@@ -1,4 +1,4 @@
-name: One-off navigation diagnosis
+name: One-off navigation CPU diagnosis
 on:
   push:
     branches: [main]
@@ -29,19 +29,28 @@ jobs:
           info=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
           port=info['NetworkSettings']['Ports']['3000/tcp'][0]['HostPort']
           print('RUNTIME',json.dumps({'started':info['State']['StartedAt'],'restarts':info['RestartCount'],'memoryLimit':info['HostConfig']['Memory'],'cpuLimit':info['HostConfig']['NanoCpus']}),flush=True)
-          paths=['/api/health','/','/cars/offer/special_dealer_topavto__f7579564-ecc5-4c74-bb0e-fdf824f598d5','/cars?city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/api/catalog/search?market=china&fuel=petrol&pageSize=6','/api/encyclopedia/1d2dfca4e510626f5daec218?year=2026']
-          for path in paths:
+          source="import fs from 'node:fs';\n// Run only inside the application container. Emit function counters, never heap data.\nconst targets=await fetch('http://127.0.0.1:9229/json/list').then(r=>r.json());\nif(targets.length!==1)throw Error('unexpected_inspector_targets');\nconst url=new URL(targets[0].webSocketDebuggerUrl);\nif(!['127.0.0.1','localhost'].includes(url.hostname))throw Error('inspector_must_be_loopback');\nconst ws=new WebSocket(url);await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});\nlet sequence=0;const pending=new Map();\nws.onmessage=e=>{const m=JSON.parse(e.data);const p=pending.get(m.id);if(p){pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error(m.error.message)):p.resolve(m.result);}};\nfunction call(method,params={}){return new Promise((resolve,reject)=>{const id=++sequence;const timer=setTimeout(()=>{pending.delete(id);reject(Error('inspector_timeout:'+method));},12000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}));});}\nfunction startNetworkSample(){\n const dc=process.getBuiltinModule('node:diagnostics_channel'),started=performance.now(),active=new Map(),rows=[];\n const bindings=[];\n const on=(name,fn)=>{const channel=dc.channel(name);const safe=value=>{try{fn(value);}catch{}};channel.subscribe(safe);bindings.push([channel,safe]);};\n const category=request=>{const path=String(request.path||'').split('?')[0];\n  for(const [needle,label] of [['exchange-rates','rates'],['markets/','market-settings'],['collection','source-controls'],['feature','features'],['green-corner','stock'],['overview','overview'],['catalog/','catalog'],['business','business'],['dealer','dealer']])if(path.includes(needle))return label;\n  return 'other';};\n on('undici:request:create',({request})=>{if(rows.length+active.size<200)active.set(request,{kind:category(request),method:['GET','HEAD','POST','PUT'].includes(request.method)?request.method:'other',atMs:Math.round(performance.now()-started),start:performance.now()});});\n on('undici:request:headers',({request,response})=>{const row=active.get(request);if(row)row.status=response.statusCode;});\n const finish=(request,error=false,incomplete=false)=>{const row=active.get(request);if(!row)return;active.delete(request);const {start,...safe}=row;rows.push({...safe,ms:Math.round(performance.now()-start),error,incomplete});};\n on('undici:request:trailers',({request})=>finish(request));on('undici:request:error',({request})=>finish(request,true));\n globalThis.__avtocenaPerfNetworkStop=()=>{for(const [channel,fn] of bindings)channel.unsubscribe(fn);for(const [request]of active)finish(request,false,true);delete globalThis.__avtocenaPerfNetworkStop;return rows;};\n return true;\n}\ntry{\n if(process.env.CPU_SAMPLE_CLOSE_ONLY==='1'){}else{\n await call('Runtime.evaluate',{expression:`(${startNetworkSample.toString()})()`,returnByValue:true});\n await call('Profiler.enable');await call('Profiler.setSamplingInterval',{interval:2000});await call('Profiler.start');\n await new Promise(r=>setTimeout(r,5000));\n const {profile}=await call('Profiler.stop');\n const parents=new Map();for(const node of profile.nodes)for(const child of node.children||[])parents.set(child,node.id);\n const byId=new Map(profile.nodes.map(n=>[n.id,n]));\n const samples=new Map();for(const id of profile.samples||[])samples.set(id,(samples.get(id)||0)+1);\n const sources=new Map();\n const describe=id=>{const n=byId.get(id);if(!n)return null;const f=n.callFrame;let code='';if(f.url.startsWith('file:///app/apps/web/.next/server/')){try{let lines=sources.get(f.url);if(!lines){lines=fs.readFileSync(new URL(f.url),'utf8').split('\\n');sources.set(f.url,lines);}code=lines[f.lineNumber]?.slice(Math.max(0,f.columnNumber-80),f.columnNumber+1800)||'';}catch{}}return {fn:f.functionName,url:f.url,line:f.lineNumber,column:f.columnNumber,code};};\n const net=await call('Runtime.evaluate',{expression:'globalThis.__avtocenaPerfNetworkStop?.()||[]',returnByValue:true});\n console.log('CPU_SAMPLE',JSON.stringify({network:net.result?.value||[],samples:profile.samples?.length,top:[...samples].sort((a,b)=>b[1]-a[1]).slice(0,20).map(([id,count])=>({count,stack:[id,parents.get(id),parents.get(parents.get(id))].filter(Boolean).map(describe)}))}));\n await call('Profiler.disable');\n }\n}finally{\n // Close the temporary listener from the sampled process; never publish its port.\n ws.send(JSON.stringify({id:++sequence,method:'Runtime.evaluate',params:{expression:'globalThis.__avtocenaPerfNetworkStop?.();process._debugEnd()'}}));\n await new Promise(r=>setTimeout(r,500));ws.close();\n}\n"
+          subprocess.run(['docker','kill','--signal=USR1','avtocena-production'],check=True,capture_output=True)
+          time.sleep(1)
+          profile=subprocess.Popen(['docker','exec','-i','avtocena-production','node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+          profile.stdin.write(source);profile.stdin.close();profile.stdin=None
+          time.sleep(1)
+          path='/api/catalog/search?market=china&fuel=petrol&pageSize=6'
+          try:
               started=time.monotonic()
+              with urllib.request.urlopen('http://127.0.0.1:'+port+path,timeout=35) as r:
+                  body=json.load(r)
+                  print('MEASURE',json.dumps({'path':path,'seconds':round(time.monotonic()-started,3),'status':r.status,'timing':r.headers.get('Server-Timing'),'total':body.get('total'),'indexes':body.get('usedIndexShards')}),flush=True)
+          finally:
               try:
-                  req=urllib.request.Request('http://127.0.0.1:'+port+path,headers={'Host':'avtocena.com','X-Forwarded-Proto':'https','X-Forwarded-For':'151.248.113.177'})
-                  with urllib.request.urlopen(req,timeout=35) as r:
-                      ttfb=time.monotonic()-started
-                      body=r.read()
-                      result={'path':path,'status':r.status,'ttfb':round(ttfb,3),'total':round(time.monotonic()-started,3),'bytes':len(body),'timing':r.headers.get('Server-Timing')}
-                      if path=='/api/health':result['health']=json.loads(body)
-                      if path.startswith('/cars') or path=='/':result.update(streamError=b'$RX(' in body,cards=body.count(b'/cars/offer/'))
-                      print('MEASURE',json.dumps(result),flush=True)
-              except Exception as e:print('MEASURE_ERROR',json.dumps({'path':path,'seconds':round(time.monotonic()-started,3),'kind':type(e).__name__,'status':getattr(e,'code',None)}),flush=True)
+                  output,error=profile.communicate(timeout=20)
+                  for line in output.splitlines():
+                      if line.startswith('CPU_SAMPLE '):print(line,flush=True)
+                  print('PROFILE_EXIT',profile.returncode,flush=True)
+              except subprocess.TimeoutExpired:
+                  profile.kill();profile.communicate()
+                  subprocess.run(['docker','exec','-i','-e','CPU_SAMPLE_CLOSE_ONLY=1','avtocena-production','node','--input-type=module'],input=source,text=True,capture_output=True,timeout=20)
+                  raise
           logs=subprocess.run(['docker','logs','--since','20m','--tail','3000','avtocena-production'],capture_output=True,text=True)
           text=logs.stdout+'\n'+logs.stderr
           # Print only error categories, storage namespaces and source locations.
