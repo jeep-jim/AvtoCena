@@ -8,8 +8,8 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  'ajes-market-selection':`export const usesAjesMarket=async market=>['china','korea','japan'].includes(market);`,
  'ajes-catalog':`export const withAjesCount=async x=>x;`,
  'green-corner-search':`export const filterGreenCorner=(items,params)=>items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));export const greenCornerFacets=()=>({makes:[],models:[],bodyTypes:[],fuels:[],transmissions:[],drives:[]});`,
- 'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const readGreenCornerPage=async(items,params,clampPage,pageSize)=>{if(pageSize!==6)throw Error('preview must price six cards');const rows=items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));return {items:rows,total:rows.length}};`,
- 'storage':`export const readCatalogFacets=async()=>{if(globalThis.__catalogFixtureFail)throw Error('fixture outage');return {}};export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
+ 'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const readGreenCornerPage=async(items,params,clampPage,pageSize)=>{globalThis.__catalogStockStarted?.();if(globalThis.__catalogStockFailure)throw Error('stock selection unavailable');if(pageSize!==6)throw Error('preview must price six cards');const rows=items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));return {items:rows,total:rows.length}};`,
+ 'storage':`export const readCatalogFacets=async()=>{if(globalThis.__catalogFixtureFail)throw Error('fixture outage');return {}};export const searchOffers=async()=>{await globalThis.__catalogLocalGate;return {total:0,items:[],page:1,pageSize:10}};`,
  'market-facets':`export const readGroupedCatalogFacets=async()=>({});`,
  'overview':`export const readCatalogOverview=async()=>null;`,
  'market-page':`export const readCatalogMarketPage=async()=>({total:0,items:[]});export const balanceBusinessRows=x=>x;export const businessOrder=()=>0;export const sortCatalogRows=x=>x;`,
@@ -32,6 +32,24 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  assert.equal(rails.length,3);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);
  const green=elements.find(x=>x.type?.name==='GreenCornerRail');assert.equal(green.props.total,1);assert.equal(green.props.items[0].id,'match');
  const link=new URL(green.props.href,'https://avtocena.com');for(const [key,value] of Object.entries(params))assert.equal(link.searchParams.get(key),value);assert.equal(link.searchParams.get('stock'),'green');
+ // A slow local market must not postpone independent stock selection.
+ let releaseLocal!:()=>void;
+ (globalThis as any).__catalogLocalGate=new Promise<void>(resolve=>{releaseLocal=resolve;});
+ let stockStarted!:()=>void;
+ const started=new Promise<void>(resolve=>{stockStarted=resolve;});
+ (globalThis as any).__catalogStockStarted=stockStarted;
+ const pending=m.exports.CatalogContent({params});
+ try{
+  await Promise.race([started,new Promise((_,reject)=>setTimeout(()=>reject(Error('stock waited for local market')),1000))]);
+ }finally{releaseLocal();delete (globalThis as any).__catalogLocalGate;delete (globalThis as any).__catalogStockStarted;}
+ await pending;
+ // An early stock failure is handled by the page, not an unhandled rejection.
+ (globalThis as any).__catalogStockFailure=true;
+ (globalThis as any).__catalogLocalGate=new Promise<void>(resolve=>setTimeout(resolve,30));
+ try{
+  const failed=await m.exports.CatalogContent({params});elements.length=0;walk(failed);
+  assert.match(elements.find(x=>x.type?.name==='CatalogSidebar').props.resultError,/Выбранные условия сохранены/);
+ }finally{delete (globalThis as any).__catalogStockFailure;delete (globalThis as any).__catalogLocalGate;}
  (globalThis as any).__catalogFixtureFail=true;
  try{
   const failed=await m.exports.CatalogContent({params});elements.length=0;walk(failed);

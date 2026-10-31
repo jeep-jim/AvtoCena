@@ -124,6 +124,13 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   const railReads=new Map<string,ReturnType<typeof readAjesRailData>>(markets.filter(m=>liveMarket(m.id)||m.id==='japan').map(m=>[m.id,readAjesRailData(m.id as 'japan'|'china'|'korea',params)]));
   // Stock and market snapshots are independent; start both storage reads together.
   const greenRead = showGreen ? readGreenCorner().catch(()=>null) : Promise.resolve(null);
+  // Finish the independent stock selection while local markets are being read.
+  // Settle failures immediately so an early rejection cannot escape while the
+  // market reads are pending; the normal page error handler still receives it.
+  const greenPageRead = greenRead.then(async green => ({
+    green,
+    selection: green ? await readGreenCornerPage(green.items, {...Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)])),page:"1"},true,OVERVIEW_CARDS) : null,
+  })).then(value=>({ok:true as const,value}),error=>({ok:false as const,error}));
   const overview = overviewEligible ? await readPublicCatalogOverview().catch((error) => {
     console.error("catalog_overview_read_failed", error);
     return null;
@@ -178,8 +185,9 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
       })),
     ]);
   }
-  const green = (!dealer||dealer.markets.includes("japan")) ? await greenRead : null;
-  const greenSelection = showGreen && green ? await readGreenCornerPage(green.items, {...Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)])),page:"1"},true,OVERVIEW_CARDS) : null;
+  const greenPage = await greenPageRead;
+  if (greenPage.ok === false) throw greenPage.error;
+  const {green,selection:greenSelection} = greenPage.value;
   const greenItems = (greenSelection?.items || []).map(publicGreenOffer);
   const greenTotal = greenSelection?.total || 0;
   if (showGreen && green) {
