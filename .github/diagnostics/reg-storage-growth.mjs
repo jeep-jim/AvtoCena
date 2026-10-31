@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import {storageCapacityStatus} from '../../scripts/lib/storage-capacity-status.mjs';
 import { ObjectJsonStorage } from '../../apps/web/lib/data.ts';
 
 // Read-only metadata inventory: never GET object contents or issue writes.
@@ -71,6 +73,11 @@ try {
     if(age>=0&&age<=172800000)g.modifiedLast48hBytes+=item.size;
     groups.set(group,g);
   }
+  const capacity=storageCapacityStatus(allBytes,1_000_000_000_000);
+  const report={checkedAt:new Date().toISOString(),...capacity,totalObjects:objects.length,coverage:'current-object-versions-only',groups:[...groups.values()].sort((a,b)=>b.bytes-a.bytes)};
+  await fs.writeFile('storage-capacity.json',JSON.stringify(report,null,2));
+  if(process.env.GITHUB_STEP_SUMMARY)await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,`\nREG storage: ${(allBytes/1e9).toFixed(2)} GB / 1000 GB (${capacity.usedPercent.toFixed(1)}%). Status: ${capacity.status}. Current object versions only; historical versions and unfinished uploads are not included.\n`);
+  if(capacity.status!=='ok')console.log(`::warning::REG storage ${capacity.status}: ${capacity.usedPercent.toFixed(1)}% of 1000 GB used by current objects. Review retention or increase quota.`);
   console.log(JSON.stringify({source:'REG S3',checkedAt:new Date().toISOString(),completedPages,requests,totalObjects:objects.length,totalBytes:allBytes,decimalGB:allBytes/1e9,binaryGiB:allBytes/2**30,groups:[...groups.values()].sort((a,b)=>b.bytes-a.bytes),scope:'Current object versions only; modified bytes are not net growth; active writers can change totals. Metadata only, no object contents or mutations.'}));
 
 } catch (error) {
