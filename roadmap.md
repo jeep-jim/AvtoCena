@@ -18874,3 +18874,12 @@ Primary system/source audit41221312241/41221313591 сообщает running/OOMf
 Единственный bounded watch health00:12 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Приложение не переустанавливалось в этой сверке; успешный health не заменяет приёмку всех рынков, authenticated production save и revision-linked заполненных карточек. Прежние500/exit139/502/Proxy CONNECT timeout/первый отказ Энциклопедии сохранены.
 
 Далее — существующие China publication/Direct/PR1673 CI и новые primary результаты; без новых запусков watch. PR1641/drafts и все исторические остатки сохранены. Только Road/checklist append-only expected-parentCAS, обе истории сохраняются; наблюдение включено.
+
+### 01.11.2026 — Итог ночного аудита, 00:19 местного времени
+
+- PR #1673 merged b7b35ebe439e0fcc336916c56f1175bbb6fb4c86: anchor трёхдневного календаря17UTC совпадает с cron местной полуночи. CI41223310767/job124602168632:2737/2737 тестов, typecheck/build successful.
+- Браузер проверил живой /cars/green:487 машин, отображаемые расчёты, фото первой карточки, кнопка «Показать ещё» увеличила видимые24→48. Новое приложение не развёртывалось.
+- Основной REG read-model run41223144630 успешен. Старый shared-budget run41223144625 упал live_encyclopedia_binding_missing на прежнем manifest. Yandex feed41223144631 подтвердил green_feed_empty,208275 старых записей/eligible0. Оба используют прежнюю YC-конфигурацию, не объявлены исправленными.
+- Дополнительная статическая проверка расписаний выявила старую YC-конфигурацию также в dealer-billing-reconcile, crm-document-retention, catalog-overview-read-model; последние runs41200057935/41184792510/41182149347 successful, но соответствие действующей базе этим не доказано. Финансовые действия и удаление документов не запускались.
+- Китай41223091606 прошёл восстановление intake, storage reserve и year-boundary tests, выполняется publish через расчётные/retention guards. На момент завершения аудита новый manifest ещё не подтверждён; запуск остаётся фоновым, успешное обновление Китая НЕ заявлено.
+- Подробный отчёт с семью конфликтами Green, таблицей рынков, проверками сервера и незакрытыми проблемами: docs/operations/2026-11-01-system-market-audit.md.
