@@ -1,8 +1,7 @@
 {
-  "operation": "owner-open-inventory-20261006-1412-compatible-release",
+  "operation": "owner-stale-green-recovery-20261031",
+  "requestedAt": "2026-10-31T17:00:07.736Z",
   "market": "japan",
-  "resetCursors": true,
   "publish": true,
-  "publishOnly": false,
-  "reason": "Fresh Japan 2010+ inventory without price or horsepower exclusion."
+  "reason": "Owner requested overdue Green Corner refresh. Last saved snapshot 9 October, scheduled collection failed green_missing_photos. PR1670 CI passed; preserve saved vehicle facts, full-scan/currency/collapse/CAS guards and archive previous snapshot. Data-only update; no app deployment."
 }
