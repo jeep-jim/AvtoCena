@@ -10,14 +10,14 @@ export function DirectoryFilters({makes,years,fuels}:{makes:string[];years:numbe
  useEffect(()=>{latest.current=params.toString();setQ(params.get('q')||'');},[params]);
  useEffect(()=>()=>clearTimeout(timer.current),[]);
  const change=(key:string,value:string)=>{const next=new URLSearchParams(latest.current);next.delete('page');next.delete('market');if(key==='make')next.delete('letter');if(value)next.set(key,value);else next.delete(key);latest.current=next.toString();window.history.replaceState(null,'',`/cars/autocatalog${next.size?'?'+next:''}`);};
- return <section className="ac-ency-filters" aria-label="Фильтры энциклопедии" aria-busy={false}>
-  <label>Марка<select value={params.get('make')||''} onChange={e=>change('make',e.target.value)}><option value="">Все марки</option>{makes.map(v=><option key={v}>{v}</option>)}</select></label>
+ return <><section className="ac-ency-filters" aria-label="Фильтры энциклопедии" aria-busy={false}>
+
   <label className="ac-ency-search">Поиск<input type="search" value={q} placeholder="Марка или модель" onChange={e=>{setQ(e.target.value);clearTimeout(timer.current);const value=e.target.value;timer.current=setTimeout(()=>change('q',value),350);}}/></label>
   <label>Год<select value={params.get('year')||''} onChange={e=>change('year',e.target.value)}><option value="">Все годы</option>{years.map(v=><option key={v}>{v}</option>)}</select></label>
-  <label>Топливо<select value={params.get('fuel')||''} onChange={e=>change('fuel',e.target.value)}><option value="">Все виды</option>{fuels.map(v=><option key={v} value={v}>{displayValue(v)}</option>)}</select></label>
+  <label>Топливо<select value={params.get('fuel')||''} onChange={e=>change('fuel',e.target.value)}><option value="">Все виды</option><option value="electrified">Электро + гибриды</option>{fuels.map(v=><option key={v} value={v}>{displayValue(v)}</option>)}</select></label>
   <label className="ac-ency-check"><input type="checkbox" checked={params.has('missing30')} onChange={e=>change('missing30',e.target.checked?'1':'')}/>Без 30-мин. мощности</label>
   <button className="ac-ency-button" onClick={()=>{clearTimeout(timer.current);setQ('');latest.current='';window.history.replaceState(null,'','/cars/autocatalog');}}>Сбросить</button>
- </section>;
+ </section><div className="ac-ency-quick-filters" role="group" aria-label="Быстрые фильтры топлива">{[['','Все'],['electrified','Электро + гибриды'],['electric','Электро'],['hybrid','Гибриды'],['petrol','Бензин'],['diesel','Дизель']].map(([value,label])=><button key={value} aria-pressed={(params.get('fuel')||'')===value} onClick={()=>change('fuel',value)}>{label}</button>)}</div></>;
 }
 
 export function DirectoryAlphabet({makes}:{makes:string[]}){
