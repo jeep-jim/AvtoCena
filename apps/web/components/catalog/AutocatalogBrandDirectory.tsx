@@ -1,4 +1,5 @@
 "use client";
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -69,16 +70,17 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const syncSize = () => {
-      const headerHeight = header?.getBoundingClientRect().height || 64;
+      const headerHeight = header?.getBoundingClientRect().bottom || 64;
       bar.style.top = `${headerHeight}px`;
       root.current?.style.setProperty("--directory-scroll-offset", `${headerHeight + bar.offsetHeight + 12}px`);
       schedule();
     };
     const resize = new ResizeObserver(syncSize);
     resize.observe(bar); if (header) resize.observe(header);
+    window.addEventListener(PUBLIC_HEADER_LAYOUT_EVENT, syncSize);
     window.addEventListener("scroll", schedule, {passive:true});
     schedule();
-    return () => { resize.disconnect(); window.removeEventListener("scroll", schedule); cancelAnimationFrame(frame); };
+    return () => { resize.disconnect(); window.removeEventListener(PUBLIC_HEADER_LAYOUT_EVENT, syncSize); window.removeEventListener("scroll", schedule); cancelAnimationFrame(frame); };
   }, [grouped]);
 
   return <section ref={root} className="mt-7" aria-labelledby="autocatalog-brands-title">
@@ -104,7 +106,7 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
             event.preventDefault();
             const target=document.getElementById(`brands-${letter === "#" ? "number" : letter.toLowerCase()}`);
             if(!target || !toolbar.current)return;
-            const offset=(document.querySelector(".ac-public-header")?.getBoundingClientRect().height || 64)+toolbar.current.offsetHeight+12;
+            const offset=(document.querySelector(".ac-public-header")?.getBoundingClientRect().bottom || 64)+toolbar.current.offsetHeight+12;
             window.history.replaceState(window.history.state,"",event.currentTarget.getAttribute("href"));
             window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-offset,behavior:"instant"});
           }}
