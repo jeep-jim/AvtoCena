@@ -91,6 +91,10 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
 
  assert.equal(await editor.getByLabel('Топливо',{exact:true}).inputValue(),'petrol');
  await editor.getByLabel('Привод',{exact:true}).selectOption('awd');
+ await editor.getByLabel('Топливо',{exact:true}).selectOption('hybrid');
+ await editor.getByLabel('Тип силовой установки',{exact:true}).selectOption('series_hybrid');
+ await editor.getByLabel('Мощность ДВС, кВт',{exact:true}).fill('72');
+ await editor.getByLabel('30-мин. мощность, кВт',{exact:true}).fill('45');
  let submitted;
  await page.evaluate(()=>window.dispatchEvent(new StorageEvent('storage',{key:'avtocena.encyclopedia-updated.v1',newValue:'pending'})));
  await page.waitForTimeout(100);assert.equal(await editor.getByLabel('Мощность, л.с.',{exact:true}).inputValue(),'155','external update preserves the unsaved draft');
@@ -100,6 +104,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  await editor.getByRole('button',{name:'Сохранить',exact:true}).click();
  await page.getByRole('status').filter({hasText:'Изменения сохранены'}).waitFor();
  assert.equal(submitted.variant.powerHp,'155');assert.equal(submitted.variant.drive,'awd');
+ assert.equal(submitted.variant.fuel,'hybrid');assert.equal(submitted.variant.powertrainKind,'series_hybrid');assert.equal(submitted.variant.icePowerKw,'72');assert.equal(submitted.variant.power30MinKw,'45');
  assert.equal(submitted.variant.sourceUrl,'https://example.com/specs');assert.equal(submitted.variant.notes,'Сохранённое примечание');assert.equal(submitted.revision,'fixture');
 
  await page.locator('.ac-ency-row-verified').waitFor();assert.equal(await page.locator('.ac-ency-row-review').count(),0);

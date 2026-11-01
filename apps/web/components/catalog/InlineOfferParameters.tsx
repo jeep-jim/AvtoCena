@@ -1,5 +1,5 @@
 "use client";
-import {notifyEncyclopediaUpdate} from "@/components/encyclopedia/updates";
+import {notifyEncyclopediaUpdate,ENCYCLOPEDIA_UPDATED_EVENT,ENCYCLOPEDIA_UPDATED_KEY} from "@/components/encyclopedia/updates";
 import {encodeShareDraft} from "../../lib/catalog/offer-share";
 import { publicProductionYears } from "../../lib/catalog/public-year-range";
 import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
@@ -110,7 +110,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{estimatedPowerHp?:number;initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{onKnowledgeRefresh?:()=>void;estimatedPowerHp?:number;initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || initial);
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
@@ -141,6 +141,24 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
  },[offerId]);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
+ const syncBlocked=useRef(false),syncPending=useRef(false);
+ syncBlocked.current=userEdited||saving||!!initialScenario;
+ useEffect(()=>{
+  const refresh=()=>{if(syncBlocked.current||document.hidden){syncPending.current=true;return;}onKnowledgeRefresh?.();invalidateSavedCalculationPreviews();};
+  const storage=(event:StorageEvent)=>{if(event.key===ENCYCLOPEDIA_UPDATED_KEY)refresh();};
+  const visible=()=>{if(!document.hidden&&syncPending.current){syncPending.current=false;refresh();}};
+  window.addEventListener(ENCYCLOPEDIA_UPDATED_EVENT,refresh);window.addEventListener('storage',storage);document.addEventListener('visibilitychange',visible);
+  return()=>{window.removeEventListener(ENCYCLOPEDIA_UPDATED_EVENT,refresh);window.removeEventListener('storage',storage);document.removeEventListener('visibilitychange',visible);};
+ },[onKnowledgeRefresh,offerId]);
+ const incoming=JSON.stringify([savedCalculation?.version,originalDraft]),lastIncoming=useRef(incoming);
+ useEffect(()=>{
+  if(userEdited||saving||initialScenario)return;
+  if(syncPending.current&&!document.hidden){syncPending.current=false;onKnowledgeRefresh?.();}
+  if(lastIncoming.current===incoming)return;lastIncoming.current=incoming;revision.current++;
+  const next=localCityEdited?{...originalDraft,deliveryCity:draft.deliveryCity}:originalDraft;
+  setDraft(next);setSavedDraft(completePowerUnitDraft(savedCalculation?.draft||next));setSavedVersion(savedCalculation?.version||null);
+  setResult(localCityEdited?null:savedCalculation?.calculation||null);setError('');
+ },[incoming,userEdited,saving,initialScenario,onKnowledgeRefresh]);
  const [knowledgeRetry,setKnowledgeRetry]=useState(false);
  const saveDirty=Object.keys({...savedDraft,...draft}).some(key=>(savedDraft[key]??"")!==(draft[key]??""));
  async function save(){
@@ -152,7 +170,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
    if(!response.ok)throw Error(data.error || "Не удалось сохранить");
    const page=document.querySelector<HTMLElement>("[data-offer-id]");
    if(page)page.dataset.offerSavedVersion=data.version;
-   setSaveMessage(data.knowledgeWarning || (data.knowledgeSaved?"Сохранено. Пустые параметры совместимых автомобилей будут заполнены на всех рынках.":"Расчёт сохранён."));setKnowledgeRetry(Boolean(data.knowledgeWarning));setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
+   setSaveMessage(data.knowledgeWarning || (data.knowledgeSaved?"Сохранено. Параметры переданы в энциклопедию и совместимые автомобили.":"Расчёт сохранён."));setKnowledgeRetry(Boolean(data.knowledgeWarning));setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
    if(version===revision.current){setResult(data.calculation);setUserEdited(false);}
    invalidateSavedCalculationPreviews();
    if(data.knowledgeSaved)notifyEncyclopediaUpdate();
@@ -232,7 +250,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
   {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
    <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
-   <p className="mt-3 text-sm">Пустые параметры совместимых автомобилей этой модели и года будут заполняться на всех рынках, в том числе у новых объявлений. Уже заполненные значения не изменятся. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
+   <p className="mt-3 text-sm">Изменения применятся к этой карточке и совместимым версиям автомобиля в энциклопедии. Связанные прежние значения обновятся и у похожих автомобилей на всех рынках. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
    <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
   </dialog> : null}
   {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}

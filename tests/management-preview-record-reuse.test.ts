@@ -8,7 +8,7 @@ test('complete AJES rows reuse exact local facts; compact rows still verify pric
  const state={reads:[] as string[],calculated:[] as any[],records:new Map<string,any>(),revision:'knowledge-1',hp:150};
  (globalThis as any).__managementReuse=state;
  const stubs:Record<string,string>={
-  './management-knowledge':`export const attachManagementKnowledge=async rows=>rows.map(o=>({...o,operational:{...o.operational,managementKnowledge:{revision:globalThis.__managementReuse.revision,parameters:{powerHp:globalThis.__managementReuse.hp,drive:'awd'}}}}));`,
+  './management-knowledge':`export const invalidateManagementPrice=o=>o; export const attachManagementKnowledge=async rows=>rows.map(o=>({...o,operational:{...o.operational,managementKnowledge:{revision:globalThis.__managementReuse.revision,parameters:{powerHp:globalThis.__managementReuse.hp,drive:'awd'}}}}));`,
   './power30-precedent':`export const offerPrecedentParameterDraft=o=>({year:String(o.year),fuel:o.fuel,engineCc:String(o.engineCc),powerHp:String(o.powerHp||o.operational.managementKnowledge.parameters.powerHp)});`,
   './customer-parameters':`export const validateCustomerParameters=x=>({...x});`,
   './customs-pricing':`export const calculateOfferWithCustomerParametersDetailed=async(o,p)=>{globalThis.__managementReuse.calculated.push({offer:o,parameters:p});return {ok:true,calculation:{totalRub:o.sourcePrice*2+Number(p.powerHp)}};};`,

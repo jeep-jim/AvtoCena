@@ -19356,3 +19356,20 @@ Existing compact41287999330/job124793152233 впервые прочитан:fixt
 Единственный bounded health15:39–15:40 завершился curl0:ok=true,releaseSha62d75e7118a83a3f8d3242a21f3618468009742f,calculationVersioncb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c прежний. Это подтверждает активный подвал после failure, не успешный public verifier/установку1682. Нового active appdeploy/China continuation в свежем списке не обнаружено. Sharedbudget41288819018/41289238157SUCCESSmetadataonly,CRMretrySKIPPED — не читались/не повторялись.
 
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны,FINALFAIL10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны,не locklost/timeout/6h/rollback. Collect/old41111109988 не повторялись. OWNERFREEZE вне новых прямых задач/обе истории/остатки/authsave/fullsync/REG/drafts/1678 сохранены. Только Road/checklist append-only expected-parentCAS;watchenabled. Далее existing1683CI/primarymanifest и гибридная приёмка/Chinafinal доступность без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков.
+
+
+### 01.11.2026 — PR1683: браузерная проверка гибридных полей пройдена
+
+Код опубликован в draft PR1683, head cb6c66fdb728893e8a6f2b0c68b0feb7c55afed6. GitHub browser41289708107/job124798204453 SUCCESS; финальный журнал прочитан: 4000 моделей, 320/390/1440px × dark/light, сохранение hybrid/series_hybrid/icePowerKw/power30MinKw, blue→green→blue, соседняя вкладка и защита draft PASS. Это fixture-приёмка, не authenticated production save. 19 адресных тестов и финальный TypeScript PASS. Dubicars/green budget/site controls SUCCESS. Общая CI41289708152 и локальная полная регрессия ещё выполняются; полный build не объявлен пройденным. PR не объединён, release не запускался; конфликт типа A06 и полный реверс уже заполненных значений остаются открытыми. Blue/green PR1682 также ещё не установлен из-за остановки выпуска361 до сборки.
+
+
+### 01.11.2026 — PR1683: реверс гибридных правок по предыдущей ревизии
+
+По прямому запросу владельца продолжен полный реверс: shared knowledge хранит ограниченные предыдущие значения и связь подтверждённой staff-строки с исходной карточкой. Совместимая правка обновляет известное старое значение, но сохраняет другую модификацию, более позднюю ручную правку и архивную ссылку расчёта. При очистке мощности старый итог не показывается. Свежая ревизия пересчитывает default saved calculation и bounded previews, открытая карточка получает событие энциклопедии без потери несохранённого ввода. Сохранение projected/staff-строки проверяет management revision; blue→green→blue уже включено из PR1682.
+
+Адресные тесты PASS: 18 по гибридным alias/ревизиям/общей памяти, включая 40→45→60→70→45 и удаление мощности; TypeScript PASS. После устранения зависимости на новый export в mock-data 28 тестов AutoBot+revision PASS. Полная регрессия ещё выполняется; новый browser case для same-version refresh/cross-tab/dirty/archive добавлен в existing CI, результат пока не заявлен. Предыдущая полная регрессия alias-only: 2759 PASS. Это изменения кода, не установленный выпуск и не authenticated live save. Deployment safeguards/marker не менялись.
+
+
+### 01.11.2026 — PR1683: единицы мощности и изоляция архивного расчёта
+
+Дополнительные проверки выявили два края: синхронизация кВт должна обновлять соответствующие л.с., а явно очищенная 30-минутная мощность не должна возвращаться из старой пары единиц или estimate. Исправлено; 40 адресных тестов PASS, включая реальный default/archive путь saved calculation с текущей ценой и неизменной архивной мощностью. На 8993322 directory browser прошёл 4000 моделей ×6, новая проверка карточки остановилась на неверном текстовом locator (название находится в aria-label); locator исправлен, следующий результат ожидается. Остальные шесть browser/market workflow SUCCESS по metadata; общий CI ещё выполняется. Выпуск не запускался.

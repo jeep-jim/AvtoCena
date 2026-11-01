@@ -1,3 +1,4 @@
+import {managementSavedDraft,readManagementKnowledge,type ManagementKnowledge} from './management-knowledge';
 import {scenarioPath} from './saved-calculation-input';
 import { createHash, randomUUID } from "node:crypto";
 import { cache } from "react";
@@ -36,14 +37,15 @@ export async function saveClientCalculation(offer:VehicleOffer,draft:Record<stri
   await mutateDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,record.version),null,current=>current || record);
   return record;
 }
-async function currentSavedCalculation(offer:VehicleOffer,record:SavedOfferCalculation|null,keepCity=false) {
+async function currentSavedCalculation(offer:VehicleOffer,record:SavedOfferCalculation|null,keepCity=false,knowledge?:ManagementKnowledge) {
  if(!record)return null;
- const draft=keepCity?record.draft:{...record.draft,deliveryCity:""};
+ const draft=keepCity?record.draft:managementSavedDraft(offer,{...record.draft,deliveryCity:""},record.savedAt,knowledge||await readManagementKnowledge(true));
  const {calculateOfferWithCustomerParametersDetailed}=await import("./customs-pricing");
- const fresh=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
+ let parameters;try{parameters=validateCustomerParameters(draft);}catch{return null;}
+ const fresh=await calculateOfferWithCustomerParametersDetailed(offer,parameters);
  return fresh.ok?{...record,draft,calculation:fresh.calculation}:null;
 }
-export async function getSavedOfferCalculation(offer: VehicleOffer, version?:string) {
+export async function getSavedOfferCalculation(offer: VehicleOffer, version?:string,knowledge?:ManagementKnowledge) {
   if(version){
     if(!/^[a-f0-9-]{36}$/i.test(version))return null;
     const archived=matchingSavedCalculation(await readDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,version),null),offer);
@@ -54,7 +56,7 @@ export async function getSavedOfferCalculation(offer: VehicleOffer, version?:str
   const record = matchingSavedCalculation(await readSavedRecord(offer.id), offer);
   // Stored versions preserve the chosen vehicle inputs and city. Public links
   // replay those inputs with current rates/costs, without rewriting the archive.
-  return currentSavedCalculation(offer,record);
+  return currentSavedCalculation(offer,record,false,knowledge);
 }
 export class SavedCalculationConflict extends Error {}
 export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<string,string>, calculation:SavedCalculationResult, userId:string, expectedVersion:string|null, savedByName?:string) {

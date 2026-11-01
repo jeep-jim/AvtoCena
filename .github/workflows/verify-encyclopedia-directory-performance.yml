@@ -4,12 +4,16 @@ on:
     paths:
       - 'apps/web/components/encyclopedia/**'
       - 'tests/browser/encyclopedia-directory*'
+      - 'tests/browser/hybrid-revision-sync*'
+      - 'apps/web/components/catalog/*InlineOfferParameters.tsx'
       - '.github/workflows/verify-encyclopedia-directory-performance.yml'
   push:
     branches: [main]
     paths:
       - 'apps/web/components/encyclopedia/**'
       - 'tests/browser/encyclopedia-directory*'
+      - 'tests/browser/hybrid-revision-sync*'
+      - 'apps/web/components/catalog/*InlineOfferParameters.tsx'
       - '.github/workflows/verify-encyclopedia-directory-performance.yml'
   workflow_dispatch:
 permissions:
@@ -30,6 +34,11 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/directory-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/encyclopedia-directory.mjs
+
+      - name: Verify hybrid reverse updates without losing unsaved inputs
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/directory-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/hybrid-revision-sync.mjs
 
       - uses: actions/upload-artifact@v4
         if: always()
