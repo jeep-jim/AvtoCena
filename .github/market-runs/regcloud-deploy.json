@@ -108,9 +108,9 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-requested hybrid bidirectional correction PR1683 merged at 4e962ae. Final b7c15f1: 2766/2766 regression, TypeScript and production build PASS; all eight workflows SUCCESS; final browser confirms hybrid 45→60→45, blue→green→blue, cross-tab and dirty/archive protection. Includes pending PR1682 review colors and active footer PR1681. Prepare a fresh coherent encyclopedia snapshot for this new release; preserve all research/ASTRA/market safeguards.",
+  "reason": "Owner explicitly requested publishing PR1684 encyclopedia UI to production. Validated application code949ff326 and final24f449b0:2767 tests, production build, all5workflows SUCCESS; browser320/390/1440 dark/light and hybrid revision sync PASS. PR1684 merged e534956; documentation-only conflict resolved preserving both histories. Preserve existing research/ASTRA requirements and preparation market scope. No calculation, provider or synchronization changes.",
   "ideaReports": [],
-  "requestedAt": "2026-11-01T09:28:53.059Z",
+  "requestedAt": "2026-11-01T14:05:36.159Z",
   "preparationMarkets": [
     "china",
     "korea",
