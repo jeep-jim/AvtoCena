@@ -45,7 +45,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  assert.equal(await page.locator('.ac-brand-card').count(),200);
  const initialElements=await page.locator('*').count();assert.ok(initialElements<2200);
  await page.screenshot({path:out+`/brands-${theme}-${width}.png`});
- await page.locator('.ac-brand-card').filter({hasText:/^Brand 0\b/}).click();
+ await page.locator('.ac-brand-card').filter({has:page.locator('strong',{hasText:/^Brand 0$/})}).click();
  await rows.last().waitFor();assert.equal(await rows.count(),20);assert.equal(reads,0);
  assert.equal(new URL(page.url()).searchParams.get('make'),'Brand 0');
  await rows.first().getByRole('button',{name:'Увеличить фото Brand 0 Model 0'}).click();await page.getByRole('dialog').waitFor();await page.keyboard.press('Escape');assert.equal(reads,0);
@@ -54,7 +54,7 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  assert.equal(await rows.first().locator('.ac-ency-model-editor').count(),1);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
  await page.screenshot({path:out+`/directory-${theme}-${width}.png`});
- if(width>700){await page.getByRole('navigation',{name:'Марки автомобилей'}).getByRole('button',{name:/^Brand 5 /}).click();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 5 Model 0'));assert.equal(reads,2);await page.goBack();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 0 Model 0'));}
+ if(width>700){await page.getByRole('navigation',{name:'Марки автомобилей'}).locator('button').filter({has:page.locator('span',{hasText:/^Brand 5$/})}).click();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 5 Model 0'));assert.equal(reads,2);await page.goBack();await page.waitForFunction(()=>document.querySelector('.ac-model-list-item')?.textContent.includes('Brand 0 Model 0'));}
  await page.getByRole('button',{name:width>700?'Все марки':'Назад к маркам',exact:true}).click();await page.locator('.ac-brand-card').last().waitFor();assert.equal(await rows.count(),0);
  await page.getByRole('group',{name:'Быстрые фильтры топлива'}).getByRole('button',{name:'Электро + гибриды',exact:true}).click();await page.getByRole('heading',{name:'Марки не найдены'}).waitFor();assert.equal(reads,2);
  await page.getByRole('button',{name:'Сбросить',exact:true}).click();await page.locator('.ac-brand-card').last().waitFor();
