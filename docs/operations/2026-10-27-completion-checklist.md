@@ -1458,3 +1458,20 @@ CRM41293286139 audit124808808910/browser124808809000 впервые прочит
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35, причины/publicationStatus/manifest/числа неизвестны. Locklost/timeout/6h/rollback не приписываются; нового active China continuation не обнаружено. Collect/old41111109988 не повторялись.
 
 OWNERFREEZE вне новых прямых задач/обе истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS, watchenabled. Далее existing deploy41293321798, primary fixture/manifest/hybrid acceptance и доступность Chinafinal без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков.
+
+
+## 01.11.2026, 17:35 Красноярск — PR1682/1683 установлены, финальный verifier пройден
+
+Свежие main152a54b488b39e4e9fab4e0af794237cd5694896, Road/checklist прочитаны; новых primary результатов и PR после1683 нет. AGENTS03336196 и связанные operations unchanged. Обе истории сохранены; уже прочитанные CI/browser/compact/CRM и прежние manifest failure logs не повторялись.
+
+Existing deploy41293321798/job124809046224 FINAL SUCCESS17:34:30; итоговый журнал впервые прочитан. Exact release5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b активен17:30:17. Pre45/post45 functionalPASS,slow0/2; post performanceAccepted=false,latencyBlocking=false advisory, не rollback. Два медленных post samples China search API marketPage1/page9:after_ttl2.6238s и after_directory_ttl2.8075s. Это не универсальная subsecond-приёмка.
+
+Public verifier17:34:22 exact5a6f57ad:532groups/4888variants/22635fields/3809groupedVariants/2privateDescriptions,verified=true. PR1682 review-цвета и PR1683 гибридный revision sync INSTALLED. Успех нового выпуска не объясняет/не стирает прежние public_source_manifest_mismatch после switch62d75e7 и astra_release_manifest_changed_after_verification до build68a425bc, а также сохранённые расхождения metadata/log времени.
+
+Единственный bounded health17:34–17:35 завершился curl0:ok=true,releaseSha5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b,НОВАЯ calculationVersion930618be749487a96ef052289dbb945715fb807d39a3935367007cb7ce5db6a1. Смена cb492→930618 ограничивает сравнение кэшей между выпусками; не объявляется отдельным доказательством ускорения.
+
+Authenticated live save/полная двусторонняя синхронизация и exact-SHA UI-приёмка1682/1683 ещё не подтверждены. Предыдущие compact41293286091 и CRM41293286139 fixture timeout на ожидаемом тексте сохранения остаются открытыми; live был SKIPPED. Следующий шаг основной работы — сохранённый fixture/response/актуальный текст и адресная приёмка нового exact release; watch не запускает browser/provider/диагностику и не повторяет старые журналы. A06 конфликт hev/series_hybrid не подменён.
+
+Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны, locklost/timeout/6h/rollback не приписываются. Нового active China continuation не обнаружено; collect/old41111109988 не повторялись.
+
+OWNERFREEZE вне новых прямых задач/истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено до итоговой приёмки всех целей. Новых runtime/deploy/repair/collector/diag/browser/provider/cleanup запусков нет.
