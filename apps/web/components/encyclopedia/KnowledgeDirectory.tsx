@@ -1,4 +1,5 @@
 'use client';
+import {ENCYCLOPEDIA_UPDATED_EVENT,ENCYCLOPEDIA_UPDATED_KEY} from './updates';
 import {CatalogPagination,catalogPageNumbers} from '@/components/catalog/CatalogPagination';
 import {Fragment,useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter,useSearchParams} from 'next/navigation';
@@ -22,6 +23,16 @@ export function ModelWorkspace({model,canEdit,standalone=false}:{model:Summary;c
   catch(e){if(!request.signal.aborted){setError('Не удалось загрузить модификации.');throw e;}}
  },[model.id,year]);
  useEffect(()=>{setRecord(null);void load().catch(()=>{});return()=>controller.current?.abort();},[load]);
+ const editingNow=useRef(editing),refreshPending=useRef(false);
+ editingNow.current=editing;
+ useEffect(()=>{if(!editing&&refreshPending.current){refreshPending.current=false;void load().catch(()=>{});}},[editing,load]);
+ useEffect(()=>{
+  const refresh=()=>{if(editingNow.current||document.hidden){refreshPending.current=true;return;}void load().catch(()=>{});};
+  const storage=(event:StorageEvent)=>{if(event.key===ENCYCLOPEDIA_UPDATED_KEY)refresh();};
+  const visible=()=>{if(!document.hidden&&refreshPending.current){refreshPending.current=false;refresh();}};
+  window.addEventListener(ENCYCLOPEDIA_UPDATED_EVENT,refresh);window.addEventListener('storage',storage);document.addEventListener('visibilitychange',visible);
+  return()=>{window.removeEventListener(ENCYCLOPEDIA_UPDATED_EVENT,refresh);window.removeEventListener('storage',storage);document.removeEventListener('visibilitychange',visible);};
+ },[load]);
  return <section className="ac-knowledge-workspace" aria-label={`${model.make} ${model.model}: модификации`}>
   <div className="ac-knowledge-workspace-bar"><div className="ac-knowledge-years" role="group" aria-label={`Год ${model.model}`}>{years.map(y=><button key={y} aria-pressed={year===y} disabled={editing} onClick={()=>setYear(y)}>{y==='unknown'?'Без года':y}</button>)}</div></div>
   {error?<p role="alert">{error} <button className="ac-ency-button" onClick={()=>void load().catch(()=>{})}>Повторить</button></p>:record?<ModelEditor record={record} canEdit={canEdit} defaultYear={year==='unknown'?undefined:Number(year)} onSaved={load} onEditingChange={setEditing} filterFuel={params.get('fuel')||''} onlyMissing30={params.has('missing30')}/>:<p className="ac-ency-muted" role="status">Загружаем модификации…</p>}
