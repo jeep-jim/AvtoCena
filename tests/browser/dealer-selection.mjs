@@ -134,7 +134,7 @@ try{for(const width of [390,1440]){
  await openFilters(page,width);
  const multiForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  for(const [placeholder,names,key,values] of [
-  ['Любая трансмиссия',['Автомат','Вариатор'],'transmission','automatic|cvt'],
+  ['Любая КПП',['Автомат','Вариатор'],'transmission','automatic|cvt'],
   ['Любое топливо',['Бензин','Дизель'],'fuel','petrol|diesel'],
   ['Любой кузов',['Седан','Хэтчбек'],'bodyType','sedan|hatchback'],
   ['Любой привод',['Передний','Полный'],'drive','fwd|awd']

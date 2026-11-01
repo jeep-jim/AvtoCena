@@ -42,7 +42,7 @@ try{
   if(width<1024){
    const heading=scope.locator('.ac-mobile-filter-header');
    assert.ok((await heading.boundingBox()).height<=66,'compact mobile header');
-   assert.match(await heading.innerText(),/37\s?718/);assert.doesNotMatch(await heading.innerText(),/Найдено/);
+   assert.match(await heading.innerText(),/37\s?718/);assert.match(await heading.innerText(),/Найдено .* машин/);
    if(!live){assert.equal(await heading.getByRole('button',{name:'Свернуть фильтры',exact:true}).innerText(),'');assert.equal(await heading.locator('button[data-ac-mobile-close="1"] svg').count(),1);}
    await page.screenshot({path:`${out}/sheet-${width}-${theme}.png`});
   }
