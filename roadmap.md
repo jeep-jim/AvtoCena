@@ -19373,3 +19373,10 @@ Existing compact41287999330/job124793152233 впервые прочитан:fixt
 ### 01.11.2026 — PR1683: единицы мощности и изоляция архивного расчёта
 
 Дополнительные проверки выявили два края: синхронизация кВт должна обновлять соответствующие л.с., а явно очищенная 30-минутная мощность не должна возвращаться из старой пары единиц или estimate. Исправлено; 40 адресных тестов PASS, включая реальный default/archive путь saved calculation с текущей ценой и неизменной архивной мощностью. На 8993322 directory browser прошёл 4000 моделей ×6, новая проверка карточки остановилась на неверном текстовом locator (название находится в aria-label); locator исправлен, следующий результат ожидается. Остальные шесть browser/market workflow SUCCESS по metadata; общий CI ещё выполняется. Выпуск не запускался.
+
+
+### 01.11.2026 — PR1683 принят: 2766 тестов, production build, начало согласованного выпуска
+
+Финальный b7c15f116b880f77c0dacfd7fb15650b422d10d7: все восемь workflow SUCCESS. CI41292767831/job124807244748 прочитан: 2766/2766 PASS, web/engine typecheck и production build SUCCESS. Browser41292767806/job124807244941 прочитан: 4000 моделей, обе темы ×320/390/1440, hybrid поля, blue→green→blue; same-version45→60→45, cross-tab, сохранность unsaved/archive PASS. 41 локальный адресный тест PASS. PR1683 merged4e962ae299e1ebb8263d4e9ddc3b0035a80b236b. Baseline metadata ограничены скалярными полями, рекурсивные прежние сведения не копируются.
+
+По прямому запросу владельца исправить и довести работу запускается новый согласованный release marker. Обновлены только reason/requestedAt; сохранены57 requiredResearchBatches,43 publicResearchBatches,3 required ASTRA digests, preparationMarkets china/korea/europe/uae/georgia. Это новый код и новый snapshot/binding, не повтор старого immutable release68a425bc. Guards не ослаблены. До переключения livehealth ok=true, release62d75e7118a83a3f8d3242a21f3618468009742f. A06 revision53421004 сохранена; подтверждённый hev и staffseries_hybrid не переименовывались произвольно. Установка и authenticated live save пока не заявлены.
