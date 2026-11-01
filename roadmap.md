@@ -18995,3 +18995,25 @@ OWNERFREEZE вне прямой задачи, все истории/остатк
 Единственный bounded health этой сверки завершился curl0; результат получен07:42:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это не приёмка публикации/всех целей и не объяснение прежнего Proxy CONNECT timeout.
 
 OWNERFREEZE, все истории/остатки, authenticated save/fullsync, PR1641/drafts/REG сохранены. Наблюдение включено; далее existing publish124685023963, доступность failed final124601674990 и новые primary результаты. Только Road/checklist append-only expected-parentCAS, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
+
+
+## 01.11.2026, 08:24 Красноярск — редакционный пакет из10 материалов, подготовка единого выпуска
+
+Прочитаны свежие AGENTS/Road/editorial-policy. Подготовлены10 самостоятельных статей:2 новые темы и8 завершённых неопубликованных черновиков; не заявляются10новостей сегодняшнего дня. Точные тексты, даты, первоисточники и права на фото: docs/blog/drafts/2026-11-01.json и docs/blog/editorial-2026-11-01.md.
+
+- car-of-the-year-2027-seven-electric-finalists — Семь электромобилей в финале Car of the Year 2027: как читать этот список; https://caroftheyear.org/news/the-shortlist-for-the-car-of-the-year-2027-award-historic-the-all-electric-car-revolution-has-arrived/
+- staria-cargo-electric-van-route-guide — Электрический STARIA Cargo: как оценить фургон по рабочему маршруту; https://www.hyundai.news/eu/articles/press-releases/staria-cargo-introduction.html
+- bmw-gen6-battery-800v-2026 — BMW Gen6: зачем батарее обходиться без привычных модулей; https://newsroom.bmwgroup.com/global/bmw-group-begins-series-production-of-gen6-high-voltage-batteries-in-shenyang/
+- hyundai-tucson-n-line-equipment-2026 — Tucson N Line: спортивное оформление не определяет двигатель; https://www.hyundai.news/eu/articles/press-releases/tucson-n-line-paris-motor-show-2026.html
+- toyota-rav4-phev-japan-2026-guide — Японский RAV4 PHEV: как читать данные о запасе хода; https://global.toyota/en/newsroom/toyota/43984473.html
+- land-cruiser-fj-prototype-guide — Land Cruiser FJ: что рассказывал прототип и чего он не доказывает; https://global.toyota/en/newsroom/toyota/43389422.html
+- jeju-v2g-electric-car-grid-2026 — V2G на Чеджу: чем отдача энергии в сеть отличается от розетки в машине; https://www.hyundaimotorgroup.com/en/story/hyundai-motor-group-jeju-v2g-ev-pilot
+- ioniq-6-uk-2026-trims-range — Обновлённый IONIQ 6 в Британии: почему комплектация меняет запас хода; https://www.hyundai.news/uk/articles/press-releases/ioniq-6-uk-pricing-october-2026.html
+- derek-bell-85-let-2026 — Дереку Беллу — 85: почему гонки на выносливость помнят его имя; https://newsroom.porsche.com/en/2026/history/porsche-derek-bell-85th-birthday-43597.html
+- porsche-e-shift-virtual-gears-guide — Виртуальные передачи Taycan: что переключает E-Shift; https://newsroom.porsche.com/en/2026/products/porsche-e-shift-electromobility-43019.html
+
+Исправлена дата источникаBell по нынешней странице31.10; недоступный BMWaward заменён проверенным разбором Gen6production15.10, прежний slug сохранён. Ветка PR1641 будет согласована со свежим main; сохранены все старые draft/adaptation30.10, seedCorolla/Prius и REGoverride/manual priority. В рынки/парсеры/runtime logic изменений нет; штатный marker сохраняет research/preparation guards. Новый параллельный deploy не создавался. На сверке в работе только existing China41227716152; его сбор/публикация не тронуты.
+
+Проверка каталога: TaycanEurope реальные offerlinks, точнаяrelated-ссылка с оговоркой E-Shift; RAV4проданные лоты, Tucson/iX3старые исполнения, IONIQ6/9errorHTMLпри200. Неподтверждённое наличие не заявлено. Шесть официальных фотоHTTP200/визуально просмотрены;4Commonsиндивидуальные лицензии и webimage доступны, прямой GETсреды403, поэтому их liveотображение ещё не принято. Детали в editorial-audit.
+
+tests/blog.test.ts2/2PASS после добавления10seed. TypeScript npx tsc -p apps/web/tsconfig.json --noEmit PASS;10draft/published-form schemas PASS без обрезки текста/атрибуции. CI/merge/установка и liveURLs ещё не подтверждены этой записью. Подготовлены10Дзен+10VKадаптаций; подключённые официальные каналы не подтверждены, внешних публикаций0. Пакет пока подготовлен к выпуску, живых новых публикаций0 на исходной сверке.
