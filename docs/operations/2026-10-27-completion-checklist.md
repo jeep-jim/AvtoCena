@@ -1399,3 +1399,22 @@ Primary Road13:30 и сохранённый JSON подтверждают32liveC
 Оба China final logs124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны,lock_lost/timeout/6h/rollback не приписываются. Нового active continuation нет. Следующий адресный шаг — доступность этих существующих финальных журналов и новые primary результаты; исправление причины до получения доказательств не назначается. Collect/old41111109988/прочитанныеCI/CRM/deploy логи не повторялись.
 
 OWNERFREEZE/обе истории/все остатки/authsave/fullsync/REG/drafts/issue1678 backlog сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено до итоговой приёмки всех целей. Новых runtime/deploy/repair/diagnostics/browser/provider/cleanup запусков нет.
+
+
+## 01.11.2026, 15:21 Красноярск — подвал активен, итог выпуска ожидается; review-цвета в очереди
+
+Свежие main68a425bc1ee7a7c4c4f2da3bb0721794d460dffe, Road/checklist и новый docs/operations/verification/encyclopedia-review-colors-20261101.json прочитаны. AGENTS03336196 unchanged; других изменённых связанных operations audits нет. Новые прямые задачи владельца основной работе не расширяют runtime-полномочия watch; обе истории сохранены.
+
+PR1681 MERGEDf831a9ce07eb8dc28dd0ddb1860b0ee567e9102e,head0f30d763b84b8eadca7c8756768d49c2ebcf3ed8: CSS раскладки общего подвала после добавления АвтоБота. ActualCI41284885961/job124784077506 впервые прочитан:2747/2747,extras/types/build56PASS;FINAL SUCCESS14:35:38. Primary42локальных случая и30CSS-preview+6дилерских случаев PASS; временная подстановка CSS не production acceptance. Primary остановленное auto-review обращение к внешнему фотохосту не повторялось watch; последующие primary геометрические проверки без внешних изображений, не приёмка фото.
+
+Existing footer deploy41285459573 target62d75e7118a83a3f8d3242a21f3618468009742f:wait124785716432SUCCESS,prepare124785842222IN_PROGRESS,deployment step с15:12:00. Index/coverage/build/image/pricesSUCCESSmetadata,final gates/verifier PENDING. Журнал активного job404BlobNotFound — НЕ прочитан, не failure. Единственный bounded health15:19–15:20 завершился curl0:ok=true,releaseSha62d75e7118a83a3f8d3242a21f3618468009742f,calculationVersioncb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c прежний. Подвал уже активен по exactSHA, но итоговый verifier и exact-SHA UI-приёмка не подтверждены.
+
+PR1682 MERGEDbedf2405e79b54baceb5e7f61ae2a38e69883b6a,head26cb3a5deada11a4302dcee75c0a33d686f941bf: primary новая задача голубых review-строк до подтверждения, зелёных verified и нейтральных observed. GET-проекция management-полей, event/storage refresh после успешного сохранения и отложенное обновление при dirty draft; primary указывает сохранение формул/matching/приоритетов знаний и серверной проверки источника. Это не доказательство authsave/fullsync на production.
+
+ActualCI41287280123/job124791030889 впервые прочитан:2753/2753,extras/types/build56PASS; журнал завершает build15:13:15 и cleanup15:13:17. Metadata conclusionSUCCESS,но completed_at09:13:19Z расходится с журналом08:13 и текущим временем08:20Z; расхождение не превращается в failure и не скрывается. Остальные7workflowSUCCESS — primary/metadata. Primary13targetedtests и fixture4000models/3203901440×darklight,review→verified→review/соседняя вкладка/draft PASS;4live baseline случая KiaSportage воспроизводят старые зелёные «На проверке», не приёмка исправления. JSON productionStatus=not installed/liveVerification=pending.
+
+Existing следующий deploy41288031765 marker68a425bc PENDING; не watch запуск,1682 не установлен. Новые existing compact-dropdown41287999330 и CRM41287999301 выполняются, финальные журналы не читались; greenbudget41287999426/directory41287999349 SUCCESSmetadataonly. Новых PR после1682 на сверке нет; эти проверки не повторяются/не отменяются.
+
+Оба China final logs124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35,причины/publicationStatus/manifest/числа неизвестны. Lock_lost/timeout/6h/rollback не приписываются; нового activeChina continuation не обнаружено. Collect/old41111109988 и уже прочитанные старые журналы не повторялись.
+
+OWNERFREEZE/истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS. Далее existing2deploy/CRM/compact и primary exact-SHA приёмка/доступностьChinafinal без runtime/deploy/repair/diag/browser/provider/cleanup и новых запусков. Наблюдение включено.
