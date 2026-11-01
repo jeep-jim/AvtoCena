@@ -1,7 +1,7 @@
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {createHash} from 'node:crypto';
 import {mutateDataJson,readDataJson} from '../data';
-import {modelKey as baseModelKey} from '../encyclopedia/calculation-index';
+import {modelKey as baseModelKey,normalizeCalculationFactValue as normalizeCalculationFact} from '../encyclopedia/calculation-index';
 const modelKey=(make:any,model:any)=>baseModelKey(make,model)+(/\+\s*$/.test(String(model))?'plus':'');
 import {DetailReadCache} from './detail-read-cache';
 import {validateCustomerParameters} from './customer-parameters';
@@ -12,11 +12,18 @@ export type ManagementFact={offerId:string;version:string;savedAt:string;savedBy
 export type ManagementKnowledge={encyclopediaRevisions?:Record<string,string>;version:1;revision:string;models:Record<string,Record<string,ManagementFact>>};
 const empty=():ManagementKnowledge=>({version:1,revision:'empty',models:{}});
 const cache=new DetailReadCache<ManagementKnowledge>({maxEntries:1,maxBytes:16*1024*1024,ttlMs:5000,concurrency:1});
-export const readManagementKnowledge=()=>cache.get('current',()=>readDataJson(MANAGEMENT_KNOWLEDGE_PATH,empty()));
+export const readManagementKnowledge=(fresh=false)=>fresh?readDataJson(MANAGEMENT_KNOWLEDGE_PATH,empty()):cache.get('current',()=>readDataJson(MANAGEMENT_KNOWLEDGE_PATH,empty()));
 const fields=['vehicleCategory','grossVehicleWeightKg','n1IceFuel','fuel','engineCc','powerHp','powertrainKind','icePowerKw','power30MinKw','drive','transmission','bodyType','engineCode','chassisCode','generation','batteryKwh','motorPeakKw'] as const;
 const known=(v:any)=>v!==null&&v!==undefined&&v!==''&&v!==0&&v!=='unknown';
 const token=(v:any)=>String(v).normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
-function same(k:string,a:any,b:any){return ['powerHp','icePowerKw','power30MinKw','batteryKwh','motorPeakKw'].includes(k)?Math.abs(Number(a)-Number(b))<(k==='powerHp'?1.01:0.1):k==='engineCc'?Math.abs(Number(a)-Number(b))<=10:token(a)===token(b);}
+// Use the existing calculation vocabulary for propulsion aliases. In particular,
+// HEV and other_hybrid must not block each other's missing facts; series remains distinct.
+const managementValue=(k:string,v:any)=>{
+ if(k==='fuel'&&['hev','phev','mhev'].includes(token(v)))return 'hybrid';
+ if(k==='powertrainKind'&&['parallelhybrid','mhev'].includes(token(v)))return 'other_hybrid';
+ return ['fuel','powertrainKind'].includes(k)?normalizeCalculationFact(k,v):v;
+};
+function same(k:string,a:any,b:any){a=managementValue(k,a);b=managementValue(k,b);return ['powerHp','icePowerKw','power30MinKw','batteryKwh','motorPeakKw'].includes(k)?Math.abs(Number(a)-Number(b))<(k==='powerHp'?1.01:0.1):k==='engineCc'?Math.abs(Number(a)-Number(b))<=10:token(a)===token(b);}
 export function managementParameters(input:any,index:ManagementKnowledge):Record<string,any>{
  const offer=applyUaeManualSpecifications(input);
  const rows=Object.values(index.models[modelKey(offer.make,offer.model)]||{});
@@ -45,7 +52,7 @@ export function managementParameters(input:any,index:ManagementKnowledge):Record
   // remain protected; contradictory encyclopedia variants remain unresolved.
   const canonical=available.filter(r=>r.offerId.startsWith('encyclopedia:'));
   const values=(canonical.length?canonical:available).map(r=>r.values[field]);
-  if(values.length&&values.every(v=>same(field,v,values[0])))parameters[field]=values[0];
+  if(values.length&&values.every(v=>same(field,v,values[0])))parameters[field]=managementValue(field,values[0]);
  }
  if(parameters.powerHp&&!known(offer.powerKw))parameters.powerKw=parameters.powerHp*0.73549875;
  return parameters;

@@ -8,9 +8,9 @@ export const fieldGroups=[
 export const editorFieldGroups=[...fieldGroups,{title:'Внутренние сведения',fields:['sourceUrl','notes']}] as const;
 export const fieldChoices:Record<string,string[]>={
  bodyType:['sedan','suv','crossover','hatchback','wagon','minivan','coupe'],
- fuel:['petrol','diesel','electric','hybrid','phev','hev','mhev','lpg','cng'],
+ fuel:['petrol','diesel','electric','hybrid','lpg','cng'],
  drive:['fwd','rwd','awd'],transmission:['automatic','manual','cvt','dct'],
- powertrainKind:['ice','hev','phev','mhev','series_hybrid','parallel_hybrid','electric'],
+ powertrainKind:['combustion','series_hybrid','other_hybrid','electric'],
 };
 export function astraDetails(variant:Variant){
  const rows:{label:string;value:string}[]=[];

@@ -26,7 +26,7 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string}>}
  const year=new URL(request.url).searchParams.get('year');
  if(year===null||year!=='unknown'&&!/^\d{4}$/.test(year))return Response.json({error:'Выберите год.'},{status:400,headers});
  const {id}=await params;
- const [stored,knowledge,user]=await Promise.all([readModel(id),readManagementKnowledge(),getCurrentUser()]);
+ const [stored,knowledge,user]=await Promise.all([readModel(id),readManagementKnowledge(true),getCurrentUser()]);
  if(!stored)return Response.json({error:'Модель не найдена.'},{status:404,headers});
  const record=encyclopediaReviewDisplay(stored,encyclopediaWithManagement(stored,knowledge,year==='unknown'?null:Number(year)));
  const {editedBy,previousKey,...publicRecord}=record;

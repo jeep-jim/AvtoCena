@@ -29,6 +29,7 @@ function normalized(field:string,value:any):any{
  if(field==='bodyType')return ({седан:'sedan',saloon:'sedan',estate:'wagon',универсал:'wagon',crossover:'suv',кроссовер:'suv',хэтчбек:'hatchback'} as any)[t]||t;
  return typeof value==='number'?value:t;
 }
+export {normalized as normalizeCalculationFactValue};
 function same(field:string,a:any,b:any){
  if(['powerHp','powerKw','icePowerKw'].includes(field))return Math.abs(Number(a)-Number(b))<= (field==='powerHp'?1:0.74);
  return normalized(field,a)===normalized(field,b);
