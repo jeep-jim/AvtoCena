@@ -1301,3 +1301,18 @@ OWNERFREEZE вне прямой задачи, все истории/остатк
 Единственный bounded health этой сверки завершился curl0; результат получен07:42:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это не приёмка публикации/всех целей и не объяснение прежнего Proxy CONNECT timeout.
 
 OWNERFREEZE, все истории/остатки, authenticated save/fullsync, PR1641/drafts/REG сохранены. Наблюдение включено; далее existing publish124685023963, доступность failed final124601674990 и новые primary результаты. Только Road/checklist append-only expected-parentCAS, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
+
+
+## 01.11.2026, 09:09 Красноярск — редакционный выпуск готовит цены; Китай ещё публикуется
+
+Свежие main fc6750153567a99669e0ebccd1e2fe7ede2a1d25 и Road/checklist прочитаны. AGENTS03336196 и operations audits не изменились. Новые primary записи Road08:24/08:34: подготовлены10 статей (2 новые темы и8 завершённых черновиков),10Дзен+10VKадаптаций; внешних публикаций0. Primary визуальная проверка10обложек и единичный /blog4.318496s не повторялись watch и не означают полную live/subsecond приёмку.
+
+PR1641 теперь MERGED основной работой: merge5d23ce54b1638b168d590d0e45c671a2e3e3dfab,finalhead7d74af82732b3b1f11948383777d1a62717aafe5. Watch PR/drafts не менял. Фактический CI41261024481/job124714131753 впервые прочитан:2737/2737,fail0; дополнительные тесты, web/engine types и production build56/56 PASS, FINAL SUCCESS08:32:10. Остальные3проверки SUCCESS атрибутированы primary Road; их журналы watch не читал. Новых PR после1673 нет.
+
+Единственный existing appdeploy41261542902 target5d23ce54: wait124715663572 SUCCESS08:33:46,prepare124715813202 IN_PROGRESS. Index/coverage/build/image SUCCESS по metadata; exact price indexes выполняются с08:50:08. Switch, functional gates и public verifier ещё PENDING; новый редакционный пакет НЕ подтверждён установленным,10liveURL/SEO/обложки остаются за основной работой. Watch выпуск не запускал/не повторял/не отменял.
+
+Existing scheduled China41227716152/publish124685023963 IN_PROGRESS с06:17:48,plan/collectSUCCESS. Итоговый журнал, manifest и опубликованные числа не подтверждены; прочитанный collect log не повторялся. Попытка чтения failed recovery124601674990 снова Transport closed: журнал НЕ прочитан, FINAL FAILURE05:33:35 сохранён; причина/publicationStatus/manifest неизвестны, lock_lost/timeout/6h/rollback не приписываются. Старый41111109988 не запрашивался.
+
+Единственный bounded health09:08 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это прежний выпуск; не приёмка новых статей/Китая/authenticated save/fullsync и не объяснение старого Proxy CONNECT timeout.
+
+OWNERFREEZE вне прямой задачи, обе истории и все остатки сохранены. Только Road/checklist append-only expected-parentCAS. Далее existing deploy41261542902/China publish124685023963, доступность failed final124601674990 и новые primary результаты; без runtime/deploy/repair/diagnostics/browser/provider/cleanup, новых запусков и повторов прочитанных logs. Наблюдение включено.
