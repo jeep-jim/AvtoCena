@@ -1492,3 +1492,16 @@ Compact41293286091/CRM41293286139 fixture timeout на тексте сохран
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны, FINALFAIL10:13:17/05:33:35 сохранены. Причина/publicationStatus/manifest/числа неизвестны, не приписывать locklost/timeout/6h/rollback. Active continuation нет; collect/old41111109988 не повторялись.
 
 OWNERFREEZE вне новых прямых задач/обе истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS, watchenabled. Далее existing PR1684/новые primary exact-UI/save/fixture результаты и Chinafinal доступность без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков.
+
+
+## 01.11.2026, 19:36 Красноярск — PR1684 без изменений, новых результатов приёмки нет
+
+Свежие main97fe70947516d2227157575cf8e22ed9b5fc2cf8, Road/checklist и PR проверены. PR1684 остаётся OPEN с head24f449b0b67d741f4e544c119fe166f666f89a3b; новых PR/primary exact-UI/save/fixture результатов не найдено. AGENTS03336196 и operations unchanged; in_progress0, appdeploy/China active continuation нет. CI41301924463 и primary browser41301924497 уже прочитаны ранее, журналы не повторялись. PR1684 не merged/installed.
+
+Единственный bounded health этой сверки завершился curl0, результат получен19:36:ok=true, exactrelease5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b, calculationVersion930618be749487a96ef052289dbb945715fb807d39a3935367007cb7ce5db6a1 прежний. PR1682/1683 установлены по прежнему final verifier; authenticated live save/fullsync/exact-UI приёмка остаётся неподтверждённой. Смена calcVersion ранее продолжает ограничивать сравнение кэшей.
+
+Оба запроса существующих China final jobs124685023963/124601674990 снова вернули Transport closed — журналы НЕ прочитаны. FINALFAIL10:13:17/05:33:35 сохранены, причины/publicationStatus/manifest/числа неизвестны; locklost/timeout/6h/rollback не приписываются. Collect и old41111109988 не повторялись.
+
+Compact41293286091/CRM41293286139 fixture timeout на тексте сохранения и liveSKIPPED сохранены; адресный primary разбор причины по сохранённым fixture/response/text пока не найден. Старые manifest failures, часовые metadata/log расхождения, обе истории и все остатки сохранены. OWNERFREEZE вне новых прямых задач/authsave/fullsync/REG/drafts/1678backlog остаются в силе.
+
+Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее существующий PR1684/новые primary результаты и доступность China final без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков и повторов прочитанных журналов.
