@@ -19420,3 +19420,12 @@ Authenticated live save/полная двусторонняя синхрониз
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны, locklost/timeout/6h/rollback не приписываются. Нового active China continuation не обнаружено; collect/old41111109988 не повторялись.
 
 OWNERFREEZE вне новых прямых задач/истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено до итоговой приёмки всех целей. Новых runtime/deploy/repair/collector/diag/browser/provider/cleanup запусков нет.
+
+
+### 01.11.2026 — PR1683 установлен; полный release SUCCESS
+
+Regcloud41293321798/job124809046224 завершён SUCCESS, итоговый журнал прочитан. Активирован release5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b с hybrid revision sync и blue/green PR1682; отметка Release active10:30:17Z. Подготовка private index/ASTRA, image build и exact price indexes прошли; прежние manifest failure не повторились. Функциональные release-пробы до/после:45/45 и45/45 PASS. Slow-only0/2, post performanceAccepted=false/latencyBlocking=false по действующей advisory-политике — полной скоростной приёмкой не объявлять.
+
+Финальный PUBLIC_ENCYCLOPEDIA_RELEASE_VERIFIED10:34:22Z: exactrelease5a6f57ad,532 группы,4888 вариантов,22635 полей,3809 groupedVariants,verified=true. Это подтверждение установленного выпуска и публичной сверки, не только CI. Исходный codeheadb7c15f1 ранее принят всеми8workflow;2766/2766tests,TypeScript,production build и browser45→60→45/blue→green→blue/cross-tab/dirty/archive PASS.
+
+До переключения A06 прочитан в live API и раскрыт в браузере: revision53421004-c48e-4922-b0a4-c53acee4e974, исходные значения не менялись. Рабочая среда и cloud browser отключились во время длительной установки, поэтому дополнительная ручная визуальная/authenticated save-приёмка ПОСЛЕ switch не выполнена и не заявлена. Установку подтверждают final server gates и exact public verifier. Физический тип гибрида не угадан; связываются только совместимые прежние значения/исходная staff-карточка. Никаких новых provider/publication/repair запусков, изменения scope/guards или разрушительной очистки агент не выполнял.
