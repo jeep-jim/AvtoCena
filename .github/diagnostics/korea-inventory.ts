@@ -6,12 +6,14 @@ import {readAjesQueryCache,retainedAjesQueryEntries} from '../../apps/web/lib/ca
 // addresses, SQL, credentials, response bodies, or configuration values.
 async function main(){
  const storage=getJsonStorage(),ids=new Set<string>();
+ const incidentTargets=[{name:'Carnival',id:'6izvWQkzMx6Aed'},{name:'Casper',id:'6izzGEOo424cPs'}];
+ const listedTargets:Record<string,{observedAt:string;stale:boolean}>={};
  let snapshots=0,readErrors=0;const dates:string[]=[];
  for(let start=0;start<128;start+=4){
   const slots=await Promise.all(Array.from({length:4},(_,i)=>storage.readJson(`catalog/partner-cache/ajes/queries/${start+i}.json`,null).catch(()=>{readErrors++;return null;})));
   for(const slot of slots)for(const {value} of retainedAjesQueryEntries(slot)){
    const rows=Array.isArray(value.items)?value.items.filter((r:any)=>r?.table==='korea'&&typeof r.id==='string'):[];
-   if(!rows.length)continue;snapshots++;for(const r of rows)ids.add(r.id);
+   if(!rows.length)continue;snapshots++;for(const r of rows){ids.add(r.id);if(incidentTargets.some(t=>t.id===r.id)&&(!listedTargets[r.id]||Date.parse(value.observedAt)>Date.parse(listedTargets[r.id].observedAt)))listedTargets[r.id]={observedAt:value.observedAt,stale:Boolean(value.stale)};}
    if(Number.isFinite(Date.parse(value.observedAt)))dates.push(new Date(value.observedAt).toISOString());
   }
  }
@@ -26,6 +28,12 @@ async function main(){
   if(!v){console.log('KOREA_FAILURE',{kind,present:false});continue;}
   const allowed=/^(visitor_restricted|request_failed|request_timeout|connect_timeout|invalid_response|empty_response|response_too_large|identity_mismatch|query_too_large|http_\d{3})$/;
   console.log('KOREA_FAILURE',JSON.stringify({kind,present:true,startedAt:v.startedAt,finishedAt:v.finishedAt,outcome:allowed.test(v.outcome)?v.outcome:'other',httpStatus:v.httpStatus,providerCode:/^(bot|ban)\d{0,12}$/.test(v.providerCode)?v.providerCode:null,endpoint:v.endpoint==='http://87.242.72.57/api/'?'ru':v.endpoint==='http://78.46.90.228/api/'?'global':'other'}));
+ }
+ const failure:any=await storage.readJson('integrations/ajes/catalog-failure-pages/korea-detail.json',null);
+ for(const target of incidentTargets){
+  const saved:any=await storage.readJson(`catalog/partner-cache/ajes/korea/${target.id}.json`,null);
+  const matched=failure?.sql===ajesQuery({table:'korea',id:target.id}).sql;
+  console.log('KOREA_INCIDENT_TARGET',JSON.stringify({name:target.name,listed:listedTargets[target.id]??null,detailFound:!!saved,detailObservedAt:saved?.observedAt??null,fullInformation:saved?.fullInformation===true,detailItems:Array.isArray(saved?.items)?saved.items.length:null,detailIdentityMatches:saved?.items?.length===1&&saved.items[0].id===target.id,lastFailureMatches:matched,...(matched?{failureStartedAt:failure.startedAt,failureFinishedAt:failure.finishedAt,outcome:/^(visitor_restricted|request_failed|request_timeout|connect_timeout|invalid_response|empty_response|response_too_large|identity_mismatch|query_too_large|http_\d{3})$/.test(failure.outcome)?failure.outcome:'other',httpStatus:failure.httpStatus,providerCode:/^(bot|ban)\d{0,12}$/.test(failure.providerCode)?failure.providerCode:null}:{})}));
  }
 }
 main().catch(()=>{console.log('KOREA_INVENTORY_READ_FAILED');process.exitCode=1;});
