@@ -1475,3 +1475,20 @@ Authenticated live save/полная двусторонняя синхрониз
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны, locklost/timeout/6h/rollback не приписываются. Нового active China continuation не обнаружено; collect/old41111109988 не повторялись.
 
 OWNERFREEZE вне новых прямых задач/истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено до итоговой приёмки всех целей. Новых runtime/deploy/repair/collector/diag/browser/provider/cleanup запусков нет.
+
+
+## 01.11.2026, 18:55 Красноярск — новая UX-оболочка PR1684 проверена в CI, ещё не установлена
+
+Свежие main0fd1e5b2ed5918de417e987e87c46e34ccb0ffbc, Road/checklist и PR1683/1684 прочитаны. После ae316702 на main изменён только roadmap; AGENTS03336196 и связанные operations audits/verification JSON unchanged. Primary подтвердил: дополнительный authenticated save после switch5a6f57ad не выполнялся из-за отключения рабочей/browser-среды. До switch A06 только прочитан/раскрыт, значения не менялись. Это не новая live-приёмка, прежние остатки сохранены.
+
+Новая прямая UX-задача владельца основной работе: PR1684 OPEN24f449b0b67d741f4e544c119fe166f666f89a3b, codehead949ff326d4da63e0e4dd1b9810ca96b5a7e896bf. Компактная сетка марок вместо общей таблицы; desktop список брендов слева/модели справа, mobile возврат; закреплённые поиск/год/топливо, быстрый «Электро + гибриды». Кузов/привод фильтруют фактические варианты открытой модели, редакторы читаются по раскрытию, URL/Back сохраняются. Primary указывает неизменность расчётов/API записи/ревизий/синхронизации. Сравнение949ff326...24f449b0 подтверждает только roadmap, application code одинаковый. Watch не реализует параллельную UX-правку.
+
+ActualCI41301924463/job124834478116 впервые прочитан watch:2767/2767, extras/web+engine types/build56 PASS, FINAL SUCCESS18:33:30; build в журнале18:33:27. Primary PR/branch Road:18targeted и browser41301924497/job124834478209 уже прочитаны основной работой — fixture4000models×320/390/1440×dark/light,brand/search/filters/Back/independent opening/photo/save/blue→green→blue/cross-tab/dirty/archive/hybrid reverse PASS. SSR79615bytes/1154DOM/0initial model workspaces;2раскрытия→2чтения. Снимки primary, watch не просматривал; журнал browser не повторялся. Это fixture, НЕ production/authsave/fullsync. Все5workflowSUCCESS на codehead — primary attribution; PR1684 не merged/installed, appdeploy нет, in_progress0.
+
+Единственный bounded health18:54–18:55 завершился curl0:ok=true,exactrelease5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b,calculationVersion930618be749487a96ef052289dbb945715fb807d39a3935367007cb7ce5db6a1 прежний. Установка1682/1683 сохраняется; новый UX1684 на production не подтверждён. Прежняя смена cb492→930618 продолжает ограничивать сравнение кэшей.
+
+Compact41293286091/CRM41293286139 fixture timeout на тексте сохранения, liveSKIPPED, остаются исторически открытыми; свежего адресного разбора причины не найдено. Новая browser fixture1684 не стирает эти отказы и не доказывает delivery/live save. Старые manifest failures и metadata/log часовые расхождения сохранены; прочитанные deploy/CI/CRM/compact логи не повторялись.
+
+Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны, FINALFAIL10:13:17/05:33:35 сохранены. Причина/publicationStatus/manifest/числа неизвестны, не приписывать locklost/timeout/6h/rollback. Active continuation нет; collect/old41111109988 не повторялись.
+
+OWNERFREEZE вне новых прямых задач/обе истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS, watchenabled. Далее existing PR1684/новые primary exact-UI/save/fixture результаты и Chinafinal доступность без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков.
