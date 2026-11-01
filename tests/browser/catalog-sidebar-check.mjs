@@ -79,6 +79,10 @@ async function verifyControls(page,scope){
  await scope.getByRole('button',{name:'Топливо',exact:true}).click();
  for(const theme of ['light','dark']){
   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+  const help=await scope.locator('.ac-power-help').evaluate(el=>{const s=getComputedStyle(el);return {background:s.backgroundColor,border:s.borderTopWidth,width:el.getBoundingClientRect().width};});
+  assert.equal(help.background,'rgba(0, 0, 0, 0)',theme+' help has no circular backdrop');assert.equal(help.border,'0px');assert.equal(help.width,32);
+  const inset=await scope.locator('.ac-power-limit').evaluate(el=>el.querySelector('input').getBoundingClientRect().left-el.getBoundingClientRect().left);
+  assert.ok(Math.abs(inset-8)<=1,theme+' checkbox has the requested balanced inset');
   const fields=await scope.locator('.ac-power-limit,.ac-sort-select > button').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {radius:s.borderRadius,background:s.backgroundColor,border:s.borderTopWidth==='0px'?'none':s.borderTopColor,borderWidth:s.borderTopWidth,height:el.getBoundingClientRect().height};}));
   assert.deepEqual(fields[0],fields[1],theme+' quick fields match');
   assert.equal(fields.length,2);
