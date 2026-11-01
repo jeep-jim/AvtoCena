@@ -19332,3 +19332,10 @@ OWNERFREEZE/истории/все остатки/authsave/fullsync/REG/drafts/16
 Health подтвердил exact release62d75e7118a83a3f8d3242a21f3618468009742f и прежний calculationVersioncb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c. Реальный CSS/JS без инъекции: /dealers/dealer_topavto, /cars, /blog, /cars/autocatalog, /privacy ×390/640/1440px ×dark/light =30 PASS. Кнопки не выходят за контейнер, высота>=44px, дилерский desktop — три равные кнопки в ряд, mobile — QR/АвтоЦена и полноширинный АвтоБот ниже; общие страницы сохраняют QR/АвтоРасчёт. В каждом случае АвтоБот открывается/закрывается. Снимки wide/mobile TopAvto просмотрены. Внешние фото/медиа заблокированы в тесте, они не требуются для проверки подвала.
 
 Приёмка UI завершена, но финальный workflow41285459573 ещё выполняет post-switch проверки. Выпуск энциклопедии68a425bc1ee7a7c4c4f2da3bb0721794d460dffe/run41288031765 ждёт в штатной очереди; его установленным не объявляем. Доказательства: docs/operations/verification/footer-autobot-layout-20261101.json.
+
+
+## 01.11.2026 — точный итог footer workflow и продолжение согласованного выпуска
+
+Run41285459573 завершился FAILURE уже после успешной активации62d75e7. Pre/post functional gates PASS45/45 каждый; после переключения4 медленных samples, performanceAccepted=false, latencyBlocking=false — ускорение не заявляем. Release active, отката нет; health подтвердил62d75e7 после завершения. UI30/30 PASS остаётся действительным.
+
+Провалился отдельный шаг Verify published encyclopedia fields: public_source_manifest_mismatch. public-release-source.mjs сравнивает текущий manifest с digest подготовленного индекса; они различаются. Это не разрешает отключать сверку или перезаписывать ручные изменения. Финальная проверка опубликованных исследовательских данных для этого выпуска НЕ завершена. Новый ранее согласованный combined release68a425bc/run41288031765 автоматически вышел из очереди и готовит свежий индекс с сохранёнными guards. Deployment/source scripts не менялись.
