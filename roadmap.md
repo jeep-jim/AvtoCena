@@ -19100,3 +19100,12 @@ OWNERFREEZE вне новых прямых задач, обе истории, в
 Косметика PR1674 уже наблюдается на production /cars: health releaseSha8b5dab49f66a09770a1897f4f5c1c505a28ce95f, calculationVersion407936d8ce73c54e6fba6a33104fbe555d2baa3fd7a354a31974fd3f0e257199 (не менялась). Браузер: «Найдено 1 015 942 машин», рынки244471/608799/487/95510/24152/41273/1250 только числа, КПП открывается, подсказка открывается/закрывается; background transparent,border0,width32 и padding-left8. Просмотрены обе темы, возвращена светлая. Снимки docs/operations/verification/catalog-cosmetics-20261101-{light,dark}.jpg сохранены в main. Мобильная проверка этого изменения — успешный browser CI, не ручная production mobile: API изменения viewport отсутствует. Главная и cookies не изменялись в PR1674.
 
 Установка41266764595: шаг Deploy with rollback and resource measurements SUCCESS; заключительный Verify published encyclopedia fields against this exact release ещё IN_PROGRESS, полный workflow пока не объявляется завершённым. Основная регрессия CI2737/2737 PASS подтверждена прочитанным журналом, все9PRworkflowsSUCCESS. Существующая история/наблюдения сохранены.
+
+
+## 2026-11-01 — Косметика PR1674: установка завершена SUCCESS
+
+REG workflow41266764595, wait124731072189 и prepare124731196907 завершились SUCCESS, включая Verify published encyclopedia fields against this exact release. Установленный release8b5dab49f66a09770a1897f4f5c1c505a28ce95f подтверждён health и живым /cars; приёмка обеих desktop тем/счётчика/КПП/подсказки и снимки описаны выше. BrowserCI mobile также SUCCESS. Все9PRworkflowsSUCCESS, полная регрессия2737/2737 без ошибок,16профильных локально,типы/сборкаPASS.
+
+Журнал завершённого prepare впервые прочитан: функциональные release-gates до/после переключения прошли; есть advisory о задержках, это НЕ достижение цели <1s. До активации /login after_ttl1.5007s; после переключения China Volkswagen page2 after_ttl2.3864s (target2s), China search marketPage1&page9 after_ttl2.5022s и after_directory_ttl2.4696s (target1s). Функциональные проверки в этих предупреждениях passed; автоматическое ослабление guards не выполнялось. Расчётная версия407936d8ce73c54e6fba6a33104fbe555d2baa3fd7a354a31974fd3f0e257199 сохранена.
+
+Срочная cookie-задача#1675 остаётся OPEN/не исправлена, по просьбе владельца добавлена в задачи. Текущий выпуск не выдаётся за исправление cookie или общий аудит всей системы. Дополнительный выпуск не запускался; China/наблюдение/история других задач сохранены.
