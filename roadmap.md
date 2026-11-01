@@ -19489,3 +19489,16 @@ UI: марки первым экраном, desktop brand sidebar+model content,
 ### 01.11.2026 — владелец разрешил установку PR1684 на сайт
 
 Все5проверок финального24f449b0 SUCCESS. Конфликт append-only roadmap разрешён сохранением обеих историй; application blobs берутся без изменений из проверенного PR. Запускается штатный release с прежними research/ASTRA/market guards. Установка пока не подтверждена.
+
+
+## 01.11.2026, 21:30 Красноярск — PR1684 объединён, существующий выпуск готовит цены
+
+Свежие main2200313d709d5731b3b98b5d83afcd05f654885e, Road/checklist, PR и jobs прочитаны. PR1684 MERGED21:05:16, mergee534956d6e0b9272d4ed9a8381db47fa33d60fb0, finalheaddba9dd1300a85e0b96c9818976b28424482ca662. Сравнение24f449b0...dba9dd13 показывает только Road/checklist: конфликт документации разрешён с сохранением обеих историй, application code не изменён. Primary Road и deploy marker фиксируют прямое разрешение владельца опубликовать UI; прежние5checks/2767tests/browser PASS относятся к ранее проверенному коду. Уже прочитанные CI41301924463/browser41301924497 не повторялись. AGENTS03336196 и связанные operations unchanged.
+
+Единственный in_progress — существующий Regcloud41314439953, head2200313d; wait124871397220 SUCCESS21:06:13, prepare124871545295 IN_PROGRESS. По metadata private index SUCCESS21:20:31, coverage21:20:33, build21:23:58, image21:24:46; exact price indexes идут с21:24:59. Deploy/switch/gates/public verifier ещё PENDING. Запрос журнала активного prepare вернул404 BlobNotFound — журнал НЕ прочитан, это не failure. Watch выпуск не запускал/не повторял/не отменял. PR1684 пока НЕ installed.
+
+Единственный bounded health21:30 завершился curl0:ok=true, exactrelease5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b, calculationVersion930618be749487a96ef052289dbb945715fb807d39a3935367007cb7ce5db6a1 прежний. Установлены1682/1683 по прежнему final verifier; новый brand-first UI ещё не подтверждён на production. Authenticated live save/fullsync/exact-UI приёмка остаётся открытой, прежняя смена calcVersion ограничивает cache comparison.
+
+Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны, active China continuation нет. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
+
+Compact/CRM fixture timeout на тексте сохранения и liveSKIPPED, прежние manifest failures/metadata часовые расхождения, обе истории и все остатки сохранены. Нового primary savedfixture/response/text разбора либо authenticated save не найдено. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее существующий deploy41314439953/final verifier и primary exact-UI/save, Chinafinal доступность. Только два документа append-only expected-parentCAS, без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков; наблюдение включено.
