@@ -19459,3 +19459,14 @@ OWNERFREEZE вне новых прямых задач/обе истории/вс
 Compact41293286091/CRM41293286139 fixture timeout на тексте сохранения и liveSKIPPED сохранены; адресный primary разбор причины по сохранённым fixture/response/text пока не найден. Старые manifest failures, часовые metadata/log расхождения, обе истории и все остатки сохранены. OWNERFREEZE вне новых прямых задач/authsave/fullsync/REG/drafts/1678backlog остаются в силе.
 
 Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее существующий PR1684/новые primary результаты и доступность China final без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков и повторов прочитанных журналов.
+
+
+## 01.11.2026, 21:03 Красноярск — состояние кандидата и приёмки без изменений
+
+Свежие main8da0a9bf37255380b01adc618126f3fc4621ae96, Road/checklist и последние PR прочитаны. Main не изменился; AGENTS03336196 и связанные operations unchanged. PR1684 остаётся OPEN24f449b0b67d741f4e544c119fe166f666f89a3b, не merged/installed. Новых PR и primary exact-UI/authenticated save/разбора сохранённого fixture не найдено; in_progress0. Прочитанные CI41301924463 и primary browser41301924497 не повторялись.
+
+Единственный bounded health21:02–21:03 завершился curl0:ok=true, exactrelease5a6f57ad0dfd7cdda088f8c187d0afb73e8e6a6b, calculationVersion930618be749487a96ef052289dbb945715fb807d39a3935367007cb7ce5db6a1 прежний. Это не новая live save/fullsync/UI-приёмка; установленными остаются1682/1683 по ранее прочитанному final verifier. Ограничение cache comparison после прежней смены calcVersion сохранено.
+
+Оба China final124685023963/124601674990 снова Transport closed, журналы НЕ прочитаны. FINALFAIL10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны, active continuation не обнаружен. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
+
+Compact/CRM fixture timeout и liveSKIPPED, старые manifest failures/часовые metadata/log расхождения, обе истории и все незавершённые цели сохранены. Следующий адресный шаг основной работы — сохранённые fixture/response/text и exact-release UI/save; watch только наблюдает существующий PR1684/новые primary результаты и доступность China final. OWNERFREEZE вне прямых задач/authsave/fullsync/REG/drafts/1678backlog в силе. Только два документа append-only expected-parentCAS, без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков; наблюдение включено.
