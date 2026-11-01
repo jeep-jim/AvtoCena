@@ -108,9 +108,9 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-authorized PR1679: mobile-only cookie notice above header; desktop remains bottom-left; persistent Hide switch for Autobot with footer opener. All 15 final-head checks SUCCESS; 2747 regression tests PASS, types/build PASS, 91 browser layout measurements PASS. Preserve existing preparationMarkets and research safeguards.",
+  "reason": "Owner-authorized issue1675, PR1679+1680: mobile cookie notice above header; desktop bottom-left; persistent Hide switch and footer Autobot opener. All final checks PASS. UI event moved outside calculation source closure; calculationVersion matches installed b595. Replace cancelled unactivated run41275811062. Preserve all market/research/ASTRA guards.",
   "ideaReports": [],
-  "requestedAt": "2026-11-01T05:09:15.351Z",
+  "requestedAt": "2026-11-01T05:48:56.615Z",
   "preparationMarkets": [
     "china",
     "korea",
