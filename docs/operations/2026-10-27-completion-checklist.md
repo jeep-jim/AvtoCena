@@ -1316,3 +1316,20 @@ Existing scheduled China41227716152/publish124685023963 IN_PROGRESS с06:17:48,p
 Единственный bounded health09:08 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это прежний выпуск; не приёмка новых статей/Китая/authenticated save/fullsync и не объяснение старого Proxy CONNECT timeout.
 
 OWNERFREEZE вне прямой задачи, обе истории и все остатки сохранены. Только Road/checklist append-only expected-parentCAS. Далее existing deploy41261542902/China publish124685023963, доступность failed final124601674990 и новые primary результаты; без runtime/deploy/repair/diagnostics/browser/provider/cleanup, новых запусков и повторов прочитанных logs. Наблюдение включено.
+
+
+## 01.11.2026, 09:59 Красноярск — редакционный выпуск установлен; косметика1674 ещё готовится
+
+Свежие main c1dec25af51b2b82d8e2f155d820d817cc3899a6 и Road/checklist прочитаны. AGENTS03336196 и operations audits unchanged. Новая primary Road09:37 подтверждает10/10 статей HTTP200/H1/последний абзац/источники/related/canonical/BlogPosting/sitemap;12/12 изображений complete/naturalWidth>0, светлая/тёмная темы. Это атрибуция основной проверке, watch браузер/API не повторял. Mobile visual и authenticated production save не приняты. Одиночные ответы статей2.601–5.185s,/blog3.508s не cold/warm серия и не subsecond. Primary timeout21.808s/0bytes до активации сохранён отдельно, причина неизвестна. Внешних публикаций0,20адаптаций сохранены.
+
+Existing deploy41261542902/job124715813202 FINAL SUCCESS09:34:42; итоговый журнал впервые прочитан watch. Release active09:30:06 exact5d23ce54b1638b168d590d0e45c671a2e3e3dfab. Pre45/post45 functionalPASS,slow1/1,performanceAccepted=false,latencyBlocking=false: задержки advisory, не rollback. Public verifier09:34:33 exact532groups/4888variants/22635fields/3809groupedVariants/2privateDescriptions,verified=true. PR1641 установлен, прежние истории отказов не отменены.
+
+Единственный bounded watch health09:58 завершился curl0:ok=true,releaseSha5d23ce54b1638b168d590d0e45c671a2e3e3dfab,calculationVersion407936d8ce73c54e6fba6a33104fbe555d2baa3fd7a354a31974fd3f0e257199. Новая calcVersion ограничивает сравнение кэшей; health не означает fullsync/все цели.
+
+Primary прямая косметическая задача: динамическое «Найдено … машин» только общий заголовок/верх фильтров, числа рынков сохранены; КПП, выравнивание checkbox/иконок, вопросик без круга с32px hit target. Figma timeout не успешный доступ, референс — owner screenshots. PR1674 MERGED50327c7aefd0f3ea3c0b2c4904961548ffa52e01,finalhead11b1cbc0854956cfb32a97f0b4e20c74300c6351. ActualCI41266108869/job124729140188 впервые прочитан:2737/2737,extras/types/build56PASS,FINAL09:48:57. Девять успешных workflows и просмотр fixture screenshots — primary атрибуция, не live приёмка.
+
+Existing новый deploy41266764595 target8b5dab49f66a09770a1897f4f5c1c505a28ce95f:wait124731072189SUCCESS09:50:37,prepare124731196907IN_PROGRESSbuildс09:58:03;index/coverageSUCCESSmetadata,image/prices/switch/gates/verifier не подтверждены. PR1674 НЕ установлен на health. Existing Journey41266757627/job124731049374 ждёт exact release с09:50:12; браузер ещё не принят, это не browser failure. Watch оба запуска не создавал/не повторял/не отменял.
+
+ScheduledChina41227716152/publish124685023963 IN_PROGRESSс06:17:48,plan/collectSUCCESS;итог/manifest/числа не подтверждены. Прочитанный collect log не повторялся. Failed recovery124601674990 снова Transport closed:журнал НЕ прочитан,FINALFAIL05:33:35,причина/publicationStatus/manifest неизвестны. Не приписываются lock_lost/timeout/6h/rollback;старый41111109988 не запрашивался.
+
+OWNERFREEZE вне новых прямых задач, обе истории, все остатки/authsave/fullsync/REG/drafts сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее existing deploy/Journey/China и primary результаты без runtime/deploy/repair/diagnostics/browser/provider/cleanup, новых запусков и повторов прочитанных журналов.
