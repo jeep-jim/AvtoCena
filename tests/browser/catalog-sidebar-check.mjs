@@ -113,7 +113,7 @@ try{
   const context=await contextFor(width),page=await context.newPage();
   await page.goto(origin+'/cars?marketPreview=1&sidebar=1');
   await page.locator('[data-test-overall-count]').waitFor();
-  assert.match(await page.locator('[data-test-overall-count]').innerText(),/895\s?838/);assert.doesNotMatch(await page.locator('[data-test-overall-count]').innerText(),/Найдено/);
+  assert.match(await page.locator('[data-test-overall-count]').innerText(),/895\s?838/);assert.match(await page.locator('[data-test-overall-count]').innerText(),/Найдено .* машин/);
   assert.equal(await page.locator('.ac-catalog-card:visible').count(),6);
   const tops=await page.locator('.ac-catalog-card:visible').evaluateAll(els=>els.map(el=>Math.round(el.getBoundingClientRect().top)));
   assert.equal(new Set(tops).size,width>=1024?2:1);
