@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-01",
+  "request": "Updated encyclopedia rows blue until confirmed, then green; retain immediate application of saved parameters.",
+  "pullRequest": 1682,
+  "testedHead": "26cb3a5deada11a4302dcee75c0a33d686f941bf",
+  "unitTests": {
+    "passed": 13,
+    "newReviewTests": 6
+  },
+  "typecheck": "PASS",
+  "browserFixture": {
+    "passed": true,
+    "models": 4000,
+    "ssrBytes": 107768,
+    "results": [
+      {
+        "theme": "dark",
+        "width": 320,
+        "initialElements": 1423,
+        "initialModels": 40,
+        "modelReads": 2
+      },
+      {
+        "theme": "dark",
+        "width": 390,
+        "initialElements": 1423,
+        "initialModels": 40,
+        "modelReads": 2
+      },
+      {
+        "theme": "dark",
+        "width": 1440,
+        "initialElements": 1423,
+        "initialModels": 40,
+        "modelReads": 2
+      },
+      {
+        "theme": "light",
+        "width": 320,
+        "initialElements": 1423,
+        "initialModels": 40,
+        "modelReads": 2
+      },
+      {
+        "theme": "light",
+        "width": 390,
+        "initialElements": 1423,
+        "initialModels": 40,
+        "modelReads": 2
+      },
+      {
+        "theme": "light",
+        "width": 1440,
+        "initialElements": 1423,
+        "initialModels": 40,
+        "modelReads": 2
+      }
+    ]
+  },
+  "browserWorkflow": 41287280126,
+  "visualReview": [
+    "pending dark desktop/mobile",
+    "pending light desktop",
+    "confirmed dark desktop"
+  ],
+  "calculationVersion": "cb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c",
+  "calculationVersionUnchanged": true,
+  "productionStatus": "not installed",
+  "liveVerification": "pending",
+  "scope": "UI status projection and event-driven refresh only; no stored-data migration, matching or calculation changes."
+}
