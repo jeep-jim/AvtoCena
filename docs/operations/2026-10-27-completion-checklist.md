@@ -1546,3 +1546,20 @@ Deploy41314439953/job124871545295 FINAL FAILURE22:00:42; итоговый жур
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны, active China continuation нет. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
 
 Compact/CRM fixture failures/liveSKIPPED, прежние manifest failures и metadata/log часовые расхождения, обе истории и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing41319301653 final/verifier и primary exact-UI/save/savedfixture, доступность China final. Только Road/checklist append-only expected-parentCAS, без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков; наблюдение включено.
+
+
+## 01.11.2026, 23:30 Красноярск — PR1684 установлен, финальный verifier успешен
+
+Свежие main1eff8106fbd0e4dbbd6cc878a36f1d9dabead755, Road/checklist, PR и jobs прочитаны. После3e2e6640 добавлена только primary запись roadmap; AGENTS03336196 и связанные operations unchanged. Новых PR после1684 нет, in_progress0/appdeploy/China active continuation нет. Старые прочитанные CI/browser и первый failed deploy41314439953 не повторялись; его pre-switch failure/old production retained сохранены исторически.
+
+Existing deploy41319301653/job124886051831 FINAL SUCCESS23:14:19; итоговый журнал впервые прочитан watch. Exact release2ffe03a5c2d4883249c14439adac9f9e4042cf3d, сообщение Release active23:07:54.908. Pre48/post48 functionalPASS, slow0/2; post performanceAccepted=false, latencyBlocking=false. Два advisory slow после directoryTTL: China Volkswagen page2 HTML3.1734s (target2s), China search marketPage1/page9 API4.2927s (target1s). Это не rollback и не универсальная subsecond-приёмка.
+
+Public verifier23:14:12.397: exact2ffe03a5,532groups/4888variants/22635fields/3809groupedVariants/2privateDescriptions,verified=true. PR1684 INSTALLED; прежние1682/1683 сохраняются в выпуске. Старые manifest failures/metadata часовые расхождения и другие отказы не стираются поздним успехом.
+
+Новая primary Road сообщает об anonymous live browser на exact2ffe03a5:197марок/3321модель без раскрытых моделей; Changan71модель, A06 раскрывается с7вариантами2026, кузовСедан даёт5, электро+гибриды даёт32моделиChangan. Все марки сохраняетfuel=electrified, поискChangan даёт1марку, Сбросить возвращает/cars/autocatalog. Визуальная проверка/снимок artifacts/avtocena-published-1793549093741.jpg — attribution основной работы, watch снимок не просматривал/browser не повторял. Производственных сохранений не выполняли; прежние320/390/1440 dark/light CI fixtures не подменяют полную live-приёмку. Authenticated save/fullsync ещё НЕ приняты; Compact/CRM fixture timeout на прежнем тексте сохранения открыт.
+
+Единственный bounded health23:29–23:30 завершился curl0:ok=true, exactrelease2ffe03a5c2d4883249c14439adac9f9e4042cf3d, НОВАЯ calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8. Смена930618→269f2d ограничивает cache comparison, не доказывает изменение расчётной логики или ускорение.
+
+Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL10:13:17/05:33:35 и неизвестные причины/publicationStatus/manifest/числа сохранены. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
+
+Обе истории/все остатки/OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog сохранены. Далее новые primary authenticated exact-release save/fullsync и savedfixture/response/text результаты, доступность China final. Только Road/checklist append-only expected-parentCAS, без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено до итоговой приёмки всех целей.
