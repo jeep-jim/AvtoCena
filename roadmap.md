@@ -19325,3 +19325,10 @@ Existing следующий deploy41288031765 marker68a425bc PENDING; не watch
 Оба China final logs124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL10:13:17/05:33:35,причины/publicationStatus/manifest/числа неизвестны. Lock_lost/timeout/6h/rollback не приписываются; нового activeChina continuation не обнаружено. Collect/old41111109988 и уже прочитанные старые журналы не повторялись.
 
 OWNERFREEZE/истории/все остатки/authsave/fullsync/REG/drafts/1678backlog сохранены. Только Road/checklist append-only expected-parentCAS. Далее existing2deploy/CRM/compact и primary exact-SHA приёмка/доступностьChinafinal без runtime/deploy/repair/diag/browser/provider/cleanup и новых запусков. Наблюдение включено.
+
+
+## 01.11.2026 — подвал установлен и проверен на сайте
+
+Health подтвердил exact release62d75e7118a83a3f8d3242a21f3618468009742f и прежний calculationVersioncb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c. Реальный CSS/JS без инъекции: /dealers/dealer_topavto, /cars, /blog, /cars/autocatalog, /privacy ×390/640/1440px ×dark/light =30 PASS. Кнопки не выходят за контейнер, высота>=44px, дилерский desktop — три равные кнопки в ряд, mobile — QR/АвтоЦена и полноширинный АвтоБот ниже; общие страницы сохраняют QR/АвтоРасчёт. В каждом случае АвтоБот открывается/закрывается. Снимки wide/mobile TopAvto просмотрены. Внешние фото/медиа заблокированы в тесте, они не требуются для проверки подвала.
+
+Приёмка UI завершена, но финальный workflow41285459573 ещё выполняет post-switch проверки. Выпуск энциклопедии68a425bc1ee7a7c4c4f2da3bb0721794d460dffe/run41288031765 ждёт в штатной очереди; его установленным не объявляем. Доказательства: docs/operations/verification/footer-autobot-layout-20261101.json.

@@ -1,0 +1,537 @@
+{
+  "pullRequest": 1681,
+  "verifiedHead": "0f30d763b84b8eadca7c8756768d49c2ebcf3ed8",
+  "releaseSha": "62d75e7118a83a3f8d3242a21f3618468009742f",
+  "deploymentRun": 41285459573,
+  "status": "installed UI verified; deployment post-checks running",
+  "change": "Shared footer CSS: three columns for dealer contexts from 640px; full-width Autobot row in narrow/public footer columns; consistent button color and weight.",
+  "githubChecks": {
+    "passed": 7,
+    "ciRun": 41284885961,
+    "regressionTests": 2747,
+    "staticPagesBuilt": 56
+  },
+  "localFixture": [
+    {
+      "context": "public",
+      "width": 320,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 320,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 390,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 390,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 639,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 639,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 640,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 640,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 768,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 768,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 1024,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 1024,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 1440,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "public",
+      "width": 1440,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 320,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 320,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 390,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 390,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 639,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 639,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 640,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 640,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 768,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 768,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 1024,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 1024,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 1440,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "profile",
+      "width": 1440,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 320,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 320,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 390,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 390,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 639,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 639,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 640,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 640,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 768,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 768,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 1024,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 1024,
+      "theme": "dark",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 1440,
+      "theme": "light",
+      "passed": true
+    },
+    {
+      "context": "dealer-context",
+      "width": 1440,
+      "theme": "dark",
+      "passed": true
+    }
+  ],
+  "previewDealer": [
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 390,
+      "theme": "dark",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 640,
+      "theme": "dark",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 1440,
+      "theme": "dark",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 390,
+      "theme": "light",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 640,
+      "theme": "light",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 1440,
+      "theme": "light",
+      "dealer": true,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Live browser checks block external hosts, images and media; the footer does not require vehicle photos.",
+    "Viewport emulation, not physical devices.",
+    "Preview checks inject CSS locally and do not prove deployment."
+  ],
+  "productionStatus": "active; final deployment job still running",
+  "installedRelease": "62d75e7118a83a3f8d3242a21f3618468009742f",
+  "liveChecks": [
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 390,
+      "theme": "dark",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 640,
+      "theme": "dark",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 1440,
+      "theme": "dark",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/cars",
+      "width": 390,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars",
+      "width": 640,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars",
+      "width": 1440,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/blog",
+      "width": 390,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/blog",
+      "width": 640,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/blog",
+      "width": 1440,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars/autocatalog",
+      "width": 390,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars/autocatalog",
+      "width": 640,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars/autocatalog",
+      "width": 1440,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/privacy",
+      "width": 390,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/privacy",
+      "width": 640,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/privacy",
+      "width": 1440,
+      "theme": "dark",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 390,
+      "theme": "light",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 640,
+      "theme": "light",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/dealers/dealer_topavto",
+      "width": 1440,
+      "theme": "light",
+      "dealer": true,
+      "passed": true
+    },
+    {
+      "route": "/cars",
+      "width": 390,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars",
+      "width": 640,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars",
+      "width": 1440,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/blog",
+      "width": 390,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/blog",
+      "width": 640,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/blog",
+      "width": 1440,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars/autocatalog",
+      "width": 390,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars/autocatalog",
+      "width": 640,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/cars/autocatalog",
+      "width": 1440,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/privacy",
+      "width": 390,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/privacy",
+      "width": 640,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    },
+    {
+      "route": "/privacy",
+      "width": 1440,
+      "theme": "light",
+      "dealer": false,
+      "passed": true
+    }
+  ],
+  "liveCasesPassed": 30,
+  "screenshotsReviewed": [
+    "dealer-1440-dark",
+    "dealer-390-dark"
+  ],
+  "externalResources": "Images/media and non-avtocena.com hosts blocked; footer geometry and actions use real installed CSS/JS without injection."
+}
