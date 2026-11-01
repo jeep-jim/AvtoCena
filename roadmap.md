@@ -19596,3 +19596,18 @@ Public verifier01:48:33.072 подтвердил exact b4479fdd:532groups/4888va
 Оба прежних China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны. Locklost/timeout/6h/rollback не приписываются; старые collect/old41111109988 не повторялись.
 
 Обе истории, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing China41337918148 итог, доступность двух прежних final logs и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
+
+
+## 02.11.2026, 03:27 Красноярск — China collection завершён, публикация ещё выполняется
+
+Свежие mainfa664b63bbb5dcf4d041bab7ff49a43f81af7359, Road/checklist, PR и jobs прочитаны. Main не изменился; AGENTS03336196 и связанные operations unchanged. Новых PR после1684 и новых primary exact-UI/authenticated Save/fullsync/savedfixture результатов нет. Установленный b4479fdd сохраняет предыдущий successful deploy/verifier; прочитанные deploy/CI/browser/primary и старые collect журналы не повторялись.
+
+В существующем штатном China41337918148 collect124941711714 завершён SUCCESS02:51:04; итоговый журнал впервые прочитан. Отчёт02:50:35.037:completed=true,mode=local_replica_and_changes,offers281858,changes291375,cursor12652013,replicaSaved=true. Это результат локальной реплики/изменений, НЕ опубликованный inventory; offers и changes не суммируются. Старые неудачные публикации этим не объяснены и не отменены.
+
+Единственный in_progress — тот же China41337918148, publish124959260274. Metadata: intake SUCCESS02:52:56, bucket reserve SUCCESS02:59:24, year boundaries SUCCESS02:59:26; Publish markets through calculation and retention guards идёт с02:59:26. Финальный итог/publicationStatus/manifest/числа публикации ещё НЕ подтверждены. Watch не запускал/не повторял/не отменял workflow; appdeploy нет. Причина времени старта и длительность не дают основания объявлять hang/failure/success.
+
+Единственный bounded health03:26 завершился curl0:ok=true, exactrelease b4479fdd4ccd642a3bb600a5855917ddd8ef3216, calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8 прежний. Это не новая UI/save/fullsync приёмка; прежние смены fingerprint ограничивают cache comparison.
+
+Оба прежних China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL01.11 10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны; locklost/timeout/6h/rollback не приписываются. Old41111109988 не повторялся.
+
+Обе истории, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing publish124959260274 final, доступность двух прежних final logs и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
