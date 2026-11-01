@@ -7,19 +7,18 @@ import { PublicLeadCaptureV2 } from "@/components/leads/PublicLeadCaptureV2";
 import { PublicLeadCaptureStyles } from "@/components/leads/PublicLeadCaptureStyles";
 
 const publicVisualFixes = `
-/* One neutral dark canvas across every public page. This matches the footer
-   area instead of introducing page-specific grey or colored gradients. */
+/* Use the existing catalog canvas token, including after a theme toggle. */
 html:not([data-theme="light"]) body {
-  background: #07090f !important;
-  background-color: #07090f !important;
+  background: var(--ac-page-bg) !important;
+  background-color: var(--ac-page-bg) !important;
   background-image: none !important;
 }
 
 html:not([data-theme="light"]) body main:not(.account-cabinet-page),
 html:not([data-theme="light"]) body .ac-page-copy,
 html:not([data-theme="light"]) body .ac-partner-page {
-  background: #07090f !important;
-  background-color: #07090f !important;
+  background: var(--ac-page-bg) !important;
+  background-color: var(--ac-page-bg) !important;
   background-image: none !important;
 }
 

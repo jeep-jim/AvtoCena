@@ -63,7 +63,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  let readyCount:AjesCountSummary|null=null;
  // Counts are optional metadata. Keep their bounded, shared request independent
  // of ready cards; a pending count must never occupy the list's critical path.
- if(options.includeCount!==false)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ // Pagination changes only the offset. Recounting here competes with the
+ // requested list in the same two-slot supplier queue. The independent count
+ // endpoint/header owns aggregate refresh; continuations need only their rows.
+ if(options.includeCount!==false&&(query.page||1)===1&&!params.after)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
@@ -81,9 +84,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
  };
  const firstPromise=params.after?null:read(query.page||1);
- // Japanese admission can remove rows even without visitor filters. Fill its
- // visible page through a continuation so borrowed rows are not repeated.
- if(query.table!=='china'&&query.table!=='stats'&&!filter.active){
+ // Unfiltered source pages keep their own offsets. Do not borrow rows from the
+ // next page: numbered navigation must never repeat borrowed listings.
+ // Post-calculation filters still require the explicit continuation below.
+ if(query.table!=='china'&&!filter.active&&!params.after){
   const page=await (firstPromise??read(query.page||1));
   const total=readyCount as AjesCountSummary|null;
   return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};

@@ -22,12 +22,13 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
 }
 
 export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){
- const {id}=await params,stored=await readModel(id);if(!stored)return Response.json({error:'Модель не найдена.'},{status:404,headers});
- const record=encyclopediaWithManagement(stored,await readManagementKnowledge());
  const year=new URL(request.url).searchParams.get('year');
- if(year===null)return Response.json({error:'Выберите год.'},{status:400,headers});
+ if(year===null||year!=='unknown'&&!/^\d{4}$/.test(year))return Response.json({error:'Выберите год.'},{status:400,headers});
+ const {id}=await params;
+ const [stored,knowledge,user]=await Promise.all([readModel(id),readManagementKnowledge(),getCurrentUser()]);
+ if(!stored)return Response.json({error:'Модель не найдена.'},{status:404,headers});
+ const record=encyclopediaWithManagement(stored,knowledge,year==='unknown'?null:Number(year));
  const {editedBy,previousKey,...publicRecord}=record;
  publicRecord.variants=mechanicalRows(record.variants.filter(v=>year==='unknown'?!v.year:v.year===Number(year)));
- const user=await getCurrentUser();
  return Response.json(canEditEncyclopedia(user)?publicRecord:publicEncyclopediaRecord(publicRecord),{headers});
 }

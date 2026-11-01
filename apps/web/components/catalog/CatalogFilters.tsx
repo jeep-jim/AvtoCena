@@ -3,7 +3,6 @@ import {CatalogFilterIcon} from "./CatalogFilterIcon";
 import {CatalogFilterPending} from './CatalogFilterPending';
 import {AUCTION_SALE_PERIODS} from "@/lib/catalog/auction-sale-period";
 import {CatalogChevron as Chevron} from "./CatalogChevron";
-import {CatalogColorSelect} from "./CatalogColorSelect";
 import {CatalogSortSelect} from "./CatalogSortSelect";
 import {normalizedCatalogSort} from "@/lib/catalog/catalog-sort";
 import {filterSelections} from '@/lib/catalog/filter-selections';
@@ -149,7 +148,7 @@ function AuctionGradeSelect({value, onChange}: {value: string; onChange: (value:
 
 const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.flatMap((value) => value==="japan"?[{value:"japan",label:"Япония · Аукционы"},{value:"green",label:"Япония · Зелёный угол"}]:[{ value, label: CATALOG_MARKET_LABELS[value] }])];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
-const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "electrified", label: "Электромобили и гибриды" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
+const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];
 const drives: Option[] = [{ value: "", label: "Любой привод" }, { value: "fwd", label: "Передний" }, { value: "rwd", label: "Задний" }, { value: "awd", label: "Полный" }];
 
@@ -165,7 +164,7 @@ function draftFromInitial(initial: Record<string, string>): FilterDraft {
     yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: (initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
     auctionGrade: initial.market === "japan" ? auctionGradeSelections(initial.auctionGrade).join("|") : "",
-    fuel: initial.fuel || "", drive: initial.drive || "", powerTo: initial.powerTo || "",
+    fuel: filterSelections(initial.fuel || "").flatMap(value=>value === "electrified" ? ["electric", "hybrid"] : [value]).join("|"), drive: initial.drive || "", powerTo: initial.powerTo || "",
   };
 }
 function initialSort(sort: string): { key: SortKey; direction: SortDir } {
@@ -197,21 +196,19 @@ function sortParam(key: SortKey, direction: SortDir) {
   return normalizedCatalogSort(key);
 }
 
-function ElectricCheckbox({ value, onChange, disabled=false }: { value: string; onChange: (value: string) => void; disabled?:boolean }) {
+function FuelCheckboxes({ value, options, onChange }: { value: string; options: Option[]; onChange: (value: string) => void }) {
  const [open,setOpen]=useState(false);
  const root=useRef<HTMLDivElement>(null);
- const choices=[...new Set(filterSelections(value).flatMap(v=>v==="electrified"?["electric","hybrid"]:[v]))];
- const selected=choices.some(v=>v==="electric"||v==="hybrid");
- const encode=(values:string[])=>values.length===2&&values.includes("electric")&&values.includes("hybrid")?"electrified":values.join("|");
- useEffect(()=>{if(!open)return;const close=(e:PointerEvent)=>{if(!root.current?.contains(e.target as Node))setOpen(false);};const escape=(e:KeyboardEvent)=>{if(e.key==="Escape")setOpen(false);};document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};},[open]);
- const toggle=(fuel:string,checked:boolean)=>onChange(encode(checked?[...new Set([...choices,fuel])]:choices.filter(v=>v!==fuel)));
- return <div ref={root} className="ac-electric-options relative min-w-0">
-  <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center gap-2 rounded-[15px] px-4 text-sm font-black">
-   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-3"><input type="checkbox" disabled={disabled} checked={selected} onChange={e=>onChange(encode(e.target.checked?[...new Set([...choices,"electric","hybrid"])]:choices.filter(v=>v!=="electric"&&v!=="hybrid")))} className="ac-unified-checkbox ac-quick-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
-   <button type="button" disabled={disabled} onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-[17px] shrink-0 items-center justify-center text-[var(--ac-muted)]"><Chevron open={open}/></button>
-  </div>
-  {open ? <div className="absolute inset-x-0 top-full z-[120] mt-2 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-semibold">
-   {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="ac-unified-checkbox ac-quick-checkbox"/>{label}</label>)}
+ const selected=filterSelections(value);
+ useDropdown(open,root,()=>setOpen(false));
+ return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"}`}>
+  <input type="hidden" name="fuel" value={value}/>
+  <button type="button" aria-label="Топливо" aria-expanded={open} onClick={()=>setOpen(current=>!current)} className="ac-filter-control flex min-h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black">
+   <span className="flex min-w-0 items-center gap-2"><CatalogFilterIcon name="fuel"/><span className="truncate">{selected.length ? optionLabel(options,value) : "Топливо"}</span></span><Chevron open={open}/>
+  </button>
+  {open ? <div className="ac-filter-dropdown absolute inset-x-0 top-full z-[220] mt-2 rounded-2xl px-4 py-2 text-sm font-semibold" role="group" aria-label="Тип топлива">
+   <button type="button" onClick={()=>onChange("")} className="flex min-h-11 w-full items-center text-left">Любое топливо{!selected.length ? " ✓" : ""}</button>
+   {options.filter(option=>option.value).map(option=><label key={option.value} className="flex min-h-11 cursor-pointer items-center gap-3"><input type="checkbox" checked={selected.includes(option.value)} onChange={event=>onChange((event.target.checked ? [...new Set([...selected,option.value])] : selected.filter(item=>item!==option.value)).join("|"))} className="ac-unified-checkbox ac-quick-checkbox"/>{option.label}</label>)}
   </div> : null}
  </div>;
 }
@@ -302,7 +299,7 @@ function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]
 function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, sourceModels, auctionResults=false, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; sourceModels?:Facets["models"]; auctionResults?:boolean; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
     {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch multiple sourceItems={sourceModels} contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market==="japan"&&draft.stock==="green"?"green":draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
-    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel} placeholder="Любое топливо" options={fuelOptions} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
+    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <FuelCheckboxes value={draft.fuel} options={fuelOptions} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
     {auctionResults&&draft.market==='japan'&&<div className="ac-japan-search-fields mt-2.5 grid grid-cols-2 gap-2.5">
       <input aria-label="Код кузова" name="chassis" value={draft.chassis} onChange={e=>setField('chassis',e.target.value.toUpperCase())} placeholder="Код кузова" maxLength={80} className="ac-filter-control min-w-0 h-13 w-full rounded-[15px] px-3 text-sm font-black outline-none"/>
       <input aria-label="Номер лота" name="lotNumber" value={draft.lotNumber} onChange={e=>setField('lotNumber',e.target.value.replace(/[^0-9]/g,''))} inputMode="numeric" maxLength={10} placeholder="Номер лота" className="ac-filter-control min-w-0 h-13 w-full rounded-[15px] px-3 text-sm font-black outline-none"/>
@@ -317,7 +314,6 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
       </div>
     </div>
-    <div className="mt-2.5"><CatalogColorSelect value={draft.color} market={draft.market} stock={draft.stock} onChange={value=>setField("color",value)}/></div>
   </>;
 }
 
@@ -511,7 +507,6 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     rememberFilterScroll(href);
     startTransition(() => router.push(href, {scroll:false}));
   };
-  const setElectric = (value: string) => { setField("fuel", value); };
   const chooseSort = (key: SortKey, direction: SortDir) => {
     setSortKey(key);
     setSortDirection(direction);
@@ -528,7 +523,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       </div>
       <div className={`ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5`}>
         {<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}
-        <ElectricCheckbox value={draft.fuel} onChange={setElectric} disabled={!interactive} />
+
         <div className="ac-sidebar-sort"><SortControl showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} hidePrice={false} sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></div>
         <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
@@ -542,12 +537,12 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     <StickyCatalogControls showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} onOpenFilters={()=>{if(window.matchMedia("(max-width:1023px)").matches)setMobileOpen(true);else document.querySelector(".ac-catalog-filter-panel")?.scrollIntoView({block:"start",behavior:"smooth"});}} hidePrice={false} chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
 
     {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form data-no-route-loader="true" aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
-      <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? countKnown?`Было: ${countText}`:"Считаем варианты…" : countKnown?`Найдено: ${countText}`:countText}<span className="block text-[10px] font-normal" aria-hidden={!updating||!countKnown}>{updating&&countKnown?"Обновляем…":""}</span></span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className="ac-mobile-filter-collapse flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--ac-muted)]" aria-label="Свернуть фильтры" title="Свернуть фильтры"><Chevron /></button></div></div>
+      <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? countKnown?`Было: ${countText}`:"Считаем варианты…" : countText}<span className="block text-[10px] font-normal" aria-hidden={!updating||!countKnown}>{updating&&countKnown?"Обновляем…":""}</span></span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className="ac-mobile-filter-collapse flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--ac-muted)]" aria-label="Свернуть фильтры" title="Свернуть фильтры"><Chevron /></button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><div className="ac-sidebar-sort"><SortControl showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} hidePrice={false} sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></div></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} disabled={!interactive} />{<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">{<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields sourceModels={sourceModels} auctionResults={auctionResults} draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel /></section>
       </div>
       <div className="shrink-0 border-t border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))]">

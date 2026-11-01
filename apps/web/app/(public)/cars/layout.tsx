@@ -3,8 +3,8 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
     {children}
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-catalog-page.ac-page-copy {
-        background: #07090f !important;
-        background-color: #07090f !important;
+        background: var(--ac-page-bg) !important;
+        background-color: var(--ac-page-bg) !important;
         background-image: none !important;
       }
 

@@ -1,4 +1,5 @@
 'use client';
+import {CatalogPagination,catalogPageNumbers} from '@/components/catalog/CatalogPagination';
 import {Fragment,useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter,useSearchParams} from 'next/navigation';
 import {BrandLogoVisual} from '@/components/catalog/BrandLogoRail';
@@ -29,7 +30,8 @@ export function ModelWorkspace({model,canEdit,standalone=false}:{model:Summary;c
 function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
  const params=useSearchParams(),[open,setOpen]=useState(false);
  const specs=(params.get('year')?model.compact?.years[params.get('year')!]:model.compact?.all)||{};
- return <article className="ac-model-list-item">
+ const hasParameters=Object.values(specs).some(value=>value&&value!=='—');
+ return <article className={`ac-model-list-item${hasParameters?' ac-model-has-parameters':''}`}>
   <div className="ac-model-list-row">
    <div className="ac-model-list-photo"><EncyclopediaPhoto src={model.photo} alt={`${model.make} ${model.model}`}/></div>
    <div><strong>{model.make} {model.model}</strong><small>{model.years.length===1?model.years[0]:model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
@@ -38,7 +40,7 @@ function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
    <div data-label="Привод / КПП">{specs.drive||'—'}<small>{specs.transmission||'—'}</small></div>
    <div data-label="30 мин., кВт">{specs.power30MinKw||'—'}</div>
    <div data-label="В каталоге" title={model.directorySnapshot?`Снимок каталога: ${new Date(model.directorySnapshot.capturedAt).toLocaleString('ru-RU')}`:'Количество ещё не проверено'}>{model.directorySnapshot?.count===undefined?'—':`${model.directorySnapshot.upperBound?'до ':''}${model.directorySnapshot.count.toLocaleString('ru-RU')}`}</div>
-   <button className="ac-ency-button" aria-expanded={open} onClick={()=>setOpen(!open)}>{open?'Свернуть':canEdit?'Изменить':'Параметры'}</button>
+   <button type="button" className="ac-model-row-toggle" aria-label={`${open?'Свернуть':'Раскрыть'} ${model.make} ${model.model}`} aria-expanded={open} onClick={()=>setOpen(!open)}/>
   </div>
   {open&&<ModelWorkspace model={model} canEdit={canEdit}/>}
  </article>;
@@ -51,12 +53,13 @@ export function KnowledgeDirectory({models,canEdit,pagination}:{models:Summary[]
  useEffect(()=>{setPage(1);},[params.toString()]);
  const ordered=useMemo(()=>[...models].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true})),[models]);
  const total=pagination?.total??ordered.length,pages=Math.max(1,Math.ceil(total/40)),current=Math.min(pagination?.page??page,pages);
+ const pageHref=(next:number)=>{const query=new URLSearchParams(params);query.set('page',String(next));return `/cars/autocatalog?${query}`;};
  const changePage=(next:number)=>{if(pagination){const query=new URLSearchParams(params);query.set("page",String(next));window.history.pushState(null,'',`/cars/autocatalog?${query}`);}else setPage(next);};
  return <section ref={list} className="ac-model-list" aria-label="Модели автомобилей">
-  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span>Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span><span/></div>
+  <div className="ac-model-list-head" aria-hidden="true"><span>Фото</span><span title="Зелёная строка с галочкой: параметры есть в базе">Марка / модель / год</span><span>Кузов / код</span><span>Двигатель</span><span>Привод / КПП</span><span>30 мин., кВт</span><span>В каталоге*</span></div>
   {(pagination?ordered:ordered.slice((current-1)*40,current*40)).map((model,index,visible)=><Fragment key={model.id}>{(index===0||visible[index-1].make!==model.make)&&<h2 className="ac-model-make-heading" data-ency-make={model.make}><BrandLogoVisual brand={model.make}/><span>{model.make}</span></h2>}<ModelRow model={model} canEdit={canEdit}/></Fragment>)}
   {!models.length&&<p>По выбранным параметрам моделей не найдено.</p>}
   <p className="ac-ency-muted">* Количество на {models.find(m=>m.directorySnapshot)?.directorySnapshot?.capturedAt?new Date(models.find(m=>m.directorySnapshot)!.directorySnapshot!.capturedAt).toLocaleDateString('ru-RU'):'дату сохранения'}. «До» — верхняя граница количества.</p>
-  {pages>1&&<nav className="ac-ency-pagination" aria-label="Страницы моделей"><button className="ac-ency-button" disabled={current===1} onClick={()=>changePage(current-1)}>Назад</button><span>{current} / {pages} · {counted(total,'model')}</span><button className="ac-ency-button" disabled={current===pages} onClick={()=>changePage(current+1)}>Далее</button></nav>}
+  {pages>1&&<div className="ac-ency-pagination"><CatalogPagination page={current} pageCount={pages} label="Страницы моделей" links={catalogPageNumbers(current,pages).map(page=>({page,href:pageHref(page)}))} previousHref={current>1?pageHref(current-1):undefined} nextHref={current<pages?pageHref(current+1):undefined} onNavigate={changePage}/></div>}
  </section>;
 }

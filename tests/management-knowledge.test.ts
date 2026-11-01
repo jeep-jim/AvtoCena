@@ -148,3 +148,15 @@ test('saved Hilux N1 mass reaches a compatible sibling and its real calculation'
 
  }finally{read.mock.restore();write.mock.restore();resetCatalogRateCache();}
 });
+
+
+test('one-year encyclopedia read preserves matching facts without processing other years',async()=>{
+ const {encyclopediaWithManagement}=await import('../apps/web/lib/catalog/management-knowledge');
+ const record:any={id:'model',make:'Honda',model:'Vezel',revision:'one',variants:[{id:'2025',year:2025,engineCc:1600,fuel:'petrol'},{id:'2024',year:2024,engineCc:1600,fuel:'petrol'},{id:'unknown',engineCc:1500}]};
+ const all=encyclopediaWithManagement(record,index);
+ assert.deepEqual(encyclopediaWithManagement(record,index,2025).variants,all.variants.filter(v=>v.year===2025));
+ assert.deepEqual(encyclopediaWithManagement(record,index,null).variants,all.variants.filter(v=>!v.year));
+ assert.equal(record.variants[0].powerHp,undefined,'reading never modifies stored records');
+ const expensive:any={id:'unrequested',year:2000,get fuel(){throw Error('unrequested year processed');}};
+ assert.deepEqual(encyclopediaWithManagement({...record,variants:[...record.variants,expensive]},index,2025).variants,all.variants.filter(v=>v.year===2025));
+});

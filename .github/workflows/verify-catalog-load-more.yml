@@ -29,6 +29,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - run: node --import tsx --test tests/catalog-page-request.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/catalog-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Test load more and return on mobile and desktop
         env:
@@ -42,6 +43,10 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
+      - name: Verify delayed Japan and Korea counts and cursor isolation
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/ajes-pagination.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

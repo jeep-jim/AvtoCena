@@ -16,7 +16,7 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
  'offer-quality':`export const isRenderablePublicCatalogOffer=()=>true;`,
  'DealerBrowsingContext':`export const DealerLink=({children})=>children;export const useDealerBrowsing=()=>null;`,
- 'navigation':`export const redirect=()=>{throw Error('unexpected redirect')};export const useRouter=()=>({refresh:()=>{}});`,
+ 'navigation':`export const redirect=()=>{throw Error('unexpected redirect')};export const useRouter=()=>({refresh:()=>{}});export const usePathname=()=>'/cars';export const useSearchParams=()=>new URLSearchParams();`,
  };
  const ui=['GreenCornerCatalog','AjesCatalog','AjesRail','JapanSectionTabs','GreenCornerRail','PublicHeader','BrandLogoRail','CatalogLoadMore','CatalogCard','CatalogMarketFlag','CatalogFilters','CurrencyRatesStrip'];
  for(const name of ui)mocks[name]=`export function ${name}(){return null;}`;

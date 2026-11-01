@@ -1,3 +1,6 @@
+import {cache} from 'react';
+// React's server renderer scopes this to one request; scripts use direct reads.
+const requestCache:typeof cache=typeof cache==='function'?cache:((fn:any)=>fn);
 import {withMarketQuotes} from './market-offer-server';
 import {DetailReadCache} from "../catalog/detail-read-cache";
 import {normalizeSiteControls,type SiteControls} from '../site-controls';
@@ -14,7 +17,7 @@ import {
 export function validDealerId(id: string) {
   return /^[a-zA-Z0-9_-]{1,80}$/.test(id) && !id.includes("__");
 }
-export async function findDealer(id: string) {
+export const findDealer = requestCache(async (id: string) => {
   if (!validDealerId(id)) return null;
   const rows = await readDataJson<any[]>("dealers/dealers.json", []);
   return (
@@ -22,8 +25,8 @@ export async function findDealer(id: string) {
       (d) => d.id === id,
     ) || null
   );
-}
-export async function readShowcase(id: string) {
+});
+export const readShowcase = requestCache(async (id: string) => {
   const dealer = await findDealer(id);
   if (!dealer) return null;
   const base=defaultShowcase(id,dealer.name);
@@ -35,7 +38,7 @@ export async function readShowcase(id: string) {
     for(const t of base.pricing.tariffs){const index=pricing.tariffs.findIndex(x=>x.city.toLocaleLowerCase('ru')===t.city.toLocaleLowerCase('ru'));if(index<0)pricing.tariffs.push(t);else pricing.tariffs[index]={...pricing.tariffs[index],usd:t.usd,daysFrom:5,daysTo:10};}
   }
   return {...base,...stored,pricing};
-}
+});
 export class ShowcaseConflict extends Error {
  constructor(public current:DealerShowcase,public proposed:DealerShowcase){super("Настройки изменились в другой вкладке. Ваши данные сохранены в редакторе.");}
 }

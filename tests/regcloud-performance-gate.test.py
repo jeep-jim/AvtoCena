@@ -2,6 +2,23 @@ import importlib.util,json,pathlib,unittest,io,contextlib,sys
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('gate','scripts/regcloud-performance-gate.py');gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
 class GateTests(unittest.TestCase):
+ def test_live_candidate_uses_observed_ssh_peer_without_invented_ip(self):
+  with patch.dict(gate.os.environ,{'SSH_CONNECTION':'8.8.4.4 54321 151.248.113.177 22'}):
+   self.assertEqual(gate.probe_headers('http://127.0.0.1:3001','/cars?market=korea','catalog')['X-Real-IP'],'8.8.4.4')
+   self.assertNotIn('X-Real-IP',gate.probe_headers('https://avtocena.com','/cars?market=korea','catalog'))
+   self.assertNotIn('X-Real-IP',gate.probe_headers('http://127.0.0.1:3001','/api/health','health'))
+  for connection in ['', '127.0.0.1 123 127.0.0.1 22','invalid 123 151.248.113.177 22']:
+   with patch.dict(gate.os.environ,{'SSH_CONNECTION':connection}):
+    with self.assertRaises(AssertionError):gate.probe_headers('http://127.0.0.1:3001','/cars?market=korea','catalog')
+ def test_lead_validation_posts_empty_body_and_rejects_crashes(self):
+  gate.validate('/api/leads','lead_validation',400,b'{"error":"personal_data_consent_required"}','x')
+  for status,body in [(500,b''),(200,b'{"ok":true}'),(403,b'{"error":"origin_forbidden"}'),(400,b'{"error":"other"}')]:
+   with self.assertRaises(AssertionError):gate.validate('/api/leads','lead_validation',status,body,'x')
+  response=gate.urllib.error.HTTPError('http://local/api/leads',400,'',{},io.BytesIO(b'{"error":"personal_data_consent_required"}'))
+  with patch.object(gate.urllib.request,'urlopen',side_effect=response) as open_request:
+   gate.sample('http://local','/api/leads','lead_validation','x')
+  req=open_request.call_args.args[0]
+  self.assertEqual(req.get_method(),'POST');self.assertEqual(req.data,b'{}')
  def test_rejects_partial_stream_and_false_success(self):
   for status,body in [(503,b'</html>'),(200,b'loading'),(200,b'$RX(error)</html>')]:
    with self.assertRaises(AssertionError):gate.validate('/','html',status,body,'x')
@@ -22,7 +39,7 @@ class GateTests(unittest.TestCase):
   self.assertEqual(gate.PHASE_DELAYS,[('warm',0),('after_ttl',35),('after_directory_ttl',305)])
   limits={p:budget for p,budget,k in gate.ROUTES}
   self.assertEqual(limits, {
-   '/api/health': .25, '/': 2, '/login': 1, '/autocalc': 1,
+   '/api/health': .25, '/api/leads': 1, '/': 2, '/login': 1, '/autocalc': 1,
    '/cars': 2, '/cars?market=china&make=Volkswagen&page=2': 2,
    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
@@ -51,13 +68,31 @@ class GateTests(unittest.TestCase):
   self.assertEqual(sample.call_count,len(gate.ROUTES)*4)
   rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
   measured=[r for r in rows if r.get('performanceGate')!='summary']
-  self.assertEqual(len(measured),36)
+  self.assertEqual(len(measured),39)
   self.assertTrue(all(r['functionalPassed'] and not r['passed'] for r in measured))
-  self.assertEqual(rows[-1]['slowSamples'],36)
+  self.assertEqual(rows[-1]['slowSamples'],39)
   self.assertFalse(rows[-1]['performanceAccepted'])
   self.assertIn('::warning::',output.getvalue())
  def test_functional_failure_and_unavailable_response_still_abort(self):
   for failure in [AssertionError('performance_empty_catalog:/cars'),TimeoutError('unavailable')]:
    with patch.object(sys,'argv',['gate','http://127.0.0.1','release']),patch.object(gate,'sample',side_effect=failure),patch.object(gate.time,'sleep'):
     with self.assertRaises(type(failure)):gate.main()
+
+class MarketScopeTests(unittest.TestCase):
+ def test_korea_does_not_probe_china_and_still_rejects_empty_catalog(self):
+  routes=gate.release_routes('korea')
+  self.assertIn(('/cars?market=korea',2.0,'catalog'),routes)
+  self.assertIn(('/api/health',.25,'health'),routes)
+  self.assertFalse(any('china' in p or p in ['/','/cars','/cars?sort=totalRub'] for p,_,_ in routes))
+  with self.assertRaises(AssertionError):gate.validate('/cars?market=korea','catalog',200,b'<html>Unavailable</html>','x')
+ def test_invalid_scope_fails_closed(self):
+  for scope in ['all','korea,','korea,korea','bad','Korea']:
+   with self.assertRaises(ValueError):gate.release_routes(scope)
+  self.assertEqual(gate.release_routes(''),gate.ROUTES)
+ def test_selected_routes_run_before_and_after_expiry_without_other_markets(self):
+  with patch.dict(gate.os.environ,{'AVTOCENA_RELEASE_MARKETS':'korea'}),patch.object(sys,'argv',['gate','http://127.0.0.1','release']),patch.object(gate,'sample',return_value=.001) as sample,patch.object(gate.time,'sleep'),contextlib.redirect_stdout(io.StringIO()):
+   gate.main()
+  self.assertEqual(sample.call_count,len(gate.release_routes('korea'))*4)
+  self.assertTrue(all('china' not in call.args[1] for call in sample.call_args_list))
+
 if __name__=='__main__':unittest.main()

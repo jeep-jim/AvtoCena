@@ -108,3 +108,41 @@ test('prepared populated partitions do not read the whole catalog for explicitly
  try{resetCatalogReadCachesForTests();const ready=await backfillBudgetSpecificationSelectors();assert.deepEqual(Object.keys(ready.markets).sort(),markets.sort());assert.equal(fullReads,0);}
  finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetCatalogReadCachesForTests();}
 });
+
+test('Korea preparation never reads failed China partitions and merges readiness without erasing other markets',async()=>{
+ const {getJsonStorage,StorageConflictError}=await import('../apps/web/lib/data');
+ const {compressedBudgetSelectors,splitPackedBudgetSelectors,specificationSelectorDirectory}=await import('../apps/web/lib/catalog/budget-selector-codec');
+ const {readCalculationIndex}=await import('../apps/web/lib/encyclopedia/calculation-index');
+ const {backfillBudgetMarketSelectors,backfillBudgetSpecificationSelectors,resetCatalogReadCachesForTests}=await import('../apps/web/lib/catalog/storage');
+ const generationId='isolated-korea',root=`catalog/generations/${generationId}/indexes/`;
+ const offers:any[]=[{id:'kr',market:'korea',make:'Test',model:'Car',engineCc:1600,totalRub:1000000},{id:'cn',market:'china',make:'Test',model:'Car',engineCc:2000,totalRub:1200000}];
+ const index=buildBudgetCountIndex(generationId,offers,new Map([['kr',0],['cn',1]]),3);
+ const packed=compressedBudgetSelectors(splitPackedBudgetSelectors(index));
+ const manifest={generationId,markets:{korea:{count:1},china:{count:1}}};
+ const values=new Map<string,any>([['catalog/manifest.json',manifest],[root+'budget-markets-v3/ready.json',packed.directory],[root+'budget-cards-v3/0.json',{generationId,items:[offers[0]]}]]);
+ for(const [market,part] of packed.parts)values.set(root+`budget-markets-v3/${market}.json`,part);
+ const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
+ const oldVersion=process.env.AVTOCENA_CALCULATION_VERSION;process.env.AVTOCENA_CALCULATION_VERSION='e'.repeat(64);
+ const readyPath=root+specificationSelectorDirectory(readCalculationIndex()?.digest||null,'e'.repeat(64))+'/ready.json';
+ const reads:string[]=[],writes:string[]=[];let injected=false;
+ const load=(key:string,fallback:any)=>{reads.push(key);if(key.includes('/china')||key.endsWith('/1.json')||/budget-count-v[123]\.json$/.test(key))throw Error('china_unavailable');return values.has(key)?structuredClone(values.get(key)):fallback;};
+ storage.readJson=async(key,fallback)=>load(key,fallback);
+ storage.readJsonWithMeta=async(key,fallback)=>({found:values.has(key),etag:values.has(key)?'etag-current':undefined,value:load(key,fallback)});
+ const foreignEntry:any={rows:1,otherRows:0,checksum:'unchanged',chunks:[]};
+ storage.writeJson=async(key,value,condition)=>{
+  if(key===readyPath&&!injected){injected=true;values.set(key,{version:4,generationId,encyclopediaDigest:readCalculationIndex()?.digest||null,markets:{china:foreignEntry}});throw new StorageConflictError();}
+  if(key===readyPath)assert.equal(condition?.ifMatch,'etag-current');
+  writes.push(key);values.set(key,structuredClone(value));
+ };
+ try{
+  resetCatalogReadCachesForTests();await backfillBudgetMarketSelectors(['korea']);
+  const ready=await backfillBudgetSpecificationSelectors(['korea']);
+  assert.equal(ready.markets.korea.rows+ready.markets.korea.otherRows,1);
+  assert.deepEqual(ready.markets.china,foreignEntry,'concurrent independent readiness is retained without reading China');
+  assert.ok(!reads.some(p=>p.includes('/china')||/budget-count-v[123]\.json$/.test(p)));
+  assert.ok(writes.every(p=>p===readyPath||p.includes('/parts/korea/')));
+  resetCatalogReadCachesForTests();
+  await assert.rejects(backfillBudgetMarketSelectors(['china']),/partition_not_ready:china/);
+  assert.deepEqual(values.get(readyPath).markets.korea,ready.markets.korea);
+ }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;if(oldVersion===undefined)delete process.env.AVTOCENA_CALCULATION_VERSION;else process.env.AVTOCENA_CALCULATION_VERSION=oldVersion;resetCatalogReadCachesForTests();}
+});

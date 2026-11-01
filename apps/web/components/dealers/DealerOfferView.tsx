@@ -33,7 +33,7 @@ import {OfferPdfButton} from "@/components/catalog/OfferPdfButton";
 import { OfferCopyButton } from "@/components/catalog/OfferCopyButton";
 import type {DealerShowcase,SpecialOffer} from '@/lib/dealers/showcase-model';
 export type PublicOfferShowcase=Pick<DealerShowcase,"dealerId"|"citySlug"|"slug"|"name"|"logoLight"|"logoDark"|"profileEnabled"|"specialsEnabled"|"stockEnabled"|"marketEnabled"|"marketHomeEnabled"|"pricing"|"offices"|"updatedAt">;
-export function DealerOfferView({editHref,id,s,o,initialCity,preview=false,verified=false,canCopy=false,localCitySelection=false,canPdf=false,items=[],markets}:{editHref?:string;id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;localCitySelection?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
+export function DealerOfferView({editHref,id,s,o,initialCity,preview=false,verified=false,canCopy=false,localCitySelection=false,canPdf=false,items=[],markets,related}:{editHref?:string;id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;localCitySelection?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode;related?:ReactNode}) {
   const globalCity=useSelectedCity();
   const privateCity=localCitySelection||initialCity!==undefined;
   const [quoteCity,setQuoteCity]=useState<string|null>(initialCity??null);
@@ -180,7 +180,7 @@ export function DealerOfferView({editHref,id,s,o,initialCity,preview=false,verif
 
           </div>
         </div>
-        <div className="mt-10" data-dealer-related><SpecialRail kinds={stock?["stock","order","market"]:["order","stock","market"]} heading={`Ещё автомобили · ${s.name}`} items={items.filter(item=>item.id!==o.id)}/>{markets}</div>
+        <div className="mt-10" data-dealer-related>{related??<SpecialRail kinds={stock?["stock","order","market"]:["order","stock","market"]} heading={`Ещё автомобили · ${s.name}`} items={items.filter(item=>item.id!==o.id)}/>}{markets}</div>
       </div>
       <OfferContactActionsStyles />
       <style>{`

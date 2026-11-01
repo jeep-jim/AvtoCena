@@ -9,8 +9,8 @@ test('ready Korea/Japan cards return while the independent count is still pendin
  const stubs:Record<string,string>={
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__countFixture.counts++;return new Promise(()=>{});}};",
-  './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:24},(_,i)=>({id:'car'+i})),observedAt:'now'};};`,
-  './ajes-query':"export const ajesCatalogQuery=p=>({table:p.market==='japan'?'stats':'korea',page:1,pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
+  './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:'now'};};`,
+  './ajes-query':"export const ajesCatalogQuery=p=>({table:p.market==='japan'?'stats':'korea',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
@@ -26,13 +26,21 @@ test('ready Korea/Japan cards return while the independent count is still pendin
   for(const market of ['korea','japan']){
    let timer:ReturnType<typeof setTimeout>;
    const page:any=await Promise.race([mod.exports.readAjesCatalogPage({market,drive:market==='japan'?'awd':undefined,city:'Новокузнецк'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by count')),300);})]).finally(()=>clearTimeout(timer!));
-   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,'car0');
+   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,(market==='japan'?'stats':'korea')+'-1-0');assert.equal(page.nextCursor,undefined,'unfiltered source pages keep numbered offsets');
   }
-  assert.equal(state.counts,2);assert.equal(state.lists,2);
+  for(const market of ['korea','japan']){
+   const second=await mod.exports.readAjesCatalogPage({market,page:'2'},undefined,{includeCount:false});
+   const third=await mod.exports.readAjesCatalogPage({market,page:'3'},undefined,{includeCount:false});
+   assert.equal(second.items.length,23,'a removed row must not borrow from the next numbered page');
+   assert.equal(third.items.length,24);
+   assert.equal(second.nextCursor,undefined);assert.equal(third.nextCursor,undefined);
+   assert.equal(new Set([...second.items,...third.items].map(x=>x.id)).size,47);
+  }
+  assert.equal(state.counts,2);assert.equal(state.lists,6,'each numbered page reads only its own source offset');
  }finally{delete (globalThis as any).__countFixture;}
 });
 
-test('overview Japan and Korea lists do not compete with their own optional counts',async()=>{
+for(const continuation of [false,true])test(`${continuation?'pagination':'overview'} Japan and Korea lists do not compete with optional counts`,async()=>{
  let release!:()=>void;const held=new Promise<void>(resolve=>{release=resolve;});
  const queue=new DetailReadCache<any>({maxEntries:8,maxBytes:100000,ttlMs:0,concurrency:2,queueTimeoutMs:80});
  const state={counts:0,lists:0, count:()=>queue.get('count'+Math.random(),async()=>{state.counts++;await held;return {total:24};}),list:async(q:any)=>{await new Promise(r=>setTimeout(r,10));return queue.get('list'+q.table,async()=>{state.lists++;return {page:1,pageSize:24,received:24,items:Array.from({length:24},(_,i)=>({id:q.table+i})),observedAt:'now'};});}};(globalThis as any).__countFixture=state;
@@ -40,7 +48,7 @@ test('overview Japan and Korea lists do not compete with their own optional coun
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{return globalThis.__countFixture.count();}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__countFixture.list(q);`,
-  './ajes-query':"export const ajesCatalogQuery=p=>({table:p.market==='japan'?'stats':'korea',page:1,pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
+  './ajes-query':"export const ajesCatalogQuery=p=>({table:p.market==='japan'?'stats':'korea',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
@@ -53,7 +61,7 @@ test('overview Japan and Korea lists do not compete with their own optional coun
  try{
   const built=await build({entryPoints:['apps/web/lib/catalog/ajes-catalog.ts'],bundle:true,platform:'node',format:'cjs',write:false,external:['react'],plugins:[{name:'count-fixture',setup(b){b.onResolve({filter:/.*/},a=>a.path in stubs?{path:a.path,namespace:'stub'}:undefined);b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:stubs[a.path]}));}}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),mod,mod.exports);
-  const pages=await Promise.all(['korea','japan'].map(market=>mod.exports.readAjesCatalogPage({market},undefined,{includeCount:false})));
+  const pages=await Promise.all(['korea','japan'].map(market=>mod.exports.readAjesCatalogPage({market,page:continuation?'2':'1'},undefined,continuation?{}:{includeCount:false})));
   assert.equal(pages.length,2);assert.ok(pages.every(page=>page.items.length===24&&page.hasMore));
   assert.equal(state.counts,0);assert.equal(state.lists,2);
  }finally{release();delete (globalThis as any).__countFixture;}

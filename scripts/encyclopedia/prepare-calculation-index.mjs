@@ -1,3 +1,5 @@
+import {prepareWithCheckpoints} from './preparation-checkpoints.mjs';
+import {calculationVersion} from '../catalog-calculation-version.mjs';
 import {compileAstraPower30Facts,astraPower30Key} from '../../apps/web/lib/encyclopedia/astra-power30.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -11,11 +13,12 @@ if(storage.driver!=='object')throw Error('durable_object_storage_required');
 const manifest=await storage.readJson(MANIFEST,null);
 if(!manifest?.models?.length)throw Error('encyclopedia_missing');
 const models={},report={modelsRead:0,variants:0,factoryFields:0,ownerReferenceFields:0,manualFields:0,astraTechnicalReferences:0,astraPower30Values:0};
-const rows=manifest.models.filter(isEncyclopediaCar);let cursor=0;
+const rows=manifest.models.filter(isEncyclopediaCar);
 const coverageModels=[];
-await Promise.all(Array.from({length:6},async()=>{
- for(;;){
-  const summary=rows[cursor++];if(!summary)return;
+const prepared = await prepareWithCheckpoints({storage, rows,
+ context: {sourceVersion: calculationVersion(), coverageYear: new Date().getFullYear()},
+ progress: value => console.log(JSON.stringify({stage:'encyclopedia_checkpoint',...value})),
+ compile: async summary => {
   const record=await storage.readJson(summary.key,null);
   if(record?.revision!==summary.revision||record.id!==summary.id)throw Error('encyclopedia_revision_mismatch');
   const ancestors=[],visited=new Set([summary.key]);let previous=record.previousKey;
@@ -26,15 +29,15 @@ await Promise.all(Array.from({length:6},async()=>{
    ancestors.push(parent);previous=parent.previousKey;
   }
   const facts=compileModelFacts(record,ancestors),key=modelKey(record.make,record.model);
-  coverageModels.push(modelCoverage(record,facts));
-  const technical=compileAstraPower30Facts(record);
+  return {key, facts, technical:compileAstraPower30Facts(record), coverage:modelCoverage(record,facts)};
+ }});
+for (const {key, facts, technical, coverage} of prepared) {
+  coverageModels.push(coverage);
   if(technical.length){models[astraPower30Key(key)]=[...(models[astraPower30Key(key)]||[]),...technical];report.astraTechnicalReferences+=technical.length;report.astraPower30Values+=technical.filter(f=>f.values.power30MinKw>0).length;}
   if(facts.length)models[key]=[...(models[key]||[]),...facts];
   report.modelsRead++;report.variants+=facts.length;
   for(const fact of facts)for(const source of Object.values(fact.sources))report[source.kind==='owner_reference'?'ownerReferenceFields':source.kind==='manual'?'manualFields':'factoryFields']++;
-  if(report.modelsRead%250===0)console.log(JSON.stringify({stage:'encyclopedia_index',modelsRead:report.modelsRead}));
- }
-}));
+}
 const identity=m=>m.models.map(x=>[x.id,x.revision,x.key]);
 const manifestDigest=checksum(identity(manifest));
 if(checksum(identity(await storage.readJson(MANIFEST,null)))!==manifestDigest)throw Error('encyclopedia_changed_during_preparation');

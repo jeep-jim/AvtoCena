@@ -1,4 +1,4 @@
-import type {AjesRequestDiagnostic} from './ajes-request-diagnostic';
+import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
 import {preserveKoreaListingLink} from './ajes-korea-detail-cache';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
@@ -17,7 +17,11 @@ class AjesSavedRecovery {
 type Dependencies={saveRequestFailure?:(value:AjesRequestDiagnostic)=>Promise<unknown>;calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
+  // A slow detail may use one slot; lists and filter directories retain the other.
+  // Keep the total supplier concurrency at two, including all request kinds.
+  // A queued detail may wait for the preceding 45-second read instead of failing
+  // at the ordinary five-second queue deadline solely due to serialization.
+  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
@@ -163,10 +167,11 @@ export function createAjesClient(deps:Dependencies) {
           }
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
-          // Keep one private diagnostic per table, at most once per minute. A
-          // cooldown/cache hit must not replace the actual failed request.
-          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(query.table)??0)>=60000){
-            lastFailureSaved.set(query.table,Date.now());
+          // Throttle fixed page/kind slots independently: a first-page failure
+          // must not suppress continuation evidence. Cooldown is not a request.
+          const failureSlot=ajesFailureSlot(query);
+          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(failureSlot)??0)>=60000){
+            lastFailureSaved.set(failureSlot,Date.now());
             const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
             if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
           }
@@ -186,7 +191,7 @@ export function createAjesClient(deps:Dependencies) {
             throw failure;
           });
         }finally{clearTimeout(timer);}
-      },visitorKey).then(value=>{
+      },visitorKey,query.kind==='detail'?'detail':'').then(value=>{
         if(query.table!=='korea'||query.kind!=='detail'||value.stale||value.items?.length!==1)return value;
         const snapshot=listed.get('korea:'+query.id)?.value;
         const age=Date.now()-Date.parse(snapshot?.observedAt||'');

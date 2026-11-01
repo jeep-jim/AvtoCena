@@ -1,4 +1,4 @@
 {
-  "reason": "Owner reported nginx 504; confirmed local health 30s timeout with available RAM and disk; conditional one-time restart",
-  "at": "2026-10-12T10:02:09.936873+00:00"
+  "reason": "Production confirmed stopped exit139, oomKilled=false; previous recovery failed before mutation on stopped-container NetworkSettings. Corrected lookup uses persisted HostConfig.PortBindings; retry guarded one-time recovery.",
+  "at": "2026-10-31T08:29:00Z"
 }

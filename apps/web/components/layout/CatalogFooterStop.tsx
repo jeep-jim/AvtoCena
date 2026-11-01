@@ -14,11 +14,7 @@ export function CatalogFooterStop() {
     const root = document.documentElement;
     const mobile = window.matchMedia("(max-width: 767px) and (pointer: coarse)");
     let armed = false;
-    let lastY = 0;
     let boundary = Infinity;
-    let nearFooter = false;
-    let moveAttached = false;
-    let movePassive = true;
     const release = () => {setVisible(false); armed = false; root.classList.remove("ac-catalog-footer-stop");};
     releaseStop.current = release;
     // Geometry changes on layout/resize, not on every animation frame of a fling.
@@ -27,37 +23,16 @@ export function CatalogFooterStop() {
     };
     const stop = () => {
       if (!armed || !mobile.matches) return;
-      if (boundary > 0 && window.scrollY >= boundary - 1) {setVisible(true); if(window.scrollY > boundary) window.scrollTo({top:boundary, behavior:"instant"});}
+      if (boundary > 0 && window.scrollY >= boundary-120) root.classList.add("ac-catalog-footer-stop");
+      if (boundary > 0 && Math.abs(window.scrollY-boundary) <= 3) setVisible(true);
       else setVisible(false);
-    };
-    const move = (event: TouchEvent) => {
-      if (event.touches.length !== 1) {release(); return;}
-      const nextY = event.touches[0].clientY;
-      const delta = lastY - nextY;
-      lastY = nextY;
-      if (delta < 0) {release(); return;}
-      if (!armed || delta === 0) return;
-      if (boundary > 0 && window.scrollY + delta >= boundary) {
-        setVisible(true);
-        if (!movePassive && event.cancelable) event.preventDefault();
-        window.scrollTo({top:boundary, behavior:"instant"});
-      }
-    };
-    const bindMove = () => {
-      const passive = !nearFooter;
-      if (moveAttached && mobile.matches && movePassive === passive) return;
-      if (moveAttached) document.removeEventListener("touchmove", move);
-      moveAttached = mobile.matches;
-      movePassive = passive;
-      if (moveAttached) document.addEventListener("touchmove", move, {passive});
     };
     const start = (event: TouchEvent) => {
       const target = event.target as Element;
       // Keep the arrow visible until its tap produces a click.
-      if (marker.current?.contains(target) && target.closest("button")) {armed=false;root.classList.remove("ac-catalog-footer-stop");lastY=event.touches[0]?.clientY||0;return;}
+      if (marker.current?.contains(target) && target.closest("button")) {armed=false;root.classList.remove("ac-catalog-footer-stop");return;}
       release();
       if (!mobile.matches || event.touches.length !== 1 || !marker.current) return;
-      lastY = event.touches[0].clientY;
       // Filters, galleries and other nested scrollers keep their own gestures.
       for (let element: Element | null = target; element && element !== document.body; element = element.parentElement) {
         if (element.matches('input, textarea, select, [role="dialog"], [aria-modal="true"]')) return;
@@ -68,21 +43,16 @@ export function CatalogFooterStop() {
       // Already at or past the line: this gesture is permission to enter footer.
       measure();
       const bottom = boundary + window.innerHeight - window.scrollY;
-      if (bottom > window.innerHeight + 8) {armed = true; root.classList.add("ac-catalog-footer-stop");}
+      if (bottom > window.innerHeight + 8) armed = true;
     };
     const click = (event: MouseEvent) => {if(!marker.current?.contains(event.target as Node))release();};
-    const resize = () => {measure(); bindMove();};
+    const resize = () => {measure();};
     const mediaChange = () => {release(); resize();};
     const geometry = new ResizeObserver(measure);
     geometry.observe(document.body);
     if (marker.current) geometry.observe(marker.current);
-    // Only the pagination boundary needs to cancel a gesture. The rest of the
-    // catalog must remain compositor-scrollable without waiting for JavaScript.
-    const proximity = new IntersectionObserver(([entry]) => {
-      nearFooter = entry.isIntersecting;
-      bindMove();
-    }, {rootMargin:"1000px 0px"});
-    if (marker.current) proximity.observe(marker.current);
+    // Native scroll snapping stops the compositor's fling once. Repeated
+    // scrollTo corrections in a scroll handler fight momentum and cause jitter.
     resize();
     document.addEventListener("touchstart", start, {passive:true});
     window.addEventListener("scroll", stop, {passive:true});
@@ -94,11 +64,9 @@ export function CatalogFooterStop() {
     return () => {
       release();
       document.removeEventListener("touchstart", start);
-      document.removeEventListener("touchmove", move);
       window.removeEventListener("scroll", stop);
       window.removeEventListener("resize", resize);
       geometry.disconnect();
-      proximity.disconnect();
       document.removeEventListener("keydown", release);
       document.removeEventListener("click", click, true);
       window.removeEventListener("popstate", release);

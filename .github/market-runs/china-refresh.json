@@ -1,12 +1,12 @@
 {
-  "operation": "restore-china-2014-chunked-projection-20261022-1931",
-  "requestedAt": "2026-10-22 19:30:34 UTC",
+  "operation": "owner-china-recover-completed-intake-20261101",
+  "requestedAt": "2026-10-31T17:08:48.182Z",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "reuseRunId": "39680279304",
+  "reuseRunId": "41111109988",
   "refreshMarkets": [],
   "resetCursors": false,
-  "reason": "Installed f4d7d22 reader is public-health verified; publish retained completed 2014+ intake using bounded all-market projection parts, with original calculation/index/retention guards and no supplier recollection."
+  "reason": "Owner-authorized stale-market recovery after independent publication heartbeat fix PR1672 passed full CI. Reuse complete Oct30 source intake, no paid recollection; retain lock ownership, generation, completeness and publication safeguards."
 }

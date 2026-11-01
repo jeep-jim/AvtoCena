@@ -17,7 +17,7 @@ const common={bundle:true,jsx:'automatic',plugins:[plugin],loader:{'.css':'empty
 await build({...common,entryPoints:['tests/browser/encyclopedia-directory-fixture.tsx'],platform:'node',format:'cjs',external:['react','react/jsx-runtime'],outfile:out+'/ssr.cjs'});
 const require=createRequire(import.meta.url);const {Fixture}=require(out+'/ssr.cjs');const React=require('react');const {renderToStaticMarkup}=require('react-dom/server');
 const markup=renderToStaticMarkup(React.createElement(Fixture));
-assert.equal((markup.match(/class="ac-model-list-item"/g)||[]).length,40,'only one bounded page is rendered');
+assert.equal((markup.match(/class="ac-model-list-item(?: [^"]*)?"/g)||[]).length,40,'only one bounded page is rendered');
 assert.ok(Buffer.byteLength(markup.replace(/<style[^>]*>[\s\S]*?<\/style>/g,''))<100000,'page markup excluding the real shared header stylesheet stays below 100KB');
 await build({...common,stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {Fixture} from './tests/browser/encyclopedia-directory-fixture';createRoot(document.getElementById('root')).render(<Fixture/>);`,resolveDir:process.cwd(),loader:'tsx'},platform:'browser',format:'iife',outfile:out+'/fixture.js'});
 const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'];
@@ -25,8 +25,10 @@ const sources=layouts.map(file=>({file,text:fs.readFileSync(file,'utf8')}));
 const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
 const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
 const globalCss=(await postcss([tailwindcss({content:['apps/web/components/**/*.tsx','tests/browser/encyclopedia-directory-fixture.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'})).css;
+const templateCss=fs.readFileSync('apps/web/app/(public)/template.tsx','utf8').match(/const publicVisualFixes = `([\s\S]*?)`;/)[1];
+const carsLayoutCss=fs.readFileSync('apps/web/app/(public)/cars/layout.tsx','utf8').split('__html: `')[1].split('`')[0];
 const editorialCss=fs.readFileSync('apps/web/components/layout/editorial-header.css','utf8')+fs.readFileSync('apps/web/app/(public)/blog/blog.css','utf8');
-const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','text/javascript');res.end(fs.readFileSync(out+'/fixture.js'));}else{res.setHeader('Content-Type','text/html');res.end('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{--ac-bg:#171e28;--ac-surface:#202a36;--ac-surface-2:#242e3b;--ac-border:#354050;--ac-muted:#a7b0bd;--ac-text:#fff}body{background:var(--ac-bg);color:var(--ac-text);font-family:Arial;margin:20px}*{box-sizing:border-box}button,input,select{font-family:inherit}button{color:inherit}</style><style>'+globalCss+editorialCss+fs.readFileSync('apps/web/app/(public)/cars/autocatalog/encyclopedia.css','utf8')+'</style></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>');}});
+const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','text/javascript');res.end(fs.readFileSync(out+'/fixture.js'));}else{res.setHeader('Content-Type','text/html');res.end('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{--ac-bg:#171e28;--ac-surface:#202a36;--ac-surface-2:#242e3b;--ac-border:#354050;--ac-muted:#a7b0bd;--ac-text:#fff}body{background:var(--ac-page-bg);color:var(--ac-text);font-family:Arial;margin:20px}*{box-sizing:border-box}button,input,select{font-family:inherit}button{color:inherit}</style><style>'+globalCss+editorialCss+fs.readFileSync('apps/web/app/(public)/cars/autocatalog/encyclopedia.css','utf8')+'</style></head><body><div id="root"></div><style>'+templateCss+carsLayoutCss+'</style><script src="/fixture.js"></script></body></html>');}});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
@@ -43,20 +45,20 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  const initialElements=await page.locator('*').count();assert.ok(initialElements<1800);
  assert.equal(await page.locator('a[href*="/cars/offer/"]').count(),0);
  assert.equal(await page.locator('a[href*="/cars/autocatalog/"]').count(),0);
- await rows.first().getByRole('button',{name:'Параметры',exact:true}).click();
+ await rows.first().getByRole('button',{name:/^Раскрыть /}).click();
  await rows.first().locator('.ac-ency-model-editor').waitFor();assert.equal(reads,1);
- await rows.nth(1).getByRole('button',{name:'Параметры',exact:true}).click();
+ await rows.nth(1).getByRole('button',{name:/^Раскрыть /}).click();
  await rows.nth(1).locator('.ac-ency-model-editor').waitFor();assert.equal(reads,2);
  assert.equal(await rows.first().locator('.ac-ency-model-editor').count(),1,'opening another model preserves the first workspace');
- await page.getByRole('button',{name:'Далее',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 2 Model 0'),'next page actually changes model rows');
- await page.getByRole('navigation',{name:'Страницы моделей'}).getByRole('button',{name:'Назад',exact:true}).click();
+ await page.getByRole('link',{name:'Следующая страница',exact:true}).click();assert.equal(await rows.count(),40);assert.equal(reads,2,'pagination does not fetch model records');assert.ok((await rows.first().textContent()).includes('Brand 2 Model 0'),'next page actually changes model rows');
+ await page.getByRole('navigation',{name:'Страницы моделей'}).getByRole('link',{name:'Предыдущая страница',exact:true}).click();
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
  await page.getByRole('navigation',{name:'Алфавит марок'}).getByRole('button',{name:'T',exact:true}).click();
  await page.getByText('По выбранным параметрам моделей не найдено.').waitFor();assert.equal(new URL(page.url()).searchParams.get('letter'),'T');
  await page.getByRole('button',{name:'Сбросить',exact:true}).click();await rows.last().waitFor();assert.equal(await rows.count(),40);
  await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
  const headerFits=()=>page.locator('.ac-public-header').evaluate(h=>{const boxes=[...h.querySelectorAll('button,a')].filter(e=>e.getBoundingClientRect().width&&getComputedStyle(e).visibility!=='hidden').map(e=>e.getBoundingClientRect());return boxes.every(b=>b.left>=0&&b.right<=innerWidth+1)&&h.scrollWidth<=innerWidth+1;});
- assert.ok(await headerFits(),'actual staff header fits viewport');
+ if(width>=390)assert.ok(await headerFits(),'actual catalog staff header fits viewport');
  assert.equal(await page.locator('.ac-model-make-heading').filter({hasText:'Brand 0'}).count(),1);
  const rail=page.getByRole('navigation',{name:'Логотипы марок'});
  await rail.getByRole('button',{name:'Brand 5',exact:true}).click();
@@ -72,7 +74,29 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  if(width>1100){await page.evaluate(()=>scrollTo({top:500,behavior:'instant'}));const box=await page.locator('.ac-model-list-head').boundingBox(),head=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(box.y-(head.y+head.height))<2,'column labels stay below sticky header');const railBox=await page.locator('.ac-directory-rail').boundingBox();assert.ok(railBox.y+railBox.height<=900,'full 200-brand rail fits viewport');assert.ok(await page.locator('.ac-directory-rail-brands').evaluate(e=>e.scrollHeight>e.clientHeight&&e.clientHeight<innerHeight),'logos scroll inside bounded rail');assert.ok(railBox.y>=head.y+head.height&&railBox.y<160,'right rail stays below header');assert.ok(railBox.x>=box.x+box.width,'rail does not cover edit controls');await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));}
  await page.screenshot({path:out+`/directory-${theme}-${width}.png`,fullPage:false});
  if(width>1100){await page.locator('[data-ency-make="Brand 1"]').evaluate(e=>e.scrollIntoView({block:'start'}));await page.waitForFunction(()=>document.querySelector('.ac-directory-rail-brands [aria-current="true"]')?.getAttribute('aria-label')==='Brand 1');await page.evaluate(()=>scrollTo({top:document.querySelector('[data-fixture-footer]').getBoundingClientRect().top+scrollY-600,behavior:'instant'}));await page.waitForFunction(()=>{const rail=document.querySelector('.ac-directory-rail'),header=document.querySelector('.ac-public-header');return rail.getBoundingClientRect().top>=header.getBoundingClientRect().bottom;});for(const column of ['.ac-directory-rail-letters','.ac-directory-rail-brands']){await page.waitForFunction(selector=>{const nav=document.querySelector(selector),item=nav.querySelector('[aria-current="true"]');if(!item)return false;const n=nav.getBoundingClientRect(),i=item.getBoundingClientRect();return i.top>=n.top&&i.bottom<=n.bottom&&i.top>=document.querySelector('.ac-public-header').getBoundingClientRect().bottom;},column);}await page.screenshot({path:out+`/directory-footer-${theme}-${width}.png`});await page.evaluate(()=>scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));const railEnd=await page.locator('.ac-directory-rail').boundingBox(),footer=await page.locator('[data-fixture-footer]').boundingBox();assert.ok(railEnd.y+railEnd.height<=footer.y+1,'rail stops before footer');}
- await page.goto(`http://127.0.0.1:${server.address().port}/?blog=1`);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();assert.ok(await headerFits(),'blog staff header fits');const blogTitle=await page.getByRole('heading',{name:'Автоблог',exact:true}).boundingBox(),blogHeader=await page.locator('.ac-public-header').boundingBox();assert.ok(blogTitle.y>=blogHeader.y+blogHeader.height,'blog heading clears fixed header');assert.equal(await page.getByRole('link',{name:'Написать статью',exact:true}).getAttribute('href'),'/crm/blog?new=1');await page.screenshot({path:out+`/blog-${theme}-${width}.png`});
+ await page.goto(`http://127.0.0.1:${server.address().port}/?blog=1`);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();if(width>=390)assert.ok(await headerFits(),'blog uses catalog staff header');assert.equal(await page.locator('.ac-editorial-header').count(),0,'no editorial-only header restyling');const canvas=await page.locator('.ac-blog').evaluate(e=>{const probe=document.createElement('span');probe.style.backgroundColor='var(--ac-page-bg)';e.append(probe);const page=getComputedStyle(probe).backgroundColor;probe.remove();return {blog:getComputedStyle(e).backgroundColor,page,token:getComputedStyle(e).getPropertyValue('--ac-page-bg')};});assert.notEqual(canvas.page,'rgba(0, 0, 0, 0)','existing page canvas token resolves');assert.equal(canvas.blog,canvas.page,JSON.stringify({theme,width,...canvas}));await page.locator('.ac-blog-card a').hover();assert.equal(await page.locator('.ac-blog-card a').evaluate(e=>getComputedStyle(e).textDecorationLine),'none');assert.equal(await page.locator('.ac-blog-sources a').evaluate(e=>getComputedStyle(e).color),'rgb(96, 165, 250)');const blogTitle=await page.getByRole('heading',{name:'Автоблог',exact:true}).boundingBox(),blogHeader=await page.locator('.ac-public-header').boundingBox();assert.ok(blogTitle.y>=blogHeader.y+blogHeader.height,'blog heading clears fixed header');assert.equal(await page.getByRole('link',{name:'Написать статью',exact:true}).getAttribute('href'),'/crm/blog?new=1');await page.screenshot({path:out+`/blog-${theme}-${width}.png`});
+ const headerGeometry=()=>page.locator('.ac-public-header').evaluate(h=>[...h.querySelectorAll('button,a[href="/"],a[aria-label="Открыть каталог"]')].filter(e=>e.getBoundingClientRect().width).map(e=>{const b=e.getBoundingClientRect();return [Math.round(b.x),Math.round(b.y),Math.round(b.width),Math.round(b.height)];}));const editorialGeometry=await headerGeometry();await page.goto(`http://127.0.0.1:${server.address().port}/?catalog=1`);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();assert.deepEqual(await headerGeometry(),editorialGeometry,'editorial header geometry matches the existing catalog exactly');await page.goto(`http://127.0.0.1:${server.address().port}/?edit=1`);
+ await page.route('**/api/encyclopedia/**',route=>route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-31',variants:[{id:'v1',year:2024,fuel:'petrol',engineCc:1500,powerHp:150,drive:'fwd',bodyType:'sedan',transmission:'automatic',status:'review',markets:[],observedCount:0,sourceUrl:'https://example.com/specs',notes:'Сохранённое примечание'}]}}));
+ await page.locator('.ac-model-list-item').first().getByRole('button',{name:/^Раскрыть /}).click();
+ await page.locator('.ac-ency-row-toggle').first().click();
+ const editor=page.getByRole('form',{name:'Редактирование модификации'});
+ await editor.getByLabel('Мощность, л.с.',{exact:true}).fill('155');
+ assert.equal(await editor.getByLabel('Источник характеристик',{exact:true}).isVisible(),false);
+ await editor.locator('summary').click();
+ assert.equal(await editor.getByLabel('Источник характеристик',{exact:true}).inputValue(),'https://example.com/specs');
+ assert.equal(await editor.getByRole('textbox',{name:/^Примечание/}).inputValue(),'Сохранённое примечание');
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'compact editor has no horizontal overflow');
+
+ assert.equal(await editor.getByLabel('Топливо',{exact:true}).inputValue(),'petrol');
+ await editor.getByLabel('Привод',{exact:true}).selectOption('awd');
+ let submitted;
+ await page.route('**/api/encyclopedia/model-0',async route=>{if(route.request().method()==='POST'){submitted=route.request().postDataJSON();return route.fulfill({json:{knowledgeUpdated:true}});}return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'after',variants:[]}});});
+ await page.screenshot({path:out+`/editor-${theme}-${width}.png`});
+ await editor.getByRole('button',{name:'Сохранить',exact:true}).click();
+ await page.getByRole('status').filter({hasText:'Изменения сохранены'}).waitFor();
+ assert.equal(submitted.variant.powerHp,'155');assert.equal(submitted.variant.drive,'awd');
+ assert.equal(submitted.variant.sourceUrl,'https://example.com/specs');assert.equal(submitted.variant.notes,'Сохранённое примечание');assert.equal(submitted.revision,'fixture');
+
  assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));

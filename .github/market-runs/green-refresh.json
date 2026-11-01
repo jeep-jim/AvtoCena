@@ -1,8 +1,5 @@
 {
-  "operation": "owner-open-inventory-20261006-1412-compatible-release",
-  "market": "japan",
-  "resetCursors": true,
-  "publish": true,
-  "publishOnly": false,
-  "reason": "Fresh Japan 2010+ inventory without price or horsepower exclusion."
+  "operation": "owner-green-refresh-preserve-conflicts-20261101",
+  "requestedAt": "2026-10-31T17:07:57.854Z",
+  "reason": "Owner-authorized overdue refresh. Preserve conflicting existing lots unchanged and report separately; retain full scan, collapse and conditional-write safeguards."
 }

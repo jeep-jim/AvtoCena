@@ -42,26 +42,12 @@ jobs:
           const enabled=collectionEnabled(await readCollectionControls(),'akebono_green');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${enabled && (process.env.EVENT_NAME !== 'schedule' || catalogRefreshDue())}\n`);
           JS
-      - name: Wait for matching web release before CIF migration
-        if: github.event_name == 'push'
+      # CIF migration is already installed. Data-only refreshes must not wait
+      # for their marker commit to become a new application release.
+      - name: Verify safe Green Corner refresh
         env:
-          EXPECTED_RELEASE: ${{ github.sha }}
-        run: |
-          node --input-type=module <<'JS'
-          import {execFileSync} from 'node:child_process';
-          let ready=false;
-          for(let i=0;i<90;i++){
-            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&/^[0-9a-f]{40}$/.test(d.releaseSha)){
-              if(d.releaseSha!==process.env.EXPECTED_RELEASE){
-                execFileSync('git',['fetch','--no-tags','--depth=100','origin',d.releaseSha],{stdio:'ignore'});
-                execFileSync('git',['merge-base','--is-ancestor',process.env.EXPECTED_RELEASE,d.releaseSha],{stdio:'ignore'});
-              }
-              ready=true;break;
-            }}catch{}
-            await new Promise(r=>setTimeout(r,10000));
-          }
-          if(!ready)throw Error('CIF web release not confirmed; existing stock retained');
-          JS
+          JSON_STORAGE_DRIVER: local
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/green-refresh-snapshot.test.ts tests/green-corner.test.ts
       - if: steps.plan.outputs.run == 'true'
         run: node --import tsx scripts/catalog-refresh-green-corner.mjs
       - uses: actions/upload-artifact@v4
