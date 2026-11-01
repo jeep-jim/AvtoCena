@@ -1,5 +1,5 @@
 'use client';
-import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 import {directoryLetter,filterModels} from '@/lib/encyclopedia/query';

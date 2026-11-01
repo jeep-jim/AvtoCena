@@ -1,5 +1,5 @@
 "use client";
-import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
 import {SlidersHorizontal} from 'lucide-react';
 import {CatalogSortSelect} from "./CatalogSortSelect";
 import {useEffect,useRef,useState} from 'react';

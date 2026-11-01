@@ -1,5 +1,5 @@
 "use client";
-import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
 import {DealerSelectionShare} from "./DealerSelectionShare";
 import {CITY_CHANGED_EVENT} from "@/lib/location/selected-city";
 import {DealerReviewCard} from './DealerReviewCard';
