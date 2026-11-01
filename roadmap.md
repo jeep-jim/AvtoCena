@@ -19043,3 +19043,10 @@ Existing scheduled China41227716152/publish124685023963 IN_PROGRESS с06:17:48,p
 Единственный bounded health09:08 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это прежний выпуск; не приёмка новых статей/Китая/authenticated save/fullsync и не объяснение старого Proxy CONNECT timeout.
 
 OWNERFREEZE вне прямой задачи, обе истории и все остатки сохранены. Только Road/checklist append-only expected-parentCAS. Далее existing deploy41261542902/China publish124685023963, доступность failed final124601674990 и новые primary результаты; без runtime/deploy/repair/diagnostics/browser/provider/cleanup, новых запусков и повторов прочитанных logs. Наблюдение включено.
+
+
+## 01.11.2026 — Косметика счётчиков и фильтров по скриншотам владельца
+
+Прямое поручение: «Найдено … машин» только в общем счётчике и верхней сводке фильтров, прежние цифры возле рынков сохраняются; выровнять checkbox/иконки, убрать круг вопросика в обеих темах, сократить «Трансмиссия» до «КПП». Числа динамические, пример1150942 не фиксируется в коде. Изолированная ветка от eea7295 сохраняет текущую работу/редакционный PR1641. Figma session39a9e521 создана, get_design_context2376:11 завершился timeout; использованы приложенные владельцем изображения, доступ к Figma не объявлен успешным.
+
+PR1674/b7786a6: изменены только copy/геометрия существующих элементов и старое browser expectation. Checkbox center20px/iconcenter20.5px; help32px hit target/focus/tooltip сохранены, фон/рамка убраны. Локально16 count/filter/UI testsPASS, web tscPASS. Полный CI и browser QA идут; установка косметики ещё НЕ выполнена. Existing REGdeploy41261542902 другого редакционного выпуска проходит заключительную проверку; новый deploy не запущен. Логика поставщиков/подсчёта/расчётов/кэшей/пагинации/данные не изменены.
