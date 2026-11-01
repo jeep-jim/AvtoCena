@@ -79,6 +79,10 @@ async function verifyControls(page,scope){
  await scope.getByRole('button',{name:'Топливо',exact:true}).click();
  for(const theme of ['light','dark']){
   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+  const help=await scope.locator('.ac-power-help').evaluate(el=>{const s=getComputedStyle(el);return {background:s.backgroundColor,border:s.borderTopWidth,width:el.getBoundingClientRect().width};});
+  assert.equal(help.background,'rgba(0, 0, 0, 0)',theme+' help has no circular backdrop');assert.equal(help.border,'0px');assert.equal(help.width,32);
+  const inset=await scope.locator('.ac-power-limit').evaluate(el=>el.querySelector('input').getBoundingClientRect().left-el.getBoundingClientRect().left);
+  assert.ok(Math.abs(inset-8)<=1,theme+' checkbox has the requested balanced inset');
   const fields=await scope.locator('.ac-power-limit,.ac-sort-select > button').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {radius:s.borderRadius,background:s.backgroundColor,border:s.borderTopWidth==='0px'?'none':s.borderTopColor,borderWidth:s.borderTopWidth,height:el.getBoundingClientRect().height};}));
   assert.deepEqual(fields[0],fields[1],theme+' quick fields match');
   assert.equal(fields.length,2);
@@ -113,7 +117,7 @@ try{
   const context=await contextFor(width),page=await context.newPage();
   await page.goto(origin+'/cars?marketPreview=1&sidebar=1');
   await page.locator('[data-test-overall-count]').waitFor();
-  assert.match(await page.locator('[data-test-overall-count]').innerText(),/895\s?838/);assert.doesNotMatch(await page.locator('[data-test-overall-count]').innerText(),/Найдено/);
+  assert.match(await page.locator('[data-test-overall-count]').innerText(),/895\s?838/);assert.match(await page.locator('[data-test-overall-count]').innerText(),/Найдено .* машин/);
   assert.equal(await page.locator('.ac-catalog-card:visible').count(),6);
   const tops=await page.locator('.ac-catalog-card:visible').evaluateAll(els=>els.map(el=>Math.round(el.getBoundingClientRect().top)));
   assert.equal(new Set(tops).size,width>=1024?2:1);

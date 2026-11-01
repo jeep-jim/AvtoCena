@@ -139,3 +139,12 @@ html body .ac-page-copy .ac-market-result-count {
 html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-electric-options input.ac-quick-checkbox:checked{background:#ffd21f;border-color:#ffd21f}
 html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-electric-options input.ac-quick-checkbox:checked::after{color:#05070b;-webkit-text-fill-color:#05070b}
 @media(min-width:768px) and (max-width:1100px){.ac-catalog-results .ac-pagination .ac-page-extra{display:none}}
+
+/* Align the checkbox and leading icons on the same centre line. */
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-power-limit{padding-left:8px!important;gap:12px}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) button.ac-filter-control:has(.ac-filter-leading-icon){padding-left:12px}
+.ac-power-help{right:6px}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) button.ac-power-help{background:transparent!important;border:0!important;border-radius:6px!important;box-shadow:none!important;color:var(--ac-muted)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.ac-power-help:hover{color:var(--ac-text)}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) button.ac-power-help:focus-visible{outline:2px solid var(--ac-text)!important;outline-offset:1px}
+@media(min-width:1024px){.ac-catalog-filter-panel .ac-power-help{right:0}}
