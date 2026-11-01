@@ -18982,3 +18982,16 @@ Fresh main d85d7d45e6cc425b89f209c2d374013d71627505 и Road/checklist прочи
 Единственный bounded watch health07:22–07:23 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Успешный health не заменяет приёмку Китая, authenticated save/fullsync или всех целей; прежний Proxy CONNECT timeout не объяснён.
 
 OWNERFREEZE вне прямой задачи, все истории/остатки/primary атрибуции сохранены. Прочитанные translation/feed/binding/deferral журналы не повторялись; PR1641/drafts/REG capacity не тронуты. Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее — existing scheduled publish124685023963, доступность failed final log124601674990 и новые primary результаты, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
+
+
+## 01.11.2026, 07:43 Красноярск — публикация Китая продолжается, новых итогов нет
+
+Свежий main 53d83f1c05606482f64fbe8b5085bf9faaf3a90b и Road/checklist прочитаны. AGENTS03336196 и связанные operations unchanged; новых primary результатов и PR после1673 нет, app deploy отсутствует.
+
+Единственный IN_PROGRESS — existing scheduled China41227716152: plan и collect SUCCESS, publish124685023963 выполняется с06:17:48. Прочитанный ранее collect log не повторялся. Итог публикации, manifest и опубликованные количества не подтверждены; продолжительность не доказывает зависание, отказ или успех.
+
+Попытка прочитать существующий failed final job124601674990 снова вернула Transport closed. Журнал НЕ прочитан; FINAL FAILURE05:33:35 сохранён, причина/publicationStatus/manifest неизвестны. Lock_lost, timeout, лимит времени и rollback этому отказу не приписываются. Старый41111109988 и остальные прочитанные журналы не повторялись.
+
+Единственный bounded health этой сверки завершился curl0; результат получен07:42:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это не приёмка публикации/всех целей и не объяснение прежнего Proxy CONNECT timeout.
+
+OWNERFREEZE, все истории/остатки, authenticated save/fullsync, PR1641/drafts/REG сохранены. Наблюдение включено; далее existing publish124685023963, доступность failed final124601674990 и новые primary результаты. Только Road/checklist append-only expected-parentCAS, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
