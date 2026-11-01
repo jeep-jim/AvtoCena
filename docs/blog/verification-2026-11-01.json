@@ -1,0 +1,516 @@
+{
+  "expectedRelease": "5d23ce54b1638b168d590d0e45c671a2e3e3dfab",
+  "checkedAt": "2026-11-01T02:31:25Z",
+  "health": {
+    "http": 200,
+    "releaseSha": "5d23ce54b1638b168d590d0e45c671a2e3e3dfab",
+    "ok": true,
+    "secondsFull": 7.003
+  },
+  "articles": [
+    {
+      "slug": "car-of-the-year-2027-seven-electric-finalists",
+      "url": "https://avtocena.com/blog/car-of-the-year-2027-seven-electric-finalists",
+      "status": 200,
+      "secondsFull": 5.185,
+      "secondsFirstByte": 4.846,
+      "bytes": 130760,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "staria-cargo-electric-van-route-guide",
+      "url": "https://avtocena.com/blog/staria-cargo-electric-van-route-guide",
+      "status": 200,
+      "secondsFull": 4.158,
+      "secondsFirstByte": 3.826,
+      "bytes": 131268,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "bmw-gen6-battery-800v-2026",
+      "url": "https://avtocena.com/blog/bmw-gen6-battery-800v-2026",
+      "status": 200,
+      "secondsFull": 3.607,
+      "secondsFirstByte": 3.266,
+      "bytes": 130808,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "hyundai-tucson-n-line-equipment-2026",
+      "url": "https://avtocena.com/blog/hyundai-tucson-n-line-equipment-2026",
+      "status": 200,
+      "secondsFull": 2.601,
+      "secondsFirstByte": 2.417,
+      "bytes": 128141,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "toyota-rav4-phev-japan-2026-guide",
+      "url": "https://avtocena.com/blog/toyota-rav4-phev-japan-2026-guide",
+      "status": 200,
+      "secondsFull": 3.684,
+      "secondsFirstByte": 3.346,
+      "bytes": 127347,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "land-cruiser-fj-prototype-guide",
+      "url": "https://avtocena.com/blog/land-cruiser-fj-prototype-guide",
+      "status": 200,
+      "secondsFull": 3.642,
+      "secondsFirstByte": 3.314,
+      "bytes": 127847,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "jeju-v2g-electric-car-grid-2026",
+      "url": "https://avtocena.com/blog/jeju-v2g-electric-car-grid-2026",
+      "status": 200,
+      "secondsFull": 3.702,
+      "secondsFirstByte": 3.371,
+      "bytes": 130118,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "ioniq-6-uk-2026-trims-range",
+      "url": "https://avtocena.com/blog/ioniq-6-uk-2026-trims-range",
+      "status": 200,
+      "secondsFull": 3.679,
+      "secondsFirstByte": 3.337,
+      "bytes": 128307,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "derek-bell-85-let-2026",
+      "url": "https://avtocena.com/blog/derek-bell-85-let-2026",
+      "status": 200,
+      "secondsFull": 3.184,
+      "secondsFirstByte": 2.855,
+      "bytes": 128948,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    },
+    {
+      "slug": "porsche-e-shift-virtual-gears-guide",
+      "url": "https://avtocena.com/blog/porsche-e-shift-virtual-gears-guide",
+      "status": 200,
+      "secondsFull": 3.275,
+      "secondsFirstByte": 2.937,
+      "bytes": 130444,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "structuredHeadline": true,
+        "related": true
+      },
+      "passed": true
+    }
+  ],
+  "index": {
+    "http": 200,
+    "secondsFull": 3.508,
+    "articleLinks": [
+      "/blog/bmw-gen6-battery-800v-2026",
+      "/blog/car-of-the-year-2027-seven-electric-finalists",
+      "/blog/derek-bell-85-let-2026",
+      "/blog/hyundai-tucson-n-line-equipment-2026",
+      "/blog/ioniq-6-uk-2026-trims-range",
+      "/blog/jeju-v2g-electric-car-grid-2026",
+      "/blog/land-cruiser-fj-prototype-guide",
+      "/blog/porsche-e-shift-virtual-gears-guide",
+      "/blog/staria-cargo-electric-van-route-guide",
+      "/blog/toyota-corolla-60-let-2026",
+      "/blog/toyota-prius-1997-kak-nachinalsya-seriynyy-gibrid",
+      "/blog/toyota-rav4-phev-japan-2026-guide"
+    ],
+    "newSlugsPresent": 10,
+    "previousPostsPreserved": true
+  },
+  "sitemap": {
+    "http": 200,
+    "secondsFull": 4.452,
+    "newSlugsPresent": 10
+  },
+  "finalHealthAfterWorkflow": {
+    "ok": true,
+    "releaseSha": "5d23ce54b1638b168d590d0e45c671a2e3e3dfab",
+    "secondsFull": 4.314
+  },
+  "release": {
+    "checkedAt": "2026-11-01 02:35:26 UTC",
+    "run": {
+      "id": 41261542902,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/41261542902",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "5d23ce54b1638b168d590d0e45c671a2e3e3dfab",
+      "started": "2026-11-01T01:33:05Z",
+      "updated": "2026-11-01T02:34:43Z"
+    },
+    "jobs": [
+      {
+        "id": 124715663572,
+        "name": "wait-for-astra",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-01T01:33:10Z",
+        "completedAt": "2026-11-01T01:33:49Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:11Z",
+            "completedAt": "2026-11-01T01:33:12Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:12Z",
+            "completedAt": "2026-11-01T01:33:27Z"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:27Z",
+            "completedAt": "2026-11-01T01:33:31Z"
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:31Z",
+            "completedAt": "2026-11-01T01:33:40Z"
+          },
+          {
+            "name": "Wait for the exact ASTRA plan to be fully applied",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:40Z",
+            "completedAt": "2026-11-01T01:33:46Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:46Z",
+            "completedAt": "2026-11-01T01:33:46Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:46Z",
+            "completedAt": "2026-11-01T01:33:46Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:46Z",
+            "completedAt": "2026-11-01T01:33:46Z"
+          }
+        ]
+      },
+      {
+        "id": 124715813202,
+        "name": "prepare",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-01T01:33:53Z",
+        "completedAt": "2026-11-01T02:34:42Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:54Z",
+            "completedAt": "2026-11-01T01:33:55Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:33:55Z",
+            "completedAt": "2026-11-01T01:34:08Z"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:08Z",
+            "completedAt": "2026-11-01T01:34:11Z"
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:11Z",
+            "completedAt": "2026-11-01T01:34:19Z"
+          },
+          {
+            "name": "Verify exact encyclopedia matching",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:19Z",
+            "completedAt": "2026-11-01T01:34:28Z"
+          },
+          {
+            "name": "Verify stream disconnect and gateway buffer regressions",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:28Z",
+            "completedAt": "2026-11-01T01:34:28Z"
+          },
+          {
+            "name": "Verify production dependency security",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:28Z",
+            "completedAt": "2026-11-01T01:34:29Z"
+          },
+          {
+            "name": "Verify catalog storage and bounded projection integrity",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:29Z",
+            "completedAt": "2026-11-01T01:34:39Z"
+          },
+          {
+            "name": "Prepare private encyclopedia index for this release",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:34:39Z",
+            "completedAt": "2026-11-01T01:45:50Z"
+          },
+          {
+            "name": "Preserve existing encyclopedia coverage and batch membership",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:45:50Z",
+            "completedAt": "2026-11-01T01:45:52Z"
+          },
+          {
+            "name": "Build existing application without production credentials",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:45:52Z",
+            "completedAt": "2026-11-01T01:49:09Z"
+          },
+          {
+            "name": "Install container runtime and load image (no application start)",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:49:09Z",
+            "completedAt": "2026-11-01T01:49:57Z"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:49:57Z",
+            "completedAt": "2026-11-01T01:50:00Z"
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:50:00Z",
+            "completedAt": "2026-11-01T01:50:08Z"
+          },
+          {
+            "name": "Read explicitly requested market scope",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:50:08Z",
+            "completedAt": "2026-11-01T01:50:08Z"
+          },
+          {
+            "name": "Prepare exact price indexes before activating the release",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T01:50:08Z",
+            "completedAt": "2026-11-01T02:17:19Z"
+          },
+          {
+            "name": "Preserve individual market preparation results",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:17:19Z",
+            "completedAt": "2026-11-01T02:17:20Z"
+          },
+          {
+            "name": "Deploy with rollback and resource measurements",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:17:20Z",
+            "completedAt": "2026-11-01T02:30:06Z"
+          },
+          {
+            "name": "Verify published encyclopedia fields against this exact release",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:30:06Z",
+            "completedAt": "2026-11-01T02:34:33Z"
+          },
+          {
+            "name": "Preserve public encyclopedia verification",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:33Z",
+            "completedAt": "2026-11-01T02:34:34Z"
+          },
+          {
+            "name": "Bound retained application releases after successful deployment",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:34Z",
+            "completedAt": "2026-11-01T02:34:38Z"
+          },
+          {
+            "name": "Publish GPT completion notes for this installed release",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:38Z",
+            "completedAt": "2026-11-01T02:34:39Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:39Z",
+            "completedAt": "2026-11-01T02:34:39Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:39Z",
+            "completedAt": "2026-11-01T02:34:39Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:39Z",
+            "completedAt": "2026-11-01T02:34:39Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "startedAt": "2026-11-01T02:34:39Z",
+            "completedAt": "2026-11-01T02:34:39Z"
+          }
+        ]
+      }
+    ],
+    "preActivationProbe": {
+      "clock": "2026-11-01T01:58:00Z",
+      "command": "curl --max-time 20 https://avtocena.com/api/health",
+      "exit": 28,
+      "elapsed": 21.808,
+      "bytes": 0,
+      "browser": "Blog reload returned loading shell; new release not activated at probe."
+    },
+    "browser": {
+      "indexArticleCount": 12,
+      "newArticleCount": 10,
+      "loadedCoverCount": 12,
+      "newCoversLoaded": 10,
+      "imageCheck": "DOM complete && naturalWidth>0 for all twelve; screenshots inspected.",
+      "representativeArticle": "https://avtocena.com/blog/car-of-the-year-2027-seven-electric-finalists",
+      "themesChecked": [
+        "light",
+        "dark"
+      ],
+      "restoredTheme": "light",
+      "mobileViewport": "Not tested in live browser; viewport emulation unavailable. Existing site controls/mobile CI passed; not equivalent to visual testing this batch on mobile.",
+      "ownerEditor": "No production authenticated save or role mutation performed; manual storage untouched. Existing local blog tests passed.",
+      "screenshot": "docs/blog/verification/editorial-blog-20261101-published-1793500469562.jpg"
+    },
+    "external": {
+      "dzen": {
+        "prepared": 10,
+        "published": 0
+      },
+      "vk": {
+        "prepared": 10,
+        "published": 0
+      },
+      "reason": "No connected confirmed official channels."
+    }
+  },
+  "screenshotSha256": "85fd57efc0b4ec46b3d8c0e917923136eff72d69452352e58abcb704c67b2e0c"
+}
