@@ -50,7 +50,8 @@ function compatibleRevisionValues(offer:any,before:Record<string,any>,after:Reco
   return known(old)&&same(field,offer[field],old);
  });
 }
-const factsOf=(value:any)=>Object.fromEntries(fields.filter(f=>known(value?.[f])).map(f=>[f,value[f]]));
+export const managementFactValues=(value:any)=>Object.fromEntries(fields.filter(f=>known(value?.[f])).map(f=>[f,value[f]]));
+const factsOf=managementFactValues;
 function priorValues(...groups:(Record<string,any>[]|undefined)[]){
  const unique=new Map<string,Record<string,any>>();
  for(const value of groups.flatMap(g=>g||[])){const clean=factsOf(value);if(Object.keys(clean).length)unique.set(JSON.stringify(clean),clean);}

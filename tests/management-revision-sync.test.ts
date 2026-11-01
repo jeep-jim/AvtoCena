@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {completePowerUnitDraft} from '../apps/web/lib/catalog/power-parameter-draft';
 import {offerPrecedentParameterDraft} from '../apps/web/lib/catalog/power30-precedent';
 import {LocalJsonStorage} from '../apps/web/lib/data';
-import {managementParameters,managementSavedDraft,rememberManagementCalculation,rememberEncyclopediaModel,readManagementKnowledge,encyclopediaWithManagement,attachManagementKnowledge,managementDraft,invalidateManagementPrice} from '../apps/web/lib/catalog/management-knowledge';
+import {managementFactValues,managementParameters,managementSavedDraft,rememberManagementCalculation,rememberEncyclopediaModel,readManagementKnowledge,encyclopediaWithManagement,attachManagementKnowledge,managementDraft,invalidateManagementPrice} from '../apps/web/lib/catalog/management-knowledge';
 import {encyclopediaReviewDisplay,variantReviewClass} from '../apps/web/components/encyclopedia/review-state';
 const source:any={id:'card',make:'Changan',model:'A06',year:2026,fuel:'hybrid',engineCc:1497,powerHp:98,powerKw:72.0788775,powertrainKind:'series_hybrid',icePowerKw:72,power30MinKw:40,drive:'rwd',transmission:'automatic',bodyType:'sedan'};
 const draft=(kw:number)=>({year:'2026',fuel:'hybrid',engineCc:'1497',powerHp:'98',powerKw:'72.0788775',hybridKind:'series_hybrid',icePowerKw:'72',power30MinKw:String(kw),deliveryCity:''});
@@ -78,3 +78,8 @@ test('editing another row does not renew the age of an unchanged canonical fact'
  assert.equal(index.models['changan:a06']['encyclopedia:model:variant'].savedAt,at(1));
  assert.equal(managementSavedDraft(source,draft(60),at(2),index).power30MinKw,'60');
 }));
+
+test('revision baselines contain only scalar vehicle facts, never recursive prior metadata',()=>{
+ const values=managementFactValues({...source,managementBaseline:{managementBaseline:source},researchEvidence:{private:true},managementOfferId:'card'});
+ assert.equal(values.managementBaseline,undefined);assert.equal(values.researchEvidence,undefined);assert.equal(values.managementOfferId,undefined);assert.equal(values.power30MinKw,40);
+});

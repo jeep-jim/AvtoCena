@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {encyclopediaReviewDisplay} from '@/components/encyclopedia/review-state';
 import {mechanicalRows} from '@/lib/encyclopedia/compact';
-import {rememberEncyclopediaModel,encyclopediaWithManagement,readManagementKnowledge,managementModelKey,managementModelRevision} from '@/lib/catalog/management-knowledge';
+import {rememberEncyclopediaModel,encyclopediaWithManagement,readManagementKnowledge,managementFactValues,managementModelKey,managementModelRevision} from '@/lib/catalog/management-knowledge';
 import {publicEncyclopediaRecord} from '@/lib/encyclopedia/public-record';
 import {getCurrentUser} from '@/lib/auth';
 import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
@@ -27,7 +27,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
     management={offerId:fact.offerId,values:fact.values};delete input.variant.id;
    }else if(input.variant?.id){
     const displayed=encyclopediaWithManagement(stored,knowledge).variants.find(v=>v.id===input.variant.id);
-    if(displayed)management={values:displayed};
+    if(displayed)management={values:managementFactValues(displayed)};
    }
   }
   const record=input.action==='sync'?await readModel(id):await editModel(id,input,user!,management);
