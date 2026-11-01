@@ -1275,3 +1275,16 @@ Existing China recovery41223091606/publish124601674990 теперь FINAL FAILUR
 Единственный bounded health06:05–06:06 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Это доступность прежнего приложения, не приёмка публикации Китая и не объяснение старого Proxy CONNECT timeout.
 
 Следующая сверка — существующий итоговый журнал124601674990 при доступности инструмента и состояние уже запущенного scheduled41227716152; исправление причины до её чтения не выдумывается. Прочитанные translation_http_403/green_feed_empty/binding/deferral журналы не повторялись. OWNERFREEZE вне прямой задачи, authenticated save/fullsync, все истории/остатки, PR1641/drafts/REG capacity сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
+
+
+## 01.11.2026, 07:23 Красноярск — плановый Китай перешёл к публикации; причина прежнего отказа недоступна
+
+Fresh main d85d7d45e6cc425b89f209c2d374013d71627505 и Road/checklist прочитаны. AGENTS03336196, system-market-audit и связанные operations unchanged; новых primary результатов и PR после1673 нет, app deploy отсутствует.
+
+Единственный IN_PROGRESS — existing scheduled China41227716152. Plan124677533792 SUCCESS; collect124677694988 завершился SUCCESS06:08:21. Его итоговый журнал впервые прочитан watch:06:07:56.916 completed=true,mode=local_replica_and_changes,offers275049,changes274716,cursor12635354,replicaSaved=true. Это результат сбора/сохранения реплики, не число опубликованных или видимых машин; offers и changes не суммируются. Новый publish124685023963 выполняет Publish markets through calculation and retention guards с06:17:48. Итоговый журнал публикации, новый manifest и опубликованные количества пока не подтверждены. Watch сбор не запускал/не повторял/не отменял.
+
+Для failed recovery41223091606/job124601674990 повторная попытка чтения уже существующего итогового журнала снова вернула Transport closed. Журнал остаётся НЕ прочитанным; FINAL FAILURE05:33:35 и отказы publish/outcome сохранены, причина/publicationStatus/manifest не установлены. Это недоступность инструмента чтения, не новая ошибка публикации и не основание приписывать lock_lost/timeout/лимит времени/rollback. Старый41111109988 log не запрашивался.
+
+Единственный bounded watch health07:22–07:23 завершился curl0:ok=true,releaseSha dfaabde705030a1cd4c78c0afc6251379b276aa2,calculationVersion4358a3d5e79b122a05f8c2512b12cae4ad8e25ca5369bff5a3bc860ab6a86c5e. Успешный health не заменяет приёмку Китая, authenticated save/fullsync или всех целей; прежний Proxy CONNECT timeout не объяснён.
+
+OWNERFREEZE вне прямой задачи, все истории/остатки/primary атрибуции сохранены. Прочитанные translation/feed/binding/deferral журналы не повторялись; PR1641/drafts/REG capacity не тронуты. Только Road/checklist append-only expected-parentCAS; наблюдение включено. Далее — existing scheduled publish124685023963, доступность failed final log124601674990 и новые primary результаты, без runtime/deploy/repair/diagnostics/browser/provider/cleanup и новых запусков.
