@@ -19579,3 +19579,20 @@ Compact/CRM fixture timeout и liveSKIPPED, старые manifest failures/metad
 Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. Исторические FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны, active China continuation не найден. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
 
 Compact/CRM fixture failures/liveSKIPPED, старые manifest failures/metadata часовые расхождения, обе истории и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing41334067888 final/verifier и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты, доступность China final. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
+
+
+## 02.11.2026, 02:26 Красноярск — выпуск фона завершён успешно; отдельный штатный China collection выполняется
+
+Свежие main38ed13189f06f2f4a32d7f869e2108b1b000e012, Road/checklist, PR и jobs прочитаны. Main не изменился; AGENTS03336196 и связанные operations unchanged. Новых PR после1684 и новых primary exact-UI/authenticated Save/fullsync/savedfixture результатов нет. Старые прочитанные deploy/CI/browser/primary журналы не повторялись.
+
+Existing deploy41334067888/job124930175783 FINAL SUCCESS01:48:40; итоговый журнал впервые прочитан watch. Exact release b4479fdd4ccd642a3bb600a5855917ddd8ef3216; сообщение Release active01:42:06.910 после post-checks, а предыдущий health01:36 уже видел этот выпуск. Pre48/post48 functionalPASS, slow0/2; post performanceAccepted=false, latencyBlocking=false. Два advisory slow на China search marketPage1/page9 API: afterTTL2.6476s и afterDirectoryTTL3.6322s при target1s. Не rollback и не универсальная subsecond-приёмка.
+
+Public verifier01:48:33.072 подтвердил exact b4479fdd:532groups/4888variants/22635fields/3809groupedVariants/2privateDescriptions,verified=true. Точечная CSS правка фона установлена; отдельная visual/exact-UI приёмка после этой правки не найдена. PR1684 сохраняется в выпуске. Authenticated Save/fullsync и Compact/CRM fixture failure на прежнем тексте сохранения остаются открытыми.
+
+Единственный bounded health02:25 завершился curl0:ok=true, exactrelease b4479fdd4ccd642a3bb600a5855917ddd8ef3216, calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8 прежний. Это не отдельная приёмка сохранения или синхронизации; прежние смены fingerprint ограничивают cache comparison.
+
+Единственный in_progress — отдельный штатный Catalog refresh china41337918148, event=schedule, created02.11 01:41:40, head38ed1318. Plan124941570729 SUCCESS metadata; collect124941711714 IN_PROGRESS, Sync Che168 from complete CSV and committed changes с01:42:54. Итог collect/публикация/manifest/числа НЕ подтверждены; длительность не доказательство failure/hang, причина времени старта неизвестна. Это не watch запуск и не доказанное продолжение прежних failed publish; не дублировать/не отменять. Appdeploy больше не активен.
+
+Оба прежних China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны. Locklost/timeout/6h/rollback не приписываются; старые collect/old41111109988 не повторялись.
+
+Обе истории, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing China41337918148 итог, доступность двух прежних final logs и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
