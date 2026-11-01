@@ -19017,3 +19017,14 @@ OWNERFREEZE, все истории/остатки, authenticated save/fullsync, 
 Проверка каталога: TaycanEurope реальные offerlinks, точнаяrelated-ссылка с оговоркой E-Shift; RAV4проданные лоты, Tucson/iX3старые исполнения, IONIQ6/9errorHTMLпри200. Неподтверждённое наличие не заявлено. Шесть официальных фотоHTTP200/визуально просмотрены;4Commonsиндивидуальные лицензии и webimage доступны, прямой GETсреды403, поэтому их liveотображение ещё не принято. Детали в editorial-audit.
 
 tests/blog.test.ts2/2PASS после добавления10seed. TypeScript npx tsc -p apps/web/tsconfig.json --noEmit PASS;10draft/published-form schemas PASS без обрезки текста/атрибуции. CI/merge/установка и liveURLs ещё не подтверждены этой записью. Подготовлены10Дзен+10VKадаптаций; подключённые официальные каналы не подтверждены, внешних публикаций0. Пакет пока подготовлен к выпуску, живых новых публикаций0 на исходной сверке.
+
+
+## 01.11.2026, 08:34 Красноярск — редакционный PR1641 объединён, запущен единственный штатный выпуск
+
+PR1641 merge SHA5d23ce54b1638b168d590d0e45c671a2e3e3dfab, head7d74af82732b3b1f11948383777d1a62717aafe5. Все4проверки SUCCESS: CI41261024481 (полнаяregression suite,dependency audit,web/engine typecheck,production build), site controls/mobile41261024444, Greenbudget41261024513, Autobot41261022343. Старые2seed сохранены побайтно поJSONструктуре; всеresearch/preparation guardfields marker неизменны.
+
+Запущен автоматически единственный REGdeploy41261542902 на mergeSHA. До merge активного appdeploy не было; existing China41227716152 оставлен в работе. Второйdeploy/collector/repair не запускался. Это начатая установка, не подтверждение liveпубликации.
+
+Все10обложек визуально просмотрены:6официальных локально,4Commons в браузере по точнымthumbnailURL. Прямой GET403 рабочей среды не воспроизвёлся в браузере; не объясняется и не выдаётся за исправление CDN. Дополнение и фактические /cars/offer samples внесены в editorial-audit/catalog-check. Одиночный полный ответ существующего /blog до выпуска:HTTP200,start3.977393s,full4.318496s,113167bytes; это не cold/warm серия и не приёмка subsecond.
+
+Следующий шаг: итог existing REG41261542902, exact live release и10URL/обложки/SEO. На момент записи новые публикации на сайте ещё не подтверждены. Внешних публикаций0;20адаптаций сохранены. Рынки/парсеры/ручные статьи не изменены.

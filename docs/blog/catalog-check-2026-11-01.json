@@ -4,83 +4,129 @@
     "url": "https://avtocena.com/cars?market=japan&make=Toyota&model=RAV4",
     "http": 200,
     "bytes": 364511,
-    "offerLinks": [
-      "/cars/china",
-      "/cars/japan",
-      "/cars/korea",
-      "/cars/uae",
-      "/cars/europe"
+    "errorText": false,
+    "matchingCardLinksOnReadPage": 24,
+    "samples": [
+      {
+        "url": "/cars/offer/toyota-rav4-g-2021--ajes-stats-8hdOsYvaD1jUDLB",
+        "soldLabel": true,
+        "text": "ЯпонияЯпонияToyota RAV4 G2021 г.Лот продан3 707 728₽Оценка 4полный24 000 км1980 см³171 л.с. · предварительно"
+      },
+      {
+        "url": "/cars/offer/toyota-rav4-4wd-g-z-package-2021--ajes-stats-0wBV8IKwNGICAMn",
+        "soldLabel": true,
+        "text": "ЯпонияЯпонияToyota RAV4 4WD G Z Package2021 г.Лот продан4 037 193₽Оценка 4.5полный22 000 км1980 см³171 л.с. · предварительно"
+      },
+      {
+        "url": "/cars/offer/toyota-rav4-hybrid-g-4wd-2019--ajes-stats-2MxQrHj0zwn57d",
+        "soldLabel": true,
+        "text": "ЯпонияЯпонияTOYOTA RAV4 Hybrid G 4WD2019 г.Лот продан1 044 432₽СанкцииОценка 4полный92 000 км2500 см³178 л.с. · предварительно"
+      }
     ],
-    "errorText": false
+    "checkedAt": "2026-11-01T01:20:00Z",
+    "availabilityConclusion": "Sampled cards carry sold-lot label; no current RAV4 PHEV2026 availability confirmed."
   },
   {
     "key": "tucson",
     "url": "https://avtocena.com/cars?market=korea&make=Hyundai&model=Tucson",
     "http": 200,
     "bytes": 194159,
-    "offerLinks": [
-      "/cars/china",
-      "/cars/japan",
-      "/cars/korea",
-      "/cars/uae",
-      "/cars/europe"
+    "errorText": false,
+    "matchingCardLinksOnReadPage": 3,
+    "samples": [
+      {
+        "url": "/cars/offer/hyundai-tucson-diesel-2-0-4wd-modern-2021--ajes-korea-6izzh4T7KCTvKu",
+        "soldLabel": false,
+        "text": "КореяКореяHyundai TUCSON Diesel 2.0 4WD Modern2021 г.4 285 146₽81 950 км1998 см³186 л.с. / 136,8 кВт"
+      },
+      {
+        "url": "/cars/offer/hyundai-tucson-gasoline-1-6-turbo-4wd-modern-2022--ajes-korea-6izyKuaobWSrEa",
+        "soldLabel": false,
+        "text": "КореяКореяHyundai TUCSON Gasoline 1.6 Turbo 4WD Modern2022 г.Расчёт под ключ2 078 375₽68 181 км1598 см³136 л.с. / 100,03 кВт"
+      },
+      {
+        "url": "/cars/offer/hyundai-tucson-gasoline-1-6-turbo-2wd-modern-2024--ajes-korea-6izvHqzoEYOtiY",
+        "soldLabel": false,
+        "text": "КореяКореяHyundai TUCSON Gasoline 1.6 Turbo 2WD Modern2024 г.Расчёт под ключ3 171 766₽56 776 км1598 см³180 л.с. / 132,39 кВт"
+      }
     ],
-    "errorText": false
+    "checkedAt": "2026-11-01T01:20:00Z",
+    "availabilityConclusion": "Existing Korean Modern versions; not confirmation of new European N Line."
   },
   {
     "key": "ioniq6",
     "url": "https://avtocena.com/cars?market=korea&make=Hyundai&model=IONIQ+6",
     "http": 200,
     "bytes": 162345,
-    "offerLinks": [
-      "/cars/china",
-      "/cars/japan",
-      "/cars/korea",
-      "/cars/uae",
-      "/cars/europe"
-    ],
-    "errorText": true
+    "errorText": true,
+    "matchingCardLinksOnReadPage": 0,
+    "samples": [],
+    "checkedAt": "2026-11-01T01:20:00Z",
+    "availabilityConclusion": "Error text in HTTP200 HTML; availability unconfirmed."
   },
   {
     "key": "taycan",
     "url": "https://avtocena.com/cars?market=europe&make=Porsche&model=Taycan",
     "http": 200,
     "bytes": 425236,
-    "offerLinks": [
-      "/cars/china",
-      "/cars/japan",
-      "/cars/korea",
-      "/cars/uae",
-      "/cars/europe"
+    "errorText": false,
+    "matchingCardLinksOnReadPage": 20,
+    "samples": [
+      {
+        "url": "/cars/offer/porsche-taycan-performancebatterie-pasm-pano-hud-acc-20-2021--794795dae9f4675f899b8cf1",
+        "soldLabel": false,
+        "text": "ЕвропаЕвропаPorsche Taycan Performancebatterie PASM Pano HUD ACC 202021 г.Предварительно · мощность по близкой версии10 062 301₽130 826 кмЭлектромотор476 л.с. / 350 кВт"
+      },
+      {
+        "url": "/cars/offer/porsche-taycan-5p-ti-2021--227df7550301906b5356d231",
+        "soldLabel": false,
+        "text": "ЕвропаЕвропаPorsche Taycan 5p.ti2021 г.Цена продавца5 236 162₽52 170 кмЭлектромотор163 л.с. / 120 кВт"
+      },
+      {
+        "url": "/cars/offer/porsche-taycan-4s-93-4-kwh-2020-31-316-km-matrix-pdls-cam360-uniek-olea-pano-carplay-adaptivecruise-2020--044708355f04b356e46bb959",
+        "soldLabel": false,
+        "text": "ЕвропаЕвропаPorsche Taycan 4S 93.4 kWh 2020 31.316 km Matrix PDLS Cam360 Uniek OLEA Pano CarPlay AdaptiveCruise2020 г.Предварительно · мощность по близкой версии11 496 372₽31 316 кмЭлектромотор489 л.с. / 360 кВт"
+      }
     ],
-    "errorText": false
+    "checkedAt": "2026-11-01T01:20:00Z",
+    "availabilityConclusion": "Matching Taycan offers shown; E-Shift equipment unconfirmed."
   },
   {
     "key": "bmw",
     "url": "https://avtocena.com/cars?market=europe&make=BMW&model=iX3",
     "http": 200,
     "bytes": 411153,
-    "offerLinks": [
-      "/cars/china",
-      "/cars/japan",
-      "/cars/korea",
-      "/cars/uae",
-      "/cars/europe"
+    "errorText": false,
+    "matchingCardLinksOnReadPage": 18,
+    "samples": [
+      {
+        "url": "/cars/offer/bmw-ix3-50-xdrive-m-sport-pro-113-kwh-pano-highway-ass-2026--192fa65abd12b384577156f0",
+        "soldLabel": false,
+        "text": "ЕвропаЕвропаBMW iX3 50 xDrive M SPORT PRO 113 kWh / PANO / HIGHWAY ASS2026 г.14 409 310₽8 259 кмЭлектромотор469 л.с. / 345 кВт30 мин: 170 кВт"
+      },
+      {
+        "url": "/cars/offer/bmw-ix3-impressive-m-sport-panorama-360-hud-dab-h-k-2023--469cbbb8346782f5a842b7ed",
+        "soldLabel": false,
+        "text": "ЕвропаЕвропаBMW iX3 Impressive M Sport Panorama 360°HUD DAB H/K2023 г.Предварительно · мощность по близкой версии7 572 851₽100 791 кмЭлектромотор286 л.с. / 210 кВт"
+      },
+      {
+        "url": "/cars/offer/bmw-ix3-80-kwh-leder-cuir-led-gps-pdc-cam-pano-blis-verw-2023--e2a4b016c358823eac1a83ad",
+        "soldLabel": false,
+        "text": "ЕвропаЕвропаBMW iX3 80 kWh LEDER/CUIR LED GPS PDC CAM Pano BLIS Verw.2023 г.Предварительно · мощность по близкой версии7 252 737₽97 960 кмЭлектромотор286 л.с. / 210 кВт"
+      }
     ],
-    "errorText": false
+    "checkedAt": "2026-11-01T01:20:00Z",
+    "availabilityConclusion": "Older iX3 offers shown; Gen6-equipped version not confirmed."
   },
   {
     "key": "ioniq9",
     "url": "https://avtocena.com/cars?market=korea&make=Hyundai&model=IONIQ+9",
     "http": 200,
     "bytes": 162345,
-    "offerLinks": [
-      "/cars/china",
-      "/cars/japan",
-      "/cars/korea",
-      "/cars/uae",
-      "/cars/europe"
-    ],
-    "errorText": true
+    "errorText": true,
+    "matchingCardLinksOnReadPage": 0,
+    "samples": [],
+    "checkedAt": "2026-11-01T01:20:00Z",
+    "availabilityConclusion": "Error text in HTTP200 HTML; availability unconfirmed."
   }
 ]
