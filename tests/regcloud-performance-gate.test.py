@@ -30,11 +30,16 @@ class GateTests(unittest.TestCase):
    with self.assertRaises(AssertionError):gate.validate('/cars','catalog',200,body,'x')
   gate.validate('/cars','catalog',200,b'<html><article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article></html>','x')
   for path,_,kind in gate.ROUTES:
-   if path.startswith('/cars') and path!='/cars/autocatalog':self.assertEqual(kind,'catalog')
- def test_encyclopedia_requires_real_bounded_rows(self):
-  for body in [b'<html>Preparing</html>',b'<html><script>const fake="<article class=ac-model-list-item>"</script></html>',b'<html>'+b'<article class="ac-model-list-item"></article>'*41+b'</html>']:
+   if path.startswith('/cars') and not path.startswith('/cars/autocatalog'):self.assertEqual(kind,'catalog')
+ def test_encyclopedia_requires_brands_then_bounded_models(self):
+  brands=b'<html><button class="ac-brand-card"><strong>Changan</strong><small>12 models</small></button></html>'
+  models=b'<html><article class="ac-model-list-item"></article></html>'
+  gate.validate('/cars/autocatalog','encyclopedia',200,brands,'x')
+  gate.validate('/cars/autocatalog?make=Changan','encyclopedia',200,models,'x')
+  for body in [b'<html>Preparing</html>',b'<html><button class="ac-brand-card"></button></html>',b'<html><button class="ac-brand-card" disabled>Changan</button></html>',b'<html><script>const fake="<button class=ac-brand-card>Changan</button>"</script></html>',models]:
    with self.assertRaises(AssertionError):gate.validate('/cars/autocatalog','encyclopedia',200,body,'x')
-  gate.validate('/cars/autocatalog','encyclopedia',200,b'<html><article class="ac-model-list-item"></article></html>','x')
+  for body in [brands,b'<html>Empty</html>',b'<html>'+b'<article class="ac-model-list-item"></article>'*41+b'</html>']:
+   with self.assertRaises(AssertionError):gate.validate('/cars/autocatalog?make=Changan','encyclopedia',200,body,'x')
  def test_measurement_targets_and_functional_activation_checks_are_preserved(self):
   self.assertEqual(gate.PHASE_DELAYS,[('warm',0),('after_ttl',35),('after_directory_ttl',305)])
   limits={p:budget for p,budget,k in gate.ROUTES}
@@ -44,7 +49,7 @@ class GateTests(unittest.TestCase):
    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
    '/api/catalog/search?market=europe&make=BMW&page=2': 1, '/cars/autocatalog': 2,
-   '/api/catalog/search?market=china&marketPage=1&page=9': 1,
+   '/api/catalog/search?market=china&marketPage=1&page=9': 1, '/cars/autocatalog?make=Changan': 2,
   }, 'Owner made speed targets advisory; route coverage and honest measurements remain')
   self.assertEqual(len(gate.ROUTES), len(limits), 'Duplicate routes must not hide missing coverage')
   script=pathlib.Path('scripts/regcloud-deploy-production.sh').read_text()
@@ -68,9 +73,9 @@ class GateTests(unittest.TestCase):
   self.assertEqual(sample.call_count,len(gate.ROUTES)*4)
   rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
   measured=[r for r in rows if r.get('performanceGate')!='summary']
-  self.assertEqual(len(measured),39)
+  self.assertEqual(len(measured),42)
   self.assertTrue(all(r['functionalPassed'] and not r['passed'] for r in measured))
-  self.assertEqual(rows[-1]['slowSamples'],39)
+  self.assertEqual(rows[-1]['slowSamples'],42)
   self.assertFalse(rows[-1]['performanceAccepted'])
   self.assertIn('::warning::',output.getvalue())
  def test_functional_failure_and_unavailable_response_still_abort(self):
@@ -83,6 +88,8 @@ class MarketScopeTests(unittest.TestCase):
   routes=gate.release_routes('korea')
   self.assertIn(('/cars?market=korea',2.0,'catalog'),routes)
   self.assertIn(('/api/health',.25,'health'),routes)
+  self.assertIn(('/cars/autocatalog',2.0,'encyclopedia'),routes)
+  self.assertIn(('/cars/autocatalog?make=Changan',2.0,'encyclopedia'),routes)
   self.assertFalse(any('china' in p or p in ['/','/cars','/cars?sort=totalRub'] for p,_,_ in routes))
   with self.assertRaises(AssertionError):gate.validate('/cars?market=korea','catalog',200,b'<html>Unavailable</html>','x')
  def test_invalid_scope_fails_closed(self):

@@ -22,6 +22,7 @@ ROUTES=[
  # Page nine is the first page beyond the 192-card prepared category landing.
  ('/api/catalog/search?market=china&marketPage=1&page=9',1.0,'search'),
  ('/cars/autocatalog',2.0,'encyclopedia'),
+ ('/cars/autocatalog?make=Changan',2.0,'encyclopedia'),
 ]
 
 # Owner instruction 31.10.2026: a targeted market release must not depend on
@@ -31,7 +32,7 @@ def release_routes(scope=''):
  markets=scope.split(',')
  if len(markets)!=len(set(markets)) or any(m not in ['china','korea','japan','europe','uae','georgia'] for m in markets):
   raise ValueError('release_market_scope_invalid')
- common=[r for r in ROUTES if r[0] in ['/api/health','/api/leads','/login','/autocalc','/cars/autocatalog']]
+ common=[r for r in ROUTES if r[2]=='encyclopedia' or r[0] in ['/api/health','/api/leads','/login','/autocalc','/cars/autocatalog']]
  selected=[r for r in ROUTES if urllib.parse.parse_qs(urllib.parse.urlsplit(r[0]).query).get('market',[''])[0] in markets]
  for market in markets:
   route=('/cars?market='+market,2.0,'catalog')
@@ -56,9 +57,18 @@ class CatalogCards(HTMLParser):
    self.in_card=False;self.has_link=False
 
 class EncyclopediaRows(HTMLParser):
- def __init__(self):super().__init__();self.count=0
+ def __init__(self):super().__init__();self.count=0;self.brands=0;self.brand_text=False;self.in_brand=False
  def handle_starttag(self,tag,attrs):
-  if tag=='article' and 'ac-model-list-item' in dict(attrs).get('class','').split():self.count+=1
+  attrs=dict(attrs);classes=attrs.get('class','').split()
+  if tag=='article' and 'ac-model-list-item' in classes:self.count+=1
+  if tag=='button' and 'ac-brand-card' in classes:
+   self.in_brand='disabled' not in attrs;self.brand_text=False
+ def handle_data(self,data):
+  if self.in_brand and data.strip():self.brand_text=True
+ def handle_endtag(self,tag):
+  if tag=='button':
+   if self.in_brand and self.brand_text:self.brands+=1
+   self.in_brand=False
 
 def validate(path,kind,status,body,release):
  if kind=='lead_validation':
@@ -69,7 +79,9 @@ def validate(path,kind,status,body,release):
   if b'</html>' not in body or b'$RX(' in body:raise AssertionError('performance_incomplete_html:'+path)
   if kind=='encyclopedia':
    rows=EncyclopediaRows();rows.feed(body.decode('utf8','replace'))
-   if not 1<=rows.count<=40:raise AssertionError('performance_invalid_encyclopedia:'+path)
+   selected=bool(urllib.parse.parse_qs(urllib.parse.urlsplit(path).query).get('make'))
+   valid=1<=rows.count<=40 if selected else rows.brands>0 and rows.count==0
+   if not valid:raise AssertionError('performance_invalid_encyclopedia:'+path)
   if kind=='catalog':
    cards=CatalogCards();cards.feed(body.decode('utf8','replace'))
    if not cards.count:raise AssertionError('performance_empty_catalog:'+path)
