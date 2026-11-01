@@ -200,3 +200,4 @@ html[data-theme=light] .ac-ency-filter-dock{background:#fff}html[data-theme=ligh
 .ac-ency-page .ac-knowledge-toolbar>.ac-ency-button,.ac-ency-page .ac-knowledge-alphabet button{height:32px;min-height:32px;font-size:11px;padding:0 9px}.ac-ency-page .ac-knowledge-alphabet{gap:4px}.ac-ency-page .ac-knowledge-alphabet button{min-width:28px}.ac-ency-page .ac-knowledge-toolbar{margin:0 0 10px}
 @media(max-width:700px){.ac-brand-card::after{display:none}.ac-brand-card>img{width:26px}}
 .ac-directory-browser .ac-model-list-row strong{display:flex;align-items:center;gap:6px}.ac-directory-browser .ac-model-list-row strong svg{width:13px;height:13px;flex:none;color:var(--ac-muted)}
+.ac-directory-browser{scroll-margin-top:calc(var(--ency-header-height,68px) + var(--ency-filter-height,150px) + 16px)}

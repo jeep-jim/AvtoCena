@@ -6,6 +6,7 @@ import {ArrowLeft,Search} from 'lucide-react';
 import {filterModels} from '@/lib/encyclopedia/query';
 import {unpackDirectory,type DirectoryWire} from '@/lib/encyclopedia/directory-wire';
 import {BrandLogoVisual} from '@/components/catalog/BrandLogoRail';
+import {counted} from '@/lib/encyclopedia/schema';
 import {KnowledgeDirectory} from './KnowledgeDirectory';
 export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolean}){
  const params=useSearchParams(),models=useMemo(()=>unpackDirectory(data),[data]);
@@ -16,7 +17,7 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
   const groups=new Map<string,number>();for(const model of filterModels(models,query))groups.set(model.make,(groups.get(model.make)||0)+1);
   return [...groups].map(([name,count])=>({name,count}));
  },[models,params]);
- const navigate=(name:string)=>{const next=new URLSearchParams(params);next.delete('page');if(name)next.set('make',name);else next.delete('make');window.history.pushState(null,'',`/cars/autocatalog${next.size?'?'+next:''}`);};
+ const navigate=(name:string)=>{const next=new URLSearchParams(params);next.delete('page');if(name)next.set('make',name);else next.delete('make');window.history.pushState(null,'',`/cars/autocatalog${next.size?'?'+next:''}`);root.current?.scrollIntoView({block:'start',behavior:'instant'});};
  useEffect(()=>{
   const node=root.current?.closest<HTMLElement>('.ac-ency-page');if(!node)return;
   const header=document.querySelector<HTMLElement>('.ac-public-header'),filters=node.querySelector<HTMLElement>('.ac-ency-filter-dock');
@@ -28,8 +29,8 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
  return <div ref={root} className={`ac-directory-browser${make?' is-selected':''}`}>
   {make&&<aside className="ac-brand-sidebar"><button className="ac-browser-back" onClick={()=>navigate('')}><ArrowLeft size={16}/>Все марки</button><nav aria-label="Марки автомобилей">{brands.map(brand=><button key={brand.name} aria-current={make===brand.name?'true':undefined} onClick={()=>navigate(brand.name)}><BrandLogoVisual brand={brand.name}/><span>{brand.name}</span><small>{brand.count}</small></button>)}</nav></aside>}
   <div className="ac-browser-content">
-   <header className="ac-browser-heading"><div>{make?<><button className="ac-browser-mobile-back" aria-label="Назад к маркам" onClick={()=>navigate('')}><ArrowLeft size={18}/></button><BrandLogoVisual brand={make}/></>:null}<h2>{make||'Марки автомобилей'}</h2><span>{make?`${filtered.length} моделей`:`${brands.length} марок`}</span></div></header>
-   {make?<KnowledgeDirectory models={filtered.slice((page-1)*40,page*40)} canEdit={canEdit} pagination={{page,total:filtered.length}}/>:<div className="ac-brand-grid">{brands.map(brand=><button className="ac-brand-card" key={brand.name} onClick={()=>navigate(brand.name)}><BrandLogoVisual brand={brand.name}/><span><strong>{brand.name}</strong><small>{brand.count} моделей</small></span></button>)}</div>}
+   <header className="ac-browser-heading"><div>{make?<><button className="ac-browser-mobile-back" aria-label="Назад к маркам" onClick={()=>navigate('')}><ArrowLeft size={18}/></button><BrandLogoVisual brand={make}/></>:null}<h2>{make||'Марки автомобилей'}</h2><span>{make?counted(filtered.length,'model'):counted(brands.length,'make')}</span></div></header>
+   {make?<KnowledgeDirectory models={filtered.slice((page-1)*40,page*40)} canEdit={canEdit} pagination={{page,total:filtered.length}}/>:<div className="ac-brand-grid">{brands.map(brand=><button className="ac-brand-card" key={brand.name} onClick={()=>navigate(brand.name)}><BrandLogoVisual brand={brand.name}/><span><strong>{brand.name}</strong><small>{counted(brand.count,'model')}</small></span></button>)}</div>}
    {!make&&!brands.length&&<div className="ac-browser-empty"><Search size={24}/><h3>Марки не найдены</h3><p>Измените поиск или сбросьте фильтры.</p></div>}
   </div>
  </div>;
