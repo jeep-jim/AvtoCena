@@ -1382,3 +1382,20 @@ Cookie deploy41275811062/job124762699297 CANCELLED12:38:35, журнал впе�
 CRM41275779193 FINAL SUCCESS: audit124757550772 и live124758696395 впервые прочитаны watch. Audit12:09:28release8b5dab49/No production deployment requested;live12:16:46 cases36/openings168PASS,jobFINAL12:16:52 ДО установкиb595/4456. Это не приёмка новых выпусков/доставка заявок;browserfixtureSUCCESSmetadata,его лог не читался.
 
 Оба China final logs124685023963/124601674990 снова Transport closed — НЕ прочитаны,FINALFAIL10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны;lock_lost/timeout/6h/rollback не приписываются. Прочитанные collect/старый41111109988 не повторялись; нового activeChina continuation нет. OWNERFREEZE/обе истории/остатки/authsave/fullsync/REG/drafts сохранены. Только Road/checklist append-only expected-parentCAS;watchenabled. Далее existing41278375909 final/verifier и primary UI приёмка1675/доступностьChinafinal без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков.
+
+
+## 01.11.2026, 13:48 Красноярск — cookie/АвтоБот установлен; итоговый verifier и ограниченная UI-приёмка подтверждены
+
+Свежий main3aac54ffc03fff2e5029363da513be6e309880e3, Road/checklist и новый docs/operations/verification/cookie-autobot-20261101.json прочитаны. AGENTS03336196 unchanged; других изменений связанных operations относительно d048d1cc нет. Primary история сохранена. Новых PR после1680 и in_progress workflows на сверке нет.
+
+Deploy41278375909/job124765180262 FINAL SUCCESS13:30:07; итоговый журнал впервые прочитан watch. Release active13:23:53 exact4456a45344d064256b048fb2ee5412d151f5be89. Pre45/post45functionalPASS,slow0/5;postperformanceAccepted=false,latencyBlocking=false/advisory. Public verifier13:29:59 exact532groups/4888variants/22635fields/3809groupedVariants/2privateDescriptions,verified=true. PR1679+1680 установлены. Прошлый404BlobNotFound был недоступностью активного журнала, не failure.
+
+Все5медленных post samples относятся к after_directory_ttl: China Volkswagen page2 HTML7.4084s,Europe BMW page2 HTML3.5403s/API1.2908s,China marketPage1&page9 API4.5092s,Europe HTML4.775s. Функционально PASS; это не subsecond/performance acceptance и не rollback. Предыдущая отмена41275811062 до switch сохранена, лог повторно не читался.
+
+Primary Road13:30 и сохранённый JSON подтверждают32liveChromiumизмерения: главная и /cars,390/1440×light/dark,ready/settings/scroll/settled; mobile cookie над шапкой с резервом высоты,desktop снизу слева. Primary отказ освобождает место;4контекста Autobot hide→reload→footer reopen→unhide PASS, без отправки сообщений/заявок. Issue1675 CLOSED13:31:15. Это адресная UI-приёмка основной работы; watch браузер/поставщика не повторял и снимки самостоятельно не просматривал. Физический телефон/сворачивание адресной строки не проверены; полная приёмка каталога/authsave/fullsync/скорости этим не закрывается.
+
+Единственный bounded health13:47 завершился curl0:ok=true,releaseSha4456a45344d064256b048fb2ee5412d151f5be89,calculationVersioncb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c. Calc прежний относительно13:24; более ранняя смена407936→cb492 продолжает ограничивать сравнение кэшей.
+
+Оба China final logs124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны,lock_lost/timeout/6h/rollback не приписываются. Нового active continuation нет. Следующий адресный шаг — доступность этих существующих финальных журналов и новые primary результаты; исправление причины до получения доказательств не назначается. Collect/old41111109988/прочитанныеCI/CRM/deploy логи не повторялись.
+
+OWNERFREEZE/обе истории/все остатки/authsave/fullsync/REG/drafts/issue1678 backlog сохранены. Только Road/checklist append-only expected-parentCAS; наблюдение включено до итоговой приёмки всех целей. Новых runtime/deploy/repair/diagnostics/browser/provider/cleanup запусков нет.
