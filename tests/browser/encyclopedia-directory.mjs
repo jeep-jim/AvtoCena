@@ -33,7 +33,7 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
 try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
- const page=await browser.newPage({viewport:{width,height:900}});const errors=[];let reads=0;
+ const context=await browser.newContext({viewport:{width,height:900}});const page=await context.newPage();const errors=[];let reads=0;
  try{
  page.on('pageerror',e=>errors.push(String(e)));
  await page.route('**/api/**',route=>route.fulfill({json:route.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner',displayName:'Owner',avatarUrl:''}}:{ok:true,leads:[],pending:[],recent:[],counts:{}}}));
@@ -110,6 +110,6 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  }else await page.evaluate(()=>window.dispatchEvent(new Event('avtocena:encyclopedia-updated')));
  await page.locator('.ac-ency-row-review').waitFor();assert.equal(await page.locator('.ac-ency-row-verified').count(),0);assert.ok((await page.locator('.ac-ency-row-review').textContent()).includes('160'));
  await page.screenshot({path:out+`/pending-${theme}-${width}.png`});
- assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
+ assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await context.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));
