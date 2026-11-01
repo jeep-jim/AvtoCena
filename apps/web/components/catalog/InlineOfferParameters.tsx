@@ -1,4 +1,5 @@
 "use client";
+import {notifyEncyclopediaUpdate} from "@/components/encyclopedia/updates";
 import {encodeShareDraft} from "../../lib/catalog/offer-share";
 import { publicProductionYears } from "../../lib/catalog/public-year-range";
 import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
@@ -154,6 +155,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
    setSaveMessage(data.knowledgeWarning || (data.knowledgeSaved?"Сохранено. Пустые параметры совместимых автомобилей будут заполнены на всех рынках.":"Расчёт сохранён."));setKnowledgeRetry(Boolean(data.knowledgeWarning));setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
    if(version===revision.current){setResult(data.calculation);setUserEdited(false);}
    invalidateSavedCalculationPreviews();
+   if(data.knowledgeSaved)notifyEncyclopediaUpdate();
 
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}

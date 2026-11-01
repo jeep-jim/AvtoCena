@@ -33,7 +33,7 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
 try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
- const page=await browser.newPage({viewport:{width,height:900}});const errors=[];let reads=0;
+ const context=await browser.newContext({viewport:{width,height:900}});const page=await context.newPage();const errors=[];let reads=0;
  try{
  page.on('pageerror',e=>errors.push(String(e)));
  await page.route('**/api/**',route=>route.fulfill({json:route.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner',displayName:'Owner',avatarUrl:''}}:{ok:true,leads:[],pending:[],recent:[],counts:{}}}));
@@ -78,6 +78,8 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  const headerGeometry=()=>page.locator('.ac-public-header').evaluate(h=>[...h.querySelectorAll('button,a[href="/"],a[aria-label="Открыть каталог"]')].filter(e=>e.getBoundingClientRect().width).map(e=>{const b=e.getBoundingClientRect();return [Math.round(b.x),Math.round(b.y),Math.round(b.width),Math.round(b.height)];}));const editorialGeometry=await headerGeometry();await page.goto(`http://127.0.0.1:${server.address().port}/?catalog=1`);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();assert.deepEqual(await headerGeometry(),editorialGeometry,'editorial header geometry matches the existing catalog exactly');await page.goto(`http://127.0.0.1:${server.address().port}/?edit=1`);
  await page.route('**/api/encyclopedia/**',route=>route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'fixture',updatedAt:'2026-10-31',variants:[{id:'v1',year:2024,fuel:'petrol',engineCc:1500,powerHp:150,drive:'fwd',bodyType:'sedan',transmission:'automatic',status:'review',markets:[],observedCount:0,sourceUrl:'https://example.com/specs',notes:'Сохранённое примечание'}]}}));
  await page.locator('.ac-model-list-item').first().getByRole('button',{name:/^Раскрыть /}).click();
+ await page.locator('.ac-ency-row-review').waitFor();
+ assert.equal(await page.locator('.ac-ency-row-verified').count(),0);
  await page.locator('.ac-ency-row-toggle').first().click();
  const editor=page.getByRole('form',{name:'Редактирование модификации'});
  await editor.getByLabel('Мощность, л.с.',{exact:true}).fill('155');
@@ -90,13 +92,24 @@ try{for(const theme of ['dark','light'])for(const width of [320,390,1440]){
  assert.equal(await editor.getByLabel('Топливо',{exact:true}).inputValue(),'petrol');
  await editor.getByLabel('Привод',{exact:true}).selectOption('awd');
  let submitted;
- await page.route('**/api/encyclopedia/model-0',async route=>{if(route.request().method()==='POST'){submitted=route.request().postDataJSON();return route.fulfill({json:{knowledgeUpdated:true}});}return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'after',variants:[]}});});
+ await page.evaluate(()=>window.dispatchEvent(new StorageEvent('storage',{key:'avtocena.encyclopedia-updated.v1',newValue:'pending'})));
+ await page.waitForTimeout(100);assert.equal(await editor.getByLabel('Мощность, л.с.',{exact:true}).inputValue(),'155','external update preserves the unsaved draft');
+ await editor.locator('.ac-ency-verification select').selectOption('verified');
+ await page.route('**/api/encyclopedia/model-0*',async route=>{if(route.request().method()==='POST'){submitted=route.request().postDataJSON();return route.fulfill({json:{knowledgeUpdated:true}});}return route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'after',variants:[{...submitted.variant,powerHp:Number(submitted.variant.powerHp),status:'verified'}]}});});
  await page.screenshot({path:out+`/editor-${theme}-${width}.png`});
  await editor.getByRole('button',{name:'Сохранить',exact:true}).click();
  await page.getByRole('status').filter({hasText:'Изменения сохранены'}).waitFor();
  assert.equal(submitted.variant.powerHp,'155');assert.equal(submitted.variant.drive,'awd');
  assert.equal(submitted.variant.sourceUrl,'https://example.com/specs');assert.equal(submitted.variant.notes,'Сохранённое примечание');assert.equal(submitted.revision,'fixture');
 
- assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await page.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
+ await page.locator('.ac-ency-row-verified').waitFor();assert.equal(await page.locator('.ac-ency-row-review').count(),0);
+ await page.screenshot({path:out+`/confirmed-${theme}-${width}.png`});
+ await page.route('**/api/encyclopedia/model-0?year=2024',route=>route.fulfill({json:{id:'model-0',make:'Brand 0',model:'Model 0',revision:'card-update',variants:[{...submitted.variant,powerHp:160,status:'review'}]}}));
+ if(width===1440&&theme==='dark'){
+  const sender=await page.context().newPage();await sender.goto(`http://127.0.0.1:${server.address().port}/?catalog=1`);await sender.evaluate(()=>localStorage.setItem('avtocena.encyclopedia-updated.v1',String(Date.now())));await page.bringToFront();await sender.close();
+ }else await page.evaluate(()=>window.dispatchEvent(new Event('avtocena:encyclopedia-updated')));
+ await page.locator('.ac-ency-row-review').waitFor();assert.equal(await page.locator('.ac-ency-row-verified').count(),0);assert.ok((await page.locator('.ac-ency-row-review').textContent()).includes('160'));
+ await page.screenshot({path:out+`/pending-${theme}-${width}.png`});
+ assert.deepEqual(errors,[]);results.push({theme,width,initialElements,initialModels:40,modelReads:reads});await context.close();}catch(error){await page.screenshot({path:out+`/failure-${theme}-${width}.png`});throw error;}
 }}finally{await browser.close();await new Promise(r=>server.close(r));}
 console.log(JSON.stringify({passed:true,models:4000,ssrBytes:Buffer.byteLength(markup),results}));

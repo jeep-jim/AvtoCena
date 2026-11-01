@@ -1,3 +1,4 @@
+import {encyclopediaReviewDisplay} from '@/components/encyclopedia/review-state';
 import {mechanicalRows} from '@/lib/encyclopedia/compact';
 import {rememberEncyclopediaModel,encyclopediaWithManagement,readManagementKnowledge} from '@/lib/catalog/management-knowledge';
 import {publicEncyclopediaRecord} from '@/lib/encyclopedia/public-record';
@@ -27,7 +28,7 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string}>}
  const {id}=await params;
  const [stored,knowledge,user]=await Promise.all([readModel(id),readManagementKnowledge(),getCurrentUser()]);
  if(!stored)return Response.json({error:'Модель не найдена.'},{status:404,headers});
- const record=encyclopediaWithManagement(stored,knowledge,year==='unknown'?null:Number(year));
+ const record=encyclopediaReviewDisplay(stored,encyclopediaWithManagement(stored,knowledge,year==='unknown'?null:Number(year)));
  const {editedBy,previousKey,...publicRecord}=record;
  publicRecord.variants=mechanicalRows(record.variants.filter(v=>year==='unknown'?!v.year:v.year===Number(year)));
  return Response.json(canEditEncyclopedia(user)?publicRecord:publicEncyclopediaRecord(publicRecord),{headers});
