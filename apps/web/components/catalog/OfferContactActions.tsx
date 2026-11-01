@@ -1,5 +1,5 @@
 "use client";
-import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
 import {useEffect,useRef,useState,type ReactNode,type CSSProperties} from "react";
 import {createPortal} from "react-dom";
 import { FavoriteToggle, type FavoriteSnapshot } from "./FavoriteToggle";

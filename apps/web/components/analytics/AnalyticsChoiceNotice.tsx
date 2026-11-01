@@ -4,7 +4,7 @@ import {createPortal} from 'react-dom';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {ANALYTICS_EVENT,analyticsChoice,setAnalyticsChoice} from '@/lib/privacy-consent';
-import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
 import {isPublicPagePath} from '@/lib/public-page-url';
 export function AnalyticsChoiceNotice(){
  const pathname=usePathname(),[visible,setVisible]=useState(false),[settings,setSettings]=useState(false),[allowAnalytics,setAllowAnalytics]=useState(true);
