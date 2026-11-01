@@ -207,8 +207,23 @@ export function createAjesClient(deps:Dependencies) {
         // Treat only these bounded local failures as recoverable unavailability;
         // never turn programming/data errors into an empty successful response.
         if(error instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(error.message)){
-          // Queue admission failed before persisted rows were read. Recover only
-          // bounded saved lists, never call the supplier outside its queue.
+          // Queue admission failed before persisted rows were read. Stored
+          // detail recovery uses its own bounded queue, never a supplier bypass.
+          if(query.kind==='detail'){
+            return visitorCache.get(visitorKey,async()=>{
+              await deps.assertEnabled(query.table);
+              let saved:any=null;try{saved=await deps.readDetail?.(query.table,query.id!);}catch{}
+              if(isUsable(saved)){await deps.assertEnabled(query.table);return {...saved,stale:true};}
+              const memory=listed.get(query.table+':'+query.id)?.value;
+              if(isUsable(memory)){await deps.assertEnabled(query.table);return {...memory,partial:true,stale:true};}
+              let fallback:any=null;try{fallback=await deps.readListedDetail?.(query.table,query.id!);}catch{}
+              if(isUsable(fallback)){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
+              throw new AjesUnavailable('local_busy');
+            }).catch(recoveryError=>{
+              if(recoveryError instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(recoveryError.message))throw new AjesUnavailable('local_busy');
+              throw recoveryError;
+            });
+          }
           if(query.kind==='list'){
             await deps.assertEnabled(query.table);
             let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}
