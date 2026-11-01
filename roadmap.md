@@ -19561,3 +19561,8 @@ Public verifier23:14:12.397: exact2ffe03a5,532groups/4888variants/22635fields/38
 Оба China final124685023963/124601674990 снова Transport closed — журналы НЕ прочитаны. Исторические FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
 
 Compact/CRM fixture timeout и liveSKIPPED, старые manifest failures/metadata часовые расхождения, обе истории и все незавершённые цели сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее новые primary authenticated exact-release save/fullsync/savedfixture результаты и доступность China final. Только Road/checklist append-only expected-parentCAS, без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков; наблюдение включено.
+
+
+## 02.11.2026 — Подложка фильтров энциклопедии в светлой теме
+
+По скриншоту владельца изменено ровно одно CSS значение:html[data-theme=light] .ac-ency-filter-dock background:#fff → var(--ac-page-bg). Токен совпадает с фоном .ac-ency-page; подложка остаётся непрозрачной при sticky-прокрутке. Тёмная тема, поля, карточки, размеры и логика не менялись. Проверено единственное вхождение и точечный diff. Запрошена штатная публикация через marker с сохранением всех guards/ASTRA/research/market scope; успешная установка пока не подтверждена.
