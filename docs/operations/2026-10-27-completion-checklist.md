@@ -1619,3 +1619,23 @@ Public verifier01:48:33.072 подтвердил exact b4479fdd:532groups/4888va
 Оба прежних China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL01.11 10:13:17/05:33:35 сохранены. Причины/publicationStatus/manifest/числа неизвестны; locklost/timeout/6h/rollback не приписываются. Old41111109988 не повторялся.
 
 Обе истории, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing publish124959260274 final, доступность двух прежних final logs и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
+
+
+## 02.11.2026, 05:19 Красноярск — China публикация ожидается; новый Georgia сбор частичный
+
+Свежие main fc2c7f6a58a90031f4d9ef0d41df8868530d9cb1, Road/checklist, дерево, PR и существующие jobs прочитаны. Main не изменился, AGENTS03336196 и связанные operations unchanged; новых PR после1684 и новых primary exact-UI/authenticated Save/fullsync/savedfixture результатов нет. Прочитанные deploy/CI/browser/primary/China collect журналы не повторялись. Appdeploy нет.
+
+China41337918148/publish124959260274 всё ещё IN_PROGRESS: Publish markets through calculation and retention guards с02:59:26. Финальный итог/publicationStatus/manifest/числа не подтверждены; длительность не доказывает hang/failure/success. Ранее прочитанный collect124941711714 SUCCESS и его числа остаются результатом реплики, не опубликованным inventory.
+
+Дополнительно обнаружены три существующих штатных schedule на head fc2c7f6a: UAE41349217825 создан03:54:18, Europe41349460500 создан03:57:16, Georgia41349826080 создан04:01:34. Watch их не запускал/не повторял/не отменял. Их collect журналы впервые прочитаны:
+- UAE collect124975713617 SUCCESS04:14:12; report04:14:08.317 completed=true,mode=delta,changes3653,cursor303268,observations2087,uniqueOffers2039. Это delta, не полный и не опубликованный inventory; числа не суммировать.
+- Europe collect124976431128 SUCCESS04:54:53; report04:54:24.401 qualityStatus=configured_routes_finished,partialSources=[],productionWrites=false. mobile_de_open:1750pages/30760observations/30653withImages; autoscout_europe_open:201pages/3725observations/3724withImages, оба source_finished/errors[]. Это завершение настроенных маршрутов, не доказательство всего рынка и не публикация.
+- Georgia collect124977532304 SUCCESS05:13:14, но report05:13:11.035 qualityStatus=partial,productionWrites=false. myauto_georgia_list:0pages/0observations,stopReason=blocked, ошибка yandex_bridge_http_503_myauto_1_myauto_access_blocked_http_403. Autopapa:971pages/1106observations/1106withImages,source_finished/errors[], при этом final health.ok=false с сообщением «Yandex autopapa bridge page 971: 0»,httpStatus200. Успешный job не означает полноту; причина отказа Myauto не установлена, supplier fault не приписывается, запрос не повторялся.
+
+Metadata публикаций на чтении: UAE124980782390 IN_PROGRESS Publish с04:22:03; Europe124991298298 IN_PROGRESS Publish с05:05:33; Georgia124996095196 IN_PROGRESS bucket reserve с05:13:47. Финальные журналы/manifest/числа этих публикаций не подтверждены. Это не новые watch запуски и не доказанные retry старых отказов. Исторические UAE collection_missing/Georgia blocked/Europe published-visible discrepancy сохраняются отдельно.
+
+Единственный bounded health05:18 завершился curl0:ok=true, exactrelease b4479fdd4ccd642a3bb600a5855917ddd8ef3216, calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8 прежний. CSS+PR1684 установлены по предыдущему verifier; это не новая UI/save/fullsync приёмка. Прежние смены fingerprint ограничивают cache comparison.
+
+Оба прежних China final124685023963/124601674990 снова Transport closed — НЕ прочитаны; FINALFAIL01.11 10:13:17/05:33:35 и неизвестные причины/publicationStatus/manifest/числа сохранены. Locklost/timeout/6h/rollback не приписываются; old41111109988 не повторялся.
+
+Обе истории, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения, OWNERFREEZE вне новых прямых задач, REG/drafts/1678 и все остатки сохранены. Далее финалы существующих China/UAE/Europe/Georgia публикаций, доступность двух прежних China final logs и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
