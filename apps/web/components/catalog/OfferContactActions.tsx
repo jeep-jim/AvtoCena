@@ -1,4 +1,5 @@
 "use client";
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
 import {useEffect,useRef,useState,type ReactNode,type CSSProperties} from "react";
 import {createPortal} from "react-dom";
 import { FavoriteToggle, type FavoriteSnapshot } from "./FavoriteToggle";
@@ -52,8 +53,8 @@ function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:s
     dismiss.current=()=>{closed=true;update();header?.querySelector<HTMLElement>('button,a')?.focus({preventScroll:true});};
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
     const observer=new ResizeObserver(schedule);observer.observe(node);observer.observe(document.body);if(header)observer.observe(header);
-    window.addEventListener('scroll',schedule,{passive:true,capture:true});window.addEventListener('resize',schedule);update();
-    return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule,true);window.removeEventListener('resize',schedule);};
+    window.addEventListener('scroll',schedule,{passive:true,capture:true});window.addEventListener('resize',schedule);window.addEventListener(PUBLIC_HEADER_LAYOUT_EVENT,schedule);update();
+    return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule,true);window.removeEventListener('resize',schedule);window.removeEventListener(PUBLIC_HEADER_LAYOUT_EVENT,schedule);};
   },[]);
   const bar=<div className="ac-offer-contact-bar"><button type="button" className="ac-offer-contact-close" aria-label="Закрыть панель заявки и показать шапку" onClick={()=>dismiss.current()}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div>;
   // A portal avoids clipping/stacking contexts in both dealer and catalogue layouts.

@@ -1,4 +1,5 @@
 "use client";
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
 import {SlidersHorizontal} from 'lucide-react';
 import {CatalogSortSelect} from "./CatalogSortSelect";
 import {useEffect,useRef,useState} from 'react';
@@ -13,12 +14,12 @@ export function StickyCatalogControls({chips,onRemove,sort,onSort,hidden=false,h
  useEffect(()=>{
   const header=document.querySelector<HTMLElement>('.ac-public-header');
   const measure=()=>{
-   setTop(Math.round(header?.getBoundingClientRect().height||64));
+   setTop(Math.round(header?.getBoundingClientRect().bottom||64));
    const width=document.documentElement.clientWidth;
    const contentLeft=sentinel.current?.getBoundingClientRect().left||0;
    setLeftPadding(Math.max(width<1024?12:28,contentLeft-Math.max(0,(width-1600)/2)));
   };measure();
-  const observer=new ResizeObserver(measure);if(header)observer.observe(header);if(sentinel.current)observer.observe(sentinel.current);window.addEventListener("resize",measure);return()=>{observer.disconnect();window.removeEventListener("resize",measure);};
+  const observer=new ResizeObserver(measure);if(header)observer.observe(header);if(sentinel.current)observer.observe(sentinel.current);window.addEventListener("resize",measure);window.addEventListener(PUBLIC_HEADER_LAYOUT_EVENT,measure);return()=>{observer.disconnect();window.removeEventListener("resize",measure);window.removeEventListener(PUBLIC_HEADER_LAYOUT_EVENT,measure);};
  },[]);
  useEffect(()=>{const marker=sentinel.current;if(!marker)return;const observer=new IntersectionObserver(([entry])=>setVisible(entry.boundingClientRect.top<top),{rootMargin:`-${top}px 0px 0px 0px`,threshold:0});observer.observe(marker);return()=>observer.disconnect();},[top]);
  return <><div ref={sentinel} className="ac-catalog-sticky-sentinel" aria-hidden="true"/>{visible&&!hidden&&createPortal(<nav className="ac-catalog-sticky backdrop-blur-xl" style={{top}} aria-label="Выбранные фильтры и сортировка">

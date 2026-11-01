@@ -121,7 +121,7 @@ try{
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.getByRole('complementary',{name:'Выбор аналитики'}).waitFor();
   assert.equal(await page.locator('#yandex-metrika-112098062').count(),0);
-  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y-10)<2,'mobile notice floats 10px below viewport top');assert.ok(noticeBox.height<150,'compact mobile notice');}
+  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y)<2,'mobile notice starts above the public header');assert.ok(noticeBox.height<150,'compact mobile notice');const reserved=await page.locator('.ac-analytics-space').boundingBox();assert.ok(Math.abs(reserved.height-noticeBox.height)<=1,'mobile notice reserves its rendered height');}
   for(const button of ['.ac-analytics-accept','.ac-analytics-settings'])assert.equal(await page.locator(button).evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}),true,'consent controls are not covered by assistant');
   assert.equal(await page.locator('input[type=tel]').evaluate(el=>el.classList.contains('ym-disable-keys')),true);
   await page.screenshot({path:out+'/notice-'+width+'-'+theme+'.png'});

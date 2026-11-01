@@ -77,6 +77,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
 
             <div aria-label="Инструменты АвтоЦены" className="ac-public-footer-tools mt-4 grid grid-cols-2 gap-2 [&>button]:justify-center [&>button]:rounded-xl [&>button]:border [&>button]:border-[var(--ac-border)] [&>button]:px-2 [&>button]:whitespace-nowrap [&>button]:text-xs sm:[&>button]:text-sm [&>button:hover]:bg-[var(--ac-surface-2)]">
               <PageQrButton key={pathname} />
+              {!/^\/(crm|partner|login|account)(\/|$)/.test(pathname||'')&&<button type="button" className="ac-footer-autobot min-h-11" aria-label="Открыть АвтоБота" aria-haspopup="dialog" onClick={()=>window.dispatchEvent(new Event('autobot-open'))}>АвтоБот</button>}
               <span className="ac-footer-global-calculator"><AutoCalcButton /></span>
               <Link href="/" className="ac-footer-dealer-home"><BrandMarkMono/>АвтоЦена</Link>
             </div>

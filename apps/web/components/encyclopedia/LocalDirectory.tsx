@@ -1,4 +1,5 @@
 'use client';
+import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/lib/public-header-layout';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 import {directoryLetter,filterModels} from '@/lib/encyclopedia/query';
@@ -16,9 +17,10 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
  useEffect(()=>{
   const node=root.current;if(!node)return;
   const header=document.querySelector<HTMLElement>('.ac-public-header');
-  const sync=()=>node.style.setProperty('--ency-header-height',`${header?.getBoundingClientRect().height||68}px`);sync();
+  const sync=()=>node.style.setProperty('--ency-header-height',`${header?.getBoundingClientRect().bottom||68}px`);sync();
   const resize=new ResizeObserver(sync);if(header)resize.observe(header);
-  return()=>resize.disconnect();
+  window.addEventListener(PUBLIC_HEADER_LAYOUT_EVENT,sync);
+  return()=>{resize.disconnect();window.removeEventListener(PUBLIC_HEADER_LAYOUT_EVENT,sync);};
  },[]);
  useEffect(()=>{
   const node=root.current;if(!node)return;
@@ -43,8 +45,8 @@ export function LocalDirectory({data,canEdit}:{data:DirectoryWire;canEdit:boolea
    }
    const top=(headings[0]?parseFloat(getComputedStyle(headings[0]).scrollMarginTop):0)||((document.querySelector('.ac-public-header')?.getBoundingClientRect().bottom||68)+64);const visible=headings.filter(h=>h.getBoundingClientRect().top<=top+1);setActive((visible.at(-1)||headings[0])?.dataset.encyMake||'');
   };
-  const scroll=()=>{if(!frame)frame=requestAnimationFrame(update);};update();window.addEventListener('scroll',scroll,{passive:true});window.addEventListener('resize',scroll);
-  return()=>{window.removeEventListener('scroll',scroll);window.removeEventListener('resize',scroll);cancelAnimationFrame(frame);};
+  const scroll=()=>{if(!frame)frame=requestAnimationFrame(update);};update();window.addEventListener('scroll',scroll,{passive:true});window.addEventListener('resize',scroll);window.addEventListener(PUBLIC_HEADER_LAYOUT_EVENT,scroll);
+  return()=>{window.removeEventListener('scroll',scroll);window.removeEventListener('resize',scroll);window.removeEventListener(PUBLIC_HEADER_LAYOUT_EVENT,scroll);cancelAnimationFrame(frame);};
  },[filtered,params]);
  useEffect(()=>{for(const column of root.current?.querySelectorAll<HTMLElement>('.ac-directory-rail-column')||[]){const item=column.querySelector<HTMLElement>('[aria-current="true"]');if(item)column.scrollTo({top:Math.max(0,item.offsetTop-column.clientHeight/2+item.clientHeight/2),left:Math.max(0,item.offsetLeft-column.clientWidth/2+item.clientWidth/2),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}},[active]);
  const page=Math.min(Math.max(1,Math.floor(Number(params.get('page'))||1)),Math.max(1,Math.ceil(filtered.length/40)));
