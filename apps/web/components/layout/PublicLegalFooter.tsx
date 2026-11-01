@@ -117,6 +117,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
       </footer>
 
       <style>{`
+.ac-public-footer-tools>.ac-footer-autobot{grid-column:1/-1;order:1;display:flex;align-items:center;justify-content:center;min-height:44px;color:var(--ac-text);font-weight:700}
 .ac-footer-global-calculator{display:contents}.ac-footer-global-calculator>button{justify-content:center;border:1px solid var(--ac-border);border-radius:12px;padding:0 8px;white-space:nowrap;font-size:12px}.ac-footer-global-calculator>button:hover{background:var(--ac-surface-2)}@media(min-width:640px){.ac-footer-global-calculator>button{font-size:14px}}.ac-footer-dealer-home{display:none!important}
 body:has([data-dealer-context]) .ac-footer-global-calculator,body:has(.dealer-profile) .ac-footer-global-calculator{display:none!important}
 body:has([data-dealer-context]) .ac-footer-dealer-home,body:has(.dealer-profile) .ac-footer-dealer-home{display:flex!important;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ac-border);border-radius:12px;min-height:44px;padding:8px;font-size:12px;font-weight:700}
@@ -128,6 +129,7 @@ body:has([data-dealer-context]) .ac-public-footer-navigation>div,body:has(.deale
 body:has([data-dealer-context]) .ac-public-footer-tools,body:has(.dealer-profile) .ac-public-footer-tools{margin:0!important;max-width:380px;padding:12px 0!important}
 body:has([data-dealer-context]) .ac-public-legal-footer,body:has(.dealer-profile) .ac-public-legal-footer{margin-top:0!important}
 body:has([data-dealer-context]) .ac-public-legal-footer-line,body:has(.dealer-profile) .ac-public-legal-footer-line{border-top:1px solid var(--ac-border);margin-top:8px;padding-top:16px}
+@media(min-width:640px){body:has([data-dealer-context]) .ac-public-footer-tools,body:has(.dealer-profile) .ac-public-footer-tools{max-width:590px;grid-template-columns:repeat(3,minmax(0,1fr))}body:has([data-dealer-context]) .ac-footer-autobot,body:has(.dealer-profile) .ac-footer-autobot{grid-column:auto;order:0}}
 @media(min-width:1024px){body:has([data-dealer-context]) .ac-public-legal-footer-line,body:has(.dealer-profile) .ac-public-legal-footer-line{grid-template-columns:1fr;gap:12px}body:has([data-dealer-context]) .ac-public-legal-footer-line>p,body:has(.dealer-profile) .ac-public-legal-footer-line>p{grid-column:auto;max-width:850px}body:has([data-dealer-context]) .ac-public-legal-footer-line nav,body:has(.dealer-profile) .ac-public-legal-footer-line nav{justify-content:flex-start}}
 `}</style>
       {cookieOpen ? (
