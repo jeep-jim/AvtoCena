@@ -1,3 +1,4 @@
+import {invalidateManagementPrice} from './management-knowledge';
 import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {cache} from 'react';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
@@ -21,7 +22,7 @@ export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeReq
   const editorial=await readCatalogEditorial();
   const sourceOffer = enrichOfferWithSourceTableParameters(restoreProAuctionsPower(applyCatalogEditorial(storedOffer,editorial)));
   const restoredOffer = applyUaeManualSpecifications(sourceOffer);
-  const safeOffer = safePublicPricing(restoredOffer);
+  const safeOffer = safePublicPricing(invalidateManagementPrice(restoredOffer));
   const offer = safeOffer.editorialPriceKey || safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
 
   const sellerPricing = isSellerPricedOffer(offer);

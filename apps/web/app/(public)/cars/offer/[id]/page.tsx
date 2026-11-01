@@ -50,7 +50,7 @@ import { confirmedProductionMonth, confirmedProductionDay } from "@/lib/catalog/
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { JapanAuctionBadges } from "@/components/catalog/JapanAuctionBadges";
 import { SellerPrice } from "@/components/catalog/SellerPrice";
-import { InlineOfferParameters } from "@/components/catalog/InlineOfferParameters";
+import { SyncedInlineOfferParameters as InlineOfferParameters } from "@/components/catalog/SyncedInlineOfferParameters";
 import { OfferSpecificationsDisclosure } from "@/components/catalog/OfferSpecificationsDisclosure";
 import { offerSpecificationGroups } from "@/lib/catalog/offer-specification-groups";
 import { assessJapanExportRestriction, japanRestrictionDescription } from "@/lib/catalog/japan-export-restriction";

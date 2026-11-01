@@ -1,5 +1,5 @@
 import type {VehicleOffer} from './types';
-import {attachManagementKnowledge} from './management-knowledge';
+import {attachManagementKnowledge,invalidateManagementPrice} from './management-knowledge';
 import {offerPrecedentParameterDraft} from './power30-precedent';
 import {validateCustomerParameters} from './customer-parameters';
 import {calculateOfferWithCustomerParametersDetailed} from './customs-pricing';
@@ -30,6 +30,6 @@ export async function attachManagementPreviews<T extends Partial<VehicleOffer>>(
    const c=result.calculation;
    return {version:'management:'+learned.revision,managementLearned:true,totalRub:c.totalRub,parameters,deliveryCity:'',currencyRate:c.currencyRate,deliveryPricingBasis:c.deliveryPricingBasis,utilizationPowerKw:c.customs?.utilizationPowerKw,power30Precedent:c.power30Precedent};
   }).catch(()=>null);
-  return preview?{...offer,savedCalculationPreview:preview}:offer;
+  return preview?{...offer,savedCalculationPreview:preview}:invalidateManagementPrice(offer);
  }));
 }

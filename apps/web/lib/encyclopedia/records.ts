@@ -31,7 +31,7 @@ export async function readModel(id:string,manifest?:EncyclopediaManifest|null){
  return summary.key.startsWith(`${ROOT}/revisions/${id}/`)?revisionCache.get(summary.key,read):read();
 }
 export class EncyclopediaConflict extends Error{}
-export async function editModel(id:string,input:Record<string,unknown>,user:AuthUser){
+export async function editModel(id:string,input:Record<string,unknown>,user:AuthUser,management?:{offerId?:string;values:Record<string,any>}){
  if(!canEditEncyclopedia(user))throw new EncyclopediaInputError('Доступ запрещён.');
  const manifest=await readEncyclopedia();const current=await readModel(id,manifest);
  if(!manifest||!current)throw new EncyclopediaInputError('Модель не найдена.');
@@ -46,8 +46,8 @@ export async function editModel(id:string,input:Record<string,unknown>,user:Auth
   const raw=input.variant;if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new EncyclopediaInputError('Проверьте параметры.');
   const v=raw as Record<string,unknown>,clean=cleanVariant(v),old=next.variants.find(x=>x.id===v.id);
   if(v.id&&!old)throw new EncyclopediaInputError('Модификация не найдена.');
-  const sourceMetadata=old?Object.fromEntries(['astraIdentity','astraEvidence','astraMatchEvidence'].filter(field=>old[field as keyof Variant]!==undefined).map(field=>[field,old[field as keyof Variant]])):{};
-  const changed:Variant={...clean,...sourceMetadata,id:old?.id||randomUUID(),observedCount:old?.observedCount||0,manualEditedAt:next.updatedAt};
+  const sourceMetadata=old?Object.fromEntries(['astraIdentity','astraEvidence','astraMatchEvidence','managementOfferId','managementBaseline'].filter(field=>old[field as keyof Variant]!==undefined).map(field=>[field,old[field as keyof Variant]])):{};
+  const changed:Variant={...clean,...sourceMetadata,...(management?{...(management.offerId?{managementOfferId:management.offerId}:{}),managementBaseline:management.values}:{}),id:old?.id||randomUUID(),observedCount:old?.observedCount||0,manualEditedAt:next.updatedAt};
   if(next.variants.some(x=>x.id!==changed.id&&variantSignature(x)===variantSignature(changed)))throw new EncyclopediaInputError('Модификация с такими параметрами уже есть.');
   next.variants=old?next.variants.map(x=>x.id===old.id?changed:x):[...next.variants,changed];
  }

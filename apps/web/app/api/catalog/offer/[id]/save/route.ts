@@ -34,7 +34,7 @@ export async function POST(request:Request,{params}:{params: Promise<{id:string}
     const saved=await saveOfferCalculation(offer,draft,result.calculation,user.id,expectedVersion,user.displayName);
     let knowledgeSaved=false;
     if(isPlatformTeam(user)){
-      try{await rememberManagementCalculation(offer,saved);knowledgeSaved=true;}
+      try{await rememberManagementCalculation(offer,saved,previous?.draft);knowledgeSaved=true;}
       catch(error){console.error("management_knowledge_save_failed",error);}
     }
     await recordCrmActivity(user,{id:`calculation_${saved.version}`,type:"calculation_saved",title:"Изменены параметры и стоимость автомобиля",entityType:"offer",entityId:offer.id,entityLabel:[offer.make,offer.model,offer.year].filter(Boolean).join(" "),href:`/cars/offer/${encodeURIComponent(offer.id)}?calculation=${encodeURIComponent(saved.version)}`,changes:[...activityChanges(previous?.draft||{},saved.draft,{year:"Год",engineCc:"Объём, см³",powerHp:"Мощность, л.с.",powerKw:"Мощность, кВт",fuel:"Топливо",hybridKind:"Тип гибрида",power30MinKw:"30-минутная мощность",deliveryCity:"Город доставки"}),{label:"Стоимость, ₽",before:String(previous?.calculation?.totalRub||offer.totalRub||""),after:String(saved.calculation.totalRub)}]});

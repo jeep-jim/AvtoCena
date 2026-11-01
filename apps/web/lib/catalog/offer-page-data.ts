@@ -41,14 +41,14 @@ export const getOfferForPage = cache(async (id: string) => {
 
 // The same authoritative record feeds the page and its share preview.
 export const getOfferDetailRecord = cache(async (id:string)=>{
-  if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)) return getOfferForPage(id);
+  if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)){const offer=await getOfferForPage(id);return offer?(await attachManagementKnowledge([offer],true))[0]:null;}
   let storedOffer = isJapanCatalogOfferId(id)
     ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
     : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
   // New auction IDs are hashes, so their market cannot be inferred from the ID.
   if (storedOffer?.market === "japan" && !isJapanCatalogOfferId(id)) storedOffer = await getOfferFromCurrentShard(id) || storedOffer;
   const editorial=await readCatalogEditorial();
-  return storedOffer&&!editorialHidden(storedOffer,editorial)?(await attachManagementKnowledge([applyCatalogEditorial(storedOffer,editorial)]))[0]:null;
+  return storedOffer&&!editorialHidden(storedOffer,editorial)?(await attachManagementKnowledge([applyCatalogEditorial(storedOffer,editorial)],true))[0]:null;
 });
 
 /** Never treat a provider refusal as a sold car or an application-wide crash. */
