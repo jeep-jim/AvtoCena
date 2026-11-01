@@ -9,11 +9,11 @@ const server=http.createServer((req,res)=>{const name=req.url.split('?')[0];if([
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox']});
 try{
- const context=await browser.newContext(),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ const context=await browser.newContext(),page=await context.newPage(),errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error(e)});
  await page.route('**/api/catalog/rates',r=>r.fulfill({json:{rates:[]}}));
  await page.route('**/api/catalog/offer/hybrid/calculate',r=>r.fulfill({json:{totalRub:2100000,breakdown:[]}}));
  await page.goto(origin);const power=page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true});
- await page.locator('summary').filter({hasText:'Мощность гибрида'}).click();assert.equal(await power.inputValue(),'45');
+ await page.locator('summary[aria-label^="Мощность гибрида:"]').click();assert.equal(await power.inputValue(),'45');
  await page.evaluate(()=>{window.nextPower=60;dispatchEvent(new Event('avtocena:encyclopedia-updated'));});
  await page.waitForFunction(()=>document.querySelector('[aria-label="30-минутная мощность, кВт"]')?.value==='60');
  await page.evaluate(()=>{window.nextPower=45;dispatchEvent(new StorageEvent('storage',{key:'avtocena.encyclopedia-updated.v1',newValue:'next'}));});
@@ -21,7 +21,7 @@ try{
  await power.fill('70');const refreshes=await page.evaluate(()=>window.refreshes);
  await page.evaluate(()=>{window.nextPower=80;dispatchEvent(new Event('avtocena:encyclopedia-updated'));});
  await page.waitForTimeout(250);assert.equal(await power.inputValue(),'70');assert.equal(await page.evaluate(()=>window.refreshes),refreshes,'unsaved user changes must block a route refresh');
- await page.goto(origin+'/?archive=1');await page.locator('summary').filter({hasText:'Мощность гибрида'}).click();
+ await page.goto(origin+'/?archive=1');await page.locator('summary[aria-label^="Мощность гибрида:"]').click();
  await page.evaluate(()=>{window.nextPower=80;dispatchEvent(new Event('avtocena:encyclopedia-updated'));});await page.waitForTimeout(250);
  assert.equal(await power.inputValue(),'45');assert.equal(await page.evaluate(()=>window.refreshes||0),0,'shared archived inputs remain fixed');
  assert.deepEqual(errors,[]);console.log('PASS hybrid 45→60→45 with same saved version; cross-tab refresh; unsaved input and archive protection');

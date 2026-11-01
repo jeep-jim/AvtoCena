@@ -1,5 +1,7 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
+import {completePowerUnitDraft} from '../apps/web/lib/catalog/power-parameter-draft';
+import {offerPrecedentParameterDraft} from '../apps/web/lib/catalog/power30-precedent';
 import {LocalJsonStorage} from '../apps/web/lib/data';
 import {managementParameters,managementSavedDraft,rememberManagementCalculation,rememberEncyclopediaModel,readManagementKnowledge,encyclopediaWithManagement,attachManagementKnowledge,managementDraft,invalidateManagementPrice} from '../apps/web/lib/catalog/management-knowledge';
 import {encyclopediaReviewDisplay,variantReviewClass} from '../apps/web/components/encyclopedia/review-state';
@@ -19,6 +21,8 @@ test('hybrid corrections round-trip 40 → 45 → 60 → 70 → 45 with blue/gre
  let index=await readManagementKnowledge(true);
  let view=encyclopediaWithManagement(original,index);
  assert.equal(view.variants[0].power30MinKw,45);
+ const [learned]=await attachManagementKnowledge([{...source,id:'recipient'}],true);
+ const input=managementDraft(learned,completePowerUnitDraft(draft(40)));assert.equal(input.power30MinKw,'45');assert.ok(Math.abs(Number(input.power30MinHp)*0.73549875-45)<0.001);
  assert.equal(variantReviewClass(encyclopediaReviewDisplay(original,view).variants[0]),'ac-ency-row-review');
  const canonical={...model(60,2,{managementBaseline:view.variants[0]}),previousKey:'previous'};
  await rememberEncyclopediaModel(canonical);index=await readManagementKnowledge(true);
@@ -51,7 +55,8 @@ test('cleared hybrid power removes a stale total without inventing zero or reviv
  await rememberEncyclopediaModel({...cleared,previousKey:'previous'});
  const target={...source,power30MinKw:45,totalRub:3000000,savedCalculationPreview:{totalRub:3000000}};
  const [learned]=await attachManagementKnowledge([target],true);
- assert.equal(managementDraft(learned,draft(45)).power30MinKw,'');
+ assert.equal(completePowerUnitDraft(managementDraft(learned,completePowerUnitDraft(draft(45)))).power30MinKw,'');
+ assert.equal(offerPrecedentParameterDraft(learned).power30MinKw,'','clearing must not revive a stale hp conversion or estimated precedent');
  assert.equal(invalidateManagementPrice(learned).totalRub,null);assert.equal(invalidateManagementPrice(learned).savedCalculationPreview,undefined);
  assert.equal(managementSavedDraft(source,draft(45),at(1),await readManagementKnowledge(true)).power30MinKw,'');
 }));

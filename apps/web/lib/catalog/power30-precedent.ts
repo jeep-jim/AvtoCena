@@ -25,7 +25,7 @@ export function power30Precedent(offer:Partial<VehicleOffer>,index=readCalculati
 }
 export function offerPrecedentParameterDraft(offer:VehicleOffer,raw:VehicleOffer=offer):Record<string,string>{
  const draft=managementDraft(offer,offerParameterDraft(offer,raw));
- if(draft.power30MinKw)return draft;
+ if(draft.power30MinKw||(offer.operational as any)?.managementKnowledge?.parameters?.power30MinKw===null)return draft;
  const estimate=power30Precedent(offer);
  return estimate?completePowerUnitDraft({...draft,power30MinKw:String(estimate.kw),_power30EstimateKw:String(estimate.kw)}):draft;
 }

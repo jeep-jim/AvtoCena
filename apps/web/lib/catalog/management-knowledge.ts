@@ -5,6 +5,7 @@ import {modelKey as baseModelKey,normalizeCalculationFactValue as normalizeCalcu
 export const managementModelKey=(make:any,model:any)=>baseModelKey(make,model)+(/\+\s*$/.test(String(model))?'plus':'');
 const modelKey=managementModelKey;
 import {DetailReadCache} from './detail-read-cache';
+import {powerUnitPatch} from './power-parameter-draft';
 import {validateCustomerParameters} from './customer-parameters';
 import type {VehicleOffer} from './types';
 
@@ -67,15 +68,15 @@ function activeFacts(index:ManagementKnowledge,key:string){
 /** A correction can replace only values still matching a recorded prior identity.
  * An unrelated conflicting variant or a later explicit card edit is never a target. */
 export function managementCorrections(offer:any,index:ManagementKnowledge,after='',canonicalOnly=false){
- if(offer.editorialSpecifications&&Object.keys(offer.editorialSpecifications).length)return {};
  const rows=activeFacts(index,modelKey(offer.make,offer.model)).filter(row=>
   (!canonicalOnly||row.offerId.startsWith('encyclopedia:'))&&row.offerId!==offer.id&&row.year===Number(offer.year)&&row.savedAt>(after||offer.manualEditedAt||'')
   &&(!row.targetOfferId||row.targetOfferId===offer.id||String(offer.id).startsWith('encyclopedia:')));
  const candidates=rows.flatMap(row=>(row.previousValues||[]).filter(before=>compatibleRevisionValues(offer,before,row.values)).map(before=>({row,before})));
  const result:Record<string,any>={};
  for(const field of fields){
+  if(known(offer.editorialSpecifications?.[field]))continue;
   if(field==='power30MinKw'&&offer.power30MinKwByMotor?.some((v:any)=>Number(v)>0))continue;
-  const changed=candidates.filter(({row,before})=>known(before[field])&&(!known(row.values[field])||!same(field,before[field],row.values[field]))
+  const changed=candidates.filter(({row,before})=>(known(before[field])?(!known(row.values[field])||!same(field,before[field],row.values[field])):!known(offer[field])&&known(row.values[field]))
    &&(!known(offer[field])||same(field,offer[field],before[field])));
   // Encyclopedia changes are canonical for cards. In an encyclopedia view its
   // own contribution is already excluded, and newer card edits can return.
@@ -196,7 +197,7 @@ export function managementDraft(offer:any,draft:Record<string,string>){
   const key=field==='powertrainKind'?'hybridKind':field;
   // This is the initial draft, before the visitor edits it. A supplied
   // alternative/estimate must not mask an empty actual vehicle field.
-  if(!known(offer[field])||!result[key]||result[key]==='unknown'||offer.operational?.managementKnowledge?.correctedFields?.includes(field)&&same(field,result[key],offer[field]))result[key]=value===null?'':String(value);
+  if(!known(offer[field])||!result[key]||result[key]==='unknown'||offer.operational?.managementKnowledge?.correctedFields?.includes(field)&&same(field,result[key],offer[field]))Object.assign(result,powerUnitPatch(key,value===null?'':String(value),result));
  }
  return result;
 }
@@ -207,7 +208,7 @@ export function managementSavedDraft(offer:any,draft:Record<string,string>,saved
  const input={...offer,...validateCustomerParameters(draft)};
  const corrections=managementCorrections(input,index,savedAt,true);
  const result={...draft};
- for(const [field,value] of Object.entries(corrections))result[field==='powertrainKind'?'hybridKind':field]=value===null?'':String(value);
+ for(const [field,value] of Object.entries(corrections))Object.assign(result,powerUnitPatch(field==='powertrainKind'?'hybridKind':field,value===null?'':String(value),result));
  if(Object.hasOwn(corrections,'powerHp')&&!Object.hasOwn(corrections,'powerKw'))result.powerKw=corrections.powerHp===null?'':String(Number(corrections.powerHp)*0.73549875);
  return result;
 }

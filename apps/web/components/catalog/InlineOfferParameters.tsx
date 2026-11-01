@@ -250,7 +250,7 @@ export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initi
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
   {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
    <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
-   <p className="mt-3 text-sm">Пустые параметры совместимых автомобилей этой модели и года будут заполняться на всех рынках, в том числе у новых объявлений. Уже заполненные значения не изменятся. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
+   <p className="mt-3 text-sm">Изменения применятся к этой карточке и совместимым версиям автомобиля в энциклопедии. Связанные прежние значения обновятся и у похожих автомобилей на всех рынках. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
    <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
   </dialog> : null}
   {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}
