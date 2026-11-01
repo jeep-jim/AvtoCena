@@ -35,3 +35,12 @@ test('owner disable during recovery is respected and storage errors stay unavail
  const broken=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>{throw Error('storage');},readListedDetail:async()=>{throw Error('storage');}});
  await assert.rejects(broken.read({table:'korea',id:'fixture001'},'203.0.113.1'),busy);
 });
+test('saved recovery stays bounded under concurrent callers and never escapes to supplier',async t=>{
+ blockSupplier(t,'detail_cache_queue_full');let active=0,maxActive=0;const release:Array<()=>void>=[];
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('no supplier');},readDetail:async()=>{active++;maxActive=Math.max(active,maxActive);await new Promise<void>(resolve=>release.push(resolve));active--;return snapshot('korea');}});
+ const a=client.read({table:'korea',id:'fixture001'},'203.0.113.1');
+ const b=client.read({table:'korea',id:'fixture001'},'203.0.113.2');
+ const c=client.read({table:'korea',id:'fixture001'},'203.0.113.3');
+ await assert.rejects(c,busy);assert.equal(maxActive,2);assert.equal(release.length,2);
+ release.forEach(resolve=>resolve());await Promise.all([a,b]);
+});
