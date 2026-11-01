@@ -26,7 +26,7 @@ export default async function EncyclopediaPage({searchParams}:{searchParams:Prom
   <CatalogBreadcrumbs items={[{label:'Главная',href:'/'},{label:'Каталог автомобилей',href:'/cars'},{label:'Энциклопедия',href:'/cars/autocatalog'},...(p.make?[{label:p.make,href:`/cars/autocatalog?make=${encodeURIComponent(p.make)}`}]:[])]}/>
   <header className="ac-ency-intro"><div><h1>Энциклопедия автомобилей</h1><div className="ac-ency-count"><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{counted(models.length,'model')} · {counted(makes.length,'make')}</div></div></header>
   <div className="ac-knowledge-toolbar">{canEditEncyclopedia(user)&&<CreateModel/>}<Suspense><DirectoryAlphabet makes={makes}/></Suspense></div>
-  <Suspense><DirectoryFilters makes={makes} years={years} fuels={fuels}/></Suspense>
+  <div className="ac-ency-filter-dock"><Suspense><DirectoryFilters makes={makes} years={years} fuels={fuels}/></Suspense></div>
   <section className="ac-ency-results">{!manifest?.directoryCapturedAt?<p role="status">Список моделей ещё готовится. Сохранённые характеристики доступны по прежним ссылкам.</p>:<Suspense><LocalDirectory data={data} canEdit={canEditEncyclopedia(user)}/></Suspense>}</section>
  </div></main>;
 }

@@ -47,3 +47,11 @@ test('owner compound-brand selections use parent brands without duplicating mult
  assert.equal(catalogBrandFilter('Mercedes-Benz,Mercedes Maybach'),'Mercedes-Benz,Mercedes-Maybach');
  assert.equal(catalogBrandPresentation('MERCEDES-ADRIA').conversion,'ADRIA');
 });
+
+test('electric and hybrid quick filter preserves aliases, missing-power and year filters',()=>{
+ const rows=['petrol','electric','hev','phev','Гибрид','diesel','unknown'].map((fuel,i)=>({make:'Toyota',model:String(i),years:[2025],fuels:[fuel],needs30:i===2?1:0}));
+ assert.deepEqual(filterModels(rows,{fuel:'electrified'}).map(m=>m.model),['1','2','3','4']);
+ assert.deepEqual(filterModels(rows,{fuel:'electrified',missing30:'1'}).map(m=>m.model),['2']);
+ assert.deepEqual(filterModels(rows,{fuel:'electrified',year:'2024'}),[]);
+ assert.equal(rows[2].fuels[0],'hev');
+});

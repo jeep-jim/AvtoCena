@@ -19470,3 +19470,22 @@ Compact41293286091/CRM41293286139 fixture timeout на тексте сохран
 Оба China final124685023963/124601674990 снова Transport closed, журналы НЕ прочитаны. FINALFAIL10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны, active continuation не обнаружен. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
 
 Compact/CRM fixture timeout и liveSKIPPED, старые manifest failures/часовые metadata/log расхождения, обе истории и все незавершённые цели сохранены. Следующий адресный шаг основной работы — сохранённые fixture/response/text и exact-release UI/save; watch только наблюдает существующий PR1684/новые primary результаты и доступность China final. OWNERFREEZE вне прямых задач/authsave/fullsync/REG/drafts/1678backlog в силе. Только два документа append-only expected-parentCAS, без новых runtime/deploy/repair/diag/browser/provider/cleanup запусков; наблюдение включено.
+
+
+### 01.11.2026 — оболочка энциклопедии: марки и рабочая область (PR1684)
+
+По прямому запросу владельца опубликован новый brand-first UI: компактная сетка марок вместо общей таблицы, выбранный бренд слева и его модели справа, возврат на mobile, локальные поиск/фильтры и URL/Back. Добавлен быстрый фильтр «Электро + гибриды». Кузов и привод фильтруют фактические варианты открытой модели, не агрегированное «Разные». Редакторы загружаются по раскрытию. Расчётные функции, API записи, ревизии и синхронизация не изменены.
+
+18 адресных тестов и TypeScript PASS. Стартовый SSR без моделей/редакторов укладывается в прежние100KB. Local browser заблокирован socket Operation not permitted; проверка320/390/1440×2темы идёт в существующем GitHub workflow. Production compilation/static56/56 завершены, build traces ещё выполняются. PR draft; установка/live-приёмка не заявлены.
+
+
+### 01.11.2026 — PR1684: оболочка проверена и опубликована
+
+Финальный codehead949ff326d4da63e0e4dd1b9810ca96b5a7e896bf: все5workflow SUCCESS, включая CI41301924463 и browser41301924497/job124834478209. Local2767/2767tests,18targeted,TypeScript,production build PASS. Browser4000models×320/390/1440×dark/light: brand hub, local search/filters, Back, independent model opening, photo, save and blue→green→blue, cross-tab/dirty/archive/hybrid reverse PASS. SSR79615bytes/1154DOM/0initial model workspaces, два раскрытия дают ровно2чтения записей. Desktop/light и mobile/light/dark screenshots просмотрены; горизонтального переполнения в тесте нет.
+
+UI: марки первым экраном, desktop brand sidebar+model content, mobile back, sticky search/year/fuel, electric+hybrid quick filter; body/drive относятся к фактическим вариантам открытой модели. Выбор бренда прокручивает начало рабочей области под закреплённые фильтры. Изменены только оболочка/фильтрация отображения и их тесты; API записи, расчётные функции, ревизии и synchronization не менялись. PR1684 опубликован; production deployment и live acceptance не выполнялись. Последующий commit только фиксирует этот журнал, application code идентичен проверенному949ff326.
+
+
+### 01.11.2026 — владелец разрешил установку PR1684 на сайт
+
+Все5проверок финального24f449b0 SUCCESS. Конфликт append-only roadmap разрешён сохранением обеих историй; application blobs берутся без изменений из проверенного PR. Запускается штатный release с прежними research/ASTRA/market guards. Установка пока не подтверждена.

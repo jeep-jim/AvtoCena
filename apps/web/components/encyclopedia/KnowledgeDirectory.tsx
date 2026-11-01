@@ -3,6 +3,7 @@ import {ENCYCLOPEDIA_UPDATED_EVENT,ENCYCLOPEDIA_UPDATED_KEY} from './updates';
 import {CatalogPagination,catalogPageNumbers} from '@/components/catalog/CatalogPagination';
 import {Fragment,useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter,useSearchParams} from 'next/navigation';
+import {CatalogChevron} from '@/components/catalog/CatalogChevron';
 import {BrandLogoVisual} from '@/components/catalog/BrandLogoRail';
 import {ModelEditor} from './ModelEditor';
 import {EncyclopediaPhoto} from './Photo';
@@ -45,7 +46,7 @@ function ModelRow({model,canEdit}:{model:Summary;canEdit:boolean}){
  return <article className={`ac-model-list-item${hasParameters?' ac-model-has-parameters':''}`}>
   <div className="ac-model-list-row">
    <div className="ac-model-list-photo"><EncyclopediaPhoto src={model.photo} alt={`${model.make} ${model.model}`}/></div>
-   <div><strong>{model.make} {model.model}</strong><small>{model.years.length===1?model.years[0]:model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
+   <div><strong>{model.make} {model.model}<CatalogChevron open={open}/></strong><small>{model.years.length===1?model.years[0]:model.years.length?`${Math.min(...model.years)}–${Math.max(...model.years)}`:'Год не указан'}</small></div>
    <div data-label="Кузов">{specs.bodyType||'—'}<small>{specs.chassisCode||'—'}</small></div>
    <div data-label="Двигатель">{specs.fuel||'—'}<small>{specs.engineCc||'—'} см³ · {specs.powerHp||'—'} л.с.</small></div>
    <div data-label="Привод / КПП">{specs.drive||'—'}<small>{specs.transmission||'—'}</small></div>
