@@ -19566,3 +19566,16 @@ Compact/CRM fixture timeout и liveSKIPPED, старые manifest failures/metad
 ## 02.11.2026 — Подложка фильтров энциклопедии в светлой теме
 
 По скриншоту владельца изменено ровно одно CSS значение:html[data-theme=light] .ac-ency-filter-dock background:#fff → var(--ac-page-bg). Токен совпадает с фоном .ac-ency-page; подложка остаётся непрозрачной при sticky-прокрутке. Тёмная тема, поля, карточки, размеры и логика не менялись. Проверено единственное вхождение и точечный diff. Запрошена штатная публикация через marker с сохранением всех guards/ASTRA/research/market scope; успешная установка пока не подтверждена.
+
+
+## 02.11.2026, 01:37 Красноярск — точечная правка фона активна, финальная проверка выпуска ожидается
+
+Свежие main b4479fdd4ccd642a3bb600a5855917ddd8ef3216, Road/checklist, PR и существующие jobs прочитаны. После b044854d основная работа изменила одну CSS декларацию светлой темы: .ac-ency-filter-dock background:#fff → var(--ac-page-bg), а также deploy marker и roadmap. Это прямое визуальное поручение владельца; расчётная логика и синхронизация не изменялись. AGENTS03336196 и связанные operations unchanged; новых PR после1684 и новых primary authenticated save/fullsync/savedfixture результатов нет. Прочитанные deploy41319301653/CI/browser/primary журналы не повторялись.
+
+Единственный существующий in_progress — deploy41334067888, head b4479fdd. Wait124930040499 SUCCESS00:57:46; prepare124930175783 IN_PROGRESS. Metadata: private index SUCCESS01:05:56, coverage01:05:58, build01:09:40, image01:12:13, prices01:28:32; deploy/gates идут с01:28:33, public verifier pending. Active job log вернул404 BlobNotFound — журнал НЕ прочитан, это не failure. Watch ничего не запускал и не отменял; финальный результат и числа verifier ещё не подтверждены.
+
+Единственный bounded health01:36 завершился curl0:ok=true, exactrelease b4479fdd4ccd642a3bb600a5855917ddd8ef3216, calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8 прежний. Новый выпуск ACTIVE на этом чтении; это не финальная приёмка deploy/визуального результата/authenticated Save/fullsync. PR1684 остаётся установленным по предыдущему прочитанному exact verifier; прежние смены fingerprint ограничивают cache comparison.
+
+Оба China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. Исторические FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны, active China continuation не найден. Locklost/timeout/6h/rollback не приписываются; collect/old41111109988 не повторялись.
+
+Compact/CRM fixture failures/liveSKIPPED, старые manifest failures/metadata часовые расхождения, обе истории и все остатки сохранены. OWNERFREEZE вне новых прямых задач/REG/drafts/1678backlog в силе. Далее existing41334067888 final/verifier и новые primary exact-release UI/authenticated Save/fullsync/savedfixture результаты, доступность China final. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
