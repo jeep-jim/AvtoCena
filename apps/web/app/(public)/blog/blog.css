@@ -12,3 +12,21 @@ html body .ac-blog{background:var(--ac-page-bg)!important}
 .ac-blog-share{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:24px 0}.ac-blog-share button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:10px;background:var(--ac-surface-2);color:var(--ac-text);font-weight:700}.ac-blog-share span{color:var(--ac-muted);font-size:14px}.ac-blog-more{border-top:1px solid var(--ac-border);padding-top:28px;margin-top:36px}.ac-blog-more>h2{font-size:26px;font-weight:750}.ac-blog-more .ac-blog-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin:20px 0 0}.ac-blog-card>a{display:block;height:100%}@media(max-width:600px){.ac-blog-more .ac-blog-grid{grid-template-columns:1fr}}
 
 .ac-blog-top-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0}.ac-blog-top-actions .ac-blog-author-actions,.ac-blog-top-actions .ac-blog-share{margin:0}
+
+/* The editor uses the same palette and header as the public blog. */
+html body .ac-blog-editor{background:var(--ac-page-bg)!important;color:var(--ac-text);padding:24px 24px 48px}
+.ac-blog-editor h1,.ac-blog-editor label,.ac-blog-editor nav a{color:var(--ac-text)}
+.ac-blog-editor nav{gap:8px;margin-bottom:24px}
+.ac-blog-editor nav a{display:inline-flex;align-items:center;min-height:38px;padding:8px 12px;border-radius:10px;background:var(--ac-surface-2);font-size:13px;font-weight:650;text-decoration:none}
+.ac-blog-editor label{font-size:14px;font-weight:600;gap:8px}
+.ac-blog-editor input,.ac-blog-editor textarea,.ac-blog-editor select{box-sizing:border-box;min-width:0;max-width:100%;font-size:15px;font-weight:400;line-height:1.5;padding:10px 12px;border-radius:10px}
+.ac-blog-editor textarea{resize:vertical}.ac-blog-editor textarea[name="body"]{min-height:260px}
+.ac-blog-editor small{font-size:12px;font-weight:400}
+.ac-blog-editor :is(input,textarea,select,button,a):focus-visible{outline:2px solid #ff353d;outline-offset:3px}
+.ac-blog-editor input:read-only{color:var(--ac-muted)}
+.ac-blog-editor-save{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;border-top:1px solid var(--ac-border);padding-top:18px;margin-top:6px}
+.ac-blog-editor-save label{flex:1;min-width:180px;max-width:280px}
+.ac-blog-editor-save button{min-height:44px;font-size:14px;font-weight:700;cursor:pointer}
+.ac-blog-editor-save button:disabled{opacity:.6;cursor:wait}
+.ac-blog-editor-save [role="status"]{flex-basis:100%;color:var(--ac-text);font-size:14px;margin:0}
+@media(max-width:600px){html body .ac-blog-editor{padding:18px 16px 32px}.ac-blog-editor h1{font-size:25px}.ac-blog-editor-save label{max-width:none}.ac-blog-editor-save button{flex:1}}
