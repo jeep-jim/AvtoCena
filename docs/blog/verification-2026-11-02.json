@@ -1,0 +1,298 @@
+{
+  "expectedRelease": "31bf04b128fea6bd0e09e4636f1fb7cc74da739e",
+  "checkedAt": "2026-11-02T02:49:00Z",
+  "health": {
+    "http": 200,
+    "ok": true,
+    "releaseSha": "31bf04b128fea6bd0e09e4636f1fb7cc74da739e",
+    "secondsFull": 5.838
+  },
+  "articles": [
+    {
+      "slug": "toyota-waymo-bz4x-2027-plan",
+      "url": "https://avtocena.com/blog/toyota-waymo-bz4x-2027-plan",
+      "http": 200,
+      "secondsFirstByte": 4.869,
+      "secondsFull": 5.252,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "toyota-hybrid-15-platform-2026",
+      "url": "https://avtocena.com/blog/toyota-hybrid-15-platform-2026",
+      "http": 200,
+      "secondsFirstByte": 5.523,
+      "secondsFull": 5.925,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "inclusive-mobility-cities-2026",
+      "url": "https://avtocena.com/blog/inclusive-mobility-cities-2026",
+      "http": 200,
+      "secondsFirstByte": 4.77,
+      "secondsFull": 5.103,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "toyota-europe-sales-electrified-2026",
+      "url": "https://avtocena.com/blog/toyota-europe-sales-electrified-2026",
+      "http": 200,
+      "secondsFirstByte": 4.136,
+      "secondsFull": 4.484,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "made-with-europe-position-not-law",
+      "url": "https://avtocena.com/blog/made-with-europe-position-not-law",
+      "http": 200,
+      "secondsFirstByte": 8.217,
+      "secondsFull": 8.546,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "deeside-carbon-neutral-factory-boundaries",
+      "url": "https://avtocena.com/blog/deeside-carbon-neutral-factory-boundaries",
+      "http": 200,
+      "secondsFirstByte": 8.184,
+      "secondsFull": 8.532,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "woven-city-mobility-test-city-2026",
+      "url": "https://avtocena.com/blog/woven-city-mobility-test-city-2026",
+      "http": 200,
+      "secondsFirstByte": 4.835,
+      "secondsFull": 5.786,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "hydrogen-trucks-infrastructure-2030",
+      "url": "https://avtocena.com/blog/hydrogen-trucks-infrastructure-2030",
+      "http": 200,
+      "secondsFirstByte": 4.792,
+      "secondsFull": 5.774,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "hyundai-interbrand-value-not-reliability",
+      "url": "https://avtocena.com/blog/hyundai-interbrand-value-not-reliability",
+      "http": 200,
+      "secondsFirstByte": 5.617,
+      "secondsFull": 5.966,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "hyundai-display-themes-region-check",
+      "url": "https://avtocena.com/blog/hyundai-display-themes-region-check",
+      "http": 200,
+      "secondsFirstByte": 5.565,
+      "secondsFull": 5.897,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noNotFoundStream": true
+      },
+      "pass": true
+    }
+  ],
+  "blogPages": [
+    {
+      "url": "https://avtocena.com/blog",
+      "http": 200,
+      "articleLinks": [
+        "/blog/bmw-gen6-battery-800v-2026",
+        "/blog/car-of-the-year-2027-seven-electric-finalists",
+        "/blog/deeside-carbon-neutral-factory-boundaries",
+        "/blog/hydrogen-trucks-infrastructure-2030",
+        "/blog/hyundai-display-themes-region-check",
+        "/blog/hyundai-interbrand-value-not-reliability",
+        "/blog/inclusive-mobility-cities-2026",
+        "/blog/made-with-europe-position-not-law",
+        "/blog/toyota-europe-sales-electrified-2026",
+        "/blog/toyota-hybrid-15-platform-2026",
+        "/blog/toyota-waymo-bz4x-2027-plan",
+        "/blog/woven-city-mobility-test-city-2026"
+      ],
+      "secondsFull": 5.119
+    },
+    {
+      "url": "https://avtocena.com/blog?page=2",
+      "http": 200,
+      "articleLinks": [
+        "/blog/derek-bell-85-let-2026",
+        "/blog/hyundai-tucson-n-line-equipment-2026",
+        "/blog/ioniq-6-uk-2026-trims-range",
+        "/blog/jeju-v2g-electric-car-grid-2026",
+        "/blog/land-cruiser-fj-prototype-guide",
+        "/blog/porsche-e-shift-virtual-gears-guide",
+        "/blog/staria-cargo-electric-van-route-guide",
+        "/blog/toyota-corolla-60-let-2026",
+        "/blog/toyota-prius-1997-kak-nachinalsya-seriynyy-gibrid",
+        "/blog/toyota-rav4-phev-japan-2026-guide"
+      ],
+      "secondsFull": 5.109
+    }
+  ],
+  "sitemap": {
+    "http": 200,
+    "newUrls": {
+      "toyota-waymo-bz4x-2027-plan": true,
+      "toyota-hybrid-15-platform-2026": true,
+      "inclusive-mobility-cities-2026": true,
+      "toyota-europe-sales-electrified-2026": true,
+      "made-with-europe-position-not-law": true,
+      "deeside-carbon-neutral-factory-boundaries": true,
+      "woven-city-mobility-test-city-2026": true,
+      "hydrogen-trucks-infrastructure-2030": true,
+      "hyundai-interbrand-value-not-reliability": true,
+      "hyundai-display-themes-region-check": true
+    }
+  },
+  "chart": {
+    "http": 200,
+    "hasData": true,
+    "secondsFull": 4.959
+  },
+  "externalPublications": {
+    "dzen": 0,
+    "vk": 0,
+    "reason": "No confirmed connected AvtoCena channels; adaptations saved."
+  },
+  "browser": {
+    "status": "desktop passed",
+    "listing": "10 new covers loaded, complete and naturalWidth > 0",
+    "pagination": "page 1 has 12 records; clicked page 2 and observed 10 earlier records",
+    "article": "toyota-waymo-bz4x-2027-plan: title, text, sources and credit observed; screenshot inspected in light and dark themes",
+    "themeRestored": "light",
+    "mobile": "not verified; local browser launch unavailable and cloud viewport resizing not exposed",
+    "screenshot": "docs/blog/verification/editorial-blog-20261102.jpg"
+  },
+  "scope": {
+    "newArticles": 10,
+    "previousSeedObjectsUnchanged": 12,
+    "totalSeedPosts": 22,
+    "externalChannelsConfirmed": false
+  },
+  "deployment": {
+    "runId": 41376177803,
+    "status": "completed",
+    "conclusion": "success",
+    "completedAt": "2026-11-02T02:56:51Z",
+    "releaseSha": "31bf04b128fea6bd0e09e4636f1fb7cc74da739e",
+    "healthAfterCompletion": true
+  }
+}
