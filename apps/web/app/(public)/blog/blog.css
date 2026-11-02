@@ -10,3 +10,5 @@ html body .ac-blog{background:var(--ac-page-bg)!important}
 .ac-blog .ac-pagination{margin-top:28px}
 
 .ac-blog-share{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:24px 0}.ac-blog-share button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:10px;background:var(--ac-surface-2);color:var(--ac-text);font-weight:700}.ac-blog-share span{color:var(--ac-muted);font-size:14px}.ac-blog-more{border-top:1px solid var(--ac-border);padding-top:28px;margin-top:36px}.ac-blog-more>h2{font-size:26px;font-weight:750}.ac-blog-more .ac-blog-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin:20px 0 0}.ac-blog-card>a{display:block;height:100%}@media(max-width:600px){.ac-blog-more .ac-blog-grid{grid-template-columns:1fr}}
+
+.ac-blog-top-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0}.ac-blog-top-actions .ac-blog-author-actions,.ac-blog-top-actions .ac-blog-share{margin:0}
