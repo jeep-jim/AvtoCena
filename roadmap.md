@@ -19701,3 +19701,22 @@ UAE41349217825/publish124980782390 остаётся IN_PROGRESS Publish с04:22:
 ## 02.11.2026 09:00 Красноярск — редакционный PR1685: зелёные проверки и объединение журнала
 
 CI41374414858, Verify site controls41374414966 и Verify green corner41374414844 завершились success для0187a954. Попытка штатного merge остановлена GitHub405 из-за одновременных append в roadmap; deploy не запущен. Обе записи журнала сохранены, включая наблюдение08:53, ветка обновляется от22caa48a. Сами10 статей, их источники/обложки,12 прежних seed записей и release marker не менялись. Повторный CI на объединённом head ожидается. Внешних публикаций0.
+
+
+## 02.11.2026 09:09 Красноярск — PR1685 объединён; единственная установка выпуска началась
+
+Повторный CI41375370107, site controls41375370137 и green corner41375370101 — success для803b31bb. PR1685 merged:31bf04b128fea6bd0e09e4636f1fb7cc74da739e. Штатный REG deploy41376177803 IN_PROGRESS; второй deploy не запускался. До merge в REG не было running/queued release; старые queued Yandex/legacy collector workflows не запускались и не менялись. Рынки/парсеры не изменены. Статьи ещё не подтверждены на живом сайте.
+
+Первоисточники выпуска (точные названия и фотографии также в docs/blog/editorial-2026-11-02.md):
+- Toyota и Waymo готовят автономный bZ4X к испытаниям в Японии (`toyota-waymo-bz4x-2027-plan`): https://newsroom.toyota.eu/toyota-and-waymo-advance-autonomous-driving-collaboration-for-safer-streets-and-freedom-of-movement-for-all/
+- Новый гибрид Toyota 1,5 л: устройство и цели разработки (`toyota-hybrid-15-platform-2026`): https://newsroom.toyota.eu/toyota-develops-next-generation-hybrid-for-future-multi-pathway-vehicle-platforms/
+- Доступная мобильность: как оценить удобство всей поездки (`inclusive-mobility-cities-2026`): https://newsroom.toyota.eu/toyota-mobility-foundation-and-polis-launch-inclusive-mobility-cities-challenge-across-europe/
+- Что означают 87% электрифицированных продаж Toyota и Lexus (`toyota-europe-sales-electrified-2026`): https://newsroom.toyota.eu/toyota-motor-europe-posts-all-time-record-sales-of-936042-vehicles-in-the-first-nine-months-of-2026/
+- Made with Europe: что Toyota предложила для европейского автопрома (`made-with-europe-position-not-law`): https://newsroom.toyota.eu/made-with-europe---toyota-calls-for-partnership-and-pragmatism-to-secure-europes-automotive-competitiveness/
+- Завод Deeside: как Toyota меняет производство двигателей (`deeside-carbon-neutral-factory-boundaries`): https://newsroom.toyota.eu/toyota-to-start-carbon-neutral-production-at-its-uk-engine-plant/
+- Woven City: что испытывают в городе Toyota (`woven-city-mobility-test-city-2026`): https://newsroom.toyota.eu/toyota-woven-city-marks-first-year-of-real-world-testing-and-community-growth/
+- Водородные грузовики: как связаны машина, маршрут и заправочная сеть (`hydrogen-trucks-infrastructure-2030`): https://newsroom.toyota.eu/industry-leaders-scale-full-value-chain-for-hydrogen-mobility-across-europe/
+- Hyundai в рейтинге Interbrand: как читать оценку автомобильного бренда (`hyundai-interbrand-value-not-reliability`): https://www.hyundai.news/eu/articles/press-releases/interbrand-best-global-brands-2026.html
+- Цифровые темы Hyundai: как проверить совместимость перед покупкой (`hyundai-display-themes-region-check`): https://www.hyundai.news/eu/articles/press-releases/halloween-peanuts-display-theme.html
+
+Дзен/VK:10+10 адаптаций сохранены, отправок0; подтверждённых подключённых каналов нет. Мобильная визуальная проверка пока не выполнена: локальный Chromium не запускается в доступном окружении; браузерная проверка живых статей ожидается после установки. Все9 внешних адресов обложек HTTP200, собственный SVG просмотрен;12 старых seed-записей полностью сохранены.
