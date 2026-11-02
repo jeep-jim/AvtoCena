@@ -1669,3 +1669,16 @@ FreshOfferAudit отчёта:34485uniqueFreshOfferIds,admitted24266,rejected1021
 Оба old China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны. Locklost/timeout/6h/rollback не приписываются; old41111109988 не повторялся.
 
 Обе истории/все остатки, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения, OWNERFREEZE вне новых прямых задач, REG/drafts/1678 сохранены. Далее existing China/UAE/Georgia final, primary saved Europe analysis и exact-release UI/authenticated Save/fullsync/savedfixture, доступность двух old China final logs. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
+
+
+## 02.11.2026, 07:51 Красноярск — три публикации продолжаются, новых результатов приёмки нет
+
+Свежие main 2aaa6fb6539dfec50c6197f9f441ff32ce6f75ae, Road/checklist, дерево, PR и существующие jobs прочитаны. Main не изменился; AGENTS03336196 и связанные operations unchanged. Новых PR после1684 и primary saved Europe analysis/exact-UI/authenticated Save/fullsync/savedfixture результатов не найдено. Прочитанные Europe final/collect/deploy/CI/browser/primary журналы не повторялись; appdeploy нет.
+
+Только три existing публикации IN_PROGRESS: China41337918148/publish124959260274 Publish с02:59:26; UAE41349217825/publish124980782390 Publish с04:22:03; Georgia41349826080/publish124996095196 Publish с05:21:44. Финальные итоги/publicationStatus/manifest/числа не подтверждены; длительность не доказательство hang/failure/success. Europe41349460500 FINALFAIL05:28:03 с previousManifestPreserved=true остаётся открытым; активного Europe continuation в текущем списке нет. Следующий primary шаг — разбор сохранённых rejected/retained/expired и publicCountGuard без blind rerun/ослабления guards. Georgia partial/Myauto blocked и Autopapa healthfalse/HTTP200 сохранены.
+
+Единственный bounded health07:51 завершился curl0:ok=true, exactrelease b4479fdd4ccd642a3bb600a5855917ddd8ef3216, calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8 прежний. CSS+1684 INSTALLED по прежнему verifier; это не новая UI/Save/fullsync приёмка. Прежние смены fingerprint ограничивают cache comparison.
+
+Оба old China final124685023963/124601674990 снова Transport closed — НЕ прочитаны. FINALFAIL01.11 10:13:17/05:33:35 сохранены; причины/publicationStatus/manifest/числа неизвестны. Locklost/timeout/6h/rollback не приписываются; old41111109988 не повторялся.
+
+Обе истории/все остатки, Compact/CRM fixture failures/liveSKIPPED, manifest failures/metadata часовые расхождения, OWNERFREEZE вне новых прямых задач, REG/drafts/1678 сохранены. Далее existing China/UAE/Georgia final, primary saved Europe analysis и exact-release UI/authenticated Save/fullsync/savedfixture, доступность двух old China final logs. Только Road/checklist append-only expected-parentCAS; без runtime/deploy/repair/diag/browser/provider/cleanup/новых запусков. Наблюдение включено.
