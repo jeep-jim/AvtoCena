@@ -1,0 +1,26 @@
+# Редакционный выпуск 03.11.2026 — черновики
+
+Подготовлено 10 самостоятельных текстов, не 10 готовых публикаций. Опубликовано 0. Один свежий анонс (BMW 02.11), девять явно архивных разборов. Сверены 22 опубликованных seed-записи и прежние черновики: новые slug, без перезаписи.
+
+## Материалы и даты
+
+- Городской помощник BMW: что обещано на 2027 год — `bmw-city-assistant-2027-driver-role`; Первоисточник производителя, 2026-11-02: https://newsroom.bmwgroup.com/global/bmw-to-expand-urban-driver-assistance-functions-from-2027/
+- Шесть поколений BMW M3: почему одного названия мало — `bmw-m3-six-generations-guide`; Первоисточник производителя, 2026-10-09: https://newsroom.bmwgroup.com/global/40-years-of-the-bmw-m3/
+- PCCM Plus: современная мультимедиа для прежних Porsche — `porsche-pccm-plus-retrofit-compatibility`; Первоисточник производителя, 2026-09-29: https://newsroom.porsche.com/en_PME/2026/products/porsche-classic-communication-management-plus-infotainmentsystem-43351.html
+- Porsche Mission S: как читать дизайнерскую концепцию — `porsche-mission-s-design-vision`; Первоисточник производителя, 2026-10-15: https://newsroom.porsche.com/en_PME/2026/products/porsche-mission-s-vision-model-43529.html
+- HVO для дизеля: сначала допуск, затем экологические цифры — `bmw-hvo-fuel-approval-guide`; Первоисточник производителя, 2026-07-13: https://newsroom.bmwgroup.com/global/eni-and-bmw-group-an-agreement-for-enilive-hvo-diesel-biofuel-to-power-corporate-fleets/
+- Новый электрический Kangoo: как оценить обещанный запас хода — `renault-kangoo-52-kwh-pending-range`; Первоисточник производителя, 2026-10-12: https://be.media.renaultgroup.com/renault-kangoo-van-en-renault-kangoo-meer-rijbereik-betere-prestaties-en-nieuwe-technologieen-aan-boord/?lang=nld
+- Alpine A310 VISION: возвращение образа, а не обещание серии — `alpine-a310-vision-heritage-study`; Первоисточник производителя, 2026-10-12: https://be.media.renaultgroup.com/alpine-presenteert-a310-vision-een-concept-car-geinspireerd-op-een-van-zijn-voornaamste-iconen-alpine-a310/?lang=nld
+- Renault 4: почему одинаковая батарея не означает одинаковый пробег — `renault-4-roof-range-battery-choice`; Первоисточник производителя, 2026-10-09: https://be.media.renaultgroup.com/renault-4-e-tech-elctric-voortdurende-verbetering-ten-dienste-van-onze-klanten/?lang=nld
+- BMW iX4: что известно о запуске электрического купе-кроссовера — `bmw-ix4-launch-plan-2027`; Первоисточник производителя, 2026-10-08: https://newsroom.bmwgroup.com/global/the-new-bmw-ix4/
+- Где будут собирать новую BMW 3 Series: разбираем производственный план — `bmw-3-series-production-geography`; Первоисточник производителя, 2026-09-30: https://newsroom.bmwgroup.com/global/made-in-germany-bmw-investing-around-two-billion-euros-in-the-production-of-the-new-bmw-3-series/
+
+## Препятствия и проверки
+
+Фотография PCCM Plus скачана, JPEG1935×1089 декодирован и просмотрен; автор Porsche AG. Условия: https://newsroom.porsche.com/en/images-videos/porsche-newsroom-terms-and-conditions.html — редакционная журналистская публикация, не реклама. Изображение вместе с атрибуцией сохранено среди черновиков; на домен сайта не установлено, браузерная загрузка не проверена. Для остальных9 обложек проверка конкретного файла и разрешения не завершена. Не подставлены случайные картинки или внешние CDN. Общие ограничения BMW MediaPool https://mediapool.bmwgroup.com/download/edown/common/info?actEvent=mediaRights не подтверждают универсальную лицензию на выбранные фото. Общие условия Renault https://www.renaultgroup.com/en/general-conditions-of-use/ не заменяют индивидуальные права пресс-изображения. Это незавершённая редакционная проверка, не отсутствие доступа к GitHub или доказанная неисправность блога.
+
+Каталог проверен ограниченными чтениями: BMW M3 Европа7 карточек, Porsche911 Европа9, Kangoo Европа9, Renault4 Европа0. Эти числа относятся к текущей странице, не полному inventory. Ссылка M3 добавлена с уточнением поколения/привода. Обнаруженные911 относятся к более поздним поколениям, Kangoo — не доказательство наличия новых52кВт·ч: нерелевантные ссылки не добавлены. Наличие концептов/будущих моделей не заявлено.
+
+Схема черновиков проверяется отдельно от допуска к публикации. Тесты блога2/2passed. Приложение, seed, release marker, рынки/парсеры не изменены. Во время проверки активен существующий China41538213115; roadmap также фиксирует отложенную подготовку цен publication_in_progress. Новый deploy не запускался, активный publisher не отменялся. Это дополнительный координационный риск, а не утверждение, что публикационный путь блога сломан.
+
+10 адаптаций Дзена и10 VK сохранены, отправок0. Их будущие URL явно обозначены как ещё не опубликованные. Каналы не подтверждены. Следующий шаг: завершить9 обложек с правами, перенести разрешённые копии в blog-media, повторить актуальность/каталог, затем один PR и согласованная установка после проверки очереди, liveURL/точная версия/обе темы/mobile.

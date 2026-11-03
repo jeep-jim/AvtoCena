@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-03",
+  "textDrafts": 10,
+  "publicationReadyBatch": false,
+  "published": 0,
+  "reason": "Nine covers not cleared and localized; active China publisher blocks concurrent preparation context. No deploy attempted.",
+  "photos": [
+    {
+      "slug": "porsche-pccm-plus-retrofit-compatibility",
+      "path": "docs/blog/drafts/media/pccm-plus-2026.jpg",
+      "sha256": "2d6e062fe0721dda563cd8f0633bc0f43a2a995b203ff37cbdd3ba4d73990501",
+      "source": "https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?crop=1&cs=c95679972a58d6c9&h=1089&id=340526&public=1&w=1935",
+      "credit": "Porsche AG, Porsche 911 Cabriolet (997), Interior, PCCM Plus, 2026",
+      "rights": "https://newsroom.porsche.com/en/images-videos/porsche-newsroom-terms-and-conditions.html",
+      "scope": "Editorial reporting only, not advertising; preserve credit. Download decoded and visually inspected; not deployed or tested on site."
+    }
+  ],
+  "remainingCoverChecks": [
+    "bmw-city-assistant-2027-driver-role",
+    "bmw-m3-six-generations-guide",
+    "porsche-mission-s-design-vision",
+    "bmw-hvo-fuel-approval-guide",
+    "renault-kangoo-52-kwh-pending-range",
+    "alpine-a310-vision-heritage-study",
+    "renault-4-roof-range-battery-choice",
+    "bmw-ix4-launch-plan-2027",
+    "bmw-3-series-production-geography"
+  ],
+  "externalPublications": {
+    "dzen": 0,
+    "vk": 0,
+    "adaptationsEach": 10,
+    "reason": "No confirmed connected official channels"
+  },
+  "tests": {
+    "blogTestsPassed": 2,
+    "publicationSchema": "not eligible: missing covers"
+  },
+  "catalog": "catalog-check-2026-11-03.json"
+}
