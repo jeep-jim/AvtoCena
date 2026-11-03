@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Bell, BellOff } from "lucide-react";
-import { requestPushPermission, pushPermissionMessage } from "@/lib/push-permission";
+import { requestPushPermission, pushPermissionMessage } from "./push-permission";
 export function CrmPushControl({userId,customer=false}: {userId: string;customer?:boolean}) {
   const endpoint=customer?"/api/account/push":"/api/crm/push",scope=customer?"/account":"/",worker=customer?"/account-notifications-sw.js":"/crm-push-sw.js";
   const [active, setActive] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState("");

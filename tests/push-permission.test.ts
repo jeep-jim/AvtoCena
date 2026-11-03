@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {requestPushPermission,pushPermissionMessage} from '../apps/web/lib/push-permission';
+import {requestPushPermission,pushPermissionMessage} from '../apps/web/components/crm/push-permission';
 
 test('desktop permission prompt starts in the click stack, before the first await',async()=>{
   let called=false;
