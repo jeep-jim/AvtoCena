@@ -1,0 +1,289 @@
+{
+  "checkedAt": "2026-11-03T05:28:18.347319+00:00",
+  "expectedRelease": "27e7a987014438d34bf3ee2b130cd3339f3f1d33",
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "27e7a987014438d34bf3ee2b130cd3339f3f1d33",
+    "calculationVersion": "269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8"
+  },
+  "assets": [
+    {
+      "path": "/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/18-d2d731f129776809.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/main-app-7b13489b43c77ae6.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/9664-bbf55e28a0306eec.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/app/(public)/layout-9fcce1db3e1702bc.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/app/(public)/error-5fcbad61331b9ce4.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/6473-d925533e6b1678bb.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/638-6359f802695a80c3.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/8781-0535a93e04c05cad.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/3682-1b17afaaefbe46de.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/3782-05593a0e60816579.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/2855-9ba91b163cf4135d.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/app/(public)/template-4d55eaa7ea2451d1.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/app/global-error-a235960c7d972547.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/6563-1d5b05e4de9cdc03.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": true,
+        "actualDenial": true,
+        "deviceSuccess": true,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/8287-03b1bffc753ad751.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/app/(public)/blog/page-130f3fc5d2b7d1b5.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/9233-fe13153c94873c46.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/3097-498431c9d3a2980a.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/app/layout-7cf952008aee2db6.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    },
+    {
+      "path": "/_next/static/chunks/webpack-6a90dce344ecdbc0.js",
+      "http": 200,
+      "checks": {
+        "retryDismissed": false,
+        "actualDenial": false,
+        "deviceSuccess": false,
+        "oldGenericSettingsMessage": false
+      }
+    }
+  ],
+  "nativeOwnerPermissionVerified": false,
+  "realPushDeliveryVerified": false,
+  "pass": true,
+  "pullRequest": "https://github.com/jeep-jim/AvtoCena/pull/1689",
+  "candidate": "b7f7a98e1571a5fa5c656cbbf1c4060b223875bd",
+  "tests": {
+    "targetedPush": {
+      "passed": 6,
+      "failed": 0
+    },
+    "typecheck": "PASS",
+    "candidateCI": 41579471673,
+    "candidateCrm": 41579471726,
+    "crmFixtureCases": 88,
+    "parameterFixtureCases": 48,
+    "parameterFixtureOpenings": 228,
+    "singleEndpointRebind": "Isolated mock: A receives no delivery after A-to-B reassignment; B receives once and preserves delivery cursor on re-registration. No real sends."
+  },
+  "blogAfterPush": {
+    "date": "2026-11-03",
+    "visibleNewArticles": 10,
+    "newCoversDecoded": 10,
+    "screenshot": "../blog/verification/editorial-blog-after-push-20261103.jpg"
+  },
+  "nativePermissionReference": "https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static",
+  "postMergeCrm": {
+    "run": 41580447623,
+    "attempt": 2,
+    "auditJob": 125745564168,
+    "browserJob": 125745566191,
+    "liveJob": 125745730625,
+    "conclusion": "success",
+    "liveCases": 36,
+    "liveOpenings": 168,
+    "submittedForms": false,
+    "auditLimits": "Read-only snapshot, not a penetration test. Legacy Yandex gateway/security-profile reads returned 403; public REG release confirmed independently."
+  },
+  "postMergeAttachedParameters": {
+    "run": 41580447641,
+    "attempt": 2,
+    "job": 125745568094,
+    "conclusion": "success",
+    "fixtureCases": 48,
+    "fixtureOpenings": 228,
+    "pickupMarkets": 6,
+    "pickupWidths": [
+      390,
+      1440
+    ],
+    "liveCases": 36,
+    "liveOpenings": 168,
+    "submittedForms": false
+  },
+  "deploymentReport": "desktop-push-deployment-2026-11-03.json",
+  "deploymentConclusion": "success",
+  "recordedAt": "2026-11-03T05:40:34.415529+00:00"
+}
