@@ -2251,3 +2251,14 @@ Old China124685023963/124601674990: по одному запросу досту�
 Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Все ранее прочитанные final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись. Следующий шаг — новые сохранённые primary результаты авторизованной приёмки и адресного анализа открытых failures; watch не запускает probes/rerun/repair.
 
 Owner freeze сохранён. Только append-only Road/checklist, expected-parent CAS/readback и additions-only; runtime, данные, цены, права и guards не менялись, новые запуски не создавались. PerformanceAccepted=false остаётся advisory. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 03.11.2026, 22:31 Красноярск — новых результатов приёмки нет
+
+Свежие main45c532119778d4d5595e06b82af93806f996992e, Road/checklist, PR и existing runs/jobs сверены. Новых primary записей и PR после1693 нет. AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. IN_PROGRESS0, новых app deploy/continuation нет. Existing dealerbilling41659160262/reconcile125997497699 SUCCESS22:00:04 только metadata; журнал НЕ прочитан, финансовая сверка/изменения доступа или данных не подтверждены. Capacity watch не дублировался.
+
+Единственный bounded health22:31 завершился curl exit0: ok=true, exactrelease e9d9ddd21ea1540cec94ef79982d879d43ab7aa6, calculationVersione6247b5a21b7cbb1fd1b4d24f297f1c3abdb68a794b106df9cc3dcfb9d87f5c4 unchanged. PR1693 установлен, но realstafflogin/showcaseSaveconflict/authenticatedblogSave/nativepermission/realpushdelivery остаются без новых сохранённых подтверждений. Health не закрывает исторические failures, в том числе Korea exactrequest503 с неизвестной причиной.
+
+Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Ранее прочитанные final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись. Нового saved market/feed/binding/cancelcause/finalmanifest анализа нет. Следующий шаг — сохранённые primary результаты авторизованной приёмки и адресного анализа открытых failures, без watch probe/rerun/repair.
+
+Owner freeze сохранён; только append-only Road/checklist с expected-parent CAS/readback и additions-only. Runtime, данные, цены, права и guards не менялись; новые запуски не создавались. PerformanceAccepted=false остаётся advisory. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
