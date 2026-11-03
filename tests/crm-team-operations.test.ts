@@ -10,7 +10,7 @@ async function moduleFor(entry:string,state:any,extra:Record<string,string>={}){
   data:`const s=globalThis.__teamTest;export const readDataJson=async(k,f)=>s.files.get(k)??f;export const mutateDataJson=async(k,f,fn)=>{const v=fn(s.files.get(k)??f);s.files.set(k,v);return v};export const readChunkedDataJson=async k=>k.startsWith('leads')?s.leads||[]:s.clients||[];export const appendChunkedDataJson=async(k,row)=>{const rows=s.files.get(k)||[];s.files.set(k,[row,...rows]);return row;};export const readRecentChunkedDataJson=async(k,n,f)=>(s.files.get(k)||[]).filter(f).slice(0,n);`,
   'crm-users':`export const readCrmUsers=async()=>globalThis.__teamTest.users;`,
   'crm-activity':`export const recordCrmActivity=async(a,e)=>globalThis.__teamTest.events.push(e);`,...extra};
- const result=await build({entryPoints:[entry],bundle:true,format:'cjs',platform:'node',packages:'external',write:false,plugins:[{name:'team-test',setup(b){b.onResolve({filter:/^(\.\/|@\/lib\/)/},args=>{const name=args.path.split('/').at(-1)!;if(mocks[name])return {path:name,namespace:'mock'};});b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
+ const result=await build({entryPoints:[entry],bundle:true,format:'cjs',platform:'node',packages:'external',write:false,plugins:[{name:'team-test',setup(b){b.onResolve({filter:/^(\.\.?\/|@\/lib\/)/},args=>{const name=args.path.split('/').at(-1)!;if(mocks[name])return {path:name,namespace:'mock'};});b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
  const m={exports:{} as any};new Function('require','module','exports',result.outputFiles[0].text)(require,m,m.exports);return m.exports;
 }
 const owner:any={id:'o',role:'owner',displayName:'Owner'},manager:any={id:'m',role:'manager',displayName:'Manager'},other:any={id:'b',role:'manager',displayName:'Other'},admin:any={id:'a',role:'admin',displayName:'Admin'};
@@ -31,7 +31,16 @@ test('team shifts require confirmation, reject stale edits, validate time and no
 test('unified notices keep recipient/read state separate and birthdays go only to owners/admins',async()=>{
  const today=new Date(Date.now()+7*3600000).toISOString().slice(0,10),birth=`1990-${today.slice(5)}`;
  const state={files:new Map([['crm/staff-profiles.json',{m:{birthDate:birth}}],['crm/notifications.json',[{id:'s',recipientIds:['m'],createdAt:new Date().toISOString(),kind:'schedule',title:'Shift',text:'Changed',href:'/crm/managers'}]]]),users:[owner,admin,manager,other],events:[]};
- const api=await moduleFor('apps/web/lib/crm-unified-notifications.ts',state,{'crm-reminders':`export const readReminders=async()=>[];`,'crm-accounts':`export const canReadRegisteredCustomers=()=>false;`,'regcloud-balance':`export const readRegcloudBalance=async()=>null;`});
+ const api=await moduleFor('apps/web/lib/crm-unified-notifications.ts',state,{'program-store':`export const readMembership=async(id)=>globalThis.__teamTest.files.get('dealers/memberships/'+id+'.json')||{};`,'crm-reminders':`export const readReminders=async()=>[];`,'crm-accounts':`export const canReadRegisteredCustomers=()=>false;`,'regcloud-balance':`export const readRegcloudBalance=async()=>null;`});
+ state.files.set('dealers/dealers.json',[{id:'test-dealer',name:'Test Dealer'}] as any);
+ state.files.set('dealers/memberships/test-dealer.json',{agreement:{submittedAt:new Date().toISOString()}} as any);
+ const platformOwner={...owner,companyId:'dealer_topavto'};
+ const pending=await api.readNotifications(platformOwner);
+ assert.equal(pending.dealerApprovalCount,1);
+ assert.equal(pending.notifications.filter((n:any)=>n.kind==='dealer_approval').length,1);
+ assert.equal((await api.readNotifications({...admin,companyId:'dealer_topavto'})).dealerApprovalCount,0);
+ state.files.set('dealers/memberships/test-dealer.json',{agreement:{submittedAt:new Date().toISOString(),approvedAt:new Date().toISOString()}} as any);
+ assert.equal((await api.readNotifications(platformOwner)).dealerApprovalCount,0);
  const mine=await api.readNotifications(manager);assert.equal(mine.notifications.length,1);assert.equal(mine.notifications[0].id,'s');assert.equal((await api.readNotifications(other)).notifications.length,0);
  for(const actor of [owner,admin]){const rows=(await api.readNotifications(actor)).notifications;assert.equal(rows.length,1);assert.equal(rows[0].kind,'birthday');}
  const store=await moduleFor('apps/web/lib/crm-notification-store.ts',state);await store.markNotificationsRead('m',['s']);assert.equal((await api.readNotifications(manager)).notifications[0].unread,false);assert.equal((await api.readNotifications(owner)).notifications[0].unread,true);
