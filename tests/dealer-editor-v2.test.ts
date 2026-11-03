@@ -46,7 +46,7 @@ test('public dealer links are valid Mini App destinations without admitting CRM'
 test('saving a stale editor merges independent edits, rejects conflicting edits and reserves links',async()=>{
  const fs=await import('node:fs/promises'),os=await import('node:os'),path=await import('node:path');
  const {resetJsonStorageForTests}=await import('../apps/web/lib/data');
- const {saveShowcase,readShowcase,resolveDealerProfile,ShowcaseConflict}=await import('../apps/web/lib/dealers/showcase-store');
+ const {saveShowcase,readShowcase,resolveDealerProfile,resolveDealerIdOrSlug,ShowcaseConflict}=await import('../apps/web/lib/dealers/showcase-store');
  const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER,tmp=await fs.mkdtemp(path.join(os.tmpdir(),'dealer-v2-'));
  try{
   await fs.mkdir(path.join(tmp,'data/dealers'),{recursive:true});await fs.writeFile(path.join(tmp,'data/dealers/dealers.json'),JSON.stringify([{id:'dealer_topavto',name:'TopAvto'},{id:'other',name:'Other'}]));
@@ -65,5 +65,19 @@ test('saving a stale editor merges independent edits, rejects conflicting edits 
   await assert.rejects(saveShowcase(base.dealerId,{...first,base:first,phone:'78880000000'}),ShowcaseConflict);
   assert.equal((await readShowcase(base.dealerId))?.phone,'79990000000');
   await assert.rejects(saveShowcase('other',{...defaultShowcase('other','Other'),citySlug:'nvkz',slug:'topavto'}),/занята/);
+  const short=await saveShowcase('other',{...defaultShowcase('other','Other'),slug:'avtograd'});
+  assert.equal(dealerProfilePath(short),'/dealers/avtograd');
+  assert.equal(await resolveDealerIdOrSlug('avtograd'),'other');
+  assert.equal(await resolveDealerIdOrSlug('other'),'other');
+  assert.equal(await resolveDealerIdOrSlug('missing'),null);
+  const current=(await readShowcase(base.dealerId))!;
+  await assert.rejects(saveShowcase(base.dealerId,{...current,citySlug:'',slug:'avtograd'}),/занята/);
+  await assert.rejects(saveShowcase(base.dealerId,{...current,citySlug:'',slug:'other'}),/занято/);
+  await assert.rejects(saveShowcase(base.dealerId,{...current,citySlug:'',slug:'demo'}),/Для ссылки/);
+  const renamed=await saveShowcase('other',{...short,slug:'avtograd-new'});
+  assert.equal(await resolveDealerIdOrSlug('avtograd'),'other');
+  assert.equal(await resolveDealerIdOrSlug('avtograd-new'),'other');
+  assert.equal(dealerProfilePath(renamed),'/dealers/avtograd-new');
+
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();await fs.rm(tmp,{recursive:true,force:true});}
 });
