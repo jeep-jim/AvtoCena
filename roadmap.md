@@ -20779,3 +20779,18 @@ CRMretry41729303764/metrika126242166987 SUCCESS05:17:04/deliver126242167097 SUCC
 Единственный bounded health04.11 06:06–06:07 завершился curl exit0: ok=true, exactrelease e5cdeb3562a7762b04eedc001d534b534f533cf4, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. PR1694 установлен; health не закрывает новые/исторические failures, не означает authenticated editor Save/native permission/real push delivery acceptance. Новых сохранённых primary результатов этой приёмки и market/cancelcause/binding анализа нет. PerformanceAccepted=false advisory, functional deadline90s сохранён.
 
 Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Ранее прочитанные журналы не повторялись. Следующий watch — final существующей China publication и новые сохранённые primary результаты адресного анализа/авторизованной приёмки. Owner freeze сохранён; runtime/данные/цены/права/guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории append-only только Road/checklist, expected-parent CAS/readback и additions-only проверяются; наблюдение enabled до итоговой приёмки.
+
+
+## 04.11.2026, 06:39 Красноярск — публикация Китая остаётся незавершённой
+
+Свежие main1e25d5399cb0d64b36bba476a29b673860587e45, Road/checklist, AGENTS, PR и existing runs/jobs сверены. Новых primary записей и PR после1694 нет; AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. Новых сохранённых результатов authenticatedblogSave/realstafflogin/showcaseSaveconflict/nativepermission/realpushdelivery и адресного market/feed/binding/cancelcause/translation анализа нет.
+
+Единственный IN_PROGRESS — существующий China41711927294/publish126198742555, шаг Publish markets through calculation and retention guards с04:03:43. Итоговый журнал НЕ прочитан, final manifest/published inventory не подтверждены. Collect126182293193 уже прочитан; его журнал не повторялся. Новых запусков после предыдущей сверки нет, app deploy нет. Длительность не устанавливает причину и не означает failure/rollback.
+
+Все28 final logs из записи06:12 уже прочитаны и не повторялись. Translation_http_403, оба Direct green_feed_empty и пять live_encyclopedia_binding_missing остаются открытыми; пять deferred active publisher failures учитываются отдельно. Успешные compact/current pages/overview не закрывают эти ошибки и не являются live inventory/приёмкой. USD41732172664/126252035435 SUCCESS05:35:56 и CRM41729303764/126242166987/126242167097 остаются metadata only, журналы НЕ прочитаны, не rate/delivery/data proof.
+
+Единственный bounded health04.11 06:38 завершился curl exit0: ok=true, exactreleasee5cdeb3562a7762b04eedc001d534b534f533cf4, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. PR1694 установлен; это не authenticated editor Save acceptance и не закрытие исторических failures. PerformanceAccepted=false остаётся advisory, functional deadline90s сохранён.
+
+Old China124685023963/124601674990: по одному запросу снова Transport closed; журналы НЕ прочитаны/cause unknown. Capacity watch не дублировался. Следующий шаг — final существующей China publication и новые сохранённые primary результаты авторизованной приёмки/адресного анализа, без watch browser/login/provider probe/rerun/repair.
+
+Owner freeze сохранён; runtime/данные/цены/права/guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
