@@ -1,3 +1,4 @@
+import { validStaffLogin } from "@/lib/staff-login";
 import {startDealerTrial} from '@/lib/dealers/program-store';
 import {getCurrentUser,getAuthUsers,normalizeTelegramUsername,type AuthUser} from '@/lib/auth';
 import {isPlatformOwner,isPlatformTeam} from '@/lib/platform-access';
@@ -17,7 +18,7 @@ export async function PUT(req:Request,{params}:{params:Promise<{id:string}>}){
  const {id}=await params;if(!await findDealer(id))return Response.json({error:'Компания не найдена'},{status:404});
  try{
   const body=await req.json();const username=normalizeTelegramUsername(String(body.username||''));
-  if(!/^[a-z0-9_]{5,32}$/.test(username))throw Error('Проверьте Telegram username сотрудника');
+  if(!validStaffLogin(username))throw Error('Проверьте логин сотрудника');
   let targetId='';
   await mutateDataJson<AuthUser[]>('auth/users.json',getAuthUsers(),users=>{
    const target=users.find(u=>normalizeTelegramUsername(u.telegramUsername)===username);

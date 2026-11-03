@@ -1,3 +1,5 @@
+import { validStaffLogin } from "@/lib/staff-login";
+import { isPlatformOwner } from "@/lib/platform-access";
 import { NextResponse } from "next/server";
 import {
   AUTH_COOKIE_NAME,
@@ -20,7 +22,7 @@ export async function POST(request: Request) {
     80,
   );
   const key = String(body.accessKey || "").trim();
-  if (!/^[a-z][a-z0-9_]{4,31}$/.test(username) || !key || key.length > 200)
+  if (!validStaffLogin(username) || !key || key.length > 200)
     return NextResponse.json(
       { ok: false, error: "access_denied" },
       { status: 401 },
@@ -42,7 +44,8 @@ export async function POST(request: Request) {
   // One-time migration: only the existing owner can use the deployment key,
   // and only before any personal credential has been issued to that owner.
   const bootstrap =
-    user?.role === "owner" &&
+    isPlatformOwner(user) &&
+    user &&
     !user.keyIssuedAt &&
     Boolean(process.env.AUTH_ACCESS_KEY) &&
     keyMatches(key, digest(process.env.AUTH_ACCESS_KEY || ""));

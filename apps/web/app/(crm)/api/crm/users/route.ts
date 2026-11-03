@@ -1,3 +1,4 @@
+import { validStaffLogin } from "@/lib/staff-login";
 import {offerCopySetting} from "@/lib/offer-copy";
 import {parseWorkAddresses} from "@/lib/staff-workplaces";
 import {normalizeStaffPhone} from "@/lib/staff-phone";
@@ -59,7 +60,8 @@ export async function POST(request: Request) {
     const workplaces=form.get("workplacesPresent")==="1"?{workAddresses:parseWorkAddresses(String(form.get("workAddresses")||"[]")),remoteWork:form.get("remoteWork")==="on"}:undefined;
 
     if (phoneInput&&!personalPhone) throw new Error("Проверьте личный телефон: укажите номер с кодом страны, например +7 999 123-45-67");
-    if (!displayName || !telegramUsername) throw new Error("Укажите имя и Telegram username");
+    if (!displayName) throw new Error("Укажите имя сотрудника");
+    if (!validStaffLogin(telegramUsername)) throw new Error("Логин: от 5 до 32 латинских букв, цифр или знаков подчёркивания");
     if (role === "owner" && actor.role !== "owner") throw new Error("Назначить владельца может только владелец");
 
     const assertCanGrant=(candidate:AuthUser)=>{if(actor.role!=="owner"&&(Object.keys(CRM_PERMISSIONS) as CrmPermission[]).some(key=>hasCrmPermission(candidate,key)&&!hasCrmPermission(actor,key)))throw Error("Нельзя выдать права, которых у вас нет");};
@@ -69,7 +71,7 @@ export async function POST(request: Request) {
     await mutateDataJson<AuthUser[]>("auth/users.json", seed, (stored) => {
       const users = Array.isArray(stored) && stored.length ? stored : seed;
       const duplicate = users.find((item) => normalizeTelegramUsername(item.telegramUsername) === telegramUsername && item.id !== userId);
-      if (duplicate) throw new Error("Этот Telegram username уже добавлен");
+      if (duplicate) throw new Error("Этот логин уже добавлен");
 
       if (!userId) {
         savedId = generateId("user");
@@ -88,7 +90,7 @@ export async function POST(request: Request) {
       if(actor.id===userId&&permissions&&!permissions.staff)throw Error("Нельзя отключить собственное управление доступом");
       const identityChanged = staffIdentityChanged(current.telegramUsername, telegramUsername);
       return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId, ...workplaces, ...(personalPhone!==undefined?{personalPhone}:{}), ...(permissions?{permissions}:{}), ...((current.companyId!==companyId||current.role!==role)?{dealerApproved:false}:{}), ...(offerCopyEnabled!==undefined?{offerCopyEnabled}:{}),
-        sessionVersion: (item.sessionVersion || 0) + (identityChanged || item.role !== role || item.status !== status || (permissions&&JSON.stringify(item.permissions)!==JSON.stringify(permissions)) ? 1 : 0),
+        sessionVersion: (item.sessionVersion || 0) + (identityChanged || item.companyId !== companyId || item.role !== role || item.status !== status || (permissions&&JSON.stringify(item.permissions)!==JSON.stringify(permissions)) ? 1 : 0),
         ...(identityChanged ? {telegramId:"",botBindHash:"",botBindExpiresAt:""} : {}),
         updatedAt: new Date().toISOString() } : item);
     });
