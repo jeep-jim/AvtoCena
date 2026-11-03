@@ -9,6 +9,22 @@ export async function startDealerTrial(id:string){if(!validDealerId(id)||id==='d
 export async function grantDealerPeriod(id:string,raw:{version:number;months:number;amountRub:number;note:string},actorId:string){
  if(!validDealerId(id)||id==='dealer_topavto')throw Error('Для ТопАвто подписка не требуется');
  if(![1,6,12].includes(raw.months)||!Number.isFinite(raw.amountRub)||raw.amountRub<0||raw.amountRub>1e7||!String(raw.note||'').trim())throw Error('Укажите период, сумму и основание платежа');
- const price=raw.months===1?10000:raw.months===6?50000:100000;if(raw.amountRub!==price)throw Error('Полученная сумма не соответствует выбранному тарифу');let saved!:Membership;await mutateDataJson<Membership>(`dealers/memberships/${id}.json`,EMPTY_MEMBERSHIP,m=>{if(m.version!==raw.version)throw Error('Доступ уже изменён. Обновите страницу');const now=new Date(),start=new Date(Math.max(now.getTime(),Date.parse(m.paidUntil)||0,Date.parse(m.trialEndsAt)||0));if(!m.agreement?.approvedAt)throw Error('Сначала подтвердите принятие оферты и полномочия представителя');saved={...m,plan:'subscription',version:m.version+1,paidUntil:addMonths(start,raw.months).toISOString(),history:[...m.history,{id:crypto.randomUUID(),at:now.toISOString(),actorId,months:raw.months,amountRub:Math.round(raw.amountRub),note:String(raw.note).trim().slice(0,500)}]};return saved;});return saved;
+ const price=raw.months===1?10000:raw.months===6?50000:100000;if(raw.amountRub!==price)throw Error('Полученная сумма не соответствует выбранному тарифу');let saved!:Membership;await mutateDataJson<Membership>(`dealers/memberships/${id}.json`,EMPTY_MEMBERSHIP,m=>{if(m.version!==raw.version)throw Error('Доступ уже изменён. Обновите страницу');const now=new Date(),start=new Date(Math.max(now.getTime(),Date.parse(m.paidUntil)||0,Date.parse(m.trialEndsAt)||0,Date.parse(m.partnerUntil||'')||0));if(!m.agreement?.approvedAt)throw Error('Сначала подтвердите принятие оферты и полномочия представителя');saved={...m,plan:'subscription',version:m.version+1,paidUntil:addMonths(start,raw.months).toISOString(),history:[...m.history,{id:crypto.randomUUID(),at:now.toISOString(),actorId,months:raw.months,amountRub:Math.round(raw.amountRub),note:String(raw.note).trim().slice(0,500)}]};return saved;});return saved;
 }
 export async function availableShowcase(s:DealerShowcase){const dealer=await findDealer(s.dealerId);if(s.dealerId!=='dealer_topavto'&&dealer?.status!=='verified')return {...applyBasicAccess(s),profileEnabled:false};return dealerAccessLevel(s.dealerId,await readMembership(s.dealerId)).full?s:{...applyBasicAccess(s),profileEnabled:false};}
+
+// Called only by the platform-owner route; never records a received payment.
+export async function grantDealerPartnerPeriod(id:string,raw:{version:number;months:number;note:string},actorId:string){
+ if(!validDealerId(id)||id==='dealer_topavto')throw Error('Выберите компанию партнёра');
+ if(![1,3,6,12].includes(raw.months)||typeof raw.note!=='string'||!raw.note.trim())throw Error('Укажите срок и основание бесплатного доступа');
+ let saved!:Membership;
+ await mutateDataJson<Membership>(`dealers/memberships/${id}.json`,EMPTY_MEMBERSHIP,m=>{
+  if(m.version!==raw.version)throw Error('Доступ уже изменён. Обновите страницу');
+  if(!m.agreement?.approvedAt)throw Error('Сначала подтвердите принятие оферты и полномочия представителя');
+  const now=new Date(),start=new Date(Math.max(now.getTime(),Date.parse(m.paidUntil)||0,Date.parse(m.trialEndsAt)||0,Date.parse(m.partnerUntil||'')||0));
+  const until=addMonths(start,raw.months).toISOString();
+  saved={...m,plan:'subscription',version:m.version+1,partnerUntil:until,history:[...m.history,{id:crypto.randomUUID(),at:now.toISOString(),actorId,months:raw.months,amountRub:0,note:raw.note.trim().slice(0,500),kind:'partner',until}]};
+  return saved;
+ });
+ return saved;
+}

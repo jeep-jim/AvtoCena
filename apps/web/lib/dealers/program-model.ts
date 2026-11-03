@@ -2,11 +2,12 @@ import type {DealerShowcase} from './showcase-model';
 export type DealerProgram = {version:number;trialDays:number;monthRub:number;halfYearRub:number;yearRub:number;commissionPercent:number;commissionBasis:'sale'|'remuneration';policyVersion?:number;updatedAt:string};
 export const DEFAULT_PROGRAM:DealerProgram={version:0,trialDays:30,monthRub:10000,halfYearRub:50000,yearRub:100000,commissionPercent:10,commissionBasis:'remuneration',policyVersion:2,updatedAt:''};
 export type DealerAcceptance={version:string;text:string;digest:string;submittedAt:string;actorId:string;representative:string;authority:string;legalName:string;inn:string;ogrn:string;address:string;approvedAt?:string;approvedBy?:string};
-export type Membership={agreementHistory?:DealerAcceptance[];agreement?:DealerAcceptance;plan?:'subscription'|'commission';version:number;trialStartedAt:string;trialEndsAt:string;paidUntil:string;history:{id:string;at:string;actorId:string;months:number;amountRub:number;note:string}[]};
+export type Membership={partnerUntil?:string;agreementHistory?:DealerAcceptance[];agreement?:DealerAcceptance;plan?:'subscription'|'commission';version:number;trialStartedAt:string;trialEndsAt:string;paidUntil:string;history:{id:string;at:string;actorId:string;months:number;amountRub:number;note:string;kind?:'partner';until?:string}[]};
 export const EMPTY_MEMBERSHIP:Membership={version:0,trialStartedAt:'',trialEndsAt:'',paidUntil:'',history:[]};
 export function dealerAccessLevel(id:string,m:Membership,now=new Date()){
  if(id==='dealer_topavto')return {level:'platform' as const,full:true,until:''};
  if(m.plan==='commission'&&m.agreement?.approvedAt)return {level:'commission' as const,full:true,until:''};
+ if(Date.parse(m.partnerUntil||'')>now.getTime()&&Date.parse(m.partnerUntil||'')>=Math.max(Date.parse(m.paidUntil)||0,Date.parse(m.trialEndsAt)||0))return {level:'partner' as const,full:true,until:m.partnerUntil!};
  if(Date.parse(m.paidUntil)>now.getTime())return {level:'paid' as const,full:true,until:m.paidUntil};
  if(Date.parse(m.trialEndsAt)>now.getTime())return {level:'trial' as const,full:true,until:m.trialEndsAt};
  return {level:'expired' as const,full:false,until:''};
@@ -20,5 +21,5 @@ export const PREMIUM_FIELDS=['extraBanners','logoLight','logoDark','headerIcon',
 export function restrictedShowcaseChange(current:DealerShowcase,next:DealerShowcase){return PREMIUM_FIELDS.some(k=>JSON.stringify(current[k])!==JSON.stringify(next[k]))||JSON.stringify(current.offices.map(o=>[o.id,o.photos]).filter(([,p])=>Array.isArray(p)&&p.length))!==JSON.stringify((next.offices||[]).map(o=>[o.id,o.photos]).filter(([,p])=>Array.isArray(p)&&p.length));}
 export function applyBasicAccess(s:DealerShowcase):DealerShowcase{return {...s,buyersEnabled:false,buyerPhotos:[],specialsEnabled:false,stockEnabled:false,marketEnabled:false,marketHomeEnabled:false,offers:[],extraBanners:[],logoLight:'',logoDark:'',headerIcon:'',offices:s.offices.map(o=>({...o,photos:[]}))};}
 
-export function dealerCommissionPercent(m:Membership,now=new Date()){return m.plan==='commission'&&!!m.agreement?.approvedAt?15:Date.parse(m.paidUntil)>now.getTime()||Date.parse(m.trialEndsAt)>now.getTime()?10:null;}
+export function dealerCommissionPercent(m:Membership,now=new Date()){return m.plan==='commission'&&!!m.agreement?.approvedAt?15:Date.parse(m.paidUntil)>now.getTime()||Date.parse(m.trialEndsAt)>now.getTime()||Date.parse(m.partnerUntil||'')>now.getTime()?10:null;}
 export function remunerationCommission(amount:number,percent:number){if(!Number.isFinite(amount)||amount<=0||amount>1e9||![10,15].includes(percent))throw Error('Проверьте полученное вознаграждение и ставку');return Math.round(Math.round(amount*100)*percent/100)/100;}

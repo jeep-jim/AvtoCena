@@ -4,7 +4,7 @@ import {getCurrentUser} from '@/lib/auth';
 import {isPlatformOwner} from '@/lib/platform-access';
 import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
 import {readDataJson,mutateDataJson,readChunkedDataJson,updateChunkedDataJson} from '@/lib/data';
-import {readDealerProgram,saveDealerProgram,readMembership,grantDealerPeriod,startDealerTrial} from '@/lib/dealers/program-store';
+import {readDealerProgram,saveDealerProgram,readMembership,grantDealerPeriod,grantDealerPartnerPeriod,startDealerTrial} from '@/lib/dealers/program-store';
 import {findDealer,validDealerId} from '@/lib/dealers/showcase-store';
 import {recordCrmActivity} from '@/lib/crm-activity';
 export const runtime='nodejs';
@@ -21,6 +21,7 @@ export async function POST(req:Request){
   }else{
    const id=String(b.dealerId||'');if(!validDealerId(id)||!await findDealer(id))throw Error('Компания не найдена');
    if(b.action==='approveAgreement'){await mutateDataJson<Membership>(`dealers/memberships/${id}.json`,EMPTY_MEMBERSHIP,m=>{if(m.version!==b.version)throw Error('Данные изменились');if(!m.agreement)throw Error('Дилер ещё не принял оферту');if(m.agreement.approvedAt)return m;return {...m,version:m.version+1,agreement:{...m.agreement,approvedAt:new Date().toISOString(),approvedBy:actor.id}};});await startDealerTrial(id);result=await readMembership(id);}
+   else if(b.action==='partnerAccess')result=await grantDealerPartnerPeriod(id,b,actor.id);
    else if(b.action==='membership')result=await grantDealerPeriod(id,b,actor.id);
    else if(b.action==='trial'){await startDealerTrial(id);result=await readMembership(id);}
    else if(b.action==='company'){

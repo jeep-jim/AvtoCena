@@ -17,7 +17,7 @@ export async function POST(request:Request,{params}:{params: Promise<{id:string}
   const headers={"Cache-Control":"no-store"};
   if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"Недопустимый источник запроса"},{status:403,headers});
   const user=await getCurrentUser();
-  if(!user || !hasCrmPermission(user,"calculations"))return NextResponse.json({error:"Требуется вход сотрудника"},{status:403,headers});
+  if(!user || !isPlatformTeam(user) || !hasCrmPermission(user,"calculations"))return NextResponse.json({error:"Требуется вход сотрудника"},{status:403,headers});
   const body=await request.text();
   if(body.length>4096)return NextResponse.json({error:"Слишком большой запрос"},{status:413,headers});
   let draft, expectedVersion;
