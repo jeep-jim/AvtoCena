@@ -3,7 +3,7 @@
   "textDrafts": 10,
   "publicationReadyBatch": true,
   "published": 0,
-  "reason": "Covers completed and inspected. Candidate prepared; CI, merge, installation and live verification pending.",
+  "reason": "PR1688 merged after green checks. Single deploy41574459179 in progress; installation and publication not yet verified.",
   "photos": [
     {
       "slug": "porsche-pccm-plus-retrofit-compatibility",
@@ -26,7 +26,14 @@
     "blogTestsPassed": 2,
     "publicationSchema": "PASS: all 32 seed posts; 10 new posts have local covers and sources; original 22 records unchanged",
     "typecheck": "PASS: npm run typecheck",
-    "coverGeometry": "7 SVG covers use 1200×750, matching the existing 16:10 card crop; rendered and visually checked"
+    "coverGeometry": "7 SVG covers use 1200×750, matching the existing 16:10 card crop; rendered and visually checked",
+    "ciRun": 41573643430,
+    "ciConclusion": "success",
+    "verifyJobs": [
+      125712057579,
+      125712057390
+    ],
+    "verifyConclusion": "success"
   },
   "catalog": "catalog-check-2026-11-03.json",
   "media": [
@@ -121,5 +128,12 @@
       "visuallyInspected": true
     }
   ],
-  "candidatePreparedAt": "2026-11-03T03:37:45Z"
+  "candidatePreparedAt": "2026-11-03T03:37:45Z",
+  "deployment": {
+    "runId": 41574459179,
+    "releaseSha": "3b73315578e96faaa4817a2b57fca81aa66dc0f3",
+    "status": "in_progress",
+    "conclusion": null
+  },
+  "pullRequest": 1688
 }
