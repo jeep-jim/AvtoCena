@@ -312,7 +312,7 @@ try{
     await button.click();await page.getByRole('dialog').waitFor();assert.equal(saves,0,'opening confirmation does not save');
     await page.getByRole('button',{name:'Нет',exact:true}).click();assert.equal(saves,0);assert.ok(await button.isVisible());
     await button.click();await page.getByRole('button',{name:'Да',exact:true}).click();
-    await page.getByText('Сохранено. Пустые параметры совместимых автомобилей будут заполнены на всех рынках.').waitFor();assert.equal(saves,1);assert.equal(await button.count(),0);
+    await page.getByText('Сохранено. Параметры переданы в энциклопедию и совместимые автомобили.').waitFor();assert.equal(saves,1);assert.equal(await button.count(),0);
     assert.ok(await page.getByText('Новый сотрудник',{exact:true}).isVisible());
    }
    else {assert.equal(await button.count(),0);assert.equal(saves,0);}
