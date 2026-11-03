@@ -26,8 +26,10 @@ test("save endpoint checks session, role, origin and input; recalculates server-
  try {
   assert.equal((await post(request())).status,403);assert.equal(state.calculations,0);assert.equal(state.saves,0);
   state.user={id:"partner",role:"partner"};assert.equal((await post(request())).status,403);
-  for(const role of ["owner","admin","manager"]){state.user={id:role,role};const response=await post(request());assert.equal(response.status,200);assert.equal((await response.json()).calculation.totalRub,2500000);assert.equal(state.saved.userId,role);}
+  for(const role of ["owner","admin","manager"]){state.user={id:role,role,companyId:"dealer_topavto"};const response=await post(request());assert.equal(response.status,200);assert.equal((await response.json()).calculation.totalRub,2500000);assert.equal(state.saved.userId,role);}
   const before=state.saves;
+  for(const role of ["owner","admin","manager","dealer"]){state.user={id:"external",role,companyId:"external",permissions:{calculations:true}};assert.equal((await post(request())).status,403);assert.equal(state.saves,before);}
+  state.user={id:"owner",role:"owner",companyId:"dealer_topavto"};
   assert.deepEqual(state.revalidated,['/cars','layout']);
   assert.equal((await post(request(undefined,"https://attacker.example"))).status,403);
   assert.equal((await post(request({draft:{...draft,fuel:"hybrid"}}))).status,400);

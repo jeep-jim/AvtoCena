@@ -24,7 +24,7 @@ export async function POST(request:Request){
  }
  if(b.action==='commission'){
  if(!m.agreement?.approvedAt||b.confirmed!==true)throw Error('Сначала подтвердите подключение и выбор режима');
- if(Date.parse(m.paidUntil)>Date.now()||Date.parse(m.trialEndsAt)>Date.now())throw Error('До окончания текущего периода действует комиссия 10%. Выберите новый режим после его окончания');
+ if(Date.parse(m.paidUntil)>Date.now()||Date.parse(m.trialEndsAt)>Date.now()||Date.parse(m.partnerUntil||'')>Date.now())throw Error('До окончания текущего периода действует комиссия 10%. Выберите новый режим после его окончания');
  return {...m,version:m.version+1,plan:'commission'};
  }throw Error('Неизвестное действие');
  });return Response.json({ok:true},{headers});

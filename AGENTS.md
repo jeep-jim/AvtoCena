@@ -236,3 +236,10 @@
 - Owner observed Korea pages and vehicle details working quickly on the phone with VPN disabled; VPN-on failures remain connection-dependent observations, not proof of a specific root cause. Do not claim a universally fixed VPN path.
 - The only newly authorized encyclopedia polish: hide rail scrollbars while preserving scrolling, widen the alphabet, remove the visible Edit button and open the existing workspace by tapping the row. Preserve photo enlargement, keyboard access, permissions, saved data and calculation semantics.
 - Green rows currently indicate parameters exist in the database; do not relabel them as verified complete synchronization.
+
+# Owner dealer pilot — 03.11.2026
+
+- Prepare a controlled pilot with 3–4 known dealers. Global catalog prices, editorial cards/photos and encyclopedia writes belong exclusively to authorized TopAvto staff. External dealer roles, including stale external owner/admin/manager records, must never gain platform editorial access. Preserve own-company showcase management and tenant isolation.
+- The platform owner may grant a recorded, expiring partner period without payment. Keep this distinct from paid receipts; preserve existing access periods, agreement approval, company verification and staff approval. Never let a dealer grant or extend their own period.
+- External dealer navigation must exclude platform markets/settings, global documents administration, site editor, global catalog/archive, tasks and ideas. An owner viewing a dealer through CRM still has the owner's navigation; do not confuse this with the dealer session.
+- Next stage, only after pilot verification: home-page dealer interface, refinement of the existing public dealer directory and dealer selection in a vehicle card. Do not activate these or change accepted catalog/pricing/collector logic as part of pilot preparation.
