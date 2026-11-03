@@ -133,10 +133,12 @@ try {
   const logo=await card.locator('.ac-dealer-logo').boundingBox();assert.ok(logo.width<=(width<640?48:64));
   for(const theme of ['light','dark']){await page.evaluate(t=>{document.documentElement.dataset.theme=t;window.scrollTo(0,0)},theme);await page.screenshot({path:out+'/'+width+'-'+theme+'-directory-top.png',fullPage:true});}
 
-  await page.getByRole('textbox',{name:'Поиск по городу'}).fill('новокуз');
+  await page.getByRole('textbox',{name:'Название компании или город'}).fill('новокуз');
   assert.equal(await page.getByRole('link',{name:/Топ Авто/}).count(),1);
-  await page.getByRole('textbox',{name:'Поиск по городу'}).fill('Москва');
-  await page.getByRole('heading',{name:'В этом городе пока нет дилеров'}).waitFor();
+  await page.getByRole('textbox',{name:'Название компании или город'}).fill('топ авто');
+  assert.equal(await page.getByRole('link',{name:/Топ Авто/}).count(),1);
+  await page.getByRole('textbox',{name:'Название компании или город'}).fill('Москва');
+  await page.getByRole('heading',{name:'Компании не найдены'}).waitFor();
   await page.getByRole('button',{name:'Все компании'}).click();
   let attempts=0;
   await page.route('**/api/dealers/apply',async route=>{attempts++;const body=route.request().postData();assert.match(body,/dealer_directory/);assert.match(body,/Test Company/);await route.fulfill({status:attempts===1?500:200,contentType:'application/json',body:JSON.stringify({ok:attempts>1})});});

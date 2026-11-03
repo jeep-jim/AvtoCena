@@ -11,7 +11,7 @@ import {dealerProfilePath} from '@/lib/dealers/profile-url';
 import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { readShowcase,findDealer } from "@/lib/dealers/showcase-store";
+import { readShowcase,findDealer,resolveDealerIdOrSlug } from "@/lib/dealers/showcase-store";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
@@ -21,7 +21,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
   searchParams: Promise<Record<string,string|string[]|undefined>>;
 }) {
-  const s = await readShowcase((await params).id);
+  const id = await resolveDealerIdOrSlug((await params).id);
+  const s = id ? await readShowcase(id) : null;
   if (!s?.profileEnabled || (await searchParams).preview)
     return {
       title: "Дилер — АвтоЦена",
@@ -40,7 +41,8 @@ export default async function Page({
   params: Promise<{ id: string }>;
   searchParams: Promise<Record<string,string|string[]|undefined>>;
 }) {
-  const id=(await params).id;
+  const id=await resolveDealerIdOrSlug((await params).id);
+  if(!id)notFound();
   const [stored,canShareSelection]=await Promise.all([readShowcase(id),getCurrentUser().then(user=>canManageDealer(user,id))]);
   let s=stored;
   const preview =

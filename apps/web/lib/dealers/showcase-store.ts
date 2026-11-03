@@ -17,14 +17,14 @@ import {
 export function validDealerId(id: string) {
   return /^[a-zA-Z0-9_-]{1,80}$/.test(id) && !id.includes("__");
 }
+export const readDealers = requestCache(async () => {
+  const rows = await readDataJson<any[]>("dealers/dealers.json", []);
+  return rows.length ? rows : [{id:PILOT_DEALER_ID,name:"TopAvto",status:"verified"}];
+});
 export const findDealer = requestCache(async (id: string) => {
   if (!validDealerId(id)) return null;
-  const rows = await readDataJson<any[]>("dealers/dealers.json", []);
-  return (
-    (rows.length ? rows : [{ id: PILOT_DEALER_ID, name: "TopAvto", status:"verified" }]).find(
-      (d) => d.id === id,
-    ) || null
-  );
+  const rows = await readDealers();
+  return rows.find(d => d.id === id) || null;
 });
 export const readShowcase = requestCache(async (id: string) => {
   const dealer = await findDealer(id);
@@ -46,6 +46,11 @@ export async function resolveDealerProfile(city:string,slug:string){
  const index=await readDataJson<Record<string,string>>("dealers/profile-links.json",{});
  return index[`/${city}/${slug}`] || (city==='nvkz'&&slug==='topavto'?PILOT_DEALER_ID:null);
 }
+export async function resolveDealerIdOrSlug(value:string){
+ if(await findDealer(value))return value;
+ const index=await readDataJson<Record<string,string>>("dealers/profile-links.json",{});
+ return index[`/dealers/${value}`]||null;
+}
 export async function saveShowcase(id:string,raw:any){
  if(!(await findDealer(id)))throw Error("Компания не найдена");
  let saved!:DealerShowcase;
@@ -60,11 +65,14 @@ export async function saveShowcase(id:string,raw:any){
   saved=await withMarketQuotes(normalizeShowcase(candidate,id,current.version+1));
   for(const o of saved.offers)if(o.availability==='market'&&o.status==='published'&&o.marketQuote?.error)throw Error(o.marketQuote.error);
   const url=dealerProfilePath(saved);
-  if(!url.startsWith('/dealers/'))await mutateDataJson<Record<string,string>>('dealers/profile-links.json',{},index=>{
-   if(index[url]&&index[url]!==id)throw Error("Эта ссылка уже занята другим дилером");
-   if(url==='/nvkz/topavto'&&id!==PILOT_DEALER_ID)throw Error("Эта ссылка уже занята другим дилером");
+  if(saved.slug){
+   if(!saved.citySlug){const existing=await findDealer(saved.slug);if(existing&&existing.id!==id)throw Error('Это имя занято. Придумайте другое');}
+   await mutateDataJson<Record<string,string>>('dealers/profile-links.json',{},index=>{
+   if(index[url]&&index[url]!==id)throw Error("Эта ссылка уже занята. Придумайте другое");
+   if(url==='/nvkz/topavto'&&id!==PILOT_DEALER_ID)throw Error("Эта ссылка уже занята. Придумайте другое");
    return {...index,[url]:id};
-  });
+   });
+  }
   return saved;
  });
  return saved;

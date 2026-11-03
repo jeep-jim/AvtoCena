@@ -430,7 +430,7 @@ export function normalizeShowcase(
     updatedAt: new Date().toISOString(),
   };
   if (!s.name) throw Error("Укажите название дилера");
-  if ((s.citySlug || s.slug) && (!validProfilePart(s.citySlug || "") || !validProfilePart(s.slug || ""))) throw Error("Для ссылки укажите код города и никнейм: 2–40 латинских букв, цифр или дефисов, начиная с буквы");
+  if ((s.slug && !validProfilePart(s.slug)) || (s.citySlug && (!validProfilePart(s.citySlug) || !s.slug))) throw Error("Для ссылки укажите 2–40 латинских букв, цифр или дефисов, начиная с буквы");
   if (!Array.isArray(raw.offices) || raw.offices.length > 100)
     throw Error("Проверьте список офисов");
   s.offices = raw.offices.map((o: any) => ({
