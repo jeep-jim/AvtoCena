@@ -1,9 +1,9 @@
 {
   "date": "2026-11-03",
   "textDrafts": 10,
-  "publicationReadyBatch": false,
+  "publicationReadyBatch": true,
   "published": 0,
-  "reason": "Nine covers not cleared and localized; active China publisher blocks concurrent preparation context. No deploy attempted.",
+  "reason": "Covers completed and inspected. Candidate prepared; CI, merge, installation and live verification pending.",
   "photos": [
     {
       "slug": "porsche-pccm-plus-retrofit-compatibility",
@@ -15,17 +15,7 @@
       "scope": "Editorial reporting only, not advertising; preserve credit. Download decoded and visually inspected; not deployed or tested on site."
     }
   ],
-  "remainingCoverChecks": [
-    "bmw-city-assistant-2027-driver-role",
-    "bmw-m3-six-generations-guide",
-    "porsche-mission-s-design-vision",
-    "bmw-hvo-fuel-approval-guide",
-    "renault-kangoo-52-kwh-pending-range",
-    "alpine-a310-vision-heritage-study",
-    "renault-4-roof-range-battery-choice",
-    "bmw-ix4-launch-plan-2027",
-    "bmw-3-series-production-geography"
-  ],
+  "remainingCoverChecks": [],
   "externalPublications": {
     "dzen": 0,
     "vk": 0,
@@ -34,7 +24,100 @@
   },
   "tests": {
     "blogTestsPassed": 2,
-    "publicationSchema": "not eligible: missing covers"
+    "publicationSchema": "PASS: all 32 seed posts; 10 new posts have local covers and sources; original 22 records unchanged"
   },
-  "catalog": "catalog-check-2026-11-03.json"
+  "catalog": "catalog-check-2026-11-03.json",
+  "media": [
+    {
+      "slug": "bmw-city-assistant-2027-driver-role",
+      "path": "apps/web/public/blog-media/bmw-city-assistant-20261103.svg",
+      "sha256": "80e7d4ebbc7d5a2d6b28624bd2f6b7cceb6cfef18e17cded03e2ad6f2e833dbe",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "bmw-m3-six-generations-guide",
+      "path": "apps/web/public/blog-media/m3-e30-alf-van-beem-20261103.jpg",
+      "sha256": "72cdb1b931ed931d75cb9df9c803288eff0be2641a66a9b091b3105cde46f557",
+      "credit": "Alf van Beem, 03.06.2018; гоночный BMW M3 E30 в музее Spa-Francorchamps. Wikimedia Commons, public domain (PD-self). Историческая иллюстрация.",
+      "kind": "photograph",
+      "rights": "https://commons.wikimedia.org/wiki/File:1992_BMW_M3_E30.jpg",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "porsche-pccm-plus-retrofit-compatibility",
+      "path": "apps/web/public/blog-media/pccm-plus-porsche-20261103.jpg",
+      "sha256": "2d6e062fe0721dda563cd8f0633bc0f43a2a995b203ff37cbdd3ba4d73990501",
+      "credit": "Porsche AG, 2026. Porsche 911 Cabriolet (997), PCCM Plus. Porsche Newsroom: редакционное журналистское использование; не реклама.",
+      "kind": "photograph",
+      "rights": "https://newsroom.porsche.com/en/images-videos/porsche-newsroom-terms-and-conditions.html",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "porsche-mission-s-design-vision",
+      "path": "apps/web/public/blog-media/mission-s-porsche-20261103.jpg",
+      "sha256": "b181e0d8a271eb5ccd86e235d09507b515f932c75247e8ade8c8f1371dc77df3",
+      "credit": "Porsche AG, 2026. Mission S, дизайнерская модель. Porsche Newsroom: редакционное журналистское использование; не реклама.",
+      "kind": "photograph",
+      "rights": "https://newsroom.porsche.com/en/images-videos/porsche-newsroom-terms-and-conditions.html",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "bmw-hvo-fuel-approval-guide",
+      "path": "apps/web/public/blog-media/bmw-hvo-20261103.svg",
+      "sha256": "32bad3b59eab3e7fb64b58acc38ec8443b87ebf614eb14e45e776aca7c0ff173",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "renault-kangoo-52-kwh-pending-range",
+      "path": "apps/web/public/blog-media/kangoo-52kwh-20261103.svg",
+      "sha256": "9e17f0ba90224aa6e48fddf73d1211f56c7e196516d9841df85d90706124e59e",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "alpine-a310-vision-heritage-study",
+      "path": "apps/web/public/blog-media/alpine-a310-timeline-20261103.svg",
+      "sha256": "c8ad189917e62cb779d249e062922acf37b4f08b395bf415e12ca48c7cb6d46c",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "renault-4-roof-range-battery-choice",
+      "path": "apps/web/public/blog-media/renault4-range-20261103.svg",
+      "sha256": "ab81ec8ff238987fc1430c31551a04a5572c2bccd23e55356d9026dec2b102bd",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "bmw-ix4-launch-plan-2027",
+      "path": "apps/web/public/blog-media/bmw-ix4-timeline-20261103.svg",
+      "sha256": "2fccdefb1b22c8d7ba8ba08c7bd377afb2fa98015bab7eebbe48362050889d9d",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    },
+    {
+      "slug": "bmw-3-series-production-geography",
+      "path": "apps/web/public/blog-media/bmw-3series-plants-20261103.svg",
+      "sha256": "4f969e318aa23fd076bb05b1f38074e4a01d1e955747903ab11160f859de3549",
+      "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
+      "kind": "original-editorial-diagram",
+      "rights": "Original AvtoCena editorial SVG",
+      "visuallyInspected": true
+    }
+  ],
+  "candidatePreparedAt": "2026-11-03T03:37:45Z"
 }
