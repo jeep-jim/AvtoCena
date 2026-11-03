@@ -16,16 +16,22 @@ import {SpecTile} from '../../apps/web/components/catalog/OfferSpecTile';
 import {publicRail} from '../../apps/web/lib/dealers/public-rail';
 import {SpecialRail} from '../../apps/web/components/dealers/SpecialRail';
 import {createRoot} from 'react-dom/client';
+import {DealerCabinetNavigation} from '../../apps/web/components/dealers/DealerCabinetNavigation';
+import '../../apps/web/app/(public)/dealer-cabinet/cabinet.css';
 import {DealerWorkspace} from '../../apps/web/components/dealers/DealerWorkspace';
 import {DealerPlatformManager} from '../../apps/web/components/dealers/DealerPlatformManager';
 import {PartnerLanding,KnowledgeBase} from '../../apps/web/components/partners/PartnerPages';
 import {defaultShowcase} from '../../apps/web/lib/dealers/showcase-model';
-import {DEFAULT_PROGRAM} from '../../apps/web/lib/dealers/program-model';
+import {DEFAULT_PROGRAM,EMPTY_MEMBERSHIP} from '../../apps/web/lib/dealers/program-model';
 const q=new URLSearchParams(location.search),kind=q.get('view')||(location.pathname.startsWith('/cars/offer/')?'offer':location.pathname==='/favorites'?'favorites':'')||(location.pathname==='/knowledge'?'knowledge':'editor'),s=defaultShowcase('dealer_topavto');s.description=q.has('long')?'Подбор и доставка автомобилей из шести стран. '+('Поможем выбрать автомобиль, проверим его состояние и организуем доставку в ваш город. '.repeat(6)):'Подбор и доставка автомобилей из шести стран.';s.offices=[{id:'office',city:'Новокузнецк',address:'Пример адреса',phone:'',hours:'10:00–19:00',lat:null,lon:null,photos:[]}];
 Object.assign(s,JSON.parse(sessionStorage.getItem('fixture-server')||'{}'));
 const renderer=kind==='preview-hydration'?null:createRoot(document.getElementById('root')!);
 const root={render:(content:React.ReactNode)=>renderer!.render(<><OverlayBackHistory/>{content}</>)};
-if(kind==='preview-hydration'){
+if(kind==='cabinet'){
+ s.dealerId='dealer_fixture';s.name='АВТОГРАД';s.profileEnabled=true;
+ const active=q.get('access')==='active',membership={...EMPTY_MEMBERSHIP,partnerUntil:active?'2099-01-01T00:00:00Z':''};
+ root.render(<div className="dealer-cabinet-shell"><DealerCabinetNavigation/><main className="dealer-workspace dealer-cabinet-content"><h1 className="dealer-cabinet-title">{s.name}</h1><DealerWorkspace verified={q.get('verified')!=='0'} initial={s} features={{version:0,affiliatesEnabled:false}} membership={membership} fullAccess={active}/></main></div>);
+}else if(kind==='preview-hydration'){
  const preview=<DealerLivePreview value={s} section="overview" verified fullAccess/>;
  const container=document.getElementById('root')!;
  container.innerHTML=renderToString(preview);

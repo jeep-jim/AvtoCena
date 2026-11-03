@@ -1,5 +1,3 @@
-import {readChunkedDataJson} from '@/lib/data';
-import {dealerReviewSummary,type DealerReview} from '@/lib/dealers/review-policy';
 import {redirect} from 'next/navigation';
 import {getCurrentUser} from '@/lib/auth';
 import {isPlatformOwner} from '@/lib/platform-access';
@@ -14,6 +12,5 @@ export default async function Page(){
  const allowed=await canManageDealer(user,user.companyId||'');const s=allowed?await readShowcase(user.companyId!):null;
  if(s&&s.dealerId!=='dealer_topavto'){const current=await readMembership(s.dealerId);if(!current.trialStartedAt&&!current.history.length)await startDealerTrial(s.dealerId);}
  const [program,membership]=await Promise.all([readDealerProgram(),s?readMembership(s.dealerId):Promise.resolve(null)]);
- const reviews=s?dealerReviewSummary(await readChunkedDataJson<DealerReview>(`dealers/${encodeURIComponent(s.dealerId)}/reviews.json`,[]),s.dealerId):null;
- return <main className="dealer-workspace min-h-screen bg-[var(--ac-page-bg)] text-[var(--ac-text)]"><div className="mx-auto max-w-[1500px] px-4 py-8 md:px-8"><h1 className="mb-6 text-3xl font-black">{s?s.name:'Доступ к кабинету'}</h1>{s&&reviews&&<a href={`/dealers/${s.dealerId}#reviews`} className="mb-6 block rounded-2xl border border-[var(--ac-border)] p-5"><strong className="text-2xl">{reviews.count}</strong> отзывов · Рейтинг {reviews.rating??"—"}</a>}{s&&membership?<DealerWorkspace verified={(await findDealer(s.dealerId))?.status==='verified'} initial={s} features={{version:0,affiliatesEnabled:false}} program={program} membership={membership} fullAccess={dealerAccessLevel(s.dealerId,membership).full}/>:<p>Кабинет станет доступен после подтверждения компании и вашего доступа командой АвтоЦены.</p>}</div></main>;
+ return <main className="dealer-workspace dealer-cabinet-content"><h1 className="dealer-cabinet-title">{s?s.name:'Доступ к кабинету'}</h1>{s&&membership?<DealerWorkspace verified={(await findDealer(s.dealerId))?.status==='verified'} initial={s} features={{version:0,affiliatesEnabled:false}} program={program} membership={membership} fullAccess={dealerAccessLevel(s.dealerId,membership).full}/>:<p>Кабинет станет доступен после подтверждения компании и вашего доступа командой АвтоЦены.</p>}</main>;
 }
