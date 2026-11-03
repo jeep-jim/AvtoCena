@@ -2,8 +2,8 @@
   "date": "2026-11-03",
   "textDrafts": 10,
   "publicationReadyBatch": true,
-  "published": 0,
-  "reason": "PR1688 merged after green checks. Single deploy41574459179 in progress; installation and publication not yet verified.",
+  "published": 10,
+  "reason": "Exact release 3b733155 installed; all 10 articles and owned covers verified live. Deployment final postchecks still running at this checkpoint.",
   "photos": [
     {
       "slug": "porsche-pccm-plus-retrofit-compatibility",
@@ -12,7 +12,7 @@
       "source": "https://porschepictures.flowcenter.de/pmdb/thumbnail.cgi?crop=1&cs=c95679972a58d6c9&h=1089&id=340526&public=1&w=1935",
       "credit": "Porsche AG, Porsche 911 Cabriolet (997), Interior, PCCM Plus, 2026",
       "rights": "https://newsroom.porsche.com/en/images-videos/porsche-newsroom-terms-and-conditions.html",
-      "scope": "Editorial reporting only, not advertising; preserve credit. Download decoded and visually inspected; not deployed or tested on site."
+      "scope": "Editorial reporting only, not advertising; credit preserved. Local JPEG decoded, visually inspected and verified on avtocena.com."
     }
   ],
   "remainingCoverChecks": [],
@@ -135,5 +135,11 @@
     "status": "in_progress",
     "conclusion": null
   },
-  "pullRequest": 1688
+  "pullRequest": 1688,
+  "liveVerification": "live-verification-2026-11-03.json",
+  "visualVerification": {
+    "desktop": "Listing and BMW article inspected in light/dark themes; all 10 covers decoded in the browser",
+    "mobile": "Not visually verified in this environment",
+    "screenshot": "verification/editorial-blog-20261103.jpg"
+  }
 }
