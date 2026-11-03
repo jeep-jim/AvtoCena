@@ -2333,3 +2333,20 @@ Old China124685023963/124601674990: по одному запросу снова 
 Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Все ранее прочитанные final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись. Capacity watch не дублировался. Следующий шаг — final существующего collect/publish и новые сохранённые primary результаты авторизованной приёмки/адресного анализа, без watch browser/login/probe/rerun/repair.
 
 Owner freeze сохранён. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Runtime, данные, цены, права и guards не менялись. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 04.11.2026, 05:06 Красноярск — collect Китая завершён, публикация ещё выполняется
+
+Свежие maind4ec70229a7a5c0b580eb575b9321a2b176c4cfe, Road/checklist, PR и existing runs/jobs сверены. Новых primary записей и PR после1694 нет. AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. Новых сохранённых результатов realstafflogin/showcaseSaveconflict/authenticatedblogSave/nativepermission/realpushdelivery и market/feed/binding/cancelcause/finalmanifest анализа нет.
+
+Новый final существующего China41711927294/collect126182293193 SUCCESS04.11 03:53:56 прочитан, НЕ ПОВТОРЯТЬ. Report03:53:27.213: completed=true, mode=local_replica_and_changes, offers284522, changes349337, cursor12709975, replicaSaved=true. Offers и changes — разные единицы, не суммировать; это завершение сбора/локальной реплики, не published inventory. Artifact13269283323 не просмотрен. Успех collect не закрывает исторические сбои публикации.
+
+Единственный IN_PROGRESS — существующий publish126198742555 того же China41711927294, шаг Publish markets through calculation and retention guards с04.11 04:03:43. Итоговый журнал publish НЕ прочитан, final manifest/числа опубликованного inventory не подтверждены. Длительность не устанавливает причину. App deploy нет; watch не запускал/не повторял/не отменял сбор или публикацию.
+
+Existing dealerbilling41716845007/reconcile126198961110 SUCCESS04.11 03:55:09 и container retention41725712148/cleanup126229812800 SUCCESS04.11 04:53:39 — только metadata, журналы НЕ прочитаны; финансовая сверка, изменения доступа/данных и результаты очистки не подтверждаются. Capacity watch не дублировался.
+
+Единственный bounded health04.11 05:05–05:06 завершился curl exit0: ok=true, exactreleasee5cdeb3562a7762b04eedc001d534b534f533cf4, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. PR1694 установлен; health не означает авторизованную приёмку и не закрывает Korea exactrequest503/live_encyclopedia_binding_missing. PerformanceAccepted=false advisory; functional deadline90s сохранён.
+
+Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Прочитанные ранее final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись. Следующий шаг — final существующей публикации и новые сохранённые primary результаты авторизованной приёмки/адресного анализа, без watch browser/login/probe/rerun/repair.
+
+Owner freeze сохранён. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Runtime, данные, цены, права и guards не менялись. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
