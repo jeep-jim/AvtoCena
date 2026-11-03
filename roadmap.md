@@ -20586,3 +20586,16 @@ CRMretry41635838535/deliver125916675412 SUCCESS19:30:47/metrika125916675739 SUCC
 Old China124685023963/124601674990 по одному запросу снова Transport closed, НЕ прочитаны/cause unknown. Прочитанные CI/deploy/collect/primary/browser/diagnostic logs не повторялись. Нового saved market/feed/binding/cancelcause/finalmanifest анализа нет; прежний Korea exactrequest503/causeunknown не закрыт health/gates/sharedprices. Следующий шаг — сохранённая авторизованная primary приёмка последнего кабинета и редактора, адресный saved анализ открытых failures без watch probe/rerun/repair.
 
 Обе истории сохраняются append-only только Road/checklist, additions-only, expected-parent CAS/readback. Watch не менял runtime, цены, данные, права/guards, не создавал/повторял/отменял deploy/collect/diagnostics/browser/provider/cleanup/publications. PerformanceAccepted=false остаётся advisory. Наблюдение enabled до итоговой приёмки последнего кандидата и целей; исторические незавершённости не разрешают нарушать owner freeze.
+
+
+## 03.11.2026, 21:15 Красноярск — сверка без новой приёмки
+
+Свежие main677b23b7b40ebafb1d8812de8b98eba8c60bf942, Road/checklist, PR и existing runs/jobs сверены. Новых primary записей и PR после1693 нет; AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. PR1693 остаётся установленным e9d9ddd21ea1540cec94ef79982d879d43ab7aa6; прочитанные final/primary/CI журналы не повторялись.
+
+Existing REG size breakdown41639984243/inventory125930742300 завершился SUCCESS20:06:25 (run updated20:06:26), только metadata. Final-журнал НЕ прочитан, размеры и фактический результат не утверждаются; отдельный capacity watch не дублировался. IN_PROGRESS0, новых app deploy/continuation нет. SUCCESS metadata не закрывает исторические failures.
+
+Единственный bounded health21:14 завершился curl exit0: ok=true, exactrelease e9d9ddd21ea1540cec94ef79982d879d43ab7aa6, calculationVersione6247b5a21b7cbb1fd1b4d24f297f1c3abdb68a794b106df9cc3dcfb9d87f5c4 unchanged. Это не авторизованная приёмка: realstafflogin/showcaseSaveconflict/authenticatedblogSave/nativepermission/realpushdelivery по-прежнему не проверены. Нового saved market/feed/binding/cancelcause/finalmanifest анализа нет; Korea exactrequest503 остаётся с неизвестной причиной. Следующий шаг — новые сохранённые primary результаты авторизованной приёмки и адресного анализа открытых failures, без watch probe/rerun.
+
+Old China124685023963/124601674990: по одному запросу доступности вернулся Transport closed, журналы НЕ прочитаны/cause unknown. Предварительные вызовы со строковыми job_id отклонены проверкой аргументов до обращения к данным; после исправления типа выполнено по одному запросу. Остальные прочитанные журналы не повторялись.
+
+Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Owner freeze сохранён; runtime/цены/данные/права/guards не менялись, новые запуски не создавались. PerformanceAccepted=false остаётся advisory; health не закрывает прежние failures. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
