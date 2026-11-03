@@ -20709,3 +20709,16 @@ Old China124685023963/124601674990: по одному запросу снова 
 Нового saved market/feed/binding/cancelcause/finalmanifest анализа нет. Исторические failures, включая Korea exactrequest503 и live_encyclopedia_binding_missing, остаются открытыми. Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Все ранее прочитанные final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись; capacity watch не дублировался.
 
 Следующий шаг — новые сохранённые primary результаты авторизованной приёмки и адресного анализа открытых failures, без watch browser/login/probe/rerun/repair. Owner freeze сохранён; runtime, данные, цены, права и guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 04.11.2026, 03:48 Красноярск — существующий плановый сбор Китая выполняется
+
+Свежие mainbd38db20a7f4b8ab19abdca37748149367c6742f, Road/checklist, PR и existing runs/jobs сверены. Новых primary записей и PR после1694 нет. AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. Новых сохранённых результатов realstafflogin/showcaseSaveconflict/authenticatedblogSave/nativepermission/realpushdelivery и market/feed/binding/cancelcause/finalmanifest анализа нет.
+
+Единственный existing IN_PROGRESS — scheduled China41711927294, создан04.11 03:22:13 наbd38db20a7f4b8ab19abdca37748149367c6742f. Plan126181910929 SUCCESS03:22:56 только metadata. Collect126182293193 IN_PROGRESS, шаг Sync Che168 from the complete CSV and then only committed changes с03:24:26. Итоговый журнал collect НЕ прочитан; completed outcome, final manifest и published inventory не подтверждены. Это существующий schedule, не watch-запуск и не доказанный retry/repair прежнего failure. App deploy нет; watch не создавал, не повторял и не отменял запуск.
+
+Единственный bounded health04.11 03:47 завершился curl exit0: ok=true, exactreleasee5cdeb3562a7762b04eedc001d534b534f533cf4, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. PR1694 установлен; health не означает авторизованную приёмку. Исторические failures, включая Korea exactrequest503 с неизвестной причиной и live_encyclopedia_binding_missing, не закрыты. PerformanceAccepted=false advisory; functional deadline90s сохранён.
+
+Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Все ранее прочитанные final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись. Capacity watch не дублировался. Следующий шаг — final существующего collect/publish и новые сохранённые primary результаты авторизованной приёмки/адресного анализа, без watch browser/login/probe/rerun/repair.
+
+Owner freeze сохранён. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Runtime, данные, цены, права и guards не менялись. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
