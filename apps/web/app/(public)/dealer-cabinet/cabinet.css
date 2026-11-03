@@ -1,0 +1,8 @@
+/* Match the established CRM company workspace, scoped to the dealer cabinet. */
+.dealer-cabinet-content,.dealer-cabinet-navigation{max-width:1328px;margin:0 auto;padding:20px 24px 24px;min-width:0}
+.dealer-cabinet-title{font-size:30px;line-height:1.15;font-weight:900;letter-spacing:-.035em;margin:0 0 16px}
+.dealer-cabinet-navigation{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding-top:12px;padding-bottom:12px;border-bottom:1px solid var(--ac-border)}
+.dealer-cabinet-shell .dealer-cabinet-navigation a{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border-radius:11px;background:var(--ac-surface-2);font-size:13px;font-weight:750;color:var(--ac-text);-webkit-text-fill-color:var(--ac-text)}
+html body .dealer-cabinet-shell .dealer-cabinet-navigation a[aria-current=page]{background:#ff353d!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+.dealer-cabinet-navigation a:focus-visible{outline:2px solid #ff5962;outline-offset:3px}
+@media(max-width:760px){.dealer-cabinet-content,.dealer-cabinet-navigation{padding-left:16px;padding-right:16px}}

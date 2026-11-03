@@ -113,6 +113,27 @@ const browser = await chromium.launch({
 });
 
 try{
+ for(const width of [390,1440])for(const theme of ['light','dark']){
+  const page=await browser.newPage({viewport:{width,height:1000}});
+  await page.goto(origin+'/dealer-cabinet?view=cabinet');
+  await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  const active=page.getByRole('navigation',{name:'Кабинет дилера'}).getByRole('link',{name:'Компания',exact:true});
+  await active.waitFor();assert.equal(await active.getAttribute('aria-current'),'page');
+  const colors=await active.evaluate(el=>{const s=getComputedStyle(el);return {text:s.webkitTextFillColor,bg:s.backgroundColor};});
+  assert.equal(colors.text,'rgb(255, 255, 255)');assert.equal(colors.bg,'rgb(255, 53, 61)');
+  await page.getByRole('button',{name:'Страница скрыта Подключение не завершено',exact:true}).waitFor();
+  assert.equal(await page.getByRole('button',{name:'Страница опубликована Готово',exact:true}).count(),0);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  if(width===1440)assert.equal(await page.locator('.dealer-cabinet-content').evaluate(el=>Math.round(el.getBoundingClientRect().width)),1328);
+  await page.screenshot({path:`${out}/cabinet-${width}-${theme}.png`,fullPage:true});
+  await page.getByRole('button',{name:'Страница скрыта Подключение не завершено',exact:true}).click();
+  await page.getByRole('link',{name:'Оферта и выбор режима'}).waitFor();
+  await page.goto(origin+'/dealer-cabinet?view=cabinet&access=active');
+  await page.getByRole('button',{name:'Страница опубликована Готово',exact:true}).waitFor();
+  await page.goto(origin+'/dealer-cabinet?view=cabinet&access=active&verified=0');
+  await page.getByRole('button',{name:'Страница скрыта Компания не подтверждена',exact:true}).waitFor();
+  await page.close();console.log(width,theme,'dealer cabinet navigation and actual publication eligibility OK');
+ }
  {
   const page=await browser.newPage({viewport:{width:1440,height:1050}});
   await page.goto(origin+'?view=preview-hydration');

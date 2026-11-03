@@ -52,6 +52,10 @@ export function DealerEditor({
   useEffect(()=>{const requestedTab=new URLSearchParams(window.location.search).get("tab");if(requestedTab==="telegram")setTab("telegram");if(requestedTab==="access"&&platformOwner)setTab("administration");},[]);
   const [reviewCount,setReviewCount]=useState<number|null>(null);
   useEffect(()=>{if(demo)return;const controller=new AbortController();fetch(`/api/crm/reviews?dealerId=${encodeURIComponent(initial.dealerId)}`,{signal:controller.signal,cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d)setReviewCount(d.total);}).catch(()=>{});return()=>controller.abort();},[initial.dealerId,demo]);
+  const publicationAllowed=demo?fullAccess:(s.dealerId==='dealer_topavto'||verified)&&dealerAccessLevel(s.dealerId,membership).full;
+  const published=s.profileEnabled&&publicationAllowed;
+  const publicationStatus=demo?'Пример в демо':published?'Готово':!s.profileEnabled?'Скрыта':!verified&&s.dealerId!=='dealer_topavto'?'Компания не подтверждена':'Подключение не завершено';
+  const openPublication=()=>setTab(!s.profileEnabled||publicationAllowed?'profile':platformOwner?'administration':'subscription');
   const [offerMode,setOfferMode]=useState<OfferAvailability>('order');
   const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
   useEffect(()=>{
@@ -195,7 +199,7 @@ export function DealerEditor({
       {tab==='overview'&&<div className="space-y-5">
        <section className="dealer-editor-panel"><p className="dw-eyebrow">Ваша компания</p><h2 className="dw-title">{s.name}</h2><p className="dw-muted">Страница, автомобили и обращения — всё начинается здесь.</p><div className="mt-5 flex flex-wrap gap-3"><button type="button" className="dw-primary" onClick={()=>setTab('offers')}><Car size={18}/> Добавить автомобиль</button><Link onClick={openDemoPreview} className={button+' inline-flex items-center gap-2'} href={demo?'#':`/dealers/${s.dealerId}?preview=1`} target={demo?undefined:'_blank'}>Посмотреть страницу <ArrowUpRight size={16}/></Link></div></section>
        <div className="dw-grid dealer-overview-stats">{[['Автомобили',s.offers.filter(o=>o.status==='published').length,'offers'],['Фото выдач',s.buyerPhotos.length,'buyers'],['Направления',dealerMarkets(s.catalogMarkets).length,'markets'],['Отзывы',demo?0:reviewCount??'—','reviews']].map(([label,n,id])=><button key={String(id)} type="button" className="dw-card text-left" onClick={()=>setTab(String(id))}><span className="dw-muted">{label}</span><strong className="dw-stat">{n}</strong></button>)}</div>
-       <section className="dealer-editor-panel"><h2 className="font-bold text-xl">Подготовьте компанию к работе</h2>{[['Название и описание',!!s.name&&!!s.description,'profile'],['Адрес офиса',s.offices.length>0,'offices'],['Направления каталога',dealerMarkets(s.catalogMarkets).length>0,'markets'],['Страница опубликована',s.profileEnabled,'profile']].map(([label,done,id])=><button type="button" className="dw-row w-full text-left" key={String(label)} onClick={()=>setTab(String(id))}><span>{label}</span><span className="dw-badge">{done?'Готово':'Настроить'}</span></button>)}</section>
+       <section className="dealer-editor-panel"><h2 className="font-bold text-xl">Подготовьте компанию к работе</h2>{[['Название и описание',!!s.name&&!!s.description,'profile'],['Адрес офиса',s.offices.length>0,'offices'],['Направления каталога',dealerMarkets(s.catalogMarkets).length>0,'markets']].map(([label,done,id])=><button type="button" className="dw-row w-full text-left" key={String(label)} onClick={()=>setTab(String(id))}><span>{label}</span><span className="dw-badge">{done?'Готово':'Настроить'}</span></button>)}<button type="button" className="dw-row w-full text-left" onClick={openPublication}><span>{published&&!demo?'Страница опубликована':'Страница скрыта'}</span><span className={published&&!demo?'dw-badge':'dw-muted'}>{publicationStatus}</span></button></section>
        {s.dealerId==='dealer_topavto'&&<section className="dealer-editor-panel"><h2 className="font-bold">ТопАвто · компания платформы</h2><p className="dw-muted mt-2">Общие расценки шести рынков уже настроены в разделе «Рынки и расчёт». Здесь вы управляете своей страницей и отдельно добавленными автомобилями.</p></section>}
       </div>}
       {tab==='reviews'&&(demo?<section className="dealer-editor-panel">Отзывы появятся после работы с покупателями.</section>:<DealerReviewsManager dealerId={s.dealerId} onCount={setReviewCount}/>)}
@@ -208,13 +212,12 @@ export function DealerEditor({
           <section className="dealer-editor-panel space-y-5">
             <Toggle
               label="Показывать публичную страницу дилера"
-              status={s.profileEnabled?"Активна":"Скрыта"}
+              status={demo?"Пример в демо":published?"Опубликована":"Скрыта"}
               value={s.profileEnabled}
               onChange={(v) => patch({ profileEnabled: v })}
             />
             <p className="text-sm text-[var(--ac-muted)]">
-              После включения страница станет доступна посетителям. Пока она скрыта, её можете
-              посмотреть только вы.
+              {published?"Страница доступна посетителям.":!publicationAllowed?"Для публикации нужны подтверждение компании и действующий доступ. Настройки страницы сохранены.":"Включите публикацию, чтобы посетители могли открыть страницу."}
             </p>
             <Link
               className={button+" inline-flex items-center gap-2"}
