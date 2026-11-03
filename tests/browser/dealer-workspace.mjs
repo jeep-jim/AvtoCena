@@ -121,6 +121,7 @@ try{
   await active.waitFor();assert.equal(await active.getAttribute('aria-current'),'page');
   const colors=await active.evaluate(el=>{const s=getComputedStyle(el);return {text:s.webkitTextFillColor,bg:s.backgroundColor};});
   assert.equal(colors.text,'rgb(255, 255, 255)');assert.equal(colors.bg,'rgb(255, 53, 61)');
+  assert.ok(await page.getByRole('button',{name:'Выйти',exact:true}).evaluate(el=>getComputedStyle(el).webkitTextFillColor!==getComputedStyle(el).backgroundColor),'logout remains readable in either theme');
   await page.getByRole('button',{name:'Страница скрыта Подключение не завершено',exact:true}).waitFor();
   assert.equal(await page.getByRole('button',{name:'Страница опубликована Готово',exact:true}).count(),0);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
