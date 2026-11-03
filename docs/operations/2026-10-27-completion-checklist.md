@@ -2309,3 +2309,14 @@ Old China124685023963/124601674990: по одному запросу снова 
 Нового saved market/feed/binding/cancelcause/finalmanifest анализа нет. Исторические failures, включая Korea exactrequest503 с неизвестной причиной и live_encyclopedia_binding_missing, не закрываются поздними успехами. Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Прочитанные ранее final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись; capacity watch не дублировался.
 
 Следующий шаг — новые сохранённые primary результаты авторизованной приёмки установленного1694 и адресного анализа открытых failures. Owner freeze сохранён; watch не менял runtime, данные, цены, права и guards, не создавал/повторял/отменял запуски. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 04.11.2026, 02:33 Красноярск — состояние после предыдущей сверки без изменений
+
+Свежие main8157e35394bc2ccdc0bcb48b5185083307810ea9, Road/checklist, PR и existing runs/jobs сверены. Новых primary записей и PR после1694 нет. AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. IN_PROGRESS0; новых app deploy/continuation нет. USD41687472539/refresh126096910970 остаётся SUCCESS00:46:39 только metadata; журнал НЕ прочитан, изменение курса/данных не подтверждается.
+
+Единственный bounded health04.11 02:32–02:33 завершился curl exit0: ok=true, exactreleasee5cdeb3562a7762b04eedc001d534b534f533cf4, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. PR1694 установлен; новых сохранённых результатов realstafflogin/showcaseSaveconflict/authenticatedblogSave/nativepermission/realpushdelivery нет. Health не означает авторизованную приёмку. PerformanceAccepted=false остаётся advisory; functional deadline90s сохранён.
+
+Нового saved market/feed/binding/cancelcause/finalmanifest анализа нет. Исторические failures, включая Korea exactrequest503 и live_encyclopedia_binding_missing, остаются открытыми. Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Все ранее прочитанные final/CI/deploy/collect/primary/browser/diagnostic журналы не повторялись; capacity watch не дублировался.
+
+Следующий шаг — новые сохранённые primary результаты авторизованной приёмки и адресного анализа открытых failures, без watch browser/login/probe/rerun/repair. Owner freeze сохранён; runtime, данные, цены, права и guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории сохраняются append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
