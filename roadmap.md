@@ -20357,3 +20357,13 @@ Old China124685023963/124601674990 по одному запросу снова T
 ### Разрешение владельца на выпуск исправления входа
 
 Владелец ответил «разрешаю» на отправку этого исправления в публичный jeep-jim/AvtoCena и установку после проверок. Разрешение получено. Shell git push не имеет credentials; дальнейшая передача через подключённый GitHub API. Предыдущий deploy41596055310 завершил подготовку цен и выполняет Deploy with rollback and resource measurements; новый deploy до его завершения не запускается.
+
+## 03.11.2026 — исправление входа дилерских сотрудников: PR1691 merged, выпуск372 начат
+
+По явному ответу владельца «разрешаю» код передан через GitHub API. PR1691 finalhead570b19ca43b49db3ff91b14268124bca418d9bdd, merge0f3db204882c7f4c30b77ba7e597b49c77514025. Общий helper в components/auth: расчётная версия base/final одинаковая8d5ba38299884cb646f312f5a930d0d3102eb6afd287ba9717fead54c438d0da. Штатный marker обновлён для разрешённой установки, gates/алгоритмы выпуска не менялись.
+
+Final-head CI41602207260/125803375524 SUCCESS: regression, types, production build. Dealer workspace41602207025/125803374719 SUCCESS, журнал прочитан: desktop/mobile, light/dark, save, gallery, demo, subscriptions, reload и failure recovery прошли. CRM41602206978: browser125803374528 SUCCESS,16unit,88CRM cases,48fixture cases/228openings; live125805672037 SUCCESS36cases/168openings без отправки форм; audit125803376073 SKIPPED по PR-условию. Остальные owner UI, green budget, banner/map, services/editlinks, site controls workflow завершилисьSUCCESS по metadata. Это не вход реального дилера.
+
+Выпуск41603474395 №372 поставлен штатной concurrency-очередью за41596055310, параллельного переключения нет. Предыдущий prepare125783798381 завершёнSUCCESS; final log прочитан: postactivation48samples/3slow, functionalPassed=true, performanceAccepted=false;532groups/4888variants/22635fields проверены08:30:14Z. Health подтвердил предыдущий aeaa587f release. Новая установка372 начала wait-for-astra125808496106; исправление входа ещё НЕ объявляется установленным.
+
+Проверка /crm/managers в отдельном браузере привела к /login: авторизованной сессии нет. Ключи реальных сотрудников не запрашивались/не изменялись, их вход и показанный владельцем конфликт сохранения остаются непроверенными. Продолжение — тот же выпуск372 до terminal и exact health, без второго запуска.
