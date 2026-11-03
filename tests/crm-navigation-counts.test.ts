@@ -10,7 +10,7 @@ test('navigation badges count new visible events, preserve per-user receipts and
  (globalThis as any).__navTest=state;
  const sources:any={
   './crm-activity':'export const readCrmActivity=async()=>globalThis.__navTest.events;',
-  './crm-unified-notifications':'export const readNotifications=async()=>({notifications:globalThis.__navTest.notices});',
+  './crm-unified-notifications':'export const readNotifications=async(user)=>({notifications:globalThis.__navTest.notices,dealerApprovalCount:user.role==="owner"?2:0});',
   './team-ideas':`export const listIdeas=async()=>globalThis.__navTest.ideas;export const ideaReceipts=async(user)=>globalThis.__navTest.ideaSeen[user.id]||{};export const ideaChanges=${ideaChanges.toString()};`,
   './data':'export const readDataJson=async(p,f)=>globalThis.__navTest.seen[p]||f;export const mutateDataJson=async(p,f,fn)=>globalThis.__navTest.seen[p]=fn(globalThis.__navTest.seen[p]||f);'
  };
@@ -18,6 +18,12 @@ test('navigation badges count new visible events, preserve per-user receipts and
  const m={exports:{} as any};new Function('require','module','exports',b.outputFiles[0].text)(require,m,m.exports);
  const user:any={id:'m',role:'manager',companyId:'dealer_topavto',permissions:{documents:false}};
  try{
+  const owner={id:'owner',role:'owner',companyId:'dealer_topavto'};
+  const ownerData=await m.exports.navigationCounts(owner);
+  assert.equal(ownerData.counts['/crm/dealers'],2);
+  assert.equal(ownerData.persistentCounts['/crm/dealers'],2);
+  await m.exports.markNavigationSeen(owner,'/crm/dealers',ownerData.through);
+  assert.equal((await m.exports.navigationCounts(owner)).counts['/crm/dealers'],2);
   let data=await m.exports.navigationCounts(user);
   assert.equal(data.counts['/crm/leads'],1);assert.equal(data.counts['/crm/ideas'],2);assert.equal(data.counts['/crm/chat'],1);assert.equal(data.counts['/crm/clients'],0);
   assert.equal(data.counts['/crm/site'],undefined);assert.equal(data.counts['/crm/documents'],undefined);

@@ -72,6 +72,7 @@ export function Photos({
   single = false,
   limit = 30,
   purpose,
+  sizeHint,
 }: {
   dealerId: string;
   value: DealerPhoto[];
@@ -79,6 +80,7 @@ export function Photos({
   single?: boolean;
   limit?: number;
   purpose?:"profile-banner";
+  sizeHint?:string;
 }) {
   const demo=useDealerDemo(),picker=useRef<HTMLInputElement>(null);
   const [busy,setBusy]=useState(false),[url,setUrl]=useState(''),[error,setError]=useState(''),[progress,setProgress]=useState(''),[drag,setDrag]=useState(false);
@@ -108,7 +110,7 @@ export function Photos({
   function move(i:number,to:number){const next=[...value];const [p]=next.splice(i,1);next.splice(to,0,p);onChange(next);}
   return <div className="dealer-photos space-y-3">
    <div className={`dealer-photo-drop ${drag?'is-dragging':''}`} onDragOver={e=>{e.preventDefault();setDrag(true);}} onDragLeave={()=>setDrag(false)} onDrop={e=>{e.preventDefault();setDrag(false);if(!busy)void upload(e.dataTransfer.files);}}>
-    <ImagePlus size={26}/><div><strong>{single?'Добавить изображение':'Добавить фотографии'}</strong><p>Перетащите сюда или выберите на устройстве</p></div><button type="button" className={button} disabled={busy} onClick={()=>picker.current?.click()}><Upload size={16}/> Выбрать</button>
+    <ImagePlus size={26}/><div><strong>{sizeHint|| (single?'Добавить изображение':'Добавить фотографии')}</strong>{sizeHint&&<p>Рекомендуемый размер · ширина × высота</p>}<p>Перетащите сюда или выберите на устройстве</p></div><button type="button" className={button} disabled={busy} onClick={()=>picker.current?.click()}><Upload size={16}/> Выбрать</button>
     <input ref={picker} aria-label="Загрузить фотографии" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple={!single} hidden disabled={busy} onChange={e=>void upload(e.target.files)}/>
    </div>
    {!!value.length&&<div className={single?'dealer-photo-single':'dealer-photo-grid'}>{value.map((p,i)=><article key={`${p.id}-${i}`} className="dealer-photo-tile">
