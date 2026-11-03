@@ -26,7 +26,7 @@ const cache=new Map<string,{until:number;promise:ReturnType<typeof sources>}>();
 async function sources(user:AuthUser){
  const through=new Date().toISOString();
  const [events,notifications,ideas]=await Promise.all([readCrmActivity(user,500),readNotifications(user),listIdeas(user)]);
- return {through,events,notifications:notifications.notifications,ideas};
+ return {through,events,notifications:notifications.notifications,dealerApprovalCount:notifications.dealerApprovalCount,ideas};
 }
 export async function navigationCounts(user:AuthUser){
  if(!isPlatformTeam(user))throw Error('forbidden');
@@ -45,7 +45,9 @@ export async function navigationCounts(user:AuthUser){
   const changes=ideaChanges(idea,user,ideasSeen[idea.id]);
   counts['/crm/ideas']+=Number(changes.activityChanged)+Number(changes.isNew)+Number(changes.textChanged)+changes.commentIds.length;
  }
- return {counts,through:data.through};
+ const persistentCounts:Record<string,number>={};
+ if('/crm/dealers' in counts&&data.dealerApprovalCount){persistentCounts['/crm/dealers']=data.dealerApprovalCount;counts['/crm/dealers']+=data.dealerApprovalCount;}
+ return {counts,persistentCounts,through:data.through};
 }
 export async function markNavigationSeen(user:AuthUser,section:string,through:string){
  if(!isPlatformTeam(user)||!CRM_SECTIONS.includes(section as any)||gates[section]&&!hasCrmPermission(user,gates[section]))throw Error('forbidden');
