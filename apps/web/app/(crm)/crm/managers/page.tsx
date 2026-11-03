@@ -26,7 +26,7 @@ export default async function CrmManagersPage({searchParams}:{searchParams?:Prom
     readChunkedDataJson<any>("leads/leads.json", []),
     readChunkedDataJson<any>("clients/clients.json", []),
   ]);
-  const managers = allUsers.filter((user) => isCrmRole(user.role) || (user.role === "dealer" && hasCrmPermission(actor,"staff")));
+  const managers = allUsers.filter((user) => user.companyId === actor.companyId && isCrmRole(user.role));
 
   return (
     <CrmShell activeHref="/crm/managers" title="Команда и права" subtitle="Сотрудники компании, их роли, назначенные заявки и доступ к разделам CRM.">
@@ -34,7 +34,8 @@ export default async function CrmManagersPage({searchParams}:{searchParams?:Prom
       <section className="crm-team-intro glass mb-5 rounded-[1.8rem] p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-black">Сотрудники</h2>
+            <h2 className="text-2xl font-black">Сотрудники ТопАвто</h2>
+            {hasCrmPermission(actor,"staff") && <Link href="/crm/dealers" className="mt-2 block text-sm text-red-300">Сотрудники других компаний — в разделе «Дилеры»</Link>}
 
           </div>
           {hasCrmPermission(actor,"staff")?<Link href="/crm/managers/new" className="rounded-xl bg-red-600 px-5 py-3 text-sm font-black text-white">Добавить сотрудника</Link>:null}

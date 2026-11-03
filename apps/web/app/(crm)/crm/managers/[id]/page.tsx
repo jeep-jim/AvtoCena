@@ -39,14 +39,18 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
   const profile=isNew?{}:(await readStaffProfiles())[id]||{};
   const state = first(query.state);
   const message = first(query.message);
+  const dealerId = (user?.companyId || requestedCompany);
+  const externalCompany = dealerId && dealerId !== "dealer_topavto";
+  const teamHref = externalCompany ? `/crm/dealers/${encodeURIComponent(dealerId)}?tab=access` : "/crm/managers";
   const avatar = user?.avatarUrl || defaultManagerAvatar(user?.id || user?.telegramUsername || id);
 
   return (
     <CrmShell activeHref="/crm/managers" title={isNew ? "Новый сотрудник" : user!.displayName} subtitle="Логин, персональный ключ и права доступа в CRM.">
-      <div className="mb-4"><Link href="/crm/managers" className="text-sm font-black text-red-300">← Назад к команде</Link></div>
+      <div className="mb-4"><Link href={teamHref} className="text-sm font-black text-red-300">{externalCompany ? "← Назад к компании" : "← Назад к команде"}</Link></div>
       {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Сотрудник сохранён. При необходимости выдайте персональный ключ.</div> : null}
       {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить сотрудника."}</div> : null}
 
+      {user && externalCompany && <section className="glass mb-4 rounded-2xl p-5"><h2 className="font-bold">Доступ к компании</h2><p className="my-2 text-sm">{user.dealerApproved ? "Доступ сотрудника к компании подтверждён." : "Доступ сотрудника к компании ещё не подтверждён."} Для входа нужны логин и персональный ключ. Кабинет откроется после подтверждения компании и сотрудника.</p><Link href={teamHref} className="text-sm font-bold text-red-300">Проверить компанию и подтвердить доступ →</Link><p className="mt-2 text-sm">Адрес входа: avtocena.com/dealer-cabinet</p></section>}
       <StaffProfileTabs documents={user?<StaffDocuments userId={user.id} canManage={hasCrmPermission(actor,"staff")&&(user.role!=="owner"||actor.role==="owner")}/>:undefined} schedule={user?<TeamSchedule focusUserId={user.id}/>:undefined}>
       {user && <StaffAccess userId={user.id} canManage={hasCrmPermission(actor,"staff")&&(user.role!=="owner"||actor.role==="owner")} self={actor.id===user.id}/> }
       {user&&!hasCrmPermission(actor,"staff")?<StaffAvatarUpload userId={user.id} avatar={avatar}/>:null}
@@ -56,7 +60,7 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
 
         <div className="grid gap-4 md:grid-cols-2">
           <label className="grid gap-2 text-xs font-black normal-case tracking-normal text-white/42">Имя сотрудника<input required name="displayName" defaultValue={user?.displayName || ""} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
-          <label className="grid gap-2 text-xs font-black normal-case tracking-normal text-white/42">Логин<input required name="telegramUsername" defaultValue={user?.telegramUsername ? `@${user.telegramUsername}` : ""} placeholder="username" className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
+          <label className="grid gap-2 text-xs font-black normal-case tracking-normal text-white/42">Логин<input required name="telegramUsername" defaultValue={user?.telegramUsername ? `@${user.telegramUsername}` : ""} placeholder="Латинские буквы, цифры, _" minLength={5} maxLength={33} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
           <label className="grid gap-2 text-xs font-bold">Дата рождения<input type="date" name="birthDate" defaultValue={profile.birthDate||""} className="soft-input rounded-xl px-4 py-3"/></label>
           <label className="grid gap-2 text-xs font-bold">Личный телефон<input type="tel" name="personalPhone" autoComplete="tel" maxLength={40} defaultValue={user?.personalPhone||""} placeholder="+7 (999) 123-45-67" className="soft-input rounded-xl px-4 py-3"/><span className="text-[11px] font-normal text-[var(--ac-muted)]">Для звонков из блока команды.</span></label>
           <StaffWorkplaces addresses={user?.workAddresses} remote={user?.remoteWork}/>

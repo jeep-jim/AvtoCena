@@ -49,7 +49,7 @@ export function DealerEditor({
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
     [tab, setTab] = useState("overview");
-  useEffect(()=>{if(new URLSearchParams(window.location.search).get("tab")==="telegram")setTab("telegram");},[]);
+  useEffect(()=>{const requestedTab=new URLSearchParams(window.location.search).get("tab");if(requestedTab==="telegram")setTab("telegram");if(requestedTab==="access"&&platformOwner)setTab("administration");},[]);
   const [reviewCount,setReviewCount]=useState<number|null>(null);
   useEffect(()=>{if(demo)return;const controller=new AbortController();fetch(`/api/crm/reviews?dealerId=${encodeURIComponent(initial.dealerId)}`,{signal:controller.signal,cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d)setReviewCount(d.total);}).catch(()=>{});return()=>controller.abort();},[initial.dealerId,demo]);
   const [offerMode,setOfferMode]=useState<OfferAvailability>('order');
