@@ -72,7 +72,7 @@ const html =
   '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>';
 const server = http.createServer((req, res) => {
   const u = new URL(req.url, "http://localhost");
-  if (["/", "/autocalc", "/knowledge", "/favorites"].includes(u.pathname)||u.pathname.startsWith("/cars/offer/")) {
+  if (["/", "/dealer-cabinet", "/autocalc", "/knowledge", "/favorites"].includes(u.pathname)||u.pathname.startsWith("/cars/offer/")) {
     res.setHeader("Content-Type", "text/html");
     res.end(html);
     return;
