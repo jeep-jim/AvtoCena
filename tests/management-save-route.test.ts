@@ -24,7 +24,7 @@ test('confirmed save learns the edited drive and only management can update shar
  const request=()=>new Request('https://avtocena.com/api/catalog/offer/car/save',{method:'POST',body:JSON.stringify({draft:{powerHp:'150'},version:null})});
  try{
   const response=await module.exports.POST(request(),{params:Promise.resolve({id:'car'})});assert.equal(response.status,200);assert.equal((await response.json()).knowledgeSaved,true);assert.equal(state.learned[0].offer.drive,'awd');
-  state.team=false;await module.exports.POST(request(),{params:Promise.resolve({id:'car'})});assert.equal(state.learned.length,1);assert.equal(state.saved,2);
-  state.origin=false;assert.equal((await module.exports.POST(request(),{params:Promise.resolve({id:'car'})})).status,403);assert.equal(state.saved,2);
+  state.team=false;assert.equal((await module.exports.POST(request(),{params:Promise.resolve({id:'car'})})).status,403);assert.equal(state.learned.length,1);assert.equal(state.saved,1);
+  state.team=true;state.origin=false;assert.equal((await module.exports.POST(request(),{params:Promise.resolve({id:'car'})})).status,403);assert.equal(state.saved,1);
  }finally{delete (globalThis as any).__managementSaveTest;}
 });
