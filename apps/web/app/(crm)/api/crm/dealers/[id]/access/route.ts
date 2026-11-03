@@ -1,4 +1,4 @@
-import { validStaffLogin } from "@/lib/staff-login";
+import { validStaffLogin } from "@/components/auth/staff-login";
 import {startDealerTrial} from '@/lib/dealers/program-store';
 import {getCurrentUser,getAuthUsers,normalizeTelegramUsername,type AuthUser} from '@/lib/auth';
 import {isPlatformOwner,isPlatformTeam} from '@/lib/platform-access';

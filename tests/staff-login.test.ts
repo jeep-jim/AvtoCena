@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
-import {validStaffLogin} from '../apps/web/lib/staff-login';
+import {validStaffLogin} from '../apps/web/components/auth/staff-login';
 const require=createRequire(import.meta.url);
 test('local staff login accepts numeric identifiers and rejects malformed identifiers',()=>{
  for(const login of ['1111111','dealer_one','nstass','12_ab'])assert.equal(validStaffLogin(login),true,login);

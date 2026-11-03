@@ -1,4 +1,4 @@
-import { validStaffLogin } from "@/lib/staff-login";
+import { validStaffLogin } from "@/components/auth/staff-login";
 import { isPlatformOwner } from "@/lib/platform-access";
 import { NextResponse } from "next/server";
 import {

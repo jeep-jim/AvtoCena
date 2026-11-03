@@ -1,4 +1,4 @@
-import { validStaffLogin } from "@/lib/staff-login";
+import { validStaffLogin } from "@/components/auth/staff-login";
 import {offerCopySetting} from "@/lib/offer-copy";
 import {parseWorkAddresses} from "@/lib/staff-workplaces";
 import {normalizeStaffPhone} from "@/lib/staff-phone";
