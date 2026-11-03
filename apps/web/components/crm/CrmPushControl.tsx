@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Bell, BellOff } from "lucide-react";
+import { requestPushPermission, pushPermissionMessage } from "@/lib/push-permission";
 export function CrmPushControl({userId,customer=false}: {userId: string;customer?:boolean}) {
   const endpoint=customer?"/api/account/push":"/api/crm/push",scope=customer?"/account":"/",worker=customer?"/account-notifications-sw.js":"/crm-push-sw.js";
   const [active, setActive] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState("");
@@ -37,8 +38,11 @@ export function CrmPushControl({userId,customer=false}: {userId: string;customer
   async function toggle() {
     setBusy(true); setMessage("");
     try {
-      if (!supported) { setMessage("На iPhone добавьте сайт на экран «Домой» и откройте его оттуда. Нужен iOS 16.4 или новее."); return; }
-      if (!active && await Notification.requestPermission() !== "granted") { setMessage("Разрешите уведомления для сайта в настройках браузера."); return; }
+      if (!supported) { setMessage(/iPhone|iPad|iPod/.test(navigator.userAgent) ? "На iPhone добавьте сайт на экран «Домой» и откройте его оттуда. Нужен iOS 16.4 или новее." : "Этот браузер не поддерживает push-уведомления."); return; }
+      if (!active) {
+        const permission = await requestPushPermission(Notification);
+        if (permission !== "granted") { setMessage(pushPermissionMessage(permission)); return; }
+      }
       const registration = await navigator.serviceWorker.register(worker, {scope});
       await waitForPushWorker(registration);
       let subscription = await registration.pushManager.getSubscription();
@@ -50,15 +54,16 @@ export function CrmPushControl({userId,customer=false}: {userId: string;customer
         }
         remember(false);setActive(false); return;
       }
-      const config = await fetch(endpoint, {cache: "no-store"}); if (!config.ok) throw Error();
-      const {publicKey} = await config.json();
-      const bytes = Uint8Array.from(atob(publicKey.replace(/-/g, "+").replace(/_/g, "/")), char => char.charCodeAt(0));
-      if(subscription&&!active){await subscription.unsubscribe();subscription=null;}
-      subscription ||= await registration.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: bytes});
+      if (!subscription) {
+        const config = await fetch(endpoint, {cache: "no-store"}); if (!config.ok) throw Error();
+        const {publicKey} = await config.json();
+        const bytes = Uint8Array.from(atob(publicKey.replace(/-/g, "+").replace(/_/g, "/")), char => char.charCodeAt(0));
+        subscription = await registration.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: bytes});
+      }
       const response = await fetch(endpoint, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(subscription)});
       remember(true);setActive(true);
       if (!response.ok) { setMessage("Подписка включена. Повторим синхронизацию при возвращении на сайт."); return; }
-      setActive(true); setMessage("Уведомления на этом устройстве включены. Звук push настраивается в телефоне.");
+      setActive(true); setMessage("Уведомления на этом устройстве включены.");
     } catch { setMessage("Не удалось сохранить подписку. Проверьте разрешения браузера и повторите."); }
     finally { setBusy(false); }
   }
