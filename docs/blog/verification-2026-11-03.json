@@ -3,7 +3,7 @@
   "textDrafts": 10,
   "publicationReadyBatch": true,
   "published": 10,
-  "reason": "Exact release 3b733155 installed; all 10 articles and owned covers verified live. Deployment final postchecks still running at this checkpoint.",
+  "reason": "Published and verified: exact release 3b733155; deploy41574459179 completed successfully. All 10 articles/covers and all 32 listing links checked.",
   "photos": [
     {
       "slug": "porsche-pccm-plus-retrofit-compatibility",
@@ -129,12 +129,7 @@
     }
   ],
   "candidatePreparedAt": "2026-11-03T03:37:45Z",
-  "deployment": {
-    "runId": 41574459179,
-    "releaseSha": "3b73315578e96faaa4817a2b57fca81aa66dc0f3",
-    "status": "in_progress",
-    "conclusion": null
-  },
+  "deployment": "deployment-2026-11-03.json",
   "pullRequest": 1688,
   "liveVerification": "live-verification-2026-11-03.json",
   "visualVerification": {
