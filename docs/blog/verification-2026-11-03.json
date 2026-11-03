@@ -24,14 +24,16 @@
   },
   "tests": {
     "blogTestsPassed": 2,
-    "publicationSchema": "PASS: all 32 seed posts; 10 new posts have local covers and sources; original 22 records unchanged"
+    "publicationSchema": "PASS: all 32 seed posts; 10 new posts have local covers and sources; original 22 records unchanged",
+    "typecheck": "PASS: npm run typecheck",
+    "coverGeometry": "7 SVG covers use 1200×750, matching the existing 16:10 card crop; rendered and visually checked"
   },
   "catalog": "catalog-check-2026-11-03.json",
   "media": [
     {
       "slug": "bmw-city-assistant-2027-driver-role",
       "path": "apps/web/public/blog-media/bmw-city-assistant-20261103.svg",
-      "sha256": "80e7d4ebbc7d5a2d6b28624bd2f6b7cceb6cfef18e17cded03e2ad6f2e833dbe",
+      "sha256": "3675998ade030f6f33b4a3592a794fe1940fdc99ecae671a63b09729bbf8d86c",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
@@ -67,7 +69,7 @@
     {
       "slug": "bmw-hvo-fuel-approval-guide",
       "path": "apps/web/public/blog-media/bmw-hvo-20261103.svg",
-      "sha256": "32bad3b59eab3e7fb64b58acc38ec8443b87ebf614eb14e45e776aca7c0ff173",
+      "sha256": "e35926f57b0af04cf5157e394ca42b48337f2ed51f5fb7f7638e05fe7f709206",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
@@ -76,7 +78,7 @@
     {
       "slug": "renault-kangoo-52-kwh-pending-range",
       "path": "apps/web/public/blog-media/kangoo-52kwh-20261103.svg",
-      "sha256": "9e17f0ba90224aa6e48fddf73d1211f56c7e196516d9841df85d90706124e59e",
+      "sha256": "d1b47300988f89853ca8fced20102a6cdfd75a22391dbe9a70b14ece9d326c23",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
@@ -85,7 +87,7 @@
     {
       "slug": "alpine-a310-vision-heritage-study",
       "path": "apps/web/public/blog-media/alpine-a310-timeline-20261103.svg",
-      "sha256": "c8ad189917e62cb779d249e062922acf37b4f08b395bf415e12ca48c7cb6d46c",
+      "sha256": "24ff5cbe348313bdb3168173e5ff4f5bd0b3ccf726376a980f1238b4f04f4133",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
@@ -94,7 +96,7 @@
     {
       "slug": "renault-4-roof-range-battery-choice",
       "path": "apps/web/public/blog-media/renault4-range-20261103.svg",
-      "sha256": "ab81ec8ff238987fc1430c31551a04a5572c2bccd23e55356d9026dec2b102bd",
+      "sha256": "f7b22130648aef07b430cd9488a7a6546587ebf22b29fdbe6a9d7387621de151",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
@@ -103,7 +105,7 @@
     {
       "slug": "bmw-ix4-launch-plan-2027",
       "path": "apps/web/public/blog-media/bmw-ix4-timeline-20261103.svg",
-      "sha256": "2fccdefb1b22c8d7ba8ba08c7bd377afb2fa98015bab7eebbe48362050889d9d",
+      "sha256": "40488cf43dabf192500c72e3156d0ec27742376fb95118aefab4d4de7097332e",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
@@ -112,7 +114,7 @@
     {
       "slug": "bmw-3-series-production-geography",
       "path": "apps/web/public/blog-media/bmw-3series-plants-20261103.svg",
-      "sha256": "4f969e318aa23fd076bb05b1f38074e4a01d1e955747903ab11160f859de3549",
+      "sha256": "1f3dcbb781b5297dc2ae46f120692f8867364ccf55f293776f5106a0767d2477",
       "credit": "Редакционная схема АвтоЦены по указанному первоисточнику. Оригинальная графика; не фотография автомобиля.",
       "kind": "original-editorial-diagram",
       "rights": "Original AvtoCena editorial SVG",
