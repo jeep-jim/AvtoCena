@@ -20465,3 +20465,14 @@ Old China124685023963/124601674990 по одному запросу снова T
 ### Разрешение на выпуск
 
 Владелец явно ответил «разрешаю» на публикацию в публичный jeep-jim/AvtoCena и установку после проверок. Shell git push не имеет credentials; передача выполняется через подключённый GitHub API. Последняя запись main ac3dcb2 сохранена при rebase; изменения приложения относительно проверенной версии не менялись.
+
+
+## 03.11.2026 — PR1692 объединён, установка исправлений дилеров началась
+
+По явному «разрешаю» владельца исправление опубликовано через GitHub API (shell push без credentials). PR https://github.com/jeep-jim/AvtoCena/pull/1692 , final head 54af82227fd63ef9d61495ea229cbbb834433de1, merge 87ad792abbac16a4bb83991ff0049ac189cf7f22. Сохранена последняя запись main ac3dcb2, конфликт append-only Road разрешён сохранением обеих историй. Обновлены старые browser fixtures под поиск по названию/городу и явный баннер; runtime после локальной итоговой сборки не менялся.
+
+Все семь final-head PR workflows SUCCESS. CI41614276478/job125843680114 прочитан: regression, типы, production build, 56/56 static pages PASS. Dealer workspace41614276490/job125843679619 прочитан:26tests PASS, 390/1440 light/dark, save/gallery/demo/plans, subscriptions/failure recovery, profile geometry/live updates/reload/privacy/no overflow OK; artifact13220557119 не скачивался. Остальные проверки SUCCESS по metadata. Это fixture-проверки, не вход в реальный дилерский кабинет.
+
+Штатная установка https://github.com/jeep-jim/AvtoCena/actions/runs/41615518962 началась, сейчас wait-for-astra125847897265. Второй deploy не запускался, guards и алгоритм установки не менялись. До установки публичный health вернул прежний0f3db204882c7f4c30b77ba7e597b49c77514025 и calc8d5ba38299884cb646f312f5a930d0d3102eb6afd287ba9717fead54c438d0da. Новая консервативная calculationVersion e6247b5a21b7cbb1fd1b4d24f297f1c3abdb68a794b106df9cc3dcfb9d87f5c4 обусловлена изменениями lib/dealers; расчётные алгоритмы не менялись.
+
+Публичная проверка старой версии: /dealers показывает только TopAvto. /bsk/avtograd отдаёт metadata АВТОГРАД, затем NEXT_HTTP_ERROR_FALLBACK;404 и NEXT_REDIRECT;replace;/cars;308. Профиль существует, но availableShowcase не пропускает его в публичный доступ (подтверждение компании/срок доступа); точное частное состояние не прочитано. Глобальный not-found переводит на /cars. Нельзя объявлять это исчезновением записи или обещать, что одна правка directory обойдёт условия публикации. Реальные права/подписки не менялись. Итог установки и live список пока не подтверждены.
