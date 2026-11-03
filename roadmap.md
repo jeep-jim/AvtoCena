@@ -20153,3 +20153,14 @@ China41538213115/publish125610704878 всё ещё IN_PROGRESS, Publish с06:15:
 Единственный bounded health11:22–11:23 завершился curl0: ok=true, exact6ceaceadb9773c69f2e33af31bed3a555864c01f, calculationVersion269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8 прежний. Это не установка1688, не UI/Save acceptance и не объяснение прежних transport failures. Все ранее прочитанные final/deploy/market/collect/Direct/sharedprices/primary журналы не повторены.
 
 Обе истории и все primary материалы сохранены; только Road/checklist append-only expected-parentCAS поверх свежего primary main с readback. Watch runtime/данные/цены/права/guards не менял; deploy/repair/collect/diagnostics/browser/login/provider/cleanup/publications не запускал, не повторял и не отменял. Capacity watch не дублировался. Далее existing relevant finals и новые primary saved результаты; owner freeze и наблюдение enabled сохраняются до итоговой приёмки.
+
+
+## 03.11.2026, 11:19 Красноярск — по новому поручению восстановлен клиентский путь включения push
+
+Владелец показал desktop-меню с «Включить push на устройстве» и подсказкой перейти в настройки браузера. По одному скриншоту нельзя различить Notification.permission=default и denied. В CrmPushControl оба результата requestPermission ранее сводились к одной подсказке; такой текст существовал уже до0ec1f16ee, поэтому недавняя причина отказа браузера не установлена. История до0ec1f16ee показывает повторное использование существующей подписки; текущий код её безусловно отписывал при active=false.
+
+Кандидат: granted больше не вызывает повторный requestPermission; default вызывает нативный запрос непосредственно в стеке клика, до сетевых/worker await; закрытый/default запрос предлагает повтор, только denied объясняет сохранённый запрет браузера. Действующая подписка повторно используется без unsubscribe/subscribe. Десктопу не показывается общая неподходящая инструкция для iPhone, успешный текст относится к устройству. Запрет браузера не обходится, системное разрешение не имитируется. Auth/origin/endpoint validation/sessionVersion/delivery и scopes CRM/account не менялись.
+
+Проверки:6/6 push-permission + crm-push-policy + crm-push-delivery PASS; npm run typecheck PASS. MDN primary: https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static . Нативное разрешение в браузере владельца и получение реального push не проверены: его permission-state/авторизованная сессия здесь не доступны. Это исправление выявленных клиентских веток, не доказательство причины конкретного browser denial.
+
+Текущий blog deploy41574459179/3b733155 продолжает Prepare exact price indexes before activating the release. Второй одновременный deploy не создавать: новый кандидат отправляется на CI, merge/установка только после завершения текущего запуска. Все10 статей и прежние22 сохранены. Рынки/парсеры/расчёты/deploy-логика не изменены.
