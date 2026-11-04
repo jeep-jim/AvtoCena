@@ -20828,3 +20828,13 @@ China41711927294/publish126198742555 остаётся FINAL FAILURE07:34:36 по
 Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Следующий адресный primary saved analysis — publish outcome/report/final log и final public manifest с конкретным условием verifier; отдельно сохранённые request/response/configuration/authorization для translation403. Без новых доказательств не объявлять готовность и не повторять runtime/provider операции.
 
 Owner freeze сохранён; runtime/данные/цены/права/guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 04.11.2026 — ежедневный выпуск автоблога: подготовка начата
+
+Прочитаны AGENTS.md, актуальный roadmap и docs/blog/editorial-policy.md. Сверены 32 seed-статьи и прошлые редакционные материалы. Подбираются 10 разных публикаций, первоисточники и разрешённые фотографии; архивные даты отделяются от новостей. Публикация и deploy пока не запускались. Рынки, парсеры, цены и runtime-логика не меняются. Внешние каналы Дзен/VK не подтверждены; адаптации будут сохранены без отправки.
+
+
+## 04.11.2026 — редакционный пакет подготовлен, установка ещё не начата
+
+10 статей: porsche-pcm-2026-hardware-and-availability, toyota-monza-2026-drivers-title-preview, ioniq-9-six-or-seven-seats-guide, porsche-recycled-cathode-not-whole-battery, leipzig-one-line-different-powertrains, cayenne-s-electric-charging-conditions, cayenne-coupe-electric-aerodynamics-tradeoff, porsche-pccb-brakes-check-specification, porsche-3d-seat-comfort-layer-explained, porsche-transaxle-front-engine-rear-gearbox. Точные названия, даты и первоисточники: docs/blog/editorial-2026-11-04.md. Два свежих анонса (PCM03.11, ToyotaMonza02.11), восемь явно архивных разборов. Фото10/10 JPEG, права/исходники/SHA в media-check-2026-11-04.json; каталог проверен, evidence в catalog-check-2026-11-04.json. 32 прежние записи без изменений; blog.test.ts2/2PASS, diffcheckPASS. Штатный marker сохраняет все существующие guards/scope; CI/merge/deploy/live ещё не подтверждены. 10Дзен+10VK сохранены; внешних публикаций0, каналы не подтверждены.
