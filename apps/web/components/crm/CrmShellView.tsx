@@ -1,3 +1,4 @@
+import {CrmWorkspaceFrame,CrmPageHeading} from './CrmWorkspaceFrame';
 import {Gamepad2} from 'lucide-react';
 
 import {CrmNavigation} from './CrmNavigation';
@@ -8,19 +9,5 @@ import { CrmThemeToggle } from "./CrmThemeToggle";
 import { CrmLiveAlerts } from "./CrmLiveAlerts";
 import type { ReactNode } from "react";
 export function CrmShellView({title,subtitle,activeHref,user,links,avatar,children}:{title:string;subtitle:string;activeHref:string;user:{id:string;role:string;displayName:string;permissions?:CrmPermissions};links:Array<readonly [string,string]>;avatar:string;children:ReactNode}) {
- return <main className="crm-root crm-workspace min-h-screen">
-  <header className="crm-header">
-   <div className="crm-header-inner">
-    <div className="crm-topbar">
-     <Link href="/" className="crm-brand"><img src="/logo/avtocena-mark-dark.svg" className="crm-brand-mark" width={36} height={36} alt="" /><span>CRM</span></Link>
-     <div className="crm-header-actions">{hasCrmPermission(user as AuthUser,"game")?<Link href="/crm/game" prefetch={false} className="crm-game-link crm-header-game" aria-label="Старт — игры"><Gamepad2 size={20} aria-hidden="true"/><span className="crm-game-label">Старт</span></Link>:null}<CrmThemeToggle/><CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} crm canCreateSelection={hasCrmPermission(user as AuthUser,"dealers")} avatar={avatar}/></div>
-    </div>
-    <CrmNavigation links={links} activeHref={activeHref} userId={user.id}/>
-   </div>
-  </header>
-  <div className="crm-content">
-   <div className="crm-page-heading"><h1>{title}</h1><details className="crm-page-help"><summary>О разделе</summary><p>{subtitle}</p></details></div>
-   {children}
-  </div>
- </main>;
+ return <CrmWorkspaceFrame actions={<>{hasCrmPermission(user as AuthUser,"game")?<Link href="/crm/game" prefetch={false} className="crm-game-link crm-header-game" aria-label="Старт — игры"><Gamepad2 size={20} aria-hidden="true"/><span className="crm-game-label">Старт</span></Link>:null}<CrmThemeToggle/><CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} crm canCreateSelection={hasCrmPermission(user as AuthUser,"dealers")} avatar={avatar}/></>} navigation={<CrmNavigation links={links} activeHref={activeHref} userId={user.id}/>}><CrmPageHeading title={title} help={subtitle}/>{children}</CrmWorkspaceFrame>;
 }

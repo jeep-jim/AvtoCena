@@ -1,3 +1,4 @@
+import {CrmLeadSummary,CrmLeadLayoutToggle,CRM_LEAD_CARD_CLASS} from '@/components/crm/CrmRecordViews';
 import {LeadFilters,CollapseLead} from "@/components/crm/LeadFilters";
 import {leadColumn} from "@/lib/crm-lead-board";
 import {LeadBoard} from "@/components/crm/LeadBoard";
@@ -163,7 +164,7 @@ export default async function CrmLeadsPage({
         ))}
 
       </div>
-      <ManualLeadForm offices={user.workAddresses||[]} headerBefore={<div className="crm-lead-layout" aria-label="Вид заявок">{[["list","Список"],["board","По этапам"]].map(([key,label])=><Link key={key} href={layoutHref(key)} aria-current={(board?"board":"list")===key?"page":undefined}>{label}</Link>)}</div>} headerAside={
+      <ManualLeadForm offices={user.workAddresses||[]} headerBefore={<CrmLeadLayoutToggle listHref={layoutHref('list')} boardHref={layoutHref('board')} board={board}/>} headerAside={
       <LeadFilters key={JSON.stringify(params)} count={["q","status","manager","date","dealer"].filter(key=>first(params[key])).length}>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view==="my"?"all":view} />
@@ -231,9 +232,9 @@ export default async function CrmLeadsPage({
               key={lead.id}
               id={lead.id}
               open={id === lead.id}
-              className="crm-lead-card group overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]"
+              className={CRM_LEAD_CARD_CLASS}
             >
-              <summary className="crm-lead-summary grid cursor-pointer list-none grid-cols-[64px_1fr] items-center gap-3 p-4 md:grid-cols-[80px_1.4fr_1.4fr_1fr_auto] [&::-webkit-details-marker]:hidden">
+              <CrmLeadSummary>
                 {car?.image ? (
                   <img
                     src={safeHref(car.image)}
@@ -288,7 +289,7 @@ export default async function CrmLeadsPage({
                     <span className="crm-lead-open-label">Открыть ↓</span><span className="crm-lead-close-label">Свернуть ↑</span>
                   </div>
                 </div>
-              </summary>
+              </CrmLeadSummary>
               <div className="border-t border-[var(--ac-border)] p-4 md:p-5">
                 <CollapseLead/>
                 <div className="crm-lead-detail-grid">

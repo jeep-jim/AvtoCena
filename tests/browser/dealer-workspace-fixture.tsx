@@ -16,6 +16,7 @@ import {SpecTile} from '../../apps/web/components/catalog/OfferSpecTile';
 import {publicRail} from '../../apps/web/lib/dealers/public-rail';
 import {SpecialRail} from '../../apps/web/components/dealers/SpecialRail';
 import {createRoot} from 'react-dom/client';
+import {CrmWorkspaceFrame,CrmPageHeading} from '../../apps/web/components/crm/CrmWorkspaceFrame';
 import {DealerCabinetNavigation} from '../../apps/web/components/dealers/DealerCabinetNavigation';
 import '../../apps/web/app/(public)/dealer-cabinet/cabinet.css';
 import {DealerWorkspace} from '../../apps/web/components/dealers/DealerWorkspace';
@@ -30,7 +31,7 @@ const root={render:(content:React.ReactNode)=>renderer!.render(<><OverlayBackHis
 if(kind==='cabinet'){
  s.dealerId='dealer_fixture';s.name='АВТОГРАД';s.profileEnabled=true;
  const active=q.get('access')==='active',membership={...EMPTY_MEMBERSHIP,partnerUntil:active?'2099-01-01T00:00:00Z':''};
- root.render(<div className="dealer-cabinet-shell"><DealerCabinetNavigation/><main className="dealer-workspace dealer-cabinet-content"><h1 className="dealer-cabinet-title">{s.name}</h1><DealerWorkspace verified={q.get('verified')!=='0'} initial={s} features={{version:0,affiliatesEnabled:false}} membership={membership} fullAccess={active}/></main></div>);
+ root.render(<CrmWorkspaceFrame actions={null} navigation={<DealerCabinetNavigation/>}><section className="dealer-workspace dealer-cabinet-content"><CrmPageHeading title={s.name}/><DealerWorkspace verified={q.get('verified')!=='0'} initial={s} features={{version:0,affiliatesEnabled:false}} membership={membership} fullAccess={active}/></section></CrmWorkspaceFrame>);
 }else if(kind==='preview-hydration'){
  const preview=<DealerLivePreview value={s} section="overview" verified fullAccess/>;
  const container=document.getElementById('root')!;

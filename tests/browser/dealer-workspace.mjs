@@ -58,7 +58,7 @@ const css = await postcss([
   tailwindcss({
     content: [
       "tests/browser/dealer-workspace-fixture.tsx",
-      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal,ui}/**/*.tsx",
+      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal,ui,crm}/**/*.tsx",
       "apps/web/app/(public)/favorites/page.tsx",
     ],
   }),

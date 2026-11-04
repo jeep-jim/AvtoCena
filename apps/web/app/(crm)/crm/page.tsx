@@ -1,3 +1,4 @@
+import {CrmMetricCards} from '@/components/crm/CrmWorkspaceFrame';
 import {SiteAnalytics} from "@/components/crm/SiteAnalytics";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {ActivityFeed} from "@/components/crm/ActivityFeed";
@@ -28,12 +29,7 @@ export default async function CrmPage() {
 
   return (
     <CrmShell activeHref="/crm" title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">
-      <div className="crm-metrics grid grid-cols-2 gap-3 md:grid-cols-4">
-        <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Все лиды</div><div className="mt-2 text-4xl font-black">{leads.length}</div></div>
-        <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Мои заявки</div><div className="mt-2 text-4xl font-black">{myLeads.length}</div></div>
-        <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Клиенты</div><div className="mt-2 text-4xl font-black">{clients.length}</div></div>
-        <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Менеджеры</div><div className="mt-2 text-4xl font-black">{managers.length}</div></div>
-      </div>
+      <CrmMetricCards items={[{label:'Все лиды',value:leads.length},{label:'Мои заявки',value:myLeads.length},{label:'Клиенты',value:clients.length},{label:'Менеджеры',value:managers.length}]}/>
 
       <StaffPresence />
       <div className="crm-overview-columns mt-5 grid gap-5 lg:grid-cols-[1fr_340px]">
