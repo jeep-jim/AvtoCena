@@ -39,7 +39,7 @@ export async function AjesRail({market='japan',params={},prepared}:{market?:'jap
  const total=exactAjesCount(count);
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
-   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{count||unavailable?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}</h2>
+   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{count?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}</h2>
    <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
 

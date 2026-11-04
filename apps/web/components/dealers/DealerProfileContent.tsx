@@ -74,7 +74,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   <section className="dealer-profile-identity dealer-sheet">
    <div className="dealer-identity-row">
     <button type="button" className="dealer-avatar dealer-avatar-centered" aria-label={`Открыть логотип ${s.name}${verified?' · Проверенный дилер':''}`} onClick={()=>logoDialog.current?.showModal()}><span className="dealer-avatar-face">{logo}</span></button>
-    <div className="dealer-profile-metrics"><button type="button" onClick={()=>section('reviews')}><RatingIcon/><strong>{reviews.rating??'—'}</strong><span>Рейтинг</span></button><button type="button" onClick={()=>section('specials')}><OfferIcon/><strong>{items.length.toLocaleString('ru-RU')}</strong><span>Предложения</span></button></div>
+    <div className="dealer-profile-metrics"><button type="button" onClick={()=>section('reviews')}><RatingIcon/><strong>{reviews.rating??'—'}</strong><span>Рейтинг</span></button><button type="button" onClick={()=>section('specials')}><OfferIcon/><strong>{items.length.toLocaleString('ru-RU')}</strong><span>Свои предложения</span></button></div>
     <p className="dealer-identity-divider"><span>{verified&&<BadgeCheck className="dealer-verified-mark" size={20} aria-label="Проверенный дилер"/>}Дилер</span></p>
     <div className="dealer-identity-title"><div className="dealer-title-line"><h1>{s.name}</h1></div></div>
    </div>

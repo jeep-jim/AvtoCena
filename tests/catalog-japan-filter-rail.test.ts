@@ -27,7 +27,12 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  const tree=await m.exports.CatalogContent({params});const elements:any[]=[];
  const walk=(node:any)=>{if(Array.isArray(node)){node.forEach(walk);return;}if(!node||typeof node!=='object')return;elements.push(node);walk(node.props?.children);walk(node.props?.header);};walk(tree);
  const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');
- const summary=await counter.props.summary;assert.deepEqual(summary,{total:32,countIncomplete:true});
+ const summary=await counter.props.summary;assert.deepEqual(summary,{total:31,countIncomplete:true});
+ const label=await counter.type(counter.props);assert.equal(label.type(label.props).props.children,'Общее количество уточняется');
+ const dealer={id:'test',markets:['japan'],href:'/dealers/test',preview:false};
+ elements.length=0;walk(await m.exports.CatalogContent({params,dealer,embedded:true}));
+ assert.deepEqual(await elements.find(x=>x.type?.name==='ResolvedCatalogCount').props.summary,{total:11,countIncomplete:false});
+ elements.length=0;walk(tree);
  const rails=elements.filter(x=>x.type?.name==='AjesRail');
  assert.equal(rails.length,3);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);
  const green=elements.find(x=>x.type?.name==='GreenCornerRail');assert.equal(green.props.total,1);assert.equal(green.props.items[0].id,'match');

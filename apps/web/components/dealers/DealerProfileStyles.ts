@@ -118,7 +118,42 @@ html[data-theme] body .dealer-subscription-control>button,html[data-theme] body 
 .dealer-profile .dealer-intro,.dealer-profile .dealer-expand{transition:none!important;animation:none!important;touch-action:manipulation}
 /* One desktop grid places the existing filters alongside the whole dealer page. */
 @media(min-width:1024px){
- .dealer-profile--with-catalog{display:grid;grid-template-columns:292px minmax(0,1fr);column-gap:28px;align-items:start}
+ .dealer-profile--with-catalog,body:has(.ac-dealer-public-page .dealer-profile--with-catalog){
+  --dealer-filter-width:292px;
+  --dealer-column-gap:28px;
+ }
+ .ac-dealer-public-page .ac-public-header button[aria-label="Назад"]{display:none}
+ .ac-dealer-public-page>.dealer-profile{margin-top:16px}
+ .dealer-profile--with-catalog{display:grid;grid-template-columns:var(--dealer-filter-width) minmax(0,1fr);column-gap:var(--dealer-column-gap);align-items:start}
+ .ac-dealer-public-page .dealer-profile-identity:before{
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--ac-surface) 58%,transparent),var(--ac-surface) 100px);
+  -webkit-backdrop-filter:blur(18px) saturate(130%);
+  backdrop-filter:blur(18px) saturate(130%);
+ }
+ .ac-dealer-public-page .dealer-profile-footer>.dealer-requisites{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,auto);
+  column-gap:24px;
+ }
+ .ac-dealer-public-page .dealer-profile-footer h3,.ac-dealer-public-page .dealer-profile-footer p{grid-column:1}
+ .ac-dealer-public-page .dealer-profile-footer dl{grid-column:2;grid-row:1 / span 2;align-self:start}
+ body:has(.ac-dealer-public-page .dealer-profile--with-catalog) .ac-public-legal-footer{
+  display:grid;
+  grid-template-columns:var(--dealer-filter-width) minmax(0,1fr);
+  column-gap:var(--dealer-column-gap);
+ }
+ body:has(.ac-dealer-public-page .dealer-profile--with-catalog) .ac-public-legal-footer>div{grid-column:2}
+ body:has(.ac-dealer-public-page) .ac-public-footer-navigation{border-top:1px solid var(--ac-border)}
+ body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-public-footer-tools{max-width:none;grid-template-columns:repeat(2,minmax(0,190px)) minmax(0,1fr)}
+ body:has(.ac-dealer-public-page) .ac-footer-dealer-home{justify-self:end;width:min(100%,284px)}
+ body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-footer-dealer-attribution{display:inline}
+ body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-footer-dealer-label{display:none}
+ body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-public-legal-footer-line{grid-template-columns:auto minmax(0,1fr);gap:20px 24px}
+ body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-public-legal-footer-line>p{grid-column:1/-1;max-width:none}
+ .ac-dealer-public-page .dealer-profile--with-catalog #catalog .ac-catalog-sidebar{
+  top:calc(var(--dealer-header-height,88px) + 16px);
+  max-height:calc(100dvh - var(--dealer-header-height,88px) - 32px);
+ }
  .dealer-profile--with-catalog>.dealer-profile-home-banner{grid-column:2;grid-row:1}
  .dealer-profile--with-catalog>.dealer-profile-sheet,
  .dealer-profile--with-catalog>.dealer-profile-sheet>.dealer-profile-body,
@@ -142,5 +177,10 @@ html[data-theme] body .dealer-subscription-control>button,html[data-theme] body 
  .dealer-profile--with-catalog #catalog .ac-catalog-results{scroll-margin-top:90px}
  .dealer-profile--with-catalog #catalog .ac-catalog-sidebar{grid-column:1;grid-row:1 / span 20;top:var(--dealer-header-height,88px);max-height:calc(100dvh - var(--dealer-header-height,88px) - 16px)}
 }
-@media(min-width:1440px){.dealer-profile--with-catalog{grid-template-columns:312px minmax(0,1fr);column-gap:32px}}
+@media(min-width:1440px){
+ .dealer-profile--with-catalog,body:has(.ac-dealer-public-page .dealer-profile--with-catalog){
+  --dealer-filter-width:312px;
+  --dealer-column-gap:32px;
+ }
+}
 `;

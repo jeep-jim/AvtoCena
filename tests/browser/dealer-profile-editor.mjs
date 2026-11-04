@@ -117,7 +117,7 @@ try {
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.getByRole('button',{name:'Развернуть описание'}).waitFor();await page.locator('.dealer-cover').evaluate(img=>img.decode());assert.ok((await page.locator('.dealer-cover').evaluate(img=>img.currentSrc)).endsWith(width===390?'/buyers/2.jpg':'/dealers/topavto-banner-v3.webp'),'device selects its cover');
   assert.equal(await page.locator('.dealer-profile-identity .dealer-primary').count(),0);
-  assert.equal(await page.locator('.dealer-profile-metrics span').allTextContents().then(a=>a.join(',')),'Рейтинг,Предложения');
+  assert.equal(await page.locator('.dealer-profile-metrics span').allTextContents().then(a=>a.join(',')),'Рейтинг,Свои предложения');
   assert.equal(await page.locator('.dealer-avatar-centered').evaluate(el=>getComputedStyle(el).borderRadius),'50%');assert.equal(await page.locator('.dealer-verified-mark').count(),verified?1:0);
   assert.ok(await page.locator('.dealer-intro').evaluate(el=>{const css=getComputedStyle(el);return css.textAlign==='left'&&el.clientHeight<=parseFloat(css.lineHeight)*2+1;}));
   assert.ok(await page.locator('.dealer-identity-title h1').evaluate(el=>{const r=el.getBoundingClientRect(),sheet=document.querySelector('.dealer-profile-identity').getBoundingClientRect();return Math.abs(r.x+r.width/2-sheet.x-sheet.width/2)<1;}));

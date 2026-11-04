@@ -124,6 +124,14 @@ try{
   const results=await page.locator('.ac-catalog-results').boundingBox();
   if(width>=1024){
    assert.ok(sidebar.x+sidebar.width<=banner.x,'filters are left of banner');
+   const header=await page.locator('.ac-public-header').boundingBox();
+   assert.equal(banner.y-header.y-header.height,16,'banner and filters start below the header');
+   const footer=await page.locator('.ac-public-legal-footer-line').boundingBox();
+   assert.equal(footer.x,banner.x,'legal footer starts at the catalog column');
+   const attribution=await page.getByRole('link',{name:'Работает на АвтоЦене'}).boundingBox();
+   assert.ok(Math.abs(attribution.x+attribution.width-banner.x-banner.width)<2,'attribution aligns to the catalog right edge');
+   const blur=await page.locator('.dealer-profile-identity').evaluate(el=>getComputedStyle(el,'::before').backdropFilter);
+   assert.match(blur,/blur\(18px\)/);
    assert.ok(Math.abs(sidebar.y-banner.y)<2,`filters start at banner top: ${JSON.stringify({sidebar,banner})}`);
    assert.ok(Math.abs(identity.x-banner.x)<2&&Math.abs(results.x-banner.x)<2,'dealer content shares the right column');
   }else assert.ok(sidebar.y>identity.y+identity.height,'mobile filters remain below dealer identity');

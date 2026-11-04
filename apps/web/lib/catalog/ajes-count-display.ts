@@ -1,10 +1,16 @@
 import {formatCatalogCount} from './count-format';
 
+const countDate=new Intl.DateTimeFormat('ru-RU',{timeZone:'Asia/Novokuznetsk',day:'numeric',month:'long',year:'numeric'});
+
 export type AjesCountSummary = {total:number; stale:boolean; observedAt:string; upperBound:boolean};
 /** A list outage must not discard an independently received aggregate. */
 export function ajesCountText(summary?:AjesCountSummary|null):string {
  if(!summary||summary.upperBound||!Number.isSafeInteger(summary.total)||summary.total<0)return 'Количество уточняется';
- return `${formatCatalogCount(summary.total)}${summary.stale?' · по последним данным':''}`;
+ const total=formatCatalogCount(summary.total);
+ if(!summary.stale)return total;
+ const observedAt=new Date(summary.observedAt);
+ if(!Number.isFinite(observedAt.getTime()))return `${total} · сохранённый подсчёт`;
+ return `${total} · данные на ${countDate.format(observedAt)}`;
 }
 export function exactAjesCount(summary?:AjesCountSummary|null):number|undefined {
  return summary&&!summary.stale&&!summary.upperBound&&Number.isSafeInteger(summary.total)&&summary.total>=0?summary.total:undefined;
