@@ -20868,3 +20868,34 @@ China41711927294/publish126198742555 FINAL FAILURE07:34:36 остаётся meta
 Новых primary результатов authenticatedblogSave/realstafflogin/showcaseSaveconflict/nativepermission/realpushdelivery и адресного market/binding/cancelcause/translation анализа нет. Следующий watch — final существующего deploy и новые сохранённые primary результаты. Для China нужен saved publish outcome/report/final manifest и конкретное условие verifier; translation403 отдельно требует saved request/response/configuration/authorization analysis, без watch rerun/repair/provider request.
 
 Owner freeze сохранён; runtime/данные/цены/права/guards watch не менял. Обе истории append-only только Road/checklist, expected-parent CAS/readback и additions-only проверяются. Существующее наблюдение enabled до итоговой приёмки последнего кандидата и целей; дубликат не создавался.
+
+
+## 04.11.2026 — ежедневная редакция: десять статей опубликованы и проверены
+
+PR1695, exact release 7f4504b3f11cecf4f2f32bab8f43ff7379bc9cd5. Один штатный REG deploy41758561067: success. Финальный журнал prepare126340722785 прочитан; точные результаты gates и публичной проверки энциклопедии сохранены в deployment-2026-11-04.json. Журнал повторно читать не требуется. Повторный deploy не создавался.
+
+Два свежих анонса и восемь явно обозначенных архивных разборов. Точные опубликованные материалы (дата ниже относится к первоисточнику, дата публикации всех статей04.11.2026):
+
+1. **Новый PCM: какие Porsche получат другую мультимедиа** — https://avtocena.com/blog/porsche-pcm-2026-hardware-and-availability; первоисточник 2026-11-03: https://newsroom.porsche.eu/en/2026/products/porsche-new-infotainment-generation-mib4-43640.html
+2. **Финал WEC в Монце: за чем следить в борьбе экипажей Toyota** — https://avtocena.com/blog/toyota-monza-2026-drivers-title-preview; первоисточник 2026-11-02: https://media.toyota.co.uk/champions-toyota-racing-ready-for-season-finale-at-monza/
+3. **IONIQ 9: как выбрать между шестью и семью местами** — https://avtocena.com/blog/ioniq-9-six-or-seven-seats-guide; первоисточник 2024-11-21: https://www.hyundai.news/eu/articles/press-releases/hyundai-motor-redefines-ev-mobility-with-ioniq-9-electric.html
+4. **Батарея из вторсырья: что означает результат Porsche и cylib** — https://avtocena.com/blog/porsche-recycled-cathode-not-whole-battery; первоисточник 2026-09-17: https://newsroom.porsche.com/en/2026/company/porsche-cylib-battery-recycling-43269.html
+5. **Один завод, разные приводы: чему учит пример Porsche Leipzig** — https://avtocena.com/blog/leipzig-one-line-different-powertrains; первоисточник 2026-03-13: https://newsroom.porsche.com/en/2026/products/porsche-australia-75-years-two-special-cars-from-leipzig-41890.html
+6. **400 кВт и 16 минут: как читать обещания быстрой зарядки** — https://avtocena.com/blog/cayenne-s-electric-charging-conditions; первоисточник 2026-03-10: https://newsroom.porsche.com/en/2026/products/porsche-the-new-cayenne-s-electric-41864.html
+7. **Cayenne Coupé Electric: аэродинамика и место под крышей** — https://avtocena.com/blog/cayenne-coupe-electric-aerodynamics-tradeoff; первоисточник 2026-04-24: https://newsroom.porsche.com/en_PME/2026/products/porsche-the-new-cayenne-coupe-electric-42223.html
+8. **Керамические тормоза: что сверить на примере 911 Turbo S** — https://avtocena.com/blog/porsche-pccb-brakes-check-specification; первоисточник 2026-05-10: https://newsroom.porsche.com/en_AU/2026/products/product-highlights-porsche-911-turbo-s-the-superior-all-rounder-among-sports-cars-42442.html
+9. **Что печатают на 3D-принтере в автомобильном кресле** — https://avtocena.com/blog/porsche-3d-seat-comfort-layer-explained; первоисточник 2020-03-17: https://newsroom.porsche.com/en/2020/products/porsche-3d-printed-bodyform-full-bucket-seat-concept-study-19996.html
+10. **Transaxle: зачем двигателю и коробке разные концы автомобиля** — https://avtocena.com/blog/porsche-transaxle-front-engine-rear-gearbox; первоисточник 2026-05-14: https://newsroom.porsche.com/en_PAP/2026/history/porsche-museum-pop-up-installations-50-years-transaxle-42864.html
+
+blog.test.ts 2/2 PASS; схема всех42 записей, безопасные ссылки, скрытие черновиков и конфликт ревизии проверены. PR CI41757471430/126336875101 и verify41757471449/126336875025,41757471420/126336874957 SUCCESS. Это не заявление об успехе всех независимых workflow: записанный watch сбой CRM41758560979 ожидания публикации релиза не закрыт этой редакционной проверкой.
+
+Live: 10/10 HTTP200, правильные заголовки/последние абзацы/источники/атрибуции/внутренние ссылки/canonical/BlogPosting JSON-LD; 10/10 обложек SHA-256 совпали; новые10 и прежние32 записи присутствуют в индексе, все новые URL в sitemap. В браузере: светлый список, тёмная PCM-статья, все10 JPEG загружены. Скриншоты и JSON: docs/blog/verification/ и docs/blog/live-verification-2026-11-04.json. Mobile visual/authenticated owner Save не выполнялись; не объявлены PASS.
+
+Фото:10 разрешённых редакционных JPEG с атрибуцией, без SVG; evidence docs/blog/media-check-2026-11-04.json. Каталог: подтверждены ссылки на911/Panamera/IONIQ9; комплектация не гарантируется. Электрический Cayenne не подтверждён, ссылки о наличии не добавлены. Каталожный evidence docs/blog/catalog-check-2026-11-04.json. Схема/32 прежние seed-записи/ручные ревизии сохранены; runtime рынков, парсеров, цен и редактора не изменён.
+
+Внешняя публикация НЕ выполнена:0 отправок, подтверждённые подключённые каналы отсутствуют в доступе. Сохранены10 Дзен+10 VK с оригинальными URL/UTM/первоисточниками/атрибуцией: docs/blog/syndication/2026-11-04.md. Общий отчёт и установка: docs/blog/editorial-2026-11-04.md и deployment-2026-11-04.json.
+
+Скорость: live article GET из удалённой среды4.660–7.311с, каталог3.744–8.182с; это не изолированная серверная метрика и не достижение цели менее1с. Редакционный выпуск не закрывает исторические технические инциденты.
+
+
+Штатные gates: до переключения 48 измерений/1 медленное, после переключения 48/4; functionalPassed=true, performanceAccepted=false, latencyBlocking=false. Публичная энциклопедия: verified=true, 532 группы, 4888 вариантов, 22635 полей, 3809 сгруппированных вариантов, 2 privateDescriptions. Финальный журнал prepare126340722785 прочитан один раз; повторять не нужно.
