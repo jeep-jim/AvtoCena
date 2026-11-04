@@ -3,7 +3,7 @@ import {canonicalCatalogBrand} from './brands';
 export type ModelSearchData = {version:1;models:[string,string,string[],number][];brands:[string,string[]][]};
 export type ModelSuggestion = {id?:string;make:string;model:string;aliases:string[];related?:boolean};
 const letters:Record<string,string>={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'i',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'ts',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'i',ь:'',э:'e',ю:'yu',я:'ya'};
-export function suggestionKey(value:string){return value.normalize('NFKC').toLowerCase().replace(/[а-яё]/g,c=>letters[c]).replace(/y/g,'i').replace(/c(?=[aourl])/g,'k').replace(/([lrs])\1+/g,'$1').replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
+export function suggestionKey(value:string){return value.normalize('NFKC').toLowerCase().replace(/х(?=[\s-]*\d)/g,'x').replace(/(^|[^\p{L}\p{N}])([a-zа-яё]{1,3})[\s-]+(?=\d)/gu,'$1$2').replace(/[а-яё]/g,c=>letters[c]).replace(/y/g,'i').replace(/c(?=[aourl])/g,'k').replace(/([lrs])\1+/g,'$1').replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
 // Bounded typo suggestions for alphabetic names only; never rewrite a selection.
 function nearModelWord(query:string, word:string){
  if(!/^[a-z]{4,}$/.test(query)||!/^[a-z]+$/.test(word))return false;
@@ -109,10 +109,33 @@ export function mergeModelSuggestions(inventory:ModelSuggestion[], directory:Mod
  return [...merged.values()].sort((a,b)=>rank(a)-rank(b)||a.model.length-b.model.length||a.model.localeCompare(b.model,'ru'));
 }
 
-/** Commit only the names entered by the user; never substitute the first fuzzy result. */
-export function typedModelSelection(query:string, items:{model:string;aliases?:string[]}[], multiple:boolean){
+/** A fragment must start at a word boundary; digit codes keep their full number.
+ * Used only to resolve an unambiguous catalog choice, never technical identity.
+ */
+function modelFragmentMatches(value:string, query:string):boolean {
+ const words=suggestionKey(value).split(' '), q=suggestionKey(query);
+ if(q.length<2)return false;
+ return words.some((_,index)=>{
+  const tail=words.slice(index).join(' ');
+  if(!tail.startsWith(q))return false;
+  const rest=tail.slice(q.length);
+  return !/\d$/.test(q)||!rest||/^\s/.test(rest)||/^[a-z]+(?:\s|$)/.test(rest);
+ });
+}
+/** Never substitute a fuzzy or ambiguous result. Catalog controls may resolve
+ * a unique word prefix/suffix to the actual selectable model before submission.
+ */
+export function typedModelSelection(query:string, items:{model:string;aliases?:string[]}[], multiple:boolean, resolveFragments=false){
  const names=(multiple?query.split(","):[query]).map(value=>value.replace(/\s+/g," ").trim()).filter(Boolean);
- return [...new Set(names.map(name=>items.find(item=>[item.model,...(item.aliases||[])].some(alias=>suggestionKey(alias).replace(/\s/g,'')===suggestionKey(name).replace(/\s/g,'')))?.model||name))].join(multiple?"|":"");
+ return [...new Set(names.map(name=>{
+  const exact=items.find(item=>[item.model,...(item.aliases||[])].some(alias=>suggestionKey(alias).replace(/\s/g,'')===suggestionKey(name).replace(/\s/g,'')));
+  if(exact)return exact.model;
+  if(resolveFragments){
+   const matches=[...new Set(items.filter(item=>[item.model,...(item.aliases||[])].some(alias=>modelFragmentMatches(alias,name))).map(item=>item.model))];
+   if(matches.length===1)return matches[0];
+  }
+  return name;
+ }))].join(multiple?"|":"");
 }
 
 /** Infer a make only when every exact typed selection identifies the same brand. */

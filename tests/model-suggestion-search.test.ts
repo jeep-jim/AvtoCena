@@ -101,3 +101,24 @@ test('spaced exact ix35 uses its real name and infers only an unambiguous make',
  assert.equal(typedModelMake('Unknown',rows),'');
  assert.equal(typedModelMake('ix35',[...rows,{make:'Other',model:'ix35',aliases:[]}]),'');
 });
+
+
+test('catalog short codes and word prefixes resolve only a unique real model',async()=>{
+ const {typedModelSelection}=await import('../apps/web/lib/catalog/model-suggestion-search');
+ const {groupFilterModels}=await import('../apps/web/lib/catalog/model-filter-options');
+ const find=createModelSuggestionSearch({version:1,brands:[['Geely',['Джили']]],models:[['Geely','Vision',[],1],['Geely','Vision X3',[],1],['Geely','Vision X6',[],1],['Geely','GX3 Pro',[],1],['Geely','Vision X30',[],1],['BMW','X3',[],1]]});
+ for(const q of ['X3','Х3','х 3','X 3','X-3','Vision X3']){
+  const items=groupFilterModels(find(q,'Geely'));
+  assert.ok(items.some(row=>row.model==='Vision X3'),q);
+  assert.equal(typedModelSelection(q,items,true,true),'Vision X3',q);
+ }
+ assert.equal(typedModelSelection('X6',groupFilterModels(find('X6','Geely')),true,true),'Vision X6');
+ assert.equal(typedModelSelection('X3',find('X3','Geely'),true),'X3','autocalc keeps existing exact-selection behavior');
+ assert.equal(typedModelSelection('X4',find('X4','Geely'),true,true),'X4');
+ assert.equal(typedModelSelection('Vis',find('Vis','Geely'),true,true),'Vis','ambiguous prefix never selects first');
+ assert.equal(typedModelSelection('Cross',[{model:'Corolla Cross'}],true,true),'Corolla Cross');
+ assert.equal(typedModelSelection('300',[{model:'Land Cruiser 300'}],true,true),'Land Cruiser 300');
+ assert.equal(typedModelSelection('Pra',[{model:'Land Cruiser Prado'}],true,true),'Land Cruiser Prado');
+ assert.equal(typedModelSelection('X3',[{model:'Vision X30'},{model:'GX3 Pro'}],true,true),'X3','no substring or neighboring number substitution');
+ assert.equal(typedModelSelection('Corolla Z',[{model:'Corolla Cross'}],true,true),'Corolla Z','no fuzzy substitution');
+});

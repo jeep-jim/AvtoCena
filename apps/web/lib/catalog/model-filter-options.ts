@@ -17,7 +17,10 @@ export function groupFilterModels(rows:ModelSuggestion[]):ModelSuggestion[]{
   const roots=[...new Set(list.map(row=>filterModelName(row.model)))].sort((a,b)=>a.length-b.length);
   const grouped=new Map<string,ModelSuggestion>();
   for(const row of list){
-   const root=roots.find(name=>matchesCatalogModel(row.model,name,make))||row.model;
+   const base=filterModelName(row.model);
+   // Vision X3/X6 are distinct selectable models, not trims of Vision.
+   const root=roots.find(name=>matchesCatalogModel(row.model,name,make)
+    && (name===base||!/(?:^|\s)[a-z]+[\s-]*\d/i.test(base.slice(name.length))))||base;
    const key=root.toLocaleLowerCase('ru-RU'),previous=grouped.get(key);
    grouped.set(key,{make,model:previous?.model||root,aliases:[...new Set([...(previous?.aliases||[]),row.model,...row.aliases])],related:previous?previous.related&&row.related:row.related});
   }

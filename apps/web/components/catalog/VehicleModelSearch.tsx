@@ -340,7 +340,7 @@ export function VehicleModelSearch({
   };
 
   const applyTypedModel = () => {
-    const typed=typedModelSelection(query, items, multiple);
+    const typed=typedModelSelection(query, items, multiple, contextual);
     const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
     if(!make){const inferred=typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
     onValueChange?.(next);
