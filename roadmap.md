@@ -21184,3 +21184,33 @@ Owner freeze и принятая рабочая база сохранены. Т�
 На установленном b27644d страницы /cars и /dealers/avtograd вернули одинаковое итоговое число 409 997 и сохранённый счётчик Японии 607 528. Причина расхождения между общим и рыночным счётчиками: вместо отсутствующего точного агрегата в общий счётчик попадало число карточек превью. При неполном подсчёте теперь отображается «Общее количество уточняется», у сохранённого агрегата указана дата подсчёта. В профиле отдельно подписаны собственные предложения дилера. Направления доставки по-прежнему определяют доступные рынки витрины.
 
 TypeScript и 16 целевых тестов прошли. Геометрия дилерской витрины прошла на 390/1024/1440/1920 в двух темах. После штатной подготовки WebP полный локальный сценарий кабинета прошёл, включая галерею и автосохранение. Локальное отклонение проверки панели воспроизвелось на исходном коде и исчезло при мгновенной прокрутке вместо плавной. Проверка каталога и дилерского кабинета в GitHub прошла на 505037e. Исходный head PR1699 eebd9dc прошёл десять проверок GitHub. Установка исправления счётчиков пока не подтверждена.
+
+
+## 04.11.2026 20:15 Красноярск — docs-only watch: PR1699 merged, deploy ещё не terminal
+
+Fresh main ff5dc861c446cc39620e42a000f2de519e8eaf39; свежие Road/checklist прочитаны. AGENTS5358784280f8648a854730abb5dc83149ed2d6fd неизменён, related operations не менялись по сравнению с d3f275a7. Новых PR после1699 нет. PR1699 MERGED19:10:59, merge ff5dc861c446cc39620e42a000f2de519e8eaf39, final head cc478f90ba380068e0dd5ed37d0e2dd338a3c08b. Итоговая установка пока НЕ подтверждена.
+
+Новая primary Road «Счётчики общей и дилерской витрин» ПРОЧИТАНА. Primary на b27644d получил /cars и /dealers/avtograd с одинаковым итогом409997 и сохранённым счётчиком Японии607528; это сохранённое наблюдение конкретных страниц, не новый watch inventory. Primary установил, что при отсутствии точного агрегата общий счётчик использовал число preview-карточек. Кандидат показывает «Общее количество уточняется» для неполного подсчёта, дату сохранённого агрегата и отдельную подпись собственных предложений дилера; направления доставки продолжают определять рынки. Primary TS/16 целевых tests/geometry390/1024/1440/1920 обе темы и полный локальный cabinet после штатной подготовки WebP PASS. Отклонение панели воспроизвелось на исходном коде и исчезло с instant вместо smooth scroll. Это primary saved evidence, не watch browser и не live acceptance.
+
+Прочитан сохранённый diff теста tests/encyclopedia-directory-aliases.test.ts: observedAt «now» заменён ISO2026-11-03T18:00:00Z; stale text assertion теперь «данные на 4 ноября 2026 г.». Assertions total577000/pages24042/upperBound/null сохранены. Исторический text failure41824336245/126555106666 не отменяется поздним PASS; его журнал не повторялся.
+
+Новые final logs ПРОЧИТАНЫ, не повторять:
+- CI41825411293/126558780271 SUCCESS19:08:51 на прежнем7feae5a9: regression2785 PASS, целевые suites/TS/build PASS; artifacts13318883450/13319471685 НЕ viewed.
+- Final-head CI41827039532/126564301445 SUCCESS19:19:40: regression2785 PASS, suites/TS/build PASS; artifacts13320237201/13320900325 НЕ viewed.
+- Final-head workspace41827039460/126564300291 SUCCESS19:15:12:35 tests, sidebar390/1024/1440/1920 обе темы, workspace/profile/controls/autosave fixtures PASS; artifact13321005327 НЕ viewed, встроенные visual images не просмотрены.
+- Final-head selection41827039744/126564301046 SUCCESS19:13:20:43 tests,390/1440, nested navigation, sharing cases PASS; artifact13318688828 НЕ viewed.
+- Main sidebar41827067580/126564396674 SUCCESS19:12:15:61 tests, mobile390 и sidebar1280/1600 PASS; artifact13320136586 НЕ viewed.
+- Main green41827067686/126564396889 SUCCESS19:12:00:50 tests и1440/390 fixture PASS; artifact13319072737 НЕ viewed.
+- Main banner41827067517/126564395942 SUCCESS19:12:24:30 tests/TS PASS; artifact13320430238 НЕ viewed; production-profile126564398620 SKIPPED.
+- Main CRM41827067621/browser126564397133 SUCCESS19:17:05:16 unit/88 CRM/48 fixture cases228 openings PASS; artifact13321505425 НЕ viewed.
+- Main CRM41827067621/audit126564396708 FAILURE19:26:33:19:26:30.962 Error «Production release or verified descendant not confirmed», scripts/wait-published-release.mjs:21:7. Audit artifact отсутствует; live126572023431 SKIPPED. Это ожидание release, НЕ browser Save failure и НЕ новое доказательство Korea503.
+
+Остальные final-head workflow SUCCESS metadata only: per-car41827040239, site41827039987, isolation41827039849, QR41827039836, footer41827039827, Dubicars41827039815, owner41827039806, banner41827039780, city41827039609, sidebar41827039504, green41827039499. Main Autobot41827067414 SUCCESS metadata only. Их журналы не читались; весь CI/release live acceptance не объявляется по этим статусам.
+
+Существующий deploy41827067548/prepare126565077819 IN_PROGRESS, шаг Deploy with rollback and resource measurements с20:05:57; wait126564396638 SUCCESS19:12:28 metadata. Final НЕ прочитан; health нового SHA сам по себе не terminal acceptance. Следующий шаг — existing deploy final и новые saved primary release-time/live verification, без watch rerun/repair/browser. Второй IN_PROGRESS — existing REG size41835974301/job126594843840, metadata-only listing с20:12:49; capacity watch не дублируется. Cleanup41825271855/126558295907 SUCCESS19:11:06 metadata only; лог не читался, фактическая очистка/изменения данных не подтверждены статусом.
+
+Единственный bounded health20:13–20:14 завершился curl exit0: ok=true, exact release ff5dc861c446cc39620e42a000f2de519e8eaf39, новая calculationVersion3f2e08fd788fc200f06b686badd221b2329f265ce8c2b886e193b3d6e4f73a4e. Новая версия ограничивает cache comparisons; это не authenticated editor Save/полная визуальная приёмка и не объяснение прежнего Korea503.
+
+China126198742555 и oldChina124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ, причины/outcome/final public manifest неизвестны. Новых primary saved Korea exact-request/response/release-time/binding, Direct inputs/binding/filter, sharedprices binding или translation403 analysis нет; старые failures сохранены. Новых authenticated blog Save/native permission/real push delivery подтверждений нет.
+
+Owner freeze и принятая база сохранены. Watch дополняет только Road/checklist append-only с expected-parent CAS/readback; runtime/live остаётся основной интерактивной работе. Новые запуски/отмены/repair/browser/provider запросы, изменения цен/данных/прав/guards не выполнялись. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
