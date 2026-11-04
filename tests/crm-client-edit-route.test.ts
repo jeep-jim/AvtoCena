@@ -17,8 +17,8 @@ test('client editing enforces visibility, concurrency and field allowlist',async
  try {
   assert.equal((await patch()).status,401);
   state.user={id:'m',role:'partner'};assert.equal((await patch()).status,401);
-  state.user={id:'stranger',role:'manager'};assert.equal((await patch()).status,403);
-  state.user={id:'m',role:'manager'};
+  state.user={id:'stranger',role:'manager',companyId:'dealer_topavto'};assert.equal((await patch()).status,403);
+  state.user={id:'m',role:'manager',companyId:'dealer_topavto'};
   assert.equal((await patch(undefined,'https://evil.example')).status,403);
   assert.equal((await patch({...state.client,updatedAt:'stale'})).status,409);
   assert.equal((await patch({...state.client,fio:'',phone:'',telegram:''})).status,400);

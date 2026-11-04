@@ -2,18 +2,18 @@
 import {useEffect,useRef,useState} from 'react';
 import {ChatDialog} from './ChatDialog';
 import type {NotificationReplyTarget} from '@/lib/notification-reply';
-export function NotificationReply({target,text,title}:{target?:NotificationReplyTarget;text:string;title:string}){
+export function NotificationReply({target,text,title,apiBase='/api/crm'}:{apiBase?:string;target?:NotificationReplyTarget;text:string;title:string}){
  const [open,setOpen]=useState(false),[draft,setDraft]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[sent,setSent]=useState(false);
  const operation=useRef('');
  const [threads,setThreads]=useState<{id:string;title:string}[]>([]),[thread,setThread]=useState('');
- useEffect(()=>{if(!open||target?.kind!=='notice')return;let active=true;fetch('/api/crm/chat',{cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok)throw Error(d.error);if(active)setThreads((d.threads||[]).filter((t:{kind:string})=>['team','room'].includes(t.kind)));}).catch(()=>{if(active)setError('Не удалось загрузить доступные переписки.');});return()=>{active=false;};},[open,target?.kind]);
+ useEffect(()=>{if(!open||target?.kind!=='notice')return;let active=true;fetch(`${apiBase}/chat`,{cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok)throw Error(d.error);if(active)setThreads((d.threads||[]).filter((t:{kind:string})=>['team','room'].includes(t.kind)));}).catch(()=>{if(active)setError('Не удалось загрузить доступные переписки.');});return()=>{active=false;};},[open,target?.kind]);
  if(!target)return null;
  async function send(){
   if(!target||busy||!draft.trim()||(target.kind==='notice'&&!thread))return;
   operation.current||=crypto.randomUUID();setBusy(true);setError('');
   try{
    const body=target.kind==='notice'?{thread,noticeId:target.noticeId,text:draft,operationId:operation.current}:target.kind==='chat'?{thread:target.thread,replyToId:target.messageId,text:draft,operationId:operation.current}:{type:target.type,id:target.id,replyTo:target.messageId,text:draft,operationId:operation.current};
-   const response=await fetch(target.kind==='discussion'?'/api/crm/discussion':'/api/crm/chat',{method:'POST',signal:AbortSignal.timeout(20000),headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+   const response=await fetch(target.kind==='discussion'?`${apiBase}/discussion`:`${apiBase}/chat`,{method:'POST',signal:AbortSignal.timeout(20000),headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
    const data=await response.json();if(!response.ok)throw Error(data.error||'Не удалось отправить ответ');
    setDraft('');operation.current='';setSent(true);setOpen(false);window.dispatchEvent(new Event('avtocena:crm-change'));
   }catch(e){setError(e instanceof Error&&!['TypeError','AbortError','TimeoutError'].includes(e.name)?e.message:'Не удалось связаться с сервером. Повторите отправку.');}finally{setBusy(false);}

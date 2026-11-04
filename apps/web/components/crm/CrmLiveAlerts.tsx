@@ -40,15 +40,15 @@ function beep(){
   }catch{}
 }
 type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string;name?:string;phone?:string;telegram?:string;car?:string;offerTitle?:string;selectedOffers?:{title:string}[]};
-export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar,canCreateSelection=false}:{userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string;canCreateSelection?:boolean}) {
+export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar,canCreateSelection=false,apiBase='/api/crm',basePath='/crm',noticesOnly=false,noticeIntro}:{apiBase?:string;basePath?:string;noticesOnly?:boolean;noticeIntro?:import('react').ReactNode;userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string;canCreateSelection?:boolean}) {
   const [enabled,setEnabled]=useState(false),[pending,setPending]=useState<InboxLead[]>([]),[authorized,setAuthorized]=useState(true);
   const [recent,setRecent]=useState<InboxLead[]>([]),[leadsOpen,setLeadsOpen]=useState(false);
   const [notifications,setNotifications]=useState<CrmNotice[]>([]),[reminders,setReminders]=useState<CrmReminder[]>([]),[notificationsOpen,setNotificationsOpen]=useState(false);
   const unreadNotices=notifications.filter(n=>n.unread);
   const [birthdays,setBirthdays]=useState<Birthday[]>([]);
-  async function refreshNotices(){try{const r=await fetch('/api/crm/notifications',{cache:'no-store'});if(r.ok){const d=await r.json();setNotifications(d.notifications||[]);setReminders(d.reminders||[]);if(crm)setBirthdays(d.birthdayCelebrations||[]);}}catch{}}
+  async function refreshNotices(){try{const r=await fetch(`${apiBase}/notifications`,{cache:'no-store'});if(r.ok){const d=await r.json();setNotifications(d.notifications||[]);setReminders(d.reminders||[]);if(crm)setBirthdays(d.birthdayCelebrations||[]);}}catch{}}
   useEffect(()=>{let busy=false;const poll=async()=>{if(busy||document.visibilityState!=='visible')return;busy=true;try{await refreshNotices();}finally{busy=false;}};void poll();const timer=setInterval(poll,20000);window.addEventListener('avtocena:reminders',poll);window.addEventListener('avtocena:crm-change',poll);document.addEventListener('visibilitychange',poll);return()=>{clearInterval(timer);window.removeEventListener('avtocena:reminders',poll);window.removeEventListener('avtocena:crm-change',poll);document.removeEventListener('visibilitychange',poll);};},[userId]);
-  async function readNotices(ids:string[]){if(!ids.length)return;try{const r=await fetch('/api/crm/notifications',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ids})});if(!r.ok)throw Error();setNotifications(rows=>rows.map(n=>ids.includes(n.id)?{...n,unread:false}:n));}catch{setAckError('Не удалось отметить уведомления прочитанными.');}}
+  async function readNotices(ids:string[]){if(!ids.length)return;try{const r=await fetch(`${apiBase}/notifications`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ids})});if(!r.ok)throw Error();setNotifications(rows=>rows.map(n=>ids.includes(n.id)?{...n,unread:false}:n));}catch{setAckError('Не удалось отметить уведомления прочитанными.');}}
   const dismissKey=`avtocena_crm_dismissed_${userId}`;
   const [dismissed,setDismissed]=useState<Set<string>>(new Set());
   const leadKey=(lead:InboxLead)=>`lead:${lead.id}:${lead.eventKey}`;
@@ -106,6 +106,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     return ()=>{window.removeEventListener("avtocena:sound-preference",localSync);window.removeEventListener("storage",sync);window.removeEventListener("pointerdown",unlock);window.removeEventListener("keydown",unlock);};
   },[userId]);
   useEffect(()=>{
+    if(noticesOnly)return;
     let active=true,busy=false;
     const poll=async()=>{
       if(busy||document.visibilityState!=="visible")return;busy=true;
@@ -188,18 +189,19 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
   return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""} ${crm?"ac-staff-tools--crm":""}`}>
     {crm?<BirthdayCelebration key={userId} birthdays={birthdays}/>:null}
-    <StaffHeartbeat/>
+    {!noticesOnly&&<StaffHeartbeat/>}
     <button type="button" className="ac-staff-account" aria-label={`Уведомления: ${pending.length+unreadNotices.length}`} aria-expanded={notificationsOpen} onClick={()=>{setNotificationsOpen(!notificationsOpen);setMenuOpen(false);}}><Bell size={19}/>{pending.length+unreadNotices.length>0?<span className="ac-unified-badge ac-staff-badge">{pending.length+unreadNotices.length}</span>:null}</button>
     {notificationsOpen?<section className="ac-unified-notifications" aria-label="Все уведомления"><div className="ac-notifications-heading"><strong>Уведомления</strong><button type="button" aria-label="Закрыть уведомления" onClick={()=>setNotificationsOpen(false)}><X size={20}/></button></div>
+    {noticeIntro}
     {pending.length+unreadNotices.length>0?<button type="button" className="ac-notifications-read" onClick={()=>{void acknowledge();void readNotices(unreadNotices.map(n=>n.id));}}>Отметить прочитанными</button>:<p className="ac-notifications-empty">Новых уведомлений нет</p>}
     {pending.map(lead=><a className="ac-notification is-unread" key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}`} onClick={()=>void readRecent(lead)}><strong>{lead.assignmentUnread?'Вам назначена заявка':'Новая заявка'} · {lead.name||'Клиент'}</strong><span>{lead.offerTitle||lead.car||lead.selectedOffers?.map(o=>o.title).join(', ')||'Подбор автомобиля'}</span></a>)}
-    {unreadNotices.map(n=><div key={n.id} className={`ac-notification ${n.unread?'is-unread':''}`}>{n.href?<a href={n.href} onClick={()=>void readNotices([n.id])}><strong>{n.title}</strong><span>{n.text}</span>{n.kind==='comment'?<small className="mt-2 block font-bold">Открыть обсуждение и ответить →</small>:null}</a>:<><strong>{n.title}</strong><span>{n.text}</span></>}<NotificationReply target={n.replyTarget} title={n.title} text={n.text}/>{n.unread?<button type="button" onClick={()=>void readNotices([n.id])}>Прочитано</button>:null}</div>)}
+    {unreadNotices.map(n=><div key={n.id} className={`ac-notification ${n.unread?'is-unread':''}`}>{n.href?<a href={n.href} onClick={()=>void readNotices([n.id])}><strong>{n.title}</strong><span>{n.text}</span>{n.kind==='comment'?<small className="mt-2 block font-bold">Открыть обсуждение и ответить →</small>:null}</a>:<><strong>{n.title}</strong><span>{n.text}</span></>}<NotificationReply apiBase={apiBase} target={n.replyTarget} title={n.title} text={n.text}/>{n.unread?<button type="button" onClick={()=>void readNotices([n.id])}>Прочитано</button>:null}</div>)}
     <h3 className="ac-notifications-subtitle"><AlarmClock size={17}/>Напоминания команды</h3>
     {!reminders.some(r=>Date.parse(r.dueAt)<=Date.now())?<p className="ac-notifications-empty">На сейчас напоминаний нет</p>:null}
-    <ReminderRows rows={reminders.filter(r=>Date.parse(r.dueAt)<=Date.now())} onChange={()=>void refreshNotices()}/>
-    {reminders.some(r=>Date.parse(r.dueAt)>Date.now())?<><h4 className="ac-notifications-subtitle">Предстоящие</h4><ReminderRows rows={reminders.filter(r=>Date.parse(r.dueAt)>Date.now())} onChange={()=>void refreshNotices()}/></>:null}
+    <ReminderRows apiBase={apiBase} basePath={basePath} rows={reminders.filter(r=>Date.parse(r.dueAt)<=Date.now())} onChange={()=>void refreshNotices()}/>
+    {reminders.some(r=>Date.parse(r.dueAt)>Date.now())?<><h4 className="ac-notifications-subtitle">Предстоящие</h4><ReminderRows apiBase={apiBase} basePath={basePath} rows={reminders.filter(r=>Date.parse(r.dueAt)>Date.now())} onChange={()=>void refreshNotices()}/></>:null}
     {ackError?<p role="alert">{ackError}</p>:null}</section>:null}
-    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>{setMenuOpen(!menuOpen);setNotificationsOpen(false);}}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}</button>
+    {!noticesOnly&&<><button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>{setMenuOpen(!menuOpen);setNotificationsOpen(false);}}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}</button>
     <div hidden={!menuOpen} id={`staff-menu-${userId}`} className="ac-staff-menu" style={menuBox?{position:'fixed',left:menuBox.left,right:'auto',top:menuBox.top,width:menuBox.width}:undefined}>
       <p className="ac-staff-name">{displayName}{crm?<small className="block text-xs font-normal">{({owner:"Владелец",admin:"Администратор",manager:"Менеджер"} as Record<string,string>)[role]||role}</small>:null}</p>
       <button type="button" onClick={()=>setLeadsOpen(!leadsOpen)} aria-expanded={leadsOpen}><ClipboardList size={18}/>Заявки{badge}<ChevronDown size={18} style={{marginLeft:'auto',transform:leadsOpen?'rotate(180deg)':undefined}}/></button>
@@ -216,6 +218,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       </div>
       {canCreateSelection&&<Link className="ac-staff-selection" href="/dealers/dealer_topavto?selection=1&filters=1#catalog" onClick={event=>{if(document.querySelector('[data-dealer-context="dealer_topavto"] .dealer-profile')){event.preventDefault();window.dispatchEvent(new CustomEvent(OPEN_SELECTION_PANEL,{detail:{dealerId:'dealer_topavto'}}));}setMenuOpen(false);}}><Share2 size={18}/>Подборка для клиента</Link>}
     </div>
+    </>}
     {!notificationsOpen&&hasAlert?<div role="status" className="ac-staff-notice">
       <button type="button" className="ac-staff-notice-close" aria-label="Закрыть и остановить звук" onClick={dismissAlert}><X size={20}/></button>
       <p className="font-bold">{pending.length?`Новые заявки: ${pending.length}`:unreadNotices[0]?.title}</p>{unreadNotices.length>0?<button className="ac-staff-notice-action" type="button" onClick={()=>{setNotificationsOpen(true);setMenuOpen(false);}}>Открыть уведомления ({unreadNotices.length})</button>:null}

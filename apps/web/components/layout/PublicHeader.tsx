@@ -13,6 +13,7 @@ const THEME_KEY = "avtocena_theme";
 
 type Props = {
   backHref?: string;
+  hideBack?: boolean;
   backLabel?: string;
   className?: string;
 };
@@ -101,7 +102,7 @@ function CarIcon() {
   );
 }
 
-export function PublicHeader({ backHref, backLabel = "Назад", className = "" }: Props) {
+export function PublicHeader({ backHref, hideBack = false, backLabel = "Назад", className = "" }: Props) {
   const dealer = useDealerBrowsing();
   const pathname = usePathname();
   const router = useRouter();
@@ -151,7 +152,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       <header className={`ac-public-header sticky top-0 z-50 backdrop-blur-xl ${className}`}>
         <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
           <div className="flex min-w-0 items-center gap-2.5">
-            {dealer || backHref ? (
+            {!hideBack && (dealer || backHref) ? (
               <button type="button" aria-label="Назад" onClick={() => window.history.length > 1 ? router.back() : router.replace(backHref || "/cars")} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
                 <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 <span className="hidden sm:inline">Назад</span>

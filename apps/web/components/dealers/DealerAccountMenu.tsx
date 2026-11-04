@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import {CrmLiveAlerts} from '../crm/CrmLiveAlerts';
 import {useEffect,useRef,useState} from 'react';
 import {Bell,ClipboardList,LogOut,UserRound} from 'lucide-react';
 import {StaffHeartbeat} from '../crm/StaffPresence';
@@ -17,7 +18,7 @@ export function DealerAccountMenu({user,newLeads=0}:{newLeads?:number;user:{id:s
  },[open]);
  return <div className="ac-staff-tools ac-staff-tools--header" ref={root}>
   <StaffToolsStyles/><StaffHeartbeat endpoint="/api/dealers/presence"/>
-  <Link href="/dealer-cabinet/leads?manager=unassigned" className="ac-staff-account" aria-label={`Заявки без ответственного: ${newLeads}`}><Bell size={21}/>{newLeads>0&&<span className="ac-staff-badge ac-unified-badge">{newLeads>99?'99+':newLeads}</span>}</Link>
+  <CrmLiveAlerts noticesOnly header userId={user.id} apiBase="/api/dealers" basePath="/dealer-cabinet" noticeIntro={newLeads>0?<Link className="ac-notification" href="/dealer-cabinet/leads?manager=unassigned">Заявки без ответственного: {newLeads}</Link>:null}/>
   <button ref={trigger} type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={open} aria-controls="dealer-account-menu" onClick={()=>setOpen(!open)}><img src={user.avatarUrl||defaultManagerAvatar(user.id)} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover"/></button>
   {open&&<div id="dealer-account-menu" className="ac-staff-menu">
    <p className="ac-staff-name">{user.displayName}</p>

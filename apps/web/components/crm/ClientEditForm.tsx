@@ -3,13 +3,13 @@ import {CLIENT_STATUSES} from "../../lib/crm-client-status";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 type Client = {id:string; fio:string; phone:string; telegram:string; max?:string; city:string; comment:string; updatedAt:string;status?:string;assignedManagerId?:string};
-export function ClientEditForm({client,managers=[],canAssign=false,canEdit=true}: {client:Client;managers?:{id:string;displayName:string}[];canAssign?:boolean;canEdit?:boolean}) {
+export function ClientEditForm({apiBase="/api/crm/clients",client,managers=[],canAssign=false,canEdit=true}: {apiBase?:string;client:Client;managers?:{id:string;displayName:string}[];canAssign?:boolean;canEdit?:boolean}) {
  const router = useRouter();
  const [form,setForm] = useState(client), [busy,setBusy] = useState(false), [message,setMessage] = useState("");
  async function submit(event: React.FormEvent) {
   event.preventDefault();setBusy(true);setMessage("");
   try {
-   const response = await fetch(`/api/crm/clients/${encodeURIComponent(client.id)}`, {method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(form)});
+   const response = await fetch(`${apiBase}/${encodeURIComponent(client.id)}`, {method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(form)});
    const result = await response.json();
    if (!response.ok) throw Error(result.error === "client_conflict" ? "Клиент изменён другим сотрудником. Обновите страницу перед сохранением." : result.error === "client_contact_required" ? "Укажите имя, телефон или Telegram." : "Не удалось сохранить клиента. Проверьте доступ и повторите попытку.");
    setForm(result.client);setMessage("Изменения сохранены.");router.refresh();

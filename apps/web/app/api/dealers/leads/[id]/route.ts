@@ -1,3 +1,4 @@
+import {applyDealerLeadUpdate} from '@/lib/dealers/lead-update';
 import {after} from 'next/server';
 import {notifyCustomerForLead} from '@/lib/account/lead-push';
 import {confirmedCustomerContract} from '@/lib/account/access';
@@ -14,11 +15,12 @@ import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-orig
 export async function POST(request:Request,{params}:{params:Promise<{id:string}>}){
  const headers={'Cache-Control':'private, no-store'},u=await getCurrentUser();if(!u||!u.companyId||!await canManageDealer(u,u.companyId)||!isCalculationOriginAllowed(request))return Response.json({error:'Нет доступа'},{status:403,headers});
  try{const raw=await request.text();if(raw.length>5000)throw Error('Слишком большой запрос');const b=JSON.parse(raw),{id}=await params,m=await readMembership(u.companyId),now=new Date(),users=await readCrmUsers();
- const clients=['stage','contact'].includes(b.action)?await readChunkedDataJson<any>(clientsPath(u.companyId),[]):[];
+ const clients=['stage','contact','update'].includes(b.action)?await readChunkedDataJson<any>(clientsPath(u.companyId),[]):[];
  let previous:any;
  const lead=await updateChunkedDataJson<any>('leads/leads.json',id,l=>{
- if(leadDealerId(l)!==u.companyId||l.archivedAt)throw Error('Заявка недоступна');
+ if(leadDealerId(l)!==u.companyId||(l.archivedAt&&b.action!=='update'))throw Error('Заявка недоступна');
  previous=l;
+ if(b.action==='update')return applyDealerLeadUpdate(l,u,b,users,clients,now);
  if(b.action==='assign'){
  const manager=users.find(x=>x.id===b.managerId&&x.companyId===u.companyId&&x.status!=='disabled'&&x.dealerApproved===true);if(!manager)throw Error('Выберите подтверждённого сотрудника своей компании');
  if((l.assignedManagerId||'')!==(b.expectedManagerId||''))throw Error('Ответственный уже изменён. Обновите страницу');
@@ -37,6 +39,11 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
  if(['paid','in_progress','delivered','completed'].includes(b.status)&&!confirmedCustomerContract(clients.find(c=>c.id===l.clientId),l.id))throw Error('Сначала прикрепите подписанный договор и получите подтверждение клиента в его кабинете');
  return {...l,status:b.status,updatedAt:now.toISOString(),dealerWorkflowHistory:[...(l.dealerWorkflowHistory||[]),{action:'stage',status:b.status,actorId:u.id,at:now.toISOString()}]};
  }throw Error('Неизвестное действие');
- });if(!lead)throw Error('Заявка не найдена');if(b.action==='assign'&&lead.clientId)await updateChunkedDataJson<any>(clientsPath(u.companyId),lead.clientId,c=>c.companyId===u.companyId?{...c,assignedManagerId:lead.assignedManagerId}:c);after(()=>notifyCustomerForLead(lead,previous).catch(()=>{console.error('customer_lead_notice_failed');}));return Response.json({lead:dealerLeadView(lead,u.companyId)},{headers});
+ });if(!lead)throw Error('Заявка не найдена');if(['assign','update'].includes(b.action)&&lead.clientId)await updateChunkedDataJson<any>(clientsPath(u.companyId),lead.clientId,c=>c.companyId===u.companyId?{...c,assignedManagerId:lead.assignedManagerId}:c);after(()=>notifyCustomerForLead(lead,previous).catch(()=>{console.error('customer_lead_notice_failed');}));return Response.json({lead:dealerLeadView(lead,u.companyId)},{headers});
  }catch(e){return Response.json({error:e instanceof Error?e.message:'Не удалось сохранить'},{status:400,headers});}
+}
+
+export async function PATCH(request:Request,context:{params:Promise<{id:string}>}){
+ const raw=await request.text();if(raw.length>5000)return Response.json({error:'Слишком большой запрос'},{status:413});
+ try{const body=JSON.parse(raw);return POST(new Request(request.url,{method:'POST',headers:request.headers,body:JSON.stringify({...body,action:'update'})}),context);}catch{return Response.json({error:'Неверный запрос'},{status:400});}
 }
