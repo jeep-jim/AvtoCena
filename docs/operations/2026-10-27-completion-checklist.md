@@ -2743,3 +2743,37 @@ CRM/delivery failures возникли при tests/browser/crm-mobile-layout.mj
 Единственный bounded health21:34–21:35 завершился curl exit0: ok=true, exact ff5dc861c446cc39620e42a000f2de519e8eaf39, прежняя calculationVersion3f2e08fd788fc200f06b686badd221b2329f265ce8c2b886e193b3d6e4f73a4e. Это не приёмка PR1700/authenticated editor Save. China126198742555 и oldChina124685023963/124601674990: по одному запросу снова Transport closed, НЕ ПРОЧИТАНЫ; cause/outcome/final public manifest неизвестны.
 
 Новых saved Korea exact request/response/release-time/binding, Direct inputs/binding/filter, market binding/translation analysis, authenticated blog Save/native permission/real push delivery нет. Owner freeze и принятая база сохранены, capacity watch не дублируется. Обе истории дополняются append-only с expected-parent CAS/readback; runtime/live не менялись. Наблюдение остаётся enabled до итоговой приёмки кандидата и целей.
+
+
+## 04.11.2026 22:32 Красноярск — docs-only watch: PR1700 merged, deploy ещё выполняется
+
+Fresh main ee215102637799dc2d86961c199e088e4ca9c8b7. Свежие Road/checklist прочитаны; main AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 теперь содержит ранее прочитанный owner CRM parity. Related operations, кроме двух журналов watch, неизменны. Новых PR после1700 нет. PR1700 MERGED22:15:39, final head0f754036027b385414ad0fa67f0210f3642e15fd, merge ee215102637799dc2d86961c199e088e4ca9c8b7; terminal installed ещё НЕ подтверждён.
+
+Новая primary Road «восстановление проверок PR1700 после обрыва чата» ПРОЧИТАНА. Primary уже прочитал terminal CRM41848501302/browser126638198945 FAIL21:39:37 и delivery41848501299/126638199102 FAIL21:37:45: pages[kind](...).then is not a function для client на четырёх ширинах в обеих темах. Синхронный ClientWorkspacePage валиден; fixture loader исправлен через Promise.resolve с сохранением resolver/assertions. TS и local fixture bundle PASS; локальный Chromium не запускался из-за socket Operation not permitted, поэтому browser PASS локально не заявлен. Истории при конфликте сохранены. Причина обрыва чата неизвестна. Эти два журнала primary READ, watch повторно их не запрашивал; audit126638201206/live126642628470 SKIPPED metadata. Это fixture failure, не production authenticated Save failure.
+
+Новые 13 final job journals ПРОЧИТАНЫ, не повторять. Указанные artifacts НЕ viewed:
+- Old e6b7 CI41847780731/126635732402 SUCCESS21:35:40:2788 tests PASS, typecheck/Next build58pages PASS; artifacts13332044149/13331179554.
+- Old f4be CI41848139853/126636981172 SUCCESS21:40:12:2789 tests PASS, typecheck/Next build58pages PASS; artifacts13332477261/13333355804.
+- Old a88 CI41848501219/126638198240 SUCCESS21:41:30:2789 tests PASS, typecheck/Next build58pages PASS; artifacts13333335495/13331759319.
+- Old a88 workspace41848501193/126638199508 SUCCESS21:36:32:35tests, geometry390/1024/1440/1920 light/dark, workspace/profile/controls390/1440 PASS; artifact13331749823.
+- Final-head CI41851426518/126648458137 SUCCESS21:58:58:2789 tests PASS, typecheck/Next build58pages PASS; artifacts13335507637/13334524781.
+- Final-head workspace41851426634/126648461823 SUCCESS21:54:16:35tests, geometry390/1024/1440/1920 light/dark, workspace/profile/controls390/1440 PASS; artifact13336411690.
+- Final-head CRM41851426438/browser126648457887 SUCCESS21:54:59:16unit/88CRM/48fixture cases228 openings PASS; artifact13335637435. Audit126648460922 SKIPPED metadata.
+- Final-head CRM41851426438/live126651672354 SUCCESS21:56:55:36cases168openings PASS; artifact13335782594. Это существующий live test, не authenticated blog Save/реальный dealer acceptance и не проверка установленного ee215102.
+- Final-head delivery41851426434/126648456574 SUCCESS21:51:39:21tests/24fixture cases PASS; artifact13335391490. Это не реальная доставка уведомлений.
+- Final-head offer41851426397/126648455851 SUCCESS21:51:57:39tests, Android/iPhone native/clipboard/mini/estimate/default/cancel/native-failure fixtures PASS. Это не native permission/real-device acceptance.
+- Main CRM41855875730/browser126664223105 SUCCESS22:21:00:16unit/88CRM/48fixture cases228 openings PASS; artifact13337761519.
+- Main green41855875635/126664222305 SUCCESS22:16:37:50tests/browser PASS; artifact13337646210.
+- Main banner41855875769/126664222290 SUCCESS22:16:55:30tests/390/1440 light/dark map activation, office switching, banner selection, offer grid/no overflow PASS; artifact13337715859. Production-profile126664225948 SKIPPED metadata.
+
+Все11 final-head workflow SUCCESS metadata:41851426675 banner,41851426634 workspace,41851426547 owner,41851426518 CI,41851426487 site,41851426452 per-car,41851426438 CRM,41851426434 delivery,41851426433 selection,41851426397 offer,41851426384 green. Журналы остальных шести workflow не читались. Исторические WebKit install, Node-builtins bundling и Promise fixture failures сохранены; поздние успехи их не отменяют. Ранее прочитанный offer41848501210/126638198639 не повторялся.
+
+На срез metadata IN_PROGRESS2/PENDING0: existing deploy41855875636/prepare126664790276 выполняет Build с22:30:42; wait126664223007 SUCCESS22:16:39 metadata only. Final deploy НЕ прочитан. Existing CRM41855875730/audit126664222918 ещё ждёт release с22:16:26, terminal result НЕ прочитан. Watch не создавал и не повторял эти запуски. Следующий шаг — existing deploy/audit finals и новые saved primary release-time/authenticated acceptance результаты, без watch browser/rerun/repair.
+
+Единственный bounded health22:30–22:31 завершился curl exit0: ok=true, exact установленный release ff5dc861c446cc39620e42a000f2de519e8eaf39, прежняя calculationVersion3f2e08fd788fc200f06b686badd221b2329f265ce8c2b886e193b3d6e4f73a4e. Это не terminal acceptance PR1700 и не authenticated Save. PR1699 остаётся последней подтверждённой установкой; его deploy/sharedprices журналы не повторялись.
+
+China126198742555 и oldChina124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ; cause/outcome/final public manifest неизвестны. Новых saved Korea exact-request/response/release-time/binding, Direct inputs/binding/filter, market binding/translation analysis, authenticated blog Save/native permission/real push delivery подтверждений нет. Следующие адресные saved analysis остаются прежними.
+
+Owner freeze и принятая база сохранены. Runtime/live остаётся основной интерактивной работе; watch меняет только Road/checklist append-only с expected-parent CAS/readback, не меняет цены/данные/права/guards и не дублирует capacity watch. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
+
+Уточнение перед записью: existing CRM41855875730/audit126664222918 FINAL FAILURE22:31:40, новый14-й final журнал ПРОЧИТАН, не повторять. В22:31:36.894 scripts/wait-published-release.mjs:21:7: Production release or verified descendant not confirmed, exit1. Security-photo-audit artifact отсутствует (No files were found); live126674104960 SKIPPED metadata. Это wait-release failure, НЕ browser/Save failure и не доказательство неисправности кандидата. Теперь незавершённым остаётся deploy41855875636/126664790276, Build с22:30:42; его final ещё НЕ прочитан. Следующий шаг — существующий deploy final и saved primary release-time acceptance, без watch rerun/repair/browser.
