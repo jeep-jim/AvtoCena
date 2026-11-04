@@ -29,7 +29,7 @@ export async function discussionEntity(user:AuthUser,type:DiscussionType,id:stri
 export async function notifyDiscussion(user:AuthUser,type:DiscussionType,entity:any,note:DiscussionMessage){
  const users=await readCrmUsers();
  const recipientIds=users.filter(u=>u.id!==user.id&&sameWorkspace(user,u)&&workspacePermission(u,'chat')&&workspaceCanSee(u,entity,type)).map(u=>u.id);
- await notifyTeam({...(isDealerWorkspace(user)?{companyId:user.companyId}:{}),id:`comment_${type}_${entity.id}_${note.id}`,createdAt:note.createdAt,entityType:type,entityId:entity.id,recipientIds,kind:'comment',title:`${user.displayName} написал(а) · ${discussionLabel(type,entity)}`,text:note.text.slice(0,500),href:isDealerWorkspace(user)?`${workspaceHref(user,type==='lead'?'leads':'clients')}?id=${encodeURIComponent(entity.id)}`:discussionHref(type,entity.id,note.id)});
+ await notifyTeam({...(isDealerWorkspace(user)?{companyId:user.companyId}:{}),id:`comment_${type}_${entity.id}_${note.id}`,createdAt:note.createdAt,entityType:type,entityId:entity.id,recipientIds,kind:'comment',title:`${user.displayName} написал(а) · ${discussionLabel(type,entity)}`,text:note.text.slice(0,500),href:isDealerWorkspace(user)?discussionHref(type,entity.id,note.id).replace('/crm/',workspaceHref(user,'') ):discussionHref(type,entity.id,note.id)});
 }
 export async function readDiscussion(user:AuthUser,type:DiscussionType,id:string){
  const entity=await discussionEntity(user,type,id),users=await readCrmUsers();

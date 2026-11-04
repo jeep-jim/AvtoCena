@@ -1,3 +1,4 @@
+import {notificationReplyTarget} from '../apps/web/lib/notification-reply';
 import {createReminder,readReminders,finishReminder} from '../apps/web/lib/crm-reminders';
 import './helpers/server-only-hook.mjs';
 import test from 'node:test';
@@ -60,4 +61,10 @@ test('dealer status edits retain contract safeguards, tenant assignment, archive
  assert.throws(()=>apply({status:'selection'},a,{...lead,platformTerms:null}));
  const next=apply({status:'offer_sent',note:'Offer ready',assignedManagerId:teammate.id,expectedManagerId:a.id});assert.equal(next.status,'offer_sent');assert.equal(next.assignedManagerId,teammate.id);assert.equal(next.dealerInternalNotes[0].text,'Offer ready');assert.equal(next.platformTerms,lead.platformTerms);
  assert.ok(apply({archived:true,note:'Duplicate'}).archivedAt);
+});
+
+test('dealer notification reply targets require matching company URLs and retain client discussion identity',()=>{
+ const notice={id:'comment_client_client-a_note-a',kind:'comment',entityType:'client' as const,entityId:'client-a',companyId:'dealer_a',href:'/dealer-cabinet/company/dealer_a/clients/client-a?message=note-a#discussion-client-client-a'};
+ assert.deepEqual(notificationReplyTarget(notice),{kind:'discussion',type:'client',id:'client-a',messageId:'note-a'});
+ assert.equal(notificationReplyTarget({...notice,companyId:'dealer_b'}),undefined);
 });
