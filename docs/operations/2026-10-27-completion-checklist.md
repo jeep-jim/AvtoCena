@@ -2424,3 +2424,18 @@ China41711927294/publish126198742555 FINAL FAILURE04.11 07:34:36 подтвер�
 Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Следующий адресный primary saved analysis — outcome/report и доступный final log publish126198742555, проверка состояния publication относительно final public manifest и конкретного условия verifier; отдельно сохранённые request/response/configuration/authorization для translation403. До появления доказательств не объявлять готовность, не повторять сбор/публикацию/перевод, не менять guards/лимиты и не обращаться к поставщику без owner trace.
 
 Owner freeze сохранён; runtime/данные/цены/права/guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории append-only только Road/checklist, expected-parent CAS/readback и additions-only проверяются. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 04.11.2026, 08:34 Красноярск — новых результатов приёмки и анализа нет
+
+Свежие main53942dabe8f1293ffbc7ba8c78a1666d4353112a, Road/checklist, AGENTS, PR и existing runs/jobs сверены. Новых primary записей и PR после1694 нет; AGENTSbb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged. IN_PROGRESS0, активного продолжения failed China publication и app deploy нет. Новых сохранённых результатов authenticatedblogSave/realstafflogin/showcaseSaveconflict/nativepermission/realpushdelivery либо адресного market/binding/cancelcause/translation анализа нет.
+
+China41711927294/publish126198742555 остаётся FINAL FAILURE07:34:36 по metadata. Один запрос доступности итогового журнала снова Transport closed: журнал НЕ ПРОЧИТАН, точная ошибка/причина неизвестна; artifact13283749108 не просмотрен, outcome/final public manifest не подтверждены. Прежние Invalid string length, timeout/6h, OOM, lock loss или rollback не приписываются этому запуску без свидетельства. Уже прочитанные collect, verifier41747866892/126305295122 и translation41747866885/126305294728 не повторялись; che168_publication_not_active и translation_http_403 остаются открытыми, как и failures из06:12.
+
+Новый existing dealerbilling41752653917/reconcile126321228833 SUCCESS04.11 08:15:07 — только metadata, журнал НЕ прочитан; финансовая сверка и изменения доступа/данных не подтверждены. Capacity watch не дублировался.
+
+Единственный bounded health04.11 08:33 завершился curl exit0: ok=true, exactreleasee5cdeb3562a7762b04eedc001d534b534f533cf4, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. PR1694 установлен; health не подтверждает China publication/inventory или authenticated editor Save acceptance и не закрывает исторические failures. PerformanceAccepted=false advisory, functional deadline90s сохранён.
+
+Old China124685023963/124601674990: по одному запросу снова Transport closed, журналы НЕ прочитаны/cause unknown. Следующий адресный primary saved analysis — publish outcome/report/final log и final public manifest с конкретным условием verifier; отдельно сохранённые request/response/configuration/authorization для translation403. Без новых доказательств не объявлять готовность и не повторять runtime/provider операции.
+
+Owner freeze сохранён; runtime/данные/цены/права/guards не менялись, новые запуски не создавались/не повторялись/не отменялись. Обе истории append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение enabled до итоговой приёмки последнего кандидата и целей.
