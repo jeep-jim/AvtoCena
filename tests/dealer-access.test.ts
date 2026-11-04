@@ -85,7 +85,7 @@ test('middleware admits the reviewed team and limits dealer sessions to scoped e
    assert.equal((await call(dealer,url)).status,401,url);
    assert.equal((await call({...dealer,role:'owner'},url)).status,401,`stale owner: ${url}`);
   }
-  assert.equal(new URL((await call(dealer,'/crm')).headers.get('location')!).pathname,'/dealer-cabinet');
+  assert.equal(new URL((await call(dealer,'/crm')).headers.get('location')!).pathname,'/dealer-cabinet/overview');
  }finally{if(previous===undefined)delete process.env.AUTH_SECRET;else process.env.AUTH_SECRET=previous;}
 });
 

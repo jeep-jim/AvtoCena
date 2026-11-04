@@ -1,4 +1,5 @@
 "use client";
+import {CopyDealerLink} from "./CopyDealerLink";
 import {orderedOffers} from '@/lib/dealers/market-offer';
 import {OfficeAddress} from "./OfficeAddress";
 import {DealerReviewsManager} from "./DealerReviewsManager";
@@ -229,7 +230,7 @@ export function DealerEditor({
             >
               <Eye size={17}/> Предпросмотр страницы дилера
             </Link>
-            <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><Field label="Имя в ссылке" value={s.slug||''} onChange={v=>patch({citySlug:'',slug:v.toLowerCase()})}/>{message.includes("занят")&&<p role="alert" className="text-sm text-red-500">Это имя занято. Придумайте другое.</p>}<p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Изменения ссылки сохраняются автоматически.</p></div>
+            <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><Field label="Имя в ссылке" value={s.slug||''} onChange={v=>patch({citySlug:'',slug:v.toLowerCase()})}/>{message.includes("занят")&&<p role="alert" className="text-sm text-red-500">Это имя занято. Придумайте другое.</p>}<div className="text-sm"><CopyDealerLink url={`https://avtocena.com${dealerProfilePath(s)}`}/></div><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Изменения ссылки сохраняются автоматически.</p></div>
             <Field
               label="Название компании"
               value={s.name}

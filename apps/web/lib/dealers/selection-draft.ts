@@ -1,7 +1,7 @@
 export type SelectionDraft={title:string;textOpen:boolean;dismissed:string|null;opened:boolean};
 export const emptySelectionDraft:SelectionDraft={title:'',textOpen:false,dismissed:null,opened:false};
 const drafts=new Map<string,SelectionDraft>();
-const key=(dealerId:string)=>'avtocena:selection-draft:v1:'+dealerId;
+const key=(dealerId:string)=>'avtocena:selection-draft:'+(dealerId==='dealer_topavto'?'v1:':'v2:')+dealerId;
 export function readSelectionDraft(dealerId:string):SelectionDraft{
  if(drafts.has(dealerId))return drafts.get(dealerId)!;
  try{const value=JSON.parse(sessionStorage.getItem(key(dealerId))||'null');

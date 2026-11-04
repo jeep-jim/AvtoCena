@@ -12,12 +12,12 @@ export function DealerSelectionShare({dealerId,initialQuery=''}:{dealerId:string
  const [status,setStatus]=useState(''),[busy,setBusy]=useState(false);
  const customTitle=draft.title;
  function updateDraft(patch:Partial<SelectionDraft>){const next={...draftRef.current,...patch};draftRef.current=next;setDraft(next);saveSelectionDraft(dealerId,next);}
- useLayoutEffect(()=>{const saved=readSelectionDraft(dealerId);draftRef.current=saved;setDraft(saved);},[dealerId]);
+ useLayoutEffect(()=>{const saved=readSelectionDraft(dealerId);if(dealerId==='dealer_topavto'&&new URLSearchParams(window.location.search).get('selection')==='1')saved.opened=true;draftRef.current=saved;setDraft(saved);},[dealerId]);
  const prepared=useRef<{key:string;url:string}|null>(null),inFlight=useRef(false),latest=useRef('');
  const key=queryKey(dealerId,selection.query);const title=selectionTitle(customTitle)||SELECTION_TITLE;const shareKey=JSON.stringify([key,title]);latest.current=shareKey;
  useEffect(()=>{
   const receive=(event:Event)=>{const detail=(event as CustomEvent<Selection>).detail;if(detail?.dealerId!==dealerId)return;
-   const nextKey=queryKey(dealerId,detail.query);if(nextKey!==lastQuery.current){lastQuery.current=nextKey;updateDraft({dismissed:null,opened:true});}
+   const nextKey=queryKey(dealerId,detail.query);if(nextKey!==lastQuery.current){lastQuery.current=nextKey;if(dealerId==='dealer_topavto')updateDraft({dismissed:null,opened:true});}
    setSelection(detail);
   };
   const open=(event:Event)=>{if((event as CustomEvent).detail?.dealerId!==dealerId)return;updateDraft({dismissed:null,opened:true});};
@@ -25,7 +25,7 @@ export function DealerSelectionShare({dealerId,initialQuery=''}:{dealerId:string
   return()=>{window.removeEventListener(SELECTION_EVENT,receive);window.removeEventListener(OPEN_SELECTION_PANEL,open);};
  },[dealerId]);
  useEffect(()=>{setStatus('');},[shareKey]);
- const active=(draft.opened||selectionQuery(new URLSearchParams(selection.query),false).size>0)&&draft.dismissed!==key;
+ const active=(draft.opened||(dealerId==='dealer_topavto'&&selectionQuery(new URLSearchParams(selection.query),false).size>0))&&draft.dismissed!==key;
  useLayoutEffect(()=>{
   const element=dock.current;if(!active||selection.filtersOpen||!element)return;
   const root=element.ownerDocument.documentElement;
@@ -47,7 +47,7 @@ export function DealerSelectionShare({dealerId,initialQuery=''}:{dealerId:string
  if(!active)return null;
  return <><nav ref={dock} className="dealer-selection-dock" data-selection-dock hidden={selection.filtersOpen} aria-label="Поделиться подборкой">
   {draft.textOpen&&<label id={fieldId} className="dealer-selection-title"><span className="sr-only">Название подборки</span><input aria-label="Название подборки" placeholder="Название подборки (необязательно)" value={customTitle} maxLength={160} onChange={event=>updateDraft({title:event.target.value})} /></label>}
-  <button type="button" className="dealer-selection-close" aria-label="Скрыть панель подборки" onClick={()=>updateDraft({dismissed:key})}><X size={23}/></button>
+  <button type="button" className="dealer-selection-close" aria-label="Скрыть панель подборки" onClick={()=>updateDraft({dismissed:key,opened:false})}><X size={23}/></button>
   <button type="button" className="dealer-selection-text" aria-label="Текст подборки" aria-expanded={draft.textOpen} aria-controls={fieldId} onClick={()=>updateDraft({textOpen:!draft.textOpen})}><Type size={23}/><ChevronDown size={12} style={{transform:draft.textOpen?'rotate(180deg)':undefined}}/></button>
   <button type="button" className="dealer-selection-send" onClick={()=>void share()} disabled={busy}><Share2 size={19}/><span>{busy?'Готовим ссылку…':'Поделиться подборкой'}</span></button>
   {status&&<p role="status">{status}</p>}

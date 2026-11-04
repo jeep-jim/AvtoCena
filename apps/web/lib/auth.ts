@@ -24,6 +24,7 @@ export type AuthUser = {
   remoteWork?: boolean;
   companyId?: string;
   dealerApproved?: boolean;
+  dealerTeamRole?: "owner" | "manager";
   role: UserRole;
   status?: "active" | "disabled";
   partnerCode?: string;

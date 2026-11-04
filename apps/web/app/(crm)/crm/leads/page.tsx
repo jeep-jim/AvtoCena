@@ -150,7 +150,7 @@ export default async function CrmLeadsPage({
       <div className={`crm-lead-tabs mb-4 flex flex-wrap gap-2${user.role === "owner" ? " crm-lead-tabs-owner" : ""}`}>
         {[
           ["all", "Активные"],
-          ["my", "Мои заявки"],
+          ...(isPlatformOwner(user)?[["dealers", "Заявки дилеров"]]:[]),
           ["archive", "Архив"],
         ].map(([key, label]) => (
           <Link
@@ -158,7 +158,7 @@ export default async function CrmLeadsPage({
             href={`/crm/leads?${new URLSearchParams({view: key, ...(first(params.date) ? {date: first(params.date)} : {})})}`}
             className={`rounded-xl px-4 py-2 text-sm font-bold ${view === key ? "bg-red-500 text-white" : "border border-[var(--ac-border)]"}`}
           >
-            {label}
+            {label}{key==="dealers"&&stored.some(l=>canSeeLead(user,l)&&leadDealerId(l)!=="dealer_topavto"&&!l.archivedAt&&!l.assignedManagerId)&&<span className="ml-2 rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">{stored.filter(l=>canSeeLead(user,l)&&leadDealerId(l)!=="dealer_topavto"&&!l.archivedAt&&!l.assignedManagerId).length}</span>}
           </Link>
         ))}
 
@@ -166,7 +166,7 @@ export default async function CrmLeadsPage({
       <ManualLeadForm offices={user.workAddresses||[]} headerBefore={<div className="crm-lead-layout" aria-label="Вид заявок">{[["list","Список"],["board","По этапам"]].map(([key,label])=><Link key={key} href={layoutHref(key)} aria-current={(board?"board":"list")===key?"page":undefined}>{label}</Link>)}</div>} headerAside={
       <LeadFilters key={JSON.stringify(params)} count={["q","status","manager","date","dealer"].filter(key=>first(params[key])).length}>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
-        <input type="hidden" name="view" value={view} />
+        <input type="hidden" name="view" value={view==="my"?"all":view} />
         <input type="hidden" name="layout" value={board?"board":"list"} />
         {view==='dealers'&&<select name="dealer" aria-label="Фильтр дилера" defaultValue={dealerFilter} className="soft-input rounded-xl p-3"><option value="">Все дилеры</option>{Array.from(new Map(stored.filter(l=>canSeeLead(user,l)&&leadDealerId(l)!=='dealer_topavto').map(l=>[leadDealerId(l),l.requestedDealerName||leadDealerId(l)])).entries()).map(([id,name])=><option key={id} value={id}>{String(name)}</option>)}</select>}
         <label className="crm-filter-date">Дата заявки<input className="soft-input rounded-xl p-3" type="date" name="date" defaultValue={first(params.date)} /></label>
@@ -193,12 +193,13 @@ export default async function CrmLeadsPage({
         <select
           name="manager"
           aria-label="Фильтр менеджера"
-          defaultValue={first(params.manager)}
+          defaultValue={view==="my"?user.id:first(params.manager)}
           className="soft-input min-w-0 rounded-xl p-3"
         >
           <option value="">Все ответственные</option>
+          <option value={user.id}>Мои заявки</option>
           <option value="unassigned">Без ответственного</option>
-          {managers.map((manager) => (
+          {managers.filter(manager=>manager.id!==user.id).map((manager) => (
             <option key={manager.id} value={manager.id}>
               {manager.displayName}
             </option>
