@@ -19,3 +19,9 @@ test('numeric models and different makes stay separate',()=>{
  const rows=[['Audi','A2'],['Audi','A20'],['BMW','X5'],['BMW','X50'],['Hyundai','Kona'],['Other','Kona']].map(([make,model])=>({make,model,aliases:[]}));
  assert.equal(groupFilterModels(rows).length,6);
 });
+
+
+test('family grouping keeps numeric submodels selectable beside their parent',()=>{
+ const rows=['Vision','Vision X3','Vision X3 1.5','Vision X6','Vision X30'].map(model=>({make:'Geely',model,aliases:[]}));
+ assert.deepEqual(groupFilterModels(rows).map(row=>row.model),['Vision','Vision X3','Vision X6','Vision X30']);
+});

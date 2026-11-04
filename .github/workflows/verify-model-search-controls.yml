@@ -1,5 +1,12 @@
 name: Verify model search controls
 on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/VehicleModelSearch.tsx'
+      - 'apps/web/lib/catalog/model-suggestion-search.ts'
+      - 'apps/web/lib/catalog/model-filter-options.ts'
+      - 'tests/browser/model-search-controls.mjs'
+      - '.github/workflows/verify-model-search-controls.yml'
   workflow_dispatch:
   push:
     branches: [main]
@@ -12,7 +19,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4

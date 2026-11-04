@@ -35,7 +35,7 @@ const facets={makes:['Toyota','BMW','Mazda'],models:[{make:'Toyota',model:'Corol
 try {
  for(const width of [390,1440])for(const theme of ['dark','light']) {
   const context=await browser.newContext({viewport:{width,height:844}}), page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
-  const models={version:1,brands:[['Toyota',['Тойота']]],models:[['Toyota','Corolla',[],1],['Toyota','Camry',[],1]]};
+  const models={version:1,brands:[['Toyota',['Тойота']],['Geely',['Джили']]],models:[['Toyota','Corolla',[],1],['Toyota','Camry',[],1],['Geely','Vision',[],1],['Geely','Vision X3',[],1],['Geely','Vision X6',[],1],['Geely','GX3 Pro',[],1],['Geely','Vision X30',[],1]]};
   await page.route('**/api/catalog/**',route=>route.fulfill({json:route.request().url().includes('scope=inventory')?models:{counts:{Toyota:12},items:[],facets:{makes:['Toyota']}}}));
   const asset=JSON.parse(fs.readFileSync('apps/web/lib/catalog/model-search-asset.json','utf8')).asset;
   await page.route('**'+asset,route=>route.fulfill({json:models}));
@@ -66,6 +66,24 @@ try {
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Camry');
   assert.deepEqual(errors,[]);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-  console.log(JSON.stringify({width,theme,passed:true}));await context.close();
+  for(const query of ['X3','Х3','X 3','X6']){
+   await page.goto(`${origin}/cars?theme=${theme}`);
+   scope=page.locator('.ac-catalog-filter-panel');
+   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
+   const field=scope.getByRole('searchbox',{name:'Модель автомобиля'});
+   let picker=scope;
+   if(width<1024){await field.click();picker=page.getByRole('dialog',{name:'Выбор моделей'});await picker.getByRole('searchbox',{name:'Поиск модели'}).fill(query);}else await field.fill(query);
+   const expected=query==='X6'?'Vision X6':'Vision X3';
+   await picker.getByRole('button',{name:new RegExp('^'+expected+'(?: Geely)?$')}).waitFor();
+   await picker.getByRole('button',{name:'Применить',exact:true}).click();
+   assert.equal(await scope.locator('input[name=model]').inputValue(),expected);
+   assert.equal(await scope.locator('input[name=make]').inputValue(),'Geely');
+   if(width<1024)await scope.getByRole('button',{name:'Показать автомобили',exact:true}).click();
+   await page.waitForFunction(model=>new URLSearchParams(location.search).get('model')===model,expected);
+   assert.equal(new URL(page.url()).searchParams.get('make'),'Geely');
+   assert.deepEqual(errors,[]);
+  }
+  await page.screenshot({path:`${out}/${width}-${theme}-geely.png`});
+  console.log(JSON.stringify({width,theme,shortModelCodes:true,passed:true}));await context.close();
  }
 }finally{await browser.close();if(server)await new Promise(r=>server.close(r));}
