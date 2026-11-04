@@ -17,6 +17,7 @@ export async function GET() {
       displayName: user.displayName,
       avatarUrl: user.avatarUrl || null,
       role: user.role,
+      companyId: user.companyId || null,
       partnerCode: user.partnerCode || null,
       canCreateSelection: await canManageDealer(user,"dealer_topavto")
     }

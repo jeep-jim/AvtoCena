@@ -1,3 +1,4 @@
+import {CrmTeamCardContent,CRM_TEAM_CARD_CLASS} from '@/components/crm/CrmRecordViews';
 import {GPT_PROFILE} from "@/lib/crm-gpt-profile";
 import {TeamSchedulePanel} from "@/components/crm/TeamSchedulePanel";
 import {hasCrmPermission,ROLE_DETAILS} from "@/lib/crm-permissions";
@@ -57,23 +58,8 @@ export default async function CrmManagersPage({searchParams}:{searchParams?:Prom
           const info = roleInfo[manager.role] || { label: manager.role, access: "Индивидуальные права" };
           const avatar = manager.avatarUrl || defaultManagerAvatar(manager.id || manager.telegramUsername);
           return (
-            <Link key={manager.id} href={hasCrmPermission(actor,"staff")||actor.id===manager.id?`/crm/managers/${encodeURIComponent(manager.id)}`:"/crm/managers#team-schedule"} className="crm-team-card glass rounded-[1.6rem] p-5 transition hover:-translate-y-0.5">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex min-w-0 items-center gap-3">
-                  <img src={avatar} alt="" className="h-12 w-12 shrink-0 rounded-full object-cover" referrerPolicy="no-referrer" />
-                  <div className="min-w-0">
-                    <h2 className="truncate text-xl font-black">{manager.displayName}</h2>
-                    <div className="mt-1 truncate text-sm font-bold text-white/45">@{manager.telegramUsername}</div>
-                  </div>
-                </div>
-                <span className="rounded-full bg-red-500/15 px-3 py-1 text-xs font-black text-red-300">{info.label}</span>
-              </div>
-              <div className="crm-team-access mt-4 rounded-2xl bg-white/[.04] p-3 text-sm font-bold leading-6 text-white/48">{info.access}</div>
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-white/[.055] p-4"><div className="text-xs font-bold text-white/45">Заявки</div><div className="mt-1 text-3xl font-black">{managerLeads.length}</div></div>
-                <div className="rounded-2xl bg-white/[.055] p-4"><div className="text-xs font-bold text-white/45">Клиенты</div><div className="mt-1 text-3xl font-black">{managerClients.length}</div></div>
-              </div>
-              <div className="mt-4 text-sm font-black text-red-300">Открыть →</div>
+            <Link key={manager.id} href={hasCrmPermission(actor,"staff")||actor.id===manager.id?`/crm/managers/${encodeURIComponent(manager.id)}`:"/crm/managers#team-schedule"} className={CRM_TEAM_CARD_CLASS}>
+              <CrmTeamCardContent name={manager.displayName} login={`@${manager.telegramUsername}`} avatar={avatar} role={info.label} access={info.access} leads={managerLeads.length} clients={managerClients.length}><div className="mt-4 text-sm font-black text-red-300">Открыть →</div></CrmTeamCardContent>
             </Link>
           );
         })}

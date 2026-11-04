@@ -44,16 +44,18 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
  const office=s.offices.find(o=>o.id===officeId)||s.offices[0];
  const photos=s.buyersEnabled?s.buyerPhotos:[];
  const request=`/request?dealer=${encodeURIComponent(s.dealerId)}`;
+ // Desktop wrappers use display:contents; scroll a rendered catalog element instead.
+ const catalogTarget=()=>{const root=top.current;return window.matchMedia('(min-width:1024px)').matches?root?.querySelector<HTMLElement>('.ac-catalog-heading,.ac-catalog-results')??root?.querySelector<HTMLElement>('#catalog'):root?.querySelector<HTMLElement>('#catalog');};
  useEffect(()=>{
   if(editorSection)return;
   const navigate=(scroll:boolean)=>{const hash=location.hash;const value=hash==='#offices'?'about':hash.slice(1);if(['','cars','photos','about','specials','reviews'].includes(value)){setTab((value==='specials'?'cars':value||'cars') as Tab);if(scroll&&value==='specials')requestAnimationFrame(()=>specialSection.current?.scrollIntoView({block:'start'}));}};
   navigate(false);window.dispatchEvent(new Event(CITY_CHANGED_EVENT));let initial=0;
   // Allow the selected-city/selection layout effects to settle before aligning a deep link.
-  initial=requestAnimationFrame(()=>{initial=requestAnimationFrame(()=>{if(location.hash==='#catalog')document.getElementById('catalog')?.scrollIntoView({block:'start',behavior:'instant'});});});
+  initial=requestAnimationFrame(()=>{initial=requestAnimationFrame(()=>{if(location.hash==='#catalog')catalogTarget()?.scrollIntoView({block:'start',behavior:'instant'});});});
   const changed=()=>navigate(true);window.addEventListener('hashchange',changed);return()=>{cancelAnimationFrame(initial);window.removeEventListener('hashchange',changed);};
  },[s.dealerId,editorSection]);
  useEffect(()=>{const el=top.current;if(!el)return;const header=el.ownerDocument.querySelector('.ac-public-header');if(!header)return;const measure=()=>el.style.setProperty('--dealer-header-height',`${header.getBoundingClientRect().bottom}px`);measure();const observer=new ResizeObserver(measure);observer.observe(header);window.addEventListener(PUBLIC_HEADER_LAYOUT_EVENT,measure);return()=>{observer.disconnect();window.removeEventListener(PUBLIC_HEADER_LAYOUT_EVENT,measure);};},[]);
- useEffect(()=>{if(editorSection)return;const openCatalog=()=>{setTab('cars');requestAnimationFrame(()=>body.current?.scrollIntoView({block:'start'}));};window.addEventListener('avtocena:dealer-section',openCatalog);return()=>window.removeEventListener('avtocena:dealer-section',openCatalog);},[]);
+ useEffect(()=>{if(editorSection)return;const openCatalog=()=>{setTab('cars');requestAnimationFrame(()=>catalogTarget()?.scrollIntoView({block:'start'}));};window.addEventListener('avtocena:dealer-section',openCatalog);return()=>window.removeEventListener('avtocena:dealer-section',openCatalog);},[]);
  function selectTab(value:Tab){setTab(value==='specials'?'cars':value);}
  function scrollToElement(el:HTMLElement|null){if(!el)return;if(editorSection){const win=el.ownerDocument.defaultView;win?.scrollTo({top:el.getBoundingClientRect().top+win.scrollY,behavior:'smooth'});}else el.scrollIntoView({behavior:'smooth',block:'start'});}
  function section(value:Tab){selectTab(value);if(value==='specials')requestAnimationFrame(()=>scrollToElement(specialSection.current));else if(value==='cars')requestAnimationFrame(()=>scrollToElement(top.current));}
@@ -65,7 +67,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   if(['overview','profile'].includes(editorSection)&&top.current?.ownerDocument!==document){const win=top.current?.ownerDocument.defaultView;win?.scrollTo({top:0,behavior:'instant'});}
  },[editorSection]);
  const logo=<>{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt={`Логотип ${s.name}`} className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt={`Логотип ${s.name}`} className="dealer-logo-dark"/></>:<img className="dealer-default-logo" src="/logo/avtocena-mark-dark.svg" alt="АвтоЦена"/>}</>;
- return <div ref={top} className={`dealer-profile mx-auto w-full max-w-[1500px] px-4 md:px-8 ${catalogOnly?"dealer-profile--catalog-only":""}`} onClickCapture={editorSection?e=>{if((e.target as HTMLElement).closest('a'))e.preventDefault();}:undefined}>
+ return <div ref={top} className={`dealer-profile ${catalog&&s.catalogMarkets.length?"dealer-profile--with-catalog":""} mx-auto w-full max-w-[1500px] px-4 md:px-8 ${catalogOnly?"dealer-profile--catalog-only":""}`} onClickCapture={editorSection?e=>{if((e.target as HTMLElement).closest('a'))e.preventDefault();}:undefined}>
   <div className="dealer-profile-home-banner"><DealerBannerGallery s={s}/></div>
   <style>{`@media(max-width:767px){.dealer-profile--catalog-only .dealer-profile-sheet{margin-top:0}.dealer-profile--catalog-only .dealer-profile-sheet:before{top:0}.dealer-profile--catalog-only .dealer-profile-home-banner,.dealer-profile--catalog-only .dealer-profile-identity,.dealer-profile--catalog-only .dealer-profile-actions,.dealer-profile--catalog-only .dealer-tab-content>div>.dealer-stories,.dealer-profile--catalog-only .dealer-main-offers{display:none!important}}`}</style>
   <div className="dealer-profile-sheet">

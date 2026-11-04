@@ -67,10 +67,12 @@ try{
    const fixturePath=kind==='leads'?'/crm/leads':'/';
    await page.goto(`http://127.0.0.1:${server.address().port}${fixturePath}?kind=${kind}&theme=${theme}`);
    if(kind==='dealer-docs'){
-    await page.getByRole('heading',{name:'Клиенты и документы',exact:true}).waitFor();
+    await page.getByRole('heading',{name:'Клиенты',exact:true}).waitFor();
     assert.equal(await page.getByRole('button',{name:'Добавить клиента',exact:true}).count(),1);
     assert.equal(await page.getByRole('heading',{name:'Документы компании',exact:true}).count(),1);
-    assert.equal(await page.getByRole('link',{name:'← Кабинет компании',exact:true}).count(),1);
+    assert.equal(await page.getByRole('link',{name:'← Кабинет компании',exact:true}).count(),0,'no duplicate cabinet link');
+    await page.getByRole('navigation',{name:'Разделы клиентов'}).getByRole('link',{name:'Документы',exact:true}).click();
+    await page.getByRole('heading',{name:'Документы компании',exact:true}).waitFor();
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer documents fit viewport');
     await page.screenshot({path:`${out}/dealer-documents-${theme}-${width}.png`,fullPage:true});
     assert.deepEqual(errors,[]);results.push({theme,width,kind,passed:true});await page.close();continue;

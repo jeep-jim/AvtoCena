@@ -1,5 +1,5 @@
 'use client';
-import Link from 'next/link';
+import {CrmNavigationLinks} from './CrmNavigationLinks';
 import {useEffect,useState} from 'react';
 const shortLabels:Record<string,string>={'Команда и права':'Команда','Рынки и расчёт':'Рынки'};
 export function CrmNavigation({links,activeHref,userId}:{links:Array<readonly [string,string]>;activeHref:string;userId:string}){
@@ -19,5 +19,5 @@ export function CrmNavigation({links,activeHref,userId}:{links:Array<readonly [s
   window.addEventListener('avtocena:crm-change',load);window.addEventListener('focus',load);document.addEventListener('visibilitychange',load);
   return()=>{stopped=true;controller.abort();clearInterval(timer);window.removeEventListener('avtocena:crm-change',load);window.removeEventListener('focus',load);document.removeEventListener('visibilitychange',load);};
  },[activeHref,userId]);
- return <nav className="crm-navigation crm-navigation-counted" aria-label="Разделы CRM">{links.map(([href,label])=>{const count=counts[href]||0;return <Link key={href} href={href} prefetch={false} className={href==='/crm/documents'?'crm-documents-button':undefined} aria-label={`${label}${count?`, новых действий: ${count}`:''}`} aria-current={href===activeHref?'page':undefined}>{shortLabels[label]||label}{count>0&&<span className="crm-navigation-badge" aria-hidden="true" title={`Новых действий: ${count}`}>{count>99?'99+':count}</span>}</Link>;})}</nav>;
+ return <CrmNavigationLinks links={links.map(([href,label])=>[href,shortLabels[label]||label] as const)} activeHref={activeHref} counts={counts}/>;
 }

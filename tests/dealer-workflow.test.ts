@@ -26,3 +26,10 @@ test('client acknowledgement is required for new dealer confirmations, legacy co
  assert.ok(confirmedCustomerContract({...c,portalContracts:{l:{...c.portalContracts.l,requiresCustomerConfirmation:false}}},'l'));assert.equal(confirmedCustomerContract(undefined,'l'),null);
  assert.equal(hasContactResult({assignedManagerId:'m',dealerContactResult:'waiting'}),true);assert.equal(hasContactResult({dealerContactResult:'contacted'}),false);
 });
+test('explicit archive browsing preserves tenant isolation and contact disclosure',()=>{
+ const lead={id:'archived',requestedDealerId:'dealer_a',archivedAt:'2026-11-04',name:'secret',phone:'secret',comment:'secret'};
+ assert.equal(dealerLeadView(lead,'dealer_b',true),null);
+ assert.equal(dealerLeadView(lead,'dealer_a'),null);
+ assert.equal(dealerLeadView(lead,'dealer_a',true)?.id,'archived');assert.equal(JSON.stringify(dealerLeadView(lead,'dealer_a',true)).includes('secret'),false);
+ assert.equal(dealerLeadView({...lead,assignedManagerId:'own',platformTerms:{agreementDigest:'accepted'}},'dealer_a',true)?.name,'secret');
+});

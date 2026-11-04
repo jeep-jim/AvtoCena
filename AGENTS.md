@@ -248,3 +248,8 @@
 # Owner mobile chips — 04.11.2026
 
 - On mobile, chip/tab rows must stay on one horizontal scrollable line, matching the established cabinet. Do not wrap chips onto a second row. Preserve keyboard access and clear active states. Apply this to touched interfaces; track remaining rows for follow-up without unsolicited catalog logic changes.
+
+# Owner shared CRM interface — 04.11.2026
+
+- Dealer workspaces reuse the existing CRM frame, navigation/badges, headings, metric/team/client/lead presentation and account-menu styles. Do not invent a second visual system or duplicate profile links above the page. Update shared components so both interfaces stay consistent.
+- Keep the dealer's five workspace tabs, own-company scope and existing action permissions. Shared presentation must never grant platform/project management or disclose another company's records. Internal TopAvto staff use their CRM shell and their personal profile; their company editor belongs at /crm/company.
