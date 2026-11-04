@@ -116,6 +116,18 @@ html[data-theme] body .dealer-profile-actions>button{background:#00a5dc;color:#f
 html[data-theme] body .dealer-subscription-control>button,html[data-theme] body .dealer-subscription-control>button[aria-pressed=true]{background:#ed3d5318;color:#ed233a;-webkit-text-fill-color:#ed233a}
 .dealer-subscription-control strong{background:transparent}
 .dealer-profile .dealer-intro,.dealer-profile .dealer-expand{transition:none!important;animation:none!important;touch-action:manipulation}
+/* Shared mobile and desktop dealer identity/footer. */
+.ac-dealer-public-page .dealer-profile-identity:before{background:linear-gradient(to bottom,color-mix(in srgb,var(--ac-surface) 58%,transparent),var(--ac-surface) 100px);-webkit-backdrop-filter:blur(18px) saturate(130%);backdrop-filter:blur(18px) saturate(130%)}
+body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-footer-dealer-attribution{display:inline}
+body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-footer-dealer-label{display:none}
+body:has(.ac-dealer-public-page) .ac-public-footer-navigation{border-top:1px solid var(--ac-border)}
+body:has(.ac-dealer-public-page) .ac-public-footer-tools{max-width:none}
+@media(max-width:1023px){
+ body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-public-footer-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body:has(.ac-dealer-public-page) .ac-footer-dealer-home{grid-column:2;justify-self:end;max-width:100%}
+ .ac-dealer-public-page .dealer-profile-footer>.dealer-requisites{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+ .ac-dealer-public-page .dealer-profile-footer dl{justify-self:end;max-width:100%}
+}
 /* One desktop grid places the existing filters alongside the whole dealer page. */
 @media(min-width:1024px){
  .dealer-profile--with-catalog,body:has(.ac-dealer-public-page .dealer-profile--with-catalog){

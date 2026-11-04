@@ -5,7 +5,7 @@ import {normalizeRuPhone} from "@/lib/ru-phone";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
-export function ClientCreateForm() {
+export function ClientCreateForm({apiBase="/api/crm/clients",clientBase="/crm/clients"}:{apiBase?:string;clientBase?:string}={}) {
   const router = useRouter();
   const operationIdRef = useRef<string>(crypto.randomUUID());
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export function ClientCreateForm() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/crm/clients", {
+      const response = await fetch(apiBase, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, phone: normalizeRuPhone(form.phone), operationId: operationIdRef.current })
@@ -80,7 +80,7 @@ export function ClientCreateForm() {
       </div>
 
       {error && <div className="crm-error mt-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">{error}</div>}
-      {sent && <div className="crm-success mt-4 rounded-2xl bg-green-500/15 px-4 py-3 text-sm font-bold text-green-100">Клиент добавлен в базу. <a className="mt-2 block underline" href={`/crm/clients/${encodeURIComponent(createdClientId)}`}>Открыть карточку и прикрепить документы →</a></div>}
+      {sent && <div className="crm-success mt-4 rounded-2xl bg-green-500/15 px-4 py-3 text-sm font-bold text-green-100">Клиент добавлен в базу. <a className="mt-2 block underline" href={`${clientBase}/${encodeURIComponent(createdClientId)}`}>Открыть карточку и прикрепить документы →</a></div>}
 
       <button disabled={loading} className="avto-button mt-5 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60">
         {loading ? "Сохраняем..." : "Добавить клиента"}

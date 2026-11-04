@@ -253,3 +253,10 @@
 
 - Dealer workspaces reuse the existing CRM frame, navigation/badges, headings, metric/team/client/lead presentation and account-menu styles. Do not invent a second visual system or duplicate profile links above the page. Update shared components so both interfaces stay consistent.
 - Keep the dealer's five workspace tabs, own-company scope and existing action permissions. Shared presentation must never grant platform/project management or disclose another company's records. Internal TopAvto staff use their CRM shell and their personal profile; their company editor belongs at /crm/company.
+
+
+# Owner dealer CRM parity — 04.11.2026 evening
+
+- Supersedes the five-tab restriction: external dealers need the shared CRM chat, lead cards, client workspace, discussions, reminders and team-management controls. Use shared components so future UI edits reach every company. Platform editorial/site administration stays exclusive to authorized TopAvto staff.
+- Company identity belongs in dealer workspace URLs and the visible shell. Verify tenant membership server-side; a company URL is not authorization. Preserve explicit owner assignment, disclosure/contract gates and isolation of platform internal notes.
+- Public dealer profiles have no Back arrow in their header. Mobile uses the same gradient/blur and visible «Работает на АвтоЦене» attribution as desktop.

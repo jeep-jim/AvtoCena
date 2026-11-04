@@ -212,10 +212,29 @@ async function routeRequest(request: NextRequest) {
 
 export const config = { matcher: ["/((?!.*\\..*).*)"] };
 
+async function dealerWorkspaceRoute(request: NextRequest) {
+  if(request.nextUrl.pathname==='/dealer-cabinet'||request.nextUrl.pathname.startsWith('/dealer-cabinet/')){
+    const session=await getSession(request),path=request.nextUrl.pathname;
+    if(path.startsWith('/dealer-cabinet/company/')){
+      const match=path.match(/^\/dealer-cabinet\/company\/([a-zA-Z0-9_-]{1,80})(\/.*)?$/);
+      if(!match||!session||session.role!=='dealer'||session.companyId!==match[1])return new NextResponse('Нет доступа к кабинету этой компании',{status:403,headers:{'Cache-Control':'private, no-store'}});
+      const url=request.nextUrl.clone();url.pathname='/dealer-cabinet'+(match[2]||'');
+      const headers=new Headers(request.headers);headers.set('x-dealer-workspace',match[1]);
+      return NextResponse.rewrite(url,{request:{headers},headers:{'Cache-Control':'private, no-store'}});
+    }
+    if(session?.role==='dealer'&&session.companyId&&/^[a-zA-Z0-9_-]{1,80}$/.test(session.companyId)){
+      const url=request.nextUrl.clone();url.pathname='/dealer-cabinet/company/'+session.companyId+path.slice('/dealer-cabinet'.length);
+      return NextResponse.redirect(url,307);
+    }
+  }
+  return null;
+}
+
 export async function middleware(request: NextRequest) {
-  const response = await routeRequest(request);
+  const workspaceResponse=await dealerWorkspaceRoute(request);
+  const response = workspaceResponse||await routeRequest(request);
   // Never overwrite logout/login responses, errors, or redirects with a renewed cookie.
-  if (request.method !== "GET" || response.status >= 300 || /\/(?:login|logout)(?:\/|$)/.test(request.nextUrl.pathname)) return response;
+  if (request.method !== "GET" || (response.status >= 300 && !(workspaceResponse && response.status === 307)) || /\/(?:login|logout)(?:\/|$)/.test(request.nextUrl.pathname)) return response;
   for (const [name, prefix] of [[COOKIE_NAME, ""], ["avtocena_customer", "customer:"]] as const) {
     const raw = request.cookies.get(name)?.value;
     if (!raw) continue;

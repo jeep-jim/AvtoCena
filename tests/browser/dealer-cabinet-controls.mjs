@@ -11,6 +11,7 @@ const fixtureStaff=[fixtureUser,{...fixtureUser,id:'staff',displayName:'Сотр
 const fixtureLeads=[{id:'visible',requestedDealerId:'dealer_test',name:'Клиент для проверки',phone:'+70000000000',car:'Geely Vision X3',createdAt:'2026-11-04T01:00:00Z',assignedManagerId:'owner',platformTerms:{agreementDigest:'fixture'},status:'new'},{id:'hidden',requestedDealerId:'dealer_test',name:'SECRET_CONTACT',phone:'SECRET_PHONE',car:'SECRET_CAR',createdAt:'2026-11-04T02:00:00Z',status:'new'},{id:'foreign',requestedDealerId:'dealer_other',name:'FOREIGN_CONTACT',phone:'FOREIGN_PHONE',createdAt:'2026-11-04T02:00:00Z'}];
 const fixtureClients=[{id:'client',fio:'Клиент для проверки',phone:'+70000000000',city:'Новокузнецк',assignedManagerId:'owner',createdAt:'2026-11-04T01:00:00Z',documents:[]}];
 const mocks={
+ '@/lib/crm-notifications':`export const followupText=e=>e.comment||'Повторное обращение через форму';`,
  '@/lib/dealers/cabinet-user':`export const cabinetUser=async()=>({...${JSON.stringify(fixtureUser)},dealerTeamRole:new URLSearchParams(location.search).get('owner')==='1'?'owner':'manager'});`,
  '@/lib/auth':`export const getCurrentUser=async()=>(${JSON.stringify(fixtureUser)});`,
  '@/lib/crm-users':`export const readCrmUsers=async()=>(${JSON.stringify(fixtureStaff)});`,
@@ -31,7 +32,7 @@ await page.route('**/api/**',r=>{const path=new URL(r.request().url()).pathname;
 async function visit(path){await page.goto(origin+path);await page.locator('.crm-content').waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);}
 async function shot(name){assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no horizontal page overflow: '+name);await page.screenshot({path:`${out}/${width}-${theme}-${name}.png`,fullPage:true});}
 await visit('/dealer-cabinet/profile?owner=1');
-const nav=page.getByRole('navigation',{name:'Кабинет дилера'});assert.deepEqual(await nav.locator('a').allTextContents(),['Обзор','Заявки2','Клиенты','Сотрудники','Кабинет']);await nav.getByRole('button',{name:'Выйти'}).waitFor();if(width===390){const positions=await nav.locator('a').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().top));assert.equal(new Set(positions).size,1,'mobile tabs stay on one row');assert.ok(await nav.evaluate(n=>n.scrollWidth>n.clientWidth),'mobile tabs scroll horizontally');}
+const nav=page.getByRole('navigation',{name:'Кабинет дилера'});assert.deepEqual(await nav.locator('a').allTextContents(),['Обзор','Чат','Заявки2','Клиенты','Сотрудники','Кабинет']);await nav.getByRole('button',{name:'Выйти'}).waitFor();if(width===390){const positions=await nav.locator('a').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().top));assert.equal(new Set(positions).size,1,'mobile tabs stay on one row');assert.ok(await nav.evaluate(n=>n.scrollWidth>n.clientWidth),'mobile tabs scroll horizontally');}
 assert.equal(await nav.locator('.crm-navigation-badge').evaluate(el=>getComputedStyle(el).position),'absolute');
 await page.getByRole('button',{name:'Копировать ссылку на дилера'}).click();assert.equal(await page.evaluate(()=>window.copied),'https://avtocena.com/dealers/test');
 await page.getByLabel('Имя',{exact:true}).fill('Новое имя');await page.getByRole('button',{name:'Сохранить',exact:true}).click();await page.getByText('Профиль сохранён').waitFor();

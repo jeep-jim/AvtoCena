@@ -12,7 +12,7 @@ import Leads from '../../apps/web/app/(public)/dealer-cabinet/leads/page';
 import Clients from '../../apps/web/app/(public)/dealer-cabinet/documents/page';
 import {cabinetUser} from '../../apps/web/lib/dealers/cabinet-user';
 import '../../apps/web/app/(public)/dealer-cabinet/cabinet.css';
-async function render(){const pathname=location.pathname,searchParams=Promise.resolve(Object.fromEntries(new URLSearchParams(location.search)));
+async function render(){const pathname=location.pathname.replace(/\/$/,''),searchParams=Promise.resolve(Object.fromEntries(new URLSearchParams(location.search)));
  const content=pathname.endsWith('/team')?await Team():pathname.endsWith('/overview')?await Overview():pathname.endsWith('/leads')?await Leads({searchParams}):pathname.endsWith('/documents')?await Clients({searchParams}):<section><CrmPageHeading title="Мой профиль"/><CopyDealerLink url="https://avtocena.com/dealers/test"/><DealerPersonalProfile name="Тестовый сотрудник" phone=""/></section>;
  createRoot(document.getElementById('root')!).render(<CrmWorkspaceFrame actions={<><CrmThemeToggle/><DealerAccountMenu user={await cabinetUser()} newLeads={2}/></>} navigation={<DealerCabinetNavigation newLeads={2}/>}>{content}</CrmWorkspaceFrame>);
 }void render();

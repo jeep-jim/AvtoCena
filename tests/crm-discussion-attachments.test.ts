@@ -17,9 +17,9 @@ test('discussion attachments require access on upload and download, encrypt byte
  const download=(id:string,entity='lead')=>route.GET(new Request(`https://avtocena.com/api/crm/discussion/attachment?type=lead&id=${entity}&file=${id}`));
  try{
   assert.equal((await upload()).status,403);
-  state.user={id:'m',role:'manager'};assert.equal((await upload('operation-123','https://foreign.example')).status,403);
-  state.user={id:'m',role:'manager',permissions:{editLeads:false}};assert.equal((await upload()).status,403);
-  state.user={id:'m',role:'manager'};
+  state.user={id:'m',role:'manager',companyId:'dealer_topavto'};assert.equal((await upload('operation-123','https://foreign.example')).status,403);
+  state.user={id:'m',role:'manager',companyId:'dealer_topavto',permissions:{editLeads:false}};assert.equal((await upload()).status,403);
+  state.user={id:'m',role:'manager',companyId:'dealer_topavto'};
   assert.equal((await upload()).status,200);assert.equal(state.binary.size,1);assert.equal(state.notes.length,1);
   assert.ok(![...state.binary.values()][0].includes(Buffer.from('%PDF-')));
   const attachment=state.notes[0].attachment;
@@ -27,7 +27,7 @@ test('discussion attachments require access on upload and download, encrypt byte
   await upload();assert.equal(state.binary.size,1);assert.equal(state.notes.length,1);
   state.fail=true;assert.equal((await upload('operation-failure')).status,400);assert.equal(state.binary.size,1);state.fail=false;
   assert.equal((await upload('operation-bad','https://avtocena.com',new File(['bad'],'fake.svg'))).status,400);
-  const reads=state.reads;state.user={id:'other',role:'manager'};assert.equal((await download(attachment.id)).status,404);assert.equal(state.reads,reads);
-  state.user={id:'m',role:'manager'};assert.equal((await download(attachment.id,'another-lead')).status,404);assert.equal(state.reads,reads);
+  const reads=state.reads;state.user={id:'other',role:'manager',companyId:'dealer_topavto'};assert.equal((await download(attachment.id)).status,404);assert.equal(state.reads,reads);
+  state.user={id:'m',role:'manager',companyId:'dealer_topavto'};assert.equal((await download(attachment.id,'another-lead')).status,404);assert.equal(state.reads,reads);
  }finally{delete (globalThis as any).__discussionFiles;}
 });

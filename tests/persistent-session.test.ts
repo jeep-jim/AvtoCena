@@ -39,3 +39,14 @@ test('daily renewal preserves version and never overwrites a logout request',asy
  assert.equal(out.cookies.get('avtocena_session'),undefined);
  }
 });
+
+test('dealer workspace URLs carry company identity, preserve queries and reject a foreign company',async()=>{
+ const token=createSessionCookie(user),headers={cookie:`avtocena_session=${token}`};
+ const legacy=await middleware(new NextRequest('https://avtocena.com/dealer-cabinet/leads?id=lead1',{headers}));
+ assert.equal(legacy.status,307);assert.equal(legacy.headers.get('location'),'https://avtocena.com/dealer-cabinet/company/dealer_test/leads?id=lead1');
+ const canonical=await middleware(new NextRequest('https://avtocena.com/dealer-cabinet/company/dealer_test/leads?id=lead1',{headers}));
+ assert.equal(canonical.headers.get('x-middleware-rewrite'),'https://avtocena.com/dealer-cabinet/leads?id=lead1');
+ assert.equal(canonical.headers.get('x-middleware-request-x-dealer-workspace'),'dealer_test');
+ assert.equal((await middleware(new NextRequest('https://avtocena.com/dealer-cabinet/company/dealer_other/leads',{headers}))).status,403);
+ assert.equal((await middleware(new NextRequest('https://avtocena.com/dealer-cabinet/company/dealer_test/leads'))).status,403);
+});

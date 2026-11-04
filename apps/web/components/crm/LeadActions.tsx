@@ -11,6 +11,8 @@ type ManagerOption = {
 };
 
 type LeadActionsProps = {
+  apiBase?: string;
+  showMetrika?: boolean;
   leadId: string;
   currentStatus?: string;
   currentManagerId?: string | null;
@@ -21,6 +23,8 @@ type LeadActionsProps = {
 };
 
 export function LeadActions({
+  apiBase="/api/crm/leads",
+  showMetrika=true,
   leadId,
   currentStatus = "new",
   currentManagerId,
@@ -44,7 +48,7 @@ export function LeadActions({
     const reason=archived ? "Восстановлена из архива" : window.prompt("Причина архивации", "Тест");
     if(!reason?.trim())return;
     setLoading(true);setError("");
-    try {const response=await fetch(`/api/crm/leads/${encodeURIComponent(leadId)}`,{method:"PATCH",headers:{"content-type":"application/json"},body:JSON.stringify({archived:!archived,note:reason})});if(!response.ok)throw Error();router.refresh();}catch{setError("Не удалось изменить архив. Повторите попытку.");}finally{setLoading(false);}
+    try {const response=await fetch(`${apiBase}/${encodeURIComponent(leadId)}`,{method:"PATCH",headers:{"content-type":"application/json"},body:JSON.stringify({archived:!archived,note:reason})});if(!response.ok)throw Error();router.refresh();}catch{setError("Не удалось изменить архив. Повторите попытку.");}finally{setLoading(false);}
   }
 
   async function save() {
@@ -59,7 +63,7 @@ export function LeadActions({
     setLoading(true);
 
     try {
-      const response = await fetch(`/api/crm/leads/${encodeURIComponent(leadId)}`, {
+      const response = await fetch(`${apiBase}/${encodeURIComponent(leadId)}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,7 +79,7 @@ export function LeadActions({
         if (result?.error === "assignment_conflict") throw new Error("assignment_conflict");
         if (result?.error === "reason_required") throw new Error("reason_required");
         if (result?.error === "lead_forbidden" || result?.error === "manager_assignment_forbidden") throw new Error("forbidden");
-        throw new Error("lead_update_error");
+        throw new Error(apiBase!=="/api/crm/leads" && typeof result?.error==="string" ? result.error : "lead_update_error");
       }
 
       setSaved(true);
@@ -89,7 +93,7 @@ export function LeadActions({
           ? "Для отказа, дубля или спама причина обязательна."
           : saveError instanceof Error && saveError.message === "forbidden"
             ? "У вас нет прав на изменение этой заявки или её менеджера."
-            : "Не получилось сохранить изменения."
+            : apiBase!=="/api/crm/leads" && saveError instanceof Error ? saveError.message : "Не получилось сохранить изменения."
       );
     } finally {
       setLoading(false);
@@ -151,7 +155,7 @@ export function LeadActions({
         {loading ? "Сохраняем..." : "Сохранить"}
       </button>
 
-      {metrikaStage && <p className="crm-metrika-lead-hint col-span-2 md:col-span-4" data-metrika-stage={metrikaStage.tone}>
+      {showMetrika && metrikaStage && <p className="crm-metrika-lead-hint col-span-2 md:col-span-4" data-metrika-stage={metrikaStage.tone}>
         <strong>{metrikaStage.marker} Цель Метрики: {metrikaStage.name}.</strong>{' '}
         {status === 'spam' ? 'Спам — сигнал о некачественной заявке. Отсутствие ответа само по себе не спам. ' : ''}
         После сохранения статус попадёт в фоновую отправку при включённой интеграции и наличии ClientID. Эта отметка не подтверждает доставку в Метрику.

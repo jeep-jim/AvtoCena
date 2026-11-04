@@ -1,3 +1,7 @@
+import {assertWorkspace} from '@/lib/crm-workspace-access';
+import {workspacePermission,workspaceCanSee,sameWorkspace} from '@/lib/crm-workspace';
+import {workspaceClientsPath} from '@/lib/document-workspace';
+import {dealerClientReady} from '@/lib/dealers/client-workflow';
 import {randomUUID} from "node:crypto";
 import {notifyDiscussion} from "@/lib/crm-discussion-store";
 import {CLIENT_STATUSES,clientStatusLabel} from "@/lib/crm-client-status";
@@ -12,21 +16,24 @@ import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-or
 export async function PATCH(request:Request, context:{params:Promise<{id:string}>}) {
  if (!isCalculationOriginAllowed(request)) return NextResponse.json({error:"origin_forbidden"},{status:403});
  const user = await getCurrentUser();
- if (!user || !hasCrmPermission(user,"editClients")) return NextResponse.json({error:"auth_required"},{status:401});
+ if (!user || !workspacePermission(user,"editClients")) return NextResponse.json({error:"auth_required"},{status:401});
  const body = await request.json().catch(()=>null);
  if (!body || ["fio","phone","telegram","city","comment","updatedAt"].some(key=>typeof body[key]!=="string")) return NextResponse.json({error:"invalid_fields"},{status:400});
  const fields = {...(typeof body.max === "string" ? {max:body.max.trim().slice(0,500)} : {}),fio:body.fio.trim().slice(0,500),phone:body.phone.trim().slice(0,500),telegram:body.telegram.trim().slice(0,500),city:body.city.trim().slice(0,500),comment:body.comment.trim().slice(0,4000)};
  if (!fields.fio && !fields.phone && !fields.telegram && !fields.max) return NextResponse.json({error:"client_contact_required"},{status:400});
  if(body.status!==undefined&&!Object.hasOwn(CLIENT_STATUSES,body.status))return NextResponse.json({error:"invalid_status"},{status:400});
- const assigning=typeof body.assignedManagerId==="string"&&hasCrmPermission(user,"assign");
+ const assigning=typeof body.assignedManagerId==="string"&&workspacePermission(user,"assign");
  const managers=assigning?await readCrmUsers():[];
- if(assigning&&body.assignedManagerId&&!managers.some(m=>m.id===body.assignedManagerId&&m.status!=="disabled"&&isCrmRole(m.role)))return NextResponse.json({error:"manager_not_found"},{status:400});
+ if(assigning&&body.assignedManagerId&&!managers.some(m=>m.id===body.assignedManagerId&&m.status!=="disabled"&&sameWorkspace(user,m)))return NextResponse.json({error:"manager_not_found"},{status:400});
  const {id} = await context.params;
  try {
+  await assertWorkspace(user);
+  const row=user.role==='dealer'?(await (await import('@/lib/data')).readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id):null;
+  if(row&&!await dealerClientReady(user,row))return NextResponse.json({error:'client_forbidden'},{status:403});
   let previous:any;
   const noteId=`note-${randomUUID()}`,now=new Date().toISOString();
-  const client = await updateChunkedDataJson<any>("clients/clients.json",id,current=>{
-   if (!canSeeLead(user,current)) throw Error("client_forbidden");
+  const client = await updateChunkedDataJson<any>(workspaceClientsPath(user),id,current=>{
+   if (!workspaceCanSee(user,current,'client')) throw Error("client_forbidden");
    if ((current.updatedAt||"")!==body.updatedAt) throw Error("client_conflict");
    previous=current;
    return {...current,...fields,...(fields.comment&&fields.comment!==current.comment?{internalNotes:[...(current.internalNotes||[]),{id:noteId,text:fields.comment,createdAt:now,createdByUserId:user.id,createdByName:user.displayName}]}:{}),...(body.status?{status:body.status}:{}),...(assigning?{assignedManagerId:body.assignedManagerId}:{}),updatedAt:new Date().toISOString(),updatedByManagerId:user.id};
