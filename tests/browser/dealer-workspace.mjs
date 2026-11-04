@@ -113,6 +113,27 @@ const browser = await chromium.launch({
 });
 
 try{
+ for(const width of [390,1024,1440,1920])for(const theme of ['light','dark']){
+  const page=await browser.newPage({viewport:{width,height:1050}});
+  await page.goto(origin+'?view=profile&sidebar=1');
+  await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  await page.getByRole('textbox',{name:'Марка автомобиля'}).fill('Honda');
+  const sidebar=await page.locator('.ac-catalog-sidebar').boundingBox();
+  const banner=await page.locator('.dealer-profile-home-banner').boundingBox();
+  const identity=await page.locator('.dealer-profile-identity').boundingBox();
+  const results=await page.locator('.ac-catalog-results').boundingBox();
+  if(width>=1024){
+   assert.ok(sidebar.x+sidebar.width<=banner.x,'filters are left of banner');
+   assert.ok(Math.abs(sidebar.y-banner.y)<2,'filters start at banner top');
+   assert.ok(Math.abs(identity.x-banner.x)<2&&Math.abs(results.x-banner.x)<2,'dealer content shares the right column');
+  }else assert.ok(sidebar.y>identity.y+identity.height,'mobile filters remain below dealer identity');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer layout fits viewport');
+  await page.setViewportSize({width:width>=1024?390:1440,height:1050});
+  assert.equal(await page.getByRole('textbox',{name:'Марка автомобиля'}).inputValue(),'Honda','responsive layout preserves filter input');
+  await page.setViewportSize({width,height:1050});
+  await page.screenshot({path:`${out}/profile-sidebar-${width}-${theme}.png`,fullPage:true});
+  await page.close();console.log(width,theme,'dealer sidebar alignment OK');
+ }
  for(const width of [390,1440])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1000}});
   await page.goto(origin+'/dealer-cabinet?view=cabinet');
@@ -125,7 +146,7 @@ try{
   await page.getByRole('button',{name:'Страница скрыта Подключение не завершено',exact:true}).waitFor();
   assert.equal(await page.getByRole('button',{name:'Страница опубликована Готово',exact:true}).count(),0);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-  if(width===1440)assert.equal(await page.locator('.dealer-cabinet-content').evaluate(el=>Math.round(el.getBoundingClientRect().width)),1328);
+  if(width===1440){const box=await page.locator('.dealer-cabinet-content').boundingBox();const frame=await page.locator('.crm-content').boundingBox();assert.equal(Math.round(box.width),Math.round(frame.width)-48,'content uses the shared CRM frame padding');assert.equal(Math.round(box.x),Math.round(frame.x)+24);}
   await page.screenshot({path:`${out}/cabinet-${width}-${theme}.png`,fullPage:true});
   await page.getByRole('button',{name:'Страница скрыта Подключение не завершено',exact:true}).click();
   await page.getByRole('link',{name:'Оферта и выбор режима'}).waitFor();
