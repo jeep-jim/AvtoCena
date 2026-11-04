@@ -2716,3 +2716,30 @@ IN_PROGRESS0/PENDING0; app deploy continuation нет. Existing REG size41835974
 China126198742555 и oldChina124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ, причины/outcome/final public manifest неизвестны. Новых saved primary Korea exact-request/response/release-time/binding, Direct inputs/binding/filter, market binding/translation analysis и native permission/real push delivery подтверждений нет. Следующие адресные saved analysis остаются прежними; старые failures не отменены поздними успехами.
 
 Owner freeze и принятая база сохранены. Обе истории дополняются только append-only с expected-parent CAS/readback. Runtime/live остаётся основной интерактивной работе; watch не создавал/повторял/отменял запусков и не менял цены/данные/права/guards. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
+
+
+## 04.11.2026 21:35 Красноярск — docs-only watch: PR1700 и failures предыдущих heads
+
+Fresh main a8b895a1df9f84a8411263d951b03bee8e9fe7f3; свежие Road/checklist и main AGENTS5358784280f8648a854730abb5dc83149ed2d6fd прочитаны. Main related operations неизменны. PR1699 остаётся INSTALLED ff5dc861c446cc39620e42a000f2de519e8eaf39; его ранее прочитанные deploy/sharedprices журналы не повторялись.
+
+Новый PR1700 OPEN, head a88e43d5183fc4322d60c0c57d245957ab579051, НЕ installed. Branch Road b4abfbd8987764270cf0f64bc06c5de14cbe5146 и AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 ПРОЧИТАНЫ; branch related operations не изменены. Новый owner CRM parity supersedes прежнее ограничение пятью вкладками для primary: общие chat/leads/clients/discussions/reminders/team controls, company URL и server-side membership, без platform editorial/site administration. Watch сохраняет docs-only scope.
+
+Primary Road21:25/21:27 сообщает общие компоненты заявки/клиента/ChatWorkspace, командные чаты, обсуждения/вложения, заметки/напоминания/уведомления с разделением компаний и сохранением contact/contract/assignment guards; company-scoped URL с проверкой tenant, mobile gradient/blur/атрибуция и отсутствие Back. Локальные TS/Next production build58pages PASS, целевые42 затем12 и3 tests PASS; полный2788:2787 PASS, один bundler mock failure, после исправления целевой3/3 PASS. Полный повтор2788 после исправления не подтверждён. Локальные desktop/390px fixtures просмотрены primary, НЕ watch/production/authenticated acceptance. Ручное создание платформенной заявки, глобальное удаление, полная унификация списков/служебных функций не завершены; реальные dealerTeamRole=owner/создание сотрудников не проверены. «100% внедрено» не заявляется. Отсутствие credentials у локального git push не является сбоем сайта.
+
+Новые шесть final failures ПРОЧИТАНЫ, не повторять:
+- Head e6b7a708: offer41847780766/job126635731441 FAIL21:28:49 после39tests PASS;21:28:46.125 ERROR: Playwright does not support webkit on ubuntu26.04-x64; browser install exit1.
+- Head f4be30a1: offer41848140055/job126636982076 FAIL21:30:43 после39tests PASS;21:30:40.881 тот же точный WebKit install failure. Это не сбой пользовательского share в production.
+- Head e6b7a708: CRM41847780968/browser126635732701 FAIL21:28:50 после16tests PASS;21:28:48.012 Build failed with29errors при browser fixture bundling; artifact13331158620 НЕ viewed; audit126635735949/live126636363586 SKIPPED.
+- Head f4be30a1: CRM41848139891/browser126636984110 FAIL21:31:00;21:30:57.149 Build failed with29errors; artifact13331428550 НЕ viewed; audit126636986912/live126637617290 SKIPPED.
+- Head e6b7a708: delivery41847780798/job126635732171 FAIL21:28:48 после21tests PASS;21:28:44.272 Build failed with29errors; artifact13332336144 НЕ viewed.
+- Head f4be30a1: delivery41848140006/job126636982819 FAIL21:31:04;21:31:01.214 Build failed with29errors; artifact13332665521 НЕ viewed.
+
+CRM/delivery failures возникли при tests/browser/crm-mobile-layout.mjs: esbuild не разрешает Node builtins, включая node:crypto, node:fs, node:path, node:util (apps/web/lib/auth.ts/account/auth.ts и другие). Delivery ограничивал CRM_TEST_PAGES=leads,overview,client. Это сборка browser fixture до пользовательской проверки, НЕ authenticated Save/delivery failure. Следующий адресный primary saved analysis — import graph/fixture mocks/bundler boundary; отдельно WebKit runner/version compatibility, без watch rerun/repair/ослабления guards.
+
+Новый current-head offer41848501210/job126638198639 SUCCESS21:35:06, журнал ПРОЧИТАН, не повторять:39tests PASS; WebKit26.0 build2203 установлен, Android/iPhone native/clipboard/mini/estimate/default/cancel/native-failure fixture scenarios OK. Это не реальное устройство/production delivery/native permission acceptance; прежние install failures сохранены.
+
+На21:35 IN_PROGRESS6: current CI41848501219/126638198240, workspace41848501193/126638199508, delivery41848501299/126638199102, CRM41848501302/browser126638198945; также old-head CI41848139853 и41847780731/126635732402. Их finals ещё НЕ прочитаны; текущий CRM audit126638201206 SKIPPED metadata. PENDING0, нового app deploy нет. Current site41848501341/selection41848501083/banner41848501225/green41848501073/owner41848501052/per-car41848500973 SUCCESS metadata only, логи не читались. Следующий шаг — существующие relevant finals и новые сохранённые primary результаты, без новых запусков.
+
+Единственный bounded health21:34–21:35 завершился curl exit0: ok=true, exact ff5dc861c446cc39620e42a000f2de519e8eaf39, прежняя calculationVersion3f2e08fd788fc200f06b686badd221b2329f265ce8c2b886e193b3d6e4f73a4e. Это не приёмка PR1700/authenticated editor Save. China126198742555 и oldChina124685023963/124601674990: по одному запросу снова Transport closed, НЕ ПРОЧИТАНЫ; cause/outcome/final public manifest неизвестны.
+
+Новых saved Korea exact request/response/release-time/binding, Direct inputs/binding/filter, market binding/translation analysis, authenticated blog Save/native permission/real push delivery нет. Owner freeze и принятая база сохранены, capacity watch не дублируется. Обе истории дополняются append-only с expected-parent CAS/readback; runtime/live не менялись. Наблюдение остаётся enabled до итоговой приёмки кандидата и целей.
