@@ -79,7 +79,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
               <PageQrButton key={pathname} />
               {!/^\/(crm|partner|login|account)(\/|$)/.test(pathname||'')&&<button type="button" className="ac-footer-autobot min-h-11" aria-label="Открыть АвтоБота" aria-haspopup="dialog" onClick={()=>window.dispatchEvent(new Event('autobot-open'))}>АвтоБот</button>}
               <span className="ac-footer-global-calculator"><AutoCalcButton /></span>
-              <Link href="/" className="ac-footer-dealer-home"><BrandMarkMono/>АвтоЦена</Link>
+              <Link href="/" className="ac-footer-dealer-home"><BrandMarkMono/><span><span className="ac-footer-dealer-attribution">Работает на АвтоЦене</span><span className="ac-footer-dealer-label">АвтоЦена</span></span></Link>
             </div>
 
 
@@ -123,6 +123,7 @@ body:has([data-dealer-context]) .ac-footer-global-calculator,body:has(.dealer-pr
 body:has([data-dealer-context]) .ac-footer-dealer-home,body:has(.dealer-profile) .ac-footer-dealer-home{display:flex!important;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ac-border);border-radius:12px;min-height:44px;padding:8px;font-size:12px;font-weight:700}
 body:has([data-dealer-context]) .ac-public-legal-footer,body:has(.dealer-profile) .ac-public-legal-footer{color:var(--ac-muted)}
 body:has([data-dealer-context]) .ac-footer-dealer-home,body:has(.dealer-profile) .ac-footer-dealer-home{color:var(--ac-text)}
+.ac-footer-dealer-attribution{display:none}
 .ac-footer-dealer-home:disabled{opacity:.5;cursor:not-allowed}
 body:has([data-dealer-context]) .ac-public-footer-navigation,body:has(.dealer-profile) .ac-public-footer-navigation{display:block;padding:0!important}
 body:has([data-dealer-context]) .ac-public-footer-navigation>div,body:has(.dealer-profile) .ac-public-footer-navigation>div{max-width:none}

@@ -55,7 +55,7 @@ export default async function Page({
   const dealer=browsingContextFromShowcase(s,preview);
   const catalog=s.catalogMarkets.length&&dealer?<CatalogContent params={await searchParams} dealer={dealer} embedded/>:null;
   return (
-    <DealerBrowsingProvider dealer={dealer} profile><main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
+    <DealerBrowsingProvider dealer={dealer} profile><main className="ac-dealer-public-page ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />
       <DealerProfileContent canShareSelection={canShareSelection} initialSelectionQuery={selectionQuery(new URLSearchParams(Object.entries(await searchParams).flatMap(([k,v])=>v?[[k,Array.isArray(v)?v[0]:v]]:[])),false).toString()} s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} catalog={catalog} verified={(await findDealer(s.dealerId))?.status==='verified'} />
     </main></DealerBrowsingProvider>

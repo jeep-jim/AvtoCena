@@ -21151,3 +21151,7 @@ Fresh main def05507959c83d93b15137659eb7f302612de64. Свежие Road/checklist
 China126198742555 и oldChina124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ; причины, outcome/final public manifest неизвестны, artifacts НЕ viewed. Не переносить старый Invalid string length на новый failure. Direct green_feed_empty, binding_missing, translation403, fuel/overlay/city и остальные исторические failures не отменены. Их следующие saved primary analysis остаются прежними; новые provider/runtime запросы не выполнялись.
 
 Новых сохранённых authenticated blog editor Save/native permission/real push delivery/market-binding-translation analysis нет. Owner freeze и принятая база сохранены. Только обе документационные истории дополняются append-only с expected-parent CAS/readback. Watch не запускал и не отменял runtime/CI/deploy, не менял данные/цены/права/guards. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
+
+## 04.11.2026 — Десктопная витрина дилера
+
+Добавлен зазор 16 px под шапкой, скрыта кнопка «Назад» на десктопной витрине по пометке на скриншоте. Подвал выровнен по каталогу, реквизиты и ссылка «Работает на АвтоЦене» вынесены вправо. Верх плашки профиля использует градиент и размытие фона в обеих темах. Локально проверены TypeScript и геометрия 390/1024/1440/1920 в Chromium в обеих темах. Установка на момент записи не выполнялась.
