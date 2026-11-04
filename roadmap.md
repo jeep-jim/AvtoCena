@@ -20899,3 +20899,24 @@ Live: 10/10 HTTP200, правильные заголовки/последние 
 
 
 Штатные gates: до переключения 48 измерений/1 медленное, после переключения 48/4; functionalPassed=true, performanceAccepted=false, latencyBlocking=false. Публичная энциклопедия: verified=true, 532 группы, 4888 вариантов, 22635 полей, 3809 сгруппированных вариантов, 2 privateDescriptions. Финальный журнал prepare126340722785 прочитан один раз; повторять не нужно.
+
+
+## 04.11.2026, 11:18 Красноярск — PR1695 установлен; primary проверил десять опубликованных статей
+
+Свежие main d0ffe8d74eb7a802db07fa940bd4be736c4b3c11, Road/checklist, PR и existing runs/jobs сверены. Прочитаны новые primary Road, docs/blog/deployment-2026-11-04.json, editorial-2026-11-04.md и live-verification-2026-11-04.json. AGENTS bb465d2dd5430aff78771ab96ab582acb0a0bb55 и related operations unchanged; новых PR после1695 нет. IN_PROGRESS0, нового app deploy и активного продолжения failed China publication нет.
+
+PR1695 INSTALLED: existing REG deploy41758561067/prepare126340722785 SUCCESS04.11 09:52:30. Финальный журнал уже прочитан primary, watch НЕ повторял, НЕ ПОВТОРЯТЬ. Сохранённые gates: pre48/slow1, post48/slow4, functionalPassed=true, performanceAccepted=false, latencyBlocking=false. Verifier09:52:21.540: exact7f4504b3f11cecf4f2f32bab8f43ff7379bc9cd5, groups532, variants4888, fields22635, groupedVariants3809, privateDescriptions2, verified=true. Медленные ответы advisory, functional deadline90s сохранён.
+
+Новая primary live-проверка:10/10 статей HTTP200, заголовки/последние абзацы/источники/атрибуции/внутренние ссылки/canonical/BlogPosting JSON-LD PASS;10/10 cover SHA совпали. Все42 уникальные ссылки на четырёх страницах индекса, включая32 прежние записи и10 новых; новые URL присутствуют в sitemap. Это проверка разметки, не доказательство индексации поисковиками. Primary desktop light blog/dark PCM и загрузка10JPEG PASS; watch скриншоты НЕ просматривал. JSON checkedAt09:45:59.880789, итоговый deployment/editorial checkedAt09:53:07.071903. Mobile visual и authenticated owner Save явно not performed, не PASS и не Save failure. Статьи4.660–7.311с из удалённой среды — не приёмка скорости. 10Дзен+10VK сохранены, внешних отправок0.
+
+Новый final shared prices41763537299/126356499619 SUCCESS10:04:00 прочитан, НЕ ПОВТОРЯТЬ. Report at09:53:25.144, emitted10:03:57.781: release7f4504b3f11cecf4f2f32bab8f43ff7379bc9cd5, generation gen_1793323223905_c6da006e, skipped=false, verified=true, encyclopediaDigest bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b;12tests PASS. Artifact13291749266 НЕ просмотрен. Runtime report10:03:55.653 прочитан:3 queries по12IDs — China total77230/29111ms, China filtered15323/29846ms, Korea1110/7471ms. Это сохранённые query reports, не final published inventory, не принятие скорости и не закрытие прежнего live_encyclopedia_binding_missing/Direct/China/translation failures.
+
+Existing CRMretry41763537207/deliver126356499200 SUCCESS09:55:46/metrika126356499581 SUCCESS09:53:08 — metadata only, журналы НЕ прочитаны; реальная доставка не подтверждена. Прежние CRM41758560979/audit126340458108 waitrelease FAILURE, browser126340458502 PASS и live126346079241 SKIPPED сохранены; новые успехи не отменяют историю, эти журналы не повторялись. Capacity watch не дублировался.
+
+Единственный bounded health04.11 11:17–11:18 завершился curl exit0: ok=true, exactrelease7f4504b3f11cecf4f2f32bab8f43ff7379bc9cd5, calculationVersion4ab14912cda34780c6673f1d2fc19765816b6065bfa59c97e07bd841ae8d0141 unchanged. Это не authenticated Save/native permission/real push delivery acceptance и не закрытие исторических ошибок рынков.
+
+China41711927294/publish126198742555 FINAL FAILURE07:34:36: один запрос итогового журнала снова Transport closed, НЕ ПРОЧИТАН; причина/outcome/final public manifest неизвестны, artifact13283749108 НЕ просмотрен. Old China124685023963/124601674990: по одному запросу также Transport closed, НЕ прочитаны. Не приписывать timeout/6h/OOM/Invalid string length/rollback. Уже прочитанные collect/verifier126305295122/translation126305294728/28final06:12 не повторялись.
+
+Новых сохранённых primary результатов realstafflogin/showcaseSaveconflict/authenticatedblogSave/nativepermission/realpushdelivery и адресного market/binding/cancelcause/translation анализа нет. Следующий шаг — новые сохранённые результаты авторизованной приёмки; для China saved publish outcome/report/final manifest и конкретное условие verifier, отдельно translation request/response/configuration/authorization analysis. Без watch browser/login/provider probe/rerun/repair и без новых runtime запусков.
+
+Owner freeze сохранён; runtime/данные/цены/права/guards watch не менял. Обе истории append-only только Road/checklist с expected-parent CAS/readback и проверкой additions-only. Наблюдение enabled до итоговой приёмки последнего кандидата и целей; дубликат не создавался.
