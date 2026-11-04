@@ -2796,3 +2796,15 @@ IN_PROGRESS0/PENDING0, app deploy continuation нет. Existing CRMretry41869258
 China126198742555 и oldChina124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ; cause/outcome/final public manifest неизвестны. Новых saved primary Korea exact-request/response/release-time/binding, Direct inputs/binding/filter, market binding/translation analysis и native permission/real push delivery подтверждений нет. Старые failures не отменены поздними успехами.
 
 Owner freeze и принятая база сохранены. Обе истории дополняются append-only с expected-parent CAS/readback только в Road/checklist. Runtime/live остаётся основной интерактивной работе; watch не создавал/повторял/отменял запусков, не менял цены/данные/права/guards. Наблюдение остаётся enabled до итоговой приёмки последнего кандидата и целей.
+
+## Docs-only watch — 05.11.2026 01:11 Красноярск
+
+Fresh main 9808255c16d012d90d1d7c832078941874e67025: свежие Road/checklist прочитаны; новых primary записей нет. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations не изменились. Новых PR после1700 нет; PR1700 остаётся INSTALLED ee215102637799dc2d86961c199e088e4ca9c8b7. Уже прочитанные deploy/CI/prices/CRM журналы не повторялись.
+
+IN_PROGRESS0/PENDING0, app deploy continuation нет. Existing CRM Telegram delivery retries41877304519: metrika126740113978 SUCCESS05.11 00:42:57, deliver126740114342 SUCCESS00:43:45. Existing dealer USD rate41882093092/refresh126756890885 SUCCESS00:57:20. Это metadata only; журналы не читались, фактическая доставка и изменение курса не подтверждены. Capacity watch не дублируется.
+
+Единственный bounded health05.11 01:10 завершился curl exit0: ok=true, exact release ee215102637799dc2d86961c199e088e4ca9c8b7, прежняя calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. Health не authenticated editor Save acceptance и не объяснение исторического Korea503.
+
+China126198742555 и oldChina124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ; причина и final public manifest неизвестны. Новых saved primary authenticated Save, native permission/real push delivery, Korea exact-request/response/release-time/binding, Direct inputs/binding/filter или market binding/translation analysis нет. Старые failures сохраняются, включая CRM41855875730 wait-release FAILURE/live SKIPPED; это не Save failure.
+
+Следующий шаг — новые сохранённые primary release-time/authenticated acceptance результаты и отдельно Korea exact-request/response/binding analysis. Owner freeze и принятая база сохранены; runtime/live остаётся основной интерактивной работе. Watch не создавал/повторял/отменял запусков и не менял цены/данные/права/guards. Обе истории дополняются append-only только в Road/checklist с expected-parent CAS/readback; наблюдение остаётся enabled до итоговой приёмки.
