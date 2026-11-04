@@ -15,11 +15,11 @@ test('brand aliases share headings and old filter links retain every source reco
  assert.equal(rows[7].make,'FIAT-ADRIA','stored technical identity is unchanged');
 });
 test('cursor page totals expose the aggregate rather than just the first 24 cards',()=>{
- const s={total:577000,stale:false,upperBound:false,observedAt:'now'};
+ const s={total:577000,stale:false,upperBound:false,observedAt:'2026-11-03T18:00:00Z'};
  assert.match(ajesPaginationCountText(s),/577.*000/);
  assert.match(ajesPaginationCountText(s),/24.*042/);
  assert.equal(ajesPaginationCountText({...s,upperBound:true}),'Количество уточняется');
- assert.match(ajesPaginationCountText({...s,stale:true}),/последним данным/);
+ assert.match(ajesPaginationCountText({...s,stale:true}),/данные на 4 ноября 2026 г\./);
  assert.equal(ajesPaginationCountText(null),'Количество уточняется');
 });
 
