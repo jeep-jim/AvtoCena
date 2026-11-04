@@ -8,7 +8,9 @@ test('independent counts retain zero, unavailable and stale semantics',()=>{
  assert.equal(ajesCountText(fresh),'147\u00a0867');assert.equal(exactAjesCount(fresh),147867);
  assert.equal(ajesCountText({...fresh,total:0}),'0');
  assert.equal(ajesCountText(null),'Количество уточняется');
- assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · по последним данным');
+ assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · данные на 18 октября 2026 г.');
+ assert.equal(ajesCountText({...fresh,stale:true,observedAt:'2026-10-18T18:00:00Z'}),'147\u00a0867 · данные на 19 октября 2026 г.');
+ assert.equal(ajesCountText({...fresh,stale:true,observedAt:''}),'147\u00a0867 · сохранённый подсчёт');
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
  assert.equal(ajesCountText({...fresh,upperBound:true}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);

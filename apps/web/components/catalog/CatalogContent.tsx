@@ -195,12 +195,12 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     const rail=await read;if(rail.disabled)return {total:0,incomplete:false};
     const count=rail.count||await readAjesRailCount(market as 'japan'|'china'|'korea',params);
     const exact=exactAjesCount(count);
-    return {total:exact??rail.items.length,incomplete:exact===undefined};
+    return {total:exact??0,incomplete:exact===undefined};
   })).then(counts=>({
     total:localTotal-groupedMarkets.filter(m=>railReads.has(m.id)).reduce((sum,m)=>sum+m.total,0)+counts.reduce((sum,c)=>sum+c.total,0),
-    countIncomplete:counts.some(c=>c.incomplete),
+    countIncomplete:(showGreen && !green) || counts.some(c=>c.incomplete),
   }));
-  const total=localTotal,countIncomplete=overviewEligible||groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan');
+  const total=localTotal,countIncomplete=railReads.size>0 || (showGreen && !green);
 
   const initialKeys = ["salePeriod","color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
