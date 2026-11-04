@@ -124,7 +124,7 @@ try{
   const results=await page.locator('.ac-catalog-results').boundingBox();
   if(width>=1024){
    assert.ok(sidebar.x+sidebar.width<=banner.x,'filters are left of banner');
-   assert.ok(Math.abs(sidebar.y-banner.y)<2,'filters start at banner top');
+   assert.ok(Math.abs(sidebar.y-banner.y)<2,`filters start at banner top: ${JSON.stringify({sidebar,banner})}`);
    assert.ok(Math.abs(identity.x-banner.x)<2&&Math.abs(results.x-banner.x)<2,'dealer content shares the right column');
   }else assert.ok(sidebar.y>identity.y+identity.height,'mobile filters remain below dealer identity');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer layout fits viewport');
@@ -132,6 +132,10 @@ try{
   assert.equal(await page.getByRole('textbox',{name:'Марка автомобиля'}).inputValue(),'Honda','responsive layout preserves filter input');
   await page.setViewportSize({width,height:1050});
   await page.screenshot({path:`${out}/profile-sidebar-${width}-${theme}.png`,fullPage:true});
+  if(width>=1024){
+   await page.evaluate(()=>window.dispatchEvent(new Event('avtocena:dealer-section')));
+   await page.waitForFunction(()=>Math.abs(document.querySelector('.ac-catalog-heading').getBoundingClientRect().top-90)<2);
+  }
   await page.close();console.log(width,theme,'dealer sidebar alignment OK');
  }
  for(const width of [390,1440])for(const theme of ['light','dark']){
@@ -236,7 +240,7 @@ try{
    await page.getByRole('button',{name:'Открыть фотографии автомобиля'}).click();
    await page.getByRole('button',{name:'Закрыть галерею',exact:true}).click();
    await page.waitForFunction(()=>!history.state?.acOverlayStep);
-   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));
    await page.screenshot({path:`${out}/${width}-${theme}-public-${stock?'stock':'order'}.png`,fullPage:true});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer card overflow');
    await page.evaluate(()=>{localStorage.clear();document.cookie='avtocena_city=; Max-Age=0; Path=/';});
@@ -301,7 +305,7 @@ try{
  for(const [width,theme] of [[390,'light'],[1440,'light'],[1440,'dark']]){
   const page=await browser.newPage({viewport:{width,height:1000}});const errors=[],writes=[];let releaseMedia;let holdMedia=new Promise(r=>{releaseMedia=r;});page.on('pageerror',e=>errors.push(e.message));let acceptDelete=true;page.on('dialog',d=>acceptDelete?d.accept():d.dismiss());
   await page.route('**/api/**',async route=>{const u=route.request().url();if(route.request().method()==='GET'&&u.includes('/api/account/review-moderation'))return route.fulfill({json:{canDelete:false}});if(route.request().method()==='GET'&&/\/reviews(?:\?|$)/.test(u))return route.fulfill({json:{count:0,rating:null,items:[]}});if(u.includes('exchange-rate'))return route.fulfill({json:{quote:{value:84,quoteAt:new Date().toISOString(),fetchedAt:new Date().toISOString(),source:'https://www.profinance.ru/chart/usdrub/'}}});if(u.includes('/knowledge'))return route.fulfill({json:{models:[],choices:[]}});if(u.includes('/media')){await holdMedia;return route.fulfill({json:{id:crypto.randomUUID(),url:'/buyers/1.jpg',caption:''}});}let body={};try{body=route.request().postDataJSON()||{};}catch{}writes.push({url:u,body});const {base,...value}=body;return route.fulfill({json:{...value,version:(body.version||0)+1}});});
-  async function shot(name){await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(250);await page.screenshot({path:`${out}/${width}-${theme}-${name}.png`,fullPage:true});if(theme==='light'&&['vehicle','stock'].includes(name))console.log('VISUAL_'+width+'_'+name+':'+(await page.screenshot({type:'jpeg',quality:65})).toString('base64'));assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'horizontal overflow '+name);}
+  async function shot(name){await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));await page.waitForTimeout(250);await page.screenshot({path:`${out}/${width}-${theme}-${name}.png`,fullPage:true});if(theme==='light'&&['vehicle','stock'].includes(name))console.log('VISUAL_'+width+'_'+name+':'+(await page.screenshot({type:'jpeg',quality:65})).toString('base64'));assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'horizontal overflow '+name);}
   await page.goto(origin+'?view=specs');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.getByText('От 5 дней — автомобиль у вас дома',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-spec-tile').first().evaluate(el=>{const css=getComputedStyle(el);return css.borderTopWidth==='1px'&&css.backgroundColor!=='rgba(0, 0, 0, 0)';}));await shot('public-specs');
   await page.goto(origin);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.frameLocator('.dealer-live-preview iframe').locator('.dealer-identity-title h1').waitFor();await shot('overview');assert.ok(await page.locator('.dealer-editor-navigation button').evaluateAll(items=>items.every(el=>el.scrollWidth<=el.clientWidth+1)),'menu labels fit buttons');
   await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await page.getByRole('switch',{name:'Показывать фотографии покупателей'}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.buyersEnabled,false);await shot('gallery');assert.equal(await page.locator('.dealer-editor-toolbar').count(),0);
@@ -309,9 +313,9 @@ try{
   const description=page.getByLabel('Описание',{exact:true});
   await page.evaluate(()=>{window.descriptionNode=document.querySelector('.dealer-offer-fields textarea');window.flashSamples=[];window.sampleFlashes=true;const sample=()=>{if(!window.sampleFlashes)return;const field=document.querySelector('.dealer-offer-fields textarea');if(field)window.flashSamples.push({same:field===window.descriptionNode,bg:getComputedStyle(field).backgroundColor,theme:document.documentElement.dataset.theme});requestAnimationFrame(sample);};sample();});
   await description.pressSequentially('Автомобиль без повреждений. Документы проверены.',{delay:30});await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
-  const samples=await page.evaluate(()=>{window.sampleFlashes=false;return window.flashSamples;});assert.ok(samples.length>10);assert.ok(samples.every(s=>s.same&&s.theme===theme));if(theme==='dark')assert.ok(samples.every(s=>!['rgb(255, 255, 255)','rgba(0, 0, 0, 0)'].includes(s.bg)),'no white/unstyled frame while typing or autosaving');await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(100);
+  const samples=await page.evaluate(()=>{window.sampleFlashes=false;return window.flashSamples;});assert.ok(samples.length>10);assert.ok(samples.every(s=>s.same&&s.theme===theme));if(theme==='dark')assert.ok(samples.every(s=>!['rgb(255, 255, 255)','rgba(0, 0, 0, 0)'].includes(s.bg)),'no white/unstyled frame while typing or autosaving');await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));await page.waitForTimeout(100);
   await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.offers[0].status,'draft');
-  if(width>=1280){const layout=await page.locator('.dealer-editor-layout').boundingBox(),actions=await page.locator('.dealer-offer-actions').boundingBox(),mode=await page.locator('.dealer-offer-mode-row').boundingBox();assert.ok(actions.x>mode.x+mode.width,'actions sit to the right');assert.ok(Math.abs(actions.y-layout.y)<2,'actions align with mode switch');assert.ok(await page.locator('.dealer-editor-sidebar .dw-demo-button').count()===1);}
+  if(width>=1280){const layout=await page.locator('.dealer-editor-layout').boundingBox(),actions=await page.locator('.dealer-offer-actions').boundingBox(),mode=await page.locator('.dealer-offer-mode-row').boundingBox();assert.ok(actions.x>mode.x+mode.width,'actions sit to the right');assert.ok(Math.abs(actions.y-layout.y)<2,`actions align with mode switch: ${JSON.stringify({layout,actions,mode})}`);assert.ok(await page.locator('.dealer-editor-sidebar .dw-demo-button').count()===1);}
   await page.getByLabel('Статус автомобиля',{exact:true}).selectOption('sold');assert.equal(await page.getByLabel('Статус',{exact:true}).inputValue(),'sold');await page.getByLabel('Статус',{exact:true}).selectOption('draft');assert.equal(await page.getByLabel('Статус автомобиля',{exact:true}).inputValue(),'draft');
   await page.getByText('Все изменения сохранены',{exact:true}).waitFor();await page.getByRole('button',{name:'Сохранено',exact:true}).waitFor();
   await page.getByLabel('Город для проверки расчёта',{exact:true}).fill('Красноярск');await page.getByText(/Ориентировочно:.*\$/).waitFor();
@@ -347,7 +351,7 @@ try{
   await shot('pricing');
   assert.equal(await page.locator('.dealer-knowledge-fold').getAttribute('open'),null);await page.locator('.dealer-knowledge-fold > summary').click();assert.notEqual(await page.locator('.dealer-knowledge-fold').getAttribute('open'),null);
   assert.equal(await page.locator('.dealer-offer-fields > details').nth(1).getAttribute('data-complete'),'true');
-  if(width>=1280){assert.equal(await page.locator('.dealer-offer-aside').evaluate(el=>getComputedStyle(el).position),'sticky');await page.evaluate(()=>window.scrollTo(0,600));const box=await page.locator('.dealer-offer-aside').boundingBox();assert.ok(Math.abs(box.y-145)<2,'right column remains below header');await page.evaluate(()=>window.scrollTo(0,0));}
+  if(width>=1280){assert.equal(await page.locator('.dealer-offer-aside').evaluate(el=>getComputedStyle(el).position),'sticky');await page.evaluate(()=>window.scrollTo(0,600));const box=await page.locator('.dealer-offer-aside').boundingBox();assert.ok(Math.abs(box.y-145)<2,'right column remains below header');await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));}
   await page.getByRole('tab',{name:'В наличии',exact:true}).click();assert.equal(await page.locator('.dealer-offer-tile[aria-pressed]').count(),0);assert.ok(await page.locator('.dealer-offer-mode').evaluate(el=>{const active=el.querySelector('[aria-selected=true]');return getComputedStyle(el).borderTopWidth==='0px'&&Number(getComputedStyle(active).zIndex)>Number(getComputedStyle(el,'::before').zIndex);}),'active tab covers the frame');
   await page.getByRole('button',{name:'Добавить автомобиль',exact:true}).click();
   await page.getByLabel('Марка',{exact:true}).fill('Honda');await page.getByLabel('Модель',{exact:true}).fill('Fit');await page.getByLabel('Год выпуска',{exact:true}).fill('2021');await page.getByLabel('Состояние',{exact:true}).selectOption('used');await page.getByLabel('Цена автомобиля, ₽',{exact:true}).fill('1250000');await page.getByLabel('Пробег, км',{exact:true}).fill('42000');

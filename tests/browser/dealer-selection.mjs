@@ -59,7 +59,7 @@ try{for(const width of [390,1440]){
  await page.addInitScript(()=>{window.calls=[];document.cookie='avtocena_city='+encodeURIComponent('Москва')+';path=/';Object.defineProperty(navigator,'share',{value:async v=>window.calls.push(v)});Object.defineProperty(navigator,'clipboard',{value:{writeText:async v=>window.calls.push(v)}});});
  await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&city=Новокузнецк&selection=1#catalog');
  const send=page.getByRole('button',{name:'Поделиться подборкой',exact:true});await page.waitForTimeout(200);assert.equal(await send.count(),0,'filters must not activate selection');await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection-open',{detail:{dealerId:'external'}})));await send.waitFor();await page.locator('[data-city]').filter({hasText:'Новокузнецк'}).waitFor();
- await page.waitForFunction(()=>Math.abs(document.getElementById('catalog').getBoundingClientRect().top-90)<10);
+ await page.waitForFunction(()=>{const target=innerWidth>=1024?document.querySelector('.ac-catalog-heading,.ac-catalog-results'):document.getElementById('catalog');return Math.abs(target.getBoundingClientRect().top-90)<10;});
  await send.click();await page.waitForFunction(()=>window.calls.length===1);const calls=await page.evaluate(()=>window.calls);const msg=typeof calls[0]==='string'?calls[0]:calls[0].text;assert.match(msg,/^Подборка вариантов по вашему запросу\nhttp:\/\/127\.0\.0\.1:\d+\/s\/[\w-]{16}$/);if(typeof calls[0]!=='string')assert.equal(calls[0].url,undefined);
  await page.getByRole('button',{name:'Текст подборки',exact:true}).click();
  const custom='Подборка Ауди из Китая 2023 года для Николая';
