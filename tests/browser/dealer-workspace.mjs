@@ -117,7 +117,7 @@ try{
   const page=await browser.newPage({viewport:{width,height:1000}});
   await page.goto(origin+'/dealer-cabinet?view=cabinet');
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
-  const active=page.getByRole('navigation',{name:'Кабинет дилера'}).getByRole('link',{name:'Компания',exact:true});
+  const active=page.getByRole('navigation',{name:'Кабинет дилера'}).getByRole('link',{name:'Кабинет',exact:true});
   await active.waitFor();assert.equal(await active.getAttribute('aria-current'),'page');
   const colors=await active.evaluate(el=>{const s=getComputedStyle(el);return {text:s.webkitTextFillColor,bg:s.backgroundColor};});
   assert.equal(colors.text,'rgb(255, 255, 255)');assert.equal(colors.bg,'rgb(255, 53, 61)');

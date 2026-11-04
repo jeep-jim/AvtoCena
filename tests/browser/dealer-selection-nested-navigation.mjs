@@ -57,6 +57,8 @@ try {
  const page=await browser.newPage({viewport:{width:390,height:900},isMobile:true,hasTouch:true});
  await page.addInitScript(()=>{window.routePops=[];window.addEventListener('popstate',event=>window.routePops.push({href:location.href,tree:event.state?.__PRIVATE_NEXTJS_INTERNALS_TREE?.route}));window.rewinds=[];const go=history.go.bind(history);history.go=(delta)=>{window.rewinds.push(delta);go(delta);};});
  await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&city=Новокузнецк&selection=1#catalog');
+ await page.locator('#catalog').waitFor();
+ await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection-open',{detail:{dealerId:'external'}})));
  await page.getByRole('button',{name:'Поделиться подборкой',exact:true}).waitFor();
  await openFilters(page,390);
  const sheet=page.getByRole('dialog',{name:'Фильтры каталога'});
@@ -77,7 +79,9 @@ try {
  assert.equal(await page.evaluate(()=>window.layerScans),0,'unrelated card mutations must not rescan all overlays');
  for(const closePickerFirst of [true,false]){
   await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&selection=1');
-  await page.getByRole('button',{name:'Поделиться подборкой',exact:true}).waitFor();
+  await page.locator('#catalog').waitFor();
+ await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection-open',{detail:{dealerId:'external'}})));
+ await page.getByRole('button',{name:'Поделиться подборкой',exact:true}).waitFor();
   await openFilters(page,390);
   await sheet.getByRole('searchbox',{name:'Модель автомобиля',exact:true}).click();await models.waitFor();
   await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:catalog-navigation',{detail:{href:'/test/dealer?make=Audi&model=Q5&budget=2500000&selection=1'}})));

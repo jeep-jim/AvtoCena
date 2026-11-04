@@ -10,7 +10,7 @@ export async function GET(_req:Request,{params}:{params:Promise<{id:string}>}){
  if(!isPlatformOwner(await getCurrentUser()))return Response.json({error:'Доступ запрещён'},{status:403});
  const {id}=await params;
  const users=await readDataJson<AuthUser[]>('auth/users.json',getAuthUsers());
- return Response.json({users:users.filter(u=>u.companyId===id&&!isPlatformTeam(u)).map(u=>({id:u.id,name:u.displayName,username:u.telegramUsername,approved:u.dealerApproved===true,status:u.status}))},{headers:{'Cache-Control':'no-store'}});
+ return Response.json({users:users.filter(u=>u.companyId===id&&!isPlatformTeam(u)).map(u=>({id:u.id,name:u.displayName,username:u.telegramUsername,approved:u.dealerApproved===true,status:u.status,teamRole:u.dealerTeamRole||"manager"}))},{headers:{'Cache-Control':'no-store'}});
 }
 export async function PUT(req:Request,{params}:{params:Promise<{id:string}>}){
  const actor=await getCurrentUser();
@@ -26,7 +26,7 @@ export async function PUT(req:Request,{params}:{params:Promise<{id:string}>}){
    if(isPlatformTeam(target)||target.role!=='dealer')throw Error('Этот аккаунт не является аккаунтом дилера');
    if(target.companyId!==id)throw Error('Сотрудник закреплён за другой компанией. Проверьте его карточку в разделе «Команда и права»');
    targetId=target.id;
-   return users.map(u=>u.id===target.id?{...u,dealerApproved:body.approved===true,sessionVersion:(u.sessionVersion||0)+1,updatedAt:new Date().toISOString()}:u);
+   return users.map(u=>u.id===target.id?{...u,...(body.teamRole==='owner'||body.teamRole==='manager'?{dealerTeamRole:body.teamRole}:{}),dealerApproved:body.approved===true,sessionVersion:(u.sessionVersion||0)+1,updatedAt:new Date().toISOString()}:body.teamRole==='owner'&&u.companyId===id&&u.dealerTeamRole==='owner'?{...u,dealerTeamRole:'manager',sessionVersion:(u.sessionVersion||0)+1}:u);
   });
   if(body.approved===true)await startDealerTrial(id);
   await recordCrmActivity(actor,{type:'dealer_access_updated',title:body.approved===true?'Подтверждён доступ дилера':'Отключён доступ дилера',visibility:'management',entityType:'dealer',entityId:id,href:`/crm/dealers/${id}`,text:`Аккаунт: ${targetId}`});

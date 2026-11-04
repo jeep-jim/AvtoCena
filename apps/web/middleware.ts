@@ -183,7 +183,7 @@ async function routeRequest(request: NextRequest) {
   if (session?.role === "dealer" && pathname === "/api/crm/customer-access") return NextResponse.next();
   if (pathname === "/crm" || pathname.startsWith("/crm/") || pathname.startsWith("/api/crm")) {
     if (session && isPlatformTeam(session)) return NextResponse.next();
-    if(session && !wantsJson(pathname)) return NextResponse.redirect(new URL("/dealer-cabinet",request.url));
+    if(session && !wantsJson(pathname)) return NextResponse.redirect(new URL("/dealer-cabinet/overview",request.url));
     return denyOrRedirect(request);
   }
 

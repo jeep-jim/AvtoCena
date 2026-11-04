@@ -243,3 +243,8 @@
 - The platform owner may grant a recorded, expiring partner period without payment. Keep this distinct from paid receipts; preserve existing access periods, agreement approval, company verification and staff approval. Never let a dealer grant or extend their own period.
 - External dealer navigation must exclude platform markets/settings, global documents administration, site editor, global catalog/archive, tasks and ideas. An owner viewing a dealer through CRM still has the owner's navigation; do not confuse this with the dealer session.
 - Next stage, only after pilot verification: home-page dealer interface, refinement of the existing public dealer directory and dealer selection in a vehicle card. Do not activate these or change accepted catalog/pricing/collector logic as part of pilot preparation.
+
+
+# Owner mobile chips — 04.11.2026
+
+- On mobile, chip/tab rows must stay on one horizontal scrollable line, matching the established cabinet. Do not wrap chips onto a second row. Preserve keyboard access and clear active states. Apply this to touched interfaces; track remaining rows for follow-up without unsolicited catalog logic changes.
