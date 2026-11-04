@@ -2842,3 +2842,17 @@ China126198742555/124685023963/124601674990: по одному запросу д
 China126198742555/124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ; причина и final public manifest неизвестны. Новых saved primary authenticated editor Save, native permission/real push delivery, market binding/translation и Korea exact-request/response/release-time/binding analysis нет. Следующий primary шаг — сохранённая release-time/authenticated acceptance и отдельно Korea binding analysis.
 
 Исторические failures, owner freeze и принятая база сохранены. Runtime/live остаётся primary; watch не создавал/повторял/отменял запусков, не менял цены/данные/права/guards. Capacity watch не дублируется. Только две append-only истории с expected-parent CAS/readback; наблюдение остаётся enabled до итоговой приёмки.
+
+## Docs-only watch — 05.11.2026 04:55 Красноярск
+
+Свежие main e91920d049e58e499a695e0221d2d03b0042d013, Road/checklist и AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 сверены. Новых primary записей, изменений related operations и PR после1700 нет. Новых runs после среза03:43 нет. PR1700 остаётся INSTALLED ee215102637799dc2d86961c199e088e4ca9c8b7; ранее прочитанные журналы не повторялись.
+
+Новый final existing China41908421725/collect126849504742 SUCCESS05.11 04:15:59, журнал ПРОЧИТАН, не повторять. Report04:15:34.137: completed=true, mode=local_replica_and_changes, offers280149, changes385682, cursor12746320, replicaSaved=true. Offers и changes не суммируются и не являются опубликованной inventory. Artifact13363218863 НЕ viewed. Plan126849193799 остаётся SUCCESS03:38:24 metadata only.
+
+Единственный existing IN_PROGRESS — тот же scheduled China41908421725, теперь publish126870309797: шаг Publish markets through calculation and retention guards с04:24:55. Final НЕ прочитан; итоговые public manifest/inventory не подтверждены. PENDING0, app deploy continuation нет. Watch не запускал этот workflow; это не доказанный retry/repair. Следующий шаг — существующий publish final при завершении, без новых запусков.
+
+Единственный bounded health05.11 04:55 завершился curl exit0: ok=true, exact release ee215102637799dc2d86961c199e088e4ca9c8b7, прежняя calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. Health не authenticated Save acceptance; ограничение среды03:04 сохраняется в истории.
+
+China126198742555/124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ; cause/outcome/final public manifest неизвестны. Новых saved primary authenticated editor Save, native permission/real push delivery, market binding/translation и Korea exact-request/response/release-time/binding analysis нет. Следующий primary шаг — сохранённая release-time/authenticated acceptance и отдельно Korea binding analysis. Старые failures не отменены новым collect SUCCESS.
+
+Owner freeze и принятая база сохранены; runtime/live остаётся primary. Watch не создавал/повторял/отменял запусков и не менял цены/данные/права/guards; capacity watch не дублируется. Обе истории дополняются append-only только в Road/checklist с expected-parent CAS/readback. Существующее наблюдение enabled, итоговая приёмка ещё не завершена.
