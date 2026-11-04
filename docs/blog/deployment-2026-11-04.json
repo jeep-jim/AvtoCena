@@ -1,0 +1,25 @@
+{
+  "releaseSha": "7f4504b3f11cecf4f2f32bab8f43ff7379bc9cd5",
+  "pr": 1695,
+  "ci": {
+    "runId": 41757471430,
+    "jobId": 126336875101,
+    "conclusion": "success"
+  },
+  "verifyJobs": [
+    {
+      "runId": 41757471449,
+      "jobId": 126336875025,
+      "conclusion": "success"
+    },
+    {
+      "runId": 41757471420,
+      "jobId": 126336874957,
+      "conclusion": "success"
+    }
+  ],
+  "deployRunId": 41758561067,
+  "deployStatus": "in_progress",
+  "livePublicationConfirmed": false,
+  "externalPosts": 0
+}

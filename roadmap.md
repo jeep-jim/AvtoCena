@@ -20838,3 +20838,8 @@ Owner freeze сохранён; runtime/данные/цены/права/guards �
 ## 04.11.2026 — редакционный пакет подготовлен, установка ещё не начата
 
 10 статей: porsche-pcm-2026-hardware-and-availability, toyota-monza-2026-drivers-title-preview, ioniq-9-six-or-seven-seats-guide, porsche-recycled-cathode-not-whole-battery, leipzig-one-line-different-powertrains, cayenne-s-electric-charging-conditions, cayenne-coupe-electric-aerodynamics-tradeoff, porsche-pccb-brakes-check-specification, porsche-3d-seat-comfort-layer-explained, porsche-transaxle-front-engine-rear-gearbox. Точные названия, даты и первоисточники: docs/blog/editorial-2026-11-04.md. Два свежих анонса (PCM03.11, ToyotaMonza02.11), восемь явно архивных разборов. Фото10/10 JPEG, права/исходники/SHA в media-check-2026-11-04.json; каталог проверен, evidence в catalog-check-2026-11-04.json. 32 прежние записи без изменений; blog.test.ts2/2PASS, diffcheckPASS. Штатный marker сохраняет все существующие guards/scope; CI/merge/deploy/live ещё не подтверждены. 10Дзен+10VK сохранены; внешних публикаций0, каналы не подтверждены.
+
+
+## 04.11.2026, 09:07 Красноярск — выпуск автоблога: PR1695 объединён, установка выполняется
+
+CI41757471430/126336875101 и verify41757471449/126336875025,41757471420/126336874957 завершились SUCCESS. PR1695 merged: 7f4504b3f11cecf4f2f32bab8f43ff7379bc9cd5. Перед merge in_progress=0; в очереди REG app deploy не было (прежние отдельные queued Yandex/collectors не тронуты). Запущен один штатный REG deploy41758561067; повторный не создавался. Установка и10 live-статей пока НЕ подтверждены. Прежние32 seed-записи сохранены; все10 новых фото JPEG. Дзен-адаптации дополнены самостоятельными примерами и первоисточниками, внешних публикаций0.
