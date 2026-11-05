@@ -2,7 +2,7 @@
 
 import {readDealerSubscriptions} from "@/lib/dealers/subscriptions-client";
 import Link from "next/link";
-import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {DealerLink, useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import { PublicStaffAlerts } from "../crm/PublicStaffAlerts";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -183,14 +183,14 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
               <ThemeIcon theme={theme} />
             </button>
 
-            <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
+            <DealerLink href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
               <StarIcon filled={favoritesCount > 0} />
               {favoritesCount > 0 ? (
                 <span className={`absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-black ${favoriteBadgeClass}`} style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
                   {Math.min(favoritesCount, 99)}
                 </span>
               ) : null}
-            </Link>
+            </DealerLink>
 
             <nav className="hidden items-center gap-1 text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
 
