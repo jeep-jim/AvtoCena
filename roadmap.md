@@ -21798,3 +21798,15 @@ IN_PROGRESS0, нового app deploy/market continuation нет. Четыре �
 Исторические failures/performanceAccepted=false сохранены. Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Next saved primary1708 exact-release verification Japan list/count/both power bounds и1706/1707 release-time acceptance; отдельные прежние адресные analyses остаются открыты.
 
 Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+## Сверка 05.11.2026 20:53 Красноярск — новых acceptance результатов нет
+
+Свежие main829d25da9e7e062e5a71d7041a88534a76183c6d и обе истории прочитаны. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations unchanged. PR1708 OPEN/7c35c4c19cdb17021ae8f1f81cc97dc3f92680cd, PR1707 OPEN/80e2b2669b0dd52347edb6ef3d4215ebae27f8db и PR1706 OPEN/e6e51e7d6452fb5eb22f1ddd7fb5ceab5e50c941 unchanged; PR1706 headruns0. Сохранённые primary Road и все final READ/PRIMARYREAD журналы не повторялись; установка кандидатов и live Japan acceptance не подтверждены.
+
+IN_PROGRESS0/current PENDING0, нового app deploy/market continuation нет. Четыре старых global queued38994950593/38994894574/38994824794/31164670128 остаются историческими, не новыми app deploy. NEW existing REGsize42035683400/127273086608 SUCCESS20:33:15 — metadata only, лог НЕ READ, размеры/изменение данных не подтверждены; capacitywatch не дублируется.
+
+Единственный bounded health20:53 завершился curl exit0:ok=true,exacta1a3ec8ce6475f7da0c89e0e6545b96a121f9442,same calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. PR1705 остаётся установленным; это не PR1706/1707/1708 и не authenticated editor Save. China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed, все НЕ READ/causeunknown, retry не выполнялся.
+
+Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Next saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance; прежние адресные analyses и исторические failures/performanceAccepted=false сохранены.
+
+Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
