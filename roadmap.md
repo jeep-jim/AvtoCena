@@ -21924,3 +21924,63 @@ NEW container retention42119104194/cleanup127566483139 SUCCESS05:10:23 — metad
 China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed; все НЕ READ, causeunknown, без retry. Следующие материалы — existing China publish final/outcome/report/final public manifest и Green final, затем saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет.
 
 Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Исторические failures/performanceAccepted=false сохранены. Без workflow launch/rerun/cancel, browser/provider/repair и изменений data/prices/rights/guards. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+## Сверка 06.11.2026 06:47 Красноярск — новые final failures, China publish продолжается
+
+Прочитаны свежие main05b6522db2cd3988b2696f2620dfb5021f35b395 и обе истории; новых primary записей нет. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations без изменений. PR1708 OPEN/7c35c4c19cdb17021ae8f1f81cc97dc3f92680cd, PR1707 OPEN/80e2b2669b0dd52347edb6ef3d4215ebae27f8db, PR1706 OPEN/e6e51e7d6452fb5eb22f1ddd7fb5ceab5e50c941 без изменений; PR1706 headruns0. Все прежние READ/PRIMARYREAD, включая China collect127526723041 и PR1708 Road/четыре final, не повторялись.
+
+Ниже 31 НОВЫЙ финальный журнал READ — НЕ ПОВТОРЯТЬ. Все времена 06.11.2026 по Красноярску; report/error — время из сохранённого журнала. Указанные artifacts НЕ просмотрены. SUCCESS с ограничениями не закрывает прежние failures.
+
+| Результат | Run | Job | Завершение | Report/error или примечание | Artifact |
+| --- | --- | --- | --- | --- | --- |
+| Shared prices: FAIL live_encyclopedia_binding_missing | 42121672407 | 127575339246 | 05:28:33 | 05:28:29.572 | 13459126590 |
+| Shared prices: FAIL live_encyclopedia_binding_missing | 42121748111 | 127575773118 | 05:29:24 | 05:29:20.580 | 13459441099 |
+| Shared prices: FAIL live_encyclopedia_binding_missing | 42122459120 | 127578055219 | 05:34:24 | 05:34:18.856 | 13460161837 |
+| Shared prices: FAIL live_encyclopedia_binding_missing | 42123024705 | 127579986196 | 05:38:02 | 05:37:58.658 | 13458303913 |
+| Shared prices: FAIL live_encyclopedia_binding_missing | 42123134437 | 127580378920 | 05:39:03 | 05:38:57.548 | 13460167670 |
+| Regcloud prices: FAIL deferred active publisher | 42122123483 | 127576903718 | 05:32:03 | 05:31:59.185 | 13459116655 |
+| Regcloud prices: FAIL deferred active publisher | 42122229366 | 127577468841 | 05:32:58 | 05:32:55.017 | 13458084458 |
+| Regcloud prices: FAIL deferred active publisher | 42122571593 | 127578439035 | 05:34:57 | 05:34:54.617 | 13460117002 |
+| Regcloud prices: FAIL deferred active publisher | 42122937343 | 127579689053 | 05:37:40 | 05:37:35.542 | 13459182355 |
+| Regcloud prices: FAIL deferred active publisher | 42123120726 | 127580328043 | 05:38:43 | 05:38:40.722 | 13458503526 |
+| Regcloud prices: FAIL deferred active publisher | 42123228968 | 127580704551 | 05:39:43 | 05:39:40.509 | 13459357492 |
+| Direct: FAIL green_feed_empty | 42121672408 | 127575339240 | 05:34:26 | 05:34:23.647 | нет JSON/artifact |
+| Direct: FAIL green_feed_empty | 42122459087 | 127578640010 | 05:40:26 | 05:40:24.181 | нет JSON/artifact |
+| Direct: FAIL green_feed_empty | 42123134442 | 127581513204 | 05:47:11 | 05:47:09.382 | нет JSON/artifact |
+| Translation: FAIL translation_http_403 | 42123134570 | 127580377352 | 05:51:14 | 05:51:09.937 | 13459583843 |
+| Compact counts: SUCCESS/deferred | 42121748108 | 127575605370 | 05:29:13 | — | — |
+| Compact counts: SUCCESS/deferred | 42122459173 | 127578054948 | 05:34:19 | — | — |
+| Compact counts: SUCCESS/deferred | 42123024641 | 127579985782 | 05:38:20 | — | — |
+| Compact counts: SUCCESS/deferred | 42123134341 | 127580520160 | 05:39:27 | — | — |
+| Current pages: SUCCESS | 42121672313 | 127575339583 | 05:30:50 | policy06/07/08.11 | — |
+| Current pages: SUCCESS | 42121748098 | 127576879382 | 05:31:33 | alreadyPrepared | — |
+| Current pages: SUCCESS | 42122459036 | 127578054803 | 05:34:01 | alreadyPrepared | — |
+| Current pages: SUCCESS | 42122819395 | 127579279747 | 05:36:33 | alreadyPrepared | — |
+| Current pages: SUCCESS | 42123024701 | 127579986655 | 05:37:53 | alreadyPrepared | — |
+| Current pages: SUCCESS | 42123134541 | 127580376968 | 05:38:40 | alreadyPrepared | — |
+| Overview: SUCCESS | 42123257606 | 127580800268 | 05:40:31 | 05:40:30.002 | — |
+| Market plan: SUCCESS; collect/publish SKIPPED | 42121658454 | 127575289556 | 05:28:07 | UAE | — |
+| Market plan: SUCCESS; collect/publish SKIPPED | 42122358490 | 127577711975 | 05:33:13 | Europe | — |
+| Market plan: SUCCESS; collect/publish SKIPPED | 42122931946 | 127579669651 | 05:37:09 | Georgia | — |
+| Market plan: SUCCESS; collect/publish SKIPPED | 42123030806 | 127580008400 | 05:37:59 | Korea | — |
+| Green: SUCCESS; actual refresh SKIPPED | 42121578164 | 127575006129 | 05:27:35 | 17 tests PASS | нет report/artifact |
+
+Пять shared prices: release a1a3ec8ce6475f7da0c89e0e6545b96a121f9442, generation gen_1791597210034_5b83bc90, skipped=false/verified=false, live_encyclopedia_binding_missing. Шесть Regcloud prices: тот же release, generation gen_1793850840258_78913964, skipped=true/verified=false, reason publication_in_progress, error budget_preparation_deferred_active_publisher. Это разные сохранённые условия, не установленная root cause и не доказательство отказа live calculator/Save. Различие generation не объясняет binding failure. Для job127579689053 первый metadata fetch отклонён без причины, последующий metadata fetch и final log доступны; final READ.
+
+Три Direct: green/china/korea/uae/georgia/europe count=0, cumulative scanned=208275, green_feed_empty; yandex-direct-feed-report.json отсутствует, artifacts нет. Это не доказательство inventory loss/rollback. Direct42121748122 и42123024656 CANCELLED только metadata, jobs=[], причина отмены неизвестна. Активного Direct continuation нет. Следующий адресный материал — saved primary inputs/source/storage/generation/binding/filter analysis, без rerun.
+
+Translation: offers=254397, unique=34521, translated=0, rejected=0, characters=0, pending=34521, samples=[], translation_http_403. Причина отказа неизвестна. Следующий материал — сохранённые primary request/response/config/authorization evidence, без новых provider requests/retry.
+
+Все четыре compact counts завершились SUCCESS, но status=deferred/reason=catalog_writer_busy/indexPrepared=false — подготовка индекса не подтверждена. Шесть current pages: по11 tests PASS; generation gen_1793850840258_78913964, первый run создаёт policy06/07/08.11 с generationScopedOnly=true, остальные alreadyPrepared=true. Эти generation-scoped результаты не являются новым live inventory.
+
+Overview: refresh05:39:29.756, generation gen_1791597210034_5b83bc90, expected policy06.11/previous05.11, publicationActive=false. Landing05:40:05.691 Europe49456, final05:40:30.002 Europe49455 — различие не объяснено. Final ok=true/total207335: China138608, Japan0, Korea9115, UAE1043, Europe49455, Georgia9114. Samples/candidates и эти сохранённые generation counts не равны полному live inventory; не суммировать с другими audit/collection counts.
+
+Market plan collect/publish SKIPPED metadata: UAE127575560976/127575561136, Europe127578031001/127578031383, Georgia127579952011/127579952662, Korea127580350226/127580351356. Korea plan05:37:56.064: no_enabled_background_source. Для остальных планов конкретная причина пропуска не установлена. Green:17 tests PASS, actual scripts/catalog-refresh-green-corner.mjs step SKIPPED; catalog-green-report.json отсутствует, artifact не создан. SUCCESS Green не доказывает фактический refresh/publication.
+
+На сверке единственный IN_PROGRESS — existing China42107580508/publish127541782446, Publish с04:34:27; final НЕ READ, final public manifest/inventory неизвестны. Current pending0/app deploy нет. Старые global queued38994950593/38994894574/38994824794/31164670128 сохранены, не новые deploy. CRM retry42124930853/metrika127586556021 SUCCESS05:51:39 и deliver127586556558 SUCCESS05:52:03 — metadata only, логи НЕ READ, не delivery proof. Billing/retention/USD/REG не перепроверялись как finance/cleanup/rate/capacity evidence; capacitywatch не дублируется.
+
+Единственный bounded health06:43 завершился curl exit0: ok=true, exact a1a3ec8ce6475f7da0c89e0e6545b96a121f9442, calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357 без изменений. Timeout01:55–01:56/curl28/35002ms/0bytes сохранён, cause unknown; успех не объясняет прежний timeout. PR1705 установлен; установка1706/1707/1708, live Japan acceptance и authenticated editor Save не подтверждены.
+
+China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed, все НЕ READ/cause unknown, без retry. Ожидаются existing China publish final/outcome/report/final public manifest, saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Новых saved primary auth Save/native permission/real delivery, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline и Korea binding analyses нет.
+
+Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Исторические failures/performanceAccepted=false не отменены. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/repair. Только2docs append-only, expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
