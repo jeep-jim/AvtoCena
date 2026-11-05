@@ -1,0 +1,239 @@
+{
+  "checkedAt": "2026-11-05T03:45:30.660838+00:00",
+  "expectedRelease": "c7ae186695e012a19521a1309a8988fc75e02ad3",
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "c7ae186695e012a19521a1309a8988fc75e02ad3",
+    "calculationVersion": "f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357"
+  },
+  "articles": [
+    {
+      "url": "https://avtocena.com/blog/hyundai-fisita-2026-four-powertrain-paths",
+      "http": 200,
+      "seconds": 4.517,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "8da6ecc6d3abd936b435de3787ebb2a66e8f14fef7b2aac8f93b4302d342c8ed"
+    },
+    {
+      "url": "https://avtocena.com/blog/hyundai-hydrogen-refueling-robot-2026",
+      "http": 200,
+      "seconds": 4.921,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "b87d535a9bbc5e1b73bb4cfc16dedbe382194f4db4775e5bbbac3c0598589b0e"
+    },
+    {
+      "url": "https://avtocena.com/blog/corolla-fn50-2026-reliability-how-to-read",
+      "http": 200,
+      "seconds": 4.365,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "441dc17849eadee737b22696534f28e86a73ec1c1a790b06b03b5e5b72840134"
+    },
+    {
+      "url": "https://avtocena.com/blog/toyota-wrc-2027-two-teams-two-cars",
+      "http": 200,
+      "seconds": 4.367,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "0598e3c33d59ecf1ec88d46e94327889813c30fc3d46321f440754e68d1c8c9a"
+    },
+    {
+      "url": "https://avtocena.com/blog/aygo-x-hybrid-four-seats-city-check",
+      "http": 200,
+      "seconds": 8.707,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "1d5f685d992458e339c8fb3aa3a896a4d8cbb49c67adf418955edb6e55a50c34"
+    },
+    {
+      "url": "https://avtocena.com/blog/urban-cruiser-sliding-seat-battery-choice",
+      "http": 200,
+      "seconds": 8.526,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "2274cb14a9d96657ef5dbf58118e646d0a03abccddc02d4c9ec508e47081d212"
+    },
+    {
+      "url": "https://avtocena.com/blog/land-cruiser-48v-five-seat-uk-guide",
+      "http": 200,
+      "seconds": 6.792,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "afb4c6ae6fd3096db5d082d9b2355d72056fb5c845f9f13b93292534be6042bd"
+    },
+    {
+      "url": "https://avtocena.com/blog/gr-yaris-2026-steering-wheel-ergonomics",
+      "http": 200,
+      "seconds": 6.785,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "360f796057234a15c6cd92424a58eba59c15c0de0f946cd032e3b8da6b5d5779"
+    },
+    {
+      "url": "https://avtocena.com/blog/mirai-second-generation-platform-packaging",
+      "http": 200,
+      "seconds": 4.832,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "5ec243576963c6a4bc851bdedf2e69cfcbe198c8323d52bf50c3a3384279526f"
+    },
+    {
+      "url": "https://avtocena.com/blog/proace-city-verso-two-lengths-family-guide",
+      "http": 200,
+      "seconds": 4.587,
+      "checks": {
+        "http200": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "jsonLd": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "coverBytes": true,
+        "headingBlocks": true
+      },
+      "pass": true,
+      "coverSha256": "1f4c5030b613f98d7d64554e730a0130e31e8baac3fd776a54d058efac56a9e0"
+    }
+  ],
+  "indexes": [
+    {
+      "url": "https://avtocena.com/blog",
+      "http": 200,
+      "seconds": 4.081,
+      "links": 12
+    },
+    {
+      "url": "https://avtocena.com/blog?page=2",
+      "http": 200,
+      "seconds": 4.351,
+      "links": 12
+    },
+    {
+      "url": "https://avtocena.com/blog?page=3",
+      "http": 200,
+      "seconds": 15.939,
+      "links": 12
+    },
+    {
+      "url": "https://avtocena.com/blog?page=4",
+      "http": 200,
+      "seconds": 4.065,
+      "links": 12
+    },
+    {
+      "url": "https://avtocena.com/blog?page=5",
+      "http": 200,
+      "seconds": 8.749,
+      "links": 4
+    }
+  ],
+  "indexUniqueArticles": 52,
+  "all52Present": true,
+  "sitemap": true,
+  "pass": true
+}
