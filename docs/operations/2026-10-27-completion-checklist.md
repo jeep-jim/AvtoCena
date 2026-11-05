@@ -3236,3 +3236,15 @@ IN_PROGRESS0/current PENDING0, новых запусков после преды
 Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Next saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Исторические failures/performanceAccepted=false и прежние адресные analyses сохранены.
 
 Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+## Сверка 06.11.2026 02:32 Красноярск — без новых результатов приёмки
+
+Прочитаны свежие main ae3511d4b1ca464253d664859231b64f71be9e17 и обе истории. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations без изменений. PR1708 OPEN/7c35c4c19cdb17021ae8f1f81cc97dc3f92680cd, PR1707 OPEN/80e2b2669b0dd52347edb6ef3d4215ebae27f8db и PR1706 OPEN/e6e51e7d6452fb5eb22f1ddd7fb5ceab5e50c941 без изменений; PR1706 headruns0. Новых PR и сохранённых primary результатов приёмки нет. READ/PRIMARYREAD журналы не повторялись.
+
+IN_PROGRESS0/current PENDING0; нового app deploy/market continuation нет. Новый existing USD42090474665/refresh127466862916 SUCCESS06.11 02:05:36 — metadata only; лог НЕ READ, изменение курса/данных не подтверждено. CRM42077150792 и REGsize42035683400 остаются SUCCESS metadata only, не доказательство доставки/размеров; capacitywatch не дублируется. Старые global queued38994950593/38994894574/38994824794/31164670128 не новые app deploy.
+
+Единственный bounded health02:31–02:32 завершился curl exit0: ok=true, exact a1a3ec8ce6475f7da0c89e0e6545b96a121f9442, calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357 без изменений. Предыдущий timeout01:55–01:56/curl28/35002ms/0bytes сохранён; новый успех не объясняет его причину. PR1705 установлен; установка1706/1707/1708, live Japan acceptance и authenticated editor Save не подтверждены.
+
+China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed; все НЕ READ, causeunknown, без retry. Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Следующие ожидаемые материалы: saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance.
+
+Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Исторические failures/performanceAccepted=false и прежние адресные analyses сохранены. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
