@@ -13,7 +13,7 @@ import {DealerProfileContent} from '../../apps/web/components/dealers/DealerProf
 import {publicDealerProfile} from '../../apps/web/lib/dealers/public-profile';
 import {DealerOfferContent} from '../../apps/web/components/dealers/DealerOfferContent';
 import {PublicLeadCaptureV2} from '../../apps/web/components/leads/PublicLeadCaptureV2';
-import FavoritesPage from '../../apps/web/app/(public)/favorites/page';
+import FavoritesPage from '../../apps/web/components/catalog/FavoritesContent';
 import {SpecTile} from '../../apps/web/components/catalog/OfferSpecTile';
 import {publicRail} from '../../apps/web/lib/dealers/public-rail';
 import {SpecialRail} from '../../apps/web/components/dealers/SpecialRail';

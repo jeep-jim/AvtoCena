@@ -21764,3 +21764,11 @@ IN_PROGRESS0/PENDING0; app deploy/market continuation не обнаружено.
 Новых saved primary auth Save/native permission/real delivery, Direct inputs/binding/filter, Georgia partial-source-retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier request/deadline, translation authorization/Korea binding analyses нет. Исторические failures и performanceAccepted=false не закрыты поздними успехами. Next saved primary PR1706 CI/release-time acceptance и отдельные адресные analyses; без watch browser/provider/rerun/repair.
 
 Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+
+## 05.11.2026 — избранное в контексте дилера
+
+По скриншоту владельца убраны ссылки «Автомобили»/«Автодилеры» только при переходе от дилера. Ссылка шапки сохраняет dealer/preview, сервер повторно проверяет доступность профиля штатным resolver и передаёт контекст в избранное. Пустое избранное возвращает в каталог выбранного дилера. Общая страница сохраняет прежнюю навигацию; список компаний по-прежнему только из ручных подписок, без автоматически добавленных рекомендаций. Сохранённые автомобили и компании не удаляются и не фильтруются.
+
+Локально TypeScript PASS, 7 адресных тестов PASS (рендер с/без дилера, URL, настройки и подписки), git diff --check PASS. Расширен существующий browser dealer-directory сценарий для контекста/перезагрузки/пустых подписок; в этой сессии браузерный сценарий пока не запускался. Подготовлен штатный deploy marker; публикация/установка пока не подтверждены.
+

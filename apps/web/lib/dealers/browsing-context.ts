@@ -10,7 +10,7 @@ export function dealerBrowsingHref(href:string, dealer:DealerBrowsingContext|nul
   if(url.pathname==='/cars/green'){target.searchParams.set('market','japan');target.searchParams.set('stock','green');}
   return target.pathname+target.search+url.hash;
  }
- if(url.pathname.startsWith('/cars/')||url.pathname==='/request') {
+ if(url.pathname.startsWith('/cars/')||url.pathname==='/request'||url.pathname==='/favorites') {
   url.searchParams.set('dealer',dealer.id);
   if(dealer.preview)url.searchParams.set('preview','1');
   return url.pathname+url.search+url.hash;
