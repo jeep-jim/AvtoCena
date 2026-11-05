@@ -199,6 +199,7 @@ body:has(.ac-dealer-public-page) .ac-public-footer-tools{max-width:none}
 
 .dealer-section-links{display:none}
 @media(min-width:768px){
+ .ac-dealer-public-page .dealer-cover{aspect-ratio:3/1}
  .ac-dealer-public-page .dealer-profile-actions{
   position:absolute;inset:20px 20px auto;display:flex;justify-content:space-between;
   max-width:none;margin:0;z-index:3;pointer-events:none

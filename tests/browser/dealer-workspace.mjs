@@ -149,6 +149,15 @@ try{
    assert.equal(await view.getAttribute('data-compact'),'false');
    await page.getByRole('button',{name:'Тестовые фильтры'}).click();
    await page.waitForFunction(()=>document.querySelector('.ac-dealer-catalog-toolbar .ac-catalog-view-toggle')?.dataset.compact==='true');
+   const toolbar=page.locator('.ac-dealer-catalog-toolbar');
+   const toolbarTop=await toolbar.evaluate(el=>parseFloat(getComputedStyle(el).top));
+   const beforeScroll=await toolbar.boundingBox();
+   await page.evaluate(y=>scrollTo(0,y),beforeScroll.y+200);
+   const floating=await toolbar.boundingBox();
+   assert.ok(Math.abs(floating.y-toolbarTop)<2,'selected filters stick below the header');
+   const toggleBox=await view.boundingBox();
+   assert.ok(Math.abs(toggleBox.x+toggleBox.width-floating.x-floating.width)<2,'view controls remain on the right');
+   await page.evaluate(()=>scrollTo(0,0));
    await view.getByRole('button',{name:'Список'}).click();
    assert.equal(await view.getByRole('button',{name:'Список'}).getAttribute('aria-pressed'),'true');
    await page.getByRole('button',{name:'Тестовые фильтры'}).click();

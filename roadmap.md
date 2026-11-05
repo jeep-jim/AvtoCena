@@ -21673,3 +21673,8 @@ IN_PROGRESS0/PENDING0, новых app deploy/market continuations не обна�
 Единственный bounded health12:38–12:39 завершился curl exit0:ok=true,exact10b75dd68e53e6df0734cef516753d5d0055c59e,same calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed, все НЕ READ,causeunknown.
 
 Новых saved primary auth Save/native permission/real delivery либо verifier request/deadline, UAE outcome-cancelcause-locktimeline/audit request binding, Direct binding/filter, translation authorization, Korea binding результатов нет. Next saved primary release-time acceptance и адресные analyses выше. Owner freeze соблюдён; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял данные/права/цены/guards и не использовал browser/provider/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+
+## 05.11.2026 — плавающие выбранные фильтры и баннер дилера
+
+Восстановлена фиксация панели выбранных фильтров при прокрутке с переключателем вида справа. Убраны хлебные крошки из встроенного каталога и профиля дилера. С 768 px пропорция баннера 3:1 вместо 4:1, высота при одинаковой ширине увеличена на треть. Добавлена браузерная проверка фиксации панели после прокрутки. Локально 11 профильных тестов PASS; проверка типов выполняется. Публикация и браузерная приёмка новой версии пока не подтверждены.

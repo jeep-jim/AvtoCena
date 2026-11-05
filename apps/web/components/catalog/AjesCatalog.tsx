@@ -1,7 +1,6 @@
 import {Suspense} from 'react';
 import {CatalogResultCountUpdate} from './CatalogSelectionContext';
 import {MarketResultCount} from './MarketResultCount';
-import {CatalogBreadcrumbs} from './CatalogBreadcrumbs';
 import {CatalogCountLabel} from './CatalogCountLabel';
 import type {DealerBrowsingContext} from '@/lib/dealers/browsing-context';
 import {CatalogSidebar} from './CatalogSidebar';
@@ -38,8 +37,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  <CatalogSidebar dealerLayout={embedded} resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<div className={embedded?"ac-dealer-catalog-title":"contents"}>
 
 
- <nav aria-label="Хлебные крошки" className={`ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)] ${embedded&&dealer?"md:hidden":""}`}><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>
- {embedded&&dealer&&<CatalogBreadcrumbs className="hidden md:flex" items={[{label:"Главная",href:"/"},{label:dealer.name,href:dealer.href},{label,href:"/cars"}]}/>}
+ {!embedded&&<nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>}
  <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":"Каталог автомобилей"}</h1>
  {embedded&&<p className="ac-catalog-result-count hidden md:flex items-center gap-2 text-[var(--ac-muted)]" role="status">

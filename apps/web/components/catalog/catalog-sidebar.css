@@ -161,10 +161,20 @@ html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) button.ac-power-
   display:flex;justify-content:flex-end;flex-wrap:nowrap;position:static;
   margin:0;padding:0;background:transparent!important;box-shadow:none
  }
- .ac-dealer-catalog-toolbar:has(.ac-filter-chip){grid-column:1/-1}
+
+ .ac-catalog-heading:has(>.ac-dealer-catalog-toolbar .ac-filter-chip){display:contents}
+ .ac-catalog-toolbar.ac-dealer-catalog-toolbar:has(.ac-filter-chip){
+  grid-column:2;position:sticky;top:var(--dealer-header-height,64px);z-index:20;
+  padding:8px 0 12px;background:var(--ac-page-bg,#1a2029)!important;
+  isolation:isolate;box-shadow:0 1px 0 var(--ac-border)
+ }
  .ac-dealer-catalog-toolbar .ac-catalog-selection{display:flex;flex:1;min-width:0;background:transparent}
  .ac-dealer-catalog-toolbar .ac-catalog-selection:empty{display:none}
  .ac-dealer-catalog-toolbar .ac-catalog-view-toggle{order:0;flex-shrink:0;margin-left:auto;align-self:flex-start}
  .ac-dealer-catalog-toolbar .ac-catalog-view-toggle button{position:relative}
  .ac-dealer-catalog-toolbar .ac-catalog-view-toggle[data-compact=true] button span{position:absolute;visibility:hidden;white-space:nowrap}
+}
+
+@media(min-width:1024px){
+ .ac-catalog-heading:has(>.ac-dealer-catalog-toolbar .ac-filter-chip)>:not(.ac-dealer-catalog-toolbar){grid-column:2}
 }
