@@ -21496,3 +21496,34 @@ PR1701 INSTALLED в release a34585099eedb5c9827926de03663fb61e6baf64. Новый
 Единственный bounded health08:52 завершился curl exit0: ok=true, exacta34585099eedb5c9827926de03663fb61e6baf64, прежняя calculationVersionf5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. Health не authenticated Save acceptance. China126198742555/124685023963/124601674990: по одному запросу доступности снова Transport closed, НЕ ПРОЧИТАНЫ/cause unknown.
 
 Новых saved primary authenticated editor Save/native permission/real push delivery, market binding/translation либо Korea exact-request/response/release-time/binding analysis нет. Следующие шаги — existing market finals и saved primary release-time/authenticated acceptance; отдельно Direct inputs/binding/filter, translation request/response/config/auth и Korea binding analysis. Все прежние failures сохранены, поздние успехи их не отменяют. Owner freeze и принятая база сохранены; runtime/live остаётся primary. Watch не создавал/повторял/отменял workflow и не менял цены/данные/права/guards; без browser/provider requests/repair. Только две append-only истории с expected-parent CAS/readback. Наблюдение остаётся enabled до итоговой приёмки.
+
+
+## Ежедневная редакция — 05.11.2026, подготовка выпуска
+
+Прочитаны актуальные AGENTS.md, roadmap.md и docs/blog/editorial-policy.md. Подготовлены 10 разных материалов (4 новости, 6 архивных разборов); точные темы и источники:
+
+1. **Четыре пути электрификации Hyundai: что показал саммит FISITA** — `hyundai-fisita-2026-four-powertrain-paths`. Новость; 05.11.2026; событие 4–5 ноября. Источник: https://www.hyundai.news/eu/articles/press-releases/fisita-world-mobility-summit-2026.html
+
+2. **Робот на водородной заправке: что демонстрирует Hyundai** — `hyundai-hydrogen-refueling-robot-2026`. Новость; 04.11.2026; выставка 4–6 ноября. Источник: https://www.hyundai.news/eu/articles/press-releases/world-hydrogen-expo-2026.html
+
+3. **Corolla получила награду за надёжность: что измерял FN50** — `corolla-fn50-2026-reliability-how-to-read`. Новость; 04.11.2026. Источник: https://media.toyota.co.uk/toyota-corolla-rated-the-uks-number-one-for-reliability/
+
+4. **Две команды Toyota в WRC-2027: как читать новый состав** — `toyota-wrc-2027-two-teams-two-cars`. Новость; 03.11.2026; планы на 2027 год. Источник: https://media.toyota.co.uk/two-teams-and-two-cars-take-tgr-wrt-into-a-new-world-rally-championship-era/
+
+5. **Aygo X Hybrid: сначала четыре места, потом расход** — `aygo-x-hybrid-four-seats-city-check`. Архивный разбор; август 2026; производство с 13.11.2025. Источник: https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/260810-AygoX-Press-Pack.pdf
+
+6. **Urban Cruiser: зачем сравнивать батарею и положение заднего дивана** — `urban-cruiser-sliding-seat-battery-choice`. Архивный разбор; август 2026. Источник: https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/260810-Urban-Cruiser-Press-Pack.pdf
+
+7. **Land Cruiser 48V: почему важны рынок и число мест** — `land-cruiser-48v-five-seat-uk-guide`. Архивный разбор; 17.11.2025. Источник: https://media.toyota.co.uk/vehicles/land-cruiser-2024-current/
+
+8. **GR Yaris: зачем уменьшили руль всего на пять миллиметров** — `gr-yaris-2026-steering-wheel-ergonomics`. Архивный разбор; 13.03.2026. Источник: https://media.toyota.co.uk/vehicles/gr-yaris/
+
+9. **Вторая Mirai: как компоновка меняет водородный автомобиль** — `mirai-second-generation-platform-packaging`. Архивный разбор; обновление январь 2023. Источник: https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/241127-Mirai-Press-Pack.pdf
+
+10. **Proace City Verso: две длины кузова для разных семейных задач** — `proace-city-verso-two-lengths-family-guide`. Архивный разбор; 07.08.2024. Источник: https://media.toyota.co.uk/vehicles/proace-city-verso-2024-current/
+
+Все 10 разрешённых JPEG декодированы и визуально просмотрены; локальные копии/атрибуция/права/SHA-256 сохранены. Каталог проверен семью bounded запросами, подтверждённые ссылки добавлены для Corolla, электрического Urban Cruiser и Mirai; остальные версии не объявлены в наличии. 42 прежних seed-записи сохранены, ручные ревизии не перезаписываются. Рынки/парсеры/расчёты не меняются.
+
+Полный отчёт docs/blog/editorial-2026-11-05.md; проверенные черновики docs/blog/drafts/2026-11-05.json; 20 адаптаций docs/blog/syndication/2026-11-05.md. Внешних отправок 0: подключённые подтверждённые каналы Дзена/VK не установлены. На этом этапе тесты/PR/установка ещё предстоят; опубликованным выпуск не объявлен. Предыдущий app deploy41943033790 SUCCESS, новой параллельной установки не запускали.
+
+Проверки до PR: blog.test.ts 2/2 PASS, схема 52 записей; git diff --check PASS; 42 прежние записи структурно равны HEAD. Четыре страницы публичного индекса проверены: 42 прежние статьи, новых slug ещё нет.
