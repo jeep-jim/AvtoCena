@@ -113,7 +113,7 @@ const browser = await chromium.launch({
 });
 
 try{
- for(const width of [390,1024,1440,1920])for(const theme of ['light','dark']){
+ for(const width of [390,820,1024,1440,1920])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});
   await page.goto(origin+'?view=profile&sidebar=1');
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
@@ -135,6 +135,25 @@ try{
    assert.ok(Math.abs(sidebar.y-banner.y)<2,`filters start at banner top: ${JSON.stringify({sidebar,banner})}`);
    assert.ok(Math.abs(identity.x-banner.x)<2&&Math.abs(results.x-banner.x)<2,'dealer content shares the right column');
   }else assert.ok(sidebar.y>identity.y+identity.height,'mobile filters remain below dealer identity');
+  const sections=page.locator('.dealer-section-links');
+  const view=page.locator('.ac-dealer-catalog-toolbar .ac-catalog-view-toggle');
+  assert.equal(await sections.isVisible(),width>=768);
+  assert.equal(await view.isVisible(),width>=768);
+  if(width>=768){
+   assert.deepEqual(await sections.getByRole('button').allTextContents(),['Каталог','Медиа','Адреса','Отзывы','Заявка']);
+   const share=await page.getByRole('button',{name:'Поделиться',exact:true}).boundingBox();
+   const favorite=await page.locator('.dealer-subscription-control>button').boundingBox();
+   assert.ok(Math.abs(share.x-identity.x-20)<2);
+   assert.ok(Math.abs(identity.x+identity.width-favorite.x-favorite.width-20)<2);
+   assert.ok(Math.abs(share.y-favorite.y)<2);
+   assert.equal(await view.getAttribute('data-compact'),'false');
+   await page.getByRole('button',{name:'Тестовые фильтры'}).click();
+   await page.waitForFunction(()=>document.querySelector('.ac-dealer-catalog-toolbar .ac-catalog-view-toggle')?.dataset.compact==='true');
+   await view.getByRole('button',{name:'Список'}).click();
+   assert.equal(await view.getByRole('button',{name:'Список'}).getAttribute('aria-pressed'),'true');
+   await page.getByRole('button',{name:'Тестовые фильтры'}).click();
+   await page.waitForFunction(()=>document.querySelector('.ac-dealer-catalog-toolbar .ac-catalog-view-toggle')?.dataset.compact==='false');
+  }
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer layout fits viewport');
   await page.setViewportSize({width:width>=1024?390:1440,height:1050});
   assert.equal(await page.getByRole('textbox',{name:'Марка автомобиля'}).inputValue(),'Honda','responsive layout preserves filter input');

@@ -1,6 +1,9 @@
 import {Suspense} from 'react';
 import {CatalogResultCountUpdate} from './CatalogSelectionContext';
 import {MarketResultCount} from './MarketResultCount';
+import {CatalogBreadcrumbs} from './CatalogBreadcrumbs';
+import {CatalogCountLabel} from './CatalogCountLabel';
+import type {DealerBrowsingContext} from '@/lib/dealers/browsing-context';
 import {CatalogSidebar} from './CatalogSidebar';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {PublicHeader} from '@/components/layout/PublicHeader';
@@ -15,7 +18,7 @@ import {AjesInputError} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
-export async function AjesCatalog({params,embedded=false}:{params:Params;embedded?:boolean}){
+export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));const market=initial.market==='china'?'china':initial.market==='korea'?'korea':'japan';const label=market==='china'?'Китай':market==='korea'?'Корея':'Япония';initial.market=market;if(market!=='japan')initial.source='ajes';if(!initial.make&&initial.brand)initial.make=initial.brand;
  let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
  // The independent streamed count below starts after the visible page. Two
@@ -32,13 +35,19 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
  {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
  <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
- <CatalogSidebar resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<>
+ <CatalogSidebar dealerLayout={embedded} resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<div className={embedded?"ac-dealer-catalog-title":"contents"}>
 
 
- <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>
+ <nav aria-label="Хлебные крошки" className={`ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)] ${embedded&&dealer?"md:hidden":""}`}><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>
+ {embedded&&dealer&&<CatalogBreadcrumbs className="hidden md:flex" items={[{label:"Главная",href:"/"},{label:dealer.name,href:dealer.href},{label,href:"/cars"}]}/>}
+ <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":"Каталог автомобилей"}</h1>
-
- </>}>
+ {embedded&&<p className="ac-catalog-result-count hidden md:flex items-center gap-2 text-[var(--ac-muted)]" role="status">
+  <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span/></span>
+  <CatalogCountLabel total={displayTotal??0} countIncomplete={displayTotal===undefined}/>
+ </p>}
+ </div>
+ </div>}>
  <Suspense fallback={<BrandLogoRail initial={initial} brands={makes.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={displayTotal??undefined}/>}>
   <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
  </Suspense>
