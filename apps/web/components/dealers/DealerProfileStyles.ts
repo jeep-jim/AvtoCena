@@ -124,7 +124,8 @@ body:has(.ac-dealer-public-page) .ac-public-footer-navigation{border-top:1px sol
 body:has(.ac-dealer-public-page) .ac-public-footer-tools{max-width:none}
 @media(max-width:1023px){
  body:has(.ac-dealer-public-page) .ac-public-legal-footer .ac-public-footer-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
- body:has(.ac-dealer-public-page) .ac-footer-dealer-home{grid-column:2;justify-self:end;max-width:100%}
+ body:has(.ac-dealer-public-page) .ac-public-footer-tools>.ac-footer-autobot{grid-column:auto;order:0}
+ body:has(.ac-dealer-public-page) .ac-footer-dealer-home{grid-column:1/-1}
  .ac-dealer-public-page .dealer-profile-footer>.dealer-requisites{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
  .ac-dealer-public-page .dealer-profile-footer dl{justify-self:end;max-width:100%}
 }

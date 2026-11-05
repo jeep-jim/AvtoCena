@@ -7,6 +7,7 @@ import { PageQrButton } from "../sharing/PageQrButton";
 import { isPublicPagePath } from "../../lib/public-page-url";
 import { TOPAVTO_DEALER } from "@/lib/topavto-dealer";
 import Link from "next/link";
+import { Bot } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CatalogFooterStop } from "./CatalogFooterStop";
@@ -77,7 +78,12 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
 
             <div aria-label="Инструменты АвтоЦены" className="ac-public-footer-tools mt-4 grid grid-cols-2 gap-2 [&>button]:justify-center [&>button]:rounded-xl [&>button]:border [&>button]:border-[var(--ac-border)] [&>button]:px-2 [&>button]:whitespace-nowrap [&>button]:text-xs sm:[&>button]:text-sm [&>button:hover]:bg-[var(--ac-surface-2)]">
               <PageQrButton key={pathname} />
-              {!/^\/(crm|partner|login|account)(\/|$)/.test(pathname||'')&&<button type="button" className="ac-footer-autobot min-h-11" aria-label="Открыть АвтоБота" aria-haspopup="dialog" onClick={()=>window.dispatchEvent(new Event('autobot-open'))}>АвтоБот</button>}
+              {!/^\/(crm|partner|login|account)(\/|$)/.test(pathname||'') && (
+                <button type="button" className="ac-footer-autobot min-h-11 gap-2" aria-label="Открыть АвтоБота" aria-haspopup="dialog" onClick={() => window.dispatchEvent(new Event('autobot-open'))}>
+                  <Bot size={18} className="shrink-0" aria-hidden="true" />
+                  АвтоБот
+                </button>
+              )}
               <span className="ac-footer-global-calculator"><AutoCalcButton /></span>
               <Link href="/" className="ac-footer-dealer-home"><BrandMarkMono/><span><span className="ac-footer-dealer-attribution">Работает на АвтоЦене</span><span className="ac-footer-dealer-label">АвтоЦена</span></span></Link>
             </div>
@@ -108,7 +114,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
           <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Настройки cookie</button>
-            <Link href="/privacy" className="ac-public-legal-link font-bold underline underline-offset-4">Политика конфиденциальности</Link>
+            <Link href="/privacy" className="ac-public-legal-link font-bold">Политика конфиденциальности</Link>
             <Link href="/terms" className="ac-public-legal-link">Правила использования сервиса</Link>
             <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
             <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
@@ -117,6 +123,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
       </footer>
 
       <style>{`
+.ac-public-legal-footer-line .ac-public-legal-link{text-decoration:underline;text-underline-offset:4px}
 .ac-public-footer-tools>.ac-footer-autobot{grid-column:1/-1;order:1;display:flex;align-items:center;justify-content:center;min-height:44px;color:var(--ac-text);font-weight:700}
 .ac-footer-global-calculator{display:contents}.ac-footer-global-calculator>button{justify-content:center;border:1px solid var(--ac-border);border-radius:12px;padding:0 8px;white-space:nowrap;font-size:12px}.ac-footer-global-calculator>button:hover{background:var(--ac-surface-2)}@media(min-width:640px){.ac-footer-global-calculator>button{font-size:14px}}.ac-footer-dealer-home{display:none!important}
 body:has([data-dealer-context]) .ac-footer-global-calculator,body:has(.dealer-profile) .ac-footer-global-calculator{display:none!important}
