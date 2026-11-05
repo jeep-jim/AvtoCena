@@ -23,7 +23,7 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  assert.equal(await page.locator('.ac-public-footer-operator').isVisible(),false);assert.equal(await page.getByRole('navigation',{name:'По странам'}).isVisible(),false);assert.equal(await page.getByRole('button',{name:'QR страницы',exact:true}).count(),1);
  assert.equal(await page.locator('.dealer-profile a[href^="tel:"]').count(),0);
  assert.equal(await page.locator('.dealer-profile').getByText('+79991234567').count(),0);
- assert.equal(await page.locator('.dealer-dock-request').textContent(),'Заявка');
+ assert.equal(await page.locator('.dealer-dock .dealer-dock-request').textContent(),'Заявка');
  const dock=page.locator('.dealer-dock');assert.equal(await dock.locator('button,a').count(),5);
  if(width<768){
   assert.equal(await dock.isVisible(),true);

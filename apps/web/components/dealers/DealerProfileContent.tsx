@@ -1,5 +1,6 @@
 "use client";
 import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
+import {CatalogBreadcrumbs} from '@/components/catalog/CatalogBreadcrumbs';
 import {DealerSelectionShare} from "./DealerSelectionShare";
 import {CITY_CHANGED_EVENT} from "@/lib/location/selected-city";
 import {DealerReviewCard} from './DealerReviewCard';
@@ -66,6 +67,13 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   setTab(editorSection==='buyers'?'photos':['offices','requisites','markets'].includes(editorSection)?'about':'cars');
   if(['overview','profile'].includes(editorSection)&&top.current?.ownerDocument!==document){const win=top.current?.ownerDocument.defaultView;win?.scrollTo({top:0,behavior:'instant'});}
  },[editorSection]);
+ const sectionButtons=<>
+  <button type="button" aria-pressed={tab==='cars'||tab==='specials'} onClick={()=>section('cars')}><Icon name="cars"/><span>Каталог</span></button>
+  <button type="button" aria-pressed={tab==='photos'} onClick={()=>section('photos')}><Icon name="photos"/><span>Медиа</span></button>
+  <button type="button" aria-pressed={tab==='about'} onClick={()=>section('about')}><Icon name="pin"/><span>Адреса</span></button>
+  <button type="button" aria-pressed={tab==='reviews'} onClick={()=>section('reviews')}><Star size={22}/><span>Отзывы</span></button>
+  <button type="button" className="dealer-dock-request" onClick={()=>setLeadOpen(true)}><Icon name="message"/><span>Заявка</span></button>
+ </>;
  const logo=<>{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt={`Логотип ${s.name}`} className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt={`Логотип ${s.name}`} className="dealer-logo-dark"/></>:<img className="dealer-default-logo" src="/logo/avtocena-mark-dark.svg" alt="АвтоЦена"/>}</>;
  return <div ref={top} className={`dealer-profile ${catalog&&s.catalogMarkets.length?"dealer-profile--with-catalog":""} mx-auto w-full max-w-[1500px] px-4 md:px-8 ${catalogOnly?"dealer-profile--catalog-only":""}`} onClickCapture={editorSection?e=>{if((e.target as HTMLElement).closest('a'))e.preventDefault();}:undefined}>
   <div className="dealer-profile-home-banner"><DealerBannerGallery s={s}/></div>
@@ -82,6 +90,8 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   </section>
   <div className="dealer-profile-actions"><button type="button" onClick={()=>void share()}><Icon name="share"/><span>Поделиться</span></button><DealerSubscriptionButton s={s} preview={!!editorSection}/></div>{shareStatus&&<p className="dealer-action-status" role="status">{shareStatus}</p>}
 
+  <nav className="dealer-section-links" aria-label="Разделы дилера">{sectionButtons}</nav>
+  {!catalog&&<CatalogBreadcrumbs className="hidden md:flex" items={[{label:"Главная",href:"/"},{label:s.name,href:`/dealers/${encodeURIComponent(s.dealerId)}`}]}/>}
   <div className="dealer-profile-body"><section ref={body} className="dealer-tab-content" aria-label={tab==='cars'?'Каталог АвтоЦены':tab==='specials'?'Предложения дилера':tab==='photos'?'Фотографии компании':tab==='reviews'?'Отзывы о дилере':'Контакты компании'}>
    <div>
     {photos.length>0&&<div className="dealer-stories"><BuyerGallery title="Наши фото и Автовыдачи" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}
@@ -92,7 +102,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   <footer className="dealer-profile-footer"><DealerRequisites value={s.requisites}/></footer>
   </div>
   {canShareSelection&&!preview&&!editorSection&&<DealerSelectionShare dealerId={s.dealerId} initialQuery={initialSelectionQuery}/>}
-  <nav className="dealer-dock" aria-label="Быстрое меню дилера"><button type="button" aria-pressed={tab==='cars'||tab==='specials'} onClick={()=>section('cars')}><Icon name="cars"/><span>Каталог</span></button><button type="button" aria-pressed={tab==='photos'} onClick={()=>section('photos')}><Icon name="photos"/><span>Медиа</span></button><button type="button" aria-pressed={tab==='about'} onClick={()=>section('about')}><Icon name="pin"/><span>Адреса</span></button><button type="button" aria-pressed={tab==='reviews'} onClick={()=>section('reviews')}><Star size={22}/><span>Отзывы</span></button><button type="button" className="dealer-dock-request" onClick={()=>setLeadOpen(true)}><Icon name="message"/><span>Заявка</span></button></nav>
+  <nav className="dealer-dock" aria-label="Быстрое меню дилера">{sectionButtons}</nav>
   {['photos','about','reviews'].includes(tab)&&<PublicSheet title={tab==='photos'?'Медиа':tab==='about'?'Адреса':'Отзывы'} onClose={()=>setTab('cars')} ownerDocument={top.current?.ownerDocument}><div className="dealer-profile dealer-drawer-content">   {tab==='reviews'&&<section className="dealer-reviews-panel"><header><div><p className="dealer-eyebrow">Рейтинг компании</p><h2>Отзывы о {s.name}</h2></div><div className="dealer-rating-summary"><RatingIcon/><strong>{reviews.rating??'—'}</strong><span>{reviews.count?`Отзывов: ${reviews.count}`:"Оценок пока нет"}</span></div></header><article className="dealer-welcome-review"><div className="dealer-welcome-heading"><span className="dealer-welcome-logo">{logo}</span><div><strong>{s.name}</strong><span>Сообщение компании</span></div>{verified&&<BadgeCheck size={22}/>}</div><h3>Здравствуйте!</h3><p>Спасибо, что выбираете нас! Нам важно ваше мнение. Расскажите о своём опыте — ваш отзыв поможет другим клиентам выбрать компанию, а нам — улучшить работу.</p></article><div>{reviews.items.map(r=><DealerReviewCard key={r.id} review={r} dealerId={s.dealerId} dealerName={s.name} canReply={canReplyReviews} canDelete={canModerateReviews} onChanged={()=>{fetch(`/api/dealers/${encodeURIComponent(s.dealerId)}/reviews`,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(setReviews).catch(()=>{});}}/>)}</div><div className="dealer-review-eligibility"><div aria-hidden="true">{[1,2,3,4,5].map(n=><Star key={n}/>)}</div><p>Оценку и отзыв можно оставить после подтверждения подписанного договора.</p><a href="/account">Перейти в личный кабинет →</a></div></section>}
    {tab==='about'&&<section className="dealer-sheet dealer-contact-sheet">
     <button type="button" className="dealer-contact-details" onClick={openOffice}>Информация о компании <ArrowUpRight size={16}/></button>

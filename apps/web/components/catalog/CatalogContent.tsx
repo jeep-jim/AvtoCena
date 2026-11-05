@@ -82,7 +82,7 @@ export async function CatalogContent(props:CatalogContentProps){
    {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:'{}'}}/>
    <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
-    <CatalogSidebar resultScope={catalogResultScope(params,dealer)} resultError="Выбранные условия сохранены. Попробуйте обновить подборку."
+    <CatalogSidebar dealerLayout={embedded} resultScope={catalogResultScope(params,dealer)} resultError="Выбранные условия сохранены. Попробуйте обновить подборку."
      header={<h1 className="text-3xl font-black">Каталог автомобилей</h1>} filters={<CatalogFilters initial={initial}/>}>{null}</CatalogSidebar>
    </section>
   </Container>;
@@ -97,7 +97,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
   const allowedMarkets=dealer?marketOrder.filter(m=>dealer.markets.includes(m.id)):marketOrder;
   if(dealer&&!allowedMarkets.length)return <p className="py-10 text-[var(--ac-muted)]">Компания пока не указала направления доставки.</p>;
-  if ((!dealer||dealer.markets.includes(first(params.market) as any)) && await usesAjesMarket(first(params.market),first(params.source))) return <AjesCatalog params={params} embedded={embedded}/>;
+  if ((!dealer||dealer.markets.includes(first(params.market) as any)) && await usesAjesMarket(first(params.market),first(params.source))) return <AjesCatalog params={params} embedded={embedded} dealer={dealer}/>;
   const requestedMarkets = filterSelections(first(params.market).toLowerCase());
   const requestedMarket = requestedMarkets.length===1 && requestedMarkets[0]!=="green" ? requestedMarkets[0] : "";
   const selectedMarkets=requestedMarkets.filter(m=>m==="green"?(!dealer||dealer.markets.includes("japan")):allowedMarkets.some(a=>a.id===m));
@@ -229,24 +229,30 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     })),
   }).replace(/</g, "\\u003c");
 
+  const countLabel=<p className={`ac-catalog-result-count mt-3 items-center gap-2 text-sm text-[var(--ac-muted)] ${embedded&&selectedMarket?"hidden md:flex":"flex"}`} role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={countIncomplete?undefined:total}>
+        <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span>
+        <Suspense fallback={<CatalogCountLabel total={total} countIncomplete={countIncomplete}/>}><ResolvedCatalogCount summary={countSummary}/></Suspense>
+      </p>;
+
   const Container=embedded?"div":"main";
   return <Container className={`ac-catalog-page ac-page-copy ${embedded?"dealer-shared-catalog":"min-h-screen bg-[#0f172a] text-white"}`}>
     {!embedded&&<PublicHeader backHref="/" backLabel="На главную" />}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
     <section className={embedded?"ac-catalog-shell w-full py-5":"ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10"}>
-      <CatalogSidebar resultScope={catalogResultScope(params,dealer)} filters={<CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />} header={<>
-      <div className="max-w-4xl">
+      <CatalogSidebar dealerLayout={embedded} resultScope={catalogResultScope(params,dealer)} filters={<CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />} header={<>
+      <div className={embedded?"ac-dealer-catalog-title":"max-w-4xl"}>
         {selectedMarket === "japan" ? <JapanSectionTabs active={japanAll ? "all" : "auction"} params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))} /> : null}
-        <CatalogBreadcrumbs items={breadcrumbItems}/>
+        <CatalogBreadcrumbs items={breadcrumbItems} className={embedded&&dealer?"flex md:hidden":undefined}/>
+        {embedded&&dealer&&<CatalogBreadcrumbs className="hidden md:flex" items={[breadcrumbItems[0],{label:dealer.name,href:dealer.href},...breadcrumbItems.slice(2)]}/>}
+        <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
-        <div className="lg:hidden"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
+        <div className={embedded?"md:hidden":"lg:hidden"}><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
+          {embedded&&!japanStatisticsSelected&&countLabel}
+        </div>
       </div>
-      {!selectedMarket&&<p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={countIncomplete?undefined:total}>
-        <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span>
-        <Suspense fallback={<CatalogCountLabel total={total} countIncomplete={countIncomplete}/>}><ResolvedCatalogCount summary={countSummary}/></Suspense>
-      </p>}
+      {!embedded&&!selectedMarket&&countLabel}
       </>}>
-      <div className="hidden lg:block"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
+      <div className={embedded?"hidden md:block":"hidden lg:block"}><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
       <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.total}>{formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
 {showGreen&&!markets.some(m=>m.id==="japan")&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)}/>}
 {!selectedMarket&&<Suspense fallback={null}><CatalogEmptyResults localTotal={localTotal} reads={[...railReads.values()]}/></Suspense>}
