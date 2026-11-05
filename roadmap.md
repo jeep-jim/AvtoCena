@@ -21780,3 +21780,10 @@ IN_PROGRESS1: existing storagecleanup42024259045/127234388459, metadata only, fi
 Единственный bounded health19:08 завершился curl exit0:ok=true,exacta1a3ec8ce6475f7da0c89e0e6545b96a121f9442,same calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. PR1705 остаётся установленным; НЕ1706/1707/auth Save. China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed, все НЕ READ,causeunknown, без retry.
 
 Исторические failures/performanceAccepted=false сохранены. Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Next saved primary1706/1707 release-time acceptance и отдельные адресные analyses. Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+
+## 05.11.2026 — Япония до 160 л.с.: длина запроса поставщику
+
+На публичном API market=japan&powerTo=160&countOnly=1 подтверждён HTTP503 reason=query_too_large (клиент преобразует HTTP414 поставщика). Список ответил HTTP200 только с partial=true/stale=true и неизвестным count, что не является исправной полной выдачей. Запрос powerTo=160 до изменения занимал 8489 символов URLSearchParams(sql), без остальных параметров.
+
+Для японских powerFrom/powerTo включён уже существующий компактный эквивалент исключения грузовиков, ранее применяемый для drive. После изменения список 3184, count3145 символов. Сохранены правила STEP WGN150, ограничения мощности, порядок/пагинация и прочие рынки. Добавлена регрессия размера для main/stats, списков/счётчиков и обеих границ мощности. 88 адресных тестов PASS, включая SQL-эквивалентность всех грузовых семейств и границ названий; TypeScript PASS. Публикация и проверка исправления на живом поставщике пока не подтверждены.
