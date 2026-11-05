@@ -3200,3 +3200,15 @@ IN_PROGRESS0/current PENDING0, новых запусков после преды
 Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Next saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Исторические failures/performanceAccepted=false и прежние адресные analyses сохранены.
 
 Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+## Сверка 06.11.2026 00:16 Красноярск — без новых результатов приёмки
+
+Свежие main85e38444eb3df4a5cabb55aa6996c86584be6763 и обе истории прочитаны. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations unchanged. PR1708 OPEN/7c35c4c19cdb17021ae8f1f81cc97dc3f92680cd, PR1707 OPEN/80e2b2669b0dd52347edb6ef3d4215ebae27f8db и PR1706 OPEN/e6e51e7d6452fb5eb22f1ddd7fb5ceab5e50c941 unchanged; PR1706 headruns0. Новых PR/primary Road/acceptance нет; READ/PRIMARYREAD журналы не повторялись.
+
+IN_PROGRESS0/current PENDING0, новых запусков после предыдущей сверки и app deploy/market continuation нет. Старые global queued38994950593/38994894574/38994824794/31164670128 не новые app deploy. REGsize42035683400/127273086608 SUCCESS20:33:15 unchanged metadata only; лог НЕ READ, capacitywatch не дублируется.
+
+Единственный bounded health00:15 завершился curl exit0:ok=true,exacta1a3ec8ce6475f7da0c89e0e6545b96a121f9442,same calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. PR1705 установлен; установка1706/1707/1708, live Japan acceptance и authenticated editor Save не подтверждены. China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed; все НЕ READ/causeunknown, без retry.
+
+Новых saved primary auth Save/native permission/real delivery, Direct binding/filter, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation/Korea binding analyses нет. Next saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Исторические failures/performanceAccepted=false и прежние адресные analyses сохранены.
+
+Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/rerun/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
