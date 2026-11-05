@@ -115,6 +115,9 @@ html[data-theme=light] .dealer-identity-row>.dealer-avatar-centered{border-color
 html[data-theme] body .dealer-profile-actions>button{background:#00a5dc;color:#fff;-webkit-text-fill-color:#fff}
 html[data-theme] body .dealer-subscription-control>button,html[data-theme] body .dealer-subscription-control>button[aria-pressed=true]{background:#ed3d5318;color:#ed233a;-webkit-text-fill-color:#ed233a}
 .dealer-subscription-control strong{background:transparent}
+.dealer-subscription-control>button>svg{width:20px;height:20px;flex:0 0 20px}
+.dealer-subscription-control>button{white-space:nowrap;gap:8px;padding:10px 12px}
+.dealer-subscription-control strong{min-width:0;padding:2px 0}
 .dealer-profile .dealer-intro,.dealer-profile .dealer-expand{transition:none!important;animation:none!important;touch-action:manipulation}
 /* Shared mobile and desktop dealer identity/footer. */
 .ac-dealer-public-page .dealer-profile-identity:before{background:linear-gradient(to bottom,color-mix(in srgb,var(--ac-surface) 58%,transparent),var(--ac-surface) 100px);-webkit-backdrop-filter:blur(18px) saturate(130%);backdrop-filter:blur(18px) saturate(130%)}
@@ -199,12 +202,12 @@ body:has(.ac-dealer-public-page) .ac-public-footer-tools{max-width:none}
 
 .dealer-section-links{display:none}
 @media(min-width:768px){
- .ac-dealer-public-page .dealer-cover{aspect-ratio:3/1}
+ .dealer-profile .dealer-cover{height:auto;aspect-ratio:3/1}
  .ac-dealer-public-page .dealer-profile-actions{
   position:absolute;inset:20px 20px auto;display:flex;justify-content:space-between;
   max-width:none;margin:0;z-index:3;pointer-events:none
  }
- .ac-dealer-public-page .dealer-profile-actions>*{width:clamp(125px,14vw,158px);pointer-events:auto}
+ .ac-dealer-public-page .dealer-profile-actions>*{width:158px;pointer-events:auto}
  .ac-dealer-public-page .dealer-profile-metrics{max-width: min(620px,calc(100% - 300px))}
  .ac-dealer-public-page .dealer-section-links{
   display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:12px 0 22px
