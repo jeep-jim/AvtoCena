@@ -15,9 +15,12 @@ test("invalid counts are not silently shown as zero", () => {
 test("counter renders once in the sidebar header outside mobile-hidden wrappers", () => {
   const source = readFileSync("apps/web/components/catalog/CatalogContent.tsx","utf8");
   assert.equal((source.match(/data-catalog-result-count=/g)||[]).length,1);
-  assert.match(source,/<\/div>\s*\{!selectedMarket&&<p className="ac-catalog-result-count/);
-  const counter = source.slice(source.indexOf('<p className="ac-catalog-result-count'),source.indexOf('</p>',source.indexOf('<p className="ac-catalog-result-count')));
-  assert.ok(!/\bhidden\b|lg:block|display:\s*none/.test(counter.replace('aria-hidden="true"','')));
+  assert.match(source,/\{!embedded&&!selectedMarket&&countLabel\}/);
+  assert.match(source,/\{embedded&&!japanStatisticsSelected&&countLabel\}/);
+  const start = source.indexOf('const countLabel=<p');
+  assert.ok(start >= 0);
+  const counter = source.slice(start,source.indexOf('</p>',start));
+  assert.match(counter,/embedded&&selectedMarket\?"hidden md:flex":"flex"/);
   assert.match(counter,/ac-pulse-dot ac-pulse-dot--status/);
   assert.match(counter,/role="status"/);
   assert.match(counter,/ResolvedCatalogCount summary=\{countSummary\}/);
