@@ -1,6 +1,5 @@
 "use client";
 import {PUBLIC_HEADER_LAYOUT_EVENT} from '@/components/layout/public-header-layout';
-import {CatalogBreadcrumbs} from '@/components/catalog/CatalogBreadcrumbs';
 import {DealerSelectionShare} from "./DealerSelectionShare";
 import {CITY_CHANGED_EVENT} from "@/lib/location/selected-city";
 import {DealerReviewCard} from './DealerReviewCard';
@@ -91,7 +90,6 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   <div className="dealer-profile-actions"><button type="button" onClick={()=>void share()}><Icon name="share"/><span>Поделиться</span></button><DealerSubscriptionButton s={s} preview={!!editorSection}/></div>{shareStatus&&<p className="dealer-action-status" role="status">{shareStatus}</p>}
 
   <nav className="dealer-section-links" aria-label="Разделы дилера">{sectionButtons}</nav>
-  {!catalog&&<CatalogBreadcrumbs className="hidden md:flex" items={[{label:"Главная",href:"/"},{label:s.name,href:`/dealers/${encodeURIComponent(s.dealerId)}`}]}/>}
   <div className="dealer-profile-body"><section ref={body} className="dealer-tab-content" aria-label={tab==='cars'?'Каталог АвтоЦены':tab==='specials'?'Предложения дилера':tab==='photos'?'Фотографии компании':tab==='reviews'?'Отзывы о дилере':'Контакты компании'}>
    <div>
     {photos.length>0&&<div className="dealer-stories"><BuyerGallery title="Наши фото и Автовыдачи" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}

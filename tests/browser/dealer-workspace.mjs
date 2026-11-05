@@ -115,6 +115,8 @@ const browser = await chromium.launch({
 try{
  for(const width of [390,820,1024,1440,1920])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});
+  let subscribed=false;
+  await page.route('**/api/dealers/*/subscription',route=>{if(route.request().method()==='PUT')subscribed=route.request().postDataJSON().subscribed;return route.fulfill({json:{subscribed,count:subscribed?1:0}});});
   await page.goto(origin+'?view=profile&sidebar=1');
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.getByRole('textbox',{name:'Марка автомобиля'}).fill('Honda');
@@ -135,6 +137,15 @@ try{
    assert.ok(Math.abs(sidebar.y-banner.y)<2,`filters start at banner top: ${JSON.stringify({sidebar,banner})}`);
    assert.ok(Math.abs(identity.x-banner.x)<2&&Math.abs(results.x-banner.x)<2,'dealer content shares the right column');
   }else assert.ok(sidebar.y>identity.y+identity.height,'mobile filters remain below dealer identity');
+  const favoriteButton=page.locator('.dealer-subscription-control>button');
+  await favoriteButton.waitFor({state:'visible'});
+  await page.waitForFunction(()=>!document.querySelector('.dealer-subscription-control>button').disabled);
+  for(const active of [false,true]){
+   assert.equal(await favoriteButton.getAttribute('aria-pressed'),String(active));
+   const star=await favoriteButton.locator('svg').boundingBox();
+   assert.equal(Math.round(star.width),20,'favorite star retains its full width in both states');
+   if(!active){await favoriteButton.click();await page.waitForFunction(()=>document.querySelector('.dealer-subscription-control>button').getAttribute('aria-pressed')==='true');}
+  }
   const sections=page.locator('.dealer-section-links');
   const view=page.locator('.ac-dealer-catalog-toolbar .ac-catalog-view-toggle');
   assert.equal(await sections.isVisible(),width>=768);
@@ -149,6 +160,19 @@ try{
    assert.equal(await view.getAttribute('data-compact'),'false');
    await page.getByRole('button',{name:'Тестовые фильтры'}).click();
    await page.waitForFunction(()=>document.querySelector('.ac-dealer-catalog-toolbar .ac-catalog-view-toggle')?.dataset.compact==='true');
+   const toolbar=page.locator('.ac-dealer-catalog-toolbar');
+   const toolbarTop=await toolbar.evaluate(el=>parseFloat(getComputedStyle(el).top));
+   const bannerImage=await page.locator('.dealer-profile-home-banner .dealer-cover').boundingBox();
+   assert.ok(Math.abs(bannerImage.width/bannerImage.height-3)<.02,'dealer banner uses the taller 3:1 frame');
+   const beforeScroll=await toolbar.boundingBox();
+   await page.evaluate(y=>scrollTo(0,y),beforeScroll.y+200);
+   const floating=await toolbar.boundingBox();
+   assert.ok(Math.abs(floating.y-toolbarTop)<2,'selected filters stick below the header');
+   await page.evaluate(()=>scrollBy(0,400));
+   assert.ok(Math.abs((await toolbar.boundingBox()).y-toolbarTop)<2,'toolbar stays attached deeper in the catalog');
+   const toggleBox=await view.boundingBox();
+   assert.ok(Math.abs(toggleBox.x+toggleBox.width-floating.x-floating.width)<2,'view controls remain on the right');
+   await page.evaluate(()=>scrollTo(0,0));
    await view.getByRole('button',{name:'Список'}).click();
    assert.equal(await view.getByRole('button',{name:'Список'}).getAttribute('aria-pressed'),'true');
    await page.getByRole('button',{name:'Тестовые фильтры'}).click();

@@ -242,8 +242,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
       <CatalogSidebar dealerLayout={embedded} resultScope={catalogResultScope(params,dealer)} filters={<CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />} header={<>
       <div className={embedded?"ac-dealer-catalog-title":"max-w-4xl"}>
         {selectedMarket === "japan" ? <JapanSectionTabs active={japanAll ? "all" : "auction"} params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))} /> : null}
-        <CatalogBreadcrumbs items={breadcrumbItems} className={embedded&&dealer?"flex md:hidden":undefined}/>
-        {embedded&&dealer&&<CatalogBreadcrumbs className="hidden md:flex" items={[breadcrumbItems[0],{label:dealer.name,href:dealer.href},...breadcrumbItems.slice(2)]}/>}
+        {!embedded&&<CatalogBreadcrumbs items={breadcrumbItems}/>}
         <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
         <div className={embedded?"md:hidden":"lg:hidden"}><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>

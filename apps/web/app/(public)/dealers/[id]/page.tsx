@@ -28,7 +28,13 @@ export async function generateMetadata({
       title: "Дилер — АвтоЦена",
       robots: { index: false, follow: false },
     };
+  const logo=s.logoLight||s.logoDark;
+  const description=publicDealerProfile(s).description.slice(0,200);
+  const url=dealerProfilePath(s);
   return {
+    ...(logo?{icons:{icon:[{url:logo}],apple:[{url:logo}]}}:{}),
+    openGraph:{title:s.name,description,url,siteName:s.name,type:"website",...(logo?{images:[{url:logo,alt:s.name}]}:{})},
+    twitter:{card:"summary",title:s.name,description,...(logo?{images:[logo]}:{})},
     title: `${s.name} — дилер на АвтоЦена`,
     description: publicDealerProfile(s).description.slice(0, 200),
     alternates: { canonical: dealerProfilePath(s) },
