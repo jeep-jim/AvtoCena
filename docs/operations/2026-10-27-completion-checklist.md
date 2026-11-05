@@ -3118,3 +3118,15 @@ IN_PROGRESS0/PENDING0; активного app deploy/market continuation нет.
 China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed, все НЕ READ/causeunknown. Все3 новых final logs выше READ,artifacts НЕ viewed. Новых saved primary auth Save/native permission/real delivery, Direct inputs/binding/filter, Georgia partial-source-retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline, translation authorization/Korea binding analyses нет. Next saved primary PR1706 CI/release-time acceptance и отдельные адресные analyses; без watch rerun/repair/provider/browser.
 
 Owner freeze/принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards и не дублировал capacitywatch. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+## Сверка 05.11.2026 18:03 Красноярск — без новых release/acceptance результатов
+
+Свежие main e2930420627892aaeb73eec72aecba05176f2718 и обе истории прочитаны. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations unchanged. PR1706 остаётся OPEN на e6e51e7d6452fb5eb22f1ddd7fb5ceab5e50c941; head workflow runs отсутствуют, новых PR после1706 нет. Ранее прочитанная branch Road6d1741f1 unchanged по тому же head; новая CI/установка/Windows share acceptance не подтверждены.
+
+IN_PROGRESS0/PENDING0; app deploy/market continuation не обнаружено. PR1705 остаётся установленным; все предыдущие final READ/PRIMARYREAD журналы не повторялись. Новые CRMretry42005978831/deliver127172704615 SUCCESS16:53:18/metrika127172705550 SUCCESS16:53:09 и CRMtrash42003489527/cleanup127164329951 SUCCESS16:35:11 — metadata only; логи не читались, не доказательство доставки/очистки/изменения данных. Capacitywatch не дублируется.
+
+Единственный bounded health18:02–18:03 завершился curl exit0:ok=true,exact a1a3ec8ce6475f7da0c89e0e6545b96a121f9442,same calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357. Это не PR1706 и не authenticated editor Save. China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed; все НЕ READ,causeunknown, retry не выполнялся.
+
+Новых saved primary auth Save/native permission/real delivery, Direct inputs/binding/filter, Georgia partial-source-retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier request/deadline, translation authorization/Korea binding analyses нет. Исторические failures и performanceAccepted=false не закрыты поздними успехами. Next saved primary PR1706 CI/release-time acceptance и отдельные адресные analyses; без watch browser/provider/rerun/repair.
+
+Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
