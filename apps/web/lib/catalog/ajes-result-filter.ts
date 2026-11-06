@@ -26,9 +26,10 @@ export function ajesResultFilter(params:Record<string,unknown>){
   if(!matchesCatalogColor(offer,scalar(params.color)))return false;
   if(powerFilter){
    const displayed=offerWithSavedPreview(offer);
-   const exact=Number(displayed.powerHp);
-   const values=Number.isFinite(exact)&&exact>0?[exact]:ajesPowerFilterValues(displayed);
-   if(!values.length||values.some(hp=>(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo)))return false;
+   const exact=isOwnerStepwgnNonHybrid(displayed)?150:Number(displayed.powerHp);
+   // Supplier PW is not a vehicle specification. Only the locally enriched,
+   // trusted encyclopedia value (or the explicit owner override) can qualify.
+   if(!Number.isFinite(exact)||exact<=0||(powerFrom!==undefined&&exact<powerFrom)||(powerTo!==undefined&&exact>powerTo))return false;
   }
   if(!matchesFilterSelection(catalogBodyType(offer),body))return false;
   if(!priceFilter)return true;
