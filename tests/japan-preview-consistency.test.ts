@@ -10,24 +10,24 @@ test('screenshot Every, Alto and Fielder regain editable previews without assert
   const result=applyJapanFactoryFuel(input);
   assert.equal(result.fuel,'petrol');assert.equal(result.powerHp,undefined);
   assert.equal(japanPreviewParameters(result).fuel,'petrol');
-  assert.equal(japanPreviewParameters(result).powerHp,Number(power.split(',')[0]));
+  assert.equal(japanPreviewParameters(result).powerHp,undefined);
  }
  for(const [make,model,chassis] of [['SUZUKI','ALTO','HA97S'],['SUZUKI','EVERY','DA64V'],['TOYOTA','COROLLA FIELDER','NKE165G']]){
   const input={...raw,make,model,engineCc:660,operational:{chassisCode:chassis,raw:{sourceFuel:''}}};assert.equal(applyJapanFactoryFuel(input),input);
  }
 });
-test('same factory fuel and reported power reach card DTO and editable preview without becoming exact hp',()=>{
+test('factory fuel reaches card DTO while supplier horsepower remains non-authoritative',()=>{
  const offer=applyJapanFactoryFuel(raw);assert.equal(offer.fuel,'petrol');assert.equal(raw.fuel,undefined);assert.equal(offer.powerHp,undefined);
- const dto=publicOffer(offer);assert.equal(japanPowerEstimateLabel(dto),'90 л.с. · предварительно');assert.equal(ajesPowerEstimateHp(dto as any),90);assert.equal((dto as any).operational,undefined);
- assert.equal(japanPreviewParameters(offer).fuel,'petrol');assert.equal(japanPreviewParameters(offer).powerHp,90);
- assert.equal((dto as any).powerHp,undefined);assert.equal(japanPreviewParameters(dto as any).powerHp,90);
+ const dto=publicOffer(offer);assert.equal(japanPowerEstimateLabel(dto),'');assert.equal(ajesPowerEstimateHp(dto as any),undefined);assert.equal((dto as any).operational,undefined);
+ assert.equal(japanPreviewParameters(offer).fuel,'petrol');assert.equal(japanPreviewParameters(offer).powerHp,undefined);
+ assert.equal((dto as any).powerHp,undefined);assert.equal(japanPreviewParameters(dto as any).powerHp,undefined);
 });
 test('diesel and hybrids are not replaced by a blanket petrol default',()=>{
  const diesel=applyJapanFactoryFuel({...raw,make:'CITROEN',model:'BERLINGO',engineCc:1500,operational:{chassisCode:'K9CYH01',raw:{sourceFuel:''}}});assert.equal(diesel.fuel,'diesel');
  for(const patch of [{fuel:'diesel'},{powertrainKind:'other_hybrid'},{model:'UNKNOWN'},{engineCc:2000},{operational:{chassisCode:'AHH4B',raw:{sourceFuel:'H'}}},{operational:{chassisCode:'AHH4B',semanticEvidence:{fuel:{status:'conflict'}}}}]){const r={...raw,...patch};assert.equal(applyJapanFactoryFuel(r),r);}
 });
 test('ambiguous reported power stays labelled, bound to offer, and separate from certified power',()=>{
- const offer={...raw,operational:{...raw.operational,raw:{sourcePower:'54,64'}}};const e=compactJapanPowerEstimate(offer);const dto={id:raw.id,market:'japan',japanPowerEstimate:e};assert.equal(japanPowerEstimateLabel(dto),'54 / 64 л.с. · уточнить');assert.equal(ajesPowerEstimateHp(dto as any),54);assert.equal(japanPowerEstimateLabel({...dto,id:'ajes-stats-other'}),'');
+ const offer={...raw,operational:{...raw.operational,raw:{sourcePower:'54,64'}}};const e=compactJapanPowerEstimate(offer);const dto={id:raw.id,market:'japan',japanPowerEstimate:e};assert.equal(e,undefined);assert.equal(japanPowerEstimateLabel(dto),'');assert.equal(ajesPowerEstimateHp(dto as any),undefined);assert.equal(japanPowerEstimateLabel({...dto,id:'ajes-stats-other'}),'');
  assert.throws(()=>japanPreviewParameters({...offer,fuel:'hybrid',powertrainKind:'other_hybrid'} as any));
 });
 test('N-BOX and Clipper fuel follows exact chassis, without guessing turbo power',()=>{
@@ -49,8 +49,8 @@ test('reviewed Nissan and Passat fuel uses exact chassis and volume, not family 
 test('related Alto cards display the same reported power as their calculated preview',()=>{
  const offer:any={...raw,make:'SUZUKI',model:'ALTO',year:2023,engineCc:660,operational:{chassisCode:'3BA-HA37S',semanticEvidence:{engineCc:{status:'exact',value:660,source:'ajes:stats:example:ENG_V',rawValues:['660']}},raw:{sourcePower:'46',sourceFuel:''}}};
  const priced={...applyJapanFactoryFuel(offer),japanDeliveredPreview:{totalRub:509539,estimated:true}};
- assert.equal(japanPreviewParameters(priced).powerHp,46);
- assert.equal(japanPowerEstimateLabel(priced),'46 л.с. · предварительно');
+ assert.equal(japanPreviewParameters(priced).powerHp,undefined);
+ assert.equal(japanPowerEstimateLabel(priced),'');
  const dto=publicOffer(priced);
  assert.equal(japanPowerEstimateLabel(dto),japanPowerEstimateLabel(priced));
  assert.equal((dto as any).japanDeliveredPreview.totalRub,509539);
@@ -60,7 +60,7 @@ test('related Alto cards display the same reported power as their calculated pre
 });
 test('full offers retain ambiguous power labels and never invent missing power from a price',()=>{
  const offer={...raw,operational:{raw:{sourcePower:'49,64'}}};
- assert.equal(japanPowerEstimateLabel(offer),'49 / 64 л.с. · уточнить');
+ assert.equal(japanPowerEstimateLabel(offer),'');
  for(const power of ['', 'unknown','0','2501','46<script>']){
   assert.equal(japanPowerEstimateLabel({...raw,japanDeliveredPreview:{totalRub:500000},operational:{raw:{sourcePower:power}}}), '');
  }
