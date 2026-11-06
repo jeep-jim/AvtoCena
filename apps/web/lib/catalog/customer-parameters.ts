@@ -1,7 +1,7 @@
 import { parseEngineCc } from "./engine-input";
 import { normalizeDeliveryCity } from "./city-delivery";
 import type { VehicleOffer } from "./types";
-export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
+export function validateCustomerParameters(input: any, allowMissingPower = false): Partial<VehicleOffer> {
   const number = (name: string, min: number, max: number, integer = false) => {
     const n = typeof input?.[name] === "number" || typeof input?.[name] === "string" ? Number(input[name]) : NaN;
     if (!Number.isFinite(n) || n < min || n > max || (integer && !Number.isInteger(n))) throw new Error(`Проверьте поле ${name}`);
@@ -11,7 +11,7 @@ export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
   const year = number("year",1990,new Date().getUTCFullYear()+1,true);
   const fuel = input?.fuel;
   if (!["petrol","diesel","lpg","cng","electric","hybrid"].includes(fuel)) throw new Error("Укажите тип топлива");
-  const powerHp = input?.vehicleCategory === "N1" && (input.powerHp == null || input.powerHp === "") ? undefined : number("powerHp",1,2500);
+  const powerHp = (input?.vehicleCategory === "N1" || allowMissingPower) && (input.powerHp == null || input.powerHp === "") ? undefined : number("powerHp",1,2500);
   const powertrainKind = fuel === "electric" ? "electric" : fuel === "hybrid" ? input.hybridKind : "combustion";
   if (!["electric","combustion","series_hybrid","other_hybrid"].includes(powertrainKind)) throw new Error("Укажите тип гибрида");
   // Preserve explicit kW when another parameter changes. Never turn 118 kW into
