@@ -1,4 +1,3 @@
-import {stepwgnOwnerSql} from './japan-owner-specifications';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
