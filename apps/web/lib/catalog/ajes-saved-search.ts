@@ -65,7 +65,7 @@ export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string
    // Power is intentionally not decided from saved supplier PW here. The
    // caller enriches these candidate rows from the local encyclopedia and runs
    // the same final public filter as a fresh supplier response.
-   &&true;
+   ;
  });
  const unique=[...new Map(matches.map(saved=>[saved.items[0].id,saved])).values()];
  unique.sort((a,b)=>(input.sort==='totalRub'?a.items[0].sourcePrice-b.items[0].sourcePrice:input.sort==='totalRubDesc'?b.items[0].sourcePrice-a.items[0].sourcePrice:0)||String(b.items[0].id).localeCompare(String(a.items[0].id)));
