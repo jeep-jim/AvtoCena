@@ -37,12 +37,12 @@ export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary
  const resolved=await resolvedCatalogQuery(key);
  if(resolved.modelDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
  const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
- const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(q.table==='stats'&&filter.powerFilter){
   // Supplier COUNT cannot see verified horsepower added by our local encyclopedia.
   // Do not issue a misleading/expensive aggregate request; the exact total is unknown.
   return {total:0,stale:false,observedAt:new Date().toISOString(),upperBound:true};
  }
+ const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
  return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'||filter.active};
 });
