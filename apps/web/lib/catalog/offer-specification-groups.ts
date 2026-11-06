@@ -9,6 +9,9 @@ import { catalogPowerSanity } from "./power-sanity";
 export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLabel?: string }): SourceSpecificationSnapshot["groups"] {
   const groups: SourceSpecificationSnapshot["groups"] = [];
   const ajes=/^ajes_(?:japan|korea|china)_feed$/.test(offer.sourceId);
+  const editorial=offer.editorialSpecifications as Record<string,unknown>|undefined;
+  const coreFields=new Set<string>(Array.isArray(offer.operational?.knowledgeCore?.fieldsApplied)?offer.operational.knowledgeCore.fieldsApplied:[]);
+  const localField=(field:string)=>!ajes||Boolean(editorial?.[field])||coreFields.has(field);
   const basic: Array<{name: string; value: string}> = [];
   const add = (items: typeof basic, name: string, value: unknown) => {
     if ((typeof value === "string" && value.trim()) || (typeof value === "number" && Number.isFinite(value))) items.push({ name, value: String(value) });
