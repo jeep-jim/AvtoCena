@@ -33,6 +33,24 @@ test('HTTP 414 recovers a previously viewed page as stale instead of failing clo
  assert.equal(result.stale,true);assert.equal(result.items[0].id,'saved-japan');
 });
 
+test('saved AJES fallbacks return bounded car candidates and defer power eligibility to local enrichment',async()=>{
+ const {findSavedAjesSearch,findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const now=Date.now(),observedAt=new Date(now).toISOString();
+ const japan={schemaVersion:2,observedAt,items:[{id:'jp-saved',table:'stats',make:'TOYOTA',model:'PRIUS',year:2023,status:'Sold',finalPriceJpy:1000000,sourcePower:'150'}]};
+ const stock={schemaVersion:2,observedAt,items:[{id:'cn-saved',table:'china',make:'BYD',model:'QIN',year:2024,status:'Active',sourcePrice:10000,sourcePower:'150'}]};
+ const jp=findSavedAjesSearch({table:'stats',powerTo:160}, {'stats:jp-saved':japan},now);
+ const cn=findSavedAjesStockSearch({table:'china',make:'BYD',model:'QIN',powerTo:160}, {'china:cn-saved':stock},now);
+ assert.equal(jp?.items[0].id,'jp-saved');
+ assert.equal(cn?.items[0].id,'cn-saved');
+ const japanFilter=ajesResultFilter({market:'japan',powerTo:'160'});
+ const chinaFilter=ajesResultFilter({market:'china',powerTo:'160'});
+ assert.equal(japanFilter.matches({...japan.items[0],sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ assert.equal(chinaFilter.matches({...stock.items[0],sourceId:'ajes_china_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ assert.equal(japanFilter.matches({...japan.items[0],powerHp:150}),true);
+ assert.equal(chinaFilter.matches({...stock.items[0],powerHp:150}),true);
+});
+
 test('actual supplier TAG aggregates are positional and strictly numeric',async()=>{
  const read=async(body:unknown,aggregate:'count'|'models')=>createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(body))}).read({aggregate},'127.0.0.1');
  assert.equal((await read([{TAG0:'123456'}],'count')).total,123456);
