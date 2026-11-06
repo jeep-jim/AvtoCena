@@ -3705,3 +3705,51 @@ PR #1711 установлен. Финальный журнал 42264947305/12805
 Выполняется один запуск, PENDING 0, в очереди четыре прежних запуска. Задача хранения образов 42298889858/128171189985 завершилась в 04:42:44 со статусом SUCCESS по метаданным. Объём очистки не проверялся. PR #1706–1708 открыты. Пять однократных запросов ранее непрочитанных журналов Китая вернули `Transport closed`. Причина сбоя предыдущей публикации 127541782446 и её публичный манифест остаются неизвестными.
 
 Один запрос health в 04:51 вернул HTTP 200, curl exit 0, ok=true, releaseSha `b459e14304b35cbfe81af8c2c1f0c1d3008bfe4d` и calculationVersion `5dad731a202ea33dfc83ad4f26f2893eb4a2d61fbf67e4a08a162e5827eac573`. Новых сохранённых результатов проверки списка и счётчика Японии до 160 л.с. и сохранения в авторизованном редакторе в документах нет. Наблюдение продолжается.
+
+## Сверка 07.11.2026 05:52 Красноярск
+
+На установленном релизе b459e143 пять задач подготовки общих цен завершились с live_encyclopedia_binding_missing при generationId=gen_1791597210034_5b83bc90, skipped=false и verified=false. В шести задачах Regcloud отчёт для gen_1793850840258_78913964 указал publication_in_progress и budget_preparation_deferred_active_publisher, skipped=true и verified=false. Для разбора первой группы нужны сохранённые входные данные о поколении и привязке энциклопедии. Во второй группе подготовка была отложена из-за активной публикации. Работоспособность расчёта цены на сайте эти задачи не проверяли.
+
+Три задачи Яндекс Директа завершились с green_feed_empty. Во всех трёх count=0 по каждому рынку при итоговом scanned=208275. Артефактов отчёта нет. Два других запуска Директа, 42300474921 и 42301129444, отменены без задач, причина неизвестна. Для анализа нужны сохранённые входные данные, поколение и условия отбора green. Задача перевода завершилась с translation_http_403, offers=254397, unique=34521, translated=0, pending=34521. Причину отказа предстоит сверить по сохранённым запросу, ответу и конфигурации авторизации.
+
+Четыре задачи компактных счётчиков завершились SUCCESS с catalog_writer_busy и indexPrepared=false. Шесть задач текущих страниц завершились SUCCESS. Первая работала с поколением gen_1793850840258_78913964 на 7–9 ноября. Обзор на 7 ноября для отдельного поколения gen_1791597210034_5b83bc90 сообщил total=207335, Европа 49455 при 49456 в отчёте посадочной страницы. Причина расхождения неизвестна. Эти значения относятся к своим сохранённым отчётам. Плановые задачи ОАЭ, Европы, Кореи и Грузии пропустили сбор и публикацию. Для Кореи журнал указал no_enabled_background_source. Green прошёл 17 тестов, шаг обновления пропущен.
+
+Новые прочитанные финальные журналы перечислены ниже. Время окончания указано по Красноярску. Для цен отдельно указано время отчёта. Номера артефактов получены из метаданных, содержимое не просматривалось.
+
+| Процесс и задача | Запуск/задача | Финал | Ошибка цен и время отчёта | Артефакты |
+| --- | --- | --- | --- | --- |
+| Catalog refresh green / refresh | 42300200232/128175685867 | 04:52:40 SUCCESS |  | — |
+| Prepare shared budget prices / prepare | 42300290243/128175991107 | 04:53:37 FAILURE | live_encyclopedia_binding_missing (04:53:33) | 13543253029 |
+| Regcloud — prepare current catalog pages / build | 42300290493/128175991801 | 04:54:54 SUCCESS |  | — |
+| Publish Yandex Direct feed / publish | 42300290530/128175992647 | 04:59:00 FAILURE |  | — |
+| Catalog refresh uae / refresh / plan | 42300385147/128176312586 | 04:54:05 SUCCESS |  | — |
+| Regcloud — prepare current catalog pages / build | 42300474756/128176970766 | 04:55:34 SUCCESS |  | — |
+| Prepare compact budget counts / prepare | 42300474877/128176623871 | 04:55:08 SUCCESS |  | — |
+| Prepare shared budget prices / prepare | 42300474884/128176624942 | 04:55:03 FAILURE | live_encyclopedia_binding_missing (04:54:59) | 13543916891 |
+| Regcloud — prepare shared budget prices / prepare | 42300582287/128177000096 | 04:55:56 FAILURE | budget_preparation_deferred_active_publisher (04:55:52) | 13543068821 |
+| Regcloud — prepare shared budget prices / prepare | 42300675006/128177450482 | 04:56:49 FAILURE | budget_preparation_deferred_active_publisher (04:56:45) | 13544665638 |
+| Catalog refresh europe / refresh / plan | 42300733751/128177521635 | 04:56:52 SUCCESS |  | — |
+| Publish Yandex Direct feed / publish | 42300837869/128178797831 | 05:05:32 FAILURE |  | — |
+| Regcloud — prepare current catalog pages / build | 42300837888/128177891196 | 04:57:38 SUCCESS |  | — |
+| Prepare shared budget prices / prepare | 42300837957/128177891535 | 04:58:05 FAILURE | live_encyclopedia_binding_missing (04:58:00) | 13544371195 |
+| Prepare compact budget counts / prepare | 42300837995/128177891524 | 04:57:47 SUCCESS |  | — |
+| Regcloud — prepare shared budget prices / prepare | 42300933586/128178221548 | 04:58:41 FAILURE | budget_preparation_deferred_active_publisher (04:58:36) | 13544441052 |
+| Regcloud — prepare current catalog pages / build | 42300962945/128178329558 | 04:58:33 SUCCESS |  | — |
+| Regcloud — prepare shared budget prices / prepare | 42301047581/128178656489 | 04:59:41 FAILURE | budget_preparation_deferred_active_publisher (04:59:35) | 13544766040 |
+| Catalog refresh korea / refresh / plan | 42301048949/128178623324 | 04:59:11 SUCCESS |  | — |
+| Catalog refresh georgia / refresh / plan | 42301055366/128178644851 | 04:59:20 SUCCESS |  | — |
+| Regcloud — prepare current catalog pages / build | 42301129401/128178905266 | 04:59:57 SUCCESS |  | — |
+| Prepare shared budget prices / prepare | 42301129434/128178905270 | 05:00:17 FAILURE | live_encyclopedia_binding_missing (05:00:12) | 13543767888 |
+| Prepare compact budget counts / prepare | 42301129461/128178905662 | 05:00:04 SUCCESS |  | — |
+| Catalog Russian descriptions / translate | 42301129464/128178904915 | 05:15:21 FAILURE |  | 13545855063 |
+| Prepare compact budget counts / prepare | 42301147753/128179264278 | 05:00:51 SUCCESS |  | — |
+| Prepare shared budget prices / prepare | 42301147801/128179366397 | 05:01:22 FAILURE | live_encyclopedia_binding_missing (05:01:16) | 13544916206 |
+| Publish Yandex Direct feed / publish | 42301147991/128181763507 | 05:11:50 FAILURE |  | — |
+| Regcloud — prepare current catalog pages / build | 42301148079/128179209758 | 05:00:39 SUCCESS |  | — |
+| Regcloud — prepare shared budget prices / prepare | 42301222581/128179232340 | 05:01:03 FAILURE | budget_preparation_deferred_active_publisher (05:00:58) | 13544976014 |
+| Regcloud — prepare shared budget prices / prepare | 42301323775/128179722945 | 05:02:06 FAILURE | budget_preparation_deferred_active_publisher (05:02:01) | 13544541494 |
+| Build compact catalog overview / build | 42301463985/128180023901 | 05:03:16 SUCCESS |  | — |
+
+Публикация Китая 42286308791/128144651298 по-прежнему выполняется на шаге публикации с 03:56:51. Финал и публичный манифест ожидаются. Для пяти прежних непрочитанных журналов по одному запросу вернули Transport closed. Причина прежнего сбоя 127541782446 неизвестна. CRM 42301390722/128179777957 и 128179778550 завершились SUCCESS по метаданным, фактическая доставка не проверялась. Выполняется один запуск, PENDING 0, четыре старых запуска в очереди. PR #1706–1708 открыты.
+
+Единственный запрос health в 05:51 вернул HTTP 200, curl exit 0, ok=true, releaseSha `b459e14304b35cbfe81af8c2c1f0c1d3008bfe4d`, calculationVersion `5dad731a202ea33dfc83ad4f26f2893eb4a2d61fbf67e4a08a162e5827eac573`. Новых сохранённых результатов проверки японского списка и счётчика до 160 л.с. и сохранения в авторизованном редакторе нет. Наблюдение продолжается.
