@@ -11,6 +11,27 @@ import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-adm
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
 
+test('Japan power search defers unknown supplier horsepower to local encyclopedia enrichment',()=>{
+ const sql=ajesQuery({table:'stats',powerTo:160}).sql;
+ assert.match(sql,/pw<=160/);
+ assert.match(sql,/pw is null/);
+ assert.match(sql,/pw=''/);
+ assert.match(sql,/pw<=0/);
+ const {ajesResultFilter}=require('../apps/web/lib/catalog/ajes-result-filter');
+ const filter=ajesResultFilter({market:'japan',powerTo:'160'});
+ // These are post-enrichment offers: verified local horsepower, not supplier PW, decides.
+ assert.equal(filter.matches({powerHp:150}),true);
+ assert.equal(filter.matches({powerHp:180}),false);
+ assert.equal(filter.matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:''}}}),false);
+});
+
+test('HTTP 414 recovers a previously viewed page as stale instead of failing closed with no cards',async()=>{
+ const saved={schemaVersion:2,items:[{id:'saved-japan',table:'stats'}],page:1,pageSize:24,observedAt:new Date(Date.now()-31*60_000).toISOString()};
+ const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>new Response('too long',{status:414})});
+ const result=await client.read({table:'stats',powerTo:160},'127.0.0.1');
+ assert.equal(result.stale,true);assert.equal(result.items[0].id,'saved-japan');
+});
+
 test('actual supplier TAG aggregates are positional and strictly numeric',async()=>{
  const read=async(body:unknown,aggregate:'count'|'models')=>createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(body))}).read({aggregate},'127.0.0.1');
  assert.equal((await read([{TAG0:'123456'}],'count')).total,123456);
