@@ -24,6 +24,8 @@ test('AJES power filter uses local encyclopedia power, never supplier PW as a sp
  // A locally enriched value wins over a contradictory supplier hint.
  assert.equal(filter.matches({powerHp:150,sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'250'}}}),true);
  assert.equal(filter.matches({powerHp:180,sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ // A manually saved customer scenario is not evidence of the vehicle's factory power.
+ assert.equal(filter.matches({powerHp:180,savedCalculationPreview:{totalRub:1000000,parameters:{powerHp:150}}}),false);
 });
 
 test('HTTP 414 recovers a previously viewed page as stale instead of failing closed with no cards',async()=>{
