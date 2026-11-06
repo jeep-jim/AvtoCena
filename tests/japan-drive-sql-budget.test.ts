@@ -78,6 +78,14 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
   assert.match(sql,/pw=''/);
   assert.match(sql,/pw<=0/);
  }
+ // Korea and China also defer unknown supplier power to the local encyclopedia.
+ for(const table of ['korea','china'] as const){
+  const sql=ajesQuery({table,powerTo:160}).sql;
+  assert.match(sql,/pw<=160/);
+  assert.match(sql,/pw is null/);
+  assert.match(sql,/pw=''/);
+  assert.match(sql,/pw<=0/);
+ }
  // Stock-market power filters and unfiltered Japan keep their existing SQL.
  for(const table of ['stats','main','korea','china'] as const){
   assert.ok(ajesQuery({table,...(table==='korea'||table==='china'?{powerTo:160}:{})}).sql.includes(heavyVehicleSqlExclusion()));
