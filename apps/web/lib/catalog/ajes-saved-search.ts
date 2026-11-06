@@ -17,10 +17,6 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
   const age=now-Date.parse(saved?.observedAt||''),lot=saved?.items?.[0];
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1
    &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!knownHeavyVehicleFamily(lot.make,lot.model)
-   &&((input.powerFrom===undefined&&input.powerTo===undefined)||(()=>{
-    const values=ajesPowerFilterValues({...lot,market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel}}});
-    return values.length>0&&values.every(hp=>(input.powerFrom===undefined||hp>=input.powerFrom)&&(input.powerTo===undefined||hp<=input.powerTo));
-   })())
    &&(!makes||makes.includes(normalized(lot.make)))
    &&(!models&&!families||Boolean(models?.includes(normalized(lot.model)))||Boolean(families?.some(model=>normalized(lot.model).startsWith(model+' '))))
    &&(!drives||drives.includes(enrichJapanDrive({drive:undefined as string|undefined,market:'japan',make:lot.make,model:lot.model,year:lot.year,trim:lot.trim,chassisCode:lot.chassisCode,operational:{raw:{sourceDrive:lot.sourceDrive}}},driveIndex).drive||''))
