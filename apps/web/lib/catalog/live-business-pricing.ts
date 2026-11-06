@@ -247,7 +247,10 @@ export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOff
 
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
-  const [repriced, markets] = await Promise.all([applyActiveBusinessPriceBatch(offers), getEffectiveMarketsWithDefaults()]);
+  // Share one immutable market-settings snapshot across pricing and preview stages.
+  // Previously the same batch fetched effective market settings twice.
+  const marketsPromise=getEffectiveMarketsWithDefaults();
+  const [repriced, markets] = await Promise.all([applyActiveBusinessPriceBatch(offers,{},marketsPromise),marketsPromise]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
   const identified = await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
   const { attachJapanDeliveredPreviews } = await import("./japan-delivered-preview");
