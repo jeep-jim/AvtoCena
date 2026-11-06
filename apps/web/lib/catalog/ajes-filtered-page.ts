@@ -7,7 +7,7 @@ type SourcePage<T> = {items:T[]; received:number; partial?:boolean; stale?:boole
  * The skip is within the accepted rows of one source page, never a guessed raw offset.
  */
 export async function readFilteredAjesPage<T>(options:{
- startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number; maxReads?:number;
+ startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number;
  read:(page:number)=>Promise<SourcePage<T>>; now?:()=>number;
 }) {
  const {pageSize,read}=options,now=options.now??Date.now,started=options.startedAt??now();
