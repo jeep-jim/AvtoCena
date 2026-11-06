@@ -1,4 +1,5 @@
-import {applyJapanOwnerSpecifications} from './japan-owner-specifications';
+import {applyJapanOwnerSpecifications,isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
+import {classifySpecificationEvidence} from './specification-evidence-audit';
 import {catalogBodyType} from './pickup-body';
 import {internationalModel} from './international-model';
 import { CATALOG_MARKET_LABELS } from "./runtime-config";
@@ -620,8 +621,28 @@ export function presentCatalogOffer(offer: any) {
     ? offer.images.map((image: any) => safeCatalogText(image?.url)).filter(Boolean)
     : [];
   const market = safeCatalogText(offer?.market).toLowerCase();
+  const ajes=/^ajes_(?:japan|korea|china)_feed$/.test(String(offer?.sourceId||''));
+  const editorial=offer?.editorialSpecifications as Record<string,unknown>|undefined;
+  const locallyVerified=(field:'engineCc'|'powerHp'|'fuelPowertrain'|'bodyType'|'transmission'|'drive'|'color'|'certifiedPower')=>{
+    if(!ajes)return true;
+    if(field==='powerHp'&&isOwnerStepwgnNonHybrid(offer))return true;
+    return Boolean(editorial?.[field])||classifySpecificationEvidence(offer,field).state==='exact';
+  };
+  // AJES source attributes remain internal matching hints. Public cards expose
+  // technical values only after the local encyclopedia has verified them.
+  const engineCc=locallyVerified('engineCc')?offer.engineCc:undefined;
+  const powerHp=locallyVerified('powerHp')?offer.powerHp:undefined;
+  const powerKw=powerHp?offer.powerKw:undefined;
+  const power30MinKw=locallyVerified('certifiedPower')?offer.power30MinKw:undefined;
+  const fuel=locallyVerified('fuelPowertrain')?offer.fuel:undefined;
+  const powertrainKind=locallyVerified('fuelPowertrain')?offer.powertrainKind:undefined;
+  const bodyType=locallyVerified('bodyType')?offer.bodyType:undefined;
+  const transmission=locallyVerified('transmission')?offer.transmission:undefined;
+  const drive=locallyVerified('drive')?offer.drive:undefined;
+  const color=locallyVerified('color')?offer.color:undefined;
   return {
     ...offer,
+    engineCc,powerHp,powerKw,power30MinKw,fuel,powertrainKind,bodyType,transmission,drive,color,
     title: catalogOfferTitle(offer),
     makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : publicMarketIdentity(offer?.make, market),
     modelLabel: isChinaOffer(offer)
@@ -629,10 +650,10 @@ export function presentCatalogOffer(offer: any) {
       : publicResolvedModelLabel(offer, collapseAdjacentRepeatedPhrases(publicMarketIdentity(offer?.model, market))),
     trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
-    bodyLabel: catalogBodyName(offer?.bodyType, offer),
-    fuelLabel: catalogFuelName(offer?.fuel),
-    transmissionLabel: catalogTransmissionName(offer?.transmission) === "уточняется" && offer?.sourceId === "akebono_green_japan_open" && offer?.transmission ? `Код ${safeCatalogText(offer.transmission)}` : catalogTransmissionName(offer?.transmission),
-    driveLabel: catalogDriveName(offer?.drive),
+    bodyLabel: catalogBodyName(bodyType, offer),
+    fuelLabel: catalogFuelName(fuel),
+    transmissionLabel: catalogTransmissionName(transmission) === "уточняется" && offer?.sourceId === "akebono_green_japan_open" && transmission ? `Код ${safeCatalogText(transmission)}` : catalogTransmissionName(transmission),
+    driveLabel: catalogDriveName(drive),
     images,
   };
 }
