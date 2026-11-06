@@ -85,7 +85,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   else {
    // Only newly attested auction cards need the existing delivered-preview path.
    // Leave unmatched supplier rows on their current inexpensive path.
-   const matched=page.items.filter(v=>{if(hasEncyclopediaCalculationEvidence(v))return true;try{japanPreviewParameters(v);return true;}catch{return false;}});
+   const matched=page.items.filter(v=>{if(hasEncyclopediaCalculationEvidence(v))return true;try{const parameters=japanPreviewParameters(v);return parameters.powerHp!=null||parameters.vehicleCategory==='N1';}catch{return false;}});
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
   measure?.('pricing',performance.now()-pricingStarted);
