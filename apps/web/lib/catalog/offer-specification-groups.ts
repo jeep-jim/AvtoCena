@@ -9,9 +9,6 @@ import { catalogPowerSanity } from "./power-sanity";
 export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLabel?: string }): SourceSpecificationSnapshot["groups"] {
   const groups: SourceSpecificationSnapshot["groups"] = [];
   const ajes=/^ajes_(?:japan|korea|china)_feed$/.test(offer.sourceId);
-  const editorial=offer.editorialSpecifications as Record<string,unknown>|undefined;
-  const coreFields=new Set<string>(Array.isArray(offer.operational?.knowledgeCore?.fieldsApplied)?offer.operational.knowledgeCore.fieldsApplied:[]);
-  const localField=(field:string)=>!ajes||Boolean(editorial?.[field])||coreFields.has(field);
   const basic: Array<{name: string; value: string}> = [];
   const add = (items: typeof basic, name: string, value: unknown) => {
     if ((typeof value === "string" && value.trim()) || (typeof value === "number" && Number.isFinite(value))) items.push({ name, value: String(value) });
@@ -20,11 +17,11 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
   if (offer.year > 1900) add(basic, "Год в объявлении", offer.year);
   if (typeof offer.mileageKm === "number" && offer.mileageKm >= 0) add(basic, "Пробег, км", offer.mileageKm);
   const bodyLabel = display?.bodyLabel ?? catalogBodyName(offer.bodyType, offer);
-  if (bodyLabel && bodyLabel !== "уточняется" && localField("bodyType")) add(basic, "Кузов", bodyLabel);
-  if(offer.drive&&localField("drive"))add(basic,"Привод",catalogDriveName(offer.drive));
-  if(offer.transmission&&localField("transmission"))add(basic,"Коробка передач",catalogTransmissionName(offer.transmission));
-  if(offer.color&&localField("color"))add(basic,"Цвет",offer.color);
-  if(/^ajes_(?:korea|china)_feed$/.test(offer.sourceId)){add(basic,'VIN / номер кузова',offer.frameNumber);add(basic,'Номер объявления',offer.lotNumber);if(typeof offer.operational?.sourceDate==='string'&&/^\d{4}\.(?:0?[1-9]|1[0-2])$/.test(offer.operational.sourceDate))add(basic,'Дата в объявлении',offer.operational.sourceDate);}
+  if (bodyLabel && bodyLabel !== "уточняется") add(basic, "Кузов", bodyLabel);
+  if(offer.editorialSpecifications?.drive)add(basic,"Привод",catalogDriveName(offer.drive));
+  if(offer.editorialSpecifications?.transmission)add(basic,"Коробка передач",catalogTransmissionName(offer.transmission));
+  if(offer.color)add(basic,"Цвет",offer.color);
+  if(/^ajes_(?:korea|china)_feed$/.test(offer.sourceId)){add(basic,'VIN / номер кузова',offer.frameNumber);add(basic,'Номер объявления',offer.lotNumber);if(typeof offer.operational?.sourceDate==='string'&&/^\d{4}\.(?:0?[1-9]|1[0-2])$/.test(offer.operational.sourceDate))add(basic,'Дата в объявлении',offer.operational.sourceDate);if(offer.drive)add(basic,'Привод',catalogDriveName(offer.drive));if(offer.transmission)add(basic,'Коробка передач',catalogTransmissionName(offer.transmission));add(basic,'Оснащение',offer.operational?.sourceEquipment);}
   if (basic.length) groups.push({ name: "Об автомобиле", items: basic });
   const verified: typeof basic = [];
   if (classifySpecificationEvidence(offer, "engineCc").state === "exact") add(verified, "Рабочий объём, см³", offer.engineCc);
@@ -45,14 +42,18 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
     if(offer.sourceId==='ajes_japan_feed'){
       add(auction,"Номер кузова",offer.frameNumber);
       add(auction,"Место проведения",offer.operational?.auctionTown);
-      // Supplier technical fields are matching hints only; never expose them as vehicle specifications.
+      const source=offer.operational?.raw as Record<string,unknown>|undefined;
+      add(auction,"Привод: обозначение поставщика",source?.sourceDrive);
+      add(auction,"КПП: обозначение поставщика",source?.sourceTransmission);
+      add(auction,"Тип КПП: обозначение поставщика",offer.operational?.sourceTransmissionCode);
+      add(auction,"Оснащение",offer.operational?.sourceEquipment);
     }
     const restriction = assessJapanExportRestriction(offer);
     if (restriction) add(auction, "Экспорт из Японии", japanRestrictionDescription(restriction));
     if (auction.length) groups.push({ name: "Аукцион и экспорт", items: auction });
   }
   const snapshot = offer.operational?.sourceSpecifications;
-  if (!ajes && snapshot?.sourceId === offer.sourceId && snapshot.sourceOfferId === offer.sourceOfferId) {
+  if (snapshot?.sourceId === offer.sourceId && snapshot.sourceOfferId === offer.sourceOfferId) {
     // Match the existing public DTO privacy boundary while retaining model/chassis codes.
     const privateIdentifier = /\bvin\b|vehicle identification|(?:frame|chassis)\s*(?:number|no\b)|номер\s*(?:кузова|рамы|шасси)|车架号/i;
     const rejectedPower = catalogPowerSanity(offer).suspicious || (offer.operational as any)?.powerSanity?.rejected;
