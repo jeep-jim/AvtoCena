@@ -7,6 +7,7 @@ import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/cat
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
 import {japanChassisDriveRows,lookupJapanChassisDrive} from '../apps/web/lib/encyclopedia/japan-chassis-drive';
+import {stepwgnOwnerSql} from '../apps/web/lib/catalog/japan-owner-specifications';
 function database(){
  const db=new DatabaseSync(':memory:');
  db.function('regexp',(pattern,value)=>value===null?null:Number(new RegExp(String(pattern),'i').test(String(value))));
@@ -72,7 +73,7 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
   const bytes=new URLSearchParams({sql}).toString().length;
   assert.ok(bytes<6000,`${table}/${aggregate}: ${bytes}`);
   assert.ok(sql.includes(heavyVehicleSqlExclusion(false,false,true)));
-  assert.match(sql,/RP\[58\]/);
+  assert.match(stepwgnOwnerSql(),/RP\[58\]/);
   assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
  // No AJES market may use supplier PW as a technical-specification filter.
