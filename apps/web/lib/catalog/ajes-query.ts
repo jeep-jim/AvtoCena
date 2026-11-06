@@ -58,8 +58,8 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  // Japan power filters add the owner override twice. Use the equivalent compact truck
-  // predicate for drive and power bounds so the supplier GET stays below its URI limit.
+  // Use the equivalent compact heavy-vehicle predicate on filtered Japan queries
+  // to keep the supplier request small; horsepower itself is resolved locally.
   const compactJapan=!stock&&(Boolean(q.drive)||q.powerFrom!==undefined||q.powerTo!==undefined);
   where.push(heavyVehicleSqlExclusion(false,false,compactJapan),motorcycleSqlExclusion());
   if(!stock)where.push(japanMakeSqlExclusion());
