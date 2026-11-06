@@ -20,17 +20,19 @@ export function ajesResultFilter(params:Record<string,unknown>){
  if(filterSelections(body).some(value=>!['suv','offroad','sedan','hatchback','wagon','minivan','coupe','convertible','pickup','van'].includes(value)))throw new AjesInputError();
  if(hasPrice&&!['yes','no'].includes(hasPrice))throw new AjesInputError();
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
- return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color)||japanDrive||japanFuel,priceFilter,powerFilter,matches(offer:any){
+ const matchesPower=(offer:any)=>{
+  if(!powerFilter)return true;
+  const displayed=offerWithSavedPreview(offer);
+  const exact=isOwnerStepwgnNonHybrid(displayed)?150:Number(displayed.powerHp);
+  // Supplier PW is not a vehicle specification. Only the locally enriched,
+  // trusted encyclopedia value (or the explicit owner override) can qualify.
+  return Number.isFinite(exact)&&exact>0&&(powerFrom===undefined||exact>=powerFrom)&&(powerTo===undefined||exact<=powerTo);
+ };
+ return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color)||japanDrive||japanFuel,priceFilter,powerFilter,matchesPower,matches(offer:any){
   if(japanFuel&&!matchesFilterSelection(offer.fuel,fuel==='electrified'?'hybrid|electric':fuel.replaceAll('electrified','hybrid|electric')))return false;
   if(japanDrive&&!matchesFilterSelection(offer.drive,drive))return false;
   if(!matchesCatalogColor(offer,scalar(params.color)))return false;
-  if(powerFilter){
-   const displayed=offerWithSavedPreview(offer);
-   const exact=isOwnerStepwgnNonHybrid(displayed)?150:Number(displayed.powerHp);
-   // Supplier PW is not a vehicle specification. Only the locally enriched,
-   // trusted encyclopedia value (or the explicit owner override) can qualify.
-   if(!Number.isFinite(exact)||exact<=0||(powerFrom!==undefined&&exact<powerFrom)||(powerTo!==undefined&&exact>powerTo))return false;
-  }
+  if(!matchesPower(offer))return false;
   if(!matchesFilterSelection(catalogBodyType(offer),body))return false;
   if(!priceFilter)return true;
   const cityPrice=city?priceCardForCity(offer,city):null;
