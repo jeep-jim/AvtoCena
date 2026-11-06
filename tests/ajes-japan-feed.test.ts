@@ -11,13 +11,10 @@ import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-adm
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
 
-test('AJES power filter uses local encyclopedia power, never supplier PW as a displayed specification',async()=>{
+test('AJES power filter uses local encyclopedia power, never supplier PW as a specification',async()=>{
  for(const table of ['stats','main','korea','china'] as const){
   const sql=ajesQuery({table,powerTo:160}).sql;
-  assert.match(sql,/pw<=160/);
-  assert.match(sql,/pw is null/);
-  assert.match(sql,/pw=''/);
-  assert.match(sql,/pw<=0/);
+  assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const filter=ajesResultFilter({market:'japan',powerTo:'160'});
