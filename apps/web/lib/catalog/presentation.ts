@@ -623,10 +623,13 @@ export function presentCatalogOffer(offer: any) {
   const market = safeCatalogText(offer?.market).toLowerCase();
   const ajes=/^ajes_(?:japan|korea|china)_feed$/.test(String(offer?.sourceId||''));
   const editorial=offer?.editorialSpecifications as Record<string,unknown>|undefined;
+  const appliedCoreFields=new Set<string>(Array.isArray(offer?.operational?.knowledgeCore?.fieldsApplied)?offer.operational.knowledgeCore.fieldsApplied:[]);
   const locallyVerified=(field:'engineCc'|'powerHp'|'fuelPowertrain'|'bodyType'|'transmission'|'drive'|'color'|'certifiedPower')=>{
     if(!ajes)return true;
     if(field==='powerHp'&&isOwnerStepwgnNonHybrid(offer))return true;
-    return Boolean(editorial?.[field])||classifySpecificationEvidence(offer,field).state==='exact';
+    if(Boolean(editorial?.[field])||appliedCoreFields.has(field))return true;
+    if(field==='engineCc'||field==='powerHp'||field==='fuelPowertrain'||field==='certifiedPower')return classifySpecificationEvidence(offer,field).state==='exact';
+    return false;
   };
   // AJES source attributes remain internal matching hints. Public cards expose
   // technical values only after the local encyclopedia has verified them.
