@@ -19,7 +19,7 @@ export async function readFilteredAjesPage<T>(options:{
  }
  const items:T[]=[];
  let exhausted=false,partial=false,stale=false,reads=0,interrupted=false;
- while(reads<Math.max(1,Math.min(8,options.maxReads??8))&&(reads===0||now()-started<8000)){
+ while(reads<8&&(reads===0||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage);}catch(error){
    const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
