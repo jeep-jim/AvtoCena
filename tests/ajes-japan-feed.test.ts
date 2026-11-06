@@ -11,13 +11,13 @@ import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-adm
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
 
-test('Japan power search defers unknown supplier horsepower to local encyclopedia enrichment',()=>{
+test('Japan power search defers unknown supplier horsepower to local encyclopedia enrichment',async()=>{
  const sql=ajesQuery({table:'stats',powerTo:160}).sql;
  assert.match(sql,/pw<=160/);
  assert.match(sql,/pw is null/);
  assert.match(sql,/pw=''/);
  assert.match(sql,/pw<=0/);
- const {ajesResultFilter}=require('../apps/web/lib/catalog/ajes-result-filter');
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const filter=ajesResultFilter({market:'japan',powerTo:'160'});
  // These are post-enrichment offers: verified local horsepower, not supplier PW, decides.
  assert.equal(filter.matches({powerHp:150}),true);
