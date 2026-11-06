@@ -38,6 +38,11 @@ export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary
  if(resolved.modelDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
  const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
+ if(q.table==='stats'&&filter.powerFilter){
+  // Supplier COUNT cannot see verified horsepower added by our local encyclopedia.
+  // Do not issue a misleading/expensive aggregate request; the exact total is unknown.
+  return {total:0,stale:false,observedAt:new Date().toISOString(),upperBound:true};
+ }
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
  return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'||filter.active};
 });
@@ -66,7 +71,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // Pagination changes only the offset. Recounting here competes with the
  // requested list in the same two-slot supplier queue. The independent count
  // endpoint/header owns aggregate refresh; continuations need only their rows.
- if(options.includeCount!==false&&(query.page||1)===1&&!params.after)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!(query.table==='stats'&&filter.powerFilter))void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
@@ -96,7 +101,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const total=readyCount as AjesCountSummary|null;
  // Reuse the first read only when it is the requested continuation's source page.
  let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
- const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
+ const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,maxReads:query.table==='stats'&&filter.powerFilter?2:8,
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
