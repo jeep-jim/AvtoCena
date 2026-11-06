@@ -66,6 +66,20 @@ test('single drivetrain queries remain well below a standard 8 KB request line',
  // Unfiltered cached queries retain their exact old truck predicate.
  assert.ok(ajesQuery({}).sql.includes(heavyVehicleSqlExclusion()));
 });
+test('Japan power lists and counts fit the supplier URI budget without losing owner power rules',()=>{
+ for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const)for(const power of [{powerTo:160},{powerFrom:100},{powerFrom:100,powerTo:160}]){
+  const sql=ajesQuery({table,aggregate,...power}).sql;
+  const bytes=new URLSearchParams({sql}).toString().length;
+  assert.ok(bytes<6000,`${table}/${aggregate}: ${bytes}`);
+  assert.ok(sql.includes(heavyVehicleSqlExclusion(false,false,true)));
+  assert.match(sql,/RP\[58\]/);
+  assert.match(sql,/pw>=/);
+ }
+ // Stock-market power filters and unfiltered Japan keep their existing SQL.
+ for(const table of ['stats','main','korea','china'] as const){
+  assert.ok(ajesQuery({table,...(table==='korea'||table==='china'?{powerTo:160}:{})}).sql.includes(heavyVehicleSqlExclusion()));
+ }
+});
 test('supplier URI limit is classified without leaking its response or credentials',async()=>{
  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response('private provider body',{status:414})});
  let failure:unknown;try{await client.read({drive:'awd'},'127.0.0.1');}catch(error){failure=error;}
