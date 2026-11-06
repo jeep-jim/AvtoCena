@@ -101,7 +101,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const total=readyCount as AjesCountSummary|null;
  // Reuse the first read only when it is the requested continuation's source page.
  let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
- const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,maxReads:query.table==='stats'&&filter.powerFilter?2:8,
+ const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,maxReads:filter.powerFilter?2:8,
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
