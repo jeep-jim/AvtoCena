@@ -7,7 +7,7 @@ type SourcePage<T> = {items:T[]; received:number; partial?:boolean; stale?:boole
  * The skip is within the accepted rows of one source page, never a guessed raw offset.
  */
 export async function readFilteredAjesPage<T>(options:{
- startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number;
+ startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number; maxReads?:number;
  read:(page:number)=>Promise<SourcePage<T>>; now?:()=>number;
 }) {
  const {pageSize,read}=options,now=options.now??Date.now,started=options.startedAt??now();
@@ -19,7 +19,7 @@ export async function readFilteredAjesPage<T>(options:{
  }
  const items:T[]=[];
  let exhausted=false,partial=false,stale=false,reads=0,interrupted=false;
- while(reads<8&&(reads===0||now()-started<8000)){
+ while(reads<Math.max(1,Math.min(8,options.maxReads??8))&&(reads===0||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage);}catch(error){
    const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
