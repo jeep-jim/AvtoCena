@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
 import {ajesQuery,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
+import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
+import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {StorageConflictError,type JsonStorage} from '../apps/web/lib/data';
@@ -51,6 +53,17 @@ test('saved AJES fallbacks return bounded car candidates and defer power eligibi
  assert.equal(chinaFilter.matches({...stock.items[0],sourceId:'ajes_china_feed',operational:{raw:{sourcePower:'150'}}}),false);
  assert.equal(japanFilter.matches({...japan.items[0],powerHp:150}),true);
  assert.equal(chinaFilter.matches({...stock.items[0],powerHp:150}),true);
+});
+
+test('stock supplier PW stays raw evidence and never becomes a vehicle horsepower fact',()=>{
+ const lot=ajesLot({...row,ID:'cn-power',MARKA_NAME:'BYD',MODEL_NAME:'QIN',YEAR:'2024',STATUS:'Active',FINISH:'10000',PW:'150',ENG_V:'1498',TIME:'P',KPP:'AT',PRIV:'FF'},'china',false);
+ assert.ok(lot);
+ const offer=ajesOffer(lot!,{currency:'CNY',sourcePrice:10000,effectiveRate:12,rateSource:'cbr'} as any,new Date().toISOString());
+ assert.equal(offer.powerHp,undefined);
+ assert.equal(offer.powerDataSource,undefined);
+ assert.equal(offer.operational?.semanticEvidence?.powerHp,undefined);
+ assert.equal(ajesPowerEstimateHp(offer),undefined);
+ assert.equal(ajesPowerEstimateHp({...offer,powerHp:150}),150);
 });
 
 test('actual supplier TAG aggregates are positional and strictly numeric',async()=>{
