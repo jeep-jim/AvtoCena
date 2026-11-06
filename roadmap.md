@@ -22235,3 +22235,69 @@ PR #1706–1708 открыты на прежних head. Для head #1706 за�
 После записи 23:24 новых запусков и результатов приёмки в main нет. PR #1711 открыт на `56c6f3ad6010c7f5585d9b325affb6d12834379c`. Последний CI этого коммита завершился с FAILURE в 23:12:46. Проверены метаданные, прочитанный журнал повторно не запрашивался. Выполняющихся и ожидающих в статусе PENDING запусков 0, в очереди четыре прежних запуска. [CI #1711](https://github.com/jeep-jim/AvtoCena/actions/runs/42248933755/job/127998484930)
 
 Единственный запрос health вернул HTTP 200, curl exit 0, ok=true, релиз `8d79ce16868cc392b1308c441dab93dae9039da5` и calculationVersion `dadd435b2fa55550a0229a89ce09fc07d104adb62f29efd46eb685337cdc9f66`. По одному запросу к пяти непрочитанным журналам Китая вернули `Transport closed`. Причина отказа публикации №127541782446 и итоговый публичный манифест неизвестны. Наблюдение продолжается до сохранённой проверки списка и счётчика Японии при ограничении 160 л.с. и сохранения в авторизованном редакторе.
+
+## Сверка 07.11.2026 01:08 Красноярск
+
+В 00:45:47 CI финального коммита PR #1711 `4028b25965efac444a9f908cdcd22378caae2541` завершился SUCCESS: прошли 2796 тестов, проверка TypeScript и сборка 58 статических страниц. Green, Dubicars и Controls на этом коммите также прошли. В 00:46:16 PR вошёл в main как `ea1f897ae78416453140b00a5e95191e9361a89b`. [Финальный CI](https://github.com/jeep-jim/AvtoCena/actions/runs/42263386776/job/128048877795)
+
+По сохранённому разбору основной работы на 3a4a03b6 прошли 2793 из 2794 тестов. Обход allowMissingPower разрешал автоматический предварительный расчёт без обязательного поля мощности. Исправление сохранило карточку, известные параметры и возможность ручного ввода. Строгая проверка восстановлена с существующим исключением N1. Исходный защитный тест сохранён. [Разбор](https://github.com/jeep-jim/AvtoCena/blob/b459e14304b35cbfe81af8c2c1f0c1d3008bfe4d/docs/operations/2026-11-07-pr1711-preview-safety.md)
+
+После слияния отдельный коммит `b459e14304b35cbfe81af8c2c1f0c1d3008bfe4d` запросил деплой. Задача 42264947305/128054647988 выполняется, с 01:06:10 устанавливает среду контейнера и загружает образ до запуска приложения. Финал ожидается. Единственный health вернул HTTP 200, curl exit 0, ok=true на предыдущем релизе `8d79ce16868cc392b1308c441dab93dae9039da5`, calculationVersion `dadd435b2fa55550a0229a89ce09fc07d104adb62f29efd46eb685337cdc9f66`. [Деплой](https://github.com/jeep-jim/AvtoCena/actions/runs/42264947305/job/128054647988)
+
+Аудит CRM на merge-коммите проверял установленный #1710, поскольку запрос на деплой поступил отдельным коммитом. Аудит завершился SUCCESS, два ответа 403 сохранены в журнале. Live-проверка прошла 36 сценариев с 168 открытиями. Подтверждение сохранения в авторизованном редакторе и проверка списка и счётчика Японии до 160 л.с. на #1711 ожидаются после активации. [Аудит](https://github.com/jeep-jim/AvtoCena/actions/runs/42264668619/job/128053334626)
+
+Реестр новых результатов. Ранние неуспешные версии предшествуют финальному head.
+
+- ea1f897a Verify CRM mobile and security audit (browser) 42264668619/128053334365 SUCCESS.
+- ea1f897a Verify CRM mobile and security audit (audit) 42264668619/128053334626 SUCCESS.
+- ea1f897a Verify CRM mobile and security audit (live) 42264668619/128056216429 SUCCESS.
+- ea1f897a Verify price, delivery and inventory corrections (verify) 42264668597/128053334405 SUCCESS.
+- ea1f897a Verify green corner budget (verify) 42264668409/128053333457 SUCCESS.
+- 4028b259 Verify site controls and chat (verify) 42263386876/128048877808 SUCCESS.
+- 4028b259 Verify Dubicars paid feed (verify) 42263386837/128048878375 SUCCESS.
+- 4028b259 CI (validate) 42263386776/128048877795 SUCCESS.
+- 4028b259 Verify green corner budget (verify) 42263386772/128048878271 SUCCESS.
+- 3a4a03b6 Verify site controls and chat (verify) 42259645854/128035900010 SUCCESS.
+- 3a4a03b6 Verify Dubicars paid feed (verify) 42259645849/128035899991 SUCCESS.
+- 3a4a03b6 Verify green corner budget (verify) 42259645844/128035900037 SUCCESS.
+- 3a4a03b6 CI (validate) 42259645804/128035900008 FAILURE — прочитан по сохранённому отчёту основной работы.
+- ea9ac48c CI (validate) 42259408883/128035089154 FAILURE.
+- ea9ac48c Verify Dubicars paid feed (verify) 42259408490/128035087616 SUCCESS.
+- ea9ac48c Verify green corner budget (verify) 42259408437/128035086978 SUCCESS.
+- ea9ac48c Verify site controls and chat (verify) 42259408398/128035086621 SUCCESS.
+- 92c5c1ad CI (validate) 42259380342/128034994238 FAILURE.
+- 92c5c1ad Verify Dubicars paid feed (verify) 42259379951/128034993201 SUCCESS.
+- 92c5c1ad Verify green corner budget (verify) 42259379868/128034993635 SUCCESS.
+- 92c5c1ad Verify site controls and chat (verify) 42259379732/128034992647 SUCCESS.
+- f0a4a5e0 CI (validate) 42259093501/128034017840 FAILURE.
+- f0a4a5e0 Verify Dubicars paid feed (verify) 42259093474/128034017809 SUCCESS.
+- f0a4a5e0 Verify green corner budget (verify) 42259093251/128034017040 SUCCESS.
+- f0a4a5e0 Verify site controls and chat (verify) 42259093202/128034016375 SUCCESS.
+- 193defa0 Verify green corner budget (verify) 42259077776/128033964079 SUCCESS.
+- 193defa0 CI (validate) 42259077764/128033963534 FAILURE.
+- 193defa0 Verify site controls and chat (verify) 42259077682/128033962832 SUCCESS.
+- 193defa0 Verify Dubicars paid feed (verify) 42259077569/128033962752 SUCCESS.
+- 5d7d7521 CI (validate) 42259009357/128033727516 FAILURE.
+- 5d7d7521 Verify green corner budget (verify) 42259009348/128033727168 SUCCESS.
+- 5d7d7521 Verify site controls and chat (verify) 42259009342/128033727945 SUCCESS.
+- 5d7d7521 Verify Dubicars paid feed (verify) 42259009337/128033727165 SUCCESS.
+- 702ada76 Verify Dubicars paid feed (verify) 42258896022/128033324970 SUCCESS.
+- 702ada76 Verify green corner budget (verify) 42258896001/128033326730 SUCCESS.
+- 702ada76 Verify site controls and chat (verify) 42258895978/128033324723 SUCCESS.
+- 702ada76 CI (validate) 42258895965/128033324925 FAILURE.
+- 24e58145 Verify green corner budget (verify) 42258852308/128033171790 SUCCESS.
+- 24e58145 Verify site controls and chat (verify) 42258852278/128033171388 SUCCESS.
+- 24e58145 CI (validate) 42258852250/128033171018 FAILURE.
+- 24e58145 Verify Dubicars paid feed (verify) 42258852224/128033171369 SUCCESS.
+- 7180e83e Verify site controls and chat (verify) 42258824021/128033072048 SUCCESS.
+- 7180e83e CI (validate) 42258823900/128033072971 FAILURE.
+- 7180e83e Verify green corner budget (verify) 42258823899/128033071369 SUCCESS.
+- 7180e83e Verify Dubicars paid feed (verify) 42258823898/128033071709 SUCCESS.
+- eab2533f Verify green corner budget (verify) 42258812669/128033034577 SUCCESS.
+- eab2533f CI (validate) 42258812639/128033035453 FAILURE.
+- eab2533f Verify Dubicars paid feed (verify) 42258812611/128033035871 SUCCESS.
+- eab2533f Verify site controls and chat (verify) 42258812383/128033034648 SUCCESS.
+
+Сверка биллинга и повторная доставка CRM завершились успешно по метаданным. Фактическая доставка и финансовый результат неизвестны. В последнем списке выполняющихся запусков остался деплой. PENDING 0, в очереди четыре прежних запуска. PR #1706–1708 открыты. Наблюдение продолжается.
+
+Пять однократных запросов непрочитанных журналов Китая вернули `Transport closed`. Для публикации №127541782446 причина и итоговый публичный манифест остаются неизвестными.
