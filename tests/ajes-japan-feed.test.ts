@@ -357,9 +357,6 @@ test('old normalized cache refreshes TIME on demand and remains available on sup
 });
 
 import {mock} from 'node:test';
-import {LocalJsonStorage} from '../apps/web/lib/data';
-import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
-import {calculateOfferWithCustomerParametersDetailed} from '../apps/web/lib/catalog/customs-pricing';
 import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {offerSpecificationGroups} from '../apps/web/lib/catalog/offer-specification-groups';
