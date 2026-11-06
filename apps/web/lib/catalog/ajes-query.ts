@@ -107,7 +107,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   const terms=parseCatalogSort(sort);if(!terms)throw new AjesInputError();
   const fields={auctionDateAsc:'auction_date asc',auctionDateDesc:'auction_date desc',mileage:'mileage asc',mileageDesc:'mileage desc',year:'year desc',yearAsc:'year asc',totalRub:'finish asc',totalRubDesc:'finish desc'};
   const order=terms.length?terms.map(term=>fields[term]).join(', ')+(stock||terms.some(t=>t.startsWith('auctionDate'))||terms[0].startsWith('mileage')?'':', auction_date desc'):stock?'id desc':'auction_date desc';
-  return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
+  return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize,...(q.powerFrom!==undefined?{powerFrom:q.powerFrom}:{}),...(q.powerTo!==undefined?{powerTo:q.powerTo}:{})};
 }
 
 /** Provider uses &w=320 even when no question mark is present. Never download images here. */
