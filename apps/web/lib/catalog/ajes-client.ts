@@ -93,8 +93,8 @@ export function createAjesClient(deps:Dependencies) {
         // A Japan power-filter request must never hold a visitor behind a slow
         // supplier scan. The local encyclopedia has already been applied before
         // post-filtering, so fail fast and use a bounded saved page when possible.
-        const japanPowerList=query.table==='stats'&&query.kind==='list'&&(query.powerFrom!==undefined||query.powerTo!==undefined);
-        const timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:japanPowerList?4500:20000);
+        const encyclopediaPowerList=query.kind==='list'&&(query.powerFrom!==undefined||query.powerTo!==undefined);
+        const timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:encyclopediaPowerList?4500:20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
