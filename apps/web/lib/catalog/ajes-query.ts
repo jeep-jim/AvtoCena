@@ -90,7 +90,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
     // Use the supplier's plain numeric comparison grammar. Validate normalized power again before display.
-    if(stock)where.push(`pw>=${low}`,`pw<=${high}`);
+    if(stock)where.push(`((pw>=${low} and pw<=${high}) or pw is null or pw='' or pw<=0)`);
     else {const owner=stepwgnOwnerSql();
       // PW is only a supplier-side hint. Unknown/zero values must reach the local
       // encyclopedia enrichment before the final power decision; otherwise valid
