@@ -1,4 +1,3 @@
-import {ajesPowerFilterValues} from './ajes-power-estimate';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
