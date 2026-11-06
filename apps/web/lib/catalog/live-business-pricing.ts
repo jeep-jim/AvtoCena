@@ -230,13 +230,14 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 }
 
 /** Shared price replay for selectors and visible cards; no display-identity or saved-draft reads. */
-export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean}={}): Promise<T[]> {
+export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean}={}, marketSnapshot?:Promise<Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>>|Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>): Promise<T[]> {
   if (!offers.length) return offers;
   const editorial=await readCatalogEditorial();
   offers=offers.map(offer=>offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer);
   offers=await Promise.all((await withChinaCnyPrices(offers,options)).map(async offer=>repriceEncyclopediaOffer(await repriceEditorialOffer(offer))));
+  const marketsPromise=marketSnapshot?Promise.resolve(marketSnapshot):getEffectiveMarketsWithDefaults();
   const [markets, ratedOffers] = await Promise.all([
-    getEffectiveMarketsWithDefaults(),
+    marketsPromise,
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
