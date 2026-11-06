@@ -34,9 +34,7 @@ function ajesStockOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Currenc
  const details=lot.sourceDetails||ajesSourceDetails(lot.info),extra=ajesDetailValues(details),sourceUrl=ajesOriginalListingUrl(lot.status,market,lot.lot);
  const engineCc=lot.engineCc||extra.engineCc;
  const fuel=({P:'petrol',D:'diesel',E:'electric',H:'hybrid',HE:'hybrid',L:'lpg',C:'cng'} as Record<string,string>)[lot.sourceFuel.toUpperCase()]||extra.fuel;
- const hp=/^\d+(?:\.\d+)?$/.test(lot.sourcePower)?Number(lot.sourcePower):undefined;
- const powerHp=hp&&hp>0&&hp<=2500?hp:!lot.sourcePower.trim()?extra.horsepower:undefined;
- const powerField=hp?'PW':'INFO:Maximum horsepower (Ps)',engineField=lot.engineCc?'ENG_V':'INFO:Displacement (mL)',fuelField=({P:1,D:1,E:1,H:1,HE:1,L:1,C:1} as Record<string,number>)[lot.sourceFuel.toUpperCase()]?(lot.sourceFuelField||'TIME'):'INFO:fuel form';
+ const engineField=lot.engineCc?'ENG_V':'INFO:Displacement (mL)',fuelField=({P:1,D:1,E:1,H:1,HE:1,L:1,C:1} as Record<string,number>)[lot.sourceFuel.toUpperCase()]?(lot.sourceFuelField||'TIME'):'INFO:fuel form';
  const sellerPriceRub=Math.round(lot.sourcePrice*rate.effectiveRate),sourceId=`ajes_${market}_feed`;
  return {id:`ajes-${market}-${lot.id}`,sourceId,sourceOfferId:lot.id,market,offerType:'fixed',status:'active',catalogKind:'listing',
  make:lot.make,model:lot.model,trim:lot.trim,year:lot.year,
