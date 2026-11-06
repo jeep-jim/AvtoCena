@@ -1,5 +1,4 @@
 import {isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
-import {offerWithSavedPreview} from './saved-calculation-preview';
 import {matchesCatalogColor} from './catalog-color-index';
 import {filterSelections,matchesFilterSelection} from './filter-selections';
 import {AjesInputError} from './ajes-query';
@@ -22,8 +21,7 @@ export function ajesResultFilter(params:Record<string,unknown>){
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
  const matchesPower=(offer:any)=>{
   if(!powerFilter)return true;
-  const displayed=offerWithSavedPreview(offer);
-  const exact=isOwnerStepwgnNonHybrid(displayed)?150:Number(displayed.powerHp);
+  const exact=isOwnerStepwgnNonHybrid(offer)?150:Number(offer.powerHp);
   // Supplier PW is not a vehicle specification. Only the locally enriched,
   // trusted encyclopedia value (or the explicit owner override) can qualify.
   return Number.isFinite(exact)&&exact>0&&(powerFrom===undefined||exact>=powerFrom)&&(powerTo===undefined||exact<=powerTo);
