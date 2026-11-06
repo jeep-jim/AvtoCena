@@ -71,7 +71,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // Pagination changes only the offset. Recounting here competes with the
  // requested list in the same two-slot supplier queue. The independent count
  // endpoint/header owns aggregate refresh; continuations need only their rows.
- if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!(query.table==='stats'&&filter.powerFilter))void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
