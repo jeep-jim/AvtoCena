@@ -19,10 +19,10 @@ test('power selection never becomes a supplier horsepower SQL predicate',()=>{
  for(const market of ['china','korea'] as const)for(const aggregate of [undefined,'count','models'] as const){
   const q=ajesCatalogQuery({market,powerFrom:'100',powerTo:'160',pageSize:'48'});
   const sql=ajesQuery({...q,aggregate}).sql;
-  assert.doesNotMatch(sql,/pw\\s*(?:>=|<=|>|<)/i);
+  assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
  for(const p of [{powerTo:'-1'},{powerFrom:'200',powerTo:'100'},{powerTo:'Infinity'}])assert.throws(()=>ajesQuery(ajesCatalogQuery({market:'china',...p})));
- assert.doesNotMatch(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw\\s*(?:>=|<=|>|<)/i);
+ assert.doesNotMatch(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw\s*(?:>=|<=|>|<)/i);
  assert.match(ajesQuery(ajesCatalogQuery({market:'china',sort:'mileage',page:'2',pageSize:'48'})).sql,/order by mileage asc, id asc limit 48,48/);
 });
 
