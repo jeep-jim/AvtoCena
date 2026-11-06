@@ -14,7 +14,7 @@ test('original STATUS link reaches existing operational source slot without chan
   assert.equal(offer.operational?.sourceUrl,url);
   assert.equal(offer.sourcePrice,price);
   assert.equal(offer.sellerPriceRub,Math.round(price*rate));
-  assert.equal(offer.powerHp,150);
+  assert.equal(offer.powerHp,undefined);assert.equal(offer.powerDataSource,undefined);
   // A pre-fix normalized snapshot also has STATUS: no schema reset or forced upstream call.
   assert.equal(ajesOffer(JSON.parse(JSON.stringify(lot)),{rateSource:'cbr',currency:offer.sourceCurrency,sourcePrice:price,effectiveRate:rate} as any,'2026-10-19').operational?.sourceUrl,url);
  }
@@ -49,8 +49,8 @@ test('named INFO technical table fills only explicit missing parameters and reta
   const lot=ajesLot({ID:'fixture',MARKA_NAME:'HAVAL',MODEL_NAME:'M6',YEAR:2023,FINISH:57800,STATUS:'https://m.che168.com/cardetail/index?infoid={LOT}',LOT:'59163228',INFO},'china',detail)!;
   const offer=ajesOffer(lot,{rateSource:'cbr',currency:'CNY',sourcePrice:57800,effectiveRate:12.495} as any,'2026-10-19');
   assert.equal(offer.sourcePrice,57800);assert.equal(offer.sellerPriceRub,722211);
-  assert.equal(offer.powerHp,150);assert.equal(offer.engineCc,1497);assert.equal(offer.fuel,'petrol');assert.equal(offer.drive,'fwd');assert.equal(offer.transmission,'manual');assert.equal(offer.bodyType,'suv');
-  assert.match(offer.powerDataSource!,/INFO:Maximum horsepower/);
+  assert.equal(offer.powerHp,undefined);assert.equal(offer.powerDataSource,undefined);assert.equal(offer.engineCc,1497);assert.equal(offer.fuel,'petrol');assert.equal(offer.drive,'fwd');assert.equal(offer.transmission,'manual');assert.equal(offer.bodyType,'suv');
+  assert.equal(offer.powerDataSource,undefined);
   assert.equal(offer.power30MinKw,undefined);
   const snapshot=offer.operational?.sourceSpecifications;assert.equal(snapshot?.sourceOfferId,'fixture');assert.equal(snapshot?.sourceId,'ajes_china_feed');
   assert.ok(snapshot?.groups[0].items.some(i=>i.value==='GW4G15M'));
@@ -61,7 +61,7 @@ test('INFO cannot override present core parameters or fabricate power from peak 
  const row={ID:'fixture',MARKA_NAME:'TEST',MODEL_NAME:'TEST',YEAR:2023,FINISH:57800,PW:'160',ENG_V:1998,TIME:'D',KPP:'AT',PRIV:'4WD',INFO:'Maximum horsepower (Ps): 150<br>Displacement (mL): 1497<br>fuel form: Gasoline<br>gearbox: 6-speed Manual<br>Drive mode: FF'};
  const rate={rateSource:'cbr',currency:'CNY',sourcePrice:57800,effectiveRate:12.495} as any;
  const offer=ajesOffer(ajesLot(row,'china',true)!,rate,'2026-10-19');
- assert.equal(offer.powerHp,160);assert.equal(offer.engineCc,1998);assert.equal(offer.fuel,'diesel');assert.equal(offer.transmission,'automatic');assert.equal(offer.drive,'awd');
+ assert.equal(offer.powerHp,undefined);assert.equal(offer.engineCc,1998);assert.equal(offer.fuel,'diesel');assert.equal(offer.transmission,'automatic');assert.equal(offer.drive,'awd');
  const ambiguous=ajesOffer(ajesLot({...row,PW:'',INFO:'Maximum horsepower (Ps): 150<br>Maximum horsepower (Ps): 180<br>Maximum power(kW): 110'},'china',true)!,rate,'2026-10-19');
  assert.equal(ambiguous.powerHp,undefined);assert.equal(ambiguous.power30MinKw,undefined);
  const missing=ajesOffer(ajesLot({...row,PW:'',INFO:'Maximum power(kW): 110'},'china',true)!,rate,'2026-10-19');assert.equal(missing.powerHp,undefined);
