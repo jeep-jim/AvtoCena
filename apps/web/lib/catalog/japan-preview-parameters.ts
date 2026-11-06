@@ -21,5 +21,5 @@ export function japanPreviewParameters(input: VehicleOffer) {
     power30MinKw: catalogPowerDisplay(offer)?.thirtyMinutePowerKw, icePowerKw: offer.icePowerKw,
     vehicleCategory: /pickup|pick-up|пикап/i.test(String(offer.bodyType || "")) ? "N1" : offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory,
     grossVehicleWeightKg: offer.grossVehicleWeightKg, n1IceFuel: offer.n1IceFuel, transportToBorderRub: offer.transportToBorderRub,
-  }, true);
+  });
 }
