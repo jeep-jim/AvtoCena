@@ -91,7 +91,12 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     if(low>high)throw new AjesInputError();
     // Use the supplier's plain numeric comparison grammar. Validate normalized power again before display.
     if(stock)where.push(`pw>=${low}`,`pw<=${high}`);
-    else {const owner=stepwgnOwnerSql();where.push(`((${owner} and 150>=${low} and 150<=${high}) or (not ${owner} and pw>=${low} and pw<=${high}))`);}
+    else {const owner=stepwgnOwnerSql();
+      // PW is only a supplier-side hint. Unknown/zero values must reach the local
+      // encyclopedia enrichment before the final power decision; otherwise valid
+      // cars are discarded before our own verified specification index can match them.
+      where.push(`((${owner} and 150>=${low} and 150<=${high}) or (not ${owner} and ((pw>=${low} and pw<=${high}) or pw is null or pw='' or pw<=0)))`);
+    }
   }
   if(q.aggregate!==undefined&&!['count','models','makes','colors'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
