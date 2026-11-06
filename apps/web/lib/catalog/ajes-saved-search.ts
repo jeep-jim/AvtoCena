@@ -62,7 +62,10 @@ export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string
    &&makes.includes(norm(lot.make))&&(!models||models.includes(norm(lot.model)))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
    &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo)
-   &&((input.powerFrom===undefined&&input.powerTo===undefined)||(/^\d+(?:\.\d+)?$/.test(String(lot.sourcePower||''))&&Number(lot.sourcePower)>0&&(input.powerFrom===undefined||Number(lot.sourcePower)>=input.powerFrom)&&(input.powerTo===undefined||Number(lot.sourcePower)<=input.powerTo)));
+   // Power is intentionally not decided from saved supplier PW here. The
+   // caller enriches these candidate rows from the local encyclopedia and runs
+   // the same final public filter as a fresh supplier response.
+   &&true;
  });
  const unique=[...new Map(matches.map(saved=>[saved.items[0].id,saved])).values()];
  unique.sort((a,b)=>(input.sort==='totalRub'?a.items[0].sourcePrice-b.items[0].sourcePrice:input.sort==='totalRubDesc'?b.items[0].sourcePrice-a.items[0].sourcePrice:0)||String(b.items[0].id).localeCompare(String(a.items[0].id)));
