@@ -15,7 +15,7 @@ test('stock mapping keeps exact units, VIN and first photograph; missing power r
  const offer=ajesOffer(lot,{rateSource:'cbr',currency:'KRW',sourcePrice:17400000,effectiveRate:0.06} as any,'2026-10-18T02:00:00Z');
  assert.equal(offer.sourcePrice,17400000);assert.equal(offer.sourceCurrency,'KRW');assert.equal(offer.sellerPriceRub,1044000);assert.equal(offer.fuel,'diesel');assert.equal(offer.powerHp,undefined);assert.equal(offer.totalRub,null);assert.equal(offer.status,'active');assert.equal(offer.images[0].role,'vehicle');assert.equal(offer.productionDate,`${row.YEAR}-10`);assert.ok(ajesOfferId(offer.id));assert.ok(ajesImageUrl(offer.images[0].url));
  const cn=ajesLot({...row,FINISH:'108000',PW:'104',TIME:'O'},'china',true)!;
- const c=ajesOffer(cn,{rateSource:'cbr',currency:'CNY',sourcePrice:108000,effectiveRate:12} as any,'2026-10-18');assert.equal(c.sourcePrice,108000);assert.equal(c.powerHp,104);assert.equal(c.fuel,undefined);
+ const c=ajesOffer(cn,{rateSource:'cbr',currency:'CNY',sourcePrice:108000,effectiveRate:12} as any,'2026-10-18');assert.equal(c.sourcePrice,108000);assert.equal(c.powerHp,undefined);assert.equal(c.operational?.raw?.sourcePower,'104');assert.equal(c.fuel,undefined);
 });
 test('switch is checked by requested market; refusals stop without alternate routing',async()=>{
  const tables:string[]=[],urls:string[]=[];
@@ -55,7 +55,7 @@ test('China price ceiling can reuse a prior bounded page without reusing counts 
  assert.equal(ajesChinaPriceAllowed({sourceId:'ajes_china_feed',sellerPriceRub:52061667}),false);
 });
 
-test('confirmed supplier horsepower survives normalization and public safety checks',async()=>{
+test('supplier horsepower remains raw provenance and never becomes a verified specification',async()=>{
  const {normalizeVehicleOfferSpecs}=await import('../apps/web/lib/catalog/spec-normalization');
  const {safePublicPricing}=await import('../apps/web/lib/catalog/safe-public-pricing');
  const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/specification-evidence-audit');
@@ -63,9 +63,10 @@ test('confirmed supplier horsepower survives normalization and public safety che
   const lot=ajesLot({...row,MARKA_NAME:'TOYOTA',MODEL_NAME:'COROLLA',FINISH:'108000',PW:power,TIME:'P'},'china',false)!;
   const offer=ajesOffer(lot,{rateSource:'cbr',currency:'CNY',sourcePrice:108000,effectiveRate:12,rateDate:new Date().toISOString()} as any,new Date().toISOString());
   const normalized=normalizeVehicleOfferSpecs(offer);
-  assert.equal(normalized.powerDataConfidence,'source_exact');
-  assert.equal(classifySpecificationEvidence(normalized,'powerHp').state,'exact');
-  assert.equal(safePublicPricing(normalized).powerHp,Number(power));
+  assert.notEqual(normalized.powerDataConfidence,'source_exact');
+  assert.notEqual(classifySpecificationEvidence(normalized,'powerHp').state,'exact');
+  assert.equal(safePublicPricing(normalized).powerHp,undefined);
+  assert.equal(normalized.operational?.raw?.sourcePower,power);
   assert.equal(normalized.power30MinKw,undefined);
  }
 });

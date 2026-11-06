@@ -8,6 +8,7 @@ import { catalogPowerSanity } from "./power-sanity";
 
 export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLabel?: string }): SourceSpecificationSnapshot["groups"] {
   const groups: SourceSpecificationSnapshot["groups"] = [];
+  const ajes=/^ajes_(?:japan|korea|china)_feed$/.test(offer.sourceId);
   const basic: Array<{name: string; value: string}> = [];
   const add = (items: typeof basic, name: string, value: unknown) => {
     if ((typeof value === "string" && value.trim()) || (typeof value === "number" && Number.isFinite(value))) items.push({ name, value: String(value) });
@@ -42,7 +43,6 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
       add(auction,"Номер кузова",offer.frameNumber);
       add(auction,"Место проведения",offer.operational?.auctionTown);
       const source=offer.operational?.raw as Record<string,unknown>|undefined;
-      add(auction,"Мощность: варианты поставщика",source?.sourcePower);
       add(auction,"Привод: обозначение поставщика",source?.sourceDrive);
       add(auction,"КПП: обозначение поставщика",source?.sourceTransmission);
       add(auction,"Тип КПП: обозначение поставщика",offer.operational?.sourceTransmissionCode);

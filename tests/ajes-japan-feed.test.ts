@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
 import {ajesQuery,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
+import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
+import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {StorageConflictError,type JsonStorage} from '../apps/web/lib/data';
@@ -10,6 +12,59 @@ import {validateCollectionControls} from '../apps/web/lib/catalog/collection-con
 import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission';
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
+
+test('AJES power filter uses local encyclopedia power, never supplier PW as a specification',async()=>{
+ for(const table of ['stats','main','korea','china'] as const){
+  const sql=ajesQuery({table,powerTo:160}).sql;
+  assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
+ }
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const filter=ajesResultFilter({market:'japan',powerTo:'160'});
+ // Supplier PW alone is not sufficient, even when it claims a matching value.
+ assert.equal(filter.matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ assert.equal(filter.matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'250'}}}),false);
+ // A locally enriched value wins over a contradictory supplier hint.
+ assert.equal(filter.matches({powerHp:150,sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'250'}}}),true);
+ assert.equal(filter.matches({powerHp:180,sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ // A manually saved customer scenario is not evidence of the vehicle's factory power.
+ assert.equal(filter.matches({powerHp:180,savedCalculationPreview:{totalRub:1000000,parameters:{powerHp:150}}}),false);
+});
+
+test('HTTP 414 recovers a previously viewed page as stale instead of failing closed with no cards',async()=>{
+ const saved={schemaVersion:2,items:[{id:'saved-japan',table:'stats'}],page:1,pageSize:24,observedAt:new Date(Date.now()-31*60_000).toISOString()};
+ const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>new Response('too long',{status:414})});
+ const result=await client.read({table:'stats',powerTo:160},'127.0.0.1');
+ assert.equal(result.stale,true);assert.equal(result.items[0].id,'saved-japan');
+});
+
+test('saved AJES fallbacks return bounded car candidates and defer power eligibility to local enrichment',async()=>{
+ const {findSavedAjesSearch,findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const now=Date.now(),observedAt=new Date(now).toISOString();
+ const japan={schemaVersion:2,observedAt,items:[{id:'jp-saved',table:'stats',make:'TOYOTA',model:'PRIUS',year:2023,status:'Sold',finalPriceJpy:1000000,sourcePower:'150'}]};
+ const stock={schemaVersion:2,observedAt,items:[{id:'cn-saved',table:'china',make:'BYD',model:'QIN',year:2024,status:'Active',sourcePrice:10000,sourcePower:'150'}]};
+ const jp=findSavedAjesSearch({table:'stats',powerTo:160}, {'stats:jp-saved':japan},now);
+ const cn=findSavedAjesStockSearch({table:'china',make:'BYD',model:'QIN',powerTo:160}, {'china:cn-saved':stock},now);
+ assert.equal(jp?.items[0].id,'jp-saved');
+ assert.equal(cn?.items[0].id,'cn-saved');
+ const japanFilter=ajesResultFilter({market:'japan',powerTo:'160'});
+ const chinaFilter=ajesResultFilter({market:'china',powerTo:'160'});
+ assert.equal(japanFilter.matches({...japan.items[0],sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ assert.equal(chinaFilter.matches({...stock.items[0],sourceId:'ajes_china_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ assert.equal(japanFilter.matches({...japan.items[0],powerHp:150}),true);
+ assert.equal(chinaFilter.matches({...stock.items[0],powerHp:150}),true);
+});
+
+test('stock supplier PW stays raw evidence and never becomes a vehicle horsepower fact',()=>{
+ const lot=ajesLot({...row,ID:'cn-power',MARKA_NAME:'BYD',MODEL_NAME:'QIN',YEAR:'2024',STATUS:'Active',FINISH:'10000',PW:'150',ENG_V:'1498',TIME:'P',KPP:'AT',PRIV:'FF'},'china',false);
+ assert.ok(lot);
+ const offer=ajesOffer(lot!,{currency:'CNY',sourcePrice:10000,effectiveRate:12,rateSource:'cbr'} as any,new Date().toISOString());
+ assert.equal(offer.powerHp,undefined);
+ assert.equal(offer.powerDataSource,undefined);
+ assert.equal(offer.operational?.semanticEvidence?.powerHp,undefined);
+ assert.equal(ajesPowerEstimateHp(offer),undefined);
+ assert.equal(ajesPowerEstimateHp({...offer,powerHp:150}),150);
+});
 
 test('actual supplier TAG aggregates are positional and strictly numeric',async()=>{
  const read=async(body:unknown,aggregate:'count'|'models')=>createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(body))}).read({aggregate},'127.0.0.1');
@@ -302,48 +357,36 @@ test('old normalized cache refreshes TIME on demand and remains available on sup
 });
 
 import {mock} from 'node:test';
-import {LocalJsonStorage} from '../apps/web/lib/data';
-import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
-import {calculateOfferWithCustomerParametersDetailed} from '../apps/web/lib/catalog/customs-pricing';
 import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {offerSpecificationGroups} from '../apps/web/lib/catalog/offer-specification-groups';
 
-test('AJES detail retains chassis identity and source specifications; first PW only seeds editable estimate',()=>{
+test('AJES detail keeps listing identity but never exposes supplier PW as a specification',()=>{
  const lot=ajesLot({...row,TIME:'P',PW:'79,98',ENG_V:'1500',KUZOV:'TEST10',SERIAL:'TEST10-1234567',COLOR:'WHITE',EQUIP:'AC',KPP:'FA'},'stats',true)!;
  const offer=ajesOffer(lot,rate,new Date().toISOString());
  const publicRaw={...offer,operational:undefined} as any;
  const draft=offerParameterDraft(offer,publicRaw);
- assert.equal(draft.powerHp,'79');assert.equal(offer.powerHp,undefined);
+ assert.equal(draft.powerHp,'');assert.equal(offer.powerHp,undefined);
  assert.equal(draft.power30MinKw,'');assert.equal(offer.totalRub,null);
  const groups=offerSpecificationGroups(offer);
  assert.ok(groups.some(g=>g.items.some(i=>i.name==='Код кузова'&&i.value==='TEST10')));
  assert.ok(groups.some(g=>g.items.some(i=>i.name==='Номер кузова'&&i.value==='TEST10-1234567')));
- assert.ok(groups.some(g=>g.items.some(i=>i.value==='79,98')));
+ assert.ok(!groups.some(g=>g.items.some(i=>i.value==='79,98')));
  assert.equal(offer.color,'WHITE');
  assert.equal(ajesLot({...row,SERIAL:'TEST10-1234567'},'stats',false)?.frameNumber,undefined);
  assert.equal(ajesPowerEstimateHp({...offer,sourceId:'encar'}),undefined);
  for(const PW of ['', 'bad79', '0,98','79,bad','2501,98'])assert.equal(ajesPowerEstimateHp(ajesOffer(ajesLot({...row,PW},'stats',true)!,rate,new Date().toISOString())),undefined);
  const electric=ajesOffer(ajesLot({...row,TIME:'E',PW:'150,200'},'stats',true)!,rate,new Date().toISOString());
  const electricDraft=offerParameterDraft(electric);
- assert.equal(electricDraft.powerHp,'150');assert.equal(electricDraft.power30MinKw,'');
+ assert.equal(electricDraft.powerHp,'');assert.equal(electricDraft.power30MinKw,'');
  assert.throws(()=>validateCustomerParameters(electricDraft));
 });
 
-test('Japan first-PW draft computes a delivered estimate through the real customer calculator',async()=>{
+test('Japan source PW cannot start a delivered calculation without local or manual power',()=>{
  const offer=ajesOffer(ajesLot({...row,YEAR:'2018',TIME:'P',PW:'79,98',ENG_V:'1500'},'stats',true)!,rate,new Date().toISOString());
  const draft={...offerParameterDraft(offer),deliveryCity:'Новокузнецк'};
- const today=new Date().toISOString(),original=LocalJsonStorage.prototype.readJsonWithMeta;
- const patch=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async function(this:LocalJsonStorage,key:string,fallback:any){
-  if(key==='fees/exchange-rates.json')return {found:true,value:{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today},JPY:{cbrRate:53,nominal:100,rateDate:today},USD:{cbrRate:90,nominal:1,rateDate:today}}};
-  return original.call(this,key,fallback);
- });
- resetCatalogRateCache();
- try{
-  const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
-  assert.equal(result.ok,true,JSON.stringify(result));
-  if(result.ok){assert.ok(result.calculation.totalRub>offer.sellerPriceRub!);assert.ok(result.calculation.breakdown.length>1);}
- }finally{patch.mock.restore();resetCatalogRateCache();}
+ assert.equal(draft.powerHp,'');
+ assert.throws(()=>validateCustomerParameters(draft));
 });
 
 

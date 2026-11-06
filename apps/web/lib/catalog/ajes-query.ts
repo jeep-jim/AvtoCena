@@ -1,4 +1,3 @@
-import {stepwgnOwnerSql} from './japan-owner-specifications';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
@@ -59,8 +58,8 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  // Japan power filters add the owner override twice. Use the equivalent compact truck
-  // predicate for drive and power bounds so the supplier GET stays below its URI limit.
+  // Use the equivalent compact heavy-vehicle predicate on filtered Japan queries
+  // to keep the supplier request small; horsepower itself is resolved locally.
   const compactJapan=!stock&&(Boolean(q.drive)||q.powerFrom!==undefined||q.powerTo!==undefined);
   where.push(heavyVehicleSqlExclusion(false,false,compactJapan),motorcycleSqlExclusion());
   if(!stock)where.push(japanMakeSqlExclusion());
@@ -89,9 +88,9 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // Use the supplier's plain numeric comparison grammar. Validate normalized power again before display.
-    if(stock)where.push(`pw>=${low}`,`pw<=${high}`);
-    else {const owner=stepwgnOwnerSql();where.push(`((${owner} and 150>=${low} and 150<=${high}) or (not ${owner} and pw>=${low} and pw<=${high}))`);}
+    // Power is deliberately not a supplier SQL predicate. The supplier returns
+    // car identity/photos; local encyclopedia enrichment decides eligibility.
+    // The bounded post-filter below prevents an unbounded scan of supplier pages.
   }
   if(q.aggregate!==undefined&&!['count','models','makes','colors'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
@@ -102,7 +101,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   const terms=parseCatalogSort(sort);if(!terms)throw new AjesInputError();
   const fields={auctionDateAsc:'auction_date asc',auctionDateDesc:'auction_date desc',mileage:'mileage asc',mileageDesc:'mileage desc',year:'year desc',yearAsc:'year asc',totalRub:'finish asc',totalRubDesc:'finish desc'};
   const order=terms.length?terms.map(term=>fields[term]).join(', ')+(stock||terms.some(t=>t.startsWith('auctionDate'))||terms[0].startsWith('mileage')?'':', auction_date desc'):stock?'id desc':'auction_date desc';
-  return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
+  return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize,...(q.powerFrom!==undefined?{powerFrom:q.powerFrom}:{}),...(q.powerTo!==undefined?{powerTo:q.powerTo}:{})};
 }
 
 /** Provider uses &w=320 even when no question mark is present. Never download images here. */

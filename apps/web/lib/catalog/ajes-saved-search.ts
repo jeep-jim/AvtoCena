@@ -1,11 +1,13 @@
-import {ajesPowerFilterValues} from './ajes-power-estimate';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 import {enrichJapanDrive} from './japan-drive';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 
-/** Recover bounded saved Japan results, always labelled partial; never claim a complete catalog. */
+/** Recover bounded saved Japan candidates, always labelled partial; never claim a complete catalog.
+ * Supplier PW is intentionally ignored here. readAjesPublic enriches candidates locally,
+ * then the same final encyclopedia power filter used for fresh pages decides eligibility.
+ */
 export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
  const query=ajesQuery(input,driveIndex);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
@@ -18,10 +20,6 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
   const age=now-Date.parse(saved?.observedAt||''),lot=saved?.items?.[0];
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1
    &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!knownHeavyVehicleFamily(lot.make,lot.model)
-   &&((input.powerFrom===undefined&&input.powerTo===undefined)||(()=>{
-    const values=ajesPowerFilterValues({...lot,market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel}}});
-    return values.length>0&&values.every(hp=>(input.powerFrom===undefined||hp>=input.powerFrom)&&(input.powerTo===undefined||hp<=input.powerTo));
-   })())
    &&(!makes||makes.includes(normalized(lot.make)))
    &&(!models&&!families||Boolean(models?.includes(normalized(lot.model)))||Boolean(families?.some(model=>normalized(lot.model).startsWith(model+' '))))
    &&(!drives||drives.includes(enrichJapanDrive({drive:undefined as string|undefined,market:'japan',make:lot.make,model:lot.model,year:lot.year,trim:lot.trim,chassisCode:lot.chassisCode,operational:{raw:{sourceDrive:lot.sourceDrive}}},driveIndex).drive||''))
@@ -59,6 +57,7 @@ export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&!['updatedAt','totalRub','totalRubDesc'].includes(input.sort))return null;
  const norm=(value:unknown)=>String(value??'').trim().toUpperCase();
  const makes=input.make.split(',').map(norm),models=input.model?.split('|').map(norm),year=new Date(now).getUTCFullYear();
+ // Saved stock rows are candidates only; power is resolved after local enrichment.
  const matches=Object.values(snapshots).filter(saved=>{
   const lot=saved?.items?.[0],age=now-Date.parse(saved?.observedAt||'');
   return age>=0&&age<7*86400000&&lot?.table===query.table&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')
@@ -66,8 +65,7 @@ export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string
    &&! /^(sold|removed|withdrawn|deleted)$/i.test(lot.status||'')&&!knownHeavyVehicleFamily(lot.make,lot.model)
    &&makes.includes(norm(lot.make))&&(!models||models.includes(norm(lot.model)))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
-   &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo)
-   &&((input.powerFrom===undefined&&input.powerTo===undefined)||(/^\d+(?:\.\d+)?$/.test(String(lot.sourcePower||''))&&Number(lot.sourcePower)>0&&(input.powerFrom===undefined||Number(lot.sourcePower)>=input.powerFrom)&&(input.powerTo===undefined||Number(lot.sourcePower)<=input.powerTo)));
+   &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo);
  });
  const unique=[...new Map(matches.map(saved=>[saved.items[0].id,saved])).values()];
  unique.sort((a,b)=>(input.sort==='totalRub'?a.items[0].sourcePrice-b.items[0].sourcePrice:input.sort==='totalRubDesc'?b.items[0].sourcePrice-a.items[0].sourcePrice:0)||String(b.items[0].id).localeCompare(String(a.items[0].id)));

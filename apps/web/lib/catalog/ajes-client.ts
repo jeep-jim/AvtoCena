@@ -89,7 +89,12 @@ export function createAjesClient(deps:Dependencies) {
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
-        const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:20000);
+        const controller=new AbortController();
+        // A power-filter request must never hold a visitor behind a slow
+        // supplier scan. The local encyclopedia has already been applied before
+        // post-filtering, so fail fast and use a bounded saved page when possible.
+        const encyclopediaPowerList=query.kind==='list'&&(query.powerFrom!==undefined||query.powerTo!==undefined);
+        const timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:encyclopediaPowerList?4500:20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
@@ -158,7 +163,7 @@ export function createAjesClient(deps:Dependencies) {
           return query.kind==='list'?remember(result):result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
-          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
+          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
           if(error instanceof AjesUnavailable&&recoverable){
             const key=error.reason==='quota_exhausted'?quotaKey:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
             // Do not extend an existing cooldown when merely reading the cached failure.

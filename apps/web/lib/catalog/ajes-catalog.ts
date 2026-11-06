@@ -34,6 +34,11 @@ const resolvedCatalogQuery=cache(async(key:string)=>{
 });
 export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary>=>{
  const params=JSON.parse(key),filter=ajesResultFilter(params);
+ if(filter.powerFilter){
+  // Supplier COUNT and directory resolution cannot know the locally enriched
+  // horsepower. Return immediately; never occupy a supplier slot for a false total.
+  return {total:0,stale:false,observedAt:new Date().toISOString(),upperBound:true};
+ }
  const resolved=await resolvedCatalogQuery(key);
  if(resolved.modelDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
  const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
@@ -66,18 +71,21 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // Pagination changes only the offset. Recounting here competes with the
  // requested list in the same two-slot supplier queue. The independent count
  // endpoint/header owns aggregate refresh; continuations need only their rows.
- if(options.includeCount!==false&&(query.page||1)===1&&!params.after)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
-  const page=modelDirectoryUnavailable?{...received,partial:true}:received;
+  // Apply locally verified technical filters before delivered-price previews.
+  // Non-matching cars never enter the expensive customs/management pipeline.
+  const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
+  const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
   const pricingStarted=performance.now();
   let priced=page.items;
   if(query.table==='china'||query.table==='korea'||filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
   else {
    // Only newly attested auction cards need the existing delivered-preview path.
    // Leave unmatched supplier rows on their current inexpensive path.
-   const matched=page.items.filter(v=>{if(hasEncyclopediaCalculationEvidence(v))return true;try{japanPreviewParameters(v);return true;}catch{return false;}});
+   const matched=page.items.filter(v=>{if(v.powerHp!=null&&hasEncyclopediaCalculationEvidence(v))return true;try{const parameters=japanPreviewParameters(v);return parameters.powerHp!=null||parameters.vehicleCategory==='N1';}catch{return false;}});
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
   measure?.('pricing',performance.now()-pricingStarted);
