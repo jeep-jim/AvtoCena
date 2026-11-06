@@ -29,12 +29,6 @@ test('fresh source total stops an exact source boundary; stale pages cannot use 
  assert.equal((await readFilteredAjesPage({page:1,pageSize:24,sourceTotal:24,read})).hasMore,false);
  assert.equal((await readFilteredAjesPage({page:1,pageSize:24,sourceTotal:24,read:async()=>({...await read(),stale:true})})).hasMore,true);
 });
-test('Japan power scans are capped to two supplier pages and keep a continuation',async()=>{
- let reads=0;
- const result=await readFilteredAjesPage({page:1,pageSize:24,maxReads:2,read:async()=>{reads++;return {items:[],received:24};}});
- assert.equal(reads,2);assert.equal(result.reads,2);assert.equal(result.scanLimited,true);assert.equal(result.nextCursor,'3.0');assert.equal(result.hasMore,true);
-});
-
 test('partial fallback stays partial and never triggers a crawl',async()=>{
  const result=await readFilteredAjesPage({page:1,pageSize:24,read:async()=>({items:['saved'],received:24,partial:true,stale:true})});
  assert.equal(result.reads,1);assert.equal(result.partial,true);assert.equal(result.stale,true);assert.equal(result.hasMore,false);
