@@ -15,14 +15,14 @@ test('independent counts retain zero, unavailable and stale semantics',()=>{
  assert.equal(ajesCountText({...fresh,upperBound:true}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);
 });
-test('stock power selection uses numeric nonempty evidence in lists and aggregates',()=>{
- for(const market of ['china','korea'])for(const aggregate of [undefined,'count','models'] as const){
+test('power selection never becomes a supplier horsepower SQL predicate',()=>{
+ for(const market of ['china','korea'] as const)for(const aggregate of [undefined,'count','models'] as const){
   const q=ajesCatalogQuery({market,powerFrom:'100',powerTo:'160',pageSize:'48'});
   const sql=ajesQuery({...q,aggregate}).sql;
-  assert.doesNotMatch(sql,/regexp|pw\+0/);assert.match(sql,/pw>=100/);assert.match(sql,/pw<=160/);
+  assert.doesNotMatch(sql,/pw\\s*(?:>=|<=|>|<)/i);
  }
  for(const p of [{powerTo:'-1'},{powerFrom:'200',powerTo:'100'},{powerTo:'Infinity'}])assert.throws(()=>ajesQuery(ajesCatalogQuery({market:'china',...p})));
- assert.match(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw<=160/);
+ assert.doesNotMatch(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw\\s*(?:>=|<=|>|<)/i);
  assert.match(ajesQuery(ajesCatalogQuery({market:'china',sort:'mileage',page:'2',pageSize:'48'})).sql,/order by mileage asc, id asc limit 48,48/);
 });
 
@@ -69,13 +69,16 @@ test('loopback release probes never reach supplier or credentials without visito
  assert.equal(touched,0);
 });
 
-test('exact Korea/China filters recover only matching saved cards when the source refuses',async()=>{
+test('Korea/China saved fallback returns candidates; local power filter still rejects missing encyclopedia power',async()=>{
  const {findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const now=Date.parse('2026-10-18T12:00:00Z'),lot={id:'a5',table:'korea',make:'AUDI',model:'A5 F5',year:2023,sourcePrice:35000000,status:''};
  const saved={items:[lot],observedAt:new Date(now-60000).toISOString()},snapshots={one:saved};
  const q={table:'korea' as const,make:'Audi',model:'A5 F5|A5 B10',yearFrom:2023,yearTo:2023};
- const result=findSavedAjesStockSearch(q,snapshots,now)!;assert.equal(result.items[0].id,'a5');assert.equal(result.partial,true);assert.equal(result.stale,true);assert.equal('total' in result,false);
- for(const extra of [{model:'A50'},{make:'BMW'},{yearFrom:2024,yearTo:2024},{page:2},{powerTo:160},{fuel:'petrol'},{sort:'year' as const}])assert.equal(findSavedAjesStockSearch({...q,...extra},snapshots,now),null);
+ const result=findSavedAjesStockSearch(q,snapshots,now)!;
+ assert.equal(result.items[0].id,'a5');assert.equal(result.partial,true);assert.equal(result.stale,true);assert.equal('total' in result,false);
+ assert.equal(ajesResultFilter({market:'korea',powerTo:160}).matches(result.items[0]),false);
+ for(const extra of [{model:'A50'},{make:'BMW'},{yearFrom:2024,yearTo:2024},{page:2},{fuel:'petrol'},{sort:'year' as const}])assert.equal(findSavedAjesStockSearch({...q,...extra},snapshots,now),null);
  assert.equal(findSavedAjesStockSearch({table:'korea'},snapshots,now),null);
  for(const change of [{status:'Sold'},{year:2019},{sourcePrice:null},{table:'china'},{make:'HYUNDAI',model:'UNIVERSE'}])assert.equal(findSavedAjesStockSearch(q,{one:{...saved,items:[{...lot,...change}]}},now),null);
  assert.equal(findSavedAjesStockSearch(q,{one:{...saved,observedAt:'2026-10-01T00:00:00Z'}},now),null);
@@ -83,7 +86,6 @@ test('exact Korea/China filters recover only matching saved cards when the sourc
  assert.equal(findSavedAjesStockSearch(china,{one:{...saved,items:[{...lot,table:'china',sourcePrice:100001}]}},now),null);
  assert.ok(findSavedAjesStockSearch(china,{one:{...saved,items:[{...lot,table:'china',sourcePrice:100000}]}},now));
 });
-
 
 test('large families keep every source generation and never match A50 or S5',async()=>{
  const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
@@ -101,21 +103,25 @@ test('power results keep the source 111 hp match and reject empty, malformed and
  assert.equal(filter.matches({powerHp:111}),true);assert.equal(filter.matches({powerHp:160}),true);
  for(const powerHp of [undefined,null,'',0,200,'111,200','unknown'])assert.equal(filter.matches({powerHp}),false);
 });
-test('power filter uses the saved horsepower shown on the card without changing source evidence',async()=>{
+test('power filter uses only local encyclopedia horsepower, not saved calculation scenarios',async()=>{
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const filter=ajesResultFilter({market:'korea',powerTo:'160'});
  const offer={powerHp:150,savedCalculationPreview:{totalRub:4309204,parameters:{powerHp:186,powerKw:136.8027675}}};
- assert.equal(filter.matches(offer),false);
+ assert.equal(filter.matches(offer),true);
  assert.equal(offer.powerHp,150);
- assert.equal(filter.matches({...offer,savedCalculationPreview:{totalRub:4309204,parameters:{powerHp:160}}}),true);
- assert.equal(filter.matches({...offer,savedCalculationPreview:{totalRub:0,parameters:{powerHp:186}}}),true);
+ assert.equal(filter.matches({...offer,powerHp:undefined,savedCalculationPreview:{totalRub:4309204,parameters:{powerHp:160}}}),false);
+ assert.equal(filter.matches({...offer,powerHp:160,savedCalculationPreview:{totalRub:0,parameters:{powerHp:186}}}),true);
 });
-test('power search recovers only matching already received cars without requiring a model',async()=>{
+
+test('power search recovers bounded stock candidates without treating supplier PW as power',async()=>{
  const {findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const now=Date.now(),observedAt=new Date(now-1000).toISOString();
  const snapshots=Object.fromEntries([['ok','111',100],['too','200',200],['missing','',300],['malformed','111,200',400],['wrong','111',500]].map(([id,power,price])=>[id,{observedAt,items:[{id,table:'china',make:id==='wrong'?'Toyota':'Volkswagen',model:'SANTANA',year:new Date().getUTCFullYear(),sourcePrice:price,sourcePower:power}]}]));
  const result=findSavedAjesStockSearch({table:'china',make:'VOLKSWAGEN',powerTo:160,sort:'totalRub'},snapshots,now);
- assert.deepEqual(result?.items.map(x=>x.id),['ok']);assert.equal(result?.partial,true);assert.equal(result?.stale,true);assert.equal('total' in result!,false);
+ assert.deepEqual(result?.items.map(x=>x.id),['ok','too','missing','malformed']);
+ assert.equal(result?.partial,true);assert.equal(result?.stale,true);assert.equal('total' in result!,false);
+ assert.ok(result!.items.every(item=>ajesResultFilter({market:'china',powerTo:160}).matches(item)===false));
 });
 
 test('Honda selector aliases resolve to actual supplier names without changing other makes',async()=>{
@@ -131,27 +137,31 @@ test('exact base Corolla does not hide other Corollas in supplier search',async(
  assert.deepEqual(resolveAjesModelSelection('Corolla',[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'COROLLA FIELDER'},{model:'CAMRY'}]),{model:'COROLLA|COROLLA CROSS|COROLLA FIELDER'});
 });
 
- test('Japan power discovery checks every supplier alternative without assigning exact power',async()=>{
+ test('Japan power discovery ignores supplier alternatives and accepts only explicit owner rules',async()=>{
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
- const filter=ajesResultFilter({powerTo:'160'});
- for(const [sourcePower,expected] of [['79,98',true],['160',true],['160,200',false],['200,150',false],['',false],['0,98',false],['79,bad',false],['150,2501',false]] as const){
-  const offer={sourceId:'ajes_japan_feed',operational:{raw:{sourcePower}}};
-  assert.equal(filter.matches(offer),expected,sourcePower);
+ const filter=ajesResultFilter({market:'japan',powerTo:'160'});
+ for(const sourcePower of ['79,98','160','160,200','200,150','','0,98','79,bad','150,2501']){
+  const offer={id:'ajes-stats-fixture',market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower}}};
+  assert.equal(filter.matches(offer),false,sourcePower);
   assert.equal('powerHp' in offer,false);
  }
- assert.equal(filter.matches({sourceId:'ajes_korea_feed',operational:{raw:{sourcePower:'150'}}}),false);
- assert.equal(ajesResultFilter({powerFrom:'100',powerTo:'160'}).matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'79,150'}}}),false);
- });
+ const ownerStepwgn={id:'ajes-stats-owner',market:'japan',make:'HONDA',model:'STEPWGN',fuel:'petrol',powertrainKind:'combustion',operational:{chassisCode:'RP3',raw:{sourceFuel:'P',sourcePower:''}}};
+ assert.equal(filter.matches(ownerStepwgn),true);
+ assert.equal(ajesResultFilter({market:'japan',powerFrom:'100',powerTo:'160'}).matches({id:'ajes-stats-fixture',market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'79,150'}}}),false);
+});
 
-test('Japan power selection recovers only matching bounded saved results after supplier refusal',async()=>{
+test('Japan saved fallback returns bounded candidates; source PW cannot qualify them',async()=>{
  const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const now=Date.now(),observedAt=new Date(now-1000).toISOString();
  const snapshots=Object.fromEntries([['ok','79,98'],['limit','160'],['too','150,200'],['missing',''],['bad','150,bad']].map(([id,sourcePower])=>[id,{observedAt,items:[{id,table:'stats',make:'TOYOTA',model:'TEST',year:2023,status:'Sold',finalPriceJpy:1000000,sourcePower}]}]));
  const result=findSavedAjesSearch({table:'stats',powerTo:160},snapshots,now);
- assert.deepEqual(result?.items.map(x=>x.id),['limit','ok']);
+ assert.deepEqual(result?.items.map(x=>x.id),['bad','limit','missing','ok','too']);
  assert.equal(result?.partial,true);assert.equal(result?.stale,true);assert.equal('total' in result!,false);
- assert.equal(findSavedAjesSearch({table:'stats',powerFrom:100,powerTo:159},snapshots,now),null);
+ assert.ok(result!.items.every(item=>ajesResultFilter({market:'japan',powerTo:160}).matches(item)===false));
+ assert.ok(findSavedAjesSearch({table:'stats',powerFrom:100,powerTo:159},snapshots,now));
  assert.equal(findSavedAjesSearch({table:'stats',powerTo:160,page:2},snapshots,now),null);
  assert.equal(findSavedAjesSearch({table:'stats',powerTo:160,fuel:'diesel'},snapshots,now),null);
  assert.equal(findSavedAjesSearch({table:'stats',powerTo:160},snapshots,now+8*86400000),null);
 });
+
