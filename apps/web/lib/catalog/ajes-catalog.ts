@@ -75,7 +75,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
-  const page=modelDirectoryUnavailable?{...received,partial:true}:received;
+  // Apply locally verified technical filters before delivered-price previews.
+  // Non-matching cars never enter the expensive customs/management pipeline.
+  const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
+  const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
   const pricingStarted=performance.now();
   let priced=page.items;
   if(query.table==='china'||query.table==='korea'||filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
