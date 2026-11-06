@@ -72,7 +72,7 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
   const bytes=new URLSearchParams({sql}).toString().length;
   assert.ok(bytes<6000,`${table}/${aggregate}: ${bytes}`);
   assert.ok(sql.includes(heavyVehicleSqlExclusion(false,false,true)));
-  assert.match(sql,/RP\\[58\\]/);
+  assert.match(sql,/RP\[58\]/);
   assert.match(sql,/pw>=/);
  }
  // Stock-market power filters and unfiltered Japan keep their existing SQL.
