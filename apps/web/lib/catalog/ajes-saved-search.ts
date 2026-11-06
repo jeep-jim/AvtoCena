@@ -4,7 +4,10 @@ import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 import {enrichJapanDrive} from './japan-drive';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 
-/** Recover bounded saved Japan results, always labelled partial; never claim a complete catalog. */
+/** Recover bounded saved Japan candidates, always labelled partial; never claim a complete catalog.
+ * Supplier PW is intentionally ignored here. readAjesPublic enriches candidates locally,
+ * then the same final encyclopedia power filter used for fresh pages decides eligibility.
+ */
 export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
  const query=ajesQuery(input,driveIndex);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
@@ -54,6 +57,7 @@ export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&!['updatedAt','totalRub','totalRubDesc'].includes(input.sort))return null;
  const norm=(value:unknown)=>String(value??'').trim().toUpperCase();
  const makes=input.make.split(',').map(norm),models=input.model?.split('|').map(norm),year=new Date(now).getUTCFullYear();
+ // Saved stock rows are candidates only; power is resolved after local enrichment.
  const matches=Object.values(snapshots).filter(saved=>{
   const lot=saved?.items?.[0],age=now-Date.parse(saved?.observedAt||'');
   return age>=0&&age<7*86400000&&lot?.table===query.table&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')
@@ -61,11 +65,7 @@ export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string
    &&! /^(sold|removed|withdrawn|deleted)$/i.test(lot.status||'')&&!knownHeavyVehicleFamily(lot.make,lot.model)
    &&makes.includes(norm(lot.make))&&(!models||models.includes(norm(lot.model)))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
-   &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo)
-   // Power is intentionally not decided from saved supplier PW here. The
-   // caller enriches these candidate rows from the local encyclopedia and runs
-   // the same final public filter as a fresh supplier response.
-   ;
+   &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo);
  });
  const unique=[...new Map(matches.map(saved=>[saved.items[0].id,saved])).values()];
  unique.sort((a,b)=>(input.sort==='totalRub'?a.items[0].sourcePrice-b.items[0].sourcePrice:input.sort==='totalRubDesc'?b.items[0].sourcePrice-a.items[0].sourcePrice:0)||String(b.items[0].id).localeCompare(String(a.items[0].id)));
