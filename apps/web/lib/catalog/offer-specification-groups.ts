@@ -20,7 +20,7 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
   if (offer.year > 1900) add(basic, "Год в объявлении", offer.year);
   if (typeof offer.mileageKm === "number" && offer.mileageKm >= 0) add(basic, "Пробег, км", offer.mileageKm);
   const bodyLabel = display?.bodyLabel ?? catalogBodyName(offer.bodyType, offer);
-  if (bodyLabel && bodyLabel !== "уточняется" && (!ajes || offer.editorialSpecifications?.bodyType || classifySpecificationEvidence(offer,"bodyType").state==="exact")) add(basic, "Кузов", bodyLabel);
+  if (bodyLabel && bodyLabel !== "уточняется" && localField("bodyType")) add(basic, "Кузов", bodyLabel);
   if(offer.editorialSpecifications?.drive)add(basic,"Привод",catalogDriveName(offer.drive));
   if(offer.editorialSpecifications?.transmission)add(basic,"Коробка передач",catalogTransmissionName(offer.transmission));
   if(offer.color&&(!ajes||offer.editorialSpecifications?.color||classifySpecificationEvidence(offer,"color").state==="exact"))add(basic,"Цвет",offer.color);
