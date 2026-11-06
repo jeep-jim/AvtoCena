@@ -3368,3 +3368,17 @@ China126870309797/126198742555/124685023963/124601674990: по одному за
 Следующий материал — existing China publish final/outcome/report/final public manifest; saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Новых saved primary auth Save/native permission/real delivery, Direct inputs/source/storage/generation/binding/filter, translation request/response/config/auth, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline и Korea binding analyses нет.
 
 Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Исторические failures/performanceAccepted=false не отменены. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки и authenticated Save.
+
+## Сверка 06.11.2026 08:43 Красноярск
+
+В обеих историях на main `4c4120139a47f27bf36707f9a4ecfca3abc369df` последняя запись датирована 07:42. AGENTS соответствует `e43d71557ddddef18c30cfec1c40f54f658e4826`. Новых записей основной работы в related operations нет.
+
+С предыдущей сверки появился один запуск. Dealer billing reconciliation `42144106548`, job `127651308282`, завершился в 08:29:24 со статусом SUCCESS. Проверены только метаданные. Результат финансовой сверки и изменения данных неизвестны.
+
+Единственная выполняющаяся задача — публикация Китая `42107580508/127541782446`. Шаг Publish идёт с 04:34:27. Итог публикации и публичный манифест пока неизвестны. Сбор `127526723041` и 31 финальный журнал из записи 06:47 повторно не запрашивались. В очереди те же четыре старых запуска. Нового деплоя приложения нет.
+
+PR #1706, #1707 и #1708 открыты на прежних коммитах. Для head #1706 зарегистрировано 0 запусков. Следующий источник для приёмки #1708 — сохранённая проверка списка, счётчика и обеих границ мощности Японии на точном релизе. Для редактора ожидается сохранённый результат Save из авторизованной сессии.
+
+Единственный запрос health вернул HTTP 200, 217 байт, curl exit 0, ok=true. Релиз `a1a3ec8ce6475f7da0c89e0e6545b96a121f9442`, calculationVersion `f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357`. Причина таймаута в 01:55–01:56 остаётся неизвестной.
+
+По каждому из четырёх прежних China jobs `126870309797`, `126198742555`, `124685023963`, `124601674990` единственный запрос журнала вернул Transport closed. Все четыре остаются НЕ READ. Наблюдение продолжается до итоговой приёмки. Ближайший ожидаемый результат — финальный журнал текущей публикации Китая и связанный с ней публичный манифест.
