@@ -90,7 +90,7 @@ export function createAjesClient(deps:Dependencies) {
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();
-        // A Japan power-filter request must never hold a visitor behind a slow
+        // A power-filter request must never hold a visitor behind a slow
         // supplier scan. The local encyclopedia has already been applied before
         // post-filtering, so fail fast and use a bounded saved page when possible.
         const encyclopediaPowerList=query.kind==='list'&&(query.powerFrom!==undefined||query.powerTo!==undefined);
