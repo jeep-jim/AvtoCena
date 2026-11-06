@@ -3350,3 +3350,21 @@ Market plan collect/publish SKIPPED metadata: UAE127575560976/127575561136, Euro
 China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed, все НЕ READ/cause unknown, без retry. Ожидаются existing China publish final/outcome/report/final public manifest, saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Новых saved primary auth Save/native permission/real delivery, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline и Korea binding analyses нет.
 
 Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Исторические failures/performanceAccepted=false не отменены. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/repair. Только2docs append-only, expected-parent CAS/readback; наблюдение enabled до итоговой приёмки.
+
+## Сверка 06.11.2026 07:42 Красноярск — China publish без нового final
+
+Прочитаны свежие main85e0af4c9f1636e495ab1b08df7e160e710f3cb1 и последние записи обеих историй. Новых primary записей нет; AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 и related operations без изменений. Все31 final из06:47 и прежние READ/PRIMARYREAD, включая China collect127526723041 и PR1708 Road/четыре final, не повторялись.
+
+PR1708 OPEN/7c35c4c19cdb17021ae8f1f81cc97dc3f92680cd, PR1707 OPEN/80e2b2669b0dd52347edb6ef3d4215ebae27f8db, PR1706 OPEN/e6e51e7d6452fb5eb22f1ddd7fb5ceab5e50c941 без изменений; PR1706 headruns0. Установка1706/1707/1708 и новая release-time приёмка не подтверждены.
+
+Единственный existing IN_PROGRESS — China42107580508/publish127541782446: Publish с04:34:27; final НЕ READ, final public manifest/inventory неизвестны. Current pending0/app deploy нет. Старые global queued38994950593/38994894574/38994824794/31164670128 без изменений, не новые deploy. Длительность не устанавливает причину/timeout/lock failure.
+
+NEW USD42134958901/refresh127620640009 SUCCESS07:11:23 — только metadata, лог НЕ READ; фактическое изменение курса/данных не подтверждено. CRM42124930853, billing42104974217, retention42119104194 и REGsize42035683400 остаются metadata only, не delivery/finance/cleanup/capacity proof; capacitywatch не дублируется.
+
+Единственный bounded health07:40–07:41 завершился curl exit0: ok=true, exact a1a3ec8ce6475f7da0c89e0e6545b96a121f9442, calculationVersion f5ed801dbe06d89e03825c42851389a5c440cf1ab734cd068750a2f558d59357 без изменений. Timeout01:55–01:56/curl28/35002ms/0bytes сохранён, cause unknown; успех не объясняет прежний timeout. Health не является UI/authenticated editor Save acceptance.
+
+China126870309797/126198742555/124685023963/124601674990: по одному запросу Transport closed; все НЕ READ/cause unknown, без retry. Новых relevant final logs для чтения нет; прежние Direct green_feed_empty, shared prices binding_missing, Regcloud deferred, translation_http_403 и их ограничения сохранены.
+
+Следующий материал — existing China publish final/outcome/report/final public manifest; saved primary1708 exact-release Japan list/count/both power bounds и1706/1707 release-time acceptance. Новых saved primary auth Save/native permission/real delivery, Direct inputs/source/storage/generation/binding/filter, translation request/response/config/auth, Georgia retention/finalmanifest/selecteddifference, UAE lock/cancelcause/auditbinding, verifier deadline и Korea binding analyses нет.
+
+Owner freeze и принятая база сохранены; runtime/live принадлежит primary. Исторические failures/performanceAccepted=false не отменены. Watch не запускал/повторял/отменял workflow, не менял data/prices/rights/guards; без browser/provider/repair. Только2docs append-only expected-parent CAS/readback; наблюдение enabled до итоговой приёмки и authenticated Save.
