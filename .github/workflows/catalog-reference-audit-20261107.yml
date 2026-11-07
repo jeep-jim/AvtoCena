@@ -1,0 +1,89 @@
+name: Catalog reference audit 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-reference-audit-20261107.yml', 'scripts/diagnostics/catalog-reference-audit-20261107.mjs']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalog-reference-audit-20261107
+  cancel-in-progress: false
+jobs:
+  record-priority:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: audit
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+      - name: Read current instructions and append owner request only
+        working-directory: main
+        run: |
+          set -euo pipefail
+          tail -n 120 AGENTS.md
+          tail -n 100 roadmap.md
+          python3 - <<'PY'
+          from pathlib import Path
+          note=Path('../audit/docs/operations/2026-11-07-catalog-reference-priority.md').read_text()
+          p=Path('roadmap.md'); original=p.read_text()
+          if '## Приоритет владельца 07.11.2026 — восстановление каталога, скорость, типографика и SEO' not in original:
+              p.write_text(original+'\n\n'+note)
+          PY
+          git diff --check
+          if ! git diff --quiet -- roadmap.md; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -- roadmap.md
+            git commit -m 'docs: owner priority for catalog recovery, reference audit, fonts and SEO'
+            git push origin HEAD:main
+          fi
+          git log -1 --format='%H %s'
+  public-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Export bounded tracked source for offline review
+        run: |
+          mkdir -p audit-output
+          python3 - <<'PY'
+          import subprocess,pathlib,tarfile,json
+          paths=subprocess.check_output(['git','ls-files','-z']).decode().split('\0'); omitted=[]
+          with tarfile.open('audit-output/source.tar.gz','w:gz') as t:
+              for name in paths:
+                  p=pathlib.Path(name)
+                  if not name or not p.is_file(): continue
+                  keep=name in ['AGENTS.md','roadmap.md','package.json','package-lock.json','tsconfig.json','Dockerfile','.dockerignore','.gitignore'] or name.startswith(('apps/','packages/','scripts/','tests/','data/','.github/','docs/operations/'))
+                  if not keep: continue
+                  if p.stat().st_size>8000000 or (p.suffix.lower() in ['.png','.jpg','.jpeg','.webp','.mp4','.pdf','.zip'] and not name.startswith('tests/')):
+                      omitted.append(name);continue
+                  t.add(name,recursive=False)
+          pathlib.Path('audit-output/omitted.json').write_text(json.dumps(omitted))
+          print('SOURCE_ARCHIVE_BYTES',pathlib.Path('audit-output/source.tar.gz').stat().st_size)
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install isolated browser audit dependencies
+        run: |
+          mkdir -p /tmp/catalog-browser
+          npm install --prefix /tmp/catalog-browser --no-audit --no-fund playwright@1.56.1
+          /tmp/catalog-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Compare bounded public routes and rendered typography
+        run: node scripts/diagnostics/catalog-reference-audit-20261107.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-reference-audit-20261107
+          path: audit-output
+          retention-days: 7
