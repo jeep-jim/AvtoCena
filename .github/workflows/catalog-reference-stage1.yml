@@ -2,7 +2,7 @@ name: Catalog reference stage 1 preparation
 on:
   push:
     branches: [fix/catalog-reference-20261107]
-    paths: ['.github/workflows/catalog-reference-stage1.yml', '.github/patches/catalog-reference-stage1.py', '.github/patches/catalog-reference-stage1-tests.py', 'apps/web/lib/catalog/market-section-result.ts', 'apps/web/app/public-typography.css']
+    paths: ['.github/workflows/catalog-reference-stage1.yml', '.github/patches/catalog-reference-stage1.py', '.github/patches/catalog-reference-stage1-tests.py', '.github/patches/catalog-reference-font-import.py', 'apps/web/lib/catalog/market-section-result.ts', 'apps/web/app/public-typography.css']
   workflow_dispatch:
 permissions:
   contents: write
@@ -24,6 +24,7 @@ jobs:
           test "$GITHUB_REF" = refs/heads/fix/catalog-reference-20261107
           python3 .github/patches/catalog-reference-stage1.py
           python3 .github/patches/catalog-reference-stage1-tests.py
+          python3 .github/patches/catalog-reference-font-import.py
           npm install --workspace=@avtocena/web --package-lock-only --ignore-scripts --save-exact --no-audit --no-fund @fontsource-variable/onest@5.3.1
           git diff --check
       - run: npm ci
@@ -66,7 +67,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm .github/patches/catalog-reference-stage1.py .github/patches/catalog-reference-stage1-tests.py .github/workflows/catalog-reference-stage1.yml
+          git rm .github/patches/catalog-reference-stage1.py .github/patches/catalog-reference-stage1-tests.py .github/patches/catalog-reference-font-import.py .github/workflows/catalog-reference-stage1.yml
           git add apps/web tests package-lock.json docs/operations/2026-11-07-zma-reference-findings.md
           git commit -m 'fix: readable public typography, canonical catalog routes and isolated market failures'
           git push origin HEAD:fix/catalog-reference-20261107
