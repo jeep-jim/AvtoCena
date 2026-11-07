@@ -1,3 +1,4 @@
+import {offerIdFromPath} from '@/lib/catalog/offer-url';
 import {readDealerSelection} from '@/lib/dealers/selection-share-server';
 import {SELECTION_TITLE} from '@/lib/dealers/selection-share';
 import type {Metadata} from 'next';
@@ -18,7 +19,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   return {title,description:selection.description,robots:{index:false,follow:true},alternates:{canonical:url},openGraph:{type:'website',title,description:selection.description,url,images:selection.images},twitter:{card:selection.images.length?'summary_large_image':'summary',title,description:selection.description,images:selection.images}};
  }
  const target=new URL(record.path,'https://avtocena.com');
- const metadata=await generateOfferMetadata({params:Promise.resolve({id:target.pathname.slice('/cars/offer/'.length)}),searchParams:Promise.resolve(Object.fromEntries(target.searchParams))});
+ const metadata=await generateOfferMetadata({params:Promise.resolve({id:offerIdFromPath(target.pathname)}),searchParams:Promise.resolve(Object.fromEntries(target.searchParams))});
  return {...metadata,robots:{index:false,follow:true},openGraph:{...metadata.openGraph,url:`https://avtocena.com/s/${token}`}};
 }
 export default async function ShortSharePage({params,searchParams}:Props){
