@@ -1,0 +1,85 @@
+name: Single public brand rail acceptance 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-single-brand-rail-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-single-brand-rail-acceptance
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-single-brand-rail-20261107
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: preparation
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Apply presentation-only candidate on exact base
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 11e3b4ed853518731c11aa1522068cc87cbb8ff4
+          tail -n 35 AGENTS.md
+          python3 preparation/.github/patches/catalog-single-brand-rail-20261107.py
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('tests/browser/catalog-single-brand-fixture.tsx');s=p.read_text();s=s.replace('import {CATALOG_BRANDS}', 'import {CATALOG_BRANDS,canonicalCatalogBrand}').replace('const brands=CATALOG_BRANDS.map(v=>v.name);','const brands=[...new Set(CATALOG_BRANDS.map(v=>canonicalCatalogBrand(v.name)).filter(Boolean))];');p.write_text(s)
+          PY
+          git diff --check
+      - run: npm ci
+      - name: Install bounded browser test runtime
+        run: |
+          npm install --prefix /tmp/single-rail-browser --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          /tmp/single-rail-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Compare responsive geometry, all brands, sticky controls and retained results
+        env:
+          PLAYWRIGHT_MODULE: /tmp/single-rail-browser/node_modules/playwright/index.mjs
+        run: node tests/browser/catalog-single-brand-check.mjs > single-rail-browser.log 2>&1 || { cat single-rail-browser.log; exit 1; }
+      - name: Full regression suite
+        run: npm test > single-rail-regressions.log 2>&1 || { tail -n 180 single-rail-regressions.log; exit 1; }
+      - name: Web and engine typecheck
+        run: npm run typecheck > single-rail-typecheck.log 2>&1 || { cat single-rail-typecheck.log; exit 1; }
+      - name: Production build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: npm run build > single-rail-build.log 2>&1 || { tail -n 160 single-rail-build.log; exit 1; }
+      - name: Commit only verified application and regression files to isolated branch
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          Path('docs/operations/2026-11-07-single-brand-rail.md').write_text('# 07.11.2026 — одна полоса марок публичного каталога\n\nИзолированный кандидат после PR1714/1715: один BrandLogoRail в публичном CatalogContent вместо двух responsive-копий. Все марки, поиск, URL, данные, расчёты и права сохранены. Дилерский вариант и AJES-шаблон не менялись. CSS slots сохраняют порядок по ширине экрана; stable keys сохраняют карточки при ошибке.\n\nПроверка '+os.environ['GITHUB_RUN_ID']+' прошла сравнительную геометрию390/768/1023/1280/1600, обе темы, полную директорию, sticky64px, плитку/список и retained results, затем полный npm test, typecheck и production build. Это проверка изолированного стенда, не измерение рабочего сайта и не установка. Требуется review/стандартный CI и live-приёмка.\n')
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- apps/web/components/catalog/CatalogSidebar.tsx apps/web/components/catalog/CatalogContent.tsx apps/web/components/catalog/catalog-sidebar.css tests/browser/catalog-sidebar-baseline.generated.tsx tests/browser/catalog-single-brand-fixture.tsx tests/browser/catalog-single-brand-check.mjs docs/operations/2026-11-07-single-brand-rail.md
+          git commit -m 'perf: render one public brand rail with preserved responsive layout'
+          git push origin HEAD:fix/catalog-single-brand-rail-20261107
+          git log -1 --format='%H %s'
+      - name: Preserve candidate and test evidence
+        if: always()
+        run: |
+          mkdir -p single-rail-report
+          git diff > single-rail-report/candidate.patch
+          cp single-rail-*.log single-rail-report/ 2>/dev/null || true
+          git rev-parse HEAD > single-rail-report/head.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-single-brand-rail-acceptance
+          path: |
+            single-rail-report
+            artifacts/catalog-single-brand
+          retention-days: 7
