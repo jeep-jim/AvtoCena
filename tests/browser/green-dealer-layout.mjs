@@ -22,7 +22,17 @@ const mocks={
 };
 const entry=`
  import React from 'react';
- import {renderToStaticMarkup} from 'react-dom/server';
+ import {renderToPipeableStream,renderToStaticMarkup} from 'react-dom/server';
+ import {PassThrough} from 'node:stream';
+ async function renderMarkup(tree){
+  const legacy=renderToStaticMarkup(tree);
+  console.log('SSR_STYLE_SERIALIZATION',JSON.stringify({legacyEscapesDirectChild:legacy.includes('&gt;.dealer-profile-home-banner')}));
+  return await new Promise((resolve,reject)=>{
+   const chunks=[],output=new PassThrough();
+   output.on('data',chunk=>chunks.push(chunk));output.on('end',()=>resolve(Buffer.concat(chunks).toString('utf8')));output.on('error',reject);
+   const controller=renderToPipeableStream(tree,{onAllReady(){controller.pipe(output);},onShellError:reject,onError:reject});
+  });
+ }
  import {GreenCornerCatalog} from './apps/web/components/catalog/GreenCornerCatalog';
  import {DealerProfileContent} from './apps/web/components/dealers/DealerProfileContent';
  import {DealerBrowsingProvider} from './apps/web/components/dealers/DealerBrowsingContext';
@@ -38,7 +48,7 @@ const entry=`
   let catalog=q.stock==='green'||!embedded?await GreenCornerCatalog({params:initial,embedded}):<div className="dealer-shared-catalog ac-catalog-page ac-page-copy"><div className="ac-catalog-shell"><CatalogSidebar dealerLayout filters={<div style={{minHeight:650}}>Фильтры аукционов</div>} header={<h1>Авто под заказ</h1>}><JapanSectionTabs active="auction" params={initial}/><div style={{height:600}}>Аукционная подборка</div></CatalogSidebar></div></div>;
   // Recreate only the two original wrapper defects as a negative control.
   if(q.fixtureBroken==='1'&&embedded)catalog=<DealerBrowsingProvider dealer={dealer}>{React.cloneElement(catalog,{className:'ac-catalog-page ac-page-copy min-h-screen'})}</DealerBrowsingProvider>;
-  return renderToStaticMarkup(embedded?<DealerBrowsingProvider dealer={dealer} profile><main className="ac-dealer-public-page ac-page-copy" style={{'--dealer-header-height':'64px'}}><header className="ac-public-header" style={{height:64}}>Тестовый дилер</header><DealerProfileContent s={profile} catalog={catalog}/></main></DealerBrowsingProvider>:catalog);
+  return renderMarkup(embedded?<DealerBrowsingProvider dealer={dealer} profile><main className="ac-dealer-public-page ac-page-copy" style={{'--dealer-header-height':'64px'}}><header className="ac-public-header" style={{height:64}}>Тестовый дилер</header><DealerProfileContent s={profile} catalog={catalog}/></main></DealerBrowsingProvider>:catalog);
  }
 `;
 const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'cjs',outfile:`${out}/fixture.cjs`,write:false,jsx:'automatic',packages:'external',tsconfig:'apps/web/tsconfig.json',loader:{'.css':'empty'},plugins:[{name:'fixture',setup(b){
@@ -52,11 +62,12 @@ const styles=layouts.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[
 const inline=layouts.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
 const moduleCss=compiled.outputFiles.filter(f=>f.path.endsWith('.css')).map(f=>f.text).join('\n');
 const css=await postcss([tailwindcss({content:['apps/web/components/**/*.{ts,tsx}','tests/browser/green-dealer-layout.mjs']})]).process(styles.join('\n')+'\n'+inline+'\n'+moduleCss+'\n'+fs.readFileSync('apps/web/components/catalog/catalog-sidebar.css','utf8'),{from:'apps/web/app/globals.css'});
+fs.writeFileSync(out+'/app.css',css.css);
 const server=http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://fixture');
  if(url.pathname==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}
  if(!url.pathname.startsWith('/dealers/')&&url.pathname!=='/cars/green'){res.writeHead(404);res.end();return;}
- try{const html=await module.exports.render(url);res.setHeader('Content-Type','text/html; charset=utf-8');res.end(`<!doctype html><html lang="ru" data-theme="${url.searchParams.get('theme')==='light'?'light':'dark'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"></head><body>${html}</body></html>`);}catch(e){console.error(e);res.writeHead(500);res.end('fixture failed');}
+ try{const html=await module.exports.render(url);fs.writeFileSync(out+'/last.html',html);res.setHeader('Content-Type','text/html; charset=utf-8');res.end(`<!doctype html><html lang="ru" data-theme="${url.searchParams.get('theme')==='light'?'light':'dark'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"></head><body>${html}</body></html>`);}catch(e){console.error(e);res.writeHead(500);res.end('fixture failed');}
 });
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
