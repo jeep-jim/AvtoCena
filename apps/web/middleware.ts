@@ -1,3 +1,4 @@
+import {canonicalCatalogHref} from './lib/catalog/catalog-routes';
 import {SESSION_COOKIE_MAX_AGE, persistentSessionFields, sessionTimeValid, sessionNeedsRenewal} from "./lib/session-policy";
 import {isPlatformTeam} from "./lib/platform-access";
 import { NextRequest, NextResponse } from "next/server";
@@ -120,6 +121,12 @@ async function routeRequest(request: NextRequest) {
     url.searchParams.set("market", "japan");
     url.searchParams.set("stock", "green");
     return NextResponse.redirect(url, 307);
+  }
+
+  if (request.method === 'GET' || request.method === 'HEAD') {
+    const current = pathname + request.nextUrl.search;
+    const canonical = canonicalCatalogHref(current);
+    if (canonical !== current) return NextResponse.redirect(new URL(canonical, request.url), 308);
   }
 
   const legacyOffer=pathname.match(/^\/cars\/offer\/([^/]+)$/);

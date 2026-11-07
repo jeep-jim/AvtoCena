@@ -5,8 +5,8 @@ import {power30FromOffer} from '../apps/web/lib/power30/offer';
 import type {VehicleOffer} from '../apps/web/lib/catalog/types';
 const offer=(patch:Partial<VehicleOffer>={})=>({id:'abc',sourceId:'test',sourceOfferId:'123',make:'Example',model:'EV',year:2024,market:'china',fuel:'electric',powertrainKind:'electric',powerKw:150,powerDataConfidence:'source_exact',operational:{},...patch}) as VehicleOffer;
 test('owned listing URLs: readable, legacy and auction IDs; reject SSRF and traversal',()=>{
- for(const [url,id] of [['https://avtocena.com/cars/offer/abc','abc'],['https://www.avtocena.com/cars/offer/model-2024--ajes-stats-123?x=1','ajes-stats-123']])assert.equal(power30OfferId(url),id);
- for(const url of ['https://avtocena.com.evil.test/cars/offer/a','https://avtocena.com@evil.test/cars/offer/a','https://avtocena.com:444/cars/offer/a','file:///cars/offer/a','https://avtocena.com/cars','https://avtocena.com/cars/offer/%2e%2e%2fsecret','https://avtocena.com/cars/offer/%00','https://avtocena.com/cars/offer/a/more',null])assert.throws(()=>power30OfferId(url));
+ for(const [url,id] of [['https://avtocena.com/cars/offer/abc','abc'],['https://avtocena.com/cars/offer/abc/model-2024','abc'],['https://www.avtocena.com/cars/offer/model-2024--ajes-stats-123?x=1','ajes-stats-123']])assert.equal(power30OfferId(url),id);
+ for(const url of ['https://avtocena.com.evil.test/cars/offer/a','https://avtocena.com@evil.test/cars/offer/a','https://avtocena.com:444/cars/offer/a','file:///cars/offer/a','https://avtocena.com/cars','https://avtocena.com/cars/offer/%2e%2e%2fsecret','https://avtocena.com/cars/offer/%00','https://avtocena.com/cars/offer/a/model-2024/extra','https://avtocena.com/cars/offer/a/%2Fsecret',null])assert.throws(()=>power30OfferId(url));
 });
 const physics={efficiency:'90',current:'300',resistance:'0.02',capacity:'20',coolant:'40',initial:'40',limit:'120',controller:'120',usableEnergy:''};
 const input={...emptyPower30Inputs,kind:'BEV' as const,peak:'120',voltage:'400'};

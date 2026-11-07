@@ -1,3 +1,4 @@
+import {catalogSearchHeading} from '@/lib/catalog/catalog-routes';
 import {Suspense} from 'react';
 import {CatalogResultCountUpdate} from './CatalogSelectionContext';
 import {MarketResultCount} from './MarketResultCount';
@@ -39,7 +40,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
 
  {!embedded&&<nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>}
  <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
- <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":"Каталог автомобилей"}</h1>
+ <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":catalogSearchHeading(initial)}</h1>
  {embedded&&<p className="ac-catalog-result-count hidden md:flex items-center gap-2 text-[var(--ac-muted)]" role="status">
   <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span/></span>
   <CatalogCountLabel total={displayTotal??0} countIncomplete={displayTotal===undefined}/>

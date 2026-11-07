@@ -61,7 +61,7 @@ test('vehicle specification question receives research before the very first mod
  calculation:`export const normalizeCalculationArgs=x=>x;export const calculateForChat=async()=>{throw Error('calculation not requested')};export const calculationReply=()=>'';`,
  route:`export async function GET(){throw Error('catalog must not run')}`,
  storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo source generation',year:2022,market:'korea',trim:'Premium'});`,
- 'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
+ 'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerIdFromPath=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
  'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
@@ -119,7 +119,7 @@ test('successful calculator result is returned without another model generation'
  const a=await load('apps/web/lib/autobot/agent.ts',{files:new Map()},{
  route:`export const GET=async()=>{throw Error('not used')};`,
  storage:`export const getOffer=async()=>null;`,
- 'offer-url':`export const offerRouteId=x=>x;export const offerPath=x=>'/cars/offer/'+x.id;`,
+ 'offer-url':`export const offerRouteId=x=>x;export const offerIdFromPath=x=>x.split('?')[0].split('/')[3]?.split('--').at(-1);export const offerPath=x=>'/cars/offer/'+x.id;`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
  'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
@@ -237,7 +237,7 @@ test('chat form preserves known values, rubles, and edits across tab restoration
 test('a requested chat calculation form is structured and keeps history values',async()=>{
  const a=await load('apps/web/lib/autobot/agent.ts',{files:new Map()},{
  route:`export const GET=async()=>{throw Error('not used')};`,storage:`export const getOffer=async()=>({id:'current',make:'Volkswagen',model:'Golf',year:2025,powerHp:200,sourceCurrency:'EUR',sourcePrice:30000,market:'europe'});`,
- 'offer-url':`export const offerRouteId=x=>x;export const offerPath=x=>'/cars/offer/'+x.id;`,
+ 'offer-url':`export const offerRouteId=x=>x;export const offerIdFromPath=x=>x.split('?')[0].split('/')[3]?.split('--').at(-1);export const offerPath=x=>'/cars/offer/'+x.id;`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
  research:`export const researchTopic=()=> 'specifications';export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,

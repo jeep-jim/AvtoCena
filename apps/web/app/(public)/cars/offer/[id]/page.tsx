@@ -231,8 +231,8 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
   </details>;
 }
 
-async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string;edit?:string }> }) {
-  const { id: routeId } = await params;
+async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string; slug?: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string;edit?:string }> }) {
+  const { id: routeId, slug: routeSlug } = await params;
   if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} initialCity={(await searchParams)?.estimate ? decodeShareDraft((await searchParams)!.estimate!)?.deliveryCity || "" : undefined} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
@@ -265,7 +265,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
   if(storedOffer.market==='korea' && storedOffer.sourceId!=='ajes_korea_feed') permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
   const canonicalPath = offerPath(storedOffer);
-  if (`/cars/offer/${encodeURIComponent(routeId)}` !== canonicalPath && `/cars/offer/${routeId}` !== canonicalPath) {
+  if (`/cars/offer/${encodeURIComponent(routeId)}${routeSlug ? `/${encodeURIComponent(routeSlug)}` : ""}` !== canonicalPath && `/cars/offer/${routeId}${routeSlug ? `/${routeSlug}` : ""}` !== canonicalPath) {
     const preserved = new URLSearchParams();
     for (const [key,value] of Object.entries(query)) {
       if (Array.isArray(value)) value.forEach(item=>preserved.append(key,String(item)));

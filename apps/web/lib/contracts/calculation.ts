@@ -1,11 +1,12 @@
-import {offerRouteId,offerPath} from '../catalog/offer-url';
+import {offerPath} from '../catalog/offer-url';
 import {getOfferForPage} from '../catalog/offer-page-data';
 import {getOfferFromCurrentShard} from '../catalog/storage';
 import {getSavedOfferCalculation} from '../catalog/saved-offer-calculation';
 import {validateCustomerParameters} from '../catalog/customer-parameters';
 import {calculateOfferWithCustomerParametersDetailed} from '../catalog/customs-pricing';
 import {today,type ContractFields,type ContractCalculation,type TemplateId} from './model';
-export function extractOfferId(input:string){let u:URL;try{u=new URL(input,'https://avtocena.com');}catch{throw Error('Вставьте ссылку на автомобиль с АвтоЦены.');}if(!['avtocena.com','www.avtocena.com'].includes(u.hostname)||!['https:','http:'].includes(u.protocol)||u.username||u.password||u.port)throw Error('Нужна ссылка на автомобиль с АвтоЦены.');const match=u.pathname.match(/^\/cars\/offer\/([^/]+)\/?$/);if(!match)throw Error('Нужна ссылка на карточку автомобиля.');const id=offerRouteId(decodeURIComponent(match[1]));if(!id||id.length>300||/[\\/\x00-\x1f]/.test(id)||id==='.'||id==='..')throw Error('Некорректная ссылка.');return id;}
+import {extractOfferId} from './offer-url-input';
+export {extractOfferId} from './offer-url-input';
 const text=(v:unknown)=>v==null?'':String(v);
 export async function importContractOffer(url:string,fields:ContractFields,templateId:TemplateId){const id=extractOfferId(url);const offer=await getOfferForPage(id)||await getOfferFromCurrentShard(id);if(!offer)throw Error('Автомобиль не найден. Заполните данные вручную.');if((offer.market==='japan')!==(templateId==='japan'))throw Error('Для этого автомобиля выберите другой шаблон договора.');const saved=await getSavedOfferCalculation(offer);const parameters=saved?validateCustomerParameters(saved.draft):{productionDate:offer.productionDate};const vehicle={...offer,...parameters};const fuel:Record<string,string>={petrol:'Бензин',diesel:'Дизель',hybrid:'Гибрид',electric:'Электрический',lpg:'Газ',cng:'Газ'};
  const loaded:ContractFields={...fields,market:offer.market,offerUrl:`https://avtocena.com${offerPath(offer)}`,car:[offer.make,offer.model,offer.trim].filter(Boolean).join(' '),year:text(vehicle.year),color:text(offer.color),engine:fuel[vehicle.fuel||'']||text(vehicle.engineType),engineCc:text(vehicle.engineCc),powerHp:text(vehicle.powerHp),transmission:({AT:'Автомат',MT:'Механика',CVT:'Вариатор',DCT:'Робот'} as Record<string,string>)[offer.transmission||'']||text(offer.transmission),drive:({FWD:'Передний',RWD:'Задний',AWD:'Полный','4WD':'Полный'} as Record<string,string>)[offer.drive||'']||text(offer.drive),mileage:text(offer.mileageKm),grade:text(offer.auctionGrade),vin:offer.vin||offer.frameNumber||'',deliveryCity:fields.deliveryCity||vehicle.deliveryCity||''};
