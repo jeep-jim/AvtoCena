@@ -1,0 +1,113 @@
+name: Catalog ready list verified correction 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-local-ready-reviewed-20261107.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: catalog-local-ready-20261107
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 69e0a281c2a464fd32c9d0a5f5ce44f0e1cf46c8
+      - uses: actions/checkout@v4
+        with:
+          ref: bd6dd1b3d917ffc7ac638a1edd639c2632e8d268
+          path: recovery-recipe
+          persist-credentials: false
+          sparse-checkout: .github/workflows/catalog-local-ready-20261107.yml
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Apply exact earlier candidate, restrict it to lists and retain all detail handling
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 69e0a281c2a464fd32c9d0a5f5ce44f0e1cf46c8
+          test -z "$(git ls-remote --heads origin refs/heads/fix/catalog-local-ready-20261107)"
+          git checkout -b fix/catalog-local-ready-20261107
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          recipe=Path('recovery-recipe/.github/workflows/catalog-local-ready-20261107.yml').read_text()
+          start=recipe.index("          python3 - <<'PY'\n")+len("          python3 - <<'PY'\n")
+          end=recipe.index('\n          PY',start)
+          lines=recipe[start:end].splitlines()
+          assert all(not x.strip() or x.startswith('          ') for x in lines)
+          script='\n'.join(x[10:] for x in lines)
+          exec(compile(script,'reviewed-local-ready-recipe','exec'))
+          def replace(path, before, after, count=1):
+              p=Path(path); text=p.read_text()
+              assert text.count(before)==count,(path,text.count(before),before[:90])
+              p.write_text(text.replace(before,after))
+          client='apps/web/lib/catalog/ajes-client.ts'
+          replace(client,'const inMemory=cache.peekFresh(query.sql);',"const inMemory=query.kind==='list'?cache.peekFresh(query.sql):undefined;")
+          replace(client,"const inspectPrepared=query.kind!=='detail';","const inspectPrepared=query.kind==='list';")
+          replace(client,'preparedReads.get(query.sql,()=>deps.readQuery!(query.sql))',"preparedReads.get(query.sql,()=>deps.readQuery!(query.sql),query.sql,'prepared')")
+          replace(client,"if(!inspectPrepared)try {saved=await deps.readDetail?.(query.table,query.id!);}catch{}","if(!inspectPrepared)try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}")
+          replace(client,"// Retained directory pages are names, not a fresh inventory count.\n            await deps.assertEnabled(query.table);\n            const saved=prepared;","// Retained directory pages are names, not a fresh inventory count.\n            await deps.assertEnabled(query.table);\n            let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}")
+          replace(client,'// Only exact, already requested list/aggregate responses are inspected here.','// Only exact, already requested list responses are inspected here.')
+          # Existing tests injected failure into every DetailReadCache instance.
+          # Keep all their fallback/source-switch assertions, target the supplier
+          # admission, and allow the independently bounded prepared-list queue.
+          p=Path('tests/ajes-queue-fallback.test.ts'); text=p.read_text()
+          anchor="const busy=(e:unknown)=>e instanceof AjesUnavailable&&e.reason==='local_busy';"
+          helper='''
+          function rejectSupplierQueue(t:any,message:string){
+            const original=DetailReadCache.prototype.get;
+            return t.mock.method(DetailReadCache.prototype,'get',function(this:DetailReadCache<any>,...args:Parameters<typeof original>){
+              return args[3]==='prepared'?original.apply(this,args):Promise.reject(new Error(message));
+            });
+          }
+          '''
+          assert text.count(anchor)==1;text=text.replace(anchor,anchor+helper)
+          pattern=r"t\.mock\.method\(DetailReadCache\.prototype,'get',\(\)=>Promise\.reject\(new Error\((message|'detail_cache_queue_full'|'detail_cache_queue_timeout')\)\)\)"
+          text,count=re.subn(pattern,r'rejectSupplierQueue(t,\1)',text);assert count==4,count
+          p.write_text(text)
+          # The existing regression tests/ajes-stock-feed.test.ts checks a cached
+          # Korea detail retains its exact previously supplied LOT URL; unchanged.
+          PY
+          git diff --check
+      - run: npm ci
+      - name: Exact source-link, fallback, freshness and independent queue regressions
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-prepared-admission.test.ts tests/brand-theme-store.test.ts tests/detail-read-cache.test.ts tests/ajes-queue-fallback.test.ts tests/ajes-model-recovery.test.ts tests/ajes-stock-feed.test.ts tests/ajes-queue-unavailable.test.ts tests/ajes-recovery-isolation.test.ts tests/ajes-detail-queue-recovery.test.ts tests/ajes-page-cache-recovery.test.ts tests/ajes-list-admission.test.ts tests/ajes-japan-feed.test.ts
+      - name: Full regression suite
+        run: npm test > regression.log 2>&1 || { tail -n 220 regression.log; exit 1; }
+      - name: Typecheck and production build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: |
+          npm run typecheck > typecheck.log 2>&1 || { cat typecheck.log; exit 1; }
+          npm run build > build.log 2>&1 || { tail -n 160 build.log; exit 1; }
+      - name: Commit only checked changes on the new isolated branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- apps/web/lib/catalog/ajes-client.ts apps/web/lib/catalog/detail-read-cache.ts apps/web/components/catalog/BrandLogoRail.tsx apps/web/components/catalog/brand-theme-store.ts tests/ajes-prepared-admission.test.ts tests/brand-theme-store.test.ts tests/ajes-queue-fallback.test.ts
+          git diff --cached --check
+          test "$(git diff --cached --name-only | wc -l)" = 7
+          git commit -m 'fix: ready lists bypass supplier queue without changing Korea detail handling'
+          git push origin HEAD:refs/heads/fix/catalog-local-ready-20261107
+          git log -1 --format='CHECKED_COMMIT=%H'
+      - name: Preserve bounded evidence
+        if: always()
+        run: |
+          mkdir -p ready-report
+          git diff > ready-report/candidate.patch
+          cp regression.log typecheck.log build.log ready-report/ 2>/dev/null || true
+          git rev-parse HEAD > ready-report/head.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-ready-isolation-reviewed
+          path: ready-report
+          retention-days: 7
