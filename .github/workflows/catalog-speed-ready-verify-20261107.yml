@@ -11,7 +11,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,13 +36,11 @@ jobs:
           python3 preparation/.github/patches/catalog-speed-ready-tests-20261107.py
           git diff --check
       - run: npm ci
+      - name: Web and engine typecheck
+        run: npm run typecheck > speed-ready-evidence/typecheck.log 2>&1 || { cat speed-ready-evidence/typecheck.log; exit 1; }
       - name: Queue, cache, source-link, filter and model regressions
         run: |
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-ready-metadata.test.ts tests/ajes-prepared-admission.test.ts tests/ajes-queue-fallback.test.ts tests/ajes-model-recovery.test.ts tests/ajes-stock-feed.test.ts tests/ajes-detail-queue-recovery.test.ts tests/ajes-recovery-isolation.test.ts tests/ajes-count-display.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-japan-filter-rail.test.ts tests/model-suggestion-search.test.ts tests/ajes-model-loader.test.ts > speed-ready-evidence/targeted.log 2>&1 || { tail -n 120 speed-ready-evidence/targeted.log; exit 1; }
-      - name: Complete regression suite
-        run: npm test > speed-ready-evidence/regression.log 2>&1 || { tail -n 150 speed-ready-evidence/regression.log; exit 1; }
-      - name: Web and engine typecheck
-        run: npm run typecheck > speed-ready-evidence/typecheck.log 2>&1 || { cat speed-ready-evidence/typecheck.log; exit 1; }
       - name: Production build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
@@ -51,7 +49,7 @@ jobs:
         run: |
           npm install --prefix /tmp/speed-ready-browser --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
           PLAYWRIGHT_MODULE=/tmp/speed-ready-browser/node_modules/playwright/index.mjs CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-sidebar-check.mjs > speed-ready-evidence/sidebar.log 2>&1 || { tail -n 100 speed-ready-evidence/sidebar.log; exit 1; }
-      - name: Commit verified code and append recovery roadmap without replacing history
+      - name: Commit verified preflight candidate for standard full PR CI
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -61,19 +59,19 @@ jobs:
 
           ## 07.11.2026 — ускорение готовых данных без изменения расчётов и источников
 
-          Владелец подтвердил исправление дилерского «Зелёного угла» и поручил продолжить скорость. Прочитаны AGENTS и актуальный конец roadmap. Выпуск 393/42367668990 завершён SUCCESS; внешний 42367789665 подтвердил установленный a5f9a645, дилерский переход и единственную полосу марок. Прочитаны оба JSON из artifact 13573666770: первый переход к аукционам 8.486 с, следующие 0.886/1.183 с. Это разные контексты, не статистическая гарантия. /cars: 198 логотипов, 42 карточки, 875982 байта распакованного HTML; Китай: 133/24/504477 байт.
+          Владелец подтвердил исправление дилерского «Зелёного угла» и поручил продолжить скорость. Прочитаны AGENTS и актуальный конец roadmap. Выпуск 393/42367668990 и внешний браузер 42367789665 завершились SUCCESS. Прочитаны оба JSON artifact13573666770: installed a5f9a645, первый переход к аукционам8.486с, следующие0.886/1.183с; разные контексты, не статистическая гарантия. /cars:198логотипов/42карточки/875982байта распакованного HTML; Китай133/24/504477байт.
 
-          Диагностика 42371868730/artifact 13573624398 выполнила 10 последовательных публичных API-запросов, без нагрузки, записей или обхода поставщика. Release a5f9a645 до/после одинаков. Japan Nissan query-resolution 152.4/1063.3 мс, ответы stale. Korea unfiltered server-total 1091.7/147.5 мс; detail-cache-sum 5412.1/2.9 мс — сумма параллельных операций, не время ожидания посетителя. China <=160: read 707.2/0.1 мс, pricing 11.2/7.5 мс. Быстрая пустая Korea <=160 не является исправлением мощности.
+          Диагностика42371868730/artifact13573624398 выполнила10последовательных публичных API-запросов без нагрузочного теста, записи или обхода поставщика. Release a5f9a645 до/после совпал. Japan Nissan query-resolution152.4/1063.3мс, ответы stale. Korea unfiltered total1091.7/147.5мс; detail-cache-sum5412.1/2.9мс — сумма параллельных операций, не wall time. China<=160: read707.2/0.1мс, pricing11.2/7.5мс. Быстрая пустая Korea<=160 не является исправлением мощности.
 
-          Изменение 1: точные свежие сохранённые makes/models/colors/count читаются через существующую ограниченную prepared-очередь отдельно от двух supplier slots; исходное 30-минутное окно observedAt не продлевается. Повторная stale-выдача того же IP во время действующего cooldown использует существующий 30-секундный visitor cache до повторного I/O; новый shared fresh результат имеет приоритет. Source/password/IP checks сохранены. Details и их LOT provenance не затрагиваются. Concurrency, retention, cooldown и квоты не увеличены.
+          Изменение1: точные свежие сохранённые makes/models/colors/count используют существующую bounded prepared-очередь независимо от двух supplier slots; 30-минутный observedAt deadline не продлевается. Повторная stale-выдача того же IP во время существующего cooldown читает существующий30-секундный visitor cache до повторного I/O. Shared fresh имеет приоритет. Source/password/IP checks сохранены; детали и LOT provenance не затрагиваются. Concurrency, retention, cooldown и квоты не увеличены.
 
-          Изменение 2: обычный CatalogContent не передаёт неиспользуемый facets.models через client boundary. CatalogFilters уже игнорировал этот массив; полный model-picker сохраняет прежнюю загрузку справочника при открытии. Source-only Green/AJES models/aliases/КПП и все прочие facets сохранены. Это удаление лишней копии, а не удаление моделей. Реальное уменьшение HTML и ускорение установленного сайта пока не измерены; результат синтетического теста не выдаётся за выигрыш production.
+          Изменение2: обычный CatalogContent не отправляет неиспользуемую копию facets.models через client boundary. CatalogFilters уже игнорировал её; полный model-picker сохраняет прежнюю загрузку справочника при открытии. Source-only Green/AJES модели/aliases/КПП и остальные facets сохранены. Это удаление лишней копии, не удаление моделей. Синтетическая экономия не выдаётся за измеренное ускорение production.
 
-          Проверки: на прежнем коде 9 из 11 новых локальных AJES-тестов выявили ожидание очереди/повторный I/O/продление freshness. После исправления 36 адресных тестов прошли через локальный TypeScript CJS-loader, не полный CI. Первый полный runner 42372518522 остановился на двух старых model-recovery fixtures, которые ошибочно отвергали новую prepared-очередь вместе с supplier admission. Fixtures уточнены: отказывает только supplier queue, stale-сценарий использует часовую запись; все прежние утверждения stale/expiry/page/source-switch сохранены. Дополнительно локально прошли четыре чистые model-recovery проверки; esbuild-сценарий проверяется полноценным runner.
+          Проверки: локально36адресных тестов; negative-control прежнего AJES выявил9/11новых сценариев. Первый полный runner42372518522 остановился на двух fixtures, отвергавших одновременно supplier и новую prepared очередь. В fixtures теперь отказывает только supplier admission; stale-сценарий использует часовую запись, все проверки stale/expiry/page/source-switch сохранены. Повторный42373293056 прошёл2830/2830полных тестов, но typecheck выявил недостижимую non-detail ветку TS2339. Эта ветка удалена: !inspectPrepared теперь однозначно detail. Никакая выполняемая ветка не удалена.
 
-          Повторный runner RUN_ID прошёл адресные тесты, полный npm test, web/engine typecheck, production build и браузерный sidebar/model-picker до сохранения этого коммита. Нужен стандартный CI окончательного PR head. Этот документ не подтверждает установку нового runtime. Цены, комиссии, формулы, роли, источник, ограничения, объявления, ручные данные, энциклопедия и дилерская вёрстка не изменены.
+          Preflight RUN_ID прошёл typecheck, адресные тесты, production build и браузерный sidebar/model-picker после исправления типов. Полный npm test на окончательном SHA должен пройти стандартный PR CI; старый успех не переносится автоматически. Runtime ещё НЕ установлен этим документом. Формулы, цены, комиссии, источник, ограничения, объявления, ручные данные, энциклопедия, роли и дилерская вёрстка не изменяются.
 
-          Остаются: полнота <=160 Korea/Japan и счётчики, per-card Korea detail I/O, intermittent /cars, полный SEO/VPN/performance контроль. Выпуск один после зелёного CI, затем exact-release readback и сравнение корректных видимых карточек, повторного/первого перехода и объёма ответа. Не кешировать общий авторизованный HTML и не превращать неизвестную мощность в догадку.
+          Остаются полнота<=160Korea/Japan и счётчики, per-card Korea detail I/O, intermittent/cars, полный SEO/VPN/performance контроль. Один выпуск после зелёного стандартного CI, затем exact-release readback и замеры корректных видимых карточек, первого/повторного перехода и объёма ответа. Не включать общий кеш авторизованного HTML и не подставлять неизвестную мощность.
           '''
           note='\n'.join(x[10:] if x.startswith('          ') else x for x in note.splitlines()).replace('RUN_ID',os.environ['GITHUB_RUN_ID'])+'\n'
           p=Path('roadmap.md');before=p.read_bytes();p.write_bytes(before+note.encode());assert p.read_bytes().startswith(before)
