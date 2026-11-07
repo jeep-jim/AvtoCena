@@ -5,15 +5,22 @@ import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 import {resolveAjesQueryModels} from '../apps/web/lib/catalog/ajes-model-resolution';
 import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 
+function rejectSupplierQueue(t:any,message:string){
+ const original=DetailReadCache.prototype.get;
+ t.mock.method(DetailReadCache.prototype,'get',function(this:DetailReadCache<any>,...args:Parameters<typeof original>){
+  return args[3]==='prepared'?original.apply(this,args):Promise.reject(Error(message));
+ });
+}
+
 test('model directory queue failures recover exact saved names without contacting the supplier',async t=>{
- t.mock.method(DetailReadCache.prototype,'get',()=>Promise.reject(Error('detail_cache_queue_full')));
- let calls=0;const saved={items:[],models:[{make:'HYUNDAI',model:'TUCSON',total:7}],page:1,pageSize:500,received:1,observedAt:new Date().toISOString()};
+ rejectSupplierQueue(t,'detail_cache_queue_full');
+ let calls=0;const saved={items:[],models:[{make:'HYUNDAI',model:'TUCSON',total:7}],page:1,pageSize:500,received:1,observedAt:new Date(Date.now()-3600000).toISOString()};
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('provider forbidden');},readQuery:async sql=>{calls++;assert.equal(sql,ajesQuery({table:'korea',make:'HYUNDAI',aggregate:'models',page:1}).sql);return saved;}});
  const result=await readAjesModelDirectory(client,{table:'korea',make:'HYUNDAI'},'203.0.113.1');
  assert.deepEqual(result.models,saved.models);assert.equal(result.stale,true);assert.equal(calls,1);assert.equal('stale' in saved,false);
 });
 test('retained model directory cannot cross expiry, page or source switch',async t=>{
- t.mock.method(DetailReadCache.prototype,'get',()=>Promise.reject(Error('detail_cache_queue_timeout')));
+ rejectSupplierQueue(t,'detail_cache_queue_timeout');
  const base={items:[],models:[{make:'HYUNDAI',model:'TUCSON',total:7}],page:1,pageSize:500,received:1,observedAt:new Date().toISOString()};
  for(const saved of [{...base,page:2},{...base,pageSize:24},{...base,observedAt:'2000-01-01'},{...base,models:undefined}]){
   const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>saved});
