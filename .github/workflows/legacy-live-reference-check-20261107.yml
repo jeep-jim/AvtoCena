@@ -1,0 +1,107 @@
+name: Verify live legacy storage references 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/legacy-live-reference-check-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: legacy-storage-live-reference-check
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    environment: regcloud-staging
+    env:
+      AWS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install --disable-pip-version-check boto3==1.40.68
+      - name: Read live records and prepared public data, no mutation or supplier request
+        env:
+          LEGACY_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          mkdir -p legacy-live-reference-check
+          python3 - <<'PY'
+          import os,json,hashlib,datetime,time,concurrent.futures,threading,urllib.request,boto3
+          from botocore.config import Config
+          bucket='avtocena-staging-8120751';prefix='migration-staging/full-20261011/'
+          report={'startedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'complete':False,'matches':[],'readObjects':0,'readBytes':0,'scope':'All non-catalog live application namespaces, active and rollback public chunks, active internal chunks and public projections. Historical catalog generations and retired archives excluded. No supplier requests or data writes.'}
+          guard=threading.Lock();deadline=time.monotonic()+21*60
+          def save():
+              with open('legacy-live-reference-check/report.json','w') as f:json.dump(report,f,indent=2)
+          c=boto3.client('s3',endpoint_url='https://s3.regru.cloud',region_name='us-east-1',aws_access_key_id=os.environ['ACCESS'],aws_secret_access_key=os.environ['SECRET'],config=Config(signature_version='s3v4',connect_timeout=15,read_timeout=60,retries={'max_attempts':2},max_pool_connections=4,s3={'addressing_style':'path'}))
+          def listing(p,delimiter=None):
+              rows=[];folders=[];token=None;seen=set()
+              for _ in range(100):
+                  q={'Bucket':bucket,'Prefix':p,'MaxKeys':1000}
+                  if delimiter:q['Delimiter']=delimiter
+                  if token:q['ContinuationToken']=token
+                  d=c.list_objects_v2(**q);rows+=d.get('Contents',[]);folders+=d.get('CommonPrefixes',[])
+                  if not d.get('IsTruncated'):return rows,folders
+                  token=d.get('NextContinuationToken');assert token and token not in seen;seen.add(token)
+              raise RuntimeError('incomplete_live_listing')
+          def read_json(key):
+              r=c.get_object(Bucket=bucket,Key=prefix+key)
+              try:return json.loads(r['Body'].read()),r['ETag']
+              finally:r['Body'].close()
+          try:
+              with urllib.request.urlopen('https://avtocena.com/api/health',timeout=15) as r:h=json.load(r)
+              assert h.get('ok');report['releaseBefore']=h.get('releaseSha')
+              roots={p:read_json(p) for p in ['catalog/manifest.json','catalog/previous-manifest.json','catalog/internal/manifest.json']}
+              keys=set();top,folders=listing(prefix,'/');keys.update(r['Key'] for r in top)
+              for folder in folders:
+                  p=folder['Prefix']
+                  if p==prefix+'catalog/':continue
+                  rows,_=listing(p);keys.update(r['Key'] for r in rows)
+              rows,_=listing(prefix+'catalog/public/');keys.update(r['Key'] for r in rows)
+              for path,(manifest,etag) in roots.items():
+                  keys.add(prefix+path)
+                  if 'markets' in manifest:
+                      for market,row in manifest['markets'].items():
+                          for chunk in row.get('chunks',[]):keys.add(prefix+(chunk if chunk.startswith('catalog/') else f"catalog/generations/{manifest['generationId']}/offers/{market}/{chunk}.json"))
+                  if 'sources' in manifest:
+                      for row in manifest['sources'].values():keys.update(prefix+k for k in row.get('chunks',[]))
+              assert len(keys)<20000,'unexpected_live_scope'
+              report['plannedObjects']=len(keys);save()
+              needle=os.environ['LEGACY_BUCKET'].encode().lower();assert len(needle)>4 and needle!=bucket.encode()
+              patterns=[b'storage.yandexcloud.net/'+needle,needle+b'.storage.yandexcloud.net',b'bbaohms2ccpm3vb4e73t']
+              def scan(key):
+                  assert time.monotonic()<deadline,'read_deadline'
+                  assert key.startswith(prefix) and '/../' not in key
+                  r=c.get_object(Bucket=bucket,Key=key);assert r['ContentLength']<=2_000_000_000,'unbounded_record'
+                  tail=b'';matched=False;length=0
+                  try:
+                      while True:
+                          part=r['Body'].read(1024*1024)
+                          if not part:break
+                          length+=len(part);window=(tail+part).lower();matched=matched or any(p in window for p in patterns);tail=window[-1024:]
+                  finally:r['Body'].close()
+                  assert length==r['ContentLength']
+                  with guard:
+                      report['readObjects']+=1;report['readBytes']+=length
+                      if matched:report['matches'].append({'namespace':key[len(prefix):].split('/')[0],'keySha256':hashlib.sha256(key.encode()).hexdigest()})
+                      if report['readObjects']%100==0:save();print(json.dumps({k:report[k] for k in ['readObjects','plannedObjects','readBytes']}),flush=True)
+              with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+                  for _ in pool.map(scan,sorted(keys)):pass
+              for key,(data,etag) in roots.items():assert read_json(key)[1]==etag,'live_manifest_changed'
+              with urllib.request.urlopen('https://avtocena.com/api/health',timeout=15) as r:h=json.load(r)
+              assert h.get('ok');report['releaseAfter']=h.get('releaseSha');assert report['releaseAfter']==report['releaseBefore']
+              report['complete']=True;report['referencesAbsent']=not report['matches'];report['finishedAt']=datetime.datetime.now(datetime.timezone.utc).isoformat()
+          except Exception as e:report['errorType']=type(e).__name__;report['error']=str(e)[:200] if isinstance(e,(RuntimeError,AssertionError)) else 'read_failed_without_private_details';raise SystemExit(1)
+          finally:save();print(json.dumps(report),flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: legacy-live-reference-check
+          path: legacy-live-reference-check/report.json
+          retention-days: 14
