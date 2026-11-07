@@ -11,7 +11,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
+    timeout-minutes: 9
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,7 +23,7 @@ jobs:
         run: |
           npm install --prefix /tmp/catalog-visible --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
           /tmp/catalog-visible/node_modules/.bin/playwright install --with-deps chromium
-      - name: Check fixed public probe syntax and baseline lookup
+      - name: Verify actual mobile accessible name and full model lookup
         env:
           EXPECTED_RELEASE: a5f9a645835ae636ab99dd1a7b1073ba24d851b4
           PLAYWRIGHT_MODULE: /tmp/catalog-visible/node_modules/playwright/index.mjs
@@ -32,6 +32,10 @@ jobs:
           python3 scripts/diagnostics/catalog-speed-after-release-20261107.py
           node --check /tmp/catalog-visible/check.mjs
           node scripts/diagnostics/catalog-speed-filter-live-20261107.mjs
+      - name: Fixed first and repeat visible-card baseline, no load test
+        env:
+          EXPECTED_RELEASE: a5f9a645835ae636ab99dd1a7b1073ba24d851b4
+        run: node /tmp/catalog-visible/check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
