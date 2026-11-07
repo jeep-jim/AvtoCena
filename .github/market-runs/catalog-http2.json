@@ -1,0 +1,5 @@
+{
+  "operation": "enable-http2-only",
+  "ownerRequest": "2026-11-07-catalog-reference",
+  "reason": "Owner-authorized catalog speed optimization; preserve application release, data, pricing, auth, cache semantics and source admission. Apply only through main with existing regcloud-staging protections, tested nginx configuration, runtime lock, backup and rollback."
+}

@@ -1,8 +1,8 @@
 name: Catalog HTTP2 transport verification 2026-11-07
 on:
   push:
-    branches: [fix/catalog-http2-20261107]
-    paths: ['scripts/regcloud-http2-config.py', 'scripts/regcloud-http2-apply.sh', '.github/workflows/catalog-http2-20261107.yml']
+    branches: [main, fix/catalog-http2-20261107]
+    paths: ['.github/market-runs/catalog-http2.json', '.github/workflows/catalog-http2-20261107.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -10,11 +10,9 @@ concurrency:
   group: regcloud-http2-owner-20261107
   cancel-in-progress: false
 jobs:
-  transport:
-    if: github.ref == 'refs/heads/fix/catalog-http2-20261107'
+  validate:
     runs-on: ubuntu-24.04
-    environment: regcloud-staging
-    timeout-minutes: 8
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,6 +21,24 @@ jobs:
         run: |
           python3 tests/regcloud-http2-config.test.py
           bash -n scripts/regcloud-http2-apply.sh
+  transport:
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require the exact owner transport request
+        run: |
+          python3 - <<'PY'
+          import json
+          request=json.load(open('.github/market-runs/catalog-http2.json'))
+          assert request.get('operation')=='enable-http2-only'
+          assert request.get('ownerRequest')=='2026-11-07-catalog-reference'
+          PY
       - name: Apply TLS transport only with automatic rollback
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
