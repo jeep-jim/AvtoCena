@@ -2,7 +2,7 @@ name: Catalog reference stage 1 preparation
 on:
   push:
     branches: [fix/catalog-reference-20261107]
-    paths: ['.github/workflows/catalog-reference-stage1.yml', '.github/patches/catalog-reference-stage1.py']
+    paths: ['.github/workflows/catalog-reference-stage1.yml', '.github/patches/catalog-reference-stage1.py', '.github/patches/catalog-reference-stage1-tests.py']
   workflow_dispatch:
 permissions:
   contents: write
@@ -23,12 +23,15 @@ jobs:
         run: |
           test "$GITHUB_REF" = refs/heads/fix/catalog-reference-20261107
           python3 .github/patches/catalog-reference-stage1.py
+          python3 .github/patches/catalog-reference-stage1-tests.py
           npm install --workspace=@avtocena/web --package-lock-only --ignore-scripts --save-exact --no-audit --no-fund @fontsource-variable/onest@5.3.1
           git diff --check
       - run: npm ci
+      - name: Production dependency security
+        run: npm audit --omit=dev --audit-level=high
       - name: Targeted routing, sharing, dealer, font and resilience regressions
         run: |
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-reference-routes.test.ts tests/catalog-market-section-result.test.ts tests/search-snippets.test.ts tests/staff-avatar-presence-url.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/selection-city-persistence.test.ts tests/offer-share.test.ts tests/public-page-recovery.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-reference-routes.test.ts tests/catalog-market-section-result.test.ts tests/search-snippets.test.ts tests/staff-avatar-presence-url.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/selection-city-persistence.test.ts tests/offer-share.test.ts tests/public-page-recovery.test.ts tests/crm-contracts.test.ts tests/telegram-miniapp.test.ts
       - name: Full regression suite
         run: npm test > regression.log 2>&1 || { tail -n 240 regression.log; exit 1; }
       - name: Web and engine typecheck
@@ -42,7 +45,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm .github/patches/catalog-reference-stage1.py .github/workflows/catalog-reference-stage1.yml
+          git rm .github/patches/catalog-reference-stage1.py .github/patches/catalog-reference-stage1-tests.py .github/workflows/catalog-reference-stage1.yml
           git add apps/web tests package-lock.json docs/operations/2026-11-07-zma-reference-findings.md
           git commit -m 'fix: readable public typography, canonical catalog routes and isolated market failures'
           git push origin HEAD:fix/catalog-reference-20261107
