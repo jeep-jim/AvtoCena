@@ -1,0 +1,50 @@
+name: Catalog typography browser acceptance 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-typography-acceptance-20261107.yml', 'scripts/diagnostics/catalog-typography-acceptance-20261107.mjs']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: audit
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: aaceff2851aa1b290b0bec3814d294c3a93869d6
+          path: candidate
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: candidate/package-lock.json
+      - run: npm ci
+        working-directory: candidate
+      - name: Build exact candidate without production credentials
+        working-directory: candidate
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: npm run build > candidate-build.log 2>&1 || { tail -n 100 candidate-build.log; exit 1; }
+      - name: Install isolated browser dependencies
+        run: |
+          mkdir -p /tmp/catalog-browser
+          npm install --prefix /tmp/catalog-browser --no-audit --no-fund playwright@1.56.1
+          /tmp/catalog-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Verify actual local production font files, themes and country redirect
+        working-directory: candidate
+        run: node ../audit/scripts/diagnostics/catalog-typography-acceptance-20261107.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-typography-acceptance-20261107
+          path: |
+            candidate/typography-output
+            candidate/candidate-build.log
+          retention-days: 7
