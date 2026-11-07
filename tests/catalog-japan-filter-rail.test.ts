@@ -25,7 +25,9 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);
  const params={make:'Volkswagen',powerTo:'160',sort:'totalRub',city:'Новокузнецк'};
  const tree=await m.exports.CatalogContent({params});const elements:any[]=[];
- const walk=(node:any)=>{if(Array.isArray(node)){node.forEach(walk);return;}if(!node||typeof node!=='object')return;elements.push(node);walk(node.props?.children);walk(node.props?.header);};walk(tree);
+ const walk=(node:any)=>{if(Array.isArray(node)){node.forEach(walk);return;}if(!node||typeof node!=='object')return;elements.push(node);walk(node.props?.children);walk(node.props?.header);walk(node.props?.brandRail);walk(node.props?.headerAfterBrands);};walk(tree);
+ assert.equal(elements.filter(x=>x.type?.name==='ResolvedCatalogCount').length,1,'one public counter across layout slots');
+ assert.equal(elements.filter(x=>x.type?.name==='BrandLogoRail').length,1,'one complete public brand rail');
  const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');
  const summary=await counter.props.summary;assert.deepEqual(summary,{total:31,countIncomplete:true});
  const label=await counter.type(counter.props);assert.equal(label.type(label.props).props.children,'Общее количество уточняется');

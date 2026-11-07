@@ -12,10 +12,12 @@ test("catalog counts group every thousand, including four digits and zero", () =
 test("invalid counts are not silently shown as zero", () => {
   for (const n of [NaN,Infinity,-1,1.5,Number.MAX_SAFE_INTEGER+1]) assert.equal(formatCatalogCount(n),"—");
 });
-test("counter renders once in the sidebar header outside mobile-hidden wrappers", () => {
+test("counter renders once in the responsive header slot outside mobile-hidden wrappers", () => {
   const source = readFileSync("apps/web/components/catalog/CatalogContent.tsx","utf8");
   assert.equal((source.match(/data-catalog-result-count=/g)||[]).length,1);
-  assert.match(source,/\{!embedded&&!selectedMarket&&countLabel\}/);
+  assert.match(source,/headerAfterBrands=\{!embedded&&!selectedMarket\?countLabel:undefined\}/);
+  assert.equal((source.match(/headerAfterBrands=/g)||[]).length,1);
+  const sidebar=readFileSync("apps/web/components/catalog/CatalogSidebar.tsx","utf8");assert.match(sidebar,/singleRail&&headerAfterBrands&&<div key="count" className="ac-catalog-count-slot">\{headerAfterBrands\}<\/div>/);
   assert.match(source,/\{embedded&&!japanStatisticsSelected&&countLabel\}/);
   const start = source.indexOf('const countLabel=<p');
   assert.ok(start >= 0);
