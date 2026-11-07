@@ -1,0 +1,66 @@
+name: Save catalog analysis and reconcile roadmap history
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-reference-documentation-20261107.yml']
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-reference-20261107
+          path: candidate
+          fetch-depth: 2
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+      - name: Append verified analysis to current main without replacing prior history
+        working-directory: main
+        run: |
+          set -euo pipefail
+          test "$(git -C ../candidate rev-parse HEAD)" = b661caf4adb9740a72da4fd111776698f4af66ce
+          tail -n 30 AGENTS.md
+          tail -n 50 roadmap.md
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          source=Path('../candidate/docs/operations/2026-11-07-zma-architecture-and-github.md')
+          target=Path('docs/operations/2026-11-07-zma-architecture-and-github.md')
+          content=source.read_bytes()
+          assert not target.exists() or target.read_bytes()==content
+          target.write_bytes(content)
+          old=subprocess.check_output(['git','-C','../candidate','show','573fa945b163f4785d5d69323c875996cf0326a1:roadmap.md'])
+          branch=Path('../candidate/roadmap.md').read_bytes()
+          assert branch.startswith(old)
+          note=branch[len(old):]
+          assert note.startswith('\n\n## 07.11.2026 — продолжение ZMA:'.encode())
+          p=Path('roadmap.md');before=p.read_bytes()
+          if note not in before:p.write_bytes(before+note)
+          assert p.read_bytes().startswith(before)
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- roadmap.md docs/operations/2026-11-07-zma-architecture-and-github.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'docs: save verified ZMA architecture comparison and catalog continuation status'
+            git push origin HEAD:main
+          fi
+          git log -1 --format='%H %s'
+      - name: Remove only the duplicate branch append after main persistence
+        working-directory: candidate
+        run: |
+          set -euo pipefail
+          git show 573fa945b163f4785d5d69323c875996cf0326a1:roadmap.md > roadmap.md
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- roadmap.md
+          git commit -m 'docs: keep shared roadmap continuation on main without duplicate merge conflict'
+          git push origin HEAD:fix/catalog-reference-20261107
+          git log -1 --format='%H %s'
