@@ -1,0 +1,32 @@
+name: Storage maintenance target comparison 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/storage-target-comparison-20261107.yml']
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Compare nonsecret destination identities, do not contact storage
+        env:
+          LEGACY_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          LEGACY_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          LEGACY_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+        run: |
+          python3 - <<'PY'
+          import os,json,urllib.parse,datetime
+          endpoint=(os.environ.get('LEGACY_ENDPOINT') or 'https://storage.yandexcloud.net').rstrip('/')
+          host=urllib.parse.urlparse(endpoint).hostname
+          report={'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Compare the repository-secret destination used by catalog-storage-cleanup.yml against the explicit REG destination used by the website deployment. No credential values, requests or mutations.','cleanupProvider':'REG' if host=='s3.regru.cloud' else 'Yandex' if host=='storage.yandexcloud.net' else 'other','sameEndpointAsREG':endpoint=='https://s3.regru.cloud','sameBucketAsREG':os.environ.get('LEGACY_BUCKET','')=='avtocena-staging-8120751','samePrefixAsREG':os.environ.get('LEGACY_PREFIX','').strip('/')=='migration-staging/full-20261011'}
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          with open('storage-target-comparison.json','w') as f:json.dump(report,f,ensure_ascii=False,indent=2)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storage-target-comparison-20261107
+          path: storage-target-comparison.json
+          retention-days: 14
