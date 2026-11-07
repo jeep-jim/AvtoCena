@@ -1,0 +1,43 @@
+name: Catalog recovery installed release readback 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-release-readback-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-recovery-live-readback-20261107
+  cancel-in-progress: false
+jobs:
+  readback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Wait only for the already running exact release
+        env:
+          EXPECTED_RELEASE: 11e3b4ed853518731c11aa1522068cc87cbb8ff4
+          RELEASE_WAIT_SECONDS: '1800'
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/wait-published-release.mjs
+      - name: Install isolated supported browser
+        run: |
+          npm install --prefix /tmp/catalog-readback --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          /tmp/catalog-readback/node_modules/.bin/playwright install --with-deps chromium
+      - name: Check exact release, six markets, old URLs, font, mobile and one real card
+        env:
+          EXPECTED_RELEASE: 11e3b4ed853518731c11aa1522068cc87cbb8ff4
+        run: node scripts/diagnostics/catalog-release-readback-20261107.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-recovery-live-readback
+          path: |
+            catalog-release-readback
+            artifacts/mobile-filter-release
+          retention-days: 7
