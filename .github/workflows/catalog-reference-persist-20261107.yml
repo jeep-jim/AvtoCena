@@ -1,0 +1,68 @@
+name: Persist verified catalog fixtures and ZMA report
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-reference-persist-20261107.yml']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  persist:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 8bc2ffc6656e6378b6b7113d524aeb44a826f65d
+          path: verified-plan
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-reference-20261107
+          path: candidate
+      - name: Require saved browser success and exact unchanged application head
+        working-directory: candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 573fa945b163f4785d5d69323c875996cf0326a1
+          python3 - <<'PY'
+          import json,os,urllib.request
+          url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/42349956028/jobs'
+          req=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+          data=json.load(urllib.request.urlopen(req,timeout=20))
+          jobs=[j for j in data['jobs'] if j['id']==128335767338]
+          assert len(jobs)==1
+          results={s['name']:s.get('conclusion') for s in jobs[0]['steps']}
+          names=['Verify filters and canonical country preservation','Verify gallery and grade selection across canonical reload','Verify native sharing including WebKit and action icons']
+          for name in names:
+              assert results.get(name)=='success', (name,results.get(name))
+              print('SAVED_BROWSER_CHECK_SUCCESS',name)
+          PY
+      - name: Persist exactly the previously verified changes and factual report
+        working-directory: candidate
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          source=Path('../verified-plan/.github/workflows/catalog-reference-gates-20261107.yml').read_text()
+          def block(name,next_name):
+              section=source.split('      - name: '+name+'\n',1)[1].split('      - name: '+next_name+'\n',1)[0]
+              raw=section.split('        run: |\n',1)[1]
+              return '\n'.join(line[10:] if line.startswith('          ') else line for line in raw.splitlines())+'\n'
+          section=source.split('      - name: Apply bounded fixture corrections to the reviewed candidate\n',1)[1].split('      - run: npm ci\n',1)[0]
+          raw=section.split('        run: |\n',1)[1]
+          patch='\n'.join(line[10:] if line.startswith('          ') else line for line in raw.splitlines())+'\n'
+          patch=patch.replace('1e21404fa27a176a8538b2b627a0d85edd905b59','573fa945b163f4785d5d69323c875996cf0326a1')
+          before="replace('.github/workflows/verify-share-autohome.yml', 'runs-on: ubuntu-latest', 'runs-on: ubuntu-24.04')"
+          assert patch.count(before)==1
+          patch=patch.replace(before,"assert 'runs-on: ubuntu-24.04' in Path('.github/workflows/verify-share-autohome.yml').read_text()")
+          subprocess.run(['bash','-e','-o','pipefail','-c',patch],check=True)
+          record=block('Record evidence without claiming production acceptance','Preserve test evidence even on failure')
+          record=record.replace("run=os.environ['GITHUB_RUN_ID']","run='42349956028'")
+          record=record.replace('git add -- tests/browser/', 'git add -- tests/browser/',1)
+          assert "git push origin HEAD:fix/catalog-reference-20261107" in record
+          subprocess.run(['bash','-e','-o','pipefail','-c',record],check=True)
+          PY
