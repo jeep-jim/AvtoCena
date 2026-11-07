@@ -4,64 +4,37 @@ on:
     branches: [audit/catalog-reference-20261107]
     paths: ['.github/workflows/dealer-green-renderer-check-20261107.yml']
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: dealer-green-renderer-verification
   cancel-in-progress: false
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: fix/dealer-green-layout-20261107
+          ref: 3f3a870834a746fb3cacade4553585fbde121099
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
           cache: npm
-      - name: Use streaming React SSR without modifying application CSS or assertions
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = 1de96bc2df0bcdc7ab2499beb54d28b85d57590c
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path('tests/browser/green-dealer-layout.mjs');s=p.read_text()
-          old=" import {renderToStaticMarkup} from 'react-dom/server';"
-          new=""" import {renderToPipeableStream,renderToStaticMarkup} from 'react-dom/server';
-           import {PassThrough} from 'node:stream';
-           async function renderMarkup(tree){
-            const legacy=renderToStaticMarkup(tree);
-            console.log('SSR_STYLE_SERIALIZATION',JSON.stringify({legacyEscapesDirectChild:legacy.includes('&gt;.dealer-profile-home-banner')}));
-            return await new Promise((resolve,reject)=>{
-             const chunks=[],output=new PassThrough();
-             output.on('data',chunk=>chunks.push(chunk));output.on('end',()=>resolve(Buffer.concat(chunks).toString('utf8')));output.on('error',reject);
-             const controller=renderToPipeableStream(tree,{onAllReady(){controller.pipe(output);},onShellError:reject,onError:reject});
-            });
-           }"""
-          assert s.count(old)==1;s=s.replace(old,new)
-          old='return renderToStaticMarkup(embedded?';assert s.count(old)==1;s=s.replace(old,'return renderMarkup(embedded?')
-          old='const html=await module.exports.render(url);';assert s.count(old)==1;s=s.replace(old,old+"fs.writeFileSync(out+'/last.html',html);")
-          old='const server=http.createServer';assert s.count(old)==1;s=s.replace(old,"fs.writeFileSync(out+'/app.css',css.css);\n"+old)
-          p.write_text(s)
-          PY
-          git diff --check
       - run: npm ci
       - run: npm install --prefix /tmp/green-renderer --no-package-lock --ignore-scripts playwright@1.55.0
-      - name: Exercise unchanged responsive assertions and original-bug negative control
+      - name: Exercise real mounted components and original-bug negative control
         env:
           PLAYWRIGHT_MODULE: /tmp/green-renderer/node_modules/playwright/index.mjs
-        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-dealer-layout.mjs | tee green-renderer.log
-      - name: Preserve verified test-only correction
         run: |
           set -euo pipefail
-          git diff --check
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add tests/browser/green-dealer-layout.mjs
-          git commit -m 'test: render dealer fixture with streaming SSR and preserve CSS selectors'
-          git push origin HEAD:fix/dealer-green-layout-20261107
-          git log -1 --format='%H %s'
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/green-dealer-layout.mjs > green-renderer.log 2>&1 || { cat green-renderer.log; exit 1; }
+          cat green-renderer.log
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import assert from 'node:assert/strict';
+          const r=JSON.parse(fs.readFileSync('artifacts/green-dealer-layout/report.json','utf8'));
+          assert.equal(r.results.length,10);assert.ok(r.results.every(x=>x.root&&x.roundTrip&&!x.overflow));assert.equal(r.standalone,true);assert.equal(r.negativeControl.root,false);
+          JS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
