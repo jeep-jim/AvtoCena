@@ -1,0 +1,66 @@
+name: Prepare shared speed recovery log 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-log-publish-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-speed-log-publish-20261107
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: f62463ba1c8b2351ac839669b8521e4965695124
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Prepare documentation-only main commit and identical-code candidate, without moving refs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,json,os,urllib.request
+          base='33dbb734f1903963015ea41ce99e6211902022c5';head='f62463ba1c8b2351ac839669b8521e4965695124';main='90dfe418d17e16f65041b950eb8535dea22cb8fd'
+          original='6e18f0249814c8ffb6c0b2ccc7065cae4943d69b'
+          def git(*args):return subprocess.check_output(['git',*args])
+          def api(path,payload=None):
+              req=urllib.request.Request('https://api.github.com/repos/jeep-jim/AvtoCena'+path,data=None if payload is None else json.dumps(payload).encode(),headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='GET' if payload is None else 'POST')
+              with urllib.request.urlopen(req,timeout=25) as r:return json.load(r)
+          assert api('/git/ref/heads/main')['object']['sha']==main
+          assert api('/git/ref/heads/fix/catalog-speed-ready-metadata-20261107')['object']['sha']==head
+          assert set(git('diff','--name-only',base,main).decode().splitlines())=={'roadmap.md','docs/operations/2026-10-27-completion-checklist.md'}
+          runs=api('/actions/runs?head_sha='+head+'&event=pull_request&per_page=100')['workflow_runs']
+          assert len(runs)==8 and all(r['status']=='completed' and r['conclusion']=='success' for r in runs)
+          common=git('show',base+':roadmap.md');left=git('show',main+':roadmap.md');right=git('show',head+':roadmap.md')
+          assert left.startswith(common) and right.startswith(common)
+          extra=right[len(common):];assert extra and extra not in left
+          merged=left+extra
+          assert merged.startswith(left)
+          blob=api('/git/blobs',{'encoding':'utf-8','content':merged.decode()})['sha']
+          def entry(path):
+              mode,kind,rest=git('ls-tree',head,'--',path).decode().strip().split(' ',2)
+              sha,name=rest.split('\t',1);assert name==path and kind=='blob'
+              return {'path':path,'mode':mode,'type':kind,'sha':sha}
+          doc='docs/operations/2026-11-07-catalog-speed-ready.md'
+          mainTree=api('/git/trees',{'base_tree':git('rev-parse',main+'^{tree}').decode().strip(),'tree':[{'path':'roadmap.md','mode':'100644','type':'blob','sha':blob},entry(doc)]})['sha']
+          mainCommit=api('/git/commits',{'message':'docs: persist verified speed recovery plan and preserve concurrent operational log','tree':mainTree,'parents':[main]})['sha']
+          codePaths=git('diff','--name-only',original,'1ebc7c687b271ced9ff284a2d82efb25a03f9842').decode().splitlines()
+          assert len(codePaths)==8
+          entries=[entry(p) for p in codePaths if p not in {'roadmap.md',doc}]
+          assert len(entries)==6 and all(p['path'].startswith(('apps/','tests/')) for p in entries)
+          featureTree=api('/git/trees',{'base_tree':mainTree,'tree':entries})['sha']
+          featureCommit=api('/git/commits',{'message':'Merge shared recovery documentation; retain exact tested application blobs','tree':featureTree,'parents':[head,mainCommit]})['sha']
+          result={'expectedMain':main,'expectedFeature':head,'mainDocumentationCommit':mainCommit,'mainDocumentationTree':mainTree,'featureReconciledCommit':featureCommit,'featureTree':featureTree,'documentationOnlyMain':True,'runtimeBlobsIdenticalToVerifiedHead':True,'roadmapIsExactSharedMain':True,'refUpdated':False,'checks':[{'name':r['name'],'id':r['id'],'conclusion':r['conclusion']} for r in runs]}
+          Path('log-reconcile-evidence').mkdir();Path('log-reconcile-evidence/plan.json').write_text(json.dumps(result,indent=2));print('PREPARED_LOG_COMMITS',json.dumps(result))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-speed-shared-log
+          path: log-reconcile-evidence
+          retention-days: 7
