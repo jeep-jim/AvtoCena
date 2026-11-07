@@ -1,0 +1,65 @@
+name: Catalog visible-card speed baseline 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-visible-baseline-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-visible-baseline-20261107
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Install isolated supported browser
+        run: |
+          npm install --prefix /tmp/catalog-visible --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          /tmp/catalog-visible/node_modules/.bin/playwright install --with-deps chromium
+      - name: First and repeated visible-card timings, bounded to seven public routes
+        run: |
+          mkdir -p visible-speed
+          cat > /tmp/catalog-visible/check.mjs <<'JS'
+          import fs from 'node:fs';
+          import {chromium} from 'playwright';
+          const expected='a5f9a645835ae636ab99dd1a7b1073ba24d851b4';
+          const health=async()=>{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)}),d=await r.json();if(r.status!==200||d.releaseSha!==expected)throw Error('release_changed');return {releaseSha:d.releaseSha,calculationVersion:d.calculationVersion};};
+          const report={at:new Date().toISOString(),expected,scope:'One runner; seven fixed public routes, two sequential navigations in one context per route. First visit does not imply cold server cache. No load test or VPN comparison. Different sites have different inventory/content.',cases:[]};
+          const save=()=>fs.writeFileSync('visible-speed/report.json',JSON.stringify(report,null,2));
+          const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+          const probes=[['cars','https://avtocena.com/cars'],['china','https://avtocena.com/cars/china'],['china160','https://avtocena.com/cars/china?powerTo=160'],['korea','https://avtocena.com/cars/korea'],['japan-nissan','https://avtocena.com/cars/japan?make=Nissan'],['zma-china','https://zmaimport.ru/avto-iz-kitaya-pod-zakaz'],['zma-catalog-china','https://zmaimport.ru/katalog?market=china']];
+          try{
+            report.before=await health();
+            for(const [label,url] of probes){
+              const context=await browser.newContext({viewport:{width:1440,height:1000},serviceWorkers:'block'}),page=await context.newPage();
+              const selector=label.startsWith('zma')?'a[href*="/avto/china/"] img':'.ac-catalog-card';
+              const failures=[];page.on('requestfailed',request=>{const u=new URL(request.url());if(u.origin===new URL(url).origin&&failures.length<15)failures.push({path:u.pathname,type:request.resourceType(),error:request.failure()?.errorText});});
+              for(let attempt=1;attempt<=2;attempt++){
+                const row={label,attempt,failures:[]};failures.length=0;
+                try{
+                  const start=performance.now();const response=await page.goto(url,{waitUntil:'commit',timeout:30000});row.status=response?.status();
+                  await page.locator(selector).first().waitFor({state:'visible',timeout:20000});row.firstCardMs=Math.round(performance.now()-start);
+                  await page.waitForLoadState('domcontentloaded',{timeout:15000});
+                  const image=label.startsWith('zma')?page.locator(selector).first():page.locator('.ac-catalog-card').first().locator('img').first();
+                  try{await image.waitFor({state:'visible',timeout:5000});await image.evaluate(el=>el.complete&&el.naturalWidth?true:new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('cover_timeout')),5000);el.addEventListener('load',()=>{clearTimeout(timer);resolve(true);},{once:true});el.addEventListener('error',()=>{clearTimeout(timer);reject(Error('cover_failed'));},{once:true});}));row.firstCoverMs=Math.round(performance.now()-start);}catch{row.coverUnavailable=true;}
+                  row.state=await page.evaluate(()=>{const n=performance.getEntriesByType('navigation')[0];return {path:location.pathname,protocol:n?.nextHopProtocol,ttfbMs:n?Math.round(n.responseStart-n.startTime):null,domMs:n?Math.round(n.domContentLoadedEventEnd-n.startTime):null,decodedBytes:n?.decodedBodySize,transferBytes:n?.transferSize,h1:[...document.querySelectorAll('h1')].filter(e=>e.getClientRects().length).map(e=>e.textContent),cards:document.querySelectorAll('.ac-catalog-card').length,overflow:document.documentElement.scrollWidth>innerWidth+1,errors:['Не удалось загрузить эту страницу','Не удалось обновить автомобили','Источник отклонил подключение'].filter(s=>document.body.innerText.includes(s))};});
+                  if(attempt===1)await page.screenshot({path:'visible-speed/'+label+'.png'});
+                }catch(e){row.error=String(e.message).slice(0,200);}
+                row.failures=[...failures];report.cases.push(row);save();console.log('VISIBLE_SPEED',JSON.stringify(row));
+              }
+              await context.close();
+            }
+            report.after=await health();
+          }finally{await browser.close();save();}
+          JS
+          node /tmp/catalog-visible/check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-visible-speed-baseline
+          path: visible-speed
+          retention-days: 7
