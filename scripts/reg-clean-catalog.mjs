@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {planRegRetention,applyExactSelection,fingerprint} from './lib/reg-retention-plan.mjs';
+import {listCompleteObjects} from './lib/reg-complete-inventory.mjs';
 const data=await import('../apps/web/lib/data.ts');
 const {getJsonStorage,mutateDataJson}=data.getJsonStorage?data:data.default;
 assert.equal(process.env.JSON_STORAGE_DRIVER,'object');
@@ -34,8 +35,8 @@ try{
  for(const path of roots){baseline[path]=await storage.readJsonWithMeta(path,null);assert.ok(baseline[path].found&&baseline[path].etag,'required_manifest_missing');}
  const extras=[];
  for(const path of ['catalog/public/facets.json','catalog/public/brand-summary.json','catalog/japan-auction-history/manifest.json']){const value=await storage.readJson(path,null);if(value)extras.push(value);}
- const generationObjects=await storage.listObjects('catalog/generations/');
- const internalObjects=await storage.listObjects('catalog/internal/offers/');
+ const generationObjects=await listCompleteObjects(storage,'catalog/generations/');
+ const internalObjects=await listCompleteObjects(storage,'catalog/internal/offers/');
  await fence();
  const plan=planRegRetention({generationObjects,internalObjects,publicManifest:baseline[roots[0]].value,previousManifest:baseline[roots[1]].value,internalManifest:baseline[roots[2]].value,extraReferences:extras,maxDeletes:marker.maxDeletes,graceMs:86400000});
  report.plan=plan.summary;report.manifestHashes=Object.fromEntries(roots.map(k=>[k,fingerprint(baseline[k].value)]));
@@ -49,7 +50,7 @@ try{
    Object.assign(report,progress);save();batches++;
    if(batches%10===0){const current=await health();assert.deepEqual(current,report.healthBefore,'runtime_changed_during_cleanup');await mutateDataJson(lockPath,{lockedUntil:''},v=>{assert.equal(v?.operationId,operationId,'lease_changed');return {...v,lockedUntil:new Date(Date.now()+ttl).toISOString()};});console.log(JSON.stringify({acknowledged:report.acknowledged,selected:plan.summary.selectedObjects}));}
   }}));
-  const remaining=[...await storage.listObjects('catalog/generations/'),...await storage.listObjects('catalog/internal/offers/')],remainingKeys=new Set(remaining.map(r=>r.key));
+  const remaining=[...await listCompleteObjects(storage,'catalog/generations/'),...await listCompleteObjects(storage,'catalog/internal/offers/')],remainingKeys=new Set(remaining.map(r=>r.key));
   assert.ok(plan.selected.every(r=>!remainingKeys.has(r.key)),'delete_readback_failed');
   const selectedKeys=new Set(plan.selected.map(r=>r.key));
   for(const row of [...generationObjects,...internalObjects])if(!selectedKeys.has(row.key))assert.ok(remainingKeys.has(row.key),'retained_object_missing');
