@@ -29,6 +29,15 @@ export class DetailReadCache<T> {
     this.bytes = 0;
   }
 
+  /** Inspect only a still-fresh entry without joining an I/O admission queue. */
+  peekFresh(key: string): T | undefined {
+    const entry = this.entries.get(key);
+    if (!entry || entry.expiresAt <= (this.options.now || Date.now)()) return undefined;
+    this.entries.delete(key);
+    this.entries.set(key, entry);
+    return entry.value;
+  }
+
   private remove(key: string) {
     const entry = this.entries.get(key);
     if (entry) this.bytes -= entry.bytes;
