@@ -3839,3 +3839,47 @@ PR #1713 MERGED 11:14:26, head fcd8424eef2cc9ef813497521354f20edac019e5, merge 3
 Итого девять новых финальных журналов прочитаны и не требуют повторного запроса: 128286445871, 128286446074, 128293075402, 128294442468, 128295857578, 128295916648, 128296849228, 128297833244, 128297917255. IN_PROGRESS 1, PENDING 0, четыре прежних queued без изменений. PR #1706–1708 OPEN с прежними head; нового PR после #1713 на момент чтения нет. Все прежние failures сохраняются.
 
 Единственный bounded health 11:21: HTTP 200, curl exit 0, ok=true, exact releaseSha 98324b3f26e7aa2120df2f3690ee8b17bf564bf4, calculationVersion 5dad731a202ea33dfc83ad4f26f2893eb4a2d61fbf67e4a08a162e5827eac573. Health не закрывает приёмку каталога. Для China 128144651298 один запрос вернул BlobNotFound; пять прежних 127541782446/126870309797/126198742555/124685023963/124601674990 — Transport closed. Все шесть остаются непрочитанными; причины финалов и публичные манифесты неизвестны. Watch не запрашивал повторно прочитанные deploy/verifier/translation/diagnostics, не запускал runtime/browser/provider. Наблюдение оставлено включённым: полный список/счётчик Японии <=160, новая приёмка каталога и authenticated editor Save не подтверждены.
+
+## Сверка 07.11.2026 12:23 Красноярск
+
+Свежий main 8b3b3a22f3f87045da0e8a3d5baec997879c5f08. Сначала прочитаны новые roadmap/checklist и docs/operations/2026-11-07-catalog-reference-readback.md (blob 4e7dfd82e13e20ecbf2f0bb82825d79f00e2ec40). Прочитаны обновлённый branch report docs/operations/2026-11-07-zma-reference-findings.md (a449c0c681f29b06226813d90acda2587a32ae54), branch Road и описание PR #1714. AGENTS main/branch e43d71557ddddef18c30cfec1c40f54f658e4826 не изменился. Остальные related operations main не изменились.
+
+Новый сохранённый primary post-HTTP2 readback 42338228253/128299894842 SUCCESS 11:24:49, замер 11:24:25.481, прочитан через primary report; журнал повторно не запрашивался. На прежнем app release 98324b3f все четыре маршрута HTTP 200/h2, общая ошибка false. Catalog DOM 2581/LCP 2816 мс, 100 запросов/42 уникальные ссылки; China 1150/1508 мс, 88/24; Korea<=160 2287/2036 мс, 55/0; Japan<=160 1445/1844 мс, 58/1. Это один свежий анонимный контекст на маршрут на другом runner; DOM не равно полной интерактивности, LCP измерен в окне 5 секунд. Замер быстрее прежнего /cars DOM 7146/LCP 7240, но весь эффект нельзя приписать HTTP/2. Полнота <=160 и точные счётчики не приняты, периодический сбой /cars не объявлен исправленным; VPN-паритет не измерялся.
+
+PR #1714 OPEN, head 1e21404fa27a176a8538b2b627a0d85edd905b59, НЕ установлен. Primary описывает локальный Onest/wght.css, тематические H1/title, market/card URL и совместимые редиректы с сохранением контекста, изоляцию локального отказа рынка. Новый CI SUCCESS не означает весь CI зелёный: на этом head три workflow FAILURE. После исправления subset imports подготовка прошла, прежние failures сохранены.
+
+21 новый финальный журнал прочитан; ниже полный реестр READ, повторно не запрашивать. Артефакты зарегистрированы без просмотра. Все браузерные результаты кандидата — fixtures/локальная сборка, не production/authenticated приёмка.
+
+| Run/job | Финал по Красноярску | Результат | Артефакты, не просмотрены |
+| --- | --- | --- | --- |
+| 42337885216/128298830142 | 11:24:52 FAILURE | Targeted 77 PASS; regression/typecheck прошли до build; Module not found: @fontsource-variable/onest/cyrillic.css и /latin.css (11:24:48). | 13560063775 |
+| 42338126746/128300270362 | 11:31:01 SUCCESS | Targeted 77 PASS; security audit, полный regression, web/engine typecheck и build SUCCESS; точное общее число regression в журнале не напечатано. | 13559879875 |
+| 42339067970/128302484031 | 11:37:58 SUCCESS | Локальный production build: Onest loaded=true, WOFF2 HTTP 200, 1440×1000/390×844, light/dark, без overflow. Проверена страница privacy, НЕ каталог/live. | 13560288645 |
+| 42338923955/128302037298 | 11:33:51 FAILURE | page.reload: net::ERR_HTTP_RESPONSE_CODE_FAILURE, qr-gallery-preview.mjs:59:14 (11:33:47.922); точный HTTP status/URL ответа не указан. | 13560667648 |
+| 42338923964/128302037311 | 11:33:36 FAILURE | 61 unit PASS; AssertionError null !== 'japan', catalog-sidebar-check.mjs:140:10 (11:33:33.618). | 13561025570 |
+| 42338923998/128302037610 | 11:33:29 FAILURE | Playwright does not support webkit on ubuntu26.04-x64 (11:33:27.893), browser не выполнен. | — |
+| 42339313273/128303239692 | 11:39:13 FAILURE | page.reload: net::ERR_HTTP_RESPONSE_CODE_FAILURE, qr-gallery-preview.mjs:59:14 (11:39:09.906); точный HTTP status/URL ответа не указан. | 13560753231 |
+| 42339312790/128303237083 | 11:39:04 FAILURE | 61 unit PASS; AssertionError null !== 'japan', catalog-sidebar-check.mjs:140:10 (11:39:00.330). | 13561490274 |
+| 42339312766/128303237182 | 11:38:56 FAILURE | Playwright does not support webkit on ubuntu26.04-x64 (11:38:54.136), browser не выполнен. | — |
+| 42339312880/128303237421 | 11:47:31 SUCCESS | 2806/2806 основных regression, дополнительные перекрывающиеся группы, TypeScript и build 58/58 PASS; числа групп не суммировать. | 13560444225, 13560863761 |
+| 42339312885/128303237587 | 11:42:25 SUCCESS | 35 unit, geometry/workspace/profile/controls 390/1440 light/dark, autosave/reload/failure recovery fixtures PASS; НЕ authenticated production Save. | 13560687420 |
+| 42339312807/128303236945 | 11:38:57 SUCCESS | Failure/retry, retained filters/state, expiry/scope/empty-result, independent lead form fixtures PASS desktop/mobile. | 13561245754 |
+| 42339312784/128303237323 | 11:39:53 SUCCESS | Offer sharing desktop/Android/iPhone scenarios PASS в fixtures; НЕ реальная native/Windows приёмка. | — |
+| 42339312786/128303237111 | 11:39:18 SUCCESS | 64 tests PASS; paid-feed contract verification, НЕ подтверждение новой поставки или live inventory. | — |
+| 42339312825/128303237181 | 11:39:40 SUCCESS | City picker verification SUCCESS; artifact зарегистрирован, НЕ live release acceptance. | 13560723315 |
+| 42339312877/128303237521 | 11:40:51 SUCCESS | Controls/chat/local-city 390/1440, themes/account fixtures PASS; НЕ authenticated editor Save. | 13560298884 |
+| 42339312759/128303237065 | 11:39:17 SUCCESS | Local filters/stream feedback/no unrelated scans/no touch prefetch 390/1440 PASS; 1 test PASS. | 13560916366 |
+| 42339312878/128303237410 | 11:39:15 SUCCESS | 27 tests, service isolation/edit links/market fields/reload fixtures 390/1440 PASS. | 13561250747 |
+| 42339312748/128303236903 | 11:40:31 SUCCESS | Dealer selection/sharing fixtures PASS; реальная доставка/native UI не проверена. | 13561030823 |
+| 42339312738/128303236836 | 11:39:32 SUCCESS | 30 tests, map/office/banner/offer-grid 390/1440 light/dark PASS; production-profile 128303237836 SKIPPED. | 13561470322 |
+| 42339312824/128303237061 | 11:38:52 SUCCESS | 50 tests, green-budget browser SUCCESS; НЕ live pricing acceptance. | 13560393487 |
+
+Ошибки sidebar, QR/gallery и WebKit повторились на предыдущем head aaceff2851aa1b290b0bec3814d294c3a93869d6 и текущем 1e21404f; поздние успешные CI/fixtures их не отменяют. Активного продолжения на момент сверки нет. Следующий адресный saved analysis основной работы: для sidebar — фактический URL/маршрут после перехода и контракт проверки market на строке 140; для QR/gallery — URL/status/response при reload на строке 59 и маршрут fixture; отдельно поддержка WebKit в среде workflow. Причина точного reload-ответа и природа несовпадения sidebar пока не установлены. Watch не исправляет тесты, не ослабляет assertions и не запускает повторные проверки.
+
+Остальные завершённые SUCCESS предыдущего head оставлены metadata-only, журналы не запрашивались: 42338898772/128301959603; 42338923918/128302037139; 42338924005/128302037332; 42338923952/128302037193; 42338923945/128302037138; 42338923924/128302037188; 42338923917/128302036999; 42338923911/128302036995; 42338923908/128302036990; 42338923897/128302036956; 42338923896/128302037218; 42338923890/128302036846; 42338923864/128302036816; 42338923832/128302036646 (production-profile 128302037705 SKIPPED). CRM retries 42341829813/128310976720 SUCCESS 12:19:48, metrika 128310978127 SKIPPED — только метаданные, доставка не подтверждена.
+
+IN_PROGRESS 0, PENDING 0; четыре прежних queued 38994950593/38994894574/38994824794/31164670128 без изменений, нового app deploy нет. PR #1706–1708 OPEN с прежними head; #1713 HTTP/2 установлен отдельно от приложения. Последний новый запуск — CRM 12:13:45, новых запусков при заключительной сверке не обнаружено.
+
+China 42286308791/128144651298 FAILURE 06:12:39 без активного продолжения. Один запрос журнала снова BlobNotFound; по одному запросу 127541782446/126870309797/126198742555/124685023963/124601674990 снова Transport closed. Все шесть остаются непрочитанными, причины завершения и итоговые публичные манифесты неизвестны. Следующий saved analysis прежний: завершение исполнителя, последняя запись публикации/outcome/final public manifest. Прочитанные verifier/translation/deploy/diagnostics повторно не запрашивались.
+
+Единственный bounded health 12:21:54: HTTP 200, curl exit 0, ok=true, releaseSha 98324b3f26e7aa2120df2f3690ee8b17bf564bf4, calculationVersion 5dad731a202ea33dfc83ad4f26f2893eb4a2d61fbf67e4a08a162e5827eac573. Кандидат #1714 не установлен; health не закрывает ошибки CI, приёмку полного каталога/Японии <=160 или authenticated editor Save. Наблюдение оставлено включённым. Watch ограничился чтением и дописыванием двух документов; runtime/browser/provider, новые сборы/деплой/repair и дубликаты watch не запускались.
