@@ -1,0 +1,15 @@
+/* Onest 5.3.1, SIL OFL 1.1. Bundled locally by Next, no third-party font request. */
+body:has([data-public-typography]) {
+ font-family: 'Onest Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+body:has([data-public-typography]) :is(.ac-page-copy,.ac-public-header,.ac-public-legal-footer,[role='dialog']) {
+ font-family: 'Onest Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+body:has([data-public-typography]) :is(.ac-page-copy,.ac-public-header,[role='dialog']) :is(button,input,select,textarea) {font-family:inherit;}
+body:has([data-public-typography]) :is(.ac-page-copy,.ac-public-header,[role='dialog']) :is(.font-black,.font-extrabold) {font-weight:600;}
+html body:has([data-public-typography]) :is(.ac-catalog-page,.ac-offer-page) h1 {
+ font-weight:700!important; letter-spacing:-.025em!important; line-height:1.25!important;
+ font-size:clamp(1.75rem,3.34vw,3rem)!important;
+}
+body:has([data-public-typography]) .ac-page-copy :is(h2,h3) {font-weight:700;letter-spacing:-.02em;}
+body:has([data-public-typography]) .ac-catalog-card :is(h2,h3) {font-weight:600;letter-spacing:normal;line-height:1.375;}
