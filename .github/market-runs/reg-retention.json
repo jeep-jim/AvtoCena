@@ -1,6 +1,6 @@
 {
   "authorization": "owner-2026-11-07-storage-cleanup",
-  "mode": "plan",
+  "mode": "apply",
   "maxDeletes": 200000,
-  "expectedPlanDigest": ""
+  "expectedPlanDigest": "3ee83a012223f7843dfe01c514571bf508bcb8ecc04b6697f78934c706419f94"
 }
