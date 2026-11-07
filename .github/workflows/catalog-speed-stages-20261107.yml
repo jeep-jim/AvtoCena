@@ -1,0 +1,58 @@
+name: Catalog speed stage evidence 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-stages-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-speed-stages-20261107
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 6e18f0249814c8ffb6c0b2ccc7065cae4943d69b
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Preserve current instructions and bounded source snapshot
+        run: |
+          mkdir -p speed-evidence
+          cp AGENTS.md speed-evidence/
+          tail -n 200 roadmap.md > speed-evidence/roadmap-tail.md
+          git rev-parse HEAD > speed-evidence/source-head.txt
+          tar -czf speed-evidence/runtime-source.tar.gz apps/web/lib/catalog apps/web/lib/encyclopedia apps/web/components/catalog apps/web/lib/data.ts apps/web/app/'(public)'/api/catalog/search/route.ts tests package.json package-lock.json
+      - name: Read ten fixed public searches without crawling or data changes
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const origin='https://avtocena.com',expected='a5f9a645835ae636ab99dd1a7b1073ba24d851b4';
+          const report={at:new Date().toISOString(),scope:'Ten sequential anonymous first-page API requests; no crawl, writes, VPN or load test. Measurements are not first-screen paint.',expected,cases:[]};
+          const health=async()=>{const r=await fetch(origin+'/api/health',{signal:AbortSignal.timeout(15000)});const v=await r.json();if(r.status!==200||v.releaseSha!==expected)throw Error('installed_release_changed');return {releaseSha:v.releaseSha,calculationVersion:v.calculationVersion};};
+          report.before=await health();
+          for(const params of [{market:'japan',make:'Nissan'},{market:'korea'},{market:'korea',powerTo:'160'},{market:'china',powerTo:'160'},{market:'china'}]){
+            for(let attempt=1;attempt<=2;attempt++){
+              const start=performance.now(),row={params,attempt};
+              try{
+                const r=await fetch(origin+'/api/catalog/search?'+new URLSearchParams({...params,pageSize:'24'}),{signal:AbortSignal.timeout(25000)});
+                row.headersMs=Math.round(performance.now()-start);row.status=r.status;row.timing=r.headers.get('server-timing');
+                const raw=await r.text();row.completeMs=Math.round(performance.now()-start);row.bytes=Buffer.byteLength(raw);
+                let d;try{d=JSON.parse(raw);}catch{row.error='not_json';}
+                if(d){row.ok=d.ok===true;row.items=Array.isArray(d.items)?d.items.length:null;row.knownPower=Array.isArray(d.items)?d.items.filter(v=>Number(v.powerHp)>0).length:null;row.partial=!!d.partial;row.stale=!!d.stale;row.total=d.total??null;row.hasMore=!!d.hasMore;row.reason=String(d.reason||d.error||'').replace(/[^a-zA-Z0-9_:-]/g,'').slice(0,80);}
+              }catch(e){row.completeMs=Math.round(performance.now()-start);row.error=e.name;}
+              report.cases.push(row);console.log('PUBLIC_PHASE',JSON.stringify(row));fs.writeFileSync('speed-evidence/report.json',JSON.stringify(report,null,2));
+            }
+          }
+          report.after=await health();fs.writeFileSync('speed-evidence/report.json',JSON.stringify(report,null,2));
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-speed-stages
+          path: speed-evidence
+          retention-days: 7
