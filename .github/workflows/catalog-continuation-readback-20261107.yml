@@ -1,0 +1,62 @@
+name: Catalog continuation record 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-continuation-readback-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-continuation-record-20261107
+  cancel-in-progress: false
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Read and append continuation without replacing history
+        run: |
+          set -euo pipefail
+          cat AGENTS.md
+          tail -n 100 roadmap.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python3 - <<'PY'
+          from pathlib import Path
+          note='''
+
+          ## 07.11.2026 — продолжение восстановления: выпуск проверенных PR1714 и PR1715
+
+          Повторное поручение владельца «продолжай» исполнено без повторного запуска завершённых этапов. План с этой даты остаётся docs/operations/2026-11-07-catalog-recovery-plan.md: сначала доступность каталога, выдача/счётчик <=160, сокращение лишней работы и SEO; несвязанные функции не выполняются.
+
+          Перечитаны AGENTS, план, актуальные PR и diff. PR1714 уже объединён как69e0a281c2a464fd32c9d0a5f5ce44f0e1cf46c8. PR1715 exact head c3bf8c052bf436b380b7baba42c9fa69936d623c прошёл все7проверок, включая CI42354073588, QR/gallery и site controls; обсуждения пусты. Объединён как544bd59bff3bb22d0b81ca1a7988d659ee87c0ee. Только точные подготовленные списки обходят очередь поставщика, не его правила; детали/агрегаты/сроки свежести/права/источники/расчёты сохранены. Один общий observer темы вместо отдельных observer для логотипов; двойная разметка ещё остаётся.
+
+          До запроса выпуска main не имел IN_PROGRESS запусков. Единственный новый маркер публикации11e3b4ed853518731c11aa1522068cc87cbb8ff4 меняет только reason/requestedAt существующего regcloud-deploy.json. Исследовательские batches/digests, preparationMarkets, guards и расчётные настройки сохранены. Запуск выпуска не равен установке; release SHA и пользовательские маршруты нужно проверить после активации. Не объявлять полноту Кореи/Японии<=160 или периодический /cars исправленными.
+
+          Прямые HTTP-проверки из текущей среды недоступны; это не свидетельство недоступности сайта. Проверка выполняется существующим release pipeline и отдельным ограниченным внешним браузерным readback. Новые сборы/переключение источников/обходы отказов/дубли deploy не запускать. Следующий кодовый шаг: один адаптивный блок марок без удаления марок/изменения расположения; дальнейшая диагностика мощности должна пройти всю реальную цепочку обогащения, а не только первый индекс.
+          '''
+          note='\n'.join(line[10:] if line.startswith('          ') else line for line in note.splitlines())+'\n'
+          p=Path('roadmap.md'); before=p.read_bytes(); p.write_bytes(before+note.encode()); assert p.read_bytes().startswith(before)
+          Path('docs/operations/2026-11-07-catalog-continuation.md').write_text(note.lstrip())
+          PY
+          git diff --check
+          git add roadmap.md docs/operations/2026-11-07-catalog-continuation.md
+          git commit -m 'docs: record verified catalog release request and remaining acceptance work'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then break; fi
+            test "$attempt" -lt 3
+            git fetch origin main
+            git rebase origin/main
+          done
+          git log -1 --format='%H %s'
+          mkdir -p continuation-report
+          tail -n 140 roadmap.md > continuation-report/roadmap-tail.md
+          cp docs/operations/2026-11-07-catalog-continuation.md continuation-report/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-continuation-record
+          path: continuation-report
+          retention-days: 7
