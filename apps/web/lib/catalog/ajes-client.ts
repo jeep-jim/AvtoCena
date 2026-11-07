@@ -24,12 +24,14 @@ export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
-  // Only exact, already requested list responses are inspected here.
+  // Inspect exact already requested lists and metadata, never detail responses.
   // Separate bounded storage admission: a ready saved list must not wait
-  // for two unrelated supplier requests. No new shared TTL or feed crawl.
+  // for two unrelated supplier requests. Names/counts have the same existing
+  // observation deadline. No new shared TTL, source admission or feed crawl.
   const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
     const age=Date.now()-Date.parse(value?.observedAt||'');
-    return value?.schemaVersion===2&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
+    const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Number.isSafeInteger(value?.total);
+    return supported&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
   }});
   // Memoization avoids repeated object-store reads. Every reuse below
   // still checks observedAt; memory residence never extends freshness.
@@ -85,9 +87,20 @@ export function createAjesClient(deps:Dependencies) {
         }
         return null;
       };
-      const inMemory=query.kind==='list'?cache.peekFresh(query.sql):undefined;
+      // Complete Korea details still follow the original provenance-preserving path.
+      const inspectPrepared=query.kind!=='detail';
+      const inMemory=inspectPrepared?cache.peekFresh(query.sql):undefined;
       if(inMemory!==undefined)return inMemory;
-      const inspectPrepared=query.kind==='list';
+      // Reuse only this visitor's already recovered result while the original
+      // refusal cooldown is active. Looking it up after queue/storage work made
+      // the 30-second recovery cache ineffective at protecting repeat visits.
+      // peekFresh never renews its deadline; a new shared success above wins.
+      const recovered=inspectPrepared?visitorCache.peekFresh(visitorKey):undefined;
+      if(recovered?.stale&&isUsable(recovered)
+        &&(cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey))){
+        await deps.assertEnabled(query.table);
+        return recovered;
+      }
       let prepared:any=null;
       if(inspectPrepared&&deps.readQuery){
         prepared=await preparedReads.get(query.sql,()=>deps.readQuery!(query.sql),query.sql,'prepared').catch(()=>null);
@@ -105,7 +118,7 @@ export function createAjesClient(deps:Dependencies) {
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=prepared;
-        if(!inspectPrepared)try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}
+        if(!inspectPrepared)try {saved=await deps.readDetail?.(query.table,query.id!);}catch{}
         const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=isUsable(saved);
         const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2&&(query.table!=='korea'||query.kind!=='detail'||saved?.fullInformation===true);
@@ -261,7 +274,7 @@ export function createAjesClient(deps:Dependencies) {
           }else if(query.kind==='models'||query.kind==='makes'){
             // Retained directory pages are names, not a fresh inventory count.
             await deps.assertEnabled(query.table);
-            let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}
+            const saved=prepared;
             if(isUsable(saved)){await deps.assertEnabled(query.table);return {...saved,stale:true};}
           }
           throw new AjesUnavailable('local_busy');

@@ -1,3 +1,4 @@
+import {catalogFilterFacetsForClient} from '@/lib/catalog/filter-facets-wire';
 import {readMarketSection} from '@/lib/catalog/market-section-result';
 import {catalogSearchHeading,canonicalCatalogHref} from '@/lib/catalog/catalog-routes';
 import {catalogBrandFilter} from '@/lib/catalog/brands';
@@ -242,7 +243,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     {!embedded&&<PublicHeader backHref="/" backLabel="На главную" />}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
     <section className={embedded?"ac-catalog-shell w-full py-5":"ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10"}>
-      <CatalogSidebar dealerLayout={embedded} resultScope={catalogResultScope(params,dealer)} brandRail={embedded?undefined:<BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total}/>} headerAfterBrands={!embedded&&!selectedMarket?countLabel:undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />} header={<>
+      <CatalogSidebar dealerLayout={embedded} resultScope={catalogResultScope(params,dealer)} brandRail={embedded?undefined:<BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total}/>} headerAfterBrands={!embedded&&!selectedMarket?countLabel:undefined} filters={<CatalogFilters initial={initial} facets={catalogFilterFacetsForClient(facets,initial.stock==='green')} resultCount={countIncomplete?undefined:total} />} header={<>
       <div className={embedded?"ac-dealer-catalog-title":"max-w-4xl"}>
         {selectedMarket === "japan" ? <JapanSectionTabs active={japanAll ? "all" : "auction"} params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))} /> : null}
         {!embedded&&<CatalogBreadcrumbs items={breadcrumbItems}/>}
