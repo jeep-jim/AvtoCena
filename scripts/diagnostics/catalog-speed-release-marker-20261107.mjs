@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
-const repo='jeep-jim/AvtoCena',expectedHead='1ebc7c687b271ced9ff284a2d82efb25a03f9842';
+const repo='jeep-jim/AvtoCena',expectedHead='f62463ba1c8b2351ac839669b8521e4965695124';
 const main=process.env.EXPECTED_MAIN,token=process.env.GITHUB_TOKEN;
 assert.match(main||'',/^[a-f0-9]{40}$/);assert.ok(token);
 const base='https://api.github.com/repos/'+repo;
