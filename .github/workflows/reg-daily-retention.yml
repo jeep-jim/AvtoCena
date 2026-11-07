@@ -1,0 +1,76 @@
+name: REG daily bounded retention
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: catalog-object-storage-cleanup
+  cancel-in-progress: false
+jobs:
+  retain:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    environment: regcloud-staging
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_MAX_ATTEMPTS: '2'
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: 24.22.1}
+      - run: npm ci --ignore-scripts
+      - name: Verify all retention guards before storage access
+        run: |
+          node --test tests/reg-retention-plan.test.mjs tests/reg-complete-inventory.test.mjs tests/reg-daily-retention.test.mjs
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-internal-cleanup.test.ts tests/catalog-storage-maintenance.test.ts
+      - name: Plan a maximum of twenty thousand immutable old objects
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          fs.writeFileSync('.github/market-runs/reg-retention.json',JSON.stringify({authorization:'owner-2026-11-07-storage-cleanup',mode:'plan',maxDeletes:20000,expectedPlanDigest:''}));
+          JS
+          node --import tsx scripts/reg-clean-catalog.mjs
+      - name: Preserve plan and bind apply to its exact digest
+        id: plan
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import assert from 'node:assert/strict';
+          const report=JSON.parse(fs.readFileSync('reg-retention-report/report.json','utf8'));
+          fs.mkdirSync('reg-daily-retention-report',{recursive:true});
+          fs.copyFileSync('reg-retention-report/report.json','reg-daily-retention-report/plan.json');
+          if(report.deferred){assert.equal(report.reason,'active_catalog_writer');fs.appendFileSync(process.env.GITHUB_OUTPUT,'apply=false\n');console.log('Active publication: daily cleanup safely deferred');}
+          else{
+            assert.equal(report.completed,true);assert.equal(report.apply,false);assert.equal(report.plan.maxDeletes,20000);assert.ok(report.plan.selectedObjects<=20000);assert.match(report.plan.selectionDigest,/^[a-f0-9]{64}$/);
+            if(report.plan.selectedObjects===0){fs.appendFileSync(process.env.GITHUB_OUTPUT,'apply=false\n');console.log('No eligible expired objects');}
+            else{
+              fs.copyFileSync('reg-retention-report/selection.json','reg-daily-retention-report/selection.json');
+              fs.writeFileSync('.github/market-runs/reg-retention.json',JSON.stringify({authorization:'owner-2026-11-07-storage-cleanup',mode:'apply',maxDeletes:20000,expectedPlanDigest:report.plan.selectionDigest}));
+              fs.appendFileSync(process.env.GITHUB_OUTPUT,'apply=true\n');
+            }
+          }
+          JS
+      - name: Apply unchanged plan under publisher lease and verify retained membership
+        if: steps.plan.outputs.apply == 'true'
+        run: node --import tsx scripts/reg-clean-catalog.mjs
+      - name: Preserve actual result even when safely stopped
+        if: always()
+        run: |
+          mkdir -p reg-daily-retention-report
+          if test -f reg-retention-report/report.json; then cp reg-retention-report/report.json reg-daily-retention-report/final.json; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reg-daily-retention-report
+          path: reg-daily-retention-report
+          retention-days: 14
