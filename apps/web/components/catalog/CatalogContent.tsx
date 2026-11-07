@@ -1,3 +1,5 @@
+import {readMarketSection} from '@/lib/catalog/market-section-result';
+import {catalogSearchHeading,canonicalCatalogHref} from '@/lib/catalog/catalog-routes';
 import {catalogBrandFilter} from '@/lib/catalog/brands';
 import {catalogFailureDiagnostic} from './catalog-failure-diagnostic';
 import {MARKET_RAIL_CLASS} from './market-rail-layout';
@@ -48,13 +50,13 @@ function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?
   if (filters.make) query.set("make", filters.make);
   if (filters.model) query.set("model", filters.model);
   const suffix = query.toString();
-  return suffix ? `/cars?${suffix}` : "/cars";
+  return canonicalCatalogHref(suffix ? `/cars?${suffix}` : "/cars");
 }
 
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 24;
-type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number };
+type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number; unavailable?: boolean };
 
 function requestedSort(value?: string | string[]) {
   const sort = first(value);
@@ -66,7 +68,7 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
   for (const [key, value] of Object.entries(params)) { const resolved = first(value); if (resolved && key !== "page") query.set(key, resolved); }
   if (page > 1) query.set("page", String(page));
   const suffix = query.toString();
-  return suffix ? `/cars?${suffix}` : "/cars";
+  return canonicalCatalogHref(suffix ? `/cars?${suffix}` : "/cars");
 }
 
 type CatalogContentProps={params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean};
@@ -83,7 +85,7 @@ export async function CatalogContent(props:CatalogContentProps){
    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:'{}'}}/>
    <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
     <CatalogSidebar dealerLayout={embedded} resultScope={catalogResultScope(params,dealer)} resultError="Выбранные условия сохранены. Попробуйте обновить подборку."
-     header={<h1 className="text-3xl font-black">Каталог автомобилей</h1>} filters={<CatalogFilters initial={initial}/>}>{null}</CatalogSidebar>
+     header={<h1 className="text-3xl font-black">{embedded?"Авто под заказ":catalogSearchHeading(params)}</h1>} filters={<CatalogFilters initial={initial}/>}>{null}</CatalogSidebar>
    </section>
   </Container>;
  }
@@ -133,7 +135,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   let groupedMarkets: MarketGroup[];
   if (overview) {
     facets = overview.facets;
-    groupedMarkets = await Promise.all(allowedMarkets.map(async (market) => {
+    groupedMarkets = await Promise.all(allowedMarkets.map((market) => readMarketSection(async () => {
       if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
       const snapshot = overview.markets[market.id] || { total: 0, items: [] };
       const snapshotCandidates = balanceBusinessRows((snapshot.items as any[]).filter(isRenderablePublicCatalogOffer));
@@ -148,12 +150,12 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
         : balanceBusinessRows(((fallback?.items || []) as any[]).filter(isRenderablePublicCatalogOffer));
       const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, OVERVIEW_CARDS));
       return { ...market, items: balanceBusinessRows(visible), total: snapshot.total, page: 1, pageSize: OVERVIEW_CARDS };
-    }));
+    }, {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS}, error=>console.error("catalog_market_unavailable",{market:market.id,...catalogFailureDiagnostic(error)}))));
   } else {
     [facets, groupedMarkets] = await Promise.all([
       // Navigation options come from prepared directories, independently of the selected filter.
       readCatalogFacets(selectedMarket ? {market:selectedMarket} : {}),
-      Promise.all(markets.map(async (market) => {
+      Promise.all(markets.map((market) => readMarketSection(async () => {
         if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
         const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
         const page = selectedMarket ? requestedPage : 1;
@@ -175,7 +177,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
         const repriced = await applyActiveBusinessPricingBatch(pageRows);
         const items = customSort ? sortCatalogRows(repriced, selectedSort,common.city) : common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced);
         return { ...market, items, total: result.total, page: result.page, pageSize: result.pageSize };
-      })),
+      }, {...market,items:[],total:0,page:selectedMarket?requestedPage:1,pageSize:selectedMarket?MARKET_PAGE_SIZE:OVERVIEW_CARDS}, error=>console.error("catalog_market_unavailable",{market:market.id,...catalogFailureDiagnostic(error)})))),
     ]);
   }
   const green = (!dealer||dealer.markets.includes("japan")) ? await greenRead : null;
@@ -189,7 +191,8 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     const models=new Map([...(facets.models||[]),...stockFacets.models].map(row=>[`${row.make}:${row.model}`,row]));
     facets.models=[...models.values()];
   }
-  const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || market.id === "japan");
+  const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.unavailable || market.total > 0 || liveMarket(market.id) || market.id === "japan");
+  const localIncomplete=groupedMarkets.some(m=>m.unavailable);
   const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + ((japanAll || !selectedMarket) ? greenTotal : 0);
   const countSummary=Promise.all([...railReads].map(async([market,read])=>{
     const rail=await read;if(rail.disabled)return {total:0,incomplete:false};
@@ -198,9 +201,9 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     return {total:exact??0,incomplete:exact===undefined};
   })).then(counts=>({
     total:localTotal-groupedMarkets.filter(m=>railReads.has(m.id)).reduce((sum,m)=>sum+m.total,0)+counts.reduce((sum,c)=>sum+c.total,0),
-    countIncomplete:(showGreen && !green) || counts.some(c=>c.incomplete),
+    countIncomplete:localIncomplete || (showGreen && !green) || counts.some(c=>c.incomplete),
   }));
-  const total=localTotal,countIncomplete=railReads.size>0 || (showGreen && !green);
+  const total=localTotal,countIncomplete=localIncomplete || railReads.size>0 || (showGreen && !green);
 
   const initialKeys = ["salePeriod","color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
@@ -244,7 +247,8 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
         {selectedMarket === "japan" ? <JapanSectionTabs active={japanAll ? "all" : "auction"} params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))} /> : null}
         {!embedded&&<CatalogBreadcrumbs items={breadcrumbItems}/>}
         <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
-        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
+        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded ? "Авто под заказ" : catalogSearchHeading(params)}</h1>
+        {japanStatisticsSelected&&!embedded?<p className="mt-2 text-sm text-[var(--ac-muted)]">Аукционная статистика</p>:null}
         <div className={embedded?"md:hidden":"lg:hidden"}><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
           {embedded&&!japanStatisticsSelected&&countLabel}
         </div>
@@ -252,9 +256,9 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
       {!embedded&&!selectedMarket&&countLabel}
       </>}>
       <div className={embedded?"hidden md:block":"hidden lg:block"}><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.total}>{formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.unavailable?undefined:market.total}>{market.unavailable?"Количество уточняется":formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.unavailable ? <p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили этого направления. <Link href={pageHref({...params,market:market.id},requestedPage)} className="underline">Повторить</Link></p> : market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
 {showGreen&&!markets.some(m=>m.id==="japan")&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)}/>}
-{!selectedMarket&&<Suspense fallback={null}><CatalogEmptyResults localTotal={localTotal} reads={[...railReads.values()]}/></Suspense>}
+{!selectedMarket&&!localIncomplete&&<Suspense fallback={null}><CatalogEmptyResults localTotal={localTotal} reads={[...railReads.values()]}/></Suspense>}
 </CatalogSidebar>
       <CurrencyRatesStrip variant="mobile" className="mt-8 lg:hidden" />
     </section>

@@ -2,7 +2,7 @@
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {offerShareTitle,offerShareUrl} from "../../lib/catalog/offer-share";
 import {useState,useRef} from "react";
-import {offerRouteId} from "../../lib/catalog/offer-url";
+import {offerIdFromPath} from "../../lib/catalog/offer-url";
 export function ShareLinkButton({className = "", compactMobile = false, iconOnly = false}: {className?: string; compactMobile?: boolean; iconOnly?: boolean}) {
   const dealer=useDealerBrowsing();
   const [status,setStatus]=useState("");
@@ -27,7 +27,7 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     const totalRub=price ? (price.includes('₽')?Number(price.replace(/[^\d,.-]/g,'').replace(',','.')):null) : parameters ? null : Number(page?.dataset.offerPriceRub);
     const title=page?.dataset.offerShareName ? offerShareTitle({title:page.dataset.offerShareName,year:parameters?.dataset.shareYear||page.dataset.offerShareYear,engineCc:parameters?.dataset.shareEngineCc||page.dataset.offerShareEngineCc,fuel:parameters?.dataset.shareFuel||page.dataset.offerShareFuel,totalRub}) : document.title;
     const inMini=document.documentElement.dataset.miniapp==="true";
-    const offerId=document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerId || (target.pathname.startsWith("/cars/offer/") ? offerRouteId(decodeURIComponent(target.pathname.slice("/cars/offer/".length))) : "");
+    const offerId=document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerId || (target.pathname.startsWith("/cars/offer/") ? offerIdFromPath(target.pathname) : "");
     setStatus("Готовим ссылку…");
     let url:string;
     const shareKey=JSON.stringify({path:target.pathname+target.search,mini:inMini});

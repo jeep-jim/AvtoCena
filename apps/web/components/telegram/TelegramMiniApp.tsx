@@ -1,4 +1,5 @@
 "use client";
+import {isCatalogSearchPath} from "../../lib/catalog/catalog-routes";
 import {useCallback,useEffect,useRef,useState} from "react";
 import Link from "next/link";
 import Script from "next/script";
@@ -39,7 +40,7 @@ export function TelegramMiniApp(){
   },[enabled,applyTheme]);
   function toggleTheme(){const value=theme==="dark"?"light":"dark";manualTheme.current=value;try{localStorage.setItem("avtocena_mini_theme",value);}catch{}applyTheme(value);}
 
-  const atCatalog=pathname==="/mini"||pathname==="/cars"||pathname==="/cars/green";
+  const atCatalog=pathname==="/mini"||isCatalogSearchPath(pathname);
   useEffect(()=>{
     setEnabled(syncMiniAppPresentation());
     if(atCatalog)lastCatalog.current=location.pathname+location.search;

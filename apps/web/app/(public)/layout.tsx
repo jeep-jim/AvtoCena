@@ -1,3 +1,5 @@
+import '@fontsource-variable/onest/wght.css';
+import '../public-typography.css';
 import "../../components/catalog/MobileCatalogDropdowns.css";
 import "../flat-ui.css";
 import "../public-regression-fixes.css";
@@ -291,7 +293,7 @@ html[data-theme="light"] .ac-public-footer-dealers:focus-visible {
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <ConsentMetrika /><AnalyticsChoiceNotice/>
+      <span data-public-typography="onest" hidden aria-hidden="true"/><ConsentMetrika /><AnalyticsChoiceNotice/>
       {children}
       <YandexMetrikaRouteTracker />
       <style dangerouslySetInnerHTML={{ __html: publicPageFixes }} />

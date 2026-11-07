@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {offerShareTitle,offerShareUrl,encodeShareDraft,decodeShareDraft} from '../apps/web/lib/catalog/offer-share';
-import {offerPath,offerRouteId} from '../apps/web/lib/catalog/offer-url';
+import {offerPath,offerRouteId,offerIdFromPath} from '../apps/web/lib/catalog/offer-url';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
@@ -13,7 +13,7 @@ test('share title identifies the car, year, displacement and actual ruble price'
 });
 test('Korean and Chinese source names do not become encoded slug noise; old IDs still resolve',()=>{
  const offer={id:'f649514e83647d1d84c917e0',make:'Chevrolet',model:'Trax',trim:'터보 1.2 레드라인',market:'korea',year:2024};
- const path=offerPath(offer);assert.match(path,/^\/cars\/offer\/[a-z0-9-]+$/);assert.match(path,/chevrolet-trax/);assert.match(path,/2024--f649514e83647d1d84c917e0$/);assert.equal(offerRouteId(path.split('/').at(-1)!),offer.id);
+ const path=offerPath(offer);assert.match(path,/^\/cars\/offer\/[a-z0-9-]+\/[a-z0-9-]+$/);assert.match(path,/chevrolet-trax/);assert.match(path,/\/f649514e83647d1d84c917e0\/[^/]+2024$/);assert.equal(offerIdFromPath(path),offer.id);
  assert.equal(offerRouteId('chevrolet-trax-%E1%84%90-2024--'+offer.id),offer.id);
 });
 test('share URL keeps an explicit calculation and selected modification but strips tracking',()=>{

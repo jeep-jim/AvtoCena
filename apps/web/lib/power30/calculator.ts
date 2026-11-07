@@ -42,7 +42,7 @@ export function power30OfferId(value: unknown) {
   let url: URL;
   try { url = new URL(value.trim()); } catch { throw new Error("Вставьте полную ссылку на автомобиль с avtocena.com."); }
   if (!["https:","http:"].includes(url.protocol) || !["avtocena.com","www.avtocena.com"].includes(url.hostname) || url.port || url.username || url.password) throw new Error("Поддерживаются только ссылки на автомобили с avtocena.com.");
-  const path = url.pathname.match(/^\/cars\/offer\/([^/]+)\/?$/);
+  const path = url.pathname.match(/^\/cars\/offer\/([^/]+)(?:\/[A-Za-z0-9_-]{1,160})?\/?$/);
   if (!path) throw new Error("Нужна ссылка на карточку автомобиля, а не на каталог.");
   let segment: string;
   try {segment = decodeURIComponent(path[1]);} catch {throw new Error("Некорректная ссылка.");}

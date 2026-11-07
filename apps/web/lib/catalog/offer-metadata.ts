@@ -17,9 +17,9 @@ import {parseSpecialId,specialTitle,calculateSpecial} from '../dealers/showcase-
 import {getSpecialOffer} from '../dealers/public-showcase';
 
 type Query={calculation?:string;direct?:string;powerHp?:string;modificationId?:string;preview?:string;estimate?:string;share?:string;dealer?:string};
-function metadata(title:string,description:string,url:string,images:string[],index=true):Metadata {
+function metadata(title:string,description:string,url:string,images:string[],index=true,canonical=url):Metadata {
  images=images.map(socialImageUrl);
- return {title,description,alternates:{canonical:url},openGraph:{type:'website',title,description,url,images:images.map(url=>({url,alt:title}))},twitter:{card:'summary_large_image',title,description,images},robots:{index,follow:index,'max-image-preview':'large'}};
+ return {title,description,alternates:{canonical},openGraph:{type:'website',title,description,url,images:images.map(url=>({url,alt:title}))},twitter:{card:'summary_large_image',title,description,images},robots:{index,follow:index,'max-image-preview':'large'}};
 }
 export async function generateOfferMetadata({params,searchParams}:{params:Promise<{id:string}>;searchParams?:Promise<Query>}):Promise<Metadata>{
  const route=(await params).id;let id=offerRouteId(route);try{id=offerRouteId(decodeURIComponent(route));}catch{}
@@ -49,5 +49,6 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
  // The share message already contains the calculated price; avoid repeating it in its preview.
  const previewTitle=q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title;
  const images=rankedCatalogImageUrls(pricedOffer).slice(0,3).map(u=>absoluteAvtocenaUrl(protectedPhotoUrl(u,offer.market)));
- return metadata(previewTitle,description,url,images,Boolean(scenario||visibleRub||selectionRequired||sellerPricing));
+ const privateScenario=Boolean(q.preview||q.dealer||q.calculation||q.estimate||q.direct||q.powerHp||q.modificationId);
+ return metadata(previewTitle,description,url,images,!privateScenario&&Boolean(scenario||visibleRub||selectionRequired||sellerPricing),absoluteAvtocenaUrl(offerPath(stored)));
 }

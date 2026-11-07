@@ -11,9 +11,9 @@ export function cleanShareTarget(value:unknown, mini:unknown, title?:unknown):Sh
     const dealerId=url.pathname.slice('/dealers/'.length);
     return {version:2,kind:'dealer-selection',dealerId,path:selectionTarget(dealerId,url.search),mini:false,...(selectionTitle(title)?{title:selectionTitle(title)}:{})};
   }
-  if(typeof value!=='string'  || value.length>4000 || !/^\/cars\/offer\/[A-Za-z0-9_%.-]+(?:\?|$)/.test(value))throw Error('invalid_share');
+  if(typeof value!=='string'  || value.length>4000 || !/^\/cars\/offer\/[A-Za-z0-9_%.-]+(?:\/[A-Za-z0-9_-]{1,160})?(?:\?|$)/.test(value))throw Error('invalid_share');
   const url=new URL(value,'https://avtocena.com');
-  if(!/^\/cars\/offer\/[A-Za-z0-9_-]{1,240}$/.test(url.pathname))throw Error('invalid_share');
+  if(!/^\/cars\/offer\/[A-Za-z0-9_-]{1,240}(?:\/[A-Za-z0-9_-]{1,160})?$/.test(url.pathname))throw Error('invalid_share');
   const query=new URLSearchParams();
   for(const key of ['calculation','direct','powerHp','modificationId','estimate','dealer']){
     const item=url.searchParams.get(key);if(!item)continue;

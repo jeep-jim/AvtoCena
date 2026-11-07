@@ -6,7 +6,7 @@ import {dealerBrowsingHref} from '../apps/web/lib/dealers/browsing-context';
 import {offerPath,offerIdFromPath,offerRouteId} from '../apps/web/lib/catalog/offer-url';
 import {cleanShareTarget} from '../apps/web/lib/catalog/short-share';
 import {power30OfferId} from '../apps/web/lib/power30/calculator';
-import {extractOfferId} from '../apps/web/lib/contracts/calculation';
+import {extractOfferId} from '../apps/web/lib/contracts/offer-url-input';
 test('country routes preserve every filter, dealer, city, page and hash; no redirect loops',()=>{
  for(const [market,country] of Object.entries(CATALOG_COUNTRIES)){
   const href=canonicalCatalogHref(`/cars?market=${market}&powerTo=160&page=2&cursor=abc&city=Kemerovo&dealer=pilot&preview=1&tag=a&tag=b#results`);
@@ -41,8 +41,14 @@ test('legacy and new offer URLs resolve to the same identity across sharing, con
 });
 test('Onest is self-hosted, only public typography changes, and hidden fallback adds no second H1',()=>{
  const layout=fs.readFileSync('apps/web/app/(public)/layout.tsx','utf8');
- assert.match(layout,/@fontsource-variable\/onest\/cyrillic.css/);assert.match(layout,/@fontsource-variable\/onest\/latin.css/);
+ assert.match(layout,/@fontsource-variable\/onest\/wght.css/);
  assert.doesNotMatch(layout,/fonts.googleapis.com|fonts.gstatic.com/);
  const css=fs.readFileSync('apps/web/app/public-typography.css','utf8');assert.match(css,/data-public-typography/);assert.match(css,/font-weight:700!important/);
  const access=fs.readFileSync('apps/web/components/site/SitePageAccess.tsx','utf8');assert.doesNotMatch(access,/<h1[ >]/);assert.match(access,/data-site-disabled/);
+});
+
+test('contract URLs reject external hosts, credentials, unsafe identifiers and extra segments',()=>{
+ for(const value of ['https://evil.example/cars/offer/id/slug','https://avtocena.com:444/cars/offer/id/slug','https://user:pass@avtocena.com/cars/offer/id/slug','https://avtocena.com/cars/offer/%2Fprivate/slug','https://avtocena.com/cars/offer/id/slug/extra'])assert.throws(()=>extractOfferId(value));
+ const mini=fs.readFileSync('apps/web/components/telegram/TelegramMiniApp.tsx','utf8');
+ assert.match(mini,/isCatalogSearchPath\(pathname\)/);
 });

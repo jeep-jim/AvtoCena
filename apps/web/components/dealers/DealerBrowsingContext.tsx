@@ -1,6 +1,7 @@
 "use client";
 import {createContext,useContext,useMemo,useTransition,type ReactNode, type ComponentProps} from 'react';
 import {rememberFilterScroll} from "@/lib/catalog/filter-scroll";
+import {isCatalogSearchPath} from '@/lib/catalog/catalog-routes';
 import Link from 'next/link';
 import {useSelectedCity} from '@/lib/location/selected-city';
 import {usePathname,useRouter} from 'next/navigation';
@@ -11,12 +12,12 @@ export const useDealerBrowsing=()=>useContext(Context);
 export function DealerLink({href,onClick,scroll,children,...props}:ComponentProps<typeof Link>){
  const dealer=useDealerBrowsing();const city=useSelectedCity();const router=useRouter();const [pending,startTransition]=useTransition();
  const target=typeof href==='string'?dealerBrowsingHref(href,dealer,city):href;
- const catalog=typeof href==='string' && (href.split('?')[0]==='/cars'||href.split('?')[0]==='/cars/green');
+ const catalog=typeof href==='string' && isCatalogSearchPath(href.split(/[?#]/)[0]);
  return <Link {...props} style={catalog&&pending?{...props.style,boxShadow:"inset 0 -2px currentColor",opacity:0.7}:props.style} href={target} prefetch={catalog?false:props.prefetch} data-no-route-loader={catalog?"true":props["data-no-route-loader"]} aria-busy={catalog&&pending||undefined} scroll={scroll??(catalog?false:undefined)} onClick={event=>{
   onClick?.(event);
   if(catalog&&!event.defaultPrevented&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0&&(!props.target||props.target==='_self')&&!props.download&&typeof target==='string'){
    event.preventDefault();if(pending)return;
-   const fromCatalog=location.pathname==='/cars'||location.pathname==='/cars/green';
+   const fromCatalog=isCatalogSearchPath(location.pathname);
    if(fromCatalog)rememberFilterScroll(target);
    startTransition(()=>{router.push(target,{scroll:scroll??!fromCatalog});});
   }

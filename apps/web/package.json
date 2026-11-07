@@ -10,6 +10,7 @@
     "prebuild": "node ../../scripts/prepare-web-assets.mjs && node --import tsx ../../scripts/build-knowledge-read-model.mjs && node --import tsx ../../scripts/build-model-search-index.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/onest": "5.3.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.0.0",
     "heic-decode": "2.1.0",

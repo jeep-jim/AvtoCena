@@ -1,4 +1,5 @@
 "use client";
+import {isCatalogSearchPath} from '@/lib/catalog/catalog-routes';
 
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -307,7 +308,7 @@ function RoutePreloaderInner(){
    if(!anchor||anchor.dataset.noRouteLoader==="true"||anchor.dataset.intentPrefetch==="true"||anchor.target==="_blank"||anchor.hasAttribute("download"))return;
    const url=new URL(anchor.href,window.location.href);
    if(url.origin!==window.location.origin||sameDocumentHashNavigation(anchor,url))return;
-   if(url.pathname==="/cars"&&url.search)return;
+   if(isCatalogSearchPath(url.pathname))return;
    const route=`${url.pathname}${url.search}`;
    if(route===`${window.location.pathname}${window.location.search}`||warmedRoutesRef.current.has(route))return;
    const run=()=>{cancelWarm();warmedRoutesRef.current.add(route);if(warmedRoutesRef.current.size>64)warmedRoutesRef.current.delete(warmedRoutesRef.current.values().next().value!);router.prefetch(route);};
