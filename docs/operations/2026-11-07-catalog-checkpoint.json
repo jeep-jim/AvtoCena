@@ -1,0 +1,41 @@
+{
+  "at": "2026-11-07T09:14:46.644447+00:00",
+  "deployment": {
+    "run": 42356872095,
+    "status": "in_progress",
+    "conclusion": null,
+    "head": "11e3b4ed853518731c11aa1522068cc87cbb8ff4",
+    "jobs": [
+      {
+        "name": "wait-for-astra",
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
+      },
+      {
+        "name": "prepare",
+        "status": "in_progress",
+        "conclusion": null,
+        "activeSteps": [
+          "Prepare exact price indexes before activating the release"
+        ]
+      }
+    ]
+  },
+  "publicBrowserReadback": {
+    "run": 42357261786,
+    "status": "in_progress",
+    "conclusion": null,
+    "head": "2b217273e4d76d5daaf0480a1979ca73a0829504",
+    "jobs": [
+      {
+        "name": "readback",
+        "status": "in_progress",
+        "conclusion": null,
+        "activeSteps": [
+          "Wait only for the already running exact release"
+        ]
+      }
+    ]
+  }
+}
