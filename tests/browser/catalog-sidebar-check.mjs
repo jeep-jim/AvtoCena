@@ -137,7 +137,9 @@ try{
   assert.equal(new URL(page.url()).searchParams.get('powerTo'),'160');
   assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0,'real CatalogFilters must not activate the header loader');
   assert.equal(await page.locator('.ac-catalog-card').count(),6,'previous cards remain while the selected filter is pending');
-  assert.equal(new URL(page.url()).searchParams.get('market'),'japan');
+  const canonicalTarget=new URL(page.url());
+  assert.equal(canonicalTarget.pathname,'/cars/japan','selected Japan stays in the canonical path');
+  assert.equal(canonicalTarget.searchParams.has('market'),false,'canonical path must not retain duplicate market query');
   await page.screenshot({path:out+'/japan-power-'+width+'.png'});
   await context.close();
  }
