@@ -1,10 +1,9 @@
 {
-  "at": "2026-11-07T09:14:46.644447+00:00",
+  "at": "2026-11-07T09:48:35.083917+00:00",
   "deployment": {
     "run": 42356872095,
-    "status": "in_progress",
-    "conclusion": null,
-    "head": "11e3b4ed853518731c11aa1522068cc87cbb8ff4",
+    "status": "completed",
+    "conclusion": "success",
     "jobs": [
       {
         "name": "wait-for-astra",
@@ -14,27 +13,35 @@
       },
       {
         "name": "prepare",
-        "status": "in_progress",
-        "conclusion": null,
-        "activeSteps": [
-          "Prepare exact price indexes before activating the release"
-        ]
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
       }
     ]
   },
-  "publicBrowserReadback": {
-    "run": 42357261786,
-    "status": "in_progress",
-    "conclusion": null,
-    "head": "2b217273e4d76d5daaf0480a1979ca73a0829504",
+  "installedBrowserReadback": {
+    "run": 42360024550,
+    "status": "completed",
+    "conclusion": "success",
     "jobs": [
       {
         "name": "readback",
-        "status": "in_progress",
-        "conclusion": null,
-        "activeSteps": [
-          "Wait only for the already running exact release"
-        ]
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
+      }
+    ]
+  },
+  "isolatedSingleRailCandidate": {
+    "run": 42359906366,
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
       }
     ]
   }
