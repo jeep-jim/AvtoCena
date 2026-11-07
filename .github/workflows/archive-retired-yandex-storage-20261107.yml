@@ -14,12 +14,27 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     environment: regcloud-staging
+    env:
+      AWS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
     steps:
       - uses: actions/checkout@v4
         with: {persist-credentials: false}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: pip install --disable-pip-version-check boto3==1.40.68
+      - name: Validate HTTPS using OS certificates without credentials
+        run: |
+          python3 - <<'PY'
+          import ssl,urllib.request,urllib.error
+          ctx=ssl.create_default_context(cafile='/etc/ssl/certs/ca-certificates.crt')
+          try:
+              with urllib.request.urlopen('https://s3.regru.cloud/',context=ctx,timeout=20) as r:print('Verified TLS; HTTP',r.status)
+          except urllib.error.HTTPError as e:
+              assert e.code in (400,403,404,405);print('Verified TLS; unauthenticated HTTP',e.code)
+          except urllib.error.URLError as e:
+              print('TLS preflight failed:',str(e.reason)[:250]);raise SystemExit(1)
+          PY
       - name: Validate archive is restricted to non-runtime prefix
         run: |
           python3 -m py_compile scripts/archive-retired-yandex-storage.py
@@ -32,7 +47,6 @@ jobs:
           assert "'ACL':'private'" in s and "ACL='private'" in s
           assert 'archive_readback_mismatch' in s and 'source_changed_during_archive' in s
           assert 'max_workers=4' in s
-          # Test the actual streaming hash adapter without invoking credentials.
           body=[n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='HashReader']
           import hashlib,io
           env={'hashlib':hashlib};exec(compile(ast.Module(body=body,type_ignores=[]),'adapter','exec'),env)
