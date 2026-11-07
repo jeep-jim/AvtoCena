@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 24.22.1
           cache: npm
-      - name: Apply presentation-only candidate on exact base
+      - name: Apply presentation-only candidate and preserve semantic regression assertions
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = 11e3b4ed853518731c11aa1522068cc87cbb8ff4
@@ -33,10 +33,18 @@ jobs:
           python3 preparation/.github/patches/catalog-single-brand-rail-20261107.py
           python3 - <<'PY'
           from pathlib import Path
+          def replace(path,before,after):
+              p=Path(path);s=p.read_text();assert s.count(before)==1,(path,s.count(before));p.write_text(s.replace(before,after))
           p=Path('tests/browser/catalog-single-brand-fixture.tsx');s=p.read_text();s=s.replace('import {CATALOG_BRANDS}', 'import {CATALOG_BRANDS,canonicalCatalogBrand}').replace('const brands=CATALOG_BRANDS.map(v=>v.name);','const brands=[...new Set(CATALOG_BRANDS.map(v=>canonicalCatalogBrand(v.name)).filter(Boolean))];');p.write_text(s)
+          replace('tests/catalog-count-format.test.ts','counter renders once in the sidebar header outside mobile-hidden wrappers','counter renders once in the responsive header slot outside mobile-hidden wrappers')
+          replace('tests/catalog-count-format.test.ts',r'assert.match(source,/\{!embedded&&!selectedMarket&&countLabel\}/);',r'assert.match(source,/headerAfterBrands=\{!embedded&&!selectedMarket\?countLabel:undefined\}/);'+'\n  '+r'assert.equal((source.match(/headerAfterBrands=/g)||[]).length,1);'+'\n  '+r'''const sidebar=readFileSync("apps/web/components/catalog/CatalogSidebar.tsx","utf8");assert.match(sidebar,/singleRail&&headerAfterBrands&&<div key="count" className="ac-catalog-count-slot">\{headerAfterBrands\}<\/div>/);''')
+          replace('tests/catalog-japan-filter-rail.test.ts','walk(node.props?.header);','walk(node.props?.header);walk(node.props?.brandRail);walk(node.props?.headerAfterBrands);')
+          replace('tests/catalog-japan-filter-rail.test.ts'," const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');", " assert.equal(elements.filter(x=>x.type?.name==='ResolvedCatalogCount').length,1,'one public counter across layout slots');\n assert.equal(elements.filter(x=>x.type?.name==='BrandLogoRail').length,1,'one complete public brand rail');\n const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');")
           PY
           git diff --check
       - run: npm ci
+      - name: Targeted count and Japan slot regressions
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-count-format.test.ts tests/catalog-japan-filter-rail.test.ts
       - name: Install bounded browser test runtime
         run: |
           npm install --prefix /tmp/single-rail-browser --no-audit --no-fund --ignore-scripts playwright@1.56.1
@@ -58,13 +66,15 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import os
-          Path('docs/operations/2026-11-07-single-brand-rail.md').write_text('# 07.11.2026 — одна полоса марок публичного каталога\n\nИзолированный кандидат после PR1714/1715: один BrandLogoRail в публичном CatalogContent вместо двух responsive-копий. Все марки, поиск, URL, данные, расчёты и права сохранены. Дилерский вариант и AJES-шаблон не менялись. CSS slots сохраняют порядок по ширине экрана; stable keys сохраняют карточки при ошибке.\n\nПроверка '+os.environ['GITHUB_RUN_ID']+' прошла сравнительную геометрию390/768/1023/1280/1600, обе темы, полную директорию, sticky64px, плитку/список и retained results, затем полный npm test, typecheck и production build. Это проверка изолированного стенда, не измерение рабочего сайта и не установка. Требуется review/стандартный CI и live-приёмка.\n')
+          import os,json
+          results=json.loads(Path('artifacts/catalog-single-brand/results.json').read_text())
+          Path('docs/operations/2026-11-07-single-brand-rail.md').write_text('# 07.11.2026 — одна полоса марок публичного каталога\n\nИзолированный кандидат после PR1714/1715: один BrandLogoRail в публичном CatalogContent вместо двух responsive-копий. Все марки, поиск, URL, данные, расчёты и права сохранены. Дилерский вариант и AJES-шаблон не менялись. CSS slots сохраняют порядок по ширине экрана; stable keys сохраняют карточки при ошибке.\n\nПроверка '+os.environ['GITHUB_RUN_ID']+' прошла сравнительную геометрию390/768/1023/1280/1600, обе темы, полную директорию, sticky64px, плитку/список и retained results, затем полный npm test, typecheck и production build. Это проверка изолированного стенда, не измерение рабочего сайта и не установка. Требуется review/стандартный CI и live-приёмка.\n\nПервый прогон42359388776 прошёл браузерную часть, но остановился на двух тестах, ожидавших старое положение счётчика: regex исходника и обход React-tree без новых slots. Обновлена форма обхода/передачи; семантические проверки общего/неполного количества, Японии/Green/города и ошибки сохранены. Добавлены отдельные проверки единственного счётчика и единственной полной полосы.\n')
+          Path('docs/operations/2026-11-07-single-brand-rail-browser.json').write_text(json.dumps({'run':os.environ['GITHUB_RUN_ID'],'scope':'Isolated layout fixture; not production HTML/network benchmark','results':results},ensure_ascii=False,indent=2)+'\n')
           PY
           git diff --check
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- apps/web/components/catalog/CatalogSidebar.tsx apps/web/components/catalog/CatalogContent.tsx apps/web/components/catalog/catalog-sidebar.css tests/browser/catalog-sidebar-baseline.generated.tsx tests/browser/catalog-single-brand-fixture.tsx tests/browser/catalog-single-brand-check.mjs docs/operations/2026-11-07-single-brand-rail.md
+          git add -- apps/web/components/catalog/CatalogSidebar.tsx apps/web/components/catalog/CatalogContent.tsx apps/web/components/catalog/catalog-sidebar.css tests/browser/catalog-sidebar-baseline.generated.tsx tests/browser/catalog-single-brand-fixture.tsx tests/browser/catalog-single-brand-check.mjs tests/catalog-count-format.test.ts tests/catalog-japan-filter-rail.test.ts docs/operations/2026-11-07-single-brand-rail.md docs/operations/2026-11-07-single-brand-rail-browser.json
           git commit -m 'perf: render one public brand rail with preserved responsive layout'
           git push origin HEAD:fix/catalog-single-brand-rail-20261107
           git log -1 --format='%H %s'
