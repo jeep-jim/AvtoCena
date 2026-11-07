@@ -1,0 +1,139 @@
+name: Catalog reference browser gate recovery 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-reference-gates-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-reference-browser-gate-recovery
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-reference-20261107
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Apply bounded fixture corrections to the reviewed candidate
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 1e21404fa27a176a8538b2b627a0d85edd905b59
+          tail -n 35 AGENTS.md
+          tail -n 50 roadmap.md
+          python3 - <<'PY'
+          from pathlib import Path
+          def replace(path, before, after):
+              p=Path(path); s=p.read_text()
+              assert s.count(before)==1, (path, before[:80], s.count(before))
+              p.write_text(s.replace(before,after))
+          replace('tests/browser/catalog-sidebar-check.mjs', "  assert.equal(new URL(page.url()).searchParams.get('market'),'japan');", "  const canonicalTarget=new URL(page.url());\n  assert.equal(canonicalTarget.pathname,'/cars/japan','selected Japan stays in the canonical path');\n  assert.equal(canonicalTarget.searchParams.has('market'),false,'canonical path must not retain duplicate market query');")
+          replace('tests/browser/qr-gallery-preview.mjs', "['/','/filters','/cars','/cars/offer/qa-gallery','/admin/settings','/crm']", "['/','/filters','/cars','/cars/japan','/cars/offer/qa-gallery','/admin/settings','/crm']")
+          replace('tests/browser/qr-gallery-preview.mjs', "  await page.reload();if(width<500)", "  assert.equal(new URL(page.url()).pathname,'/cars/japan','filter navigation uses the new canonical market route');\n  assert.equal(new URL(page.url()).searchParams.has('market'),false);\n  await page.reload();if(width<500)")
+          replace('tests/browser/qr-gallery-fixture.tsx', "import React, {useEffect, useState} from 'react';", "import React, {useEffect, useState} from 'react';\nimport {catalogRouteParams,isCatalogSearchPath} from '../../apps/web/lib/catalog/catalog-routes';\nconst filterParams=()=>({...Object.fromEntries(new URLSearchParams(location.search)),...(catalogRouteParams(location.pathname)||{})});")
+          replace('tests/browser/qr-gallery-fixture.tsx', "useState(()=>Object.fromEntries(new URLSearchParams(location.search)))", "useState(filterParams)")
+          replace('tests/browser/qr-gallery-fixture.tsx', "setInitial(Object.fromEntries(new URLSearchParams(location.search)))", "setInitial(filterParams())")
+          replace('tests/browser/qr-gallery-fixture.tsx', "['/filters','/cars'].includes(location.pathname)", "(location.pathname==='/filters'||isCatalogSearchPath(location.pathname))")
+          replace('.github/workflows/verify-share-autohome.yml', 'runs-on: ubuntu-latest', 'runs-on: ubuntu-24.04')
+          PY
+          git diff --check
+      - run: npm ci
+      - name: Prepare existing browser fixtures and isolated browser runtime
+        run: |
+          node scripts/prepare-web-assets.mjs
+          npm install --prefix "$RUNNER_TEMP/catalog-gates" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.55.0
+          node "$RUNNER_TEMP/catalog-gates/node_modules/playwright/cli.js" install --with-deps chromium webkit
+      - name: Verify filters and canonical country preservation
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-gates/node_modules/playwright/index.mjs
+        run: |
+          set -o pipefail
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-sidebar-check.mjs 2>&1 | tee sidebar-recovery.log
+      - name: Verify gallery and grade selection across canonical reload
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-gates/node_modules/playwright/index.mjs
+        run: |
+          set -o pipefail
+          node --import tsx tests/browser/qr-gallery-preview.mjs 2>&1 | tee gallery-recovery.log
+      - name: Verify native sharing including WebKit and action icons
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-gates/node_modules/playwright/index.mjs
+        run: |
+          set -o pipefail
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs 2>&1 | tee share-recovery.log
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-actions-icons.mjs 2>&1 | tee icons-recovery.log
+      - name: Record evidence without claiming production acceptance
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          report='''# ZMA, скорость и GitHub — разбор 07.11.2026
+
+          ## Область доказательств
+          Исходный публичный аудит: Actions 42333928729, artifact 13558033932, report.json и сохранённый HTML. Замеры 03:25 UTC 07.11.2026, один внешний runner, без VPN-сравнения и без нагрузочного теста. Числа ниже повторно извлечены из этих файлов, это не новые live-замеры. Браузерные показатели и установленный HTTP/2: docs/operations/2026-11-07-catalog-reference-readback.md. Корректность всей базы/таможенных расчётов ZMA не проверена. Частный backend, БД, cache hit rate и используемый ими сервис контроля версий неизвестны.
+
+          ## Что видно у ZMA
+          Заголовок x-powered-by: Nuxt; публичные страницы содержат готовый HTML, локальный Onest Variable и WebP-медиа из отдельного S3-хранилища. Страна ведёт на /avto-iz-kitaya-pod-zakaz, но отдельный каталог существует как /katalog?market=china. Наличие query-параметра само по себе не ошибка SEO. Это два типа страниц: посадочная о направлении и фильтруемый каталог.
+          Cache-Control страницы направления и каталога: s-maxage=120, stale-while-revalidate; карточки: s-maxage=300, stale-while-revalidate. Заголовки разрешают повторное использование ответов общим кешем. Они НЕ доказывают конкретное попадание в кеш, тип БД или отсутствие обращений к поставщику. Значение stale-while-revalidate отдано без числового параметра; точную допустимую длительность stale-выдачи по нему установить нельзя.
+          HTTP-чтения страницы Китая: первая попытка TTFB1097мс/полное тело1708мс; вторая211/414мс. Каталог Китая1009/1777 и211/820мс; карточка201/393 и220/423мс. Уменьшение времени повторного запроса согласуется с повторным использованием соединения/прогревом/кешированием, но разделить вклад этих факторов по двум запросам нельзя.
+
+          ## Что видно у АвтоЦены
+          HTML отвечал private, no-cache, no-store, max-age=0, must-revalidate. Это запрещает общий HTTP-кеш страниц, но НЕ означает отсутствие наших кешей данных. Китай без фильтра: полное HTTP-тело272/300мс, с <=160:4522/399мс. Корея<=160:5614/10001мс, при TTFB182/191мс. Быстрая первая порция HTML здесь не означает готовый список.
+          Размер сохранённого HTML: ZMA-каталог277415байт, АвтоЦена-Китай584079байт, общий /cars972866байт; страна ZMA145366байт. Размеры распакованного содержимого, не одинаковый набор карточек и не оценка сетевого трафика после gzip.
+          В сохранённом /cars396 img-элементов логотипов:198 уникальных URL, каждый дважды. В Китае266:133URL дважды. Это DOM-элементы, НЕ396/266 сетевых загрузок. CatalogContent рендерит две responsive-полосы BrandLogoRail; CSS-скрытие не удаляет их из HTML. Это конкретная точка сокращения HTML/гидратации без удаления марок из каталога.
+          AJES-клиент в apps/web/lib/catalog/ajes-client.ts ограничивает общую очередь двумя операциями; детали одной. Кеш-промах, чтение сохранённого ответа и запрос поставщику выполняются внутри этого пути. readFilteredAjesPage может последовательно прочитать до8страниц при лимите времени. Фильтр мощности применяется после локального обогащения; неизвестная мощность не подходит под <=160. readAjesCountSummary для такого фильтра сразу возвращает upperBound, а не точный supplier COUNT. Эти ограничения объясняют конкретные риски очередей/неполноты, но не устанавливают единственную причину каждого отказа.
+
+          ## Выпуск кода и обслуживание посетителей — разные цепочки
+          .github/workflows/regcloud-deploy.yml собирает Docker-образ на runner, сохраняет/проверяет SHA256, передаёт образ по SSH/SCP на REG-сервер и загружает Docker. Dockerfile запускает node apps/web/server.js из standalone-сборки. Рабочие страницы обслуживаются nginx/Node на REG с данными из настроенного object storage, локальных кешей и разрешённых API; GitHub не является промежуточным сервером выдачи каталога.
+          В исходниках найдены отдельные GitHub-интеграции crm-dispatch.ts и team-assistant/repository.ts. Поэтому утверждение «всё приложение вообще не зависит от GitHub» было бы слишком сильным. Они не являются передачей каждого каталожного запроса через GitHub.
+          Отказ от GitHub сам по себе не уменьшит HTML, не исправит provider refusal, не создаст точный индекс мощности и не ускорит те же запросы на том же сервере. Разработка на рабочем сервере без истории/проверок увеличит риск неповторимых изменений; сборки на том же CPU могут конкурировать с посетителями. Возможная отдельная задача — ускорить подготовку релиза и переиспользование неизменных индексов, сохраняя версионность, проверки и откат. В этой сессии выпуск/источники/права/цены не изменяются.
+
+          ## Следующий порядок оптимизации
+          1. Завершить реальные проверки PR1714 без пропуска падающих browser gates.
+          2. Удалить двойной responsive-рендер марок, сохранив полный справочник, размещение, выбор и доступность.
+          3. Разделить получение готовых локальных данных и ожидание внешнего поставщика; измерять каждый этап до видимых карточек, отдельно cold/warm/expired.
+          4. Публичный кеш строить по версии каталога/энциклопедии/курса/условий/города; не кешировать чужую авторизацию или stale-цену как актуальную. Не копировать чужой s-maxage на весь персонализированный HTML.
+          5. Проверять выдачу<=160 и счётчики на одних подтверждённых данных. Не заполнять неизвестную мощность догадками, не обходить отказ поставщика подменой IP и не копировать ограниченный фид целиком.
+          6. Закрыть H1/title/canonical/sitemap/старые ссылки/дилера/город/расчётный сценарий в единой приёмке.
+
+          ## Исправления браузерных стендов
+          Sidebar теперь проверяет /cars/japan и отсутствие дублирующего market query, сохраняя powerTo160/старые карточки/локальную обратную связь. QR-стенд принимает этот маршрут, восстанавливает страну из пути и проверяет аукционные оценки после настоящей перезагрузки. WebKit-проверка закреплена на Ubuntu24.04, поддерживаемой используемым Playwright. Рабочая логика фильтров/источников/расчётов не менялась.
+          '''
+          report='\n'.join(line[10:] if line.startswith('          ') else line for line in report.splitlines())+'\n'
+          run=os.environ['GITHUB_RUN_ID']
+          report+='\nИзолированная проверка исправленных стендов завершилась успешно в run '+run+'. Проверены sidebar, QR/gallery, native share (включая WebKit), action icons. Это не полный CI и не публикация интерфейса.\n'
+          Path('docs/operations/2026-11-07-zma-architecture-and-github.md').write_text(report)
+          p=Path('roadmap.md'); before=p.read_bytes()
+          note='\n\n## 07.11.2026 — продолжение ZMA: браузерные стенды и отделение GitHub от runtime\n\nИсправлены canonical-route fixtures sidebar/QR с сохранением проверок фильтров/перезагрузки/галереи; WebKit runner закреплён на Ubuntu24.04. Изолированные browser checks пройдены в https://github.com/jeep-jim/AvtoCena/actions/runs/'+run+'. Подробный разбор кеширования, HTML, AJES-очереди и цепочки Docker/GitHub/REG записан в docs/operations/2026-11-07-zma-architecture-and-github.md. Повторный анализ сохранённого HTML нашёл две копии198логотипов в /cars и133 в Китае; это число DOM-элементов, не сетевых запросов. Следующая оптимизация должна убирать повторный рендер, не ограничивать марки. Удаление GitHub не принято как способ ускорения runtime. Новый полный CI точного head ещё нужен, production не изменён. Полнота<=160Корея/Япония, периодический /cars и окончательный SEO audit открыты.\n'
+          p.write_bytes(before+note.encode())
+          assert p.read_bytes().startswith(before)
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- tests/browser/catalog-sidebar-check.mjs tests/browser/qr-gallery-preview.mjs tests/browser/qr-gallery-fixture.tsx .github/workflows/verify-share-autohome.yml docs/operations/2026-11-07-zma-architecture-and-github.md roadmap.md
+          git commit -m 'test: verify canonical catalog routes across browser reloads; document ZMA and runtime boundaries'
+          git push origin HEAD:fix/catalog-reference-20261107
+          git log -1 --format='%H %s'
+      - name: Preserve test evidence even on failure
+        if: always()
+        run: |
+          mkdir -p gate-recovery-report
+          git diff > gate-recovery-report/worktree.patch
+          git rev-parse HEAD > gate-recovery-report/head.txt
+          cp *-recovery.log gate-recovery-report/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-reference-gate-recovery
+          path: |
+            gate-recovery-report
+            artifacts/mobile-filter-local-chromium
+            artifacts/qr-gallery
+            artifacts/offer-actions
+          retention-days: 7
