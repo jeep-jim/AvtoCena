@@ -40,7 +40,7 @@ export async function GreenCornerCatalog({params:input,embedded=false}:{params:R
    <CatalogCountLabel total={result.total}/>
   </p>}
   </div>
-  <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукциона.</p>
+  <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукционе.</p>
   </div><GreenCornerDeliveryBanner /></div>
   </>}>
   <div className="mt-5 flex flex-wrap items-center justify-between gap-3"><h2 className="flex flex-wrap items-center gap-2 text-2xl font-black"><span>Япония · В наличии</span><MarketResultCount total={result.total}>{result.total.toLocaleString("ru-RU")}</MarketResultCount></h2><JapanSectionTabs active="green" params={initial}/></div>
