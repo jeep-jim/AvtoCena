@@ -16,13 +16,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Append factual checkpoint while preserving the recovery history
+      - name: Append confirmed installation and keep unresolved failures visible
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           tail -n 35 AGENTS.md
-          cat docs/operations/2026-11-07-catalog-recovery-plan.md
+          cat docs/operations/2026-11-07-catalog-installed-readback.md
           python3 - <<'PY'
           import os,json,datetime,urllib.request
           from pathlib import Path
@@ -31,25 +31,35 @@ jobs:
               request=urllib.request.Request(base+path,headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN'],'Accept':'application/vnd.github+json'})
               with urllib.request.urlopen(request,timeout=20) as response:return json.load(response)
           evidence={}
-          for name,run_id in [('deployment',42356872095),('publicBrowserReadback',42357261786)]:
-              run=read('/actions/runs/'+str(run_id))
-              jobs=read('/actions/runs/'+str(run_id)+'/jobs?per_page=20')['jobs']
-              evidence[name]={'run':run_id,'status':run['status'],'conclusion':run['conclusion'],'head':run['head_sha'],'jobs':[{'name':j['name'],'status':j['status'],'conclusion':j['conclusion'],'activeSteps':[s['name'] for s in j.get('steps',[]) if s['status']=='in_progress']} for j in jobs]}
+          for name,run_id in [('deployment',42356872095),('installedBrowserReadback',42360024550),('isolatedSingleRailCandidate',42359906366)]:
+              run=read('/actions/runs/'+str(run_id));jobs=read('/actions/runs/'+str(run_id)+'/jobs?per_page=20')['jobs']
+              evidence[name]={'run':run_id,'status':run['status'],'conclusion':run['conclusion'],'jobs':[{'name':j['name'],'status':j['status'],'conclusion':j['conclusion'],'activeSteps':[s['name'] for s in j.get('steps',[]) if s['status']=='in_progress']} for j in jobs]}
+          assert evidence['installedBrowserReadback']['conclusion']=='success'
+          assert evidence['isolatedSingleRailCandidate']['conclusion']=='success'
           at=datetime.datetime.now(datetime.timezone.utc).isoformat()
-          text='## 07.11.2026 — контрольная запись продолжения восстановления\n\n'
-          text+='Сверка '+at+'. План восстановления от07.11 остаётся обязательным; несвязанные функции не выполняются.\n\n'
-          text+='Проверка42357690240/128359285650 прочитала только48уже сохранённых объявлений, без запросов к поставщику и без изменения данных. Корея:19/24неразрешённых идентичностей модели,5/24без проверенных вариантов; мощность не установлена для24/24на всех этапах технической цепочки. Япония:23/24без строки точной модели+года в установленном calculation index,1проходит существующее owner-правило. Это выборка, не вывод о всей базе; сырой PW не превращать в подтверждённую характеристику. Подробности и хеш артефакта: docs/operations/2026-11-07-catalog-power-pipeline-readback.md.\n\n'
-          text+='Публикация391 запущена один раз, ожидаемый application release11e3b4ed853518731c11aa1522068cc87cbb8ff4. Реальные текущие состояния ниже получены из API; метаданные SUCCESS сами по себе не равны приёмке каталога.\n\n```json\n'+json.dumps(evidence,ensure_ascii=False,indent=2)+'\n```\n\n'
-          text+='Открытые задачи: дождаться результата уже запущенного выпуска без дубликатов; прочитать браузерный отчёт точного установленного SHA и визуальные результаты; устранить точные разрывы сопоставления уже известных вариантов/доказанные пробелы фактов; обеспечить одинаковую основу фильтра и счётчика; затем убрать двойную разметку полосы марок с сохранением размещения/всехмарок и закончить sitemap/canonical/redirect audit. Не называть периодическое падение /cars или полноту<=160исправленными до фактической проверки.\n'
-          p=Path('roadmap.md');before=p.read_bytes();p.write_bytes(before+b'\n\n'+text.encode());assert p.read_bytes().startswith(before)
-          Path('docs/operations/2026-11-07-catalog-checkpoint.md').write_text(text)
+          note='''
+
+          ## 07.11.2026 — установлен PR1714/1715; фактическая приёмка каталога остаётся частичной
+
+          Поручение владельца «продолжай» выполнено: единственный release11e3b4ed853518731c11aa1522068cc87cbb8ff4 установлен и подтверждён до/после внешнего браузерного прогона42360024550. Скачан и прочитан artifact13569575865, SHA256b40d981dee749bc2310e9e61660ad8506e0d9d628c5d659a1a621e1577b727d2; просмотрены снимки Китая, Кореи<=160, мобильного Китая и карточки. Отчёт в main: docs/operations/2026-11-07-catalog-installed-readback.md.
+
+          15каталожных сценариев и1настоящая карточка: HTTP200, HTTP/2, загруженный Onest, тематические H1; query-входы3стран возвращают308 с сохранением city/page/powerTo. Проверенные строки общей ошибки и uncaught pageerror отсутствуют. Это не полная приёмка: Корея<=160=0карточек/неполный счётчик, Япония<=160=1/неполный; Китай<=160 в одиночном замере DOM5.909с. Есть учтённые неуспешные same-origin запросы, причина не записана этим аудитом; на раннем desktopChinaPNG замечено оформление меню диапазонов «Не важно», требующее проверки после гидратации. Не считать сеть/всю верстку/все цены/всю базу проверенными. Периодический /cars не воспроизведён, но первопричина окончательно не закрыта.
+
+          PR1716/head97e53be924ce168f00f5f1eb985e0c41ecfb732f подготовлен отдельно, ещё не объединён/не установлен. Полный npm test, typecheck, build и браузерное сравнение5ширин×2темы SUCCESS в42359906366. В макете183марки сохранены,366элементовлоготипов→183, расположение/закрепление/retainedcards сохранены. Второго deploy нет; нужен стандартный CI и последующая live-проверка.
+
+          Продолжаем по плану от07.11: точное сопоставление объявлений с проверенными вариантами из энциклопедии (19/24Korea model_identity_unresolved,5/24verified_variants_missing в сохранённой выборке), без подстановки PW; единые основания списка/счётчика; сокращение лишней разметки; сетевые/визуальные дефекты и холодный/прогретый замер; полный sitemap/canonical/redirect audit. Источники, допуск, тарифы, пошлины, комиссии, ручные правки, дилерские права и CRM не изменять ради визуально зелёного экрана. Несвязанные функции не продолжать.
+          '''
+          note='\n'.join(line[10:] if line.startswith('          ') else line for line in note.splitlines())+'\n'
+          note+='\nСостояния запусков на '+at+':\n```json\n'+json.dumps(evidence,ensure_ascii=False,indent=2)+'\n```\n'
+          p=Path('roadmap.md');before=p.read_bytes();p.write_bytes(before+note.encode());assert p.read_bytes().startswith(before)
+          Path('docs/operations/2026-11-07-catalog-checkpoint.md').write_text(note.lstrip())
           Path('docs/operations/2026-11-07-catalog-checkpoint.json').write_text(json.dumps({'at':at,**evidence},ensure_ascii=False,indent=2)+'\n')
           PY
           git diff --check
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add roadmap.md docs/operations/2026-11-07-catalog-checkpoint.md docs/operations/2026-11-07-catalog-checkpoint.json
-          git commit -m 'docs: checkpoint recovery release and confirmed power-matching gaps'
+          git commit -m 'docs: confirm installed catalog release and retain power, network and SEO blockers'
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then break; fi
             test "$attempt" -lt 3
@@ -58,7 +68,7 @@ jobs:
           done
           git log -1 --format='%H %s'
           mkdir -p continuation-report
-          tail -n 140 roadmap.md > continuation-report/roadmap-tail.md
+          tail -n 150 roadmap.md > continuation-report/roadmap-tail.md
           cp docs/operations/2026-11-07-catalog-checkpoint.* continuation-report/
       - uses: actions/upload-artifact@v4
         if: always()
