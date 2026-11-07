@@ -1,0 +1,103 @@
+name: Owner storage retirement preflight 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/storage-retirement-preflight-20261107.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: owner-storage-retirement-preflight
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - run: npm ci --ignore-scripts
+      - name: Preserve exact maintenance code and latest roadmap for review
+        run: |
+          mkdir -p retirement-preflight
+          tail -n 240 roadmap.md > retirement-preflight/roadmap-tail.md
+          git rev-parse HEAD > retirement-preflight/revision.txt
+          tar -czf retirement-preflight/maintenance-source.tar.gz AGENTS.md scripts apps/web/lib/data.ts apps/web/lib/object-storage-response.ts apps/web/lib/catalog/storage.ts apps/web/lib/catalog/refresh-policy.ts .github/workflows .github/diagnostics tests/catalog-storage* tests/catalog-internal* tests/storage* package.json
+      - name: Inspect live REG manifests and workflow destinations without writes
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const storage=getJsonStorage(), result={at:new Date().toISOString(),manifests:{},workflowDestinations:[],errors:[]};
+          for(const path of ['catalog/manifest.json','catalog/previous-manifest.json','catalog/internal/manifest.json','catalog/import-lock.json','catalog/japan-auction-history/manifest.json']){
+            const value=await storage.readJson(path,null);if(!value){result.manifests[path]={present:false};continue;}
+            const refs=new Set(),generations=new Set();
+            const walk=v=>{if(typeof v==='string'){for(const m of v.matchAll(/gen_\d+_[-a-z0-9]+/gi))generations.add(m[0]);if(v.startsWith('catalog/'))refs.add(v);}else if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')Object.values(v).forEach(walk);};walk(value);
+            result.manifests[path]={present:true,sha256:crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex'),generationId:value.generationId,generations:[...generations],referenceCount:refs.size,referencePrefixes:[...new Set([...refs].map(k=>k.split('/').slice(0,4).join('/')))].slice(0,50),markets:value.markets?Object.fromEntries(Object.entries(value.markets).map(([k,v])=>[k,{count:v.count,chunks:v.chunks?.length}])):undefined,sources:value.sources?Object.fromEntries(Object.entries(value.sources).map(([k,v])=>[k,{count:v.count,chunks:v.chunks?.length}])):undefined,lockedUntil:value.lockedUntil,activeLock:Date.parse(value.lockedUntil||'')>Date.now()};
+          }
+          const response=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const h=await response.json();result.health={status:response.status,ok:h.ok,releaseSha:h.releaseSha,calculationVersion:h.calculationVersion};
+          const states=new Map();for(let page=1;page<=8;page++){const r=await fetch(`https://api.github.com/repos/jeep-jim/AvtoCena/actions/workflows?per_page=100&page=${page}`,{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN},signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('workflow_inventory_'+r.status);const d=await r.json();for(const w of d.workflows||[])states.set(w.path,{id:w.id,state:w.state});if(d.workflows.length<100)break;if(page===8)throw Error('workflow_inventory_incomplete');}
+          for(const name of fs.readdirSync('.github/workflows').filter(n=>/\.ya?ml$/.test(n))){const path='.github/workflows/'+name,s=fs.readFileSync(path,'utf8');if(!/YC_OBJECT_STORAGE|YC_SA_JSON|yandexcloud|cr\.yandex/.test(s))continue;result.workflowDestinations.push({path,...states.get(path),legacyStorageSecrets:/secrets\.YC_OBJECT_STORAGE/.test(s),regStorageSecrets:/secrets\.REGCLOUD_S3/.test(s),yandexServiceAccount:/secrets\.YC_SA_JSON/.test(s),scheduled:/^\s{2}schedule:/m.test(s),automaticCompletion:/^\s{2}workflow_run:/m.test(s)});}
+          fs.writeFileSync('retirement-preflight/live-references.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+          JS
+      - name: Enumerate old Yandex resources without deleting anything
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import crypto from 'node:crypto';
+          const report={at:new Date().toISOString(),readOnly:true,resources:{},errors:[]};
+          try{
+            const key=JSON.parse(process.env.YC_SA_JSON_CREDENTIALS||'{}');if(!key.id||!key.service_account_id||!key.private_key)throw Error('service_account_unavailable');
+            const iam='https://iam.api.cloud.yandex.net/iam/v1/tokens',now=Math.floor(Date.now()/1000),enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+            const unsigned=enc({alg:'PS256',typ:'JWT',kid:key.id})+'.'+enc({iss:key.service_account_id,aud:iam,iat:now,exp:now+600});
+            const signature=crypto.sign('sha256',Buffer.from(unsigned),{key:key.private_key.slice(key.private_key.indexOf('-----BEGIN')),padding:crypto.constants.RSA_PKCS1_PSS_PADDING,saltLength:32}).toString('base64url');
+            const ir=await fetch(iam,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jwt:unsigned+'.'+signature}),signal:AbortSignal.timeout(15000)});if(!ir.ok)throw Error('iam_http_'+ir.status);const {iamToken}=await ir.json();
+            const folder='b1g9vq73onqb7dp5hgqg';
+            const specs=[['containers','https://serverless-containers.api.cloud.yandex.net/containers/v1/containers','containers'],['functions','https://serverless-functions.api.cloud.yandex.net/functions/v1/functions','functions'],['gateways','https://serverless-apigateway.api.cloud.yandex.net/apigateways/v1/apigateways','apiGateways'],['instances','https://compute.api.cloud.yandex.net/compute/v1/instances','instances'],['disks','https://compute.api.cloud.yandex.net/compute/v1/disks','disks'],['addresses','https://vpc.api.cloud.yandex.net/vpc/v1/addresses','addresses'],['registries','https://container-registry.api.cloud.yandex.net/container-registry/v1/registries','registries'],['buckets','https://storage.api.cloud.yandex.net/storage/v1/buckets','buckets']];
+            for(const [kind,endpoint,field] of specs){let pageToken='',all=[],complete=false;try{for(let i=0;i<20;i++){const url=new URL(endpoint);url.searchParams.set('folderId',folder);url.searchParams.set('pageSize','100');if(pageToken)url.searchParams.set('pageToken',pageToken);const r=await fetch(url,{headers:{Authorization:'Bearer '+iamToken},signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('http_'+r.status);const d=await r.json();all.push(...(d[field]||[]).map(x=>({id:x.id,name:x.name,status:x.status,size:x.size,createdAt:x.createdAt})));pageToken=d.nextPageToken||'';if(!pageToken){complete=true;break;}}report.resources[kind]={complete,items:all};}catch(e){report.resources[kind]={complete:false,items:all};report.errors.push({kind,error:e.message});}}
+          }catch(e){report.errors.push({stage:'authentication',error:e.message});}
+          fs.writeFileSync('retirement-preflight/yandex-resources.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+          JS
+      - name: Check runtime cloud dependencies without printing credentials
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY' | tee retirement-preflight/runtime-dependencies.json
+          import subprocess,json,urllib.parse
+          raw=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
+          env=dict(v.split('=',1) for v in raw['Config']['Env'] if '=' in v)
+          report={'environmentNamesWithYandexService':[],'storageIsREG':False,'releaseSha':env.get('AVTOCENA_RELEASE_SHA'),'containerRunning':raw['State']['Running']}
+          for k,v in env.items():
+              if k=='YC_OBJECT_STORAGE_ENDPOINT':report['storageIsREG']=urllib.parse.urlparse(v).hostname=='s3.regru.cloud'
+              if any(h in v.lower() for h in ['yandexcloud.net','api.cloud.yandex.net','cr.yandex']):report['environmentNamesWithYandexService'].append(k)
+          print(json.dumps(report))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: storage-retirement-preflight
+          path: retirement-preflight
+          retention-days: 7
