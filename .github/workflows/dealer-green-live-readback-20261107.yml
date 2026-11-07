@@ -1,0 +1,70 @@
+name: Dealer green installed release acceptance 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/dealer-green-live-readback-20261107.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: dealer-green-live-readback-20261107
+  cancel-in-progress: false
+jobs:
+  readback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Validate fixed public probes before waiting
+        run: |
+          node --check scripts/diagnostics/dealer-green-live-20261107.mjs
+          node --check scripts/diagnostics/catalog-single-rail-live-20261107.mjs
+      - name: Wait for the one corrected deployment, without starting another release
+        id: installed
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'JS'
+          const expected='a5f9a645835ae636ab99dd1a7b1073ba24d851b4',deadline=Date.now()+60*60*1000;
+          const url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/42367668990';
+          for(;;){
+            const response=await fetch(url,{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(15000)});
+            if(!response.ok)throw Error('cannot_read_deployment_status');
+            const run=await response.json();
+            if(run.head_sha!==expected||run.path!=='.github/workflows/regcloud-deploy.yml')throw Error('unexpected_deployment_identity');
+            if(run.status==='completed'){
+              if(run.conclusion!=='success')throw Error('deployment_not_successful:'+run.conclusion);
+              console.log('EXACT_DEPLOYMENT_SUCCESS',expected);break;
+            }
+            if(Date.now()>=deadline)throw Error('bounded_release_wait_expired');
+            await new Promise(resolve=>setTimeout(resolve,25000));
+          }
+          JS
+      - name: Install isolated public browser
+        run: |
+          npm install --prefix /tmp/dealer-green-live --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          /tmp/dealer-green-live/node_modules/.bin/playwright install --with-deps chromium
+      - name: Avtograd real SPA round trip, city and green layout
+        env:
+          PLAYWRIGHT_MODULE: /tmp/dealer-green-live/node_modules/playwright/index.mjs
+          EXPECTED_RELEASE: a5f9a645835ae636ab99dd1a7b1073ba24d851b4
+        run: node scripts/diagnostics/dealer-green-live-20261107.mjs
+      - name: Public catalog single rail and actual payload
+        if: always() && steps.installed.outcome == 'success'
+        env:
+          PLAYWRIGHT_MODULE: /tmp/dealer-green-live/node_modules/playwright/index.mjs
+          EXPECTED_RELEASE: a5f9a645835ae636ab99dd1a7b1073ba24d851b4
+        run: node scripts/diagnostics/catalog-single-rail-live-20261107.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dealer-green-installed-readback
+          path: |
+            dealer-green-live
+            catalog-single-rail-live
+          retention-days: 7
