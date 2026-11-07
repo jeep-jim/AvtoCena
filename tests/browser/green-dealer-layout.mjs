@@ -38,19 +38,20 @@ const entry=`
   let catalog=q.stock==='green'||!embedded?await GreenCornerCatalog({params:initial,embedded}):<div className="dealer-shared-catalog ac-catalog-page ac-page-copy"><div className="ac-catalog-shell"><CatalogSidebar dealerLayout filters={<div style={{minHeight:650}}>Фильтры аукционов</div>} header={<h1>Авто под заказ</h1>}><JapanSectionTabs active="auction" params={initial}/><div style={{height:600}}>Аукционная подборка</div></CatalogSidebar></div></div>;
   // Recreate only the two original wrapper defects as a negative control.
   if(q.fixtureBroken==='1'&&embedded)catalog=<DealerBrowsingProvider dealer={dealer}>{React.cloneElement(catalog,{className:'ac-catalog-page ac-page-copy min-h-screen'})}</DealerBrowsingProvider>;
-  return renderToStaticMarkup(embedded?<DealerBrowsingProvider dealer={dealer} profile><main className="ac-dealer-public-page ac-page-copy"><header className="ac-public-header" style={{height:64}}>Тестовый дилер</header><DealerProfileContent s={profile} catalog={catalog}/></main></DealerBrowsingProvider>:catalog);
+  return renderToStaticMarkup(embedded?<DealerBrowsingProvider dealer={dealer} profile><main className="ac-dealer-public-page ac-page-copy" style={{'--dealer-header-height':'64px'}}><header className="ac-public-header" style={{height:64}}>Тестовый дилер</header><DealerProfileContent s={profile} catalog={catalog}/></main></DealerBrowsingProvider>:catalog);
  }
 `;
-const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',packages:'external',tsconfig:'apps/web/tsconfig.json',loader:{'.css':'empty'},plugins:[{name:'fixture',setup(b){
+const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'cjs',outfile:`${out}/fixture.cjs`,write:false,jsx:'automatic',packages:'external',tsconfig:'apps/web/tsconfig.json',loader:{'.css':'empty'},plugins:[{name:'fixture',setup(b){
  b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1);if(mocks[n])return {path:n,namespace:'fixture'};if(/^next\/(navigation|link|dynamic|headers|image)$/.test(a.path)||a.path==='server-only')return {path:a.path,namespace:'next-fixture'};});
  b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:mocks[a.path],loader:'jsx',resolveDir:process.cwd()}));
  b.onLoad({filter:/.*/,namespace:'next-fixture'},a=>({loader:'jsx',resolveDir:process.cwd(),contents:a.path==='next/link'?`import React from 'react';export default function Link({children,prefetch,scroll,...props}){return <a {...props}>{children}</a>;}`:a.path==='next/navigation'?`export const usePathname=()=>globalThis.__greenBrowserUrl.pathname;export const useSearchParams=()=>globalThis.__greenBrowserUrl.searchParams;export const useRouter=()=>({push(){},replace(){},refresh(){}});export const redirect=url=>{throw Error('redirect:'+url);};`:a.path==='next/headers'?`export const cookies=async()=>({get:()=>({value:'Новокузнецк'})});`:a.path==='next/dynamic'?`export default function dynamic(){return ()=>null;}`:a.path==='next/image'?`export default function Image(props){return <img {...props}/>;}`:''}));
 }}]});
-const module={exports:{}};new Function('require','module','exports',compiled.outputFiles[0].text)(require,module,module.exports);
+const module={exports:{}};new Function('require','module','exports',compiled.outputFiles.find(f=>f.path.endsWith('.cjs')).text)(require,module,module.exports);
 const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'].map(file=>({file,text:fs.readFileSync(file,'utf8')}));
 const styles=layouts.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>fs.readFileSync(path.resolve(path.dirname(file),m[1]),'utf8')));
 const inline=layouts.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
-const css=await postcss([tailwindcss({content:['apps/web/components/**/*.{ts,tsx}','tests/browser/green-dealer-layout.mjs']})]).process(styles.join('\n')+'\n'+inline+'\n'+fs.readFileSync('apps/web/components/catalog/catalog-sidebar.css','utf8'),{from:'apps/web/app/globals.css'});
+const moduleCss=compiled.outputFiles.filter(f=>f.path.endsWith('.css')).map(f=>f.text).join('\n');
+const css=await postcss([tailwindcss({content:['apps/web/components/**/*.{ts,tsx}','tests/browser/green-dealer-layout.mjs']})]).process(styles.join('\n')+'\n'+inline+'\n'+moduleCss+'\n'+fs.readFileSync('apps/web/components/catalog/catalog-sidebar.css','utf8'),{from:'apps/web/app/globals.css'});
 const server=http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://fixture');
  if(url.pathname==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}
@@ -72,7 +73,7 @@ try{
    assert.equal((await page.goto(url,{waitUntil:'load'})).status(),200);
    await page.getByRole('link',{name:'В наличии',exact:true}).click();await page.locator('#catalog .ac-green-heading').waitFor();
    const current=new URL(page.url());assert.equal(current.pathname,'/dealers/fixture');for(const [k,v] of Object.entries({make:'Nissan',market:'japan',stock:'green',city:'Новокузнецк',powerTo:'160'}))assert.equal(current.searchParams.get(k),v);assert.equal(current.searchParams.has('page'),false);
-   const g=await page.evaluate(geometry);assert.equal(g.root,true);assert.equal(g.contexts,1);assert.equal(g.dock,0);assert.equal(g.overflow,false);
+   const g=await page.evaluate(geometry);console.log('GREEN_GEOMETRY',JSON.stringify({width,theme,...g}));assert.equal(g.root,true);assert.equal(g.contexts,1);assert.equal(g.dock,0);assert.equal(g.overflow,false);
    assert.ok(g.results.width>width*.45,JSON.stringify(g));assert.ok(g.footer.y>=g.results.bottom-2,'footer must follow the full results area');
    if(width>=1024){assert.ok(Math.abs(g.heading.x-g.banner.x)<=2,JSON.stringify(g));assert.ok(Math.abs(g.results.x-g.banner.x)<=2);assert.ok(Math.abs(g.results.width-g.banner.width)<=2);assert.ok(g.sidebar.x<g.banner.x);assert.ok(g.sidebar.y<=g.banner.y+2);}
    const initial=JSON.parse(await page.locator('[data-green-initial]').getAttribute('data-green-initial'));const query=JSON.parse(await page.locator('[data-green-query]').getAttribute('data-green-query'));assert.deepEqual(query,initial);assert.equal(query.make,'Nissan');assert.equal(query.city,'Новокузнецк');assert.equal(query.powerTo,'160');assert.equal(await page.locator('.ac-catalog-card').count(),6);
