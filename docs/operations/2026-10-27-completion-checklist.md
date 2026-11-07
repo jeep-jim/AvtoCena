@@ -4014,3 +4014,62 @@ Main ещё раз продвинулсяb9bd7284→e07c4a66c7f296221dfd1aeca14d
 Дополнительно прочитаны семь новых финальных журналов PR1716, далее НЕ ПОВТОРЯТЬ: sidebar42361075647/128369396678 SUCCESS61tests (artifact13569841622); QR42361076004/128369396904 SUCCESS390/1440lightdark QR/gallery/share (13569671246); failure-isolation42361075621/128369396345 SUCCESS desktop/mobile failure/retry/retained/expiry/scope/empty/lead-form (13569362853); green42361075815/128369396275 SUCCESS50tests (13570066170); city42361075718/128369396519 SUCCESS8Chromium+8WebKit (13570001266); owner-polish42361075651/128369395799 SUCCESS12cases+1test (13569561684); controls42361075655/128369395919 SUCCESS16:48:24 (artifact13570260963; controls390/1440/themes/account fixtures PASS). Это fixtures, не live/authenticated acceptance; все artifacts не просмотрены. Итого в этой сверке16 новых final logs READ плюс saved primary power report; старые READ не повторялись.
 
 На16:49:32 остаются IN_PROGRESS CI42361075597/128369396080,shared prices42361211390/128369809361,CRM delivery42361211483/128369809876; их финалы НЕ ПРОЧИТАНЫ. Metrika128369809650 SUCCESS16:48:12 и record42361258537/128369952932 SUCCESS metadata-only, не delivery proof. PR1716 OPEN97e53be, не installed; deploy11e3b4ed завершён. Следующий шаг только чтение этих существующих finals и новых primary saved analysis. Watch enabled, runtime/provider/browser не запускались.
+
+
+## 07.11.2026 18:07 Красноярск — docs-only watch: PR1716 merged, PR1717 layout fixtures и незакрытая live-приёмка
+
+Сначала прочитаны свежие roadmap/checklist на main625e9ccf2b51ebd9c5f56ab2110786fe3ccc1730, новый primary dealer-green-progress.md и branch dealer-green-layout.md. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 прежний; ранее прочитанные single-brand-rail reports не повторялись. Истории и прежние failures сохранены. PR1706–1708 остаются OPEN.
+
+PR1716 MERGED17:48:34: merge69c9ccca21bb2c865260c775d32261db7c437691, head97e53be924ce168f00f5f1eb985e0c41ecfb732f. Новый финальный CI42361075597/128369396080 SUCCESS16:53:25:2813tests, TypeScript и build58. Это не установка. PR1717 OPEN head3f3a870834a746fb3cacade4553585fbde121099; на18:07 CI42366466796/128385467359 ещё IN_PROGRESS Complete regression suite, финал НЕ ПРОЧИТАН. Пять остальных текущих workflow SUCCESS; не объявлять весь CI зелёным.
+
+Новая primary сохранённая причина сжатия /dealers/avtograd?make=Nissan&market=japan&stock=green: повторный DealerBrowsingProvider при embedded=true и отсутствие прямого dealer-shared-catalog нарушали общий CSS grid. PR1717 возвращает общий embedded shell; standalone сохраняет свой provider/header. Watch только прочитал эту primary работу. Данные, расчёты, фильтры, допуск Японии и права не менялись watch.
+
+Новые final failures READ, НЕ ПОВТОРЯТЬ:
+- green42365462197/128382470343 FAIL17:49:07:53tests PASS и budget1440/390 PASS, затем esbuild Cannot import DealerMarketChips.module.css without an output path configured; остановка до layout, artifact13570743827 не просмотрен.
+- green42365681538/128383117065 FAIL17:52:06:53tests PASS и budget1440/390 PASS, затем AssertionError green-dealer-layout.mjs77:11 в17:52:03.132; banner x32 width292, heading/results x672 width320, sidebar x352 width292, contexts1/roottrue/dock0. Это сохранённое падение fixture, не доказанный live Save failure.
+- renderer42366157527/128384569705 имеет итог SUCCESS17:58:58, НО журнал содержит AssertionError17:58:51.929 green-dealer-layout.mjs88:11 с той же геометрией. Последующий commit146e80b streaming SSR не превращает этот assertion в PASS; artifact13570909045 не просмотрен.
+
+Новый green42366466775/128385467128 SUCCESS18:03:42 на3f3a8708:53tests, budget1440/390 PASS; GREEN_DEALER_LAYOUT_PASS18:03:38.043 cases10, negativeControltrue, standalonetrue; artifact13571866905 не просмотрен. Предыдущие failures выше сохраняются. Изолированный SSR fixture не подтверждает гидратированные переходы на production, Windows Share или authenticated editor Save. Следующий адресный saved primary analysis: причина промежуточного geometry assertion и корректировка renderer/селекторов, затем сохранённая приёмка исходного URL владельца после установки, auction→stock→back/direct reload, Nissan/город/<=160/page, desktop/tablet/mobile и обе темы.
+
+CRM42365508814: audit128382607820 SUCCESS17:49:15, НО Korea Error:http_503 в17:49:11.716 и legacy gateways403/TypeError:fetch failed; точный request/response binding и причина неизвестны. Browser128382608092 SUCCESS17:54:12:16unit/88CRM/48fixture228; live128383744684 SUCCESS17:56:01:36/168. Это не новая release/authenticated Save acceptance. Next только primary saved Korea exact-request/response/release-time binding, без watch probe.
+
+Shared prices42361211390/128369809361 SUCCESS16:59:23:12tests; report16:48:25.024 emitted16:59:19.574, release11e3b4ed853518731c11aa1522068cc87cbb8ff4, gen_1793850840258_78913964, skippedfalse/verifiedtrue, digestbf2c72cb. Artifact13570167549 не просмотрен; успех не закрывает исторический live_encyclopedia_binding_missing и не доказывает полноту inventory/скорость.
+
+Другие новые READ finals: промежуточные CI128382470081 и128383117054 SUCCESS2816tests/TypeScript/build58; main sidebar61, green50, Autobot52+session/91measurements; три версии owner12cases+1test, city8Chromium+8WebKit, controls390/1440lightdark/account fixture PASS, QR workflow SUCCESS. Ожидаемые crm_user_save_failed в проверках прав не являются production Save failure. Все26 журналов ниже теперь READ, НЕ ПОВТОРЯТЬ; все artifacts НЕ ПРОСМОТРЕНЫ.
+
+| Run/job | Job | Итог metadata | Artifact IDs, не просмотрены |
+| --- | --- | --- | --- |
+| 42366466775/128385467128 | verify | success | 13571866905 |
+| 42365681538/128383117065 | verify | failure | 13571940062 |
+| 42365462197/128382470343 | verify | failure | 13570743827 |
+| 42366157527/128384569705 | verify | success | 13570909045 |
+| 42365508814/128382607820 | audit | success | 13571149422 |
+| 42365508814/128382608092 | browser | success | 13571955350 |
+| 42365508814/128383744684 | live | success | 13572010041 |
+| 42361075597/128369396080 | validate | success | 13569896374, 13570191920 |
+| 42361211390/128369809361 | prepare | success | 13570167549 |
+| 42365681541/128383117054 | validate | success | 13570719314, 13570644701 |
+| 42365462138/128382470081 | validate | success | 13571558360, 13571678003 |
+| 42366466811/128385468466 | browser | success | 13571856876 |
+| 42366466835/128385467407 | browser | success | 13571936598 |
+| 42366466806/128385467398 | verify | success (свежий workflow metadata) | 13572026569 |
+| 42366466801/128385467187 | verify | success (свежий workflow metadata) | 13571757504 |
+| 42365681540/128383116885 | verify | success | 13571727017 |
+| 42365681542/128383116903 | verify | success | 13572015084 |
+| 42365681565/128383117000 | browser | success | 13571815446 |
+| 42365681531/128383117159 | browser | success | 13571039947 |
+| 42365462265/128382470613 | verify | success | 13571870184 |
+| 42365462279/128382470356 | verify | success | 13571337380 |
+| 42365462139/128382469906 | browser | success | 13571302476 |
+| 42365462309/128382470789 | browser | success | 13571521743 |
+| 42365508638/128382606966 | verify | success | 13570964794 |
+| 42365508586/128382606793 | verify | success | 13571144332 |
+| 42365508551/128382606616 | verify | success | 13571488055 |
+
+Шесть intermediate workflows на146e80b имеют ACTION_REQUIRED/jobs[]:42366206644/42366206605/42366206601/42366206597/42366206575/42366206574; причина неизвестна, это не выполненные failing tests. На18:06–18:07 IN_PROGRESS2: текущий CI42366466796 и capacity cleanup42366132491/128384490774; PENDING0, нового app-deploy нет. Cleanup metadata-only, capacity watch не дублировать. CRM retry42361211483/deliver128369809876 SUCCESS16:50:39/metrika128369809650 SUCCESS16:48:12 и billing42361757625/128371434773 SUCCESS16:56:08 — metadata-only, не delivery/finance proof.
+
+Один bounded health18:06:35–18:06:41: curl exit0, HTTP200, oktrue, exact11e3b4ed853518731c11aa1522068cc87cbb8ff4, calculationVersion3dfe8fe83a3d281ccfaf415cc6cb8ce627d08893d1c499b34014c20f807ecde4 прежняя. PR1714/1715 installed ранее; PR1716/1717 не подтверждены installed. Health не закрывает полноту мощности JP/KR, list-counter, cold/warm SEO, старые failedSameOriginRequests и authenticated editor Save.
+
+По одному запросу доступности шести unread China logs:128144651298 снова404 BlobNotFound;127541782446/126870309797/126198742555/124685023963/124601674990 снова Transport closed. Все остаются НЕ ПРОЧИТАНЫ; причина final failure и final public manifest неизвестны. Старые READ verifier/translation/deploy не запрашивались. Next только saved primary outcome/finalmanifest/specific-verifier и отдельные Direct binding/filter, Georgia retention/selected difference, UAE locktimeline/auditbinding, translation authorization/Korea analyses. Длительность не причина, unknown не healthy.
+
+Watch enabled до итоговой приёмки кандидата и целей; owner freeze принятой базы сохранён. Watch не запускал deploy, repair, rerun, browser/login, provider requests, cleanup, публикации или изменение прав/данных. Эта запись добавляется только в roadmap.md и completion-checklist.md поверх указанного main с expected-parent CAS и последующим readback.
