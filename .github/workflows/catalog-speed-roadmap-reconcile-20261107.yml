@@ -1,0 +1,64 @@
+name: Reconcile speed recovery roadmap 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-roadmap-reconcile-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-speed-roadmap-reconcile-20261107
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 1ebc7c687b271ced9ff284a2d82efb25a03f9842
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Prepare immutable merged roadmap blob and exact tree plan, no ref writes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,json,os,urllib.request
+          base='6e18f0249814c8ffb6c0b2ccc7065cae4943d69b'
+          head='1ebc7c687b271ced9ff284a2d82efb25a03f9842'
+          main='33dbb734f1903963015ea41ce99e6211902022c5'
+          def git(*args):return subprocess.check_output(['git',*args])
+          def api(path,payload=None):
+              req=urllib.request.Request('https://api.github.com/repos/jeep-jim/AvtoCena'+path,data=None if payload is None else json.dumps(payload).encode(),headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='GET' if payload is None else 'POST')
+              with urllib.request.urlopen(req,timeout=25) as r:return json.load(r)
+          assert api('/git/ref/heads/main')['object']['sha']==main
+          assert api('/git/ref/heads/fix/catalog-speed-ready-metadata-20261107')['object']['sha']==head
+          changed=git('diff','--name-only',base,main).decode().splitlines()
+          assert set(changed)=={'roadmap.md','docs/operations/2026-10-27-completion-checklist.md','docs/operations/2026-11-07-visible-speed-baseline.md'},changed
+          old=git('show',base+':roadmap.md');left=git('show',main+':roadmap.md');right=git('show',head+':roadmap.md')
+          assert left.startswith(old) and right.startswith(old),'roadmap edits are not append-only'
+          extra=right[len(old):]
+          assert extra.count('## 07.11.2026 — ускорение готовых данных'.encode())==1
+          assert extra not in left
+          merged=left+extra
+          assert merged.startswith(left) and merged.endswith(extra)
+          blob=api('/git/blobs',{'encoding':'utf-8','content':merged.decode()})['sha']
+          files=git('diff','--name-only',base,head).decode().splitlines()
+          assert len(files)==8 and 'roadmap.md' in files,files
+          entries=[]
+          for path in files:
+              line=git('ls-tree',head,'--',path).decode().strip()
+              meta,name=line.split('\t',1);mode,kind,sha=meta.split();assert kind=='blob' and name==path
+              entries.append({'path':path,'mode':mode,'type':'blob','sha':blob if path=='roadmap.md' else sha})
+          result={'base':base,'expectedFeature':head,'expectedMain':main,'baseTree':git('rev-parse',main+'^{tree}').decode().strip(),'treeElements':entries,'runtimeChangedFromVerifiedHead':False,'bothRoadmapAppendsPreserved':True,'refUpdated':False}
+          Path('reconcile-evidence').mkdir();Path('reconcile-evidence/plan.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+          Path('reconcile-evidence/roadmap-tail.md').write_bytes(b'\n'.join(merged.splitlines()[-100:]))
+          print('CHECKED_RECONCILIATION_PLAN',json.dumps(result,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-speed-roadmap-reconcile
+          path: reconcile-evidence
+          retention-days: 7
