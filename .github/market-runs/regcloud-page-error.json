@@ -1,6 +1,6 @@
 {
   "logsOnly": true,
   "failedRelease": "",
-  "reason": "Urgent owner lead form incident: public POST /api/leads with empty JSON returned HTTP 500 before validation. Read bounded production error categories only; no customer output or mutations.",
-  "requestedAt": "2026-10-31T02:45:00Z"
+  "reason": "Owner-requested 2026-11-07 catalog recovery audit: /cars renders an error boundary without power filters. Read bounded production error categories, digests and resource state only; no customer data, source switches, collectors, data writes or deployment.",
+  "requestedAt": "2026-11-07T03:15:00Z"
 }
