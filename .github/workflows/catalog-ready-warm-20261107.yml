@@ -1,0 +1,77 @@
+name: Catalog ready repeated reads and browser check
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-ready-warm-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-local-ready-20261107
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-local-ready-20261107
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Keep the existing 30-minute observed freshness on repeated saved reads
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 6187fe58950d84c9c441f160a27bd4072524079b
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/ajes-client.ts');s=p.read_text()
+          before='const preparedReads=new DetailReadCache<any>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:()=>false});'
+          after='''const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
+              const age=Date.now()-Date.parse(value?.observedAt||'');
+              return value?.schemaVersion===2&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
+            }});
+            // Memoization avoids repeated object-store reads. Every reuse below
+            // still checks observedAt; memory residence never extends freshness.'''
+          assert s.count(before)==1;p.write_text(s.replace(before,after))
+          p=Path('tests/ajes-prepared-admission.test.ts')
+          p.write_text(p.read_text()+'''
+          test('a prepared list is read once across visitors, but its original observation deadline still applies',async t=>{
+            let now=Date.parse('2026-11-07T08:00:00Z'),reads=0,requests=0;
+            t.mock.method(Date,'now',()=>now);
+            const observedAt=new Date(now-29*60000).toISOString();
+            const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>{reads++;return snapshot({observedAt});},fetcher:async()=>{requests++;return Response.json([]);}});
+            for(const ip of ['203.0.113.1','203.0.113.2','203.0.113.3']){
+              const page=await client.read({table:'korea',page:3},ip);assert.equal(page.items[0].id,'saved001');assert.equal(page.observedAt,observedAt);
+            }
+            assert.equal(reads,1,'ready persisted lists must not trigger storage on every request');assert.equal(requests,0);
+            now+=2*60000;
+            const page=await client.read({table:'korea',page:3},'203.0.113.4');assert.equal(requests,1,'expired observation cannot become fresh through memoization');assert.deepEqual(page.items,[]);
+          });
+          ''')
+          PY
+          git diff --check
+      - run: npm ci
+      - name: Saved cache, queue, detail provenance and switch regressions
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-prepared-admission.test.ts tests/brand-theme-store.test.ts tests/detail-read-cache.test.ts tests/ajes-queue-fallback.test.ts tests/ajes-model-recovery.test.ts tests/ajes-stock-feed.test.ts tests/ajes-recovery-isolation.test.ts tests/ajes-page-cache-recovery.test.ts
+      - name: Actual browser sidebar and brand rendering
+        run: |
+          npm install --prefix "$RUNNER_TEMP/ready-browser" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.55.0
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/ready-browser/node_modules/playwright/index.mjs" CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-sidebar-check.mjs
+      - name: Save only the two verified files to the same candidate
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- apps/web/lib/catalog/ajes-client.ts tests/ajes-prepared-admission.test.ts
+          test "$(git diff --cached --name-only | wc -l)" = 2
+          git commit -m 'fix: memoize ready lists without prolonging observed freshness'
+          git push origin HEAD:fix/catalog-local-ready-20261107
+          git log -1 --format='VERIFIED_CANDIDATE=%H'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-ready-browser-warm
+          path: artifacts/mobile-filter-local-chromium
+          retention-days: 7
