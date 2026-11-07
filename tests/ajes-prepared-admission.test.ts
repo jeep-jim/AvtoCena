@@ -48,3 +48,16 @@ test('peekFresh never starts work or prolongs the freshness deadline',async()=>{
   assert.equal(cache.peekFresh('a'),undefined);assert.equal(await cache.get('a',async()=>{loads++;return 7;}),7);
   now=9;assert.equal(cache.peekFresh('a'),7);now=10;assert.equal(cache.peekFresh('a'),undefined);assert.equal(loads,1);
 });
+
+test('a prepared list is read once across visitors, but its original observation deadline still applies',async t=>{
+  let now=Date.parse('2026-11-07T08:00:00Z'),reads=0,requests=0;
+  t.mock.method(Date,'now',()=>now);
+  const observedAt=new Date(now-29*60000).toISOString();
+  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>{reads++;return snapshot({observedAt});},fetcher:async()=>{requests++;return Response.json([]);}});
+  for(const ip of ['203.0.113.1','203.0.113.2','203.0.113.3']){
+    const page=await client.read({table:'korea',page:3},ip);assert.equal(page.items[0].id,'saved001');assert.equal(page.observedAt,observedAt);
+  }
+  assert.equal(reads,1,'ready persisted lists must not trigger storage on every request');assert.equal(requests,0);
+  now+=2*60000;
+  const page=await client.read({table:'korea',page:3},'203.0.113.4');assert.equal(requests,1,'expired observation cannot become fresh through memoization');assert.deepEqual(page.items,[]);
+});

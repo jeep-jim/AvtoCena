@@ -27,7 +27,12 @@ export function createAjesClient(deps:Dependencies) {
   // Only exact, already requested list responses are inspected here.
   // Separate bounded storage admission: a ready saved list must not wait
   // for two unrelated supplier requests. No new shared TTL or feed crawl.
-  const preparedReads=new DetailReadCache<any>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:()=>false});
+  const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
+    const age=Date.now()-Date.parse(value?.observedAt||'');
+    return value?.schemaVersion===2&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
+  }});
+  // Memoization avoids repeated object-store reads. Every reuse below
+  // still checks observedAt; memory residence never extends freshness.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
   // Persistence is a best-effort cache of requested responses, not the supplier
   // transaction. A slow storage write must not delay ready cars or hold the two
