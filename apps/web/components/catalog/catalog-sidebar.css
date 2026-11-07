@@ -179,3 +179,22 @@ html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) button.ac-power-
  .ac-dealer-catalog-layout>.ac-catalog-results{grid-row:3}
  .dealer-profile--with-catalog #catalog .ac-dealer-catalog-toolbar{grid-column:2;grid-row:auto}
 }
+
+/* A single public brand rail: same responsive order without rendering two copies.
+ * The toolbar remains a grid item in the full-height layout so sticky is retained. */
+.ac-catalog-brand-slot,.ac-catalog-count-slot{min-width:0}
+.ac-catalog-toolbar-slot{display:none}
+@media(max-width:1023px){.ac-catalog-brand-slot{max-width:56rem}}
+@media(min-width:1024px){
+ .ac-catalog-layout.ac-catalog-layout--single-brand-rail{row-gap:0;--ac-catalog-heading-gap:28px}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-heading{grid-column:2;grid-row:1}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-count-slot{grid-column:2;grid-row:2}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-sidebar{grid-column:1;grid-row:1 / span 5}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-toolbar-slot{display:contents}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-toolbar-slot>.ac-catalog-toolbar{grid-column:2;grid-row:3;margin-top:var(--ac-catalog-heading-gap);margin-bottom:0}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-brand-slot{grid-column:2;grid-row:4}
+ .ac-catalog-layout--single-brand-rail>.ac-catalog-results{grid-column:2;grid-row:5}
+ .ac-catalog-brand-slot section.ac-brand-rail{border-top:1px solid var(--ac-border);border-bottom:1px solid var(--ac-border);border-radius:0}
+ html body .ac-page-copy.ac-catalog-page .ac-catalog-brand-slot section.ac-brand-rail[aria-label="Марки автомобилей"]{border-top:1px solid var(--ac-border)!important;border-bottom:1px solid var(--ac-border)!important;padding-top:16px!important;padding-bottom:16px!important}
+}
+@media(min-width:1440px){.ac-catalog-layout.ac-catalog-layout--single-brand-rail{--ac-catalog-heading-gap:32px}}
