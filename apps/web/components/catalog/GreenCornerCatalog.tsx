@@ -27,7 +27,10 @@ export async function GreenCornerCatalog({params:input,embedded=false}:{params:R
  const page=result.page;
  const items=result.items.map(publicGreenOffer);
 
- return <DealerBrowsingProvider dealer={dealer}><Container className="ac-catalog-page ac-page-copy min-h-screen bg-[#07080d] text-white">{!embedded&&<PublicHeader backHref="/cars" backLabel="Каталог" />}<div className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
+ // Embedded catalogs already inherit the authorized profile's browsing provider.
+ // Keep this root a direct #catalog child: dealer CSS places its filters and
+ // results in the profile grid. A nested provider adds a blocking box and dock.
+ const content=<Container className={`ac-catalog-page ac-page-copy ${embedded?"dealer-shared-catalog":"min-h-screen bg-[#07080d] text-white"}`}>{!embedded&&<PublicHeader backHref="/cars" backLabel="Каталог" />}<div className={embedded?"ac-catalog-shell w-full py-5":"ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10"}>
   <CatalogSidebar dealerLayout={embedded} filters={<CatalogFilters initial={initial} facets={result.facets} resultCount={result.total} />} header={<>
   <div className="ac-green-intro"><div>
   <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
@@ -37,12 +40,13 @@ export async function GreenCornerCatalog({params:input,embedded=false}:{params:R
    <CatalogCountLabel total={result.total}/>
   </p>}
   </div>
-  <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукционе.</p>
+  <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукциона.</p>
   </div><GreenCornerDeliveryBanner /></div>
   </>}>
   <div className="mt-5 flex flex-wrap items-center justify-between gap-3"><h2 className="flex flex-wrap items-center gap-2 text-2xl font-black"><span>Япония · В наличии</span><MarketResultCount total={result.total}>{result.total.toLocaleString("ru-RU")}</MarketResultCount></h2><JapanSectionTabs active="green" params={initial}/></div>
   <div className="mt-5"><CatalogLoadMore key={`${JSON.stringify(initial)}:${page}`} query={{}} greenQuery={initial} initialPage={page} initialTotal={result.total} initialCount={items.length} initialCards={items.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense />)} /></div>
   {!items.length?<p className="py-8">Подходящих автомобилей пока нет.</p>:null}
 </CatalogSidebar>
- </div></Container></DealerBrowsingProvider>;
+ </div></Container>;
+ return embedded?content:<DealerBrowsingProvider dealer={dealer}>{content}</DealerBrowsingProvider>;
 }
