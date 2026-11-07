@@ -5,9 +5,11 @@ on:
     paths:
       - 'apps/web/**'
       - 'tests/green-corner-filters.test.ts'
+      - 'tests/green-corner-dealer-layout.test.ts'
       - 'tests/catalog-filter-ui.test.ts'
       - 'tests/dubicars-price-on-request-ui.test.ts'
       - 'tests/browser/green-budget*'
+      - 'tests/browser/green-dealer-layout.mjs'
       - '.github/workflows/verify-green-budget.yml'
   workflow_run:
     workflows: ['Deploy to Yandex Cloud']
@@ -18,9 +20,11 @@ on:
     paths:
       - 'apps/web/**'
       - 'tests/green-corner-filters.test.ts'
+      - 'tests/green-corner-dealer-layout.test.ts'
       - 'tests/catalog-filter-ui.test.ts'
       - 'tests/dubicars-price-on-request-ui.test.ts'
       - 'tests/browser/green-budget*'
+      - 'tests/browser/green-dealer-layout.mjs'
       - '.github/workflows/verify-green-budget.yml'
 permissions:
   contents: read
@@ -47,6 +51,10 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-budget.mjs
+      - name: Dealer green stock grid, filter context and round-trip navigation
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-dealer-layout.mjs
       - name: Wait for exact deployed release and check live budget
         if: github.event_name == 'workflow_run'
         env:
@@ -76,4 +84,6 @@ jobs:
         if: always()
         with:
           name: green-budget-browser
-          path: artifacts/green-budget-*
+          path: |
+            artifacts/green-budget-*
+            artifacts/green-dealer-layout
