@@ -23284,3 +23284,34 @@ PR1718 OPEN head1ebc7c687b271ced9ff284a2d82efb25a03f9842, НЕ installed. Primar
 Preflight 42373903325 прошёл typecheck, адресные тесты, production build и браузерный sidebar/model-picker после исправления типов. Полный npm test на окончательном SHA должен пройти стандартный PR CI; старый успех не переносится автоматически. Runtime ещё НЕ установлен этим документом. Формулы, цены, комиссии, источник, ограничения, объявления, ручные данные, энциклопедия, роли и дилерская вёрстка не изменяются.
 
 Остаются полнота<=160Korea/Japan и счётчики, per-card Korea detail I/O, intermittent/cars, полный SEO/VPN/performance контроль. Один выпуск после зелёного стандартного CI, затем exact-release readback и замеры корректных видимых карточек, первого/повторного перехода и объёма ответа. Не включать общий кеш авторизованного HTML и не подставлять неизвестную мощность.
+
+
+## Сверка 07.11.2026 21:19 Красноярск — CI PR1718 PASS, мобильный baseline model-picker FAILURE
+
+Сначала прочитаны свежие roadmap/checklist на mainae93953297c783b6a954870c6eff182956829188 и AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 (неизменен). Primary перенёс прежний branch catalog-speed-ready.md и его Road append в main; содержание уже PRIMARY READ19:59, старые журналы не повторялись. Обе истории полностью сохранены. Новый head PR1718 OPEN43e158db671a958926865f6e644287e7514768c5; compare1ebc7c→43e158db содержит только согласование docs, runtime прежний. PR1718 НЕ merged/installed.
+
+Точный head CI42376000570/128413585125 SUCCESS20:20:32:2830/2830 полных тестов, TypeScript web/engine и build58 PASS. Остальные семь head workflows SUCCESS, прочитаны ниже. Это подтверждение CI кандидата, НЕ production speed/authenticated Save acceptance. Исторические два preflight failures, renderer assertion и first-deploy ENOENT сохраняются.
+
+Новый отдельный baseline42376034102/128413685511 FAILURE20:15:31, report SPEED_FILTER_READBACK20:15:28.495 (at20:14:59.267). Expected/before/after releasea5f9a645835ae636ab99dd1a7b1073ba24d851b4, calculationVersion3dfe8fe83a3d281ccfaf415cc6cb8ce627d08893d1c499b34014c20f807ecde4 — прежний установленный выпуск, НЕ PR1718. URL /cars/china/Toyota?city=Новокузнецк&powerTo=160. Desktop1440dark acceptedtrue: directory JSON и /api/catalog/models HTTP200, matching Любая модель/Camry/Camry XSE V6/Carib, modelDirectoryPreservedtrue,24visibleCards,overflowfalse,pageErrors[]. Это ограниченный model-picker сценарий, не full inventory.
+Mobile390light acceptedfalse: locator.click Timeout20000ms, ожидание getByRole('button', {name:'Открыть фильтры каталога',exact:true}).first(); directoryResponses[],pageErrors[]. Общий acceptedfalse/exit1. Отсутствие pageErrors не отменяет failure; причина не установлена, не доказана потеря моделей/регрессия PR1718/Save failure. Artifact13575169331 не просмотрен. Следующий адресный saved primary analysis: фактический mobile DOM/accessible name, состояние загрузки/гидратации и снимок на этом URL/release, соответствие локатора; без watch browser/rerun/repair.
+
+Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8Chromium+8WebKit PASS; Dubicars64tests PASS (fixtures, не provider/live publication). Failure-isolation desktop/mobile PASS для filters/state/expiry/scope/empty/retry и independent lead. Owner12cases+localfeedback390/1440 PASS; QR390/1440lightdark qr/tiles5/zoom/favorites/share/auctionSheetPreservedtrue. Site controls390/1440lightdark/account fixtures PASS; ожидаемые crm_user_save_failed в тестах прав НЕ production Save failure. Все изображения/artifacts watch не смотрел.
+
+Все9 новых final logs READ, далее НЕ ПОВТОРЯТЬ:
+| Run/job | Итог | Artifacts, не просмотрены |
+| --- | --- | --- |
+| 42376000570/128413585125 | success | 13576165182,13575003687 |
+| 42376000548/128413585034 | success | 13575159519 |
+| 42376000565/128413585047 | success | 13575995771 |
+| 42376000531/128413585024 | success | отсутствует в журнале |
+| 42376000511/128413584861 | success | 13575543558 |
+| 42376000523/128413585007 | success | 13575711631 |
+| 42376000532/128413585074 | success | 13575303982 |
+| 42376000522/128413585151 | success | 13575981671 |
+| 42376034102/128413685511 | failure | 13575169331 |
+
+Промежуточный headf62463ba workflows42374856380/42374856331/42374856311/42374856303/42374856286/42374856234/42374856218/42374856196 SUCCESS metadata-only, журналы не читались. Prepare shared speed recovery log42375854363 SUCCESS metadata-only; фактическое добавление docs в main подтверждено commit ae939532. USD42377244445 SUCCESS metadata-only, не доказательство изменения курса. OSMINOG shared-host read-only preflight42377719528/128418637267 FAILURE metadata, steps failure[]; единственный запрос журнала вернул404 BlobNotFound, UNREAD/causeunknown. Не failure приложения и не основание для repair/capacity duplication.
+
+На21:17–21:18 IN_PROGRESS0/PENDING0; новых runs после20:36:11 нет, active app deploy/continuation model-picker нет. Один bounded health21:17:42–21:17:48:curl exit0 HTTP200 oktrue exacta5f9a645835ae636ab99dd1a7b1073ba24d851b4, calculationVersion3dfe8fe83a3d281ccfaf415cc6cb8ce627d08893d1c499b34014c20f807ecde4 прежняя. Целевая скорость, полнота<=160Japan/Korea, list-counter, ERR_ABORTED binding, cold/warm/SEO/VPN и authenticated editor Save не закрыты.
+
+По одному запросу шести unread China logs:128144651298 снова404 BlobNotFound;127541782446/126870309797/126198742555/124685023963/124601674990 снова Transport closed. Все UNREAD/causeunknown/finalmanifestunknown; старые READ verifier/translation/deploy/primary не запрашивались. Сохраняются отдельные saved analyses China finalmanifest, Direct binding/filter, Georgia retention/selected difference, UAE locktimeline/auditbinding, translation authorization/Korea и first-deploy missing batch manifest. Watch enabled до итоговой приёмки, owner freeze соблюдён. Только append-only2docs с expected-parent CAS/readback; watch не запускал runtime/deploy/rerun/repair/browser/provider/cleanup и не менял данные/права.
