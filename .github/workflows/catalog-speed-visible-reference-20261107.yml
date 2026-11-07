@@ -1,0 +1,55 @@
+name: Catalog visible-card reference acceptance 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-visible-reference-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-visible-reference-20261107
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 8863883d61985bc7e1ec42ac8a65fd523706fe60
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Install isolated browser
+        run: |
+          npm install --prefix /tmp/catalog-visible --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          /tmp/catalog-visible/node_modules/.bin/playwright install --with-deps chromium
+      - name: Correct only the verified reference card DOM selector
+        run: |
+          mkdir -p visible-speed
+          python3 - <<'PY'
+          from pathlib import Path
+          source=Path('.github/workflows/catalog-speed-visible-baseline-20261107.yml').read_text()
+          start=source.index("          import fs from 'node:fs';")
+          end=source.index('\n          JS\n',start)
+          script='\n'.join(line[10:] for line in source[start:end].splitlines())+'\n'
+          # ZMA's img and heading link are siblings within article, not nested.
+          before="const selector=label.startsWith('zma')?'a[href*=\"/avto/china/\"] img':'.ac-catalog-card';"
+          after="const selector=label.startsWith('zma')?'article:has(a[href*=\"/avto/china/\"])':'.ac-catalog-card';"
+          assert script.count(before)==1
+          script=script.replace(before,after)
+          before="const image=label.startsWith('zma')?page.locator(selector).first():page.locator('.ac-catalog-card').first().locator('img').first();"
+          assert script.count(before)==1
+          script=script.replace(before,"const image=page.locator(selector).first().locator('img').first();")
+          script=script.replace("cards:document.querySelectorAll('.ac-catalog-card').length","cards:document.querySelectorAll('.ac-catalog-card,article:has(a[href*=\"/avto/china/\"])').length")
+          Path('/tmp/catalog-visible/check.mjs').write_text(script)
+          Path('visible-speed/measurement-script.mjs').write_text(script)
+          Path('visible-speed/method-note.txt').write_text('Original run 42372959991 reference timings are invalid: incorrect nested-image selector. This rerun changes only the selector based on inspected public HTML. Counts, timing definitions and first/repeat navigation remain unchanged. ERR_ABORTED can include requests cancelled by the next measurement navigation, so these events are not classified as site failures. No claim of cold server cache or VPN parity.\n')
+          PY
+          node /tmp/catalog-visible/check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-visible-speed-reference
+          path: visible-speed
+          retention-days: 7
