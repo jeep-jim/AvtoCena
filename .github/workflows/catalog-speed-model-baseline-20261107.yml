@@ -1,0 +1,42 @@
+name: Catalog model picker baseline 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-model-baseline-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-speed-model-baseline-20261107
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Install isolated supported browser
+        run: |
+          npm install --prefix /tmp/catalog-visible --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          /tmp/catalog-visible/node_modules/.bin/playwright install --with-deps chromium
+      - name: Check fixed public probe syntax and baseline lookup
+        env:
+          EXPECTED_RELEASE: a5f9a645835ae636ab99dd1a7b1073ba24d851b4
+          PLAYWRIGHT_MODULE: /tmp/catalog-visible/node_modules/playwright/index.mjs
+        run: |
+          node --check scripts/diagnostics/catalog-speed-filter-live-20261107.mjs
+          python3 scripts/diagnostics/catalog-speed-after-release-20261107.py
+          node --check /tmp/catalog-visible/check.mjs
+          node scripts/diagnostics/catalog-speed-filter-live-20261107.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-model-picker-baseline
+          path: |
+            speed-filter-readback
+            speed-installed
+          retention-days: 7
