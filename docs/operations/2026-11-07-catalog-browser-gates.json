@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-07",
+  "pullRequest": 1714,
+  "applicationBaseSha": "1e21404fa27a176a8538b2b627a0d85edd905b59",
+  "candidateBeforeEvidence": "ce338d6ef9e54373677851d983361f745c65ef4a",
+  "browserRun": 42349956028,
+  "browserJob": 128335767338,
+  "browserArtifact": 13565380768,
+  "browserChecks": {
+    "catalogSidebar": "success",
+    "galleryAndCanonicalReload": "success",
+    "nativeSharingChromiumAndroidWebkit": "success",
+    "offerActionIcons": "success"
+  },
+  "scope": "Isolated fixtures, not production catalogue acceptance. Runtime application files are unchanged by this continuation.",
+  "runConclusion": "failure",
+  "failureAfterBrowserChecks": "The workflow token could not push a workflow-file change. The four browser checks passed before that push refusal.",
+  "persistence": {
+    "workflowPinCommit": "573fa945b163f4785d5d69323c875996cf0326a1",
+    "verifiedFixtureAndReportCommit": "b661caf4adb9740a72da4fd111776698f4af66ce",
+    "fixtureAndReportRun": 42350438821,
+    "fixtureAndReportRunConclusion": "success",
+    "mainReport": "docs/operations/2026-11-07-zma-architecture-and-github.md",
+    "roadmap": "Continuation note retained on main; duplicate branch append removed without replacing main history."
+  },
+  "newStandardCiRequired": true,
+  "productionDeployed": false,
+  "notAccepted": [
+    "Full Korea and Japan <=160 hp coverage and exact counts",
+    "Intermittent /cars failure",
+    "Removal of duplicate brand rail rendering",
+    "Complete production SEO and navigation verification",
+    "VPN versus non-VPN performance parity"
+  ]
+}
