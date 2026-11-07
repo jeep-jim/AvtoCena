@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   record-priority:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
       contents: write
@@ -47,30 +47,13 @@ jobs:
           fi
           git log -1 --format='%H %s'
   public-audit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Export bounded tracked source for offline review
-        run: |
-          mkdir -p audit-output
-          python3 - <<'PY'
-          import subprocess,pathlib,tarfile,json
-          paths=subprocess.check_output(['git','ls-files','-z']).decode().split('\0'); omitted=[]
-          with tarfile.open('audit-output/source.tar.gz','w:gz') as t:
-              for name in paths:
-                  p=pathlib.Path(name)
-                  if not name or not p.is_file(): continue
-                  keep=name in ['AGENTS.md','roadmap.md','package.json','package-lock.json','tsconfig.json','Dockerfile','.dockerignore','.gitignore'] or name.startswith(('apps/','packages/','scripts/','tests/','data/','.github/','docs/operations/'))
-                  if not keep: continue
-                  if p.stat().st_size>8000000 or (p.suffix.lower() in ['.png','.jpg','.jpeg','.webp','.mp4','.pdf','.zip'] and not name.startswith('tests/')):
-                      omitted.append(name);continue
-                  t.add(name,recursive=False)
-          pathlib.Path('audit-output/omitted.json').write_text(json.dumps(omitted))
-          print('SOURCE_ARCHIVE_BYTES',pathlib.Path('audit-output/source.tar.gz').stat().st_size)
-          PY
+      - run: mkdir -p audit-output
       - uses: actions/setup-node@v4
         with:
           node-version: 24
