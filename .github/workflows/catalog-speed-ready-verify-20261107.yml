@@ -1,0 +1,92 @@
+name: Catalog speed ready-data verification 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-speed-ready-verify-20261107.yml']
+permissions:
+  contents: write
+concurrency:
+  group: catalog-speed-ready-verify-20261107
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-speed-ready-metadata-20261107
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: preparation
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Inspect instructions and apply exact bounded patch
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 6e18f0249814c8ffb6c0b2ccc7065cae4943d69b
+          tail -n 40 AGENTS.md
+          mkdir -p speed-ready-evidence
+          tail -n 200 roadmap.md > speed-ready-evidence/roadmap-before.md
+          python3 preparation/.github/patches/catalog-speed-ready-20261107.py
+          git diff --check
+      - run: npm ci
+      - name: Queue, cache, source-link, filter and model regressions
+        run: |
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-ready-metadata.test.ts tests/ajes-prepared-admission.test.ts tests/ajes-queue-fallback.test.ts tests/ajes-stock-feed.test.ts tests/ajes-detail-queue-recovery.test.ts tests/ajes-recovery-isolation.test.ts tests/ajes-count-display.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-japan-filter-rail.test.ts tests/model-suggestion-search.test.ts tests/ajes-model-loader.test.ts > speed-ready-evidence/targeted.log 2>&1 || { tail -n 120 speed-ready-evidence/targeted.log; exit 1; }
+      - name: Complete regression suite
+        run: npm test > speed-ready-evidence/regression.log 2>&1 || { tail -n 150 speed-ready-evidence/regression.log; exit 1; }
+      - name: Web and engine typecheck
+        run: npm run typecheck > speed-ready-evidence/typecheck.log 2>&1 || { cat speed-ready-evidence/typecheck.log; exit 1; }
+      - name: Production build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: npm run build > speed-ready-evidence/build.log 2>&1 || { tail -n 120 speed-ready-evidence/build.log; exit 1; }
+      - name: Browser model-picker and sidebar regression
+        run: |
+          npm install --prefix /tmp/speed-ready-browser --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.56.1
+          PLAYWRIGHT_MODULE=/tmp/speed-ready-browser/node_modules/playwright/index.mjs CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-sidebar-check.mjs > speed-ready-evidence/sidebar.log 2>&1 || { tail -n 100 speed-ready-evidence/sidebar.log; exit 1; }
+      - name: Commit verified code and append recovery roadmap without replacing history
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          note='''
+
+          ## 07.11.2026 — ускорение готовых данных и сокращение неиспользуемых данных фильтра
+
+          Новое явное поручение владельца: после исправления дилерского Green Corner продолжить скорость до сопоставимой отзывчивости с ZMA, сохраняя бизнес-логику. До правок прочитаны AGENTS и актуальный конец roadmap. Контроль393/42367668990 завершён SUCCESS; внешний42367789665 подтвердил установленныйa5f9a645, исправленный дилерский переход и единственную полосу марок. Из ZIP13573666770 прочитаны оба JSON: в одном cold-переходе к аукционам8.486с, в двух следующих0.886/1.183с; это разные контексты, не статистическая гарантия. Public/cars:198логотипов,42карточки,875982байта распакованного HTML; Китай133/24/504477байт.
+
+          Новая bounded диагностика42371868730/artifact13573624398,10последовательных публичных API-запросов, без нагрузочного теста/записи/обхода поставщика. Exact releasea5f9a645 до/после. Japan Nissan query-resolution152.4/1063.3мс, ответы stale. Korea unfiltered server-total1091.7/147.5мс, detail-cache-sum5412.1/2.9мс (сумма параллельных операций, НЕ время ожидания посетителя). China<=160: read707.2/0.1мс и pricing11.2/7.5мс. Быстрая пустая Korea<=160 не является исправлением мощности.
+
+          Подготовлены две оптимизации. (1) Точные свежие сохранённые makes/models/colors/count читаются через уже существующую bounded prepared-очередь отдельно от двух supplier slots; observation deadline30мин не продлевается. Повторная stale-выдача того же IP в существующем cooldown использует уже имеющийся30-секундный visitor cache ДО повторного I/O; новый shared fresh результат имеет приоритет, source/password/IP checks сохранены. Details не затрагиваются; их LOT provenance и исходные safeguards сохранены. Не увеличены concurrency, retention, cooldown или квоты. (2) Обычный CatalogContent не отправляет неиспользуемый facets.models через client boundary. CatalogFilters ранее уже игнорировал этот массив; полный model-picker как раньше загружает свой справочник при открытии. Source-only Green/AJES модели/aliases/КПП, все марки, выборы, данные и полная энциклопедия сохранены.
+
+          Локальный negative-control на прежнем AJES-коде:9из11 новых проверок выявили ожидание очереди/повторные чтения/продление свежести metadata. После правки локальные36адресных тестов прошли (локальный TypeScript CJS-loader, НЕ полный CI). Проверенный runner RUN_ID прошёл адресные тесты, полныйnpm test, web/engine typecheck, production build и браузерный sidebar/model-picker. Для exact head требуется стандартныйPR CI. На момент этой записи runtime НЕ выпущен; уменьшение wire payload и отсутствие лишнего I/O подтверждены контрактом, ускорение production ещё НЕ измерено.
+
+          Не закрыты: полный<=160Korea/Japan и счётчики, per-card Korea detail I/O, точная причина intermittent/cars, полная SEO/VPN/performance приёмка. Новый выпуск только один после зелёногоCI, затем actual release/readback, холодный и повторный переход, loaded font, dealer green regression и сравнение bytes/правильных карточек. Не обходить источник, не кешировать общий авторизованныйHTML, не публиковать неподтверждённые числа ускорения.
+          '''
+          note='\n'.join(x[10:] if x.startswith('          ') else x for x in note.splitlines()).replace('RUN_ID',os.environ['GITHUB_RUN_ID'])+'\n'
+          p=Path('roadmap.md');before=p.read_bytes();p.write_bytes(before+note.encode());assert p.read_bytes().startswith(before)
+          Path('docs/operations/2026-11-07-catalog-speed-ready.md').write_text(note.lstrip())
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- apps/web/lib/catalog/ajes-client.ts apps/web/lib/catalog/filter-facets-wire.ts apps/web/components/catalog/CatalogContent.tsx tests/ajes-ready-metadata.test.ts tests/catalog-filter-facets-wire.test.ts docs/operations/2026-11-07-catalog-speed-ready.md roadmap.md
+          git diff --cached --stat
+          git commit -m 'perf: serve ready catalog metadata without supplier queue and trim unused model payload'
+          git push origin HEAD:fix/catalog-speed-ready-metadata-20261107
+          git rev-parse HEAD > speed-ready-evidence/verified-head.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-speed-ready-verification
+          path: |
+            speed-ready-evidence
+            artifacts/mobile-filter-local-chromium
+          retention-days: 7
