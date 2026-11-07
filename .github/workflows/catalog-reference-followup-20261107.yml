@@ -1,0 +1,65 @@
+name: Catalog reference post-HTTP2 readback 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-reference-followup-20261107.yml', 'scripts/diagnostics/catalog-reference-followup-20261107.mjs']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalog-reference-followup-20261107
+  cancel-in-progress: false
+jobs:
+  readback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: audit
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install isolated browser dependencies
+        run: |
+          mkdir -p /tmp/catalog-browser
+          npm install --prefix /tmp/catalog-browser --no-audit --no-fund playwright@1.56.1
+          /tmp/catalog-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Read only four fixed public routes
+        working-directory: audit
+        run: node scripts/diagnostics/catalog-reference-followup-20261107.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-reference-followup-20261107
+          path: audit/followup-output
+          retention-days: 7
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+      - name: Preserve results and append roadmap without replacing history
+        working-directory: main
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          note=Path('../audit/followup-output/roadmap-entry.md').read_text()
+          p=Path('roadmap.md');original=p.read_text()
+          if '## 07.11.2026 — ZMA: измеренный разбор и установленный HTTP/2' not in original:
+              p.write_text(original+'\n\n'+note)
+          report=Path('docs/operations/2026-11-07-catalog-reference-readback.md')
+          report.write_text(note)
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- roadmap.md docs/operations/2026-11-07-catalog-reference-readback.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'docs: measured ZMA comparison, HTTP2 activation and remaining catalog acceptance'
+            git push origin HEAD:main
+          fi
+          git log -1 --format='%H %s'
