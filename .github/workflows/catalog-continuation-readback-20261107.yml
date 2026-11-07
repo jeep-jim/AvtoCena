@@ -5,6 +5,7 @@ on:
     paths: ['.github/workflows/catalog-continuation-readback-20261107.yml']
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: catalog-continuation-record-20261107
   cancel-in-progress: false
@@ -16,13 +17,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Append dealer green regression and exact current PR states
+      - name: Read existing instructions and append verified recovery state
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          tail -n 35 AGENTS.md
-          tail -n 85 roadmap.md
+          tail -n 40 AGENTS.md
+          tail -n 100 roadmap.md
           python3 - <<'PY'
           import os,json,datetime,urllib.request
           from pathlib import Path
@@ -34,34 +35,39 @@ jobs:
           for number in [1716,1717]:
               pr=read('/pulls/'+str(number))
               runs=read('/actions/runs?head_sha='+pr['head']['sha']+'&event=pull_request&per_page=50')['workflow_runs']
-              evidence[str(number)]={'state':pr['state'],'merged':pr['merged'],'head':pr['head']['sha'],'merge':pr['merge_commit_sha'],'checks':[{'run':r['id'],'name':r['name'],'status':r['status'],'conclusion':r['conclusion']} for r in runs]}
+              evidence['PR'+str(number)]={'state':pr['state'],'merged':pr['merged'],'head':pr['head']['sha'],'merge':pr['merge_commit_sha'],'checks':[{'run':r['id'],'name':r['name'],'status':r['status'],'conclusion':r['conclusion']} for r in runs]}
+          for name,ident in [('deployment',42367668990),('liveReadback',42367789665)]:
+              run=read('/actions/runs/'+str(ident));jobs=read('/actions/runs/'+str(ident)+'/jobs?per_page=20')['jobs']
+              evidence[name]={'run':ident,'head':run['head_sha'],'status':run['status'],'conclusion':run['conclusion'],'jobs':[{'name':j['name'],'status':j['status'],'conclusion':j['conclusion'],'activeSteps':[s['name'] for s in j['steps'] if s['status']=='in_progress']} for j in jobs]}
+          try:
+              with urllib.request.urlopen('https://avtocena.com/api/health',timeout=15) as response:h=json.load(response)
+              evidence['health']={k:h.get(k) for k in ['ok','releaseSha','calculationVersion']}
+          except Exception:
+              evidence['health']={'verified':False,'reason':'public_health_not_read'}
           at=datetime.datetime.now(datetime.timezone.utc).isoformat()
-          note='''
+          note='''## 07.11.2026 — продолжение после обрыва ответа: исправление дилерского «Зелёного угла» сохранено
 
-          ## 07.11.2026 — регрессия «Зелёного угла» у дилера: ремонт по скриншотам владельца
+          Повторно проверены PR1716/1717, их фактический diff и результаты проверок. PR1717 исправляет лишний DealerBrowsingProvider и отсутствующий прямой dealer-shared-catalog при embedded=true; standalone-режим сохранён. Все шесть стандартных workflow точного head3f3a870834a746fb3cacade4553585fbde121099 завершились SUCCESS. Исправление и одна адаптивная полоса марок PR1716 объединены, но слияние не считается установкой.
 
-          Владелец показал /dealers/avtograd?make=Nissan&market=japan&stock=green: заголовок, баннер и выдача сжаты в левую колонку; stock=all сохраняет правую выдачу. Причина в проверенных исходниках: GreenCornerCatalog повторно создавал DealerBrowsingProvider при embedded=true и не выдавал прямой dealer-shared-catalog. Это нарушает селектор #catalog>.dealer-shared-catalog и общую сетку DealerProfileStyles.
+          Единственный действующий выпуск —393/run42367668990, ожидаемый application release a5f9a645835ae636ab99dd1a7b1073ba24d851b4. Дополнительный deployment в этой сессии не запускался; release marker и формулы не менялись. Уже запущенный readback42367789665 ожидает завершения именно этого выпуска и проверяет исходный дилерский URL, реальный SPA-переход аукционы↔в наличии, город/марку, ширины1440/1024/390 и публичную единственную полосу марок. Результат браузерного прогона нужно прочитать, а снимки осмотреть до объявления live-приёмки.
 
-          PR1717 устраняет именно вложенную обёртку и возвращает общий embedded shell. Самостоятельная /cars/green сохраняет собственную шапку/provider. Расчёты, объявления, фильтры, город, проверка разрешённой Японии и права не меняются. 53 адресные проверки первого запуска прошли, включая новые регрессии embedded/standalone/дилерского допуска; браузерный стенд остановился на конфигурации CSS modules, до проверки вёрстки. Стенд исправляется без удаления проверок. На этой записи новый runtime ещё НЕ опубликован.
+          Тестовый снимок green-1600-dark показывает исправленную геометрию на изолированных данных, не установленный сайт. Прямая сеть из текущей среды недоступна; это не вывод о доступности сервиса, проверка ведётся внешним runner. Состояния ниже получены на указанную дату напрямую из GitHub и публичного health, не из старого сообщения.
 
-          PR1716 с одной адаптивной полосой марок прошёл восемь стандартных проверок и объединён коммитом69c9ccca21bb2c865260c775d32261db7c437691. Это объединение кода, не установка. Один согласованный выпуск после зелёных проверок PR1717 и проверки отсутствия действующего deploy; не запускать дубликаты и не отменять здоровые задачи.
-
-          Приёмка: исходный URL владельца, переход аукционы→в наличии→назад, прямой вход и перезагрузка; сохранение Nissan/города/<=160/страницы; desktop/tablet/mobile, обе темы; фильтры слева, баннер/карточки справа и реквизиты после каталога, один provider/dock. Изолированный SSR-стенд не заменяет реальные гидратированные переходы после установки. Сохраняются обязательные незакрытые пункты плана07.11: полнота мощности Кореи/Японии, согласованность счётчика, холодная/прогретая скорость и SEO. Не подменять неизвестные характеристики и не отключать источники ради быстрого пустого экрана.
+          Главные незакрытые обязательства плана07.11 сохраняются: точное сопоставление мощности Кореи/Японии с проверенными вариантами, полнота<=160 и согласованность счётчика, устранение intermittent/cars, холодные/прогретые замеры, ошибки сети и полная SEO-приёмка. Не называть весь сайт быстрым/исправным по одному CI или HTTP200. Источники, права, энциклопедия/ручные данные, цены/пошлины/комиссии и сроки свежести не изменяются этим контрольным действием.
           '''
           note='\n'.join(line[10:] if line.startswith('          ') else line for line in note.splitlines())+'\n'
-          note+='\nСостояние GitHub на '+at+':\n```json\n'+json.dumps(evidence,ensure_ascii=False,indent=2)+'\n```\n'
-          marker='## 07.11.2026 — регрессия «Зелёного угла» у дилера: ремонт по скриншотам владельца'
-          p=Path('roadmap.md');before=p.read_bytes()
-          if marker.encode() not in before:p.write_bytes(before+note.encode())
+          note+='\nКонтроль на '+at+':\n```json\n'+json.dumps(evidence,ensure_ascii=False,indent=2)+'\n```\n'
+          p=Path('roadmap.md');before=p.read_bytes();marker=note.splitlines()[0].encode()
+          if marker not in before:p.write_bytes(before+b'\n\n'+note.encode())
           assert p.read_bytes().startswith(before)
-          Path('docs/operations/2026-11-07-dealer-green-progress.md').write_text(note.lstrip())
+          Path('docs/operations/2026-11-07-dealer-green-resume.md').write_text(note)
           PY
           git diff --check
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add roadmap.md docs/operations/2026-11-07-dealer-green-progress.md
+          git add -- roadmap.md docs/operations/2026-11-07-dealer-green-resume.md
           if ! git diff --cached --quiet; then
-            git commit -m 'docs: record dealer green layout regression and approved recovery scope'
+            git commit -m 'docs: checkpoint dealer green release and remaining catalog acceptance'
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then break; fi
               test "$attempt" -lt 3
@@ -71,8 +77,8 @@ jobs:
           fi
           git log -1 --format='%H %s'
           mkdir -p continuation-report
-          tail -n 170 roadmap.md > continuation-report/roadmap-tail.md
-          cp docs/operations/2026-11-07-dealer-green-progress.md continuation-report/
+          tail -n 220 roadmap.md > continuation-report/roadmap-tail.md
+          cp docs/operations/2026-11-07-dealer-green-resume.md continuation-report/
       - uses: actions/upload-artifact@v4
         if: always()
         with:
