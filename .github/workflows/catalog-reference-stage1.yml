@@ -27,19 +27,40 @@ jobs:
           npm install --workspace=@avtocena/web --package-lock-only --ignore-scripts --save-exact --no-audit --no-fund @fontsource-variable/onest@5.3.1
           git diff --check
       - run: npm ci
+        id: dependencies
       - name: Production dependency security
+        id: security
         run: npm audit --omit=dev --audit-level=high
       - name: Targeted routing, sharing, dealer, font and resilience regressions
+        id: targeted
+        continue-on-error: true
         run: |
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-reference-routes.test.ts tests/catalog-market-section-result.test.ts tests/search-snippets.test.ts tests/staff-avatar-presence-url.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/selection-city-persistence.test.ts tests/offer-share.test.ts tests/public-page-recovery.test.ts tests/crm-contracts.test.ts tests/telegram-miniapp.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-reference-routes.test.ts tests/catalog-market-section-result.test.ts tests/search-snippets.test.ts tests/staff-avatar-presence-url.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/selection-city-persistence.test.ts tests/offer-share.test.ts tests/public-page-recovery.test.ts tests/crm-contracts.test.ts tests/telegram-miniapp.test.ts tests/ajes-catalog-progressive.test.ts tests/autobot.test.ts tests/catalog-japan-redirect.test.ts tests/power30.test.ts
       - name: Full regression suite
+        id: regression
+        if: ${{ !cancelled() && steps.dependencies.outcome == 'success' }}
+        continue-on-error: true
         run: npm test > regression.log 2>&1 || { tail -n 240 regression.log; exit 1; }
       - name: Web and engine typecheck
+        id: types
+        if: ${{ !cancelled() && steps.dependencies.outcome == 'success' }}
+        continue-on-error: true
         run: npm run typecheck > typecheck.log 2>&1 || { cat typecheck.log; exit 1; }
       - name: Production build
+        id: build
+        if: ${{ !cancelled() && steps.dependencies.outcome == 'success' }}
+        continue-on-error: true
         env:
           NEXT_TELEMETRY_DISABLED: '1'
         run: npm run build > build.log 2>&1 || { tail -n 200 build.log; exit 1; }
+      - name: Require every acceptance check
+        if: ${{ !cancelled() }}
+        run: |
+          test '${{ steps.security.outcome }}' = success
+          test '${{ steps.targeted.outcome }}' = success
+          test '${{ steps.regression.outcome }}' = success
+          test '${{ steps.types.outcome }}' = success
+          test '${{ steps.build.outcome }}' = success
       - name: Commit verified code only to the same isolated branch
         run: |
           set -euo pipefail
