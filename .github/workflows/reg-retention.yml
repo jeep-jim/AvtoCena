@@ -6,7 +6,9 @@ on:
     paths:
       - scripts/reg-clean-catalog.mjs
       - scripts/lib/reg-retention-plan.mjs
+      - scripts/lib/reg-complete-inventory.mjs
       - tests/reg-retention-plan.test.mjs
+      - tests/reg-complete-inventory.test.mjs
       - .github/workflows/reg-retention.yml
       - .github/market-runs/reg-retention.json
 permissions:
@@ -24,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 24.22.1}
       - run: npm ci --ignore-scripts
-      - run: node --test tests/reg-retention-plan.test.mjs tests/catalog-storage-budget.test.mjs
+      - run: node --test tests/reg-retention-plan.test.mjs tests/reg-complete-inventory.test.mjs tests/catalog-storage-budget.test.mjs
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-internal-cleanup.test.ts tests/catalog-storage-maintenance.test.ts tests/storage.test.ts
       - run: node --check scripts/reg-clean-catalog.mjs
   execute:
