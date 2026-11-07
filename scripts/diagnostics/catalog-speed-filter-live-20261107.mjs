@@ -21,7 +21,7 @@ try{
    await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;},probe.theme);
    const originalUrl=page.url();row.initialUrl=new URL(originalUrl).pathname+new URL(originalUrl).search;
    let scope=page.locator('.ac-catalog-sidebar');
-   if(probe.width<1024){await page.getByRole('button',{name:'Открыть фильтры каталога',exact:true}).first().click();scope=page.getByRole('dialog',{name:'Фильтры каталога',exact:true});await scope.waitFor();}
+   if(probe.width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).first().click();scope=page.getByRole('dialog',{name:'Фильтры каталога',exact:true});await scope.waitFor();}
    const model=scope.getByRole('searchbox',{name:'Модель автомобиля',exact:true});
    await model.waitFor();await page.waitForFunction(()=>[...document.querySelectorAll('input[aria-label="Модель автомобиля"]')].some(e=>Object.keys(e).some(k=>k.startsWith('__reactProps$'))),{},{timeout:20000});
    await model.click();
