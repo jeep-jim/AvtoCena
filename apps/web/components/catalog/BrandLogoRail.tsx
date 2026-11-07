@@ -7,7 +7,8 @@ import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import Link from "next/link";
 import {brandContextQuery,brandSelectionQuery} from "@/lib/catalog/brand-navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
+import {subscribeBrandTheme,readBrandTheme,serverBrandTheme} from "./brand-theme-store";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug, catalogBrandPresentation } from "@/lib/catalog/brands";
 
 const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
@@ -48,19 +49,12 @@ function loadBrandCounts(query: string) {
 }
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const theme=useSyncExternalStore(subscribeBrandTheme,readBrandTheme,serverBrandTheme);
   const [sourceIndex, setSourceIndex] = useState(0);
   const slug = catalogBrandSlug(catalogBrandPresentation(brand).name);
 
   useEffect(() => setSourceIndex(0), [brand, theme]);
-  useEffect(() => {
-    const root = document.documentElement;
-    const sync = () => setTheme(root.dataset.theme === "dark" ? "dark" : "light");
-    sync();
-    const observer = new MutationObserver(sync);
-    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
-    return () => observer.disconnect();
-  }, []);
+
 
   const sources = [
     `/brand-logos/local/${theme}/${slug}.png`,

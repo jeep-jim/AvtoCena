@@ -24,6 +24,15 @@ export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
+  // Only exact, already requested list responses are inspected here.
+  // Separate bounded storage admission: a ready saved list must not wait
+  // for two unrelated supplier requests. No new shared TTL or feed crawl.
+  const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
+    const age=Date.now()-Date.parse(value?.observedAt||'');
+    return value?.schemaVersion===2&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
+  }});
+  // Memoization avoids repeated object-store reads. Every reuse below
+  // still checks observedAt; memory residence never extends freshness.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
   // Persistence is a best-effort cache of requested responses, not the supplier
   // transaction. A slow storage write must not delay ready cars or hold the two
@@ -76,15 +85,31 @@ export function createAjesClient(deps:Dependencies) {
         }
         return null;
       };
+      const inMemory=query.kind==='list'?cache.peekFresh(query.sql):undefined;
+      if(inMemory!==undefined)return inMemory;
+      const inspectPrepared=query.kind==='list';
+      let prepared:any=null;
+      if(inspectPrepared&&deps.readQuery){
+        prepared=await preparedReads.get(query.sql,()=>deps.readQuery!(query.sql),query.sql,'prepared').catch(()=>null);
+      }
+      const freshPrepared=(value:any)=>{
+        const age=Date.now()-Date.parse(value?.observedAt||'');
+        const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
+        return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<30*60*1000;
+      };
+      if(inspectPrepared&&freshPrepared(prepared)){
+        await deps.assertEnabled(query.table);
+        return query.kind==='list'?remember({...prepared,stale:false}):{...prepared,stale:false};
+      }
       return cache.get(query.sql,async()=>{
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
-        let saved:any=null;
-        try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}
+        let saved:any=prepared;
+        if(!inspectPrepared)try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}
         const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=isUsable(saved);
         const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2&&(query.table!=='korea'||query.kind!=='detail'||saved?.fullInformation===true);
-        if(usable&&currentSchema&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
+        if(usable&&currentSchema&&!saved.stale&&!saved.partial&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
@@ -231,7 +256,7 @@ export function createAjesClient(deps:Dependencies) {
           }
           if(query.kind==='list'){
             await deps.assertEnabled(query.table);
-            let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}
+            const saved=prepared;
             const fallback=await listFallback(saved);if(fallback)return fallback;
           }else if(query.kind==='models'||query.kind==='makes'){
             // Retained directory pages are names, not a fresh inventory count.
