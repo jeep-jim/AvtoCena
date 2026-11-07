@@ -1,0 +1,43 @@
+name: Catalog HTTP2 transport verification 2026-11-07
+on:
+  push:
+    branches: [fix/catalog-http2-20261107]
+    paths: ['scripts/regcloud-http2-config.py', 'scripts/regcloud-http2-apply.sh', '.github/workflows/catalog-http2-20261107.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-http2-owner-20261107
+  cancel-in-progress: false
+jobs:
+  transport:
+    if: github.ref == 'refs/heads/fix/catalog-http2-20261107'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate isolated configuration transform
+        run: |
+          python3 tests/regcloud-http2-config.test.py
+          bash -n scripts/regcloud-http2-apply.sh
+      - name: Apply TLS transport only with automatic rollback
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key=$(mktemp)
+          trap 'rm -f "$key"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key"
+          unset SSH_PRIVATE_KEY
+          opts=(-i "$key" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote="/opt/avtocena/http2-owner-$GITHUB_RUN_ID"
+          ssh "${opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote'"
+          scp "${opts[@]}" scripts/regcloud-http2-config.py scripts/regcloud-http2-apply.sh "root@151.248.113.177:$remote/"
+          ssh "${opts[@]}" root@151.248.113.177 "bash '$remote/regcloud-http2-apply.sh' '$remote/regcloud-http2-config.py'"
+      - name: Independent external HTTP2 health read
+        run: |
+          curl --fail --silent --show-error --http2 --max-time 20 -w '\nEXTERNAL_PROTOCOL=%{http_version} STATUS=%{http_code}\n' https://avtocena.com/api/health
