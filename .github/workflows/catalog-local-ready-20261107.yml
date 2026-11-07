@@ -1,0 +1,216 @@
+name: Catalog ready data isolation 2026-11-07
+on:
+  push:
+    branches: [audit/catalog-reference-20261107]
+    paths: ['.github/workflows/catalog-local-ready-20261107.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: catalog-local-ready-20261107
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 69e0a281c2a464fd32c9d0a5f5ce44f0e1cf46c8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Apply bounded changes to the exact reviewed base
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 69e0a281c2a464fd32c9d0a5f5ce44f0e1cf46c8
+          test -z "$(git ls-remote --heads origin refs/heads/fix/catalog-local-ready-20261107)"
+          git checkout -b fix/catalog-local-ready-20261107
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          def checked(path, sha):
+              data=Path(path).read_bytes()
+              assert hashlib.sha1(('blob '+str(len(data))+'\0').encode()+data).hexdigest()==sha, path+' changed'
+              return data.decode()
+          def replace(path, before, after):
+              p=Path(path); text=p.read_text()
+              assert text.count(before)==1, (path,text.count(before),before[:90])
+              p.write_text(text.replace(before,after))
+          checked('apps/web/lib/catalog/ajes-client.ts','20933afb45193de6fd19468e3aac3246e4d631aa')
+          checked('apps/web/components/catalog/BrandLogoRail.tsx','978f4807d1334d89222b7b548557535bb1ab0003')
+          replace('apps/web/lib/catalog/detail-read-cache.ts', '  private remove(key: string) {', '''  /** Inspect only a still-fresh entry without joining an I/O admission queue. */
+            peekFresh(key: string): T | undefined {
+              const entry = this.entries.get(key);
+              if (!entry || entry.expiresAt <= (this.options.now || Date.now)()) return undefined;
+              this.entries.delete(key);
+              this.entries.set(key, entry);
+              return entry.value;
+            }
+
+            private remove(key: string) {''')
+          replace('apps/web/lib/catalog/ajes-client.ts', '  const visitorCache=new DetailReadCache<any>', '''  // Only exact, already requested list/aggregate responses are inspected here.
+            // Separate bounded storage admission: a ready saved list must not wait
+            // for two unrelated supplier requests. No new shared TTL or feed crawl.
+            const preparedReads=new DetailReadCache<any>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:()=>false});
+            const visitorCache=new DetailReadCache<any>''')
+          replace('apps/web/lib/catalog/ajes-client.ts', '      return cache.get(query.sql,async()=>{', '''      const inMemory=cache.peekFresh(query.sql);
+                if(inMemory!==undefined)return inMemory;
+                const inspectPrepared=query.kind!=='detail';
+                let prepared:any=null;
+                if(inspectPrepared&&deps.readQuery){
+                  prepared=await preparedReads.get(query.sql,()=>deps.readQuery!(query.sql)).catch(()=>null);
+                }
+                const freshPrepared=(value:any)=>{
+                  const age=Date.now()-Date.parse(value?.observedAt||'');
+                  const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
+                  return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<30*60*1000;
+                };
+                if(inspectPrepared&&freshPrepared(prepared)){
+                  await deps.assertEnabled(query.table);
+                  return query.kind==='list'?remember({...prepared,stale:false}):{...prepared,stale:false};
+                }
+                return cache.get(query.sql,async()=>{''')
+          replace('apps/web/lib/catalog/ajes-client.ts', "        let saved:any=null;\n        try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}", "        let saved:any=prepared;\n        if(!inspectPrepared)try {saved=await deps.readDetail?.(query.table,query.id!);}catch{}")
+          replace('apps/web/lib/catalog/ajes-client.ts', "        if(usable&&currentSchema&&age<30*60*1000)return", "        if(usable&&currentSchema&&!saved.stale&&!saved.partial&&age<30*60*1000)return")
+          # The pre-admission exact read is reused on queue failure instead of reading it twice.
+          p=Path('apps/web/lib/catalog/ajes-client.ts'); text=p.read_text()
+          old="            let saved:any=null;try{saved=await deps.readQuery?.(query.sql);}catch{}"
+          assert text.count(old)==2
+          p.write_text(text.replace(old,"            const saved=prepared;"))
+          replace('apps/web/components/catalog/BrandLogoRail.tsx', 'import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";', 'import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";\nimport {subscribeBrandTheme,readBrandTheme,serverBrandTheme} from "./brand-theme-store";')
+          replace('apps/web/components/catalog/BrandLogoRail.tsx', '  const [theme, setTheme] = useState<"light" | "dark">("light");', '  const theme=useSyncExternalStore(subscribeBrandTheme,readBrandTheme,serverBrandTheme);')
+          replace('apps/web/components/catalog/BrandLogoRail.tsx', '''  useEffect(() => {
+              const root = document.documentElement;
+              const sync = () => setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+              sync();
+              const observer = new MutationObserver(sync);
+              observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+              return () => observer.disconnect();
+            }, []);''', '')
+          Path('apps/web/components/catalog/brand-theme-store.ts').write_text('''/** One observer per mounted logo collection, not one per logo. No network I/O. */
+          const listeners=new Set<()=>void>();
+          let observer:MutationObserver|null=null;
+          export const serverBrandTheme=():"light"|"dark"=>"light";
+          export const readBrandTheme=():"light"|"dark"=>typeof document!=="undefined"&&document.documentElement.dataset.theme==="dark"?"dark":"light";
+          export function subscribeBrandTheme(notify:()=>void){
+            listeners.add(notify);
+            if(!observer&&typeof document!=="undefined"){
+              observer=new MutationObserver(()=>{for(const listener of [...listeners])listener();});
+              observer.observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+            }
+            return ()=>{listeners.delete(notify);if(!listeners.size){observer?.disconnect();observer=null;}};
+          }
+          ''')
+          Path('tests/ajes-prepared-admission.test.ts').write_text('''import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
+          import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
+          const tick=()=>new Promise(r=>setTimeout(r,0));
+          const snapshot=(overrides:any={})=>({schemaVersion:2,items:[{id:'saved001',table:'korea'}],page:3,pageSize:24,received:1,rejected:0,stale:false,observedAt:new Date().toISOString(),...overrides});
+          test('a fresh exact saved list is delivered while both supplier slots are occupied',async()=>{
+            let release!:()=>void,started=0,reserves=0,done=false;
+            const held=new Promise<void>(r=>release=r);
+            const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{reserves++;},readQuery:async sql=>sql.endsWith('limit 48,24')?snapshot():null,fetcher:async()=>{started++;await held;return Response.json([]);}});
+            const pending=[1,2].map(page=>client.read({table:'korea',page},'203.0.113.1'));
+            try{
+              for(let i=0;i<100&&started<2;i++)await tick();assert.equal(started,2);
+              const ready=client.read({table:'korea',page:3},'203.0.113.2').then(value=>{done=true;return value;});
+              for(let i=0;i<100&&!done;i++)await tick();
+              assert.equal(done,true,'ready local inventory must not wait for supplier admission');
+              const result=await ready;assert.equal(result.items[0].id,'saved001');assert.equal(result.stale,false);assert.equal(reserves,2);
+            }finally{release();await Promise.allSettled(pending);}
+          });
+          test('slow storage read does not consume supplier slots; stored inspection coalesces and stays bounded',async()=>{
+            let release!:()=>void,active=0,peak=0,reads=0,requests=0;
+            const held=new Promise<void>(r=>release=r);
+            const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>{reads++;active++;peak=Math.max(peak,active);if(sql.endsWith('limit 0,24'))await held;active--;return null;},fetcher:async()=>{requests++;return Response.json([]);}});
+            const a=client.read({table:'korea',page:1},'203.0.113.1'),b=client.read({table:'korea',page:1},'203.0.113.1');
+            try{
+              for(let i=0;i<100&&active<1;i++)await tick();
+              await client.read({table:'korea',page:2},'203.0.113.2');assert.equal(requests,1);assert.equal(reads,2);assert.ok(peak<=2);
+            }finally{release();await Promise.all([a,b]);}
+            assert.equal(requests,2,'duplicate requests retain supplier coalescing');
+            const before=reads;await client.read({table:'korea',page:1},'203.0.113.3');assert.equal(reads,before,'fresh memory hit performs no storage read');
+          });
+          test('prepared pages still obey source switch, visitor IP and configuration',async()=>{
+            let disabled=false,reads=0;const denied=Error('owner_disabled');
+            const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{if(disabled)throw denied;},reserve:async()=>{throw Error('no source');},readQuery:async()=>{reads++;disabled=true;return snapshot();}});
+            await assert.rejects(client.read({table:'korea',page:3},'203.0.113.1'),e=>e===denied);
+            disabled=false;await assert.rejects(client.read({table:'korea',page:3},''),/client_ip_missing/);assert.equal(reads,1);
+            const absent=createAjesClient({password:()=>undefined,assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>{throw Error('should not read');}});
+            await assert.rejects(absent.read({table:'korea',page:3},'203.0.113.1'),/not_configured/);
+          });
+          test('partial, stale, expired, future, wrong-schema and wrong-market saved pages are not promoted to fresh',async()=>{
+            for(const overrides of [{partial:true},{stale:true},{schemaVersion:0},{observedAt:new Date(Date.now()-31*60000).toISOString()},{observedAt:new Date(Date.now()+60000).toISOString()},{items:[{id:'saved001',table:'china'}]}]){
+              let requests=0;const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>snapshot(overrides),fetcher:async()=>{requests++;return Response.json([]);}});
+              const result=await client.read({table:'korea',page:3},'203.0.113.1');assert.equal(requests,1,JSON.stringify(overrides));assert.deepEqual(result.items,[]);
+            }
+          });
+          test('peekFresh never starts work or prolongs the freshness deadline',async()=>{
+            let now=0,loads=0;const cache=new DetailReadCache<number>({maxEntries:1,maxBytes:20,ttlMs:10,concurrency:1,now:()=>now});
+            assert.equal(cache.peekFresh('a'),undefined);assert.equal(await cache.get('a',async()=>{loads++;return 7;}),7);
+            now=9;assert.equal(cache.peekFresh('a'),7);now=10;assert.equal(cache.peekFresh('a'),undefined);assert.equal(loads,1);
+          });
+          ''')
+          Path('tests/brand-theme-store.test.ts').write_text('''import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import {subscribeBrandTheme,readBrandTheme,serverBrandTheme} from '../apps/web/components/catalog/brand-theme-store';
+          test('hundreds of brand logos share one theme observer and clean it up after unmount',()=>{
+            const originalDocument=Object.getOwnPropertyDescriptor(globalThis,'document'),originalObserver=Object.getOwnPropertyDescriptor(globalThis,'MutationObserver');
+            let created=0,disconnected=0,notifications=0,callback=()=>{};
+            const root={dataset:{theme:'light'}};const cleanups:Array<()=>void>=[];
+            class Observer{constructor(cb:()=>void){created++;callback=cb;}observe(target:unknown,options:unknown){assert.equal(target,root);assert.deepEqual(options,{attributes:true,attributeFilter:['data-theme']});}disconnect(){disconnected++;}}
+            try{
+              Object.defineProperty(globalThis,'document',{configurable:true,value:{documentElement:root}});
+              Object.defineProperty(globalThis,'MutationObserver',{configurable:true,value:Observer});
+              assert.equal(serverBrandTheme(),'light');assert.equal(readBrandTheme(),'light');
+              for(let i=0;i<396;i++)cleanups.push(subscribeBrandTheme(()=>{notifications++;}));
+              assert.equal(created,1);root.dataset.theme='dark';callback();assert.equal(readBrandTheme(),'dark');assert.equal(notifications,396);
+              cleanups.splice(0,395).forEach(fn=>fn());assert.equal(disconnected,0);cleanups.pop()!();assert.equal(disconnected,1);
+              const stop=subscribeBrandTheme(()=>{});assert.equal(created,2);stop();assert.equal(disconnected,2);
+            }finally{
+              cleanups.forEach(fn=>fn());
+              if(originalDocument)Object.defineProperty(globalThis,'document',originalDocument);else delete (globalThis as any).document;
+              if(originalObserver)Object.defineProperty(globalThis,'MutationObserver',originalObserver);else delete (globalThis as any).MutationObserver;
+            }
+          });
+          ''')
+          PY
+          git diff --check
+      - run: npm ci
+      - name: Admission, freshness and theme regression tests
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-prepared-admission.test.ts tests/brand-theme-store.test.ts tests/detail-read-cache.test.ts tests/ajes-queue-unavailable.test.ts tests/ajes-recovery-isolation.test.ts tests/ajes-detail-queue-recovery.test.ts tests/ajes-page-cache-recovery.test.ts tests/ajes-list-admission.test.ts tests/ajes-japan-feed.test.ts
+      - name: Full regression suite
+        run: npm test > regression.log 2>&1 || { tail -n 220 regression.log; exit 1; }
+      - name: Typecheck and production build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: |
+          npm run typecheck > typecheck.log 2>&1 || { cat typecheck.log; exit 1; }
+          npm run build > build.log 2>&1 || { tail -n 160 build.log; exit 1; }
+      - name: Commit only checked changes on a new isolated branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- apps/web/lib/catalog/ajes-client.ts apps/web/lib/catalog/detail-read-cache.ts apps/web/components/catalog/BrandLogoRail.tsx apps/web/components/catalog/brand-theme-store.ts tests/ajes-prepared-admission.test.ts tests/brand-theme-store.test.ts
+          git diff --cached --check
+          test "$(git diff --cached --name-only | wc -l)" = 6
+          git commit -m 'fix: ready catalog reads bypass supplier queue; share brand theme observer'
+          git push origin HEAD:refs/heads/fix/catalog-local-ready-20261107
+          git log -1 --format='CHECKED_COMMIT=%H'
+      - name: Preserve bounded evidence
+        if: always()
+        run: |
+          mkdir -p ready-report
+          git diff > ready-report/candidate.patch
+          cp regression.log typecheck.log build.log ready-report/ 2>/dev/null || true
+          git rev-parse HEAD > ready-report/head.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-ready-isolation-checks
+          path: ready-report
+          retention-days: 7
