@@ -1,0 +1,238 @@
+{
+  "checkedAt": "2026-11-08T02:57:48.896Z",
+  "expectedRelease": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+  "healthStatus": 200,
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+    "calculationVersion": "091f4cbc26484a9a3f455dda84eeb8bfc11237796574b549da859efd95889daf"
+  },
+  "articles": [
+    {
+      "slug": "mercedes-amg-sl-wta-one-off-what-is-special",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "mazda-kd-center-dejima-parts-logistics-explained",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "honda-sensing-ride-motorcycle-radar-assistance",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "renault-john-cockerill-forefront-remote-platform-concept",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "opel-stx-concept-active-aero-estate-study",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "kia-seltos-hybrid-eawd-feature-check-guide",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "volkswagen-id-cross-37kwh-range-charging-guide",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "bmw-x5-fifth-generation-five-drivetrains-timeline",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "nissan-kicks-design-panel-springback-manufacturing",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    },
+    {
+      "slug": "volvo-digital-key-plus-uwb-region-compatibility",
+      "status": 200,
+      "title": true,
+      "description": true,
+      "canonical": true,
+      "jsonLd": true,
+      "headings": true,
+      "lastParagraph": true,
+      "sourceUrls": true
+    }
+  ],
+  "images": [
+    {
+      "file": "/blog-media/2026-11-08/mercedes-amg-sl-wta-one-off-2026.jpg",
+      "status": 200,
+      "bytes": 228419,
+      "sha256": "d259de49f42ceecab19aeba693724b78ce7c69da66e247fc7cd69de03f64b9b2",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/mazda-kd-center-logistics-2026.jpg",
+      "status": 200,
+      "bytes": 466482,
+      "sha256": "d0b7e0998ea768cee04e05f046309e3293c6baaca7d18005eb0a9e6763990f0f",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/honda-sensing-ride-motorcycle-radar-2026.jpg",
+      "status": 200,
+      "bytes": 59428,
+      "sha256": "4f8fc7a81cca3d490b4bb25dac929fe4acbb2813681d352159aa2819e0a4a641",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/renault-forefront-remote-platform-concept-2026.jpg",
+      "status": 200,
+      "bytes": 2143602,
+      "sha256": "878259bb1abd364f6dd8d6ecdf51ecaaa76ee4a7fe8a46842590fc14caa8f5c8",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/opel-stx-concept-active-aero-2026.jpg",
+      "status": 200,
+      "bytes": 113701,
+      "sha256": "0026c9d35a43f39eb3d5a7900a8134552a1ea50cea12142e6d76138d6c4ec0f0",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/kia-seltos-hybrid-v2l-eawd-guide.jpg",
+      "status": 200,
+      "bytes": 1504740,
+      "sha256": "a5db4a1ebf14e13aca36426323c6f9f542f8ea84d604b2b9b7f8afa4640de5bc",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/vw-id-cross-37kwh-city-range-guide.jpg",
+      "status": 200,
+      "bytes": 392337,
+      "sha256": "9a408d96ca66b364c23b069606b44670784aaf51159486f1f1e14624b71e1cb9",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/bmw-x5-five-powertrains-launch-timing.jpg",
+      "status": 200,
+      "bytes": 661918,
+      "sha256": "167ea661cba5e13eab0e32ea73624d3a9f6cb5ea85617fe1bca22fecc14de1f6",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/nissan-kicks-design-springback-2026.jpg",
+      "status": 200,
+      "bytes": 204050,
+      "sha256": "831453cfdf56f8711f698b10156b197d206213c38b151a87ef9a6f31926cc291",
+      "match": true
+    },
+    {
+      "file": "/blog-media/2026-11-08/volvo-digital-key-plus-uwb-guide.jpg",
+      "status": 200,
+      "bytes": 394033,
+      "sha256": "57261f497146873a0eed95c58cacfaa5be8c4c8d53b32fbdffbd7eb7c3c76d13",
+      "match": true
+    }
+  ],
+  "indexPages": [
+    {
+      "page": 1,
+      "status": 200,
+      "slugs": 12
+    },
+    {
+      "page": 2,
+      "status": 200,
+      "slugs": 12
+    },
+    {
+      "page": 3,
+      "status": 200,
+      "slugs": 12
+    },
+    {
+      "page": 4,
+      "status": 200,
+      "slugs": 12
+    },
+    {
+      "page": 5,
+      "status": 200,
+      "slugs": 12
+    },
+    {
+      "page": 6,
+      "status": 200,
+      "slugs": 12
+    },
+    {
+      "page": 7,
+      "status": 200,
+      "slugs": 10
+    }
+  ],
+  "indexUniqueSlugs": 82,
+  "newInIndex": true,
+  "newInSitemap": true,
+  "sitemapStatus": 200,
+  "pass": true
+}
