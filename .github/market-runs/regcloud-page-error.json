@@ -1,6 +1,6 @@
 {
   "logsOnly": true,
   "failedRelease": "",
-  "reason": "Owner-approved recovery from 2026-11-07: read current bounded error categories, safe digests/stacks, resources and HTTP2 while PR1714 is merged but not installed. Investigate intermittent /cars error independently of successful CI. No source requests, provider/IP changes, collectors, data writes or deployment.",
-  "requestedAt": "2026-11-07T07:52:00Z"
+  "reason": "Owner request 2026-11-08: diagnose reproduced homepage and navigation stalls. Read bounded aggregate errors and resources only; no deployment, source requests or data changes.",
+  "requestedAt": "2026-11-08T02:30:40.873Z"
 }
