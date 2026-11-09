@@ -1,0 +1,80 @@
+name: One-time owner-approved OSMINOG account bootstrap
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: osminog-initial-access-20261109
+  cancel-in-progress: false
+jobs:
+  bootstrap:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    environment: regcloud-staging
+    steps:
+      - name: Provision separate account and verify AvtoCena unchanged
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          bootstrap="$RUNNER_TEMP/osminog-bootstrap-reviewed.sh"
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error --max-time 30 \
+            https://raw.githubusercontent.com/jeep-jim/OSMINOG/7068dea8f9426f515f7fe0bd417a3fbabe842ad2/infra/osminog-access/bootstrap.sh \
+            -o "$bootstrap"
+          printf '%s  %s\n' '69614e08f0bcac7ebec18215358b7bf9ccd800dfeeab0396e046e911a56486fa' "$bootstrap" | sha256sum --check --status
+          bash -n "$bootstrap"
+          key_file=$(mktemp)
+          hosts_file=$(mktemp)
+          payload=$(mktemp)
+          trap 'rm -f "$key_file" "$hosts_file" "$payload" "$bootstrap"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          printf '%s\n' '151.248.113.177 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAwiP6mOUcqHc5+Xvih7YY0Ikc7TyNsIoLoFTVx1JcSV' > "$hosts_file"
+          cat > "$payload" <<'BEFORE'
+          set -euo pipefail
+          test "$(id -u)" = 0
+          test "$(hostname -s)" = cv8120751
+          for bin in python3 curl docker systemctl sha256sum; do command -v "$bin" >/dev/null; done
+          health_release() {
+            curl --fail --silent --show-error --max-time 20 --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health |
+              python3 -c 'import sys,json,re; d=json.load(sys.stdin); s=d.get("releaseSha",""); assert d.get("ok") is True and re.fullmatch("[0-9a-f]{40}",s); print(s)'
+          }
+          protected_state() {
+            docker inspect --format '{{.Id}} {{.State.Running}} {{.State.StartedAt}} {{.State.Pid}} {{.RestartCount}}' avtocena-production
+            systemctl show ssh nginx docker --property=MainPID,ActiveState,ActiveEnterTimestampMonotonic --no-pager
+            for path in /root/.ssh/authorized_keys /etc/ssh/sshd_config /etc/nginx/nginx.conf /etc/sudoers; do
+              if test -f "$path"; then sha256sum "$path"; else printf 'absent %s\n' "$path"; fi
+            done
+          }
+          test "$(docker inspect --format '{{.State.Running}}' avtocena-production)" = true
+          test "$(systemctl is-active nginx)" = active
+          before_release=$(health_release)
+          before_protected=$(protected_state)
+          printf 'AVTOCENA_HEALTH_BEFORE_OK release=%s\n' "$before_release"
+          BEFORE
+          cat "$bootstrap" >> "$payload"
+          cat >> "$payload" <<'AFTER'
+          
+          test "$(id -u osminog)" -ne 0
+          test "$(id -nG osminog)" = osminog
+          test "$(stat -c %U /opt/osminog)" = osminog
+          runuser -u osminog -- test -w /opt/osminog
+          runuser -u osminog -- test ! -r /root/.ssh/authorized_keys
+          runuser -u osminog -- test ! -w /etc/nginx
+          runuser -u osminog -- test ! -w /var/run/docker.sock
+          after_release=$(health_release)
+          after_protected=$(protected_state)
+          test "$before_release" = "$after_release"
+          test "$before_protected" = "$after_protected"
+          printf 'AVTOCENA_HEALTH_AFTER_OK release=%s\n' "$after_release"
+          printf '%s\n' 'AVTOCENA_PROCESS_AND_CONFIG_UNCHANGED' 'OSMINOG_GROUPS_ONLY_OSMINOG' 'OSMINOG_ROOT_KEY_AND_DOCKER_SOCKET_INACCESSIBLE'
+          AFTER
+          bash -n "$payload"
+          ssh -i "$key_file" -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=12 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=2 \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts_file" \
+            root@151.248.113.177 'timeout 90 bash -s' < "$payload"
+          printf '%s\n' '## Owner-approved initial access completed' 'Only the separate osminog account/home/public key were provisioned.' 'AvtoCena health, release, process start state and selected protected configuration remained unchanged.' 'No application/service installation or restart. Follow-up access must use the OSMINOG-owned key/account.' >> "$GITHUB_STEP_SUMMARY"
