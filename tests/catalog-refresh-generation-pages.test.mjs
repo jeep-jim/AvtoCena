@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {refreshGenerationPages} from '../scripts/lib/catalog-refresh-generation-pages.mjs';
+import {generationPagePreparation,RELEASE_MARKETS} from '../scripts/lib/release-market-scope.mjs';
 function fixture() {
   const writes = [], reads = [], objects = new Map();
   const generation = 'gen_old', prefix = `catalog/generations/${generation}/indexes/`;
@@ -90,4 +91,76 @@ test('market-only preparation never reads or replaces a global overview',async()
  const result=await refreshGenerationPages(f.options);
  assert.equal(result.landingsOnly,true);
  assert.equal(f.writes.length,1);
+});
+test('explicit home release reads all saved projections and retains Japan in the shared overview',async()=>{
+ const f=fixture();Object.assign(f.options,generationPagePreparation('china',true));
+ f.objects.get('catalog/manifest.json').markets.japan={count:1};
+ f.objects.set(f.prefix+'projection/japan.json',{generationId:'gen_old',items:[{id:'japan-a',market:'japan'}]});
+ f.options.landingPath=(g,m)=>`catalog/generations/${g}/indexes/market-landing-v1/${m}.json`;
+ f.options.buildLanding=async(g,m,rows)=>({generationId:g,market:m,sourceTotal:rows.length,total:rows.length,policyDate:'2026-10-23'});
+ f.options.prepareRows=rows=>rows;
+ f.options.buildOverview=async(g,rows)=>({generationId:g,policyDate:'2026-10-23',facets:{generationId:g,markets:[...new Set(rows.map(row=>row.market))]},
+  markets:Object.fromEntries(RELEASE_MARKETS.map(market=>{const items=rows.filter(row=>row.market===market);return [market,{total:items.length,items}];}))});
+ await refreshGenerationPages(f.options);
+ const overview=f.objects.get(f.prefix+'overview.json');
+ assert.equal(f.reads.includes(f.prefix+'projection/japan.json'),true);
+ assert.deepEqual(overview.markets.japan,{sourceTotal:1,total:1,items:[{id:'japan-a',market:'japan'}]});
+ assert.equal(overview.facets.markets.includes('japan'),true);
+ assert.equal(f.writes.length,7);assert.equal(f.reads.includes('catalog/import-lock.json'),false);
+});
+
+function requireCompleteOverview(overview,{generationId,manifest,policyDate}){
+ const market=overview?.markets?.china;
+ return overview?.generationId===generationId&&overview.policyDate===policyDate&&market?.sourceTotal===manifest.markets.china.count
+  &&Number.isInteger(market.total)&&market.total>0&&market.total<=market.sourceTotal&&Array.isArray(market.items)&&market.items.length>=Math.min(10,market.total);
+}
+function readyOverview(f,overrides={}){
+ return {generationId:'gen_old',facets:{generationId:'gen_old'},policyDate:'2026-10-23',dailyLandingsVersion:1,
+  markets:{china:{sourceTotal:2,total:1,items:[{id:'a',market:'china'}],...overrides}}};
+}
+test('home readiness may skip only a complete current generation summary',async()=>{
+ const f=fixture();f.options.skipReady=true;f.options.overviewComplete=requireCompleteOverview;
+ f.objects.set(f.prefix+'overview.json',readyOverview(f));
+ const result=await refreshGenerationPages(f.options);
+ assert.equal(result.alreadyPrepared,true);assert.equal(f.writes.length,0);
+ assert.equal(f.reads.some(key=>key.includes('/projection/')),false);
+});
+for(const scenario of ['wrong-source-count','missing-cards','false-zero','old-policy','missing-market']){
+ test(`home readiness rebuilds ${scenario} despite a saved ready marker`,async()=>{
+  const f=fixture();f.options.skipReady=true;f.options.overviewComplete=requireCompleteOverview;
+  const previous=readyOverview(f,scenario==='wrong-source-count'?{sourceTotal:1}:scenario==='missing-cards'?{items:[]}:scenario==='false-zero'?{total:0,items:[]}:{});
+  if(scenario==='old-policy')previous.policyDate='2026-10-22';
+  if(scenario==='missing-market')previous.markets={};
+  f.objects.set(f.prefix+'overview.json',previous);
+  f.options.buildOverview=async()=>readyOverview(f);
+  const result=await refreshGenerationPages(f.options);
+  assert.equal(result.alreadyPrepared,undefined);assert.equal(f.writes.length,2);
+  const write=f.writes.find(w=>w.path.endsWith('/overview.json'));
+  assert.deepEqual(write.condition,{ifMatch:'v1'});
+  assert.equal(write.value.markets.china.items.length,1);
+ });
+}
+test('failed home completeness preserves the prior overview and generation fence still applies',async()=>{
+ const f=fixture();f.options.overviewComplete=requireCompleteOverview;
+ const previous=readyOverview(f);f.objects.set(f.prefix+'overview.json',previous);
+ await assert.rejects(refreshGenerationPages(f.options),/home_overview_incomplete/);
+ assert.equal(f.writes.length,1);assert.equal(f.objects.get(f.prefix+'overview.json'),previous);
+ const g=fixture();g.options.overviewComplete=requireCompleteOverview;
+ g.options.buildOverview=async()=>{g.objects.set('catalog/manifest.json',{generationId:'new'});return readyOverview(g);};
+ await assert.rejects(refreshGenerationPages(g.options),/generation_changed/);
+ assert.equal(g.writes.length,1);assert.equal(g.objects.has(g.prefix+'overview.json'),false);
+});
+test('home flag is carried through preparation, candidate checks and deployment regression tests',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const workflow=await readFile(new URL('../.github/workflows/regcloud-deploy.yml',import.meta.url),'utf8');
+ const entry=await readFile(new URL('../scripts/catalog-refresh-generation-pages.mjs',import.meta.url),'utf8');
+ const deploy=await readFile(new URL('../scripts/regcloud-deploy-production.sh',import.meta.url),'utf8');
+ assert.match(workflow,/markerHomeCatalog\('\.github\/market-runs\/regcloud-deploy\.json'\)/);
+ assert.match(workflow,/RELEASE_REQUIRE_HOME_CATALOG=\$\{requireHomeCatalog\?'1':'0'\}/);
+ assert.match(workflow,/'\$RELEASE_PREPARATION_MARKETS' '\$RELEASE_REQUIRE_HOME_CATALOG'/);
+ assert.match(workflow,/node --test tests\/release-market-scope\.test\.mjs tests\/catalog-overview-source-validation\.test\.mjs tests\/catalog-refresh-generation-pages\.test\.mjs/);
+ assert.match(entry,/catalogOverviewMatchesGeneration\(overview,generationId\)/);
+ assert.match(entry,/catalogOverviewMarketComplete\(/);assert.match(entry,/HOME_OVERVIEW_MARKETS\.every/);
+ assert.match(entry,/\.\.\.preparation,overviewComplete/);
+ assert.match(deploy,/export AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG="\$\{5:-0\}"/);
 });

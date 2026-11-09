@@ -58,6 +58,7 @@ jobs:
       - name: Verify stream disconnect and gateway buffer regressions
         run: |
           node scripts/check-runtime-streams.mjs
+          node --test tests/release-market-scope.test.mjs tests/catalog-overview-source-validation.test.mjs tests/catalog-refresh-generation-pages.test.mjs
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py
       - name: Verify production dependency security
@@ -146,10 +147,12 @@ jobs:
         run: |
           node --input-type=module <<'SCOPE'
           import {appendFileSync} from 'node:fs';
-          import {markerMarkets} from './scripts/lib/release-market-scope.mjs';
+          import {markerMarkets,markerHomeCatalog} from './scripts/lib/release-market-scope.mjs';
           const markets=markerMarkets('.github/market-runs/regcloud-deploy.json');
-          appendFileSync(process.env.GITHUB_ENV,`RELEASE_PREPARATION_MARKETS=${markets?.join(',')||''}\n`);
+          const requireHomeCatalog=markerHomeCatalog('.github/market-runs/regcloud-deploy.json');
+          appendFileSync(process.env.GITHUB_ENV,`RELEASE_PREPARATION_MARKETS=${markets?.join(',')||''}\nRELEASE_REQUIRE_HOME_CATALOG=${requireHomeCatalog?'1':'0'}\n`);
           console.log('Preparation scope:',markets||'all markets');
+          console.log('Home catalog acceptance:',requireHomeCatalog);
           SCOPE
       - name: Prepare exact price indexes before activating the release
         env:
@@ -212,7 +215,7 @@ jobs:
           remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS'"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS' '$RELEASE_REQUIRE_HOME_CATALOG'"
       - name: Verify published encyclopedia fields against this exact release
         env:
           ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'

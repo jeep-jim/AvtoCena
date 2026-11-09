@@ -108,9 +108,10 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-requested completion of homepage hang fixes 2026-11-08: stream the catalog inside the stable interactive shell, decouple brand suggestions, and refuse unavailable/mismatched home summaries without whole-catalog fallback or visitor-triggered market recovery. Preserve editorial exclusions, current pricing, supplier policy, and all existing deployment gates. One coordinated production release; verify exact SHA and full responses after activation.",
+  "requireHomeCatalog": true,
+  "reason": "Owner-requested completion on 2026-11-09: fix percent-encoded catalog make/model parameters before search, filters and metadata; preserve city, power and sort context. Complete the already prepared bounded homepage read and independent interactive shell. Preserve current pricing, editorial exclusions, source policies, research batches and functional deployment gates; verify installed SHA and the reported BMW route after activation.",
   "ideaReports": [],
-  "requestedAt": "2026-11-08T11:46:32.030703+00:00",
+  "requestedAt": "2026-11-09T04:01:00.976180+00:00",
   "preparationMarkets": [
     "china",
     "korea",

@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-11-09T03:06:13Z",
+  "releaseSha": "008643e8929901e366d079b0d5c394e9b4df2350",
+  "health": {
+    "status": 200,
+    "releaseShaMatches": true,
+    "responseSeconds": 4.540151
+  },
+  "articles": [
+    {"slug":"hyundai-design-archive-how-car-ideas-take-shape","status":200,"responseMs":6342,"titlePresent":true,"sourcePresent":true},
+    {"slug":"honda-manaus-capacity-vertical-integration-explained","status":200,"responseMs":5395,"titlePresent":true,"sourcePresent":true},
+    {"slug":"honda-fireblade-2027-frame-rigidity-works-edition","status":200,"responseMs":5391,"titlePresent":true,"sourcePresent":true},
+    {"slug":"honda-africa-twin-1150-three-versions-guide","status":200,"responseMs":6336,"titlePresent":true,"sourcePresent":true},
+    {"slug":"honda-rn0-emtb-mullet-suspension-explained","status":200,"responseMs":5391,"titlePresent":true,"sourcePresent":true},
+    {"slug":"hyundai-hydrogen-chain-production-refueling-fleet","status":200,"responseMs":6338,"titlePresent":true,"sourcePresent":true},
+    {"slug":"nissan-sema-2026-concepts-not-production-models","status":200,"responseMs":6339,"titlePresent":true,"sourcePresent":true},
+    {"slug":"nissan-rogue-hybrid-electric-drive-series-hybrid","status":200,"responseMs":5263,"titlePresent":true,"sourcePresent":true},
+    {"slug":"nissan-qashqai-20-years-heritage-collection","status":200,"responseMs":5264,"titlePresent":true,"sourcePresent":true},
+    {"slug":"mercedes-c-class-2027-mild-hybrid-mbos-guide","status":200,"responseMs":5390,"titlePresent":true,"sourcePresent":true}
+  ],
+  "covers": [
+    {"name":"honda-africa-twin-2027.jpg","status":200,"responseMs":4841,"sha256Match":true},
+    {"name":"honda-fireblade-2027.jpg","status":200,"responseMs":4831,"sha256Match":true},
+    {"name":"honda-manaus-50-years.jpg","status":200,"responseMs":5749,"sha256Match":true},
+    {"name":"honda-rn0-emtb.jpg","status":200,"responseMs":4985,"sha256Match":true},
+    {"name":"hyundai-design-archive.jpg","status":200,"responseMs":5282,"sha256Match":true},
+    {"name":"hyundai-hydrogen-expo.jpg","status":200,"responseMs":5183,"sha256Match":true},
+    {"name":"mercedes-c-class-update.jpg","status":200,"responseMs":5199,"sha256Match":true},
+    {"name":"nissan-qashqai-heritage.jpg","status":200,"responseMs":5187,"sha256Match":true},
+    {"name":"nissan-rogue-hybrid.jpg","status":200,"responseMs":5743,"sha256Match":true},
+    {"name":"nissan-sema-concepts.jpg","status":200,"responseMs":4992,"sha256Match":true}
+  ],
+  "index": {
+    "pagesChecked": 8,
+    "allStatus200": true,
+    "articleCountsByPage": [12, 12, 12, 12, 12, 12, 12, 8],
+    "allTenNewArticlesOnPageOne": true,
+    "responseMsRange": [4053, 4231]
+  },
+  "sitemap": {
+    "status": 200,
+    "allTenArticleUrlsPresent": true,
+    "responseMs": 635
+  },
+  "browser": {
+    "blogIndexRendered": true,
+    "allTenNewCardsVisible": true,
+    "paginationShowsEightPages": true,
+    "articleRendered": "hyundai-design-archive-how-car-ideas-take-shape",
+    "coverVisible": true,
+    "threeSectionsVisible": true,
+    "attributionVisible": true,
+    "primarySourceLinkVisible": true
+  },
+  "performanceAcceptance": {
+    "underOneSecondConfirmed": false,
+    "note": "This editorial live check observed uncached remote HTTP responses of 4.053-6.342 seconds for blog pages and articles. It verifies publication correctness, not the separate sub-second performance goal."
+  }
+}
