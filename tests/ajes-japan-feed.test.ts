@@ -133,11 +133,22 @@ test('duplicate user requests coalesce; cache hits still obey source switch',asy
   assert.deepEqual(a,b);assert.equal(calls,1);assert.equal(reserved,1);assert.equal(a.quota.remaining,19990);assert.ok(!JSON.stringify(a).includes('test-secret'));
   enabled=false;await assert.rejects(client.read({},'127.0.0.1'),/disabled/);assert.equal(calls,1);
 });
-test('provider failures never expose its URL/body/secret and are not cached as no results',async()=>{
-  let calls=0;
-  const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{calls++;if(calls===1)throw Error('http://example/?code=test-secret');return new Response(JSON.stringify([row]));}});
+test('provider failures never expose its URL/body/secret and are not cached as no results',async t=>{
+  let now=Date.now(),calls=0,reserves=0;
+  t.mock.method(Date,'now',()=>now);
+  const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{},reserve:async()=>{reserves++;},fetcher:async()=>{calls++;if(calls===1)throw Error('http://example/?code=test-secret');return new Response(JSON.stringify([row]));}});
   await assert.rejects(client.read({},'127.0.0.1'),e=>String(e)==='Error: ajes_request_failed');
-  assert.equal((await client.read({},'127.0.0.1')).items.length,1);assert.equal(calls,2);
+  // A failed request remains a typed failure during its private cooldown,
+  // never an empty successful catalog or an immediate supplier retry.
+  await assert.rejects(client.read({},'127.0.0.1'),e=>String(e)==='Error: ajes_request_failed');
+  now+=29999;
+  await assert.rejects(client.read({},'127.0.0.1'),e=>String(e)==='Error: ajes_request_failed');
+  assert.equal(calls,1);assert.equal(reserves,1);
+  now+=2;
+  const recovered=await client.read({},'127.0.0.1');
+  assert.equal(recovered.items.length,1);assert.equal(recovered.stale,false);
+  assert.ok(!JSON.stringify(recovered).includes('test-secret'));
+  assert.equal(calls,2);assert.equal(reserves,2,'cooldown expires from the original failure, not the latest read');
 });
 test('wrong detail identity, oversized response and invalid JSON fail closed',async()=>{
   for(const response of [new Response(JSON.stringify([{...row,ID:'wrong'}])),new Response('secret error page'),new Response('[]',{headers:{'content-length':'3000000'}})]){
@@ -511,7 +522,7 @@ test('owner LA350A / 2910 search keeps both exact predicates in lists, counts an
  const input=ajesCatalogQuery({market:'japan',chassis:' la350a ',lotNumber:' 002910 ',page:'2'});
  for(const aggregate of [undefined,'count','models'] as const){
   const sql=ajesQuery({...input,aggregate}).sql;
-  assert.match(sql,/kuzov='LA350A' and lot='002910'/);
+  assert.ok(sql.includes("kuzov='LA350A'"));assert.match(sql,/\) and lot='002910'/);
   assert.doesNotMatch(sql,/(?:kuzov|lot) like/i);
  }
  assert.match(ajesQuery(input).sql,/limit 24,24$/);

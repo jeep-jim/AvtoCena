@@ -1,15 +1,35 @@
+export type DetailReadCacheQueueSnapshot = {
+  cache: string; active: number; queued: number; oldestActiveMs: number;
+};
+
+/** Fixed operational metadata only. Never retain a lookup key, value or visitor. */
+export class DetailReadCacheQueueError extends Error {
+  constructor(message: 'detail_cache_queue_timeout' | 'detail_cache_queue_full', public queue: DetailReadCacheQueueSnapshot) {
+    super(message);
+  }
+}
+
+/** Recognize both named queues and errors from an older reader in this process. */
+export function isDetailReadCacheQueueError(error: unknown): error is Error {
+  return error instanceof DetailReadCacheQueueError || error instanceof Error
+    && (error.message === 'detail_cache_queue_timeout' || error.message === 'detail_cache_queue_full');
+}
+
 /** Keep complete detail blocks within a byte budget, including on crawler traffic. */
 export class DetailReadCache<T> {
   private entries = new Map<string, { value: T; bytes: number; expiresAt: number }>();
   private pending = new Map<string, Promise<T>>();
   private bytes = 0;
   private active = 0;
+  private activeStarted = new Map<symbol, number>();
   private waiters: Array<{canStart: () => boolean; run: () => void}> = [];
   private activeGroups = new Map<string, number>();
   private epoch = 0;
 
   constructor(private readonly options: {
     maxEntries: number; maxBytes: number; ttlMs: number; concurrency: number;
+    /** A fixed code identifier for diagnostics, never a lookup key or user input. */
+    name?: string;
     now?: () => number;
     maxQueued?: number; queueTimeoutMs?: number;
     /** Reserve shared capacity for other work without raising total concurrency. */
@@ -44,6 +64,24 @@ export class DetailReadCache<T> {
     this.entries.delete(key);
   }
 
+  private queueSnapshot(): DetailReadCacheQueueSnapshot {
+    const now = (this.options.now || Date.now)();
+    let oldestActiveMs = 0;
+    for (const started of this.activeStarted.values()) oldestActiveMs = Math.max(oldestActiveMs, now - started);
+    return {
+      cache: this.options.name && /^[a-z][a-z0-9_]{0,63}$/.test(this.options.name) ? this.options.name : 'unnamed',
+      active: this.active, queued: this.waiters.length, oldestActiveMs: Math.max(0, Math.floor(oldestActiveMs)),
+    };
+  }
+
+  private queueError(message: 'detail_cache_queue_timeout' | 'detail_cache_queue_full') {
+    const error = new DetailReadCacheQueueError(message, this.queueSnapshot());
+    // Capture the caller while it is still on the stack. Creating this error
+    // inside the timer loses the responsible cache and leaves only timer frames.
+    Error.captureStackTrace?.(error, this.get);
+    return error;
+  }
+
   get(key: string, load: () => Promise<T>, pendingKey = key, admissionGroup = ''): Promise<T> {
     const now = this.options.now || Date.now;
     for (const [id, entry] of this.entries) {
@@ -61,24 +99,29 @@ export class DetailReadCache<T> {
       !admissionGroup || (this.activeGroups.get(admissionGroup) || 0) <
         (this.options.groupConcurrency?.[admissionGroup] ?? this.options.concurrency)
     );
+    let activeSlot: symbol;
     const reserve = () => {
       this.active++;
+      activeSlot = Symbol();
+      this.activeStarted.set(activeSlot, now());
       if (admissionGroup) this.activeGroups.set(admissionGroup, (this.activeGroups.get(admissionGroup) || 0) + 1);
     };
     if (!canStart() && this.waiters.length >= (this.options.maxQueued ?? 256)) {
-      return cached ? Promise.resolve(cached.value) : Promise.reject(new Error("detail_cache_queue_full"));
+      return cached ? Promise.resolve(cached.value) : Promise.reject(this.queueError("detail_cache_queue_full"));
     }
     const epoch = this.epoch;
     const promise = (async () => {
       // Reserve a slot before any I/O; simultaneous card/price lookups must not
       // parse dozens of multi-megabyte blocks at once.
       if (!canStart()) {
+        const timeoutError = this.queueError("detail_cache_queue_timeout");
         await new Promise<void>((resolve,reject) => {
           const next={canStart,run:()=>{clearTimeout(timer);reserve();resolve();}};
           const timer=setTimeout(()=>{
+            timeoutError.queue = this.queueSnapshot();
             const position=this.waiters.indexOf(next);
             if(position>=0)this.waiters.splice(position,1);
-            reject(new Error("detail_cache_queue_timeout"));
+            reject(timeoutError);
           },this.options.groupQueueTimeoutMs?.[admissionGroup] ?? this.options.queueTimeoutMs ?? 5_000);
           this.waiters.push(next);
         });
@@ -113,6 +156,7 @@ export class DetailReadCache<T> {
         return value;
       } finally {
         this.active--;
+        this.activeStarted.delete(activeSlot!);
         if (admissionGroup) {
           const left = (this.activeGroups.get(admissionGroup) || 1) - 1;
           if (left) this.activeGroups.set(admissionGroup, left);

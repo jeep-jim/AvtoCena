@@ -1,3 +1,5 @@
+import {DetailReadCacheQueueError} from '../../lib/catalog/detail-read-cache';
+
 /** Only fixed error classes/codes and generated-code locations may enter public logs. */
 export function catalogFailureDiagnostic(error: unknown) {
   try {
@@ -16,7 +18,11 @@ export function catalogFailureDiagnostic(error: unknown) {
   const network = /^(ECONNRESET|ETIMEDOUT|EPIPE|ENOMEM|UND_ERR_CONNECT_TIMEOUT|UND_ERR_SOCKET)$/.test(rawCode) ? rawCode : undefined;
   const code = prefix?.slice(0, 96) || (Object.hasOwn(known, message) ? known[message] : undefined) || network || 'unclassified';
   const locations = (value?.stack?.match(/\.next\/server\/[A-Za-z0-9_./()\[\]-]+\.js:\d+:\d+/g) || []).slice(0, 6);
-  return {name, code, locations};
+  const queue = value instanceof DetailReadCacheQueueError ? value.queue : null;
+  const safeQueue = queue && typeof queue.cache === 'string' && /^[a-z][a-z0-9_]{0,63}$/.test(queue.cache)
+    && [queue.active, queue.queued, queue.oldestActiveMs].every(number => Number.isSafeInteger(number) && number >= 0)
+    ? {cache:queue.cache, active:queue.active, queued:queue.queued, oldestActiveMs:queue.oldestActiveMs} : null;
+  return {name, code, locations, ...(safeQueue ? {queue:safeQueue} : {})};
   } catch {
     // Diagnostics must never replace the original page fallback with a new error.
     return {name:'UnknownError', code:'unclassified', locations:[] as string[]};

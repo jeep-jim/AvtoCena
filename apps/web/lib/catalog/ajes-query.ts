@@ -1,6 +1,7 @@
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
+import {japanChassisSearchSql} from './japan-chassis-search';
 import {auctionSaleRange} from "./auction-sale-period";
 import {japanExcludedMake,japanMakeSqlExclusion} from './japan-vehicle-policy';
 import {CHINA_MIN_MODEL_YEAR} from './china-year-policy';
@@ -76,7 +77,12 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.pickup!==undefined){if(q.pickup!==true)throw new AjesInputError();where.push(pickupSourceCandidateSql(stock));}
   if(q.auctionGrade){const grades=values(q.auctionGrade,'|');if(grades.some(v=>! /^(?:[0-6](?:\.5)?|S|R|RA|A|B|C)$/.test(v)))throw new AjesInputError();where.push(`rate in (${grades.map(v=>`'${v}'`).join(',')})`);}
 
-  if(q.chassis!==undefined)where.push(`kuzov='${name(q.chassis)}'`);
+  if(q.chassis!==undefined){
+    const value=name(q.chassis)!;
+    const clause=stock?`kuzov='${value}'`:japanChassisSearchSql(value);
+    if(!clause)throw new AjesInputError();
+    where.push(clause);
+  }
   if(q.frameNumber!==undefined)where.push(`serial='${name(q.frameNumber)}'`);
   if(q.lotNumber!==undefined){if(typeof q.lotNumber!=='string'||!/^\d{1,10}$/.test(q.lotNumber.trim()))throw new AjesInputError();where.push(`lot='${q.lotNumber.trim()}'`);}
   for(const [from,to,column,max] of [['mileageFrom','mileageTo','mileage',2000000],['engineFrom','engineTo','eng_v',20000]] as const){

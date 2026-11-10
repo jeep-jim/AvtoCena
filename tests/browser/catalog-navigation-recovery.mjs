@@ -33,7 +33,10 @@ try{for(const width of [390,1440]){
  await page.getByText('Открываем…',{exact:true}).waitFor();assert.equal(await page.locator('.ac-route-loader[aria-hidden="false"]').count(),0);assert.equal(await page.locator('.ac-route-loader').evaluate(el=>getComputedStyle(el).opacity),'0');
  assert.equal(await page.locator('article').count(),48,'navigation retains the source page while the target is pending');
  await page.getByRole('link',{name:/Все из Кореи/}).click();assert.equal((await page.evaluate(()=>window.__pushes)).length,1,'second click does not duplicate navigation');
- assert.match((await page.evaluate(()=>window.__pushes))[0],/market=korea/);
+ const destination=new URL((await page.evaluate(()=>window.__pushes))[0],'http://fixture');
+ assert.equal(destination.pathname,'/cars/korea/SsangYong/Rexton');
+ assert.equal(destination.searchParams.get('city'),'Новокузнецк');
+ assert.equal(destination.searchParams.has('market'),false);
  await page.screenshot({path:`${out}/${width}-pending.png`});await page.locator('#resolve').click();await page.getByRole('heading',{name:'Корея Rexton'}).waitFor();
  assert.deepEqual(errors,[]);await page.close();console.log(`PASS ${width}: partial retry/replace, AWD cursor append, local category pending and single navigation`);
 }}finally{await browser.close();server.close();}

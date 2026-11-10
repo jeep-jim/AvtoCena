@@ -21,25 +21,25 @@ export function createAjesClient(deps:Dependencies) {
   // Keep the total supplier concurrency at two, including all request kinds.
   // A queued detail may wait for the preceding 45-second read instead of failing
   // at the ordinary five-second queue deadline solely due to serialization.
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
+  const cache=new DetailReadCache<any>({name:'ajes_supplier',maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   // Inspect exact already requested lists and metadata, never detail responses.
   // Separate bounded storage admission: a ready saved list must not wait
   // for two unrelated supplier requests. Names/counts have the same existing
   // observation deadline. No new shared TTL, source admission or feed crawl.
-  const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
+  const preparedReads=new DetailReadCache<any>({name:'ajes_prepared_queries',maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
     const age=Date.now()-Date.parse(value?.observedAt||'');
     const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Number.isSafeInteger(value?.total);
     return supported&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
   }});
   // Memoization avoids repeated object-store reads. Every reuse below
   // still checks observedAt; memory residence never extends freshness.
-  const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
+  const visitorCache=new DetailReadCache<any>({name:'ajes_visitor_recovery',maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
   // Persistence is a best-effort cache of requested responses, not the supplier
   // transaction. A slow storage write must not delay ready cars or hold the two
   // supplier slots. Bound both concurrent writes and retained waiting payloads.
-  const persistence=new DetailReadCache<null>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:16,queueTimeoutMs:5000,shouldCache:()=>false});
+  const persistence=new DetailReadCache<null>({name:'ajes_persistence',maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:16,queueTimeoutMs:5000,shouldCache:()=>false});
   let persistenceSequence=0,persistenceWarningAt=0;
   const lastFailureSaved=new Map<string,number>();
   const persist=(save:()=>Promise<unknown>)=>{void persistence.get(String(++persistenceSequence),async()=>{await save();return null;}).catch(()=>{
@@ -201,15 +201,17 @@ export function createAjesClient(deps:Dependencies) {
           return query.kind==='list'?remember(result):result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
-          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
-          if(error instanceof AjesUnavailable&&recoverable){
-            const key=error.reason==='quota_exhausted'?quotaKey:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
-            // Do not extend an existing cooldown when merely reading the cached failure.
-            if(!cooling(key))failures.set(key,{reason:error.reason,until:Date.now()+(error.reason==='visitor_restricted'?300000:30000)});
-            while(failures.size>500)failures.delete(failures.keys().next().value!);
-          }
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
+          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
+          if(recoverable){
+            const key=failure.reason==='quota_exhausted'?quotaKey:failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+            // Native fetch/abort errors need the same private cooldown as typed
+            // failures; otherwise a recovered page retries the source on every visit.
+            // Do not extend an existing cooldown when merely reading the cached failure.
+            if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
+            while(failures.size>500)failures.delete(failures.keys().next().value!);
+          }
           // Throttle fixed page/kind slots independently: a first-page failure
           // must not suppress continuation evidence. Cooldown is not a request.
           const failureSlot=ajesFailureSlot(query);

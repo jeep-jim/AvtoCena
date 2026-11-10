@@ -62,7 +62,7 @@ function decodeBudgetSnapshot(value:any):any{
 }
 // The five markets' budget+sort tuples measure ~148 MB before rich metadata.
 // Keep the active working set together instead of evicting a market on each toggle.
-const cache=new DetailReadCache<BudgetCountRow[]>({maxEntries:16,maxBytes:256*1024*1024,ttlMs:86400000,concurrency:2});
+const cache=new DetailReadCache<BudgetCountRow[]>({name:'catalog_shared_budget_prices',maxEntries:16,maxBytes:256*1024*1024,ttlMs:86400000,concurrency:2});
 export function resetSharedBudgetPriceCache(){cache.clear();}
 
 function validBasis(value:any):boolean {

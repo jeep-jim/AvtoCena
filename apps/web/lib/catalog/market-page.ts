@@ -108,7 +108,7 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
 }
 
 
-const pages = new DetailReadCache<any>({maxEntries: 32, maxBytes: 12 * 1024 * 1024, ttlMs: 60_000, concurrency: 4});
+const pages = new DetailReadCache<any>({name:'catalog_market_pages',maxEntries: 32, maxBytes: 12 * 1024 * 1024, ttlMs: 60_000, concurrency: 4});
 export async function readCatalogMarketPage(query: CatalogSearchParams) {
   const normalized = {...query, page: Math.max(1, Math.floor(Number(query.page) || 1)), pageSize: MARKET_PAGE_SIZE};
   const key = JSON.stringify([(await readCatalogEditorial()).revision,Object.entries(normalized).sort(([a],[b])=>a.localeCompare(b))]);

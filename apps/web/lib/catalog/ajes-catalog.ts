@@ -5,6 +5,7 @@ import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
 import {resolveAjesQueryModels} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
+import {ajesPowerFilterView,missingAjesFilterPower} from './ajes-filter-power';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 import {assertCollectionEnabled} from './collection-controls';
@@ -75,9 +76,12 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
-  // Apply locally verified technical filters before delivered-price previews.
-  // Non-matching cars never enter the expensive customs/management pipeline.
-  const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
+  // Reject known non-matches early. Korean rows with missing factory power
+  // still need the same saved/management inputs that their visible card uses;
+  // filtering them here made confirmed 136/123 hp cards disappear entirely.
+  const candidates=filter.powerFilter?received.items.filter(v=>filter.matchesPower(v)
+   ||query.table==='korea'&&missingAjesFilterPower(v)):received.items;
+  const sourceById=new Map(received.items.map(v=>[v.id,v]));
   const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
   const pricingStarted=performance.now();
   let priced=page.items;
@@ -89,7 +93,8 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
   measure?.('pricing',performance.now()-pricingStarted);
-  return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
+  return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)
+   &&filter.matches(filter.powerFilter?ajesPowerFilterView(v,sourceById.get(v.id)):v))};
  };
  const firstPromise=params.after?null:read(query.page||1);
  // Unfiltered source pages keep their own offsets. Do not borrow rows from the

@@ -21,6 +21,34 @@ class GateTests(unittest.TestCase):
    gate.sample('http://local','/api/leads','lead_validation','x')
   req=open_request.call_args.args[0]
   self.assertEqual(req.get_method(),'POST');self.assertEqual(req.data,b'{}')
+ def test_preparation_http_failure_identifies_route_and_stops_without_retry_or_private_data(self):
+  output=io.StringIO();private_body=io.BytesIO(b'private response body')
+  response=io.BytesIO(b'{"ok":true,"releaseSha":"release"}');response.status=200
+  failure=gate.urllib.error.HTTPError('http://private-host'+OWNER_BMW_ROUTE,500,'private reason',{'X-Private':'private header'},private_body)
+  routes=[('/api/health',.25,'health'),(OWNER_BMW_ROUTE,2,'catalog'),('/cars?market=uae',2,'catalog')]
+  with patch.object(sys,'argv',['gate','http://local','release']),patch.object(gate,'release_routes',return_value=routes),patch.object(gate.urllib.request,'urlopen',side_effect=[response,failure]) as request,patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(output):
+   with self.assertRaises(gate.urllib.error.HTTPError) as raised:gate.main()
+  self.assertIs(raised.exception,failure)
+  self.assertEqual(request.call_count,2);sleep.assert_not_called()
+  self.assertEqual([call.args[0].full_url for call in request.call_args_list],['http://local/api/health','http://local'+OWNER_BMW_ROUTE])
+  self.assertTrue(all(call.kwargs['timeout']==gate.REQUEST_TIMEOUT_SECONDS for call in request.call_args_list))
+  self.assertEqual(json.loads(output.getvalue()),{'performanceGate':'failure','stage':'preparation','path':OWNER_BMW_ROUTE,'kind':'catalog','status':500,'error':'HTTPError','functionalPassed':False})
+  self.assertEqual(private_body.tell(),0)
+  for value in ['private-host','private reason','private header','private response body']:self.assertNotIn(value,output.getvalue())
+ def test_expired_cache_failure_logs_actual_stage_and_does_not_continue_or_accept(self):
+  output=io.StringIO();failure=gate.urllib.error.HTTPError('http://local'+OWNER_BMW_ROUTE,503,'private reason',{},None)
+  with patch.object(sys,'argv',['gate','http://local','release']),patch.object(gate,'release_routes',return_value=[(OWNER_BMW_ROUTE,2,'catalog')]),patch.object(gate,'sample',side_effect=[.01,.01,failure]) as sample,patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(output):
+   with self.assertRaises(gate.urllib.error.HTTPError) as raised:gate.main()
+  self.assertIs(raised.exception,failure);self.assertEqual(sample.call_count,3);sleep.assert_called_once_with(35)
+  rows=[json.loads(line) for line in output.getvalue().splitlines()]
+  self.assertEqual([row['performanceGate'] for row in rows],['warm','failure'])
+  self.assertEqual(rows[-1],{'performanceGate':'failure','stage':'after_ttl','path':OWNER_BMW_ROUTE,'kind':'catalog','status':503,'error':'HTTPError','functionalPassed':False})
+ def test_expected_consent_error_is_still_success_without_failure_log(self):
+  output=io.StringIO()
+  response=gate.urllib.error.HTTPError('http://local/api/leads',400,'',{},io.BytesIO(b'{"error":"personal_data_consent_required"}'))
+  with patch.object(gate.urllib.request,'urlopen',side_effect=response) as request,contextlib.redirect_stdout(output):
+   self.assertGreaterEqual(gate.sample_with_context('http://local','/api/leads','lead_validation','release','preparation'),0)
+  request.assert_called_once();self.assertEqual(output.getvalue(),'')
  def test_rejects_partial_stream_and_false_success(self):
   for status,body in [(503,b'</html>'),(200,b'loading'),(200,b'$RX(error)</html>')]:
    with self.assertRaises(AssertionError):gate.validate('/','html',status,body,'x')

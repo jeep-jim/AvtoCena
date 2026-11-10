@@ -46,7 +46,7 @@ import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOvervie
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, writeBoundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
-import { DetailReadCache } from "./detail-read-cache";
+import { DetailReadCache, isDetailReadCacheQueueError } from "./detail-read-cache";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { safePublicPricing } from "./safe-public-pricing";
 import { confirmedSourceWithdrawalById, isConfirmedSourceWithdrawn } from './confirmed-source-withdrawals';
@@ -596,7 +596,7 @@ export async function getOfferFromCurrentProjection(id: string) {
   return row && !isConfirmedSourceWithdrawn(row) && catalogInventoryAgeDecision(row).eligible && !catalogVehicleExcluded(row) ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
-const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
+const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({name:'catalog_search_projection_cache',sizeOf:jsonReadByteLength,
   maxEntries: SEARCH_PROJECTION_CACHE_MAX, maxBytes: 96 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
@@ -604,19 +604,19 @@ const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
 const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; value?: { generationId: string; items: CatalogSearchProjection[] }; meta?: JsonReadResult<{ generationId: string; items: CatalogSearchProjection[] }>; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 // A single Volkswagen projection is 66 MB; a 32 MB budget never retained it.
 // Keys include the verified generation, so immutable brand rows can outlive a minute.
-const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
+const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({name:'catalog_current_brand_projection_cache',sizeOf:jsonReadByteLength,
   maxEntries: 64, maxBytes: 384 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
 });
 const unavailableReadCache=new UnavailableReadCache();
-const previousLocationCache=new DetailReadCache<{byId:Record<string,OfferLocation>}>({sizeOf:jsonReadByteLength, maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
-const previousOfferChunkCache=new DetailReadCache<VehicleOffer[]>({sizeOf:jsonReadByteLength, maxEntries:4,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
+const previousLocationCache=new DetailReadCache<{byId:Record<string,OfferLocation>}>({name:'catalog_previous_location_cache',sizeOf:jsonReadByteLength, maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
+const previousOfferChunkCache=new DetailReadCache<VehicleOffer[]>({name:'catalog_previous_offer_chunk_cache',sizeOf:jsonReadByteLength, maxEntries:4,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
-const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({sizeOf:jsonReadByteLength,
+const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({name:'catalog_current_offer_shard_cache',sizeOf:jsonReadByteLength,
   maxEntries: 256, maxBytes: 128 * 1024 * 1024,
   ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 4,
 });
-const immutableOfferShardCache = new DetailReadCache<{generationId:string} & DetailShard<VehicleOffer>>({sizeOf:jsonReadByteLength, maxEntries:1024,maxBytes:192*1024*1024,ttlMs:3600_000,concurrency:4});
+const immutableOfferShardCache = new DetailReadCache<{generationId:string} & DetailShard<VehicleOffer>>({name:'catalog_immutable_offer_shard_cache',sizeOf:jsonReadByteLength, maxEntries:1024,maxBytes:192*1024*1024,ttlMs:3600_000,concurrency:4});
 let projectionCacheGeneration = "";
 let offerLookupCacheGeneration = "";
 let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<string, OfferLocation> }> | null = null;
@@ -1213,8 +1213,8 @@ type MarketLanding = {
 export function catalogMarketLandingPath(generationId: string, market: string) {
   return generationPath(generationId, `indexes/market-landing-v1/${cleanShard(market)}.json`);
 }
-const editorialLandingCache = new DetailReadCache<MarketLanding>({maxEntries:8,maxBytes:12_000_000,ttlMs:300_000,concurrency:2});
-const marketLandingCache = new DetailReadCache<MarketLanding>({maxEntries: 8, maxBytes: 12_000_000, ttlMs: 300_000, concurrency: 4});
+const editorialLandingCache = new DetailReadCache<MarketLanding>({name:'catalog_editorial_landing_cache',maxEntries:8,maxBytes:12_000_000,ttlMs:300_000,concurrency:2});
+const marketLandingCache = new DetailReadCache<MarketLanding>({name:'catalog_market_landing_cache',maxEntries: 8, maxBytes: 12_000_000, ttlMs: 300_000, concurrency: 4});
 // City is delivery context, not an inventory predicate. Budget/price sorting
 // still fail this guard and retain their exact city-aware search path.
 function canUseMarketLanding(params: CatalogSearchParams) {
@@ -1312,7 +1312,7 @@ function withEditorialFacetOptions(facets:CatalogFacets,market?:string):CatalogF
  return {...facets,bodyTypes:values('bodyType',facets.bodyTypes),drives:values('drive',facets.drives),transmissions:values('transmission',facets.transmissions)};
 }
 let budgetFacetCache=new WeakMap<BudgetCountIndex["rows"],CatalogFacets>();
-const filteredFacetCache=new DetailReadCache<CatalogFacets>({maxEntries:48,maxBytes:4*1024*1024,ttlMs:30_000,concurrency:6});
+const filteredFacetCache=new DetailReadCache<CatalogFacets>({name:'catalog_filtered_facet_cache',maxEntries:48,maxBytes:4*1024*1024,ttlMs:30_000,concurrency:6});
 async function readCatalogFacetsEditorial(input: CatalogSearchParams = {}): Promise<CatalogFacets> {
   const manifest=await readManifest();
   const {sort:_sort,page:_page,pageSize:_size,...filters}=input;
@@ -2031,7 +2031,7 @@ export async function getOfferWithoutEditorial(id: string) {
   return offer ? (isConfirmedSourceWithdrawn(offer) || !catalogInventoryAgeDecision(offer).eligible || catalogVehicleExcluded(offer) ? null : offer) : readProjectionFallback();
 }
 const BUDGET_CARD_BLOCK_SIZE=256;
-const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({sizeOf:jsonReadByteLength, maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
+const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({name:'catalog_budget_card_cache',sizeOf:jsonReadByteLength, maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
 async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProjection[]){
  // Card blocks retain the existing pricing replay inputs; the small selector never carries photos or ledgers.
  const ordered=[...rows];
@@ -2055,7 +2055,7 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
 }
 // Price selection must replay the same FX, customs anniversaries and business
 // settings as rendered cards. Cache only compact tuples, never whole markets.
-const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({maxEntries:512,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:3});
+const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({name:'catalog_live_budget_block_cache',maxEntries:512,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:3});
 async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:string){
  const {applyActiveBusinessPriceBatch}=await import("./live-business-pricing");
  const {attachJapanSearchValues}=await import("./japan-delivered-preview");
@@ -2080,8 +2080,8 @@ async function currentBudgetBlock(generationId:string,version:1|2|3,block:number
   return buildBudgetCountIndex(generationId,priced,new Map(priced.map(row=>[row.id,block])));
  });
 }
-const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
-const japanBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:4,maxBytes:48*1024*1024,ttlMs:86400_000,concurrency:2});
+const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({name:'catalog_live_budget_replay_cache',maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
+const japanBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({name:'catalog_japan_budget_replay_cache',maxEntries:4,maxBytes:48*1024*1024,ttlMs:86400_000,concurrency:2});
 async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false){
  const displayRows=(rows:CatalogSearchProjection[])=>displayPrices?rows.map(row=>row.catalogPricingMode==="seller"?{...row,totalRub:Number(row.japanDeliveredPreview?.totalRub||row.sellerPriceRub)||null}:row):rows;
  const fingerprint=await budgetPricingFingerprint(market);
@@ -2153,7 +2153,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
 }
 const budgetEligibility=new BudgetEligibilityCache();
 const stableBudgetSelections=new StableBudgetSelectionCache();
-const filteredBudgetSelectionCache = new DetailReadCache<CompactSelection|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4,sizeOf:budgetSelectionBytes});
+const filteredBudgetSelectionCache = new DetailReadCache<CompactSelection|null>({name:'catalog_filtered_budget_selection_cache',maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4,sizeOf:budgetSelectionBytes});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['color','make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
@@ -2169,7 +2169,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const manifest=await readManifest();
  const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
+  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(optionalBudgetReadFailure);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   // Older selectors cannot distinguish seller-only display prices in default
   // ranking. Keep their authoritative fallback until enriched selectors exist.
@@ -2416,14 +2416,20 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const cards=params.budgetFrom || params.budgetTo ? await currentSearchPrices(prepareCatalogProjectionRows(visibleCards),selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
-const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2,sizeOf:value=>jsonReadByteLength(value)??budgetIndexBytes(value)});
-const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
-const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
-const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({name:'catalog_budget_index_cache',maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2,sizeOf:value=>jsonReadByteLength(value)??budgetIndexBytes(value)});
+const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({name:'catalog_budget_market_directory_cache',maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({name:'catalog_packed_budget_directory_cache',maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({name:'catalog_compressed_budget_directory_cache',maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const aggregateBudgetIndexCache=new AggregateBudgetIndexCache();
 const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<BudgetCountIndex|null>>();
-const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
+const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({name:'catalog_specification_budget_directory_cache',maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const specificationSelectorPath=(name:string)=>`${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}/${name}.json`;
+function optionalBudgetReadFailure(error:unknown):null {
+ // Missing/invalid optional formats retain compatibility fallback. A saturated
+ // queue must not trigger more formats or a whole-catalog projection scan.
+ if(isDetailReadCacheQueueError(error))throw error;
+ return null;
+}
 async function readBudgetCountIndex(generationId:string,market?:string){
  if(market && MARKETS.includes(market as CatalogMarket)){
   const manifest=await readManifest();
@@ -2433,7 +2439,7 @@ async function readBudgetCountIndex(generationId:string,market?:string){
   if(manifest.generationId===generationId && manifest.markets?.[market as CatalogMarket]?.count===0)return null;
  }
  if(!market || market==='any'){
-  const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(()=>null);
+  const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(optionalBudgetReadFailure);
   const manifest=await readManifest();
   const required=MARKETS.filter(m=>Number(manifest.markets?.[m]?.count)>0);
   if(directory?.generationId===generationId && directory.encyclopediaDigest===(readCalculationIndex()?.digest||null) && required.length && required.every(m=>directory.markets?.[m])){
@@ -2441,7 +2447,10 @@ async function readBudgetCountIndex(generationId:string,market?:string){
    if(!pending){pending=(async()=>{
     const parts=await mapWithConcurrency(Object.keys(directory.markets),2,name=>readBudgetCountIndex(generationId,name));
     return aggregateBudgetIndexCache.merge(parts);
-   })().catch(()=>null);aggregateBudgetIndexes.set(directory,pending);}
+   })().catch(error=>{
+    if(aggregateBudgetIndexes.get(directory)===pending)aggregateBudgetIndexes.delete(directory);
+    return optionalBudgetReadFailure(error);
+   });aggregateBudgetIndexes.set(directory,pending);}
    const merged=await pending;
    if(merged)return merged;
    aggregateBudgetIndexes.delete(directory);
@@ -2449,27 +2458,27 @@ async function readBudgetCountIndex(generationId:string,market?:string){
  }
 
  if(market && MARKETS.includes(market as CatalogMarket)){
-  const specificationDirectory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(()=>null);
+  const specificationDirectory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,specificationSelectorPath('ready'),null)).catch(optionalBudgetReadFailure);
   if(specificationDirectory?.generationId===generationId && specificationDirectory.encyclopediaDigest===(readCalculationIndex()?.digest||null) && specificationDirectory.markets?.[market]){
-   const rich=await budgetIndexCache.get(`${generationId}:specifications:${market}`,async()=>readCompressedSelector(specificationDirectory,market,name=>readIndex(generationId,specificationSelectorPath(name),null))).catch(()=>null);
+   const rich=await budgetIndexCache.get(`${generationId}:specifications:${market}`,async()=>readCompressedSelector(specificationDirectory,market,name=>readIndex(generationId,specificationSelectorPath(name),null))).catch(optionalBudgetReadFailure);
    if(rich?.specificationFilterVersion===1)return rich;
   }
-  const compressedDirectory=await compressedBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v3/ready.json',null)).catch(()=>null);
+  const compressedDirectory=await compressedBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v3/ready.json',null)).catch(optionalBudgetReadFailure);
   if(compressedDirectory?.generationId===generationId && compressedDirectory.markets?.[market]){
-   const compressed=await budgetIndexCache.get(`${generationId}:compressed:${market}`,async()=>readCompressedSelector(compressedDirectory,market,name=>readIndex(generationId,`budget-markets-v3/${name}.json`,null))).catch(()=>null);
+   const compressed=await budgetIndexCache.get(`${generationId}:compressed:${market}`,async()=>readCompressedSelector(compressedDirectory,market,name=>readIndex(generationId,`budget-markets-v3/${name}.json`,null))).catch(optionalBudgetReadFailure);
    if(compressed)return compressed;
   }
-  const packedDirectory=await packedBudgetDirectoryCache.get(generationId,()=>readIndex<PackedBudgetDirectory|null>(generationId,'budget-markets-v2/ready.json',null)).catch(()=>null);
+  const packedDirectory=await packedBudgetDirectoryCache.get(generationId,()=>readIndex<PackedBudgetDirectory|null>(generationId,'budget-markets-v2/ready.json',null)).catch(optionalBudgetReadFailure);
   if(packedDirectory?.generationId===generationId && packedDirectory.markets?.[market]){
-   const packed=await budgetIndexCache.get(`${generationId}:packed:${market}`,async()=>verifiedPackedBudgetSelector(packedDirectory,market,await readIndex<PackedBudgetSelector|null>(generationId,`budget-markets-v2/${market}.json`,null))).catch(()=>null);
+   const packed=await budgetIndexCache.get(`${generationId}:packed:${market}`,async()=>verifiedPackedBudgetSelector(packedDirectory,market,await readIndex<PackedBudgetSelector|null>(generationId,`budget-markets-v2/${market}.json`,null))).catch(optionalBudgetReadFailure);
    if(packed)return packed;
   }
-  const directory=await budgetMarketDirectoryCache.get(generationId,()=>readIndex<BudgetMarketDirectory|null>(generationId,'budget-markets-v1/ready.json',null)).catch(()=>null);
+  const directory=await budgetMarketDirectoryCache.get(generationId,()=>readIndex<BudgetMarketDirectory|null>(generationId,'budget-markets-v1/ready.json',null)).catch(optionalBudgetReadFailure);
   if(directory?.version===1 && directory.generationId===generationId && directory.markets?.[market]){
    const part=await budgetIndexCache.get(`${generationId}:${market}`,async()=>{
     const candidate=await readIndex<BudgetCountIndex|null>(generationId,`budget-markets-v1/${market}.json`,null);
     return validBudgetMarketIndex(directory,market,candidate)?candidate:null;
-   }).catch(()=>null);
+   }).catch(optionalBudgetReadFailure);
    if(part)return part;
   }
  }
@@ -2582,7 +2591,7 @@ export async function backfillCatalogBudgetCountIndex(){
  budgetIndexCache.clear();stableBudgetSelections.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
  return {generationId,version:stored.version,verified:true,sourceRows:stored.sourceRows,rows:stored.rows.length,otherRows:stored.otherRows.length,bytes:Buffer.byteLength(JSON.stringify(stored))};
 }
-const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
+const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({name:'catalog_count_cache',maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
 /** Exact filter semantics without sorting, materializing or repricing result cards. */
 async function countCatalogOffersEditorial(params: CatalogSearchParams) {
   const {page: _page, pageSize: _pageSize, sort: _sort, city, ...filters} = params;
@@ -2609,7 +2618,7 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
 }
 // Let six country groups progress together; underlying detail and card reads
 // remain bounded by their separate queues.
-const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:6});
+const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({name:'catalog_filtered_search_cache',maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:6});
 async function searchOffersEditorial(params: CatalogSearchParams, internalPageLimit = 48) {
   const manifest=await readManifest();
   // HTML supplies empty controls and explicit defaults; the API omits them.
@@ -2938,7 +2947,7 @@ export async function readCurrentPublicCatalogProjection(){return withCatalogEdi
 
 export async function readPublicCatalogMarketCounts(){return withCatalogEditorial(()=>readPublicCatalogMarketCountsEditorial());}
 
-const editorialSummaryCache=new DetailReadCache<CatalogBrandSummary>({maxEntries:4,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
+const editorialSummaryCache=new DetailReadCache<CatalogBrandSummary>({name:'catalog_editorial_summary_cache',maxEntries:4,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
 async function readEditorialBrandSummary(){
  const stored=await readCurrentBrandSummary();
  const summary={...stored,brands:Object.fromEntries(Object.entries(stored.brands).map(([key,brand])=>[key,{...withoutJapanAuctionCounts(brand),models:brand.models.map(withoutJapanAuctionCounts).filter(model=>model.count>0)}]).filter(([,brand])=>(brand as CatalogBrandSummary["brands"][string]).count>0))} as CatalogBrandSummary;

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {catalogFailureDiagnostic} from '../apps/web/components/catalog/catalog-failure-diagnostic';
+import {DetailReadCacheQueueError} from '../apps/web/lib/catalog/detail-read-cache';
 
 test('catalog failure retains an actionable code without storage credentials or request data', () => {
   const error = new Error('object_storage_GET_unreachable:https://private.example/user@example.com?token=secret');
@@ -22,4 +23,18 @@ test('unknown messages and arbitrary thrown values are not published', () => {
   const inaccessible = new Error('private text');
   Object.defineProperty(inaccessible, 'name', {get(){throw new Error('must not escape diagnostics');}});
   assert.deepEqual(catalogFailureDiagnostic(inaccessible), {name:'UnknownError',code:'unclassified',locations:[]});
+});
+
+test('queue failures expose only fixed queue identity and bounded operational counters', () => {
+  const error = new DetailReadCacheQueueError('detail_cache_queue_timeout', {cache:'catalog_budget_cards',active:6,queued:18,oldestActiveMs:5210});
+  error.stack = 'Error: detail_cache_queue_timeout\n at search (/app/.next/server/chunks/456.js:1:123)';
+  Object.assign(error.queue,{key:'private-user-input',clientIp:'192.0.2.1'});
+  assert.deepEqual(catalogFailureDiagnostic(error), {name:'Error',code:'detail_cache_queue_timeout',locations:['.next/server/chunks/456.js:1:123'],
+    queue:{cache:'catalog_budget_cards',active:6,queued:18,oldestActiveMs:5210}});
+  const forged = Object.assign(new Error('detail_cache_queue_timeout'),{queue:error.queue});
+  assert.equal('queue' in catalogFailureDiagnostic(forged),false);
+  error.queue = {cache:'private/path',active:6,queued:18,oldestActiveMs:5210};
+  assert.equal('queue' in catalogFailureDiagnostic(error),false);
+  error.queue = {cache:'catalog_budget_cards',active:6,queued:-1,oldestActiveMs:5210};
+  assert.equal('queue' in catalogFailureDiagnostic(error),false);
 });

@@ -4,15 +4,29 @@ on:
     paths:
       - 'apps/web/components/catalog/CatalogLoadMore.tsx'
       - 'apps/web/components/catalog/catalog-load-more-action.tsx'
+      - 'apps/web/components/catalog/LazyRelatedOffers.tsx'
+      - 'apps/web/components/catalog/RelatedOffersContent.tsx'
+      - 'apps/web/lib/catalog/related-offer*.ts'
+      - 'apps/web/app/(public)/cars/offer/**/page.tsx'
+      - 'apps/web/app/api/catalog/related/route.ts'
       - 'tests/browser/catalog-load-more*'
       - 'tests/browser/catalog-navigation-recovery*'
+      - 'tests/browser/related-offers*'
+      - 'tests/related-offers*.test.ts'
       - 'apps/web/app/(public)/api/catalog/search/route.ts'
       - '.github/workflows/verify-catalog-load-more.yml'
   push:
     branches: [fix/saved-offer-and-ui-20260920, fix/catalog-pages-parameter-ux, main, fix/catalog-speed-load-more, fix/catalog-gateway-actions, fix/catalog-hydration-final]
     paths:
       - 'apps/web/components/catalog/CatalogLoadMore.tsx'
+      - 'apps/web/components/catalog/LazyRelatedOffers.tsx'
+      - 'apps/web/components/catalog/RelatedOffersContent.tsx'
+      - 'apps/web/lib/catalog/related-offer*.ts'
+      - 'apps/web/app/(public)/cars/offer/**/page.tsx'
+      - 'apps/web/app/api/catalog/related/route.ts'
       - 'tests/browser/catalog-load-more*'
+      - 'tests/browser/related-offers*'
+      - 'tests/related-offers*.test.ts'
       - 'apps/web/app/(public)/cars/layout.tsx'
       - '.github/workflows/verify-catalog-load-more.yml'
 permissions:
@@ -47,6 +61,10 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/ajes-pagination.mjs
+      - name: Verify deferred related offers and manual failure recovery on mobile and desktop
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/related-offers-check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -54,4 +72,6 @@ jobs:
           path: |
             artifacts/catalog-load-more*
             artifacts/catalog-navigation-recovery
+            artifacts/related-offers/report.json
+            artifacts/related-offers/*.png
           retention-days: 3
