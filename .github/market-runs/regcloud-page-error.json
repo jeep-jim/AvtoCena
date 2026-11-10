@@ -1,6 +1,8 @@
 {
   "logsOnly": true,
-  "failedRelease": "1585eb6f1774d2f3d5f7d47b9b8aeda323ff7aa6",
-  "reason": "Owner-authorized catalog recovery: read stopped failed candidate logs for the exact UAE cutover incident; no requests to suppliers or data changes.",
-  "requestedAt": "2026-11-10T08:08:00Z"
+  "failedRelease": "a87ad8234ba62a00d313c886d24ce003564531ba",
+  "since": "2026-11-10T12:00:25Z",
+  "until": "2026-11-10T12:01:20Z",
+  "reason": "Read exact closed post-switch HTTP500 window in stopped tested candidate; no restart, provider requests or data changes.",
+  "requestedAt": "2026-11-10T12:04:00Z"
 }
