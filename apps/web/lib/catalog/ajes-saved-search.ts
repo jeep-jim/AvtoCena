@@ -2,6 +2,7 @@ import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 import {enrichJapanDrive} from './japan-drive';
+import {matchesJapanSearchChassis} from './japan-chassis-search';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 
 /** Recover bounded saved Japan candidates, always labelled partial; never claim a complete catalog.
@@ -24,7 +25,7 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
    &&(!models&&!families||Boolean(models?.includes(normalized(lot.model)))||Boolean(families?.some(model=>normalized(lot.model).startsWith(model+' '))))
    &&(!drives||drives.includes(enrichJapanDrive({drive:undefined as string|undefined,market:'japan',make:lot.make,model:lot.model,year:lot.year,trim:lot.trim,chassisCode:lot.chassisCode,operational:{raw:{sourceDrive:lot.sourceDrive}}},driveIndex).drive||''))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
-   &&(!input.chassis||normalized(lot.chassisCode)===normalized(input.chassis))
+   &&(!input.chassis||matchesJapanSearchChassis(lot.chassisCode,input.chassis))
    &&(!input.frameNumber||normalized(lot.frameNumber)===normalized(input.frameNumber))
    &&(!input.lotNumber||String(lot.lot).trim()===input.lotNumber.trim());
  });

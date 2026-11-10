@@ -8,7 +8,7 @@ export class BudgetSortOrderCache{
  private indexes=new WeakMap<object,number>();private nextIndex=0;
  private memberships=new WeakMap<BudgetCountRow[],Promise<string>>();
  private orders:DetailReadCache<Uint32Array|null>;
- constructor(now=Date.now){this.orders=new DetailReadCache({maxEntries:32,maxBytes:32*1024*1024,ttlMs:3600_000,concurrency:4,sizeOf:value=>value?.byteLength||0,shouldCache:value=>value!==null,now});}
+ constructor(now=Date.now){this.orders=new DetailReadCache({name:'catalog_budget_sort_orders',maxEntries:32,maxBytes:32*1024*1024,ttlMs:3600_000,concurrency:4,sizeOf:value=>value?.byteLength||0,shouldCache:value=>value!==null,now});}
  clear(){this.orders.clear();this.indexes=new WeakMap();this.memberships=new WeakMap();this.nextIndex=0;}
  indexKey(index:object){let key=this.indexes.get(index);if(key===undefined){key=++this.nextIndex;this.indexes.set(index,key);}return key;}
  async get(context:BudgetSortContext,rows:BudgetCountRow[],load:()=>Promise<Uint32Array|null>){

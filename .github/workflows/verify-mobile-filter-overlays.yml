@@ -1,5 +1,10 @@
 name: Verify mobile catalog filter overlays
 on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/CatalogFilters.tsx'
+      - 'tests/browser/mobile-filter-*'
+      - '.github/workflows/verify-mobile-filter-overlays.yml'
   push:
     branches: [fix/idea5-search-performance, fix/catalog-filter-continuity-20260921, fix/staff-inbox-ui-20260920, fix/mobile-catalog-overlay-menus-20260913, fix/catalog-filter-readiness, fix/spec-labels-filter-ready-20260920, fix/mobile-filter-notice-20260920, fix/catalog-projection-reuse-20260920, main]
     paths:

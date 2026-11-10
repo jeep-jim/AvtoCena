@@ -25,9 +25,11 @@ test('unrenderable candidates are skipped and each recommendation group is bound
  assert.equal(groups.sameModel.length,4);assert.deepEqual(calls,[4,4]);assert.equal(groups.sameModel[0].id,'model-4');
 });
 
-test('detail recommendations retain trusted source identity after publicOffer sanitization',()=>{
- const page=readFileSync('apps/web/app/(public)/cars/offer/[id]/page.tsx','utf8');
- assert.match(page,/<SimilarOffers markets=\{dealer\?\.markets\} current=\{\{\.\.\.raw,sourceId:offer.sourceId,offerType:offer.offerType\}\} \/>/);
+test('lazy recommendations retain authoritative source identity after publicOffer sanitization',()=>{
+ const route=readFileSync('apps/web/app/api/catalog/related/route.ts','utf8');
+ assert.match(route,/readOfferDetailForPage\(id\)/);
+ assert.match(route,/resolveOfferDisplay\(stored\)/);
+ assert.match(route,/readRelatedOffers\(\{\.\.\.display.raw,sourceId:display.offer.sourceId,offerType:display.offer.offerType\}/);
 });
 
 test('published stock DTOs without private provenance remain eligible in recommendations',async()=>{

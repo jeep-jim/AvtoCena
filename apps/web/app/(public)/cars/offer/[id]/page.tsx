@@ -1,3 +1,4 @@
+import {LazyRelatedOffers} from "@/components/catalog/LazyRelatedOffers";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import {OfferLeadForm} from "@/components/catalog/OfferLeadForm";
@@ -5,8 +6,6 @@ import {SupplierUnavailableOffer} from '@/components/catalog/SupplierUnavailable
 import {readOfferDetailForPage} from '@/lib/catalog/offer-page-data';
 import {missingElectrifiedSpecifications} from '@/lib/autobot/missing-specifications';
 import {ajesPowerEstimateHp} from '@/lib/catalog/ajes-power-estimate';
-import {readAjesPublic} from '@/lib/catalog/ajes-public';
-import {readAjesCount} from '@/lib/catalog/ajes-catalog';
 import {getOfferFromCurrentShard as getEditorialSourceOffer} from "@/lib/catalog/storage";
 import {CatalogEditorialEditor} from "@/components/catalog/CatalogEditorialEditor";
 import {canEditCatalog} from "@/lib/catalog/editorial-access";
@@ -24,11 +23,6 @@ import { canCopyOffer } from "@/lib/offer-copy";
 import { directOfferScenario } from "@/lib/catalog/yandex-direct-scenario";
 import { offerPath, offerRouteId } from "@/lib/catalog/offer-url";
 import { permanentRedirect } from "next/navigation";
-import { selectRelatedOfferGroups, isRenderableRelatedOffer } from "@/lib/catalog/related-offer-selection";
-import { readRelatedModelFamily } from "@/lib/catalog/related-model-family";
-import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
-import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
-import { PUBLIC_CATALOG_MARKETS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { isGreenCornerOffer } from "@/lib/catalog/green-corner-contract";
 import { OfferUpdatedStatus } from "@/components/catalog/OfferUpdatedStatus";
 import { protectedPhotoUrl } from "@/lib/catalog/photo-proxy-policy";
@@ -38,7 +32,7 @@ import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation"
 import { PageLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
 import {restoreProAuctionsPower,proAuctionsReportedVolume,proAuctionsHybridDraft} from "@/lib/catalog/proauctions-source-parameters";
 import { businessPaymentPlan } from "../../../../../../../packages/engine/src/calculation/calculateAvtocena";
-import { applyActiveBusinessPricing, applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
+import { applyActiveBusinessPricing } from "@/lib/catalog/live-business-pricing";
 import { customerPriceBreakdown } from "@/lib/catalog/customer-price-breakdown";
 import { recyclingPowerInfo, type RecyclingPowerInfo } from "@/lib/catalog/recycling-power";
 import { RecyclingFeeHelp } from "@/components/catalog/RecyclingPower";
@@ -56,17 +50,15 @@ import { offerSpecificationGroups } from "@/lib/catalog/offer-specification-grou
 import { assessJapanExportRestriction, japanRestrictionDescription } from "@/lib/catalog/japan-export-restriction";
 import { hasModificationSelection, withoutDeliveredPrice } from "@/lib/catalog/modification-contract";
 import { calculateSelectedModification, conditionalModificationRub } from "@/lib/catalog/modification-recovery";
-import { Suspense, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import {DealerLink as Link,DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
 import {resolveDealerBrowsingContext} from "@/lib/dealers/resolve-browsing-context";
 import { UnavailableOffer } from "@/components/catalog/UnavailableOffer";
 import { unavailableOfferRecord } from "@/lib/catalog/offer-availability";
 import { money } from "@/lib/avtocena";
-import { CatalogCard } from "@/components/catalog/CatalogCard";
 
 import { VehicleResearchLink } from "@/components/catalog/VehicleResearchLink";
 import { OfferContactActionsStyles, OfferDesktopActions, OfferMobileActions } from "@/components/catalog/OfferContactActions";
-import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { AuctionResultPrice, PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
@@ -84,7 +76,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { getUnavailableOffer, getOfferFromCurrentProjection, getOfferFromCurrentShard, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { getUnavailableOffer, getOfferFromCurrentProjection, getOfferFromCurrentShard, isJapanCatalogOfferId } from "@/lib/catalog/storage";
 
 // Offer inventory changes independently from web deploys. Never persist a
 // not-found render for an ID that can become available in a later generation.
@@ -117,52 +109,6 @@ function safeExternalUrl(value: unknown) {
   } catch {
     return "";
   }
-}
-
-async function SimilarOffers({ current, markets }: { current: any; markets?:string[] }) {
-  const make = String(current.make || "").trim();
-  const familyModel = await readRelatedModelFamily(make, String(current.model || "").trim());
-  const greenCurrent = isGreenCornerOffer(current);
-  const presented = presentCatalogOffer(current);
-  const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
-  const otherMarkets = PUBLIC_CATALOG_MARKETS.filter(market => market !== current.market);
-  // Bounded model queries stream behind the primary offer; failures stay isolated by market.
-  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'||params.market==='korea'||(/^ajes-(?:korea|china)-/.test(String(current.id))&&params.market===current.market)
-    ? readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(/^ajes-(?:stats|korea|china)-/.test(String(current.id))?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
-    : searchOffers(params)).catch(error => {
-    console.error("offer_similar_search_failed", error); return {items:[],total:0};
-  });
-  const [modelResult, marketResult, crossResults, green] = await Promise.all([
-    familyModel && make ? safeSearch({market:current.market,make,model: familyModel,pageSize:48,sort:"updatedAt"}) : Promise.resolve({items:[],total:0}),
-    safeSearch({market:current.market,pageSize:48,sort:"updatedAt"}),
-    Promise.all(otherMarkets.map(async market => ({market,...(familyModel && make ? await safeSearch({market,make,model: familyModel,pageSize:24,sort:"updatedAt"}) : {items:[],total:0})}))),
-    familyModel && make ? readGreenCorner().catch(()=>null) : Promise.resolve(null),
-  ]);
-  const greenModels = green ? filterGreenCorner(green.items,{make,model:familyModel}).map(publicGreenOffer) : [];
-  const {stockModels,sameModel,crossMarketGroups,marketRows} = await selectRelatedOfferGroups({
-    current,modelRows:modelResult.items,marketRows:marketResult.items,crossResults,
-    greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
-    price:applyActiveBusinessPricingBatch,renderable:isRenderableRelatedOffer,
-  });
-  const liveStock=/^ajes-(?:korea|china)-/.test(String(current.id));
-  const japanTotal=current.market==='japan'||liveStock?await readAjesCount(JSON.stringify({market:current.market})).catch(()=>null):null;
-  const marketTotal=liveStock?japanTotal:current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0)):Math.max(0,Number(marketResult.total||0));
-  const modelParams = new URLSearchParams({market:String(current.market||""),make,model:familyModel});
-  const marketParams = new URLSearchParams({market:String(current.market||"")});
-  if(current.market==='japan')marketParams.set('stock','all');
-  if(/^ajes-(?:korea|china)-/.test(String(current.id))){marketParams.set('source','ajes');modelParams.set('source','ajes');}
-  const marketLabel = String(presented.marketLabel || current.market || "рынка");
-  const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={publicOffer(item)} compact />)}</div>;
-  return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>
-    {stockModels.length && (!markets||markets.includes("japan")) ? <section data-related-section="stock-model"><div className="flex items-end justify-between gap-3"><h2 className="ac-green-heading text-[26px] font-black md:text-4xl">{modelTitle} · В наличии</h2><Link href={`/cars/green?${modelParams}`} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>{rail(stockModels)}</section> : null}
-    {sameModel.length ? <section data-related-section="market-model"><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle} · {marketLabel}</h2><Link href={`/cars?${modelParams}${current.market==='japan'?'&stock='+ (greenCurrent?'auction':'all'):''}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(sameModel)}</section> : null}
-    {crossMarketGroups.length ? <section data-related-section="other-markets"><h2 className="text-[26px] font-black md:text-4xl">{modelTitle} на других рынках</h2><div className="space-y-8">{crossMarketGroups.filter(group=>!markets||markets.includes(group.market)).map(group=><section key={group.market}><div className="mt-5 flex items-center justify-between gap-3"><h3 className="flex items-center gap-2 text-xl font-black"><CatalogMarketFlag market={group.market} className="h-5 w-7" />{CATALOG_MARKET_LABELS[group.market as keyof typeof CATALOG_MARKET_LABELS]}</h3><Link href={`/cars?${new URLSearchParams({make,model:familyModel,market:group.market,...(group.market==='japan'?{stock:'all'}:{})})}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(group.items)}</section>)}</div></section> : null}
-    <section data-related-section="market"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal===null?"—":marketTotal.toLocaleString("ru-RU")}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{marketRows.length?rail(marketRows):<p className="text-[var(--ac-muted)]">Другие предложения появятся после обновления каталога.</p>}</section>
-  </div>;
-}
-
-function SimilarOffersFallback() {
-  return <section className="mt-10 md:mt-14" aria-label="Загружаем похожие предложения"><div className="h-9 w-52 animate-pulse rounded-xl bg-white/[0.08]" /><div className="mt-5 grid grid-cols-2 gap-2.5 md:grid-cols-4">{Array.from({ length: 4 }, (_, index) => <div key={index} className="min-h-64 animate-pulse rounded-[1.35rem] bg-white/[0.045]" />)}</div></section>;
 }
 
 type BreakdownLine = { note?: string; id?: string; title: string; amountRub: number };
@@ -441,7 +387,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
       </div>
 
 
-      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers markets={dealer?.markets} current={{...raw,sourceId:offer.sourceId,offerType:offer.offerType}} /></Suspense>
+      <LazyRelatedOffers key={storedOffer.id} id={storedOffer.id} catalogHref={marketHref} />
       {!retro&&<PageLeadBanner kind="offer" />}
     </section>
     <OfferContactActionsStyles />

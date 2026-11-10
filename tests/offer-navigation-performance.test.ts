@@ -25,19 +25,13 @@ test("offer navigation swaps the catalog for an immediate route skeleton", () =>
   assert.match(loading, /Загружаем карточку автомобиля/);
 });
 
-test("similar offers stream after the primary offer instead of blocking it", () => {
-  const offerPage = page.slice(page.indexOf("export default async function OfferPage"));
-  const beforeReturn = offerPage.slice(0, offerPage.indexOf("return <main"));
-  assert.doesNotMatch(beforeReturn, /await searchOffers/);
-  assert.match(page, /<Suspense fallback=\{<SimilarOffersFallback \/>\}>/);
-  assert.match(page, /async function SimilarOffers/);
-  assert.match(page, /const familyModel/);
-  assert.match(page, /new URLSearchParams/);
-  assert.match(page, /Ещё \{modelTitle\}/);
-  assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
-  assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
-  assert.match(page, /marketTotal===null\?"—":marketTotal\.toLocaleString\("ru-RU"\)/);
-  assert.match(page, /model: familyModel/);
+test("opening an offer does not start secondary market searches on the server", () => {
+  assert.match(page, /<LazyRelatedOffers /);
+  assert.doesNotMatch(page, /async function SimilarOffers|readAjesPublic|readAjesCount|readRelatedModelFamily|searchOffers/);
+  const content = fs.readFileSync("apps/web/components/catalog/RelatedOffersContent.tsx", "utf8");
+  assert.match(content, /data-related-section="market-model"/);
+  assert.match(content, /data-related-section="other-markets"/);
+  assert.match(content, /marketTotal === null/);
 });
 
 test("metadata and page share one memoized offer lookup per request", () => {

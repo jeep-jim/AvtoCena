@@ -155,18 +155,30 @@ def sample(base,path,kind,release):
  validate(path,kind,status,body,release)
  return elapsed
 
+def sample_with_context(base,path,kind,release,stage):
+ # Initial preparation used to fail without identifying its route. Report only
+ # the configured public path and exception metadata; never log response bodies,
+ # headers, full request URLs or exception messages that may contain private data.
+ try:
+  return sample(base,path,kind,release)
+ except Exception as error:
+  status=error.code if isinstance(error,urllib.error.HTTPError) else None
+  print(json.dumps({'performanceGate':'failure','stage':stage,'path':path,'kind':kind,
+   'status':status,'error':type(error).__name__,'functionalPassed':False}),flush=True)
+  raise
+
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('base');parser.add_argument('release');args=parser.parse_args()
  # Explicit preparation, then measurements. No swallowed timeouts/empty states.
  home_flag=os.environ.get('AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG','0')
  if home_flag not in ('0','1'):raise ValueError('release_home_catalog_flag_invalid')
  routes=release_routes(os.environ.get('AVTOCENA_RELEASE_MARKETS',''),home_flag=='1')
- for path,limit,kind in routes:sample(args.base,path,kind,args.release)
+ for path,limit,kind in routes:sample_with_context(args.base,path,kind,args.release,'preparation')
  slow=0
  for phase,delay in PHASE_DELAYS:
   if delay:time.sleep(delay)
   for path,limit,kind in routes:
-   elapsed=sample(args.base,path,kind,args.release)
+   elapsed=sample_with_context(args.base,path,kind,args.release,phase)
    print(json.dumps({'performanceGate':phase,'path':path,'seconds':round(elapsed,4),'ceiling':limit,'passed':elapsed<=limit,'functionalPassed':True,'latencyBlocking':False}),flush=True)
    if elapsed>limit:
     slow+=1

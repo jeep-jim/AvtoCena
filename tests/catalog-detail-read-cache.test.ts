@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { DetailReadCache } from '../apps/web/lib/catalog/detail-read-cache';
+import { DetailReadCache, DetailReadCacheQueueError } from '../apps/web/lib/catalog/detail-read-cache';
 
 test('detail cache evicts by bytes and recency and does not retain oversized blocks', async () => {
   const cache = new DetailReadCache<string>({maxEntries: 8, maxBytes: 12, ttlMs: 60, concurrency: 2});
@@ -125,4 +125,82 @@ test('serialized details can wait for their predecessor without extending list q
   t.mock.timers.tick(39999); releaseDetail(); await first;
   assert.equal(await second, 'b');
   releaseList(); await list;
+});
+
+test('contention diagnostics retain caller stacks and current queue ages without lookup data', async t => {
+  t.mock.timers.enable({apis:['setTimeout']});
+  let now = 100;
+  const cache = new DetailReadCache<string>({name:'catalog_test_reads', maxEntries:8, maxBytes:1000, ttlMs:10000,
+    concurrency:2, maxQueued:1, queueTimeoutMs:50, now:()=>now});
+  const releases = new Map<string, () => void>();
+  const active = (key:string) => cache.get(key, async () => {
+    await new Promise<void>(resolve => releases.set(key, resolve));
+    return key;
+  });
+  const first = active('a');
+  now = 130;
+  const second = active('b');
+  let queuedCalls = 0;
+  function queuedCaller() {
+    return cache.get('private-query=customer@example.test', async () => {queuedCalls++; return 'must not run';}, '192.0.2.1');
+  }
+  const waiting = queuedCaller();
+  const timedOut = assert.rejects(waiting, error => {
+    assert.ok(error instanceof DetailReadCacheQueueError);
+    assert.equal(error.message, 'detail_cache_queue_timeout');
+    assert.equal(error.name, 'Error');
+    assert.deepEqual(error.queue, {cache:'catalog_test_reads', active:2, queued:1, oldestActiveMs:80});
+    assert.match(error.stack!, /queuedCaller/);
+    assert.doesNotMatch(error.stack!, /Timeout\._onTimeout/);
+    assert.doesNotMatch(JSON.stringify(error), /customer|private-query|192\.0\.2\.1/);
+    return true;
+  });
+  function queueFullCaller() { return cache.get('another-private-key', async () => 'must not run'); }
+  await assert.rejects(queueFullCaller(), error => {
+    assert.ok(error instanceof DetailReadCacheQueueError);
+    assert.equal(error.message, 'detail_cache_queue_full');
+    assert.deepEqual(error.queue, {cache:'catalog_test_reads', active:2, queued:1, oldestActiveMs:30});
+    assert.match(error.stack!, /queueFullCaller/);
+    return true;
+  });
+  now = 180;
+  t.mock.timers.tick(50);
+  await timedOut;
+  assert.equal(queuedCalls, 0);
+  releases.get('a')!(); releases.get('b')!();
+  await Promise.all([first, second]);
+  assert.equal(await cache.get('private-query=customer@example.test', async () => 'retry', '192.0.2.1'), 'retry');
+
+  now = 200;
+  const fresh = active('fresh');
+  now = 220;
+  const next = active('next');
+  const later = assert.rejects(cache.get('later', async () => 'must not run'), error => {
+    assert.ok(error instanceof DetailReadCacheQueueError);
+    assert.deepEqual(error.queue, {cache:'catalog_test_reads', active:2, queued:1, oldestActiveMs:70});
+    return true;
+  });
+  now = 270;
+  t.mock.timers.tick(50);
+  await later;
+  releases.get('fresh')!(); releases.get('next')!();
+  await Promise.all([fresh, next]);
+});
+
+test('queue labels reject dynamic paths and clear retains the actual active-work age', async t => {
+  t.mock.timers.enable({apis:['setTimeout']});
+  let now = 0, release!: () => void;
+  const cache = new DetailReadCache<string>({name:'https://private.test/?token=secret',maxEntries:1,maxBytes:100,ttlMs:100,
+    concurrency:1,maxQueued:0,now:()=>now});
+  const first = cache.get('same-key', async () => {await new Promise<void>(resolve => release = resolve);return 'old';});
+  now = 25;
+  cache.clear();
+  await assert.rejects(cache.get('same-key', async () => 'new'), error => {
+    assert.ok(error instanceof DetailReadCacheQueueError);
+    assert.deepEqual(error.queue,{cache:'unnamed',active:1,queued:0,oldestActiveMs:25});
+    assert.doesNotMatch(JSON.stringify(error),/private|token|secret/);
+    return true;
+  });
+  release(); await first;
+  assert.equal(await cache.get('same-key', async () => 'new'), 'new');
 });

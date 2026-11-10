@@ -1,6 +1,7 @@
 import type {BudgetCountIndex} from './budget-count-index';
 import {createHash} from 'node:crypto';
 import {splitBudgetMarketIndex} from './budget-market-index';
+import {isDetailReadCacheQueueError} from './detail-read-cache';
 import {compressBudgetSelector,packBudgetSelector,decompressBudgetSelector,unpackBudgetSelector,verifiedCompressedBudgetSelector,type CompressedBudgetDirectory,type SelectorChunk} from './budget-selector-codec';
 
 export const MAX_PUBLISHED_SELECTOR_BYTES=4*1024*1024;
@@ -56,7 +57,12 @@ export async function readCompressedSelector(directory:CompressedBudgetDirectory
   }
   if(!result||result.rows.length!==entry.rows||result.otherRows!.length!==entry.otherRows||result.sourceRows!==entry.rows+entry.otherRows)return null;
   return result;
- }catch{return null;}
+ }catch(error){
+  // Congestion does not invalidate this representation. Starting an older,
+  // larger read in response would add work to the already saturated queue.
+  if(isDetailReadCacheQueueError(error))throw error;
+  return null;
+ }
 }
 /** Chunks are content addressed. A failed upload/readback cannot replace readiness. */
 export async function publishSelectorMarket(index:BudgetCountIndex,market:string,read:Read,write:(name:string,value:any)=>Promise<void>){
