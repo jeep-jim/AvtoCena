@@ -83,7 +83,10 @@ try{
     await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();if(name==='bodyType'){assert.equal(await menu.getByRole('button',{name:'Седан',exact:true}).isVisible(),true);assert.equal(await menu.getByRole('button',{name:'Универсал',exact:true}).isVisible(),true);}const metric=await menuGeometry(page,root,menu,(await row.boundingBox()).width);
     assert.deepEqual(await positions(sheet),before,'dropdown cannot push any closed filter or range row');
     assert.equal(await sheet.locator('.ac-filter-dropdown').count(),1);
-    assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
+    if(name==='fuel'){
+     assert.equal(await menu.getByRole('checkbox').count(),5);
+     assert.equal(await menu.getByRole('button',{name:/^Любое топливо/}).isVisible(),true);
+    }else assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
     const gap=await row.evaluate(el=>parseFloat(getComputedStyle(el).columnGap));assert.ok(Math.abs(metric.gap-gap)<2,'gap must match the tile gap');
     if(width===390&&(name==='bodyType'||name==='fuel'))await page.screenshot({path:`${out}/${theme}-${width}-${name}.png`});
     await root.locator(':scope > button').click();assert.equal(await root.locator('.ac-filter-dropdown').count(),0);checks.push({name,...metric});
@@ -112,7 +115,7 @@ try{
    await page.goto(`${origin}/cars?theme=light`);const sheet=await openSheet(page);
    const status=sheet.locator('.ac-mobile-filter-header [role="status"]');
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:'{}',text:'321'}}})));
-   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 321'));
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.trim()==='321');
    assert.equal(await sheet.locator('input[name="make"]').locator('..').locator(':scope > button svg.ac-filter-leading-icon').count(),0);
    assert.equal(await sheet.locator('.ac-model-filter-icon').count(),0);
    const fuel=sheet.locator('input[name="fuel"]').locator('..');
@@ -121,7 +124,7 @@ try{
    const close=sheet.getByRole('button',{name:'Свернуть фильтры',exact:true});
    assert.equal(await close.textContent(),'');assert.equal(await close.locator('svg').count(),1);
    assert.notEqual(await close.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
-   await fuel.locator(':scope > button').click();await fuel.getByRole('button',{name:'Дизель',exact:true}).click();
+   await fuel.locator(':scope > button').click();await fuel.getByRole('checkbox',{name:'Дизель',exact:true}).check();
    await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='diesel');
    assert.match(await status.textContent(),/Было: 321/);
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{initial:{fuel:'diesel'},count:{queryKey:'{}',text:'999'}}})));
@@ -129,11 +132,11 @@ try{
    assert.equal((await status.textContent()).includes('999'),false);
    const requestCount=requests.length;const viewRenders=await page.locator('[data-view-render-count]').getAttribute('data-view-render-count');
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:JSON.stringify({fuel:'diesel'}),text:'17'}}})));
-   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 17'));
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.trim()==='17');
    assert.equal(requests.length,requestCount,'streamed count must not issue another request');
    assert.equal(await page.locator('[data-view-render-count]').getAttribute('data-view-render-count'),viewRenders,'count-only updates must not rerender view consumers');
    await close.click();await sheet.waitFor({state:'hidden'});await openSheet(page);
-   assert.equal(await sheet.locator('input[name="fuel"]').inputValue(),'diesel');assert.match(await status.textContent(),/Найдено: 17/);
+   assert.equal(await sheet.locator('input[name="fuel"]').inputValue(),'diesel');assert.equal((await status.textContent()).trim(),'17');
    await page.screenshot({path:`${out}/counter-collapse-light.png`,fullPage:true});
    await page.evaluate(()=>document.documentElement.dataset.theme='dark');await page.screenshot({path:`${out}/counter-collapse-dark.png`,fullPage:true});
    results.push({streamedCounter:true,staleQueryIgnored:true,extraCountRequests:0,collapsePreservesFilters:true,offerIcons:true,boldRestored:true});save();
