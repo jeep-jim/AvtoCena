@@ -32,7 +32,7 @@ for name, base, path in [('local-health',local,'/api/health'),('local-blog-cold'
                 result.update(ok=health.get('ok'),releaseSha=health.get('releaseSha'))
             else:
                 html=body.decode('utf-8')
-                result.update(blogHeading='Автоблог</h1>' in html,streamError=bool(re.search(r'\b(?:NEXT_HTTP_ERROR_FALLBACK|NEXT_REDIRECT|digest)\b',html)))
+                result.update(blogHeading='Автоблог</h1>' in html,incompleteStream='</html>' not in html or '$RX(' in html)
     except Exception as exc:
         result['error']=type(exc).__name__
     result['seconds']=round(time.monotonic()-start,3)
