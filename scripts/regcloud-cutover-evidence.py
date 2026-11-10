@@ -44,6 +44,12 @@ for label,name in [('failed','avtocena-release-'+release[:12]),('production','av
         with tarfile.open(fileobj=io.BytesIO(archive)) as files:
             source=files.extractfile(files.getmembers()[0]).read().decode('utf8')
         print('CUTOVER_STATIC_CALLER',source[2445:3845],flush=True)
+    if label=='failed' and release=='a87ad8234ba62a00d313c886d24ce003564531ba':
+        for chunk,position in [('823',10468),('2279',5609),('7272',3145)]:
+            archive=subprocess.run(['docker','cp',name+':/app/apps/web/.next/server/chunks/'+chunk+'.js','-'],capture_output=True,timeout=25,check=True).stdout
+            with tarfile.open(fileobj=io.BytesIO(archive)) as files:
+                source=files.extractfile(files.getmembers()[0]).read().decode('utf8')
+            print('CUTOVER_STATIC_FRAME',json.dumps({'chunk':chunk,'position':position,'code':source[max(0,position-700):position+600]}),flush=True)
     grouped=collections.defaultdict(list)
     for line in logs.splitlines():
         m=re.search(r'catalog_storage_read (\{[^\n]+\})',line)
@@ -55,5 +61,26 @@ for label,name in [('failed','avtocena-release-'+release[:12]),('production','av
         category=next((label for needle,label in [('encyclopedia','encyclopedia'),('projection','projection'),('partner-cache/ajes','ajes-cache'),('budget','budget'),('overview','overview'),('price','prices'),('editorial','editorial')] if needle in path),'other-catalog')
         grouped[category].append(ms)
     print('CUTOVER_STORAGE',json.dumps({'target':label,'groups':[{ 'category':k,'readsOver250ms':len(v),'maxMs':max(v),'meanMs':round(sum(v)/len(v),1)} for k,v in sorted(grouped.items())]}),flush=True)
-print('CURRENT_RESOURCES',run(['docker','stats','--no-stream','--format','memory={{.MemUsage}} cpu={{.CPUPerc}}','avtocena-production']).strip(),flush=True)
+# Aggregate a closed public-access window; never emit addresses, raw queries or agents.
+from datetime import datetime,timezone
+traffic=collections.Counter()
+access=run(['tail','-n','6000','/var/log/nginx/access.log'])
+for line in access.splitlines():
+    match=re.search(r'\[([^\]]+)\] "(GET|POST|HEAD) ([^ ]+) HTTP/[^" ]+" ([0-9]{3})',line)
+    if not match:continue
+    try:stamp=datetime.strptime(match[1],'%d/%b/%Y:%H:%M:%S %z').astimezone(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    except ValueError:continue
+    if not since<=stamp<=until:continue
+    url=match[3];path=url.split('?')[0]
+    if path.startswith('/cars/offer/'):bucket='offer'
+    elif path.startswith('/cars'):bucket='catalog'
+    elif path.startswith('/api/catalog/'):bucket='catalog-api'
+    elif path.startswith('/_next/'):bucket='assets'
+    elif path.startswith('/blog'):bucket='blog'
+    elif path=='/':bucket='home'
+    else:bucket='other'
+    robot=bool(re.search(r'bot|crawler|spider',line.split('"')[-2],re.I)) if line.count('"')>=6 else False
+    traffic[(bucket,match[4],robot,'_rsc=' in url)]+=1
+print('CUTOVER_ACCESS_COUNTS',json.dumps([{'routeGroup':k[0],'status':k[1],'robot':k[2],'rsc':k[3],'requests':v} for k,v in traffic.items()]),flush=True)
+print('CURRENT_RESOURCES' ,run(['docker','stats','--no-stream','--format','memory={{.MemUsage}} cpu={{.CPUPerc}}','avtocena-production']).strip(),flush=True)
 print('CUTOVER_READ_ONLY_COMPLETE',flush=True)
