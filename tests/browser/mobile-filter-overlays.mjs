@@ -68,7 +68,7 @@ try{
       await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='2000000');
       const market=desktop.locator('input[name="market"]').locator('..');await market.locator(':scope > button').click();
       await market.getByRole('button',{name:'Корея',exact:true}).click();
-      await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='korea');
+      await page.waitForFunction(()=>location.pathname==='/cars/korea'&&!new URLSearchParams(location.search).has('market'));
       assert.equal(new URL(page.url()).searchParams.get('budget'),'2000000');
       assert.equal(new URL(page.url()).searchParams.get('engineTo'),'1498');
     }

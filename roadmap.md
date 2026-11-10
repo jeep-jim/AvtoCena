@@ -24310,3 +24310,10 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 
 - Владелец ответил «Подтверждаю» на конкретный запрос отправить подготовленную ветку fix/catalog-queue-20261110 в публичный jeep-jim/AvtoCena, создать PR и установить только после успешной сборки/обязательных проверок. Продолжаем эти действия без повторного запроса разрешения.
 - Перед отправкой fetch подтвердил неизменный main868c6c42. Один bounded public health: HTTP200, exact008643e8929901e366d079b0d5c394e9b4df2350, внешний полный ответ7,092180с. Новый код ещё не установлен; внешний замер не равен времени сервера. После push обязательны точный CI head, браузеры/сборка, один штатный deploy и проверка установленной версии.
+
+
+### 10.11.2026 — продолжение после обрыва, PR1729 и адресные browser checks
+
+- Владелец прямо разрешил исправления и публикацию в текущем чате. Найден уже отправленный PR1729/head9229f9b3. CI validate SUCCESS, включая production build и полный suite; это ещё не установка. Последний подтверждённый production008643e8.
+- Два browser workflow остановлены на устаревших ожиданиях URL: /cars?market=japan&page=2 вместо /cars/japan?page=2; market=korea в query вместо /cars/korea. Канонизация подтверждена действующим catalog-routes.ts/dealerBrowsingHref и9 route/path regressions PASS. Исправлены ожидания этих двух fixtures и аналогичная проверка related-market перехода, без изменения runtime/интерфейса и ослабления функциональных проверок.
+- node syntax/diff PASS. Локальный Chromium запрещён средой (socket/ptrace), browser PASS не заявляется. Новый exact CI обязателен перед merge; далее один штатный deploy с сохранением functional gates/rollback и отдельным exact installed/live подтверждением.

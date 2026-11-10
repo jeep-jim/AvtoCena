@@ -1,3 +1,13 @@
+# Продолжение восстановления — 10.11.2026
+
+- Владелец в текущем чате прямо разрешил исправления и публикацию. PR1729 уже открыт, исходный head9229f9b368617dcf858cde6cccb823c57dc59034; подготовка через connected GitHub завершена в предыдущем чате.
+- CI validate исходного head SUCCESS, включая полный suite и production build. Browser city/owner/UI checks SUCCESS. Два browser workflow FAIL: catalog-load-more ожидал старый /cars?market=japan&page=2 вместо действующего /cars/japan?page=2; mobile-filter ожидал market=korea в query вместо /cars/korea.
+- Исправлены только ожидания canonical URL в этих fixtures и в следующем related-market navigation case. Проверки города/бюджета/объёма, количества карточек, retry, истории, геометрии и запрета дополнительных запросов сохранены. 9 реальных route/path regressions PASS; syntax/diff PASS.
+- Локальный Chromium снова не запускается: socket/ptrace denied. Browser PASS требует нового CI. Git push недоступен из-за отсутствия credentials; запись через авторизованный connected GitHub.
+- Не объединять PR до зелёных обязательных CI точного нового head. Затем один штатный deploy с unchanged functional gates/rollback; проверить installed SHA отдельно. Последняя подтверждённая production008643e8, новый deploy пока не начат.
+
+## Сохранённая предыдущая точка (история)
+
 # Текущее восстановление АвтоЦены — 10.11.2026
 
 ## Текущая точка продолжения
