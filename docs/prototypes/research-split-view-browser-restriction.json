@@ -1,0 +1,9 @@
+{
+  "messages": [
+    "Refused to frame 'https://alice.yandex.ru/' because an ancestor violates the following Content Security Policy directive: \"frame-ancestors yandex.ru *.yandex.ru sandbox.toloka.yandex.com sandbox.iframe-toloka.com iframe-toloka.com yang.yandex-team.ru iframe-yang.yandex\".\n"
+  ],
+  "frames": [
+    "http://127.0.0.1:8765/research-split-view.html",
+    ""
+  ]
+}
