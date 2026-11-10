@@ -1,12 +1,10 @@
 import importlib.util,json,pathlib,unittest,io,contextlib,sys
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('gate','scripts/regcloud-performance-gate.py');gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
-OWNER_BMW_ROUTE='/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub&city=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0'
 class GateTests(unittest.TestCase):
  def test_live_candidate_uses_observed_ssh_peer_without_invented_ip(self):
   with patch.dict(gate.os.environ,{'SSH_CONNECTION':'8.8.4.4 54321 151.248.113.177 22'}):
    self.assertEqual(gate.probe_headers('http://127.0.0.1:3001','/cars?market=korea','catalog')['X-Real-IP'],'8.8.4.4')
-   self.assertEqual(gate.probe_headers('http://127.0.0.1:3001','/cars/korea/Hyundai/TUCSON','catalog')['X-Real-IP'],'8.8.4.4')
    self.assertNotIn('X-Real-IP',gate.probe_headers('https://avtocena.com','/cars?market=korea','catalog'))
    self.assertNotIn('X-Real-IP',gate.probe_headers('http://127.0.0.1:3001','/api/health','health'))
   for connection in ['', '127.0.0.1 123 127.0.0.1 22','invalid 123 151.248.113.177 22']:
@@ -33,18 +31,6 @@ class GateTests(unittest.TestCase):
   gate.validate('/cars','catalog',200,b'<html><article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article></html>','x')
   for path,_,kind in gate.ROUTES:
    if path.startswith('/cars') and not path.startswith('/cars/autocatalog'):self.assertEqual(kind,'catalog')
- def test_owner_bmw_model_url_requires_completed_linked_cards(self):
-  self.assertIn((OWNER_BMW_ROUTE,2.0,'catalog'),gate.ROUTES)
-  for status,body in [
-   (503,b'<html>Catalog unavailable</html>'),
-   (200,b'<html><h1>BMW 3%20SERIES</h1><p>No offers</p></html>'),
-   (200,b'<html><article class="ac-catalog-card"><a href="/cars/china/BMW">Model</a></article></html>'),
-   (200,b'<html><article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article>'),
-   (200,b'<html><article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article><script>$RX(error)</script></html>'),
-  ]:
-   with self.subTest(status=status,body=body):
-    with self.assertRaises(AssertionError):gate.validate(OWNER_BMW_ROUTE,'catalog',status,body,'x')
-  gate.validate(OWNER_BMW_ROUTE,'catalog',200,b'<html><h1>BMW 3 SERIES</h1><article class="ac-catalog-card"><a href="/cars/offer/real">BMW 3 SERIES</a></article></html>','x')
  def test_encyclopedia_requires_brands_then_bounded_models(self):
   brands=b'<html><button class="ac-brand-card"><strong>Changan</strong><small>12 models</small></button></html>'
   models=b'<html><article class="ac-model-list-item"></article></html>'
@@ -61,7 +47,6 @@ class GateTests(unittest.TestCase):
    '/api/health': .25, '/api/leads': 1, '/': 2, '/login': 1, '/autocalc': 1,
    '/cars': 2, '/cars?market=china&make=Volkswagen&page=2': 2,
    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA': 2,
-   OWNER_BMW_ROUTE: 2,
    '/cars?market=europe&make=BMW&page=2': 2, '/cars?sort=totalRub': 2,
    '/api/catalog/search?market=europe&make=BMW&page=2': 1, '/cars/autocatalog': 2,
    '/api/catalog/search?market=china&marketPage=1&page=9': 1, '/cars/autocatalog?make=Changan': 2,
@@ -88,10 +73,9 @@ class GateTests(unittest.TestCase):
   self.assertEqual(sample.call_count,len(gate.ROUTES)*4)
   rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
   measured=[r for r in rows if r.get('performanceGate')!='summary']
-  self.assertEqual(len(measured),45)
+  self.assertEqual(len(measured),42)
   self.assertTrue(all(r['functionalPassed'] and not r['passed'] for r in measured))
-  self.assertEqual(rows[-1]['samples'],45)
-  self.assertEqual(rows[-1]['slowSamples'],45)
+  self.assertEqual(rows[-1]['slowSamples'],42)
   self.assertFalse(rows[-1]['performanceAccepted'])
   self.assertIn('::warning::',output.getvalue())
  def test_functional_failure_and_unavailable_response_still_abort(self):
@@ -100,15 +84,6 @@ class GateTests(unittest.TestCase):
     with self.assertRaises(type(failure)):gate.main()
 
 class MarketScopeTests(unittest.TestCase):
- def test_china_scope_includes_owner_canonical_model_path_and_existing_query_routes(self):
-  routes=gate.release_routes('china')
-  self.assertIn((OWNER_BMW_ROUTE,2.0,'catalog'),routes)
-  self.assertIn(('/cars?market=china&make=Volkswagen&page=2',2.0,'catalog'),routes)
-  self.assertIn(('/api/catalog/search?market=china&marketPage=1&page=9',1.0,'search'),routes)
-  self.assertIn(('/cars?market=china',2.0,'catalog'),routes)
-  self.assertNotIn((OWNER_BMW_ROUTE,2.0,'catalog'),gate.release_routes('korea'))
-  self.assertEqual(gate.release_routes('china,korea').count((OWNER_BMW_ROUTE,2.0,'catalog')),1)
-  self.assertEqual(gate.route_market(OWNER_BMW_ROUTE+'&market=korea'),'china')
  def test_korea_does_not_probe_china_and_still_rejects_empty_catalog(self):
   routes=gate.release_routes('korea')
   self.assertIn(('/cars?market=korea',2.0,'catalog'),routes)
@@ -126,54 +101,5 @@ class MarketScopeTests(unittest.TestCase):
    gate.main()
   self.assertEqual(sample.call_count,len(gate.release_routes('korea'))*4)
   self.assertTrue(all('china' not in call.args[1] for call in sample.call_args_list))
-
-class HomeReleaseTests(unittest.TestCase):
- def valid_payload(self):
-  return {'generationId':'gen_current','items':[{'id':'china-1','market':'china'}],
-   'marketCounts':{market:1 if market=='china' else 0 for market in gate.MARKETS},'total':1,'countIncomplete':False}
- def test_explicit_home_release_adds_acceptance_without_dropping_any_scoped_route(self):
-  for scope in ['', 'korea', 'china,korea,europe,uae,georgia']:
-   before=gate.release_routes(scope);after=gate.release_routes(scope,True)
-   self.assertEqual({p:b for p,b,k in before},{p:b for p,b,k in after if p in {r[0] for r in before}})
-   self.assertIn(('/',2.0,'home_catalog'),after)
-   self.assertIn(('/api/catalog/home',1.0,'home_snapshot'),after)
-   self.assertEqual(len(after),len({p for p,b,k in after}))
-  self.assertFalse(any(p in ['/','/api/catalog/home'] for p,b,k in gate.release_routes('korea')))
- def test_home_error_cannot_hide_behind_dealer_cards_or_a_completed_shell(self):
-  cards=b'<article class="ac-catalog-card"><a href="/cars/offer/real">Car</a></article>'
-  gate.validate('/','home_catalog',200,b'<html>'+cards+b'</html>','release')
-  for body in [b'<html>Loading</html>',b'<html>'+cards+'Не удалось загрузить каталог. Обновите страницу через минуту.'.encode()+b'</html>',b'<html>'+cards+b'<script>$RX(error)</script></html>',b'<html>'+cards]:
-   with self.assertRaises(AssertionError):gate.validate('/','home_catalog',200,body,'release')
- def test_home_payload_requires_real_generation_items_and_consistent_nonnegative_counts(self):
-  payload=self.valid_payload()
-  for incomplete in [False,True]:
-   gate.validate('/api/catalog/home','home_snapshot',200,json.dumps({**payload,'countIncomplete':incomplete}).encode(),'release')
-  # Japan/provider count may be unavailable while the local snapshot is complete.
-  extra_green={**payload,'total':2,'countIncomplete':True}
-  gate.validate('/api/catalog/home','home_snapshot',200,json.dumps(extra_green).encode(),'release')
-  invalid=[{**payload,'generationId':''},{**payload,'items':[]},{**payload,'items':[{}]},
-   {**payload,'total':None},{**payload,'total':0},{**payload,'total':True},{**payload,'countIncomplete':None},
-   {**payload,'error':'catalog_home_failed'},{**payload,'failed':True},{**payload,'ok':False},
-   {**payload,'marketCounts':{}},{**payload,'marketCounts':{**payload['marketCounts'],'china':-1}},
-   {**payload,'marketCounts':{**payload['marketCounts'],'china':0}},
-   {**payload,'marketCounts':{**payload['marketCounts'],'china':2}},
-   {**payload,'marketCounts':{**payload['marketCounts'],'extra':None}}]
-  for value in invalid:
-   with self.subTest(value=value):
-    with self.assertRaises(AssertionError):gate.validate('/api/catalog/home','home_snapshot',200,json.dumps(value).encode(),'release')
-  with self.assertRaises(AssertionError):gate.validate('/api/catalog/home','home_snapshot',503,json.dumps(payload).encode(),'release')
- def test_flagged_home_runs_in_every_phase_and_false_flag_preserves_regular_scope(self):
-  output=io.StringIO()
-  with patch.dict(gate.os.environ,{'AVTOCENA_RELEASE_MARKETS':'china','AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG':'1'}),patch.object(sys,'argv',['gate','http://127.0.0.1','release']),patch.object(gate,'sample',return_value=.001) as sample,patch.object(gate.time,'sleep'),contextlib.redirect_stdout(output):
-   gate.main()
-  routes=gate.release_routes('china',True)
-  self.assertEqual(sample.call_count,len(routes)*4)
-  for path in ['/','/api/catalog/home']:
-   self.assertEqual(sum(call.args[1]==path for call in sample.call_args_list),4)
-  report=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')][-1]
-  self.assertTrue(report['requireHomeCatalog']);self.assertEqual(report['samples'],len(routes)*3)
-  with patch.dict(gate.os.environ,{'AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG':'true'}),patch.object(sys,'argv',['gate','http://127.0.0.1','release']),patch.object(gate,'sample') as sample:
-   with self.assertRaisesRegex(ValueError,'flag_invalid'):gate.main()
-   sample.assert_not_called()
 
 if __name__=='__main__':unittest.main()

@@ -1,25 +1,17 @@
-/** Public catalog URL parsing/presentation; never changes vehicle or calculation facts. */
+/** Public URL presentation only: this module never changes search/calculation inputs. */
 export const CATALOG_COUNTRIES: Record<string, string> = {
  china: 'Китая', japan: 'Японии', korea: 'Кореи', uae: 'ОАЭ', europe: 'Европы', georgia: 'Грузии',
 };
 export type CatalogRouteParams = {market: string; make?: string; model?: string};
-/** Next's App Router passes encoded path values to pages. Decode exactly once
- * at that boundary; query-string values have already been decoded separately.
- * A literal "%20" in a name must remain "%20", not become a second space.
- */
-export function decodeCatalogPathParams(params: CatalogRouteParams): CatalogRouteParams | null {
- if (!Object.hasOwn(CATALOG_COUNTRIES, params.market)) return null;
- try {
-  const make = params.make ? decodeURIComponent(params.make) : undefined;
-  const model = params.model ? decodeURIComponent(params.model) : undefined;
-  if ([make, model].some(v => v !== undefined && (!v || /[\/\\\u0000-\u001f]/.test(v)))) return null;
-  return {market: params.market, ...(make ? {make} : {}), ...(model ? {model} : {})};
- } catch {return null;}
-}
 export function catalogRouteParams(pathname: string): CatalogRouteParams | null {
  const parts = pathname.replace(/\/$/, '').split('/');
- if (parts[1] !== 'cars' || parts.length < 3 || parts.length > 5) return null;
- return decodeCatalogPathParams({market: parts[2], make: parts[3], model: parts[4]});
+ if (parts[1] !== 'cars' || parts.length < 3 || parts.length > 5 || !Object.hasOwn(CATALOG_COUNTRIES, parts[2])) return null;
+ try {
+  const make = parts[3] ? decodeURIComponent(parts[3]) : undefined;
+  const model = parts[4] ? decodeURIComponent(parts[4]) : undefined;
+  if ([make, model].some(v => v !== undefined && (!v || /[\/\\\u0000-\u001f]/.test(v)))) return null;
+  return {market: parts[2], ...(make ? {make} : {}), ...(model ? {model} : {})};
+ } catch {return null;}
 }
 export function isCatalogSearchPath(pathname: string): boolean {
  return pathname === '/cars' || pathname === '/cars/green' || catalogRouteParams(pathname) !== null;

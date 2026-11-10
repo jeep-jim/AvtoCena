@@ -31,7 +31,6 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   reads.push(key);const saved=records.get(key);if(saved)return {found:true,value:structuredClone(saved.value) as T,etag:saved.etag};
   let value:any;
   if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}},updatedAt:base.updatedAt};
-  else if(key.endsWith('/indexes/overview.json'))value={version:1,publicPolicyVersion:2,generationId,policyDate:new Date(Date.now()+7*3600000).toISOString().slice(0,10),facets:{generationId},markets:Object.fromEntries(['korea','china','japan','uae','europe','georgia'].map(market=>[market,{total:market==='korea'?rows.length:0,sourceTotal:market==='korea'?rows.length:0,items:market==='korea'?rows:[]}]))};
   else if(key==='catalog/public/brand-summary.json')value=buildCatalogBrandSummary(generationId,rows);
   else if(key.includes('/projection/')||key.includes('/projection-brand/'))value={generationId,items:rows};
   else if(key.endsWith('/budget-count-v2.json'))value=buildBudgetCountIndex(generationId,rows,new Map(rows.map(r=>[r.id,0])));

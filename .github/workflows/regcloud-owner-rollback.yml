@@ -1,0 +1,121 @@
+name: Regcloud — owner rollback to 8 November
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-owner-rollback.json']
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+
+jobs:
+  rollback:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify the requested historical release and unchanged gates
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 tests/regcloud-performance-gate.test.py
+          python3 - <<'PY'
+          import json, subprocess
+          marker = json.load(open('.github/market-runs/regcloud-owner-rollback.json'))
+          assert marker['release'] == '463fd22559a2f9c5acd60f8f5e4b269689215c84'
+          assert marker['previousRelease'] == '008643e8929901e366d079b0d5c394e9b4df2350'
+          assert marker['originalRun'] == 42435996958
+          assert marker['preparationMarkets'] == ['china', 'korea', 'europe', 'uae', 'georgia']
+          run = json.loads(subprocess.check_output(['gh', 'api', 'repos/jeep-jim/AvtoCena/actions/runs/42435996958']))
+          assert run['head_sha'] == marker['release'] and run['status'] == 'completed' and run['conclusion'] == 'success'
+          expected = {
+              'scripts/regcloud-deploy-production.sh': '1d71ad18504e67870f4655e49c0d2db3e9a106b0',
+              'scripts/regcloud-performance-gate.py': 'b3bc8516498b151a22cf81833c061c5d6219d6d3',
+              'scripts/regcloud-resource-sampler.py': 'cc65f65bc8bc62513c17cd97bf555c43cec525b3',
+          }
+          for path, sha in expected.items():
+              assert subprocess.check_output(['git', 'hash-object', path], text=True).strip() == sha, path
+          print('Original successful deployment and all historical activation scripts verified')
+          PY
+      - name: Activate the exact retained image with historical checks and rollback
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          release=463fd22559a2f9c5acd60f8f5e4b269689215c84
+          previous=008643e8929901e366d079b0d5c394e9b4df2350
+          remote_dir="/opt/avtocena/releases/$release"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$release' '$previous' '$GITHUB_RUN_ID'" <<'PREFLIGHT'
+          set -euo pipefail
+          release=$1
+          previous=$2
+          run_id=$3
+          [[ "$release" =~ ^[a-f0-9]{40}$ && "$previous" =~ ^[a-f0-9]{40}$ && "$run_id" =~ ^[0-9]+$ ]]
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 30 9
+          test -e /opt/avtocena/PRODUCTION_ACTIVE
+          test "$(docker inspect --format '{{.State.Running}}' avtocena-production)" = true
+          test "$(docker inspect --format '{{index .Config.Labels "avtocena.role"}}' avtocena-production)" = production
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' avtocena-production)" = "$previous"
+          test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "avtocena-regcloud:$release")" = "$release"
+          test -s "/opt/avtocena/releases/$release/runtime.env"
+          backup="avtocena-before-${release:0:12}"
+          if docker inspect "$backup" >/dev/null 2>&1; then
+            test "$(docker inspect --format '{{.State.Running}}' "$backup")" = false
+            test "$(docker inspect --format '{{index .Config.Labels "avtocena.role"}}' "$backup")" = production
+            preserved="avtocena-rollback-preserved-${release:0:12}-$run_id"
+            ! docker inspect "$preserved" >/dev/null 2>&1
+            docker rename "$backup" "$preserved"
+            printf 'Preserved historical predecessor: %s\n' "$preserved"
+          fi
+          printf 'Exact retained image and current production verified: %s -> %s\n' "$previous" "$release"
+          PREFLIGHT
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$release' '$previous'" <<'ACTIVATE'
+          set -euo pipefail
+          release=$1
+          previous=$2
+          runtime="/opt/avtocena/releases/$release"
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' avtocena-production)" = "$previous"
+          calculator=$(python3 - "$runtime/runtime.env" <<'PY'
+          import pathlib, re, sys
+          values = [x.split('=', 1)[1] for x in pathlib.Path(sys.argv[1]).read_text().splitlines() if x.startswith('AVTOCENA_CALCULATION_VERSION=')]
+          assert len(values) == 1 and re.fullmatch(r'[a-f0-9]{64}', values[0])
+          print(values[0])
+          PY
+          )
+          bash "$runtime/regcloud-deploy-production.sh" "$release" "$calculator" 1 china,korea,europe,uae,georgia
+          ACTIVATE
+      - name: Verify the exact public release after activation
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --connect-timeout 10 --max-time 30 https://avtocena.com/api/health > rollback-health.json
+          python3 - <<'PY'
+          import json
+          value = json.load(open('rollback-health.json'))
+          assert value.get('ok') is True and value['releaseSha'] == '463fd22559a2f9c5acd60f8f5e4b269689215c84'
+          print('OWNER_ROLLBACK_LIVE_VERIFIED', json.dumps(value))
+          PY
+      - name: Preserve public rollback receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: owner-rollback-20261108
+          path: rollback-health.json
+          if-no-files-found: ignore

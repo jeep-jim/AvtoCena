@@ -77,7 +77,7 @@ const server = http.createServer((req, res) => {
     res.end(html);
     return;
   }
-  const base = /^\/(buyers|pdf-flags|brands|avatars|logo|dealers)\//.test(u.pathname) || /^\/favicon-round-v3\.(png|svg)$/.test(u.pathname)
+  const base = /^\/(buyers|pdf-flags|brands|avatars|logo|dealers)\//.test(u.pathname) || u.pathname === "/favicon-round-v3.png"
     ? path.resolve("apps/web/public")
     : path.resolve(out);
   const file = path.resolve(base, "." + u.pathname);
@@ -113,42 +113,6 @@ const browser = await chromium.launch({
 });
 
 try{
- for(const initialTheme of ['light','dark']){
-  const page=await browser.newPage({viewport:{width:1024,height:900}});
-  await page.addInitScript(theme=>{localStorage.setItem('avtocena_theme',theme);},initialTheme);
-  await page.route('**/api/**',route=>route.fulfill({json:{}}));
-  await page.goto(origin+'?view=browser-identity');
-  const icon=page.locator('head link[data-avtocena-theme-icon]');
-  async function expectIcon(href,type=null){
-   await page.waitForFunction(expected=>document.querySelector('link[data-avtocena-theme-icon]')?.getAttribute('href')===expected,href,{timeout:3000}).catch(async error=>{
-    assert.equal(await icon.getAttribute('href'),href,'browser icon must match the current dealer and theme');
-    throw error;
-   });
-   assert.equal(await icon.count(),1,'only one dynamic browser icon remains');
-   assert.equal(await icon.getAttribute('type'),type,'uploaded dealer images must not be forced to SVG');
-  }
-  const logo=theme=>theme==='light'?'/brands/topavto-logo-black.png':'/brands/topavto-logo.png';
-  await page.getByRole('link',{name:'Страница Первый дилер'}).waitFor();
-  await expectIcon(logo(initialTheme));
-  await page.getByRole('button',{name:initialTheme==='light'?'Включить тёмную тему':'Включить светлую тему'}).click();
-  const nextTheme=initialTheme==='light'?'dark':'light';
-  await expectIcon(logo(nextTheme));
-  await page.getByLabel('Контекст страницы').selectOption('second');
-  await expectIcon('/buyers/1.jpg');
-  await page.getByRole('button',{name:nextTheme==='light'?'Включить тёмную тему':'Включить светлую тему'}).click();
-  await expectIcon('/buyers/1.jpg');
-  await page.getByLabel('Контекст страницы').selectOption('darkOnly');
-  await expectIcon('/buyers/4.jpg');
-  await page.getByLabel('Контекст страницы').selectOption('noLogo');
-  await expectIcon('/favicon-round-v3.svg','image/svg+xml');
-  await page.getByLabel('Контекст страницы').selectOption('first');
-  await expectIcon(logo(initialTheme));
-  await page.getByLabel('Контекст страницы').selectOption('public');
-  await expectIcon('/favicon-round-v3.svg','image/svg+xml');
-  await page.close();
- }
- console.log('Dealer browser icon: both themes, dealer transitions, custom icon and missing-logo fallback OK');
- if(!process.argv.includes('--favicon-only')){
  for(const width of [390,820,1024,1440,1920])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});
   let subscribed=false;
@@ -509,5 +473,4 @@ try{
   await page.close();console.log('Autosave: queued typing, reload, legacy copy and failure recovery OK');
  }
  for(const lang of ['ru','en','zh','ja','ko','ar','de']){const page=await browser.newPage({viewport:{width:390,height:900}});await page.goto(origin+'?view=partners&lang='+lang);assert.equal(await page.locator('main').getAttribute('lang'),lang);assert.equal(await page.locator('main').getAttribute('dir'),lang==='ar'?'rtl':'ltr');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'locale overflow '+lang);if(lang==='ar')await page.screenshot({path:`${out}/arabic.png`,fullPage:true});await page.goto(origin+'?view=knowledge&lang='+lang);assert.equal(await page.locator('.pw-kb-group li a').count(),7);await page.close();}
- }
 }finally{for(const context of browser.contexts())for(const page of context.pages())await page.screenshot({path:`${out}/last-page-${page.viewportSize()?.width}.png`,fullPage:true}).catch(()=>{});await browser.close();server.close();}

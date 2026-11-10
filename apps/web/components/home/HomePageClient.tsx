@@ -6,7 +6,7 @@ import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 import { formatCatalogCount } from "@/lib/catalog/count-format";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useCallback, memo, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { memo, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 const StableCatalogCard = memo(CatalogCard);
@@ -29,7 +29,6 @@ import {ajesCountText,type AjesCountSummary} from '@/lib/catalog/ajes-count-disp
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
 type Props = {
-  catalogSlot?: ReactNode;
   dealerGallery?: string[];
   dealerGallerySlot?:ReactNode;
   specialRailSlot?:ReactNode;
@@ -228,8 +227,7 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ catalogSlot, japanAuctions, dealerGallerySlot, specialRailSlot, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false, initialMarketCountInfo={} }: Props) {
-  const [streamGreen,setStreamGreen]=useState(initialGreen);
+export default function HomePageClient({ japanAuctions, dealerGallerySlot, specialRailSlot, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false, initialMarketCountInfo={} }: Props) {
   const [marketCountInfo,setMarketCountInfo]=useState(initialMarketCountInfo);
 
   const router = useRouter();
@@ -239,15 +237,17 @@ export default function HomePageClient({ catalogSlot, japanAuctions, dealerGalle
 
   useEffect(() => {
     let cancelled = false;
-    const controller = new AbortController();
     let inFlight = false;
-    let lastLoadedAt = initialOffers.length || catalogSlot ? Date.now() : 0;
+    let lastLoadedAt = initialOffers.length ? Date.now() : 0;
     const loadCatalog = async () => {
       if (inFlight || document.visibilityState === "hidden" || Date.now() - lastLoadedAt < 5 * 60_000) return;
       inFlight = true;
       const stamp = Date.now();
       try {
-        const catalogPayload = await fetch(`/api/catalog/home?_=${stamp}`, { cache: "no-store", signal: controller.signal }).then((response) => { if (!response.ok) throw new Error("catalog_home_failed"); return response.json(); });
+        const [catalogPayload, makePayload] = await Promise.all([
+          fetch(`/api/catalog/home?_=${stamp}`, { cache: "no-store" }).then((response) => { if (!response.ok) throw new Error("catalog_home_failed"); return response.json(); }),
+          fetch(`/api/catalog/models?scope=makes&limit=500&_=${stamp}`, { cache: "no-store" }).then((response) => response.ok ? response.json() : { items: [] }).catch(() => ({ items: [] })),
+        ]);
         if (cancelled) return;
         const unique = new Map<string, Item>();
         (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });
@@ -272,18 +272,20 @@ export default function HomePageClient({ catalogSlot, japanAuctions, dealerGalle
           const incomingTotal = Math.max(0, Number(catalogPayload?.total || 0));
           return incomingTotal > 0 ? incomingTotal : previousCount;
         });
+        setKnowledgeMakes((Array.isArray(makePayload?.items) ? makePayload.items : []).map((item: any) => String(item?.value || item?.label || "")).filter(Boolean));
         setCatalogStatus("ready");
       } catch { if (!cancelled) setCatalogStatus((current) => current === "loading" ? "error" : current); }
       finally { inFlight = false; lastLoadedAt = Date.now(); }
     };
-    // Brand suggestions never hold ready cards behind their own request.
-    void fetch('/api/catalog/models?scope=makes&limit=500', { cache: 'no-store', signal: controller.signal })
-      .then(response => response.ok ? response.json() : null)
-      .then(payload => { if (!cancelled && Array.isArray(payload?.items)) setKnowledgeMakes(payload.items.map((item: any) => String(item.value || item.label || '')).filter(Boolean)); })
-      .catch(() => {});
+    if (initialOffers.length) {
+      void fetch('/api/catalog/models?scope=makes&limit=500', { cache: 'no-store' })
+        .then(response => response.ok ? response.json() : null)
+        .then(payload => { if (!cancelled && Array.isArray(payload?.items)) setKnowledgeMakes(payload.items.map((item: any) => String(item.value || item.label || '')).filter(Boolean)); })
+        .catch(() => {});
+    }
     loadCatalog(); const interval = window.setInterval(loadCatalog, 5 * 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus); document.addEventListener("visibilitychange", visibility);
-    return () => { cancelled = true; controller.abort(); window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };
+    return () => { cancelled = true; window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };
   }, []);
   useEffect(() => {
     if (!electricOnly) { setFuelItems(null); return; }
@@ -314,7 +316,7 @@ export default function HomePageClient({ catalogSlot, japanAuctions, dealerGalle
   if (year === "older") countParams.set("yearTo", "2017"); else if (year) countParams.set("yearFrom", year);
   if (powerLimited) countParams.set("powerTo", "160");
   if (electricOnly) countParams.set("fuel", "electric");
-  const { count, countError,countText } = useHomeCatalogCount(countParams.toString(), catalogTotal, !catalogSlot || catalogStatus !== "loading" || Boolean(countParams.size));
+  const { count, countError,countText } = useHomeCatalogCount(countParams.toString(), catalogTotal);
 
   const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 10) }; }), [availableItems, catalogMarket, catalogMake]);
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setFuelItems(null); setMake(""); setModel(""); setBody(""); setMarket(""); setCatalogMake(""); setCatalogMarket(""); };
@@ -335,16 +337,7 @@ export default function HomePageClient({ catalogSlot, japanAuctions, dealerGalle
           </div>
         </div>);
 
-  const acceptCatalog = useCallback((data: HomeCatalogData) => {
-    setItems(data.initialOffers.flatMap(raw => { const item=toItem(raw); return item?[item]:[]; }));
-    setMarketCounts(data.initialMarketCounts);
-    setMarketCountInfo(data.initialMarketCountInfo);
-    setCatalogTotal(data.initialCountIncomplete && !data.initialCount ? null : data.initialCount);
-    setCountIncomplete(data.initialCountIncomplete);
-    setStreamGreen(data.initialGreen);
-    setCatalogStatus(data.failed ? "error" : "ready");
-  }, []);
-  return <HomeCatalogContext.Provider value={acceptCatalog}><main data-home-react-filters className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
+  return <main data-home-react-filters className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
     <PublicHeader />
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
       <div className="ac-home-intro-grid">
@@ -356,7 +349,7 @@ export default function HomePageClient({ catalogSlot, japanAuctions, dealerGalle
       </div>
       {specialRailSlot ?? (specialRail && <SpecialRail {...specialRail} desktopSplit/>)}
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black normal-case tracking-normal text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl">Авто под заказ</h2></div></div>
-        {catalogStatus === "loading" ? (catalogSlot ?? <CatalogLoadingSkeleton />) : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <HomeMarketRails {...{marketGroups,catalogMake,electricOnly,japanAuctions,initialGreen:streamGreen,marketCountInfo,marketCounts}} /> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
+        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { if(group.id === "japan")return !catalogMake && !electricOnly ? <div key="japan" className="space-y-8">{japanAuctions}<GreenCornerRail {...initialGreen} /></div> : null; const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 flex-wrap items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><MarketResultCount>{(["china","korea"].includes(group.id)&&Object.prototype.hasOwnProperty.call(marketCountInfo,group.id)) ? (electricOnly ? `показано ${formatCatalogCount(group.total)}` : ajesCountText(marketCountInfo[group.id])) : formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</MarketResultCount></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section></div>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
       </section>
       <CurrencyRatesStrip rates={rates} variant="mobile" showHeading className="ac-home-bottom-rates mt-8 !px-4 !py-4 lg:hidden" />
@@ -367,29 +360,5 @@ export default function HomePageClient({ catalogSlot, japanAuctions, dealerGalle
     </div>
     {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black normal-case tracking-normal text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl">×</button></div><div className="mt-4 space-y-3 text-base font-medium leading-7 text-[var(--ac-muted)]"><p>АвтоЦена помогает быстро понять, какой автомобиль можно привезти под ваш бюджет. Укажите Ваш город и бюджет — система покажет подходящие варианты и актуальный расчёт.</p><p>После выбора менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" /></section></div> : null}
     <style dangerouslySetInnerHTML={{ __html: `.ac-budget-picker-overlay{background:color-mix(in srgb,var(--ac-surface) 92%,transparent);border:1px solid color-mix(in srgb,var(--ac-text) 10%,transparent)}.ac-budget-picker-overlay .ac-filter-option{background:var(--ac-surface-2)!important;border:1px solid color-mix(in srgb,var(--ac-text) 10%,transparent)!important;color:var(--ac-text)!important}.ac-budget-picker-overlay .ac-filter-option.is-active{background:#ff353d!important;border-color:#ff353d!important;color:#fff!important}@media(max-width:1023px){.ac-home-page .ac-budget-mobile,.ac-home-page .ac-budget-mobile>div,.ac-home-page .ac-budget-mobile .ac-filter-control{width:100%!important;max-width:none!important;min-width:0!important}.ac-home-filter-drawer{padding:20px!important}.ac-home-filter-drawer__header{margin:0 0 26px!important}.ac-home-filter-drawer__fields{display:flex!important;flex-direction:column!important;gap:14px!important}.ac-home-filter-drawer__actions{margin-top:20px!important}}@media(max-width:767px){.ac-home-page .ac-catalog-card,.ac-home-page .ac-catalog-card *,.ac-home-page .ac-home-market-rail,.ac-home-page .ac-home-market-rail>*{box-shadow:none!important}}` }} />
-  </main></HomeCatalogContext.Provider>;
-}
-
-export type HomeCatalogData = {
-  initialOffers: any[];
-  initialMarketCounts: Record<string,number>;
-  initialMarketCountInfo: Record<string,AjesCountSummary|null>;
-  initialCount: number;
-  initialCountIncomplete: boolean;
-  initialGreen: {items:any[];total:number};
-  failed?: boolean;
-};
-const HomeCatalogContext = createContext<((data:HomeCatalogData)=>void)|null>(null);
-
-/** Stream cards inside the existing shell; never remount/reset a visitor's form. */
-export function HomeCatalogPayload({data,japanAuctions}:{data:HomeCatalogData;japanAuctions?:ReactNode}) {
-  const accept = useContext(HomeCatalogContext);
-  useEffect(()=>{accept?.(data);},[accept,data]);
-  const items=data.initialOffers.flatMap(raw=>{const item=toItem(raw);return item?[item]:[];});
-  const marketGroups=marketIds.map(id=>{const matches=items.filter(item=>item.market===id);return {id,total:matches.length,items:balancedMarketItems(matches,10)};});
-  if(data.failed)return <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div>;
-  return <HomeMarketRails marketGroups={marketGroups} catalogMake="" electricOnly={false} japanAuctions={japanAuctions} initialGreen={data.initialGreen} marketCountInfo={data.initialMarketCountInfo} marketCounts={data.initialMarketCounts}/>;
-}
-function HomeMarketRails({marketGroups,catalogMake,electricOnly,japanAuctions,initialGreen,marketCountInfo,marketCounts}:{marketGroups:{id:string;total:number;items:Item[]}[];catalogMake:string;electricOnly:boolean;japanAuctions?:ReactNode;initialGreen:{items:any[];total:number};marketCountInfo:Record<string,AjesCountSummary|null>;marketCounts:Record<string,number>}) {
-  return <div className="mt-7 space-y-8">{marketGroups.map((group) => { if(group.id === "japan")return !catalogMake && !electricOnly ? <div key="japan" className="space-y-8">{japanAuctions}<GreenCornerRail {...initialGreen} /></div> : null; const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 flex-wrap items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><MarketResultCount>{(["china","korea"].includes(group.id)&&Object.prototype.hasOwnProperty.call(marketCountInfo,group.id)) ? (electricOnly ? `показано ${formatCatalogCount(group.total)}` : ajesCountText(marketCountInfo[group.id])) : formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</MarketResultCount></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section></div>; })}</div>;
+  </main>;
 }

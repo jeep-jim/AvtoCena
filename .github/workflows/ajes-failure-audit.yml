@@ -23,7 +23,7 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import {build} from 'esbuild';
-          await build({entryPoints:['scripts/ajes-failure-saved-summary.ts'],outfile:'/tmp/ajes-failure-summary.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          await build({entryPoints:['.github/diagnostics/korea-inventory.ts'],outfile:'/tmp/ajes-failure-summary.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
       - name: Count safe error codes and inspect proxy header directives
         env:

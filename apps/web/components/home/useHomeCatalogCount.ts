@@ -3,11 +3,10 @@ import {ajesCountText} from "@/lib/catalog/ajes-count-display";
 import { useEffect, useState } from "react";
 
 /** The homepage has one count owner. Errors are not empty search results. */
-export function useHomeCatalogCount(query: string, catalogTotal: number | null, enabled = true) {
+export function useHomeCatalogCount(query: string, catalogTotal: number | null) {
   const baseCount = query ? null : catalogTotal;
   const [result, setResult] = useState<{query: string; count: number | null; error: boolean;countText?:string}>({query, count: baseCount, error: false});
   useEffect(() => {
-    if (!enabled) return;
     if (!query && baseCount !== null) {
       setResult({query, count: baseCount, error: false});
       return;
@@ -38,7 +37,7 @@ export function useHomeCatalogCount(query: string, catalogTotal: number | null, 
       } finally { window.clearTimeout(timeout); }
     }, 180);
     return () => { active = false; window.clearTimeout(timer); window.clearTimeout(timeout); controller.abort(); };
-  }, [query, baseCount, enabled]);
+  }, [query, baseCount]);
   if (!query && baseCount !== null) return {count: baseCount, countError: false,countText:undefined};
   return result.query === query ? {count: result.count, countError: result.error,countText:result.countText} : {count: null, countError: false,countText:undefined};
 }

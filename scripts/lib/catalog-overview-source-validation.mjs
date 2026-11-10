@@ -24,14 +24,3 @@ export function validateOverviewSourceShard(projection, generationId, market, ex
     throw new Error(`catalog_overview_source_count_mismatch:${market}`);
   return projection.items.length;
 }
-
-/** A global ready marker must describe every saved source, including markets
- * whose public display policy currently removes all rows (notably old Japan).
- */
-export function overviewSourceCountsMatchManifest(overview,manifest,markets){
- return markets.every(market=>{
-  const count=Number(manifest.markets?.[market]?.count||0),summary=overview?.markets?.[market];
-  return Number.isInteger(count)&&count>=0&&summary&&Number.isInteger(summary.total)&&summary.total>=0&&summary.total<=count
-   &&(summary.sourceTotal??summary.total)===count&&Array.isArray(summary.items);
- });
-}

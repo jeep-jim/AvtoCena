@@ -123,18 +123,6 @@ try {
    assert.equal(await page.locator('.ac-dealer-logo-'+theme).isVisible(),true);
    assert.equal(await page.locator('.ac-dealer-logo-'+(theme==='light'?'dark':'light')).isVisible(),false);
   }
-  await page.goto(origin+'/favorites?dealer=dealer_topavto');
-  await page.getByRole('heading',{name:'Избранные дилеры'}).waitFor();
-  assert.equal(await page.getByRole('navigation',{name:'Каталоги'}).count(),0);
-  assert.equal(await page.locator('.ac-subscribed-dealers article').count(),1);
-  assert.equal(await page.getByRole('link',{name:'Открыть каталог',exact:true}).getAttribute('href'),'/nvkz/topavto');
-  assert.equal(await page.locator('.ac-favorite-nav').getAttribute('href'),'/favorites?dealer=dealer_topavto');
-  await page.reload();
-  await page.getByRole('heading',{name:'Избранные дилеры'}).waitFor();
-  assert.equal(await page.getByRole('navigation',{name:'Каталоги'}).count(),0);
-  await page.evaluate(()=>{localStorage.removeItem('avtocena_dealer_subscriptions');window.dispatchEvent(new Event('avtocena:favorites-changed'));});
-  await page.locator('.ac-subscribed-dealers').waitFor({state:'detached'});
-  await page.goto(origin+'/favorites');
   await page.getByRole('navigation',{name:'Каталоги'}).getByRole('link',{name:'Автодилеры'}).click();
   await page.getByRole('heading',{name:'Автодилеры',exact:true}).waitFor();
   assert.equal(await page.locator('main.ac-page-copy').count(),1);

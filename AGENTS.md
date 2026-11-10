@@ -1,7 +1,10 @@
-# Active incident continuation — 10.11.2026
+# Owner rollback and change freeze — 10.11.2026
 
-- For the ongoing stability incident, first read `docs/operations/current-incident.md`, then the latest relevant entries of `roadmap.md`. Use `tail` and targeted `rg` searches for the multi-megabyte history; do not dump the whole file into conversation context. Preserve all historical entries.
-- Reconcile the exact active deployment in the incident handoff before launching another production release. Keep prepared, merged, installed and live-verified statuses distinct.
+- The owner explicitly requests the production build that ran on 08.11.2026 from 12:00 to 16:00 Asia/Novokuznetsk: `463fd22559a2f9c5acd60f8f5e4b269689215c84`. Original successful deployment: run `42435996958`; health records inside that time window confirm the same release.
+- After the authorized rollback, freeze website code, interface, catalog/search/cache/pricing/deployment logic and editorial releases until a new explicit owner request. This supersedes earlier unfinished fixes, investigation plans, optimization work and publication authorizations. Do not resume PR1724 or another repair on the strength of old instructions.
+- Preserve the existing ordinary feed schedules, source switches, freshness/price/withdrawal rules, required index preparation, rates, CRM delivery and retention. Do not start extra audits, profiles, collection runs, migrations or automatic repair loops.
+- Read `docs/operations/current-incident.md` and the latest dated `roadmap.md` entry before work. Use bounded reads; preserve history. Distinguish repository rollback, activation and verified live release. The daily blog automation is paused for this freeze.
+- This is an application rollback, not permission to delete customer/CRM records, manual vehicle facts or current feed data. No storage restore has been requested or performed.
 
 # User-facing interface copy
 

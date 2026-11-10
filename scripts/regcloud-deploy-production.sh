@@ -21,8 +21,6 @@ release=$1
 calculator=$2
 prewarm=${3:-0}
 export AVTOCENA_RELEASE_MARKETS="${4:-}"
-export AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG="${5:-0}"
-[[ "$AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG" = 0 || "$AVTOCENA_RELEASE_REQUIRE_HOME_CATALOG" = 1 ]]
 python3 - "$AVTOCENA_RELEASE_MARKETS" <<'SCOPE'
 import sys
 scope=sys.argv[1]

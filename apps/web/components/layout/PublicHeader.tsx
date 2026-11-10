@@ -2,7 +2,7 @@
 
 import {readDealerSubscriptions} from "@/lib/dealers/subscriptions-client";
 import Link from "next/link";
-import {DealerLink, useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import { PublicStaffAlerts } from "../crm/PublicStaffAlerts";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -53,10 +53,7 @@ function applyBrowserTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
   localStorage.setItem(THEME_KEY, theme);
   updateBrowserChrome(theme);
-  window.dispatchEvent(new CustomEvent("avtocena:theme-changed", { detail: { theme } }));
-}
 
-function applyBrowserIcon(dealerIcon: string | undefined) {
   let icon = document.querySelector<HTMLLinkElement>('link[data-avtocena-theme-icon]');
   if (!icon) {
     icon = document.createElement("link");
@@ -64,9 +61,9 @@ function applyBrowserIcon(dealerIcon: string | undefined) {
     icon.dataset.avtocenaThemeIcon = "true";
     document.head.appendChild(icon);
   }
-  icon.href = dealerIcon || "/favicon-round-v3.svg";
-  if (dealerIcon) icon.removeAttribute("type");
-  else icon.type = "image/svg+xml";
+  icon.href = "/favicon-round-v3.svg";
+  icon.type = "image/svg+xml";
+  window.dispatchEvent(new CustomEvent("avtocena:theme-changed", { detail: { theme } }));
 }
 
 function StarIcon({ filled = true }: { filled?: boolean }) {
@@ -111,9 +108,6 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
   const router = useRouter();
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [theme, setTheme] = useState<Theme>("dark");
-  const dealerIcon = dealer?.headerIcon || (theme === "light"
-    ? dealer?.logoLight || dealer?.logoDark
-    : dealer?.logoDark || dealer?.logoLight);
   const catalogActive = pathname === "/cars" || pathname.startsWith("/cars/");
 
   useEffect(() => {
@@ -141,10 +135,6 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
     applyBrowserTheme(initial);
   }, []);
 
-  useEffect(() => {
-    applyBrowserIcon(dealerIcon);
-  }, [dealerIcon]);
-
   function toggleTheme() {
     const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
@@ -170,7 +160,7 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
             ) : null}
 
             {dealer ? <Link href={dealer.href} className="flex min-w-0 items-center gap-2.5" aria-label={`Страница ${dealer.name}`}>
-              {dealerIcon?<img src={dealerIcon} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
+              {(dealer.headerIcon||dealer.logoLight||dealer.logoDark)?<img src={dealer.headerIcon||(theme==='light'?(dealer.logoLight||dealer.logoDark):(dealer.logoDark||dealer.logoLight))} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
               <span className="hidden truncate text-lg font-black md:block md:text-xl">{dealer.name}</span>
             </Link> : (            <Link href="/" onClick={(event) => {
               if (pathname === '/' && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) {
@@ -193,14 +183,14 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
               <ThemeIcon theme={theme} />
             </button>
 
-            <DealerLink href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
+            <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
               <StarIcon filled={favoritesCount > 0} />
               {favoritesCount > 0 ? (
                 <span className={`absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-black ${favoriteBadgeClass}`} style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
                   {Math.min(favoritesCount, 99)}
                 </span>
               ) : null}
-            </DealerLink>
+            </Link>
 
             <nav className="hidden items-center gap-1 text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
 

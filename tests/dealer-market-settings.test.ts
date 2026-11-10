@@ -35,8 +35,6 @@ test('dealer URLs retain filters, pages, saved calculations and explicit exit',(
  assert.equal(dealerBrowsingHref('/cars?market=korea&yearFrom=2020&page=3',context),'/nvkz/topavto?market=korea&yearFrom=2020&page=3');
  assert.equal(dealerBrowsingHref('/cars/offer/test?calculation=v2',context),'/cars/offer/test?calculation=v2&dealer=dealer_topavto');
  assert.equal(dealerBrowsingHref('/request',context),'/request?dealer=dealer_topavto');
- assert.equal(dealerBrowsingHref('/favorites',context),'/favorites?dealer=dealer_topavto');
- assert.equal(dealerBrowsingHref('/favorites',null),'/favorites');
  assert.equal(dealerBrowsingHref('/',context),'/');
  assert.equal(dealerBrowsingHref('https://example.com/cars',context),'https://example.com/cars');
  assert.equal(dealerBrowsingHref('/cars',null),'/cars');

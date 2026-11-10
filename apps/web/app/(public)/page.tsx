@@ -12,7 +12,7 @@ import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import HomePageClient, {HomeCatalogPayload} from "@/components/home/HomePageClient";
+import HomePageClient from "@/components/home/HomePageClient";
 import { readHomeCatalogSnapshot } from "@/lib/catalog/storage";
 import styles from "./home.module.css";
 
@@ -62,11 +62,17 @@ async function DealerSpecials({dealer,city,timing}:{dealer:ReturnType<typeof rea
  return <SpecialRail {...rail} desktopSplit/>;
 }
 
-async function HomeCatalog({timing,japanAuctions}:{timing:ReturnType<typeof createHomePhaseTiming>;japanAuctions:React.ReactNode}) {
+export default async function HomePage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  const timing=createHomePhaseTiming();
+  const params = (await searchParams) || {};
+  const cookieStore = await cookies();
+  const fromQuery = cleanCity(first(params.city));
+  const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
+  const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
   const [catalog, green] = await Promise.all([
     timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
       console.error("home_initial_catalog_failed", error);
-      return { failed: true, items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
+      return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
     }),
     timing.measure("green",()=>readGreenCorner()).catch(() => null),
   ]);
@@ -78,32 +84,21 @@ async function HomeCatalog({timing,japanAuctions}:{timing:ReturnType<typeof crea
       return catalog.items;
     }),
   ]);
-  return <HomeCatalogPayload japanAuctions={japanAuctions} data={{
-    initialOffers:pricedItems, initialMarketCounts:catalog.marketCounts,
-    initialMarketCountInfo:catalog.marketCountInfo, initialCount:catalog.total+(green?.items.length||0),
-    initialCountIncomplete:catalog.countIncomplete||!green, initialGreen:{items:greenItems,total:green?.items.length||0},
-    failed:"failed" in catalog && catalog.failed,
-  }}/>;
-}
-
-export default async function HomePage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
-  const timing=createHomePhaseTiming();
-  const params = (await searchParams) || {};
-  const cookieStore = await cookies();
-  const fromQuery = cleanCity(first(params.city));
-  const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
-  const japanAuctions=<Suspense fallback={null}><HomeJapanRail timing={timing}/></Suspense>;
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(WEBSITE_SCHEMA)}}/>
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
-        japanAuctions={japanAuctions}
+        japanAuctions={<Suspense fallback={null}><HomeJapanRail timing={timing}/></Suspense>}
         dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
         specialRailSlot={<Suspense fallback={null}><DealerSpecials dealer={dealer} city={fromQuery || fromCookie} timing={timing}/></Suspense>}
+        initialGreen={{items:greenItems,total:green?.items.length || 0}}
         initialCity={fromQuery || fromCookie}
-        catalogSlot={<Suspense fallback={<div className="min-h-[320px]" aria-busy="true" aria-label="Загружаем автомобили"/>}><HomeCatalog timing={timing} japanAuctions={japanAuctions}/></Suspense>}
+        initialOffers={pricedItems}
+        initialMarketCounts={catalog.marketCounts}
+        initialCount={catalog.total + (green?.items.length || 0)}
+        initialCountIncomplete={catalog.countIncomplete || !green}
+        initialMarketCountInfo={catalog.marketCountInfo}
       />
     </div>
     <style dangerouslySetInnerHTML={{ __html: "@media (min-width:1024px){.ac-budget-help{display:none!important}}" }} />

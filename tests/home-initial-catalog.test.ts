@@ -8,11 +8,11 @@ const homeRoute = fs.readFileSync("apps/web/app/api/catalog/home/route.ts", "utf
 
 test("home page supplies a bounded server snapshot and recovers from storage errors", () => {
   assert.match(page, /timing\.measure\("snapshot",\(\)=>readHomeCatalogSnapshot\(10\)\)\.then\(value=>\{timing\.setGeneration\(value\.generationId\);return timing\.measure\("counts",\(\)=>withAjesCount\(value\)\);\}\)\.catch/);
-  assert.match(page, /return \{ failed: true, items: \[\], marketCounts: \{\}, total: 0, countIncomplete:true, marketCountInfo:\{\} \}/);
+  assert.match(page, /return \{ items: \[\], marketCounts: \{\}, total: 0, countIncomplete:true, marketCountInfo:\{\} \}/);
   assert.match(page, /initialCity=\{fromQuery \|\| fromCookie\}/);
-  assert.match(page, /initialOffers:pricedItems/);
-  assert.match(page, /initialMarketCounts:catalog.marketCounts/);
-  assert.match(page, /initialCount:catalog.total\+\(green\?\.items.length\|\|0\)/);
+  assert.match(page, /initialOffers=\{pricedItems\}/);
+  assert.match(page, /initialMarketCounts=\{catalog.marketCounts\}/);
+  assert.match(page, /initialCount=\{catalog.total \+ \(green\?\.items.length \|\| 0\)\}/);
 });
 
 test("home API reads shared indexes once instead of seven complete searches", () => {
@@ -21,16 +21,16 @@ test("home API reads shared indexes once instead of seven complete searches", ()
   const end = storage.indexOf("\nfunction isPrivateHost", start);
   const implementation = storage.slice(start, end);
   assert.match(homeRoute, /readHomeCatalogSnapshot\(10\)/);
-  assert.doesNotMatch(implementation, /offers-by-id|order-updatedAt|readCurrentSearchProjection|readSearchProjection/);
-  assert.match(implementation, /catalog_home_snapshot_unavailable/);
-  assert.doesNotMatch(homeRoute, /searchOffers/);
+  assert.match(implementation, /offers-by-id\.json/);
+  assert.match(implementation, /order-updatedAt\.json/);
+  assert.match(implementation, /market\/\$\{cleanShard\(market\)\}\.json/);
   assert.doesNotMatch(implementation, /searchOffers\(/);
   assert.match(storage, /if\(!editorialHasHidden\(market\)\)continue/);
 });
 
 test("home client renders a stable skeleton and loads one catalog snapshot in the background", () => {
   assert.match(client, /function CatalogLoadingSkeleton/);
-  assert.match(client, /catalogStatus === "loading" \? \(catalogSlot \?\? <CatalogLoadingSkeleton \/>\)/);
+  assert.match(client, /catalogStatus === "loading" \? <CatalogLoadingSkeleton \/>/);
   assert.match(client, /fetch\(`\/api\/catalog\/home\?_=/);
   assert.doesNotMatch(client, /marketIds\.map\(\(id\) => fetch\(`\/api\/catalog\/search\?market=/);
   assert.match(client, /setCatalogStatus\("ready"\)/);

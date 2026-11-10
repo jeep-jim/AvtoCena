@@ -2,8 +2,6 @@ import React from 'react';
 import {CatalogDesktopSelection} from '../../apps/web/components/catalog/CatalogSelectionContext';
 import {CatalogSidebar} from '../../apps/web/components/catalog/CatalogSidebar';
 import {DealerBrowsingProvider} from '../../apps/web/components/dealers/DealerBrowsingContext';
-import {PublicHeader} from '../../apps/web/components/layout/PublicHeader';
-import type {DealerBrowsingContext} from '../../apps/web/lib/dealers/browsing-context';
 import {hydrateRoot} from 'react-dom/client';
 import {renderToString} from 'react-dom/server';
 import {DealerLivePreview} from '../../apps/web/components/dealers/DealerLivePreview';
@@ -15,7 +13,7 @@ import {DealerProfileContent} from '../../apps/web/components/dealers/DealerProf
 import {publicDealerProfile} from '../../apps/web/lib/dealers/public-profile';
 import {DealerOfferContent} from '../../apps/web/components/dealers/DealerOfferContent';
 import {PublicLeadCaptureV2} from '../../apps/web/components/leads/PublicLeadCaptureV2';
-import FavoritesPage from '../../apps/web/components/catalog/FavoritesContent';
+import FavoritesPage from '../../apps/web/app/(public)/favorites/page';
 import {SpecTile} from '../../apps/web/components/catalog/OfferSpecTile';
 import {publicRail} from '../../apps/web/lib/dealers/public-rail';
 import {SpecialRail} from '../../apps/web/components/dealers/SpecialRail';
@@ -32,8 +30,7 @@ const q=new URLSearchParams(location.search),kind=q.get('view')||(location.pathn
 Object.assign(s,JSON.parse(sessionStorage.getItem('fixture-server')||'{}'));
 const renderer=kind==='preview-hydration'?null:createRoot(document.getElementById('root')!);
 const root={render:(content:React.ReactNode)=>renderer!.render(<><OverlayBackHistory/>{content}</>)};
-if(kind==='browser-identity'){root.render(<BrowserIdentityFixture/>);
-}else if(kind==='cabinet'){
+if(kind==='cabinet'){
  s.dealerId='dealer_fixture';s.name='АВТОГРАД';s.profileEnabled=true;
  const active=q.get('access')==='active',membership={...EMPTY_MEMBERSHIP,partnerUntil:active?'2099-01-01T00:00:00Z':''};
  root.render(<CrmWorkspaceFrame actions={null} navigation={<DealerCabinetNavigation/>}><section className="dealer-workspace dealer-cabinet-content"><CrmPageHeading title={s.name}/><DealerWorkspace verified={q.get('verified')!=='0'} initial={s} features={{version:0,affiliatesEnabled:false}} membership={membership} fullAccess={active}/></section></CrmWorkspaceFrame>);
@@ -65,21 +62,5 @@ function DealerLayoutFilters(){
   <CatalogDesktopSelection>{many&&<div style={{display:"flex",flexWrap:"wrap",gap:8}}>
    {Array.from({length:16},(_,index)=><button type="button" className="ac-filter-chip" key={index}>Параметр {index+1}</button>)}
   </div>}</CatalogDesktopSelection>
- </>;
-}
-
-function BrowserIdentityFixture(){
- const first:DealerBrowsingContext={id:'first',name:'Первый дилер',logoLight:'/brands/topavto-logo-black.png',logoDark:'/brands/topavto-logo.png',href:'/dealers/first',preview:false,markets:[]};
- const contexts:Record<string,DealerBrowsingContext|null>={
-  first,
-  second:{...first,id:'second',name:'Второй дилер',headerIcon:'/buyers/1.jpg',logoLight:'/buyers/2.jpg',logoDark:'/buyers/3.jpg',href:'/dealers/second'},
-  darkOnly:{...first,id:'dark-only',logoLight:'',logoDark:'/buyers/4.jpg'},
-  noLogo:{...first,id:'no-logo',logoLight:'',logoDark:''},
-  public:null,
- };
- const [context,setContext]=React.useState('first');
- return <>
-  <DealerBrowsingProvider dealer={contexts[context]}><PublicHeader hideBack/></DealerBrowsingProvider>
-  <label>Контекст страницы<select value={context} onChange={event=>setContext(event.target.value)}>{Object.keys(contexts).map(value=><option key={value} value={value}>{value}</option>)}</select></label>
  </>;
 }

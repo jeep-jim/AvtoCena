@@ -8,8 +8,8 @@ const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard
 test("homepage prefers safe delivered-price projections before pending inventory", () => {
   assert.match(storage, /function selectHomepageShowcase\(rows: CatalogSearchProjection\[\], limit: number, now=new Date\(\)\)/);
   assert.match(storage, /selectCatalogShowcaseDiversity\(rows\.filter\(row=>projectionCanRenderCardAt\(row,now\)\)\.sort\(compareCatalogDisplayOrder\),limit\)/);
-  assert.match(storage, /items: selectHomepageShowcase\(rows, 24, now\)\.map\(publicOfferFromProjection\)/);
-  assert.match(storage, /overview.markets\[market\].items.slice\(0, limit\)/);
+  assert.match(storage, /return selectHomepageShowcase\(rows, limit\)\.map\(publicOfferFromProjection\)/);
+  assert.match(storage, /const diverse = selectHomepageShowcase\(candidates, limit\)/);
 });
 
 test("unqualified pending inventory is not rendered as a public card", () => {
