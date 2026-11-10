@@ -1,3 +1,8 @@
+# Active incident continuation — 10.11.2026
+
+- For the ongoing stability incident, first read `docs/operations/current-incident.md`, then the latest relevant entries of `roadmap.md`. Use `tail` and targeted `rg` searches for the multi-megabyte history; do not dump the whole file into conversation context. Preserve all historical entries.
+- Reconcile the exact active deployment in the incident handoff before launching another production release. Keep prepared, merged, installed and live-verified statuses distinct.
+
 # User-facing interface copy
 
 - Owner instruction 23.10.2026: fill the existing permanent encyclopedia foundation. Do not restart model discovery or rebuild/reparse the model list. Prioritize activation of saved reviewed batches, verified use in catalog calculations, then missing-field completion across the existing makes. Preserve records, revisions, manual edits and exact technical identities. The accepted iterative plan is docs/encyclopedia/2026-10-23-night-morning-recap-and-plan.md; unknown certified power must remain unknown.
