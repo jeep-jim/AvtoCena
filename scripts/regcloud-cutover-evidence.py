@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Read a stopped failed candidate and current runtime; no start/exec/probes or env output."""
-import collections, json, re, subprocess, sys
+import collections, json, re, subprocess, sys, io, tarfile
 
 release = sys.argv[1]
 assert re.fullmatch(r'[a-f0-9]{40}', release)
@@ -29,6 +29,12 @@ for label,name in [('failed','avtocena-release-'+release[:12]),('production','av
             block=logs.splitlines()[i:i+16]
             safe=[line[:160] for line in block if re.match(r"^\s*(?:market: '(?:china|uae|europe|georgia|korea|japan)'|(?:name|code|message): '[a-zA-Z0-9_:.-]{1,120}'|at [a-zA-Z0-9_.$]+ \(|Error: [a-zA-Z0-9_:.-]+)",line)]
             print('CUTOVER_CATALOG_FAILURE',json.dumps({'target':label,'details':safe}),flush=True)
+    if label=='failed':
+        # The image was built without production credentials. Read static code only.
+        archive=subprocess.run(['docker','cp',name+':/app/apps/web/.next/server/chunks/7272.js','-'],capture_output=True,timeout=25,check=True).stdout
+        with tarfile.open(fileobj=io.BytesIO(archive)) as files:
+            source=files.extractfile(files.getmembers()[0]).read().decode('utf8')
+        print('CUTOVER_STATIC_CALLER',source[2445:3845],flush=True)
     grouped=collections.defaultdict(list)
     for line in logs.splitlines():
         m=re.search(r'catalog_storage_read (\{[^\n]+\})',line)
