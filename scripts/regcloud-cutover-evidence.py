@@ -19,10 +19,16 @@ for label,name in [('failed','avtocena-release-'+release[:12]),('production','av
     print('CUTOVER_STATE',json.dumps({'target':label,**state}),flush=True)
     # Closed incident interval, not a new load test. Both streams only go through
     # allowlisted aggregate extraction; no URLs, addresses, source bodies or keys.
-    p=subprocess.run(['docker','logs','--since','2026-10-27T13:51:00Z','--until','2026-10-27T14:00:00Z','--tail','12000',name],capture_output=True,text=True,timeout=25,check=True)
+    p=subprocess.run(['docker','logs','--since','2026-11-10T03:27:00Z','--until','2026-11-10T03:36:00Z','--tail','12000',name],capture_output=True,text=True,timeout=25,check=True)
     logs=p.stdout+'\n'+p.stderr
     categories=['detail_cache_queue_timeout','detail_cache_queue_full','visitor_restricted','read_deadline','object_storage_response_timeout','ETIMEDOUT','ECONNRESET','TypeError','heap out of memory','FATAL ERROR','ENOMEM','home_initial_catalog_failed','home_initial_pricing_failed']
     print('CUTOVER_ERRORS',json.dumps({'target':label,'counts':{k:logs.count(k) for k in categories}}),flush=True)
+    # Error diagnostics contain only allowlisted market labels, exception names and stack frames.
+    for i,line in enumerate(logs.splitlines()):
+        if 'catalog_market_unavailable' in line or 'catalog_page_unavailable' in line:
+            block=logs.splitlines()[i:i+16]
+            safe=[line[:160] for line in block if re.match(r"^\s*(?:market: '(?:china|uae|europe|georgia|korea|japan)'|(?:name|code|message): '[a-zA-Z0-9_:.-]{1,120}'|at [a-zA-Z0-9_.$]+ \(|Error: [a-zA-Z0-9_:.-]+)",line)]
+            print('CUTOVER_CATALOG_FAILURE',json.dumps({'target':label,'details':safe}),flush=True)
     grouped=collections.defaultdict(list)
     for line in logs.splitlines():
         m=re.search(r'catalog_storage_read (\{[^\n]+\})',line)
