@@ -24144,3 +24144,36 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - Live после rollback: `/api/health` HTTP 200, `ok=true`, но `releaseSha=008643e8929901e366d079b0d5c394e9b4df2350`, не редакционный SHA. Все 10 новых URL отдали HTTP 200 fallback старого блога, но ни один не содержал свой точный заголовок; production-публикация статей не подтверждена.
 - В журнале deploy также есть advisory latency: UAE 7,0268 с после directory TTL, Korea 10,7039 с, Europe 15,6559 с и Europe API 7,6458 с; эти замеры функционально прошли и не были блокирующим условием. Блокирующая причина — пустая UAE-выдача.
 - Следующее безопасное действие: сначала получить сохранённое подтверждение непустой UAE-выдачи и причины пустого ответа, затем выполнить один новый release-run и exact-SHA live-проверку 10 статей, 10 обложек, индекса и sitemap. Не обходить guard и не запускать повтор до устранения причины.
+
+
+### 10.11.2026 10:54 Красноярск — docs-only watch: редакционный deploy FAILURE, production прежний
+
+- Сначала прочитаны свежие Road/checklist на main61ce9149c939c912490b9d2127d2434d6bd34712 и новая primary Road10:37. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 прежний; related operations не менялись. Полные истории и прежние failures сохранены.
+- PR1727 MERGED09:54:46, merge1585eb6f1774d2f3d5f7d47b9b8aeda323ff7aa6/headb96689a9ade23fd0a66f4f4f3e6e28989f1c9f4e; НЕ installed. PR1728 docs-only MERGED10:39:08, merge61ce9149/head76406a227e91088175848798672a71c971788135, записал rollback. PR1706–1708 и1724 OPEN, heads прежние;1724 ee6a642bbe3b669325d4869953157862d36aa47c НЕ installed.
+- NEW primary saved финальный deploy42745950686/129598222948 FAILURE10:35:37 READ через Road10:37, повторно журнал НЕ запрашивался: Deploy with rollback and resource measurements остановлен guard performance_empty_catalog:/cars?market=uae, old production retained. Это функциональный empty-catalog failure, не откат из-за advisory latency. Primary сохранил UAE7.0268s/Korea10.7039s/Europe15.6559s/EuropeAPI7.6458s как slow, функционально прошедшие измерения; performance acceptance не заявляется. Точная причина пустой UAE-выдачи неизвестна; app deploy continuation нет.
+- Primary saved после rollback: health008643e8;10 новых URL HTTP200, но fallback старого блога без собственного exact title.10 статей/10 обложек,102 unique/92 preserved и30 H2 подготовлены и слиты, production publication НЕ подтверждена; Дзен/VK0external. Primary finalhead checks42744880395/129594473702 SUCCESS09:47:51,42744880386/129594473109 SUCCESS09:46:26,42744880383/129594473308 SUCCESS09:54:16 уже READ через сохранённый primary итог и повторно не читались. Authenticated editor Save не подтверждён.
+- NEW old-head CI42742813917/129587763688 FAILURE09:32:44 LOG READ:2830 tests/2829 PASS/1 FAIL, тот же qualification contract/regex «Новый курс: квалификация источников для шести рынков», AssertionError ERR_ASSERTION в09:32:39.620. Более поздние CI на46e3796c/6f43687b/e7fc2513:2830/2830, qualification contract PASS, typecheck/build58/58 PASS; прежние failures не отменены. Причина изменения actual Road отдельно не доказана; нужна saved primary привязка исправления к head/сохранности истории.
+- NEW CRM audit129597961240 FAILURE10:10:11: Production release or verified descendant not confirmed, exit1; live129603491645 SKIPPED metadata. Browser129597961040 PASS16 unit/88 CRM/48 fixture/228 openings. Это release-wait failure, не live Save failure.
+- NEW prices42750456326/129612568524 FAILURE10:36:28: report10:36:25.109 release008643e8929901e366d079b0d5c394e9b4df2350/gen_1794098779458_0e64fb1f/skipped=true/verified=false/publication_in_progress/budget_preparation_deferred_active_publisher;12 tests PASS. Не live calculation failure и не closure прежнего binding failure.
+- Все3 новых green finals:56 tests, budget1440/390, layout10cases/negativeControl=true/standalone PASS. Все3 новых site controls finals: mobile/desktop390/1440/light/dark, controls/chat/games/city/roles/account/registration-login-reload PASS; fixture != live authSave. Ниже13 новых непосредственно READ final jobs; повторно не читать, все artifacts/inline screenshots НЕ viewed.
+
+| Run | Job READ | Назначение | Итог, Красноярск | Artifact IDs (НЕ viewed) |
+| --- | --- | --- | --- | --- |
+| 42750456326 | 129612568524 | prepare | FAILURE 10:36:28 | 13733775035 |
+| 42745950810 | 129597961040 | browser | SUCCESS 10:00:10 | 13731123253 |
+| 42745950810 | 129597961240 | audit | FAILURE 10:10:11 | не найден |
+| 42745950804 | 129597961235 | verify | SUCCESS 09:55:39 | 13730768946 |
+| 42743217855 | 129589095166 | validate | SUCCESS 09:38:19 | 13730386742, 13730980650 |
+| 42743047045 | 129588537097 | validate | SUCCESS 09:36:43 | 13729219830, 13730147074 |
+| 42742813917 | 129587763688 | validate | FAILURE 09:32:44 | не найден |
+| 42743046558 | 129588531146 | verify | SUCCESS 09:31:31 | 13728949822 |
+| 42743217814 | 129589094211 | verify | SUCCESS 09:33:15 | 13730181426 |
+| 42743218078 | 129589098039 | verify | SUCCESS 09:31:23 | 13730725223 |
+| 42744362443 | 129592806291 | validate | SUCCESS 09:49:49 | 13730383392, 13730378249 |
+| 42744362300 | 129592806060 | verify | SUCCESS 09:42:40 | 13730691668 |
+| 42744362229 | 129592805759 | verify | SUCCESS 09:41:27 | 13730252393 |
+
+- Fresh runs snapshot10:51–10:53: IN_PROGRESS1/PENDING0 — existing China42718760292/publish129530600190, Publish с07:12:15, final UNREAD/public manifest unknown. Collect129507326282 уже READ и не повторялся. Последние новые runs42750456326/42750456237 созданы10:35:40; CRM retry42750456237 SKIPPED и USD42749657122 SUCCESS metadata only, не delivery/rate/data proof. Capacity watch не дублировался.
+- Единственный bounded health этой сверки10:52–10:53: curl exit0/HTTP200/ok=true/exact008643e8929901e366d079b0d5c394e9b4df2350, calculationVersion091f4cbc26484a9a3f455dda84eeb8bfc11237796574b549da859efd95889daf прежний; retry нет. Не1724/1727 installed/BMW fix/speed/UI/authSave acceptance.
+- Восемь China availability по одному запросу10:53:128144651298 снова404 BlobNotFound;128833132501/128498996181/127541782446/126870309797/126198742555/124685023963/124601674990 снова Transport closed. Все UNREAD/cause/final public manifest unknown; старые READ collect/verifier/translation не повторялись.
+- Следующий адресный primary saved анализ: точный UAE request/response/body/card count и release-time binding для performance_empty_catalog, причина пустой выдачи и сохранённое подтверждение непустого результата при неизменном guard. Watch не исполняет предложенный primary повторный release. Далее existing China final и новые saved exact-release/blog/mobile/authSave/1724/BMW результаты; отдельно compact index schema/context/readback, queue/AJES binding, translation, Direct, Europe cancel-locktimeline, price/Korea. Owner freeze/watch enabled сохранены; runtime/browser/provider/rerun/repair/cleanup/данные/цены/права не менялись.
