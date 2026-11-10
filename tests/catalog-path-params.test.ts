@@ -92,3 +92,18 @@ test('invalid encoded segments fail as a normal not-found route, without URI err
   }
   assert.equal(decodeCatalogPathParams({market: 'unknown', make: 'BMW'}), null);
 });
+
+test('all six markets preserve spaced model selection through Next route, filters, heading and pagination', async () => {
+  const page = await loadPage(modelRoute);
+  const countries = {china:'Китая',japan:'Японии',korea:'Кореи',uae:'ОАЭ',europe:'Европы',georgia:'Грузии'};
+  for (const [market,country] of Object.entries(countries)) {
+    const path = `/cars/${market}/Volkswagen/Passat%20B8`;
+    const filters = {powerTo:'160',city:'Новокузнецк',sort:'totalRub',page:'2'};
+    const props = {params:Promise.resolve(pageParams(path)),searchParams:Promise.resolve(filters)};
+    const applied = await page.default(props);
+    assert.deepEqual(applied,{...filters,market,make:'Volkswagen',model:'Passat B8'});
+    assert.equal(catalogSearchHeading(applied),`Volkswagen Passat B8 из ${country}`);
+    assert.equal(canonicalCatalogHref('/cars?'+new URLSearchParams(applied)),path+'?'+new URLSearchParams(filters));
+    assert.equal((await page.generateMetadata(props)).alternates.canonical,path+'?page=2');
+  }
+});
