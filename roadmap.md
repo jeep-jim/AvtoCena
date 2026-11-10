@@ -24051,3 +24051,50 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - Единственный bounded health начат06:33:00, exit получен к06:33:15: curl exit0/HTTP200/ok=true/exact008643e8929901e366d079b0d5c394e9b4df2350, calculationVersion091f4cbc26484a9a3f455dda84eeb8bfc11237796574b549da859efd95889daf прежний. Не1724 installed/BMW fix/speed/authSave acceptance; retry нет.
 - Восемь China availability по одному запросу:128144651298 снова404 BlobNotFound;128833132501/128498996181/127541782446/126870309797/126198742555/124685023963/124601674990 снова Transport closed. Все UNREAD/cause/final public manifest unknown/artifacts НЕviewed. China42510886490/128833132501 FINALFAIL09.11 06:09:49 подтверждён fresh metadata; причина неизвестна; новый scheduled collect не закрывает прежний failure. Ранее READ collect/verifier/translation не повторялись.
 - Далее existing China collect/publish finals и только новые saved primary результаты установки1724/exact release/BMW URL/повторного выбора модели/главной/mobile/speed/authSave; отдельно China outcome-finalmanifest/verifier condition, translation request-response-config-auth binding, Direct480→478, Europe cancel-locktimeline, price/Korea. Watch enabled/owner freeze сохранены; runtime/browser/provider/rerun/repair/cleanup/цены/данные/права watch не менял.
+
+
+### 10.11.2026 08:12 Красноярск — docs-only watch: новые финалы и сохранённые диагностики
+
+- Сначала прочитаны свежие Road/checklist на main a6c64b5e45617a85a03041caad486203535c3266. После fb03a7bc primary добавил 0f04a501 и a6c64b5e: два маркера bounded saved diagnostics и переключение entrypoint AJES audit на scripts/ajes-failure-saved-summary.ts. Diff прочитан; новых primary записей в двух docs/related operations и authenticated editor Save acceptance нет. AGENTS e43d71557ddddef18c30cfec1c40f54f658e4826 прежний. История и failures сохранены.
+- PR1724 OPEN/head ee6a642bbe3b669325d4869953157862d36aa47c, НЕ installed; PR1706–1708 OPEN с прежними heads, новых PR после1726 нет. IN_PROGRESS1/PENDING0: existing China42718760292/publish129530600190, Publish с07:12:15, final UNREAD/manifest unknown. Старые queued38994950593/38994894574/38994824794/31164670128 неизменны; нового app deploy нет. Watch запусков не создавал.
+- China collect129507326282 SUCCESS07:06:11, final READ: report07:05:45.712 completed=true, mode=local_replica_and_changes, offers288358, changes520192, cursor12880830, replicaSaved=true. Это собранная реплика, не опубликованный inventory; числа не суммировать. Новый collect не закрывает старые publish failures.
+- Два новых compact-count failures:42728869365/129541459223 в07:46:54.568 и42729649204/129548374341 в07:56:53.237 — catalog_compact_index_v3_not_verified, apps/web/lib/catalog/storage.ts:2581:104, backfill-budget-count-index.mjs:12:28, exit1. По3 offline tests PASS; preflight ok=true не подтверждает backfill. Точное несовпавшее поле readback и причина неизвестны; final compact continuation нет. Следующий адресный saved primary анализ: generation/schema/context и ожидаемый/сохранённый index, rows/otherRows lengths и порядок записи/readback под lock; без rerun/repair/ослабления guard.
+- Пять shared-prices finals FAIL: reports07:34:13.570/07:35:08.414/07:36:24.032/07:38:25.042/07:39:34.506, release008643e8929901e366d079b0d5c394e9b4df2350, gen_1794098779458_0e64fb1f, skipped=true/verified=false, publication_in_progress/budget_preparation_deferred_active_publisher. Это deferred preparation, не доказанный live calculation failure и не закрытие прежнего binding failure.
+- Translation42729622977/129544046378 FAIL07:45:24: report07:45:20.860 translation_http_403, offers254397/unique34521/translated0/pending34521; cause unknown. Следующий saved request-response-config-auth binding, без provider requests/retry.
+- Direct три SUCCESS:42728816400/129541281126,42729181081/129543640552,42729649179/129545414130; emitted07:35:44.532/07:40:00.005/07:45:22.610, gen_1794098779458_0e64fb1f. Все all30081: China0/Korea0/UAE22/Georgia7/Europe29574/green478; scanned320758 cumulative/ineligible263876/incomplete26801. all.xml9860539 bytes/SHA256 3de4cd589fab7fd641ca7408c1f98f937e32e77bc0d6dedec8457eb329c193a5. Green updated08.11 03:36:55.767. Рекламный feed не full inventory; успехи не закрывают green_feed_empty/binding/480→478; нужен saved eligibility/filter/time binding.
+- Пять current-pages SUCCESS на gen_1794098779458_0e64fb1f: первый подготовил policy10/12.11 generationScopedOnly=true,11.11 alreadyPrepared; остальные10/11/12.11 alreadyPrepared=true. Это не новая live публикация. UAE/Europe/Georgia plan SUCCESS, collect/publish SKIPPED; Korea plan no_enabled_background_source, collect/publish SKIPPED. Green17tests PASS, actual refresh SKIPPED/no artifact.
+- NEW saved page-errors42729006539/129541927317 SUCCESS07:32:23, LOG READ: categories ajes_local_busy503/detail_cache_queue_timeout1671/ajes_invalid_response498/ajes_visitor_restricted24/object_storage_GET_unreachable3 — вхождения в bounded log, не unique requests. Digest2395252187 связан в сохранённом stack с detail_cache_queue_timeout. Чтение chunk4678.js дало ENOENT; это ограничение диагностики, не доказанный runtime missing chunk. Saved snapshot memory4.118GiB/10GiB/cpu321.22%; bounded nginx/fatal categories0 не доказывают отсутствие всех сбоев. Exact owner URL/request/release-time binding и причина очереди не установлены.
+- NEW saved AJES audit42729349864/129543098834 SUCCESS07:35:13, LOG READ: Korea page1 HTTP200 invalid_response07:34:34.652–07:34:35.941; Korea count07:35:05.578–07:35:06.048 и stats detail07:35:01.177–07:35:01.386 HTTP200/providerCode=bot/outcome=visitor_restricted. Старые slots Korea3/5 visitor_restricted,6 invalid_response; stats1 visitor_restricted,3 invalid_response,5/6 HTTP502 относятся к собственным сохранённым timestamps, не к новому watch probe. Saved Korea page1 observed06:58:13.194 и Japan page1 observed04:11:55.297 содержат по24 items/schema2/stale=false/partial=false; pages2/3 отсутствуют в проверенных slots. Это не full inventory и не причина всех пользовательских ошибок. Audit SUCCESS не означает all probes PASS; отказ не обходить. Следующий primary saved request/context/time/config/queue binding, без новых запросов поставщику.
+- Ниже ledger всех24 новых READ final jobs: повторно не читать. Все перечисленные artifacts НЕ viewed; отсутствие artifact в ledger означает, что upload ID в журнале не найден.
+
+| Run | Job READ | Назначение | Итог, Красноярск | Artifact ID (НЕ viewed) |
+| --- | --- | --- | --- | --- |
+| 42729811101 | 129544766801 | prepare shared budget prices | FAILURE 07:39:39 | 13724675780 |
+| 42729722543 | 129544389180 | prepare shared budget prices | FAILURE 07:38:27 | 13724840634 |
+| 42729649238 | 129544362771 | prepare current catalog pages | SUCCESS 07:38:11 | нет |
+| 42729649204 | 129548374341 | Prepare compact budget counts | FAILURE 07:56:55 | 13725206998 |
+| 42729649179 | 129545414130 | Publish Yandex Direct feed | SUCCESS 07:45:27 | 13723882579 |
+| 42729622996 | 129544044905 | prepare current catalog pages | SUCCESS 07:37:29 | нет |
+| 42729622977 | 129544046378 | Catalog Russian descriptions | FAILURE 07:45:24 | 13725390061 |
+| 42729569374 | 129543859643 | Catalog refresh georgia | SUCCESS 07:36:54 | нет |
+| 42729543577 | 129543765127 | Catalog refresh korea | SUCCESS 07:36:41 | нет |
+| 42729484833 | 129543568008 | prepare shared budget prices | FAILURE 07:36:26 | 13724730557 |
+| 42729392798 | 129543249038 | prepare current catalog pages | SUCCESS 07:35:35 | нет |
+| 42729349864 | 129543098834 | AJ System — bounded failure audit | SUCCESS 07:35:13 | нет |
+| 42729288813 | 129542955057 | prepare shared budget prices | FAILURE 07:35:11 | 13724091301 |
+| 42729199531 | 129542580911 | prepare shared budget prices | FAILURE 07:34:17 | 13724700029 |
+| 42729181081 | 129543640552 | Publish Yandex Direct feed | SUCCESS 07:40:02 | 13724346230 |
+| 42729180731 | 129542559283 | prepare current catalog pages | SUCCESS 07:34:04 | нет |
+| 42729105957 | 129542260499 | Catalog refresh europe | SUCCESS 07:33:13 | нет |
+| 42729006539 | 129541927317 | inspect page errors | SUCCESS 07:32:23 | нет |
+| 42728869365 | 129541459223 | Prepare compact budget counts | FAILURE 07:46:58 | 13724527478 |
+| 42728816664 | 129541285563 | prepare current catalog pages | SUCCESS 07:33:23 | нет |
+| 42728816400 | 129541281126 | Publish Yandex Direct feed | SUCCESS 07:35:49 | 13724046576 |
+| 42728778326 | 129541157842 | Catalog refresh uae | SUCCESS 07:30:46 | нет |
+| 42728720565 | 129540972774 | Catalog refresh green | SUCCESS 07:30:23 | нет |
+| 42718760292 | 129507326282 | China collect | SUCCESS 07:06:11 | 13722320997 |
+
+- Cancellations42729622765/42729622634/42729181066/42728869781/42728869101 имеют jobs=[]; cause unknown, не доказанный timeout/repair. Prices42729188503/129542544531 SKIPPED metadata. Billing42726325927/129532758291 SUCCESS07:11:41 metadata only/log UNREAD, не финансовая сверка/изменения прав. Capacity watch не дублировался.
+- Единственный bounded health начат08:09:33, exit получен к08:09:57: curl exit0/HTTP200/ok=true/exact008643e8929901e366d079b0d5c394e9b4df2350, calculationVersion091f4cbc26484a9a3f455dda84eeb8bfc11237796574b549da859efd95889daf прежний. Не1724 installed/BMW fix/speed/authSave acceptance; retry нет.
+- Восемь China availability по одному запросу:128144651298 снова404 BlobNotFound;128833132501/128498996181/127541782446/126870309797/126198742555/124685023963/124601674990 снова Transport closed. Все UNREAD/cause/final public manifest unknown/artifacts НЕ viewed; ранее READ collect/verifier/translation не повторялись.
+- Далее existing China publish final и новые saved primary результаты1724/exact release/BMW URL/повторного выбора модели/главной/mobile/speed/authSave; отдельно compact index readback, queue/AJES request binding, translation, Direct, Europe cancel-locktimeline, price/Korea. Watch enabled/owner freeze сохранены; runtime/browser/provider/rerun/repair/cleanup/цены/данные/права watch не менял.
