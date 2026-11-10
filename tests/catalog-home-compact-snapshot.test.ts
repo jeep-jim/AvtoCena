@@ -77,3 +77,24 @@ test('overview and search share one generation read, and switch together after p
     Date.now = clock; storage.readJsonWithMeta = original; resetCatalogReadCachesForTests();
   }
 });
+
+for (const scenario of ['missing','wrong-generation','short-sample','old-policy']) {
+ test(`homepage refuses ${scenario} overview without expanding to a whole catalog`,async()=>{
+  const storage=getJsonStorage(), original=storage.readJsonWithMeta;
+  const reads:string[]=[];
+  storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
+   reads.push(key);
+   if(key==='catalog-editorial/current.json')return {found:false,value:fallback};
+   if(key==='catalog/manifest.json')return {found:true,value:{generationId:'home-bounded',markets:{china:{count:100000}}} as T};
+   assert.match(key,/overview(?:\.\d{4}-\d{2}-\d{2})?\.json$|overview/,`must not expand: ${key}`);
+   if(scenario==='missing')return {found:false,value:fallback};
+   const value=buildCatalogOverviewPayload(scenario==='wrong-generation'?'other':'home-bounded',{generationId:scenario==='wrong-generation'?'other':'home-bounded'} as any,{china:{sourceTotal:100000,total:100000,items:[]}},scenario==='old-policy'?'2000-01-01':undefined);
+   return {found:true,value:value as T};
+  };
+  try {
+   resetCatalogReadCachesForTests();
+   await assert.rejects(readHomeCatalogSnapshot(10),/catalog_home_snapshot_unavailable/);
+   assert.ok(reads.length<=5,`bounded reads: ${reads.join(',')}`);
+  } finally {storage.readJsonWithMeta=original;resetCatalogReadCachesForTests();}
+ });
+}

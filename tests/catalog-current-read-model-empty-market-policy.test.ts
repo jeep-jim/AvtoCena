@@ -33,13 +33,14 @@ test("homepage never erases an admitted market while a compact read-model shard 
 
 const storageSource = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 
-test("homepage distinguishes an incomplete read model from a complete market filtered by current safety policy", () => {
-  assert.match(storageSource, /const projectionComplete = MARKETS\.every/);
-  assert.match(storageSource, /manifest\.markets\?\.\[market\]\?\.count/);
-  assert.match(storageSource, /rawProjectionRows\.some\(\(row\) => row\.market === market\)/);
-  assert.match(storageSource, /const projectionRows = rawProjectionRows\.filter\(projectionCanRenderCard\)/);
-  assert.match(storageSource, /marketCounts\[market\] = rows\.length/);
-  assert.match(storageSource, /if \(projectionComplete\)/);
+test("homepage requires complete current-day summaries before returning market counts", () => {
+  const start=storageSource.indexOf("async function readHomeCatalogSnapshotOriginal");
+  const implementation=storageSource.slice(start,storageSource.indexOf("function isPrivateHost",start));
+  assert.match(implementation,/overview\?\.generationId === manifest.generationId/);
+  assert.match(implementation,/catalogOverviewMarketComplete\(summary, count, limit\)/);
+  assert.match(implementation,/policyDate/);
+  assert.match(implementation,/throw new Error\("catalog_home_snapshot_unavailable"\)/);
+  assert.doesNotMatch(implementation,/readCurrentSearchProjection|readSearchProjection|offers-by-id/);
 });
 
 test("current read-model republisher preserves every immutable public row", () => {
@@ -80,10 +81,11 @@ const homeRouteSource = fs.readFileSync(new URL("../apps/web/app/api/catalog/hom
 const offerPageSource = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 const visibleAuditSource = fs.readFileSync(new URL("../scripts/catalog-audit-visible-calculation-coverage.mjs", import.meta.url), "utf8");
 
-test("homepage route actively backfills a manifest-present market when its showcase rows are missing", () => {
-  assert.match(homeRouteSource, /const missingMarkets = Object\.entries\(result\.marketCounts/);
-  assert.match(homeRouteSource, /searchOffers\(\{ market: market as any, page: 1, pageSize: 10/);
-  assert.match(homeRouteSource, /catalog_home_market_recovery_failed/);
+test("homepage route reports unavailable summaries without visitor-triggered market scans", () => {
+  assert.match(homeRouteSource,/readHomeCatalogSnapshot\(10\)/);
+  assert.doesNotMatch(homeRouteSource,/searchOffers|missingMarkets/);
+  assert.match(homeRouteSource,/total: null, countIncomplete: true/);
+  assert.match(homeRouteSource,/status: 503/);
 });
 
 test("inline parameters replace the separate power control and duplicated form", () => {

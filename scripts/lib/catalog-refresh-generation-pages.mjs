@@ -3,7 +3,7 @@ import {validateOverviewSourceShard} from './catalog-overview-source-validation.
 // Only derivatives under the captured generation may be changed. A publisher
 // can build another generation concurrently; no shared alias or lease is touched.
 export async function refreshGenerationPages({storage, markets, buildLanding, prepareRows, buildOverview,
-  landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow, landingsOnly = false}) {
+  landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow, landingsOnly = false, overviewComplete}) {
   const day = () => new Date(now().getTime() + 7 * 3600000).toISOString().slice(0, 10);
   const capturedDay = day();
   const policyDate = policyNow ? new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10) : capturedDay;
@@ -11,6 +11,7 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   const manifest = await storage.readJson('catalog/manifest.json', null);
   const generationId = manifest?.generationId;
   if (!generationId || !/^[a-zA-Z0-9_-]+$/.test(generationId)) throw Error('catalog_pages_manifest_invalid');
+  const overviewContext={generationId,manifest,policyDate};
   const prefix = `catalog/generations/${generationId}/indexes/`;
   const scoped = path => {
     if (!path.startsWith(prefix) || path.includes('..')) throw Error('catalog_pages_unscoped_write');
@@ -34,7 +35,8 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   const previousOverview = landingsOnly ? {value:null} : await readPrevious(path);
   const previous = previousOverview.value;
   if (skipReady && previous?.generationId === generationId && previous.policyDate === policyDate
-      && previous.dailyLandingsVersion === 1 && previous.facets?.generationId === generationId) {
+      && previous.dailyLandingsVersion === 1 && previous.facets?.generationId === generationId
+      && (!overviewComplete || overviewComplete(previous,overviewContext))) {
     await check();
     return {generationId, policyDate, alreadyPrepared: true};
   }
@@ -64,6 +66,7 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
     overview.markets[market].sourceTotal = counts[market];
   }
   overview.dailyLandingsVersion = 1;
+  if(overviewComplete&&!overviewComplete(overview,overviewContext))throw Error('catalog_pages_home_overview_incomplete');
   await write(path, overview, previousOverview);
   await check();
   return {generationId, policyDate, path, markets: results, generationScopedOnly: true};

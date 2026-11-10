@@ -2817,104 +2817,10 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
-  const currentProjection = await timing.measure("snapshotProjection",()=>readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION));
-  if (currentProjection.generationId === manifest.generationId) {
-    const rawProjectionRows = currentProjection.items || [];
-    // Current read models are replaced independently from the immutable public
-    // generation. During that short window a combined projection can have the
-    // new generation id while one market shard is still absent. Never publish a
-    // false zero on the homepage: use the fast path only when every market that
-    // exists in the manifest has at least one renderable projection row.
-    const projectionComplete = MARKETS.every((market) =>
-      Number(manifest.markets?.[market]?.count || 0) <= 0
-        || rawProjectionRows.some((row) => row.market === market));
-    if (projectionComplete) {
-      const projectionRows = rawProjectionRows.filter(projectionCanRenderCard);
-      const marketCounts: Record<string, number> = {};
-      const items = MARKETS.flatMap((market) => {
-        const rows = projectionRows.filter((row) => row.market === market && projectionCanRenderCard(row));
-        marketCounts[market] = rows.length;
-        catalogSearchProjectionSort(rows, "updatedAt");
-        return selectHomepageShowcase(rows, limit).map(publicOfferFromProjection);
-      });
-      return {
-        generationId: manifest.generationId,
-        items:items.sort(compareCatalogDisplayOrder),
-        marketCounts,
-        total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
-      };
-    }
-  }
-  const [byId, order, marketShards] = await Promise.all([
-    readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }),
-    readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: [] }),
-    mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({
-      market,
-      shard: await readIndex<{ ids: string[] }>(manifest.generationId, `market/${cleanShard(market)}.json`, { ids: [] }),
-    })),
-  ]);
-
-  const marketCounts: Record<string, number> = {};
-  // Homepage cards only need the compact card projection. Reading full offer chunks
-  // for ~6 cards x 6 markets turned a simple initial render into dozens of object-store
-  // reads. Prefer the per-market projection shards and fall back to full chunks only for
-  // IDs from an older generation that cannot render a card from projection.
-  const projectionShards = await mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({
-    market,
-    items: (await readSearchProjection(manifest.generationId, market)).items || [],
-  }));
-  const projected = projectionShards.flatMap(({ items }) => items);
-  const projectedById = new Map(projected.filter(projectionCanRenderCard).map((row) => [row.id, row]));
-  const orderRank = new Map((order.ids || []).map((id, index) => [id, index]));
-  const selectedIds: string[] = [];
-  for (const { market, shard } of marketShards) {
-    const allowed = new Set(shard.ids || []);
-    const projection = projectionShards.find((entry) => entry.market === market)?.items || [];
-    const candidates = projection
-      .filter((row) => allowed.has(row.id) && byId.byId[row.id] && projectionCanRenderCard(row))
-      .sort((a, b) => Number(orderRank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - Number(orderRank.get(b.id) ?? Number.MAX_SAFE_INTEGER));
-    marketCounts[market] = candidates.length;
-    const diverse = selectHomepageShowcase(candidates, limit);
-    selectedIds.push(...diverse.map((row) => row.id));
-    if (diverse.length >= limit) continue;
-    const alreadySelected = new Set(diverse.map((row) => row.id));
-    for (const id of order.ids || []) {
-      if (!allowed.has(id) || !byId.byId[id] || alreadySelected.has(id)) continue;
-      selectedIds.push(id);
-      alreadySelected.add(id);
-      if (alreadySelected.size >= limit) break;
-    }
-  }
-  const missingIds = selectedIds.filter((id) => !projectedById.has(id));
-
-  const fallbackById = new Map<string, VehicleOffer>();
-  if (missingIds.length) {
-    const chunkLocations = new Map<string, OfferLocation>();
-    for (const id of missingIds) {
-      const location = byId.byId[id];
-      if (location) chunkLocations.set(`${location.market}/${location.chunk}`, location);
-    }
-    const readConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_SEARCH_CHUNK_CONCURRENCY || 12)));
-    const loaded = (await mapWithConcurrency([...chunkLocations.values()], readConcurrency, (location) =>
-      readDataJson<VehicleOffer[]>(storedOfferChunkPath(manifest.generationId, location.market, location.chunk), []))).flat();
-    for (const offer of loaded.filter((candidate) => isPublicOffer(candidate) && publishedOfferCanRenderUnderCurrentPolicy(candidate))) {
-      fallbackById.set(offer.id, offer);
-    }
-  }
-
-  const items = selectedIds.flatMap((id) => {
-    const row = projectedById.get(id);
-    if (row) return [publicOfferFromProjection(row)];
-    const offer = fallbackById.get(id);
-    return offer ? [publicOffer(offer)] : [];
-  });
-
-  return {
-    generationId: manifest.generationId,
-    items,
-    marketCounts,
-    total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
-  };
+  // Prepared overview is built by publication/date preparation, never by a visitor.
+  // A missing/mismatched summary must not expand into every market's projection
+  // and offer indexes. Preserve an explicit unavailable result instead of false zeroes.
+  throw new Error("catalog_home_snapshot_unavailable");
 }
 
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
