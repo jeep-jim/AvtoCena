@@ -11,7 +11,15 @@ if(marker.mode==='budget-failure-evidence'){
  }
  const editorial=await storage.readJson('catalog-editorial/current.json',null);
  const editedSellerPrices={};for(const market of ['japan','korea'])editedSellerPrices[market]=Object.values(editorial?.entries||{}).filter(row=>row.market===market&&row.status==='visible'&&row.sellerPrice).length;
- console.log('BUDGET_SOURCE_STATE',JSON.stringify({checkedAt:new Date().toISOString(),records,editedSellerPrices}));
+ const hour=Math.floor(Date.now()/3600000),requestUsage={};
+ for(const table of ['main','stats','china','korea']){
+  const value=await storage.readJson('catalog/operations/ajes-quota-'+table+'.json',null);
+  const buckets=Object.entries(value?.buckets||{}).filter(([h,n])=>/^\d+$/.test(h)&&Number(h)>=hour-23&&Number(h)<=hour&&Number.isSafeInteger(n)&&n>=0);
+  requestUsage[table]={available:!!value?.buckets,currentUtcHour:Number(value?.buckets?.[hour]||0),last24UtcBuckets:buckets.reduce((n,[,v])=>n+v,0)};
+ }
+ const previews=await storage.readJson('offer-calculation-previews/current.json',null),savedPricePreviews={};
+ for(const market of ['japan','korea'])savedPricePreviews[market]=Object.values(previews?.entries||{}).filter(row=>row.market===market).length;
+ console.log('BUDGET_SOURCE_STATE',JSON.stringify({checkedAt:new Date().toISOString(),records,editedSellerPrices,savedPricePreviews,requestUsage,usageMeaning:'application request accounting, not the supplier-enforced quota'}));
 }else{
 const health=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)}).then(r=>r.json());
 if(health.releaseSha!=='463fd22559a2f9c5acd60f8f5e4b269689215c84')throw Error('release_changed');

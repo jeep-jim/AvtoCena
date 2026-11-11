@@ -38,6 +38,21 @@ try{
   const ending=await context.request.get(origin+'/api/health',{timeout:30000});assert.equal((await ending.json()).releaseSha,marker.release);
   await context.close();
  }
+ report.browserPassed=true;
+ if(marker.verifyPartnerBudgets){
+  const context=await browser.newContext({serviceWorkers:'block'});
+  report.partnerBudgets=[];
+  for(const market of ['japan','korea']){
+   const params=new URLSearchParams({market,budgetTo:'1500000',pageSize:'6',city:'Москва'});
+   const started=performance.now();
+   const response=await context.request.get(origin+'/api/catalog/search?'+params,{timeout:35000});
+   const value=await response.json().catch(()=>({}));
+   report.partnerBudgets.push({market,status:response.status(),seconds:Number(((performance.now()-started)/1000).toFixed(3)),items:Array.isArray(value.items)?value.items.length:0,total:value.total??null,partial:!!value.partial,stale:!!value.stale,hasMore:!!value.hasMore,interrupted:!!value.interrupted,reads:value.reads??null,nextCursor:value.nextCursor??null,error:typeof value.error==='string'&&/^[a-z_]{1,64}$/.test(value.error)?value.error:null,serverTiming:response.headers()['server-timing']??null});
+  }
+  await context.close();
+  report.partnerBudgetsReady=report.partnerBudgets.every(r=>r.status===200&&r.items>0&&!r.partial&&!r.stale);
+  assert.ok(report.partnerBudgetsReady,'Japan/Korea budget availability remains unconfirmed; inspect source state');
+ }
  report.passed=true;
 }catch(error){report.error=String(error.message).slice(0,800);if(activePage)report.failureState=await activePage.evaluate(()=>({url:location.href,inputs:Array.from(document.querySelectorAll('input[aria-label="Цена: до"]')).map(e=>({value:e.value,visible:!!e.offsetParent})),busy:Array.from(document.querySelectorAll('.ac-catalog-filter-panel')).map(e=>e.getAttribute('aria-busy'))})).catch(()=>null);throw error;}
 finally{fs.writeFileSync('owner-filter-browser-report.json',JSON.stringify(report,null,2)+'\n');console.log('OWNER_FILTER_BROWSER',JSON.stringify(report));await browser.close();}
