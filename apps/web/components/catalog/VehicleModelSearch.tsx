@@ -3,7 +3,7 @@ import {groupFilterModels} from "@/lib/catalog/model-filter-options";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
-import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake} from "@/lib/catalog/model-suggestion-search";
+import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake, appendModelSelection} from "@/lib/catalog/model-suggestion-search";
 import {canonicalCatalogBrand} from "@/lib/catalog/brands";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 import {modelDirectoryMarkets} from "@/lib/catalog/market-selection";
@@ -348,7 +348,7 @@ export function VehicleModelSearch({
 
   const applyTypedModel = () => {
     const typed=typedModelSelection(query, items, multiple, contextual);
-    const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
+    const next=multiple?appendModelSelection(value,typed):typed;
     if(!make){const inferred=typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
     onValueChange?.(next);
     setQuery(multiple ? next.split("|").join(", ") : next);
@@ -365,7 +365,7 @@ export function VehicleModelSearch({
         <button type="button" aria-label="Закрыть список моделей" className="min-h-11 rounded-xl px-3 text-sm font-bold" onPointerDown={event=>event.preventDefault()} onClick={applyTypedModel}>Готово ×</button>
       </div>
       {mobile&&<input ref={dialogInput} autoFocus type="search" aria-label="Поиск модели" value={query} autoComplete="off" spellCheck={false} enterKeyHint="done" placeholder="Начните вводить модель" className="my-2 h-12 w-full shrink-0 rounded-xl bg-[var(--ac-surface-2)] px-3 text-base font-bold outline-none" onChange={event=>setQuery(event.target.value)} onKeyDown={event=>{if(event.key==='Enter'){event.preventDefault();applyTypedModel();}}}/>}
-      {mobile&&multiple&&selectedModels.length>0&&<div className="ac-hide-scrollbar flex shrink-0 gap-2 overflow-x-auto pb-2"><button type="button" onPointerDown={event=>event.preventDefault()} onClick={()=>{onValueChange?.("");setQuery("");}} className="shrink-0 rounded-full px-3 py-2 text-xs font-bold">Очистить</button>{selectedModels.map(model=><button key={model} type="button" aria-label={`Убрать модель ${model}`} onPointerDown={event=>event.preventDefault()} onClick={()=>onValueChange?.(selectedModels.filter(value=>value!==model).join("|"))} className="shrink-0 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-bold">{model} ×</button>)}</div>}
+      {mobile&&multiple&&selectedModels.length>0&&<div className="ac-hide-scrollbar flex shrink-0 gap-2 overflow-x-auto pb-2"><button type="button" onPointerDown={event=>event.preventDefault()} onClick={()=>{onValueChange?.("");setQuery("");}} className="shrink-0 rounded-full px-3 py-2 text-xs font-bold">Очистить</button>{selectedModels.map(model=><button key={model} type="button" aria-label={`Убрать модель ${model}`} onPointerDown={event=>event.preventDefault()} onClick={()=>{onValueChange?.(selectedModels.filter(value=>value!==model).join("|"));setQuery("");}} className="shrink-0 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-bold">{model} ×</button>)}</div>}
       {multiple && !mobile && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Выберите модели или введите название и нажмите «Применить»</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
       <div className={`ac-hide-scrollbar min-h-0 overflow-y-auto overscroll-contain ${mobile?"flex-1":"max-h-[min(18rem,35dvh)]"}`}>
         {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}

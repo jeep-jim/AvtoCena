@@ -50,6 +50,7 @@ test('narrow price sorting uses a prepared exact snapshot and reads only visible
  storage.readJson=async<T>(key:string,fallback:T)=>(saved.get(key)??fallback) as T;
  storage.writeJson=async(key,value)=>{saved.set(key,structuredClone(value));writes++;};
  storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
+  if(saved.has(key))return {found:true,etag:'saved',value:saved.get(key) as T};
   reads.push(key);let value:unknown=fallback;
   if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
   else if(key==='fees/exchange-rates.json')value={};
@@ -65,7 +66,7 @@ test('narrow price sorting uses a prepared exact snapshot and reads only visible
  try{
   resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();
   const fingerprint=(await budgetPricingFingerprint('korea'))!;
-  await sharedBudgetPrices(index,'korea',fingerprint,async()=>index.rows,async()=>fingerprint,true);
+  await sharedBudgetPrices(index,'korea',fingerprint,async()=>index.rows,async()=>fingerprint,true,{persistence:'required'});
   resetCatalogReadCachesForTests();reads.length=0;
   const ascending=await searchOffers({market:'korea',make:'BMW',model:'3',powerTo:160,sort:'totalRub',pageSize:2});
   assert.equal(ascending.total,50);assert.deepEqual(ascending.items.map(row=>row.id),['prepared-49','prepared-48']);

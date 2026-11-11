@@ -208,7 +208,7 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_LOCK_TTL_MS: "1800000"/);
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: "300000"/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds, options.retainedPowerMixMinimumByMarket\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
-  assert.match(storage, /writeCurrentCatalogReadModels\(generationId, publishedOffers, true\)/);
+  assert.match(storage, /writeCurrentCatalogReadModels\(generationId, publishedOffers, true, undefined, assertPublicationBase\)/);
   assert.match(storage, /alreadyCanonical \? new Set<CatalogMarket>\(storedOffers\.map\(\(offer\) => offer\.market/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(storedOffers, exactMarkets, protectedIds\)/);
 });

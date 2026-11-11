@@ -1,3 +1,75 @@
+# Selected source after measured login rejection — 2026-11-11T23:53:16.325Z
+
+- This candidate adds ONLY PR1754/933a3ca4c70f934f579bf2ad1d18597507e23314 login and saved-rate overlap to rejected75. Source changes are27application paths within109allowed paths; no whole-main application changes.
+- NOT ACCEPTED. Require merged1754, all exact-source checks, source manifest verification and unchanged frozen server/browser/35s/305s/full-results/SHA/nonce/rollback acceptance. Do not merge this acceptance history into main.
+- Previous75 failed43111977320 at strict warm/login median0.8712>0.2759. PR1753 closed unmerged. Read-only43121673944 independently confirmed a182/e36/c489 at23:41:18UTC and75 stopped. Retain original baseline; no accepted75 pin.
+- Detailed read profile43122057561 is Actions-only, not SSR latency. It exposed serial independent reads; it does not establish the full cause of production variation. All prices and full dealer preview remain;1marketquote error was observed and not hidden.
+- Full JP/KR DUMP and14/3-day cadence are not enabled. Actual public search verification is separate; do not claim availability or retention until corresponding checks run.
+
+---
+
+# Isolated candidate after rejected794 —12.11.2026
+
+NOT installed; never merge this acceptance history into main. It adds ONLY PR1752's conditional encyclopedia reads/same sorting and merged1749's OverlayBackHistory correction+tests to the already isolated794 source. No1749 homepage derivative or other main application change. Manifest:25 exact application paths within105 allowed paths; compare the actual full diff before activation.
+
+PR1752/f738 full regression suite passed; full source-review CI/build and all this exact-source checks remain required. Retained a182/e36/c489 confirmed21:57:46UTC by43107566632. Preserve frozen17-route/35/305s/completeness/request-count/SHA+nonce/rollback acceptance; unchanged794 was rejected and must not be rerun. JP/KR fullDUMP and14/3-day cadence remain unresolved/unchanged.
+
+# Owner permanent speed priority — 11.11.2026
+
+- Owner explicitly prioritizes stable high speed for every page and filter and authorizes verified repair/publication. Read `docs/operations/performance-contract.md` before future search, UI, storage, cache, pricing or deployment changes. Preserve original accepted timing baselines, exact-release browser verdict and rollback; never call partial/stale results a speed success. New scenarios require comparable baseline/candidate evidence, not relaxed old limits. No universal latency guarantee or all-pages acceptance follows from a partial matrix.
+- Native network/abort failures must use the existing visitor+query cooldown without extending it on cache reads. Preserve real visitor identity, source restrictions, current-price evidence and ordinary schedules. Full JP/KR mirror authorization remains unresolved.
+
+# Isolated selection, navigation and shared-query repair
+
+This candidate supersedes cancelled2b7c3e2 and3c641141. Exactly12 application paths differ from accepted a182. Require the full source/browser and unchanged release gates. Both predecessors stopped before activation. Shared query sanitization now retains only the five validated savedJapan* keys; private parameters remain excluded.
+
+# Shared selection correction before release — 11.11.2026 14:47 UTC
+
+- Run43039722046 / candidate3c641141 was cancelled before activation by guarded controller43041124657; Deploy=skipped. It must not be resumed. Prior2b7c3e2 is also cancelled. Accepted runtime a182 has not been switched by these runs.
+- Final query-state fix adds the five savedJapan* fields to the existing validated selectionQuery whitelist. Preserve its300-character and unsafe-character validation and exclusion of private flags/tokens. Tests now cover supplier query→shared selection→Japan restoration and actual dealer sharing after filters/reload.
+- Local15 shared-query/regression tests and TypeScript pass. Expanded browser workflow runs next; require its outcome and create a new exact isolated candidate before release. No feed mirror or14/3-day schedule is authorized by this code change.
+
+# Current isolated candidate — 11.11.2026 14:33 UTC
+
+- Candidate 3c641141b49135cdb1109f6e09ea42675998060f supersedes cancelled2b7c3e2. Active run43039722046 is pinned to this candidate; inspect it before starting another release. Its source checks passed and encyclopedia preparation is running. Application ancestry is accepted a182 with11 UI/query-state paths only. Installation is NOT confirmed yet.
+- Source verification43039169001 passed33 units, TypeScript and28 browser checks at390/1440, including Japan→Korea→Japan, saved inactive Japan fields, explicit removal, new pages at top and Back; pageErrors=[].
+- Keep main's rejected budget/uninstalled home code out of runtime; preserve unchanged accepted-speed guards, mandatory browser verdict and accepted a182 image. Source JP/KR and full-DUMP authorization remain unresolved;14/3-day schedules remain unchanged.
+
+# Candidate stopped before activation — 11.11.2026 14:23 UTC
+
+- Run43030988703 was cancelled during price preparation; Deploy step was skipped. Candidate2b7c3e2 was NOT installed. Do not rerun it.
+- Newly found cross-market issue: preserved Japan frameNumber is sent as active Korea/China input, where ajesCatalogQuery throws AjesFilterUnavailable. Store inactive Japan-specific fields separately in URL, restore on Japan return, and test through actual query builder before producing a new candidate.
+- Accepted a182 remains the runtime baseline; source/main still includes rejected budget/uninstalled home work. Keep isolated application ancestry and all current speed/browser rollback guards. Read latest roadmap before releasing.
+
+# Owner selection/scroll repair and feed proposal — 11.11.2026 13:39 UTC
+
+- Owner asks to preserve chosen cars/models/filters until explicit removal, open new pages at the top, retain Back position, finish recovery and record every milestone in roadmap. Owner publication authorization persists.
+- Source browser verification passed: 43030724798, 43030724685, dealer selection 43029957113. Main also retains rejected budget/uninstalled home changes; do not deploy main wholesale.
+- Isolated candidate 2b7c3e22ce0afb2c7e9a045021f7ec3e57979f82 on owner-retention-a182-20261111 uses accepted a182 application plus exactly9 UI files and current rollback/speed/browser guards. Its pinned workflow run43030988703 is in preparation; installation is NOT yet confirmed. Inspect that run before starting anything else.
+- Japan14days/Korea3days was proposed, not enabled. Existing supplier evidence permits visitor-request caching, not full database copying/offline serving without agreement. Public DUMP documentation is not account authorization. Preserve ordinary schedules, last working data, supplier restrictions and unresolved JP/KR status.
+- Read docs/operations/2026-11-11-navigation-retention-and-feed-cache.md and latest roadmap. Record actual acceptance/rollback SHA when this run finishes.
+
+# Active runtime and release evidence — 11.11.2026 12:47 UTC
+
+- Production is restored exact a182cd21b21ecf612b63613d263e5bdd817ea4c0 (43020674047). Restored browser43021430620 passes the original accepted envelope.3048 and2b5fc must not be reactivated without resolving the measured mobile slowdown; preserve their source/evidence.
+- Standard deployment now requires the bounded browser-verdict handshake before committing. Use scripts/regcloud-deploy-with-browser.sh and its nonce-bound receipt; never bypass this by running a historical deploy script. Offline guard tests43023263611 passed; no newer app has been activated through the new mechanism yet.
+- Preserve the exact accepted a182 image/container independently of ordinary retention counts. The pin is removed/replaced only when a newer accepted baseline is recorded. This does not pause or alter feed schedules.
+- Japan/Korea delivered-budget repair remains unfinished in production. Read docs/operations/2026-11-11-budget-speed-repair.md for exact source/availability limits and remaining tasks. A successful code test, empty stale response or SQL-only pilot is not live completion.
+
+# Verified recovery checkpoint — 11.11.2026 12:34 UTC
+
+- Production is restored accepted release a182cd21b21ecf612b63613d263e5bdd817ea4c0 (restore run 43020674047). Main contains rejected budget code and unactivated homepage code; do not equate main with production or resume the old deployment marker.
+- After-restoration browser runs 43021312299 / 43021430620 pass correct China prices at widths 390/1280. Latest filter changes 0.572–1.473s, but earlier restored mobile peak 11.897s remains; no universal or stable latency claim. Japan/Korea 1.5m budget/source recovery remains incomplete.
+- Expired-cache speed regression must fail on the expired-cache measurement itself. Immediate warmed retries cannot clear it. Only warm-phase transient jitter keeps the existing bounded retry median. Original accepted baseline, thresholds, routes and expiry delays are preserved.
+- Evidence and exact remaining work: docs/operations/current-incident.md and docs/operations/2026-11-11-restored-speed-verification.json. Homepage release 2b5fc017 / run 43020597940 was cancelled before build/install/activation; its source and tests remain available.
+
+# Owner accepted speed and phased optimization — 11.11.2026
+
+- Owner explicitly accepts current production a182cd21b21ecf612b63613d263e5bdd817ea4c0 as substantially faster and authorizes the proposed staged optimization, with an urgent Japan/Korea delivered-budget filter repair (1,500,000 RUB).
+- Preserve this release and measured baseline before changes. This new instruction supersedes the 28.10 latency-advisory exception for regressions against the accepted baseline: do not activate a measured slowdown. Compare correct visible results and full responses under equivalent warm/expired conditions, recording variability and supplier dependence; do not claim a universal latency guarantee.
+- Implement in stages with per-market rollback. Keep prices, source restrictions/real visitor IP, complete model directories, withdrawal rules, editorial/customer data and ordinary collection schedules. Full Japan/Korea bulk synchronization still requires supplier permission. Do not evade restrictions or fabricate technical facts to fill a budget result.
+- No infrastructure purchase, provider contract change, database production migration or reactivation of old periodic diagnostics has been performed merely by recording this instruction. First test changes and produce concrete evidence. Existing authorized release-triggered checks remain allowed.
+
 # Owner search and speed recovery — 11.11.2026
 
 - The owner now explicitly requests safe speed recovery, repair of encoded %20 model names, BMW 3 search and complete visible model suggestions. The 30+ second /cars loading incident is in scope. This new instruction supersedes the freeze only for this targeted repair; preserve crawler blocking, ordinary feed schedules, prices/specification evidence and customer data. Publish verified corrections under the existing owner authorization, using unchanged functional/security gates and truthful before/after measurements.

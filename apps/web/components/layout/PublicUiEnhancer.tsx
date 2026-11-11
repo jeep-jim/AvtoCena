@@ -150,10 +150,20 @@ export function PublicUiEnhancer() {
     let disposed = false;
     let frame = 0;
     let rateMap = new Map<string, PublicRate>();
+    const chartSelector = 'svg[aria-label^="Изменение курса "]';
+    const pendingCharts = new Set<SVGSVGElement>();
+    const inspectCharts = (root: ParentNode) => {
+      if (root instanceof SVGSVGElement && root.matches(chartSelector)) pendingCharts.add(root);
+      for (const svg of root.querySelectorAll<SVGSVGElement>(chartSelector)) pendingCharts.add(svg);
+    };
 
     const applyRatePointDeltas = () => {
+      frame = 0;
       if (!rateMap.size) return;
-      for (const svg of document.querySelectorAll<SVGSVGElement>('svg[aria-label^="Изменение курса "]')) {
+      const charts = [...pendingCharts];
+      pendingCharts.clear();
+      for (const svg of charts) {
+        if (!svg.isConnected || !svg.matches(chartSelector)) continue;
         const currency = String(svg.getAttribute("aria-label")?.match(/Изменение курса\s+([A-Z]{3})/i)?.[1] || "").toUpperCase();
         const rate = rateMap.get(currency);
         const host = svg.parentElement as HTMLElement | null;
@@ -184,8 +194,7 @@ export function PublicUiEnhancer() {
     };
 
     const scheduleApply = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(applyRatePointDeltas);
+      if (pendingCharts.size && !frame && rateMap.size) frame = window.requestAnimationFrame(applyRatePointDeltas);
     };
 
     const loadRates = async () => {
@@ -194,13 +203,35 @@ export function PublicUiEnhancer() {
         const rates = await loadPublicRates();
         if (disposed) return;
         rateMap = new Map(rates.map((rate: PublicRate) => [String(rate.currency || "").toUpperCase(), rate]));
+        pendingCharts.clear();
+        if (!rateMap.size) return;
+        // A new rate snapshot changes every chart; ordinary DOM changes below
+        // inspect only their added subtree or existing chart host.
+        inspectCharts(document);
         scheduleApply();
       } catch {
         // The charts remain usable without the optional point labels.
       }
     };
 
-    const observer = new MutationObserver(scheduleApply);
+    const observer = new MutationObserver(records => {
+      // A successful rate read discovers the current charts itself. Do not
+      // retain detached route nodes while rates are unavailable.
+      if (!rateMap.size) return;
+      for (const record of records) {
+        if (record.type === "attributes") {
+          if (record.target instanceof SVGSVGElement && record.target.matches(chartSelector)) pendingCharts.add(record.target);
+          continue;
+        }
+        // Preserve recovery if a dynamic chart redraw replaces its annotation.
+        if (record.target instanceof Element) {
+          const host = record.target.closest(".ac-rate-chart-host");
+          if (host) inspectCharts(host);
+        }
+        for (const node of record.addedNodes) if (node instanceof Element) inspectCharts(node);
+      }
+      scheduleApply();
+    });
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["aria-label"] });
     void loadRates();
     const interval = window.setInterval(loadRates, 15 * 60_000);
@@ -210,6 +241,7 @@ export function PublicUiEnhancer() {
     return () => {
       disposed = true;
       observer.disconnect();
+      pendingCharts.clear();
       window.clearInterval(interval);
       document.removeEventListener("visibilitychange", resumeRates);
       window.cancelAnimationFrame(frame);

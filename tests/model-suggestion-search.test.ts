@@ -3,6 +3,12 @@ import assert from 'node:assert/strict';
 import {mergeModelSuggestions,createModelSuggestionSearch,type ModelSearchData} from '../apps/web/lib/catalog/model-suggestion-search';
 const data:ModelSearchData={version:1,brands:[['Toyota',['Тойота']],['BMW',[]],['Peugeot',[]]],models:[['Toyota','Corolla',[],1],['Toyota','Corolla Cross',[],1],['Toyota','Corolla Cross AWD',[],0],['Toyota','Camry',[],1],['BMW','X5',[],1],['BMW','X3',[],1],['Peugeot','2008',[],1],['Peugeot','208',[],1]]};
 const search=createModelSuggestionSearch(data);
+test('typing another model appends without clearing earlier choices on either screen',async()=>{
+ const {appendModelSelection}=await import('../apps/web/lib/catalog/model-suggestion-search');
+ assert.equal(appendModelSelection('X3|Corolla','Camry'),'X3|Corolla|Camry');
+ assert.equal(appendModelSelection('X3|Corolla',''),'X3|Corolla');
+ assert.equal(appendModelSelection('X3|Corolla','corolla|Camry'),'X3|Corolla|Camry');
+});
 test('single-letter model names remain searchable within a selected make',()=>{
  const find=createModelSuggestionSearch({version:1,brands:[],models:[['GAC','S',[],1],['GAC','S7',[],1]]});
  assert.equal(find('S','GAC')[0].model,'S');

@@ -5,6 +5,8 @@ import {AjesInputError} from './ajes-query';
 import {priceCardForCity} from './card-city-delivery';
 import {catalogBodyType} from './pickup-body';
 import {hasModificationSelection} from './modification-contract';
+import {offerWithSavedPreview,savedCalculationPreviewRub} from './saved-calculation-preview';
+import {calculatedCatalogPrice} from './calculated-price';
 const scalar=(v:unknown)=>String(Array.isArray(v)?v[0]??'':v??'').trim();
 export function ajesResultFilter(params:Record<string,unknown>){
  const amount=(v:unknown)=>{const s=scalar(v);if(!s)return undefined;const n=Number(s);if(!Number.isSafeInteger(n)||n<0)throw new AjesInputError();return n;};
@@ -33,11 +35,23 @@ export function ajesResultFilter(params:Record<string,unknown>){
   if(!matchesPower(offer))return false;
   if(!matchesFilterSelection(catalogBodyType(offer),body))return false;
   if(!priceFilter)return true;
-  const cityPrice=city?priceCardForCity(offer,city):null;
-  const priced=cityPrice?.offer||offer;
-  const preview=priced.savedCalculationPreview?null:priced.japanDeliveredPreview||priced.deliveredCalculationPreview;
-  const total=cityPrice?Number(priced.japanDeliveredPreview?.totalRub||priced.totalRub||0):Number(preview?.totalRub||priced.totalRub||0);
-  const complete=!hasModificationSelection(offer)&&total>0&&(!cityPrice||cityPrice.included)&&Boolean(preview||priced.savedCalculationPreview||priced.catalogPricingMode!=='seller');
+  let total:number,complete:boolean;
+  const market=String(offer.market||params.market||'');
+  if(market==='japan'||market==='korea'){
+   // Match the card's already attached quote without replacing source facts
+   // used by the technical filters above or reading another pricing source.
+   const visible=offerWithSavedPreview({...offer,savedCalculationPreview:savedCalculationPreviewRub(offer.savedCalculationPreview)?offer.savedCalculationPreview:undefined});
+   const cityPrice=city?priceCardForCity(visible,city):null;
+   const priced=cityPrice?.offer||visible;
+   total=calculatedCatalogPrice(priced);
+   complete=!hasModificationSelection(priced)&&total>0&&(!cityPrice||cityPrice.included&&Number.isFinite(priced.totalRub)&&priced.totalRub>0);
+  }else{
+   const cityPrice=city?priceCardForCity(offer,city):null;
+   const priced=cityPrice?.offer||offer;
+   const preview=priced.savedCalculationPreview?null:priced.japanDeliveredPreview||priced.deliveredCalculationPreview;
+   total=cityPrice?Number(priced.japanDeliveredPreview?.totalRub||priced.totalRub||0):Number(preview?.totalRub||priced.totalRub||0);
+   complete=!hasModificationSelection(offer)&&total>0&&(!cityPrice||cityPrice.included)&&Boolean(preview||priced.savedCalculationPreview||priced.catalogPricingMode!=='seller');
+  }
   if(hasPrice&&(complete?'yes':'no')!==hasPrice)return false;
   if(from!==undefined||to!==undefined){if(!complete)return false;if(from!==undefined&&total<from)return false;if(to!==undefined&&total>to)return false;}
   return true;
