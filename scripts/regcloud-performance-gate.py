@@ -2,7 +2,7 @@
 """Functional acceptance plus the owner's measured speed regression guard.
 Run on the VM: network/proxy latency from the audit environment is excluded.
 """
-import argparse,json,time,urllib.request,urllib.error,os,urllib.parse,ipaddress,pathlib,statistics,math
+import argparse,json,time,urllib.request,urllib.error,os,urllib.parse,ipaddress,pathlib,statistics,math,hashlib
 from html.parser import HTMLParser
 
 # Absolute targets retain their advisory evidence. Owner decision 11.11.2026
@@ -44,7 +44,10 @@ def release_routes(scope=''):
 PHASE_DELAYS=[('warm',0),('after_ttl',35),('after_directory_ttl',305)]
 
 def accepted_baseline(path):
- value=json.loads(pathlib.Path(path).read_text())
+ raw=pathlib.Path(path).read_bytes()
+ if hashlib.sha256(raw).hexdigest()!='32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59':
+  raise AssertionError('frozen_speed_baseline_changed:server')
+ value=json.loads(raw)
  if value.get('schemaVersion')!=1 or not value.get('complete') or value.get('release')!='a182cd21b21ecf612b63613d263e5bdd817ea4c0':
   raise AssertionError('accepted_speed_baseline_invalid')
  grouped={}

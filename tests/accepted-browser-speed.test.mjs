@@ -67,3 +67,25 @@ test('alternate China catalog URLs retain the same request budget',()=>{
   assert.equal(acceptedBrowserSpeed(replacement,baseline).passed,false);
  }
 });
+
+test('all six original browser scenarios retain the exact 50ms or 5% boundary',()=>{
+ for(const width of [390,1280])for(const budget of [null,1500000,2000000]){
+  for(const [reference,allowance,ceiling] of [[.2,.05,.25],[2,.1,2.1]]){
+   const prior=structuredClone(baseline),report=read('2026-11-11-accepted-speed-browser-restored.json');
+   const old=prior.checks.find(row=>row.width===width),current=report.checks.find(row=>row.width===width);
+   const scenario=budget===null?'firstCards':'budget:'+budget;
+   const before=budget===null?old:old.filters.find(row=>row.budget===budget);
+   const after=budget===null?current:current.filters.find(row=>row.budget===budget);
+   const timing=budget===null?'firstCardsSeconds':'seconds';
+   before[timing]=reference;after[timing]=ceiling;
+   const exact=acceptedBrowserSpeed(report,prior);
+   assert.equal(exact.passed,true,`${width}/${scenario} accepts its exact boundary`);
+   const check=exact.checks.find(row=>row.width===width&&row.scenario===scenario);
+   assert.equal(check.measurementNoiseSeconds,allowance);assert.equal(check.ceilingSeconds,ceiling);
+   after[timing]=ceiling+.000001;
+   const exceeded=acceptedBrowserSpeed(report,prior);
+   assert.equal(exceeded.passed,false,`${width}/${scenario} rejects any exceedance`);
+   assert.deepEqual(exceeded.checks.filter(row=>!row.passed).map(row=>[row.width,row.scenario]),[[width,scenario]]);
+  }
+ }
+});
