@@ -1,3 +1,13 @@
+# Selected source after measured login rejection — 2026-11-11T23:53:16.325Z
+
+- This candidate adds ONLY PR1754/933a3ca4c70f934f579bf2ad1d18597507e23314 login and saved-rate overlap to rejected75. Source changes are27application paths within109allowed paths; no whole-main application changes.
+- NOT ACCEPTED. Require merged1754, all exact-source checks, source manifest verification and unchanged frozen server/browser/35s/305s/full-results/SHA/nonce/rollback acceptance. Do not merge this acceptance history into main.
+- Previous75 failed43111977320 at strict warm/login median0.8712>0.2759. PR1753 closed unmerged. Read-only43121673944 independently confirmed a182/e36/c489 at23:41:18UTC and75 stopped. Retain original baseline; no accepted75 pin.
+- Detailed read profile43122057561 is Actions-only, not SSR latency. It exposed serial independent reads; it does not establish the full cause of production variation. All prices and full dealer preview remain;1marketquote error was observed and not hidden.
+- Full JP/KR DUMP and14/3-day cadence are not enabled. Actual public search verification is separate; do not claim availability or retention until corresponding checks run.
+
+---
+
 ### 12.11.2026 — отдельный источник с условным чтением энциклопедии
 
 Предыдущий794 отклонён проверкой Changan в43098821534; возвратa182/e36/c489 подтверждён43107566632. Этот источник ещё не установлен. Добавлены только PR1752 и компонент истории окон/9тестов из merged1749. Производная главной1749 и другие измененияmain исключены. Манифест:25 файлов приложения,105 разрешённых путей. ПолнаяCI и неизменная приёмка ещё обязательны; JP/KR DUMP и14/3 дня не включены.
