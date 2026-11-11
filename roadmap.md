@@ -24908,3 +24908,15 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - Документ решения по фидам отформатирован для чтения; содержание и действующие расписания не изменены.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/7947a99a4c6f8f55a600b898ea447775a31beb95
 
+
+
+### 11.11.2026 — постоянная защита скорости и адресное ограничение сетевых повторов
+
+- По прямому поручению владельца скорость всех страниц/фильтров закреплена как главное условие будущих доработок: docs/operations/performance-contract.md и постоянный раздел AGENTS.md. Исходные эталоны a182, пороги, страницы/фазы и обязательный server/browser rollback сохранены.
+- Устранён пропуск30-секундного visitor+query cooldown после native fetch/abort.4 регрессии падали до исправления. Изолированный кандидат eb0b064419680c13b8ae69dbf3a0e9df81aba9e3:103 AJES-теста/TypeScript PASS,13 путей приложения; бюджет/главная из непринятого main не переносятся.
+- Gate отвергает stale/partial/interrupted/error и некорректные счётчики, браузер ограничивает повторные catalog/preview запросы по прежнему эталону, включая /cars и /cars/china/... . Python20/browser7/verdict5/handoff1/retention4 PASS. Source PR1730 первоначально прошёл полный CI/build; итоговая ревизия проверяется отдельно. Пассивный analyzer6 PASS, его запуск не включён.
+- Действующий43043393692 устанавливает1763b3e; не отменять/не дублировать. PR1731 следующего пакета объединять только после terminal+exact health/browser результата этого выпуска и устранения возможных общих UI-дефектов. Source publication не означает установленный runtime.
+- Свежий внешний бюджет1,5млн: JapanHTTP200/items0/stale/partial; KoreaHTTP200/items0/stale/interrupted. Это не доказательство отсутствия машин; полнаяJP/KR выдача остаётся открытой, DUMP/14/3д не включены. Полные внешние /blog,/dealers,/autocalc,/privacy возвращают200 без error-stream, но разовые5,0–7,9с включают сеть и не являются VM/p95 либо доказательством стабильности всех страниц.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/c41f6a3fbaad8af2682d2e771243761e31d2eeca
+
