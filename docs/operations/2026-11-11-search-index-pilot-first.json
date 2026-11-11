@@ -1,0 +1,118 @@
+{
+  "checkedAt": "2026-11-11T11:02:30.363Z",
+  "generationId": "gen_1794357678562_9c0667cb",
+  "sourceRows": 244471,
+  "cityRows": 488942,
+  "storageObjectsRead": 247,
+  "sourceChecksum": "c7d40df9acfc134941f79ac0a6937c24875fa32aab22845258254f81b38ba9ec",
+  "source": "existing validated immutable China selector; frozen snapshot prices, not fresh live acceptance",
+  "productionWrites": 0,
+  "supplierRequests": 0,
+  "environment": "ephemeral GitHub Actions PostgreSQL 16; only DB page+count time, no HTML/network/photos",
+  "correctness": {
+    "sameSnapshotIdsAndCounts": true,
+    "unpublishedGenerationInvisible": true,
+    "unreadyGenerationBlocked": true,
+    "failedImportPreservesActive": true
+  },
+  "cases": [
+    {
+      "name": "budget_1_5m_moscow",
+      "matchingCount": 18246,
+      "pageRows": 24,
+      "firstQueryMs": 70.388,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 65.169,
+        "p95Ms": 67.379,
+        "maxMs": 84.899
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 213.681,
+        "p95Ms": 267.017,
+        "maxMs": 283.049
+      },
+      "idsChecksum": "c33c1219bc7bd13d3da8c4523268b0afc642321cda64cbe1291fcfff144d1c5d"
+    },
+    {
+      "name": "budget_1_5m_novokuznetsk",
+      "matchingCount": 24972,
+      "pageRows": 24,
+      "firstQueryMs": 74.03,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 69.428,
+        "p95Ms": 74.422,
+        "maxMs": 86.391
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 218.18,
+        "p95Ms": 312.01,
+        "maxMs": 318.692
+      },
+      "idsChecksum": "c33c1219bc7bd13d3da8c4523268b0afc642321cda64cbe1291fcfff144d1c5d"
+    },
+    {
+      "name": "bmw_under160",
+      "matchingCount": 3268,
+      "pageRows": 24,
+      "firstQueryMs": 66.73,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 61.599,
+        "p95Ms": 69.977,
+        "maxMs": 75.331
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 197.955,
+        "p95Ms": 243.619,
+        "maxMs": 257.028
+      },
+      "idsChecksum": "46e3b22f447e0c6cfc9a467229ab4d39fc54c7731d8f4f0a1258ad83793f5689"
+    },
+    {
+      "name": "price_page9",
+      "matchingCount": 160545,
+      "pageRows": 24,
+      "firstQueryMs": 153.169,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 148.264,
+        "p95Ms": 151.047,
+        "maxMs": 166.85
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 497.268,
+        "p95Ms": 687.069,
+        "maxMs": 794.011
+      },
+      "idsChecksum": "f56700d69077569081a2751c46a18e595d8bb2ebf2ecb0696c72c1b74f08add8"
+    },
+    {
+      "name": "price_descending",
+      "matchingCount": 160545,
+      "pageRows": 24,
+      "firstQueryMs": 154.565,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 148.931,
+        "p95Ms": 152.535,
+        "maxMs": 171.377
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 521.779,
+        "p95Ms": 679.192,
+        "maxMs": 703.719
+      },
+      "idsChecksum": "726e48227e3cd5f016d72afb6f4ab70314e4d6945aa27f9ee22662060f74c59f"
+    }
+  ],
+  "passed": true,
+  "relationBytes": 299114496,
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/43008430803"
+}

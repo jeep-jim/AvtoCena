@@ -1,0 +1,314 @@
+{
+  "checkedAt": "2026-11-11T11:11:23.225Z",
+  "generationId": "gen_1794357678562_9c0667cb",
+  "sourceRows": 244471,
+  "cityRows": 488942,
+  "storageObjectsRead": 247,
+  "sourceChecksum": "c7d40df9acfc134941f79ac0a6937c24875fa32aab22845258254f81b38ba9ec",
+  "source": "existing validated immutable China selector; frozen snapshot prices, not fresh live acceptance",
+  "productionWrites": 0,
+  "supplierRequests": 0,
+  "environment": "ephemeral GitHub Actions PostgreSQL 16; only DB page+count time, no HTML/network/photos",
+  "correctness": {
+    "sameSnapshotIdsAndCounts": true,
+    "unpublishedGenerationInvisible": true,
+    "unreadyGenerationBlocked": true,
+    "failedImportPreservesActive": true
+  },
+  "cases": [
+    {
+      "name": "budget_1_5m_moscow",
+      "matchingCount": 18246,
+      "pageRows": 24,
+      "firstQueryMs": 9.027,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 3.524,
+        "p95Ms": 3.879,
+        "maxMs": 4.162
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 7.036,
+        "p95Ms": 12.307,
+        "maxMs": 15.369
+      },
+      "pagePlanSummary": [
+        {
+          "Node Type": "Limit",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_price",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "countPlanSummary": [
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 304,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_price",
+          "Actual Rows": 18246,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 304,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "idsChecksum": "c33c1219bc7bd13d3da8c4523268b0afc642321cda64cbe1291fcfff144d1c5d"
+    },
+    {
+      "name": "budget_1_5m_novokuznetsk",
+      "matchingCount": 24972,
+      "pageRows": 24,
+      "firstQueryMs": 11.266,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 4.434,
+        "p95Ms": 5.199,
+        "maxMs": 5.203
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 8.941,
+        "p95Ms": 15.198,
+        "maxMs": 16.469
+      },
+      "pagePlanSummary": [
+        {
+          "Node Type": "Limit",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_price",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "countPlanSummary": [
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 495,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_price",
+          "Actual Rows": 24972,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 495,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "idsChecksum": "c33c1219bc7bd13d3da8c4523268b0afc642321cda64cbe1291fcfff144d1c5d"
+    },
+    {
+      "name": "bmw_under160",
+      "matchingCount": 3268,
+      "pageRows": 24,
+      "firstQueryMs": 9.508,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 3.881,
+        "p95Ms": 4.108,
+        "maxMs": 4.296
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 7.071,
+        "p95Ms": 12.135,
+        "maxMs": 13.151
+      },
+      "pagePlanSummary": [
+        {
+          "Node Type": "Limit",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_make_price",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "countPlanSummary": [
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 347,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_make_price",
+          "Actual Rows": 3268,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 347,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "idsChecksum": "46e3b22f447e0c6cfc9a467229ab4d39fc54c7731d8f4f0a1258ad83793f5689"
+    },
+    {
+      "name": "price_page9",
+      "matchingCount": 160545,
+      "pageRows": 24,
+      "firstQueryMs": 40.893,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 37.069,
+        "p95Ms": 46.599,
+        "maxMs": 48.03
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 110.996,
+        "p95Ms": 146.749,
+        "maxMs": 164.837
+      },
+      "pagePlanSummary": [
+        {
+          "Node Type": "Limit",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 7,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_price",
+          "Actual Rows": 216,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 7,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "countPlanSummary": [
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Gather",
+          "Actual Rows": 3,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 3,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Seq Scan",
+          "Actual Rows": 53515,
+          "Actual Loops": 3,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "idsChecksum": "f56700d69077569081a2751c46a18e595d8bb2ebf2ecb0696c72c1b74f08add8"
+    },
+    {
+      "name": "price_descending",
+      "matchingCount": 160545,
+      "pageRows": 24,
+      "firstQueryMs": 40.518,
+      "warm": {
+        "samples": 30,
+        "p50Ms": 37.202,
+        "p95Ms": 37.942,
+        "maxMs": 37.99
+      },
+      "fourClients": {
+        "samples": 40,
+        "p50Ms": 105.995,
+        "p95Ms": 142.785,
+        "maxMs": 174.412
+      },
+      "pagePlanSummary": [
+        {
+          "Node Type": "Limit",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Index Only Scan",
+          "Index Name": "search_pilot_price",
+          "Actual Rows": 24,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "countPlanSummary": [
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Gather",
+          "Actual Rows": 3,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Aggregate",
+          "Actual Rows": 1,
+          "Actual Loops": 3,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        },
+        {
+          "Node Type": "Seq Scan",
+          "Actual Rows": 53515,
+          "Actual Loops": 3,
+          "Shared Hit Blocks": 7952,
+          "Shared Read Blocks": 0
+        }
+      ],
+      "idsChecksum": "726e48227e3cd5f016d72afb6f4ab70314e4d6945aa27f9ee22662060f74c59f"
+    }
+  ],
+  "passed": true,
+  "relationBytes": 299114496,
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/43009668447"
+}
