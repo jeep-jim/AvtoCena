@@ -1,0 +1,57 @@
+name: Restore owner-accepted speed after browser regression
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-restore-accepted-speed.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check exact retained releases and rollback script
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          v=json.load(open('.github/market-runs/owner-restore-accepted-speed.json'))
+          assert v['release']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+          assert v['rejectedRelease']=='3048aede91dbfa4287e038075700e1434ba53e85'
+          compile(pathlib.Path('.github/owner-rollback/restore-accepted-speed.py').read_text(),'restore-accepted-speed','exec')
+          print('Exact accepted release and browser rejection recorded')
+          PY
+      - name: Restore original accepted container preserving data and proxy rules
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 "OWNER_ACCEPTED_SPEED_RELEASE=a182cd21b21ecf612b63613d263e5bdd817ea4c0 python3 - '$GITHUB_RUN_ID'" < .github/owner-rollback/restore-accepted-speed.py | tee owner-restore-accepted-speed.log
+      - name: Verify public accepted release
+        run: |
+          curl --fail --silent --show-error --connect-timeout 10 --max-time 20 -H 'Connection: close' https://avtocena.com/api/health > owner-restore-accepted-speed-health.json
+          python3 - <<'PY'
+          import json
+          v=json.load(open('owner-restore-accepted-speed-health.json'))
+          assert v.get('ok') is True and v['releaseSha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+          print('OWNER_SPEED_PUBLIC_VERIFIED',json.dumps(v))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-restore-accepted-speed
+          path: |
+            owner-restore-accepted-speed.log
+            owner-restore-accepted-speed-health.json
+          if-no-files-found: ignore
