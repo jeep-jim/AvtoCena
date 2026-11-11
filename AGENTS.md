@@ -1,3 +1,9 @@
+# Rejected navigation release and confirmed rollback — 11.11.2026 16:00 UTC
+
+- Run43043393692 / source1763 failed mandatory expired-cache speed acceptance: China+Novokuznetsk0.1700748489s >0.1583s. Browser acceptance was not reached. Runtime rollback to accepted a182/e36 is independently confirmed by run43048247680 attempt2, job130638175608 at16:00:35UTC.
+- Navigation fixes are source-tested but NOT accepted live. Do not rerun1763 unchanged or standard-deploy main. Main also preserves later supplier/release-guard work ad93af5/4b41123; do not overwrite it.
+- Next bounded correction under test: share identical default category rows across cities, preserving city-specific budget/sort queries, editorial revision, page boundaries, TTL and pricing. Carry the latest stricter completeness/request-count guards into any new isolated candidate; preserve frozen speed baseline and expiry phases. Record actual next source/run before activation.
+
 # Active run — 2026-11-11T15:00:02.032Z
 
 - Follow release43043393692 pinned to 1763b3e5389873c1c0cbe919d7097572968071a6; no installation confirmation yet. Do not resume cancelled old candidates or standard-deploy main. Separate packaged-browser fixture check addresses Ubuntu archive DNS setup failure, not a relaxation of any runtime acceptance gate.
