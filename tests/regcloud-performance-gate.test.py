@@ -163,4 +163,41 @@ class AcceptedBaselineTests(unittest.TestCase):
   with patch.dict(gate.os.environ,{'AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':''}),patch.object(sys,'argv',['gate','local','release']):
    with self.assertRaisesRegex(AssertionError,'accepted_speed_baseline_missing'):gate.main()
 
+class RequestEvidenceTests(unittest.TestCase):
+ def test_stream_timeout_identifies_route_without_retry_or_private_error_message(self):
+  response=unittest.mock.MagicMock()
+  response.__enter__.return_value=response
+  failure=TimeoutError('private upstream detail')
+  response.read.side_effect=failure
+  output=io.StringIO()
+  with patch.object(gate.urllib.request,'urlopen',return_value=response) as request,contextlib.redirect_stdout(output):
+   with self.assertRaises(TimeoutError) as caught:gate.sample('http://local','/cars?sort=totalRub','catalog','release')
+  self.assertIs(caught.exception,failure)
+  request.assert_called_once()
+  self.assertEqual(request.call_args.kwargs['timeout'],90)
+  rows=[json.loads(line) for line in output.getvalue().splitlines()]
+  self.assertEqual([r['performanceRequest'] for r in rows],['started','failed'])
+  self.assertTrue(all(r['path']=='/cars?sort=totalRub' for r in rows))
+  self.assertEqual(rows[-1]['errorType'],'TimeoutError')
+  self.assertNotIn('private upstream detail',output.getvalue())
+  response.__exit__.assert_called_once()
+ def test_connection_error_is_named_and_propagated_once(self):
+  failure=ConnectionResetError('private network detail');output=io.StringIO()
+  with patch.object(gate.urllib.request,'urlopen',side_effect=failure) as request,contextlib.redirect_stdout(output):
+   with self.assertRaises(ConnectionResetError) as caught:gate.sample('http://local','/login','html','release')
+  self.assertIs(caught.exception,failure);request.assert_called_once()
+  self.assertEqual(json.loads(output.getvalue().splitlines()[-1])['errorType'],'ConnectionResetError')
+  self.assertNotIn('private network detail',output.getvalue())
+ def test_complete_evidence_requires_valid_body_and_preserves_measured_elapsed(self):
+  for body,accepted in [(b'</html>',True),(b'incomplete',False)]:
+   response=unittest.mock.MagicMock();response.__enter__.return_value=response
+   response.status=200;response.read.return_value=body;output=io.StringIO()
+   with patch.object(gate.urllib.request,'urlopen',return_value=response),patch.object(gate.time,'monotonic',side_effect=[10,10.1234,10.2]),contextlib.redirect_stdout(output):
+    if accepted:self.assertAlmostEqual(gate.sample('http://local','/login','html','release'),.1234)
+    else:
+     with self.assertRaisesRegex(AssertionError,'performance_incomplete_html'):gate.sample('http://local','/login','html','release')
+   rows=[json.loads(line) for line in output.getvalue().splitlines()]
+   self.assertEqual(rows[-1]['performanceRequest'],'complete' if accepted else 'failed')
+   if accepted:self.assertEqual(rows[-1]['seconds'],.1234)
+
 if __name__=='__main__':unittest.main()

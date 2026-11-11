@@ -1,13 +1,12 @@
 # Current recovery checkpoint — 12.11.2026
 
-- First read docs/operations/current-incident.md and the latest roadmap entry. Preserve the owner policies below and the archived history.
-- Last independent runtime confirmation at 17:33:44 UTC: a182cd21b21ecf612b63613d263e5bdd817ea4c0, image sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f, running=true. Do not infer final runtime while acceptance is active.
-- Active release43055396384 attempt2, job130675568177, exact source8731103c0102886064c6a0a19a14182502e6e3be, controllerb43b2d81ba0628d2ad20d3c04799522377f78271. Price preparation passed17:57:07UTC; mandatory deploy/server/browser acceptance started17:57:09UTC. Success and installed UI are not yet verified.
-- Attempt1 did not deploy: catalog_pages_date_changed_retry after the local midnight. Attempt2 repeats full preparation for the new date, preserving all date/generation guards.
-- Next release is queued43067092325, source1767642ff5dd8a9a12bd751e8724756934bf7f62, controller2ab5fdfcf725bca6f7e883d6fde3c5ca29a2d9ac. It includes ee0 plus bounded whole-window date retry. Requires predecessor43055396384 success at exactb43 and live873. Old ee0/run43060073993 was superseded: DO NOT restart it. Do not launch a competing release or standard-deploy main.
-- Previous1763/43043393692 failed after_ttl speed0.1700748489s>0.1583s and rolled back. Preserve that evidence; never replace it with a warm retry.
-- Preserve frozen baseline, all17 server routes,35/305s expiry checks, complete results, request counts, mandatory exact SHA/nonce browser verdict and rollback. Source/fixture success is not live acceptance.
-- After accepted release verify retained models/filters, new pages from top and Back on the public site; record exact final SHA/image and evidence. JP/KR provider/DUMP14/3-day policy remains unresolved; ordinary schedules/customer data unchanged. Append every milestone truthfully to roadmap.
+- Read docs/operations/current-incident.md and the latest roadmap checkpoint first. Preserve permanent owner policies below.
+- Independently confirmed18:03:02UTC in43073941128/job130708761280: productiona182cd21b21ecf612b63613d263e5bdd817ea4c0/imagee36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f, running=true; public healthok:true/calculationVersionc489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6.
+- Release43055396384 attempt2/job130675568177/source8731103c0102886064c6a0a19a14182502e6e3be FAILED17:59:51UTC. Prices were ready; first preparatory performance pass timed out in response.read before Nginx promotion. Old production retained17:59:46UTC; mandatory browser was not reached. Do not rerun unchanged or claim UI installed.
+- Successor43067092325/source1767642 failed predecessor check18:00:35UTC; prepare skipped. Older ee0/43060073993 is superseded; never restart it. Do not bypass predecessor or standard-deploy main.
+- One isolated diagnostic of retained873 is being corrected after its prelude incorrectly demanded cards from a no-visitor-IP Korea response. Original prelude requires complete HTML; strict first-pass still requires actual cards/realSSH-peer. First diagnostic43074413209 stopped candidate and verified unchanged productionID. This does not explain the original timeout.
+- Preserve frozen17-route baseline,35/305s phases, complete results, request counts, SHA/nonce browser verdict and rollback. Logging-only gate change passed23 tests and prints route failures without hiding/retrying them.
+- Before another release establish the failing route and cause. JP/KR availability, official DUMP and14/3-day snapshots unresolved; ordinary schedules/customer data unchanged. Append factual milestones to roadmap.
 
 # Owner accepted speed and phased optimization — 11.11.2026
 

@@ -71,13 +71,16 @@ jobs:
                   if raw:
                       with urllib.request.urlopen(base+path,timeout=90) as response:
                           body=response.read(20*1024*1024+1);status=response.status
-                      gate.validate(path,kind,status,body,release)
+                      # Match the original prelude: complete HTML is preparation only.
+                      # The later first-pass still requires real cards and the real SSH peer.
+                      gate.validate(path,'html' if kind=='catalog' else kind,status,body,release)
+                      if kind in ['html','catalog']:assert len(body)>50000
                       seconds=time.monotonic()-started
                   else:seconds=gate.sample(base,path,kind,release)
               except Exception as error:
                   print(json.dumps({'diagnostic':stage,'path':path,'seconds':round(time.monotonic()-started,4),'errorType':type(error).__name__}),flush=True)
                   raise
-              print(json.dumps({'diagnostic':stage,'path':path,'seconds':round(seconds,4),'functionalPassed':True}),flush=True)
+              print(json.dumps({'diagnostic':stage,'path':path,'seconds':round(seconds,4),('preparationComplete' if stage=='prelude' else 'functionalPassed'):True}),flush=True)
           scope='china,korea,europe,uae,georgia'
           for path,kind in [('/api/health','health'),('/login','html'),('/autocalc','html')]+[('/cars?market='+market,'catalog') for market in scope.split(',')]:
               visit(path,kind,'prelude',raw=True)
