@@ -25165,3 +25165,13 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/c8a2274e148380bcdb1326df0ffcaa51851ab9c4
 
+
+
+### 12.11.2026 — сохранение рабочего a182 подтверждено, начата ограниченная диагностика873
+
+- [43073941128](https://github.com/jeep-jim/AvtoCena/actions/runs/43073941128)/job130708761280 в18:03:02UTC подтвердил рабочий a182cd21b21ecf612b63613d263e5bdd817ea4c0, imagee36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f, running=true. Публичный health ok:true и calculationVersionc489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6.
+- Кандидат873 остановлен, OOMKilled:false, ExitCode0; сохранённый ограниченный журнал содержит28 строк. Он не называет зависший маршрут, поэтому причина ещё не доказана.
+- Добавлен один диагностический проход точного сохранённого873 image76af614…: отдельный loopback-контейнер с прежним лимитом, общая очередь/flock, точная проверка image и работающегоa182 до запуска, печать каждого маршрута, неизменённый90-секундный лимит, обязательная остановка кандидата и проверка прежнего production ID. Нет переключения Nginx, выпуска, изменения данных/цен/расписаний. Этот проход не заменяет server/browser acceptance.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/056adea1cbd2b7543d720b07bc86f103f5f2e8cf
+
