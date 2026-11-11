@@ -24466,3 +24466,12 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - После успешного deploy необходимо запустить existing owner-search-recovery-verify с точным SHA a182 и includeHome=true; он дополнен реальным browser-переходом каталог→карточка→рекомендации390/1280. Затем read-only diagnose exact a182 и окончательный отчёт с фактическими временами. Если deploy откатится, не повторять его без разбора причины и не ослаблять gates.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/a1c2aae6e10b330772df2d158c43d1e53b7524f3
 
+
+
+# 11.11.2026 — возобновление точного a182 после таймаута подготовки страниц
+
+- Original [run42978644198](https://github.com/jeep-jim/AvtoCena/actions/runs/42978644198) завершился FAILURE ДО переключения. Все пять рынков прошли цены/parity, immutable index и image a182 готовы; это подтверждает release-market-preparation artifact13837817687. Отказ в07:45:37UTC: object_storage_response_timeout, bytes0 на полной projection/china.json из catalog-refresh-generation-pages. Это этап подготовки, не падение нового приложения.
+- [49954395](https://github.com/jeep-jim/AvtoCena/commit/49954395a9a594b6f800fc11cf4d10539fd76125) запускает one-shot owner-resume-prepared-release: checkout точного a182, проверка всех успешных original gates/артефактов, восстановление привязанного immutable индекса, проверка неизменной generation, завершение тех же страниц с уже используемым offline timeout120с, затем неизменённые pre/post gates/rollback и public ASTRA. Новый app image не собирается; старая неготовая049 не используется.
+- Для следующих штатных выпусков такой же offline timeout добавлен именно к команде подготовки страниц. Visitor deadlines, расчёты, защита источников и обычные фиды не меняются. Публикация a182 и итоговая публичная проверка ещё не подтверждены.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/1b2415553baf15c06a92e247e895af18030867e0
+
