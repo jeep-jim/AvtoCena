@@ -69,19 +69,21 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
   const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
   const dealerRail=dealer.then(value=>timing.measure("dealerRail",()=>homeSpecialRail(fromQuery || fromCookie,value))).catch(error=>{console.error("home_specials_failed",error);return null;});
-  const [catalog, green] = await Promise.all([
+  const [{catalog, pricedItems}, {green, greenItems}] = await Promise.all([
     timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
       console.error("home_initial_catalog_failed", error);
       return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
+    }).then(async catalog=>{
+      const pricedItems=await timing.measure("catalogPricing",()=>applyActiveBusinessPricingBatch(catalog.items)).catch((error) => {
+        console.error("home_initial_pricing_failed", error);
+        // Preserve the last audited quote if settings storage is temporarily down.
+        return catalog.items;
+      });
+      return {catalog,pricedItems};
     }),
-    timing.measure("green",()=>readGreenCorner()).catch(() => null),
-  ]);
-  const [greenItems, pricedItems] = await Promise.all([
-    timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer))),
-    timing.measure("catalogPricing",()=>applyActiveBusinessPricingBatch(catalog.items)).catch((error) => {
-      console.error("home_initial_pricing_failed", error);
-      // Preserve the last audited quote if settings storage is temporarily down.
-      return catalog.items;
+    timing.measure("green",()=>readGreenCorner()).catch(() => null).then(async green=>{
+      const greenItems=await timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer)));
+      return {green,greenItems};
     }),
   ]);
   return <>

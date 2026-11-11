@@ -27,6 +27,7 @@ import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudge
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
+import type {BudgetPriceOptions} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
@@ -2163,7 +2164,7 @@ async function currentBudgetBlock(generationId:string,version:1|2|3,block:number
 }
 const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
 const japanBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:4,maxBytes:48*1024*1024,ttlMs:86400_000,concurrency:2});
-async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false){
+async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false,options:BudgetPriceOptions={}){
  const displayRows=(rows:CatalogSearchProjection[])=>displayPrices?rows.map(row=>row.catalogPricingMode==="seller"?{...row,totalRub:Number(row.japanDeliveredPreview?.totalRub||row.sellerPriceRub)||null}:row):rows;
  const fingerprint=await budgetPricingFingerprint(market);
  const load=async()=>{
@@ -2215,12 +2216,13 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
   return refreshed;
  };
  if(fingerprint){
-  try{return await sharedBudgetPrices(index,market,fingerprint,load,undefined,displayPrices);}
+  try{return await sharedBudgetPrices(index,market,fingerprint,load,undefined,displayPrices,options);}
   catch(error){
-   if(!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
+   if(options.persistence==='required'||!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
    return load(); // Do not retain a retry under a version already known to have changed.
   }
  }
+ if(options.persistence==='required')throw Error('catalog_budget_persistence_context_unavailable');
  if(market==='japan'){
   const {japanSearchContext}=await import('./japan-delivered-preview');
   const context=await japanSearchContext(index.generationId);
@@ -2655,8 +2657,8 @@ export async function warmBudgetPriceCaches(markets?:CatalogMarket[]){
  for(const market of (markets?preparationMarkets(markets):MARKETS).filter(market=>market!=='japan')){
   const index=await readBudgetCountIndex(manifest.generationId,market);
   if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
-  const start=performance.now(),rows=await currentBudgetReplay(index,market);
-  await currentBudgetReplay(index,market,true);
+  const start=performance.now(),rows=await currentBudgetReplay(index,market,false,{persistence:'required'});
+  await currentBudgetReplay(index,market,true,{persistence:'required'});
   results.push({market,rows:rows.length,ms:Math.round(performance.now()-start)});
  }
  return {generationId:manifest.generationId,results};
