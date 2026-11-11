@@ -1,1 +1,7 @@
-{"date":"2026-10-27","reason":"Refresh current generation pages after midnight: failed candidate read full China projection while scheduled refresh has not started","attempt":5}
+{
+  "date": "2026-11-12",
+  "generation": "gen_1794357678562_9c0667cb",
+  "reason": "Repair confirmed missing current-day overview on Regcloud: metadata43076441642 selectedKindnone and exact-image home phases43075855394 showed60s all-projection fallback. Existing generation-scoped CAS builder; no feed refresh or app deployment.",
+  "attempt": 6,
+  "requestedAt": "2026-11-11T18:21:07.217Z"
+}
