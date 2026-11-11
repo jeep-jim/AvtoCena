@@ -1,0 +1,44 @@
+name: Inspect public Japan and Korea availability once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/owner-partner-availability.yml']
+permissions:
+  contents: read
+concurrency:
+  group: owner-public-partner-availability
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+      - name: Read public partner searches on the retained release
+        run: |
+          node --input-type=module <<'CHECK'
+          import assert from 'node:assert/strict';
+          const origin='https://avtocena.com',expected='a182cd21b21ecf612b63613d263e5bdd817ea4c0';
+          const report={checkedAt:new Date().toISOString(),expectedSource:expected,readOnly:true,ordinaryPublicRequests:true,scope:'GitHub runner requests; not Russian-user latency, full feed completeness or DUMP permission',queries:[]};
+          const health=async()=>{const r=await fetch(origin+'/api/health',{signal:AbortSignal.timeout(30000)});assert.ok(r.ok);const v=await r.json();assert.equal(v.releaseSha,expected,'serving source changed');assert.equal(v.ok,true);return{releaseSha:v.releaseSha,calculationVersion:v.calculationVersion};};
+          const token=v=>typeof v==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(v)?v:null;
+          try{
+           report.healthBefore=await health();
+           for(const market of ['japan','korea']){
+            for(const budget of [false,true]){
+             const q=new URLSearchParams({market,pageSize:'6',city:'Москва'});if(budget)q.set('budgetTo','1500000');
+             const started=performance.now();
+             try{
+              const r=await fetch(origin+'/api/catalog/search?'+q,{signal:AbortSignal.timeout(40000),headers:{'User-Agent':'AvtoCena-owner-verification/1.0'}});
+              const v=await r.json();
+              report.queries.push({market,budget,status:r.status,seconds:+((performance.now()-started)/1000).toFixed(3),ok:v.ok===true,items:Array.isArray(v.items)?v.items.length:0,total:v.total??null,partial:!!v.partial,stale:!!v.stale,interrupted:!!v.interrupted,hasMore:!!v.hasMore,error:token(v.error),reason:token(v.reason),serverTiming:r.headers.get('server-timing')});
+             }catch(e){report.queries.push({market,budget,seconds:+((performance.now()-started)/1000).toFixed(3),error:e.name});}
+            }
+           }
+           report.healthAfter=await health();
+           report.ready=report.queries.length===4&&report.queries.every(r=>r.status===200&&r.ok&&r.items>0&&!r.partial&&!r.stale&&!r.interrupted&&!r.error);
+           assert.ok(report.ready,'partner availability or complete fresh results not verified');
+          }finally{console.log('PUBLIC_PARTNER_AVAILABILITY',JSON.stringify(report));}
+          CHECK
