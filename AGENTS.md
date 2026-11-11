@@ -1,12 +1,13 @@
 # Current recovery checkpoint — 12.11.2026
 
 - First read docs/operations/current-incident.md and the latest roadmap entry. Preserve the owner policies below and the archived history.
-- Public health immediately before the retry still confirmed a182cd21b21ecf612b63613d263e5bdd817ea4c0. Last independently inspected image: sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f at 16:00:35 UTC.
-- Active release 43055396384, **attempt 2**, prepare job 130675568177, started 11.11 at 17:04:05 UTC (12.11 Novokuznetsk). Exact source 8731103c0102886064c6a0a19a14182502e6e3be; controller b43b2d81ba0628d2ad20d3c04799522377f78271; 13 application paths on accepted a182.
-- Attempt 1 did not deploy: preparation crossed midnight and failed catalog_pages_date_changed_retry at 17:00:56 UTC. The full preparation is repeated for the new policy date; do not weaken the date/generation fence or reuse yesterday's data as current. No server/browser acceptance occurred in attempt 1.
-- The dependent ee0af253 / run 43060073993 failed its predecessor check and did not prepare or deploy. It is no longer queued. Do not restart it until the current attempt succeeds and exact live 873 is confirmed. Preserve that separate controller; do not standard-deploy main.
-- Previous 1763 / 43043393692 failed expired-cache speed acceptance (0.1700748489 s > 0.1583 s) and rolled back. This is separate from the later date-boundary failure. Never erase or override it with a warm repeat.
-- Follow attempt 2 through unchanged warm/expired/server/browser gates and rollback. Source and fixture tests already passed, but installed UI still needs public model/filter/scroll verification. Keep accepted image, frozen baseline, prices, source restrictions, ordinary schedules and customer data. JP/KR/DUMP and 14/3-day snapshots remain unresolved. Append each milestone truthfully to roadmap.
+- Last independent runtime confirmation at 17:33:44 UTC: a182cd21b21ecf612b63613d263e5bdd817ea4c0, image sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f, running=true. Do not infer final runtime while acceptance is active.
+- Active release43055396384 attempt2, job130675568177, exact source8731103c0102886064c6a0a19a14182502e6e3be, controllerb43b2d81ba0628d2ad20d3c04799522377f78271. Price preparation passed17:57:07UTC; mandatory deploy/server/browser acceptance started17:57:09UTC. Success and installed UI are not yet verified.
+- Attempt1 did not deploy: catalog_pages_date_changed_retry after the local midnight. Attempt2 repeats full preparation for the new date, preserving all date/generation guards.
+- Next release is queued43067092325, source1767642ff5dd8a9a12bd751e8724756934bf7f62, controller2ab5fdfcf725bca6f7e883d6fde3c5ca29a2d9ac. It includes ee0 plus bounded whole-window date retry. Requires predecessor43055396384 success at exactb43 and live873. Old ee0/run43060073993 was superseded: DO NOT restart it. Do not launch a competing release or standard-deploy main.
+- Previous1763/43043393692 failed after_ttl speed0.1700748489s>0.1583s and rolled back. Preserve that evidence; never replace it with a warm retry.
+- Preserve frozen baseline, all17 server routes,35/305s expiry checks, complete results, request counts, mandatory exact SHA/nonce browser verdict and rollback. Source/fixture success is not live acceptance.
+- After accepted release verify retained models/filters, new pages from top and Back on the public site; record exact final SHA/image and evidence. JP/KR provider/DUMP14/3-day policy remains unresolved; ordinary schedules/customer data unchanged. Append every milestone truthfully to roadmap.
 
 # Owner accepted speed and phased optimization — 11.11.2026
 
