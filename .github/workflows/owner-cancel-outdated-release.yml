@@ -1,0 +1,38 @@
+name: Stop the superseded offline release once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-cancel-outdated-release.json']
+permissions:
+  contents: read
+  actions: write
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cancel only the exact superseded run before application activation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request
+          value=json.loads(pathlib.Path('.github/market-runs/owner-cancel-outdated-release.json').read_text())
+          run=int(value['run']); expected=value['release']
+          base='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/'+str(run)
+          def request(url,method='GET'):
+              req=urllib.request.Request(url,method=method,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                  body=r.read(); return json.loads(body) if body else {'status':r.status}
+          current=request(base)
+          assert current['head_sha']==expected and current['path']=='.github/workflows/regcloud-deploy.yml','unexpected_release'
+          if current['status']=='completed':
+              print('Already finished:',current['conclusion']);raise SystemExit(0)
+          jobs=request(base+'/jobs')['jobs']
+          for job in jobs:
+              for step in job.get('steps',[]):
+                  if step['name']=='Deploy with rollback and resource measurements':
+                      assert step['status']=='pending','activation_already_started_do_not_interrupt'
+          print('Cancel exact offline run',run,request(base+'/cancel','POST'))
+          PY

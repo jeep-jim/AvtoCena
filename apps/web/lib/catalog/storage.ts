@@ -49,6 +49,7 @@ import { boundedDetailShards, writeBoundedDetailShards, detailHash, detailShardP
 import { DetailReadCache } from "./detail-read-cache";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { safePublicPricing } from "./safe-public-pricing";
+import { restoreSourceModelName } from "./source-model-name";
 import { confirmedSourceWithdrawalById, isConfirmedSourceWithdrawn } from './confirmed-source-withdrawals';
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
@@ -836,9 +837,10 @@ function projectionUtilizationPowerHp(row: Pick<CatalogSearchProjection,'utiliza
     || /electric|hybrid|phev|hev|bev|электро|гибрид/.test(fuel)) return 0;
   return projectionNumber(row.powerHp, 0);
 }
-/** Calculation enrichment never changes country, make or model. Reject other
- * identities before auditing their mechanical facts or creating priced copies. */
+/** Restore explicit source identity before rejecting other models. Mechanical
+ * enrichment and priced copies are needed only for matching identities. */
 function projectionIdentityMatches(row: Pick<CatalogSearchProjection,'market'|'make'|'model'>, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
+  row = restoreSourceModelName(row);
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase('ru-RU');
   if (params.market && params.market !== 'any' && lower(row.market) !== lower(params.market)) return false;
   if (params.make && !catalogMakeFilterValues(params.make).some(make => lower(row.make) === lower(make))) return false;

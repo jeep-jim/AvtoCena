@@ -94,6 +94,14 @@ test('model discovery skips unrelated mechanical audits while keeping aliases an
  const found=await filterCatalogProjectionRows(rows,{market:'korea',make:'Kia',model:'K5',powerTo:160},new Set(['kia:k5','kia:optima']));
  assert.deepEqual(found.map(r=>r.id),['selected-base','selected-alias']);
 });
+test('early model filtering preserves an explicit Yaris L source identity from older projections',async()=>{
+ const {filterCatalogProjectionRows}=await import('../apps/web/lib/catalog/storage');
+ resetCatalogReadCachesForTests();
+ const input={...row(),id:'source-yaris-l',market:'china',make:'Toyota',model:'Yaris',calculationSnapshot:{...row().calculationSnapshot,customsInput:{model:'Yaris L'}}};
+ const found=await filterCatalogProjectionRows([input],{market:'china',make:'Toyota',model:'Yaris L'});
+ assert.deepEqual(found.map(r=>[r.id,r.model]),[['source-yaris-l','Yaris L']]);
+ assert.equal(input.model,'Yaris','stored identity remains unchanged');
+});
 test('cached admission is rechecked after Krasnoyarsk midnight',t=>{
  resetCatalogReadCachesForTests();
  t.mock.timers.enable({apis:['Date'],now:new Date('2026-10-12T16:59:59Z')});
