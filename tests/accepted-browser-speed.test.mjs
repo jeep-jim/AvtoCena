@@ -55,3 +55,15 @@ test('missing or inconsistent request evidence cannot disable amplification prot
  const brokenBaseline=structuredClone(baseline);delete brokenBaseline.checks[0].filters[0].paths;
  assert.throws(()=>acceptedBrowserSpeed(good,brokenBaseline),/request/);
 });
+
+
+test('alternate China catalog URLs retain the same request budget',()=>{
+ for(const alternate of ['/cars','/cars/china/BMW/3']){
+  const replacement=read('2026-11-11-accepted-speed-browser-restored.json');
+  const one=replacement.checks[0].filters[0];
+  one.paths=one.paths.map(path=>path==='/cars/china'?alternate:path);
+  assert.equal(acceptedBrowserSpeed(replacement,baseline).passed,true);
+  one.paths.push(alternate);one.requests++;
+  assert.equal(acceptedBrowserSpeed(replacement,baseline).passed,false);
+ }
+});

@@ -7,7 +7,7 @@ const requestCounts=(row)=>{
  // Count query/preview work only: unrelated hover/account requests can begin
  // during this interval and are not caused by applying the selected budget.
  return {
-  catalog:row.paths.filter(path=>path==='/cars/china'||path==='/api/catalog/search').length,
+  catalog:row.paths.filter(path=>path==='/cars'||/^\/cars\/china(?:\/|$)/.test(path)||path==='/api/catalog/search').length,
   previews:row.paths.filter(path=>path==='/api/catalog/saved-previews').length,
  };
 };
