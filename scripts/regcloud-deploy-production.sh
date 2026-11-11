@@ -198,6 +198,10 @@ if '# AvtoCena bounded social previews' not in s:
     s=maps+s
 p.write_text(s)
 PY
+# Promote to the existing production resource limits before accepting traffic.
+# The previous container may take 30 seconds to drain; visitors must never run
+# against the candidate's deliberately reduced build/prewarm CPU limit.
+docker update --cpus 6 --memory 10g "$candidate" >/dev/null
 switched=1
 bash "$0" --configure-response-buffers "$config"
 nginx -t
@@ -209,7 +213,6 @@ for attempt in 1 2 3; do
 done
 test "$ready" = 1
 docker stop --time 30 "$old" >/dev/null
-docker update --cpus 6 --memory 10g "$candidate" >/dev/null
 python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
 docker rename "$old" "$backup"
 docker rename "$candidate" "$old"

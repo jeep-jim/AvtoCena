@@ -25,7 +25,7 @@ import { formatCatalogCount } from "@/lib/catalog/count-format";
 import {DealerLink as Link} from "@/components/dealers/DealerBrowsingContext";
 import type {DealerBrowsingContext} from "@/lib/dealers/browsing-context";
 import { redirect } from "next/navigation";
-import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { readCatalogNavigationFacets, searchOffers } from "@/lib/catalog/storage";
 import {CatalogSectionLoading} from "./CatalogLoading";
 import { readPublicCatalogOverview } from "@/lib/catalog/editorial-overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -132,7 +132,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     return null;
   }) : null;
 
-  let facets: Awaited<ReturnType<typeof readCatalogFacets>>;
+  let facets: Awaited<ReturnType<typeof readCatalogNavigationFacets>>;
   let groupedMarkets: MarketGroup[];
   if (overview) {
     facets = overview.facets;
@@ -155,7 +155,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   } else {
     [facets, groupedMarkets] = await Promise.all([
       // Navigation options come from prepared directories, independently of the selected filter.
-      readCatalogFacets(selectedMarket ? {market:selectedMarket} : {}),
+      readCatalogNavigationFacets(selectedMarket),
       Promise.all(markets.map((market) => readMarketSection(async () => {
         if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
         const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;

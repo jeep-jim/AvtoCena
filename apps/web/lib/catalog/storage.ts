@@ -611,6 +611,7 @@ const unavailableReadCache=new UnavailableReadCache();
 const previousLocationCache=new DetailReadCache<{byId:Record<string,OfferLocation>}>({sizeOf:jsonReadByteLength, maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
 const previousOfferChunkCache=new DetailReadCache<VehicleOffer[]>({sizeOf:jsonReadByteLength, maxEntries:4,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
+const navigationFacetsCache = new DetailReadCache<CatalogFacets>({maxEntries:4,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:2});
 let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
 const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({sizeOf:jsonReadByteLength,
   maxEntries: 256, maxBytes: 128 * 1024 * 1024,
@@ -657,6 +658,7 @@ export function resetCatalogReadCachesForTests() {
   currentBrandProjectionCache.clear();
   sharedProjectionBrands = new WeakMap();
   currentFacetsCache = null;
+  navigationFacetsCache.clear();
   currentBrandSummaryCache = null;
   currentOfferShardCache.clear();
   immutableOfferShardCache.clear();
@@ -1024,6 +1026,38 @@ export async function readCatalogModelNames(make = '', market = '') {
   const facets = await readCurrentFacets();
   if (facets.generationId !== manifest.generationId) throw Error('catalog_model_directory_unavailable');
   return facets.models.filter(row => !makes || makes.has(cleanFacet(row.make).toLocaleLowerCase('ru-RU')));
+}
+
+/** Navigation is a name directory, never an availability/count/price query. */
+export async function readCatalogNavigationFacets(market = ''): Promise<CatalogFacets> {
+  return withCatalogEditorial(async () => {
+    const [manifest, current, summary] = await Promise.all([
+      readManifest(), readCurrentFacets().catch(() => null),
+      market && market !== 'any' ? readCurrentBrandSummary().catch((): CatalogBrandSummary | null => null) : Promise.resolve<CatalogBrandSummary | null>(null),
+    ]);
+    if (!manifest.generationId) throw Error('catalog_navigation_directory_unavailable');
+    const valid = (value: CatalogFacets | null): value is CatalogFacets => Boolean(value
+      && value.generationId === manifest.generationId
+      && ['makes', 'models', 'markets', 'bodyTypes', 'fuels', 'transmissions', 'drives'].every(key => Array.isArray((value as any)[key])));
+    const facets = valid(current) ? current : await navigationFacetsCache.get(manifest.generationId, async () => {
+      const stored = await readIndex<CatalogFacets | null>(manifest.generationId, 'facets.json', null);
+      if (!valid(stored)) throw Error('catalog_navigation_directory_unavailable');
+      return stored;
+    });
+    // A hidden listing must not make a known model disappear from the picker or
+    // force a country-wide eligibility/price replay before any cards can render.
+    // Actual searches still apply current moderation, age and price predicates.
+    // Specification options remain catalog-wide; the prepared summary scopes names.
+    if (summary?.generationId === manifest.generationId) {
+      const brands = Object.values(summary.brands).filter(brand => Number(brand.marketCounts?.[market]) > 0);
+      return withEditorialFacetOptions({...facets,
+        makes: brands.map(brand => brand.make),
+        models: brands.flatMap(brand => brand.models.filter(model => Number(model.marketCounts?.[market]) > 0)
+          .map(model => ({make: brand.make, model: model.model}))),
+      }, market);
+    }
+    return withEditorialFacetOptions(facets, market);
+  });
 }
 
 async function readCurrentPublicCatalogProjectionEditorial() {

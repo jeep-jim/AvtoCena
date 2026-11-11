@@ -1,0 +1,32 @@
+name: Record owner search recovery checkpoint once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-search-checkpoint.json']
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Append the actual owner task and unfinished release status
+        run: |
+          set -euo pipefail
+          cp .github/market-runs/owner-search-checkpoint.json /tmp/owner-search-checkpoint.json
+          git fetch origin main
+          git checkout -B owner-search-checkpoint origin/main
+          python3 - <<'PY'
+          import json, os, pathlib
+          entry=json.loads(pathlib.Path('/tmp/owner-search-checkpoint.json').read_text())['entry']
+          entry+='\n- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/'+os.environ['GITHUB_SHA']+'\n'
+          with open('roadmap.md','a') as output:output.write('\n\n'+entry+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add roadmap.md
+          git commit -m 'docs: track owner 30-second catalog incident and unfinished recovery'
+          git push origin HEAD:main

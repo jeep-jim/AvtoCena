@@ -56,6 +56,9 @@ class GateTests(unittest.TestCase):
   calls=[i for i in range(len(script)) if script.startswith('python3 "$runtime/regcloud-performance-gate.py"',i)]
   self.assertEqual(len(calls),2)
   self.assertLess(calls[0],script.index('systemctl reload nginx\nready='))
+  promotion=script.index('docker update --cpus 6 --memory 10g "$candidate"')
+  self.assertLess(calls[0],promotion,'pre-switch functional checks still run before production promotion')
+  self.assertLess(promotion,script.index('systemctl reload nginx\nready='),'visitors must receive full production capacity before the previous process drains')
   self.assertGreater(calls[1],script.index('docker stop --time 30 "$old"'))
   self.assertLess(calls[1],script.index('committed=1'))
  def test_all_routes_are_checked_after_both_cache_deadlines(self):

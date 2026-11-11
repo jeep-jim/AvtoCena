@@ -61,7 +61,7 @@ jobs:
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py
       - name: Verify owner catalog search and queue regressions
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts
       - name: Verify production dependency security
         run: npm audit --omit=dev --audit-level=high
       - name: Verify catalog storage and bounded projection integrity
