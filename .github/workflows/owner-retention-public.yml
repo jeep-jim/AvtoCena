@@ -1,0 +1,58 @@
+name: Verify published owner selection and scroll once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-retention-public.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: owner-public-retention-verification
+  cancel-in-progress: false
+jobs:
+  public-retention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+      - name: Require completed accepted release and exact public source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node --check tests/browser/owner-retention-public.mjs
+          node --input-type=module <<'REQUIRE_ACCEPTED'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import {execFileSync} from 'node:child_process';
+          const m=JSON.parse(fs.readFileSync('.github/market-runs/owner-retention-public.json','utf8'));
+          assert.match(m.release,/^[0-9a-f]{40}$/);
+          assert.ok(Number.isSafeInteger(m.releaseRun)&&m.releaseRun>0);
+          const r=JSON.parse(execFileSync('gh',['api','repos/jeep-jim/AvtoCena/actions/runs/'+m.releaseRun],{encoding:'utf8'}));
+          assert.equal(r.status,'completed');assert.equal(r.conclusion,'success');assert.equal(r.head_sha,m.controllerCommit);
+          const h=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(30000)});
+          assert.equal(h.status,200);assert.equal((await h.json()).releaseSha,m.release);
+          console.log(JSON.stringify({acceptedReleaseRun:m.releaseRun,source:m.release,controller:m.controllerCommit}));
+          REQUIRE_ACCEPTED
+      - name: Verify actual retained choices, new page top and Back at both widths
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/retention-browser/node_modules/playwright/index.mjs
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-retention-public.mjs
+      - name: Mirror public verification report and screenshots
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: owner-retention-public
+          path: artifacts/owner-retention-public/
+          if-no-files-found: warn
+          retention-days: 14
