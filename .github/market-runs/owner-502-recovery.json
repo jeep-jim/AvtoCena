@@ -1,6 +1,6 @@
 {
-  "action": "recover",
+  "action": "diagnose",
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "requestedAt": "2026-11-11T07:19:15.152607+00:00",
-  "reason": "One conditional restart of exact17a only if bounded loopback health is still unavailable; read-only07:16 run42978265046 measured5.017s timeout and5.5GiB; preserve data/proxy/image and shared deploy lock. No loop/watchdog."
+  "requestedAt": "2026-11-11T08:05:48.895Z",
+  "reason": "Read-only availability check while exacta182 resume finishes page preparation. External check could not establish TCP/TLS; do not infer an app crash from that. No restart/profiler; exact release guard and shared lock preserved."
 }
