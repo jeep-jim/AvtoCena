@@ -1,3 +1,9 @@
+# Next isolated city-cache candidate — 2026-11-11T16:08:49.965Z
+
+- New source 8731103c0102886064c6a0a19a14182502e6e3be on owner-retention-a182-20261111: accepted a182 plus13 application paths (navigation/query retention plus shared default category rows across cities). Starting a new pinned owner-navigation-release run; inspect its status before another release. Runtime remains confirmed a182 until final acceptance.
+- Source tests:8 city/window/delivery checks plus TypeScript pass; exact accepted-branch file additionally tested. Include latest main complete-search and request-count guards; keep frozen baseline, TTL/expiry phases and nonce-bound browser rollback. Do not standard-deploy main or overwrite its independent supplier/home work.
+- Previous1763 failed expired-cache acceptance and rolled back; no unchanged rerun. JP/KR availability and DUMP authorization remain open. Record actual run ID/outcome in roadmap.
+
 # Rejected navigation release and confirmed rollback — 11.11.2026 16:00 UTC
 
 - Run43043393692 / source1763 failed mandatory expired-cache speed acceptance: China+Novokuznetsk0.1700748489s >0.1583s. Browser acceptance was not reached. Runtime rollback to accepted a182/e36 is independently confirmed by run43048247680 attempt2, job130638175608 at16:00:35UTC.

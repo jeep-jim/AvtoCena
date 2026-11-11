@@ -112,13 +112,17 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
 const pages = new DetailReadCache<any>({maxEntries: 32, maxBytes: 12 * 1024 * 1024, ttlMs: 60_000, concurrency: 4});
 export async function readCatalogMarketPage(query: CatalogSearchParams) {
   const normalized = {...query, page: Math.max(1, Math.floor(Number(query.page) || 1)), pageSize: MARKET_PAGE_SIZE};
-  const key = JSON.stringify([(await readCatalogEditorial()).revision,Object.entries(normalized).sort(([a],[b])=>a.localeCompare(b))]);
+  const {market, page, pageSize, sort, ...filters} = normalized;
+  const hasFilters = Object.entries(filters).some(([key,value])=>key!=="city"&&Boolean(value));
+  const customSort = Boolean(sort && sort !== "updatedAt");
+  // Default category rows are independent of delivery city. Share that exact
+  // result; budget filters and price ordering still retain their city in the key.
+  const defaultPage = !hasFilters && !customSort;
+  const cacheQuery = defaultPage ? {market, page, pageSize, sort:"updatedAt"} : normalized;
+  const key = JSON.stringify([(await readCatalogEditorial()).revision,Object.entries(cacheQuery).sort(([a],[b])=>a.localeCompare(b))]);
   return pages.get(key, async () => {
-    const {market, page, pageSize, sort, ...filters} = normalized;
     // A chosen delivery city must not turn a category click into full-market search.
-    const hasFilters = Object.entries(filters).some(([key,value])=>key!=="city"&&Boolean(value));
-    const customSort = Boolean(sort && sort !== "updatedAt");
-    const result = !hasFilters && !customSort
+    const result = defaultPage
       ? await readDiverseDefaultMarketPage(String(market), page)
       : await searchOffers(normalized);
     const visible = await applyActiveBusinessPricingBatch(result.items);
