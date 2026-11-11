@@ -1,0 +1,41 @@
+name: Profile rejected login reads once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/profile-rejected-login.yml']
+permissions:
+  contents: read
+concurrency:
+  group: owner-login-read-diagnostic
+  cancel-in-progress: false
+jobs:
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Preserve diagnostic and checkout exact rejected source
+        run: |
+          cp scripts/profile-rejected-login.mjs /tmp/avtocena-login-read-profile.mjs
+          git fetch --depth=1 origin 75c2e6f57cfa4022865217e029a1f5d1671842c3
+          git checkout --detach FETCH_HEAD
+          cp /tmp/avtocena-login-read-profile.mjs scripts/profile-rejected-login.mjs
+          test "$(git rev-parse HEAD)" = '75c2e6f57cfa4022865217e029a1f5d1671842c3'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Measure read-only login stages on exact source without serving traffic
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/profile-rejected-login.mjs
