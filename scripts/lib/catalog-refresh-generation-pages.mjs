@@ -1,5 +1,26 @@
 import {validateOverviewSourceShard} from './catalog-overview-source-validation.mjs';
 
+export async function refreshGenerationPagesWindow({refreshDay, now = () => new Date()}) {
+  const day = date => new Date(date.getTime() + 7 * 3600000).toISOString().slice(0, 10);
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const captured = now(), capturedDay = day(captured), results = [];
+    const checkDay = () => {
+      if (day(now()) !== capturedDay) throw Error('catalog_pages_date_changed_retry');
+    };
+    try {
+      for (let offset = 0; offset < 3; offset++) {
+        checkDay();
+        results.push(await refreshDay(new Date(captured.getTime() + offset * 86400000), offset));
+        checkDay();
+      }
+      return results;
+    } catch (error) {
+      // Restart the entire dated window once; never retry source, generation or CAS failures.
+      if (attempt || !(error instanceof Error) || error.message !== 'catalog_pages_date_changed_retry') throw error;
+    }
+  }
+}
+
 // Only derivatives under the captured generation may be changed. A publisher
 // can build another generation concurrently; no shared alias or lease is touched.
 export async function refreshGenerationPages({storage, markets, buildLanding, prepareRows, buildOverview,

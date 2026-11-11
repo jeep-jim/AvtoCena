@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {refreshGenerationPages} from '../scripts/lib/catalog-refresh-generation-pages.mjs';
+import {refreshGenerationPages, refreshGenerationPagesWindow} from '../scripts/lib/catalog-refresh-generation-pages.mjs';
 function fixture() {
   const writes = [], reads = [], objects = new Map();
   const generation = 'gen_old', prefix = `catalog/generations/${generation}/indexes/`;
@@ -90,4 +90,101 @@ test('market-only preparation never reads or replaces a global overview',async()
  const result=await refreshGenerationPages(f.options);
  assert.equal(result.landingsOnly,true);
  assert.equal(f.writes.length,1);
+});
+
+function windowFixture({landingsOnly=false,skipReady=false}={}) {
+  const f=fixture(), calls=[];
+  let clock=new Date('2026-10-23T16:59:59Z');
+  const now=()=>new Date(clock);
+  const state={...f,calls,
+    advance:()=>{clock=new Date(Math.floor((clock.getTime()+7*3600000)/86400000)*86400000-7*3600000+86400000);},
+    beforeDay:()=>{},onBuild:()=>{},afterDay:()=>{}};
+  state.run=()=>refreshGenerationPagesWindow({now,refreshDay:async(policyNow,offset)=>{
+    const policyDate=new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10);
+    calls.push({policyDate,offset});
+    state.beforeDay();
+    const dated=path=>offset?path.replace(/\.json$/,`.${policyDate}.json`):path;
+    const result=await refreshGenerationPages({...f.options,now,policyNow,landingsOnly,skipReady,
+      landingPath:g=>dated(f.options.landingPath(g)),overviewPath:g=>dated(f.options.overviewPath(g)),
+      buildLanding:async(g,market,items)=>{
+        state.onBuild();
+        return {generationId:g,market,sourceTotal:items.length,total:1,policyDate};
+      },
+      buildOverview:async(g,rows)=>({generationId:g,facets:{generationId:g},policyDate,markets:{china:{total:rows.length}}}),
+    });
+    state.afterDay(result);
+    return result;
+  }});
+  return state;
+}
+
+test('date rollover restarts the complete three-day window with a freshly captured date',async()=>{
+  const f=windowFixture({skipReady:true});
+  f.onBuild=()=>{if(f.calls.length===2)f.advance();};
+  const result=await f.run();
+  assert.deepEqual(f.calls,[
+    {policyDate:'2026-10-23',offset:0},{policyDate:'2026-10-24',offset:1},
+    {policyDate:'2026-10-24',offset:0},{policyDate:'2026-10-25',offset:1},{policyDate:'2026-10-26',offset:2},
+  ]);
+  assert.deepEqual(result.map(row=>row.policyDate),['2026-10-24','2026-10-25','2026-10-26']);
+  for(const [suffix,day] of [['','2026-10-24'],['.2026-10-25','2026-10-25'],['.2026-10-26','2026-10-26']]){
+    assert.equal(f.objects.get(`${f.prefix}overview${suffix}.json`).policyDate,day);
+    assert.equal(f.objects.get(`${f.prefix}market-landing-v1/china${suffix}.json`).policyDate,day);
+  }
+  const currentWrites=f.writes.filter(row=>row.path===`${f.prefix}overview.json`);
+  assert.deepEqual(currentWrites.map(row=>row.condition),[{ifNoneMatch:'*'},{ifMatch:'v1'}]);
+  assert.equal(f.objects.has(`${f.prefix}overview.2026-10-24.json`),false,'failed day must not be published');
+  const count=f.writes.length;
+  assert.ok((await f.run()).every(row=>row.alreadyPrepared),'skipReady still applies after recovery');
+  assert.equal(f.writes.length,count);
+});
+
+test('a stable market-only window preserves all three dates without overview reads or writes',async()=>{
+  const f=windowFixture({landingsOnly:true});
+  f.options.overviewPath=()=>{throw Error('unrelated_overview');};
+  const result=await f.run();
+  assert.deepEqual(result.map(row=>row.policyDate),['2026-10-23','2026-10-24','2026-10-25']);
+  assert.ok(result.every(row=>row.landingsOnly));
+  assert.equal(f.writes.length,3);
+  assert.ok(f.writes.every(row=>row.path.includes('/market-landing-v1/')));
+});
+
+test('rollover after a successful or final skipReady day restarts from the new current day',async()=>{
+  for(const finalOffset of [0,2]){
+    const f=windowFixture({skipReady:true});
+    await f.run();
+    f.calls.length=0;
+    const completed=[];
+    f.afterDay=result=>{completed.push(result);if(f.calls.length===finalOffset+1)f.advance();};
+    const result=await f.run();
+    assert.ok(completed.slice(0,finalOffset+1).every(row=>row.alreadyPrepared));
+    assert.deepEqual(f.calls.slice(finalOffset+1),[
+      {policyDate:'2026-10-24',offset:0},{policyDate:'2026-10-25',offset:1},{policyDate:'2026-10-26',offset:2},
+    ]);
+    assert.deepEqual(result.map(row=>row.policyDate),['2026-10-24','2026-10-25','2026-10-26']);
+    assert.equal(f.objects.get(`${f.prefix}overview.json`).policyDate,'2026-10-24');
+    assert.equal(f.objects.get(`${f.prefix}market-landing-v1/china.json`).policyDate,'2026-10-24');
+  }
+});
+
+test('a second date rollover fails closed without a third window attempt',async()=>{
+  const f=windowFixture({landingsOnly:true});
+  f.onBuild=()=>f.advance();
+  await assert.rejects(f.run(),{message:'catalog_pages_date_changed_retry'});
+  assert.deepEqual(f.calls,[{policyDate:'2026-10-23',offset:0},{policyDate:'2026-10-24',offset:0}]);
+  assert.equal(f.writes.length,0);
+});
+
+test('the three-day wrapper does not retry generation, source, CAS or other failures',async()=>{
+  for(const error of ['catalog_pages_generation_changed_retry','catalog_overview_source_count_mismatch','storage_conflict','catalog_pages_horizon_invalid','catalog_pages_date_changed_retry_extra']){
+    const f=windowFixture();
+    if(error==='catalog_pages_generation_changed_retry')f.onBuild=()=>f.objects.set('catalog/manifest.json',{generationId:'gen_new'});
+    else if(error==='catalog_overview_source_count_mismatch')f.objects.get(`${f.prefix}projection/china.json`).items.pop();
+    else if(error==='storage_conflict')f.options.storage.writeJson=async()=>{throw Error(error);};
+    else if(error==='catalog_pages_horizon_invalid')f.beforeDay=()=>f.advance();
+    else f.onBuild=()=>{throw Error(error);};
+    await assert.rejects(f.run(),new RegExp(error));
+    assert.equal(f.calls.length,1,error);
+    assert.equal(f.writes.length,0,error);
+  }
 });
