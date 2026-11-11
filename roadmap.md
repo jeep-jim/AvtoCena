@@ -24611,3 +24611,11 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - Подготовка пяти рынков и66предварительных проверок прошли, но post-switch `/` after_ttl:5,0283с; медиана трёх повторов2,3584с при пределе1,8835с. Запуск43005906700 выполнил автоматический откат; проверка фактического a182 и диагностика остановленного кандидата запущены. Исправление бюджета ещё не принято на production. Baseline не ослаблен. Источники: docs/operations/2026-11-11-budget-release-rejection.json, 2026-11-11-partner-source-state.json.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/27197f8e42edbcf9f1b83743260a90aaa1c563ae
 
+
+
+### 11.11.2026 — откат3048 подтверждён, подготовлен изолированный разбор главной
+
+- Run43014623074 подтвердил исходный a182/image e36c969 после автоматического rollback; публичный health200/exact a182. Остановленный кандидат43014623101: OOMKilled=false, ExitCode0, visitor_restricted6; чтения каталога до3531мс. Конкретная причина задержки главной пока не установлена.
+- Один новый диагностический запуск использует тот же сохранённый образ3048 с уже встроенными home_phase: отдельный loopback контейнер2CPU/8GB,4запроса cold/warm/35s/305s, без активации, профилировщика и подставного IP. Проверка private index и production до/после, очистка своего временного контейнера. Python/YAML/bash syntax и home-phase telemetry test PASS. Бюджетный выпуск не принят, baseline не менялся.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/3eacc4a8210cb8aadd9e9c707c5394e32b8a0c80
+
