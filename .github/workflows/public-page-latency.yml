@@ -1,0 +1,124 @@
+name: Observe three public pages after exact release acceptance
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/public-page-latency.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check bounded observation contract offline
+        run: python3 tests/public-page-latency.test.py
+      - name: Require accepted release or the original frozen baseline and confirmed rollback
+        id: accepted
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run=$(python3 -c 'import json;v=json.load(open(".github/market-runs/public-page-latency.json"));assert v["mode"] in ["original-a182","accepted-release"];r=v["confirmationRunId" if v["mode"]=="original-a182" else "acceptedRunId"];assert isinstance(r,int) and not isinstance(r,bool) and r>0;print(r)')
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run" > "$RUNNER_TEMP/public-pages-accepted-run.json"
+          python3 - <<'CHECK'
+          import hashlib,json,os,re,pathlib
+          marker=json.loads(pathlib.Path('.github/market-runs/public-page-latency.json').read_text())
+          run=json.loads(pathlib.Path(os.environ['RUNNER_TEMP']+'/public-pages-accepted-run.json').read_text())
+          mode=marker['mode'];assert mode in ['original-a182','accepted-release']
+          original=mode=='original-a182'
+          release=marker['release']
+          control=marker['confirmationControl' if original else 'acceptedControl']
+          run_id=marker['confirmationRunId' if original else 'acceptedRunId']
+          assert all(isinstance(v,str) and re.fullmatch('[a-f0-9]{40}',v) for v in [release,control])
+          assert run['id']==run_id and run['head_sha']==control
+          assert run['status']=='completed' and run['conclusion']=='success','successful confirmation required before any page observation'
+          assert run['head_repository']['full_name']=='jeep-jim/AvtoCena'
+          workflow=run['path'].split('@',1)[0]
+          image=calculation=''
+          if original:
+              assert release=='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+              assert run_id==43081159796 and control=='902043eafa1111e83aa32155b4845187b6a39495'
+              assert workflow=='.github/workflows/inspect-rejected-873-runtime.yml'
+              for filename,digest,flag in [
+                  ('2026-11-11-accepted-speed-baseline.json','32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59','complete'),
+                  ('2026-11-11-accepted-browser-speed-baseline.json','1ad263a9f9c6c4d656ffec4aca51d2b96f5fd284afb759e96ae53cee2bf39b06','passed')]:
+                  raw=pathlib.Path('docs/operations',filename).read_bytes()
+                  assert hashlib.sha256(raw).hexdigest()==digest,'original accepted baseline changed'
+                  value=json.loads(raw);assert value['release']==release and value[flag] is True
+              image='sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f'
+              calculation='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6'
+          elif release=='8731103c0102886064c6a0a19a14182502e6e3be':
+              assert run_id==43079097899 and control=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b'
+              assert workflow=='.github/workflows/owner-accept-prepared-873.yml'
+          else:
+              assert release!='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+              assert workflow=='.github/workflows/owner-navigation-release.yml'
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              output.write('release='+release+'\nimage='+image+'\ncalculation='+calculation+'\n')
+          print('Original-baseline rollback confirmation verified' if original else 'Successful release acceptance verified')
+          CHECK
+      - name: Observe only complete privacy, blog and dealer pages without restarting the app
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          EXPECTED_RELEASE: ${{ steps.accepted.outputs.release }}
+          EXPECTED_IMAGE: ${{ steps.accepted.outputs.image }}
+          EXPECTED_CALCULATION: ${{ steps.accepted.outputs.calculation }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/diagnostics/public-pages/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" scripts/public-page-latency.py "root@151.248.113.177:$remote_dir/probe.py"
+          set +e
+          ssh "${ssh_opts[@]}" root@151.248.113.177 bash -s -- "$EXPECTED_RELEASE" "$remote_dir" "$EXPECTED_IMAGE" "$EXPECTED_CALCULATION" <<'REMOTE'
+          set -euo pipefail
+          expected=$1
+          directory=$2
+          expected_image=${3:-}
+          expected_calculation=${4:-}
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 30 9
+          test "$(docker inspect --format '{{.State.Running}}' avtocena-production)" = true
+          test "$(docker inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' avtocena-production)" = "$expected"
+          if test -n "$expected_image"; then test "$(docker inspect --format '{{.Image}}' avtocena-production)" = "$expected_image"; fi
+          port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
+          arguments=("http://127.0.0.1:$port" "$expected" "$directory/report.json")
+          if test -n "$expected_calculation"; then arguments+=(--calculation-version "$expected_calculation"); fi
+          timeout --signal=TERM --kill-after=10 300 python3 "$directory/probe.py" "${arguments[@]}"
+          REMOTE
+          status=$?
+          scp "${ssh_opts[@]}" "root@151.248.113.177:$remote_dir/report.json" public-page-latency.json
+          copied=$?
+          set -e
+          test "$copied" = 0
+          python3 - <<'REPORT'
+          import json
+          path='public-page-latency.json'
+          report=json.load(open(path));marker=json.load(open('.github/market-runs/public-page-latency.json'))
+          assert report['release']==marker['release']
+          report['verificationMode']=marker['mode']
+          keys=['confirmationRunId','confirmationControl'] if marker['mode']=='original-a182' else ['acceptedRunId','acceptedControl']
+          for key in keys:report[key]=marker[key]
+          with open(path,'w') as output:json.dump(report,output,indent=2);output.write('\n')
+          REPORT
+          exit "$status"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-page-latency-${{ github.run_id }}
+          path: public-page-latency.json
+          if-no-files-found: ignore
