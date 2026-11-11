@@ -1,0 +1,33 @@
+name: Recover exact installed app from owner-reported 502 once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-502-recovery.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preserve diagnostics and restart only the unresponsive exact application
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'flock -w 30 /run/lock/avtocena-runtime-change.lock python3 -' < .github/owner-502-recovery/recover.py | tee owner-502-recovery.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-502-recovery
+          path: owner-502-recovery.log
