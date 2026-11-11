@@ -26,7 +26,7 @@ jobs:
               with urllib.request.urlopen(req,timeout=20) as r:
                   body=r.read(); return json.loads(body) if body else {'status':r.status}
           current=request(base)
-          assert current['head_sha']==expected and current['path']=='.github/workflows/regcloud-deploy.yml','unexpected_release'
+          assert current['head_sha']==expected and current['path'] in {'.github/workflows/regcloud-deploy.yml','.github/workflows/owner-navigation-release.yml'},'unexpected_release'
           if current['status']=='completed':
               print('Already finished:',current['conclusion']);raise SystemExit(0)
           jobs=request(base+'/jobs')['jobs']
