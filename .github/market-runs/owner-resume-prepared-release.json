@@ -1,6 +1,6 @@
 {
   "release": "3048aede91dbfa4287e038075700e1434ba53e85",
   "sourceRun": 43005906700,
-  "requestedAt": "2026-11-11T11:57:12.748Z",
-  "reason": "One exact-image recheck after homepage speed guard rejection and verified rollback to a182. Keep identical baseline/functional/security/preparation fences and rollback, add existing numeric home_phase logging only. No threshold relaxation or new build; determine the actual slow phase if it recurs."
+  "requestedAt": "2026-11-11T11:58:54.880Z",
+  "reason": "Run43016188507 stopped before any server or storage mutation: gh refused ANSI in original Actions log. Allow its capture into the private temporary file only; no raw output. Continue the one planned exact-image recheck with all baseline/gates unchanged."
 }

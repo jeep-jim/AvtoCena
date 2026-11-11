@@ -31,7 +31,7 @@ jobs:
           set -euo pipefail
           gh api repos/jeep-jim/AvtoCena/actions/runs/43005906700 > /tmp/owner-original-run.json
           gh api repos/jeep-jim/AvtoCena/actions/runs/43005906700/jobs > /tmp/owner-original-jobs.json
-          gh api repos/jeep-jim/AvtoCena/actions/jobs/130473525010/logs > /tmp/owner-original-deploy.log
+          gh api --allow-escape-sequences repos/jeep-jim/AvtoCena/actions/jobs/130473525010/logs > /tmp/owner-original-deploy.log
           gh run download 43005906700 --repo jeep-jim/AvtoCena --name release-market-preparation --dir prepared-evidence
           gh run download 43005906700 --repo jeep-jim/AvtoCena --name encyclopedia-coverage --dir reports
           python3 - <<'VERIFY'
