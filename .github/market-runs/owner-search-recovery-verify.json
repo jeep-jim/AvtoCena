@@ -1,5 +1,6 @@
 {
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "requestedAt": "2026-11-11T03:35:37.478829+00:00",
-  "reason": "Verify installed targeted repair; preserve remaining latency as open P0, never claim speed acceptance from functional pass."
+  "requestedAt": "2026-11-11T04:56:43.163540+00:00",
+  "reason": "Verify actual public pages after recovery from the 04:11 UTC heap failure; keep remaining latency open",
+  "includeHome": true
 }

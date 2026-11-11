@@ -108,10 +108,10 @@ def health(label, agent='Mozilla/5.0 AvtoCenaOwnerVerification'):
 
 
 if health('before'):
-    for path in ['/cars', '/cars/china/BMW/3?powerTo=160&sort=totalRub',
+    for path in (['/'] if marker.get('includeHome') else []) + ['/cars', '/cars/china/BMW/3?powerTo=160&sort=totalRub',
                  '/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub', '/cars/europe']:
         result, _ = request(path, html=True)
-        result['passed'] = (result.get('http') == 200 and result.get('complete') and result.get('cards', 0) > 0
+        result['passed'] = (result.get('http') == 200 and result.get('complete') and (path == '/' or result.get('cards', 0) > 0)
                             and not result.get('errorStream') and not result.get('error')
                             and '%20' not in result.get('heading', ''))
         report['checks'].append(result)
@@ -132,7 +132,7 @@ if health('before'):
     health('google-retained', 'Googlebot/2.1')
     health('yandex-retained', 'YandexBot/3.0')
     health('after')
-report['passed'] = len(report['checks']) == 11 and all(row.get('passed') for row in report['checks'])
+report['passed'] = len(report['checks']) == (12 if marker.get('includeHome') else 11) and all(row.get('passed') for row in report['checks'])
 pathlib.Path('owner-search-recovery-public.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps(report, ensure_ascii=False), flush=True)
 raise SystemExit(0 if report['passed'] else 1)

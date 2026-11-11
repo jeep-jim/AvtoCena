@@ -25,7 +25,7 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          action=$(python3 -c 'import json; value=json.load(open(".github/market-runs/owner-502-recovery.json")).get("action","recover"); assert value in ["recover","diagnose"]; print(value)')
+          action=$(python3 -c 'import json; value=json.load(open(".github/market-runs/owner-502-recovery.json")).get("action","recover"); assert value in ["recover","diagnose","restart-proof"]; print(value)')
           ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'flock -w 30 /run/lock/avtocena-runtime-change.lock python3 -' < ".github/owner-502-recovery/$action.py" | tee owner-502-recovery.log
       - uses: actions/upload-artifact@v4
         if: always()
