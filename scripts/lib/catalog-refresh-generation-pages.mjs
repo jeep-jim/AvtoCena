@@ -50,7 +50,8 @@ function completeOverviewMarkets(overview, manifest, markets, isPublished) {
 // can build another generation concurrently; no shared alias or lease is touched.
 export async function refreshGenerationPages({storage, markets, buildLanding, prepareRows, buildOverview,
   landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow, landingsOnly = false,
-  isPublished = () => true}) {
+  isPublished = () => true, editorialRevision}) {
+  if(editorialRevision!==undefined&&(typeof editorialRevision!=='string'||!editorialRevision))throw Error('catalog_pages_editorial_revision_invalid');
   const day = () => new Date(now().getTime() + 7 * 3600000).toISOString().slice(0, 10);
   const capturedDay = day();
   const policyDate = policyNow ? new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10) : capturedDay;
@@ -82,7 +83,8 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   const previous = previousOverview.value;
   if (skipReady && previous?.generationId === generationId && previous.policyDate === policyDate
       && previous.dailyLandingsVersion === 1 && previous.facets?.generationId === generationId
-      && completeOverviewMarkets(previous, manifest, markets, isPublished)) {
+      && completeOverviewMarkets(previous, manifest, markets, isPublished)
+      && (editorialRevision===undefined||previous.editorialRevision===editorialRevision)) {
     await check();
     return {generationId, policyDate, alreadyPrepared: true};
   }
@@ -107,6 +109,7 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   const overview = await buildOverview(generationId, rows);
   if (overview.generationId !== generationId || overview.facets?.generationId !== generationId
       || overview.policyDate !== policyDate) throw Error('catalog_pages_overview_invalid');
+  if(editorialRevision!==undefined&&overview.editorialRevision!==editorialRevision)throw Error('catalog_pages_editorial_revision_mismatch');
   for (const market of markets) {
     if (!overview.markets[market]) throw Error('catalog_pages_market_missing');
     overview.markets[market].sourceTotal = counts[market];

@@ -43,6 +43,14 @@ export function editorialHidden(offer:Identity,index=context.getStore()){
  const entry=matchingEditorial(offer,index);return !!entry&&entry.status!=='visible';
 }
 export function editorialHasHidden(market?:string){return editorialEntries().some(e=>e.status!=='visible'&&(!market||market==='any'||e.market===market));}
+/** A prepared overview already excludes the edits from its exact revision.
+ * On a revision change also refresh formerly edited markets: restoring a car
+ * or removing the last edit must not leave the old reduced count in place. */
+export function editorialNeedsOverviewRefresh(overview:{generationId?:string;editorialRevision?:string;editorialMarkets?:string[]},market:string){
+ if(!overview.editorialRevision)return editorialHasHidden(market);
+ if(overview.editorialRevision===editorialRevision())return false;
+ return !!overview.editorialMarkets?.includes(market)||editorialEntries().some(entry=>entry.market===market);
+}
 export function applyCatalogEditorial<T extends Identity>(offer:T,index=context.getStore()):T{
  const entry=matchingEditorial(offer,index);if(!entry)return offer;
  return {...applyCatalogEditorialPrice(applyCatalogEditorialSpecifications(offer,index),index),...(entry.title?{editorialTitle:entry.title}:{}),...(entry.photos?{

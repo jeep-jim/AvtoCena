@@ -24,7 +24,7 @@ import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
-import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
+import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialNeedsOverviewRefresh,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
@@ -2880,8 +2880,9 @@ function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number, 
 }
 
 export async function buildCatalogOverviewFromProjections(generationId: string, projections: CatalogSearchProjection[], options: {now?:Date} = {}) {
+  return withCatalogEditorial(async()=>{
   const now=options.now||new Date();
-  const visible = projections.filter(row=>projectionCanRenderCardAt(row,now));
+  const visible = prepareCatalogProjectionRowsForDate(projections,now);
   const facets = await facetsFromProjection(generationId, visible, {}, false);
   const markets = Object.fromEntries(MARKETS.map(market => {
     const rows = visible.filter(row => row.market === market);
@@ -2889,7 +2890,9 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
     return [market, {sourceTotal: projections.filter(row => row.market === market).length,
       total: rows.length, items: selectHomepageShowcase(rows, 24, now).map(publicOfferFromProjection)}];
   }));
-  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10)};
+  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10),
+    editorialRevision:editorialRevision(),editorialMarkets:[...new Set(editorialEntries().map(entry=>entry.market))]};
+  });
 }
 
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
@@ -2904,7 +2907,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
     return catalogOverviewMarketComplete(summary, count, limit);
   })) {
     const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
-    return {generationId: manifest.generationId, marketCounts,
+    return {generationId: manifest.generationId, marketCounts,editorialRevision:overview.editorialRevision,editorialMarkets:overview.editorialMarkets,
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
@@ -3149,7 +3152,7 @@ export async function readHomeCatalogSnapshot(perMarket=6){
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
  const markets=MARKETS.slice(0,0);
  for(const market of MARKETS){
-  if(!editorialHasHidden(market))continue;
+  if(!editorialNeedsOverviewRefresh(snapshot,market))continue;
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }

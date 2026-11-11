@@ -379,3 +379,24 @@ test('completed collectors prepare derivatives even when a later step failed',as
   }));
   assert.deepEqual(watched,names);
 });
+
+
+test('ready overview is reused only for the exact captured editorial revision',async()=>{
+  for(const prior of [undefined,'old-edit','current-edit']){
+    const f=readyOverviewFixture();
+    f.overview.editorialRevision=prior;f.options.editorialRevision='current-edit';
+    const build=f.options.buildOverview;
+    f.options.buildOverview=async(...args)=>({...await build(...args),editorialRevision:'current-edit'});
+    const result=await refreshGenerationPages(f.options);
+    assert.equal(result.alreadyPrepared===true,prior==='current-edit');
+    assert.equal(f.writes.length,prior==='current-edit'?0:4);
+    assert.equal(f.objects.get(f.prefix+'overview.json').editorialRevision,'current-edit');
+  }
+});
+test('wrong editorial revision cannot become the prepared common overview',async()=>{
+  const f=readyOverviewFixture();f.options.editorialRevision='current-edit';
+  const before=structuredClone(f.overview);
+  await assert.rejects(refreshGenerationPages(f.options),/editorial_revision_mismatch/);
+  assert.deepEqual(f.objects.get(f.prefix+'overview.json'),before);
+  assert.ok(f.writes.every(write=>!write.path.endsWith('/overview.json')));
+});
