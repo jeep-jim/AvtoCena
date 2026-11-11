@@ -2,9 +2,10 @@ import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {catalogOverviewMarketComplete,catalogOverviewMatchesGeneration} from '../apps/web/lib/catalog/overview.ts';
 import {publicationWithdrawn} from '../apps/web/lib/catalog/publication-policy.ts';
 import {PUBLIC_CATALOG_MARKETS} from '../apps/web/lib/catalog/runtime-config.ts';
-const expected='gen_1793052425373_c710a778',day='2026-10-28';
+const expected='gen_1794357678562_9c0667cb',day='2026-11-12';
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('object_storage_required');
 const timer=setTimeout(()=>{console.error('metadata_deadline');process.exit(1);},180000);
+storage.writeJson=async()=>{throw Error('diagnostic_write_forbidden');};
 const durations={};
 async function read(label,key){const start=performance.now();try{return await storage.readJson(key,null);}finally{durations[label]=Math.round(performance.now()-start);}}
 try{
@@ -17,7 +18,7 @@ try{
   const publicOverview=await read('public','catalog/public/overview.json');
   const editorial=await read('editorial','catalog-editorial/current.json');
   const after=await read('manifestAfter','catalog/manifest.json');
-  const shape=(value)=>({exists:!!value,dateMatches:value?.policyDate===day,generationMatches:catalogOverviewMatchesGeneration(value,expected)});
+  const shape=(value)=>({exists:!!value,policyDate:value?.policyDate??null,dateMatches:value?.policyDate===day,generationMatches:catalogOverviewMatchesGeneration(value,expected)});
   let selected=immutable,selectedKind='immutable';
   if(selected?.policyDate!==day&&dated?.policyDate===day&&catalogOverviewMatchesGeneration(dated,expected)){selected=dated;selectedKind='dated';}
   if(!(selected?.policyDate===day&&catalogOverviewMatchesGeneration(selected,expected))){selected=publicOverview;selectedKind='public';}
