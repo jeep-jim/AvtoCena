@@ -25154,3 +25154,14 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/f06a346fe598ffbe277a1f032d9aef5e6ec47a63
 
+
+
+### 12.11.2026 — 873 attempt2 отклонён до переключения, следующий выпуск остановлен
+
+- [43055396384](https://github.com/jeep-jim/AvtoCena/actions/runs/43055396384), attempt2/job130675568177: цены готовы17:57:07UTC; gate17:57:09–17:59:51UTC завершён TimeoutError в response.read первого подготовительного прохода. Маршрут этим журналом не напечатан; причина пока не установлена. Это не успешная серверная или браузерная приёмка.
+- В17:59:46UTC журнал подтвердил old production retained; Nginx ещё не переключался. Образ873 attempt2:sha256:76af614dfdc86e180eeec354dbcec678c9b222fc7cb9968bd3f9a0b9c2b6158a. Проверка браузера/публичной энциклопедии не выполнена.
+- [43067092325](https://github.com/jeep-jim/AvtoCena/actions/runs/43067092325)/1767642 остановлен18:00:35UTC из-за failed predecessor, prepare skipped. Старыйee0 также не повторять.
+- Добавлена одноразовая read-only проверка фактического production SHA/image/health и ограниченного сохранённого лога873. Без рестарта контейнеров, запросов каталога, изменений данных или ослабления эталонов.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/c8a2274e148380bcdb1326df0ffcaa51851ab9c4
+
