@@ -21,7 +21,9 @@ permissions:
   contents: write
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    # Playwright 1.55 ships WebKit for Ubuntu 24.04; ubuntu-latest moved to 26.04.
+    # Keep the existing browser version and all checks on its supported runner.
+    runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
