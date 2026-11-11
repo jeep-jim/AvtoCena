@@ -19,14 +19,14 @@ try{
  const context=await browser.newContext({viewport:{width:1440,height:1000},serviceWorkers:'block'});const page=await context.newPage();
  // RSC navigation can fall back to a full document load. A changed URL and
  // visible server HTML do not yet mean the filter's React handlers are ready.
- const waitForFilters=()=>page.waitForFunction(()=>{const b=document.querySelector('button[aria-label="Расширенные фильтры"]');return b&&!b.disabled;},null,{timeout:60000});
+ const waitForFilters=()=>page.waitForFunction(()=>{const b=document.querySelector('button[aria-label="Открыть фильтры"]');return b&&!b.disabled;},null,{timeout:60000});
  await page.route('**/*',route=>['GET','HEAD'].includes(route.request().method())?route.continue():route.abort());
  await page.goto(`${origin}/cars?budget=2000000`,{waitUntil:'domcontentloaded',timeout:120000});
  await waitForFilters();
  const japan=page.getByRole('heading',{name:/Япония/});await japan.waitFor();
  const korea=page.locator('section').filter({has:page.getByRole('heading',{name:/Корея/})}).last();
  const link=korea.getByRole('link',{name:'Все →'});assert.equal(new URL(await link.getAttribute('href'),origin).searchParams.get('budget'),'2000000');
- await link.click();await page.waitForURL(/market=korea/,{waitUntil:'domcontentloaded',timeout:90000});
+ await link.click();await page.waitForURL(url=>url.pathname==='/cars/korea',{waitUntil:'domcontentloaded',timeout:90000});
  await waitForFilters();
  assert.equal(new URL(page.url()).searchParams.get('budget'),'2000000');
  const desktop=page.locator('.ac-catalog-filter-panel');const input=desktop.getByRole('textbox',{name:'Объём двигателя: до',exact:true});

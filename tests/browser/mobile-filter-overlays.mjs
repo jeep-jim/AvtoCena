@@ -120,7 +120,7 @@ try{
    await page.goto(`${origin}/cars?theme=light`);const sheet=await openSheet(page);
    const status=sheet.locator('.ac-mobile-filter-header [role="status"]');
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:'{}',text:'321'}}})));
-   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 321'));
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено 321 машин'));
    assert.equal(await sheet.locator('input[name="make"]').locator('..').locator(':scope > button svg.ac-filter-leading-icon').count(),0);
    assert.equal(await sheet.locator('.ac-model-filter-icon').count(),0);
    const fuel=sheet.locator('input[name="fuel"]').locator('..');
@@ -137,11 +137,11 @@ try{
    assert.equal((await status.textContent()).includes('999'),false);
    const requestCount=requests.length;const viewRenders=await page.locator('[data-view-render-count]').getAttribute('data-view-render-count');
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{count:{queryKey:JSON.stringify({fuel:'diesel'}),text:'17'}}})));
-   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено: 17'));
+   await page.waitForFunction(()=>document.querySelector('.ac-mobile-filter-header [role="status"]')?.textContent.includes('Найдено 17 машин'));
    assert.equal(requests.length,requestCount,'streamed count must not issue another request');
    assert.equal(await page.locator('[data-view-render-count]').getAttribute('data-view-render-count'),viewRenders,'count-only updates must not rerender view consumers');
    await close.click();await sheet.waitFor({state:'hidden'});await openSheet(page);
-   assert.equal(await sheet.locator('input[name="fuel"]').inputValue(),'diesel');assert.match(await status.textContent(),/Найдено: 17/);
+   assert.equal(await sheet.locator('input[name="fuel"]').inputValue(),'diesel');assert.match(await status.textContent(),/Найдено 17 машин/);
    await page.screenshot({path:`${out}/counter-collapse-light.png`,fullPage:true});
    await page.evaluate(()=>document.documentElement.dataset.theme='dark');await page.screenshot({path:`${out}/counter-collapse-dark.png`,fullPage:true});
    results.push({streamedCounter:true,staleQueryIgnored:true,extraCountRequests:0,collapsePreservesFilters:true,offerIcons:true,boldRestored:true});save();
