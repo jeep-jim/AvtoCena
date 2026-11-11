@@ -10,6 +10,9 @@ on:
       - 'tests/*scroll*'
       - 'tests/*share*'
       - 'tests/*model*'
+      - 'tests/catalog-market-page*'
+      - 'tests/catalog-market-window*'
+      - 'tests/card-city-delivery*'
       - '.github/market-runs/owner-navigation-retention.json'
       - '.github/workflows/owner-navigation-retention.yml'
   pull_request:
@@ -21,6 +24,9 @@ on:
       - 'tests/*scroll*'
       - 'tests/*share*'
       - 'tests/*model*'
+      - 'tests/catalog-market-page*'
+      - 'tests/catalog-market-window*'
+      - 'tests/card-city-delivery*'
       - '.github/workflows/owner-navigation-retention.yml'
 concurrency:
   group: catalog-navigation-${{ github.ref }}
@@ -42,7 +48,7 @@ jobs:
       - run: npm ci
       - name: Check preservation helpers and current types
         run: |
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/model-suggestion-search.test.ts tests/japan-filter-retention.test.ts tests/dealer-selection-share.test.ts tests/catalog-brand-navigation.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/model-suggestion-search.test.ts tests/japan-filter-retention.test.ts tests/dealer-selection-share.test.ts tests/catalog-brand-navigation.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts tests/catalog-market-page-city.test.ts tests/catalog-market-window.test.ts tests/catalog-market-page-boundary.test.ts tests/card-city-delivery.test.ts
           npm run typecheck
       - name: Compare original behavior and fixes without production or supplier requests
         env:
