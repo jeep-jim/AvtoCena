@@ -1,3 +1,9 @@
+# Current release candidate — 2026-11-11T14:56:40.543Z
+
+- Source 1763b3e5389873c1c0cbe919d7097572968071a6; source verification43041638747 passed42 tests, types,28 mobile/desktop checks and dealer shared-link roundtrip. Exactly12 application paths differ from accepted a182. This new release is starting; installation is NOT confirmed.
+- Both prior2b7c3e2 and3c641141 releases were cancelled before activation. Do not resume them. Preserve original speed/expiry/browser/rollback guards and accepted a182 image. Do not standard-deploy main.
+- See the newest roadmap checkpoint and current-incident.md. JP/KR supplier responses and DUMP authorization remain unresolved; no14/3-day schedule was enabled.
+
 # Shared selection correction before release — 11.11.2026 14:47 UTC
 
 - Run43039722046 / candidate3c641141 was cancelled before activation by guarded controller43041124657; Deploy=skipped. It must not be resumed. Prior2b7c3e2 is also cancelled. Accepted runtime a182 has not been switched by these runs.
