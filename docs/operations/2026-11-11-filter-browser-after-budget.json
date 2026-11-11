@@ -1,0 +1,109 @@
+{
+  "release": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "phase": "after-budget-release",
+  "checkedAt": "2026-11-11T12:15:09.830Z",
+  "environment": "GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation",
+  "checks": [
+    {
+      "width": 390,
+      "firstCardsSeconds": 4.532,
+      "filters": [
+        {
+          "budget": 1500000,
+          "seconds": 14.495,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1490608,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ]
+        },
+        {
+          "budget": 2000000,
+          "seconds": 8.06,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1985641,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ]
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "firstCardsSeconds": 5.591,
+      "filters": [
+        {
+          "budget": 1500000,
+          "seconds": 2.153,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1490608,
+          "requests": 3,
+          "paths": [
+            "/cars/china",
+            "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+            "/api/catalog/saved-previews"
+          ]
+        },
+        {
+          "budget": 2000000,
+          "seconds": 1.373,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1985641,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ]
+        }
+      ],
+      "pageErrors": []
+    }
+  ],
+  "passed": false,
+  "browserPassed": true,
+  "partnerBudgets": [
+    {
+      "market": "japan",
+      "status": 200,
+      "seconds": 22.553,
+      "items": 0,
+      "total": null,
+      "partial": false,
+      "stale": true,
+      "hasMore": true,
+      "interrupted": false,
+      "reads": 1,
+      "nextCursor": "2.0",
+      "error": null,
+      "serverTiming": "catalog-total;dur=22349.8, query-resolution;dur=0.4, supplier-read;dur=21531.6, editorial-read;dur=797.2, detail-cache-sum;dur=0.0, enrichment-sum;dur=109.9, pricing;dur=12.4"
+    },
+    {
+      "market": "korea",
+      "status": 200,
+      "seconds": 8.323,
+      "items": 0,
+      "total": null,
+      "partial": false,
+      "stale": true,
+      "hasMore": true,
+      "interrupted": false,
+      "reads": 3,
+      "nextCursor": "4.0",
+      "error": null,
+      "serverTiming": "catalog-total;dur=8077.7, query-resolution;dur=0.3, supplier-read;dur=1568.8, editorial-read;dur=0.1, detail-cache-sum;dur=58006.7, enrichment-sum;dur=76.0, pricing;dur=2603.2"
+    }
+  ],
+  "partnerBudgetsReady": false,
+  "error": "Japan/Korea budget availability remains unconfirmed; inspect source state",
+  "failureState": null,
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/43018662404"
+}

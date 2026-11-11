@@ -1,0 +1,27 @@
+name: Verify owner homepage cards and city once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-home-browser.json']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+      - name: Verify home dealer cards, catalogue and city on mobile and desktop
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/home-browser/node_modules/playwright/index.mjs
+        run: |
+          npm install --prefix "$RUNNER_TEMP/home-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-home-ready-live.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-home-browser
+          path: owner-home-browser-report.json
