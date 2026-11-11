@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Runner-side browser acceptance while the VM still retains its rollback trap.
 set -euo pipefail
+node scripts/verify-frozen-speed-baselines.mjs
 key_file=$1
 release=$2
 calculator=$3

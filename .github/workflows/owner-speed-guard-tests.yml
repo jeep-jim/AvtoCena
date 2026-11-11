@@ -17,7 +17,10 @@ jobs:
         with:
           node-version: '24.22.1'
       - name: Check warm and expired server regression guards
-        run: python3 tests/regcloud-performance-gate.test.py
+        run: |
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/release-speed-guard-contract.test.mjs
+          python3 tests/regcloud-performance-gate.test.py
       - name: Reject slow visible cards and missing browser results
         run: node --test tests/accepted-browser-speed.test.mjs
       - name: Check bounded browser handshake identity and failures

@@ -63,6 +63,8 @@ jobs:
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-publication-page-window.test.ts
       - name: Verify stream disconnect and gateway buffer regressions
         run: |
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/release-speed-guard-contract.test.mjs
           node scripts/check-runtime-streams.mjs
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py

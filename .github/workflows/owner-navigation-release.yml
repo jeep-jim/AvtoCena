@@ -147,6 +147,8 @@ jobs:
       - name: Verify stream disconnect and gateway buffer regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/release-speed-guard-contract.test.mjs
           node scripts/check-runtime-streams.mjs
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py

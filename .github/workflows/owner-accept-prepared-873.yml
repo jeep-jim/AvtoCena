@@ -14,6 +14,9 @@ env:
   RELEASE_PREPARATION_MARKETS: china,korea,europe,uae,georgia
 jobs:
   accept:
+    # Retired normal activation path. Use owner-navigation-release with current
+    # frozen baselines and browser acceptance; migrate before re-enabling.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 45
     environment: regcloud-staging
