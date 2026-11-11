@@ -29,6 +29,15 @@ jobs:
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/model-suggestion-search.test.ts tests/catalog-filter-search.test.ts tests/autocalc-model-suggestions.test.ts tests/ajes-count-display.test.ts tests/ajes-model-loader.test.ts tests/ajes-stock-feed.test.ts tests/ajes-japan-feed.test.ts
       - run: npx tsc -p apps/web/tsconfig.json --noEmit --incremental false
       - run: npm install --prefix "$RUNNER_TEMP/model-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify identical context request bounds with the accepted component
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/model-browser/node_modules/playwright/index.mjs
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          git show a182cd21b21ecf612b63613d263e5bdd817ea4c0:apps/web/lib/catalog/model-suggestion-loader.ts | cmp - apps/web/lib/catalog/model-suggestion-loader.ts
+          git show a182cd21b21ecf612b63613d263e5bdd817ea4c0:apps/web/components/catalog/VehicleModelSearch.tsx > "$RUNNER_TEMP/a182-model-component.tsx"
+          MODEL_SUGGESTIONS_COMPONENT_FILE="$RUNNER_TEMP/a182-model-component.tsx" MODEL_SUGGESTIONS_REQUESTS_ONLY=true CHROME_BIN=$(command -v google-chrome) node tests/browser/model-suggestions.mjs
       - name: Verify local suggestions without per-keystroke API requests
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/model-browser/node_modules/playwright/index.mjs
