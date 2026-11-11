@@ -1,3 +1,10 @@
+# Active runtime and release evidence — 11.11.2026 12:47 UTC
+
+- Production is restored exact a182cd21b21ecf612b63613d263e5bdd817ea4c0 (43020674047). Restored browser43021430620 passes the original accepted envelope.3048 and2b5fc must not be reactivated without resolving the measured mobile slowdown; preserve their source/evidence.
+- Standard deployment now requires the bounded browser-verdict handshake before committing. Use scripts/regcloud-deploy-with-browser.sh and its nonce-bound receipt; never bypass this by running a historical deploy script. Offline guard tests43023263611 passed; no newer app has been activated through the new mechanism yet.
+- Preserve the exact accepted a182 image/container independently of ordinary retention counts. The pin is removed/replaced only when a newer accepted baseline is recorded. This does not pause or alter feed schedules.
+- Japan/Korea delivered-budget repair remains unfinished in production. Read docs/operations/2026-11-11-budget-speed-repair.md for exact source/availability limits and remaining tasks. A successful code test, empty stale response or SQL-only pilot is not live completion.
+
 # Verified recovery checkpoint — 11.11.2026 12:34 UTC
 
 - Production is restored accepted release a182cd21b21ecf612b63613d263e5bdd817ea4c0 (restore run 43020674047). Main contains rejected budget code and unactivated homepage code; do not equate main with production or resume the old deployment marker.

@@ -24,6 +24,8 @@ jobs:
         run: python3 tests/regcloud-browser-verdict.test.py
       - name: Exercise release handoff with simulated success, slowdown and missing browser output
         run: python3 tests/regcloud-browser-handoff.test.py
+      - name: Keep the accepted rollback container and image during future cleanup
+        run: python3 tests/regcloud-release-retention.test.py
       - name: Check release scripts and browser syntax
         run: |
           bash -n scripts/regcloud-deploy-production.sh scripts/regcloud-deploy-with-browser.sh

@@ -62,6 +62,7 @@ jobs:
           python3 tests/regcloud-performance-gate.test.py
           python3 tests/regcloud-browser-verdict.test.py
           python3 tests/regcloud-browser-handoff.test.py
+          python3 tests/regcloud-release-retention.test.py
           node --test tests/accepted-browser-speed.test.mjs
       - name: Verify parallel home loading and preserved city and prices
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/home-parallel-specials.test.ts tests/home-initial-catalog.test.ts tests/home-showcase-priced-first.test.ts tests/home-phase-timing.test.ts
