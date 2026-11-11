@@ -1,2 +1,0 @@
-'use client';
-export function AssistantLauncher({placement='card'}:{placement?:'card'|'header'}){return <button type="button" className={placement==='header'?'crm-game-link crm-assistant-launch':'team-assistant-launch'} aria-label={placement==='header'?'ИИ Бро — открыть помощника':undefined} aria-haspopup="dialog" onClick={()=>window.dispatchEvent(new Event('team-assistant-open'))}>{placement==='header'?'ИИ Бро':<>Чат с ИИ-помощником <span aria-hidden="true">↗</span></>}</button>;}

@@ -1,8 +1,0 @@
-{
-  "requestedAt": "2026-10-24T15:48:36.352Z",
-  "mode": "apply",
-  "sourcePlan": "docs/encyclopedia/astra/source-plan-2026-10-23.json",
-  "sourcePlanSha256": "25e56df33170014e9a53611a3f7c52952fc340984d2bd9846967dd91f789b12d",
-  "reason": "Apply one verified residual preview40106076748/artifact12565273971 after PR1523:22 existing models/62 annual variants/70 missing values/181 attestations,newModels0,newUnknownYearVariants0. Same saved ASTRA corpus, revision CAS, no download or clones. The single power30MinKw entry (Maxus T90) follows existing certified eCoC/TAS identity gates; ordinary cross-market mechanical path still excludes30min. Do not repeat prior b337 apply.",
-  "expectedPlanDigest": "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
-}

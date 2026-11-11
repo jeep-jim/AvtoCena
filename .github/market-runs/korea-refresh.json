@@ -1,7 +1,0 @@
-{
-  "operation": "korea-transport-and-gallery-20261007",
-  "market": "korea",
-  "publishMarkets": ["korea"],
-  "resetCursors": false,
-  "reason": "Queue after active Korea run without cancellation. Accept one exact vehicle photo, retry terminated transport bodies, preserve published retryable cursors; no price/power admission caps."
-}
