@@ -1,33 +1,188 @@
 {
   "expectedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "checkedAt": "2026-11-11T08:47:49.590Z",
+  "checkedAt": "2026-11-11T08:55:49.794Z",
   "environment": "GitHub Actions Chromium; external network; anonymous visitor",
   "checks": [
     {
       "width": 390,
       "passed": true,
-      "initialRecommendationRequests": 0,
-      "initialRail": {
-        "x": 16,
-        "y": 1621.71875,
-        "width": 358,
-        "height": 614
+      "offerPath": "/cars/offer/3a668f31195cad5c1f46d36b/bmw-3-series-2014",
+      "detailNavigation": {
+        "responseStartMs": 1364,
+        "responseEndMs": 1539,
+        "domInteractiveMs": 1550,
+        "domContentLoadedMs": 1551,
+        "transferBytes": 78445,
+        "encodedBytes": 78145,
+        "resources": [
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js",
+            "startMs": 1375,
+            "durationMs": 5,
+            "responseStartMs": 1378,
+            "responseEndMs": 1380,
+            "transferBytes": 0,
+            "encodedBytes": 54362
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/18-d2d731f129776809.js",
+            "startMs": 1375,
+            "durationMs": 5,
+            "responseStartMs": 1378,
+            "responseEndMs": 1380,
+            "transferBytes": 0,
+            "encodedBytes": 47064
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/a0428225e7ab07e9.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 852
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/95fa84daef90cf6b.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 18790
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/3422161c856e46cf.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 12915
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/257cc3c1ad92bd58.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 1712
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/d5391997accf9f38.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 1164
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/2ff587408db67d0e.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 3525
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/45208ff7cf4519c0.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 5872
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/33a26905bf82c575.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 5515
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/e7704af81f9149c8.css",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 764
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/chunks/webpack-741d7f4f78d1fd64.js",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 2866
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/main-app-7b13489b43c77ae6.js",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 525
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/9664-bbf55e28a0306eec.js",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 3400
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/app/(public)/layout-431dc7e9d7a98f5e.js",
+            "startMs": 1375,
+            "durationMs": 0,
+            "responseStartMs": 1375,
+            "responseEndMs": 1375,
+            "transferBytes": 0,
+            "encodedBytes": 4964
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/app/(public)/error-5fcbad61331b9ce4.js",
+            "startMs": 1376,
+            "durationMs": 0,
+            "responseStartMs": 1376,
+            "responseEndMs": 1376,
+            "transferBytes": 0,
+            "encodedBytes": 1282
+          }
+        ]
       },
-      "initialTrace": [
-        {
-          "type": "intersection",
-          "at": 12083.700000000012,
-          "intersecting": false,
-          "top": 1621.71875,
-          "bottom": 2235.71875,
-          "rootTop": -240,
-          "rootBottom": 1140,
-          "rootMargin": "240px"
-        }
-      ],
-      "catalogReadySeconds": 2.376,
-      "detailReadySeconds": 11.756,
-      "relatedReadySeconds": 3.077,
+      "initialRecommendationRequests": 0,
+      "initialRail": null,
+      "initialTrace": [],
+      "catalogReadySeconds": 1.461,
+      "detailReadySeconds": 1.568,
+      "relatedReadySeconds": 6.079,
       "heading": "BMW 3 из Китая",
       "relatedCards": 24,
       "partial": true,
@@ -35,17 +190,7 @@
       "trace": [
         {
           "type": "intersection",
-          "at": 12083.700000000012,
-          "intersecting": false,
-          "top": 1621.71875,
-          "bottom": 2235.71875,
-          "rootTop": -240,
-          "rootBottom": 1140,
-          "rootMargin": "240px"
-        },
-        {
-          "type": "intersection",
-          "at": 12187.300000000017,
+          "at": 2592,
           "intersecting": true,
           "top": 142.71875,
           "bottom": 756.71875,
@@ -55,7 +200,7 @@
         },
         {
           "type": "fetch",
-          "at": 12187.700000000012
+          "at": 2593.5
         }
       ],
       "pageErrors": []
@@ -63,32 +208,188 @@
     {
       "width": 1280,
       "passed": true,
+      "offerPath": "/cars/offer/3a668f31195cad5c1f46d36b/bmw-3-series-2014",
+      "detailNavigation": {
+        "responseStartMs": 383,
+        "responseEndMs": 396,
+        "domInteractiveMs": 436,
+        "domContentLoadedMs": 436,
+        "transferBytes": 78441,
+        "encodedBytes": 78141,
+        "resources": [
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/a0428225e7ab07e9.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 852
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/95fa84daef90cf6b.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 18790
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/3422161c856e46cf.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 12915
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/257cc3c1ad92bd58.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 1712
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/d5391997accf9f38.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 1164
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/2ff587408db67d0e.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 3525
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/45208ff7cf4519c0.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 5872
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/33a26905bf82c575.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 5515
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/css/e7704af81f9149c8.css",
+            "startMs": 396,
+            "durationMs": 0,
+            "responseStartMs": 396,
+            "responseEndMs": 396,
+            "transferBytes": 0,
+            "encodedBytes": 764
+          },
+          {
+            "type": "link",
+            "url": "https://avtocena.com/_next/static/chunks/webpack-741d7f4f78d1fd64.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 2866
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/87c73c54-09e1ba5c70e60a51.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 54362
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/18-d2d731f129776809.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 47064
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/main-app-7b13489b43c77ae6.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 525
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/9664-bbf55e28a0306eec.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 3400
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/app/(public)/layout-431dc7e9d7a98f5e.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 4964
+          },
+          {
+            "type": "script",
+            "url": "https://avtocena.com/_next/static/chunks/app/(public)/error-5fcbad61331b9ce4.js",
+            "startMs": 397,
+            "durationMs": 0,
+            "responseStartMs": 397,
+            "responseEndMs": 397,
+            "transferBytes": 0,
+            "encodedBytes": 1282
+          }
+        ]
+      },
       "initialRecommendationRequests": 0,
       "initialRail": {
         "x": 32,
         "y": 1011.4375,
         "width": 1216,
-        "height": 312
+        "height": 348
       },
-      "initialTrace": [
-        {
-          "type": "intersection",
-          "at": 2868.8000000000175,
-          "intersecting": true,
-          "top": 1011.4375,
-          "bottom": 1359.4375,
-          "rootTop": -240,
-          "rootBottom": 1140,
-          "rootMargin": "240px"
-        },
-        {
-          "type": "fetch",
-          "at": 2879.9000000000233
-        }
-      ],
-      "catalogReadySeconds": 2.317,
-      "detailReadySeconds": 2.53,
-      "relatedReadySeconds": 0.761,
+      "initialTrace": [],
+      "catalogReadySeconds": 2.608,
+      "detailReadySeconds": 0.451,
+      "relatedReadySeconds": 1.229,
       "heading": "BMW 3 из Китая",
       "relatedCards": 24,
       "partial": true,
@@ -96,7 +397,7 @@
       "trace": [
         {
           "type": "intersection",
-          "at": 2868.8000000000175,
+          "at": 919,
           "intersecting": true,
           "top": 1011.4375,
           "bottom": 1359.4375,
@@ -106,12 +407,12 @@
         },
         {
           "type": "fetch",
-          "at": 2879.9000000000233
+          "at": 920.7999999999884
         }
       ],
       "pageErrors": []
     }
   ],
   "passed": true,
-  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/42989743550"
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/42990803967"
 }
