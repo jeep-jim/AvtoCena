@@ -1,3 +1,9 @@
+# Isolated candidate after rejected794 —12.11.2026
+
+NOT installed; never merge this acceptance history into main. It adds ONLY PR1752's conditional encyclopedia reads/same sorting and merged1749's OverlayBackHistory correction+tests to the already isolated794 source. No1749 homepage derivative or other main application change. Manifest:25 exact application paths within105 allowed paths; compare the actual full diff before activation.
+
+PR1752/f738 full regression suite passed; full source-review CI/build and all this exact-source checks remain required. Retained a182/e36/c489 confirmed21:57:46UTC by43107566632. Preserve frozen17-route/35/305s/completeness/request-count/SHA+nonce/rollback acceptance; unchanged794 was rejected and must not be rerun. JP/KR fullDUMP and14/3-day cadence remain unresolved/unchanged.
+
 # Owner permanent speed priority — 11.11.2026
 
 - Owner explicitly prioritizes stable high speed for every page and filter and authorizes verified repair/publication. Read `docs/operations/performance-contract.md` before future search, UI, storage, cache, pricing or deployment changes. Preserve original accepted timing baselines, exact-release browser verdict and rollback; never call partial/stale results a speed success. New scenarios require comparable baseline/candidate evidence, not relaxed old limits. No universal latency guarantee or all-pages acceptance follows from a partial matrix.

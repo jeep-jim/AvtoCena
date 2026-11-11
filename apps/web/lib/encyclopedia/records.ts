@@ -4,7 +4,7 @@ import {isEncyclopediaCar} from './scope';
 import {createHash,randomUUID} from 'node:crypto';
 import type {AuthUser} from '../auth';
 import {isPlatformTeam} from '../platform-access';
-import {getJsonStorage,mutateDataJson,jsonReadByteLength} from '../data';
+import {getJsonStorage,mutateDataJson,jsonReadByteLength,type JsonReadResult,type JsonStorage} from '../data';
 import {fuelFilterKey,EncyclopediaInputError,cleanText,cleanVariant,numberFields,textFields,safeUrl,type Variant,type ModelRecord,type ModelSummary,type EncyclopediaManifest} from './schema';
 export const ROOT='knowledge/encyclopedia/v1';
 export const MANIFEST=`${ROOT}/manifest.json`;
@@ -14,11 +14,41 @@ export const token=(v:unknown)=>cleanText(v).normalize('NFKC').toLowerCase().rep
 export const modelId=(make:string,model:string)=>hash(`${token(make)}:${token(model)}`);
 export function variantSignature(row:Partial<Variant>){return JSON.stringify([...textFields.filter(x=>!['notes','sourceUrl'].includes(x)).map(x=>token(row[x])),...numberFields.map(x=>row[x]??null)]);}
 export function summarize(record:ModelRecord,key:string):ModelSummary{return {directorySnapshot:record.directorySnapshot,manualCreated:Boolean(record.manualCreated),compact:compactModel(record),id:record.id,make:record.make,model:record.model,photo:record.photo,photoMarket:record.photoMarket,hasUnknownYear:record.variants.some(v=>!v.year),years:[...new Set(record.variants.flatMap(v=>v.year?[v.year]:[]))].sort((a,b)=>b-a),fuels:[...new Set(record.variants.flatMap(v=>v.fuel?[fuelFilterKey(v.fuel)]:[]))],markets:[...new Set(record.variants.flatMap(v=>v.markets))],variants:record.variants.length,verified:record.variants.filter(v=>v.status==='verified').length,power30:record.variants.filter(v=>v.power30MinKw!==undefined).length,needs30:record.variants.filter(v=>/electric|hybrid|hev/i.test((v.fuel||'')+' '+(v.powertrainKind||''))&&v.power30MinKw===undefined).length,key,revision:record.revision,updatedAt:record.updatedAt};}
-let manifestRead:Promise<EncyclopediaManifest|null>|undefined;
+type ManifestReadState={
+ context:string;
+ pending?:Promise<EncyclopediaManifest|null>;
+ previous?:JsonReadResult<EncyclopediaManifest|null>;
+ filtered?:EncyclopediaManifest;
+};
+const manifestReads=new WeakMap<JsonStorage,ManifestReadState>();
+const MANIFEST_REUSE_MAX_BYTES=16*1024*1024;
 export function readEncyclopedia(){
- // Coalesce concurrent reads only; a later request still resolves fresh state.
- if(!manifestRead)manifestRead=getJsonStorage().readJson<EncyclopediaManifest|null>(MANIFEST,null).then(manifest=>manifest?{...manifest,models:manifest.models.filter(isEncyclopediaCar)}:null).finally(()=>{manifestRead=undefined;});
- return manifestRead;
+ const storage=getJsonStorage();
+ // A later request must still validate the current object. The conditional
+ // response can reuse its body; elapsed time never makes an old body current.
+ const context=JSON.stringify([process.env.YC_OBJECT_STORAGE_ENDPOINT||'',process.env.YC_OBJECT_STORAGE_REGION||'',process.env.YC_OBJECT_STORAGE_BUCKET||'',process.env.YC_OBJECT_STORAGE_PREFIX||'']);
+ let state=manifestReads.get(storage);
+ if(!state||state.context!==context){state={context};manifestReads.set(storage,state);}
+ const current=state;
+ if(!current.pending)current.pending=storage.readJsonWithMeta<EncyclopediaManifest|null>(MANIFEST,null,current.previous).then(meta=>{
+  if(meta===current.previous&&current.filtered)return structuredClone(current.filtered);
+  const manifest=meta.value;
+  const filtered=manifest?{...manifest,models:manifest.models.filter(isEncyclopediaCar)}:null;
+  const bytes=jsonReadByteLength(manifest);
+  // Retain one bounded object only when storage measured its original bytes.
+  // Local/custom stores keep their fresh-read behavior without an assumed size.
+  if(storage.driver==='object'&&meta.found&&meta.etag&&filtered&&bytes!==undefined&&bytes<=MANIFEST_REUSE_MAX_BYTES){
+   current.previous=meta;current.filtered=filtered;
+   // Callers historically received a fresh manifest on sequential reads.
+   // Keep their mutations away from the conditionally retained source body.
+   return structuredClone(filtered);
+  }else{current.previous=undefined;current.filtered=undefined;}
+  return filtered;
+ }).catch(error=>{
+  current.previous=undefined;current.filtered=undefined;
+  throw error; // An unavailable or invalid current object is never stale success.
+ }).finally(()=>{current.pending=undefined;});
+ return current.pending;
 }
 const revisionCache=new DetailReadCache<ModelRecord|null>({maxEntries:32,maxBytes:64*1024*1024,ttlMs:3600_000,concurrency:2,sizeOf:jsonReadByteLength,shouldCache:value=>value!==null});
 export async function readModel(id:string,manifest?:EncyclopediaManifest|null){
