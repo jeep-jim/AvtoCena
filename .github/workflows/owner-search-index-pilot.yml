@@ -1,0 +1,55 @@
+name: Test owner China search index once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-search-index-pilot.json']
+permissions:
+  contents: read
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: regcloud-staging
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: avtocena_pilot
+          POSTGRES_PASSWORD: ephemeral-fixture-only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Read existing China selector; no source requests or production writes
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: node --import tsx scripts/search-pilot/export-china.ts
+      - name: Compare correctness, failed publication and bounded SQL latency
+        env:
+          SEARCH_PILOT_DATABASE_URL: postgresql://postgres:ephemeral-fixture-only@127.0.0.1:5432/avtocena_pilot
+        run: |
+          python3 -m venv "$RUNNER_TEMP/pilot-python"
+          "$RUNNER_TEMP/pilot-python/bin/pip" install 'psycopg[binary]==3.2.12'
+          "$RUNNER_TEMP/pilot-python/bin/python" scripts/search-pilot/benchmark.py
+      - name: Remove temporary source copy
+        if: always()
+        run: rm -f /tmp/avtocena-search-pilot/china.csv /tmp/avtocena-search-pilot/expected.json /tmp/avtocena-search-pilot/source.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-search-index-pilot
+          path: owner-search-pilot-report.json
