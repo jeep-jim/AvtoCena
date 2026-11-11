@@ -1,1 +1,5 @@
-{"requestedAt": "2026-11-11", "scope": "readiness and publisher lock only"}
+{
+  "mode": "budget-failure-evidence",
+  "requestedAt": "2026-11-11T10:09:43.194081+00:00",
+  "scope": "Read four saved failure slots and count manual seller-price edits; no supplier request, IP/SQL disclosure or mutation."
+}
