@@ -24604,3 +24604,10 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - Результаты сохранены в docs/operations/2026-11-11-search-index-publication-check.json и дополнены ограничения пилота. Production БД и сайт не переключались этим тестом. Выпуск3048/run43005906700 по-прежнему отдельный: продолжается подготовка цен, live-приёмка ещё не выполнена.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/8fbd33df1cf6b1cbb26995c2775c5f651d446522
 
+
+
+### 11.11.2026 — защита принятой скорости отклонила выпуск3048
+
+- Подготовка пяти рынков и66предварительных проверок прошли, но post-switch `/` after_ttl:5,0283с; медиана трёх повторов2,3584с при пределе1,8835с. Запуск43005906700 выполнил автоматический откат; проверка фактического a182 и диагностика остановленного кандидата запущены. Исправление бюджета ещё не принято на production. Baseline не ослаблен. Источники: docs/operations/2026-11-11-budget-release-rejection.json, 2026-11-11-partner-source-state.json.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/27197f8e42edbcf9f1b83743260a90aaa1c563ae
+
