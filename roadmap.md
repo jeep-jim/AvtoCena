@@ -25297,3 +25297,15 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/81fa332cf9fadf901a6bc19d079a8c57a1cf1045
 
+
+
+### 12.11.2026 —25d072 остановлен до подготовки; исправляется совместимость отката
+
+[43084384134](https://github.com/jeep-jim/AvtoCena/actions/runs/43084384134),controller81fa332cf9fadf901a6bc19d079a8c57a1cf1045: CANCELLED на ожиданииexactCI, job130744846852; prepare130745966141 без шагов. Никакой образ не построен/не установлен. PR1743 закрыт без объединения; не повторять25d072.
+
+PR1742 закрыт после проверки: редакционно отфильтрованные данные нельзя записывать поверх rawoverview, который читает принятыйa182 при откате. Исправление делается отдельным версионированным editorial snapshot; исходныйoverview остаётся неизменным, порядок должен совпадать с текущим hidden-market search(updatedAt), а совместимость проверяется старымreader. ПолныйCI1742SUCCESS не снимает этот обнаруженный дефект проекта.
+
+Дополнительный браузерный43084069224/job130743763253 такжеFAILURE: inventoryRequests5!=1. Сверено: loader точногоa182 и25 идентичен, ключURL зависит отmake/market; fixture отдаётJSON только длягологоinventoryURL. Корректируется fixture со строгим одним запросом накаждыйточныйконтекст и отсутствиемзапросовотнаборабукв. Исходные live server/browser budgets не меняются. Вcontroller добавлен отказ длязакрытого/supersededPR, чтобызакрытый25 не активировался при случайномповторе.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/1ff1a97b0b11697a3575a4be42d8ada1ba3c255f
+
