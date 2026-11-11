@@ -1,18 +1,146 @@
 {
-  "expectedRelease": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "checkedAt": "2026-11-11T04:57:24.142229+00:00",
+  "expectedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "checkedAt": "2026-11-11T08:38:11.726982+00:00",
   "measurementEnvironment": "GitHub Actions public verification runner",
   "timingMeaning": "External network measurements: first linked card received in HTML, not browser paint.",
   "checks": [
     {
       "path": "/api/health",
       "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
-      "error": "TimeoutError:The read operation timed out",
-      "completeSeconds": 20.703,
+      "http": 200,
+      "headersSeconds": 0.758,
+      "completeSeconds": 0.758,
       "label": "before",
-      "passed": false
+      "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 1.435,
+      "completeSeconds": 6.583,
+      "cards": 62,
+      "firstCardsSeconds": 6.526,
+      "heading": "Цена на авто под заказ Ваш город",
+      "complete": true,
+      "errorStream": false,
+      "latencyTargetMiss": true,
+      "passed": true
+    },
+    {
+      "path": "/cars",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 1.535,
+      "completeSeconds": 2.654,
+      "cards": 42,
+      "firstCardsSeconds": 2.023,
+      "heading": "Каталог автомобилей",
+      "complete": true,
+      "errorStream": false,
+      "latencyTargetMiss": true,
+      "passed": true
+    },
+    {
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 1.56,
+      "completeSeconds": 22.356,
+      "cards": 24,
+      "firstCardsSeconds": 22.188,
+      "heading": "BMW 3 из Китая",
+      "complete": true,
+      "errorStream": false,
+      "latencyTargetMiss": true,
+      "passed": true
+    },
+    {
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 2.966,
+      "completeSeconds": 14.944,
+      "cards": 24,
+      "firstCardsSeconds": 14.626,
+      "heading": "BMW 3 SERIES из Китая",
+      "complete": true,
+      "errorStream": false,
+      "latencyTargetMiss": true,
+      "passed": true
+    },
+    {
+      "path": "/cars/europe",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 1.498,
+      "completeSeconds": 8.668,
+      "cards": 24,
+      "firstCardsSeconds": 8.66,
+      "heading": "Авто из Европы под заказ",
+      "complete": true,
+      "errorStream": false,
+      "latencyTargetMiss": true,
+      "passed": true
+    },
+    {
+      "path": "/api/catalog/models?scope=inventory&make=BMW&market=china",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 0.986,
+      "completeSeconds": 0.986,
+      "models": 32,
+      "bmw3": true,
+      "passed": true
+    },
+    {
+      "path": "/cars",
+      "agent": "Amazonbot/0.1",
+      "http": 403,
+      "headersSeconds": 0.694,
+      "completeSeconds": 0.695,
+      "passed": true
+    },
+    {
+      "path": "/cars",
+      "agent": "ReflectionBot/1.0",
+      "http": 403,
+      "headersSeconds": 0.516,
+      "completeSeconds": 0.516,
+      "passed": true
+    },
+    {
+      "path": "/api/health",
+      "agent": "Googlebot/2.1",
+      "http": 200,
+      "headersSeconds": 1.723,
+      "completeSeconds": 1.723,
+      "label": "google-retained",
+      "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "passed": true
+    },
+    {
+      "path": "/api/health",
+      "agent": "YandexBot/3.0",
+      "http": 200,
+      "headersSeconds": 0.827,
+      "completeSeconds": 0.827,
+      "label": "yandex-retained",
+      "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "passed": true
+    },
+    {
+      "path": "/api/health",
+      "agent": "Mozilla/5.0 AvtoCenaOwnerVerification",
+      "http": 200,
+      "headersSeconds": 1.293,
+      "completeSeconds": 1.293,
+      "label": "after",
+      "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "passed": true
     }
   ],
-  "passed": false,
-  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/42962517535"
+  "passed": true,
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/42988571059"
 }

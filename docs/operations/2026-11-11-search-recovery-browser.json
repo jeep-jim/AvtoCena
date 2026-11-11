@@ -1,0 +1,22 @@
+{
+  "expectedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "checkedAt": "2026-11-11T08:39:25.905Z",
+  "environment": "GitHub Actions Chromium; external network; anonymous visitor",
+  "checks": [
+    {
+      "width": 390,
+      "catalogReadySeconds": 3.364,
+      "detailReadySeconds": 8.063,
+      "relatedReadySeconds": 3.759,
+      "heading": "BMW 3 из Китая",
+      "relatedCards": 24,
+      "partial": true,
+      "recommendationRequests": 1,
+      "pageErrors": [],
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "error": "primary offer must not start related-market searches\n\n1 !== 0\n",
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/42988571059"
+}
