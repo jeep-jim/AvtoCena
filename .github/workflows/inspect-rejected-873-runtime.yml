@@ -1,0 +1,50 @@
+name: Inspect rejected 873 runtime once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-rejected-873-runtime.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read retained production identity and bounded candidate diagnostics
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'REMOTE'
+          import json,subprocess,datetime,urllib.request,pathlib,re,collections
+          print(json.dumps({'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat()}))
+          for name in ['avtocena-production','avtocena-release-8731103c0102']:
+              value=json.loads(subprocess.check_output(['docker','inspect',name],text=True))[0]
+              print(json.dumps({'container':name,'image':value['Image'],'revision':value['Config']['Labels'].get('org.opencontainers.image.revision'),'state':{k:value['State'].get(k) for k in ['Status','Running','OOMKilled','ExitCode','StartedAt','FinishedAt']}}))
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=20) as response:
+              value=json.load(response)
+          print(json.dumps({'publicHealth':{k:value.get(k) for k in ['ok','releaseSha','calculationVersion']}}))
+          print(json.dumps({'resources':json.loads(pathlib.Path('/opt/avtocena/metrics/resources.json').read_text())}))
+          process=subprocess.run(['docker','logs','--timestamps','--tail','4000','avtocena-release-8731103c0102'],capture_output=True,text=True,check=True)
+          rows=[];errors=collections.Counter()
+          for line in (process.stdout+process.stderr).splitlines():
+              if 'catalog_storage_read ' in line:
+                  try:
+                      value=json.loads(line.split('catalog_storage_read ',1)[1])
+                      path=value.get('path','')
+                      if re.fullmatch(r'catalog/[a-zA-Z0-9_./-]+',path):
+                          rows.append({'time':line.split(' ',1)[0],'path':path,'ms':value.get('ms'),'found':value.get('found')})
+                  except (ValueError,TypeError):pass
+              for token in ['TimeoutError','AbortError','TypeError','SyntaxError','RangeError','ECONNRESET','ETIMEDOUT','EAI_AGAIN','ENOMEM']:
+                  if token in line:errors[token]+=1
+          print(json.dumps({'boundedLogLines':len((process.stdout+process.stderr).splitlines()),'errorCounts':dict(errors),'catalogReads':rows[-80:]}))
+          REMOTE
