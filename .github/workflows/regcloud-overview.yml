@@ -50,4 +50,40 @@ jobs:
       - name: Validate overview builder syntax
         run: node --check scripts/catalog-refresh-generation-pages.mjs
       - name: Build compact current overview read model
+        env:
+          CATALOG_PREPARE_EDITORIAL_HOME: 'false'
         run: npx tsx scripts/catalog-refresh-generation-pages.mjs
+      - name: Verify installed editorial preparation guards offline
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs
+      - name: Resolve exact installed release and calculator
+        id: installed
+        timeout-minutes: 1
+        run: node scripts/catalog-editorial-runtime.mjs --resolve
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.installed.outputs.release }}
+          path: installed-editorial-runtime
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+          cache-dependency-path: installed-editorial-runtime/package-lock.json
+      - name: Install exact runtime dependencies
+        timeout-minutes: 4
+        working-directory: installed-editorial-runtime
+        run: npm ci
+      - name: Prepare current-day editorial home using installed source and immutable index
+        timeout-minutes: 6
+        working-directory: installed-editorial-runtime
+        env:
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+          CATALOG_HOME_PHASE_TIMING: '0'
+          CATALOG_STORAGE_TIMING: '0'
+          CATALOG_PUBLICATION_PROGRESS: '0'
+        run: |
+          umask 077
+          timeout --signal=TERM --kill-after=10s 300s node --import tsx ../scripts/catalog-editorial-runtime.mjs . '${{ steps.installed.outputs.release }}' '${{ steps.installed.outputs.calculation }}'
+      - name: Remove private installed-runtime preparation files
+        if: always()
+        run: rm -rf -- installed-editorial-runtime

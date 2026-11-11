@@ -21,6 +21,11 @@ const empty:CatalogEditorialIndex={revision:'0',entries:{}};
 const reads=new DetailReadCache<CatalogEditorialIndex>({maxEntries:1,maxBytes:8*1024*1024,ttlMs:5_000,concurrency:1});
 const context=new AsyncLocalStorage<CatalogEditorialIndex>();
 export const readCatalogEditorial=()=>reads.get(path,()=>readDataJson(path,empty));
+/** Preparation fences must bypass the visitor's five-second read cache. */
+export const readCatalogEditorialFresh=()=>readDataJson(path,empty);
+export function withCatalogEditorialSnapshot<T>(index:CatalogEditorialIndex,fn:()=>Promise<T>):Promise<T>{
+ return context.run(index,fn);
+}
 export function resetCatalogEditorialCache(){reads.clear();}
 export async function withCatalogEditorial<T>(fn:()=>Promise<T>):Promise<T>{
  if(context.getStore())return fn();
