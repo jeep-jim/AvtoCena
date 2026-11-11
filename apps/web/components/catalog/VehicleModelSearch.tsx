@@ -3,7 +3,7 @@ import {groupFilterModels} from "@/lib/catalog/model-filter-options";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
-import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake} from "@/lib/catalog/model-suggestion-search";
+import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake, appendModelSelection} from "@/lib/catalog/model-suggestion-search";
 import {canonicalCatalogBrand} from "@/lib/catalog/brands";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 import {modelDirectoryMarkets} from "@/lib/catalog/market-selection";
@@ -348,7 +348,7 @@ export function VehicleModelSearch({
 
   const applyTypedModel = () => {
     const typed=typedModelSelection(query, items, multiple, contextual);
-    const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
+    const next=multiple?appendModelSelection(value,typed):typed;
     if(!make){const inferred=typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
     onValueChange?.(next);
     setQuery(multiple ? next.split("|").join(", ") : next);

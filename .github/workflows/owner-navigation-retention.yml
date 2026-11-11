@@ -1,0 +1,39 @@
+name: Verify owner filters and navigation retention once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-navigation-retention.json']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Check preservation helpers and current types
+        run: |
+          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          npm run typecheck
+      - name: Compare original behavior and fixes without production or supplier requests
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/retention-browser/node_modules/playwright/index.mjs
+          RETENTION_BASE_REF: '55871adcdd69a40c5007ec23f2899a1736c5a38f'
+        run: |
+          git fetch --depth=1 origin "$RETENTION_BASE_REF"
+          npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-retention.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-navigation-retention
+          path: artifacts/catalog-retention/

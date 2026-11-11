@@ -1,5 +1,6 @@
 "use client";
 import {isCatalogSearchPath} from '@/lib/catalog/catalog-routes';
+import {trackRouteScroll,completeRouteScroll} from '@/lib/catalog/route-scroll';
 
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -278,6 +279,8 @@ function sameDocumentHashNavigation(anchor:HTMLAnchorElement,url:URL){return url
 function RoutePreloaderInner(){
  const pathname=usePathname();const searchParams=useSearchParams();const router=useRouter();const [visible,setVisible]=useState(false);const [mounted,setMounted]=useState(false);
  const startedAtRef=useRef(0);const routeKey=`${pathname}?${searchParams.toString()}`;const previousRouteKeyRef=useRef(routeKey);const warmedRoutesRef=useRef(new Set<string>());const revealTimerRef=useRef<number|null>(null);const hideTimerRef=useRef<number|null>(null);const safetyTimerRef=useRef<number|null>(null);
+ useEffect(()=>trackRouteScroll(),[]);
+ useLayoutEffect(()=>completeRouteScroll(),[routeKey]);
  const clearTimers=()=>{if(revealTimerRef.current!==null)window.clearTimeout(revealTimerRef.current);if(hideTimerRef.current!==null)window.clearTimeout(hideTimerRef.current);if(safetyTimerRef.current!==null)window.clearTimeout(safetyTimerRef.current);revealTimerRef.current=null;hideTimerRef.current=null;safetyTimerRef.current=null};
  const hide=()=>{clearTimers();setVisible(false)};
  const show=()=>{clearTimers();const startedRoute=`${window.location.pathname}${window.location.search}`;revealTimerRef.current=window.setTimeout(()=>{revealTimerRef.current=null;if(`${window.location.pathname}${window.location.search}`!==startedRoute)return;startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)},REVEAL_DELAY_MS)};
