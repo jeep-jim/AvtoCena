@@ -1,6 +1,6 @@
 {
-  "action": "restart-proof",
+  "action": "recover",
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "reason": "Isolate Docker signal restart semantics in disposable offline shell; never signal or restart production",
-  "attempt": 3
+  "attempt": 4,
+  "reason": "Repeated health timeouts from independent external and VM checks while verified replacement is being prepared; one conditional restart of exact old app under the shared host mutation lock"
 }

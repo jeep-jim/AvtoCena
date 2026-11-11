@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: regcloud-production-release
+  group: regcloud-owner-emergency-recovery
   cancel-in-progress: false
 jobs:
   recover:
