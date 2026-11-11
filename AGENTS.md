@@ -1,3 +1,10 @@
+# Current recovery checkpoint — 2026-11-11T23:40:36.876Z
+
+- REJECTED75: run43111977320 failed strict warm /login median0.8712 > frozen0.2759. Rollback logged23:34:31UTC; fresh independent proof pending. No unchanged retry, no accepted75 retention pin, no merge PR1753. Browser stages not reached; public43116166133 stopped before actions. See current-incident.md for exact evidence.
+- Read-only inspect-rejected-75-runtime.yml checks retaineda182/e36/c489 and candidate stopped. Never deploy whole main or loosen original acceptance; diagnose actual delay first. JP/KR fullDUMP and14/3 cadence remain unenabled.
+
+---
+
 # Current recovery checkpoint — 12.11.2026, 2026-11-11T22:27:38.823Z
 
 - ACTIVATION REQUESTED, NOT YET ACCEPTED: exact PR1753 / 75c2e6f57cfa4022865217e029a1f5d1671842c3. All18 source workflows and full offline controller guard43111118387 SUCCESS. Marker-only controller activation; do not deploy whole main or merge acceptance history.
