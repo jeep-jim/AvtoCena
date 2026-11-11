@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   RELEASE_SOURCE_SHA: '27f243a1321cc659a91dd397437a99d94efcc208'
@@ -26,6 +27,21 @@ jobs:
         with:
           persist-credentials: false
           ref: '27f243a1321cc659a91dd397437a99d94efcc208'
+      - name: Require successful predecessor and its exact installed identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/43043393692" > "$RUNNER_TEMP/predecessor-release.json"
+          curl --fail --silent --show-error --max-time 30 https://avtocena.com/api/health > "$RUNNER_TEMP/predecessor-health.json"
+          python3 - "$RUNNER_TEMP/predecessor-release.json" "$RUNNER_TEMP/predecessor-health.json" <<'PREDECESSOR'
+          import json,sys
+          run=json.load(open(sys.argv[1]));health=json.load(open(sys.argv[2]))
+          assert run['id']==43043393692 and run['head_sha']=='b5b84137c27d3a92252258f2020fd3bd417bb066', 'unexpected predecessor'
+          assert run['status']=='completed' and run['conclusion']=='success', 'predecessor did not pass mandatory server/browser acceptance'
+          assert health.get('releaseSha')=='1763b3e5389873c1c0cbe919d7097572968071a6', 'installed predecessor identity changed'
+          print('Predecessor server/browser workflow passed and exact installed identity confirmed')
+          PREDECESSOR
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
