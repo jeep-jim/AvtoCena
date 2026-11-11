@@ -37,7 +37,7 @@ try{
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.addInitScript(()=>{
    window.__fixtureRates=[];window.__rateCalls=0;
-   const probe=window.__currencyProbe={active:false,documentScans:[],callbacks:0,created:0,disconnected:0};
+   const probe=window.__currencyProbe={active:false,documentScans:[],callbacks:0,created:0,disconnected:0,externalObservers:0};
    const query=Document.prototype.querySelectorAll;
    Document.prototype.querySelectorAll=function(selector){
     if(probe.active&&['[data-ac-rate-segment]','svg[aria-label^="Изменение курса "]'].includes(selector))probe.documentScans.push(selector);
@@ -46,8 +46,16 @@ try{
    const Observer=window.MutationObserver;
    window.MutationObserver=class extends Observer{
     connected=true;
-    constructor(callback){super((records,observer)=>{if(probe.active)probe.callbacks++;callback(records,observer);});probe.created++;}
-    disconnect(){if(this.connected){this.connected=false;probe.disconnected++;}super.disconnect();}
+    constructor(callback){
+     // Playwright also creates observers in the page. Only this fixture's
+     // bundled components belong to its lifecycle and callback assertions.
+     const stack=new Error().stack||'';
+     const component=['before','after'].some(mode=>stack.includes(`${location.origin}/${mode}.js:`));
+     super((records,observer)=>{if(component&&probe.active)probe.callbacks++;callback(records,observer);});
+     this.component=component;
+     if(component)probe.created++;else probe.externalObservers++;
+    }
+    disconnect(){if(this.connected){this.connected=false;if(this.component)probe.disconnected++;}super.disconnect();}
    };
   });
   await page.goto(`http://127.0.0.1:${server.address().port}/${mode}`);
@@ -99,7 +107,8 @@ try{
 
   await page.evaluate(()=>window.__currencyFixture.unmount());
   await page.waitForFunction(()=>!document.getElementById('ac-currency-ui-enhancements')&&!document.getElementById('ac-currency-chart-polish'));
-  const cleanup=await page.evaluate(()=>({created:window.__currencyProbe.created,disconnected:window.__currencyProbe.disconnected,rateCalls:window.__rateCalls}));
+  const cleanup=await page.evaluate(()=>({created:window.__currencyProbe.created,disconnected:window.__currencyProbe.disconnected,externalObservers:window.__currencyProbe.externalObservers,rateCalls:window.__rateCalls}));
+  assert.equal(cleanup.created,2,'both component observers are included in lifecycle assertions');
   assert.equal(cleanup.created,cleanup.disconnected,'all component observers disconnect on unmount');
   await page.evaluate(()=>{window.__currencyProbe.active=true;window.__currencyProbe.callbacks=0;document.getElementById('cards').append(document.createElement('div'));document.dispatchEvent(new Event('visibilitychange'));});
   await page.waitForTimeout(100);

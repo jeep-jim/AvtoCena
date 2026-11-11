@@ -1,8 +1,30 @@
-name: Verify owner filters and navigation retention once
+name: Verify catalog selection and navigation
 on:
   push:
     branches: [main]
-    paths: ['.github/market-runs/owner-navigation-retention.json']
+    paths:
+      - 'apps/web/**'
+      - 'tests/browser/**'
+      - 'tests/*retention*'
+      - 'tests/*navigation*'
+      - 'tests/*scroll*'
+      - 'tests/*share*'
+      - 'tests/*model*'
+      - '.github/market-runs/owner-navigation-retention.json'
+      - '.github/workflows/owner-navigation-retention.yml'
+  pull_request:
+    paths:
+      - 'apps/web/**'
+      - 'tests/browser/**'
+      - 'tests/*retention*'
+      - 'tests/*navigation*'
+      - 'tests/*scroll*'
+      - 'tests/*share*'
+      - 'tests/*model*'
+      - '.github/workflows/owner-navigation-retention.yml'
+concurrency:
+  group: catalog-navigation-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
