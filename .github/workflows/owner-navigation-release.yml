@@ -10,7 +10,7 @@ permissions:
   actions: read
 
 env:
-  RELEASE_SOURCE_SHA: '25d072b385e00e1bf093cd29c2d9539e81ffeb9d'
+  RELEASE_SOURCE_SHA: '794654a00aa4990b284858f1f01c07ed3f020df4'
 
 concurrency:
   group: regcloud-production-release
@@ -26,43 +26,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '25d072b385e00e1bf093cd29c2d9539e81ffeb9d'
-      - name: Require rejected predecessor, retained base and exact green source CI
+          ref: '794654a00aa4990b284858f1f01c07ed3f020df4'
+      - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh api "repos/$GITHUB_REPOSITORY/pulls/1743" > "$RUNNER_TEMP/candidate-pr.json"
-          python3 -c 'import json,sys;p=json.load(open(sys.argv[1]));assert p["state"]=="open" and p["head"]["sha"]=="25d072b385e00e1bf093cd29c2d9539e81ffeb9d","candidate closed or superseded"' "$RUNNER_TEMP/candidate-pr.json"
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/43079097899" > "$RUNNER_TEMP/predecessor-release.json"
-          curl --fail --silent --show-error --max-time 30 https://avtocena.com/api/health > "$RUNNER_TEMP/predecessor-health.json"
-          python3 - "$RUNNER_TEMP/predecessor-release.json" "$RUNNER_TEMP/predecessor-health.json" <<'PREDECESSOR'
-          import json,sys
-          run=json.load(open(sys.argv[1]));health=json.load(open(sys.argv[2]))
-          assert run['id']==43079097899 and run['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b', 'unexpected rejected predecessor'
-          assert run['status']=='completed' and run['conclusion']=='failure', 'rejected predecessor evidence changed'
-          assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted base changed'
+          python3 - <<'SOURCE_GUARD'
+          import json,subprocess,urllib.request
+          repo='jeep-jim/AvtoCena'
+          sha='794654a00aa4990b284858f1f01c07ed3f020df4'
+          def api(path):
+              return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          p=api('pulls/1748')
+          assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture')]:
+              review=api(f'pulls/{number}')
+              assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
+          required=[{"id":43089076693,"name":"Verify dealer banner and Yandex map"},{"id":43089076694,"name":"Verify owner UI polish"},{"id":43089076704,"name":"Verify per-car services and edit links"},{"id":43089076734,"name":"Verify Dubicars paid feed"},{"id":43089076737,"name":"Verify offer sharing"},{"id":43089076756,"name":"Verify dealer selection sharing"},{"id":43089076761,"name":"Verify dealer workspace"},{"id":43089076775,"name":"Verify local model suggestions"},{"id":43089076867,"name":"Verify green corner budget"},{"id":43089076876,"name":"CI"},{"id":43089076900,"name":"Verify sticky catalog controls"},{"id":43089076902,"name":"QR and gallery browser QA"},{"id":43089077030,"name":"Verify catalog load more"},{"id":43089077063,"name":"Verify catalog sidebar and search"},{"id":43089077071,"name":"Verify site controls and chat"},{"id":43089077077,"name":"Verify catalog failure isolation"},{"id":43089077092,"name":"Verify city picker"},{"id":43089077137,"name":"Verify model search controls"}]
+          runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+          assert runs['total_count']<=100, 'unbounded source check inventory'
+          actual={r['id']:r for r in runs['workflow_runs']}
+          for expected in required:
+              r=actual.get(expected['id'])
+              assert r and r['head_sha']==sha and r['name']==expected['name'], f'exact source check missing: {expected}'
+          assert {'CI','Verify local model suggestions'} <= {r['name'] for r in actual.values()}, 'mandatory check missing'
+          for r in actual.values():
+              assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success', f'source check not green: {r["id"]} {r["name"]} {r["status"]} {r["conclusion"]}'
+          predecessor=api('actions/runs/43079097899')
+          assert predecessor['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b' and predecessor['status']=='completed' and predecessor['conclusion']=='failure', 'rejected predecessor evidence changed'
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
+              health=json.load(response)
+          assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print('Rejected predecessor and retained accepted base verified; new candidate addresses measured home phases')
-          PREDECESSOR
-          python3 - <<'EXACT_CI'
-          import json,subprocess,time
-          required=[(43083658773,'7e53af56b59071e8d793ec15a1617ef579d7838c'),(43084069287,'25d072b385e00e1bf093cd29c2d9539e81ffeb9d')]
-          deadline=time.monotonic()+25*60
-          while True:
-              pending=[]
-              for run_id,sha in required:
-                  run=json.loads(subprocess.check_output(['gh','api',f'repos/jeep-jim/AvtoCena/actions/runs/{run_id}']))
-                  assert run['id']==run_id and run['head_sha']==sha and run['name']=='CI', 'exact CI identity mismatch'
-                  if run['status']=='completed':
-                      assert run['conclusion']=='success', f'exact CI failed: {run_id}'
-                  else: pending.append(run_id)
-              if not pending: break
-              assert time.monotonic()<deadline, 'exact CI deadline'
-              print('Waiting for exact source CI',pending,flush=True)
-              time.sleep(30)
-          print('Both exact source CI runs passed')
-          EXACT_CI
+          print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
+          SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -107,7 +106,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '25d072b385e00e1bf093cd29c2d9539e81ffeb9d'
+          ref: '794654a00aa4990b284858f1f01c07ed3f020df4'
+      - name: Require exact open candidate, merged reviews and all source checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'SOURCE_GUARD'
+          import json,subprocess,urllib.request
+          repo='jeep-jim/AvtoCena'
+          sha='794654a00aa4990b284858f1f01c07ed3f020df4'
+          def api(path):
+              return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          p=api('pulls/1748')
+          assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture')]:
+              review=api(f'pulls/{number}')
+              assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
+          required=[{"id":43089076693,"name":"Verify dealer banner and Yandex map"},{"id":43089076694,"name":"Verify owner UI polish"},{"id":43089076704,"name":"Verify per-car services and edit links"},{"id":43089076734,"name":"Verify Dubicars paid feed"},{"id":43089076737,"name":"Verify offer sharing"},{"id":43089076756,"name":"Verify dealer selection sharing"},{"id":43089076761,"name":"Verify dealer workspace"},{"id":43089076775,"name":"Verify local model suggestions"},{"id":43089076867,"name":"Verify green corner budget"},{"id":43089076876,"name":"CI"},{"id":43089076900,"name":"Verify sticky catalog controls"},{"id":43089076902,"name":"QR and gallery browser QA"},{"id":43089077030,"name":"Verify catalog load more"},{"id":43089077063,"name":"Verify catalog sidebar and search"},{"id":43089077071,"name":"Verify site controls and chat"},{"id":43089077077,"name":"Verify catalog failure isolation"},{"id":43089077092,"name":"Verify city picker"},{"id":43089077137,"name":"Verify model search controls"}]
+          runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+          assert runs['total_count']<=100, 'unbounded source check inventory'
+          actual={r['id']:r for r in runs['workflow_runs']}
+          for expected in required:
+              r=actual.get(expected['id'])
+              assert r and r['head_sha']==sha and r['name']==expected['name'], f'exact source check missing: {expected}'
+          assert {'CI','Verify local model suggestions'} <= {r['name'] for r in actual.values()}, 'mandatory check missing'
+          for r in actual.values():
+              assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success', f'source check not green: {r["id"]} {r["name"]} {r["status"]} {r["conclusion"]}'
+          predecessor=api('actions/runs/43079097899')
+          assert predecessor['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b' and predecessor['status']=='completed' and predecessor['conclusion']=='failure', 'rejected predecessor evidence changed'
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
+              health=json.load(response)
+          assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
+          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
+          print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
+          SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -140,10 +174,10 @@ jobs:
         run: |
           test -f tests/catalog-publication-page-window.test.ts
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-publication-page-window.test.ts
-      - name: Verify prepared editorial overview and parallel homepage
+      - name: Verify authoritative editorial search and independent homepage
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-home-editorial-overview.test.ts tests/catalog-editorial.test.ts tests/catalog-editorial-price.test.ts tests/catalog-home-compact-snapshot.test.ts tests/home-editorial-empty.test.ts tests/home-initial-catalog.test.ts tests/home-parallel-specials.test.ts tests/home-showcase-priced-first.test.ts tests/catalog-overview-read-model.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-editorial.test.ts tests/catalog-editorial-price.test.ts tests/catalog-home-compact-snapshot.test.ts tests/home-editorial-empty.test.ts tests/home-initial-catalog.test.ts tests/home-parallel-specials.test.ts tests/home-independent-reads.test.ts tests/home-showcase-priced-first.test.ts tests/catalog-overview-read-model.test.ts
       - name: Verify stream disconnect and gateway buffer regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -177,7 +211,7 @@ jobs:
       - name: Verify owner catalog search and queue regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-market-page-city-cache.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-price-persistence.test.ts tests/catalog-price-snapshot-compression.test.ts tests/performance-regression.test.ts tests/catalog-projection-reuse.test.ts tests/green-corner-snapshot-cache.test.ts tests/catalog-deferred-recommendations.test.ts tests/offer-navigation-performance.test.ts tests/related-offer-selection.test.ts tests/related-model-family.test.ts tests/catalog-card-contract.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-market-page-city-cache.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-price-persistence.test.ts tests/catalog-projection-reuse.test.ts tests/green-corner-snapshot-cache.test.ts tests/catalog-deferred-recommendations.test.ts tests/offer-navigation-performance.test.ts tests/related-offer-selection.test.ts tests/related-model-family.test.ts tests/catalog-card-contract.test.ts
       - name: Verify deferred recommendations before release preparation
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/related-browser/node_modules/playwright/index.mjs
@@ -311,7 +345,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 25d072b385e00e1bf093cd29c2d9539e81ffeb9d
+          AVTOCENA_RELEASE_SHA: 794654a00aa4990b284858f1f01c07ed3f020df4
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -358,6 +392,41 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           npm install --prefix "$RUNNER_TEMP/release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Require exact open candidate, merged reviews and all source checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'SOURCE_GUARD'
+          import json,subprocess,urllib.request
+          repo='jeep-jim/AvtoCena'
+          sha='794654a00aa4990b284858f1f01c07ed3f020df4'
+          def api(path):
+              return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          p=api('pulls/1748')
+          assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture')]:
+              review=api(f'pulls/{number}')
+              assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
+          required=[{"id":43089076693,"name":"Verify dealer banner and Yandex map"},{"id":43089076694,"name":"Verify owner UI polish"},{"id":43089076704,"name":"Verify per-car services and edit links"},{"id":43089076734,"name":"Verify Dubicars paid feed"},{"id":43089076737,"name":"Verify offer sharing"},{"id":43089076756,"name":"Verify dealer selection sharing"},{"id":43089076761,"name":"Verify dealer workspace"},{"id":43089076775,"name":"Verify local model suggestions"},{"id":43089076867,"name":"Verify green corner budget"},{"id":43089076876,"name":"CI"},{"id":43089076900,"name":"Verify sticky catalog controls"},{"id":43089076902,"name":"QR and gallery browser QA"},{"id":43089077030,"name":"Verify catalog load more"},{"id":43089077063,"name":"Verify catalog sidebar and search"},{"id":43089077071,"name":"Verify site controls and chat"},{"id":43089077077,"name":"Verify catalog failure isolation"},{"id":43089077092,"name":"Verify city picker"},{"id":43089077137,"name":"Verify model search controls"}]
+          runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+          assert runs['total_count']<=100, 'unbounded source check inventory'
+          actual={r['id']:r for r in runs['workflow_runs']}
+          for expected in required:
+              r=actual.get(expected['id'])
+              assert r and r['head_sha']==sha and r['name']==expected['name'], f'exact source check missing: {expected}'
+          assert {'CI','Verify local model suggestions'} <= {r['name'] for r in actual.values()}, 'mandatory check missing'
+          for r in actual.values():
+              assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success', f'source check not green: {r["id"]} {r["name"]} {r["status"]} {r["conclusion"]}'
+          predecessor=api('actions/runs/43079097899')
+          assert predecessor['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b' and predecessor['status']=='completed' and predecessor['conclusion']=='failure', 'rejected predecessor evidence changed'
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
+              health=json.load(response)
+          assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
+          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
+          print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
+          SOURCE_GUARD
       - name: Deploy with rollback and resource measurements
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
