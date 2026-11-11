@@ -1037,9 +1037,12 @@ export async function readCatalogModelNames(make = '', market = '') {
 
 /** Navigation is a name directory, never an availability/count/price query. */
 export async function readCatalogNavigationFacets(market = ''): Promise<CatalogFacets> {
+  // Raw directory I/O is independent of editorial state; apply its current
+  // overlay only inside the context below, after generation validation.
+  const currentFacets = readCurrentFacets().catch(() => null);
   return withCatalogEditorial(async () => {
     const [manifest, current, summary] = await Promise.all([
-      readManifest(), readCurrentFacets().catch(() => null),
+      readManifest(), currentFacets,
       market && market !== 'any' ? readCurrentBrandSummary().catch((): CatalogBrandSummary | null => null) : Promise.resolve<CatalogBrandSummary | null>(null),
     ]);
     if (!manifest.generationId) throw Error('catalog_navigation_directory_unavailable');
