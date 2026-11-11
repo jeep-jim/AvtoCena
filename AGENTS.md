@@ -1,5 +1,7 @@
 # Current recovery checkpoint — 12.11.2026
 
+- **CURRENT HOLD:** PR1742 closed unmerged after review found rollback-incompatible editorial filtering of shared raw overview. PR1743/source25d072 also closed. Release43084384134/controller81fa332cf9fadf901a6bc19d079a8c57a1cf1045 CANCELLED at CI waiting; prepare has zero steps. Never rerun25d072. Correct optimization in progress: separate versioned editorial snapshot, raw overview remains unchanged, exact updatedAt order and old-reader rollback fixture required.
+- Source25 browser43084069224 failed global inventoryRequests1 (actual5). Same baseline loader has make/market-specific URLs but old fixture serves only bare URL. Fix fixture coverage and enforce one request per exact context/no per-keystroke queries; do not weaken frozen live browser budget. These are unresolved tasks, not successful release evidence.
 - Read docs/operations/current-incident.md and latest roadmap. Preserve permanent policies below.
 - Exact873 acceptance43079097899 FAILED: after_ttl home2.960294574s > frozen1.8835s. Independent runtime43081159796/job130733754334 confirmed runninga182/imagee36 at18:48:20UTC; healthok. Never rerun873 unchanged or unblock176's failed predecessor chain.
 - Data repair43076945512 prepared current generation12/13/14Nov. Isolated873 phases43081159684 SUCCESS18:54:43UTC: cold11.4724s,warm.4581s,after35.7538s,after3051.7286s. Prepared snapshot232.1ms but cold editorialEU9612.6ms/UAE8304.1ms. Productionbefore/aftera182,Nginxunchanged. This is diagnosis, not acceptance.

@@ -32,6 +32,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/pulls/1743" > "$RUNNER_TEMP/candidate-pr.json"
+          python3 -c 'import json,sys;p=json.load(open(sys.argv[1]));assert p["state"]=="open" and p["head"]["sha"]=="25d072b385e00e1bf093cd29c2d9539e81ffeb9d","candidate closed or superseded"' "$RUNNER_TEMP/candidate-pr.json"
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/43079097899" > "$RUNNER_TEMP/predecessor-release.json"
           curl --fail --silent --show-error --max-time 30 https://avtocena.com/api/health > "$RUNNER_TEMP/predecessor-health.json"
           python3 - "$RUNNER_TEMP/predecessor-release.json" "$RUNNER_TEMP/predecessor-health.json" <<'PREDECESSOR'
