@@ -29,10 +29,10 @@ jobs:
           for sample in 1 2; do
             date -u +%FT%TZ
             df -B1 /
-            for file in /opt/avtocena/staging/incoming/41084069907-1/avtocena-image.tar.gz /opt/avtocena/staging/incoming/41084069907-1/avtocena-image.tar.gz.sha256; do
+            for file in /opt/avtocena/staging/incoming/43030988703-1/avtocena-image.tar.gz /opt/avtocena/staging/incoming/43030988703-1/avtocena-image.tar.gz.sha256; do
               if test -f "$file"; then stat --format='%n bytes=%s modified=%y' "$file"; else echo "not_present $file"; fi
             done
-            docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' --filter reference=avtocena-regcloud:f6cc2d81f44ed9b7b4d0412ef6b5940df2c740ac
+            docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' --filter reference=avtocena-regcloud:2b7c3e22ce0afb2c7e9a045021f7ec3e57979f82
             ps -eo comm=,stat=,etime= | awk '$1 ~ /^(scp|sftp-server|gzip|docker)$/ {print}'
             if test "$sample" = 1; then sleep 30; fi
           done
