@@ -26,13 +26,14 @@ jobs:
           unset SSH_PRIVATE_KEY
           ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -eu
+          docker inspect --format 'active_runtime revision={{ index .Config.Labels "org.opencontainers.image.revision" }} image={{.Image}}' avtocena-production
           for sample in 1 2; do
             date -u +%FT%TZ
             df -B1 /
-            for file in /opt/avtocena/staging/incoming/43030988703-1/avtocena-image.tar.gz /opt/avtocena/staging/incoming/43030988703-1/avtocena-image.tar.gz.sha256; do
+            for file in /opt/avtocena/staging/incoming/43043393692-1/avtocena-image.tar.gz /opt/avtocena/staging/incoming/43043393692-1/avtocena-image.tar.gz.sha256; do
               if test -f "$file"; then stat --format='%n bytes=%s modified=%y' "$file"; else echo "not_present $file"; fi
             done
-            docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' --filter reference=avtocena-regcloud:2b7c3e22ce0afb2c7e9a045021f7ec3e57979f82
+            docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' --filter reference=avtocena-regcloud:undefined
             ps -eo comm=,stat=,etime= | awk '$1 ~ /^(scp|sftp-server|gzip|docker)$/ {print}'
             if test "$sample" = 1; then sleep 30; fi
           done
