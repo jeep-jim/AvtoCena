@@ -6,7 +6,11 @@ import {restoreReleaseEncyclopedia} from './encyclopedia/restore-calculation-ind
 import {budgetPreparationDecision} from './catalog-budget-runtime.mjs';
 
 export const EDITORIAL_HEALTH_URL='https://avtocena.com/api/health';
-export const UNSUPPORTED_ACCEPTED_RELEASE='a182cd21b21ecf612b63613d263e5bdd817ea4c0';
+// Explicit source compatibility only; inclusion is not a release acceptance verdict.
+export const KNOWN_PRE_EDITORIAL_RELEASES=Object.freeze([
+ 'a182cd21b21ecf612b63613d263e5bdd817ea4c0',
+ '794654a00aa4990b284858f1f01c07ed3f020df4',
+]);
 const HELPER='apps/web/lib/catalog/editorial-home.ts';
 const PRIVATE_INDEX='data/knowledge/encyclopedia/calculation-v1.json';
 export function validateEditorialHealth(value){
@@ -35,7 +39,7 @@ export function assertEditorialHealth(expected,actual){
 export async function installedEditorialSupported(root,release){
  try{await fs.access(path.join(root,HELPER));return true;}catch(error){
   if(error.code!=='ENOENT')throw error;
-  if(release===UNSUPPORTED_ACCEPTED_RELEASE)return false;
+  if(KNOWN_PRE_EDITORIAL_RELEASES.includes(release))return false;
   throw Error('editorial_runtime_helper_missing');
  }
 }
@@ -69,7 +73,7 @@ export async function prepareInstalledEditorial({root,expected,readHealth=readEd
  if(calculationVersion(root)!==expected.calculationVersion)throw Error('editorial_runtime_calculation_mismatch');
  if(!await installedEditorialSupported(root,expected.release)){
   assertEditorialHealth(expected,await readHealth());
-  return {...expected,supported:false,prepared:false,reason:'accepted_release_has_no_editorial_home_helper'};
+  return {...expected,supported:false,prepared:false,reason:'known_pre_helper_release'};
  }
  process.env.AVTOCENA_RELEASE_SHA=expected.release;
  process.env.AVTOCENA_CALCULATION_VERSION=expected.calculationVersion;

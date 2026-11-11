@@ -6,7 +6,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {calculationVersion} from '../scripts/catalog-calculation-version.mjs';
-import {EDITORIAL_HEALTH_URL,UNSUPPORTED_ACCEPTED_RELEASE,validateEditorialHealth,readEditorialHealth,
+import {EDITORIAL_HEALTH_URL,KNOWN_PRE_EDITORIAL_RELEASES,validateEditorialHealth,readEditorialHealth,
  assertEditorialHealth,installedEditorialSupported,editorialPreparationFetch,prepareInstalledEditorial} from '../scripts/catalog-editorial-runtime.mjs';
 
 const sha='a'.repeat(40),calc='b'.repeat(64),health={ok:true,releaseSha:sha,calculationVersion:calc};
@@ -112,9 +112,14 @@ for(const damaged of ['binding','models','version'])test(`immutable private rest
  await assert.rejects(f.run(),/live_encyclopedia_(binding_missing|index_invalid)/);assert.equal(f.writes.length,0);await f.assertClean();
 });
 
-test('only known accepted unsupported release may explicitly skip the helper',async t=>{
+test('only the two explicit pre-helper sources may skip the helper without an acceptance claim',async t=>{
  const f=await fixture(t,{helper:false});
- assert.equal(await installedEditorialSupported(f.root,UNSUPPORTED_ACCEPTED_RELEASE),false);
+ assert.deepEqual(KNOWN_PRE_EDITORIAL_RELEASES,[
+  'a182cd21b21ecf612b63613d263e5bdd817ea4c0',
+  '794654a00aa4990b284858f1f01c07ed3f020df4',
+ ]);
+ assert.equal(Object.isFrozen(KNOWN_PRE_EDITORIAL_RELEASES),true);
+ for(const release of KNOWN_PRE_EDITORIAL_RELEASES)assert.equal(await installedEditorialSupported(f.root,release),false);
  await assert.rejects(f.run(),/editorial_runtime_helper_missing/);assert.equal(f.writes.length,0);
 });
 

@@ -82,8 +82,9 @@ function fixture(originalRestoration:'auto'|'manual'='auto'){
   },
   closeButton(layer:Layer){close(layer);flushMicrotasks();},
   back(){history.back();},
+  forward(){history.go(1);},
   traverse(){
-   assert.equal(traversals.length,1);index+=traversals.shift()!;location.href=entries[index].url;
+   assert.equal(traversals.length,1);entries[index].y=y;index+=traversals.shift()!;location.href=entries[index].url;
    for(const fn of listeners.get('popstate')||[])fn({state:history.state});
    // The native continuation follows synchronous popstate handlers, before RAF.
    if(history.scrollRestoration==='auto'){y=entries[index].y;nativeRestores.push(y);}
@@ -105,6 +106,26 @@ for(const method of ['button','back'] as const)test(`catalog ${method} close ret
  f.y=575;f.frame();
  assert.equal(f.y,575);assert.deepEqual(f.scrolls,[],'catalog owns its anchor; never replay the opening offset');
  assert.equal(f.history.scrollRestoration,'auto');f.cleanup();
+});
+
+for(const elapsedFrames of [0,1])test(`route push after ${elapsedFrames} frames preserves the closed catalog entry for Back and Forward`,()=>{
+ const f=fixture(),sheet=f.open(true,500);f.closeButton(sheet);f.traverse();
+ for(let i=0;i<elapsedFrames;i++)f.frame();
+ f.history.pushState({route:'cars'},'', '/cars');
+ assert.equal(f.history.scrollRestoration,'auto');assert.equal(f.pendingFrames,0);
+ f.y=100;f.frame();f.frame();assert.equal(f.y,100);
+ f.back();f.traverse();assert.equal(f.y,500);assert.equal(f.history.scrollRestoration,'auto');
+ f.forward();f.traverse();assert.equal(f.y,100);assert.equal(f.history.scrollRestoration,'auto');
+ assert.deepEqual(f.scrolls,[]);f.cleanup();
+});
+
+test('native Back during deferred completion restores the departed entry on Forward',()=>{
+ const f=fixture();f.history.pushState({route:'catalog'},'', '/cars/china');
+ const sheet=f.open(true,500);f.closeButton(sheet);f.traverse();
+ f.back();f.traverse();assert.equal(f.history.scrollRestoration,'auto');
+ f.y=100;f.frame();f.frame();assert.equal(f.y,100,'completion must not act on a different entry');
+ f.forward();f.traverse();assert.equal(f.y,500);assert.equal(f.history.scrollRestoration,'auto');
+ assert.deepEqual(f.scrolls,[]);f.cleanup();
 });
 
 test('opening another sheet before completion retains manual restoration',()=>{
