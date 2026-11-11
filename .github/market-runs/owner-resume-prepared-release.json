@@ -1,6 +1,6 @@
 {
-  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "preparedRun": 42978644198,
-  "requestedAt": "2026-11-11T07:53:34.847660+00:00",
-  "reason": "All original gates and five-market parity succeeded; remaining generation-pages step failed reading full China projection with visitor timeout. Restore exact immutable index, finish that same step with existing offline120s deadline, then retain all original pre/post acceptance and rollback."
+  "release": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "sourceRun": 43005906700,
+  "requestedAt": "2026-11-11T11:57:12.748Z",
+  "reason": "One exact-image recheck after homepage speed guard rejection and verified rollback to a182. Keep identical baseline/functional/security/preparation fences and rollback, add existing numeric home_phase logging only. No threshold relaxation or new build; determine the actual slow phase if it recurs."
 }

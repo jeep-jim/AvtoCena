@@ -1,4 +1,4 @@
-name: Resume exact owner catalog release after storage timeout
+name: Recheck exact budget release with unchanged speed guard
 on:
   push:
     branches: [main]
@@ -15,34 +15,37 @@ jobs:
     timeout-minutes: 60
     environment: regcloud-staging
     env:
-      PREPARED_RELEASE: a182cd21b21ecf612b63613d263e5bdd817ea4c0
-      EXPECTED_RELEASE: a182cd21b21ecf612b63613d263e5bdd817ea4c0
-      AVTOCENA_RELEASE_SHA: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+      PREPARED_RELEASE: 3048aede91dbfa4287e038075700e1434ba53e85
+      EXPECTED_RELEASE: 3048aede91dbfa4287e038075700e1434ba53e85
+      AVTOCENA_RELEASE_SHA: 3048aede91dbfa4287e038075700e1434ba53e85
       RELEASE_PREPARATION_MARKETS: china,korea,europe,uae,georgia
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          ref: 3048aede91dbfa4287e038075700e1434ba53e85
           persist-credentials: false
       - name: Require exact successful gates, loaded image and all five prepared markets
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh api repos/jeep-jim/AvtoCena/actions/runs/42978644198 > /tmp/owner-original-run.json
-          gh api repos/jeep-jim/AvtoCena/actions/runs/42978644198/jobs > /tmp/owner-original-jobs.json
-          gh run download 42978644198 --repo jeep-jim/AvtoCena --name release-market-preparation --dir prepared-evidence
-          gh run download 42978644198 --repo jeep-jim/AvtoCena --name encyclopedia-coverage --dir reports
+          gh api repos/jeep-jim/AvtoCena/actions/runs/43005906700 > /tmp/owner-original-run.json
+          gh api repos/jeep-jim/AvtoCena/actions/runs/43005906700/jobs > /tmp/owner-original-jobs.json
+          gh api repos/jeep-jim/AvtoCena/actions/jobs/130473525010/logs > /tmp/owner-original-deploy.log
+          gh run download 43005906700 --repo jeep-jim/AvtoCena --name release-market-preparation --dir prepared-evidence
+          gh run download 43005906700 --repo jeep-jim/AvtoCena --name encyclopedia-coverage --dir reports
           python3 - <<'VERIFY'
           import json,os
           run=json.load(open('/tmp/owner-original-run.json'))
           assert run['head_sha']==os.environ['PREPARED_RELEASE'] and run['status']=='completed' and run['conclusion']=='failure'
+          rejection=open('/tmp/owner-original-deploy.log').read()
+          assert 'AssertionError: accepted_speed_regression:/' in rejection and 'Release gate failed: old production retained' in rejection
           jobs=json.load(open('/tmp/owner-original-jobs.json'))['jobs']
           assert any(j['name']=='wait-for-astra' and j['conclusion']=='success' for j in jobs)
           steps=next(j for j in jobs if j['name']=='prepare')['steps']
-          for name in ['Verify exact encyclopedia matching','Verify stream disconnect and gateway buffer regressions','Verify owner catalog search and queue regressions','Verify deferred recommendations before release preparation','Verify production dependency security','Verify catalog storage and bounded projection integrity','Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)']:
+          for name in ['Verify exact encyclopedia matching','Verify stream disconnect and gateway buffer regressions','Verify Japan and Korea delivered budgets, continuation and supplier refusals','Verify owner catalog search and queue regressions','Verify deferred recommendations before release preparation','Verify production dependency security','Verify catalog storage and bounded projection integrity','Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
             assert any(s['name']==name and s['conclusion']=='success' for s in steps),name
-          assert any(s['name']=='Deploy with rollback and resource measurements' and s['conclusion']=='skipped' for s in steps)
+          assert any(s['name']=='Deploy with rollback and resource measurements' and s['conclusion']=='failure' for s in steps)
           prepared=json.load(open('prepared-evidence/release-market-preparation.json'))
           markets=os.environ['RELEASE_PREPARATION_MARKETS'].split(',')
           assert prepared['markets']==markets and len(prepared['results'])==len(markets)
@@ -55,7 +58,19 @@ jobs:
           node-version: '24.22.1'
           cache: npm
       - run: npm ci
-      - name: Restore exact immutable index and finish generation page preparation
+      - name: Enable existing numeric home phase traces and retain every guard
+        run: |
+          python3 - <<'TRACE'
+          from pathlib import Path
+          p=Path('scripts/regcloud-deploy-production.sh');s=p.read_text()
+          before="'CATALOG_STORAGE_TIMING':'1'"
+          assert s.count(before)==1
+          p.write_text(s.replace(before,before+",'CATALOG_HOME_PHASE_TIMING':'1'"))
+          TRACE
+          bash -n scripts/regcloud-deploy-production.sh
+          python3 tests/regcloud-response-buffers.test.py
+          python3 tests/regcloud-performance-gate.test.py
+      - name: Restore exact immutable index and fence completed generation preparation
         env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
@@ -82,7 +97,6 @@ jobs:
           RESTORE
           node --import tsx scripts/encyclopedia/assert-release-batches.mjs
           export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
-          CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
           node --import tsx --input-type=module <<'FENCE'
           import fs from 'node:fs';import {getJsonStorage} from './apps/web/lib/data.ts';
           const prepared=JSON.parse(fs.readFileSync('prepared-evidence/release-market-preparation.json','utf8'));
@@ -101,9 +115,38 @@ jobs:
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote_dir="/opt/avtocena/releases/$PREPARED_RELEASE"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(docker image inspect --format '{{ index .Config.Labels \"org.opencontainers.image.revision\" }}' 'avtocena-regcloud:$PREPARED_RELEASE') = '$PREPARED_RELEASE'; test \$(docker inspect --format '{{ index .Config.Labels \"org.opencontainers.image.revision\" }}' avtocena-production) = '17a686182574097b5ade22b37ef8b485e2b53844'"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(docker image inspect --format '{{ index .Config.Labels \"org.opencontainers.image.revision\" }}' 'avtocena-regcloud:$PREPARED_RELEASE') = '$PREPARED_RELEASE'; test \$(docker inspect --format '{{ index .Config.Labels \"org.opencontainers.image.revision\" }}' avtocena-production) = 'a182cd21b21ecf612b63613d263e5bdd817ea4c0'"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
+          set +e
           ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$PREPARED_RELEASE' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS'"
+          status=$?
+          set -e
+          ssh "${ssh_opts[@]}" root@151.248.113.177 python3 - <<'PHASES'
+          import collections,json,subprocess,statistics
+          release='3048aede91dbfa4287e038075700e1434ba53e85'
+          for name in ['avtocena-release-'+release[:12],'avtocena-production']:
+            checked=subprocess.run(['docker','inspect',name],capture_output=True,text=True)
+            if checked.returncode:continue
+            value=json.loads(checked.stdout)[0]
+            env=dict(v.split('=',1) for v in value['Config']['Env'] if '=' in v)
+            if env.get('AVTOCENA_RELEASE_SHA')!=release:continue
+            result=subprocess.run(['docker','logs','--timestamps','--since','20m','--tail','30000',name],capture_output=True,text=True,timeout=25)
+            phases=[]
+            for line in (result.stdout+'\n'+result.stderr).splitlines():
+              if 'home_phase ' not in line:continue
+              try:
+                row=json.loads(line.split('home_phase ',1)[1])
+                phases.append({k:row[k] for k in ['trace','phase','ms','ok'] if k in row})
+              except Exception:pass
+            grouped=collections.defaultdict(list)
+            for row in phases:grouped[row['phase']].append(row['ms'])
+            print('HOME_PHASE_SUMMARY',json.dumps({k:{'samples':len(v),'medianMs':statistics.median(v),'maxMs':max(v)} for k,v in grouped.items()}))
+            slow_traces={r['trace'] for r in sorted(phases,key=lambda r:r['ms'],reverse=True)[:10]}
+            print('HOME_SLOW_TRACES',json.dumps([r for r in phases if r['trace'] in slow_traces][-200:]))
+            break
+          PHASES
+          exit "$status"
       - name: Verify published encyclopedia fields against this exact release
         env:
           ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'
