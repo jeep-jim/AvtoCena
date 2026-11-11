@@ -26,3 +26,32 @@ test('failed, incomplete, wrong-price, empty or substituted-baseline reports fai
  }
  assert.throws(()=>acceptedBrowserSpeed(good,{...baseline,release:'3048aede91dbfa4287e038075700e1434ba53e85'}));
 });
+test('a fast duplicate catalog or preview request fails the original request budget',()=>{
+ const good=read('2026-11-11-accepted-speed-browser-restored.json');
+ for(const path of ['/cars/china','/api/catalog/search','/api/catalog/saved-previews']){
+  const report=structuredClone(good),row=report.checks[0].filters[0];
+  row.paths.push(path);row.requests++;
+  const result=acceptedBrowserSpeed(report,baseline);
+  assert.equal(result.passed,false,path);
+  assert.ok(result.requestChecks.some(check=>!check.passed&&check.width===390&&check.budget===1500000));
+  assert.ok(result.checks.every(check=>check.passed),'fast timing must not hide duplicate work');
+ }
+});
+test('request budgets allow cached navigation and do not count unrelated hover or account work',()=>{
+ const good=read('2026-11-11-accepted-speed-browser-restored.json');
+ for(const check of good.checks)for(const row of check.filters){
+  row.paths=['/account','/api/auth/me','/cars/offer/current-visible-car'];row.requests=row.paths.length;
+ }
+ const result=acceptedBrowserSpeed(good,baseline);
+ assert.equal(result.passed,true);
+ assert.ok(result.requestChecks.every(check=>check.requests===0&&check.ceilingRequests===1));
+});
+test('missing or inconsistent request evidence cannot disable amplification protection',()=>{
+ const good=read('2026-11-11-accepted-speed-browser-restored.json');
+ for(const change of [r=>delete r.paths,r=>r.requests++,r=>r.requests=-1,r=>r.paths.push(null)]){
+  const report=structuredClone(good);change(report.checks[0].filters[0]);
+  assert.throws(()=>acceptedBrowserSpeed(report,baseline),/request/);
+ }
+ const brokenBaseline=structuredClone(baseline);delete brokenBaseline.checks[0].filters[0].paths;
+ assert.throws(()=>acceptedBrowserSpeed(good,brokenBaseline),/request/);
+});
