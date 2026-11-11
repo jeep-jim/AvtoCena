@@ -1,5 +1,6 @@
 {
   "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
   "phase": "before-budget-release",
-  "requestedAt": "2026-11-11T11:02:34.632Z"
+  "requestedAt": "2026-11-11T11:09:58.532Z",
+  "reason": "Run43008640838 checked correct mobile prices, but URL wait defaulted to document load and thus included external images, contrary to stated cards-ready metric. Wait for route commit plus actual idle filter state and priced cards; keep all price/health assertions and capture failure state."
 }

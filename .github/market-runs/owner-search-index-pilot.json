@@ -1,5 +1,4 @@
 {
-  "requestedAt": "2026-11-11T11:01:04.643Z",
-  "scope": "Owner-approved isolated China search-index pilot from existing immutable selector. Ephemeral DB only, no production writes, no supplier requests, no schedules. Frozen-snapshot parity is not fresh live acceptance.",
-  "reason": "Run43007952677 stopped before any source read: TS top-level await was incompatible with root CJS. Use async entry point; require populated cases. Same isolated scope and all parity assertions retained."
+  "requestedAt": "2026-11-11T11:09:58.532Z",
+  "reason": "First real-data run43008430803 passed parity at244471cars, but parallel p95 up to687ms. Pin active immutable generation once per repeatable-read page/count transaction so composite indexes have exact leading keys; keep all correctness, size, readiness and failure checks. No production writes or supplier requests."
 }
