@@ -1,6 +1,6 @@
 {
-  "requestedAt": "2026-11-11T22:18:06.221Z",
+  "requestedAt": "2026-11-11T22:21:28.410Z",
   "source": "75c2e6f57cfa4022865217e029a1f5d1671842c3",
   "candidate": 1753,
-  "reason": "Validate staged exact-source controller and mandatory durable evidence before activation; no deployment."
+  "reason": "Correct actual-step counting; preserve all mandatory evidence and run full unchanged speed/rollback guards. No deployment."
 }

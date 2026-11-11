@@ -61,12 +61,30 @@ test('attempts have separate immutable locations and unsafe metadata never write
 }));
 
 test('every optional GitHub mirror follows mandatory private evidence and source-bound outcomes',()=>{
- const sources=['private_index','market_prices','deploy_acceptance','public_verification'];
- assert.equal((controller.match(/Persist verified private evidence for /g)||[]).length,4);
- assert.equal((controller.match(/timeout-minutes: 2\n        continue-on-error: true\n        uses: actions\/upload-artifact@v4/g)||[]).length,4);
- for(const source of sources){
-  assert.ok(controller.includes('id: '+source+'\n'));
-  assert.ok(controller.includes('REQUIRE_EVIDENCE: ${{ steps.'+source+".outcome == 'success' }}"));
+ // Match step declarations, not historical step-name references inside guards.
+ const steps=controller.split(/(?=^      - (?:name|uses|run):)/m);
+ const mappings=[
+  ['private_index','Preserve existing encyclopedia coverage and batch membership'],
+  ['market_prices','Preserve individual market preparation results'],
+  ['deploy_acceptance','Preserve required browser acceptance evidence'],
+  ['public_verification','Preserve public encyclopedia verification'],
+ ];
+ const privateSteps=steps.filter(step=>/^      - name: Persist verified private evidence for /m.test(step));
+ assert.equal(privateSteps.length,4);
+ assert.equal((controller.match(/^        uses: actions\/upload-artifact@v4$/gm)||[]).length,4);
+ for(const [source,mirrorName] of mappings){
+  const evidence=steps.find(step=>step.startsWith('      - name: Persist verified private evidence for '+source+'\n'));
+  const produced=steps.find(step=>new RegExp('^        id: '+source+'$','m').test(step));
+  const mirror=steps.find(step=>step.startsWith('      - name: '+mirrorName+'\n'));
+  assert.ok(evidence&&produced&&mirror);
+  assert.ok(steps.indexOf(produced)<steps.indexOf(evidence));
+  assert.equal(steps.indexOf(mirror),steps.indexOf(evidence)+1);
+  assert.match(evidence,/^        if: always\(\)$/m);
+  assert.doesNotMatch(evidence,/continue-on-error:/);
+  assert.ok(evidence.includes('REQUIRE_EVIDENCE: ${{ steps.'+source+".outcome == 'success' }}"));
+  assert.match(mirror,/^        timeout-minutes: 2$/m);
+  assert.match(mirror,/^        continue-on-error: true$/m);
+  assert.match(mirror,/^        uses: actions\/upload-artifact@v4$/m);
  }
  assert.equal((controller.match(/prior activation may have started/g)||[]).length,3);
 });
