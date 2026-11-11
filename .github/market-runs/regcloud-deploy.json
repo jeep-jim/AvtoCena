@@ -108,9 +108,9 @@
     "b337738d7b4425fa943bc5efa27d86fc2a50bb17218f88f171d61d00eb520fc0",
     "4a621666a13e28e1a6d546027fe62fdfe94c6df51d0c34eae4ec2c983a423e93"
   ],
-  "reason": "Owner-requested navigation and selection retention only, based on accepted a182 application. Keep latest server and mandatory browser speed/rollback gates. Previously rejected budget changes and uninstalled homepage change are excluded. JP/KR availability remains open.",
+  "reason": "Owner selection/scroll retention and sharing of city-independent default category rows, based on accepted a182. City-dependent budget/sort prices remain separate. Latest complete-search and request-count guards included; frozen speed thresholds, expired-cache phases and nonce-bound browser rollback unchanged. JP/KR availability remains open.",
   "ideaReports": [],
-  "requestedAt": "2026-11-11",
+  "requestedAt": "2026-11-11T16:07:55.837Z",
   "preparationMarkets": [
     "china",
     "korea",
