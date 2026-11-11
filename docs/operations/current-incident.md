@@ -1,3 +1,10 @@
+# 11.11.2026 — urgent accepted-speed restoration in progress
+
+- Measured mobile China budget change on3048 took60.105s in idle browser run43019524173, following14.495s in43018662404. Functional prices passed; speed is **not accepted**. Full reports: `2026-11-11-budget-browser-after.json`, `2026-11-11-budget-browser-idle.json`.
+- Restore workflow43020674047 is queued to reactivate the retained exacta182 container. Public rollback is **not yet confirmed**.
+- Conflicting homepage release43020597940 (2b5fc017) started before restoration. Request cancellation before activation; retain its code/tests. Do not start another app deployment until the rollback, comparable mobile checks and corrected speed gates are verified. Feed schedules, user data and suppliers remain unchanged.
+- The server gate incorrectly allows immediate warm retries to clear an expired-cache slowdown. Fix this acceptance loophole; never raise or replace the original accepted baseline. Japan/Korea budget availability still unconfirmed.
+
 # 11.11.2026 — 3048 установлен; бюджет JP/KR и скорость ещё не приняты
 
 - Повторная серверная активация43016410665 прошла этап pre/post-switch; публичный43018662417 подтвердил exact3048. Финальная проверка энциклопедии ещё выполняется.

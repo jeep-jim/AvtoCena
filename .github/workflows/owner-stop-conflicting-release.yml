@@ -1,0 +1,30 @@
+name: Stop exact uninstalled release for accepted-speed recovery
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-stop-conflicting-release.json']
+permissions:
+  contents: read
+  actions: write
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify and stop only the conflicting uninstalled release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json,subprocess
+          route='repos/jeep-jim/AvtoCena/actions/runs/43020597940'
+          run=json.loads(subprocess.check_output(['gh','api',route]))
+          assert run['head_sha']=='2b5fc017a39ced52eafd4e4bade2c921254c4946'
+          assert run['path']=='.github/workflows/regcloud-deploy.yml'
+          jobs=json.loads(subprocess.check_output(['gh','api',route+'/jobs']))['jobs']
+          deploy=[s for j in jobs for s in j.get('steps',[]) if s['name']=='Deploy with rollback and resource measurements']
+          assert not any(s['status'] in ['in_progress','completed'] for s in deploy), 'release_already_reached_activation_do_not_interrupt'
+          if run['status']!='completed':
+            subprocess.run(['gh','api','--method','POST',route+'/cancel'],check=True)
+          print('EXACT_UNINSTALLED_RELEASE_STOP_REQUESTED',json.dumps({'run':run['id'],'sha':run['head_sha'],'beforeStatus':run['status'],'activationStarted':False}))
+          PY
