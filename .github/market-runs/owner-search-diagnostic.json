@@ -1,6 +1,6 @@
 {
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "reason": "A bounded VM read still recorded 229 queue timeouts and an incomplete root catalog; inspect the active CPU path before further changes.",
-  "attempt": 3,
-  "requestedAt": "2026-11-11T03:40:18.591454+00:00"
+  "reason": "Complete the five-second sample with anonymized incoming route/agent counts; default Nginx log is disabled for this site and cannot establish traffic attribution.",
+  "attempt": 4,
+  "requestedAt": "2026-11-11T03:43:56.788823+00:00"
 }

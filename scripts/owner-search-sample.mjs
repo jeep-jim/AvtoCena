@@ -10,7 +10,15 @@ ws.onmessage=e=>{const m=JSON.parse(e.data);const p=pending.get(m.id);if(p){pend
 function call(method,params={}){return new Promise((resolve,reject)=>{const id=++sequence;const timer=setTimeout(()=>{pending.delete(id);reject(Error('inspector_timeout:'+method));},12000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}));});}
 function startNetworkSample(){
  const dc=process.getBuiltinModule('node:diagnostics_channel'),started=performance.now(),active=new Map(),rows=[];
- const bindings=[];
+ const bindings=[], incoming=new Map();
+ on('http.server.request.start',({request})=>{
+  const path=String(request.url||'').split('?')[0];
+  const route=path.startsWith('/cars/offer/')?'offer':path.startsWith('/cars')?'catalog':path.startsWith('/api/catalog/photo')?'photo':path.startsWith('/api/catalog')?'catalog-api':path.startsWith('/_next/')?'assets':'other';
+  const ua=String(request.headers?.['user-agent']||'');
+  const agent=['Amazonbot','Reflection','Googlebot','Yandex','bingbot','GPTBot','Claude','AhrefsBot','PetalBot','Bytespider','SemrushBot','TelegramBot'].find(name=>ua.toLowerCase().includes(name.toLowerCase()))||(/bot|crawler|spider/i.test(ua)?'other-crawler':/Mozilla/i.test(ua)?'browser':'other');
+  const key=JSON.stringify({route,agent,prefetch:Boolean(request.headers?.['next-router-prefetch']||request.headers?.purpose==='prefetch')});
+  incoming.set(key,(incoming.get(key)||0)+1);
+ });
  const on=(name,fn)=>{const channel=dc.channel(name);const safe=value=>{try{fn(value);}catch{}};channel.subscribe(safe);bindings.push([channel,safe]);};
  const category=request=>{const path=String(request.path||'').split('?')[0];
   for(const [needle,label] of [['catalog/runtime-sort-prices','sort-price-snapshots'],['catalog/runtime-budget-prices','budget-price-snapshots'],['current-offers/','offer-shards'],['catalog/public/offers/','public-offer-shards'],['budget-cards-v','budget-card-blocks'],['budget-specifications','specification-selectors'],['budget-markets','budget-selectors'],['projection-brand/','brand-projections'],['projection/','market-projections'],['market-landing','market-landings'],['knowledge/','knowledge'],['encyclopedia/','encyclopedia'],['pricing-replay','pricing-replay'], ... [['exchange-rates','rates'],['markets/','market-settings'],['collection','source-controls'],['feature','features'],['green-corner','stock'],['overview','overview'],['catalog/','catalog'],['business','business'],['dealer','dealer']]])if(path.includes(needle))return label;
@@ -19,7 +27,7 @@ function startNetworkSample(){
  on('undici:request:headers',({request,response})=>{const row=active.get(request);if(row)row.status=response.statusCode;});
  const finish=(request,error=false,incomplete=false)=>{const row=active.get(request);if(!row)return;active.delete(request);const {start,...safe}=row;rows.push({...safe,ms:Math.round(performance.now()-start),error,incomplete});};
  on('undici:request:trailers',({request})=>finish(request));on('undici:request:error',({request})=>finish(request,true));
- globalThis.__avtocenaPerfNetworkStop=()=>{for(const [channel,fn] of bindings)channel.unsubscribe(fn);for(const [request]of active)finish(request,false,true);delete globalThis.__avtocenaPerfNetworkStop;return rows;};
+ globalThis.__avtocenaPerfNetworkStop=()=>{for(const [channel,fn] of bindings)channel.unsubscribe(fn);for(const [request]of active)finish(request,false,true);delete globalThis.__avtocenaPerfNetworkStop;return {storage:rows,incoming:[...incoming].map(([key,count])=>({...JSON.parse(key),count}))};};
  return true;
 }
 try{
