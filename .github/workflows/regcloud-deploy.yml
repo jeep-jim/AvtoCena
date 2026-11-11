@@ -92,6 +92,7 @@ jobs:
           python3 tests/regcloud-browser-handoff.test.py
           python3 tests/regcloud-release-retention.test.py
           node --test tests/accepted-browser-speed.test.mjs
+          node --test tests/catalog-refresh-generation-pages.test.mjs
       - name: Verify retained choices and forward/Back navigation on this exact source
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/retention-browser/node_modules/playwright/index.mjs

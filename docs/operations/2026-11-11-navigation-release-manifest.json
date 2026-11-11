@@ -1,6 +1,6 @@
 {
   "base": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "purpose": "Accepted a182 plus retained navigation, native failure cooldown, scoped DOM work, JP/KR-only saved-price filtering, redundant platform membership I/O removal, canonical city-neutral category cache and one independent navigation-facet read overlap. Preserve frozen server/browser gates; exclude wider main budget/home changes.",
+  "purpose": "Accepted a182 plus retained navigation, native failure cooldown, scoped DOM work, JP/KR-only saved-price filtering, redundant platform membership I/O removal, canonical city-neutral category cache and one independent navigation-facet read overlap. Preserve frozen server/browser gates; exclude wider main budget/home changes. Add one bounded whole-window retry on local-midnight preparation rollover; preserve all inner generation, CAS, date, source and horizon guards.",
   "appPaths": [
     "apps/web/components/catalog/CatalogContent.tsx",
     "apps/web/components/catalog/CatalogFilters.tsx",
@@ -55,7 +55,9 @@
     "docs/operations/current-incident.md",
     "docs/operations/performance-contract.md",
     "roadmap.md",
+    "scripts/catalog-refresh-generation-pages.mjs",
     "scripts/lib/accepted-browser-speed.mjs",
+    "scripts/lib/catalog-refresh-generation-pages.mjs",
     "scripts/regcloud-browser-verdict.py",
     "scripts/regcloud-deploy-production.sh",
     "scripts/regcloud-deploy-with-browser.sh",
@@ -81,6 +83,7 @@
     "tests/catalog-market-page-city-cache.test.ts",
     "tests/catalog-market-page-city.test.ts",
     "tests/catalog-navigation-facets.test.ts",
+    "tests/catalog-refresh-generation-pages.test.mjs",
     "tests/currency-observer-scope.test.ts",
     "tests/dealer-platform-membership-read.test.ts",
     "tests/japan-filter-retention.test.ts",
@@ -92,6 +95,6 @@
   ],
   "partnerBudgetsFixed": false,
   "partnerBudgetScope": "Attached saved quotes now match card city totals for JP/KR; unavailable/incomplete supplier results and ordering are not solved by this predicate.",
-  "supersedes": "27f243a1321cc659a91dd397437a99d94efcc208",
+  "supersedes": "ee0af253816acd8f1775833577aa635ef09410e8",
   "cityCorrectionSource": "8731103c0102886064c6a0a19a14182502e6e3be"
 }
