@@ -2,7 +2,7 @@
 """Functional acceptance plus the owner's measured speed regression guard.
 Run on the VM: network/proxy latency from the audit environment is excluded.
 """
-import argparse,json,time,urllib.request,urllib.error,os,urllib.parse,ipaddress,pathlib,statistics
+import argparse,json,time,urllib.request,urllib.error,os,urllib.parse,ipaddress,pathlib,statistics,math
 from html.parser import HTMLParser
 
 # Absolute targets retain their advisory evidence. Owner decision 11.11.2026
@@ -126,7 +126,16 @@ def validate(path,kind,status,body,release):
   value=json.loads(body)
   if kind=='health':
    if not value.get('ok') or value.get('releaseSha')!=release:raise AssertionError('performance_wrong_release')
-  elif not value.get('items') or not value.get('total',0)>0:raise AssertionError('performance_empty_search')
+  else:
+   if not isinstance(value,dict):raise AssertionError('performance_empty_search')
+   # The required search routes represent complete, current market pages.
+   # A retained nonempty fallback must not turn a source/read failure into a
+   # fast successful release. Normal pagination (hasMore/nextCursor) is valid.
+   if value.get('ok') is False or value.get('error') or any(value.get(flag) for flag in ('stale','partial','interrupted','countIncomplete')):
+    raise AssertionError('performance_incomplete_search:'+path)
+   items=value.get('items');total=value.get('total')
+   if not isinstance(items,list) or not items or isinstance(total,bool) or not isinstance(total,(int,float)) or not math.isfinite(total) or total<=0:
+    raise AssertionError('performance_empty_search')
 
 def probe_headers(base,path,kind):
  headers={'User-Agent':'AvtoCena-release-acceptance/1.0','Connection':'close','Content-Type':'application/json','Origin':'https://avtocena.com'}

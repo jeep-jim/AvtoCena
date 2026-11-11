@@ -1,7 +1,8 @@
 {
   "base": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "purpose": "Owner selection and scroll repair; remember inactive Japan fields without applying unsupported constraints in other markets. Accepted application plus UI/query-state wiring only; unchanged current release guards. Validated shared-selection URLs also retain remembered Japan fields.",
+  "purpose": "Owner selection/scroll repair plus shared city-independent default category rows. City-dependent budgets/sorts, TTL, editorial revisions and prices preserved. Includes the later stricter complete-search and request-count guards; frozen speed baseline and expiry phases unchanged.",
   "appPaths": [
+    "apps/web/components/catalog/CatalogContent.tsx",
     "apps/web/components/catalog/CatalogFilters.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
     "apps/web/components/catalog/VehicleModelSearch.tsx",
@@ -9,10 +10,10 @@
     "apps/web/components/layout/RoutePreloader.tsx",
     "apps/web/lib/catalog/brand-navigation.ts",
     "apps/web/lib/catalog/filter-scroll.ts",
+    "apps/web/lib/catalog/japan-filter-retention.ts",
+    "apps/web/lib/catalog/market-page.ts",
     "apps/web/lib/catalog/model-suggestion-search.ts",
     "apps/web/lib/catalog/route-scroll.ts",
-    "apps/web/components/catalog/CatalogContent.tsx",
-    "apps/web/lib/catalog/japan-filter-retention.ts",
     "apps/web/lib/dealers/selection-share.ts"
   ],
   "allowedPaths": [
@@ -28,6 +29,7 @@
     "apps/web/lib/catalog/brand-navigation.ts",
     "apps/web/lib/catalog/filter-scroll.ts",
     "apps/web/lib/catalog/japan-filter-retention.ts",
+    "apps/web/lib/catalog/market-page.ts",
     "apps/web/lib/catalog/model-suggestion-search.ts",
     "apps/web/lib/catalog/route-scroll.ts",
     "apps/web/lib/dealers/selection-share.ts",
@@ -57,6 +59,7 @@
     "tests/browser/owner-filter-speed-live.mjs",
     "tests/catalog-brand-navigation.test.ts",
     "tests/catalog-market-brand-projection.test.ts",
+    "tests/catalog-market-page-city.test.ts",
     "tests/japan-filter-retention.test.ts",
     "tests/model-suggestion-search.test.ts",
     "tests/regcloud-browser-handoff.test.py",
