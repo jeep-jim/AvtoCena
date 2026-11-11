@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {acceptedBrowserSpeed} from '../../scripts/lib/accepted-browser-speed.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
-const marker=JSON.parse(fs.readFileSync('.github/market-runs/owner-filter-browser.json','utf8'));
+const marker=JSON.parse(fs.readFileSync(process.env.OWNER_FILTER_BROWSER_MARKER||'.github/market-runs/owner-filter-browser.json','utf8'));
 const origin='https://avtocena.com';
 const report={release:marker.release,phase:marker.phase,checkedAt:new Date().toISOString(),environment:'GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation',checks:[],passed:false};
 let activePage;
@@ -71,6 +72,10 @@ try{
   report.partnerBudgetsReady=report.partnerBudgets.every(r=>r.status===200&&r.items>0&&!r.partial&&!r.stale);
   assert.ok(report.partnerBudgetsReady,'Japan/Korea budget availability remains unconfirmed; inspect source state');
  }
+ if(marker.enforceSpeed){
+  report.speedGuard=acceptedBrowserSpeed(report,JSON.parse(fs.readFileSync('docs/operations/2026-11-11-accepted-browser-speed-baseline.json','utf8')));
+  assert.ok(report.speedGuard.passed,'accepted_browser_speed_regression');
+ }
  report.passed=true;
-}catch(error){report.error=String(error.message).slice(0,800);if(activePage)report.failureState=await activePage.evaluate(()=>({url:location.href,inputs:Array.from(document.querySelectorAll('input[aria-label="Цена: до"]')).map(e=>({value:e.value,visible:!!e.offsetParent})),busy:Array.from(document.querySelectorAll('.ac-catalog-filter-panel')).map(e=>e.getAttribute('aria-busy'))})).catch(()=>null);throw error;}
+}catch(error){report.passed=false;report.error=String(error.message).slice(0,800);if(activePage)report.failureState=await activePage.evaluate(()=>({url:location.href,inputs:Array.from(document.querySelectorAll('input[aria-label="Цена: до"]')).map(e=>({value:e.value,visible:!!e.offsetParent})),busy:Array.from(document.querySelectorAll('.ac-catalog-filter-panel')).map(e=>e.getAttribute('aria-busy'))})).catch(()=>null);throw error;}
 finally{fs.writeFileSync('owner-filter-browser-report.json',JSON.stringify(report,null,2)+'\n');console.log('OWNER_FILTER_BROWSER',JSON.stringify(report));await browser.close();}

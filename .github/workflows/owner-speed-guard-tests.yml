@@ -1,0 +1,31 @@
+name: Verify accepted-speed release guards without deployment
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-speed-guard-tests.json']
+permissions:
+  contents: read
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+      - name: Check warm and expired server regression guards
+        run: python3 tests/regcloud-performance-gate.test.py
+      - name: Reject slow visible cards and missing browser results
+        run: node --test tests/accepted-browser-speed.test.mjs
+      - name: Check bounded browser handshake identity and failures
+        run: python3 tests/regcloud-browser-verdict.test.py
+      - name: Exercise release handoff with simulated success, slowdown and missing browser output
+        run: python3 tests/regcloud-browser-handoff.test.py
+      - name: Check release scripts and browser syntax
+        run: |
+          bash -n scripts/regcloud-deploy-production.sh scripts/regcloud-deploy-with-browser.sh
+          node --check tests/browser/owner-filter-speed-live.mjs
+          python3 tests/regcloud-response-buffers.test.py

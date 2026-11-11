@@ -60,6 +60,9 @@ jobs:
           node scripts/check-runtime-streams.mjs
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py
+          python3 tests/regcloud-browser-verdict.test.py
+          python3 tests/regcloud-browser-handoff.test.py
+          node --test tests/accepted-browser-speed.test.mjs
       - name: Verify parallel home loading and preserved city and prices
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/home-parallel-specials.test.ts tests/home-initial-catalog.test.ts tests/home-showcase-priced-first.test.ts tests/home-phase-timing.test.ts
       - name: Verify Japan and Korea delivered budgets, continuation and supplier refusals
@@ -210,9 +213,12 @@ jobs:
           name: release-market-preparation
           path: release-market-preparation.json
           if-no-files-found: ignore
+      - name: Prepare required browser acceptance runtime
+        run: npm install --prefix "$RUNNER_TEMP/release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Deploy with rollback and resource measurements
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/release-browser/node_modules/playwright/index.mjs
         run: |
           set -euo pipefail
           umask 077
@@ -223,9 +229,16 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
-          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py scripts/regcloud-browser-verdict.py "root@151.248.113.177:$remote_dir/"
           scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS'"
+          bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS"
+      - name: Preserve required browser acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-browser-acceptance
+          path: owner-filter-browser-report.json
+          if-no-files-found: ignore
       - name: Verify published encyclopedia fields against this exact release
         env:
           ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'

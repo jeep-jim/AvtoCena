@@ -1,3 +1,9 @@
+# 11.11.2026 — restored browser verified; release guards under test
+
+- Browser43021430620 on restored a182: mobile1.473/0.677s, desktop1.006/0.572s for1.5m/2m;24 priced cards per query within budget, no page errors. Original frozen baseline unchanged. Full report: `2026-11-11-accepted-speed-browser-restored.json`.
+- This commit changes **release verification only**, not the installed app. Expired-cache slowdown can no longer pass through immediate warm retries. Standard deployment now awaits a release+nonce-bound browser correctness/speed verdict before disarming automatic rollback. Missing/failed browser evidence rejects activation. Offline tests and a fake-SSH handshake are queued; no new app release is requested.
+- Keep a182 installed. No homepage or budget candidate should be deployed until guards pass and the actual cause of the3048 regression is addressed. JP/KR1.5m remains open, including persisted provider refusal. Do not restart parallel live performance checks.
+
 # 11.11.2026 — возврат a182 подтверждён; устранён обход проверки скорости
 
 - Восстановление [43020674047](https://github.com/jeep-jim/AvtoCena/actions/runs/43020674047) завершилось успешно: в 12:32:02 UTC включён прежний контейнер `a182cd21b21ecf612b63613d263e5bdd817ea4c0`; публичный health подтвердил его. Версия 3048 отклонена после мобильной смены бюджета за 60,105 с.

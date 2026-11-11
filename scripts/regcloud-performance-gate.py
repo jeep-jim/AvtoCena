@@ -62,13 +62,13 @@ def accepted_baseline(path):
 def check_baseline(base,path,kind,release,phase,elapsed,baseline,blocking):
  rows=baseline.get(path)
  if not rows:return None
+ if phase not in dict(PHASE_DELAYS):raise AssertionError('accepted_speed_phase_invalid')
  # A measured envelope catches cold/expired regressions. The warm median also
  # protects the usual fast path instead of permitting its historical cold peak.
  reference=statistics.median(r['seconds'] for r in rows if r['phase'].startswith('warm_')) if phase=='warm' else max(r['seconds'] for r in rows)
- # Explicit measurement noise, not a higher product target. Only warm samples
- # may use the median of three comparable warm reads to reject transient jitter.
- # An expired-cache miss fills the cache, so immediate retries cannot validate
- # that phase and must never turn its measured regression into an acceptance.
+ # Keep the original measurement allowance. Only a warm sample may use warm
+ # retries. An expired-cache miss is blocking itself: immediate retries would
+ # warm the cache and conceal the response that the next visitor experiences.
  noise=max(.05,reference*.05)
  ceiling=reference+noise
  result={'speedBaseline':phase,'path':path,'referenceSeconds':reference,'measurementNoiseSeconds':round(noise,4),'ceilingSeconds':round(ceiling,4),'seconds':elapsed,'blocking':blocking,'passed':elapsed<=ceiling}
