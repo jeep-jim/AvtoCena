@@ -1,5 +1,6 @@
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
+import {editorialOverviewSnapshotPath,readEditorialOverviewSnapshot,editorialOverviewSnapshotPage,resetEditorialOverviewSnapshotCache,type EditorialOverviewSnapshot} from "./editorial-overview-snapshot";
 import {createHomePhaseTiming} from "./home-phase-timing";
 import {StableBudgetSelectionCache} from "./stable-budget-selection";
 import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
@@ -626,6 +627,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetEditorialOverviewSnapshotCache();
   resetBudgetSourceIndexes();
   unavailableReadCache.clear();
   previousLocationCache.clear();
@@ -1975,7 +1977,8 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     rows: allProjectionItems, rowsByMarket: projectionsByMarket, assertContext: assertPageContext,
     buildLanding: (g, market, rows, now) => buildCatalogMarketLanding(g, market, rows, {now}),
     buildOverview: (g, rows, now) => buildCatalogOverviewFromProjections(g, rows, {now}),
-    landingPath: catalogMarketLandingPath, overviewPath: catalogOverviewGenerationPath});
+    landingPath: catalogMarketLandingPath, overviewPath: catalogOverviewGenerationPath,
+    buildEditorial:(g,rows,now)=>buildEditorialOverviewSnapshot(g,rows,{now}),editorialPath:editorialOverviewSnapshotPath});
   // Keep the compatibility alias caller-owned; dated writes never touch it.
   await assertPageContext();
   assertCatalogPageWindowCurrent(pageWindow.proof);
@@ -2892,6 +2895,22 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
   return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10)};
 }
 
+/** Separate derivative: never overwrite the raw overview read by rollback releases.
+ * Use the same moderated landing order as searchOffers({sort:'updatedAt'}). */
+export async function buildEditorialOverviewSnapshot(generationId:string,projections:CatalogSearchProjection[],options:{now?:Date}={}):Promise<EditorialOverviewSnapshot>{
+ return withCatalogEditorial(async()=>{
+  const now=options.now||new Date(),markets:EditorialOverviewSnapshot['markets']={};
+  for(const market of MARKETS){
+   if(market==='japan'||!editorialHasHidden(market))continue;
+   const source=projections.filter(row=>row.market===market);if(!source.length)continue;
+   const landing=await buildCatalogMarketLanding(generationId,market,source,{now});
+   markets[market]={sourceTotal:source.length,total:landing.total,items:landing.items.slice(0,48).map(publicOfferFromProjection)};
+  }
+  return {editorialSnapshotVersion:1,generationId,policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10),
+    editorialRevision:editorialRevision(),order:'updatedAt',markets};
+ });
+}
+
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
   const manifest = await timing.measure("snapshotManifest",()=>readManifest());
   timing.setGeneration(manifest.generationId);
@@ -3153,8 +3172,10 @@ export async function readHomeCatalogSnapshot(perMarket=6){
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }
+ const prepared=markets.length?await timing.measure("snapshotEditorialPrepared",()=>readEditorialOverviewSnapshot(snapshot.generationId)):null;
  const refreshed=await mapWithConcurrency(markets,2,async market=>({market,
-  result:await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
+  result:editorialOverviewSnapshotPage(prepared,market,Math.min(12,Math.max(1,perMarket)))
+    ||await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
  for(const {market,result} of refreshed){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];

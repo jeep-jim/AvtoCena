@@ -164,7 +164,7 @@ test('real publisher activates only a verified window and preserves the old mani
   t.mock.timers.enable({apis:['Date'],now:new Date('2026-10-26T16:59:00Z')});
   try{
     process.chdir(root);await fs.mkdir('data');process.env.JSON_STORAGE_DRIVER='local';
-    for(const mode of ['future_put','future_readback','late_midnight','before_manifest_midnight','success']){
+    for(const mode of ['future_put','future_readback','editorial_put','editorial_readback','late_midnight','before_manifest_midnight','success']){
       t.mock.timers.setTime(new Date('2026-10-26T16:59:00Z').getTime());
       resetJsonStorageForTests();resetCatalogReadCachesForTests();
       const storage=getJsonStorage(), baseline={version:2,generationId:'gen_initial',markets:{}};
@@ -185,6 +185,7 @@ test('real publisher activates only a verified window and preserves the old mani
           }
         }
         if(key.endsWith('overview.2026-10-27.json')){futureWrites++;if(mode==='future_put')throw Error('future_put_failed');}
+        if(mode==='editorial_put'&&key.endsWith('editorial-overview-v1.2026-10-27.json'))throw Error('editorial_put_failed');
         await write(key,value,condition);
         if(mode==='late_midnight' && key.endsWith('/publication-checkpoint.json') && (value as any).stage==='read_models_verified'){
           t.mock.timers.setTime(new Date('2026-10-26T17:00:00Z').getTime());
@@ -193,7 +194,8 @@ test('real publisher activates only a verified window and preserves the old mani
           t.mock.timers.setTime(new Date('2026-10-26T17:00:00Z').getTime());
         }
       };
-      storage.readJson=async(key,fallback)=>mode==='future_readback' && key.endsWith('overview.2026-10-27.json')
+      storage.readJson=async(key,fallback)=>(mode==='future_readback' && key.endsWith('overview.2026-10-27.json'))
+        ||(mode==='editorial_readback'&&key.endsWith('editorial-overview-v1.2026-10-27.json'))
         ? {unexpected:true} as any : read(key,fallback);
       if(mode==='success'){
         const result=await persistCatalogOffers([],{expectedBaseGenerationId:'gen_initial'});
@@ -201,13 +203,32 @@ test('real publisher activates only a verified window and preserves the old mani
         assert.equal(manifestWrites,1);
       }else{
         await assert.rejects(persistCatalogOffers([],{expectedBaseGenerationId:'gen_initial'}),
-          /future_put_failed|readback_mismatch|date_changed/);
+          /future_put_failed|editorial_put_failed|readback_mismatch|date_changed/);
         assert.deepEqual(await read('catalog/manifest.json',null),baseline);assert.equal(manifestWrites,0);
       }
-      assert.equal(futureWrites,1);
+      assert.equal(futureWrites,mode.startsWith('editorial_')?0:1);
     }
   }finally{
     process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;
     t.mock.timers.reset();resetJsonStorageForTests();resetCatalogReadCachesForTests();await fs.rm(root,{recursive:true,force:true});
   }
+});
+
+test('versioned editorial objects are separate, conditional and cannot change raw rollback payloads',async()=>{
+  const f=fixture(),base=await f.options.buildOverview('gen_new',f.options.rows,f.options.now());
+  const editPath=(g:string)=>`catalog/generations/${g}/indexes/editorial-overview-v1.json`;
+  const buildEditorial=async(g:string,_rows:any[],date:Date)=>({editorialSnapshotVersion:1 as const,generationId:g,
+    policyDate:day(date),editorialRevision:'edit',order:'updatedAt' as const,markets:{}});
+  await stageCatalogPageWindow({...f.options,buildEditorial,editorialPath:editPath});
+  for(const [index,date] of ['2026-10-26','2026-10-27','2026-10-28'].entries()){
+    const suffix=index?'.'+date:'',raw=f.objects.get(f.prefix+'overview'+suffix+'.json');
+    assert.equal(raw.markets.china.total,base.markets.china.total);
+    assert.equal('editorialRevision' in raw,false);
+    const edit=f.writes.find(w=>w.path===f.prefix+'editorial-overview-v1'+suffix+'.json');
+    assert.ok(edit);assert.deepEqual(edit.condition,{ifNoneMatch:'*'});
+    assert.ok(f.writes.indexOf(edit!)<f.writes.findIndex(w=>w.path===f.prefix+'overview'+suffix+'.json'));
+  }
+  const bad=fixture();
+  await assert.rejects(stageCatalogPageWindow({...bad.options,buildEditorial,editorialPath:()=> 'catalog/public/overview.json'}),/unscoped_write/);
+  assert.equal(bad.writes.some(w=>w.path==='catalog/public/overview.json'),false);
 });

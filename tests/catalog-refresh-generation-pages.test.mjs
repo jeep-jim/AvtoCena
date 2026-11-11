@@ -379,3 +379,38 @@ test('completed collectors prepare derivatives even when a later step failed',as
   }));
   assert.deepEqual(watched,names);
 });
+
+function editorialFixture(){
+ const f=readyOverviewFixture(),path=f.prefix+'editorial-overview-v1.json';
+ Object.assign(f.options,{editorialRevision:'edit-now',editorialPath:g=>`catalog/generations/${g}/indexes/editorial-overview-v1.json`,
+  buildEditorial:async(g,rows)=>({editorialSnapshotVersion:1,generationId:g,policyDate:f.overview.policyDate,editorialRevision:'edit-now',rawCount:rows.length}),
+  validEditorial:(value,raw,revision,date)=>value?.editorialSnapshotVersion===1&&value.generationId===raw.generationId
+    &&value.policyDate===date&&value.editorialRevision===revision});
+ return {...f,path};
+}
+test('raw readiness alone never bypasses a missing or old separate editorial snapshot',async()=>{
+ for(const revision of [null,'old-edit','edit-now']){
+  const f=editorialFixture(),before=JSON.stringify(f.overview);
+  if(revision)f.objects.set(f.path,{editorialSnapshotVersion:1,generationId:'gen_old',policyDate:f.overview.policyDate,editorialRevision:revision});
+  const result=await refreshGenerationPages(f.options);
+  assert.equal(result.alreadyPrepared===true,revision==='edit-now');
+  assert.equal(JSON.stringify(f.overview),before,'the raw object is not editorial-filtered');
+  if(revision!=='edit-now'){
+   const edit=f.writes.find(w=>w.path===f.path);
+   assert.ok(edit);assert.equal(edit.value.rawCount,15,'editorial builder receives source rows, not the filtered showcase');
+   assert.deepEqual(edit.condition,revision?{ifMatch:'v1'}:{ifNoneMatch:'*'});
+   assert.ok(f.writes.indexOf(edit)<f.writes.findIndex(w=>w.path===f.prefix+'overview.json'));
+  }
+ }
+});
+test('editorial identity, storage conflict and readback failure cannot mark the common overview ready',async()=>{
+ for(const mode of ['revision','conflict','readback']){
+  const f=editorialFixture(),before=JSON.stringify(f.overview);
+  if(mode==='revision'){const build=f.options.buildEditorial;f.options.buildEditorial=async(...args)=>({...await build(...args),editorialRevision:'wrong'});}
+  if(mode==='conflict'){const write=f.options.storage.writeJson;f.options.storage.writeJson=async(path,...args)=>{if(path===f.path)throw Error('storage_conflict');return write(path,...args);};}
+  if(mode==='readback'){const read=f.options.storage.readJson;f.options.storage.readJson=async(path,...args)=>path===f.path?{wrong:true}:read(path,...args);}
+  await assert.rejects(refreshGenerationPages(f.options),/editorial_snapshot_invalid|storage_conflict|editorial_readback_mismatch/);
+  assert.equal(f.writes.some(w=>w.path===f.prefix+'overview.json'),false);
+  assert.equal(JSON.stringify(f.objects.get(f.prefix+'overview.json')),before);
+ }
+});

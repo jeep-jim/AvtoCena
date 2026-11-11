@@ -2,12 +2,15 @@ import {releaseMarkets} from './lib/release-market-scope.mjs';
 const selectedMarkets=releaseMarkets(process.env.RELEASE_PREPARATION_MARKETS);
 import {refreshGenerationPages, refreshGenerationPagesWindow} from './lib/catalog-refresh-generation-pages.mjs';
 const {getJsonStorage} = await import('../apps/web/lib/data.ts');
-const {buildCatalogMarketLanding, prepareCatalogProjectionRowsForDate, buildCatalogOverviewFromProjections,
+const {buildCatalogMarketLanding, prepareCatalogProjectionRowsForDate, buildCatalogOverviewFromProjections, buildEditorialOverviewSnapshot,
   catalogMarketLandingPath} = await import('../apps/web/lib/catalog/storage.ts');
 const {catalogOverviewGenerationPath} = await import('../apps/web/lib/catalog/overview.ts');
 const {PUBLIC_CATALOG_MARKETS} = await import('../apps/web/lib/catalog/runtime-config.ts');
 const {datedCatalogPagePath}=await import('../apps/web/lib/catalog/dated-pages.ts');
 const {publicationWithdrawn}=await import('../apps/web/lib/catalog/publication-policy.ts');
+const {editorialOverviewSnapshotPath,validEditorialOverviewSnapshot}=await import('../apps/web/lib/catalog/editorial-overview-snapshot.ts');
+const {withCatalogEditorial,editorialRevision}=await import('../apps/web/lib/catalog/editorial.ts');
+const expectedEditorialRevision=await withCatalogEditorial(async()=>editorialRevision());
 const storage=getJsonStorage();
 // Three exact days cover delayed cron delivery without serving yesterday's counts.
 await refreshGenerationPagesWindow({
@@ -19,6 +22,8 @@ await refreshGenerationPagesWindow({
     buildLanding:(g,m,rows)=>buildCatalogMarketLanding(g,m,rows,{now}),
     prepareRows:rows=>prepareCatalogProjectionRowsForDate(rows,now),
     buildOverview:(g,rows)=>buildCatalogOverviewFromProjections(g,rows,{now}),
+    buildEditorial:(g,rows)=>buildEditorialOverviewSnapshot(g,rows,{now}),
+    editorialPath:g=>dated(editorialOverviewSnapshotPath(g)),validEditorial:validEditorialOverviewSnapshot,editorialRevision:expectedEditorialRevision,
     landingPath:(g,m)=>dated(catalogMarketLandingPath(g,m)),
     overviewPath:g=>dated(catalogOverviewGenerationPath(g)),policyNow:now,
     skipReady:process.env.CATALOG_OVERVIEW_SKIP_READY==='true',isPublished:item=>!publicationWithdrawn(item)});

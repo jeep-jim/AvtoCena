@@ -1,5 +1,6 @@
 import type {JsonStorage} from '../data';
 import {datedCatalogPagePath} from './dated-pages';
+import {validEditorialOverviewSnapshot,type EditorialOverviewSnapshot} from './editorial-overview-snapshot';
 
 type Card = {id?: unknown; market?: unknown};
 type Summary = {sourceTotal?: number; total: number; items: Card[]};
@@ -25,7 +26,7 @@ export function assertCatalogPageWindowCurrent(proof: CatalogPageWindowProof, no
 /** Derivatives only. The caller owns the publication/repair lease and manifest. */
 export async function stageCatalogPageWindow<Row extends Card>({
   storage, generationId, markets, rows, rowsByMarket, buildLanding, buildOverview,
-  landingPath, overviewPath, assertContext, now = () => new Date(),
+  landingPath, overviewPath, buildEditorial, editorialPath, assertContext, now = () => new Date(),
 }: {
   storage: Pick<JsonStorage, 'readJsonWithMeta' | 'readJson' | 'writeJson'>;
   generationId: string; markets: readonly string[]; rows: Row[]; rowsByMarket: ReadonlyMap<string, Row[]>;
@@ -33,10 +34,13 @@ export async function stageCatalogPageWindow<Row extends Card>({
   buildOverview: (generationId: string, rows: Row[], now: Date) => Promise<Overview>;
   landingPath: (generationId: string, market: string) => string;
   overviewPath: (generationId: string) => string;
+  buildEditorial?: (generationId:string,rows:Row[],now:Date)=>Promise<EditorialOverviewSnapshot>;
+  editorialPath?: (generationId:string)=>string;
   assertContext: () => Promise<void>; now?: () => Date;
 }): Promise<{proof: CatalogPageWindowProof; overview: Overview}> {
   if (!generationId || !/^[a-zA-Z0-9_-]+$/.test(generationId) || !markets.length
       || new Set(markets).size !== markets.length) throw Error('catalog_page_window_scope_invalid');
+  if(!!buildEditorial!==!!editorialPath)throw Error('catalog_page_window_editorial_builder_required');
   const captured = now(), days = Array.from({length: 3}, (_, offset) => policyDay(new Date(captured.getTime() + offset * 86400000)));
   const proof = {generationId, policyDate: days[0], days};
   const prefix = `catalog/generations/${generationId}/indexes/`;
@@ -86,7 +90,12 @@ export async function stageCatalogPageWindow<Row extends Card>({
         || markets.some(market => !validSummary(overview.markets?.[market], market, rowsByMarket.get(market)?.length || 0, 24))) {
       throw Error('catalog_page_window_overview_invalid');
     }
-    // Every landing for this date was conditionally written and read back first.
+    if(buildEditorial&&editorialPath){
+      const editorial=await buildEditorial(generationId,rows,date);
+      if(!validEditorialOverviewSnapshot(editorial,overview,editorial.editorialRevision,day))throw Error('catalog_page_window_editorial_invalid');
+      await writeVerified(dated(editorialPath(generationId)),editorial);
+    }
+    // Every derivative for this date was conditionally written and read back first.
     overview.dailyLandingsVersion = 1;
     await writeVerified(dated(overviewPath(generationId)), overview);
     if (!offset) currentOverview = overview;

@@ -50,7 +50,9 @@ function completeOverviewMarkets(overview, manifest, markets, isPublished) {
 // can build another generation concurrently; no shared alias or lease is touched.
 export async function refreshGenerationPages({storage, markets, buildLanding, prepareRows, buildOverview,
   landingPath, overviewPath, now = () => new Date(), skipReady = false, policyNow, landingsOnly = false,
-  isPublished = () => true}) {
+  isPublished = () => true, buildEditorial, editorialPath, validEditorial, editorialRevision}) {
+  const editorialEnabled=!landingsOnly&&!!buildEditorial;
+  if(editorialEnabled&&(!editorialPath||!validEditorial||typeof editorialRevision!=='string'||!editorialRevision))throw Error('catalog_pages_editorial_builder_required');
   const day = () => new Date(now().getTime() + 7 * 3600000).toISOString().slice(0, 10);
   const capturedDay = day();
   const policyDate = policyNow ? new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10) : capturedDay;
@@ -80,19 +82,23 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   const path = landingsOnly ? null : overviewPath(generationId);
   const previousOverview = landingsOnly ? {value:null} : await readPrevious(path);
   const previous = previousOverview.value;
+  const editPath=editorialEnabled?editorialPath(generationId):null;
+  const previousEditorial=editorialEnabled?await readPrevious(editPath):null;
   if (skipReady && previous?.generationId === generationId && previous.policyDate === policyDate
       && previous.dailyLandingsVersion === 1 && previous.facets?.generationId === generationId
-      && completeOverviewMarkets(previous, manifest, markets, isPublished)) {
+      && completeOverviewMarkets(previous, manifest, markets, isPublished)
+      && (!editorialEnabled||validEditorial(previousEditorial.value,previous,editorialRevision,policyDate))) {
     await check();
     return {generationId, policyDate, alreadyPrepared: true};
   }
-  const rows = [], counts = {}, results = [];
+  const rows = [], sourceRows = [], counts = {}, results = [];
   for (const market of markets) {
     const count = Number(manifest.markets?.[market]?.count || 0);
     if (!Number.isInteger(count) || count < 0) throw Error('catalog_pages_source_count_invalid');
     const projection = count ? await storage.readJson(`${prefix}projection/${market}.json`, null)
       : {generationId, items: []};
     validateOverviewSourceShard(projection, generationId, market, count);
+    if(editorialEnabled)for(const row of projection.items)sourceRows.push(row);
     const target = landingPath(generationId, market);
     const previousLanding = await readPrevious(target);
     const landing = await buildLanding(generationId, market, projection.items);
@@ -110,6 +116,13 @@ export async function refreshGenerationPages({storage, markets, buildLanding, pr
   for (const market of markets) {
     if (!overview.markets[market]) throw Error('catalog_pages_market_missing');
     overview.markets[market].sourceTotal = counts[market];
+  }
+  if(editorialEnabled){
+    const editorial=await buildEditorial(generationId,sourceRows);
+    if(!validEditorial(editorial,overview,editorialRevision,policyDate))throw Error('catalog_pages_editorial_snapshot_invalid');
+    await write(editPath,editorial,previousEditorial);
+    const verified=await storage.readJson(scoped(editPath),null);
+    if(JSON.stringify(verified)!==JSON.stringify(editorial))throw Error('catalog_pages_editorial_readback_mismatch');
   }
   overview.dailyLandingsVersion = 1;
   await write(path, overview, previousOverview);
