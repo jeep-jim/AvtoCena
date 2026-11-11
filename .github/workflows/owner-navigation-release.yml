@@ -1,4 +1,4 @@
-name: Release isolated owner selection and scroll repair
+name: Release isolated owner selection and speed repair
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  RELEASE_SOURCE_SHA: '3c641141b49135cdb1109f6e09ea42675998060f'
+  RELEASE_SOURCE_SHA: 'eb0b064419680c13b8ae69dbf3a0e9df81aba9e3'
 
 concurrency:
   group: regcloud-production-release
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '3c641141b49135cdb1109f6e09ea42675998060f'
+          ref: 'eb0b064419680c13b8ae69dbf3a0e9df81aba9e3'
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '3c641141b49135cdb1109f6e09ea42675998060f'
+          ref: 'eb0b064419680c13b8ae69dbf3a0e9df81aba9e3'
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -96,7 +96,7 @@ jobs:
       - name: Verify exact encyclopedia matching
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --test tests/management-knowledge.test.ts tests/management-save-route.test.ts tests/management-preview-route.test.ts tests/autobot-format.test.ts tests/autobot-knowledge.test.ts tests/autobot-public-answer.test.ts tests/autobot.test.ts tests/encyclopedia-hybrid-default.test.ts tests/power30-precedent-calculation.test.ts tests/encyclopedia-power30-precedents.test.mjs tests/japan-preview-consistency.test.ts tests/encyclopedia-release-batch-verification.test.mjs tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/catalog-power-normalization.test.ts tests/encyclopedia-public-release.test.mjs tests/encyclopedia-presentation.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-astra-release.test.mjs tests/catalog-independent-certified-power.test.ts tests/encyclopedia-owner-evidence.test.ts tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-astra-power30.test.ts tests/encyclopedia-ambiguous-body.test.ts tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts tests/green-corner-page-budget.test.ts tests/green-corner-filters.test.ts tests/catalog-japan-filter-rail.test.ts tests/japan-drive-sql-budget.test.ts tests/japan-drive.test.ts tests/japan-chassis-drive.test.ts tests/japan-default-fuel.test.ts tests/ajes-japan-feed.test.ts
+          node --import tsx --test tests/management-knowledge.test.ts tests/management-save-route.test.ts tests/management-preview-route.test.ts tests/autobot-format.test.ts tests/autobot-knowledge.test.ts tests/autobot-public-answer.test.ts tests/autobot.test.ts tests/encyclopedia-hybrid-default.test.ts tests/power30-precedent-calculation.test.ts tests/encyclopedia-power30-precedents.test.mjs tests/japan-preview-consistency.test.ts tests/encyclopedia-release-batch-verification.test.mjs tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/catalog-power-normalization.test.ts tests/encyclopedia-public-release.test.mjs tests/encyclopedia-presentation.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-astra-release.test.mjs tests/catalog-independent-certified-power.test.ts tests/encyclopedia-owner-evidence.test.ts tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-astra-power30.test.ts tests/encyclopedia-ambiguous-body.test.ts tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts tests/green-corner-page-budget.test.ts tests/green-corner-filters.test.ts tests/catalog-japan-filter-rail.test.ts tests/japan-drive-sql-budget.test.ts tests/japan-drive.test.ts tests/japan-chassis-drive.test.ts tests/japan-default-fuel.test.ts tests/ajes-japan-feed.test.ts tests/ajes-transient-cooldown.test.ts
       - name: Verify stream disconnect and gateway buffer regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -260,7 +260,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 3c641141b49135cdb1109f6e09ea42675998060f
+          AVTOCENA_RELEASE_SHA: eb0b064419680c13b8ae69dbf3a0e9df81aba9e3
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
