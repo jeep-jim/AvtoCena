@@ -24381,3 +24381,8 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 ### 11.11.2026 — уточнение причины очереди каталога
 
 - По текущему запросу владельца выполнен один5-секундный sample с категориями запросов и обезличенной статистикой access log; без рестарта/изменений приложения. [Запуск](https://github.com/jeep-jim/AvtoCena/actions/runs/42954297087), docs/operations/2026-11-11-search-path-diagnostic.json.
+
+
+### 11.11.2026 — уточнение причины очереди каталога
+
+- По текущему запросу владельца выполнен один5-секундный sample с категориями запросов и обезличенной статистикой access log; без рестарта/изменений приложения. [Запуск](https://github.com/jeep-jim/AvtoCena/actions/runs/42954673857), docs/operations/2026-11-11-search-path-diagnostic.json.
