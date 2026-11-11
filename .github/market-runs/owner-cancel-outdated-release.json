@@ -1,5 +1,6 @@
 {
-  "run": 42963771724,
-  "release": "884549911ab651fada858d599a1b28fcc8aee946",
-  "reason": "Replace before activation with the verified Yaris L source-identity correction; production remains untouched."
+  "run": 43020597940,
+  "release": "2b5fc017a39ced52eafd4e4bade2c921254c4946",
+  "requestedAt": "2026-11-11T12:30:34.874Z",
+  "reason": "Stop this new homepage release while still offline: owner-accepted a182 restoration43020674047 is queued after repeated3048 mobile budget regression60.105s. Preserve pending rollback, current runtime and all source/test work; do not activate homepage on the rejected budget base."
 }
