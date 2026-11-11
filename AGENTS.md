@@ -1,3 +1,10 @@
+# Active combined source preparation — 12.11.2026
+
+- Current work combines the selected a182-based navigation/speed repairs with PR1749 exact-context current-day home snapshots and installed-runtime daily preparation. PR1749 is under CI/review; its first e08d overlay edit is superseded by entry-aware completion and outgoing-entry restoration before route push, with 9 actual-component tests and independent review. Do not install an intermediate source or merge this isolated history into main.
+- The final source must be a new exact OPEN PR against acceptance/base-a182-20261112 at a182; verify every exact-head workflow run, immutable source manifest, original baseline SHA256, unchanged 17 routes/35/305s, browser SHA+nonce and rollback. Never deploy main wholesale or reactivate rejected873/25d/ddea.
+- Raw overviews remain compatible with a182 rollback. The separate home cache binds generation/day/editorial/release/calculator/private-index digest and minimum card shape. Fresh business pricing still follows selection. Missing/currently unprepared evidence falls back; homepage-only acceleration does not prove all-page latency or eliminate the post-midnight/edit/publication preparation gap.
+- Last direct accepted-runtime evidence remains a182/e36/c489. No final candidate has been installed by this local preparation. Keep existing feeds and provider restrictions; append measured milestones to roadmap.
+
 # Owner permanent speed priority — 11.11.2026
 
 - Owner explicitly prioritizes stable high speed for every page and filter and authorizes verified repair/publication. Read `docs/operations/performance-contract.md` before future search, UI, storage, cache, pricing or deployment changes. Preserve original accepted timing baselines, exact-release browser verdict and rollback; never call partial/stale results a speed success. New scenarios require comparable baseline/candidate evidence, not relaxed old limits. No universal latency guarantee or all-pages acceptance follows from a partial matrix.

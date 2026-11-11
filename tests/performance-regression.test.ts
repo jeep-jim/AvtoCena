@@ -44,16 +44,17 @@ test('large eligibility and make indexes yield; repeat brand selection skips oth
 });
 
 test('blue-green calculation contexts cannot evict one another from persistent storage',async()=>{
- const s=getJsonStorage(),read=s.readJson,write=s.writeJson,objects=new Map<string,any>();
+ const s=getJsonStorage(),read=s.readJson,meta=s.readJsonWithMeta,write=s.writeJson,objects=new Map<string,any>();
  s.readJson=async<T>(p:string,f:T)=>(objects.get(p)??f) as T;s.writeJson=async(p,v)=>{objects.set(p,structuredClone(v));};
+ s.readJsonWithMeta=async<T>(p:string,f:T)=>({found:objects.has(p),etag:objects.has(p)?'saved':undefined,value:(objects.get(p)??f) as T});
  const row:any=['korea',100,null,null,false,{id:'one',make:'Kia',block:0}];const index:any={generationId:'g',rows:[row],otherRows:[]};let loads=0;
  try{
   for(const version of ['old','new','old','new']){
-   resetSharedBudgetPriceCache();await sharedBudgetPrices(index,'korea',version,async()=>{loads++;return [row];},async()=>version);
+   resetSharedBudgetPriceCache();await sharedBudgetPrices(index,'korea',version,async()=>{loads++;return [row];},async()=>version,false,{persistence:'required'});
   }
   assert.equal(loads,2);assert.equal(objects.size,2);
   assert.ok([...objects.keys()].every(k=>/^catalog\/runtime-budget-prices-v3\/korea\/[a-f0-9]{64}\.json$/.test(k)));
- }finally{s.readJson=read;s.writeJson=write;resetSharedBudgetPriceCache();}
+ }finally{s.readJson=read;s.readJsonWithMeta=meta;s.writeJson=write;resetSharedBudgetPriceCache();}
 });
 
 test('retention selects only expired disposable price snapshots, never source/knowledge data',()=>{

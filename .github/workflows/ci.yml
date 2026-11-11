@@ -22,6 +22,8 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: Enforce performance release budgets
         run: |
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/release-speed-guard-contract.test.mjs
           python3 tests/regcloud-performance-gate.test.py
           node --test tests/accepted-browser-speed.test.mjs
           node --test tests/catalog-refresh-generation-pages.test.mjs
@@ -31,6 +33,8 @@ jobs:
           node --test tests/catalog-interaction-acceptance.test.mjs
       - name: Complete regression suite
         run: npm test
+      - name: Installed editorial preparation guards
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs
       - name: Customs tests
         run: node --import tsx --test tests/russia-customs.test.ts
       - name: Catalog modification recovery contract tests

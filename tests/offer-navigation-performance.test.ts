@@ -121,7 +121,7 @@ test("catalog generation becomes public only after canonical identity and dedupl
   assert.match(storage, /enforceCatalogModelYearQuota\(deduplicated\.rows, \{ protectedIds: protectedPublicIds \}\)/);
   assert.match(storage, /await rebuildIndexes\(generationId, publishedOffers, byId, imagesById\)/);
   const manifestSwitch = storage.indexOf('await storage.writeJson("catalog/manifest.json", manifest');
-  const currentReadModelRefresh = storage.indexOf("await writeCurrentCatalogReadModels(generationId, publishedOffers, true)");
+  const currentReadModelRefresh = storage.indexOf("await writeCurrentCatalogReadModels(generationId, publishedOffers, true, undefined, assertPublicationBase)");
   assert.ok(manifestSwitch > 0);
   assert.ok(currentReadModelRefresh > 0);
   assert.ok(currentReadModelRefresh < manifestSwitch);

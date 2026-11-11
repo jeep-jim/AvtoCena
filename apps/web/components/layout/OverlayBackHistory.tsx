@@ -11,24 +11,37 @@ export function OverlayBackHistory(){
   let replacementState:any=null;
   const originalRestoration=history.scrollRestoration;
   let restoreFrame=0,restoreSecond=0;
+  let finishRestore:(()=>void)|null=null;
+  const deferredEntries=new Set<number>();
   const pageScroll=()=>document.body.style.position==='fixed'?Math.max(0,-parseFloat(document.body.style.top)||0):window.scrollY;
   const restorePosition=(step:Step)=>{
    // Catalog sheets own unlock + layout-anchor restoration. Replaying their
    // former absolute offset here would undo it after the dealer hero collapses.
-   if(step.element.matches('.ac-mobile-filter-sheet')){
-    if(!steps.length)history.scrollRestoration=originalRestoration;
-    return;
-   }
+   const catalogSheet=step.element.matches('.ac-mobile-filter-sheet');
+   // Native persisted scrolling follows popstate. Keep manual mode through
+   // that traversal, including when the sheet already restored its own anchor.
    cancelAnimationFrame(restoreFrame);cancelAnimationFrame(restoreSecond);
-   restoreFrame=requestAnimationFrame(()=>{restoreSecond=requestAnimationFrame(()=>{
-    if(location.pathname===new URL(step.url).pathname&&document.body.style.position!=='fixed')window.scrollTo({top:step.scrollY,behavior:'instant'});
-    if(!steps.length)history.scrollRestoration=originalRestoration;
-   });});
+   const entry=position;
+   if(!steps.length)deferredEntries.add(entry);
+   const finish=()=>{
+    if(finishRestore===finish)finishRestore=null;
+    // A later traversal may already be on another entry. Restore the departed
+    // entry's mode when it is visited again, before its native scroll replay.
+    if(position!==entry||history.state?.acBackPosition!==entry)return;
+    if(!catalogSheet&&location.pathname===new URL(step.url).pathname&&document.body.style.position!=='fixed')window.scrollTo({top:step.scrollY,behavior:'instant'});
+    if(!steps.length){history.scrollRestoration=originalRestoration;deferredEntries.delete(entry);}
+   };
+   finishRestore=finish;
+   restoreFrame=requestAnimationFrame(()=>{restoreSecond=requestAnimationFrame(finish);});
   };
   const originalPush=history.pushState,originalReplace=history.replaceState;
   let position=Number(history.state?.acBackPosition)||0;
   originalReplace.call(history,{...history.state,acBackPosition:position},'',location.href);
   const push:History['pushState']=(data,unused,url)=>{
+   // A route push must not copy the temporary manual mode or strand it on the
+   // outgoing closed-overlay entry. A newly opened layer still owns manual mode.
+   if(!steps.length&&finishRestore){cancelAnimationFrame(restoreFrame);cancelAnimationFrame(restoreSecond);finishRestore();}
+   for(const entry of deferredEntries)if(entry>position)deferredEntries.delete(entry);
    const previous=location.href;
    const target=new URL(url||previous,previous);
    const applied=steps.length&&target.href!==previous&&target.pathname===location.pathname&&target.origin===location.origin;
@@ -105,6 +118,7 @@ export function OverlayBackHistory(){
    const state=event.state;
    const nextPosition=typeof state?.acBackPosition==='number'?state.acBackPosition:position-1;
    const backwards=nextPosition<position;position=nextPosition;
+   if(!travelling&&!steps.length&&state?.acBackPosition===position&&deferredEntries.delete(position))history.scrollRestoration=originalRestoration;
    const appliedStep=steps.at(-1);
    if(!travelling&&backwards&&appliedStep&&replacementUrl&&replacementState&&
       location.pathname===new URL(replacementUrl).pathname&&state?.acOverlayStep!==appliedStep.token){
