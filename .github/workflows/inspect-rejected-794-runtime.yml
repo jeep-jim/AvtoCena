@@ -93,4 +93,13 @@ jobs:
             const digest=createHash('sha256').update(JSON.stringify(models.map(m=>[m.id,m.revision]))).digest('hex');
             console.log('ENCYCLOPEDIA_TRANSFORM_PROFILE',JSON.stringify({sample,models:models.length,makes:makes.length,years:years.length,fuels:fuels.length,readMs,canonicalMs,originalSortMs,reusedCollatorSortMs,packMs,facetsMs,packedBytes:Buffer.byteLength(JSON.stringify(packed)),identityRevisionDigest:digest,identicalSortedIds:true,routeLatencyMeasured:false}));
           }
+          import {getJsonStorage,jsonReadByteLength} from './apps/web/lib/data.ts';
+          const storage=getJsonStorage(),key='knowledge/encyclopedia/v1/manifest.json';
+          let previous;
+          for(let sample=1;sample<=3;sample++){
+            const started=performance.now(),meta=await storage.readJsonWithMeta(key,null,previous);
+            assert.ok(meta.found&&meta.etag&&meta.value&&Array.isArray(meta.value.models));
+            console.log('ENCYCLOPEDIA_CONDITIONAL_PROFILE',JSON.stringify({sample,ms:elapsed(started),bytes:jsonReadByteLength(meta.value),models:meta.value.models.length,reused:meta===previous,readOnly:true}));
+            previous=meta;
+          }
           PROFILE
