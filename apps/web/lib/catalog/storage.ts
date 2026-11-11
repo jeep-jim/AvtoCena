@@ -1,5 +1,6 @@
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
+import {editorialOverviewSnapshotPath,readEditorialOverviewSnapshot,editorialOverviewSnapshotPage,resetEditorialOverviewSnapshotCache,type EditorialOverviewSnapshot} from "./editorial-overview-snapshot";
 import {createHomePhaseTiming} from "./home-phase-timing";
 import {StableBudgetSelectionCache} from "./stable-budget-selection";
 import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
@@ -10,6 +11,7 @@ import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSele
 import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
 import {verifyCatalogReadModels} from './verify-read-models';
+import {stageCatalogPageWindow, assertCatalogPageWindowCurrent} from './publication-page-window';
 import {compactFuelPowertrainEvidence} from './specification-evidence-audit';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
@@ -26,6 +28,7 @@ import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudge
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
+import type {BudgetPriceOptions} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
@@ -625,6 +628,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetEditorialOverviewSnapshotCache();
   resetBudgetSourceIndexes();
   unavailableReadCache.clear();
   previousLocationCache.clear();
@@ -1737,9 +1741,15 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
     {...publicationCheckpoint,stage:"generation_indexes_ready",updatedAt:new Date().toISOString()}, false);
   progress("current_read_models_start");
-  await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
+  const assertPublicationBase = async () => {
+    await options.beforeManifestCommit?.();
+    const current = await storage.readJson<CatalogManifest>('catalog/manifest.json', {generationId: 'empty'} as CatalogManifest);
+    if (current.generationId !== expectedBaseGenerationId) throw Error('catalog_publish_base_changed');
+  };
+  const currentReadModels = await writeCurrentCatalogReadModels(generationId, publishedOffers, true, undefined, assertPublicationBase);
   progress("current_read_models_written");
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
+  assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
   progress("all_read_models_verified");
   await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
     {...publicationCheckpoint,stage:"read_models_verified",updatedAt:new Date().toISOString()}, false);
@@ -1747,8 +1757,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     await options.beforeManifestCommit?.();
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", { ...manifest, generationId: "empty" });
     if (current.value.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
+    assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
     try {
       if (current.found && current.value?.generationId && current.value.generationId !== generationId) await storage.writeJson("catalog/previous-manifest.json", current.value);
+      assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
       resetCatalogReadCachesForTests();
       return manifest;
@@ -1877,7 +1889,9 @@ type PreparedCurrentReadModels = {
   japanInputs: ReturnType<typeof buildJapanPreviewInputIndex>;
   writeDetails: () => Promise<number>;
 };
-async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels) {
+async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels,
+  assertPageContext?: () => Promise<void>) {
+  if (!assertPageContext) throw Error('catalog_page_window_context_required');
   const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
     console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
   reportStage("begin");
@@ -1960,13 +1974,21 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   // Stage the small landing snapshot with every publication, before switching
   // the manifest. A separate workflow used to leave it on an old generation,
   // forcing every homepage visit to parse the entire catalog instead.
-  const overview = await buildCatalogOverviewFromProjections(generationId, allProjectionItems);
-  await writeJsonAtomic(catalogOverviewGenerationPath(generationId), overview, false);
-  await writeJsonAtomic(CATALOG_OVERVIEW_PATH, overview, false);
+  const pageWindow = await stageCatalogPageWindow({storage: getJsonStorage(), generationId, markets: MARKETS,
+    rows: allProjectionItems, rowsByMarket: projectionsByMarket, assertContext: assertPageContext,
+    buildLanding: (g, market, rows, now) => buildCatalogMarketLanding(g, market, rows, {now}),
+    buildOverview: (g, rows, now) => buildCatalogOverviewFromProjections(g, rows, {now}),
+    landingPath: catalogMarketLandingPath, overviewPath: catalogOverviewGenerationPath,
+    buildEditorial:(g,rows,now)=>buildEditorialOverviewSnapshot(g,rows,{now}),editorialPath:editorialOverviewSnapshotPath});
+  // Keep the compatibility alias caller-owned; dated writes never touch it.
+  await assertPageContext();
+  assertCatalogPageWindowCurrent(pageWindow.proof);
+  await writeJsonAtomic(CATALOG_OVERVIEW_PATH, pageWindow.overview, false);
 
   reportStage("complete");
   return {
     generationId,
+    pageWindow: pageWindow.proof,
     total: allProjectionItems.length,
     markets: Object.fromEntries(MARKETS.map((market) => [market, projectionsByMarket.get(market)?.length || 0])),
     projectionMarkets: projectionsByMarket.size,
@@ -2047,7 +2069,7 @@ export async function publishCurrentCatalogReadModels() {
       markets:[...marketIds].sort(),bodyTypes:[...values.bodyTypes].sort(),fuels:[...values.fuels].sort(),
       transmissions:[...values.transmissions].sort(),drives:[...values.drives].sort()};
     const result=await writeCurrentCatalogReadModels(manifest.generationId, [], true, {facets,projections,japanInputs,
-      writeDetails:()=>spool.publish(manifest.generationId,(key,value)=>writeJsonAtomic(key,value,false))});
+      writeDetails:()=>spool.publish(manifest.generationId,(key,value)=>writeJsonAtomic(key,value,false))}, assertGeneration);
     await assertGeneration();
     return result;
   } finally {await spool.close();}
@@ -2145,7 +2167,7 @@ async function currentBudgetBlock(generationId:string,version:1|2|3,block:number
 }
 const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
 const japanBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:4,maxBytes:48*1024*1024,ttlMs:86400_000,concurrency:2});
-async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false){
+async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false,options:BudgetPriceOptions={}){
  const displayRows=(rows:CatalogSearchProjection[])=>displayPrices?rows.map(row=>row.catalogPricingMode==="seller"?{...row,totalRub:Number(row.japanDeliveredPreview?.totalRub||row.sellerPriceRub)||null}:row):rows;
  const fingerprint=await budgetPricingFingerprint(market);
  const load=async()=>{
@@ -2197,12 +2219,13 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
   return refreshed;
  };
  if(fingerprint){
-  try{return await sharedBudgetPrices(index,market,fingerprint,load,undefined,displayPrices);}
+  try{return await sharedBudgetPrices(index,market,fingerprint,load,undefined,displayPrices,options);}
   catch(error){
-   if(!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
+   if(options.persistence==='required'||!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
    return load(); // Do not retain a retry under a version already known to have changed.
   }
  }
+ if(options.persistence==='required')throw Error('catalog_budget_persistence_context_unavailable');
  if(market==='japan'){
   const {japanSearchContext}=await import('./japan-delivered-preview');
   const context=await japanSearchContext(index.generationId);
@@ -2637,8 +2660,8 @@ export async function warmBudgetPriceCaches(markets?:CatalogMarket[]){
  for(const market of (markets?preparationMarkets(markets):MARKETS).filter(market=>market!=='japan')){
   const index=await readBudgetCountIndex(manifest.generationId,market);
   if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
-  const start=performance.now(),rows=await currentBudgetReplay(index,market);
-  await currentBudgetReplay(index,market,true);
+  const start=performance.now(),rows=await currentBudgetReplay(index,market,false,{persistence:'required'});
+  await currentBudgetReplay(index,market,true,{persistence:'required'});
   results.push({market,rows:rows.length,ms:Math.round(performance.now()-start)});
  }
  return {generationId:manifest.generationId,results};
@@ -2872,6 +2895,22 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
       total: rows.length, items: selectHomepageShowcase(rows, 24, now).map(publicOfferFromProjection)}];
   }));
   return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10)};
+}
+
+/** Separate derivative: never overwrite the raw overview read by rollback releases.
+ * Use the same moderated landing order as searchOffers({sort:'updatedAt'}). */
+export async function buildEditorialOverviewSnapshot(generationId:string,projections:CatalogSearchProjection[],options:{now?:Date}={}):Promise<EditorialOverviewSnapshot>{
+ return withCatalogEditorial(async()=>{
+  const now=options.now||new Date(),markets:EditorialOverviewSnapshot['markets']={};
+  for(const market of MARKETS){
+   if(market==='japan'||!editorialHasHidden(market))continue;
+   const source=projections.filter(row=>row.market===market);if(!source.length)continue;
+   const landing=await buildCatalogMarketLanding(generationId,market,source,{now});
+   markets[market]={sourceTotal:source.length,total:landing.total,items:landing.items.slice(0,48).map(publicOfferFromProjection)};
+  }
+  return {editorialSnapshotVersion:1,generationId,policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10),
+    editorialRevision:editorialRevision(),order:'updatedAt',markets};
+ });
 }
 
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
@@ -3135,8 +3174,10 @@ export async function readHomeCatalogSnapshot(perMarket=6){
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }
+ const prepared=markets.length?await timing.measure("snapshotEditorialPrepared",()=>readEditorialOverviewSnapshot(snapshot.generationId)):null;
  const refreshed=await mapWithConcurrency(markets,2,async market=>({market,
-  result:await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
+  result:editorialOverviewSnapshotPage(prepared,market,Math.min(12,Math.max(1,perMarket)))
+    ||await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
  for(const {market,result} of refreshed){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];

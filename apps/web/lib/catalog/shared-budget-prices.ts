@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync,gzip,gunzip} from 'node:zlib';
 import {promisify} from 'node:util';
 const gzipAsync=promisify(gzip),gunzipAsync=promisify(gunzip);
-import {getJsonStorage} from '../data';
+import {getJsonStorage,StorageConflictError} from '../data';
 import {getEffectiveMarketVersion} from '../effective-market-settings';
 import {catalogRateFingerprintInputs} from './rates';
 import {chinaCnyPriceFingerprint} from './china-cny-price';
@@ -63,7 +63,11 @@ function decodeBudgetSnapshot(value:any):any{
 // The five markets' budget+sort tuples measure ~148 MB before rich metadata.
 // Keep the active working set together instead of evicting a market on each toggle.
 const cache=new DetailReadCache<BudgetCountRow[]>({maxEntries:16,maxBytes:256*1024*1024,ttlMs:86400000,concurrency:2});
+// Preparation may await durable snapshots; visitors only await the rows cache.
+// Coalesce pending writes, never cache readiness or retain completed row arrays.
+const persistence=new DetailReadCache<void>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:2,queueTimeoutMs:5_000,shouldCache:()=>false});
 export function resetSharedBudgetPriceCache(){cache.clear();}
+export type BudgetPriceOptions={persistence?:'required'};
 
 function validBasis(value:any):boolean {
  return value===null || (value && Number.isFinite(value.subtotalRub) && Number.isFinite(value.deliveryRub)
@@ -110,14 +114,20 @@ export async function readPreparedBudgetPrices(index:BudgetCountIndex,market:str
  * A failed/mismatched cache always executes the existing exact calculation.
  */
 export async function sharedBudgetPrices(index:BudgetCountIndex,market:string,fingerprint:string,
- load:()=>Promise<BudgetCountRow[]>,fingerprintNow=()=>budgetPricingFingerprint(market),displayPrices=false) {
+ load:()=>Promise<BudgetCountRow[]>,fingerprintNow=()=>budgetPricingFingerprint(market),displayPrices=false,options:BudgetPriceOptions={}) {
  const source=[...index.rows,...(index.otherRows||[])].filter(row=>row[0]===market);
  const sourceIds=hash(source.map(row=>row[5].id));
  const key=hash([index.generationId,market,fingerprint,sourceIds,...(displayPrices?["display-price-v2"]:[])]);
- return cache.get(key,async()=>{
+ // A separate namespace preserves plain v1 snapshots for an old instance or rollback.
+ const path=`catalog/${displayPrices?"runtime-sort-prices-v3":"runtime-budget-prices-v3"}/${market}/${key}.json`;
+ const snapshotFor=(rows:BudgetCountRow[]):Snapshot=>{
+  const prices:Price[]=rows.map(row=>[row[5].id,row[1],row[2],row[4],row[6]??null]);
+  const snapshot:Snapshot={version:1,key,sourceIds,createdAt:Date.now(),prices,checksum:hash(prices)};
+  if(!restoreBudgetPrices(snapshot,key,source))throw new Error('catalog_budget_snapshot_invalid');
+  return snapshot;
+ };
+ const rows=await cache.get(key,async()=>{
   const storage=getJsonStorage();
-  // A separate namespace preserves plain v1 snapshots for an old instance or rollback.
-  const path=`catalog/${displayPrices?"runtime-sort-prices-v3":"runtime-budget-prices-v3"}/${market}/${key}.json`;
   const stored=await storage.readJson<SnapshotWire|null>(path,null).catch(()=>null);
   const restored=restoreBudgetPrices(await decodeBudgetSnapshotAsync(stored),key,source);
   if(restored)return restored;
@@ -125,12 +135,25 @@ export async function sharedBudgetPrices(index:BudgetCountIndex,market:string,fi
   // Rates/settings/anchors can change while a large market is being repriced.
   // Never persist that mixed result as reusable under either version.
   if(await fingerprintNow()!==fingerprint)throw new Error('catalog_budget_context_changed');
-  const prices:Price[]=rows.map(row=>[row[5].id,row[1],row[2],row[4],row[6]??null]);
-  const snapshot:Snapshot={version:1,key,sourceIds,createdAt:Date.now(),prices,checksum:hash(prices)};
-  if(!restoreBudgetPrices(snapshot,key,source))throw new Error('catalog_budget_snapshot_invalid');
-  // Different releases/generations/rates write different objects. A candidate
-  // can never evict the active release snapshot during blue/green preparation.
-  await storage.writeJson(path,await encodeBudgetSnapshotAsync(snapshot)).catch(()=>undefined);
+  snapshotFor(rows);
   return rows;
  });
+ if(options.persistence==='required')await persistence.get(key,async()=>{
+  // Admission can wait. Recheck even when an interactive calculation filled memory.
+  if(await fingerprintNow()!==fingerprint)throw new Error('catalog_budget_context_changed');
+  const storage=getJsonStorage(),stored=await storage.readJsonWithMeta<SnapshotWire|null>(path,null);
+  if(!stored.found||!restoreBudgetPrices(await decodeBudgetSnapshotAsync(stored.value),key,source)){
+   if(stored.found&&!stored.etag)throw new Error('catalog_budget_snapshot_etag_missing');
+   if(await fingerprintNow()!==fingerprint)throw new Error('catalog_budget_context_changed');
+   // Different releases/generations/rates remain isolated; never clobber a winner.
+   try{
+    await storage.writeJson(path,await encodeBudgetSnapshotAsync(snapshotFor(rows)),stored.found?{ifMatch:stored.etag!}:{ifNoneMatch:'*'});
+   }catch(error){if(!(error instanceof StorageConflictError))throw error;}
+   // Verify successful PUTs and CAS winners alike. No retries or readiness markers.
+   const ready=await storage.readJsonWithMeta<SnapshotWire|null>(path,null);
+   if(!ready.found||!restoreBudgetPrices(await decodeBudgetSnapshotAsync(ready.value),key,source))throw new Error('catalog_budget_snapshot_not_persisted');
+  }
+  if(await fingerprintNow()!==fingerprint)throw new Error('catalog_budget_context_changed');
+ });
+ return rows;
 }

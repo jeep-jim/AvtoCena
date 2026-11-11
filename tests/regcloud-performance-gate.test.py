@@ -1,6 +1,18 @@
-import importlib.util,json,pathlib,unittest,io,contextlib,sys
+import importlib.util,json,pathlib,unittest,io,contextlib,sys,tempfile
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('gate','scripts/regcloud-performance-gate.py');gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
+FROZEN_ROUTES={
+ '/api/health','/api/leads','/','/login','/autocalc','/cars',
+ '/cars?market=china&make=Volkswagen&page=2',
+ '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA',
+ '/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub',
+ '/api/catalog/search?market=europe&make=BMW&page=2',
+ '/api/catalog/search?market=china&marketPage=1&page=9',
+ '/cars/autocatalog','/cars/autocatalog?make=Changan',
+ '/cars/china/BMW/3?powerTo=160&sort=totalRub',
+ '/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub',
+ '/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',
+}
 class GateTests(unittest.TestCase):
  def test_live_candidate_uses_observed_ssh_peer_without_invented_ip(self):
   with patch.dict(gate.os.environ,{'SSH_CONNECTION':'8.8.4.4 54321 151.248.113.177 22'}):
@@ -136,9 +148,49 @@ class AcceptedBaselineTests(unittest.TestCase):
 
  def test_frozen_capture_has_all_correct_routes_and_expiry_phases(self):
   baseline=gate.accepted_baseline('docs/operations/2026-11-11-accepted-speed-baseline.json')
-  self.assertEqual(len(baseline),17)
-  self.assertIn('/cars/china/BMW/3?powerTo=160&sort=totalRub',baseline)
-  self.assertIn('/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',baseline)
+  self.assertEqual(set(baseline),FROZEN_ROUTES)
+  for path,rows in baseline.items():
+   self.assertEqual([row['phase'] for row in rows],['warm_1','warm_2','warm_3','after_ttl','after_directory_ttl'],path)
+ def test_changed_frozen_samples_or_alias_route_are_rejected_before_measurement(self):
+  source=pathlib.Path('docs/operations/2026-11-11-accepted-speed-baseline.json').read_bytes()
+  with tempfile.TemporaryDirectory() as directory:
+   path=pathlib.Path(directory)/'accepted.json';path.write_bytes(source)
+   self.assertEqual(set(gate.accepted_baseline(path)),FROZEN_ROUTES)
+   for mutation in ['timing','alias','phase']:
+    changed=json.loads(source)
+    for row in changed['samples']:
+     if mutation=='timing':row['seconds']*=2
+     elif mutation=='alias' and row['path']=='/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub':row['path']='/unrelated-replacement'
+     elif mutation=='phase' and row['phase']=='after_directory_ttl':row['phase']='after_other_ttl'
+    path.write_text(json.dumps(changed))
+    with self.subTest(mutation=mutation),self.assertRaisesRegex(AssertionError,'frozen_speed_baseline_changed'):
+     gate.accepted_baseline(path)
+ def test_exact_noise_allowance_boundaries_for_warm_and_both_expiry_phases(self):
+  for reference,allowance,ceiling in [(.2,.05,.25),(2,.1,2.1)]:
+   rows={'/path':[{'phase':phase,'seconds':reference} for phase in ['warm_1','warm_2','warm_3','after_ttl','after_directory_ttl']]}
+   for phase in ['warm','after_ttl','after_directory_ttl']:
+    with self.subTest(reference=reference,phase=phase),patch.object(gate,'sample',return_value=ceiling+.000001) as sample,contextlib.redirect_stdout(io.StringIO()):
+     result=gate.check_baseline('local','/path','html','release',phase,ceiling,rows,True)
+     self.assertTrue(result['passed']);self.assertEqual(result['measurementNoiseSeconds'],allowance)
+     self.assertEqual(result['ceilingSeconds'],ceiling);sample.assert_not_called()
+     with self.assertRaisesRegex(AssertionError,'accepted_speed_regression'):
+      gate.check_baseline('local','/path','html','release',phase,ceiling+.000001,rows,True)
+     self.assertEqual(sample.call_count,3 if phase=='warm' else 0)
+ def test_scoped_enforced_acceptance_keeps_every_frozen_route_and_expiry_phase(self):
+  output=io.StringIO()
+  env={'AVTOCENA_RELEASE_MARKETS':'korea','AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':'docs/operations/2026-11-11-accepted-speed-baseline.json'}
+  with patch.dict(gate.os.environ,env),patch.object(sys,'argv',['gate','local','release']),patch.object(gate,'sample',return_value=.001) as sample,patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(output):
+   gate.main()
+  expected=FROZEN_ROUTES|{'/cars?market=korea'}
+  self.assertEqual(sample.call_count,len(expected)*4)
+  self.assertEqual([call.args[0] for call in sleep.call_args_list],[35,305])
+  rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
+  for phase in ['warm','after_ttl','after_directory_ttl']:
+   measured=[row for row in rows if row.get('performanceGate')==phase]
+   self.assertEqual(len(measured),len(expected));self.assertEqual({row['path'] for row in measured},expected)
+   enforced=[row for row in rows if row.get('speedBaseline')==phase]
+   self.assertEqual({row['path'] for row in enforced},FROZEN_ROUTES)
+   self.assertTrue(all(row['blocking'] for row in enforced))
  def test_repeated_slowdown_blocks_but_an_isolated_jitter_is_recorded(self):
   rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
   with patch.object(gate,'sample',side_effect=[.7,.8,.9]) as sample,contextlib.redirect_stdout(io.StringIO()):
@@ -162,5 +214,42 @@ class AcceptedBaselineTests(unittest.TestCase):
  def test_missing_baseline_cannot_silently_disable_enforced_acceptance(self):
   with patch.dict(gate.os.environ,{'AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':''}),patch.object(sys,'argv',['gate','local','release']):
    with self.assertRaisesRegex(AssertionError,'accepted_speed_baseline_missing'):gate.main()
+
+class RequestEvidenceTests(unittest.TestCase):
+ def test_stream_timeout_identifies_route_without_retry_or_private_error_message(self):
+  response=unittest.mock.MagicMock()
+  response.__enter__.return_value=response
+  failure=TimeoutError('private upstream detail')
+  response.read.side_effect=failure
+  output=io.StringIO()
+  with patch.object(gate.urllib.request,'urlopen',return_value=response) as request,contextlib.redirect_stdout(output):
+   with self.assertRaises(TimeoutError) as caught:gate.sample('http://local','/cars?sort=totalRub','catalog','release')
+  self.assertIs(caught.exception,failure)
+  request.assert_called_once()
+  self.assertEqual(request.call_args.kwargs['timeout'],90)
+  rows=[json.loads(line) for line in output.getvalue().splitlines()]
+  self.assertEqual([r['performanceRequest'] for r in rows],['started','failed'])
+  self.assertTrue(all(r['path']=='/cars?sort=totalRub' for r in rows))
+  self.assertEqual(rows[-1]['errorType'],'TimeoutError')
+  self.assertNotIn('private upstream detail',output.getvalue())
+  response.__exit__.assert_called_once()
+ def test_connection_error_is_named_and_propagated_once(self):
+  failure=ConnectionResetError('private network detail');output=io.StringIO()
+  with patch.object(gate.urllib.request,'urlopen',side_effect=failure) as request,contextlib.redirect_stdout(output):
+   with self.assertRaises(ConnectionResetError) as caught:gate.sample('http://local','/login','html','release')
+  self.assertIs(caught.exception,failure);request.assert_called_once()
+  self.assertEqual(json.loads(output.getvalue().splitlines()[-1])['errorType'],'ConnectionResetError')
+  self.assertNotIn('private network detail',output.getvalue())
+ def test_complete_evidence_requires_valid_body_and_preserves_measured_elapsed(self):
+  for body,accepted in [(b'</html>',True),(b'incomplete',False)]:
+   response=unittest.mock.MagicMock();response.__enter__.return_value=response
+   response.status=200;response.read.return_value=body;output=io.StringIO()
+   with patch.object(gate.urllib.request,'urlopen',return_value=response),patch.object(gate.time,'monotonic',side_effect=[10,10.1234,10.2]),contextlib.redirect_stdout(output):
+    if accepted:self.assertAlmostEqual(gate.sample('http://local','/login','html','release'),.1234)
+    else:
+     with self.assertRaisesRegex(AssertionError,'performance_incomplete_html'):gate.sample('http://local','/login','html','release')
+   rows=[json.loads(line) for line in output.getvalue().splitlines()]
+   self.assertEqual(rows[-1]['performanceRequest'],'complete' if accepted else 'failed')
+   if accepted:self.assertEqual(rows[-1]['seconds'],.1234)
 
 if __name__=='__main__':unittest.main()
