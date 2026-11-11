@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  RELEASE_SOURCE_SHA: '3c641141b49135cdb1109f6e09ea42675998060f'
+  RELEASE_SOURCE_SHA: '1763b3e5389873c1c0cbe919d7097572968071a6'
 
 concurrency:
   group: regcloud-production-release
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '3c641141b49135cdb1109f6e09ea42675998060f'
+          ref: '1763b3e5389873c1c0cbe919d7097572968071a6'
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '3c641141b49135cdb1109f6e09ea42675998060f'
+          ref: '1763b3e5389873c1c0cbe919d7097572968071a6'
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -113,7 +113,7 @@ jobs:
           RETENTION_BASE_REF: 'a182cd21b21ecf612b63613d263e5bdd817ea4c0'
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/japan-filter-retention.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/japan-filter-retention.test.ts tests/dealer-selection-share.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
           npm run typecheck
           git fetch --depth=1 origin "$RETENTION_BASE_REF"
           npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
@@ -123,6 +123,7 @@ jobs:
           CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
       - name: Verify owner catalog search and queue regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -260,7 +261,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 3c641141b49135cdb1109f6e09ea42675998060f
+          AVTOCENA_RELEASE_SHA: 1763b3e5389873c1c0cbe919d7097572968071a6
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
