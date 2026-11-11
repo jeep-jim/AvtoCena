@@ -129,7 +129,7 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
   // Bounded model queries stream behind the primary offer; failures stay isolated by market.
   const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'||params.market==='korea'||(/^ajes-(?:korea|china)-/.test(String(current.id))&&params.market===current.market)
     ? readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(/^ajes-(?:stats|korea|china)-/.test(String(current.id))?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
-    : searchOffers(params)).catch(error => {
+    : searchOffers(params,48,'related')).catch(error => {
     console.error("offer_similar_search_failed", error); return {items:[],total:0};
   });
   const [modelResult, marketResult, crossResults, green] = await Promise.all([

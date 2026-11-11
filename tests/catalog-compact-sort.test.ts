@@ -8,6 +8,33 @@ import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-
 import {compareCatalogTerms,parseCatalogSort} from '../apps/web/lib/catalog/catalog-sort';
 import {sortCatalogRows} from '../apps/web/lib/catalog/market-page';
 
+test('a narrow brand price sort reads only its matching card blocks, not the entire market replay',async()=>{
+ const base:any={market:'korea',make:'BMW',model:'3 Series',year:2024,engineCc:1598,powerHp:150,fuel:'petrol',powertrainKind:'combustion',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-11-08T00:00:00Z'};
+ const rows=Array.from({length:100},(_,i)=>({...base,id:`narrow-${i}`,make:i<5?'BMW':'Audi',totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
+ const generationId='narrow-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])),3);
+ const storage=getJsonStorage(),original=storage.readJsonWithMeta,originalRead=storage.readJson,originalWrite=storage.writeJson,reads:string[]=[];
+ storage.readJson=async<T>(key:string,fallback:T)=>{assert.ok(!key.includes('runtime-sort-prices'),'no full-market snapshot/replay');return fallback;};
+ storage.writeJson=async()=>{assert.fail('a model sort must not build a full-market price snapshot');};
+ storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
+  reads.push(key);let value:unknown=fallback;
+  if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
+  else if(key==='fees/exchange-rates.json')value={};
+  else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
+  else if(key.endsWith('/budget-count-v3.json'))value=index;
+  else if(key.includes('/budget-cards-v3/')){assert.ok(key.endsWith('/0.json'),'unrelated model card block fetched');value={generationId,items:rows.slice(0,10)};}
+  else assert.ok(!/projection|budget-prices/.test(key),'unexpected full-market read: '+key);
+  return {found:value!==fallback,value:value as T};
+ };
+ try{
+  resetCatalogReadCachesForTests();
+  const ascending=await searchOffers({market:'korea',make:'BMW',sort:'totalRub',pageSize:2});
+  assert.equal(ascending.total,5);assert.deepEqual(ascending.items.map(row=>row.id),['narrow-0','narrow-1']);
+  const descending=await searchOffers({market:'korea',make:'BMW',sort:'totalRubDesc',pageSize:2});
+  assert.deepEqual(descending.items.map(row=>row.id),['narrow-4','narrow-3']);
+  assert.equal(reads.filter(key=>key.includes('/budget-cards-v3/')).length,1,'direction changes share exactly priced selected cards');
+ }finally{storage.readJsonWithMeta=original;storage.readJson=originalRead;storage.writeJson=originalWrite;resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();}
+});
+
 test('compact sorting keeps exact order, shares direction price reads and bounds concurrent blocks',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
  const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));

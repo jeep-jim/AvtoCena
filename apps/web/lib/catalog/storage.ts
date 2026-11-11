@@ -1007,6 +1007,25 @@ async function readCatalogDirectoryCountRowsEditorial() {
   return (await currentProjectionRows({})).rows.map(row=>({make:row.make,model:row.model,count:1}));
 }
 
+/** Names for discovery do not need prices, offer blocks or moderation recounts. */
+export async function readCatalogModelNames(make = '', market = '') {
+  const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
+  const makes = make ? new Set(catalogMakeFilterValues(make).map(value => cleanFacet(value).toLocaleLowerCase('ru-RU'))) : null;
+  const markets = market.split('|').filter(value => value && value !== 'any');
+  if (summary.generationId === manifest.generationId) {
+    return Object.values(summary.brands)
+      .filter(brand => !makes || makes.has(cleanFacet(brand.make).toLocaleLowerCase('ru-RU')))
+      .flatMap(brand => brand.models
+        .filter(model => markets.length ? markets.some(value => Number(model.marketCounts?.[value]) > 0) : model.count > 0)
+        .map(model => ({make: brand.make, model: model.model})));
+  }
+  // A publication may update the compact facets before the brand summary.
+  // Keep the complete directory; never rebuild it by downloading every vehicle.
+  const facets = await readCurrentFacets();
+  if (facets.generationId !== manifest.generationId) throw Error('catalog_model_directory_unavailable');
+  return facets.models.filter(row => !makes || makes.has(cleanFacet(row.make).toLocaleLowerCase('ru-RU')));
+}
+
 async function readCurrentPublicCatalogProjectionEditorial() {
   return currentProjectionRows({});
 }
@@ -2311,7 +2330,12 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
     const sellerValues=new Float64Array(selected.rows.length);sellerValues.fill(NaN);state!.sellerPrices=sellerValues;
     // V3 already has bounded price-only replay and a validated shared snapshot.
     // Sorting must not fetch every full card (including images and ledgers).
-    const index=selected.cardVersion===3?await readBudgetCountIndex(selected.generationId,params.market):null;
+    // A narrow model search must not wait for every vehicle in its country to
+    // be repriced after a rate/day change. The existing exact card replay below
+    // is cheaper when both the matching rows and their source blocks are small.
+    const narrowModel = Boolean(params.make || params.model) && selected.rows.length <= 4096
+      && new Set(selected.rows.map(row=>row[5].block)).size <= 32;
+    const index=selected.cardVersion===3&&!narrowModel?await readBudgetCountIndex(selected.generationId,params.market):null;
     if(index?.version===3 && index.generationId===selected.generationId){
      const markets=[...new Set(selected.rows.map(row=>row[0]))];
      const supported=markets.every(market=>market==="japan" || index.pricingChunks?.[market] || index.rows.filter(row=>row[0]===market).every(row=>row[7]));
@@ -2609,15 +2633,15 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
 }
 // Let six country groups progress together; underlying detail and card reads
 // remain bounded by their separate queues.
-const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:6});
-async function searchOffersEditorial(params: CatalogSearchParams, internalPageLimit = 48) {
+const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:6,groupConcurrency:{related:1}});
+async function searchOffersEditorial(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup = '') {
   const manifest=await readManifest();
   // HTML supplies empty controls and explicit defaults; the API omits them.
   // Both select identical rows. Share that work without changing any caller's
   // filters, current-day/editorial fence, or bounded cache lifetime.
   const cacheParams={...params,page:params.page||1,pageSize:params.pageSize||24,sort:params.sort||'updatedAt'};
   const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(cacheParams).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
-  return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
+  return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit),key,admissionGroup);
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
   if(params.market === "japan")return {generationId:await catalogGenerationId(),total:0,page:Math.max(1,Number(params.page||1)),pageSize:Math.min(internalPageLimit,Number(params.pageSize||24)),items:[],usedIndexShards:[]};
@@ -3014,7 +3038,7 @@ export async function getUnavailableOffer(id: string): Promise<UnavailableOffer 
   return offer ? unavailableOfferRecord(offer) : null;
 }
 
-export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit)));}
+export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup)));}
 
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){return withCatalogEditorial(()=>searchOffersWithoutBudgetIndexForTestsEditorial(params,internalPageLimit));}
 

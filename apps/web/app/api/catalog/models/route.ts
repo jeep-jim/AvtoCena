@@ -4,7 +4,7 @@ import {selectedCatalogMarkets} from "@/lib/catalog/market-selection";
 import {readGroupedCatalogFacets} from "@/lib/catalog/market-facets";
 import { NextResponse } from "next/server";
 import {readGreenCorner} from '@/lib/catalog/green-corner';
-import { readCatalogFacets, readCatalogDirectoryCountRows } from "@/lib/catalog/storage";
+import { readCatalogFacets, readCatalogModelNames } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
 import { effectiveCatalogEncyclopediaIdentityMode } from "@/lib/catalog/encyclopedia-identity-runtime";
 import { resolveConfiguredCatalogSearchParams } from "@/lib/catalog/encyclopedia-identity-query";
@@ -80,11 +80,12 @@ export async function GET(request: Request) {
   // Names only from the current published summary, never raw offers or prices.
   // This supplements the build-time dictionary after any market feed refresh.
   if (url.searchParams.get("scope") === "inventory") {
-    const [publishedRows, green] = await Promise.all([readCatalogDirectoryCountRows(), readGreenCorner()]);
-    const rows = [...publishedRows, ...green.items.map(row=>({make:row.make,model:row.model,count:1}))];
+    const make = clean(url.searchParams.get('make')).slice(0, 240);
+    const market = clean(url.searchParams.get('market'));
+    const rows = market === 'green' ? (await readGreenCorner()).items : await readCatalogModelNames(make, market);
     // Paid-source directories arrive independently in the browser. A slow supplier
     // must not hold back names already available in our published inventory.
-    const models = [...new Map(rows.filter(row => row.count > 0 && row.make && row.model)
+    const models = [...new Map(rows.filter(row => row.make && row.model)
       .map(row => [`${compact(row.make)}:${compact(row.model)}`, [row.make, row.model, [], 1]])).values()];
     return NextResponse.json({version: 1, models, brands: []}, {headers: {"Cache-Control": "no-store"}});
   }

@@ -7,7 +7,7 @@ const requests = new Map<string, {expires: number; promise: Promise<Search>}>();
 // Share downloads across desktop/mobile controls; never leave an unresolved
 // fetch cached forever. Runtime inventory is refreshed independently of builds.
 export function loadModelSuggestions(inventory = false, source?: {market:string;make:string}, make = '', market = ''): Promise<Search> {
-  const url = source ? '/api/catalog/source-models?'+new URLSearchParams(source) : inventory ? '/api/catalog/models?'+new URLSearchParams({scope:'inventory'}) : modelSearchAsset.asset;
+  const url = source ? '/api/catalog/source-models?'+new URLSearchParams(source) : inventory ? '/api/catalog/models?'+new URLSearchParams({scope:'inventory', ...(make ? {make} : {}), ...(market ? {market} : {})}) : modelSearchAsset.asset;
   const cached = requests.get(url);
   if (cached && cached.expires > Date.now()) return cached.promise;
   const controller = new AbortController();
