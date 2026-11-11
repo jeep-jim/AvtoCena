@@ -1,3 +1,9 @@
+# Owner crawler blocking and confirmed rollback — 11.11.2026
+
+- Live `/api/health` on 11.11 confirms `463fd22559a2f9c5acd60f8f5e4b269689215c84`; rollback run42855543854 completed successfully on 10.11. Do not repeat the completed application rollback.
+- The new owner instruction authorizes blocking the supplier-reported Amazonbot and Reflectionbot in Nginx, with official address evidence, verification and a reversible configuration change. It does not reopen application/catalog repairs or change ordinary feed schedules. The freeze below remains in force.
+- Read the latest `docs/operations/current-incident.md` entry and `docs/operations/2026-11-11-owner-bot-block.json` when present for the actual crawler-block result. Prepared source is not proof that the server rules are active.
+
 # Owner rollback and change freeze — 10.11.2026
 
 - The owner explicitly requests the production build that ran on 08.11.2026 from 12:00 to 16:00 Asia/Novokuznetsk: `463fd22559a2f9c5acd60f8f5e4b269689215c84`. Original successful deployment: run `42435996958`; health records inside that time window confirm the same release.

@@ -1,0 +1,17 @@
+{
+  "requestedAt": "2026-11-11",
+  "release": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+  "bots": [
+    "Amazonbot",
+    "Reflectionbot"
+  ],
+  "scope": "nginx only; retain freeze and ordinary feed schedules",
+  "sha256": {
+    ".github/owner-bot-block/amazonbot.json": "d975737b48aa038bf22574813d90ea6d9aba8a7560690fd42318d8b9c634cd42",
+    ".github/owner-bot-block/apply.py": "ee777f2e14ce157c9200fc0e8ec9137eda07e77fbcd94a4f6ef17495c0fd1166",
+    ".github/owner-bot-block/record-result.py": "3cee920e58994edabb1f76772b761012b52aad591c46efe8d2503ef0c76605e5",
+    ".github/owner-bot-block/reflectionbot.json": "24327394c98e6f5131d11d0974ffce061ad0c74abd6654c8667fb8a55e4fb48c",
+    ".github/owner-bot-block/verify-public.py": "9584934b48128c93bd3bf34021380b994bb2e7c9b2f94d36396fd3dddc4f1cff",
+    ".github/workflows/regcloud-owner-bot-block.yml": "36003085e8be2f9a1388ce28d1dcfce12ac4029fa60c79cbd8f539eab79aba5f"
+  }
+}
