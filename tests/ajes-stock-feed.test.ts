@@ -36,7 +36,8 @@ test('second China feed enforces 15 million at seller and delivered stages witho
  for(const aggregate of [undefined,'count','makes','models'] as const)assert.match(ajesQuery({table:'china',sourcePriceTo:ceiling,aggregate}).sql,new RegExp('finish<='+ceiling));
  for(const value of [NaN,0,-1,Infinity])assert.throws(()=>ajesChinaSourceCeiling(value));
  assert.throws(()=>ajesQuery({table:'china',sourcePriceTo:1.2}));
- assert.throws(()=>ajesQuery({table:'korea',sourcePriceTo:123}));
+ assert.match(ajesQuery({table:'korea',sourcePriceTo:123}).sql,/finish<=123/);
+ assert.throws(()=>ajesQuery({table:'main',sourcePriceTo:123}),'active-auction starting prices are not sold/seller prices');
 });
 
 

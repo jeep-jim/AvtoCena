@@ -168,6 +168,8 @@ except urllib.error.HTTPError as e:assert e.code in [401,403]
 PY
 # Candidate preparation has a smaller CPU budget than the serving process.
 # Acceptance runs before switching and again after the old process is stopped.
+export AVTOCENA_SPEED_BASELINE="$runtime/accepted-speed-baseline.json"
+export AVTOCENA_SPEED_BASELINE_MODE=observe
 python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
 # Promote before editing Nginx as well as before accepting traffic: if Docker
 # rejects the resource change, the saved serving configuration remains intact.
@@ -213,6 +215,7 @@ for attempt in 1 2 3; do
 done
 test "$ready" = 1
 docker stop --time 30 "$old" >/dev/null
+export AVTOCENA_SPEED_BASELINE_MODE=enforce
 python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
 docker rename "$old" "$backup"
 docker rename "$candidate" "$old"

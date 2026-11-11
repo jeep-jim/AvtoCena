@@ -60,6 +60,8 @@ jobs:
           node scripts/check-runtime-streams.mjs
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py
+      - name: Verify Japan and Korea delivered budgets, continuation and supplier refusals
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-budget-candidates.test.ts tests/ajes-budget-pipeline.test.ts tests/ajes-delivered-budget.test.ts tests/ajes-saved-budget-sort.test.ts tests/ajes-budget-cache.test.ts tests/ajes-provider-limit.test.ts tests/ajes-filtered-page.test.ts tests/ajes-stock-feed.test.ts tests/ajes-rail-late-count.test.ts tests/ajes-market-preview.test.ts tests/ajes-page-failure-evidence.test.ts
       - name: Verify owner catalog search and queue regressions
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-projection-reuse.test.ts tests/green-corner-snapshot-cache.test.ts tests/catalog-deferred-recommendations.test.ts tests/offer-navigation-performance.test.ts tests/related-offer-selection.test.ts tests/related-model-family.test.ts tests/catalog-card-contract.test.ts
       - name: Verify deferred recommendations before release preparation
@@ -220,6 +222,7 @@ jobs:
           remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS'"
       - name: Verify published encyclopedia fields against this exact release
         env:

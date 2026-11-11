@@ -7,6 +7,9 @@ const require=createRequire(import.meta.url);
 test('ready Korea/Japan cards return while the independent count is still pending',async()=>{
  const state={counts:0,lists:0};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
+  './saved-calculation-previews':"export const hasSavedPreviewEntriesForMarket=async()=>false;",
+  './editorial':"export const readCatalogEditorial=async()=>({entries:{}});",
+  './rates':"export const convertToRub=async()=>null;",
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__countFixture.counts++;return new Promise(()=>{});}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:'now'};};`,
@@ -45,6 +48,9 @@ for(const continuation of [false,true])test(`${continuation?'pagination':'overvi
  const queue=new DetailReadCache<any>({maxEntries:8,maxBytes:100000,ttlMs:0,concurrency:2,queueTimeoutMs:80});
  const state={counts:0,lists:0, count:()=>queue.get('count'+Math.random(),async()=>{state.counts++;await held;return {total:24};}),list:async(q:any)=>{await new Promise(r=>setTimeout(r,10));return queue.get('list'+q.table,async()=>{state.lists++;return {page:1,pageSize:24,received:24,items:Array.from({length:24},(_,i)=>({id:q.table+i})),observedAt:'now'};});}};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
+  './saved-calculation-previews':"export const hasSavedPreviewEntriesForMarket=async()=>false;",
+  './editorial':"export const readCatalogEditorial=async()=>({entries:{}});",
+  './rates':"export const convertToRub=async()=>null;",
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{return globalThis.__countFixture.count();}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__countFixture.list(q);`,

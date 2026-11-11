@@ -78,6 +78,18 @@ export async function readUncappedChinaRows(sql:string,read:(sql:string)=>Promis
  return value?{...value,schemaVersion:0,partial:true}:null;
 }
 
+/** A failed new budget query can reuse only this already-viewed source page.
+ * Its wider candidate set still passes the current delivered-price filter;
+ * it is partial/stale recovery, never a count or a new inventory scan.
+ */
+export async function readUncappedBudgetRows(sql:string,read:(sql:string)=>Promise<any|null>){
+ if(!/^select \* from (?:stats|korea) /.test(sql))return null;
+ const previous=sql.replace(/ and finish<=\d+/, '');
+ if(previous===sql)return null;
+ const value=await read(previous);
+ return value?{...value,schemaVersion:0,partial:true}:null;
+}
+
 /** Old viewed rows remain a partial failure fallback; never reuse their old counts. */
 export async function readPreviousTruckPolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
  if(!sql.startsWith('select * from'))return null;

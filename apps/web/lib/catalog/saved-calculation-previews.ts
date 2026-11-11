@@ -14,6 +14,11 @@ type Entry={market:string;sourceId:string;sourceOfferId:string;identity:string;s
 type Index={version:1;entries:Record<string,Entry>};
 // One compact read per rendered batch, shared across simultaneous rails. No per-card reads.
 const cache=new DetailReadCache<Index>({maxEntries:1,maxBytes:8*1024*1024,ttlMs:60000,concurrency:1});
+/** A source-price bound must not exclude a separate manager-saved quote. */
+export async function hasSavedPreviewEntriesForMarket(market:string):Promise<boolean>{
+ const index=await cache.get("current",()=>readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}}));
+ return Object.values(index.entries).some(entry=>entry.market===market);
+}
 export function savedPreviewEntry(record:SavedOfferCalculation,offer:VehicleOffer):Entry|null {
  if(record.draft.deliveryCity || !matchingSavedCalculation(record,offer) || !Number.isFinite(record.calculation.totalRub))return null;
  try {

@@ -29,5 +29,13 @@ test('market cards remain ready and their late count resolves with exactly the s
    const counter=await pending;assert.equal(counter.props.total,20890);
    assert.deepEqual(JSON.parse(state.countKeys.at(-1)!),state.queries.at(-1));
   }
+  for(const market of ['japan','korea']){
+   const tree=await mod.exports.AjesRail({market,params:{budget:'1500000',city:'Новокузнецк',page:'5',after:'1.0',source:'existing'},prepared:Promise.resolve({items:[],count:null,hasMore:true,nextCursor:'7.0',filteredByPage:true,partial:false,stale:false})});
+   const nodes:any[]=[];function walk(node:any){if(Array.isArray(node))return node.forEach(walk);if(!node||typeof node!=='object')return;nodes.push(node);walk(node.props?.children);}walk(tree);
+   const link=nodes.find(n=>n.props?.children==='Продолжить поиск');assert.ok(link);
+   const q=new URL(link.props.href,'https://avtocena.com').searchParams;
+   assert.equal(q.get('after'),'7.0');assert.equal(q.get('budget'),'1500000');assert.equal(q.get('city'),'Новокузнецк');assert.equal(q.get('market'),market);assert.equal(q.has('page'),false);assert.equal(q.has('source'),false);
+   const all=nodes.find(n=>n.props?.children==='Все →');assert.equal(new URL(all.props.href,'https://avtocena.com').searchParams.has('after'),false);
+  }
  }finally{delete (globalThis as any).__railFixture;}
 });

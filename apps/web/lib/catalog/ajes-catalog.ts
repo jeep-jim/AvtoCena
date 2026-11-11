@@ -19,6 +19,9 @@ import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
+import {ajesBudgetCandidates} from './ajes-budget-candidates';
+import {convertToRub} from './rates';
+import {readCatalogEditorial,type CatalogEditorialIndex} from './editorial';
 
 const sourceMakes=cache(async(table:any)=>{
  await assertCollectionEnabled(`ajes_${table==='china'||table==='korea'?table:'japan'}_feed`);
@@ -61,7 +64,20 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
 export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void,options:{includeCount?:boolean}={}){
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
- const {query,modelDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const resolved=await resolvedCatalogQuery(JSON.stringify(params));
+ const {modelDirectoryUnavailable}=resolved;
+ let query={...resolved.query};
+ const visiblePageSize=query.pageSize||24;
+ if(filter.priceTo!==undefined&&['stats','korea'].includes(query.table||'stats')){
+  const market=query.table==='korea'?'korea':'japan';
+  const [rate,editorial,savedPrices]=await Promise.all([convertToRub(1,market==='korea'?'KRW':'JPY').catch(()=>null),readCatalogEditorial().catch(()=>null),
+   import('./saved-calculation-previews').then(m=>m.hasSavedPreviewEntriesForMarket(market)).catch(()=>true)]);
+  const prices=editorial as CatalogEditorialIndex|null;
+  query=ajesBudgetCandidates(query,filter.priceTo,rate,savedPrices||!prices||Object.values(prices.entries).some(entry=>entry.market===market&&entry.status==='visible'&&entry.sellerPrice));
+ }
+ // Filtered overview rails need six accepted rows, not six raw candidates per
+ // network round trip. Use the same 24-row source cursor as the full catalog.
+ if(filter.active)query={...query,pageSize:Math.max(24,visiblePageSize)};
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -71,7 +87,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // Pagination changes only the offset. Recounting here competes with the
  // requested list in the same two-slot supplier queue. The independent count
  // endpoint/header owns aggregate refresh; continuations need only their rows.
- if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.active)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
@@ -104,11 +120,11 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const total=readyCount as AjesCountSummary|null;
  // Reuse the first read only when it is the requested continuation's source page.
  let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
- const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
+ const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:visiblePageSize,sourcePageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
- return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
+ return {...first,...page,page:query.page||1,pageSize:visiblePageSize,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{

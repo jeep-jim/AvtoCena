@@ -1,4 +1,5 @@
 import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
+import {ajesRefusalCode} from './ajes-refusal';
 import {preserveKoreaListingLink} from './ajes-korea-detail-cache';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
@@ -155,8 +156,8 @@ export function createAjesClient(deps:Dependencies) {
             // The provider returns a short plaintext bot refusal containing the
             // API password for some visitor addresses. Classify it without ever
             // retaining/logging its contents or replacing the visitor address.
-            const refusal=decoded.length<=256?decoded.toString('utf8').match(/^\s*((?:bot|ban)\d*)(?:\s|$)/i):null;
-            if(refusal){providerCode=refusal[1].length<=16?refusal[1].toLowerCase():null;throw new AjesUnavailable('visitor_restricted');}
+            const refusal=ajesRefusalCode(decoded.toString('utf8'));
+            if(refusal){providerCode=refusal;throw new AjesUnavailable('visitor_restricted');}
             rows=JSON.parse(decoded.toString('utf8'));
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){

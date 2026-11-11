@@ -47,8 +47,8 @@ export function createAjesMarketPreview(deps:Dependencies){
     while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>2*1024*1024){await reader.cancel();throw Error('response_too_large');}chunks.push(value);}
     const bytes=Buffer.concat(chunks),decoded=bytes[0]===0x1f&&bytes[1]===0x8b?gunzipSync(bytes,{maxOutputLength:2*1024*1024}):bytes;
     const text=decoded.toString('utf8');
-    const bot=decoded.length<=256?text.match(/^\s*((?:bot|ban)\d*)(?:\s|$)/i):null;
-    if(bot){diagnostic.providerCode=bot[1].toLowerCase();throw Error('visitor_restricted');}
+    const bot=ajesRefusalCode(text);
+    if(bot){diagnostic.providerCode=bot;throw Error('visitor_restricted');}
     let rows:unknown;try{rows=JSON.parse(text);}catch{throw Error('invalid_response');}
     if(!Array.isArray(rows)||rows.length>5||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw Error('invalid_response');
     const result:AjesMarketPreview={market,observedAt:new Date().toISOString(),received:rows.length,
@@ -70,3 +70,4 @@ export function createAjesMarketPreview(deps:Dependencies){
   pending.set(key,task);return task;
  };
 }
+import {ajesRefusalCode} from './ajes-refusal';

@@ -52,6 +52,9 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
  const {build}=await import('esbuild');const {createRequire}=await import('node:module');const require=createRequire(import.meta.url);
  const state={empty:false,lists:0,counts:0,queries:[] as any[]};(globalThis as any).__modelRecovery=state;
  const stubs:Record<string,string>={
+  './saved-calculation-previews':"export const hasSavedPreviewEntriesForMarket=async()=>false;",
+  './editorial':"export const readCatalogEditorial=async()=>({entries:{}});",
+  './rates':"export const convertToRub=async()=>null;",
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count must not run');}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:[{id:'hyundai-exact'}],observedAt:'now'};};`,

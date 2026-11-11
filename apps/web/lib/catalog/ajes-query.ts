@@ -49,7 +49,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+(stock?0:1))}`];
   if(!stock)where.push('auction_type!=1');
   if(stock)where.push('finish>0');
-  if(q.sourcePriceTo!==undefined){if(table!=='china')throw new AjesInputError();where.push(`finish<=${integer(q.sourcePriceTo,0,1,Number.MAX_SAFE_INTEGER)}`);}
+  if(q.sourcePriceTo!==undefined){if(!['china','korea','stats'].includes(table))throw new AjesInputError();where.push(`finish<=${integer(q.sourcePriceTo,0,1,Number.MAX_SAFE_INTEGER)}`);}
   if(table==='korea'){const month=new Date(Date.now()+7*3600000).getUTCMonth()+1;where.push(`(year>${new Date().getUTCFullYear()-6} or month=0 or month is null or month>=${month})`);}
   if(q.salePeriod){
     if(table!=='stats'||typeof q.salePeriod!=='string')throw new AjesInputError();
