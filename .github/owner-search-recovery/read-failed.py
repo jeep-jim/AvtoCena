@@ -27,7 +27,12 @@ for line in lines:
    safe=re.sub(r'(?i)(authorization|token|secret|password|cookie)[=:][^\s,;]+',r'\1=[redacted]',safe)
    stacks.append(safe[:700])
   keep-=1
+error_kinds=collections.Counter()
+for line in lines:
+ match=re.search(r'\b([A-Za-z]*Error):\s*([A-Za-z0-9_.-]+)',line)
+ if match:error_kinds[':'.join(match.groups())]+=1
 print('ERROR_COUNTS',json.dumps(counts))
+print('ERROR_KINDS',json.dumps(error_kinds.most_common(40)))
 print('SLOW_READS',json.dumps(sorted(reads,key=lambda x:x.get('ms',0),reverse=True)[:30]))
 print('FAILURE_STACKS',json.dumps(stacks[-180:]))
 live=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
