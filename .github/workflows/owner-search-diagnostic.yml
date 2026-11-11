@@ -56,9 +56,9 @@ jobs:
 
         run=os.environ[''GITHUB_RUN_ID''];url=''https://github.com/jeep-jim/AvtoCena/actions/runs/''+run
 
-        pathlib.Path(''docs/operations/2026-11-11-search-path-diagnostic.json'').write_text(json.dumps({''runUrl'':url,''release'':''463fd22559a2f9c5acd60f8f5e4b269689215c84'',''log'':log},ensure_ascii=False,indent=2)+''\n'')
+        pathlib.Path(''docs/operations/2026-11-11-search-path-diagnostic.json'').write_text(json.dumps({''runUrl'':url,''release'':json.loads(pathlib.Path(''.github/market-runs/owner-search-diagnostic.json'').read_text())[''release''],''log'':log},ensure_ascii=False,indent=2)+''\n'')
 
-        entry=''\n\n### 11.11.2026 — уточнение причины очереди каталога\n\n- После обнаружения2051 вхождений detail_cache_queue_timeout выполнен один5-секундный sample с категориями запросов и обезличенной
+        entry=''\n\n### 11.11.2026 — уточнение причины очереди каталога\n\n- По текущему запросу владельца выполнен один5-секундный sample с категориями запросов и обезличенной
         статистикой access log; без рестарта/изменений приложения. [Запуск](''+url+''), docs/operations/2026-11-11-search-path-diagnostic.json.\n''
 
 

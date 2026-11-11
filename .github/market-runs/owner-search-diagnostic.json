@@ -1,1 +1,6 @@
-{"release": "463fd22559a2f9c5acd60f8f5e4b269689215c84", "reason": "owner catalog queue path diagnosis", "attempt": 2}
+{
+  "release": "17a686182574097b5ade22b37ef8b485e2b53844",
+  "reason": "A bounded VM read still recorded 229 queue timeouts and an incomplete root catalog; inspect the active CPU path before further changes.",
+  "attempt": 3,
+  "requestedAt": "2026-11-11T03:40:18.591454+00:00"
+}
