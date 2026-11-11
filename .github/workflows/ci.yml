@@ -23,6 +23,10 @@ jobs:
       - name: Enforce performance release budgets
         run: |
           python3 tests/regcloud-performance-gate.test.py
+          node --test tests/accepted-browser-speed.test.mjs
+          python3 tests/regcloud-browser-verdict.test.py
+          python3 tests/regcloud-browser-handoff.test.py
+          python3 tests/regcloud-release-retention.test.py
           node --test tests/catalog-interaction-acceptance.test.mjs
       - name: Complete regression suite
         run: npm test

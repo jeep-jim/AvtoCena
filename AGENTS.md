@@ -1,3 +1,8 @@
+# Owner permanent speed priority — 11.11.2026
+
+- Owner explicitly prioritizes stable high speed for every page and filter and authorizes verified repair/publication. Read `docs/operations/performance-contract.md` before future search, UI, storage, cache, pricing or deployment changes. Preserve original accepted timing baselines, exact-release browser verdict and rollback; never call partial/stale results a speed success. New scenarios require comparable baseline/candidate evidence, not relaxed old limits. No universal latency guarantee or all-pages acceptance follows from a partial matrix.
+- Native network/abort failures must use the existing visitor+query cooldown without extending it on cache reads. Preserve real visitor identity, source restrictions, current-price evidence and ordinary schedules. Full JP/KR mirror authorization remains unresolved.
+
 # Shared selection correction before release — 11.11.2026 14:47 UTC
 
 - Run43039722046 / candidate3c641141 was cancelled before activation by guarded controller43041124657; Deploy=skipped. It must not be resumed. Prior2b7c3e2 is also cancelled. Accepted runtime a182 has not been switched by these runs.

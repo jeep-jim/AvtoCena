@@ -202,15 +202,17 @@ export function createAjesClient(deps:Dependencies) {
           return query.kind==='list'?remember(result):result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
-          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
-          if(error instanceof AjesUnavailable&&recoverable){
-            const key=error.reason==='quota_exhausted'?quotaKey:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
-            // Do not extend an existing cooldown when merely reading the cached failure.
-            if(!cooling(key))failures.set(key,{reason:error.reason,until:Date.now()+(error.reason==='visitor_restricted'?300000:30000)});
-            while(failures.size>500)failures.delete(failures.keys().next().value!);
-          }
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
+          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
+          if(recoverable){
+            const key=failure.reason==='quota_exhausted'?quotaKey:failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+            // Native fetch/abort errors need the same private cooldown as typed
+            // failures; otherwise a recovered page retries the source on every visit.
+            // Do not extend an existing cooldown when merely reading the cached failure.
+            if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
+            while(failures.size>500)failures.delete(failures.keys().next().value!);
+          }
           // Throttle fixed page/kind slots independently: a first-page failure
           // must not suppress continuation evidence. Cooldown is not a request.
           const failureSlot=ajesFailureSlot(query);
