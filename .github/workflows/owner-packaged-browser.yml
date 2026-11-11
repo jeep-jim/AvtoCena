@@ -1,0 +1,51 @@
+name: Verify isolated navigation in packaged browsers
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-packaged-browser.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.55.0-noble
+      options: --init --shm-size=1gb
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '1763b3e5389873c1c0cbe919d7097572968071a6'
+          persist-credentials: false
+      - name: Verify exact candidate
+        run: test "$(git rev-parse HEAD)" = '1763b3e5389873c1c0cbe919d7097572968071a6'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci
+      - name: Install matching Playwright API only
+        run: npm install --prefix "$RUNNER_TEMP/packaged-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Chromium selection and sharing
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/packaged-browser/node_modules/playwright/index.mjs
+        run: |
+          node tests/browser/dealer-selection.mjs
+          node tests/browser/dealer-selection-nested-navigation.mjs
+      - name: WebKit overlays at every existing size and theme
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/packaged-browser/node_modules/playwright/index.mjs
+          FILTER_BROWSER: webkit
+        run: node tests/browser/mobile-filter-overlays.mjs
+      - name: Desktop Android and iPhone native sharing
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/packaged-browser/node_modules/playwright/index.mjs
+        run: node tests/browser/offer-share.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: isolated-packaged-browser-evidence
+          path: |
+            artifacts/dealer-selection/
+            artifacts/mobile-filter-local-webkit/
+          retention-days: 7
