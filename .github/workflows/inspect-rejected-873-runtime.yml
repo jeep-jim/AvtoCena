@@ -1,4 +1,5 @@
 name: Inspect rejected 873 runtime once
+# Verify actual rollback after acceptance43079097899 /18:45UTC.
 on:
   push:
     branches: [main]

@@ -1,14 +1,13 @@
 # Current recovery checkpoint — 12.11.2026
 
-- Read docs/operations/current-incident.md and latest roadmap first; preserve permanent owner policies below.
-- Confirmed production remains a182cd21b21ecf612b63613d263e5bdd817ea4c0 / sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f. The new acceptance preflight43077583586/job130723237646 verified this running identity at18:30UTC and did not call deployment.
-- Original873 attempt2/43055396384 failed before promotion: home lacked current-day overview for active gen_1794357678562_9c0667cb, fell back to60.0332s projection read /88.3665s snapshot. Metadata43076441642 confirms missing12Nov overview; unrelated green builders used different generations.
-- Data-only repair43076945512 at f4ff9b549482fe6e9846592aa00080f042f3eba8 SUCCEEDED18:28:32UTC; common overview and dated pages12/13/14Nov prepared from stored generation, no imports/manifest or schedule change. New acceptance independently verified all three dates and original artifacts/index.
-- Acceptance43077583586 at f945af6d07e624e95ef6bc3de51e10e15a77b39e FAILED before deployment: helper incorrectly compared whole-file SHA256 with models-content digest. Correct canonical models hashing and exact restored-model equality; preserve all image/source/index and release checks. No server/browser acceptance happened in that run.
-- Corrected one-time workflow owner-accept-prepared-873.yml reuses exact original873 image76af614dfdc86e180eeec354dbcec678c9b222fc7cb9968bd3f9a0b9c2b6158a, original successful checks, completed data repair, and full mandatory server/browser acceptance. Treat it as pending until terminal status and installed identity verified. Never standard-deploy main.
-- Next1767642/43067092325 remains failed predecessor check. Older ee0/43060073993 superseded. Only after real873 acceptance rebind a successor controller to the exact successful acceptance run/controller and live873.
-- Preserve frozen17-route baseline,35/305s phases, complete results, request counts, SHA/nonce browser verdict and rollback. Do not retry an unchanged measured regression.
-- JP/KR full availability, official DUMP and14/3-day snapshots unresolved. Ordinary feed schedules/customer data unchanged. Record every completed milestone in roadmap.
+- Read docs/operations/current-incident.md and latest roadmap first. Preserve permanent policies below.
+- Exact873 full reacceptance43079097899/controlleredcec4b74d8a8ebd45a24a01a723a39f64c19f2b/job130726614222 FAILED18:45:14UTC. After promotion the mandatory after_ttl home response was2.960294574s > frozen1.8835s. Rollback reported old production retained18:45:10UTC; independent runtime verification is being launched.
+- Data-only current-generation overview repair43076945512 succeeded18:28:32UTC for12/13/14Nov. It removed the observed90s home timeout but did not prove all speed acceptance. Corrected image/index preflight passed, exact873/image76af verified. Browser verdict was NOT reached; UI changes not accepted.
+- One bounded isolated home-phase measurement of the same873 image is launched after repaired data to identify remaining cold/warm/35/305s home delay. No activation, supplier IP, new feed data, schedule or baseline change.
+- PR1739/b5c1db49dd2e6ffdf00abd09417847c363229a8e prepares three exact policy dates from already resident rows BEFORE new-generation manifest publication.32 local tests and TypeScript pass; full CI pending. Three files only. Do not duplicate or overwrite this work. No live data/application change from this PR yet.
+- The current 1767642 successor43067092325 remains blocked by the failed873 predecessor. Do not bypass it, rerun873 unchanged, restart supersededee0, or standard-deploy main. A new candidate must address the established cause and pass unchanged full acceptance from verified a182.
+- Preserve frozen17-route and browser baselines,35/305s checks, full results, request counts, SHA/nonce browser verdict and rollback. Keep accepteda182/imagee36 pinned.
+- JP/KR full availability, official DUMP and14/3-day snapshots unresolved. Ordinary feed schedules/customer data unchanged. Record factual milestones in roadmap.
 
 # Owner accepted speed and phased optimization — 11.11.2026
 
