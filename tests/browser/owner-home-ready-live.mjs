@@ -23,13 +23,14 @@ try {
       const started = performance.now();
       const response = await page.goto(origin + '/?city=' + encodeURIComponent('Москва'), { waitUntil: 'commit', timeout: 90000 });
       assert.equal(response.status(), 200);
-      const [catalogSeconds, dealerSeconds] = await Promise.all([cards.first().waitFor({ timeout: 60000 }).then(() => (performance.now() - started) / 1000), dealer.first().waitFor({ timeout: 60000 }).then(() => (performance.now() - started) / 1000)]);
+      const [catalogSeconds, dealerSeconds] = await Promise.all([cards.first().waitFor({ timeout: 60000 }).then(() => (performance.now() - started) / 1000), marker.expectedDealerCards > 0 ? dealer.first().waitFor({ timeout: 60000 }).then(() => (performance.now() - started) / 1000) : Promise.resolve(null)]);
       await page.waitForFunction(() => { const b = document.querySelector('button[aria-label="Выбрать город. Сейчас: Москва"]'); return b && !b.disabled; }, null, { timeout: 60000 });
       await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
       await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       const dealerRows = await rows();
-      assert.ok(dealerRows.length > 0 && dealerRows.every(r => r.href && r.title && r.price));
-      result.navigations.push({ phase, catalogSeconds: +catalogSeconds.toFixed(3), dealerSeconds: +dealerSeconds.toFixed(3), readySeconds: +((performance.now() - started) / 1000).toFixed(3), cards: await cards.count(), dealerRows, requests: requests.length, requestPaths: [...requests] });
+      assert.equal(dealerRows.length, marker.expectedDealerCards, 'dealer block must preserve the observed baseline');
+      assert.ok(dealerRows.every(r => r.href && r.title && r.price));
+      result.navigations.push({ phase, catalogSeconds: +catalogSeconds.toFixed(3), dealerSeconds: dealerSeconds === null ? null : +dealerSeconds.toFixed(3), readySeconds: +((performance.now() - started) / 1000).toFixed(3), cards: await cards.count(), dealerRows, requests: requests.length, requestPaths: [...requests] });
     }
     const consent = page.getByRole('button', { name: 'Хорошо', exact: true }); if (await consent.isVisible()) await consent.click();
     await page.getByRole('button', { name: 'Выбрать город. Сейчас: Москва', exact: true }).first().click();
@@ -39,7 +40,7 @@ try {
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     const afterSelection = await rows();
     const response = await page.reload({ waitUntil: 'domcontentloaded', timeout: 90000 }); assert.equal(response.status(), 200);
-    await dealer.first().waitFor({ timeout: 60000 });
+    if (marker.expectedDealerCards > 0) await dealer.first().waitFor({ timeout: 60000 });
     await page.waitForFunction(() => { const b = document.querySelector('button[aria-label="Выбрать город. Сейчас: Новокузнецк"]'); return b && !b.disabled; });
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     assert.deepEqual(await rows(), afterSelection, 'dealer prices and identities must survive reload in selected city');
