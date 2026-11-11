@@ -1,0 +1,92 @@
+name: Identify rejected 873 complete-response timeout once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-rejected-873-route.yml']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: One isolated route pass with exact retained image and guaranteed stop
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'timeout --signal=TERM --kill-after=30 480 bash -se' <<'REMOTE'
+          set -euo pipefail
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -n 9
+          candidate=avtocena-release-8731103c0102
+          test "$(docker inspect --format '{{.State.Running}}' "$candidate")" = false
+          test "$(docker inspect --format '{{.Image}}' "$candidate")" = sha256:76af614dfdc86e180eeec354dbcec678c9b222fc7cb9968bd3f9a0b9c2b6158a
+          test "$(docker inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' avtocena-production)" = a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          test "$(docker inspect --format '{{.State.Running}}' avtocena-production)" = true
+          original_id=$(docker inspect --format '{{.Id}}' avtocena-production)
+          finish() {
+            docker stop --time 20 "$candidate" >/dev/null
+            test "$(docker inspect --format '{{.Id}}' avtocena-production)" = "$original_id"
+            test "$(docker inspect --format '{{.State.Running}}' avtocena-production)" = true
+            echo 'DIAGNOSTIC_FINISHED candidate stopped; same production container remains running'
+          }
+          trap finish EXIT
+          trap 'exit 143' TERM HUP INT
+          docker start "$candidate" >/dev/null
+          python3 - <<'PY'
+          import importlib.util,json,pathlib,time,urllib.request
+          runtime=pathlib.Path('/opt/avtocena/releases/8731103c0102886064c6a0a19a14182502e6e3be')
+          port=(runtime/'new-port').read_text().strip()
+          assert port in ['3000','3001']
+          base='http://127.0.0.1:'+port
+          release='8731103c0102886064c6a0a19a14182502e6e3be'
+          spec=importlib.util.spec_from_file_location('gate',runtime/'regcloud-performance-gate.py')
+          gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
+          deadline=time.monotonic()+30
+          while True:
+              try:
+                  with urllib.request.urlopen(base+'/api/health',timeout=2) as response:value=json.load(response)
+                  assert value.get('ok') is True and value.get('releaseSha')==release
+                  break
+              except Exception:
+                  if time.monotonic()>=deadline:raise
+                  time.sleep(1)
+          def visit(path,kind,stage,raw=False):
+              print(json.dumps({'diagnostic':stage,'path':path,'started':True}),flush=True)
+              started=time.monotonic()
+              try:
+                  if raw:
+                      with urllib.request.urlopen(base+path,timeout=90) as response:
+                          body=response.read(20*1024*1024+1);status=response.status
+                      gate.validate(path,kind,status,body,release)
+                      seconds=time.monotonic()-started
+                  else:seconds=gate.sample(base,path,kind,release)
+              except Exception as error:
+                  print(json.dumps({'diagnostic':stage,'path':path,'seconds':round(time.monotonic()-started,4),'errorType':type(error).__name__}),flush=True)
+                  raise
+              print(json.dumps({'diagnostic':stage,'path':path,'seconds':round(seconds,4),'functionalPassed':True}),flush=True)
+          scope='china,korea,europe,uae,georgia'
+          for path,kind in [('/api/health','health'),('/login','html'),('/autocalc','html')]+[('/cars?market='+market,'catalog') for market in scope.split(',')]:
+              visit(path,kind,'prelude',raw=True)
+          for _ in range(2):visit('/api/catalog/search?market=china&source=ajes&budgetTo=3000000','search','prelude',raw=True)
+          routes=gate.release_routes(scope)
+          baseline=gate.accepted_baseline(str(runtime/'accepted-speed-baseline.json'))
+          for path,rows in baseline.items():
+              if path not in {row[0] for row in routes}:routes.append((path,rows[0]['targetSeconds'],rows[0]['kind']))
+          for path,_,kind in routes:visit(path,kind,'first-pass')
+          print(json.dumps({'diagnosticComplete':True,'routes':len(routes),'releaseAccepted':False}),flush=True)
+          PY
+          REMOTE
