@@ -36,7 +36,7 @@ try{
     await cards.first().waitFor({timeout:60000});
     const catalogReadySeconds=(performance.now()-start)/1000;
     const heading=await page.locator('h1').first().textContent();assert.ok(!heading.includes('%20'));
-    const offerHref=await cards.first().locator('a[href^="/cars/offer/"]').first().getAttribute('href');assert.ok(offerHref);
+    const offerHref=await cards.first().locator('a[href^="/cars/offer/"]').first().getAttribute('href');assert.ok(offerHref);result.offerPath=offerHref;
     let recommendationRequests=0,relatedStartedAt;
     const recommendationResponses=[];
     page.on('request',r=>{if(new URL(r.url()).pathname==='/api/catalog/recommendations'){
@@ -47,6 +47,14 @@ try{
     assert.equal(detailResponse.status(),200);
     const rail=page.locator('[data-deferred-recommendations="related"]');await rail.waitFor({state:'attached',timeout:60000});
     const detailReadySeconds=(performance.now()-detailStart)/1000;
+    result.detailNavigation=await page.evaluate(()=>{
+      const navigation=performance.getEntriesByType('navigation')[0];
+      const resources=performance.getEntriesByType('resource').map(entry=>{
+        const url=new URL(entry.name);
+        return {type:entry.initiatorType,url:url.origin+(url.origin===location.origin&&url.pathname.startsWith('/_next/static/')?url.pathname:''),startMs:Math.round(entry.startTime),durationMs:Math.round(entry.duration),responseStartMs:Math.round(entry.responseStart),responseEndMs:Math.round(entry.responseEnd),transferBytes:entry.transferSize,encodedBytes:entry.encodedBodySize};
+      }).sort((a,b)=>b.durationMs-a.durationMs).slice(0,16);
+      return {responseStartMs:Math.round(navigation.responseStart),responseEndMs:Math.round(navigation.responseEnd),domInteractiveMs:Math.round(navigation.domInteractive),domContentLoadedMs:Math.round(navigation.domContentLoadedEventEnd),transferBytes:navigation.transferSize,encodedBytes:navigation.encodedBodySize,resources};
+    });
     await page.waitForTimeout(350);
     result.initialRecommendationRequests=recommendationRequests;
     result.initialRail=await rail.boundingBox();
