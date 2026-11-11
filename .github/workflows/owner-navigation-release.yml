@@ -113,7 +113,7 @@ jobs:
           RETENTION_BASE_REF: 'a182cd21b21ecf612b63613d263e5bdd817ea4c0'
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/japan-filter-retention.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/japan-filter-retention.test.ts tests/dealer-selection-share.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
           npm run typecheck
           git fetch --depth=1 origin "$RETENTION_BASE_REF"
           npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
@@ -123,6 +123,7 @@ jobs:
           CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
       - name: Verify owner catalog search and queue regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"

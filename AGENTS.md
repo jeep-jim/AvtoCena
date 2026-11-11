@@ -1,3 +1,13 @@
+# Active run — 2026-11-11T15:00:02.032Z
+
+- Follow release43043393692 pinned to 1763b3e5389873c1c0cbe919d7097572968071a6; no installation confirmation yet. Do not resume cancelled old candidates or standard-deploy main. Separate packaged-browser fixture check addresses Ubuntu archive DNS setup failure, not a relaxation of any runtime acceptance gate.
+
+# Current release candidate — 2026-11-11T14:56:40.543Z
+
+- Source 1763b3e5389873c1c0cbe919d7097572968071a6; source verification43041638747 passed42 tests, types,28 mobile/desktop checks and dealer shared-link roundtrip. Exactly12 application paths differ from accepted a182. This new release is starting; installation is NOT confirmed.
+- Both prior2b7c3e2 and3c641141 releases were cancelled before activation. Do not resume them. Preserve original speed/expiry/browser/rollback guards and accepted a182 image. Do not standard-deploy main.
+- See the newest roadmap checkpoint and current-incident.md. JP/KR supplier responses and DUMP authorization remain unresolved; no14/3-day schedule was enabled.
+
 # Owner permanent speed priority — 11.11.2026
 
 - Owner explicitly prioritizes stable high speed for every page and filter and authorizes verified repair/publication. Read `docs/operations/performance-contract.md` before future search, UI, storage, cache, pricing or deployment changes. Preserve original accepted timing baselines, exact-release browser verdict and rollback; never call partial/stale results a speed success. New scenarios require comparable baseline/candidate evidence, not relaxed old limits. No universal latency guarantee or all-pages acceptance follows from a partial matrix.
