@@ -24931,3 +24931,13 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 - Текущий43043393692 продолжает подготовку точных цен; новые проверки не обращаются к production или поставщику и не меняют уже запущенный выпуск.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/5b9d4561f007acc968539dd4033227b4343ed580
 
+
+
+### 11.11.2026 — постоянные автоматические проверки приняты
+
+- [43048247673](https://github.com/jeep-jim/AvtoCena/actions/runs/43048247673) SUCCESS: автоматическая проверка выбора и навигации на новом определении workflow.
+- [43048248036](https://github.com/jeep-jim/AvtoCena/actions/runs/43048248036) SUCCESS: автоматическая проверка текущего SHA в Chromium/WebKit с отправкой ссылок. Историческая проверка точного приложения1763:43044741721 SUCCESS.
+- [43048247680](https://github.com/jeep-jim/AvtoCena/actions/runs/43048247680) подтвердил в15:26UTC: production-контейнерa182 работает, точный imageID=e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f; образ1763 уже присутствует. Это проверка состояния контейнера/образа, не подтверждение установки кандидата.
+- Основной43043393692 всё ещё на Prepare exact price indexes before activating the release (начало15:19:24UTC). Новую версию не объявлять принятой до серверной и публичной браузерной приёмки; не запускать параллельный выпуск и не ослаблять проверки.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/976eb1824a47918e6fbdae320a007ee44f7eaa76
+
