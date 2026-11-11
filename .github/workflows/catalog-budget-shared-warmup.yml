@@ -18,9 +18,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
-    # A deploy may fail in a postcheck after the release has gone live. Health,
-    # not the triggering commit or job conclusion, selects the calculator below.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' || (github.event.workflow_run.name == 'Deploy to Yandex Cloud' && github.event.workflow_run.conclusion == 'failure')
+    # Retired duplicate: public health resolves REG, but this workflow reads the
+    # old YC namespace (43118080350: live_encyclopedia_binding_missing).
+    # Normal market workers -> regcloud-overview -> regcloud-prices use REG.
+    # Re-enable only after a separate reviewed health/storage target is defined.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
