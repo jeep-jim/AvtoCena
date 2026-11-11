@@ -1,6 +1,7 @@
 {
-  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "phase": "before-budget-release",
-  "requestedAt": "2026-11-11T11:09:58.532Z",
-  "reason": "Run43008640838 checked correct mobile prices, but URL wait defaulted to document load and thus included external images, contrary to stated cards-ready metric. Wait for route commit plus actual idle filter state and priced cards; keep all price/health assertions and capture failure state."
+  "release": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "phase": "after-budget-release",
+  "requestedAt": "2026-11-11T12:14:41.684Z",
+  "verifyPartnerBudgets": true,
+  "reason": "Exact3048 accepted by unchanged speed guard at12:14UTC. Compare real China1.5m/2m browser transitions against accepted a182 at390/1280 widths, prices and errors; separately require fresh Japan/Korea1.5m API results. A supplier refusal must remain a failed availability check, not be reported as repaired."
 }
