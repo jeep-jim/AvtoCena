@@ -16,6 +16,45 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24.22.1'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate staged controller syntax and fixed activation boundary
+        run: |
+          python3 -m pip install --quiet PyYAML==6.0.2
+          python3 - <<'CHECK_CONTROLLER'
+          import json,pathlib,re,subprocess,tempfile,yaml
+          path=pathlib.Path('.github/workflows/owner-navigation-release.yml')
+          workflow=yaml.safe_load(path.read_text())
+          assert workflow['env']['RELEASE_SOURCE_SHA']=='75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          trigger=workflow.get('on',workflow.get(True))
+          assert trigger=={'push':{'branches':['main'],'paths':['.github/market-runs/owner-navigation-release.json']}}
+          assert workflow['permissions']=={'contents':'read','actions':'read'}
+          assert workflow['concurrency']=={'group':'regcloud-production-release','cancel-in-progress':False}
+          scripts=0;guards=0
+          with tempfile.TemporaryDirectory() as temp:
+              for job in workflow['jobs'].values():
+                  for step in job['steps']:
+                      script=step.get('run')
+                      if not script:continue
+                      subprocess.run(['bash','-n'],input=script,text=True,check=True)
+                      scripts+=1
+                      for match in re.finditer(r"<<'([A-Z_]+)'\n([\s\S]*?)^\1$",script,re.M):
+                          label,body=match.groups()
+                          if label=='SOURCE_GUARD':
+                              compile(body,label,'exec');guards+=1
+                              assert "api('pulls/1753')" in body and "api('pulls/1748')" in body
+                              assert "actions/runs/43098821534" in body and "actions/runs/43107566632" in body
+                          elif label=='REMOTE':
+                              subprocess.run(['bash','-n'],input=body,text=True,check=True)
+                          else:
+                              file=pathlib.Path(temp)/(label+'.mjs');file.write_text(body)
+                              subprocess.run(['node','--check',str(file)],check=True)
+          assert guards==3 and scripts>=34
+          print(json.dumps({'stagedControllerValid':True,'source':'75c2e6f57cfa4022865217e029a1f5d1671842c3','shellBlocks':scripts,'exactSourceGuards':guards,'activation':'unchanged marker-only boundary'}))
+          CHECK_CONTROLLER
+      - name: Require immutable private release evidence despite optional mirrors
+        run: node --test tests/release-evidence-durability.test.mjs
       - name: Check warm and expired server regression guards
         run: |
           node scripts/verify-frozen-speed-baselines.mjs

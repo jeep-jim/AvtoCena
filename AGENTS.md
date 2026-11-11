@@ -1,10 +1,10 @@
 # Current recovery checkpoint —12.11.2026,22:12UTC
 
-- **NEXT SOURCE, NOT DEPLOYED:** PR1753/source75c2e6f57cfa4022865217e029a1f5d1671842c3, exact25 application/104 total changed files within105 allowed paths. All18 exact-source workflows are running; no new controller or activation published.
+- **NEXT SOURCE, NOT DEPLOYED:** PR1753/source75c2e6f57cfa4022865217e029a1f5d1671842c3, exact25 application/104 total changed files within105 allowed paths. All18 exact-source workflows are running. Controller75 is staged for offline guard validation only; the activation marker is unchanged.
 - PR1752/f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc merged asb97d107fdaaefcf85c6b8816dd8b42dd4d3d338c after all5 exact-head checks, full regression/type/build and10 new304 protocol tests passed. Only its2 application files plus merged1749's OverlayBackHistory+test are added to isolated794. Do not merge acceptance history or deploy all main.
 - Retained a182/e36/c489 independently confirmed21:57:46UTC by43107566632. Failed794 remains closed/unaccepted;43098821534 rejected Changan warm median1.9818 >1.8951 and rolled back. No unchanged retry.
 - Production manifest10177201bytes/5328models; exact304 protocol confirmed176/185ms in Actions. New reader keeps every-request validation, bounded16MiB raw reuse, independent caller copies and immediate change/error/deletion semantics. These measurements are not live route acceptance.
-- Next controller must pin all exact-source checks plus merged1752/f738 and overlay-only1749/8778, terminal failed43098821534 and retaineda182. Original17 baseline routes,35/305s,full outputs,request budgets, frozen digests,exactSHA/nonce/browser/rollback unchanged.
+- The staged controller pins all exact-source checks plus merged1752/f738 and overlay-only1749/8778, terminal failed43098821534 and retaineda182. Original17 baseline routes,35/305s,full outputs,request budgets, frozen digests,exactSHA/nonce/browser/rollback unchanged.
 - Local execution/CUA unavailable; GitHub works. Actual public retention check remains pending. JP/KR DUMP and14/3-day schedules remain unresolved/unchanged. Keep recording milestones inroadmap.
 
 # Recovery history after rejection21:47UTC

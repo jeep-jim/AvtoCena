@@ -10,7 +10,7 @@ permissions:
   actions: read
 
 env:
-  RELEASE_SOURCE_SHA: '794654a00aa4990b284858f1f01c07ed3f020df4'
+  RELEASE_SOURCE_SHA: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
 
 concurrency:
   group: regcloud-production-release
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '794654a00aa4990b284858f1f01c07ed3f020df4'
+          ref: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -35,16 +35,16 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='794654a00aa4990b284858f1f01c07ed3f020df4'
+          sha='75c2e6f57cfa4022865217e029a1f5d1671842c3'
           def api(path):
               return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1748')
+          p=api('pulls/1753')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
-          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2"}
-          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture')]:
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead')]:
               review=api(f'pulls/{number}')
               assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
-          required=[{"id":43089076693,"name":"Verify dealer banner and Yandex map"},{"id":43089076694,"name":"Verify owner UI polish"},{"id":43089076704,"name":"Verify per-car services and edit links"},{"id":43089076734,"name":"Verify Dubicars paid feed"},{"id":43089076737,"name":"Verify offer sharing"},{"id":43089076756,"name":"Verify dealer selection sharing"},{"id":43089076761,"name":"Verify dealer workspace"},{"id":43089076775,"name":"Verify local model suggestions"},{"id":43089076867,"name":"Verify green corner budget"},{"id":43089076876,"name":"CI"},{"id":43089076900,"name":"Verify sticky catalog controls"},{"id":43089076902,"name":"QR and gallery browser QA"},{"id":43089077030,"name":"Verify catalog load more"},{"id":43089077063,"name":"Verify catalog sidebar and search"},{"id":43089077071,"name":"Verify site controls and chat"},{"id":43089077077,"name":"Verify catalog failure isolation"},{"id":43089077092,"name":"Verify city picker"},{"id":43089077137,"name":"Verify model search controls"}]
+          required=[{"id":43109457783,"name":"Verify green corner budget"},{"id":43109457791,"name":"CI"},{"id":43109457803,"name":"Verify catalog failure isolation"},{"id":43109457822,"name":"Verify dealer workspace"},{"id":43109457826,"name":"Verify site controls and chat"},{"id":43109457895,"name":"Verify per-car services and edit links"},{"id":43109457916,"name":"Verify catalog sidebar and search"},{"id":43109457920,"name":"Verify owner UI polish"},{"id":43109457951,"name":"Verify dealer selection sharing"},{"id":43109457969,"name":"Verify dealer banner and Yandex map"},{"id":43109458019,"name":"Verify model search controls"},{"id":43109458037,"name":"Verify catalog load more"},{"id":43109458107,"name":"Verify sticky catalog controls"},{"id":43109458113,"name":"QR and gallery browser QA"},{"id":43109458143,"name":"Verify city picker"},{"id":43109458209,"name":"Verify offer sharing"},{"id":43109458276,"name":"Verify local model suggestions"},{"id":43109458967,"name":"Verify Dubicars paid feed"}]
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert runs['total_count']<=100, 'unbounded source check inventory'
           actual={r['id']:r for r in runs['workflow_runs']}
@@ -65,16 +65,31 @@ jobs:
           for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
               assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
           assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
+          rejected=api('actions/runs/43098821534')
+          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='97ee63438e27862c6363c81db7b6eb0c9bcbf8b6', 'last rejected release is not terminal or changed'
+          rejected_pr=api('pulls/1748')
+          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='794654a00aa4990b284858f1f01c07ed3f020df4', 'rejected source metadata changed'
+          rejected_jobs=api('actions/runs/43098821534/jobs?per_page=100')['jobs']
+          rejected_prepare=[job for job in rejected_jobs if job['name']=='prepare']
+          assert len(rejected_prepare)==1 and rejected_prepare[0]['conclusion']=='failure', 'rejected preparation is not final'
+          rejected_steps={step['name']:step['conclusion'] for step in rejected_prepare[0]['steps']}
+          assert rejected_steps.get('Deploy with rollback and resource measurements')=='failure', 'expected measured acceptance rejection missing'
+          for name in ['Prepare exact price indexes before activating the release','Persist verified private evidence for market_prices']:
+              assert rejected_steps.get(name)=='success', 'last market preparation/evidence did not pass'
+          rollback=api('actions/runs/43107566632')
+          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='e42b8002f0e570a0d87c3f5f501a07efaef479b6', 'independent retained-runtime proof changed'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
+          print(json.dumps({'source':sha,'candidate':1753,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          git fetch --depth=1 origin f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc
+          git fetch --depth=1 origin 8778bd38be3f26227c383db5800239beb98f6182
           node --input-type=module <<'VERIFY'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -84,6 +99,11 @@ jobs:
           const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
           assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          assert.equal(m.sourceReviews.encyclopediaRead,'f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc');
+          assert.equal(m.sourceReviews.overlayHistory,'8778bd38be3f26227c383db5800239beb98f6182');
+          for(const key of ['encyclopediaRead','overlayHistory'])for(const path of m.sourceReviewScope[key]){
+            assert.equal(fs.readFileSync(path,'utf8'),execFileSync('git',['show',m.sourceReviews[key]+':'+path],{encoding:'utf8'}),'reviewed content differs: '+path);
+          }
           console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
           VERIFY
       - uses: actions/setup-node@v4
@@ -115,7 +135,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '794654a00aa4990b284858f1f01c07ed3f020df4'
+          ref: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -124,16 +144,16 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='794654a00aa4990b284858f1f01c07ed3f020df4'
+          sha='75c2e6f57cfa4022865217e029a1f5d1671842c3'
           def api(path):
               return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1748')
+          p=api('pulls/1753')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
-          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2"}
-          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture')]:
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead')]:
               review=api(f'pulls/{number}')
               assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
-          required=[{"id":43089076693,"name":"Verify dealer banner and Yandex map"},{"id":43089076694,"name":"Verify owner UI polish"},{"id":43089076704,"name":"Verify per-car services and edit links"},{"id":43089076734,"name":"Verify Dubicars paid feed"},{"id":43089076737,"name":"Verify offer sharing"},{"id":43089076756,"name":"Verify dealer selection sharing"},{"id":43089076761,"name":"Verify dealer workspace"},{"id":43089076775,"name":"Verify local model suggestions"},{"id":43089076867,"name":"Verify green corner budget"},{"id":43089076876,"name":"CI"},{"id":43089076900,"name":"Verify sticky catalog controls"},{"id":43089076902,"name":"QR and gallery browser QA"},{"id":43089077030,"name":"Verify catalog load more"},{"id":43089077063,"name":"Verify catalog sidebar and search"},{"id":43089077071,"name":"Verify site controls and chat"},{"id":43089077077,"name":"Verify catalog failure isolation"},{"id":43089077092,"name":"Verify city picker"},{"id":43089077137,"name":"Verify model search controls"}]
+          required=[{"id":43109457783,"name":"Verify green corner budget"},{"id":43109457791,"name":"CI"},{"id":43109457803,"name":"Verify catalog failure isolation"},{"id":43109457822,"name":"Verify dealer workspace"},{"id":43109457826,"name":"Verify site controls and chat"},{"id":43109457895,"name":"Verify per-car services and edit links"},{"id":43109457916,"name":"Verify catalog sidebar and search"},{"id":43109457920,"name":"Verify owner UI polish"},{"id":43109457951,"name":"Verify dealer selection sharing"},{"id":43109457969,"name":"Verify dealer banner and Yandex map"},{"id":43109458019,"name":"Verify model search controls"},{"id":43109458037,"name":"Verify catalog load more"},{"id":43109458107,"name":"Verify sticky catalog controls"},{"id":43109458113,"name":"QR and gallery browser QA"},{"id":43109458143,"name":"Verify city picker"},{"id":43109458209,"name":"Verify offer sharing"},{"id":43109458276,"name":"Verify local model suggestions"},{"id":43109458967,"name":"Verify Dubicars paid feed"}]
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert runs['total_count']<=100, 'unbounded source check inventory'
           actual={r['id']:r for r in runs['workflow_runs']}
@@ -154,16 +174,31 @@ jobs:
           for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
               assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
           assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
+          rejected=api('actions/runs/43098821534')
+          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='97ee63438e27862c6363c81db7b6eb0c9bcbf8b6', 'last rejected release is not terminal or changed'
+          rejected_pr=api('pulls/1748')
+          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='794654a00aa4990b284858f1f01c07ed3f020df4', 'rejected source metadata changed'
+          rejected_jobs=api('actions/runs/43098821534/jobs?per_page=100')['jobs']
+          rejected_prepare=[job for job in rejected_jobs if job['name']=='prepare']
+          assert len(rejected_prepare)==1 and rejected_prepare[0]['conclusion']=='failure', 'rejected preparation is not final'
+          rejected_steps={step['name']:step['conclusion'] for step in rejected_prepare[0]['steps']}
+          assert rejected_steps.get('Deploy with rollback and resource measurements')=='failure', 'expected measured acceptance rejection missing'
+          for name in ['Prepare exact price indexes before activating the release','Persist verified private evidence for market_prices']:
+              assert rejected_steps.get(name)=='success', 'last market preparation/evidence did not pass'
+          rollback=api('actions/runs/43107566632')
+          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='e42b8002f0e570a0d87c3f5f501a07efaef479b6', 'independent retained-runtime proof changed'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
+          print(json.dumps({'source':sha,'candidate':1753,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          git fetch --depth=1 origin f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc
+          git fetch --depth=1 origin 8778bd38be3f26227c383db5800239beb98f6182
           node --input-type=module <<'VERIFY'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -173,6 +208,11 @@ jobs:
           const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
           assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          assert.equal(m.sourceReviews.encyclopediaRead,'f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc');
+          assert.equal(m.sourceReviews.overlayHistory,'8778bd38be3f26227c383db5800239beb98f6182');
+          for(const key of ['encyclopediaRead','overlayHistory'])for(const path of m.sourceReviewScope[key]){
+            assert.equal(fs.readFileSync(path,'utf8'),execFileSync('git',['show',m.sourceReviews[key]+':'+path],{encoding:'utf8'}),'reviewed content differs: '+path);
+          }
           console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
           VERIFY
       - uses: actions/setup-node@v4
@@ -182,6 +222,10 @@ jobs:
       - run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           npm ci
+      - name: Verify current encyclopedia reads and overlay history before preparation
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/encyclopedia-conditional-manifest.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-directory-aliases.test.ts tests/encyclopedia-directory-wire.test.ts tests/overlay-history-scroll.test.ts
       - name: Verify exact encyclopedia matching
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -409,6 +453,8 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          git fetch --depth=1 origin f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc
+          git fetch --depth=1 origin 8778bd38be3f26227c383db5800239beb98f6182
           node --input-type=module <<'VERIFY'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -418,6 +464,11 @@ jobs:
           const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
           assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          assert.equal(m.sourceReviews.encyclopediaRead,'f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc');
+          assert.equal(m.sourceReviews.overlayHistory,'8778bd38be3f26227c383db5800239beb98f6182');
+          for(const key of ['encyclopediaRead','overlayHistory'])for(const path of m.sourceReviewScope[key]){
+            assert.equal(fs.readFileSync(path,'utf8'),execFileSync('git',['show',m.sourceReviews[key]+':'+path],{encoding:'utf8'}),'reviewed content differs: '+path);
+          }
           console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
           VERIFY
       - uses: actions/setup-node@v4
@@ -448,7 +499,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 794654a00aa4990b284858f1f01c07ed3f020df4
+          AVTOCENA_RELEASE_SHA: 75c2e6f57cfa4022865217e029a1f5d1671842c3
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -520,16 +571,16 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='794654a00aa4990b284858f1f01c07ed3f020df4'
+          sha='75c2e6f57cfa4022865217e029a1f5d1671842c3'
           def api(path):
               return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1748')
+          p=api('pulls/1753')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
-          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2"}
-          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture')]:
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead')]:
               review=api(f'pulls/{number}')
               assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
-          required=[{"id":43089076693,"name":"Verify dealer banner and Yandex map"},{"id":43089076694,"name":"Verify owner UI polish"},{"id":43089076704,"name":"Verify per-car services and edit links"},{"id":43089076734,"name":"Verify Dubicars paid feed"},{"id":43089076737,"name":"Verify offer sharing"},{"id":43089076756,"name":"Verify dealer selection sharing"},{"id":43089076761,"name":"Verify dealer workspace"},{"id":43089076775,"name":"Verify local model suggestions"},{"id":43089076867,"name":"Verify green corner budget"},{"id":43089076876,"name":"CI"},{"id":43089076900,"name":"Verify sticky catalog controls"},{"id":43089076902,"name":"QR and gallery browser QA"},{"id":43089077030,"name":"Verify catalog load more"},{"id":43089077063,"name":"Verify catalog sidebar and search"},{"id":43089077071,"name":"Verify site controls and chat"},{"id":43089077077,"name":"Verify catalog failure isolation"},{"id":43089077092,"name":"Verify city picker"},{"id":43089077137,"name":"Verify model search controls"}]
+          required=[{"id":43109457783,"name":"Verify green corner budget"},{"id":43109457791,"name":"CI"},{"id":43109457803,"name":"Verify catalog failure isolation"},{"id":43109457822,"name":"Verify dealer workspace"},{"id":43109457826,"name":"Verify site controls and chat"},{"id":43109457895,"name":"Verify per-car services and edit links"},{"id":43109457916,"name":"Verify catalog sidebar and search"},{"id":43109457920,"name":"Verify owner UI polish"},{"id":43109457951,"name":"Verify dealer selection sharing"},{"id":43109457969,"name":"Verify dealer banner and Yandex map"},{"id":43109458019,"name":"Verify model search controls"},{"id":43109458037,"name":"Verify catalog load more"},{"id":43109458107,"name":"Verify sticky catalog controls"},{"id":43109458113,"name":"QR and gallery browser QA"},{"id":43109458143,"name":"Verify city picker"},{"id":43109458209,"name":"Verify offer sharing"},{"id":43109458276,"name":"Verify local model suggestions"},{"id":43109458967,"name":"Verify Dubicars paid feed"}]
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert runs['total_count']<=100, 'unbounded source check inventory'
           actual={r['id']:r for r in runs['workflow_runs']}
@@ -550,11 +601,24 @@ jobs:
           for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
               assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
           assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
+          rejected=api('actions/runs/43098821534')
+          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='97ee63438e27862c6363c81db7b6eb0c9bcbf8b6', 'last rejected release is not terminal or changed'
+          rejected_pr=api('pulls/1748')
+          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='794654a00aa4990b284858f1f01c07ed3f020df4', 'rejected source metadata changed'
+          rejected_jobs=api('actions/runs/43098821534/jobs?per_page=100')['jobs']
+          rejected_prepare=[job for job in rejected_jobs if job['name']=='prepare']
+          assert len(rejected_prepare)==1 and rejected_prepare[0]['conclusion']=='failure', 'rejected preparation is not final'
+          rejected_steps={step['name']:step['conclusion'] for step in rejected_prepare[0]['steps']}
+          assert rejected_steps.get('Deploy with rollback and resource measurements')=='failure', 'expected measured acceptance rejection missing'
+          for name in ['Prepare exact price indexes before activating the release','Persist verified private evidence for market_prices']:
+              assert rejected_steps.get(name)=='success', 'last market preparation/evidence did not pass'
+          rollback=api('actions/runs/43107566632')
+          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='e42b8002f0e570a0d87c3f5f501a07efaef479b6', 'independent retained-runtime proof changed'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
+          print(json.dumps({'source':sha,'candidate':1753,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Deploy with rollback and resource measurements
         id: deploy_acceptance
