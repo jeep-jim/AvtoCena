@@ -1,5 +1,6 @@
 {
+  "action": "diagnose",
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "reason": "Owner reports nginx 502; independently confirmed public / and /api/health both return 502. Read cause and recover the same installed container only if unhealthy.",
-  "requestedAt": "2026-11-11T04:45:51.197978+00:00"
+  "reason": "Verify restart policy, crash evidence and restored process without signals or runtime changes",
+  "attempt": 2
 }
