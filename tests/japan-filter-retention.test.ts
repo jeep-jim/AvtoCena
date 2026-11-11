@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {appendJapanFilterQuery,rememberedJapanFilter,JAPAN_FILTER_KEYS,savedJapanFilterKey} from '../apps/web/lib/catalog/japan-filter-retention';
 import {ajesCatalogQuery,ajesQuery,AjesFilterUnavailable} from '../apps/web/lib/catalog/ajes-query';
+import {selectionQuery,selectionTarget} from '../apps/web/lib/dealers/selection-share';
 
 const chosen={chassis:'ZVW30',frameNumber:'ZVW30-1234567',lotNumber:'12345',auctionGrade:'4.5',salePeriod:'month'};
 function paramsFor(market:string,stock='',fields=chosen){const params=new URLSearchParams({market,make:'TOYOTA',model:'PRIUS',budget:'1500000'});appendJapanFilterQuery(params,{market,stock,...fields});return params;}
@@ -22,6 +23,17 @@ test('returning to Japan restores every choice after a URL round trip',()=>{
  const restored=Object.fromEntries(JAPAN_FILTER_KEYS.map(key=>[key,rememberedJapanFilter(initial,key)])) as typeof chosen;
  const params=paramsFor('japan','',restored);for(const key of JAPAN_FILTER_KEYS)assert.equal(params.get(key),chosen[key]);
  assert.doesNotThrow(()=>ajesQuery(ajesCatalogQuery(Object.fromEntries(params))));
+});
+test('shared selections preserve remembered choices through the validated public query',()=>{
+ const params=paramsFor('korea');params.set('token','private');params.set('preview','1');params.set('leadId','private');
+ const shared=new URL(selectionTarget('external',selectionQuery(params).toString()),'https://avtocena.com').searchParams;
+ for(const key of JAPAN_FILTER_KEYS){assert.equal(shared.get(savedJapanFilterKey(key)),chosen[key]);assert.equal(shared.has(key),false);}
+ for(const key of ['token','preview','leadId'])assert.equal(shared.has(key),false);
+ const restored=Object.fromEntries(JAPAN_FILTER_KEYS.map(key=>[key,rememberedJapanFilter(Object.fromEntries(shared),key)])) as typeof chosen;
+ const query=ajesCatalogQuery(Object.fromEntries(paramsFor('japan','',restored)));
+ for(const key of JAPAN_FILTER_KEYS)assert.equal(query[key],chosen[key]);
+ assert.doesNotThrow(()=>ajesQuery(query));
+ assert.throws(()=>selectionQuery(new URLSearchParams({savedJapanFrameNumber:'<script>'})),/invalid_selection/);
 });
 test('explicitly removing one remembered choice removes both keys and keeps the others',()=>{
  const params=paramsFor('korea');params.set('frameNumber',chosen.frameNumber);

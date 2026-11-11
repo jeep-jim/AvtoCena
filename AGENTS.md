@@ -1,7 +1,18 @@
-# Inactive Japan field retention — 11.11.2026
+# Isolated selection, navigation and shared-query repair
 
-- This isolated candidate supersedes cancelled2b7c3e2. It stores Japan-specific values under savedJapan* URL keys outside the Japan auction catalogue and restores their active keys on return; supplier filtering remains unchanged. Local query-builder regression tests and TypeScript pass; require current browser results and complete release acceptance before activation.
-- Application differences from accepted a182 are exactly the11 paths in docs/operations/2026-11-11-navigation-release-manifest.json. Do not deploy main wholesale. No supplier full-database permission or14/3-day schedule is introduced.
+This candidate supersedes cancelled2b7c3e2 and3c641141. Exactly12 application paths differ from accepted a182. Require the full source/browser and unchanged release gates. Both predecessors stopped before activation. Shared query sanitization now retains only the five validated savedJapan* keys; private parameters remain excluded.
+
+# Shared selection correction before release — 11.11.2026 14:47 UTC
+
+- Run43039722046 / candidate3c641141 was cancelled before activation by guarded controller43041124657; Deploy=skipped. It must not be resumed. Prior2b7c3e2 is also cancelled. Accepted runtime a182 has not been switched by these runs.
+- Final query-state fix adds the five savedJapan* fields to the existing validated selectionQuery whitelist. Preserve its300-character and unsafe-character validation and exclusion of private flags/tokens. Tests now cover supplier query→shared selection→Japan restoration and actual dealer sharing after filters/reload.
+- Local15 shared-query/regression tests and TypeScript pass. Expanded browser workflow runs next; require its outcome and create a new exact isolated candidate before release. No feed mirror or14/3-day schedule is authorized by this code change.
+
+# Current isolated candidate — 11.11.2026 14:33 UTC
+
+- Candidate 3c641141b49135cdb1109f6e09ea42675998060f supersedes cancelled2b7c3e2. Active run43039722046 is pinned to this candidate; inspect it before starting another release. Its source checks passed and encyclopedia preparation is running. Application ancestry is accepted a182 with11 UI/query-state paths only. Installation is NOT confirmed yet.
+- Source verification43039169001 passed33 units, TypeScript and28 browser checks at390/1440, including Japan→Korea→Japan, saved inactive Japan fields, explicit removal, new pages at top and Back; pageErrors=[].
+- Keep main's rejected budget/uninstalled home code out of runtime; preserve unchanged accepted-speed guards, mandatory browser verdict and accepted a182 image. Source JP/KR and full-DUMP authorization remain unresolved;14/3-day schedules remain unchanged.
 
 # Candidate stopped before activation — 11.11.2026 14:23 UTC
 
