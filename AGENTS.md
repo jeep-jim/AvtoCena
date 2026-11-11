@@ -1,3 +1,9 @@
+# Candidate stopped before activation — 11.11.2026 14:23 UTC
+
+- Run43030988703 was cancelled during price preparation; Deploy step was skipped. Candidate2b7c3e2 was NOT installed. Do not rerun it.
+- Newly found cross-market issue: preserved Japan frameNumber is sent as active Korea/China input, where ajesCatalogQuery throws AjesFilterUnavailable. Store inactive Japan-specific fields separately in URL, restore on Japan return, and test through actual query builder before producing a new candidate.
+- Accepted a182 remains the runtime baseline; source/main still includes rejected budget/uninstalled home work. Keep isolated application ancestry and all current speed/browser rollback guards. Read latest roadmap before releasing.
+
 # Owner selection/scroll repair and feed proposal — 11.11.2026 13:39 UTC
 
 - Owner asks to preserve chosen cars/models/filters until explicit removal, open new pages at the top, retain Back position, finish recovery and record every milestone in roadmap. Owner publication authorization persists.
