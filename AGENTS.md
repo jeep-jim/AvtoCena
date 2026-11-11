@@ -1,6 +1,6 @@
 # Current isolated candidate — 11.11.2026 14:33 UTC
 
-- Candidate 3c641141b49135cdb1109f6e09ea42675998060f supersedes cancelled2b7c3e2. Run owner-navigation-release.yml pinned to this candidate; inspect its latest run before starting another release. Application ancestry is accepted a182 with11 UI/query-state paths only. Installation is NOT confirmed yet.
+- Candidate 3c641141b49135cdb1109f6e09ea42675998060f supersedes cancelled2b7c3e2. Active run43039722046 is pinned to this candidate; inspect it before starting another release. Its source checks passed and encyclopedia preparation is running. Application ancestry is accepted a182 with11 UI/query-state paths only. Installation is NOT confirmed yet.
 - Source verification43039169001 passed33 units, TypeScript and28 browser checks at390/1440, including Japan→Korea→Japan, saved inactive Japan fields, explicit removal, new pages at top and Back; pageErrors=[].
 - Keep main's rejected budget/uninstalled home code out of runtime; preserve unchanged accepted-speed guards, mandatory browser verdict and accepted a182 image. Source JP/KR and full-DUMP authorization remain unresolved;14/3-day schedules remain unchanged.
 
