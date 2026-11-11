@@ -4,7 +4,17 @@
   "conclusion": "rejected_and_automatic_rollback_reported",
   "reason": "accepted_speed_regression:/",
   "finishedAt": "2026-11-11T11:43:01Z",
-  "liveRollbackVerification": "pending",
+  "liveRollbackVerification": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43014623074",
+    "at": "2026-11-11T11:46:16Z",
+    "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "running": true,
+    "http": 200,
+    "healthSeconds": 0.013,
+    "manualStop": false,
+    "inspector": "closed",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f"
+  },
   "measurements": [
     {
       "speedBaseline": "warm",
@@ -1807,5 +1817,21 @@
       ],
       "recheckMedianSeconds": 2.3584
     }
-  ]
+  ],
+  "stoppedCandidateDiagnostic": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43014623101",
+    "oomKilled": false,
+    "exitCode": 0,
+    "largestLoggedStorageReadMs": 3531,
+    "visitorRestrictedMessages": 6,
+    "causalAttribution": "not established; home phase timing disabled"
+  },
+  "recheck": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43016410665",
+    "status": "in_progress",
+    "baselineChanged": false,
+    "applicationImageChanged": false,
+    "homePhaseTimingEnabled": true,
+    "earlierValidationOnlyFailure": 43016188507
+  }
 }
