@@ -9,7 +9,7 @@ function Fixture(){
   useEffect(()=>{document.documentElement.dataset.ready='true';},[]);
   return <DealerBrowsingProvider dealer={{id:'dealer_topavto',name:'Top Avto',logoLight:'',logoDark:'',href:'/dealers/dealer_topavto',preview:false,markets:['china','japan']}}>
     <header style={{position:'fixed',top:0,zIndex:99,background:'white'}}><button id="next-offer" onClick={()=>setId('second')}>Другая карточка</button></header>
-    <main><h1>Основная карточка</h1><div style={{height:2000}}>Цена и характеристики доступны сразу</div><DeferredOfferRecommendations offerId={id} markets={['china','japan']} kind={kind}/></main>
+    <main><h1>Основная карточка</h1><div style={{height:2000}}>Цена и характеристики доступны сразу</div><DeferredOfferRecommendations offerId={id} markets={['china','japan']} kind={kind}/></main><footer className="ac-public-legal-footer" style={{height:200}}>АвтоЦена</footer>
   </DealerBrowsingProvider>;
 }
 createRoot(document.getElementById('root')!).render(<Fixture/>);
