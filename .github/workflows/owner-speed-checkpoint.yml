@@ -1,0 +1,35 @@
+name: Record owner stable speed checkpoint once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-speed-checkpoint.json']
+permissions:
+  contents: write
+concurrency:
+  group: avtocena-speed-roadmap-record
+  cancel-in-progress: false
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Append the actual owner task and unfinished release status
+        run: |
+          set -euo pipefail
+          cp .github/market-runs/owner-speed-checkpoint.json /tmp/owner-speed-checkpoint.json
+          git fetch origin main
+          git checkout -B owner-speed-checkpoint origin/main
+          python3 - <<'PY'
+          import json, os, pathlib
+          entry=json.loads(pathlib.Path('/tmp/owner-speed-checkpoint.json').read_text())['entry']
+          entry+='\n- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/'+os.environ['GITHUB_SHA']+'\n'
+          with open('roadmap.md','a') as output:output.write('\n\n'+entry+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add roadmap.md
+          git commit -m 'docs: record stable speed changes and actual release status'
+          git push origin HEAD:main

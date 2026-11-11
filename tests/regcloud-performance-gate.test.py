@@ -25,6 +25,18 @@ class GateTests(unittest.TestCase):
   for body in [{'items':[],'total':100},{'items':[{}],'total':0}]:
    with self.assertRaises(AssertionError):gate.validate('/search','search',200,json.dumps(body).encode(),'x')
   with self.assertRaises(AssertionError):gate.validate('/health','health',200,b'{"ok":true,"releaseSha":"old"}','new')
+ def test_nonempty_search_does_not_hide_stale_partial_or_failed_data(self):
+  valid={'ok':True,'items':[{'id':'car'}],'total':24}
+  for flags in [{'stale':True},{'partial':True},{'interrupted':True},{'countIncomplete':True},{'error':'storage_timeout'},{'ok':False}]:
+   with self.subTest(flags=flags),self.assertRaisesRegex(AssertionError,'performance_incomplete_search'):
+    gate.validate('/api/catalog/search?market=china','search',200,json.dumps({**valid,**flags}).encode(),'x')
+  # A complete page may still have subsequent pages. It must not be confused
+  # with an interrupted/incomplete scan or an explicitly stale fallback.
+  gate.validate('/api/catalog/search?market=china','search',200,json.dumps({**valid,'hasMore':True,'nextCursor':'page2','stale':False,'partial':False,'interrupted':False,'countIncomplete':False}).encode(),'x')
+ def test_search_success_requires_real_rows_and_a_finite_positive_count(self):
+  for value in [[],{'items':{'id':'not-an-array'},'total':24},{'items':[{}],'total':True},{'items':[{}],'total':'24'},{'items':[{}],'total':float('inf')},{'items':[{}],'total':float('nan')}]:
+   with self.subTest(value=value),self.assertRaisesRegex(AssertionError,'performance_empty_search'):
+    gate.validate('/api/catalog/search?market=china','search',200,json.dumps(value).encode(),'x')
  def test_catalog_error_page_cannot_pass_as_fast_html(self):
   for body in [b'<html>Catalog unavailable</html>',b'<html><article>News</article></html>',b'<html><article class="ac-catalog-card"></article></html>',b'<html><script>const fake="<article class=\'ac-catalog-card\'><a href=\'/cars/offer/fake\'>fake</a></article>";</script></html>']:
    with self.assertRaises(AssertionError):gate.validate('/cars','catalog',200,body,'x')
