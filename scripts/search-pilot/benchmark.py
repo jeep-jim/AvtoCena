@@ -47,13 +47,57 @@ def sample(db,q):
  elapsed=(time.perf_counter()-started)*1000
  assert ids==q['ids'] and total==q['total'],q['name']+'_parity_failed'
  return elapsed
+def verify_publication_isolation():
+ # A new feed can become active between the page and count reads. Exercise an
+ # actual second connection, plus an interrupted publication, before trusting
+ # the pilot's snapshot-consistency claim. All writes stay in the disposable DB.
+ staged=generation+'-publication-fixture'
+ class InterruptedPublication(Exception):pass
+ with connect() as writer,connect() as reader:
+  try:
+   writer.execute('INSERT INTO search_pilot_generation VALUES (%s,false)',[staged])
+   writer.execute('INSERT INTO search_pilot_offer SELECT %s,city,id,make,model,year,power,price FROM search_pilot_offer WHERE generation=%s ORDER BY city,id LIMIT 37',[staged,generation])
+   assert writer.execute('SELECT count(*) FROM search_pilot_offer WHERE generation=%s',[staged]).fetchone()[0]==37
+   assert writer.execute('SELECT count(*) FROM search_pilot_visible').fetchone()[0]==source['cityRows']
+   try:
+    with writer.transaction():
+     writer.execute('UPDATE search_pilot_generation SET ready=true WHERE generation=%s',[staged])
+     writer.execute('UPDATE search_pilot_active SET generation=%s',[staged])
+     raise InterruptedPublication()
+   except InterruptedPublication:pass
+   assert writer.execute('SELECT generation FROM search_pilot_active').fetchone()[0]==generation
+   assert writer.execute('SELECT ready FROM search_pilot_generation WHERE generation=%s',[staged]).fetchone()[0] is False
+   with reader.transaction():
+    reader.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY')
+    pinned=reader.execute('SELECT generation FROM search_pilot_active').fetchone()[0]
+    q=cases[0];sql,args,count,countargs=queries(q,pinned)
+    ids=[r[0] for r in reader.execute(sql,args).fetchall()]
+    with writer.transaction():
+     writer.execute('UPDATE search_pilot_generation SET ready=true WHERE generation=%s',[staged])
+     writer.execute('UPDATE search_pilot_active SET generation=%s',[staged])
+    assert writer.execute('SELECT count(*) FROM search_pilot_visible').fetchone()[0]==37
+    assert reader.execute('SELECT generation FROM search_pilot_active').fetchone()[0]==pinned
+    total=reader.execute(count,countargs).fetchone()[0]
+    assert ids==q['ids'] and total==q['total'],'publication_mixed_page_and_count'
+    assert reader.execute('SELECT count(*) FROM search_pilot_visible').fetchone()[0]==source['cityRows']
+   assert reader.execute('SELECT generation FROM search_pilot_active').fetchone()[0]==staged
+   assert reader.execute('SELECT count(*) FROM search_pilot_visible').fetchone()[0]==37
+  finally:
+   with writer.transaction():
+    writer.execute('UPDATE search_pilot_active SET generation=%s',[generation])
+    writer.execute('DELETE FROM search_pilot_offer WHERE generation=%s',[staged])
+    writer.execute('DELETE FROM search_pilot_generation WHERE generation=%s',[staged])
+  assert reader.execute('SELECT count(*) FROM search_pilot_visible').fetchone()[0]==source['cityRows']
+ return {'interruptedPublicationRollsBack':True,'pageAndCountStayOnOneSnapshot':True,'newRequestsSeePublishedSnapshot':True,'previousSnapshotRestored':True}
+
 def plan_summary(plan):
  out=[]
  def visit(node):
   out.append({k:node[k] for k in ['Node Type','Index Name','Actual Rows','Actual Loops','Sort Method','Shared Hit Blocks','Shared Read Blocks'] if k in node})
   for child in node.get('Plans',[]):visit(child)
  visit(plan['Plan']);return out
-report={**source,'environment':'ephemeral GitHub Actions PostgreSQL 16; only DB page+count time, no HTML/network/photos','correctness':{'sameSnapshotIdsAndCounts':True,'unpublishedGenerationInvisible':True,'unreadyGenerationBlocked':True,'failedImportPreservesActive':True},'cases':[],'passed':False}
+publication=verify_publication_isolation()
+report={**source,'environment':'ephemeral GitHub Actions PostgreSQL 16; only DB page+count time, no HTML/network/photos','correctness':{'sameSnapshotIdsAndCounts':True,'unpublishedGenerationInvisible':True,'unreadyGenerationBlocked':True,'failedImportPreservesActive':True,**publication},'cases':[],'passed':False}
 for q in cases:
  with connect() as db:
   first=sample(db,q);sql,args,count,countargs=queries(q,generation)

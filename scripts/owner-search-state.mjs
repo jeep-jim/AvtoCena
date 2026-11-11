@@ -7,7 +7,7 @@ if(marker.mode==='budget-failure-evidence'){
  const records=[];
  for(const table of ['stats','korea'])for(const slot of ['catalog-failure-'+table+'.json','catalog-failure-pages/'+table+'-list-1.json']){
   const value=await storage.readJson('integrations/ajes/'+slot,null);
-  records.push({table,slot,...Object.fromEntries(['kind','page','pageSize','startedAt','finishedAt','httpStatus','outcome'].map(key=>[key,value?.[key]??null])),providerCode:/^(bot|ban)\d*$/i.test(value?.providerCode||'')?value.providerCode:null});
+  records.push({table,slot,...Object.fromEntries(['kind','page','pageSize','startedAt','finishedAt','httpStatus','outcome'].map(key=>[key,value?.[key]??null])),providerCode:/^(?:(?:bot|ban)\d*|ban_limit)$/i.test(value?.providerCode||'')?value.providerCode:null});
  }
  const editorial=await storage.readJson('catalog-editorial/current.json',null);
  const editedSellerPrices={};for(const market of ['japan','korea'])editedSellerPrices[market]=Object.values(editorial?.entries||{}).filter(row=>row.market===market&&row.status==='visible'&&row.sellerPrice).length;
