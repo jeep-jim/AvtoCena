@@ -1,0 +1,51 @@
+name: Capture owner accepted speed baseline once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-speed-baseline.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Capture exact accepted release without changing runtime
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          expected=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/owner-speed-baseline.json"))["release"];assert re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
+          remote_dir="/opt/avtocena/owner-speed-baseline-${GITHUB_RUN_ID}"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 mkdir -m 700 "$remote_dir"
+          scp "${ssh_opts[@]}" scripts/owner-speed-baseline.py scripts/regcloud-performance-gate.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 bash -s -- "$expected" "$remote_dir" <<'REMOTE' | tee owner-speed-baseline.log
+          set -euo pipefail
+          expected=$1
+          probe_dir=$2
+          trap 'rm -f "$probe_dir/owner-speed-baseline.py" "$probe_dir/regcloud-performance-gate.py"; rm -rf "$probe_dir/__pycache__"; rmdir "$probe_dir"' EXIT
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 30 9
+          test "$(docker exec avtocena-production node -e 'console.log(process.env.AVTOCENA_RELEASE_SHA)')" = "$expected"
+          port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
+          printf 'EXACT_RELEASE %s\n' "$expected"
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          timeout 1100 python3 "$probe_dir/owner-speed-baseline.py" "http://127.0.0.1:$port" "$expected"
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          REMOTE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-speed-baseline
+          path: owner-speed-baseline.log

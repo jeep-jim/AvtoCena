@@ -1,3 +1,10 @@
+# Owner accepted speed and phased optimization — 11.11.2026
+
+- Owner explicitly accepts current production a182cd21b21ecf612b63613d263e5bdd817ea4c0 as substantially faster and authorizes the proposed staged optimization, with an urgent Japan/Korea delivered-budget filter repair (1,500,000 RUB).
+- Preserve this release and measured baseline before changes. This new instruction supersedes the 28.10 latency-advisory exception for regressions against the accepted baseline: do not activate a measured slowdown. Compare correct visible results and full responses under equivalent warm/expired conditions, recording variability and supplier dependence; do not claim a universal latency guarantee.
+- Implement in stages with per-market rollback. Keep prices, source restrictions/real visitor IP, complete model directories, withdrawal rules, editorial/customer data and ordinary collection schedules. Full Japan/Korea bulk synchronization still requires supplier permission. Do not evade restrictions or fabricate technical facts to fill a budget result.
+- No infrastructure purchase, provider contract change, database production migration or reactivation of old periodic diagnostics has been performed merely by recording this instruction. First test changes and produce concrete evidence. Existing authorized release-triggered checks remain allowed.
+
 # Owner search and speed recovery — 11.11.2026
 
 - The owner now explicitly requests safe speed recovery, repair of encoded %20 model names, BMW 3 search and complete visible model suggestions. The 30+ second /cars loading incident is in scope. This new instruction supersedes the freeze only for this targeted repair; preserve crawler blocking, ordinary feed schedules, prices/specification evidence and customer data. Publish verified corrections under the existing owner authorization, using unchanged functional/security gates and truthful before/after measurements.
