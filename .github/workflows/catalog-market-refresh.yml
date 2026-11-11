@@ -273,6 +273,12 @@ jobs:
       - name: Verify China intake and final publication year boundaries
         if: matrix.market == 'china'
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/china-year-policy.test.ts tests/catalog-auto-api-che168.test.ts
+      - name: Verify atomic dated catalog pages before publication
+        env:
+          JSON_STORAGE_DRIVER: local
+        run: |
+          test -f tests/catalog-publication-page-window.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-publication-page-window.test.ts
       - name: Publish markets through calculation and retention guards
         env:
           # Reader deployed and health-verified in f4d7d22 (23 October 2026).
