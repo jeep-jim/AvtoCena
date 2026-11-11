@@ -198,7 +198,7 @@ jobs:
             npx tsx scripts/prepare-catalog-colors.mjs
           fi
           # Supplier switching belongs to collection operations, never to an app release.
-          CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
       - name: Preserve individual market preparation results
         if: always()
         uses: actions/upload-artifact@v4

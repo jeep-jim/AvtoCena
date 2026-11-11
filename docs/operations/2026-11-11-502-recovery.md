@@ -1,3 +1,9 @@
+# 11.11.2026 — возобновление точного a182 после таймаута подготовки страниц
+
+- Original [run42978644198](https://github.com/jeep-jim/AvtoCena/actions/runs/42978644198) завершился FAILURE ДО переключения. Все пять рынков прошли цены/parity, immutable index и image a182 готовы; это подтверждает release-market-preparation artifact13837817687. Отказ в07:45:37UTC: object_storage_response_timeout, bytes0 на полной projection/china.json из catalog-refresh-generation-pages. Это этап подготовки, не падение нового приложения.
+- [49954395](https://github.com/jeep-jim/AvtoCena/commit/49954395a9a594b6f800fc11cf4d10539fd76125) запускает one-shot owner-resume-prepared-release: checkout точного a182, проверка всех успешных original gates/артефактов, восстановление привязанного immutable индекса, проверка неизменной generation, завершение тех же страниц с уже используемым offline timeout120с, затем неизменённые pre/post gates/rollback и public ASTRA. Новый app image не собирается; старая неготовая049 не используется.
+- Для следующих штатных выпусков такой же offline timeout добавлен именно к команде подготовки страниц. Visitor deadlines, расчёты, защита источников и обычные фиды не меняются. Публикация a182 и итоговая публичная проверка ещё не подтверждены.
+
 # 11.11.2026 — текущий выпуск a182 готовится, приёмка не завершена
 
 - Целевой SHA `a182cd21b21ecf612b63613d263e5bdd817ea4c0`, [run42978644198](https://github.com/jeep-jim/AvtoCena/actions/runs/42978644198), job130383871927. Проверки энциклопедии,98 проверок каталога/очередей, браузер390/1280 для обоих видов рекомендаций, security и storage прошли; идёт подготовка приватного индекса. Установка ещё не выполнена.
