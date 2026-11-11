@@ -1,6 +1,6 @@
 {
   "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "requestedAt": "2026-11-11T08:34:26.585530+00:00",
-  "reason": "Verify exact a182 after successful pre/post-switch acceptance: homepage, catalog, BMW3/decoded name, Europe, full model directory, crawler policy, real mobile/desktop offer and viewport deferred recommendations.",
+  "requestedAt": "2026-11-11T08:46:47.202636+00:00",
+  "reason": "Repeat after public ASTRA finished: investigate BMW3 latency; browser records real initial rail geometry and actual IntersectionObserver/fetch order at390/1280 instead of assuming all desktop rails start below viewport. Keep exact-release, live cards, one request, DTO and error assertions.",
   "includeHome": true
 }
