@@ -2,8 +2,9 @@ name: Regcloud — prepare shared budget prices
 on:
   workflow_dispatch:
   schedule:
-    # The calculation fingerprint changes at UTC midnight.
-    - cron: '11 0 * * *'
+    # UTC: start one minute after the calculation fingerprint changes at midnight.
+    # Removes 10 minutes of scheduled delay; queue/setup/warmup still take time.
+    - cron: '1 0 * * *'
   push:
     branches: [main]
     paths: [apps/web/lib/catalog/shared-budget-prices.ts, apps/web/lib/catalog/budget-market-index.ts, apps/web/lib/catalog/budget-selector-codec.ts, scripts/catalog-budget-shared-warmup.mjs, scripts/catalog-budget-runtime.mjs]

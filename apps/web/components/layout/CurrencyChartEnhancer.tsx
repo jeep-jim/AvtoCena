@@ -161,24 +161,37 @@ export function CurrencyChartEnhancer() {
     document.head.appendChild(style);
 
     let frame = 0;
-
+    const pending = new Set<Element>();
+    const selector = "[data-ac-rate-segment]";
     const arrange = () => {
-      document.querySelectorAll<HTMLElement>("[data-ac-rate-segment]").forEach((node) => node.remove());
-
+      frame = 0;
+      for (const node of pending) if (node.isConnected) node.remove();
+      pending.clear();
     };
-
+    const inspect = (root: ParentNode) => {
+      if (root instanceof Element && root.matches(selector)) pending.add(root);
+      for (const node of root.querySelectorAll(selector)) pending.add(node);
+    };
     const schedule = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(arrange);
+      if (pending.size && !frame) frame = window.requestAnimationFrame(arrange);
     };
 
-    const observer = new MutationObserver(schedule);
+    // Inspect only new subtrees. Card/photo mutations must not scan the whole
+    // document, while late CMS-provided rate segments still receive cleanup.
+    const observer = new MutationObserver(records => {
+      for (const record of records) for (const node of record.addedNodes) {
+        if (node instanceof Element) inspect(node);
+      }
+      schedule();
+    });
     observer.observe(document.body, { childList: true, subtree: true });
+    inspect(document);
     schedule();
 
     return () => {
       observer.disconnect();
       window.cancelAnimationFrame(frame);
+      pending.clear();
       style.remove();
     };
   }, []);

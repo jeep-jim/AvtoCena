@@ -57,7 +57,7 @@ try{for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390});const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error('PAGE ERROR',e.stack)});page.on('console',msg=>{if(msg.type()==='error')console.error(msg.text())});
  try{
  await page.addInitScript(()=>{window.calls=[];document.cookie='avtocena_city='+encodeURIComponent('Москва')+';path=/';Object.defineProperty(navigator,'share',{value:async v=>window.calls.push(v)});Object.defineProperty(navigator,'clipboard',{value:{writeText:async v=>window.calls.push(v)}});});
- await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&city=Новокузнецк&selection=1#catalog');
+ await page.goto(origin+'/test/dealer?make=Audi&budget=2500000&city=Новокузнецк&selection=1&savedJapanChassis=ZVW30&savedJapanFrameNumber=ZVW30-1234567&savedJapanLotNumber=12345&savedJapanAuctionGrade=4.5&savedJapanSalePeriod=month#catalog');
  const send=page.getByRole('button',{name:'Поделиться подборкой',exact:true});await page.waitForTimeout(200);assert.equal(await send.count(),0,'filters must not activate selection');await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection-open',{detail:{dealerId:'external'}})));await send.waitFor();await page.locator('[data-city]').filter({hasText:'Новокузнецк'}).waitFor();
  await page.waitForFunction(()=>{const target=innerWidth>=1024?document.querySelector('.ac-catalog-heading,.ac-catalog-results'):document.getElementById('catalog');return Math.abs(target.getBoundingClientRect().top-90)<10;});
  await send.click();await page.waitForFunction(()=>window.calls.length===1);const calls=await page.evaluate(()=>window.calls);const msg=typeof calls[0]==='string'?calls[0]:calls[0].text;assert.match(msg,/^Подборка вариантов по вашему запросу\nhttp:\/\/127\.0\.0\.1:\d+\/s\/[\w-]{16}$/);if(typeof calls[0]!=='string')assert.equal(calls[0].url,undefined);
@@ -100,6 +100,7 @@ try{for(const width of [390,1440]){
  await page.getByRole('textbox',{name:'Название подборки',exact:true}).fill('');
  await page.evaluate(()=>window.calls.pop());
  const target=new URL(shares.at(-1).path,origin);assert.equal(target.hash,'#catalog');assert.equal(target.searchParams.get('city'),'Новокузнецк');assert.equal(target.searchParams.get('budget'),'2500000');
+ for(const [key,value] of Object.entries({savedJapanChassis:'ZVW30',savedJapanFrameNumber:'ZVW30-1234567',savedJapanLotNumber:'12345',savedJapanAuctionGrade:'4.5',savedJapanSalePeriod:'month'}))assert.equal(target.searchParams.get(key),value,`shared selection retains ${key} after filters and reload`);
  if(width===390){for(const method of ['button','back']){
   const beforeClose=await page.evaluate(()=>{window.scrollTo({top:900,behavior:'instant'});return window.scrollY;});assert.ok(beforeClose>500);await openFilters(page,width);await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();
   await page.waitForFunction(()=>Boolean(history.state?.acOverlayStep));
@@ -177,7 +178,7 @@ try{for(const width of [390,1440]){
  assert.equal(await chipScope.getByRole('button',{name:'Убрать Китай',exact:true}).count(),1);
  assert.equal(new URL(page.url()).pathname,'/test/dealer');
  if(width===390)await chipForm.locator('button[data-ac-mobile-close="1"]').click();
- // Green Corner's source gearbox codes cannot be reused as another market's types.
+ // Changing a source retains the user's gearbox choice verbatim, without reinterpreting or clearing it.
  const switchForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  if(width===390)await openFilters(page,width);
  else await switchForm.getByRole('button',{name:'Вариатор',exact:true}).and(switchForm.locator('.ac-filter-control')).click();
@@ -186,7 +187,7 @@ try{for(const width of [390,1440]){
  await marketRoot.locator('button.ac-filter-control').click();
  await marketRoot.getByRole('button',{name:'Япония · Зелёный угол',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('stock')==='green');
- assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
+ assert.equal(new URL(page.url()).searchParams.get('transmission'),'cvt');
  assert.equal(new URL(page.url()).searchParams.get('fuel'),'petrol|diesel');
  assert.equal(new URL(page.url()).searchParams.get('bodyType'),'sedan|hatchback');
  assert.equal(new URL(page.url()).searchParams.get('drive'),'fwd|awd');
@@ -195,7 +196,7 @@ try{for(const width of [390,1440]){
  await marketRoot.getByRole('button',{name:'Все рынки',exact:true}).click();
  await marketRoot.getByRole('button',{name:'Китай',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
- assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
+ assert.equal(new URL(page.url()).searchParams.get('transmission'),'cvt');
  assert.equal(new URL(page.url()).searchParams.get('selection'),'1');
  if(width===390)await switchForm.locator('button[data-ac-mobile-close="1"]').click();
  if(width===390){
