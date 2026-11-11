@@ -1,1 +1,5 @@
-{"release":"c57dc8ccefeb1ab7cfbfd4dd1ae53b2f9816246d","reason":"Resolve the exact saved failure stack against public compiled code from the stopped candidate; no restart or runtime changes.","phase":"exact-stack-code"}
+{
+  "release": "049f45dd531a9a64eb96acd449753643761f2e1b",
+  "requestedAt": "2026-11-11T06:42:44.802664+00:00",
+  "reason": "Read exact stopped049 failure interval after48 passing pre-switch samples and post-switchHTTP500; no restart or weakening of gates"
+}
