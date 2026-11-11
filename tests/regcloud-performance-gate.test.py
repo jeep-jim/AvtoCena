@@ -106,4 +106,49 @@ class MarketScopeTests(unittest.TestCase):
   self.assertEqual(sample.call_count,len(gate.release_routes('korea'))*4)
   self.assertTrue(all('china' not in call.args[1] for call in sample.call_args_list))
 
+class AcceptedBaselineTests(unittest.TestCase):
+ def test_expired_slow_response_cannot_be_cleared_by_warm_retries(self):
+  rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
+  for phase in ['after_ttl','after_directory_ttl']:
+   with patch.object(gate,'sample',return_value=.001) as sample,contextlib.redirect_stdout(io.StringIO()) as output:
+    with self.assertRaisesRegex(AssertionError,'accepted_speed_regression:/path'):
+     gate.check_baseline('local','/path','html','release',phase,3.7252,rows,True)
+    sample.assert_not_called()
+    result=json.loads(output.getvalue());self.assertFalse(result['passed'])
+    self.assertEqual(result['seconds'],3.7252)
+    self.assertNotIn('recheckMedianSeconds',result)
+ def test_unknown_phase_cannot_use_a_looser_expiry_reference(self):
+  rows={'/path':[{'phase':'warm_1','seconds':.5}]}
+  with self.assertRaisesRegex(AssertionError,'accepted_speed_phase_invalid'):
+   gate.check_baseline('local','/path','html','release','unknown',.1,rows,True)
+
+ def test_frozen_capture_has_all_correct_routes_and_expiry_phases(self):
+  baseline=gate.accepted_baseline('docs/operations/2026-11-11-accepted-speed-baseline.json')
+  self.assertEqual(len(baseline),17)
+  self.assertIn('/cars/china/BMW/3?powerTo=160&sort=totalRub',baseline)
+  self.assertIn('/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',baseline)
+ def test_repeated_slowdown_blocks_but_an_isolated_jitter_is_recorded(self):
+  rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
+  with patch.object(gate,'sample',side_effect=[.7,.8,.9]) as sample,contextlib.redirect_stdout(io.StringIO()):
+   with self.assertRaisesRegex(AssertionError,'accepted_speed_regression'):gate.check_baseline('local','/path','html','release','warm',.8,rows,True)
+   self.assertEqual(sample.call_count,3)
+  with patch.object(gate,'sample',side_effect=[.51,.48,.53]),contextlib.redirect_stdout(io.StringIO()):
+   result=gate.check_baseline('local','/path','html','release','warm',.8,rows,True)
+  self.assertTrue(result['passed']);self.assertEqual(result['recheckMedianSeconds'],.51)
+  with patch.object(gate,'sample',side_effect=AssertionError('must not repeat')) as sample,contextlib.redirect_stdout(io.StringIO()):
+   self.assertTrue(gate.check_baseline('local','/path','html','release','after_ttl',1.1,rows,True)['passed'])
+ def test_limited_candidate_resources_are_observed_and_full_serving_resources_are_enforced(self):
+  script=pathlib.Path('scripts/regcloud-deploy-production.sh').read_text()
+  first=script.index('python3 "$runtime/regcloud-performance-gate.py"')
+  self.assertLess(script.index('export AVTOCENA_SPEED_BASELINE_MODE=observe'),first)
+  enforced=script.index('export AVTOCENA_SPEED_BASELINE_MODE=enforce')
+  self.assertLess(script.index('docker stop --time 30 "$old"'),enforced)
+  self.assertLess(enforced,script.rindex('python3 "$runtime/regcloud-performance-gate.py"'))
+  self.assertLess(script.rindex('python3 "$runtime/regcloud-performance-gate.py"'),script.index('committed=1'))
+  workflow=pathlib.Path('.github/workflows/regcloud-deploy.yml').read_text()
+  self.assertIn('docs/operations/2026-11-11-accepted-speed-baseline.json',workflow)
+ def test_missing_baseline_cannot_silently_disable_enforced_acceptance(self):
+  with patch.dict(gate.os.environ,{'AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':''}),patch.object(sys,'argv',['gate','local','release']):
+   with self.assertRaisesRegex(AssertionError,'accepted_speed_baseline_missing'):gate.main()
+
 if __name__=='__main__':unittest.main()

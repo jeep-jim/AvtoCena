@@ -1,3 +1,24 @@
+# Active runtime and release evidence — 11.11.2026 12:47 UTC
+
+- Production is restored exact a182cd21b21ecf612b63613d263e5bdd817ea4c0 (43020674047). Restored browser43021430620 passes the original accepted envelope.3048 and2b5fc must not be reactivated without resolving the measured mobile slowdown; preserve their source/evidence.
+- Standard deployment now requires the bounded browser-verdict handshake before committing. Use scripts/regcloud-deploy-with-browser.sh and its nonce-bound receipt; never bypass this by running a historical deploy script. Offline guard tests43023263611 passed; no newer app has been activated through the new mechanism yet.
+- Preserve the exact accepted a182 image/container independently of ordinary retention counts. The pin is removed/replaced only when a newer accepted baseline is recorded. This does not pause or alter feed schedules.
+- Japan/Korea delivered-budget repair remains unfinished in production. Read docs/operations/2026-11-11-budget-speed-repair.md for exact source/availability limits and remaining tasks. A successful code test, empty stale response or SQL-only pilot is not live completion.
+
+# Verified recovery checkpoint — 11.11.2026 12:34 UTC
+
+- Production is restored accepted release a182cd21b21ecf612b63613d263e5bdd817ea4c0 (restore run 43020674047). Main contains rejected budget code and unactivated homepage code; do not equate main with production or resume the old deployment marker.
+- After-restoration browser runs 43021312299 / 43021430620 pass correct China prices at widths 390/1280. Latest filter changes 0.572–1.473s, but earlier restored mobile peak 11.897s remains; no universal or stable latency claim. Japan/Korea 1.5m budget/source recovery remains incomplete.
+- Expired-cache speed regression must fail on the expired-cache measurement itself. Immediate warmed retries cannot clear it. Only warm-phase transient jitter keeps the existing bounded retry median. Original accepted baseline, thresholds, routes and expiry delays are preserved.
+- Evidence and exact remaining work: docs/operations/current-incident.md and docs/operations/2026-11-11-restored-speed-verification.json. Homepage release 2b5fc017 / run 43020597940 was cancelled before build/install/activation; its source and tests remain available.
+
+# Owner accepted speed and phased optimization — 11.11.2026
+
+- Owner explicitly accepts current production a182cd21b21ecf612b63613d263e5bdd817ea4c0 as substantially faster and authorizes the proposed staged optimization, with an urgent Japan/Korea delivered-budget filter repair (1,500,000 RUB).
+- Preserve this release and measured baseline before changes. This new instruction supersedes the 28.10 latency-advisory exception for regressions against the accepted baseline: do not activate a measured slowdown. Compare correct visible results and full responses under equivalent warm/expired conditions, recording variability and supplier dependence; do not claim a universal latency guarantee.
+- Implement in stages with per-market rollback. Keep prices, source restrictions/real visitor IP, complete model directories, withdrawal rules, editorial/customer data and ordinary collection schedules. Full Japan/Korea bulk synchronization still requires supplier permission. Do not evade restrictions or fabricate technical facts to fill a budget result.
+- No infrastructure purchase, provider contract change, database production migration or reactivation of old periodic diagnostics has been performed merely by recording this instruction. First test changes and produce concrete evidence. Existing authorized release-triggered checks remain allowed.
+
 # Owner search and speed recovery — 11.11.2026
 
 - The owner now explicitly requests safe speed recovery, repair of encoded %20 model names, BMW 3 search and complete visible model suggestions. The 30+ second /cars loading incident is in scope. This new instruction supersedes the freeze only for this targeted repair; preserve crawler blocking, ordinary feed schedules, prices/specification evidence and customer data. Publish verified corrections under the existing owner authorization, using unchanged functional/security gates and truthful before/after measurements.

@@ -138,6 +138,16 @@ export function typedModelSelection(query:string, items:{model:string;aliases?:s
  }))].join(multiple?"|":"");
 }
 
+/** Typing adds choices. Only an explicit model chip/checkbox/clear removes one. */
+export function appendModelSelection(selected:string,typed:string){
+ const values=new Map<string,string>();
+ for(const value of [...selected.split('|'),...typed.split('|')].map(v=>v.trim()).filter(Boolean)){
+  const key=value.toLocaleLowerCase('ru-RU');
+  if(!values.has(key))values.set(key,value);
+ }
+ return [...values.values()].join('|');
+}
+
 /** Infer a make only when every exact typed selection identifies the same brand. */
 export function typedModelMake(selection:string,items:ModelSuggestion[]):string{
  const makes=new Set<string>();

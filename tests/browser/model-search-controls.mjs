@@ -56,8 +56,9 @@ try {
   assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');
   assert.equal(await trigger.getAttribute('aria-expanded'),'false');
   modelScope=await enter('Camry');await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
-  assert.equal(await scope.locator('input[name=model]').inputValue(),width<1024?'Corolla|Camry':'Camry');
+  assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla|Camry');
   assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+  if(width>=1024)await page.getByRole('button',{name:'Убрать Corolla',exact:true}).filter({visible:true}).first().click();
   if(width<1024){
     modelScope=await enter('');await modelScope.getByRole('button',{name:'Убрать модель Corolla',exact:true}).click();
     await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();

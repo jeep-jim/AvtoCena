@@ -1,0 +1,403 @@
+{
+  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "phase": "accepted-release-restored",
+  "checkedAt": "2026-11-11T12:34:28.498Z",
+  "environment": "GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation",
+  "checks": [
+    {
+      "width": 390,
+      "firstCardsSeconds": 1.82,
+      "filters": [
+        {
+          "budget": 1500000,
+          "seconds": 1.473,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1490608,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": [
+            {
+              "path": "/api/auth/me",
+              "budget": null,
+              "type": "fetch",
+              "status": 401,
+              "startedMs": -322,
+              "headersMs": 186,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars/china",
+              "budget": "1500000",
+              "type": "fetch",
+              "status": 200,
+              "startedMs": 322,
+              "headersMs": 876,
+              "completeMs": 1040,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": null,
+              "startedMs": 1434,
+              "headersMs": null,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            }
+          ]
+        },
+        {
+          "budget": 2000000,
+          "seconds": 0.677,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1985641,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": [
+            {
+              "path": "/api/auth/me",
+              "budget": null,
+              "type": "fetch",
+              "status": 401,
+              "startedMs": -1902,
+              "headersMs": 186,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -147,
+              "headersMs": 421,
+              "completeMs": 421,
+              "pending": false,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars/china",
+              "budget": "2000000",
+              "type": "fetch",
+              "status": 200,
+              "startedMs": 271,
+              "headersMs": 173,
+              "completeMs": 186,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": null,
+              "startedMs": 519,
+              "headersMs": null,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            }
+          ]
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "firstCardsSeconds": 1.29,
+      "filters": [
+        {
+          "budget": 1500000,
+          "seconds": 1.006,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1490608,
+          "requests": 3,
+          "paths": [
+            "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": [
+            {
+              "path": "/api/autobot",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -360,
+              "headersMs": 1113,
+              "completeMs": 1113,
+              "pending": false,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/account/auth",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -232,
+              "headersMs": 994,
+              "completeMs": 994,
+              "pending": false,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/auth/me",
+              "budget": null,
+              "type": "fetch",
+              "status": 401,
+              "startedMs": -232,
+              "headersMs": 991,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -211,
+              "headersMs": 1041,
+              "completeMs": 1041,
+              "pending": false,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -209,
+              "headersMs": 977,
+              "completeMs": 982,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": true,
+              "serverTiming": null
+            },
+            {
+              "path": "/account",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -209,
+              "headersMs": 980,
+              "completeMs": 985,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": true,
+              "serverTiming": null
+            },
+            {
+              "path": "/favorites",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -208,
+              "headersMs": 982,
+              "completeMs": 986,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": true,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -208,
+              "headersMs": 985,
+              "completeMs": 987,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": true,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": 167,
+              "headersMs": 617,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": true,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars/china",
+              "budget": "1500000",
+              "type": "fetch",
+              "status": 200,
+              "startedMs": 191,
+              "headersMs": 601,
+              "completeMs": 684,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": null,
+              "startedMs": 948,
+              "headersMs": null,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            }
+          ]
+        },
+        {
+          "budget": 2000000,
+          "seconds": 0.572,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1985641,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": [
+            {
+              "path": "/api/auth/me",
+              "budget": null,
+              "type": "fetch",
+              "status": 401,
+              "startedMs": -1249,
+              "headersMs": 991,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -851,
+              "headersMs": 617,
+              "completeMs": 1176,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": 200,
+              "startedMs": -69,
+              "headersMs": 321,
+              "completeMs": 321,
+              "pending": false,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/cars/china",
+              "budget": "2000000",
+              "type": "fetch",
+              "status": 200,
+              "startedMs": 189,
+              "headersMs": 201,
+              "completeMs": 272,
+              "pending": false,
+              "failed": true,
+              "rsc": true,
+              "prefetch": false,
+              "serverTiming": null
+            },
+            {
+              "path": "/api/catalog/saved-previews",
+              "budget": null,
+              "type": "fetch",
+              "status": null,
+              "startedMs": 523,
+              "headersMs": null,
+              "completeMs": null,
+              "pending": true,
+              "failed": false,
+              "rsc": false,
+              "prefetch": false,
+              "serverTiming": null
+            }
+          ]
+        }
+      ],
+      "pageErrors": []
+    }
+  ],
+  "passed": true,
+  "browserPassed": true
+}

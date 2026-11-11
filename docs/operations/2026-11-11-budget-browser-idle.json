@@ -1,0 +1,88 @@
+{
+  "release": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "phase": "after-budget-release-without-concurrent-acceptance",
+  "checkedAt": "2026-11-11T12:21:09.107Z",
+  "environment": "GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation",
+  "checks": [
+    {
+      "width": 390,
+      "firstCardsSeconds": 1.678,
+      "filters": [
+        {
+          "budget": 1500000,
+          "seconds": 6.645,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1490608,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": []
+        },
+        {
+          "budget": 2000000,
+          "seconds": 60.105,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1985641,
+          "requests": 3,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/rates",
+            "/api/catalog/saved-previews"
+          ],
+          "network": [
+            {
+              "path": "/api/catalog/rates",
+              "status": 200,
+              "type": "fetch",
+              "startedMs": 59783,
+              "headersMs": 162,
+              "completeMs": 163,
+              "serverTiming": null
+            }
+          ]
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "firstCardsSeconds": 2.979,
+      "filters": [
+        {
+          "budget": 1500000,
+          "seconds": 4.899,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1490608,
+          "requests": 3,
+          "paths": [
+            "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": []
+        },
+        {
+          "budget": 2000000,
+          "seconds": 3.874,
+          "cards": 24,
+          "pricedCards": 24,
+          "largestPrice": 1985641,
+          "requests": 2,
+          "paths": [
+            "/cars/china",
+            "/api/catalog/saved-previews"
+          ],
+          "network": []
+        }
+      ],
+      "pageErrors": []
+    }
+  ],
+  "passed": true,
+  "browserPassed": true
+}

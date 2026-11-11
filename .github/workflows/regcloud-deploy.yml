@@ -23,6 +23,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Verify isolated application source and exact allowed changes
+        run: |
+          git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          node --input-type=module <<'VERIFY'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-11-navigation-release-manifest.json','utf8'));
+          assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
+          const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+          assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
+          assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
+          VERIFY
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
@@ -48,6 +62,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Verify isolated application source and exact allowed changes
+        run: |
+          git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          node --input-type=module <<'VERIFY'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-11-navigation-release-manifest.json','utf8'));
+          assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
+          const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+          assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
+          assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
+          VERIFY
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
@@ -60,6 +88,24 @@ jobs:
           node scripts/check-runtime-streams.mjs
           python3 tests/regcloud-response-buffers.test.py
           python3 tests/regcloud-performance-gate.test.py
+          python3 tests/regcloud-browser-verdict.test.py
+          python3 tests/regcloud-browser-handoff.test.py
+          python3 tests/regcloud-release-retention.test.py
+          node --test tests/accepted-browser-speed.test.mjs
+      - name: Verify retained choices and forward/Back navigation on this exact source
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/retention-browser/node_modules/playwright/index.mjs
+          RETENTION_BASE_REF: 'a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+        run: |
+          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          npm run typecheck
+          git fetch --depth=1 origin "$RETENTION_BASE_REF"
+          npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-retention.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/model-search-controls.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
       - name: Verify owner catalog search and queue regressions
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-projection-reuse.test.ts tests/green-corner-snapshot-cache.test.ts tests/catalog-deferred-recommendations.test.ts tests/offer-navigation-performance.test.ts tests/related-offer-selection.test.ts tests/related-model-family.test.ts tests/catalog-card-contract.test.ts
       - name: Verify deferred recommendations before release preparation
@@ -145,6 +191,20 @@ jobs:
           rm -- avtocena-image.tar.gz avtocena-image.tar.gz.sha256
           echo 'Image loaded and verified'
           REMOTE
+      - name: Verify isolated application source and exact allowed changes
+        run: |
+          git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          node --input-type=module <<'VERIFY'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-11-navigation-release-manifest.json','utf8'));
+          assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
+          const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+          assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
+          assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
+          VERIFY
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
@@ -206,9 +266,12 @@ jobs:
           name: release-market-preparation
           path: release-market-preparation.json
           if-no-files-found: ignore
+      - name: Prepare required browser acceptance runtime
+        run: npm install --prefix "$RUNNER_TEMP/release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Deploy with rollback and resource measurements
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/release-browser/node_modules/playwright/index.mjs
         run: |
           set -euo pipefail
           umask 077
@@ -219,8 +282,16 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
-          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS'"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py scripts/regcloud-browser-verdict.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
+          bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS"
+      - name: Preserve required browser acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-browser-acceptance
+          path: owner-filter-browser-report.json
+          if-no-files-found: ignore
       - name: Verify published encyclopedia fields against this exact release
         env:
           ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'

@@ -1,5 +1,6 @@
 "use client";
 import {catalogPageErrorMessage} from "./page-request-error";
+import {isHistoryRoute} from '@/lib/catalog/route-scroll';
 import Link from 'next/link';
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
@@ -44,7 +45,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   useLayoutEffect(() => {
     mounted.current = true;
     const saved = visits.get(key);
-    if (saved && Date.now() - saved.savedAt < TTL && saved.total === initialTotal) {
+    if (isHistoryRoute() && saved && Date.now() - saved.savedAt < TTL && saved.total === initialTotal) {
       setBatches(saved.batches); setTotal(saved.total);
       // Two frames allow the restored cards to establish their layout first.
       let second = 0;
