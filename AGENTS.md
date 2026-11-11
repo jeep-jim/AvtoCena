@@ -1,3 +1,7 @@
+# Owner search and speed recovery — 11.11.2026
+
+- The owner now explicitly requests safe speed recovery, repair of encoded %20 model names, BMW 3 search and complete visible model suggestions. The 30+ second /cars loading incident is in scope. This new instruction supersedes the freeze only for this targeted repair; preserve crawler blocking, ordinary feed schedules, prices/specification evidence and customer data. Publish verified corrections under the existing owner authorization, using unchanged functional/security gates and truthful before/after measurements.
+
 # Owner crawler blocking and confirmed rollback — 11.11.2026
 
 - Live `/api/health` on 11.11 confirms `463fd22559a2f9c5acd60f8f5e4b269689215c84`; rollback run42855543854 completed successfully on 10.11. Do not repeat the completed application rollback.

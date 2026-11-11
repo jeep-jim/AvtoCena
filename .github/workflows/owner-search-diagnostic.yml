@@ -1,0 +1,82 @@
+name: Regcloud — diagnose owner search latency once
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/market-runs/owner-search-diagnostic.json
+permissions:
+  contents: write
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+    - uses: actions/checkout@v4
+    - name: Read bounded CPU and storage sample without restarting the app
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+      run: "set -euo pipefail\n(\nset -euo pipefail\numask 077\nkey_file=$(mktemp)\ntrap 'rm -f \"$key_file\"' EXIT\nprintf '%s\\n' \"$SSH_PRIVATE_KEY\" > \"$key_file\"\nunset SSH_PRIVATE_KEY\nssh_opts=(-i\
+        \ \"$key_file\" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o \"UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts\")\nscp \"${ssh_opts[@]}\"\
+        \ scripts/regcloud-cpu-sample.mjs root@151.248.113.177:/opt/avtocena/cpu-sample-once.mjs\nexpected=$(python3 -c 'import json,re;v=json.load(open(\".github/market-runs/owner-search-diagnostic.json\"\
+        ))[\"release\"];assert re.fullmatch(r\"[a-f0-9]{40}\",v);print(v)')\nssh \"${ssh_opts[@]}\" root@151.248.113.177 bash -s -- \"$expected\" <<'REMOTE'\nset -euo pipefail\nexec 9>/run/lock/avtocena-runtime-change.lock\n\
+        flock -w 30 9\nexpected=$1\nactual=$(docker exec avtocena-production node -e 'console.log(process.env.AVTOCENA_RELEASE_SHA)')\ntest \"$actual\" = \"$expected\"\nprintf 'PROFILE_EXACT_RELEASE %s\\\
+        n' \"$actual\"\ntest \"$(docker inspect --format '{{index .Config.Labels \"avtocena.role\"}}' avtocena-production)\" = production\n# The inspector uses loopback inside the container, with no published\
+        \ port.\ndocker inspect --format '{{json .HostConfig.PortBindings}}' avtocena-production | python3 -c 'import json,sys; p=json.load(sys.stdin);assert set(p)=={\"3000/tcp\"};assert p[\"3000/tcp\"\
+        ][0][\"HostIp\"]==\"127.0.0.1\"'\ndocker exec avtocena-production node -e 'fetch(\"http://127.0.0.1:9229/json/list\").then(()=>process.exit(1),()=>process.exit(0))'\ndocker kill --signal=USR1 avtocena-production\
+        \ >/dev/null\nsleep 1\ntimeout 45 docker exec -i avtocena-production node --input-type=module < /opt/avtocena/cpu-sample-once.mjs || { timeout 20 docker exec -i -e CPU_SAMPLE_CLOSE_ONLY=1 avtocena-production\
+        \ node --input-type=module < /opt/avtocena/cpu-sample-once.mjs; exit 1; }\ndocker exec avtocena-production node -e 'fetch(\"http://127.0.0.1:9229/json/list\").then(()=>{console.error(\"INSPECTOR_STILL_OPEN\"\
+        );process.exit(1)},()=>console.log(\"INSPECTOR_CLOSED\"))'\nport=$(docker inspect --format '{{(index (index .NetworkSettings.Ports \"3000/tcp\") 0).HostPort}}' avtocena-production)\ncurl -sS --max-time\
+        \ 8 -o /dev/null -w 'HEALTH %{http_code} %{time_total}\\n' \"http://127.0.0.1:$port/api/health\" || true\ntest \"$(docker exec avtocena-production node -e 'console.log(process.env.AVTOCENA_RELEASE_SHA)')\"\
+        \ = \"$expected\"\ndocker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production\ndocker logs --since 20m --tail 10000 avtocena-production 2>&1 | python3 -c 'import\
+        \ sys,json,collections;rows=[];errors=collections.Counter()\nfor line in sys.stdin:\n    if \"catalog_storage_read \" in line:\n        try:rows.append(json.loads(line.split(\"catalog_storage_read\
+        \ \",1)[1]))\n        except:pass\n    for code in [\"object_storage_response_timeout\",\"fetch failed\",\"TimeoutError\",\"FATAL ERROR\",\"heap out of memory\",\"detail_cache_queue_timeout\",\"\
+        detail_cache_queue_full\",\"catalog_market_unavailable\",\"catalog_page_unavailable\"]:\n        if code in line:errors[code]+=1\nprint(\"MARKET_SLOW_READS\",json.dumps(sorted(rows,key=lambda x:x[\"\
+        ms\"],reverse=True)[:30]));print(\"ERROR_COUNTS\",json.dumps(errors))'\nREMOTE\n\n) 2>&1 | tee owner-search-diagnostic.log\n"
+    - name: Save exact diagnostic evidence and owner task
+      if: always()
+      run: 'set -euo pipefail
+
+        python3 - <<''RECORD''
+
+        import pathlib, json, os, datetime
+
+        p=pathlib.Path(''owner-search-diagnostic.log''); log=p.read_text() if p.exists() else ''No diagnostic output''
+
+        run=os.environ[''GITHUB_RUN_ID''];url=''https://github.com/jeep-jim/AvtoCena/actions/runs/''+run
+
+        pathlib.Path(''docs/operations/2026-11-11-search-diagnostic.json'').write_text(json.dumps({''runUrl'':url,''release'':''463fd22559a2f9c5acd60f8f5e4b269689215c84'',''log'':log},ensure_ascii=False,indent=2)+''\n'')
+
+        entry=''\n\n### 11.11.2026 — новое прямое поручение: восстановить скорость и поиск\n\n- Владелец разрешил адресное ускорение без поломки сайта, исправление %20 в названиях/поиске, BMW 3 и полноты
+        видимого списка моделей. Дополнительно сообщил ожидание общего /cars более30сек; сравнение с zmaimport.ru — ориентир владельца, не измеренный нами результат. Это новое исключение из паузы только
+        для указанного ремонта. Блокировка ботов и обычные фиды сохраняются.\n- До изменений оба BMW URL с powerTo160/sorttotalRub: полные ответы около51с,0 карточек и ошибка направления. Europe: внешний
+        timeout49с; это ограниченный замер, не доказательство постоянного отказа. Четыре регрессии Next path params воспроизвели недекодированный %20 на исходной версии; исправление готовится отдельно.\n-
+        Выполнен один ограниченный CPU/storage sample на exact463 без перезапуска; [результат](''+url+'') и docs/operations/2026-11-11-search-diagnostic.json. Это диагностика, не завершение ускорения или
+        публикация исправления.\n''
+
+        with open(''roadmap.md'',''a'') as f:f.write(entry)
+
+        with open(os.environ[''GITHUB_STEP_SUMMARY''],''a'') as f:f.write(entry)
+
+        RECORD
+
+        git config user.name ''github-actions[bot]''
+
+        git config user.email ''41898282+github-actions[bot]@users.noreply.github.com''
+
+        git add docs/operations/2026-11-11-search-diagnostic.json roadmap.md
+
+        git commit -m ''docs: record owner search and latency incident evidence''
+
+        git push origin HEAD:main
+
+        '
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: owner-search-diagnostic
+        path: owner-search-diagnostic.log
