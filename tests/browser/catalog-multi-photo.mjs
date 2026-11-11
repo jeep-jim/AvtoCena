@@ -75,8 +75,8 @@ try {
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   if(width<1024)await scope.locator('button[aria-label="Закрыть"],button[data-ac-mobile-close="1"]').click();
   try{await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Yaris|KX1');}catch(error){console.error('filter_navigation_state',await page.evaluate(()=>({url:location.href,lastFilterUrl:window.__lastFilterUrl,models:[...document.querySelectorAll('input[name=model]')].map(el=>el.value)})));throw error;}
-  assert.equal(new URL(page.url()).searchParams.get('city'),'Новосибирск');assert.equal(new URL(page.url()).pathname,'/cars/china');
-  assert.equal(new URL(page.url()).searchParams.has('market'),false,'single market uses its canonical path');
+  assert.equal(new URL(page.url()).searchParams.get('city'),'Новосибирск');assert.equal(new URL(page.url()).searchParams.get('market'),'china');
+  assert.equal(new URL(page.url()).pathname,'/dealers/dealer_topavto','dealer browsing keeps its own catalog route');
   let calls=0;const sent=[];
   await page.route('**/api/crm/dealers/*/media',route=>{calls++;sent.push(route.request().postDataBuffer()?.length||0);return route.fulfill(calls===2?{status:413,body:'too large'}:{json:{id:`photo-${calls}`,url:`/photo-${calls}`,caption:''}});});
   const sharp=(await import('sharp')).default;const bytes=await sharp({create:{width:30,height:20,channels:3,background:'#55aa33'}}).png().toBuffer();
