@@ -10,7 +10,7 @@ permissions:
   actions: read
 
 env:
-  RELEASE_SOURCE_SHA: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
+  RELEASE_SOURCE_SHA: 'f11285ebb378878832be91dd0b14633ade2351c2'
 
 concurrency:
   group: regcloud-production-release
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          ref: 'f11285ebb378878832be91dd0b14633ade2351c2'
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -35,16 +35,16 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          sha='f11285ebb378878832be91dd0b14633ade2351c2'
           def api(path):
               return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1753')
+          p=api('pulls/1755')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
-          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc"}
-          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead')]:
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc","loginReads":"933a3ca4c70f934f579bf2ad1d18597507e23314"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead'),(1754,'loginReads')]:
               review=api(f'pulls/{number}')
               assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
-          required=[{"id":43109457783,"name":"Verify green corner budget"},{"id":43109457791,"name":"CI"},{"id":43109457803,"name":"Verify catalog failure isolation"},{"id":43109457822,"name":"Verify dealer workspace"},{"id":43109457826,"name":"Verify site controls and chat"},{"id":43109457895,"name":"Verify per-car services and edit links"},{"id":43109457916,"name":"Verify catalog sidebar and search"},{"id":43109457920,"name":"Verify owner UI polish"},{"id":43109457951,"name":"Verify dealer selection sharing"},{"id":43109457969,"name":"Verify dealer banner and Yandex map"},{"id":43109458019,"name":"Verify model search controls"},{"id":43109458037,"name":"Verify catalog load more"},{"id":43109458107,"name":"Verify sticky catalog controls"},{"id":43109458113,"name":"QR and gallery browser QA"},{"id":43109458143,"name":"Verify city picker"},{"id":43109458209,"name":"Verify offer sharing"},{"id":43109458276,"name":"Verify local model suggestions"},{"id":43109458967,"name":"Verify Dubicars paid feed"}]
+          required=[{"id":43123213619,"name":"Verify catalog failure isolation"},{"id":43123213503,"name":"Verify dealer workspace"},{"id":43123213613,"name":"Verify catalog sidebar and search"},{"id":43123213483,"name":"Verify green corner budget"},{"id":43123213566,"name":"Verify sticky catalog controls"},{"id":43123213600,"name":"QR and gallery browser QA"},{"id":43123213334,"name":"Verify offer sharing"},{"id":43123213598,"name":"Verify catalog load more"},{"id":43123213522,"name":"Verify owner UI polish"},{"id":43123213422,"name":"Verify city picker"},{"id":43123213478,"name":"Verify Dubicars paid feed"},{"id":43123213362,"name":"Verify local model suggestions"},{"id":43123213347,"name":"Verify site controls and chat"},{"id":43123213601,"name":"Verify per-car services and edit links"},{"id":43123213640,"name":"Verify dealer selection sharing"},{"id":43123213504,"name":"CI"},{"id":43123213696,"name":"Verify model search controls"},{"id":43123213342,"name":"Verify dealer banner and Yandex map"}]
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert runs['total_count']<=100, 'unbounded source check inventory'
           actual={r['id']:r for r in runs['workflow_runs']}
@@ -65,24 +65,24 @@ jobs:
           for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
               assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
           assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
-          rejected=api('actions/runs/43098821534')
-          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='97ee63438e27862c6363c81db7b6eb0c9bcbf8b6', 'last rejected release is not terminal or changed'
-          rejected_pr=api('pulls/1748')
-          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='794654a00aa4990b284858f1f01c07ed3f020df4', 'rejected source metadata changed'
-          rejected_jobs=api('actions/runs/43098821534/jobs?per_page=100')['jobs']
+          rejected=api('actions/runs/43111977320')
+          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='f17101357e14c314df6f197066278cd8ab872b46', 'last rejected release is not terminal or changed'
+          rejected_pr=api('pulls/1753')
+          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='75c2e6f57cfa4022865217e029a1f5d1671842c3', 'rejected source metadata changed'
+          rejected_jobs=api('actions/runs/43111977320/jobs?per_page=100')['jobs']
           rejected_prepare=[job for job in rejected_jobs if job['name']=='prepare']
           assert len(rejected_prepare)==1 and rejected_prepare[0]['conclusion']=='failure', 'rejected preparation is not final'
           rejected_steps={step['name']:step['conclusion'] for step in rejected_prepare[0]['steps']}
           assert rejected_steps.get('Deploy with rollback and resource measurements')=='failure', 'expected measured acceptance rejection missing'
           for name in ['Prepare exact price indexes before activating the release','Persist verified private evidence for market_prices']:
               assert rejected_steps.get(name)=='success', 'last market preparation/evidence did not pass'
-          rollback=api('actions/runs/43107566632')
-          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='e42b8002f0e570a0d87c3f5f501a07efaef479b6', 'independent retained-runtime proof changed'
+          rollback=api('actions/runs/43121673944')
+          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='a175759b53917ec59dd1b991d66e363fbb91f5a4', 'independent retained-runtime proof changed'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print(json.dumps({'source':sha,'candidate':1753,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752],'productionBase':health.get('releaseSha')}))
+          print(json.dumps({'source':sha,'candidate':1755,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752,1754],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
@@ -90,6 +90,7 @@ jobs:
           git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
           git fetch --depth=1 origin f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc
           git fetch --depth=1 origin 8778bd38be3f26227c383db5800239beb98f6182
+          git fetch --depth=1 origin 933a3ca4c70f934f579bf2ad1d18597507e23314
           node --input-type=module <<'VERIFY'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -101,7 +102,8 @@ jobs:
           assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
           assert.equal(m.sourceReviews.encyclopediaRead,'f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc');
           assert.equal(m.sourceReviews.overlayHistory,'8778bd38be3f26227c383db5800239beb98f6182');
-          for(const key of ['encyclopediaRead','overlayHistory'])for(const path of m.sourceReviewScope[key]){
+          assert.equal(m.sourceReviews.loginReads,'933a3ca4c70f934f579bf2ad1d18597507e23314');
+          for(const key of ['encyclopediaRead','overlayHistory','loginReads'])for(const path of m.sourceReviewScope[key]){
             assert.equal(fs.readFileSync(path,'utf8'),execFileSync('git',['show',m.sourceReviews[key]+':'+path],{encoding:'utf8'}),'reviewed content differs: '+path);
           }
           console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
@@ -135,7 +137,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          ref: 'f11285ebb378878832be91dd0b14633ade2351c2'
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -144,16 +146,16 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          sha='f11285ebb378878832be91dd0b14633ade2351c2'
           def api(path):
               return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1753')
+          p=api('pulls/1755')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
-          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc"}
-          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead')]:
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc","loginReads":"933a3ca4c70f934f579bf2ad1d18597507e23314"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead'),(1754,'loginReads')]:
               review=api(f'pulls/{number}')
               assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
-          required=[{"id":43109457783,"name":"Verify green corner budget"},{"id":43109457791,"name":"CI"},{"id":43109457803,"name":"Verify catalog failure isolation"},{"id":43109457822,"name":"Verify dealer workspace"},{"id":43109457826,"name":"Verify site controls and chat"},{"id":43109457895,"name":"Verify per-car services and edit links"},{"id":43109457916,"name":"Verify catalog sidebar and search"},{"id":43109457920,"name":"Verify owner UI polish"},{"id":43109457951,"name":"Verify dealer selection sharing"},{"id":43109457969,"name":"Verify dealer banner and Yandex map"},{"id":43109458019,"name":"Verify model search controls"},{"id":43109458037,"name":"Verify catalog load more"},{"id":43109458107,"name":"Verify sticky catalog controls"},{"id":43109458113,"name":"QR and gallery browser QA"},{"id":43109458143,"name":"Verify city picker"},{"id":43109458209,"name":"Verify offer sharing"},{"id":43109458276,"name":"Verify local model suggestions"},{"id":43109458967,"name":"Verify Dubicars paid feed"}]
+          required=[{"id":43123213619,"name":"Verify catalog failure isolation"},{"id":43123213503,"name":"Verify dealer workspace"},{"id":43123213613,"name":"Verify catalog sidebar and search"},{"id":43123213483,"name":"Verify green corner budget"},{"id":43123213566,"name":"Verify sticky catalog controls"},{"id":43123213600,"name":"QR and gallery browser QA"},{"id":43123213334,"name":"Verify offer sharing"},{"id":43123213598,"name":"Verify catalog load more"},{"id":43123213522,"name":"Verify owner UI polish"},{"id":43123213422,"name":"Verify city picker"},{"id":43123213478,"name":"Verify Dubicars paid feed"},{"id":43123213362,"name":"Verify local model suggestions"},{"id":43123213347,"name":"Verify site controls and chat"},{"id":43123213601,"name":"Verify per-car services and edit links"},{"id":43123213640,"name":"Verify dealer selection sharing"},{"id":43123213504,"name":"CI"},{"id":43123213696,"name":"Verify model search controls"},{"id":43123213342,"name":"Verify dealer banner and Yandex map"}]
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert runs['total_count']<=100, 'unbounded source check inventory'
           actual={r['id']:r for r in runs['workflow_runs']}
@@ -174,24 +176,24 @@ jobs:
           for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
               assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
           assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
-          rejected=api('actions/runs/43098821534')
-          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='97ee63438e27862c6363c81db7b6eb0c9bcbf8b6', 'last rejected release is not terminal or changed'
-          rejected_pr=api('pulls/1748')
-          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='794654a00aa4990b284858f1f01c07ed3f020df4', 'rejected source metadata changed'
-          rejected_jobs=api('actions/runs/43098821534/jobs?per_page=100')['jobs']
+          rejected=api('actions/runs/43111977320')
+          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='f17101357e14c314df6f197066278cd8ab872b46', 'last rejected release is not terminal or changed'
+          rejected_pr=api('pulls/1753')
+          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='75c2e6f57cfa4022865217e029a1f5d1671842c3', 'rejected source metadata changed'
+          rejected_jobs=api('actions/runs/43111977320/jobs?per_page=100')['jobs']
           rejected_prepare=[job for job in rejected_jobs if job['name']=='prepare']
           assert len(rejected_prepare)==1 and rejected_prepare[0]['conclusion']=='failure', 'rejected preparation is not final'
           rejected_steps={step['name']:step['conclusion'] for step in rejected_prepare[0]['steps']}
           assert rejected_steps.get('Deploy with rollback and resource measurements')=='failure', 'expected measured acceptance rejection missing'
           for name in ['Prepare exact price indexes before activating the release','Persist verified private evidence for market_prices']:
               assert rejected_steps.get(name)=='success', 'last market preparation/evidence did not pass'
-          rollback=api('actions/runs/43107566632')
-          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='e42b8002f0e570a0d87c3f5f501a07efaef479b6', 'independent retained-runtime proof changed'
+          rollback=api('actions/runs/43121673944')
+          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='a175759b53917ec59dd1b991d66e363fbb91f5a4', 'independent retained-runtime proof changed'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print(json.dumps({'source':sha,'candidate':1753,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752],'productionBase':health.get('releaseSha')}))
+          print(json.dumps({'source':sha,'candidate':1755,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752,1754],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
@@ -199,6 +201,7 @@ jobs:
           git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
           git fetch --depth=1 origin f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc
           git fetch --depth=1 origin 8778bd38be3f26227c383db5800239beb98f6182
+          git fetch --depth=1 origin 933a3ca4c70f934f579bf2ad1d18597507e23314
           node --input-type=module <<'VERIFY'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -210,7 +213,8 @@ jobs:
           assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
           assert.equal(m.sourceReviews.encyclopediaRead,'f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc');
           assert.equal(m.sourceReviews.overlayHistory,'8778bd38be3f26227c383db5800239beb98f6182');
-          for(const key of ['encyclopediaRead','overlayHistory'])for(const path of m.sourceReviewScope[key]){
+          assert.equal(m.sourceReviews.loginReads,'933a3ca4c70f934f579bf2ad1d18597507e23314');
+          for(const key of ['encyclopediaRead','overlayHistory','loginReads'])for(const path of m.sourceReviewScope[key]){
             assert.equal(fs.readFileSync(path,'utf8'),execFileSync('git',['show',m.sourceReviews[key]+':'+path],{encoding:'utf8'}),'reviewed content differs: '+path);
           }
           console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
@@ -229,7 +233,7 @@ jobs:
       - name: Verify exact encyclopedia matching
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --test tests/management-knowledge.test.ts tests/management-save-route.test.ts tests/management-preview-route.test.ts tests/autobot-format.test.ts tests/autobot-knowledge.test.ts tests/autobot-public-answer.test.ts tests/autobot.test.ts tests/encyclopedia-hybrid-default.test.ts tests/power30-precedent-calculation.test.ts tests/encyclopedia-power30-precedents.test.mjs tests/japan-preview-consistency.test.ts tests/encyclopedia-release-batch-verification.test.mjs tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/catalog-power-normalization.test.ts tests/encyclopedia-public-release.test.mjs tests/encyclopedia-presentation.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-astra-release.test.mjs tests/catalog-independent-certified-power.test.ts tests/encyclopedia-owner-evidence.test.ts tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-astra-power30.test.ts tests/encyclopedia-ambiguous-body.test.ts tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts tests/green-corner-page-budget.test.ts tests/green-corner-filters.test.ts tests/catalog-japan-filter-rail.test.ts tests/japan-drive-sql-budget.test.ts tests/japan-drive.test.ts tests/japan-chassis-drive.test.ts tests/japan-default-fuel.test.ts tests/ajes-japan-feed.test.ts tests/ajes-transient-cooldown.test.ts tests/ajes-saved-budget-predicate.test.ts tests/currency-observer-scope.test.ts tests/dealer-platform-membership-read.test.ts
+          node --import tsx --test tests/management-knowledge.test.ts tests/management-save-route.test.ts tests/management-preview-route.test.ts tests/autobot-format.test.ts tests/autobot-knowledge.test.ts tests/autobot-public-answer.test.ts tests/autobot.test.ts tests/encyclopedia-hybrid-default.test.ts tests/power30-precedent-calculation.test.ts tests/encyclopedia-power30-precedents.test.mjs tests/japan-preview-consistency.test.ts tests/encyclopedia-release-batch-verification.test.mjs tests/encyclopedia-spec-consensus.test.ts tests/encyclopedia-technical-match.test.ts tests/catalog-power-normalization.test.ts tests/encyclopedia-public-release.test.mjs tests/encyclopedia-presentation.test.ts tests/permanent-encyclopedia.test.ts tests/encyclopedia-astra-release.test.mjs tests/catalog-independent-certified-power.test.ts tests/encyclopedia-owner-evidence.test.ts tests/encyclopedia-calculation-index.test.ts tests/encyclopedia-astra-power30.test.ts tests/encyclopedia-ambiguous-body.test.ts tests/encyclopedia-reference-reuse.test.ts tests/encyclopedia-reference-publication.test.ts tests/encyclopedia-release-index.test.ts tests/encyclopedia-coverage.test.ts tests/catalog-budget-specifications.test.ts tests/catalog-budget-runtime.test.ts tests/green-corner-page-budget.test.ts tests/green-corner-filters.test.ts tests/catalog-japan-filter-rail.test.ts tests/japan-drive-sql-budget.test.ts tests/japan-drive.test.ts tests/japan-chassis-drive.test.ts tests/japan-default-fuel.test.ts tests/ajes-japan-feed.test.ts tests/ajes-transient-cooldown.test.ts tests/ajes-saved-budget-predicate.test.ts tests/currency-observer-scope.test.ts tests/dealer-platform-membership-read.test.ts tests/login-parallel-reads.test.ts tests/dealer-rate-refresh.test.ts
       - name: Verify atomic dated catalog pages before publication
         env:
           JSON_STORAGE_DRIVER: local
@@ -455,6 +459,7 @@ jobs:
           git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
           git fetch --depth=1 origin f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc
           git fetch --depth=1 origin 8778bd38be3f26227c383db5800239beb98f6182
+          git fetch --depth=1 origin 933a3ca4c70f934f579bf2ad1d18597507e23314
           node --input-type=module <<'VERIFY'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -466,7 +471,8 @@ jobs:
           assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
           assert.equal(m.sourceReviews.encyclopediaRead,'f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc');
           assert.equal(m.sourceReviews.overlayHistory,'8778bd38be3f26227c383db5800239beb98f6182');
-          for(const key of ['encyclopediaRead','overlayHistory'])for(const path of m.sourceReviewScope[key]){
+          assert.equal(m.sourceReviews.loginReads,'933a3ca4c70f934f579bf2ad1d18597507e23314');
+          for(const key of ['encyclopediaRead','overlayHistory','loginReads'])for(const path of m.sourceReviewScope[key]){
             assert.equal(fs.readFileSync(path,'utf8'),execFileSync('git',['show',m.sourceReviews[key]+':'+path],{encoding:'utf8'}),'reviewed content differs: '+path);
           }
           console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
@@ -499,7 +505,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 75c2e6f57cfa4022865217e029a1f5d1671842c3
+          AVTOCENA_RELEASE_SHA: f11285ebb378878832be91dd0b14633ade2351c2
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -571,16 +577,16 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          sha='f11285ebb378878832be91dd0b14633ade2351c2'
           def api(path):
               return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1753')
+          p=api('pulls/1755')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'candidate closed, superseded or base changed'
-          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc"}
-          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead')]:
+          reviews={"publication":"a8e568d694833ca2120f41586c40255ce9237bd7","pricing":"5979a449cb68a04afcc17c4716b1e639103da5a6","speedIntegrity":"23493ce6889916385cd1742ab23b1a98d305145d","modelFixture":"03c95658024a7c6312d56757996befc167cda2b2","overlayHistory":"8778bd38be3f26227c383db5800239beb98f6182","encyclopediaRead":"f738f86d64e6ded24a34f5fd9bdf3940cd53e4bc","loginReads":"933a3ca4c70f934f579bf2ad1d18597507e23314"}
+          for number,key in [(1738,'publication'),(1740,'pricing'),(1744,'speedIntegrity'),(1746,'modelFixture'),(1749,'overlayHistory'),(1752,'encyclopediaRead'),(1754,'loginReads')]:
               review=api(f'pulls/{number}')
               assert review['merged'] and review['head']['sha']==reviews[key], f'included review changed: {number}'
-          required=[{"id":43109457783,"name":"Verify green corner budget"},{"id":43109457791,"name":"CI"},{"id":43109457803,"name":"Verify catalog failure isolation"},{"id":43109457822,"name":"Verify dealer workspace"},{"id":43109457826,"name":"Verify site controls and chat"},{"id":43109457895,"name":"Verify per-car services and edit links"},{"id":43109457916,"name":"Verify catalog sidebar and search"},{"id":43109457920,"name":"Verify owner UI polish"},{"id":43109457951,"name":"Verify dealer selection sharing"},{"id":43109457969,"name":"Verify dealer banner and Yandex map"},{"id":43109458019,"name":"Verify model search controls"},{"id":43109458037,"name":"Verify catalog load more"},{"id":43109458107,"name":"Verify sticky catalog controls"},{"id":43109458113,"name":"QR and gallery browser QA"},{"id":43109458143,"name":"Verify city picker"},{"id":43109458209,"name":"Verify offer sharing"},{"id":43109458276,"name":"Verify local model suggestions"},{"id":43109458967,"name":"Verify Dubicars paid feed"}]
+          required=[{"id":43123213619,"name":"Verify catalog failure isolation"},{"id":43123213503,"name":"Verify dealer workspace"},{"id":43123213613,"name":"Verify catalog sidebar and search"},{"id":43123213483,"name":"Verify green corner budget"},{"id":43123213566,"name":"Verify sticky catalog controls"},{"id":43123213600,"name":"QR and gallery browser QA"},{"id":43123213334,"name":"Verify offer sharing"},{"id":43123213598,"name":"Verify catalog load more"},{"id":43123213522,"name":"Verify owner UI polish"},{"id":43123213422,"name":"Verify city picker"},{"id":43123213478,"name":"Verify Dubicars paid feed"},{"id":43123213362,"name":"Verify local model suggestions"},{"id":43123213347,"name":"Verify site controls and chat"},{"id":43123213601,"name":"Verify per-car services and edit links"},{"id":43123213640,"name":"Verify dealer selection sharing"},{"id":43123213504,"name":"CI"},{"id":43123213696,"name":"Verify model search controls"},{"id":43123213342,"name":"Verify dealer banner and Yandex map"}]
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert runs['total_count']<=100, 'unbounded source check inventory'
           actual={r['id']:r for r in runs['workflow_runs']}
@@ -601,24 +607,24 @@ jobs:
           for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
               assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
           assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
-          rejected=api('actions/runs/43098821534')
-          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='97ee63438e27862c6363c81db7b6eb0c9bcbf8b6', 'last rejected release is not terminal or changed'
-          rejected_pr=api('pulls/1748')
-          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='794654a00aa4990b284858f1f01c07ed3f020df4', 'rejected source metadata changed'
-          rejected_jobs=api('actions/runs/43098821534/jobs?per_page=100')['jobs']
+          rejected=api('actions/runs/43111977320')
+          assert rejected['status']=='completed' and rejected['conclusion']=='failure' and rejected['head_sha']=='f17101357e14c314df6f197066278cd8ab872b46', 'last rejected release is not terminal or changed'
+          rejected_pr=api('pulls/1753')
+          assert rejected_pr['state']=='closed' and not rejected_pr['merged'] and rejected_pr['head']['sha']=='75c2e6f57cfa4022865217e029a1f5d1671842c3', 'rejected source metadata changed'
+          rejected_jobs=api('actions/runs/43111977320/jobs?per_page=100')['jobs']
           rejected_prepare=[job for job in rejected_jobs if job['name']=='prepare']
           assert len(rejected_prepare)==1 and rejected_prepare[0]['conclusion']=='failure', 'rejected preparation is not final'
           rejected_steps={step['name']:step['conclusion'] for step in rejected_prepare[0]['steps']}
           assert rejected_steps.get('Deploy with rollback and resource measurements')=='failure', 'expected measured acceptance rejection missing'
           for name in ['Prepare exact price indexes before activating the release','Persist verified private evidence for market_prices']:
               assert rejected_steps.get(name)=='success', 'last market preparation/evidence did not pass'
-          rollback=api('actions/runs/43107566632')
-          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='e42b8002f0e570a0d87c3f5f501a07efaef479b6', 'independent retained-runtime proof changed'
+          rollback=api('actions/runs/43121673944')
+          assert rollback['status']=='completed' and rollback['conclusion']=='success' and rollback['head_sha']=='a175759b53917ec59dd1b991d66e363fbb91f5a4', 'independent retained-runtime proof changed'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
-          print(json.dumps({'source':sha,'candidate':1753,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752],'productionBase':health.get('releaseSha')}))
+          print(json.dumps({'source':sha,'candidate':1755,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746,1749,1752,1754],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Deploy with rollback and resource measurements
         id: deploy_acceptance

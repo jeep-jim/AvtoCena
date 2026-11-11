@@ -1,5 +1,16 @@
 # Текущий статус АвтоЦены — 12.11.2026
 
+### 12.11.2026 — выбран f112, контроллер только подготовлен; фактическая доступностьJP/KR
+
+- PR1754/933a3ca прошёл все8checks, включая CI43122487863 с двумя held-I/O tests, полнымregression/type/build; merged2d0e0609020dc992713b8409b4a16bcb0386ff13. Исправлены независимые чтения входа и курса без изменения цен/полноты/TTL/доступа.
+- [PR1755](https://github.com/jeep-jim/AvtoCena/pull/1755), sourcef11285ebb378878832be91dd0b14633ade2351c2:75+только4файла review1754. Проверены все108changed files в2страницахAPI:27application paths,109allowed,0unexpected. Все18source workflows запущены; до SUCCESS и offlineguard активация запрещена. Не merge acceptance history и не deploy wholemain.
+- owner-navigation-release.yml подготовлен подf112/1755 с точнымmerged1754, тремя одинаковыми проверками scope/source,18точными runID, failed75/closed1753/независимый rollback43121673944. Исходные17+5маршрутов,35/305с,пороги,полныеответы,requestbudgets,браузерSHA/nonce,откат ичастныеотчёты неизменны. Выпускной marker НЕ меняется. Запускается только offline guard.
+- [Публичная проверка43123018106](https://github.com/jeep-jim/AvtoCena/actions/runs/43123018106),23:51:55–23:52:14UTC,до/послеa182/c489:безбюджетаJP6items/4.236s(сервер3.548s),KR6items/1.168s(сервер0.346s). Поставщик сообщил totals616533/104453; это его счётчики, не число локально сохранённых машин.
+- СbudgetTo1500000/cityМосква/pageSize6 оба200/ok,но0items,totalnull,hasMoretrue:JP8.882s,KR3.516s. Нельзя интерпретировать как отсутствие машин или полныйуспех. Тест availability FAIL по неполной выдаче. Ограниченный postfilter читаетдо8страниц/8секунд и отдаётcursor; нужна проверка продолжения и результата после исправления city-price predicate. Диагностика не обходитIP/лимитыпоставщика и не скачиваетфид.
+- DUMP и14/3 cadence не включены; нужен согласованный полныйsnapshot/delta, включая полякорейскойкарточки. Рабочаяa182сохранена. Source75непринят/закрыт; f112ещёнеустановлен.
+
+---
+
 ### 12.11.2026 — откат75 подтверждён независимо; измеряется цепочка входа
 
 - [43121673944/job130863427143](https://github.com/jeep-jim/AvtoCena/actions/runs/43121673944/job/130863427143) SUCCESS:23:41:18.670534UTC docker и публичный health подтверждают a182cd21b21ecf612b63613d263e5bdd817ea4c0 / imagee36c969d…c6f6f / calculatorc489dff0…0b6. Кандидат75 остановлен, OOM=false, image165c1a86aaa60500c70d43c2e28baf0069ea792393837f5e1073a7335fb79862. PR1753 закрыт без merge;75 не принят.

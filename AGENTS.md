@@ -1,3 +1,12 @@
+# Current recovery checkpoint — 2026-11-11T23:56:30.710Z
+
+- STAGED ONLY: isolated PR1755/f11285ebb378878832be91dd0b14633ade2351c2,27app/108changed/109allowed paths,18exactsource checks pending. Review1754/933a3ca all8checks SUCCESS, merged2d0e060. Controller updated but release marker UNCHANGED; run offline guard first. No deploy whole main, no merge acceptance history.
+- Rejected75/43111977320 failed strict/login median0.8712>0.2759; PR1753closed. Independent43121673944 confirmed retaineda182/e36/c489,75stopped at23:41:18UTC. Never add75accepted pin or rerununchanged.
+- PublicJP/KR43123018106:unfiltered6cars each;1.5m budget firstscan0,hasMoretrue,totalnull. Not verified complete, not zeroinventory. Continuation and candidatecitypredicate stillneedcheck. Supplier totals notlocalsnapshot. DUMP14/3 notenabled.
+- All current measurements, pins, outstanding work:current-incident.md; historical checkpoints below.
+
+---
+
 # Current recovery checkpoint — 2026-11-11T23:40:36.876Z
 
 - REJECTED75: run43111977320 failed strict warm /login median0.8712 > frozen0.2759. Rollback logged23:34:31UTC; fresh independent proof pending. No unchanged retry, no accepted75 retention pin, no merge PR1753. Browser stages not reached; public43116166133 stopped before actions. See current-incident.md for exact evidence.
