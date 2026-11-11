@@ -1,5 +1,5 @@
 {
-  "mode": "budget-failure-evidence",
-  "requestedAt": "2026-11-11T11:37:43.094Z",
-  "scope": "Owner budget incident: read already saved supplier failure slots, application usage accounting and saved quote counts while release3048 is verified. No supplier calls, full bodies, credentials, IP disclosure or data mutation."
+  "mode": "budget-cache-shape",
+  "requestedAt": "2026-11-11T12:19:48.594Z",
+  "scope": "Read existing128 retained query-cache slots once, reproduce only the runtime fallback index size and aggregate counts. Test whether its6MiB memory cache can actually retain the value. No source API, payloads, IDs, credentials or writes."
 }

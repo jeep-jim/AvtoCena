@@ -11,7 +11,13 @@ try{
   const context=await browser.newContext({viewport:{width,height:900},serviceWorkers:'block',locale:'ru-RU'});
   const page=await context.newPage(),errors=[];activePage=page;page.on('pageerror',e=>errors.push(e.message));
   const health=await context.request.get(origin+'/api/health',{timeout:30000});assert.equal((await health.json()).releaseSha,marker.release);
-  let requests=[];page.on('request',r=>{if(new URL(r.url()).origin===origin&&['document','fetch','xhr'].includes(r.resourceType()))requests.push(new URL(r.url()).pathname);});
+  let requests=[],network=[],networkStarts=new Map();let sampleStarted=0;
+  page.on('request',r=>{if(new URL(r.url()).origin===origin&&['document','fetch','xhr'].includes(r.resourceType())){requests.push(new URL(r.url()).pathname);networkStarts.set(r,performance.now());}});
+  page.on('requestfinished',async r=>{
+   const at=networkStarts.get(r);if(at===undefined||at<sampleStarted)return;
+   const response=await r.response().catch(()=>null),timing=r.timing();
+   network.push({path:new URL(r.url()).pathname,status:response?.status()??null,type:r.resourceType(),startedMs:Math.round(at-sampleStarted),headersMs:Math.round(timing.responseStart-timing.requestStart),completeMs:Math.round(timing.responseEnd-timing.requestStart),serverTiming:response?.headers()['server-timing']??null});
+  });
   const started=performance.now();
   assert.equal((await page.goto(origin+'/cars/china',{waitUntil:'domcontentloaded',timeout:90000})).status(),200);
   const cards=page.locator('article.ac-catalog-card,article.ac-catalog-list-row');await cards.first().waitFor({timeout:60000});
@@ -23,7 +29,7 @@ try{
    if(width<1024)await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
    const panel=width<1024?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
    const input=panel.getByRole('textbox',{name:'Цена: до',exact:true});await input.fill(String(budget));
-   requests=[];const start=performance.now();await input.press('Tab');
+   requests=[];network=[];const start=performance.now();sampleStarted=start;await input.press('Tab');
    if(width<1024)await panel.getByRole('button',{name:'Показать автомобили',exact:true}).click();
    await page.waitForURL(url=>url.searchParams.get('budget')===String(budget),{timeout:60000,waitUntil:'commit'});
    await page.locator('.ac-catalog-filter-panel[aria-busy="false"]').waitFor({state:'attached',timeout:60000});
@@ -32,7 +38,7 @@ try{
    const seconds=(performance.now()-start)/1000;
    const prices=await cards.locator('.ac-price').evaluateAll(nodes=>nodes.map(node=>Number(node.textContent.replace(/[^0-9]/g,''))).filter(n=>n>0));
    assert.ok(prices.length>0,'priced cards required');assert.ok(prices.every(price=>price<=budget),'visible prices must satisfy the selected budget');
-   result.filters.push({budget,seconds:Number(seconds.toFixed(3)),cards:await cards.count(),pricedCards:prices.length,largestPrice:Math.max(...prices),requests:requests.length,paths:requests});
+   result.filters.push({budget,seconds:Number(seconds.toFixed(3)),cards:await cards.count(),pricedCards:prices.length,largestPrice:Math.max(...prices),requests:requests.length,paths:requests,network:[...network]});
   }
   result.pageErrors=errors;assert.deepEqual(errors,[]);
   const ending=await context.request.get(origin+'/api/health',{timeout:30000});assert.equal((await ending.json()).releaseSha,marker.release);

@@ -20,6 +20,26 @@ if(marker.mode==='budget-failure-evidence'){
  const previews=await storage.readJson('offer-calculation-previews/current.json',null),savedPricePreviews={};
  for(const market of ['japan','korea'])savedPricePreviews[market]=Object.values(previews?.entries||{}).filter(row=>row.market===market).length;
  console.log('BUDGET_SOURCE_STATE',JSON.stringify({checkedAt:new Date().toISOString(),records,editedSellerPrices,savedPricePreviews,requestUsage,usageMeaning:'application request accounting, not the supplier-enforced quota'}));
+}else if(marker.mode==='budget-cache-shape'){
+ storage.writeJson=async()=>{throw Error('diagnostic_write_forbidden');};
+ const {retainedAjesQueryEntries}=await import('../apps/web/lib/catalog/ajes-query-cache.ts');
+ const result={},started=performance.now();let retainedQueries=0,rows=0,storedBytes=0;
+ for(let start=0;start<128;start+=8){
+  const slots=await Promise.all(Array.from({length:8},(_,i)=>storage.readJson('catalog/partner-cache/ajes/queries/'+(start+i)+'.json',null)));
+  for(const slot of slots){
+   storedBytes+=Buffer.byteLength(JSON.stringify(slot));
+   for(const {value} of retainedAjesQueryEntries(slot)){
+    retainedQueries++;
+    for(const lot of value?.items||[]){
+     rows++;const key=lot.table+':'+lot.id,at=value.observedAt;
+     if(!result[key]||Date.parse(result[key].observedAt)<Date.parse(at))result[key]={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:at,partial:true};
+    }
+   }
+  }
+ }
+ const tables={};for(const value of Object.values(result)){const table=value.items[0].table;tables[table]=(tables[table]||0)+1;}
+ const serializedBytes=Buffer.byteLength(JSON.stringify(result));
+ console.log('BUDGET_CACHE_SHAPE',JSON.stringify({checkedAt:new Date().toISOString(),readMilliseconds:Math.round(performance.now()-started),slots:128,retainedQueries,rows,uniqueLots:Object.keys(result).length,tables,storedBytes,serializedBytes,runtimeMaxBytes:6*1024*1024,fitsRuntimeCache:serializedBytes<=6*1024*1024,supplierRequests:0,productionWrites:0}));
 }else{
 const health=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)}).then(r=>r.json());
 if(health.releaseSha!=='463fd22559a2f9c5acd60f8f5e4b269689215c84')throw Error('release_changed');
