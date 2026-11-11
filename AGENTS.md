@@ -1,13 +1,13 @@
 # Current recovery checkpoint — 12.11.2026
 
-- Read docs/operations/current-incident.md and latest roadmap first. Preserve permanent policies below.
-- Exact873 full reacceptance43079097899/controlleredcec4b74d8a8ebd45a24a01a723a39f64c19f2b/job130726614222 FAILED18:45:14UTC. After promotion the mandatory after_ttl home response was2.960294574s > frozen1.8835s. Rollback reported old production retained18:45:10UTC; independent runtime verification is being launched.
-- Data-only current-generation overview repair43076945512 succeeded18:28:32UTC for12/13/14Nov. It removed the observed90s home timeout but did not prove all speed acceptance. Corrected image/index preflight passed, exact873/image76af verified. Browser verdict was NOT reached; UI changes not accepted.
-- One bounded isolated home-phase measurement of the same873 image is launched after repaired data to identify remaining cold/warm/35/305s home delay. No activation, supplier IP, new feed data, schedule or baseline change.
-- PR1739/b5c1db49dd2e6ffdf00abd09417847c363229a8e prepares three exact policy dates from already resident rows BEFORE new-generation manifest publication.32 local tests and TypeScript pass; full CI pending. Three files only. Do not duplicate or overwrite this work. No live data/application change from this PR yet.
-- The current 1767642 successor43067092325 remains blocked by the failed873 predecessor. Do not bypass it, rerun873 unchanged, restart supersededee0, or standard-deploy main. A new candidate must address the established cause and pass unchanged full acceptance from verified a182.
-- Preserve frozen17-route and browser baselines,35/305s checks, full results, request counts, SHA/nonce browser verdict and rollback. Keep accepteda182/imagee36 pinned.
-- JP/KR full availability, official DUMP and14/3-day snapshots unresolved. Ordinary feed schedules/customer data unchanged. Record factual milestones in roadmap.
+- Read docs/operations/current-incident.md and latest roadmap. Preserve permanent policies below.
+- Exact873 acceptance43079097899 FAILED: after_ttl home2.960294574s > frozen1.8835s. Independent runtime43081159796/job130733754334 confirmed runninga182/imagee36 at18:48:20UTC; healthok. Never rerun873 unchanged or unblock176's failed predecessor chain.
+- Data repair43076945512 prepared current generation12/13/14Nov. Isolated873 phases43081159684 SUCCESS18:54:43UTC: cold11.4724s,warm.4581s,after35.7538s,after3051.7286s. Prepared snapshot232.1ms but cold editorialEU9612.6ms/UAE8304.1ms. Productionbefore/aftera182,Nginxunchanged. This is diagnosis, not acceptance.
+- PR1738 merged5c15d79cabbf09b098de677b7dd3458eaacbc676 after fullCI43081823042PASS. It stages three exact dates before manifestCAS with lease/base checks,CAS/readback and exact card identity. PR1739 CLOSED UNMERGED as overlapping; never stack it.
+- PR1742/head7e53af56b59071e8d793ec15a1617ef579d7838c implements revision-bound prepared editorial overview to eliminate proved full market replay.34 related tests + TypeScript passed; fullCI pending. Restoring last hidden car/removing edits/legacy overview covered. No runtime change yet. Do not duplicate this work.
+- Prepare a NEW isolated candidate from accepted a182 plus reviewed176 changes,1738,1742 and the already-tested parallel dealer rail if included explicitly. Keep app path allowlist exact; do not deploy main wholesale or include other unaccepted pricing work accidentally.
+- Preserve frozen17-route and browser baselines,35/305s, full results/request counts, exactSHA+nonce verdict and rollback. Final public navigation/filter verification still required after acceptance.
+- JP/KR full inventory,DUMP rights and14/3-day schedules remain unresolved/unchanged. Preserve customer/editorial records and ordinary feeds. Append operational milestones to roadmap.
 
 # Owner accepted speed and phased optimization — 11.11.2026
 
