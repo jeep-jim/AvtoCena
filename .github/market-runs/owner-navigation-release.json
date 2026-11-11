@@ -1,11 +1,13 @@
 {
-  "sourceSha": "794654a00aa4990b284858f1f01c07ed3f020df4",
-  "candidate": 1748,
-  "requestedAt": "2026-11-11T20:55:10.423Z",
-  "reason": "Retry unchanged exact source after GitHub artifact transport failure before activation. Mandatory immutable private report storage replaces reliance on GitHub artifact transport; all original gates unchanged.",
+  "sourceSha": "75c2e6f57cfa4022865217e029a1f5d1671842c3",
+  "candidate": 1753,
+  "requestedAt": "2026-11-11T22:27:38.823Z",
+  "reason": "One exact-source release after reviewed conditional encyclopedia revalidation, identical sort order and overlay-history retention correction; all18 source checks and full controller guard43111118387 passed. Frozen performance/browser/rollback gates unchanged.",
   "supersedes": [
-    "25d072b385e00e1bf093cd29c2d9539e81ffeb9d",
-    "ddea57901465e459272e58b134c2fb847176cf33"
+    "794654a00aa4990b284858f1f01c07ed3f020df4"
   ],
-  "previousRun": 43090744197
+  "previousRun": 43098821534,
+  "controllerGuardRun": 43111118387,
+  "controllerGuardCommit": "c1c29d3f3b20b5920991196f19da6e3d30635762",
+  "rollbackProofRun": 43107566632
 }

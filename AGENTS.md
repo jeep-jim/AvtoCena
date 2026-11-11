@@ -1,3 +1,12 @@
+# Current recovery checkpoint — 12.11.2026, 2026-11-11T22:27:38.823Z
+
+- ACTIVATION REQUESTED, NOT YET ACCEPTED: exact PR1753 / 75c2e6f57cfa4022865217e029a1f5d1671842c3. All18 source workflows and full offline controller guard43111118387 SUCCESS. Marker-only controller activation; do not deploy whole main or merge acceptance history.
+- Keep frozen baseline/request/completeness/SHA/nonce/35s/305s/browser/rollback requirements. Await terminal release result and public retention checks. No overlapping release and no unchanged retry after a measured speed rejection.
+- Last independent live proof: 21:57:46UTC, a182cd21b21ecf612b63613d263e5bdd817ea4c0 / sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f / calculator c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6. Rejected794 stopped; PR1748 closed. Full JP/KR DUMP and14/3 cadence remain unapproved/unenabled.
+- All current facts and remaining work: docs/operations/current-incident.md. Prior checkpoints below are historical.
+
+---
+
 # Current recovery checkpoint —12.11.2026,22:12UTC
 
 - **NEXT SOURCE, NOT DEPLOYED:** PR1753/source75c2e6f57cfa4022865217e029a1f5d1671842c3, exact25 application/104 total changed files within105 allowed paths. All18 exact-source workflows PASSED (CI43109457791). Controller75 remains staged, activation marker unchanged. Guard43110647033 passed YAML/35shell/3Python and7 evidence behaviors, but a test counted3 historical name references as steps; corrected actual-step contract and a full guard retry are now requested.
