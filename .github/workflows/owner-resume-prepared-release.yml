@@ -1,0 +1,123 @@
+name: Resume exact owner catalog release after storage timeout
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-resume-prepared-release.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  resume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: regcloud-staging
+    env:
+      PREPARED_RELEASE: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+      EXPECTED_RELEASE: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+      AVTOCENA_RELEASE_SHA: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+      RELEASE_PREPARATION_MARKETS: china,korea,europe,uae,georgia
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          persist-credentials: false
+      - name: Require exact successful gates, loaded image and all five prepared markets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/jeep-jim/AvtoCena/actions/runs/42978644198 > /tmp/owner-original-run.json
+          gh api repos/jeep-jim/AvtoCena/actions/runs/42978644198/jobs > /tmp/owner-original-jobs.json
+          gh run download 42978644198 --repo jeep-jim/AvtoCena --name release-market-preparation --dir prepared-evidence
+          gh run download 42978644198 --repo jeep-jim/AvtoCena --name encyclopedia-coverage --dir reports
+          python3 - <<'VERIFY'
+          import json,os
+          run=json.load(open('/tmp/owner-original-run.json'))
+          assert run['head_sha']==os.environ['PREPARED_RELEASE'] and run['status']=='completed' and run['conclusion']=='failure'
+          jobs=json.load(open('/tmp/owner-original-jobs.json'))['jobs']
+          assert any(j['name']=='wait-for-astra' and j['conclusion']=='success' for j in jobs)
+          steps=next(j for j in jobs if j['name']=='prepare')['steps']
+          for name in ['Verify exact encyclopedia matching','Verify stream disconnect and gateway buffer regressions','Verify owner catalog search and queue regressions','Verify deferred recommendations before release preparation','Verify production dependency security','Verify catalog storage and bounded projection integrity','Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)']:
+            assert any(s['name']==name and s['conclusion']=='success' for s in steps),name
+          assert any(s['name']=='Deploy with rollback and resource measurements' and s['conclusion']=='skipped' for s in steps)
+          prepared=json.load(open('prepared-evidence/release-market-preparation.json'))
+          markets=os.environ['RELEASE_PREPARATION_MARKETS'].split(',')
+          assert prepared['markets']==markets and len(prepared['results'])==len(markets)
+          assert {r['market'] for r in prepared['results']}==set(markets) and all(r['status']=='success' for r in prepared['results'])
+          assert json.load(open('reports/astra-release-verification.json'))['verified'] is True
+          print('Original gates, exact loaded image and five-market preparation verified',prepared['generationId'])
+          VERIFY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Restore exact immutable index and finish generation page preparation
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          # Same existing offline two-minute read budget as index/price preparation.
+          # Runtime visitor budgets and all data/admission checks are unchanged.
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module <<'RESTORE'
+          import fs from 'node:fs';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {restoreReleaseEncyclopedia} from './scripts/encyclopedia/restore-calculation-index.mjs';
+          const storage=getJsonStorage(),prepared=JSON.parse(fs.readFileSync('prepared-evidence/release-market-preparation.json','utf8'));
+          if((await storage.readJson('catalog/manifest.json',null))?.generationId!==prepared.generationId)throw Error('prepared_generation_changed');
+          const digest=await restoreReleaseEncyclopedia(storage,process.cwd(),process.env.PREPARED_RELEASE);
+          if(digest!=='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b')throw Error('prepared_index_mismatch');
+          console.log('Exact prepared index restored',digest);
+          RESTORE
+          node --import tsx scripts/encyclopedia/assert-release-batches.mjs
+          export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
+          CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
+          node --import tsx --input-type=module <<'FENCE'
+          import fs from 'node:fs';import {getJsonStorage} from './apps/web/lib/data.ts';
+          const prepared=JSON.parse(fs.readFileSync('prepared-evidence/release-market-preparation.json','utf8'));
+          if((await getJsonStorage().readJson('catalog/manifest.json',null))?.generationId!==prepared.generationId)throw Error('prepared_generation_changed');
+          console.log('Prepared generation still current',prepared.generationId);
+          FENCE
+      - name: Accept exact image with unchanged pre-switch and post-switch checks and rollback
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/releases/$PREPARED_RELEASE"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(docker image inspect --format '{{ index .Config.Labels \"org.opencontainers.image.revision\" }}' 'avtocena-regcloud:$PREPARED_RELEASE') = '$PREPARED_RELEASE'; test \$(docker inspect --format '{{ index .Config.Labels \"org.opencontainers.image.revision\" }}' avtocena-production) = '17a686182574097b5ade22b37ef8b485e2b53844'"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$PREPARED_RELEASE' '$(node scripts/catalog-calculation-version.mjs)' 1 '$RELEASE_PREPARATION_MARKETS'"
+      - name: Verify published encyclopedia fields against this exact release
+        env:
+          ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/encyclopedia/verify-public-release.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-resumed-public-release
+          path: reports/encyclopedia-public-release.json
+          if-no-files-found: ignore

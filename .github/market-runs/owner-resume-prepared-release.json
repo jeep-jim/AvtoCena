@@ -1,0 +1,6 @@
+{
+  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "preparedRun": 42978644198,
+  "requestedAt": "2026-11-11T07:53:34.847660+00:00",
+  "reason": "All original gates and five-market parity succeeded; remaining generation-pages step failed reading full China projection with visitor timeout. Restore exact immutable index, finish that same step with existing offline120s deadline, then retain all original pre/post acceptance and rollback."
+}
