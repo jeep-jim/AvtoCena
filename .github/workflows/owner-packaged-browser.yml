@@ -18,7 +18,7 @@ jobs:
           ref: '1763b3e5389873c1c0cbe919d7097572968071a6'
           persist-credentials: false
       - name: Verify exact candidate
-        run: test "$(git -c safe.directory=\"$GITHUB_WORKSPACE\" rev-parse HEAD)" = '1763b3e5389873c1c0cbe919d7097572968071a6'
+        run: test "$(git -c safe.directory="$GITHUB_WORKSPACE" rev-parse HEAD)" = '1763b3e5389873c1c0cbe919d7097572968071a6'
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
