@@ -25195,3 +25195,13 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/4f504ec42a95e67a84208d1b0e2eb4268b4c8124
 
+
+
+### 12.11.2026 — замер главной установил дорогой общий каталог
+
+- [43075855394](https://github.com/jeep-jim/AvtoCena/actions/runs/43075855394)/job130715361269 на точном873/image76af завершился TimeoutError. home_phase: snapshotOverview189мс; затем snapshotProjection60033,2мс; snapshotPrepared78924,3мс; с редакционными поправками snapshot88366,5мс. counts65,6мс, dealer358мс, green247,2мс. Это изолированный cold-запрос2CPU/8GB, не замер обычного посетителя.
+- В18:16:44UTC временный контейнер удалён, productionBefore=productionAfter=a182, nginxUnchanged:true; OOMKilled:false. Измерения показывают дорогой fallback к общей projection; конкретная причина непригодности compact overview ещё проверяется.
+- Запрошено ограниченное чтение metadata текущего поколения gen_1794357678562_9c0667cb и даты12.11: готовыеoverview/dated/public плюсcounts/редакционные отметки. Без чтения полнойprojection, запросов поставщика или записи данных. До результата не менять дату старого индекса и не подменять полноту выдачи.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/e6fc83d6c430375d91045b0530df534f91bede00
+
