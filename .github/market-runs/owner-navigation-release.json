@@ -1,10 +1,11 @@
 {
   "sourceSha": "794654a00aa4990b284858f1f01c07ed3f020df4",
   "candidate": 1748,
-  "requestedAt": "2026-11-11T19:49:14.551Z",
-  "reason": "All18 exact-source checks passed. Exclude rejected editorial snapshots; preserve all original acceptance gates.",
+  "requestedAt": "2026-11-11T20:55:10.423Z",
+  "reason": "Retry unchanged exact source after GitHub artifact transport failure before activation. Mandatory immutable private report storage replaces reliance on GitHub artifact transport; all original gates unchanged.",
   "supersedes": [
     "25d072b385e00e1bf093cd29c2d9539e81ffeb9d",
     "ddea57901465e459272e58b134c2fb847176cf33"
-  ]
+  ],
+  "previousRun": 43090744197
 }

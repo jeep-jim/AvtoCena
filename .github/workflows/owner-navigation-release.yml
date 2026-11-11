@@ -56,6 +56,15 @@ jobs:
               assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success', f'source check not green: {r["id"]} {r["name"]} {r["status"]} {r["conclusion"]}'
           predecessor=api('actions/runs/43079097899')
           assert predecessor['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b' and predecessor['status']=='completed' and predecessor['conclusion']=='failure', 'rejected predecessor evidence changed'
+          failed_transport=api('actions/runs/43090744197')
+          assert failed_transport['conclusion']=='failure' and failed_transport['head_sha']=='a51c3c55a7ec759779aabac94739e02cdfa329d6', 'prior transport failure is not final or changed'
+          prior_jobs=api('actions/runs/43090744197/jobs?per_page=100')['jobs']
+          prior_prepare=[job for job in prior_jobs if job['name']=='prepare']
+          assert len(prior_prepare)==1 and prior_prepare[0]['conclusion']=='failure', 'prior preparation not final'
+          prior_steps={step['name']:step['conclusion'] for step in prior_prepare[0]['steps']}
+          for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
+              assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
+          assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
@@ -136,6 +145,15 @@ jobs:
               assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success', f'source check not green: {r["id"]} {r["name"]} {r["status"]} {r["conclusion"]}'
           predecessor=api('actions/runs/43079097899')
           assert predecessor['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b' and predecessor['status']=='completed' and predecessor['conclusion']=='failure', 'rejected predecessor evidence changed'
+          failed_transport=api('actions/runs/43090744197')
+          assert failed_transport['conclusion']=='failure' and failed_transport['head_sha']=='a51c3c55a7ec759779aabac94739e02cdfa329d6', 'prior transport failure is not final or changed'
+          prior_jobs=api('actions/runs/43090744197/jobs?per_page=100')['jobs']
+          prior_prepare=[job for job in prior_jobs if job['name']=='prepare']
+          assert len(prior_prepare)==1 and prior_prepare[0]['conclusion']=='failure', 'prior preparation not final'
+          prior_steps={step['name']:step['conclusion'] for step in prior_prepare[0]['steps']}
+          for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
+              assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
+          assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
@@ -227,7 +245,73 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-projection-serial-read.test.ts tests/catalog-projection-parts.test.ts tests/catalog-storage-serialization.test.ts tests/encyclopedia-index-transport.test.ts tests/regcloud-storage-compatibility.test.ts tests/storage.test.ts tests/storage-read-fairness.test.ts
+      - name: Install private release evidence preservation
+        run: |
+          cat > "$RUNNER_TEMP/preserve-release-evidence.mjs" <<'DURABLE_RELEASE_EVIDENCE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import {createHash} from 'node:crypto';
+          import {execFileSync} from 'node:child_process';
+          import {fileURLToPath,pathToFileURL} from 'node:url';
+          
+          const names=new Set(['encyclopedia-coverage','astra-release-verification','market-preparation','browser-acceptance','encyclopedia-public-release']);
+          const digest=value=>createHash('sha256').update(value).digest('hex');
+          
+          export async function preserveEvidence({storage,filename,name,release,runId,attempt,calculationVersion,required,expectedMarkets=[],summaryFile}){
+           assert.equal(storage.driver,'object','private_object_storage_required');
+           assert.match(release,/^[a-f0-9]{40}$/);
+           assert.match(calculationVersion,/^[a-f0-9]{64}$/);
+           assert.match(runId,/^[1-9][0-9]*$/);
+           assert.match(attempt,/^[1-9][0-9]*$/);
+           assert.ok(names.has(name),'unknown_evidence_name');
+           if(!fs.existsSync(filename)){
+            assert.equal(required,false,'successful_step_missing_evidence:'+name);
+            return {name,produced:false};
+           }
+           const size=fs.statSync(filename).size;
+           assert.ok(size>0&&size<=64*1024*1024,'evidence_size_invalid');
+           const raw=fs.readFileSync(filename),report=JSON.parse(raw.toString('utf8'));
+           assert.ok(report&&typeof report==='object'&&!Array.isArray(report),'evidence_report_invalid');
+           if(required&&name==='market-preparation'){
+            assert.ok(expectedMarkets.length>0&&new Set(expectedMarkets).size===expectedMarkets.length,'expected_scope_invalid');
+            assert.deepEqual([...report.markets].sort(),[...expectedMarkets].sort(),'prepared_scope_changed');
+            assert.equal(report.results?.length,expectedMarkets.length,'prepared_results_incomplete');
+            assert.deepEqual(report.results.map(row=>row.market).sort(),[...expectedMarkets].sort(),'prepared_markets_incomplete');
+            assert.ok(report.results.every(row=>row.status==='success'&&!row.error),'market_preparation_failed');
+            const manifest=await storage.readJson('catalog/manifest.json',null);
+            assert.ok(report.generationId&&report.generationId===manifest?.generationId,'prepared_generation_changed');
+           }
+           if(required&&name==='browser-acceptance'){
+            assert.equal(report.release,release,'browser_release_changed');
+            assert.equal(report.passed,true,'browser_acceptance_failed');
+            assert.equal(report.browserPassed,true,'browser_functional_failed');
+            assert.equal(report.speedGuard?.passed,true,'browser_speed_failed');
+           }
+           const envelope={schemaVersion:1,releaseSha:release,calculationVersion,runId,runAttempt:attempt,name,reportSha256:digest(raw),reportText:raw.toString('utf8')};
+           const key=`operations/release-evidence/${release}/${runId}-${attempt}/${name}.json`;
+           try{await storage.writeJson(key,envelope,{ifNoneMatch:'*'});}
+           catch(error){if(error?.name!=='StorageConflictError')throw error;}
+           const saved=await storage.readJson(key,null);
+           assert.deepEqual(saved,envelope,'release_evidence_readback_mismatch');
+           assert.equal(digest(saved.reportText),envelope.reportSha256,'release_evidence_hash_mismatch');
+           const receipt={name,key,releaseSha:release,runId,runAttempt:attempt,sha256:envelope.reportSha256,produced:true};
+           if(summaryFile)fs.appendFileSync(summaryFile,`\nPrivate release evidence: ${name}\n\nObject: \`${key}\`\n\nSHA256: \`${receipt.sha256}\`\n`);
+           return receipt;
+          }
+          
+          async function main(){
+           const imported=await import(pathToFileURL(path.resolve('apps/web/lib/data.ts')).href);
+           const getJsonStorage=imported.getJsonStorage||imported.default?.getJsonStorage;
+           assert.equal(typeof getJsonStorage,'function');
+           const calculator=process.env.AVTOCENA_CALCULATION_VERSION||execFileSync(process.execPath,['scripts/catalog-calculation-version.mjs'],{encoding:'utf8'}).trim();
+           const receipt=await preserveEvidence({storage:getJsonStorage(),filename:process.argv[2],name:process.argv[3],release:process.env.RELEASE_SOURCE_SHA,runId:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,calculationVersion:calculator,required:process.env.REQUIRE_EVIDENCE==='true',expectedMarkets:(process.env.RELEASE_PREPARATION_MARKETS||'china,korea,japan,europe,uae,georgia').split(','),summaryFile:process.env.GITHUB_STEP_SUMMARY});
+           console.log('RELEASE_EVIDENCE_PRESERVED',JSON.stringify(receipt));
+          }
+          if(import.meta.url.startsWith('file:')&&process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await main();
+          DURABLE_RELEASE_EVIDENCE
       - name: Prepare private encyclopedia index for this release
+        id: private_index
         env:
           # Offline preparation reads immutable history; visitor deadlines stay unchanged.
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
@@ -246,8 +330,26 @@ jobs:
           node --import tsx scripts/encyclopedia/assert-release-batches.mjs
           node --import tsx scripts/encyclopedia/assert-release-astra.mjs
           node --import tsx scripts/encyclopedia/audit-calculation-index.mjs
+      - name: Persist verified private evidence for private_index
+        if: always()
+        timeout-minutes: 4
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          REQUIRE_EVIDENCE: ${{ steps.private_index.outcome == 'success' }}
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx "$RUNNER_TEMP/preserve-release-evidence.mjs" reports/encyclopedia-coverage.json encyclopedia-coverage
+          node --import tsx "$RUNNER_TEMP/preserve-release-evidence.mjs" reports/astra-release-verification.json astra-release-verification
       - name: Preserve existing encyclopedia coverage and batch membership
         if: always()
+        timeout-minutes: 2
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: encyclopedia-coverage
@@ -336,6 +438,7 @@ jobs:
           console.log('Preparation scope:',markets||'all markets');
           SCOPE
       - name: Prepare exact price indexes before activating the release
+        id: market_prices
         env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
@@ -381,8 +484,25 @@ jobs:
           if test -n "$RELEASE_PREPARATION_MARKETS"; then
             env -u RELEASE_PREPARATION_MARKETS CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
           fi
+      - name: Persist verified private evidence for market_prices
+        if: always()
+        timeout-minutes: 4
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          REQUIRE_EVIDENCE: ${{ steps.market_prices.outcome == 'success' }}
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx "$RUNNER_TEMP/preserve-release-evidence.mjs" release-market-preparation.json market-preparation
       - name: Preserve individual market preparation results
         if: always()
+        timeout-minutes: 2
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: release-market-preparation
@@ -421,6 +541,15 @@ jobs:
               assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success', f'source check not green: {r["id"]} {r["name"]} {r["status"]} {r["conclusion"]}'
           predecessor=api('actions/runs/43079097899')
           assert predecessor['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b' and predecessor['status']=='completed' and predecessor['conclusion']=='failure', 'rejected predecessor evidence changed'
+          failed_transport=api('actions/runs/43090744197')
+          assert failed_transport['conclusion']=='failure' and failed_transport['head_sha']=='a51c3c55a7ec759779aabac94739e02cdfa329d6', 'prior transport failure is not final or changed'
+          prior_jobs=api('actions/runs/43090744197/jobs?per_page=100')['jobs']
+          prior_prepare=[job for job in prior_jobs if job['name']=='prepare']
+          assert len(prior_prepare)==1 and prior_prepare[0]['conclusion']=='failure', 'prior preparation not final'
+          prior_steps={step['name']:step['conclusion'] for step in prior_prepare[0]['steps']}
+          for name in ['Prepare private encyclopedia index for this release','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
+              assert prior_steps.get(name)=='success', 'prior source/data preparation failed: '+name
+          assert prior_steps.get('Preserve individual market preparation results')=='failure' and prior_steps.get('Deploy with rollback and resource measurements')=='skipped', 'prior activation may have started'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:
               health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted release changed'
@@ -428,6 +557,7 @@ jobs:
           print(json.dumps({'source':sha,'candidate':1748,'exactGreenChecks':len(actual),'mergedReviews':[1738,1740,1744,1746],'productionBase':health.get('releaseSha')}))
           SOURCE_GUARD
       - name: Deploy with rollback and resource measurements
+        id: deploy_acceptance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/release-browser/node_modules/playwright/index.mjs
@@ -445,14 +575,32 @@ jobs:
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py scripts/regcloud-browser-verdict.py "root@151.248.113.177:$remote_dir/"
           scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
           bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS"
+      - name: Persist verified private evidence for deploy_acceptance
+        if: always()
+        timeout-minutes: 4
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          REQUIRE_EVIDENCE: ${{ steps.deploy_acceptance.outcome == 'success' }}
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx "$RUNNER_TEMP/preserve-release-evidence.mjs" owner-filter-browser-report.json browser-acceptance
       - name: Preserve required browser acceptance evidence
         if: always()
+        timeout-minutes: 2
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: release-browser-acceptance
           path: owner-filter-browser-report.json
           if-no-files-found: ignore
       - name: Verify published encyclopedia fields against this exact release
+        id: public_verification
         env:
           ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'
           JSON_STORAGE_DRIVER: object
@@ -465,8 +613,25 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx scripts/encyclopedia/verify-public-release.mjs
+      - name: Persist verified private evidence for public_verification
+        if: always()
+        timeout-minutes: 4
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          REQUIRE_EVIDENCE: ${{ steps.public_verification.outcome == 'success' }}
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx "$RUNNER_TEMP/preserve-release-evidence.mjs" reports/encyclopedia-public-release.json encyclopedia-public-release
       - name: Preserve public encyclopedia verification
         if: always()
+        timeout-minutes: 2
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: encyclopedia-public-release
