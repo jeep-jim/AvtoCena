@@ -1,7 +1,7 @@
 {
   "release": "3048aede91dbfa4287e038075700e1434ba53e85",
   "phase": "before-home-parallel",
-  "requestedAt": "2026-11-11T12:26:28.761816+00:00",
+  "requestedAt": "2026-11-11T12:29:09.644737+00:00",
   "expectedDealerCards": 0,
-  "reason": "Baseline43019907031 assumed active dealer cards, but live UI has62 catalogue cards and0 dealer cards. Assert this observed state explicitly, keep actual catalogue and city reload checks; unit test separately covers a populated dealer rail."
+  "reason": "43020362303 recorded mobile home62 cards and correct empty dealer block, then the test requested Novokuznetsk outside the first10 popular cities. Use existing city-search control before selecting, retaining URL/cookie/price/reload assertions."
 }

@@ -34,7 +34,9 @@ try {
     }
     const consent = page.getByRole('button', { name: 'Хорошо', exact: true }); if (await consent.isVisible()) await consent.click();
     await page.getByRole('button', { name: 'Выбрать город. Сейчас: Москва', exact: true }).first().click();
-    await page.getByRole('dialog').getByRole('button', { name: 'Новокузнецк', exact: true }).click();
+    const picker = page.getByRole('dialog', { name: 'Выбор города' });
+    await picker.getByRole('textbox', { name: 'Поиск города' }).fill('Новокуз');
+    await picker.getByRole('button', { name: /Новокузнецк/ }).first().click();
     await page.waitForURL(url => url.searchParams.get('city') === 'Новокузнецк', { waitUntil: 'commit' });
     await page.getByRole('button', { name: 'Выбрать город. Сейчас: Новокузнецк', exact: true }).first().waitFor();
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
