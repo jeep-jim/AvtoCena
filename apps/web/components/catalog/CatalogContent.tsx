@@ -35,6 +35,7 @@ import { CatalogLoadMore } from "@/components/catalog/CatalogLoadMore";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
+import {JAPAN_FILTER_QUERY_KEYS} from '@/lib/catalog/japan-filter-retention';
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
@@ -206,7 +207,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   }));
   const total=localTotal,countIncomplete=localIncomplete || railReads.size>0 || (showGreen && !green);
 
-  const initialKeys = ["salePeriod","color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
+  const initialKeys = ["q",...JAPAN_FILTER_QUERY_KEYS,"color","source", "stock", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   initial.market=selectedMarkets.join("|");
   const brandNames = facets.makes || [];

@@ -34,7 +34,7 @@ try{for(const mode of modes)for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const report={mode,width,checks:{}};
  console.log(JSON.stringify({starting:mode,width}));
- await page.goto(origin+`/cars?fixture=${mode}&market=china&make=BMW&model=X3&budget=2500000&powerFrom=80&powerTo=160&transmission=cvt&chassis=ZVW30&auctionGrade=4.5&city=Новокузнецк&selection=1`);
+ await page.goto(origin+`/cars?fixture=${mode}&market=japan&make=BMW&model=X3&budget=2500000&powerFrom=80&powerTo=160&transmission=cvt&chassis=ZVW30&frameNumber=ZVW30-1234567&lotNumber=12345&auctionGrade=4.5&salePeriod=month&city=Новокузнецк&selection=1`);
  await page.locator('.ac-catalog-filter-panel').waitFor({state:'attached'});
  let scope=page.locator('.ac-catalog-filter-panel');if(width===390){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.getByRole('dialog',{name:'Фильтры каталога'});}
  await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();await scope.locator('[data-facet-value="Toyota"]').click();
@@ -51,10 +51,18 @@ try{for(const mode of modes)for(const width of [390,1440]){
  console.log(JSON.stringify({stage:'filters',...report}));
  if(mode==='after'){
   const market=scope.locator('input[name=market]').locator('..');
-  await market.locator(':scope > button').click();await market.getByRole('button',{name:'Корея',exact:true}).click();await market.getByRole('button',{name:'Китай',exact:true}).click();await market.locator(':scope > button').click();
+  await market.locator(':scope > button').click();await market.getByRole('button',{name:'Корея',exact:true}).click();await market.getByRole('button',{name:'Япония · Аукционы',exact:true}).click();await market.locator(':scope > button').click();
   await page.waitForFunction(()=>location.pathname.startsWith('/cars/korea')||new URLSearchParams(location.search).get('market')==='korea');
   const p=new URL(page.url()).searchParams;
-  report.checks.marketKeepsOtherFilters=p.get('model')==='X3|Corolla'&&p.get('budget')==='1500000'&&p.get('powerFrom')==='80'&&p.get('transmission')==='cvt'&&p.get('chassis')==='ZVW30'&&p.get('auctionGrade')==='4.5';
+  const japan={chassis:'ZVW30',frameNumber:'ZVW30-1234567',lotNumber:'12345',auctionGrade:'4.5',salePeriod:'month'};
+  const savedKey=key=>'savedJapan'+key[0].toUpperCase()+key.slice(1);
+  report.checks.marketKeepsOtherFilters=p.get('model')==='X3|Corolla'&&p.get('budget')==='1500000'&&p.get('powerFrom')==='80'&&p.get('transmission')==='cvt'&&Object.entries(japan).every(([key,value])=>p.get(savedKey(key))===value);
+  report.checks.marketDoesNotSendJapanFilters=Object.keys(japan).every(key=>!p.has(key));
+  report.checks.rememberedJapanIsLabelled=await page.getByRole('button',{name:'Убрать Сохранено для Японии: Номер кузова ZVW30-1234567',exact:true}).filter({visible:true}).count()>0;
+  await market.locator(':scope > button').click();await market.getByRole('button',{name:'Япония · Аукционы',exact:true}).click();await market.getByRole('button',{name:'Корея',exact:true}).click();await market.locator(':scope > button').click();
+  await page.waitForFunction(()=>location.pathname.startsWith('/cars/japan')||new URLSearchParams(location.search).get('market')==='japan');
+  const returned=new URL(page.url()).searchParams;
+  report.checks.marketRestoresJapanFilters=Object.entries(japan).every(([key,value])=>returned.get(key)===value&&!returned.has(savedKey(key)))&&returned.get('model')==='X3|Corolla'&&returned.get('budget')==='1500000';
  }
  // Explicitly removing one model must keep the other selected model.
  if(mode==='after'){await page.getByRole('button',{name:'Убрать X3',exact:true}).filter({visible:true}).first().click();assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');report.checks.explicitRemoveOnlyOne=true;}

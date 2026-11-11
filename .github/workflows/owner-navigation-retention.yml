@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
       - name: Check preservation helpers and current types
         run: |
-          node --import tsx --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          node --import tsx --test tests/model-suggestion-search.test.ts tests/japan-filter-retention.test.ts tests/catalog-brand-navigation.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
           npm run typecheck
       - name: Compare original behavior and fixes without production or supplier requests
         env:
