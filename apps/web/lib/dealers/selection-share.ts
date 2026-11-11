@@ -1,10 +1,11 @@
 import {parseCatalogSort} from '../catalog/catalog-sort';
+import {JAPAN_FILTER_KEYS,savedJapanFilterKey} from '../catalog/japan-filter-retention';
 /** Public catalogue parameters only: never forward editor flags, tokens or lead data. */
 export const SELECTION_TITLE='Подборка вариантов по вашему запросу';
 export const SELECTION_EVENT='avtocena:dealer-selection';
 export const OPEN_SELECTION_PANEL='avtocena:dealer-selection-open';
 export const OPEN_SELECTION_FILTERS='avtocena:dealer-selection-filters';
-const textKeys=['salePeriod','q','make','brand','model','market','stock','source','chassis','frameNumber','lotNumber','bodyType','color','transmission','fuel','drive','auctionGrade','city','hasPrice'];
+const textKeys=['salePeriod','q','make','brand','model','market','stock','source','chassis','frameNumber','lotNumber','bodyType','color','transmission','fuel','drive','auctionGrade','city','hasPrice',...JAPAN_FILTER_KEYS.map(savedJapanFilterKey)];
 const numberKeys=['yearFrom','yearTo','budgetFrom','budget','budgetTo','mileageFrom','mileageTo','engineFrom','engineTo','powerFrom','powerTo'];
 export function selectionQuery(input:URLSearchParams,strict=true){
  const out=new URLSearchParams();

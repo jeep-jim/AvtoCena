@@ -1,3 +1,9 @@
+# Shared selection correction before release — 11.11.2026 14:47 UTC
+
+- Run43039722046 / candidate3c641141 was cancelled before activation by guarded controller43041124657; Deploy=skipped. It must not be resumed. Prior2b7c3e2 is also cancelled. Accepted runtime a182 has not been switched by these runs.
+- Final query-state fix adds the five savedJapan* fields to the existing validated selectionQuery whitelist. Preserve its300-character and unsafe-character validation and exclusion of private flags/tokens. Tests now cover supplier query→shared selection→Japan restoration and actual dealer sharing after filters/reload.
+- Local15 shared-query/regression tests and TypeScript pass. Expanded browser workflow runs next; require its outcome and create a new exact isolated candidate before release. No feed mirror or14/3-day schedule is authorized by this code change.
+
 # Current isolated candidate — 11.11.2026 14:33 UTC
 
 - Candidate 3c641141b49135cdb1109f6e09ea42675998060f supersedes cancelled2b7c3e2. Active run43039722046 is pinned to this candidate; inspect it before starting another release. Its source checks passed and encyclopedia preparation is running. Application ancestry is accepted a182 with11 UI/query-state paths only. Installation is NOT confirmed yet.
