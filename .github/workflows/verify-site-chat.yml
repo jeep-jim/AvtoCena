@@ -6,6 +6,8 @@ on:
       - 'tests/site-chat*'
       - 'tests/browser/site-chat*'
       - 'tests/browser/customer-chat*'
+      - 'tests/browser/currency-observer*'
+      - 'tests/currency-observer*'
       - '.github/workflows/verify-site-chat.yml'
   workflow_dispatch:
 permissions:
@@ -23,6 +25,13 @@ jobs:
       - run: npm ci
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/crm-new-section-access.test.ts tests/crm-staff-permissions-route.test.ts tests/crm-permissions-activity.test.ts tests/site-chat-dealer-routing.test.ts tests/dealer-showcase.test.ts tests/crm-relay.test.ts tests/crm-relay-worker.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/chat-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check scoped currency observers before and after
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
+          CURRENCY_OBSERVER_BASE_REF: a182cd21b21ecf612b63613d263e5bdd817ea4c0
+        run: |
+          git fetch --depth=1 origin "$CURRENCY_OBSERVER_BASE_REF"
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/currency-observer-scope.mjs
       - name: Check games and CRM mobile sheet
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
@@ -54,3 +63,4 @@ jobs:
             artifacts/games-crm/*.png
             artifacts/site-chat-rooms/*.png
             artifacts/account-entrance/*.png
+            artifacts/currency-observer-scope/*
