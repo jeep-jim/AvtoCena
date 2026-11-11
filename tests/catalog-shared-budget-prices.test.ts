@@ -15,16 +15,17 @@ const index=()=>buildBudgetCountIndex('fixture-generation',[
 ] as any[],new Map(),3);
 
 test('prepared-only reads validate the snapshot and never start or join an expensive rebuild',async()=>{
- const storage=getJsonStorage(),read=storage.readJson,write=storage.writeJson;
+ const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  let saved:any=null,writes=0,loads=0;
  storage.readJson=async()=>saved;
+ storage.readJsonWithMeta=async()=>({found:!!saved,etag:saved?'saved':undefined,value:saved});
  storage.writeJson=async(_path,value)=>{saved=structuredClone(value);writes++;};
  const source=index(),rows=source.rows.filter(row=>row[0]==='korea').map(row=>row.slice(0,7) as typeof row);
  try{
   resetSharedBudgetPriceCache();
   assert.equal(await readPreparedBudgetPrices(source,'korea','v1',true),null);
   assert.equal(writes,0);
-  await sharedBudgetPrices(source,'korea','v1',async()=>{loads++;return rows;},async()=>'v1',true);
+  await sharedBudgetPrices(source,'korea','v1',async()=>{loads++;return rows;},async()=>'v1',true,{persistence:'required'});
   resetSharedBudgetPriceCache();
   assert.deepEqual(await readPreparedBudgetPrices(source,'korea','v1',true),rows);
   assert.equal(loads,1);
@@ -32,24 +33,25 @@ test('prepared-only reads validate the snapshot and never start or join an expen
   resetSharedBudgetPriceCache();saved.checksum='corrupt';
   assert.equal(await readPreparedBudgetPrices(source,'korea','v1',true),null);
   let finish!:(value:typeof rows)=>void;
-  const building=sharedBudgetPrices(source,'korea','v2',()=>new Promise(resolve=>{finish=resolve;}),async()=>'v2',true);
+  const building=sharedBudgetPrices(source,'korea','v2',()=>new Promise(resolve=>{finish=resolve;}),async()=>'v2',true,{persistence:'required'});
   while(!finish)await new Promise(resolve=>setImmediate(resolve));
   assert.equal(await readPreparedBudgetPrices(source,'korea','v2',true),null,'a narrow request does not await the ongoing rebuild');
   finish(rows);await building;
   assert.equal(writes,2,'only explicit full preparation writes a snapshot');
- }finally{storage.readJson=read;storage.writeJson=write;resetSharedBudgetPriceCache();}
+ }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetSharedBudgetPriceCache();}
 });
 
 test('shared price cache survives process-cache reset, rejects corrupt/old results, and coalesces parallel filters',async()=>{
- const storage=getJsonStorage(),read=storage.readJson,write=storage.writeJson;
+ const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  let saved:any=null,calls=0,writes=0;
  storage.readJson=async()=>saved;
+ storage.readJsonWithMeta=async()=>({found:!!saved,etag:saved?'saved':undefined,value:saved});
  storage.writeJson=async(_path,value)=>{saved=structuredClone(value);writes++;};
  const source=index(),rows=source.rows.filter(row=>row[0]==='korea').map(row=>row.slice(0,7) as typeof row);
  const load=async()=>{calls++;return rows;};
  try{
   resetSharedBudgetPriceCache();
-  const results=await Promise.all(Array.from({length:20},()=>sharedBudgetPrices(source,'korea','v1',load,async()=>'v1')));
+  const results=await Promise.all(Array.from({length:20},()=>sharedBudgetPrices(source,'korea','v1',load,async()=>'v1',false,{persistence:'required'})));
   assert.equal(calls,1);assert.equal(writes,1);assert.deepEqual(results[0],rows);
   resetSharedBudgetPriceCache();
   assert.deepEqual(await sharedBudgetPrices(source,'korea','v1',load,async()=>'v1'),rows);
@@ -57,7 +59,7 @@ test('shared price cache survives process-cache reset, rejects corrupt/old resul
   for(const damage of [()=>saved.prices.pop(),()=>saved.key='wrong',()=>saved.sourceIds='partial',()=>saved.createdAt-=2*86400000]){
    damage();resetSharedBudgetPriceCache();
    const before=calls;
-   assert.deepEqual(await sharedBudgetPrices(source,'korea','v1',load,async()=>'v1'),rows);
+   assert.deepEqual(await sharedBudgetPrices(source,'korea','v1',load,async()=>'v1',false,{persistence:'required'}),rows);
    assert.equal(calls,before+1,'damaged or expired cache uses exact replay');
   }
   assert.equal(restoreBudgetPrices(saved,saved.key,[rows[0]]),null,'partial input is never a full market');
@@ -72,7 +74,7 @@ test('shared price cache survives process-cache reset, rejects corrupt/old resul
   storage.readJson=async()=>{throw Error('unavailable');};storage.writeJson=async()=>{throw Error('unavailable');};
   resetSharedBudgetPriceCache();
   assert.deepEqual(await sharedBudgetPrices(source,'korea','v5',load,async()=>'v5'),rows);
- }finally{storage.readJson=read;storage.writeJson=write;resetSharedBudgetPriceCache();}
+ }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetSharedBudgetPriceCache();}
 });
 
 test('market selectors preserve every priced and unpriced identity and reject partial partitions',()=>{

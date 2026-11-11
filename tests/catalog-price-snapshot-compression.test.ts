@@ -7,14 +7,15 @@ import {sharedBudgetPrices,resetSharedBudgetPriceCache,restoreBudgetPrices} from
 test('large shared snapshots reduce transferred JSON and retain exact prices, identities, rollback isolation and corruption fallback',async()=>{
  const rows=Array.from({length:8000},(_,i)=>({id:`fixture-${i}`,market:'korea',totalRub:1000000+i*123,make:'Hyundai',model:'Avante',year:2024}));
  const index=buildBudgetCountIndex('fixture-generation',rows as any[],new Map(),3);
- const storage=getJsonStorage(),read=storage.readJson,write=storage.writeJson;
+ const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  let saved:any=null,writtenPath='',calls=0;
  storage.readJson=async()=>saved;
+ storage.readJsonWithMeta=async()=>({found:!!saved,etag:saved?'saved':undefined,value:saved});
  storage.writeJson=async(path,value)=>{writtenPath=path;saved=structuredClone(value);};
  const compact=index.rows.map(row=>row.slice(0,7) as typeof row);
  const load=async()=>{calls++;return compact;};
  try{
-  resetSharedBudgetPriceCache();const result=await sharedBudgetPrices(index,'korea','stable',load,async()=>'stable');
+  resetSharedBudgetPriceCache();const result=await sharedBudgetPrices(index,'korea','stable',load,async()=>'stable',false,{persistence:'required'});
   assert.equal(saved.encoding,'gzip-base64');assert.match(writtenPath,/^catalog\/runtime-budget-prices-v3\/korea\/[a-f0-9]{64}\.json$/);
   const wireBytes=Buffer.byteLength(JSON.stringify(saved));
   const referenceBytes=Buffer.byteLength(JSON.stringify(index.rows.map(row=>[row[5].id,row[1],row[2],row[4],row[6]??null])));
@@ -24,5 +25,5 @@ test('large shared snapshots reduce transferred JSON and retain exact prices, id
   assert.deepEqual(await sharedBudgetPrices(index,'korea','stable',load,async()=>'stable'),result);assert.equal(calls,2);
   assert.equal(restoreBudgetPrices({encoding:'gzip-base64',payload:'bad'},'stable',index.rows),null);
   console.log(JSON.stringify({fixture:'8000-price-rows',wireBytes,referenceBytes,reductionPercent:Math.round((1-wireBytes/referenceBytes)*100)}));
- }finally{storage.readJson=read;storage.writeJson=write;resetSharedBudgetPriceCache();}
+ }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetSharedBudgetPriceCache();}
 });
