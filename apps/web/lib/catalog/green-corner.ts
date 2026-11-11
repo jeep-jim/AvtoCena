@@ -2,7 +2,6 @@ import {withCatalogEditorial,applyCatalogEditorial,editorialHidden} from './edit
 import { createHash } from "node:crypto";
 import { DetailReadCache } from "./detail-read-cache";
 import { withGreenCornerFuel } from "./green-corner-fuel";
-import { unstable_cache } from "next/cache";
 import { getJsonStorage } from "../data";
 import type { VehicleOffer } from "./types";
 import { isGreenCornerOffer } from "./green-corner-contract";
@@ -10,12 +9,15 @@ import { greenCornerNeedsFullPricing,greenCornerPageSelection,type GreenFilters 
 import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 export const GREEN_CORNER_PATH="catalog/green-corner/current.json";
 export type GreenCornerSnapshot={version:1;updatedAt:string;sourceCount:number;items:VehicleOffer[]};
-export const readGreenCorner = unstable_cache(async ():Promise<GreenCornerSnapshot>=>{
+const stockSnapshot = new DetailReadCache<GreenCornerSnapshot>({maxEntries:1,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
+// One immutable validated snapshot per minute. Next's JSON cache parsed a new
+// complete copy on every offer page even when the saved stock had not changed.
+export const readGreenCorner = ():Promise<GreenCornerSnapshot>=>stockSnapshot.get(GREEN_CORNER_PATH,async()=>{
  const value=await getJsonStorage().readJson<GreenCornerSnapshot|null>(GREEN_CORNER_PATH,null);
  if(!value)return {version:1,updatedAt:"",sourceCount:0,items:[]};
  if(value.version!==1||!Array.isArray(value.items)||!value.items.every(isGreenCornerOffer))throw Error("green_invalid_snapshot");
  return {...value, items: value.items.map(withGreenCornerFuel)};
-},["green-corner-v1"],{revalidate:60});
+});
 export async function getGreenCornerOffer(id:string){
  if(!/^green-\d+$/.test(id))return null;
  return (await readGreenCorner()).items.find(row=>row.id===id)||null;

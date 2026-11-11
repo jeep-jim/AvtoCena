@@ -25,7 +25,7 @@ import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
-import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
+import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
@@ -836,6 +836,20 @@ function projectionUtilizationPowerHp(row: Pick<CatalogSearchProjection,'utiliza
     || /electric|hybrid|phev|hev|bev|электро|гибрид/.test(fuel)) return 0;
   return projectionNumber(row.powerHp, 0);
 }
+/** Calculation enrichment never changes country, make or model. Reject other
+ * identities before auditing their mechanical facts or creating priced copies. */
+function projectionIdentityMatches(row: Pick<CatalogSearchProjection,'market'|'make'|'model'>, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
+  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase('ru-RU');
+  if (params.market && params.market !== 'any' && lower(row.market) !== lower(params.market)) return false;
+  if (params.make && !catalogMakeFilterValues(params.make).some(make => lower(row.make) === lower(make))) return false;
+  if (params.model) {
+    const prefix = `${lower(row.make)}:`;
+    const canonical = modelKeys ? [...modelKeys].some(key => key.startsWith(prefix)
+      && matchesCatalogModel(row.model, key.slice(prefix.length), row.make)) : false;
+    if (!canonical && !matchesCatalogModel(row.model, params.model, row.make)) return false;
+  }
+  return true;
+}
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if(editorialHidden(row))return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
@@ -847,16 +861,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     return catalogMakeFilterValues(params.make).some(value=>cleanFacet(value).toLocaleLowerCase("ru-RU")===make);
   }
   row = applyCatalogEditorialSpecifications(preparedProjectionRows.get(row) || safePublicPricing(row));
-  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
-  if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
-  if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;
-  if (params.model) {
-    const makePrefix = `${lower(row.make)}:`;
-    const canonicalMatch = modelKeys ? [...modelKeys].some((key) => key.startsWith(makePrefix)
-      && matchesCatalogModel(row.model, key.slice(makePrefix.length),row.make)) : false;
-    const literalMatch = matchesCatalogModel(row.model, params.model,row.make);
-    if (!canonicalMatch && !literalMatch) return false;
-  }
+  if (!projectionIdentityMatches(row,params,modelKeys)) return false;
   const priced = params.city && (params.budgetFrom || params.budgetTo || params.hasPrice) ? priceCardForCity(row,params.city).offer : row;
   const filterPrice = calculatedCatalogPrice(priced);
   if ((params.budgetFrom || params.budgetTo) && !(filterPrice > 0)) return false;
@@ -894,9 +899,8 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
 /** Yield during large recommendation scans so unrelated requests can progress. */
 export async function filterCatalogProjectionRows(rows:CatalogSearchProjection[],params:CatalogSearchParams,modelKeys:Set<string>|null=null){
  const selected:CatalogSearchProjection[]=[];
- const market=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):'';
  for(let offset=0;offset<rows.length;offset+=256){
-  const batch=rows.slice(offset,offset+256).filter(row=>!market||cleanFacet(row.market).toLocaleLowerCase('ru-RU')===market);
+  const batch=rows.slice(offset,offset+256).filter(row=>projectionIdentityMatches(row,params,modelKeys));
   for(const row of prepareCatalogProjectionRows(batch))if(catalogSearchProjectionMatches(row,params,modelKeys))selected.push(row);
   if(offset+256<rows.length)await new Promise<void>(resolve=>setImmediate(resolve));
  }
@@ -980,6 +984,7 @@ async function readProjectionRows(manifest: CatalogManifest, params: CatalogSear
 
 async function currentProjectionRows(params: CatalogSearchParams = {}) {
   const makes = catalogMakeFilterValues(params.make);
+  const modelKeys = await projectionModelKeys(params);
   if (makes.length) {
     const manifest = await readManifest();
     const parts = await Promise.all(makes.map(make => readCurrentBrandProjection(make, manifest.generationId)));
@@ -987,7 +992,7 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
       // A brand projection spans all countries. Scope it before price replay:
       // each grouped market must not calculate every other country's cars.
       const rows=parts.flatMap(part=>part.items);
-      const scoped=params.market && params.market!=="any" ? rows.filter(row=>row.market===params.market) : rows;
+      const scoped=rows.filter(row=>projectionIdentityMatches(row,params,modelKeys));
       return {generationId:manifest.generationId,rows:prepareCatalogProjectionRows(scoped)};
     }
   }
@@ -997,7 +1002,7 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
   // All readers coalesce the small manifest check before downloading projections.
   const [manifest, current] = await Promise.all([readManifest(), readCurrentSearchProjection(scope)]);
   if (current.generationId === manifest.generationId) {
-    return { generationId: manifest.generationId, rows: prepareCatalogProjectionRows(current.items || []) };
+    return { generationId: manifest.generationId, rows: prepareCatalogProjectionRows((current.items || []).filter(row=>projectionIdentityMatches(row,params,modelKeys))) };
   }
   return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
 }
@@ -2369,14 +2374,19 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
     // is cheaper when both the matching rows and their source blocks are small.
     const narrowModel = Boolean(params.make || params.model) && selected.rows.length <= 4096
       && new Set(selected.rows.map(row=>row[5].block)).size <= 32;
-    const index=selected.cardVersion===3&&!narrowModel?await readBudgetCountIndex(selected.generationId,params.market):null;
+    const index=selected.cardVersion===3?await readBudgetCountIndex(selected.generationId,params.market):null;
     if(index?.version===3 && index.generationId===selected.generationId){
      const markets=[...new Set(selected.rows.map(row=>row[0]))];
      const supported=markets.every(market=>market==="japan" || index.pricingChunks?.[market] || index.rows.filter(row=>row[0]===market).every(row=>row[7]));
-     if(supported){
+     // Prepared exact prices are cheaper than fetching every matching card.
+     // If absent, narrow searches still use only their own bounded blocks.
+     const prepared=narrowModel?await Promise.all(markets.map((market,position)=>
+      fingerprints[position] && market!=='japan'
+       ?readPreparedBudgetPrices(index,market,fingerprints[position]!,true):null)):null;
+     if(supported && (!narrowModel || prepared?.every(rows=>rows!==null))){
       const {japanSearchQuotes}=await import("./japan-delivered-preview");
       const quotes=markets.includes("japan")?await japanSearchQuotes(selected.generationId):{};
-      const current=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(index,market,true));
+      const current=(prepared as BudgetCountIndex['rows'][]|null) ?? await mapWithConcurrency(markets,2,market=>currentBudgetReplay(index,market,true));
       const prices=new Map(current.flat().map(row=>[row[5].id,row]));
       for(let position=0;position<selected.rows.length;position++){
        const row=prices.get(selected.rows[position][5].id);if(!row)continue;

@@ -169,6 +169,10 @@ PY
 # Candidate preparation has a smaller CPU budget than the serving process.
 # Acceptance runs before switching and again after the old process is stopped.
 python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
+# Promote before editing Nginx as well as before accepting traffic: if Docker
+# rejects the resource change, the saved serving configuration remains intact.
+# The previous container can take 30 seconds to drain after the later switch.
+docker update --cpus 6 --memory 10g "$candidate" >/dev/null
 python3 - "$config" "$old_port" "$port" <<'PY'
 import pathlib,sys
 p=pathlib.Path(sys.argv[1]);s=p.read_text();old='127.0.0.1:'+sys.argv[2];assert s.count(old)==1
@@ -198,10 +202,6 @@ if '# AvtoCena bounded social previews' not in s:
     s=maps+s
 p.write_text(s)
 PY
-# Promote to the existing production resource limits before accepting traffic.
-# The previous container may take 30 seconds to drain; visitors must never run
-# against the candidate's deliberately reduced build/prewarm CPU limit.
-docker update --cpus 6 --memory 10g "$candidate" >/dev/null
 switched=1
 bash "$0" --configure-response-buffers "$config"
 nginx -t

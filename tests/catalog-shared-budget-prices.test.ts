@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {getJsonStorage} from '../apps/web/lib/data';
-import {sharedBudgetPrices,resetSharedBudgetPriceCache,restoreBudgetPrices,budgetPricingFingerprint} from '../apps/web/lib/catalog/shared-budget-prices';
+import {sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,restoreBudgetPrices,budgetPricingFingerprint} from '../apps/web/lib/catalog/shared-budget-prices';
 import {splitBudgetMarketIndex,validBudgetMarketIndex} from '../apps/web/lib/catalog/budget-market-index';
 import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
 import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
@@ -13,6 +13,32 @@ const index=()=>buildBudgetCountIndex('fixture-generation',[
  {id:'c',market:'china',totalRub:2500000,make:'Toyota',model:'Camry',year:2024},
  {id:'d',market:'china',totalRub:null,make:'Toyota',model:'Camry',year:2024},
 ] as any[],new Map(),3);
+
+test('prepared-only reads validate the snapshot and never start or join an expensive rebuild',async()=>{
+ const storage=getJsonStorage(),read=storage.readJson,write=storage.writeJson;
+ let saved:any=null,writes=0,loads=0;
+ storage.readJson=async()=>saved;
+ storage.writeJson=async(_path,value)=>{saved=structuredClone(value);writes++;};
+ const source=index(),rows=source.rows.filter(row=>row[0]==='korea').map(row=>row.slice(0,7) as typeof row);
+ try{
+  resetSharedBudgetPriceCache();
+  assert.equal(await readPreparedBudgetPrices(source,'korea','v1',true),null);
+  assert.equal(writes,0);
+  await sharedBudgetPrices(source,'korea','v1',async()=>{loads++;return rows;},async()=>'v1',true);
+  resetSharedBudgetPriceCache();
+  assert.deepEqual(await readPreparedBudgetPrices(source,'korea','v1',true),rows);
+  assert.equal(loads,1);
+  assert.equal(await readPreparedBudgetPrices(source,'korea','different',true),null,'other calculation context is never reused');
+  resetSharedBudgetPriceCache();saved.checksum='corrupt';
+  assert.equal(await readPreparedBudgetPrices(source,'korea','v1',true),null);
+  let finish!:(value:typeof rows)=>void;
+  const building=sharedBudgetPrices(source,'korea','v2',()=>new Promise(resolve=>{finish=resolve;}),async()=>'v2',true);
+  while(!finish)await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(await readPreparedBudgetPrices(source,'korea','v2',true),null,'a narrow request does not await the ongoing rebuild');
+  finish(rows);await building;
+  assert.equal(writes,2,'only explicit full preparation writes a snapshot');
+ }finally{storage.readJson=read;storage.writeJson=write;resetSharedBudgetPriceCache();}
+});
 
 test('shared price cache survives process-cache reset, rejects corrupt/old results, and coalesces parallel filters',async()=>{
  const storage=getJsonStorage(),read=storage.readJson,write=storage.writeJson;

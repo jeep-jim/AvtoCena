@@ -87,6 +87,24 @@ export function restoreBudgetPrices(value:any,key:string,source:BudgetCountRow[]
  return rows;
 }
 
+/** Read only an already prepared, validated price snapshot. A miss must not
+ * start or join whole-market calculation from a narrow model request. */
+export async function readPreparedBudgetPrices(index:BudgetCountIndex,market:string,fingerprint:string,displayPrices=false) {
+ const source=[...index.rows,...(index.otherRows||[])].filter(row=>row[0]===market);
+ const sourceIds=hash(source.map(row=>row[5].id));
+ const key=hash([index.generationId,market,fingerprint,sourceIds,...(displayPrices?["display-price-v2"]:[])]);
+ const present=cache.peekFresh(key);if(present)return present;
+ try {
+  return await cache.get(key,async()=>{
+   const path=`catalog/${displayPrices?"runtime-sort-prices-v3":"runtime-budget-prices-v3"}/${market}/${key}.json`;
+   const stored=await getJsonStorage().readJson<SnapshotWire|null>(path,null);
+   const restored=restoreBudgetPrices(await decodeBudgetSnapshotAsync(stored),key,source);
+   if(!restored)throw Error('catalog_prepared_price_unavailable');
+   return restored;
+  },`${key}:prepared-only`);
+ } catch { return null; }
+}
+
 /** One bounded object per market, shared across server instances. It is a
  * disposable calculation cache, never a catalog writer or published cursor.
  * A failed/mismatched cache always executes the existing exact calculation.

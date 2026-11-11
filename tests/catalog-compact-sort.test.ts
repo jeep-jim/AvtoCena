@@ -1,3 +1,4 @@
+import {sharedBudgetPrices,budgetPricingFingerprint} from '../apps/web/lib/catalog/shared-budget-prices';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {getJsonStorage} from '../apps/web/lib/data';
@@ -8,12 +9,12 @@ import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-
 import {compareCatalogTerms,parseCatalogSort} from '../apps/web/lib/catalog/catalog-sort';
 import {sortCatalogRows} from '../apps/web/lib/catalog/market-page';
 
-test('a narrow brand price sort reads only its matching card blocks, not the entire market replay',async()=>{
+test('a narrow brand price sort falls back to matching card blocks when no prepared snapshot exists',async()=>{
  const base:any={market:'korea',make:'BMW',model:'3 Series',year:2024,engineCc:1598,powerHp:150,fuel:'petrol',powertrainKind:'combustion',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-11-08T00:00:00Z'};
  const rows=Array.from({length:100},(_,i)=>({...base,id:`narrow-${i}`,make:i<5?'BMW':'Audi',totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  const generationId='narrow-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])),3);
  const storage=getJsonStorage(),original=storage.readJsonWithMeta,originalRead=storage.readJson,originalWrite=storage.writeJson,reads:string[]=[];
- storage.readJson=async<T>(key:string,fallback:T)=>{assert.ok(!key.includes('runtime-sort-prices'),'no full-market snapshot/replay');return fallback;};
+ storage.readJson=async<T>(_key:string,fallback:T)=>fallback;
  storage.writeJson=async()=>{assert.fail('a model sort must not build a full-market price snapshot');};
  storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
   reads.push(key);let value:unknown=fallback;
@@ -37,6 +38,42 @@ test('a narrow brand price sort reads only its matching card blocks, not the ent
    assert.deepEqual(selected.items.map(row=>row.id),['narrow-0','narrow-1']);
   }
   assert.equal(reads.filter(key=>key.includes('/budget-cards-v3/')).length,1,'direction changes share exactly priced selected cards');
+ }finally{storage.readJsonWithMeta=original;storage.readJson=originalRead;storage.writeJson=originalWrite;resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();}
+});
+
+test('narrow price sorting uses a prepared exact snapshot and reads only visible card blocks',async()=>{
+ const base:any={market:'korea',make:'BMW',model:'3 Series',year:2024,engineCc:1598,powerHp:150,fuel:'petrol',powertrainKind:'combustion',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-11-08T00:00:00Z'};
+ const rows=Array.from({length:100},(_,i)=>({...base,id:`prepared-${i}`,make:i<50?'BMW':'Audi',totalRub:2_000_000-i*10_000,publicVisibleRub:2_000_000-i*10_000}));
+ const generationId='prepared-narrow-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])),3);
+ const storage=getJsonStorage(),original=storage.readJsonWithMeta,originalRead=storage.readJson,originalWrite=storage.writeJson,reads:string[]=[];
+ const saved=new Map<string,unknown>();let writes=0;
+ storage.readJson=async<T>(key:string,fallback:T)=>(saved.get(key)??fallback) as T;
+ storage.writeJson=async(key,value)=>{saved.set(key,structuredClone(value));writes++;};
+ storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
+  reads.push(key);let value:unknown=fallback;
+  if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
+  else if(key==='fees/exchange-rates.json')value={};
+  else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
+  else if(key.endsWith('/budget-count-v3.json'))value=index;
+  else if(key.includes('/budget-cards-v3/')){
+   const block=Number(key.split('/').at(-1)!.replace('.json',''));
+   assert.ok([0,4].includes(block),'a non-visible block must not be read for price sorting');
+   value={generationId,items:rows.slice(block*10,block*10+10)};
+  } else assert.ok(!/projection|pricing-replay/.test(key),'unexpected whole-market calculation read');
+  return {found:value!==fallback,value:value as T};
+ };
+ try{
+  resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();
+  const fingerprint=(await budgetPricingFingerprint('korea'))!;
+  await sharedBudgetPrices(index,'korea',fingerprint,async()=>index.rows,async()=>fingerprint,true);
+  resetCatalogReadCachesForTests();reads.length=0;
+  const ascending=await searchOffers({market:'korea',make:'BMW',model:'3',powerTo:160,sort:'totalRub',pageSize:2});
+  assert.equal(ascending.total,50);assert.deepEqual(ascending.items.map(row=>row.id),['prepared-49','prepared-48']);
+  assert.equal(reads.filter(key=>key.includes('/budget-cards-v3/')).length,1);
+  const descending=await searchOffers({market:'korea',make:'BMW',model:'3',powerTo:160,sort:'totalRubDesc',pageSize:2});
+  assert.deepEqual(descending.items.map(row=>row.id),['prepared-0','prepared-1']);
+  assert.equal(reads.filter(key=>key.includes('/budget-cards-v3/')).length,2);
+  assert.equal(writes,1,'visitor requests do not rebuild the market snapshot');
  }finally{storage.readJsonWithMeta=original;storage.readJson=originalRead;storage.writeJson=originalWrite;resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();}
 });
 

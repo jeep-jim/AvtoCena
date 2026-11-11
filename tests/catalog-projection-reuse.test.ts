@@ -85,6 +85,15 @@ test('large recommendation scans preserve results and yield to other requests',a
  assert.equal(progressed,true,'a large scan must not monopolize the event loop');
  assert.deepEqual(actual.map(r=>r.id),expected);
 });
+test('model discovery skips unrelated mechanical audits while keeping aliases and power filtering',async()=>{
+ const {filterCatalogProjectionRows}=await import('../apps/web/lib/catalog/storage');
+ resetCatalogReadCachesForTests();
+ const other={...row(),id:'unrelated-model',model:'K9'};
+ Object.defineProperty(other,'powerDataSource',{get(){throw Error('unrelated model was mechanically audited');},enumerable:true});
+ const rows=[other,{...row(),id:'selected-base'},{...row(),id:'selected-alias',model:'Optima'},{...row(),id:'over-power',powerHp:200,powerKw:147.1,icePowerKw:147.1,utilizationPowerKw:147.1}];
+ const found=await filterCatalogProjectionRows(rows,{market:'korea',make:'Kia',model:'K5',powerTo:160},new Set(['kia:k5','kia:optima']));
+ assert.deepEqual(found.map(r=>r.id),['selected-base','selected-alias']);
+});
 test('cached admission is rechecked after Krasnoyarsk midnight',t=>{
  resetCatalogReadCachesForTests();
  t.mock.timers.enable({apis:['Date'],now:new Date('2026-10-12T16:59:59Z')});

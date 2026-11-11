@@ -58,6 +58,7 @@ class GateTests(unittest.TestCase):
   self.assertLess(calls[0],script.index('systemctl reload nginx\nready='))
   promotion=script.index('docker update --cpus 6 --memory 10g "$candidate"')
   self.assertLess(calls[0],promotion,'pre-switch functional checks still run before production promotion')
+  self.assertLess(promotion,script.index('python3 - "$config" "$old_port" "$port"'),'a resource promotion failure must leave the serving Nginx file unchanged')
   self.assertLess(promotion,script.index('systemctl reload nginx\nready='),'visitors must receive full production capacity before the previous process drains')
   self.assertGreater(calls[1],script.index('docker stop --time 30 "$old"'))
   self.assertLess(calls[1],script.index('committed=1'))
