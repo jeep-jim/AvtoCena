@@ -41,7 +41,7 @@ jobs:
           # The inspector uses loopback inside the container, with no published port.
           docker inspect --format '{{json .HostConfig.PortBindings}}' avtocena-production | python3 -c 'import json,sys; p=json.load(sys.stdin);assert set(p)=={"3000/tcp"};assert p["3000/tcp"][0]["HostIp"]=="127.0.0.1"'
           docker exec avtocena-production node -e 'fetch("http://127.0.0.1:9229/json/list").then(()=>process.exit(1),()=>process.exit(0))'
-          docker kill --signal=USR1 avtocena-production >/dev/null
+          docker exec avtocena-production /bin/sh -c 'kill -USR1 1'
           sleep 1
           timeout 45 docker exec -i avtocena-production node --input-type=module < /opt/avtocena/cpu-sample-once.mjs || { timeout 20 docker exec -i -e CPU_SAMPLE_CLOSE_ONLY=1 avtocena-production node --input-type=module < /opt/avtocena/cpu-sample-once.mjs; exit 1; }
           docker exec avtocena-production node -e 'fetch("http://127.0.0.1:9229/json/list").then(()=>{console.error("INSPECTOR_STILL_OPEN");process.exit(1)},()=>console.log("INSPECTOR_CLOSED"))'

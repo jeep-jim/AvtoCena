@@ -61,7 +61,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
    if long_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if ttl_probe and number==2:time.sleep(35)
    if (home_probe and number==3) or (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+8):
-    subprocess.run(['docker','kill','--signal=USR1',name],check=True,capture_output=True)
+    subprocess.run(['docker','exec',name,'/bin/sh','-c','kill -USR1 1'],check=True,capture_output=True)
     time.sleep(1)
     profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     profile.stdin.write(pathlib.Path(__file__).with_name('cpu-sample.mjs').read_text());profile.stdin.close();profile.stdin=None

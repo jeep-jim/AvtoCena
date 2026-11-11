@@ -11,6 +11,7 @@ function call(method,params={}){return new Promise((resolve,reject)=>{const id=+
 function startNetworkSample(){
  const dc=process.getBuiltinModule('node:diagnostics_channel'),started=performance.now(),active=new Map(),rows=[];
  const bindings=[], incoming=new Map();
+ const on=(name,fn)=>{const channel=dc.channel(name);const safe=value=>{try{fn(value);}catch{}};channel.subscribe(safe);bindings.push([channel,safe]);};
  on('http.server.request.start',({request})=>{
   const path=String(request.url||'').split('?')[0];
   const route=path.startsWith('/cars/offer/')?'offer':path.startsWith('/cars')?'catalog':path.startsWith('/api/catalog/photo')?'photo':path.startsWith('/api/catalog')?'catalog-api':path.startsWith('/_next/')?'assets':'other';
@@ -19,7 +20,6 @@ function startNetworkSample(){
   const key=JSON.stringify({route,agent,prefetch:Boolean(request.headers?.['next-router-prefetch']||request.headers?.purpose==='prefetch')});
   incoming.set(key,(incoming.get(key)||0)+1);
  });
- const on=(name,fn)=>{const channel=dc.channel(name);const safe=value=>{try{fn(value);}catch{}};channel.subscribe(safe);bindings.push([channel,safe]);};
  const category=request=>{const path=String(request.path||'').split('?')[0];
   for(const [needle,label] of [['catalog/runtime-sort-prices','sort-price-snapshots'],['catalog/runtime-budget-prices','budget-price-snapshots'],['current-offers/','offer-shards'],['catalog/public/offers/','public-offer-shards'],['budget-cards-v','budget-card-blocks'],['budget-specifications','specification-selectors'],['budget-markets','budget-selectors'],['projection-brand/','brand-projections'],['projection/','market-projections'],['market-landing','market-landings'],['knowledge/','knowledge'],['encyclopedia/','encyclopedia'],['pricing-replay','pricing-replay'], ... [['exchange-rates','rates'],['markets/','market-settings'],['collection','source-controls'],['feature','features'],['green-corner','stock'],['overview','overview'],['catalog/','catalog'],['business','business'],['dealer','dealer']]])if(path.includes(needle))return label;
   return 'other';};
@@ -32,10 +32,30 @@ function startNetworkSample(){
 }
 try{
  if(process.env.CPU_SAMPLE_CLOSE_ONLY==='1'){}else{
- await call('Runtime.evaluate',{expression:`(${startNetworkSample.toString()})()`,returnByValue:true});
+ const memory=async()=>{
+  const value=await call('Runtime.evaluate',{expression:"JSON.stringify({memory:process.memoryUsage(),heap:process.getBuiltinModule('node:v8').getHeapStatistics()})",returnByValue:true});
+  if(value.exceptionDetails)throw Error('memory_sample_failed');
+  return JSON.parse(value.result.value);
+ };
+ const before=await memory();
+ const started=await call('Runtime.evaluate',{expression:`(${startNetworkSample.toString()})()`,returnByValue:true});
+ if(started.exceptionDetails||started.result?.value!==true)throw Error('diagnostic_request_counter_not_started');
+ await call('HeapProfiler.enable');await call('HeapProfiler.startSampling',{samplingInterval:65536});
  await call('Profiler.enable');await call('Profiler.setSamplingInterval',{interval:2000});await call('Profiler.start');
  await new Promise(r=>setTimeout(r,5000));
  const {profile}=await call('Profiler.stop');
+ const allocation=(await call('HeapProfiler.stopSampling')).profile;
+ const after=await memory();
+ const allocated=[];
+ const visit=(node,parents=[])=>{
+  const frame={fn:node.callFrame.functionName,url:node.callFrame.url,line:node.callFrame.lineNumber};
+  const stack=[frame,...parents].slice(0,4);
+  if(node.selfSize)allocated.push({bytes:node.selfSize,stack});
+  for(const child of node.children||[])visit(child,stack);
+ };
+ visit(allocation.head);
+ console.log('MEMORY_SAMPLE',JSON.stringify({before,after,sampledSurvivingAllocations:allocated.sort((a,b)=>b.bytes-a.bytes).slice(0,12)}));
+ await call('HeapProfiler.disable');
  const parents=new Map();for(const node of profile.nodes)for(const child of node.children||[])parents.set(child,node.id);
  const byId=new Map(profile.nodes.map(n=>[n.id,n]));
  const samples=new Map();for(const id of profile.samples||[])samples.set(id,(samples.get(id)||0)+1);

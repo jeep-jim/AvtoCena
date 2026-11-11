@@ -1,6 +1,5 @@
 {
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "reason": "Complete the five-second sample with anonymized incoming route/agent counts; default Nginx log is disabled for this site and cannot establish traffic attribution.",
-  "attempt": 4,
-  "requestedAt": "2026-11-11T03:43:56.788823+00:00"
+  "attempt": 6,
+  "reason": "One five-second aggregate memory/allocation/request sample after heap failure; native process signal preserves Docker restart policy; no heap contents or visitor identities"
 }
