@@ -1,6 +1,6 @@
 {
   "base": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "purpose": "Owner requested persistent selection and forward/Back scroll. Accepted application plus UI only; current release guards retained.",
+  "purpose": "Owner selection and scroll repair; remember inactive Japan fields without applying unsupported constraints in other markets. Accepted application plus UI/query-state wiring only; unchanged current release guards.",
   "appPaths": [
     "apps/web/components/catalog/CatalogFilters.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -10,12 +10,15 @@
     "apps/web/lib/catalog/brand-navigation.ts",
     "apps/web/lib/catalog/filter-scroll.ts",
     "apps/web/lib/catalog/model-suggestion-search.ts",
-    "apps/web/lib/catalog/route-scroll.ts"
+    "apps/web/lib/catalog/route-scroll.ts",
+    "apps/web/components/catalog/CatalogContent.tsx",
+    "apps/web/lib/catalog/japan-filter-retention.ts"
   ],
   "allowedPaths": [
     ".github/market-runs/regcloud-deploy.json",
     ".github/workflows/regcloud-deploy.yml",
     "AGENTS.md",
+    "apps/web/components/catalog/CatalogContent.tsx",
     "apps/web/components/catalog/CatalogFilters.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
     "apps/web/components/catalog/VehicleModelSearch.tsx",
@@ -23,6 +26,7 @@
     "apps/web/components/layout/RoutePreloader.tsx",
     "apps/web/lib/catalog/brand-navigation.ts",
     "apps/web/lib/catalog/filter-scroll.ts",
+    "apps/web/lib/catalog/japan-filter-retention.ts",
     "apps/web/lib/catalog/model-suggestion-search.ts",
     "apps/web/lib/catalog/route-scroll.ts",
     "docs/operations/2026-11-11-accepted-browser-speed-baseline.json",
@@ -51,6 +55,7 @@
     "tests/browser/owner-filter-speed-live.mjs",
     "tests/catalog-brand-navigation.test.ts",
     "tests/catalog-market-brand-projection.test.ts",
+    "tests/japan-filter-retention.test.ts",
     "tests/model-suggestion-search.test.ts",
     "tests/regcloud-browser-handoff.test.py",
     "tests/regcloud-browser-verdict.test.py",

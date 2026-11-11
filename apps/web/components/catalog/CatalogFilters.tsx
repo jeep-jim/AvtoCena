@@ -35,6 +35,7 @@ import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/run
 
 import { auctionGradeColorClass } from "@/lib/catalog/auction-grade-color";
 import { auctionGradeSelections } from "@/lib/catalog/auction-grade-filter";
+import {appendJapanFilterQuery,japanFiltersApply,rememberedJapanFilter} from '@/lib/catalog/japan-filter-retention';
 
 type Option = { value: string; label: string };
 type Facets = { makes: string[]; models: Array<{ make: string; model: string; aliases?: string[] }>; markets?: string[]; bodyTypes?: string[]; fuels?: string[]; transmissions?: string[]; drives?: string[] };
@@ -159,14 +160,14 @@ function formatNumber(value: number) { return new Intl.NumberFormat("ru-RU").for
 function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
     q:initial.q||"",powerFrom:initial.powerFrom||"",
-    salePeriod:initial.salePeriod||"",
+    salePeriod:rememberedJapanFilter(initial,'salePeriod'),
     color: initial.color || "",
     stock: initial.stock || "",
-    chassis:initial.chassis||"",frameNumber:initial.frameNumber||"",lotNumber:initial.lotNumber||"",
+    chassis:rememberedJapanFilter(initial,'chassis'),frameNumber:rememberedJapanFilter(initial,'frameNumber'),lotNumber:rememberedJapanFilter(initial,'lotNumber'),
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
     yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: (initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
-    auctionGrade: auctionGradeSelections(initial.auctionGrade).join("|"),
+    auctionGrade: auctionGradeSelections(rememberedJapanFilter(initial,'auctionGrade')).join("|"),
     fuel: filterSelections(initial.fuel || "").flatMap(value=>value === "electrified" ? ["electric", "hybrid"] : [value]).join("|"), drive: initial.drive || "", powerTo: initial.powerTo || "",
   };
 }
@@ -181,7 +182,7 @@ function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortD
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
   add("q",draft.q);add("powerFrom",draft.powerFrom);
-  add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade",draft.auctionGrade);add("salePeriod",draft.salePeriod);
+  appendJapanFilterQuery(params,draft);
   if(draft.market==="japan")add("stock",draft.stock);
   add("color", draft.color); add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
@@ -459,13 +460,14 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
+    const japanLabel=(value:string)=>japanFiltersApply(draft)?value:`Сохранено для Японии: ${value}`;
     if(draft.color) rows.push({key:"color",label:`Цвет: ${draft.color}`});
-    if(draft.salePeriod)rows.push({key:"salePeriod",label:filterSelections(draft.salePeriod).map(v=>AUCTION_SALE_PERIODS.find(p=>p.value===v)?.label||v).join(", ")});
-    if(draft.frameNumber)rows.push({key:'frameNumber',label:`Номер кузова ${draft.frameNumber}`});
-    if(draft.chassis)rows.push({key:'chassis',label:`Кузов ${draft.chassis}`});
-    if(draft.lotNumber)rows.push({key:'lotNumber',label:`Лот ${draft.lotNumber}`});
+    if(draft.salePeriod)rows.push({key:"salePeriod",label:japanLabel(filterSelections(draft.salePeriod).map(v=>AUCTION_SALE_PERIODS.find(p=>p.value===v)?.label||v).join(", "))});
+    if(draft.frameNumber)rows.push({key:'frameNumber',label:japanLabel(`Номер кузова ${draft.frameNumber}`)});
+    if(draft.chassis)rows.push({key:'chassis',label:japanLabel(`Кузов ${draft.chassis}`)});
+    if(draft.lotNumber)rows.push({key:'lotNumber',label:japanLabel(`Лот ${draft.lotNumber}`)});
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
-    auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
+    auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: japanLabel(`Оценка ${grade}`), grade}));
     if(draft.q)rows.push({key:'q',label:`Поиск: ${draft.q}`});
     if(draft.powerFrom)rows.push({key:'powerFrom',label:`От ${draft.powerFrom} л.с.`});
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});

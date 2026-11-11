@@ -1,3 +1,22 @@
+# Inactive Japan field retention — 11.11.2026
+
+- This isolated candidate supersedes cancelled2b7c3e2. It stores Japan-specific values under savedJapan* URL keys outside the Japan auction catalogue and restores their active keys on return; supplier filtering remains unchanged. Local query-builder regression tests and TypeScript pass; require current browser results and complete release acceptance before activation.
+- Application differences from accepted a182 are exactly the11 paths in docs/operations/2026-11-11-navigation-release-manifest.json. Do not deploy main wholesale. No supplier full-database permission or14/3-day schedule is introduced.
+
+# Candidate stopped before activation — 11.11.2026 14:23 UTC
+
+- Run43030988703 was cancelled during price preparation; Deploy step was skipped. Candidate2b7c3e2 was NOT installed. Do not rerun it.
+- Newly found cross-market issue: preserved Japan frameNumber is sent as active Korea/China input, where ajesCatalogQuery throws AjesFilterUnavailable. Store inactive Japan-specific fields separately in URL, restore on Japan return, and test through actual query builder before producing a new candidate.
+- Accepted a182 remains the runtime baseline; source/main still includes rejected budget/uninstalled home work. Keep isolated application ancestry and all current speed/browser rollback guards. Read latest roadmap before releasing.
+
+# Owner selection/scroll repair and feed proposal — 11.11.2026 13:39 UTC
+
+- Owner asks to preserve chosen cars/models/filters until explicit removal, open new pages at the top, retain Back position, finish recovery and record every milestone in roadmap. Owner publication authorization persists.
+- Source browser verification passed: 43030724798, 43030724685, dealer selection 43029957113. Main also retains rejected budget/uninstalled home changes; do not deploy main wholesale.
+- Isolated candidate 2b7c3e22ce0afb2c7e9a045021f7ec3e57979f82 on owner-retention-a182-20261111 uses accepted a182 application plus exactly9 UI files and current rollback/speed/browser guards. Its pinned workflow run43030988703 is in preparation; installation is NOT yet confirmed. Inspect that run before starting anything else.
+- Japan14days/Korea3days was proposed, not enabled. Existing supplier evidence permits visitor-request caching, not full database copying/offline serving without agreement. Public DUMP documentation is not account authorization. Preserve ordinary schedules, last working data, supplier restrictions and unresolved JP/KR status.
+- Read docs/operations/2026-11-11-navigation-retention-and-feed-cache.md and latest roadmap. Record actual acceptance/rollback SHA when this run finishes.
+
 # Active runtime and release evidence — 11.11.2026 12:47 UTC
 
 - Production is restored exact a182cd21b21ecf612b63613d263e5bdd817ea4c0 (43020674047). Restored browser43021430620 passes the original accepted envelope.3048 and2b5fc must not be reactivated without resolving the measured mobile slowdown; preserve their source/evidence.
