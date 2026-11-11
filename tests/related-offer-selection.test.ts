@@ -25,9 +25,15 @@ test('unrenderable candidates are skipped and each recommendation group is bound
  assert.equal(groups.sameModel.length,4);assert.deepEqual(calls,[4,4]);assert.equal(groups.sameModel[0].id,'model-4');
 });
 
-test('detail recommendations retain trusted source identity after publicOffer sanitization',()=>{
+test('deferred recommendations read trusted source identity and expose only public cards',()=>{
  const page=readFileSync('apps/web/app/(public)/cars/offer/[id]/page.tsx','utf8');
- assert.match(page,/<SimilarOffers markets=\{dealer\?\.markets\} current=\{\{\.\.\.raw,sourceId:offer.sourceId,offerType:offer.offerType\}\} \/>/);
+ const related=readFileSync('apps/web/app/api/catalog/recommendations/data.ts','utf8');
+ assert.match(page,/offerId=\{offer.id\}/);
+ assert.match(related,/const current=await getOfferDetailRecord\(id\)/);
+ assert.match(related,/greenCurrent:isGreenCornerOffer\(current\)/);
+ for(const field of ['stockModels','sameModel','marketRows'])assert.ok(related.includes(field+':groups.'+field+'.map(publicOffer)'));
+ assert.match(related,/items:group.items.map\(publicOffer\)/);
+ assert.match(related,/items:unique.map\(publicOffer\)/);
 });
 
 test('published stock DTOs without private provenance remain eligible in recommendations',async()=>{

@@ -25,19 +25,19 @@ test("offer navigation swaps the catalog for an immediate route skeleton", () =>
   assert.match(loading, /Загружаем карточку автомобиля/);
 });
 
-test("similar offers stream after the primary offer instead of blocking it", () => {
-  const offerPage = page.slice(page.indexOf("export default async function OfferPage"));
-  const beforeReturn = offerPage.slice(0, offerPage.indexOf("return <main"));
-  assert.doesNotMatch(beforeReturn, /await searchOffers/);
-  assert.match(page, /<Suspense fallback=\{<SimilarOffersFallback \/>\}>/);
-  assert.match(page, /async function SimilarOffers/);
-  assert.match(page, /const familyModel/);
-  assert.match(page, /new URLSearchParams/);
-  assert.match(page, /Ещё \{modelTitle\}/);
-  assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
-  assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
-  assert.match(page, /marketTotal===null\?"—":marketTotal\.toLocaleString\("ru-RU"\)/);
-  assert.match(page, /model: familyModel/);
+test("similar offers start only when their rail is visible, not during primary SSR or prefetch", () => {
+  const loader=fs.readFileSync('apps/web/components/catalog/DeferredOfferRecommendations.tsx','utf8');
+  const view=fs.readFileSync('apps/web/components/catalog/RelatedOffersView.tsx','utf8');
+  const related=fs.readFileSync('apps/web/app/api/catalog/recommendations/data.ts','utf8');
+  assert.doesNotMatch(page,/async function SimilarOffers|await searchOffers|readAjesPublic|readRelatedModelFamily/);
+  assert.match(page,/<DeferredOfferRecommendations markets=\{dealer\?\.markets\} offerId=\{offer.id\}/);
+  assert.match(loader,/IntersectionObserver/);
+  assert.match(loader,/if\(!visible\)return/);
+  assert.match(loader,/controller.abort\(\)/);
+  assert.match(related,/model:familyModel/);
+  assert.match(view,/Ещё \{modelTitle\}/);
+  assert.match(view,/marketTotal===null\?"—":marketTotal.toLocaleString\("ru-RU"\)/);
+  assert.match(view,/CatalogMarketFlag/);
 });
 
 test("metadata and page share one memoized offer lookup per request", () => {
