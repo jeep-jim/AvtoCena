@@ -10,7 +10,7 @@ permissions:
   actions: read
 
 env:
-  RELEASE_SOURCE_SHA: '1767642ff5dd8a9a12bd751e8724756934bf7f62'
+  RELEASE_SOURCE_SHA: '25d072b385e00e1bf093cd29c2d9539e81ffeb9d'
 
 concurrency:
   group: regcloud-production-release
@@ -26,22 +26,41 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '1767642ff5dd8a9a12bd751e8724756934bf7f62'
-      - name: Require successful predecessor and its exact installed identity
+          ref: '25d072b385e00e1bf093cd29c2d9539e81ffeb9d'
+      - name: Require rejected predecessor, retained base and exact green source CI
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/43055396384" > "$RUNNER_TEMP/predecessor-release.json"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/43079097899" > "$RUNNER_TEMP/predecessor-release.json"
           curl --fail --silent --show-error --max-time 30 https://avtocena.com/api/health > "$RUNNER_TEMP/predecessor-health.json"
           python3 - "$RUNNER_TEMP/predecessor-release.json" "$RUNNER_TEMP/predecessor-health.json" <<'PREDECESSOR'
           import json,sys
           run=json.load(open(sys.argv[1]));health=json.load(open(sys.argv[2]))
-          assert run['id']==43055396384 and run['head_sha']=='b43b2d81ba0628d2ad20d3c04799522377f78271', 'unexpected predecessor'
-          assert run['status']=='completed' and run['conclusion']=='success', 'predecessor did not pass mandatory server/browser acceptance'
-          assert health.get('releaseSha')=='8731103c0102886064c6a0a19a14182502e6e3be', 'installed predecessor identity changed'
-          print('Predecessor server/browser workflow passed and exact installed identity confirmed')
+          assert run['id']==43079097899 and run['head_sha']=='edcec4b74d8a8ebd45a24a01a723a39f64c19f2b', 'unexpected rejected predecessor'
+          assert run['status']=='completed' and run['conclusion']=='failure', 'rejected predecessor evidence changed'
+          assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0', 'retained accepted base changed'
+          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6', 'retained calculator changed'
+          print('Rejected predecessor and retained accepted base verified; new candidate addresses measured home phases')
           PREDECESSOR
+          python3 - <<'EXACT_CI'
+          import json,subprocess,time
+          required=[(43083658773,'7e53af56b59071e8d793ec15a1617ef579d7838c'),(43084069287,'25d072b385e00e1bf093cd29c2d9539e81ffeb9d')]
+          deadline=time.monotonic()+25*60
+          while True:
+              pending=[]
+              for run_id,sha in required:
+                  run=json.loads(subprocess.check_output(['gh','api',f'repos/jeep-jim/AvtoCena/actions/runs/{run_id}']))
+                  assert run['id']==run_id and run['head_sha']==sha and run['name']=='CI', 'exact CI identity mismatch'
+                  if run['status']=='completed':
+                      assert run['conclusion']=='success', f'exact CI failed: {run_id}'
+                  else: pending.append(run_id)
+              if not pending: break
+              assert time.monotonic()<deadline, 'exact CI deadline'
+              print('Waiting for exact source CI',pending,flush=True)
+              time.sleep(30)
+          print('Both exact source CI runs passed')
+          EXACT_CI
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -86,7 +105,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: '1767642ff5dd8a9a12bd751e8724756934bf7f62'
+          ref: '25d072b385e00e1bf093cd29c2d9539e81ffeb9d'
       - name: Verify isolated application source and exact allowed changes
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -119,6 +138,10 @@ jobs:
         run: |
           test -f tests/catalog-publication-page-window.test.ts
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-publication-page-window.test.ts
+      - name: Verify prepared editorial overview and parallel homepage
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-home-editorial-overview.test.ts tests/catalog-editorial.test.ts tests/catalog-editorial-price.test.ts tests/catalog-home-compact-snapshot.test.ts tests/home-editorial-empty.test.ts tests/home-initial-catalog.test.ts tests/home-parallel-specials.test.ts tests/home-showcase-priced-first.test.ts tests/catalog-overview-read-model.test.ts
       - name: Verify stream disconnect and gateway buffer regressions
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
@@ -284,7 +307,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 1767642ff5dd8a9a12bd751e8724756934bf7f62
+          AVTOCENA_RELEASE_SHA: 25d072b385e00e1bf093cd29c2d9539e81ffeb9d
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
