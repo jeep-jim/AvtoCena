@@ -42,6 +42,7 @@ import {UnavailableReadCache} from "./unavailable-read-cache";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
 import {datedCatalogPagePath} from "./dated-pages";
+import {stageGenerationPageWindow} from "./generation-page-window";
 import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOverviewPayload, catalogOverviewGenerationPath, CATALOG_OVERVIEW_PATH, resetCatalogOverviewCache } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
@@ -1960,9 +1961,17 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   // Stage the small landing snapshot with every publication, before switching
   // the manifest. A separate workflow used to leave it on an old generation,
   // forcing every homepage visit to parse the entire catalog instead.
-  const overview = await buildCatalogOverviewFromProjections(generationId, allProjectionItems);
-  await writeJsonAtomic(catalogOverviewGenerationPath(generationId), overview, false);
+  const {overview,policyDates}=await stageGenerationPageWindow({
+    generationId,markets:MARKETS,rowsByMarket:projectionsByMarket,
+    landingLimit:MARKET_LANDING_LIMIT,overviewLimit:24,
+    buildLanding:(g,m,rows,now)=>buildCatalogMarketLanding(g,m,rows,{now}),
+    prepareRows:prepareCatalogProjectionRowsForDate,
+    buildOverview:(g,rows,now)=>buildCatalogOverviewFromProjections(g,rows,{now}),
+    landingPath:catalogMarketLandingPath,overviewPath:catalogOverviewGenerationPath,
+    write:(path,value)=>writeJsonAtomic(path,value,false),
+  });
   await writeJsonAtomic(CATALOG_OVERVIEW_PATH, overview, false);
+  if(process.env.CATALOG_PUBLICATION_PROGRESS==="1")console.log(JSON.stringify({stage:"generation_page_window_ready",generationId,policyDates}));
 
   reportStage("complete");
   return {
