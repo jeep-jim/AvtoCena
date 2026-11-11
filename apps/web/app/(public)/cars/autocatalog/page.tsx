@@ -14,12 +14,13 @@ import {canEditEncyclopedia,readEncyclopedia} from '@/lib/encyclopedia/records';
 import {canonicalDirectoryModels} from '@/lib/encyclopedia/query';
 import {counted,fuelFilterKey} from '@/lib/encyclopedia/schema';
 import './encyclopedia.css';
+const directoryOrder=new Intl.Collator('ru',{numeric:true});
 export const dynamic='force-dynamic';
 export const metadata:Metadata={title:'Энциклопедия автомобилей — модели и характеристики | АвтоЦена',description:'Постоянная энциклопедия АвтоЦена: марки, модели, модификации по годам, двигатели, привод и 30-минутная мощность. Таблица характеристик по годам.',alternates:{canonical:'/cars/autocatalog'},robots:{index:true,follow:true}};
 export default async function EncyclopediaPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
  const [user,manifest]=await Promise.all([getCurrentUser(),readEncyclopedia()]);
  const raw=await searchParams,p=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,Array.isArray(v)?v[0]:v]));if(p.make){const make=catalogBrandPresentation(p.make).name;if(make!==p.make){const canonical=new URLSearchParams();for(const [key,value] of Object.entries(p))if(value!==undefined)canonical.set(key,key==='make'?make:value);redirect(`/cars/autocatalog?${canonical}`);}}const models=canonicalDirectoryModels((manifest?.models||[]).filter(m=>m.directorySnapshot||m.manualCreated));
- models.sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true}));
+ models.sort((a,b)=>directoryOrder.compare(`${a.make} ${a.model}`,`${b.make} ${b.model}`));
  const data=packDirectory(models.map(m=>({id:m.id,make:m.make,model:m.model,photo:protectedPhotoUrl(m.photo,m.photoMarket||''),years:m.years,fuels:m.fuels,needs30:m.needs30,hasUnknownYear:m.hasUnknownYear,directorySnapshot:m.directorySnapshot,manualCreated:m.manualCreated,compact:m.compact})));
  const makes=[...new Set(models.map(m=>m.make))].sort((a,b)=>a.localeCompare(b,'ru')),years=[...new Set(models.flatMap(m=>m.years))].sort((a,b)=>b-a),fuels=[...new Set(models.flatMap(m=>m.fuels.map(fuelFilterKey)))].sort();
  return <main className="ac-ency-page ac-page-copy"><EditorialHeader backHref="/cars" backLabel="В каталог"/><div className="ac-ency-container">
