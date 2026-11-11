@@ -1,0 +1,96 @@
+name: Inspect rejected 794 runtime once
+# Read-only confirmation after rejected acceptance43098821534.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-rejected-794-runtime.yml']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: '794654a00aa4990b284858f1f01c07ed3f020df4'
+      - name: Read retained production identity and bounded candidate diagnostics
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'REMOTE'
+          import json,subprocess,datetime,urllib.request,pathlib,re,collections
+          print(json.dumps({'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat()}))
+          for name in ['avtocena-production','avtocena-release-794654a00aa4']:
+              value=json.loads(subprocess.check_output(['docker','inspect',name],text=True))[0]
+              print(json.dumps({'container':name,'image':value['Image'],'revision':value['Config']['Labels'].get('org.opencontainers.image.revision'),'state':{k:value['State'].get(k) for k in ['Status','Running','OOMKilled','ExitCode','StartedAt','FinishedAt']}}))
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=20) as response:
+              value=json.load(response)
+          print(json.dumps({'publicHealth':{k:value.get(k) for k in ['ok','releaseSha','calculationVersion']}}))
+          assert value.get('ok') is True and value.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+          assert value.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6'
+          print(json.dumps({'resources':json.loads(pathlib.Path('/opt/avtocena/metrics/resources.json').read_text())}))
+          process=subprocess.run(['docker','logs','--timestamps','--tail','4000','avtocena-release-794654a00aa4'],capture_output=True,text=True,check=True)
+          rows=[];errors=collections.Counter()
+          for line in (process.stdout+process.stderr).splitlines():
+              if 'catalog_storage_read ' in line:
+                  try:
+                      value=json.loads(line.split('catalog_storage_read ',1)[1])
+                      path=value.get('path','')
+                      if re.fullmatch(r'catalog/[a-zA-Z0-9_./-]+',path):
+                          rows.append({'time':line.split(' ',1)[0],'path':path,'ms':value.get('ms'),'found':value.get('found')})
+                  except (ValueError,TypeError):pass
+              for token in ['TimeoutError','AbortError','TypeError','SyntaxError','RangeError','ECONNRESET','ETIMEDOUT','EAI_AGAIN','ENOMEM']:
+                  if token in line:errors[token]+=1
+          print(json.dumps({'boundedLogLines':len((process.stdout+process.stderr).splitlines()),'errorCounts':dict(errors),'catalogReads':rows[-80:]}))
+          REMOTE
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Measure current encyclopedia transformation without changing any stored data
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          test "$(git rev-parse HEAD)" = '794654a00aa4990b284858f1f01c07ed3f020df4'
+          node --import tsx --input-type=module <<'PROFILE'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {readEncyclopedia} from './apps/web/lib/encyclopedia/records.ts';
+          import {canonicalDirectoryModels} from './apps/web/lib/encyclopedia/query.ts';
+          import {packDirectory} from './apps/web/lib/encyclopedia/directory-wire.ts';
+          import {fuelFilterKey} from './apps/web/lib/encyclopedia/schema.ts';
+          const elapsed=from=>Number((performance.now()-from).toFixed(3));
+          for(let sample=1;sample<=3;sample++){
+            let start=performance.now();const manifest=await readEncyclopedia();const readMs=elapsed(start);
+            assert.ok(manifest&&Array.isArray(manifest.models)&&manifest.models.length>0&&manifest.models.length<30000);
+            start=performance.now();const models=canonicalDirectoryModels(manifest.models.filter(m=>m.directorySnapshot||m.manualCreated));const canonicalMs=elapsed(start);
+            const alternative=[...models];
+            start=performance.now();models.sort((a,b)=>(a.make+' '+a.model).localeCompare(b.make+' '+b.model,'ru',{numeric:true}));const originalSortMs=elapsed(start);
+            const collator=new Intl.Collator('ru',{numeric:true});
+            start=performance.now();alternative.sort((a,b)=>collator.compare(a.make+' '+a.model,b.make+' '+b.model));const reusedCollatorSortMs=elapsed(start);
+            assert.deepEqual(alternative.map(m=>m.id),models.map(m=>m.id),'all model IDs and tie ordering must be identical');
+            start=performance.now();const packed=packDirectory(models.map(m=>({id:m.id,make:m.make,model:m.model,photo:m.photo,years:m.years,fuels:m.fuels,needs30:m.needs30,hasUnknownYear:m.hasUnknownYear,directorySnapshot:m.directorySnapshot,manualCreated:m.manualCreated,compact:m.compact})));const packMs=elapsed(start);
+            start=performance.now();const makes=[...new Set(models.map(m=>m.make))].sort((a,b)=>a.localeCompare(b,'ru')),years=[...new Set(models.flatMap(m=>m.years))].sort((a,b)=>b-a),fuels=[...new Set(models.flatMap(m=>m.fuels.map(fuelFilterKey)))].sort();const facetsMs=elapsed(start);
+            const digest=createHash('sha256').update(JSON.stringify(models.map(m=>[m.id,m.revision]))).digest('hex');
+            console.log('ENCYCLOPEDIA_TRANSFORM_PROFILE',JSON.stringify({sample,models:models.length,makes:makes.length,years:years.length,fuels:fuels.length,readMs,canonicalMs,originalSortMs,reusedCollatorSortMs,packMs,facetsMs,packedBytes:Buffer.byteLength(JSON.stringify(packed)),identityRevisionDigest:digest,identicalSortedIds:true,routeLatencyMeasured:false}));
+          }
+          PROFILE

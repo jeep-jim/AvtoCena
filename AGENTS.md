@@ -1,4 +1,14 @@
-# Current recovery checkpoint — 12.11.2026
+# Current recovery checkpoint — 12.11.2026, after21:47 UTC
+
+- **REJECTED794 / no active release:** run43098821534 /prepare130786991899 FAILED in enforced warm speed for /cars/autocatalog?make=Changan. 2.8529695808s; rechecks1.9818/1.7817/2.2668, median1.9818 > frozen1.8951. Rollback log21:47:15 says old production retained; exact VM/health read-only confirmation is pending. Never rerun source794 unchanged.
+- Source794 has all18 exact-source checks and source navigation fixtures green, but installed browser acceptance never ran. Do not call navigation/filter/scroll fixes delivered. Retained baseline a182/calc c489 must be independently verified.
+- Durable private index and market evidence really passed with readback. GitHub artifact mirrors also passed. This failure is application timing, not report transport. Current image32bd5856…18ec,270310779bytes; market report SHA25619e61e8a…8017d.
+- New inspect-rejected-794-runtime.yml only reads retained container/health/logs and profiles exact-source encyclopedia transformation. No app start/deploy or stored-data writes. Sorting reuse is an unproven hypothesis; require identical complete ID order and measurements before implementing.
+- Local execution and public CUA environment became unavailable around21:46UTC. GitHub tools remain usable. Do not bypass runtime restrictions. Public live retention check remains pending.
+- Preserve exact source manifests, all17 frozen-baseline routes plus scope routes,35/305s, completeness, request budgets, SHA/nonce browser verdict and rollback. No main wholesale deployment, no rejected1742/1745/1747 editorial snapshots. PR1749/1750/1751 were independently prepared; review before any further selected source.
+- JP/KR full DUMP rights and14/3-day cadence remain unresolved/unchanged. Record every material milestone in roadmap via the existing checkpoint mechanism.
+
+# Historical checkpoint before rejection at21:47UTC
 
 - **ACTIVE RETRY 43098821534:** https://github.com/jeep-jim/AvtoCena/actions/runs/43098821534, controller `97ee63438e27862c6363c81db7b6eb0c9bcbf8b6`, unchanged source `794654a00aa4990b284858f1f01c07ed3f020df4` / PR1748. Wait job130784124274 passed21:02:53 UTC. Prepare job130786991899 passed source/navigation/security/private-index/build/load. Mandatory immutable private_index evidence and readback passed, followed by optional GitHub mirror. All five exact-generation budget warm results are nonempty and parity passed; step26 is still preparing dated pages as of21:35 UTC. Deploy/runtime/server/browser/public verification remain pending; do not start overlapping releases. Retained a182/calc c489 last confirmed21:02:22. Check complete logs against lagging GitHub summaries. Previous43090744197 failed solely on GitHub artifact transport; Deploy SKIPPED.
 
