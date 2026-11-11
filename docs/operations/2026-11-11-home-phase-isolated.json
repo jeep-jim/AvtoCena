@@ -1,0 +1,591 @@
+{
+  "version": 1,
+  "date": "2026-11-11",
+  "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43015338908",
+  "jobId": 130504868604,
+  "sourceRelease": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "resources": {
+    "cpus": 2,
+    "memoryGiB": 8
+  },
+  "traffic": "loopback only, no production switch, no supplied visitor IP",
+  "measurements": [
+    {
+      "baselineRelease": "3048aede91dbfa4287e038075700e1434ba53e85",
+      "privateIndexExported": true
+    },
+    {
+      "homeProbe": "cold",
+      "seconds": 12.8956,
+      "bytes": 1146080,
+      "complete": true
+    },
+    {
+      "homeProbe": "warm",
+      "seconds": 0.4975,
+      "bytes": 1145988,
+      "complete": true
+    },
+    {
+      "homeProbe": "after35",
+      "seconds": 0.7235,
+      "bytes": 1145988,
+      "complete": true
+    },
+    {
+      "homeProbe": "after305",
+      "seconds": 2.0057,
+      "bytes": 1145702,
+      "complete": true
+    },
+    {
+      "homePhases": [
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "green",
+          "ms": 242.9,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotManifest",
+          "ms": 163.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "dealer",
+          "ms": 326.2,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotOverview",
+          "ms": 150.6,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotPrepared",
+          "ms": 316.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotEditorial:uae",
+          "ms": 8174.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotEditorial:europe",
+          "ms": 9702.4,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotBody",
+          "ms": 10021.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "f62e1040-303d-42f7-8908-4c5099317f85",
+          "phase": "snapshotContext",
+          "ms": 10125.3,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "snapshot",
+          "ms": 10125.6,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "counts",
+          "ms": 36.4,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "greenPricing",
+          "ms": 891.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "catalogPricing",
+          "ms": 1783.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "japanRail",
+          "ms": 56,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "7c343e84-1fa6-4045-acad-4c4803537b08",
+          "phase": "dealerRail",
+          "ms": 874.2,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "green",
+          "ms": 0.4,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotManifest",
+          "ms": 0.2,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotOverview",
+          "ms": 0.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotPrepared",
+          "ms": 0.8,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotEditorial:uae",
+          "ms": 0.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotEditorial:europe",
+          "ms": 0.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotBody",
+          "ms": 1.8,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "c8267c1e-37c8-49d4-87f9-9aba1b72f853",
+          "phase": "snapshotContext",
+          "ms": 2.3,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "snapshot",
+          "ms": 2.4,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "counts",
+          "ms": 1.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "catalogPricing",
+          "ms": 50.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "greenPricing",
+          "ms": 152.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "japanRail",
+          "ms": 44,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "dealer",
+          "ms": 265.6,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "008d4ebc-89d4-492a-950f-aee4c98767ae",
+          "phase": "dealerRail",
+          "ms": 209,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "green",
+          "ms": 0.2,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotManifest",
+          "ms": 0,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotOverview",
+          "ms": 0,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotPrepared",
+          "ms": 0.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotEditorial:uae",
+          "ms": 1.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotEditorial:europe",
+          "ms": 4.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotBody",
+          "ms": 5.4,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "e5baa6d0-71dc-45b8-af3d-42aa9305ceb0",
+          "phase": "snapshotContext",
+          "ms": 142.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "snapshot",
+          "ms": 142.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "counts",
+          "ms": 63.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "catalogPricing",
+          "ms": 105.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "dealer",
+          "ms": 314.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "greenPricing",
+          "ms": 205.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "japanRail",
+          "ms": 39.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "d73c935d-2cc6-4f44-99a6-40b6c4d14d09",
+          "phase": "dealerRail",
+          "ms": 271.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "green",
+          "ms": 255.7,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotManifest",
+          "ms": 76.3,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotOverview",
+          "ms": 97.2,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotPrepared",
+          "ms": 174.8,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "dealer",
+          "ms": 467.1,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotEditorial:europe",
+          "ms": 73.4,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotEditorial:uae",
+          "ms": 412.9,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotBody",
+          "ms": 588.3,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "adae4c94-ff80-42f3-8dc2-8df8fed4c158",
+          "phase": "snapshotContext",
+          "ms": 872.6,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "snapshot",
+          "ms": 872.6,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "counts",
+          "ms": 65.3,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "greenPricing",
+          "ms": 334.6,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "catalogPricing",
+          "ms": 378.2,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "japanRail",
+          "ms": 123.8,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        },
+        {
+          "trace": "5ca80981-3869-47ed-99cd-bbe0d11e4696",
+          "phase": "dealerRail",
+          "ms": 652.5,
+          "ok": true,
+          "policyDate": "2026-11-11",
+          "completedPolicyDate": "2026-11-11",
+          "generation": "gen_1794357678562_9c0667cb"
+        }
+      ],
+      "imageRelease": "3048aede91dbfa4287e038075700e1434ba53e85",
+      "baselineRelease": "3048aede91dbfa4287e038075700e1434ba53e85"
+    },
+    {
+      "candidateState": {
+        "Status": "exited",
+        "ExitCode": 0,
+        "OOMKilled": false
+      }
+    },
+    {
+      "productionBefore": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "productionAfter": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "nginxUnchanged": true
+    }
+  ],
+  "limitations": [
+    "Single request per phase; not production latency or a p95.",
+    "The isolated probe did not reproduce the original 5.0283s post-switch sample.",
+    "Moving dealer rail preparation is code-tested but has no before/after runtime acceptance yet."
+  ]
+}
