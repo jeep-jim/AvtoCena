@@ -25205,3 +25205,14 @@ Green56tests+budget1440/390+layout10cases/negativeControl/standalone PASS; city8
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/e6fc83d6c430375d91045b0530df534f91bede00
 
+
+
+### 12.11.2026 — найдена причина отсутствия быстрого каталога главной, начата подготовка
+
+- Read-only [43076441642](https://github.com/jeep-jim/AvtoCena/actions/runs/43076441642)/job130717375730:18:18:43UTC, поколениеgen_1794357678562_9c0667cb не изменилось. Оба overview за11.11, dated12.11 отсутствует, selectedKind:none. Это объясняет measured fallback в общуюprojection60,0332с иsnapshot88,3665с.
+- Успешный иной builder43058424490 работал с поколениемgen_1791597210034_5b83bc90, поэтому его зелёный статус не является готовностью рабочегоRegcloud.
+- Добавлена разовая подготовка актуальногоoverview и двух будущих дат из сохранённого поколения на873: source/count/date/generation/CAS сохраняются, manifest/фиды/цены/тарифы/расписания не переключаются. Старомуoverview не подменяется дата.
+- В future стандартный и изолированный controller добавлена обязательная общая подготовка после scoped индексов; уже готовая полная версия повторно используется штатным skipReady. Никакие speed/functional/browser/rollback guards не отключены. Следующий результат подготовки и повторной приёмки будет записан отдельно.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/f4ff9b549482fe6e9846592aa00080f042f3eba8
+
