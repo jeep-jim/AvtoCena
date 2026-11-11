@@ -1,0 +1,65 @@
+name: Inspect login rejection traffic once
+# Read-only confirmation after rejected acceptance43111977320.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-login-rejection-traffic.yml']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: '75c2e6f57cfa4022865217e029a1f5d1671842c3'
+      - name: Read retained production identity and bounded candidate diagnostics
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'REMOTE'
+          import json,pathlib,re,datetime,collections,urllib.parse
+          start=datetime.datetime.fromisoformat('2026-11-11T23:33:45+00:00')
+          end=datetime.datetime.fromisoformat('2026-11-11T23:34:35+00:00')
+          config=pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_text()
+          files=set(re.findall(r'access_log\s+(/var/log/nginx/[A-Za-z0-9_.-]+)',config))
+          if not files:files.add('/var/log/nginx/access.log')
+          print(json.dumps({'windowStart':start.isoformat(),'windowEnd':end.isoformat(),'readOnly':True,'ipAndUserAgentValuesOmitted':True,'configuredCrawlerLimits':{'catalog':'avtocena_catalog_robots' in config,'social':'avtocena_social_previews' in config}}))
+          pattern=re.compile(r'\[([^\]]+)\]\s+"([^"]*)"\s+(\d{3})\s+\S+\s+"[^"]*"\s+"([^"]*)"')
+          for name in sorted(files):
+              path=pathlib.Path(name)
+              if not path.is_file():
+                  print(json.dumps({'log':path.name,'exists':False}));continue
+              size=path.stat().st_size
+              with path.open('rb') as stream:
+                  stream.seek(max(0,size-8*1024*1024));chunk=stream.read()
+              buckets=collections.Counter();categories=collections.Counter();earliest=None;latest=None;matched=0;parsed=0
+              for line in chunk.decode('utf-8',errors='replace').splitlines():
+                  match=pattern.search(line)
+                  if not match:continue
+                  raw,request,status,ua=match.groups()
+                  try:at=datetime.datetime.strptime(raw,'%d/%b/%Y:%H:%M:%S %z')
+                  except ValueError:continue
+                  parsed+=1;earliest=min(earliest,at) if earliest else at;latest=max(latest,at) if latest else at
+                  if not start<=at<=end:continue
+                  parts=request.split(' ')
+                  if len(parts)!=3:continue
+                  target=urllib.parse.urlsplit(parts[1]).path
+                  category='catalog-api' if target.startswith('/api/catalog/') else 'catalog-html' if target=='/cars' or target.startswith('/cars/') else 'offer' if target.startswith('/offer/') else 'login' if target=='/login' else 'other'
+                  agent='social-bot' if re.search(r'TelegramBot|TwitterBot|WhatsApp|facebookexternalhit|Facebot|vkShare|vkbot|Viber|TamTam|OdklBot|Pinterest|Snapchat|MaxBot',ua,re.I) else 'crawler' if re.search(r'bot|crawler|spider',ua,re.I) else 'other-user-agent'
+                  buckets[(at.astimezone(datetime.timezone.utc).isoformat()[:16],agent,status)]+=1
+                  categories[(category,agent,status)]+=1;matched+=1
+              print(json.dumps({'log':path.name,'fileBytes':size,'tailBytesRead':len(chunk),'parsedLines':parsed,'firstParsedAt':earliest.isoformat() if earliest else None,'lastParsedAt':latest.isoformat() if latest else None,'fullWindowCovered':bool(earliest and earliest<=start and latest>=end),'windowRequests':matched,'byMinuteAgentStatus':[{'minute':k[0],'agentClass':k[1],'status':k[2],'count':v} for k,v in sorted(buckets.items())],'byCategoryAgentStatus':[{'category':k[0],'agentClass':k[1],'status':k[2],'count':v} for k,v in sorted(categories.items())]}))
+          REMOTE
