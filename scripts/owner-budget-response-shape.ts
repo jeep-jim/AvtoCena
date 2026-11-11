@@ -11,7 +11,7 @@ async function main(){
  const ip=process.env.AJES_DIAG_IP||'';if(!isIP(ip))throw Error('missing_peer');
  const password=await ajesPassword();if(!password)throw Error('not_configured');
  const endpoint=ajesEndpoint(ip);
- for(const table of ['stats','korea'] as const){
+ for(const table of ['stats'] as const){
   await assertCollectionEnabled(table==='stats'?'ajes_japan_feed':'ajes_korea_feed');
   const query=ajesQuery({table,pageSize:6});
   await reserveAjesRequest(getJsonStorage(),table);
@@ -28,6 +28,12 @@ async function main(){
    const decoded=report.gzip?gunzipSync(body,{maxOutputLength:2*1024*1024}):body;
    const text=decoded.toString('utf8');report.utf8Bom=text.charCodeAt(0)===0xfeff;
    const clean=text.replace(/^\uFEFF/,'');
+   report.credentialEcho=clean.includes(password);
+   report.printableAscii=Array.from(decoded).filter(byte=>byte===9||byte===10||byte===13||byte>=32&&byte<=126).length;
+   report.zlibHeader=decoded[0]===0x78&&[0x01,0x5e,0x9c,0xda].includes(decoded[1]);
+   const redacted=clean.split(password).join(' ').replace(/\b\d{1,3}(?:\.\d{1,3}){3}\b/g,' ');
+   report.knownErrorWords=['error','wrong','invalid','key','code','password','access','denied','ip','query','sql','limit','expired','forbidden','not','found','auth','bad','token','api','bot','ban','disabled','gzip','json'].filter(word=>new RegExp('\\b'+word+'\\b','i').test(redacted));
+   if(report.credentialEcho&&/^(?:(?:bot|ban)\d*|error|wrong|invalid|key|code|password|access|denied|ip|query|sql|limit|expired|forbidden|not|found|auth|bad|token|api|disabled|[ .:_=<>/-])+$/i.test(redacted.trim()))report.errorIdentifier=redacted.trim();
    refusal=decoded.length<=256&&/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(clean);report.refusal=refusal;
    report.html=/<(?:!doctype|html|head|body)\b/i.test(clean);report.phpWarning=/<b>\s*(?:Warning|Fatal error|Notice)\b/i.test(clean);
    try{
