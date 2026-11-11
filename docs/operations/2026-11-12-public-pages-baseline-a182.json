@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "routes": [
+    "/privacy",
+    "/blog",
+    "/dealers"
+  ],
+  "samples": [
+    {
+      "phase": "first_observation",
+      "path": "/privacy",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137518,
+      "headersSeconds": 0.0083,
+      "completeSeconds": 0.0096
+    },
+    {
+      "phase": "first_observation",
+      "path": "/blog",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137309,
+      "headersSeconds": 0.01,
+      "completeSeconds": 0.0881,
+      "articleLinks": 12
+    },
+    {
+      "phase": "first_observation",
+      "path": "/dealers",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 109280,
+      "headersSeconds": 0.0092,
+      "completeSeconds": 0.2989,
+      "dealerCards": 2
+    },
+    {
+      "phase": "warm_repeat",
+      "path": "/privacy",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137518,
+      "headersSeconds": 0.0085,
+      "completeSeconds": 0.0098
+    },
+    {
+      "phase": "warm_repeat",
+      "path": "/blog",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137309,
+      "headersSeconds": 0.0074,
+      "completeSeconds": 0.0701,
+      "articleLinks": 12
+    },
+    {
+      "phase": "warm_repeat",
+      "path": "/dealers",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 109280,
+      "headersSeconds": 0.0075,
+      "completeSeconds": 0.1845,
+      "dealerCards": 2
+    },
+    {
+      "phase": "after_35s_wait",
+      "path": "/privacy",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137518,
+      "headersSeconds": 0.0091,
+      "completeSeconds": 0.0101
+    },
+    {
+      "phase": "after_35s_wait",
+      "path": "/blog",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137309,
+      "headersSeconds": 0.0148,
+      "completeSeconds": 0.0451,
+      "articleLinks": 12
+    },
+    {
+      "phase": "after_35s_wait",
+      "path": "/dealers",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 109280,
+      "headersSeconds": 0.0065,
+      "completeSeconds": 0.2019,
+      "dealerCards": 2
+    },
+    {
+      "phase": "after_65s_wait",
+      "path": "/privacy",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137518,
+      "headersSeconds": 0.7579,
+      "completeSeconds": 0.7706
+    },
+    {
+      "phase": "after_65s_wait",
+      "path": "/blog",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 137309,
+      "headersSeconds": 0.0714,
+      "completeSeconds": 0.1109,
+      "articleLinks": 12
+    },
+    {
+      "phase": "after_65s_wait",
+      "path": "/dealers",
+      "functionalPassed": true,
+      "status": 200,
+      "bytes": 109280,
+      "headersSeconds": 0.0306,
+      "completeSeconds": 0.3151,
+      "dealerCards": 2
+    }
+  ],
+  "functionalPassed": true,
+  "startedAt": "2026-11-11T19:11:06.664735+00:00",
+  "observationsOnly": true,
+  "performanceCeilingsApplied": false,
+  "firstObservationIsColdProof": false,
+  "waitsProveCacheExpiry": false,
+  "healthBefore": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "healthAfter": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "finishedAt": "2026-11-11T19:12:48.854124+00:00",
+  "verificationMode": "original-a182",
+  "confirmationRunId": 43081159796,
+  "confirmationControl": "902043eafa1111e83aa32155b4845187b6a39495"
+}

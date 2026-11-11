@@ -1,9 +1,19 @@
 import {releaseMarkets} from './lib/release-market-scope.mjs';
+// Release preparation runs on the checkout, while Docker sets AVTOCENA_RELEASE_SHA.
+// Bind both to the controller's exact source before importing runtime helpers.
+const preparationRelease=process.env.RELEASE_SOURCE_SHA||process.env.GITHUB_SHA;
+if(preparationRelease){
+ if(!/^[a-f0-9]{40}$/.test(preparationRelease))throw Error('catalog_pages_release_invalid');
+ if(process.env.AVTOCENA_RELEASE_SHA&&process.env.AVTOCENA_RELEASE_SHA!==preparationRelease)throw Error('catalog_pages_release_mismatch');
+ process.env.AVTOCENA_RELEASE_SHA=preparationRelease;
+}
+if(process.env.AVTOCENA_RELEASE_SHA&&!/^[a-f0-9]{40}$/.test(process.env.AVTOCENA_RELEASE_SHA))throw Error('catalog_pages_release_invalid');
 const selectedMarkets=releaseMarkets(process.env.RELEASE_PREPARATION_MARKETS);
 import {refreshGenerationPages, refreshGenerationPagesWindow} from './lib/catalog-refresh-generation-pages.mjs';
 const {getJsonStorage} = await import('../apps/web/lib/data.ts');
 const {buildCatalogMarketLanding, prepareCatalogProjectionRowsForDate, buildCatalogOverviewFromProjections,
-  catalogMarketLandingPath} = await import('../apps/web/lib/catalog/storage.ts');
+  catalogMarketLandingPath,searchOffers} = await import('../apps/web/lib/catalog/storage.ts');
+const {prepareEditorialHome}=await import('../apps/web/lib/catalog/editorial-home.ts');
 const {catalogOverviewGenerationPath} = await import('../apps/web/lib/catalog/overview.ts');
 const {PUBLIC_CATALOG_MARKETS} = await import('../apps/web/lib/catalog/runtime-config.ts');
 const {datedCatalogPagePath}=await import('../apps/web/lib/catalog/dated-pages.ts');
@@ -25,3 +35,8 @@ await refreshGenerationPagesWindow({
   console.log(JSON.stringify(result,null,2));
   return result;
 }});
+// Separate current-day derivative: preserve raw legacy pages for rollback readers.
+// Exact-image preparation supplies its immutable calculation context. Other
+// contexts safely miss at runtime; future dates keep the original exact search.
+if(process.env.CATALOG_PREPARE_EDITORIAL_HOME!=='false')console.log(JSON.stringify(await prepareEditorialHome({storage,markets:selectedMarkets||PUBLIC_CATALOG_MARKETS,
+ search:market=>searchOffers({market,pageSize:12,sort:'updatedAt'})}),null,2));

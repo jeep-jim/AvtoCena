@@ -15,13 +15,12 @@ export function OverlayBackHistory(){
   const restorePosition=(step:Step)=>{
    // Catalog sheets own unlock + layout-anchor restoration. Replaying their
    // former absolute offset here would undo it after the dealer hero collapses.
-   if(step.element.matches('.ac-mobile-filter-sheet')){
-    if(!steps.length)history.scrollRestoration=originalRestoration;
-    return;
-   }
+   const catalogSheet=step.element.matches('.ac-mobile-filter-sheet');
+   // Native persisted scrolling follows popstate. Keep manual mode through
+   // that traversal, including when the sheet already restored its own anchor.
    cancelAnimationFrame(restoreFrame);cancelAnimationFrame(restoreSecond);
    restoreFrame=requestAnimationFrame(()=>{restoreSecond=requestAnimationFrame(()=>{
-    if(location.pathname===new URL(step.url).pathname&&document.body.style.position!=='fixed')window.scrollTo({top:step.scrollY,behavior:'instant'});
+    if(!catalogSheet&&location.pathname===new URL(step.url).pathname&&document.body.style.position!=='fixed')window.scrollTo({top:step.scrollY,behavior:'instant'});
     if(!steps.length)history.scrollRestoration=originalRestoration;
    });});
   };

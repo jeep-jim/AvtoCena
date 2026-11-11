@@ -1,5 +1,6 @@
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
+import {readEditorialHome,resetEditorialHomeCache} from './editorial-home';
 import {createHomePhaseTiming} from "./home-phase-timing";
 import {StableBudgetSelectionCache} from "./stable-budget-selection";
 import {AggregateBudgetIndexCache} from './aggregate-budget-index-cache';
@@ -627,6 +628,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetEditorialHomeCache();
   resetBudgetSourceIndexes();
   unavailableReadCache.clear();
   previousLocationCache.clear();
@@ -2896,6 +2898,7 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
 
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
   const manifest = await timing.measure("snapshotManifest",()=>readManifest());
+  const sourceCounts=Object.fromEntries(MARKETS.map(market=>[market,manifest.markets?.[market]?.count]));
   timing.setGeneration(manifest.generationId);
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
   const overview = await timing.measure("snapshotOverview",()=>readCatalogOverview(manifest.generationId)).catch(() => null);
@@ -2906,7 +2909,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
     return catalogOverviewMarketComplete(summary, count, limit);
   })) {
     const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
-    return {generationId: manifest.generationId, marketCounts,
+    return {generationId: manifest.generationId, sourceCounts, marketCounts,
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
@@ -2932,6 +2935,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
       });
       return {
         generationId: manifest.generationId,
+        sourceCounts,
         items:items.sort(compareCatalogDisplayOrder),
         marketCounts,
         total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
@@ -3004,6 +3008,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
 
   return {
     generationId: manifest.generationId,
+    sourceCounts,
     items,
     marketCounts,
     total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
@@ -3146,7 +3151,7 @@ async function readEditorialBrandSummary(){
 export async function readHomeCatalogSnapshot(perMarket=6){
  const timing=createHomePhaseTiming();
  return timing.measure("snapshotContext",()=>withCatalogEditorial(()=>timing.measure("snapshotBody",async()=>{
- const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
+ const {sourceCounts,...snapshot}=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
  const marketCounts={...snapshot.marketCounts};
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
  const markets=MARKETS.slice(0,0);
@@ -3155,8 +3160,11 @@ export async function readHomeCatalogSnapshot(perMarket=6){
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }
+ const prepared=markets.length?await timing.measure('snapshotEditorialPrepared',()=>readEditorialHome(snapshot.generationId,sourceCounts,markets)):{};
+ const limit=Math.min(12,Math.max(1,perMarket));
  const refreshed=await mapWithConcurrency(markets,2,async market=>({market,
-  result:await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
+  result:prepared[market]?{total:prepared[market].total,items:prepared[market].items.slice(0,limit)}
+   :await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:limit,sort:'updatedAt'}))}));
  for(const {market,result} of refreshed){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];
