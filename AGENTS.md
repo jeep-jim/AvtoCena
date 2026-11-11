@@ -1,12 +1,14 @@
 # Current recovery checkpoint — 12.11.2026
 
-- Read docs/operations/current-incident.md and the latest roadmap checkpoint first. Preserve permanent owner policies below.
-- Independently confirmed18:03:02UTC in43073941128/job130708761280: productiona182cd21b21ecf612b63613d263e5bdd817ea4c0/imagee36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f, running=true; public healthok:true/calculationVersionc489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6.
-- Release43055396384 attempt2/job130675568177/source8731103c0102886064c6a0a19a14182502e6e3be FAILED17:59:51UTC. Prices were ready; first preparatory performance pass timed out in response.read before Nginx promotion. Old production retained17:59:46UTC; mandatory browser was not reached. Do not rerun unchanged or claim UI installed.
-- Successor43067092325/source1767642 failed predecessor check18:00:35UTC; prepare skipped. Older ee0/43060073993 is superseded; never restart it. Do not bypass predecessor or standard-deploy main.
-- One isolated diagnostic of retained873 is being corrected after its prelude incorrectly demanded cards from a no-visitor-IP Korea response. Original prelude requires complete HTML; strict first-pass still requires actual cards/realSSH-peer. First diagnostic43074413209 stopped candidate and verified unchanged productionID. This does not explain the original timeout.
-- Preserve frozen17-route baseline,35/305s phases, complete results, request counts, SHA/nonce browser verdict and rollback. Logging-only gate change passed23 tests and prints route failures without hiding/retrying them.
-- Before another release establish the failing route and cause. JP/KR availability, official DUMP and14/3-day snapshots unresolved; ordinary schedules/customer data unchanged. Append factual milestones to roadmap.
+- Read docs/operations/current-incident.md and latest roadmap first; preserve permanent owner policies below.
+- Confirmed production remains a182cd21b21ecf612b63613d263e5bdd817ea4c0 / sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f. The new acceptance preflight43077583586/job130723237646 verified this running identity at18:30UTC and did not call deployment.
+- Original873 attempt2/43055396384 failed before promotion: home lacked current-day overview for active gen_1794357678562_9c0667cb, fell back to60.0332s projection read /88.3665s snapshot. Metadata43076441642 confirms missing12Nov overview; unrelated green builders used different generations.
+- Data-only repair43076945512 at f4ff9b549482fe6e9846592aa00080f042f3eba8 SUCCEEDED18:28:32UTC; common overview and dated pages12/13/14Nov prepared from stored generation, no imports/manifest or schedule change. New acceptance independently verified all three dates and original artifacts/index.
+- Acceptance43077583586 at f945af6d07e624e95ef6bc3de51e10e15a77b39e FAILED before deployment: helper incorrectly compared whole-file SHA256 with models-content digest. Correct canonical models hashing and exact restored-model equality; preserve all image/source/index and release checks. No server/browser acceptance happened in that run.
+- Corrected one-time workflow owner-accept-prepared-873.yml reuses exact original873 image76af614dfdc86e180eeec354dbcec678c9b222fc7cb9968bd3f9a0b9c2b6158a, original successful checks, completed data repair, and full mandatory server/browser acceptance. Treat it as pending until terminal status and installed identity verified. Never standard-deploy main.
+- Next1767642/43067092325 remains failed predecessor check. Older ee0/43060073993 superseded. Only after real873 acceptance rebind a successor controller to the exact successful acceptance run/controller and live873.
+- Preserve frozen17-route baseline,35/305s phases, complete results, request counts, SHA/nonce browser verdict and rollback. Do not retry an unchanged measured regression.
+- JP/KR full availability, official DUMP and14/3-day snapshots unresolved. Ordinary feed schedules/customer data unchanged. Record every completed milestone in roadmap.
 
 # Owner accepted speed and phased optimization — 11.11.2026
 

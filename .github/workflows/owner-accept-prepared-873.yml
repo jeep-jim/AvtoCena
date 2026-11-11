@@ -158,7 +158,7 @@ jobs:
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py scripts/regcloud-browser-verdict.py "root@151.248.113.177:$remote_dir/"
           scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
-          ssh "${ssh_opts[@]}" root@151.248.113.177 python3 - "$(node scripts/catalog-calculation-version.mjs)" <<'IMAGE'
+          ssh "${ssh_opts[@]}" root@151.248.113.177 python3 - "$(node scripts/catalog-calculation-version.mjs)" > "$RUNNER_TEMP/image-encyclopedia.json" <<'IMAGE'
           import hashlib,json,pathlib,subprocess,sys,tempfile
           def inspect(name):return json.loads(subprocess.check_output(['docker','inspect',name],text=True))[0]
           release='8731103c0102886064c6a0a19a14182502e6e3be'
@@ -178,9 +178,26 @@ jobs:
           with tempfile.TemporaryDirectory(prefix='avtocena-index-verify-') as directory:
               target=pathlib.Path(directory)/'index.json'
               subprocess.check_call(['docker','cp','avtocena-release-'+release[:12]+':/app/data/knowledge/encyclopedia/calculation-v1.json',str(target)],stdout=subprocess.DEVNULL)
-              assert hashlib.sha256(target.read_bytes()).hexdigest()=='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'
-          print('EXACT_PREPARED_IMAGE_VERIFIED',release,expected,sys.argv[1])
+              sys.stdout.buffer.write(target.read_bytes())
           IMAGE
+          node --input-type=module <<'INDEX'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const path=process.env.RUNNER_TEMP+'/image-encyclopedia.json';
+          try{
+            const actual=JSON.parse(fs.readFileSync(path,'utf8'));
+            const restored=JSON.parse(fs.readFileSync('data/knowledge/encyclopedia/calculation-v1.json','utf8'));
+            const expected='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b';
+            for(const index of [actual,restored]){
+              assert.equal(index.version,1);
+              assert.equal(index.digest,expected);
+              assert.equal(createHash('sha256').update(JSON.stringify(index.models)).digest('hex'),expected);
+            }
+            assert.deepEqual(actual.models,restored.models);
+            console.log('EXACT_PREPARED_IMAGE_AND_INDEX_VERIFIED',process.env.RELEASE_SOURCE_SHA,expected);
+          }finally{fs.rmSync(path,{force:true});}
+          INDEX
           bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS"
       - name: Preserve required browser acceptance evidence
         if: always()
