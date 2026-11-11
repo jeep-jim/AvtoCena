@@ -32,7 +32,9 @@ env:
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/main' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    # Publication can commit before a later cursor or audit step fails. Inspect
+    # the active immutable generation after every completion; never recollect.
+    if: github.ref == 'refs/heads/main'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 20

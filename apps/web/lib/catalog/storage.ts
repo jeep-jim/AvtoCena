@@ -10,6 +10,7 @@ import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSele
 import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
 import {verifyCatalogReadModels} from './verify-read-models';
+import {stageCatalogPageWindow, assertCatalogPageWindowCurrent} from './publication-page-window';
 import {compactFuelPowertrainEvidence} from './specification-evidence-audit';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
@@ -23,7 +24,7 @@ import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
-import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
+import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialNeedsOverviewRefresh,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
@@ -1737,9 +1738,15 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
     {...publicationCheckpoint,stage:"generation_indexes_ready",updatedAt:new Date().toISOString()}, false);
   progress("current_read_models_start");
-  await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
+  const assertPublicationBase = async () => {
+    await options.beforeManifestCommit?.();
+    const current = await storage.readJson<CatalogManifest>('catalog/manifest.json', {generationId: 'empty'} as CatalogManifest);
+    if (current.generationId !== expectedBaseGenerationId) throw Error('catalog_publish_base_changed');
+  };
+  const currentReadModels = await writeCurrentCatalogReadModels(generationId, publishedOffers, true, undefined, assertPublicationBase);
   progress("current_read_models_written");
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
+  assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
   progress("all_read_models_verified");
   await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
     {...publicationCheckpoint,stage:"read_models_verified",updatedAt:new Date().toISOString()}, false);
@@ -1747,8 +1754,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     await options.beforeManifestCommit?.();
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", { ...manifest, generationId: "empty" });
     if (current.value.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
+    assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
     try {
       if (current.found && current.value?.generationId && current.value.generationId !== generationId) await storage.writeJson("catalog/previous-manifest.json", current.value);
+      assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
       resetCatalogReadCachesForTests();
       return manifest;
@@ -1877,7 +1886,9 @@ type PreparedCurrentReadModels = {
   japanInputs: ReturnType<typeof buildJapanPreviewInputIndex>;
   writeDetails: () => Promise<number>;
 };
-async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels) {
+async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels,
+  assertPageContext?: () => Promise<void>) {
+  if (!assertPageContext) throw Error('catalog_page_window_context_required');
   const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
     console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
   reportStage("begin");
@@ -1960,13 +1971,20 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   // Stage the small landing snapshot with every publication, before switching
   // the manifest. A separate workflow used to leave it on an old generation,
   // forcing every homepage visit to parse the entire catalog instead.
-  const overview = await buildCatalogOverviewFromProjections(generationId, allProjectionItems);
-  await writeJsonAtomic(catalogOverviewGenerationPath(generationId), overview, false);
-  await writeJsonAtomic(CATALOG_OVERVIEW_PATH, overview, false);
+  const pageWindow = await stageCatalogPageWindow({storage: getJsonStorage(), generationId, markets: MARKETS,
+    rows: allProjectionItems, rowsByMarket: projectionsByMarket, assertContext: assertPageContext,
+    buildLanding: (g, market, rows, now) => buildCatalogMarketLanding(g, market, rows, {now}),
+    buildOverview: (g, rows, now) => buildCatalogOverviewFromProjections(g, rows, {now}),
+    landingPath: catalogMarketLandingPath, overviewPath: catalogOverviewGenerationPath});
+  // Keep the compatibility alias caller-owned; dated writes never touch it.
+  await assertPageContext();
+  assertCatalogPageWindowCurrent(pageWindow.proof);
+  await writeJsonAtomic(CATALOG_OVERVIEW_PATH, pageWindow.overview, false);
 
   reportStage("complete");
   return {
     generationId,
+    pageWindow: pageWindow.proof,
     total: allProjectionItems.length,
     markets: Object.fromEntries(MARKETS.map((market) => [market, projectionsByMarket.get(market)?.length || 0])),
     projectionMarkets: projectionsByMarket.size,
@@ -2047,7 +2065,7 @@ export async function publishCurrentCatalogReadModels() {
       markets:[...marketIds].sort(),bodyTypes:[...values.bodyTypes].sort(),fuels:[...values.fuels].sort(),
       transmissions:[...values.transmissions].sort(),drives:[...values.drives].sort()};
     const result=await writeCurrentCatalogReadModels(manifest.generationId, [], true, {facets,projections,japanInputs,
-      writeDetails:()=>spool.publish(manifest.generationId,(key,value)=>writeJsonAtomic(key,value,false))});
+      writeDetails:()=>spool.publish(manifest.generationId,(key,value)=>writeJsonAtomic(key,value,false))}, assertGeneration);
     await assertGeneration();
     return result;
   } finally {await spool.close();}
@@ -2862,8 +2880,9 @@ function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number, 
 }
 
 export async function buildCatalogOverviewFromProjections(generationId: string, projections: CatalogSearchProjection[], options: {now?:Date} = {}) {
+  return withCatalogEditorial(async()=>{
   const now=options.now||new Date();
-  const visible = projections.filter(row=>projectionCanRenderCardAt(row,now));
+  const visible = prepareCatalogProjectionRowsForDate(projections,now);
   const facets = await facetsFromProjection(generationId, visible, {}, false);
   const markets = Object.fromEntries(MARKETS.map(market => {
     const rows = visible.filter(row => row.market === market);
@@ -2871,7 +2890,9 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
     return [market, {sourceTotal: projections.filter(row => row.market === market).length,
       total: rows.length, items: selectHomepageShowcase(rows, 24, now).map(publicOfferFromProjection)}];
   }));
-  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10)};
+  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10),
+    editorialRevision:editorialRevision(),editorialMarkets:[...new Set(editorialEntries().map(entry=>entry.market))]};
+  });
 }
 
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
@@ -2886,7 +2907,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
     return catalogOverviewMarketComplete(summary, count, limit);
   })) {
     const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
-    return {generationId: manifest.generationId, marketCounts,
+    return {generationId: manifest.generationId, marketCounts,editorialRevision:overview.editorialRevision,editorialMarkets:overview.editorialMarkets,
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
@@ -3131,7 +3152,7 @@ export async function readHomeCatalogSnapshot(perMarket=6){
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
  const markets=MARKETS.slice(0,0);
  for(const market of MARKETS){
-  if(!editorialHasHidden(market))continue;
+  if(!editorialNeedsOverviewRefresh(snapshot,market))continue;
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }

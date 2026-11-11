@@ -24,7 +24,7 @@ test('actual wrapper skips empty Japan and reconciles populated UAE',async()=>{
  const calls:string[]=[];
  const original={generationId:'gen_1_abc',marketCounts:{japan:0,uae:2},total:2,items:[{id:'old',market:'uae'}]};
  const timing={measure:(_phase:string,work:()=>any)=>work()};
- const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialHasHidden','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency',code+';return readHomeCatalogSnapshot;')(
+ const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialNeedsOverviewRefresh','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency',code+';return readHomeCatalogSnapshot;')(
  ()=>timing,(work:()=>any)=>work(),async()=>original,(row:any)=>row,['japan','uae'],()=>true,homeSnapshotMarketIsEmpty,
  async(q:any)=>{calls.push(q.market);assert.equal(q.pageSize,10);assert.equal(q.sort,'updatedAt');return {total:1,items:[{id:'visible',market:'uae'}]};},()=>0,async(items:any[],limit:number,worker:any)=>{assert.equal(limit,2);return Promise.all(items.map(worker));});
  const result=await run(10);
@@ -44,7 +44,7 @@ test('home reconciliation overlaps at most two markets and preserves determinist
  const markets=['uae','europe','georgia'];
  const original={marketCounts:{uae:2,europe:2,georgia:2},total:6,items:markets.map(market=>({id:'old-'+market,market}))};
  let active=0,peak=0;const calls:string[]=[];let fail=false;
- const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialHasHidden','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency',code+';return readHomeCatalogSnapshot;')(
+ const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialNeedsOverviewRefresh','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency',code+';return readHomeCatalogSnapshot;')(
  ()=>({measure:(_:string,work:any)=>work()}),(work:any)=>work(),async()=>original,(v:any)=>v,markets,()=>true,homeSnapshotMarketIsEmpty,
  async({market}:any)=>{calls.push(market);active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,market==='uae'?15:1));active--;if(fail&&market==='europe')throw Error('search failed');return {total:1,items:[{id:market,market}]};},()=>0,mapper);
  const result=await run(10);

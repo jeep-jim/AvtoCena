@@ -154,18 +154,26 @@ def probe_headers(base,path,kind):
  return headers
 
 def sample(base,path,kind,release):
+ # Log before starting the timer so even a stalled first preparation identifies
+ # its route. Never log response bodies, peer addresses or exception messages.
+ print(json.dumps({'performanceRequest':'started','path':path}),flush=True)
  start=time.monotonic()
- req=urllib.request.Request(base+path,data=b'{}' if kind=='lead_validation' else None,headers=probe_headers(base,path,kind))
  try:
-  response=urllib.request.urlopen(req,timeout=REQUEST_TIMEOUT_SECONDS)
- except urllib.error.HTTPError as error:
-  if kind!='lead_validation':raise
-  response=error
- with response:
-  body=response.read(20*1024*1024+1);status=response.status
- elapsed=time.monotonic()-start
- if len(body)>20*1024*1024:raise AssertionError('performance_response_too_large:'+path)
- validate(path,kind,status,body,release)
+  req=urllib.request.Request(base+path,data=b'{}' if kind=='lead_validation' else None,headers=probe_headers(base,path,kind))
+  try:
+   response=urllib.request.urlopen(req,timeout=REQUEST_TIMEOUT_SECONDS)
+  except urllib.error.HTTPError as error:
+   if kind!='lead_validation':raise
+   response=error
+  with response:
+   body=response.read(20*1024*1024+1);status=response.status
+  elapsed=time.monotonic()-start
+  if len(body)>20*1024*1024:raise AssertionError('performance_response_too_large:'+path)
+  validate(path,kind,status,body,release)
+ except Exception as error:
+  print(json.dumps({'performanceRequest':'failed','path':path,'seconds':round(time.monotonic()-start,4),'errorType':type(error).__name__}),flush=True)
+  raise
+ print(json.dumps({'performanceRequest':'complete','path':path,'seconds':round(elapsed,4),'functionalPassed':True}),flush=True)
  return elapsed
 
 def main():

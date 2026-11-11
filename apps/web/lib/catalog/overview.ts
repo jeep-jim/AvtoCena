@@ -20,6 +20,8 @@ export type CatalogOverview = {
   generationId: string;
   builtAt: string;
   policyDate?: string;
+  editorialRevision?: string;
+  editorialMarkets?: string[];
   facets: CatalogFacets;
   markets: Record<string, CatalogOverviewMarket>;
 };

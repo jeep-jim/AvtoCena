@@ -25,7 +25,7 @@ test("home API reads shared indexes once instead of seven complete searches", ()
   assert.match(implementation, /order-updatedAt\.json/);
   assert.match(implementation, /market\/\$\{cleanShard\(market\)\}\.json/);
   assert.doesNotMatch(implementation, /searchOffers\(/);
-  assert.match(storage, /if\(!editorialHasHidden\(market\)\)continue/);
+  assert.match(storage, /if\(!editorialNeedsOverviewRefresh\(snapshot/);
 });
 
 test("home client renders a stable skeleton and loads one catalog snapshot in the background", () => {

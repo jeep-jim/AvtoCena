@@ -17,7 +17,7 @@ function fixture() {
     overviewPath:g=>`catalog/generations/${g}/indexes/overview.json`,
     prepareRows:rows=>rows.slice(0,1),
     buildLanding:async(g,market,items)=>({generationId:g,market,sourceTotal:items.length,total:1,policyDate:'2026-10-23'}),
-    buildOverview:async(g,rows)=>({generationId:g,facets:{generationId:g},policyDate:'2026-10-23',markets:{china:{total:rows.length,sourceTotal:rows.length}}}),
+    buildOverview:async(g,rows)=>({version:1,publicPolicyVersion:2,generationId:g,facets:{generationId:g},policyDate:'2026-10-23',markets:{china:{total:rows.length,sourceTotal:rows.length,items:rows}}}),
   };
   return {options,objects,writes,reads,prefix};
 }
@@ -92,6 +92,77 @@ test('market-only preparation never reads or replaces a global overview',async()
  assert.equal(f.writes.length,1);
 });
 
+function readyOverviewFixture() {
+  const f=fixture(), generationId='gen_old', policyDate='2026-10-23';
+  const counts={china:12,korea:3,japan:0};
+  f.objects.set('catalog/manifest.json',{generationId,markets:Object.fromEntries(Object.entries(counts).map(([market,count])=>[market,{count}]))});
+  const markets={};
+  for(const [market,count] of Object.entries(counts)){
+    const items=Array.from({length:count},(_,id)=>({id:`${market}-${id}`,market}));
+    f.objects.set(`${f.prefix}projection/${market}.json`,{generationId,items});
+    markets[market]={total:count,sourceTotal:count,items:items.slice(0,10)};
+  }
+  const overview={version:1,publicPolicyVersion:2,generationId,policyDate,dailyLandingsVersion:1,facets:{generationId},markets};
+  f.objects.set(`${f.prefix}overview.json`,overview);
+  Object.assign(f.options,{
+    markets:Object.keys(counts),skipReady:true,isPublished:item=>item.sourceId!=='withdrawn',
+    landingPath:(g,market)=>`catalog/generations/${g}/indexes/market-landing-v1/${market}.json`,
+    prepareRows:rows=>rows,
+    buildLanding:async(g,market,items)=>({generationId:g,market,sourceTotal:items.length,total:items.length,policyDate}),
+    buildOverview:async(g,rows)=>({version:1,publicPolicyVersion:2,generationId:g,facets:{generationId:g},policyDate,
+      markets:Object.fromEntries(Object.keys(counts).map(market=>{const items=rows.filter(row=>row.market===market);return [market,{total:items.length,items:items.slice(0,10)}];})),
+    }),
+  });
+  return {...f,overview};
+}
+
+test('ready overview skips work only when every requested market is complete, including zero-count markets',async()=>{
+  const f=readyOverviewFixture();
+  assert.equal((await refreshGenerationPages(f.options)).alreadyPrepared,true);
+  assert.equal(f.writes.length,0);
+  assert.equal(f.reads.some(path=>path.includes('/projection/')),false);
+  assert.deepEqual(f.overview.markets.japan,{total:0,sourceTotal:0,items:[]});
+});
+
+test('date and generation markers cannot make an incomplete home overview skip preparation',async()=>{
+  const damage=[
+    value=>{value.version=0;},
+    value=>{value.publicPolicyVersion=1;},
+    value=>{delete value.markets.korea;},
+    value=>{value.markets.korea.sourceTotal=2;},
+    value=>{value.markets.japan.sourceTotal=1;},
+    value=>{value.markets.china.total=NaN;},
+    value=>{value.markets.china.total=1.5;},
+    value=>{value.markets.china.total=-1;},
+    value=>{value.markets.china.total=13;},
+    value=>{value.markets.china.total=0;},
+    value=>{value.markets.china.items={length:10};},
+    value=>{value.markets.china.items[0]=null;},
+    value=>{value.markets.china.items=Array.from({length:10},()=>({}));},
+    value=>{value.markets.china.items[0]=value.markets.china.items[1];},
+    value=>{value.markets.china.items[0]={id:'wrong-market',market:'korea'};},
+    value=>{value.markets.china.items.pop();},
+    value=>{value.markets.china.items[0]={id:'withdrawn',sourceId:'withdrawn'};},
+    value=>{value.markets.japan.items=null;},
+  ];
+  for(const corrupt of damage){
+    const f=readyOverviewFixture();corrupt(f.overview);
+    const result=await refreshGenerationPages(f.options);
+    assert.notEqual(result.alreadyPrepared,true,corrupt.toString());
+    assert.equal(f.writes.length,4,corrupt.toString());
+    assert.deepEqual(f.writes.at(-1).condition,{ifMatch:'v1'});
+    assert.equal(f.objects.get(`${f.prefix}overview.json`).markets.korea.sourceTotal,3);
+    assert.equal(f.reads.includes(`${f.prefix}projection/japan.json`),false,'empty market needs no source read');
+  }
+});
+
+test('ready-looking overview cannot bypass invalid current manifest source counts',async()=>{
+  const f=readyOverviewFixture();
+  f.objects.get('catalog/manifest.json').markets.china.count='invalid';
+  await assert.rejects(refreshGenerationPages(f.options),/catalog_pages_source_count_invalid/);
+  assert.equal(f.writes.length,0);
+});
+
 function windowFixture({landingsOnly=false,skipReady=false}={}) {
   const f=fixture(), calls=[];
   let clock=new Date('2026-10-23T16:59:59Z');
@@ -99,7 +170,9 @@ function windowFixture({landingsOnly=false,skipReady=false}={}) {
   const state={...f,calls,
     advance:()=>{clock=new Date(Math.floor((clock.getTime()+7*3600000)/86400000)*86400000-7*3600000+86400000);},
     beforeDay:()=>{},onBuild:()=>{},afterDay:()=>{}};
-  state.run=()=>refreshGenerationPagesWindow({now,refreshDay:async(policyNow,offset)=>{
+  state.run=()=>refreshGenerationPagesWindow({now,
+    getGeneration:async()=>f.objects.get('catalog/manifest.json')?.generationId,
+    refreshDay:async(policyNow,offset)=>{
     const policyDate=new Date(policyNow.getTime()+7*3600000).toISOString().slice(0,10);
     calls.push({policyDate,offset});
     state.beforeDay();
@@ -110,7 +183,7 @@ function windowFixture({landingsOnly=false,skipReady=false}={}) {
         state.onBuild();
         return {generationId:g,market,sourceTotal:items.length,total:1,policyDate};
       },
-      buildOverview:async(g,rows)=>({generationId:g,facets:{generationId:g},policyDate,markets:{china:{total:rows.length}}}),
+      buildOverview:async(g,rows)=>({version:1,publicPolicyVersion:2,generationId:g,facets:{generationId:g},policyDate,markets:{china:{total:rows.length,items:rows}}}),
     });
     state.afterDay(result);
     return result;
@@ -175,11 +248,10 @@ test('a second date rollover fails closed without a third window attempt',async(
   assert.equal(f.writes.length,0);
 });
 
-test('the three-day wrapper does not retry generation, source, CAS or other failures',async()=>{
-  for(const error of ['catalog_pages_generation_changed_retry','catalog_overview_source_count_mismatch','storage_conflict','catalog_pages_horizon_invalid','catalog_pages_date_changed_retry_extra']){
+test('the three-day wrapper does not retry source, CAS or other failures',async()=>{
+  for(const error of ['catalog_overview_source_count_mismatch','storage_conflict','catalog_pages_horizon_invalid','catalog_pages_date_changed_retry_extra','catalog_pages_generation_changed_retry_extra']){
     const f=windowFixture();
-    if(error==='catalog_pages_generation_changed_retry')f.onBuild=()=>f.objects.set('catalog/manifest.json',{generationId:'gen_new'});
-    else if(error==='catalog_overview_source_count_mismatch')f.objects.get(`${f.prefix}projection/china.json`).items.pop();
+    if(error==='catalog_overview_source_count_mismatch')f.objects.get(`${f.prefix}projection/china.json`).items.pop();
     else if(error==='storage_conflict')f.options.storage.writeJson=async()=>{throw Error(error);};
     else if(error==='catalog_pages_horizon_invalid')f.beforeDay=()=>f.advance();
     else f.onBuild=()=>{throw Error(error);};
@@ -187,4 +259,144 @@ test('the three-day wrapper does not retry generation, source, CAS or other fail
     assert.equal(f.calls.length,1,error);
     assert.equal(f.writes.length,0,error);
   }
+});
+
+function changeWindowGeneration(f,generationId) {
+  const previous=f.objects.get('catalog/manifest.json');
+  f.objects.set('catalog/manifest.json',{...previous,generationId});
+  f.objects.set(`catalog/generations/${generationId}/indexes/projection/china.json`,{
+    generationId,items:[{id:'a',market:'china'},{id:'b',market:'china'}],
+  });
+}
+
+function assertCompleteGenerationWindow(f,result,generationId) {
+  assert.deepEqual(result.map(row=>row.generationId),[generationId,generationId,generationId]);
+  for(const [suffix,day] of [['','2026-10-23'],['.2026-10-24','2026-10-24'],['.2026-10-25','2026-10-25']]){
+    const prefix=`catalog/generations/${generationId}/indexes/`;
+    for(const name of ['overview','market-landing-v1/china']){
+      const page=f.objects.get(`${prefix}${name}${suffix}.json`);
+      assert.equal(page?.generationId,generationId);
+      assert.equal(page?.policyDate,day);
+    }
+  }
+}
+
+test('generation turnover between dated builds restarts the entire window',async()=>{
+  const f=windowFixture({skipReady:true});
+  f.afterDay=()=>{if(f.calls.length===1)changeWindowGeneration(f,'gen_new');};
+  const result=await f.run();
+  assert.deepEqual(f.calls.map(row=>row.offset),[0,1,0,1,2]);
+  assertCompleteGenerationWindow(f,result,'gen_new');
+});
+
+test('generation turnover inside a dated build uses the same bounded window retry',async()=>{
+  const f=windowFixture();
+  f.onBuild=()=>{if(f.calls.length===1)changeWindowGeneration(f,'gen_new');};
+  const result=await f.run();
+  assert.deepEqual(f.calls.map(row=>row.offset),[0,0,1,2]);
+  assertCompleteGenerationWindow(f,result,'gen_new');
+  assert.equal(f.objects.has(`${f.prefix}overview.json`),false);
+});
+
+test('final manifest validation catches publication after the last skipReady day',async()=>{
+  const f=windowFixture({skipReady:true});
+  await f.run();
+  f.calls.length=0;
+  const completed=[];
+  f.afterDay=result=>{
+    completed.push(result);
+    if(f.calls.length===3)changeWindowGeneration(f,'gen_new');
+  };
+  const result=await f.run();
+  assert.ok(completed.slice(0,3).every(row=>row.alreadyPrepared));
+  assert.deepEqual(f.calls.map(row=>row.offset),[0,1,2,0,1,2]);
+  assertCompleteGenerationWindow(f,result,'gen_new');
+});
+
+test('stable ready generation requires a final manifest read and performs no rebuild',async()=>{
+  const f=windowFixture({skipReady:true});
+  await f.run();
+  const writes=f.writes.length;
+  f.calls.length=0;
+  f.onBuild=()=>{throw Error('ready_window_must_not_rebuild');};
+  const result=await f.run();
+  assert.ok(result.every(row=>row.alreadyPrepared));
+  assertCompleteGenerationWindow(f,result,'gen_old');
+  assert.equal(f.writes.length,writes);
+  assert.deepEqual(f.calls.map(row=>row.offset),[0,1,2]);
+  let reads=0;
+  await refreshGenerationPagesWindow({now:()=>new Date('2026-10-23'),
+    getGeneration:async()=>{reads++;return 'gen_old';},
+    refreshDay:async()=>({generationId:'gen_old',alreadyPrepared:true})});
+  assert.equal(reads,2);
+});
+
+test('a second generation change fails without a third window attempt',async()=>{
+  const f=windowFixture();
+  f.afterDay=()=>changeWindowGeneration(f,`gen_changed_${f.calls.length}`);
+  await assert.rejects(f.run(),{message:'catalog_pages_generation_changed_retry'});
+  assert.deepEqual(f.calls.map(row=>row.offset),[0,1,0,1]);
+});
+
+test('date and generation turnover share one retry rather than multiplying attempts',async()=>{
+  for(const errors of [
+    ['catalog_pages_date_changed_retry','catalog_pages_generation_changed_retry'],
+    ['catalog_pages_generation_changed_retry','catalog_pages_date_changed_retry'],
+  ]){
+    let attempts=0;
+    await assert.rejects(refreshGenerationPagesWindow({now:()=>new Date('2026-10-23'),
+      getGeneration:async()=> 'gen_old',
+      refreshDay:async()=>{throw Error(errors[attempts++]);},
+    }),{message:errors[1]});
+    assert.equal(attempts,2);
+  }
+});
+
+test('missing generation reader or invalid current manifest fails before building',async()=>{
+  const refreshDay=async()=>{throw Error('must_not_build');};
+  await assert.rejects(refreshGenerationPagesWindow({refreshDay}),{message:'catalog_pages_generation_reader_required'});
+  for(const generation of [undefined,'','../wrong']){
+    await assert.rejects(refreshGenerationPagesWindow({refreshDay,getGeneration:async()=>generation}),
+      {message:'catalog_pages_manifest_invalid'});
+  }
+});
+
+test('completed collectors prepare derivatives even when a later step failed',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const workflow=await readFile(new URL('../.github/workflows/regcloud-overview.yml',import.meta.url),'utf8');
+  assert.match(workflow,/types: \[completed\]/);
+  assert.match(workflow,/build:\n(?:    #[^\n]*\n)*    if: github\.ref == 'refs\/heads\/main'\n/);
+  assert.doesNotMatch(workflow,/workflow_run\.conclusion/);
+  assert.match(workflow,/- cron: '5 17 \* \* \*'/);
+  assert.match(workflow,/branches: \[main\]/);
+  assert.match(workflow,/contents: read/);
+  assert.match(workflow,/run: npx tsx scripts\/catalog-refresh-generation-pages\.mjs/);
+  assert.doesNotMatch(workflow,/scripts\/(?:catalog-publish|catalog-source-intake|catalog-live-recovery)/);
+  const watched=workflow.match(/workflows: \[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
+  const names=await Promise.all(['china','korea','europe','uae','georgia','green'].map(async market=>{
+    const collector=await readFile(new URL(`../.github/workflows/catalog-refresh-${market}.yml`,import.meta.url),'utf8');
+    return collector.match(/^name: (.+)$/m)[1];
+  }));
+  assert.deepEqual(watched,names);
+});
+
+
+test('ready overview is reused only for the exact captured editorial revision',async()=>{
+  for(const prior of [undefined,'old-edit','current-edit']){
+    const f=readyOverviewFixture();
+    f.overview.editorialRevision=prior;f.options.editorialRevision='current-edit';
+    const build=f.options.buildOverview;
+    f.options.buildOverview=async(...args)=>({...await build(...args),editorialRevision:'current-edit'});
+    const result=await refreshGenerationPages(f.options);
+    assert.equal(result.alreadyPrepared===true,prior==='current-edit');
+    assert.equal(f.writes.length,prior==='current-edit'?0:4);
+    assert.equal(f.objects.get(f.prefix+'overview.json').editorialRevision,'current-edit');
+  }
+});
+test('wrong editorial revision cannot become the prepared common overview',async()=>{
+  const f=readyOverviewFixture();f.options.editorialRevision='current-edit';
+  const before=structuredClone(f.overview);
+  await assert.rejects(refreshGenerationPages(f.options),/editorial_revision_mismatch/);
+  assert.deepEqual(f.objects.get(f.prefix+'overview.json'),before);
+  assert.ok(f.writes.every(write=>!write.path.endsWith('/overview.json')));
 });
