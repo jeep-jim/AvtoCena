@@ -83,7 +83,13 @@ try{
     await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();if(name==='bodyType'){assert.equal(await menu.getByRole('button',{name:'Седан',exact:true}).isVisible(),true);assert.equal(await menu.getByRole('button',{name:'Универсал',exact:true}).isVisible(),true);}const metric=await menuGeometry(page,root,menu,(await row.boundingBox()).width);
     assert.deepEqual(await positions(sheet),before,'dropdown cannot push any closed filter or range row');
     assert.equal(await sheet.locator('.ac-filter-dropdown').count(),1);
-    assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
+    if(name==='fuel'){
+      // The accepted fuel control is a checkbox group, not the button grid
+      // used by body/transmission/drive. Keep its interaction covered too.
+      assert.equal(await menu.getAttribute('role'),'group');
+      assert.equal(await menu.getAttribute('aria-label'),'Тип топлива');
+      for(const label of ['Бензин','Дизель','Гибрид','Электро','Газ'])assert.equal(await menu.getByRole('checkbox',{name:label,exact:true}).count(),1);
+    }else assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
     const gap=await row.evaluate(el=>parseFloat(getComputedStyle(el).columnGap));assert.ok(Math.abs(metric.gap-gap)<2,'gap must match the tile gap');
     if(width===390&&(name==='bodyType'||name==='fuel'))await page.screenshot({path:`${out}/${theme}-${width}-${name}.png`});
     await root.locator(':scope > button').click();assert.equal(await root.locator('.ac-filter-dropdown').count(),0);checks.push({name,...metric});
@@ -121,7 +127,7 @@ try{
    const close=sheet.getByRole('button',{name:'Свернуть фильтры',exact:true});
    assert.equal(await close.textContent(),'');assert.equal(await close.locator('svg').count(),1);
    assert.notEqual(await close.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
-   await fuel.locator(':scope > button').click();await fuel.getByRole('button',{name:'Дизель',exact:true}).click();
+   await fuel.locator(':scope > button').click();await fuel.getByRole('checkbox',{name:'Дизель',exact:true}).check();
    await page.waitForFunction(()=>new URLSearchParams(location.search).get('fuel')==='diesel');
    assert.match(await status.textContent(),/Было: 321/);
    await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture:catalog-count',{detail:{initial:{fuel:'diesel'},count:{queryKey:'{}',text:'999'}}})));
