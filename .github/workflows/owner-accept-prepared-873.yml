@@ -1,0 +1,236 @@
+name: Accept prepared 873 after current-day overview repair
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/owner-accept-prepared-873.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+env:
+  RELEASE_SOURCE_SHA: '8731103c0102886064c6a0a19a14182502e6e3be'
+  RELEASE_PREPARATION_MARKETS: china,korea,europe,uae,georgia
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '8731103c0102886064c6a0a19a14182502e6e3be'
+          persist-credentials: false
+      - name: Verify isolated application source and exact allowed changes
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          git fetch --depth=1 origin a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          node --input-type=module <<'VERIFY'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-11-navigation-release-manifest.json','utf8'));
+          assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
+          const changed=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+          assert.ok(changed.every(path=>m.allowedPaths.includes(path)),'unexpected source change');
+          assert.deepEqual(changed.filter(path=>path.startsWith('apps/')).sort(),m.appPaths.slice().sort());
+          console.log(JSON.stringify({base:m.base,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),applicationFiles:m.appPaths,changed:changed.length}));
+          VERIFY
+      - name: Require exact original checks and completed common overview repair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/jeep-jim/AvtoCena/actions/runs/43055396384 > "$RUNNER_TEMP/original-run.json"
+          gh api repos/jeep-jim/AvtoCena/actions/jobs/130675568177 > "$RUNNER_TEMP/original-job.json"
+          gh api repos/jeep-jim/AvtoCena/actions/runs/43076945512 > "$RUNNER_TEMP/home-preparation-run.json"
+          gh api repos/jeep-jim/AvtoCena/actions/artifacts/13878303060/zip > "$RUNNER_TEMP/prepared-markets.zip"
+          gh api repos/jeep-jim/AvtoCena/actions/artifacts/13876196822/zip > "$RUNNER_TEMP/encyclopedia-coverage.zip"
+          python3 - <<'EVIDENCE'
+          import hashlib,json,os,pathlib,zipfile
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])
+          run=json.loads((root/'original-run.json').read_text())
+          assert run['id']==43055396384 and run['head_sha']=='b43b2d81ba0628d2ad20d3c04799522377f78271'
+          assert run['run_attempt']==2 and run['status']=='completed' and run['conclusion']=='failure'
+          job=json.loads((root/'original-job.json').read_text())
+          assert job['id']==130675568177 and job['run_id']==43055396384 and job['run_attempt']==2
+          steps=job['steps']
+          required=['Verify isolated application source and exact allowed changes','Verify exact encyclopedia matching','Verify stream disconnect and gateway buffer regressions','Verify retained choices and forward/Back navigation on this exact source','Verify owner catalog search and queue regressions','Verify deferred recommendations before release preparation','Verify production dependency security','Verify catalog storage and bounded projection integrity','Prepare private encyclopedia index for this release','Preserve existing encyclopedia coverage and batch membership','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']
+          for name in required:assert any(s['name']==name and s['conclusion']=='success' for s in steps),name
+          repair=json.loads((root/'home-preparation-run.json').read_text())
+          assert repair['id']==43076945512 and repair['head_sha']=='f4ff9b549482fe6e9846592aa00080f042f3eba8'
+          assert repair['status']=='completed' and repair['conclusion']=='success','current-day home preparation must pass first'
+          for filename,digest,target in [('prepared-markets.zip','b0f8bae355416b425150c27c95901bddafe9d9d3355975237125fc9876f495aa','prepared-evidence'),('encyclopedia-coverage.zip','080581ba18ff195a21602fd6b0b140c7b21c514cf6c64146ae028d3a03ae7677','reports')]:
+              archive=root/filename
+              assert hashlib.sha256(archive.read_bytes()).hexdigest()==digest
+              with zipfile.ZipFile(archive) as source:
+                  for member in source.infolist():
+                      path=pathlib.PurePosixPath(member.filename)
+                      assert not path.is_absolute() and '..' not in path.parts and member.file_size<=30*1024*1024
+                  source.extractall(target)
+          prepared=json.loads(pathlib.Path('prepared-evidence/release-market-preparation.json').read_text())
+          markets=os.environ['RELEASE_PREPARATION_MARKETS'].split(',')
+          assert prepared['generationId']=='gen_1794357678562_9c0667cb'
+          assert prepared['markets']==markets and len(prepared['results'])==len(markets)
+          assert {r['market'] for r in prepared['results']}==set(markets) and all(r['status']=='success' for r in prepared['results'])
+          assert json.loads(pathlib.Path('reports/astra-release-verification.json').read_text())['verified'] is True
+          print('Original checks, exact attempt2 artifacts and successful current-day repair verified')
+          EVIDENCE
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Retain original acceptance and add only tested request evidence
+        run: |
+          git fetch --depth=1 origin 570b354b9f5ac6696b6ed9435138ceb7cd038c89
+          git show 570b354b9f5ac6696b6ed9435138ceb7cd038c89:scripts/regcloud-performance-gate.py > scripts/regcloud-performance-gate.py
+          git show 570b354b9f5ac6696b6ed9435138ceb7cd038c89:tests/regcloud-performance-gate.test.py > tests/regcloud-performance-gate.test.py
+          bash -n scripts/regcloud-deploy-production.sh scripts/regcloud-deploy-with-browser.sh
+          python3 tests/regcloud-performance-gate.test.py
+          python3 tests/regcloud-response-buffers.test.py
+          python3 tests/regcloud-browser-verdict.test.py
+          python3 tests/regcloud-browser-handoff.test.py
+          python3 tests/regcloud-release-retention.test.py
+          node --test tests/accepted-browser-speed.test.mjs
+      - name: Restore immutable private index and verify three complete overview dates
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx --input-type=module <<'RESTORE'
+          import assert from 'node:assert/strict';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {restoreReleaseEncyclopedia} from './scripts/encyclopedia/restore-calculation-index.mjs';
+          import {catalogOverviewMarketComplete,catalogOverviewMatchesGeneration,catalogOverviewGenerationPath} from './apps/web/lib/catalog/overview.ts';
+          import {datedCatalogPagePath} from './apps/web/lib/catalog/dated-pages.ts';
+          import {PUBLIC_CATALOG_MARKETS} from './apps/web/lib/catalog/runtime-config.ts';
+          const storage=getJsonStorage(),generation='gen_1794357678562_9c0667cb';
+          const before=await storage.readJson('catalog/manifest.json',null);
+          assert.equal(before?.generationId,generation);
+          const captured=new Date(),day=date=>new Date(date.getTime()+7*3600000).toISOString().slice(0,10);
+          assert.equal(day(captured),'2026-11-12');
+          for(let offset=0;offset<3;offset++){
+            const policyDate=day(new Date(captured.getTime()+offset*86400000));
+            const path=offset?datedCatalogPagePath(catalogOverviewGenerationPath(generation),policyDate):catalogOverviewGenerationPath(generation);
+            const value=await storage.readJson(path,null);
+            assert.equal(value?.policyDate,policyDate);assert.equal(value?.dailyLandingsVersion,1);
+            assert.ok(catalogOverviewMatchesGeneration(value,generation));
+            for(const market of PUBLIC_CATALOG_MARKETS){
+              if(market==='japan')continue;
+              assert.ok(catalogOverviewMarketComplete(value.markets[market],Number(before.markets?.[market]?.count||0),10),market);
+            }
+            console.log('COMPLETE_COMMON_OVERVIEW_VERIFIED',generation,policyDate);
+          }
+          assert.equal((await storage.readJson('catalog/manifest.json',null))?.generationId,generation);
+          const digest=await restoreReleaseEncyclopedia(storage,process.cwd(),process.env.RELEASE_SOURCE_SHA);
+          assert.equal(digest,'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b');
+          console.log('Exact original encyclopedia index restored',digest);
+          RESTORE
+          node --import tsx scripts/encyclopedia/assert-release-batches.mjs
+      - name: Prepare required browser acceptance runtime
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          npm install --prefix "$RUNNER_TEMP/release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Deploy with rollback and resource measurements
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/release-browser/node_modules/playwright/index.mjs
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py scripts/regcloud-browser-verdict.py "root@151.248.113.177:$remote_dir/"
+          scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 python3 - "$(node scripts/catalog-calculation-version.mjs)" <<'IMAGE'
+          import hashlib,json,pathlib,subprocess,sys,tempfile
+          def inspect(name):return json.loads(subprocess.check_output(['docker','inspect',name],text=True))[0]
+          release='8731103c0102886064c6a0a19a14182502e6e3be'
+          expected='sha256:76af614dfdc86e180eeec354dbcec678c9b222fc7cb9968bd3f9a0b9c2b6158a'
+          current=inspect('avtocena-production')
+          assert current['State']['Running'] is True
+          assert current['Image']=='sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f'
+          assert current['Config']['Labels']['org.opencontainers.image.revision']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+          candidate=inspect('avtocena-release-'+release[:12])
+          image=inspect('avtocena-regcloud:'+release)
+          assert image['Id']==candidate['Image']==expected
+          assert candidate['State']['Running'] is False
+          assert image['Config']['Labels']['org.opencontainers.image.revision']==release
+          values=dict(value.split('=',1) for value in candidate['Config']['Env'] if '=' in value)
+          assert values['AVTOCENA_RELEASE_SHA']==release
+          assert values['AVTOCENA_CALCULATION_VERSION']==sys.argv[1]
+          with tempfile.TemporaryDirectory(prefix='avtocena-index-verify-') as directory:
+              target=pathlib.Path(directory)/'index.json'
+              subprocess.check_call(['docker','cp','avtocena-release-'+release[:12]+':/app/data/knowledge/encyclopedia/calculation-v1.json',str(target)],stdout=subprocess.DEVNULL)
+              assert hashlib.sha256(target.read_bytes()).hexdigest()=='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'
+          print('EXACT_PREPARED_IMAGE_VERIFIED',release,expected,sys.argv[1])
+          IMAGE
+          bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS"
+      - name: Preserve required browser acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-browser-acceptance
+          path: owner-filter-browser-report.json
+          if-no-files-found: ignore
+      - name: Verify published encyclopedia fields against this exact release
+        env:
+          ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          node --import tsx scripts/encyclopedia/verify-public-release.mjs
+      - name: Preserve public encyclopedia verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: encyclopedia-public-release
+          path: reports/encyclopedia-public-release.json
+          if-no-files-found: ignore
+      - name: Bound retained application releases after successful deployment
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 - --apply' < scripts/regcloud-release-retention.py
+      - name: Publish GPT completion notes for this installed release
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          npx tsx scripts/crm-gpt-release-report.ts
