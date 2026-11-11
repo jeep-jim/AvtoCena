@@ -1,6 +1,6 @@
 {
-  "action": "recover",
+  "action": "diagnose",
   "release": "17a686182574097b5ade22b37ef8b485e2b53844",
-  "attempt": 4,
-  "reason": "Repeated health timeouts from independent external and VM checks while verified replacement is being prepared; one conditional restart of exact old app under the shared host mutation lock"
+  "requestedAt": "2026-11-11T06:13:02.908978+00:00",
+  "reason": "Read-only current state and bounded loopback health while exact049 price preparation is still running; no restart or profiler"
 }

@@ -1,5 +1,5 @@
 """Bounded read-only follow-up: process, restart policy and crash evidence, no profiler."""
-import datetime, json, pathlib, re, subprocess
+import datetime, json, pathlib, re, subprocess, sys, time, urllib.request
 
 def run(args, timeout=20):
     result = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
@@ -11,7 +11,8 @@ def emit(label, value):
 
 container = json.loads(run(['docker', 'inspect', 'avtocena-production']))[0]
 env = dict(row.split('=', 1) for row in container['Config']['Env'] if '=' in row)
-assert env.get('AVTOCENA_RELEASE_SHA') == '17a686182574097b5ade22b37ef8b485e2b53844'
+assert len(sys.argv) == 2 and re.fullmatch(r'[a-f0-9]{40}', sys.argv[1])
+assert env.get('AVTOCENA_RELEASE_SHA') == sys.argv[1]
 assert container['Config']['Labels'].get('avtocena.role') == 'production'
 emit('RUNTIME', {'at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
     'release': env['AVTOCENA_RELEASE_SHA'], 'state': container['State'],
@@ -42,3 +43,14 @@ if container['State']['Running']:
     emit('PROCESS_MEMORY', [line for line in pathlib.Path('/proc/' + str(pid) + '/status').read_text().splitlines() if line.startswith(('Name:', 'VmRSS:', 'VmHWM:', 'VmSize:', 'Threads:'))])
     status = run(['docker', 'exec', 'avtocena-production', 'node', '-e', "fetch('http://127.0.0.1:9229/json/list',{signal:AbortSignal.timeout(1500)}).then(()=>console.log('open'),()=>console.log('closed'))"])
     emit('INSPECTOR', status.strip())
+
+    bindings = container['NetworkSettings']['Ports'].get('3000/tcp') or []
+    assert len(bindings) == 1 and bindings[0]['HostIp'] == '127.0.0.1'
+    started = time.monotonic()
+    try:
+        request = urllib.request.Request('http://127.0.0.1:' + bindings[0]['HostPort'] + '/api/health', headers={'Host':'avtocena.com'})
+        with urllib.request.urlopen(request, timeout=5) as response:
+            body = json.loads(response.read(8192))
+            emit('LOOPBACK_HEALTH', {'http': response.status, 'seconds': round(time.monotonic()-started,3), 'release': body.get('releaseSha'), 'ok': body.get('ok')})
+    except Exception as error:
+        emit('LOOPBACK_HEALTH', {'seconds': round(time.monotonic()-started,3), 'error': type(error).__name__})
