@@ -65,12 +65,14 @@ def check_baseline(base,path,kind,release,phase,elapsed,baseline,blocking):
  # A measured envelope catches cold/expired regressions. The warm median also
  # protects the usual fast path instead of permitting its historical cold peak.
  reference=statistics.median(r['seconds'] for r in rows if r['phase'].startswith('warm_')) if phase=='warm' else max(r['seconds'] for r in rows)
- # Explicit measurement noise, not a higher product target. A suspicious sample
- # requires three independent functional reads; their median must still pass.
+ # Explicit measurement noise, not a higher product target. Only warm samples
+ # may use the median of three comparable warm reads to reject transient jitter.
+ # An expired-cache miss fills the cache, so immediate retries cannot validate
+ # that phase and must never turn its measured regression into an acceptance.
  noise=max(.05,reference*.05)
  ceiling=reference+noise
  result={'speedBaseline':phase,'path':path,'referenceSeconds':reference,'measurementNoiseSeconds':round(noise,4),'ceilingSeconds':round(ceiling,4),'seconds':elapsed,'blocking':blocking,'passed':elapsed<=ceiling}
- if not result['passed'] and blocking:
+ if not result['passed'] and blocking and phase=='warm':
   repeated=[sample(base,path,kind,release) for _ in range(3)]
   result.update(recheckSeconds=[round(v,4) for v in repeated],recheckMedianSeconds=round(statistics.median(repeated),4),passed=statistics.median(repeated)<=ceiling)
  print(json.dumps(result),flush=True)

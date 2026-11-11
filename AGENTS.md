@@ -1,3 +1,10 @@
+# Verified recovery checkpoint — 11.11.2026 12:34 UTC
+
+- Production is restored accepted release a182cd21b21ecf612b63613d263e5bdd817ea4c0 (restore run 43020674047). Main contains rejected budget code and unactivated homepage code; do not equate main with production or resume the old deployment marker.
+- After-restoration browser runs 43021312299 / 43021430620 pass correct China prices at widths 390/1280. Latest filter changes 0.572–1.473s, but earlier restored mobile peak 11.897s remains; no universal or stable latency claim. Japan/Korea 1.5m budget/source recovery remains incomplete.
+- Expired-cache speed regression must fail on the expired-cache measurement itself. Immediate warmed retries cannot clear it. Only warm-phase transient jitter keeps the existing bounded retry median. Original accepted baseline, thresholds, routes and expiry delays are preserved.
+- Evidence and exact remaining work: docs/operations/current-incident.md and docs/operations/2026-11-11-restored-speed-verification.json. Homepage release 2b5fc017 / run 43020597940 was cancelled before build/install/activation; its source and tests remain available.
+
 # Owner accepted speed and phased optimization — 11.11.2026
 
 - Owner explicitly accepts current production a182cd21b21ecf612b63613d263e5bdd817ea4c0 as substantially faster and authorizes the proposed staged optimization, with an urgent Japan/Korea delivered-budget filter repair (1,500,000 RUB).

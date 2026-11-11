@@ -1,0 +1,632 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11T12:34:28.498Z",
+  "restoration": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43020674047",
+    "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "previousRelease": "3048aede91dbfa4287e038075700e1434ba53e85",
+    "activatedAt": "2026-11-11T12:32:02.727983+00:00",
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "catalogProjectionParts": "scoped-v1",
+      "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+    },
+    "reason": "Repeated mobile filter regression including 60.105 seconds"
+  },
+  "cancelledCandidate": {
+    "release": "2b5fc017a39ced52eafd4e4bade2c921254c4946",
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43020597940",
+    "conclusion": "cancelled",
+    "built": false,
+    "installed": false,
+    "activated": false
+  },
+  "browserChecks": [
+    {
+      "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43021312299",
+      "result": {
+        "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+        "phase": "after-accepted-speed-restoration",
+        "checkedAt": "2026-11-11T12:33:32.729Z",
+        "environment": "GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation",
+        "checks": [
+          {
+            "width": 390,
+            "firstCardsSeconds": 2.922,
+            "filters": [
+              {
+                "budget": 1500000,
+                "seconds": 11.897,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1490608,
+                "requests": 2,
+                "paths": [
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": []
+              },
+              {
+                "budget": 2000000,
+                "seconds": 4.771,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1985641,
+                "requests": 2,
+                "paths": [
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": []
+              }
+            ],
+            "pageErrors": []
+          },
+          {
+            "width": 1280,
+            "firstCardsSeconds": 2.389,
+            "filters": [
+              {
+                "budget": 1500000,
+                "seconds": 0.719,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1490608,
+                "requests": 3,
+                "paths": [
+                  "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": []
+              },
+              {
+                "budget": 2000000,
+                "seconds": 1.349,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1985641,
+                "requests": 2,
+                "paths": [
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": [
+                  {
+                    "path": "/cars/china",
+                    "status": 200,
+                    "type": "fetch",
+                    "startedMs": 221,
+                    "headersMs": 941,
+                    "completeMs": 943,
+                    "serverTiming": null
+                  }
+                ]
+              }
+            ],
+            "pageErrors": []
+          }
+        ],
+        "passed": true,
+        "browserPassed": true
+      }
+    },
+    {
+      "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43021430620",
+      "result": {
+        "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+        "phase": "accepted-release-restored",
+        "checkedAt": "2026-11-11T12:34:28.498Z",
+        "environment": "GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation",
+        "checks": [
+          {
+            "width": 390,
+            "firstCardsSeconds": 1.82,
+            "filters": [
+              {
+                "budget": 1500000,
+                "seconds": 1.473,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1490608,
+                "requests": 2,
+                "paths": [
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": [
+                  {
+                    "path": "/api/auth/me",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 401,
+                    "startedMs": -322,
+                    "headersMs": 186,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars/china",
+                    "budget": "1500000",
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": 322,
+                    "headersMs": 876,
+                    "completeMs": 1040,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": null,
+                    "startedMs": 1434,
+                    "headersMs": null,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  }
+                ]
+              },
+              {
+                "budget": 2000000,
+                "seconds": 0.677,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1985641,
+                "requests": 2,
+                "paths": [
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": [
+                  {
+                    "path": "/api/auth/me",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 401,
+                    "startedMs": -1902,
+                    "headersMs": 186,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -147,
+                    "headersMs": 421,
+                    "completeMs": 421,
+                    "pending": false,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars/china",
+                    "budget": "2000000",
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": 271,
+                    "headersMs": 173,
+                    "completeMs": 186,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": null,
+                    "startedMs": 519,
+                    "headersMs": null,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  }
+                ]
+              }
+            ],
+            "pageErrors": []
+          },
+          {
+            "width": 1280,
+            "firstCardsSeconds": 1.29,
+            "filters": [
+              {
+                "budget": 1500000,
+                "seconds": 1.006,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1490608,
+                "requests": 3,
+                "paths": [
+                  "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": [
+                  {
+                    "path": "/api/autobot",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -360,
+                    "headersMs": 1113,
+                    "completeMs": 1113,
+                    "pending": false,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/account/auth",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -232,
+                    "headersMs": 994,
+                    "completeMs": 994,
+                    "pending": false,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/auth/me",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 401,
+                    "startedMs": -232,
+                    "headersMs": 991,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -211,
+                    "headersMs": 1041,
+                    "completeMs": 1041,
+                    "pending": false,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -209,
+                    "headersMs": 977,
+                    "completeMs": 982,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": true,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/account",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -209,
+                    "headersMs": 980,
+                    "completeMs": 985,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": true,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/favorites",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -208,
+                    "headersMs": 982,
+                    "completeMs": 986,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": true,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -208,
+                    "headersMs": 985,
+                    "completeMs": 987,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": true,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": 167,
+                    "headersMs": 617,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": true,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars/china",
+                    "budget": "1500000",
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": 191,
+                    "headersMs": 601,
+                    "completeMs": 684,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": null,
+                    "startedMs": 948,
+                    "headersMs": null,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  }
+                ]
+              },
+              {
+                "budget": 2000000,
+                "seconds": 0.572,
+                "cards": 24,
+                "pricedCards": 24,
+                "largestPrice": 1985641,
+                "requests": 2,
+                "paths": [
+                  "/cars/china",
+                  "/api/catalog/saved-previews"
+                ],
+                "network": [
+                  {
+                    "path": "/api/auth/me",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 401,
+                    "startedMs": -1249,
+                    "headersMs": 991,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars/offer/ff21960213ac28009813b0a4/toyota-levin-2020",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -851,
+                    "headersMs": 617,
+                    "completeMs": 1176,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": -69,
+                    "headersMs": 321,
+                    "completeMs": 321,
+                    "pending": false,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/cars/china",
+                    "budget": "2000000",
+                    "type": "fetch",
+                    "status": 200,
+                    "startedMs": 189,
+                    "headersMs": 201,
+                    "completeMs": 272,
+                    "pending": false,
+                    "failed": true,
+                    "rsc": true,
+                    "prefetch": false,
+                    "serverTiming": null
+                  },
+                  {
+                    "path": "/api/catalog/saved-previews",
+                    "budget": null,
+                    "type": "fetch",
+                    "status": null,
+                    "startedMs": 523,
+                    "headersMs": null,
+                    "completeMs": null,
+                    "pending": true,
+                    "failed": false,
+                    "rsc": false,
+                    "prefetch": false,
+                    "serverTiming": null
+                  }
+                ]
+              }
+            ],
+            "pageErrors": []
+          }
+        ],
+        "passed": true,
+        "browserPassed": true
+      }
+    }
+  ],
+  "sourceErrors": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43021312164",
+    "result": {
+      "checkedAt": "2026-11-11T12:33:43.402Z",
+      "records": [
+        {
+          "table": "stats",
+          "slot": "catalog-failure-stats.json",
+          "kind": "count",
+          "page": 1,
+          "pageSize": 1,
+          "startedAt": "2026-11-11T12:32:40.306Z",
+          "finishedAt": "2026-11-11T12:32:41.045Z",
+          "httpStatus": 200,
+          "outcome": "invalid_response",
+          "providerCode": null
+        },
+        {
+          "table": "stats",
+          "slot": "catalog-failure-pages/stats-list-1.json",
+          "kind": "list",
+          "page": 1,
+          "pageSize": 12,
+          "startedAt": "2026-11-11T12:32:38.669Z",
+          "finishedAt": "2026-11-11T12:32:39.644Z",
+          "httpStatus": 200,
+          "outcome": "invalid_response",
+          "providerCode": null
+        },
+        {
+          "table": "korea",
+          "slot": "catalog-failure-korea.json",
+          "kind": "count",
+          "page": 1,
+          "pageSize": 1,
+          "startedAt": "2026-11-11T12:32:40.247Z",
+          "finishedAt": "2026-11-11T12:32:41.072Z",
+          "httpStatus": 200,
+          "outcome": "invalid_response",
+          "providerCode": null
+        },
+        {
+          "table": "korea",
+          "slot": "catalog-failure-pages/korea-list-1.json",
+          "kind": "list",
+          "page": 1,
+          "pageSize": 6,
+          "startedAt": "2026-11-11T12:32:39.640Z",
+          "finishedAt": "2026-11-11T12:32:39.873Z",
+          "httpStatus": 200,
+          "outcome": "invalid_response",
+          "providerCode": null
+        }
+      ],
+      "editedSellerPrices": {
+        "japan": 0,
+        "korea": 0
+      },
+      "savedPricePreviews": {
+        "japan": 84,
+        "korea": 22
+      },
+      "requestUsage": {
+        "main": {
+          "available": false,
+          "currentUtcHour": 0,
+          "last24UtcBuckets": 0
+        },
+        "stats": {
+          "available": true,
+          "currentUtcHour": 96,
+          "last24UtcBuckets": 68732
+        },
+        "china": {
+          "available": true,
+          "currentUtcHour": 0,
+          "last24UtcBuckets": 0
+        },
+        "korea": {
+          "available": true,
+          "currentUtcHour": 130,
+          "last24UtcBuckets": 67974
+        }
+      },
+      "usageMeaning": "application request accounting, not the supplier-enforced quota"
+    }
+  },
+  "gateCorrection": {
+    "previousFailure": "An expired-cache slowdown could be cleared by three immediate warm retries.",
+    "newBehavior": "Only phase=warm may retry transient jitter; after_ttl and after_directory_ttl enforce the original measured result.",
+    "unitTests": {
+      "performanceGate": 18,
+      "responseBuffers": 2,
+      "passed": true,
+      "preFixExpiredCacheSubtestsFailed": 2
+    },
+    "acceptedBaselineChanged": false,
+    "routesRemoved": false,
+    "thresholdsRaised": false,
+    "appDeployTriggered": false
+  },
+  "limitations": [
+    "Functional browser success is not stable latency acceptance: first restored mobile budget change still took 11.897 seconds.",
+    "Latest observed China filter changes took 0.677–1.473 seconds at width 390 and 0.572–1.006 seconds at width 1280.",
+    "Japan/Korea delivered-budget recovery remains unaccepted; retained current source error records are invalid_response with HTTP 200.",
+    "Homepage parallel dealer loading is preserved in main source but was not activated; its deployed performance benefit is unmeasured.",
+    "Main application source differs from running a182; do not infer installed code from main."
+  ]
+}

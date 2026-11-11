@@ -107,6 +107,18 @@ class MarketScopeTests(unittest.TestCase):
   self.assertTrue(all('china' not in call.args[1] for call in sample.call_args_list))
 
 class AcceptedBaselineTests(unittest.TestCase):
+ def test_expired_cache_slowdown_cannot_pass_on_immediate_warm_retries(self):
+  rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
+  for phase in ['after_ttl','after_directory_ttl']:
+   with self.subTest(phase=phase),patch.object(gate,'sample',return_value=.2) as sample,contextlib.redirect_stdout(io.StringIO()):
+    with self.assertRaisesRegex(AssertionError,'accepted_speed_regression:/path'):
+     gate.check_baseline('local','/path','html','release',phase,3.0,rows,True)
+    sample.assert_not_called()
+ def test_expired_cache_observation_records_failure_without_retrying(self):
+  rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
+  with patch.object(gate,'sample',side_effect=AssertionError('must not retry')) as sample,contextlib.redirect_stdout(io.StringIO()):
+   result=gate.check_baseline('local','/path','html','release','after_ttl',3.0,rows,False)
+  self.assertFalse(result['passed']);self.assertFalse(result['blocking']);sample.assert_not_called()
  def test_frozen_capture_has_all_correct_routes_and_expiry_phases(self):
   baseline=gate.accepted_baseline('docs/operations/2026-11-11-accepted-speed-baseline.json')
   self.assertEqual(len(baseline),17)
