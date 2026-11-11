@@ -105,6 +105,7 @@ jobs:
           CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/model-search-controls.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
       - name: Verify owner catalog search and queue regressions
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-projection-reuse.test.ts tests/green-corner-snapshot-cache.test.ts tests/catalog-deferred-recommendations.test.ts tests/offer-navigation-performance.test.ts tests/related-offer-selection.test.ts tests/related-model-family.test.ts tests/catalog-card-contract.test.ts

@@ -177,7 +177,7 @@ try{for(const width of [390,1440]){
  assert.equal(await chipScope.getByRole('button',{name:'Убрать Китай',exact:true}).count(),1);
  assert.equal(new URL(page.url()).pathname,'/test/dealer');
  if(width===390)await chipForm.locator('button[data-ac-mobile-close="1"]').click();
- // Green Corner's source gearbox codes cannot be reused as another market's types.
+ // Changing a source retains the user's gearbox choice verbatim, without reinterpreting or clearing it.
  const switchForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  if(width===390)await openFilters(page,width);
  else await switchForm.getByRole('button',{name:'Вариатор',exact:true}).and(switchForm.locator('.ac-filter-control')).click();
@@ -186,7 +186,7 @@ try{for(const width of [390,1440]){
  await marketRoot.locator('button.ac-filter-control').click();
  await marketRoot.getByRole('button',{name:'Япония · Зелёный угол',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('stock')==='green');
- assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
+ assert.equal(new URL(page.url()).searchParams.get('transmission'),'cvt');
  assert.equal(new URL(page.url()).searchParams.get('fuel'),'petrol|diesel');
  assert.equal(new URL(page.url()).searchParams.get('bodyType'),'sedan|hatchback');
  assert.equal(new URL(page.url()).searchParams.get('drive'),'fwd|awd');
@@ -195,7 +195,7 @@ try{for(const width of [390,1440]){
  await marketRoot.getByRole('button',{name:'Все рынки',exact:true}).click();
  await marketRoot.getByRole('button',{name:'Китай',exact:true}).click();
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
- assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
+ assert.equal(new URL(page.url()).searchParams.get('transmission'),'cvt');
  assert.equal(new URL(page.url()).searchParams.get('selection'),'1');
  if(width===390)await switchForm.locator('button[data-ac-mobile-close="1"]').click();
  if(width===390){

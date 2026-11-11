@@ -42,6 +42,7 @@ try{
   await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByText('Показано 60 из 60').waitFor();assert.equal(await page.locator('article').count(),60);
   await page.getByText('Автомобиль 48',{exact:true}).scrollIntoViewIfNeeded();const before=await page.evaluate(()=>scrollY);
   await page.getByText('Автомобиль 48',{exact:true}).click();await page.getByRole('button',{name:'Назад'}).click();
+  await page.waitForTimeout(150);console.log(JSON.stringify({width,back:await page.evaluate(()=>({event:window.__backHistory,href:location.href,cards:document.querySelectorAll('article').length,text:document.querySelector('main')?.innerText?.slice(-400)}))}));
   await page.getByText('Показано 60 из 60').waitFor();await page.waitForFunction(y=>Math.abs(scrollY-y)<5,before);
   assert.equal(await page.locator('article').count(),60);assert.equal(await page.getByRole('button',{name:'Показать ещё'}).count(),0);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
