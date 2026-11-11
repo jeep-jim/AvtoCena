@@ -31,6 +31,11 @@ test('a narrow brand price sort reads only its matching card blocks, not the ent
   assert.equal(ascending.total,5);assert.deepEqual(ascending.items.map(row=>row.id),['narrow-0','narrow-1']);
   const descending=await searchOffers({market:'korea',make:'BMW',sort:'totalRubDesc',pageSize:2});
   assert.deepEqual(descending.items.map(row=>row.id),['narrow-4','narrow-3']);
+  for(const model of ['3','3 SERIES']){
+   const selected=await searchOffers({market:'korea',make:'BMW',model,powerTo:160,sort:'totalRub',pageSize:2});
+   assert.equal(selected.total,5,`BMW ${model} with the power filter keeps matching inventory`);
+   assert.deepEqual(selected.items.map(row=>row.id),['narrow-0','narrow-1']);
+  }
   assert.equal(reads.filter(key=>key.includes('/budget-cards-v3/')).length,1,'direction changes share exactly priced selected cards');
  }finally{storage.readJsonWithMeta=original;storage.readJson=originalRead;storage.writeJson=originalWrite;resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();}
 });
