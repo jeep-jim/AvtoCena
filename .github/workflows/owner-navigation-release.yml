@@ -309,6 +309,11 @@ jobs:
           fi
           # Supplier switching belongs to collection operations, never to an app release.
           CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
+          # Common homepage routes need their complete current-day overview even
+          # for a market-scoped release. Reuse only a validated ready generation.
+          if test -n "$RELEASE_PREPARATION_MARKETS"; then
+            env -u RELEASE_PREPARATION_MARKETS CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
+          fi
       - name: Preserve individual market preparation results
         if: always()
         uses: actions/upload-artifact@v4
