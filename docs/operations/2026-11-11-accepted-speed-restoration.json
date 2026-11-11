@@ -1,0 +1,19 @@
+{
+  "runId": 43020674047,
+  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "previousRelease": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "originalContainerId": "9bba3f06c0684c7eaba7b15e73fa19b9e71cefd538f08e264792e70a280bc430",
+  "backupContainer": "avtocena-speed-rejected-3048-43020674047",
+  "backupContainerId": "c3fe3f09e7065897c82fcd232f4551aaae525d977928b7a75214209b4973dfbc",
+  "reason": "Repeated mobile filter regression including 60.105 seconds",
+  "applicationCodeChanged": false,
+  "normalDeploymentGatesChanged": false,
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "activatedAt": "2026-11-11T12:32:02.727983+00:00"
+}

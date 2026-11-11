@@ -1,3 +1,9 @@
+# 11.11.2026 12:32 UTC — accepted a182 restored, browser verification pending
+
+- Restore43020674047 SUCCESS. Exact retained a182 image restored; public health at12:32:03UTC confirms a182cd21b21ecf612b63613d263e5bdd817ea4c0, calculation c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6. Receipt: `2026-11-11-accepted-speed-restoration.json`.
+- Homepage deployment43020597940 was cancelled before activation. Preserve its source; do not activate it while budget slowdown remains unresolved.
+- Starting one serial mobile/desktop budget verification, without JP/KR supplier calls. Fixing expired-cache warm-retry loophole and browser regression gate next. Do not run simultaneous live acceptance probes during this comparison.
+
 # 11.11.2026 — urgent accepted-speed restoration in progress
 
 - Measured mobile China budget change on3048 took60.105s in idle browser run43019524173, following14.495s in43018662404. Functional prices passed; speed is **not accepted**. Full reports: `2026-11-11-budget-browser-after.json`, `2026-11-11-budget-browser-idle.json`.
