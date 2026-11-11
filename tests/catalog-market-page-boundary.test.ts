@@ -20,7 +20,7 @@ test('last China page beyond 10000 reaches search; invalid offsets never do',asy
   'live-business-pricing':'export const applyActiveBusinessPricingBatch=x=>x;',
   'server':'export const NextResponse={json:(body,init)=>Response.json(body,init)};',
   'public-rates':'export const loadPublicRateExtras=()=>{};',
-  'storage':'export const countCatalogOffers=()=>{};export const readCatalogFacets=()=>{};export const searchOffers=()=>{};',
+  'storage':'export const countCatalogOffers=()=>{};export const readCatalogFacets=()=>{};export const readCatalogNavigationFacets=()=>{};export const searchOffers=()=>{};',
  };
  try{
   const output=await build({entryPoints:['apps/web/app/(public)/api/catalog/search/route.ts'],bundle:true,platform:'node',format:'cjs',write:false,plugins:[{name:'fixture',setup(b){
