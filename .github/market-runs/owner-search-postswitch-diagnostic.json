@@ -1,5 +1,5 @@
 {
   "release": "3048aede91dbfa4287e038075700e1434ba53e85",
-  "requestedAt": "2026-11-11T11:45:45.935Z",
-  "reason": "Read stopped3048 logs only in11:41:30–11:43:05UTC after actual accepted-speed guard rejection on home; no process start, profiler, source request or runtime mutation."
+  "requestedAt": "2026-11-11T11:49:16.021Z",
+  "reason": "Complete existing stopped-candidate evidence with already present home_phase timings and whether logging was enabled. Same narrow failure interval; no HTTP requests, process start or configuration changes."
 }

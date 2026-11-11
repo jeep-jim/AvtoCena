@@ -12,7 +12,12 @@ log=subprocess.run(['docker','logs','--timestamps','--since','2026-11-11T11:41:3
 lines=(log.stdout+'\n'+log.stderr).splitlines()
 codes=['home_initial_catalog_failed','home_initial_pricing_failed','visitor_restricted','ban_limit','detail_cache_queue_timeout','detail_cache_queue_full','catalog_market_unavailable','catalog_page_unavailable','catalog_offer_related_search_failed','offer_similar_search_failed','object_storage_response_timeout','heap out of memory','FATAL ERROR','ECONNRESET','AbortError','TypeError','ReferenceError','SyntaxError','RangeError']
 counts=collections.Counter();reads=[];stacks=[];keep=0
+home_phases=[]
 for line in lines:
+ if 'home_phase ' in line:
+  try:
+   row=json.loads(line.split('home_phase ',1)[1]);home_phases.append({k:row[k] for k in ['trace','phase','ms','ok','generation','policyDate'] if k in row})
+  except Exception:pass
  for code in codes:
   if code in line:counts[code]+=1
  if 'catalog_storage_read ' in line:
@@ -31,6 +36,7 @@ error_kinds=collections.Counter()
 for line in lines:
  match=re.search(r'\b([A-Za-z]*Error):\s*([A-Za-z0-9_.-]+)',line)
  if match:error_kinds[':'.join(match.groups())]+=1
+print('HOME_PHASES',json.dumps({'enabled':env.get('CATALOG_HOME_PHASE_TIMING')=='1','rows':home_phases[-300:]}))
 print('ERROR_COUNTS',json.dumps(counts))
 print('ERROR_KINDS',json.dumps(error_kinds.most_common(40)))
 print('SLOW_READS',json.dumps(sorted(reads,key=lambda x:x.get('ms',0),reverse=True)[:30]))
