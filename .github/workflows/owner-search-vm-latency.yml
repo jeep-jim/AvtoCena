@@ -1,0 +1,58 @@
+name: Measure owner catalog latency on the VM once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-search-vm-latency.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact release latency and bounded resource diagnostics
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          expected=$(python3 -c 'import json,re;v=json.load(open(".github/market-runs/owner-search-vm-latency.json"))["release"];assert re.fullmatch(r"[a-f0-9]{40}",v);print(v)')
+          remote_script="/opt/avtocena/owner-search-vm-${GITHUB_RUN_ID}.py"
+          scp "${ssh_opts[@]}" scripts/owner-search-vm-latency.py "root@151.248.113.177:$remote_script"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 bash -s -- "$expected" "$remote_script" <<'REMOTE' | tee owner-search-vm-latency.log
+          set -euo pipefail
+          expected=$1
+          script=$2
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 30 9
+          test "$(docker exec avtocena-production node -e 'console.log(process.env.AVTOCENA_RELEASE_SHA)')" = "$expected"
+          port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
+          started=$(date -u +%FT%TZ)
+          printf 'EXACT_RELEASE %s\n' "$expected"
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          timeout 240 python3 "$script" "http://127.0.0.1:$port" "$expected"
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          docker logs --since "$started" --tail 10000 avtocena-production 2>&1 | python3 -c 'import sys,json,collections;reads=[];errors=collections.Counter()
+          for line in sys.stdin:
+              if "catalog_storage_read " in line:
+                  try:reads.append(json.loads(line.split("catalog_storage_read ",1)[1]))
+                  except:pass
+              for code in ["detail_cache_queue_timeout","detail_cache_queue_full","catalog_market_unavailable","catalog_page_unavailable","heap out of memory"]:
+                  if code in line:errors[code]+=1
+          print("SLOW_READS",json.dumps(sorted(reads,key=lambda r:r.get("ms",0),reverse=True)[:20]));print("ERROR_COUNTS",json.dumps(errors))'
+          REMOTE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-search-vm-latency
+          path: owner-search-vm-latency.log
