@@ -68,6 +68,21 @@ jobs:
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/home-parallel-specials.test.ts tests/home-initial-catalog.test.ts tests/home-showcase-priced-first.test.ts tests/home-phase-timing.test.ts
       - name: Verify Japan and Korea delivered budgets, continuation and supplier refusals
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-budget-candidates.test.ts tests/ajes-budget-pipeline.test.ts tests/ajes-delivered-budget.test.ts tests/ajes-saved-budget-sort.test.ts tests/ajes-budget-cache.test.ts tests/ajes-provider-limit.test.ts tests/ajes-filtered-page.test.ts tests/ajes-stock-feed.test.ts tests/ajes-rail-late-count.test.ts tests/ajes-market-preview.test.ts tests/ajes-page-failure-evidence.test.ts
+      - name: Verify retained choices and forward/Back navigation on this exact source
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/retention-browser/node_modules/playwright/index.mjs
+          RETENTION_BASE_REF: 'a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+        run: |
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/model-suggestion-search.test.ts tests/catalog-brand-navigation.test.ts tests/japan-filter-retention.test.ts tests/dealer-selection-share.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts
+          npm run typecheck
+          git fetch --depth=1 origin "$RETENTION_BASE_REF"
+          npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-retention.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/model-search-controls.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
       - name: Verify owner catalog search and queue regressions
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-navigation-facets.test.ts tests/catalog-path-params.test.ts tests/catalog-model-directory.test.ts tests/catalog-compact-sort.test.ts tests/catalog-detail-read-cache.test.ts tests/ajes-model-loader.test.ts tests/model-suggestion-search.test.ts tests/catalog-directory-memory.test.ts tests/catalog-filter-facets-wire.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-projection-reuse.test.ts tests/green-corner-snapshot-cache.test.ts tests/catalog-deferred-recommendations.test.ts tests/offer-navigation-performance.test.ts tests/related-offer-selection.test.ts tests/related-model-family.test.ts tests/catalog-card-contract.test.ts
       - name: Verify deferred recommendations before release preparation
