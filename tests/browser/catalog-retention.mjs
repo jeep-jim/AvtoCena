@@ -33,6 +33,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try{for(const mode of modes)for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const report={mode,width,checks:{}};
+ console.log(JSON.stringify({starting:mode,width}));
  await page.goto(origin+`/cars?fixture=${mode}&market=china&make=BMW&model=X3&budget=2500000&powerTo=160&city=Новокузнецк&selection=1`);
  await page.locator('.ac-catalog-filter-panel').waitFor({state:'attached'});
  let scope=page.locator('.ac-catalog-filter-panel');if(width===390){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.getByRole('dialog',{name:'Фильтры каталога'});}
@@ -47,8 +48,9 @@ try{for(const mode of modes)for(const width of [390,1440]){
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='1500000');
  const current=new URL(page.url()).searchParams;
  report.checks.filtersRetained=['BMW,Toyota'].includes(current.get('make'))&&current.get('model')==='X3|Corolla'&&current.get('powerTo')==='160'&&current.get('city')==='Новокузнецк'&&current.get('selection')==='1';
+ console.log(JSON.stringify({stage:'filters',...report}));
  // Explicitly removing one model must keep the other selected model.
- if(mode==='after'){await scope.getByRole('button',{name:'Убрать X3',exact:true}).click();assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');report.checks.explicitRemoveOnlyOne=true;}
+ if(mode==='after'){await page.getByRole('button',{name:'Убрать X3',exact:true}).filter({visible:true}).first().click();assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');report.checks.explicitRemoveOnlyOne=true;}
  if(width===390)await page.keyboard.press('Escape');
  await page.goto(origin+`/cars?fixture=${mode}&market=china`);
  await page.getByRole('link',{name:'Автомобиль 10',exact:true}).waitFor();
@@ -62,7 +64,7 @@ try{for(const mode of modes)for(const width of [390,1440]){
  report.checks.newArticleAtTop=await page.evaluate(()=>scrollY<3);
  await page.getByRole('link',{name:'Новый каталог внизу',exact:true}).click();await page.getByRole('heading',{name:'Каталог',exact:true}).waitFor();await page.waitForTimeout(80);
  report.checks.forwardCatalogAtTop=await page.evaluate(()=>scrollY<3);
- await page.getByRole('link',{name:'Категория Toyota',exact:true}).click();await page.waitForFunction(()=>new URLSearchParams(location.search).get('make')==='Toyota');await page.waitForTimeout(80);
+ await page.getByRole('link',{name:'Категория Toyota',exact:true}).click();await page.waitForFunction(()=>location.pathname.endsWith('/Toyota')||new URLSearchParams(location.search).get('make')==='Toyota');await page.waitForTimeout(80);
  report.checks.newCategoryAtTop=await page.evaluate(()=>scrollY<3);
  await page.getByRole('link',{name:'Статья с якорем',exact:true}).click();await page.getByRole('heading',{name:'Раздел по якорю',exact:true}).waitFor();await page.waitForTimeout(80);
  report.checks.anchorRespected=await page.evaluate(()=>scrollY>1000);

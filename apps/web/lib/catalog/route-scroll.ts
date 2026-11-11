@@ -16,6 +16,9 @@ export function rememberRouteScroll(href:string,kind:Kind='forward'){
 export function isHistoryRoute(){
  return intent?.kind==='history'&&intent.key===target(location.href).key;
 }
+export function isPreservedRoute(){
+ return intent?.kind==='preserve'&&intent.key===target(location.href).key;
+}
 export function trackRouteScroll(){
  const click=(event:MouseEvent)=>{
   if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey)return;
@@ -28,8 +31,9 @@ export function trackRouteScroll(){
  };
  const pop=()=>rememberRouteScroll(location.href,'history');
  document.addEventListener('click',click,true);
- window.addEventListener('popstate',pop);
- return ()=>{document.removeEventListener('click',click,true);window.removeEventListener('popstate',pop);};
+ // Mark Back before the router's bubble handler can synchronously mount a page.
+ window.addEventListener('popstate',pop,true);
+ return ()=>{document.removeEventListener('click',click,true);window.removeEventListener('popstate',pop,true);};
 }
 /** Commit once for an actual forward navigation, never on every render or Back. */
 export function completeRouteScroll(){
