@@ -1,5 +1,5 @@
 {
-  "release": "049f45dd531a9a64eb96acd449753643761f2e1b",
-  "requestedAt": "2026-11-11T07:16:09.637754+00:00",
-  "reason": "Aggregate distinct sanitized Error types from stopped049 to isolate its first post-switch500 without repeated stack flooding; no runtime mutation"
+  "release": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "requestedAt": "2026-11-11T11:45:45.935Z",
+  "reason": "Read stopped3048 logs only in11:41:30–11:43:05UTC after actual accepted-speed guard rejection on home; no process start, profiler, source request or runtime mutation."
 }

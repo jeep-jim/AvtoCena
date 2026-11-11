@@ -1,0 +1,90 @@
+{
+  "checkedAt": "2026-11-11T11:38:22.571Z",
+  "records": [
+    {
+      "table": "stats",
+      "slot": "catalog-failure-stats.json",
+      "kind": "detail",
+      "page": 1,
+      "pageSize": 1,
+      "startedAt": "2026-11-11T11:37:53.919Z",
+      "finishedAt": "2026-11-11T11:37:54.110Z",
+      "httpStatus": 200,
+      "outcome": "visitor_restricted",
+      "providerCode": "bot"
+    },
+    {
+      "table": "stats",
+      "slot": "catalog-failure-pages/stats-list-1.json",
+      "kind": "list",
+      "page": 1,
+      "pageSize": 12,
+      "startedAt": "2026-11-11T11:36:30.330Z",
+      "finishedAt": "2026-11-11T11:36:32.169Z",
+      "httpStatus": 200,
+      "outcome": "invalid_response",
+      "providerCode": null
+    },
+    {
+      "table": "korea",
+      "slot": "catalog-failure-korea.json",
+      "kind": "detail",
+      "page": 1,
+      "pageSize": 1,
+      "startedAt": "2026-11-11T11:37:50.936Z",
+      "finishedAt": "2026-11-11T11:37:51.168Z",
+      "httpStatus": 200,
+      "outcome": "visitor_restricted",
+      "providerCode": "bot"
+    },
+    {
+      "table": "korea",
+      "slot": "catalog-failure-pages/korea-list-1.json",
+      "kind": "list",
+      "page": 1,
+      "pageSize": 6,
+      "startedAt": "2026-11-11T11:36:29.069Z",
+      "finishedAt": "2026-11-11T11:36:30.925Z",
+      "httpStatus": 200,
+      "outcome": "invalid_response",
+      "providerCode": null
+    }
+  ],
+  "editedSellerPrices": {
+    "japan": 0,
+    "korea": 0
+  },
+  "savedPricePreviews": {
+    "japan": 84,
+    "korea": 22
+  },
+  "requestUsage": {
+    "main": {
+      "available": false,
+      "currentUtcHour": 0,
+      "last24UtcBuckets": 0
+    },
+    "stats": {
+      "available": true,
+      "currentUtcHour": 472,
+      "last24UtcBuckets": 72619
+    },
+    "china": {
+      "available": true,
+      "currentUtcHour": 0,
+      "last24UtcBuckets": 0
+    },
+    "korea": {
+      "available": true,
+      "currentUtcHour": 322,
+      "last24UtcBuckets": 71801
+    }
+  },
+  "usageMeaning": "application request accounting, not the supplier-enforced quota",
+  "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43013522636",
+  "limitations": [
+    "Read existing records only; request IPs and bodies were not read or printed.",
+    "Application accounting covers the current and 23 preceding UTC hour buckets, not the supplier's contract quota or exact rolling 24 hours.",
+    "Saved price previews disable conservative source-price narrowing to preserve individual quotes."
+  ]
+}

@@ -1,6 +1,6 @@
 """Read bounded stopped-candidate diagnostics; never start a process or publish payloads."""
 import collections,datetime,json,re,subprocess
-release='049f45dd531a9a64eb96acd449753643761f2e1b'
+release='3048aede91dbfa4287e038075700e1434ba53e85'
 name='avtocena-release-'+release[:12]
 meta=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 env=dict(v.split('=',1) for v in meta['Config']['Env'] if '=' in v)
@@ -8,9 +8,9 @@ assert env.get('AVTOCENA_RELEASE_SHA')==release
 assert meta['Config']['Labels']['avtocena.role']=='production'
 assert not meta['State']['Running'],'candidate must remain stopped'
 print('CANDIDATE',json.dumps({'name':name,'image':meta['Image'],'memoryLimit':meta['HostConfig']['Memory'],'nanoCpus':meta['HostConfig']['NanoCpus'],'state':{k:meta['State'].get(k) for k in ['Status','OOMKilled','ExitCode','StartedAt','FinishedAt']}}))
-log=subprocess.run(['docker','logs','--timestamps','--since','2026-11-11T06:36:35Z','--until','2026-11-11T06:37:35Z','--tail','20000',name],capture_output=True,text=True,check=True,timeout=20)
+log=subprocess.run(['docker','logs','--timestamps','--since','2026-11-11T11:41:30Z','--until','2026-11-11T11:43:05Z','--tail','20000',name],capture_output=True,text=True,check=True,timeout=20)
 lines=(log.stdout+'\n'+log.stderr).splitlines()
-codes=['detail_cache_queue_timeout','detail_cache_queue_full','catalog_market_unavailable','catalog_page_unavailable','catalog_offer_related_search_failed','offer_similar_search_failed','object_storage_response_timeout','heap out of memory','FATAL ERROR','ECONNRESET','AbortError','TypeError','ReferenceError','SyntaxError','RangeError']
+codes=['home_initial_catalog_failed','home_initial_pricing_failed','visitor_restricted','ban_limit','detail_cache_queue_timeout','detail_cache_queue_full','catalog_market_unavailable','catalog_page_unavailable','catalog_offer_related_search_failed','offer_similar_search_failed','object_storage_response_timeout','heap out of memory','FATAL ERROR','ECONNRESET','AbortError','TypeError','ReferenceError','SyntaxError','RangeError']
 counts=collections.Counter();reads=[];stacks=[];keep=0
 for line in lines:
  for code in codes:

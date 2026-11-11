@@ -1,0 +1,1811 @@
+{
+  "release": "3048aede91dbfa4287e038075700e1434ba53e85",
+  "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/43005906700",
+  "conclusion": "rejected_and_automatic_rollback_reported",
+  "reason": "accepted_speed_regression:/",
+  "finishedAt": "2026-11-11T11:43:01Z",
+  "liveRollbackVerification": "pending",
+  "measurements": [
+    {
+      "speedBaseline": "warm",
+      "path": "/api/health",
+      "referenceSeconds": 0.0206,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0706,
+      "seconds": 0.004675975069403648,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/health",
+      "seconds": 0.0047,
+      "ceiling": 0.25,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/leads",
+      "referenceSeconds": 0.0065,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0565,
+      "seconds": 0.004539101384580135,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/leads",
+      "seconds": 0.0045,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/login",
+      "referenceSeconds": 0.2259,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.2759,
+      "seconds": 0.29616399528458714,
+      "blocking": false,
+      "passed": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/login",
+      "seconds": 0.2962,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/autocalc",
+      "referenceSeconds": 0.0139,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0639,
+      "seconds": 0.016680052038282156,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/autocalc",
+      "seconds": 0.0167,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/autocatalog",
+      "referenceSeconds": 1.5871,
+      "measurementNoiseSeconds": 0.0794,
+      "ceilingSeconds": 1.6665,
+      "seconds": 0.5666861170902848,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/autocatalog",
+      "seconds": 0.5667,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/autocatalog?make=Changan",
+      "referenceSeconds": 1.8049,
+      "measurementNoiseSeconds": 0.0902,
+      "ceilingSeconds": 1.8951,
+      "seconds": 2.0110140698961914,
+      "blocking": false,
+      "passed": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/autocatalog?make=Changan",
+      "seconds": 2.011,
+      "ceiling": 2,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "referenceSeconds": 0.8934,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.9434,
+      "seconds": 0.16286054300144315,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.1629,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "referenceSeconds": 0.0901,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1401,
+      "seconds": 0.09627408301457763,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "seconds": 0.0963,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.2246,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.2746,
+      "seconds": 0.1171564208343625,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.1172,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.0221,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0721,
+      "seconds": 0.04406842589378357,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.0441,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "referenceSeconds": 0.0822,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1322,
+      "seconds": 0.009321447927504778,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "seconds": 0.0093,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china",
+      "seconds": 0.0868,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=korea",
+      "seconds": 0.551,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=europe",
+      "seconds": 0.0783,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=uae",
+      "seconds": 0.0503,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=georgia",
+      "seconds": 0.0507,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/",
+      "referenceSeconds": 0.4696,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.5196,
+      "seconds": 1.799169230274856,
+      "blocking": false,
+      "passed": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/",
+      "seconds": 1.7992,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars",
+      "referenceSeconds": 0.9607,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 1.0107,
+      "seconds": 0.22379933670163155,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars",
+      "seconds": 0.2238,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?sort=totalRub",
+      "referenceSeconds": 0.485,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.535,
+      "seconds": 0.24772687163203955,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.2477,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "referenceSeconds": 0.3441,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.3941,
+      "seconds": 0.07549522910267115,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "seconds": 0.0755,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "referenceSeconds": 0.1251,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1751,
+      "seconds": 0.07044325629249215,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "seconds": 0.0704,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "referenceSeconds": 0.0481,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0981,
+      "seconds": 0.010185427032411098,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "seconds": 0.0102,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/health",
+      "referenceSeconds": 0.4258,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.4758,
+      "seconds": 0.010181598365306854,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/health",
+      "seconds": 0.0102,
+      "ceiling": 0.25,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/leads",
+      "referenceSeconds": 0.0174,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0674,
+      "seconds": 0.012947660405188799,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/leads",
+      "seconds": 0.0129,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/login",
+      "referenceSeconds": 0.3139,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.3639,
+      "seconds": 0.641865458805114,
+      "blocking": false,
+      "passed": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/login",
+      "seconds": 0.6419,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/autocalc",
+      "referenceSeconds": 0.023,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.073,
+      "seconds": 0.026351469103246927,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/autocalc",
+      "seconds": 0.0264,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars/autocatalog",
+      "referenceSeconds": 2.1741,
+      "measurementNoiseSeconds": 0.1087,
+      "ceilingSeconds": 2.2828,
+      "seconds": 0.7364015248604119,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars/autocatalog",
+      "seconds": 0.7364,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "referenceSeconds": 3.6745,
+      "measurementNoiseSeconds": 0.1837,
+      "ceilingSeconds": 3.8582,
+      "seconds": 1.4738505221903324,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "seconds": 1.4739,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "referenceSeconds": 1.427,
+      "measurementNoiseSeconds": 0.0714,
+      "ceilingSeconds": 1.4984,
+      "seconds": 0.6615218501538038,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.6615,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "referenceSeconds": 0.1083,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1583,
+      "seconds": 0.11603723606094718,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "seconds": 0.116,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "referenceSeconds": 1.1039,
+      "measurementNoiseSeconds": 0.0552,
+      "ceilingSeconds": 1.1591,
+      "seconds": 0.19887926895171404,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.1989,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.065,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.115,
+      "seconds": 0.02241017110645771,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.0224,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "referenceSeconds": 4.4517,
+      "measurementNoiseSeconds": 0.2226,
+      "ceilingSeconds": 4.6743,
+      "seconds": 0.19790490809828043,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "seconds": 0.1979,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china",
+      "seconds": 0.0724,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=korea",
+      "seconds": 1.8,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=europe",
+      "seconds": 0.1166,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=uae",
+      "seconds": 0.0684,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=georgia",
+      "seconds": 0.0894,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/",
+      "referenceSeconds": 1.7938,
+      "measurementNoiseSeconds": 0.0897,
+      "ceilingSeconds": 1.8835,
+      "seconds": 0.9609016771428287,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/",
+      "seconds": 0.9609,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars",
+      "referenceSeconds": 1.3688,
+      "measurementNoiseSeconds": 0.0684,
+      "ceilingSeconds": 1.4372,
+      "seconds": 0.3123368271626532,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars",
+      "seconds": 0.3123,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?sort=totalRub",
+      "referenceSeconds": 10.4885,
+      "measurementNoiseSeconds": 0.5244,
+      "ceilingSeconds": 11.0129,
+      "seconds": 0.29016313096508384,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.2902,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "referenceSeconds": 3.3663,
+      "measurementNoiseSeconds": 0.1683,
+      "ceilingSeconds": 3.5346,
+      "seconds": 0.19548809295520186,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "seconds": 0.1955,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "referenceSeconds": 2.3898,
+      "measurementNoiseSeconds": 0.1195,
+      "ceilingSeconds": 2.5093,
+      "seconds": 0.058771254029124975,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "seconds": 0.0588,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "referenceSeconds": 5.9205,
+      "measurementNoiseSeconds": 0.296,
+      "ceilingSeconds": 6.2165,
+      "seconds": 1.3022678238339722,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "seconds": 1.3023,
+      "ceiling": 1,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/api/health",
+      "referenceSeconds": 0.4258,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.4758,
+      "seconds": 0.00492171011865139,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/health",
+      "seconds": 0.0049,
+      "ceiling": 0.25,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/api/leads",
+      "referenceSeconds": 0.0174,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0674,
+      "seconds": 0.004602402914315462,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/leads",
+      "seconds": 0.0046,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/login",
+      "referenceSeconds": 0.3139,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.3639,
+      "seconds": 0.6689877952449024,
+      "blocking": false,
+      "passed": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/login",
+      "seconds": 0.669,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/autocalc",
+      "referenceSeconds": 0.023,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.073,
+      "seconds": 0.015464087016880512,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/autocalc",
+      "seconds": 0.0155,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars/autocatalog",
+      "referenceSeconds": 2.1741,
+      "measurementNoiseSeconds": 0.1087,
+      "ceilingSeconds": 2.2828,
+      "seconds": 1.8190500610508025,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars/autocatalog",
+      "seconds": 1.8191,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "referenceSeconds": 3.6745,
+      "measurementNoiseSeconds": 0.1837,
+      "ceilingSeconds": 3.8582,
+      "seconds": 1.9627852919511497,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "seconds": 1.9628,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "referenceSeconds": 1.427,
+      "measurementNoiseSeconds": 0.0714,
+      "ceilingSeconds": 1.4984,
+      "seconds": 1.0543216108344495,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 1.0543,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "referenceSeconds": 0.1083,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1583,
+      "seconds": 0.26989913871511817,
+      "blocking": false,
+      "passed": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "seconds": 0.2699,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "referenceSeconds": 1.1039,
+      "measurementNoiseSeconds": 0.0552,
+      "ceilingSeconds": 1.1591,
+      "seconds": 0.2114487588405609,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.2114,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.065,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.115,
+      "seconds": 0.025244996417313814,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.0252,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "referenceSeconds": 4.4517,
+      "measurementNoiseSeconds": 0.2226,
+      "ceilingSeconds": 4.6743,
+      "seconds": 0.1899823979474604,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "seconds": 0.19,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=china",
+      "seconds": 0.0912,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=korea",
+      "seconds": 0.5829,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=europe",
+      "seconds": 0.1876,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=uae",
+      "seconds": 0.4053,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=georgia",
+      "seconds": 0.1316,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/",
+      "referenceSeconds": 1.7938,
+      "measurementNoiseSeconds": 0.0897,
+      "ceilingSeconds": 1.8835,
+      "seconds": 0.9045618851669133,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/",
+      "seconds": 0.9046,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars",
+      "referenceSeconds": 1.3688,
+      "measurementNoiseSeconds": 0.0684,
+      "ceilingSeconds": 1.4372,
+      "seconds": 0.3613677900284529,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars",
+      "seconds": 0.3614,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars?sort=totalRub",
+      "referenceSeconds": 10.4885,
+      "measurementNoiseSeconds": 0.5244,
+      "ceilingSeconds": 11.0129,
+      "seconds": 0.980786632746458,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.9808,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "referenceSeconds": 3.3663,
+      "measurementNoiseSeconds": 0.1683,
+      "ceilingSeconds": 3.5346,
+      "seconds": 1.646274478174746,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "seconds": 1.6463,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "referenceSeconds": 2.3898,
+      "measurementNoiseSeconds": 0.1195,
+      "ceilingSeconds": 2.5093,
+      "seconds": 0.5724651417694986,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "seconds": 0.5725,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "referenceSeconds": 5.9205,
+      "measurementNoiseSeconds": 0.296,
+      "ceilingSeconds": 6.2165,
+      "seconds": 1.1199353211559355,
+      "blocking": false,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "seconds": 1.1199,
+      "ceiling": 1,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "summary",
+      "marketScope": "china,korea,europe,uae,georgia",
+      "routes": [
+        "/api/health",
+        "/api/leads",
+        "/login",
+        "/autocalc",
+        "/cars/autocatalog",
+        "/cars/autocatalog?make=Changan",
+        "/cars?market=china&make=Volkswagen&page=2",
+        "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "/cars?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=china&marketPage=1&page=9",
+        "/cars?market=china",
+        "/cars?market=korea",
+        "/cars?market=europe",
+        "/cars?market=uae",
+        "/cars?market=georgia",
+        "/",
+        "/cars",
+        "/cars?sort=totalRub",
+        "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+        "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+        "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6"
+      ],
+      "samples": 66,
+      "slowSamples": 3,
+      "functionalPassed": true,
+      "performanceAccepted": false,
+      "latencyBlocking": false,
+      "acceptedBaselineEnforced": false,
+      "acceptedBaselineRoutes": [
+        "/api/health",
+        "/api/leads",
+        "/",
+        "/login",
+        "/autocalc",
+        "/cars",
+        "/cars?market=china&make=Volkswagen&page=2",
+        "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "/cars?market=europe&make=BMW&page=2",
+        "/cars?sort=totalRub",
+        "/api/catalog/search?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=china&marketPage=1&page=9",
+        "/cars/autocatalog",
+        "/cars/autocatalog?make=Changan",
+        "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+        "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+        "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6"
+      ]
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/health",
+      "referenceSeconds": 0.0206,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0706,
+      "seconds": 0.0027121296152472496,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/health",
+      "seconds": 0.0027,
+      "ceiling": 0.25,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/leads",
+      "referenceSeconds": 0.0065,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0565,
+      "seconds": 0.003958358895033598,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/leads",
+      "seconds": 0.004,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/login",
+      "referenceSeconds": 0.2259,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.2759,
+      "seconds": 0.266389150172472,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/login",
+      "seconds": 0.2664,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/autocalc",
+      "referenceSeconds": 0.0139,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0639,
+      "seconds": 0.015644979663193226,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/autocalc",
+      "seconds": 0.0156,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/autocatalog",
+      "referenceSeconds": 1.5871,
+      "measurementNoiseSeconds": 0.0794,
+      "ceilingSeconds": 1.6665,
+      "seconds": 0.9652561149559915,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/autocatalog",
+      "seconds": 0.9653,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/autocatalog?make=Changan",
+      "referenceSeconds": 1.8049,
+      "measurementNoiseSeconds": 0.0902,
+      "ceilingSeconds": 1.8951,
+      "seconds": 1.0418124310672283,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/autocatalog?make=Changan",
+      "seconds": 1.0418,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "referenceSeconds": 0.8934,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.9434,
+      "seconds": 0.10501256305724382,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.105,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "referenceSeconds": 0.0901,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1401,
+      "seconds": 0.12015290278941393,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "seconds": 0.1202,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.2246,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.2746,
+      "seconds": 0.1070765689946711,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.1071,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.0221,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0721,
+      "seconds": 0.02377358404919505,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.0238,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "referenceSeconds": 0.0822,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1322,
+      "seconds": 0.09374541183933616,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "seconds": 0.0937,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=china",
+      "seconds": 0.0816,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=korea",
+      "seconds": 1.4928,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=europe",
+      "seconds": 0.0936,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=uae",
+      "seconds": 0.0448,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?market=georgia",
+      "seconds": 0.0862,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/",
+      "referenceSeconds": 0.4696,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.5196,
+      "seconds": 0.5958489449694753,
+      "blocking": true,
+      "passed": true,
+      "recheckSeconds": [
+        0.4999,
+        0.4094,
+        1.4184
+      ],
+      "recheckMedianSeconds": 0.4999
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/",
+      "seconds": 0.5958,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars",
+      "referenceSeconds": 0.9607,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 1.0107,
+      "seconds": 0.15030304808169603,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars",
+      "seconds": 0.1503,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars?sort=totalRub",
+      "referenceSeconds": 0.485,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.535,
+      "seconds": 0.23416657792404294,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars?sort=totalRub",
+      "seconds": 0.2342,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "referenceSeconds": 0.3441,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.3941,
+      "seconds": 0.062312116380780935,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "seconds": 0.0623,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "referenceSeconds": 0.1251,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1751,
+      "seconds": 0.06959215877577662,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "seconds": 0.0696,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "warm",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "referenceSeconds": 0.0481,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0981,
+      "seconds": 0.007460718043148518,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "warm",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "seconds": 0.0075,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/health",
+      "referenceSeconds": 0.4258,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.4758,
+      "seconds": 0.004060380160808563,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/health",
+      "seconds": 0.0041,
+      "ceiling": 0.25,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/leads",
+      "referenceSeconds": 0.0174,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.0674,
+      "seconds": 0.005657507106661797,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/leads",
+      "seconds": 0.0057,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/login",
+      "referenceSeconds": 0.3139,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.3639,
+      "seconds": 0.19814214063808322,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/login",
+      "seconds": 0.1981,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/autocalc",
+      "referenceSeconds": 0.023,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.073,
+      "seconds": 0.01727860700339079,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/autocalc",
+      "seconds": 0.0173,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars/autocatalog",
+      "referenceSeconds": 2.1741,
+      "measurementNoiseSeconds": 0.1087,
+      "ceilingSeconds": 2.2828,
+      "seconds": 1.3533048117533326,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars/autocatalog",
+      "seconds": 1.3533,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "referenceSeconds": 3.6745,
+      "measurementNoiseSeconds": 0.1837,
+      "ceilingSeconds": 3.8582,
+      "seconds": 2.417893263977021,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "seconds": 2.4179,
+      "ceiling": 2,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "referenceSeconds": 1.427,
+      "measurementNoiseSeconds": 0.0714,
+      "ceilingSeconds": 1.4984,
+      "seconds": 0.8297769678756595,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 0.8298,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "referenceSeconds": 0.1083,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1583,
+      "seconds": 0.14448448875918984,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "seconds": 0.1445,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "referenceSeconds": 1.1039,
+      "measurementNoiseSeconds": 0.0552,
+      "ceilingSeconds": 1.1591,
+      "seconds": 0.23334093997254968,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 0.2333,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "referenceSeconds": 0.065,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.115,
+      "seconds": 0.02181051904335618,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 0.0218,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "referenceSeconds": 4.4517,
+      "measurementNoiseSeconds": 0.2226,
+      "ceilingSeconds": 4.6743,
+      "seconds": 0.1696136719547212,
+      "blocking": true,
+      "passed": true
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "seconds": 0.1696,
+      "ceiling": 1,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=china",
+      "seconds": 0.0882,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=korea",
+      "seconds": 0.5623,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=europe",
+      "seconds": 0.1012,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=uae",
+      "seconds": 0.0609,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_ttl",
+      "path": "/cars?market=georgia",
+      "seconds": 0.0909,
+      "ceiling": 2,
+      "passed": true,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "speedBaseline": "after_ttl",
+      "path": "/",
+      "referenceSeconds": 1.7938,
+      "measurementNoiseSeconds": 0.0897,
+      "ceilingSeconds": 1.8835,
+      "seconds": 5.028331372886896,
+      "blocking": true,
+      "passed": false,
+      "recheckSeconds": [
+        3.1812,
+        2.3584,
+        0.4792
+      ],
+      "recheckMedianSeconds": 2.3584
+    }
+  ]
+}
