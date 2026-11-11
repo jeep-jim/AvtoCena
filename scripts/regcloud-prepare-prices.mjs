@@ -1,4 +1,5 @@
 import {releaseMarkets,RELEASE_MARKETS} from './lib/release-market-scope.mjs';
+import {assertPreparedMarketPrices} from './lib/price-preparation-ready.mjs';
 import {writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
@@ -24,7 +25,10 @@ for(const market of markets||RELEASE_MARKETS){
  await backfillBudgetMarketSelectors([market]);
  const specifications=await backfillBudgetSpecificationSelectors([market]);
  console.log('specifications',JSON.stringify({market,generationId:specifications.generationId,ready:!!specifications.markets[market]}));
- console.log('budget',JSON.stringify(await warmBudgetPriceCaches([market])));
+ const preparedPrices=await warmBudgetPriceCaches([market]);
+ // Japan has no shared price namespace; keep its existing separate path.
+ if(market!=='japan')assertPreparedMarketPrices(preparedPrices,market,manifest.generationId);
+ console.log('budget',JSON.stringify(preparedPrices));
  if(market!=='japan'){
  const start=performance.now();const result=await searchOffers({market,sort:'totalRub',pageSize:1});
  if(!result.total || !result.items.length)throw Error('empty_market:'+market);
