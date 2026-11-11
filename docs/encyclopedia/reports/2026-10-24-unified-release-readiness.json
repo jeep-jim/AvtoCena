@@ -1,0 +1,53 @@
+{
+  "goal": "Single permanent encyclopedia supplies exact known facts to all catalog markets",
+  "existingInputs": {
+    "chinaEuropeReferenceReuse": {
+      "savedFields": 1398,
+      "updatedVariants": 669,
+      "savedModels": 269,
+      "alreadyActivated": true,
+      "evidence": "docs/encyclopedia/reports/2026-10-23-known-reference-reuse.json"
+    },
+    "astra": {
+      "models": 2895,
+      "technicalVariantsWithoutModelYear": 230447,
+      "alreadyImported": true,
+      "repeatImport": false
+    },
+    "reviewedPending": {
+      "fields": 224,
+      "batches": 5,
+      "acceptanceChecklist": "docs/encyclopedia/reports/2026-10-24-pending-index-acceptance-0800.json"
+    }
+  },
+  "releaseBlockerFixed": {
+    "failedRun": 40049890164,
+    "reason": "zod production security audit",
+    "fixCommit": "3df5a9cc8424682813cdb43f8e8230b036f78c9f",
+    "checks": [
+      "npm ci",
+      "npm audit high threshold",
+      "TypeScript",
+      "38 exact reference and ASTRA tests"
+    ]
+  },
+  "freshReusePreview": 40050603489,
+  "nextGate": "Review actual fresh plan/digest, apply nonzero exact changes with CAS and readback, then release one index; do not replay completed ASTRA.",
+  "coverageClaims": {
+    "eightyPercentVerified": false,
+    "chinaFortyPercentVerified": false,
+    "unknownModelYearsMayBeInvented": false
+  },
+  "feedRefreshContract": {
+    "allowed": [
+      "new listings",
+      "confirmed withdrawals",
+      "changed seller prices",
+      "operational freshness/cursor metadata"
+    ],
+    "existingTechnicalFields": "preserve unless owner requests or reviewed supplier change",
+    "deliveredTotals": "invalidate and recompute only affected price dependencies",
+    "unchangedListings": "no content rewrite",
+    "implementedEndToEnd": false
+  }
+}

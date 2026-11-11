@@ -1,0 +1,133 @@
+{
+  "startedAt": "2026-10-23T21:04:03.572Z",
+  "offerId": "b65974b83d5399d588073fc5",
+  "expectedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+  "expectedTotalRub": 25031959,
+  "cases": [
+    {
+      "width": 390,
+      "theme": "light",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "primaryPhoto": {
+        "complete": true,
+        "naturalWidth": 960,
+        "naturalHeight": 1280,
+        "sourceHost": "avtocena.com"
+      },
+      "photoScreenshot": "390-light-photo.png",
+      "screenshot": "390-light.png"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "primaryPhoto": {
+        "complete": true,
+        "naturalWidth": 960,
+        "naturalHeight": 1280,
+        "sourceHost": "avtocena.com"
+      },
+      "photoScreenshot": "390-dark-photo.png",
+      "screenshot": "390-dark.png"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280
+      },
+      "primaryPhoto": {
+        "complete": true,
+        "naturalWidth": 960,
+        "naturalHeight": 1280,
+        "sourceHost": "avtocena.com"
+      },
+      "photoScreenshot": "1280-light-photo.png",
+      "screenshot": "1280-light.png"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "pageErrors": [],
+      "passed": true,
+      "http": 200,
+      "priceText": "25 031 959₽",
+      "heading": "Aston Martin Dbx DBX707",
+      "layout": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280
+      },
+      "primaryPhoto": {
+        "complete": true,
+        "naturalWidth": 960,
+        "naturalHeight": 1280,
+        "sourceHost": "avtocena.com"
+      },
+      "photoScreenshot": "1280-dark-photo.png",
+      "screenshot": "1280-dark.png"
+    }
+  ],
+  "passed": true,
+  "scope": "Bounded public card DOM/screenshots only; no authentication, form submission, data mutation or speed certification.",
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "finishedAt": "2026-10-23T21:04:26.274Z",
+  "workflow": {
+    "run": 40023954206,
+    "job": 120655294785,
+    "conclusion": "success",
+    "commit": "f5bc4040577d058fdfe7cec1a1088e63137413c1"
+  },
+  "artifact": {
+    "id": 12531587819,
+    "sha256": "752ce494147cb4177af0bd1f71b08be4102951ea93e8b6afb54de84eabc11911",
+    "downloadHashVerified": true
+  },
+  "visualReview": {
+    "reviewedAt": "2026-10-23T21:05:11Z",
+    "screenshots": [
+      "390-light-photo.png",
+      "390-dark-photo.png",
+      "1280-light-photo.png",
+      "1280-dark-photo.png"
+    ],
+    "primaryPhotoVisibleAllCases": true,
+    "priceVisibleAllCases": true,
+    "limitations": [
+      "Only the first gallery photo checked; all 25 photos and gallery controls are not certified.",
+      "No speed certification or authenticated owner/manager assistant acceptance."
+    ]
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T13:15:26.245Z",
+  "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+  "workflow": 40093257230,
+  "job": 120870221483,
+  "activationConfirmed": true,
+  "indexDigest": "9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+  "checks": [
+    {
+      "stage": "required_research_batches_verified",
+      "indexDigest": "9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+      "batches": 39,
+      "variants": 1002,
+      "fields": 1431,
+      "identityFields": 15,
+      "descriptiveFieldsOutsideIndex": 48
+    },
+    {
+      "version": 1,
+      "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+      "startedAt": "2026-10-24T12:54:58.536Z",
+      "groups": 44,
+      "variants": 703,
+      "fields": 1069,
+      "verified": true,
+      "finishedAt": "2026-10-24T12:55:30.377Z"
+    }
+  ],
+  "publicParity": {
+    "version": 1,
+    "checkedAt": "2026-10-24T13:11:30.883298+00:00",
+    "passed": true,
+    "scope": "Ограниченная выборка Suzuki Alto Japan; partial/stale. Индекс с новой партией активирован; проверка list/detail не доказывает применение фактов к каждой карточке.",
+    "offersChecked": 2,
+    "comparisons": 26,
+    "matched": 26,
+    "rows": [
+      {
+        "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "4WD",
+            "card": "4WD",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 660,
+            "card": 660,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 46,
+            "card": 46,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 34,
+            "card": 34,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 34,
+            "card": 34,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+            "card": "permanent_encyclopedia:9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+            "equal": true
+          },
+          "totalRub": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "needs_data",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "bodyType": {
+            "search": "",
+            "card": null
+          },
+          "drive": {
+            "search": null,
+            "card": "$undefined"
+          },
+          "transmission": {
+            "search": null,
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "ajes-stats-2RUpVosRnEySFSJ",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "4WD",
+            "card": "4WD",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 660,
+            "card": 660,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 46,
+            "card": 46,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 34,
+            "card": 34,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 34,
+            "card": 34,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+            "card": "permanent_encyclopedia:9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19",
+            "equal": true
+          },
+          "totalRub": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "needs_data",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "bodyType": {
+            "search": "",
+            "card": null
+          },
+          "drive": {
+            "search": null,
+            "card": "$undefined"
+          },
+          "transmission": {
+            "search": null,
+            "card": "$undefined"
+          }
+        }
+      }
+    ],
+    "unavailable": [],
+    "repeatedGroups": [
+      {
+        "offerIds": [
+          "ajes-stats-2QFQ2qkxr4bP4Ru",
+          "ajes-stats-2RUpVosRnEySFSJ"
+        ],
+        "allCardsChecked": true
+      }
+    ],
+    "duplicateOfferIds": 0,
+    "rowsReturned": 3,
+    "catalogTotalReported": null,
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+      "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+      "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+    },
+    "sameRelease": true,
+    "generationId": "2026-10-24T12:59:11.860Z"
+  },
+  "related": {
+    "checks": [
+      {
+        "page": "card-ajes-stats-2QFQ2qkxr4bP4Ru.txt",
+        "relatedOffer": "ajes-stats-2QoalTno4ZkOeah",
+        "powerHp": null,
+        "searchPowerHp": null,
+        "equal": true
+      },
+      {
+        "page": "card-ajes-stats-2QFQ2qkxr4bP4Ru.txt",
+        "relatedOffer": "ajes-stats-2RUpVosRnEySFSJ",
+        "powerHp": 46,
+        "searchPowerHp": 46,
+        "equal": true
+      },
+      {
+        "page": "card-ajes-stats-2RUpVosRnEySFSJ.txt",
+        "relatedOffer": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "powerHp": 46,
+        "searchPowerHp": 46,
+        "equal": true
+      },
+      {
+        "page": "card-ajes-stats-2RUpVosRnEySFSJ.txt",
+        "relatedOffer": "ajes-stats-2QoalTno4ZkOeah",
+        "powerHp": null,
+        "searchPowerHp": null,
+        "equal": true
+      }
+    ],
+    "passed": true,
+    "activation": "33c026e",
+    "notWholeCatalog": true
+  },
+  "driveFilters": {
+    "checkedAt": "2026-10-24T13:12:41.639Z",
+    "awd": "HTTP503",
+    "fwd": "HTTP503",
+    "passed": false,
+    "scope": "bounded public Suzuki Alto Japan filters",
+    "cause": "not_diagnosed"
+  },
+  "publicPowerConfirmedOffers": [
+    "ajes-stats-2QFQ2qkxr4bP4Ru",
+    "ajes-stats-2RUpVosRnEySFSJ"
+  ],
+  "powerHp": 46,
+  "powerKw": 34,
+  "pricesRemainPreliminary": true,
+  "previewTotalsRub": [
+    509539,
+    527572
+  ],
+  "allCatalogComplete": false,
+  "compoundBrandRemaining": {
+    "url": "https://avtocena.com/cars/autocatalog?make=MERCEDES-ADRIA",
+    "observedHeading": "MERCEDES-ADRIA",
+    "modelsCanonical": "Mercedes-Benz",
+    "fix": "canonical redirect retaining other filters",
+    "validation": "6 actual-page-prefix cases passed",
+    "publishedFix": false
+  }
+}

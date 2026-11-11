@@ -1,0 +1,7162 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 19,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-0cf597f6cf97174c5215",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 7 Pro",
+      "modelId": "chery/tiggo-7-pro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 108,
+      "commercialNames": [
+        "TIGGO7 PRO"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 149,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f4404cac5d8b5857e73",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 7 Pro",
+      "modelId": "chery/tiggo-7-pro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 105,
+      "commercialNames": [
+        "TIGGO7 PRO"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 62,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6409b6c32ab2c01c9497",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 7 Pro",
+      "modelId": "chery/tiggo-7-pro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "TIGGO7 PRO",
+        "TIGGO7 PRO-TIGGO7 PRO E+-TIGGO"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 161,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67e5012ea5c164d846cc",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 8",
+      "modelId": "chery/tiggo-8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGGO 8",
+        "TIGGO8"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 598,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc79e8bf4193c7aec3d0",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 8",
+      "modelId": "chery/tiggo-8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGGO 8",
+        "TIGGO8"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 175,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb91a70fec05e5d29aa9",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 8",
+      "modelId": "chery/tiggo-8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 108,
+      "commercialNames": [
+        "TIGGO8",
+        "TIGGO8 PRO"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 289,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2a573340df504752d0a",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 8",
+      "modelId": "chery/tiggo-8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGGO 8"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a2bbe9ebfac07b7cf0d",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 8",
+      "modelId": "chery/tiggo-8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 105,
+      "commercialNames": [
+        "TIGGO8",
+        "TIGGO8 PHEV",
+        "TIGGO8 PRO"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 213,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b01232d704d285858cb7",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 8",
+      "modelId": "chery/tiggo-8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "TIGGO8",
+        "TIGGO8 PHEV",
+        "TIGGO8 PRO"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 111,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-443c514a0d6871bed33d",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 9",
+      "modelId": "chery/tiggo-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 105,
+      "commercialNames": [
+        "TIGGO 9"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4221085929e1c758f10",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 9",
+      "modelId": "chery/tiggo-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGGO9"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d936f9ea270e5d2fbee4",
+      "brandId": "chery",
+      "brand": "Chery",
+      "canonicalModel": "Tiggo 9",
+      "modelId": "chery/tiggo-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 105,
+      "commercialNames": [
+        "TIGGO9",
+        "TIGGO9 PHEV"
+      ],
+      "sourceMakeNames": [
+        "CHERY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 78,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad89be0ad905dc86a54d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Aveo",
+      "modelId": "chevrolet/aveo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1229,
+      "powerKw": 63,
+      "commercialNames": [
+        "AVEO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6147f9d686c056b7ce4",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Blazer",
+      "modelId": "chevrolet/blazer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3596,
+      "powerKw": 198,
+      "commercialNames": [
+        "BLAZER"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5880ca5a5cbc44f9c91f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Blazer",
+      "modelId": "chevrolet/blazer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3600,
+      "powerKw": 228,
+      "commercialNames": [
+        "CHEVROLET BLAZER"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73e8cdc2d31a01e34810",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Blazer",
+      "modelId": "chevrolet/blazer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3649,
+      "powerKw": 228,
+      "commercialNames": [
+        "CHEVROLET BLAZER"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2aa6916a1420c6f4e4b3",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Bolt",
+      "modelId": "chevrolet/bolt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "Bolt"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a648f5022aca360b5373",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Bolt",
+      "modelId": "chevrolet/bolt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "BOLT"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b1aa2119aa76d005dd4",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 202,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffc3fad393eb4b5caf9f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 205,
+      "commercialNames": [
+        "CAMARO",
+        "CAMARO LT",
+        "CHEVROLET CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc82246e2a64a64e2024",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3564,
+      "powerKw": 241,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11e312657ef05bcf0393",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 339,
+      "commercialNames": [
+        "CAMARO",
+        "CAMARO 2SS",
+        "CAMARO COUPE 2SS",
+        "CAMARO SS",
+        "CAMARO SS CONVERTIBLE",
+        "CHEVROLET CAMARO",
+        "CHEVROLET CAMARO SS"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 678,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-766f909b9f808d3bf5db",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 485,
+      "commercialNames": [
+        "CAMARO ZL1",
+        "CHEVROLET CAMARO",
+        "CHEVROLET CAMARO ZL1"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 95,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7558c42cc30e24c40691",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 339,
+      "commercialNames": [
+        "CAMARO SS",
+        "CHEVROLET CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c05da1697aba4e6ab8bd",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3640,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAMARO 1LT",
+        "CAMARO RS"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f2f0bb10a692b649d25",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6161,
+      "powerKw": 339,
+      "commercialNames": [
+        "CHEVROLET CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faed825e0e00f6471683",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 183,
+      "commercialNames": [
+        "CAMARO",
+        "CAMARO SS",
+        "CAMARO SS CONVERTIBLE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a9a0e94c33db3d6a2c4",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 335,
+      "commercialNames": [
+        "CAMARO SS",
+        "CHEVROLET CAMARO SS"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8494010db79572dd1e7",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 399,
+      "commercialNames": [
+        "CHEVROLET CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfaadce348522d703052",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6192,
+      "powerKw": 339,
+      "commercialNames": [
+        "CHEVROLET CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c155d5657e31ebdda83",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3564,
+      "powerKw": 229,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8745aa5a7660037d0433",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 318,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8294ecb8594c3bea491",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3564,
+      "powerKw": 232,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-253e9a10068d264382ab",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3604,
+      "powerKw": 246,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf21b0dd96e5ac9a9b76",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3640,
+      "powerKw": 246,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fe0fa98b0d9b1e2a915",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 327,
+      "commercialNames": [
+        "CAMARO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74dcfab035965c501a22",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Camaro",
+      "modelId": "chevrolet/camaro",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "e85",
+      "engineCc": 6162,
+      "powerKw": 335,
+      "commercialNames": [
+        "CAMARO COUPE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74d09bc36dfe57dbeef4",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Captiva",
+      "modelId": "chevrolet/captiva",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1451,
+      "powerKw": 112,
+      "commercialNames": [
+        "CAPTIVA PREMIERE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26a0501a744ef5d0044a",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Captiva",
+      "modelId": "chevrolet/captiva",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2384,
+      "powerKw": 123,
+      "commercialNames": [
+        "CAPTIVA"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be0e9e330e6c4737619e",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Captiva",
+      "modelId": "chevrolet/captiva",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2231,
+      "powerKw": 120,
+      "commercialNames": [
+        "CAPTIVA"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ea96388ba769cef9059",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Captiva",
+      "modelId": "chevrolet/captiva",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2231,
+      "powerKw": 135,
+      "commercialNames": [
+        "CAPTIVA"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9d51484bf8ce680d46f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Colorado",
+      "modelId": "chevrolet/colorado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3657,
+      "powerKw": 228,
+      "commercialNames": [
+        "COLORADO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bc7f7a22cd01f4e990b",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Colorado",
+      "modelId": "chevrolet/colorado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3600,
+      "powerKw": 230,
+      "commercialNames": [
+        "COLORADO"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3353c8950fbae2c0f19a",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 365,
+      "commercialNames": [
+        "CHEVROLET CORVETTE",
+        "CORVETTE",
+        "CORVETTE 3LT COUPE",
+        "CORVETTE C8"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e47fbf226a2645edc17",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 369,
+      "commercialNames": [
+        "CHEVROLET CORVETTE",
+        "CHEVROLET CORVETTE C8",
+        "CORVETTE C8",
+        "CORVETTE STINGRAY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1b09a51181272b88ca0",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 563,
+      "commercialNames": [
+        "CHEVROLET CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0770b36a39ddcd83b22",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6182,
+      "powerKw": 365,
+      "commercialNames": [
+        "CHEVROLET CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c05ac01a042eea1fe7b8",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 354,
+      "commercialNames": [
+        "CORVETTE",
+        "CORVETTE /",
+        "CORVETTE C8"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2887,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85a0084157ca0e318fa9",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 369,
+      "commercialNames": [
+        "CORVETTE STINGRAY W/2LT"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-343c679fd91d748f6aaa",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5460,
+      "powerKw": 475,
+      "commercialNames": [
+        "CORVETTE",
+        "CORVETTE C8 Z06",
+        "CORVETTE Z06"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 268,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92e56f31f4398a3b7d72",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5463,
+      "powerKw": 500,
+      "commercialNames": [
+        "CHEVROLET CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbe5108560b853a4aed9",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 68,
+      "commercialNames": [
+        "CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da5fcc345ac0ea5155b5",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": null,
+      "commercialNames": [
+        "CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b84e1fb23c138280da58",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 370,
+      "commercialNames": [
+        "CHEVROLET CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-464a8c87f476e46445ce",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 481,
+      "commercialNames": [
+        "CHEVROLET CORVETTE E-RAY",
+        "CORVETTE C8 E-RAY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26b848a80d7f9e6367bf",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Corvette",
+      "modelId": "chevrolet/corvette",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 6162,
+      "powerKw": 354,
+      "commercialNames": [
+        "CORVETTE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcc5e62cb501cf630c59",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 99,
+      "commercialNames": [
+        "CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46574a295295426dabd3",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1364,
+      "powerKw": 103,
+      "commercialNames": [
+        "CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a7fe73cb9a025fee881",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1796,
+      "powerKw": 101,
+      "commercialNames": [
+        "CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-663b821d2fc74474ceee",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1991,
+      "powerKw": 110,
+      "commercialNames": [
+        "CHEVROLET CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e05f74f0622e77deb86d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1362,
+      "powerKw": 103,
+      "commercialNames": [
+        "CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d71a3e2618875bd353db",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1796,
+      "powerKw": 104,
+      "commercialNames": [
+        "CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75da1eb06140dd30515c",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Cruze",
+      "modelId": "chevrolet/cruze",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1399,
+      "powerKw": 112,
+      "commercialNames": [
+        "CRUZE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-521d4e7757be35fc9cbb",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Equinox",
+      "modelId": "chevrolet/equinox",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 127,
+      "commercialNames": [
+        "EQUINOX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb86bf4ce4c8d7945161",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Equinox",
+      "modelId": "chevrolet/equinox",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 173,
+      "commercialNames": [
+        "EQUINOX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8040d4602c2f5fb356e",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Equinox",
+      "modelId": "chevrolet/equinox",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2400,
+      "powerKw": 136,
+      "commercialNames": [
+        "EQUINOX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-548aa45d69fd8b0276fb",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Equinox",
+      "modelId": "chevrolet/equinox",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 128,
+      "commercialNames": [
+        "EQUINOX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-595639bfa6950270b4bd",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Impala",
+      "modelId": "chevrolet/impala",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3556,
+      "powerKw": 224,
+      "commercialNames": [
+        "IMPALA"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cd7a2a08e8a80e1d024",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Malibu",
+      "modelId": "chevrolet/malibu",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 125,
+      "commercialNames": [
+        "MALIBU"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aaadfb801ee8c5a1999f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Malibu",
+      "modelId": "chevrolet/malibu",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3500,
+      "powerKw": 155,
+      "commercialNames": [
+        "MALIBU"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acfa3b3cfc6d16c6ee6c",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Malibu",
+      "modelId": "chevrolet/malibu",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 121,
+      "commercialNames": [
+        "CHEVROLET MALIBU",
+        "MALIBU"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff2dc9cee70b3c350d99",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Malibu",
+      "modelId": "chevrolet/malibu",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 86,
+      "commercialNames": [
+        "MALIBU"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb8eac22a1c91d53ee27",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Malibu",
+      "modelId": "chevrolet/malibu",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2457,
+      "powerKw": 145,
+      "commercialNames": [
+        "MALIBU"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14b2f5742321f51a4b73",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Malibu",
+      "modelId": "chevrolet/malibu",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "CHEVROLET MALIBU",
+        "CHEVROLET MALIBU RS"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2b283870eece8291516",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Niva",
+      "modelId": "chevrolet/niva",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1690,
+      "powerKw": 59,
+      "commercialNames": [
+        "CHEVROLET NIVA"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e9f3db4860792fd08f4",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Silverado",
+      "modelId": "chevrolet/silverado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "e85",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SILVERADO 1500"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-456bf2624900292c0467",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Silverado",
+      "modelId": "chevrolet/silverado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SILVERADO 1500"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-636c4b33144c5c7d83bb",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Sonic",
+      "modelId": "chevrolet/sonic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1796,
+      "powerKw": 101,
+      "commercialNames": [
+        "SONIC"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c9b7d0608ad359c5a99",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5328,
+      "powerKw": 265,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN",
+        "CHEVROLET SUBURBAN RST",
+        "SUBURBAN LT"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b73afd02b021fe4cb34d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5329,
+      "powerKw": 265,
+      "commercialNames": [
+        "SUBURBAN 4X4 PREMIER"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-721a83b66af0adff526d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN",
+        "CHEVROLET SUBURBAN HIGH COUNTRY",
+        "SUBURBAN",
+        "SUBURBAN CK10906",
+        "SUBURBAN HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 149,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c484f8cd98fc507d17e1",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "E85",
+      "engineCc": 5328,
+      "powerKw": 265,
+      "commercialNames": [
+        "SUBURBAN",
+        "SUBURBAN Z71"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0de1854510f34373ef8a",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN",
+        "SUBURBAN 4WD HIGH COUNTR"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b49df3b4438e2713d6ba",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN",
+        "SUBURBAN HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b31628c754dbfc1d3ef",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2991,
+      "powerKw": 207,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75b5b629d47c2d7b7702",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "e85",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN",
+        "SUBURBAN HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60dfeff10e6d463994ef",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5327,
+      "powerKw": 84,
+      "commercialNames": [
+        "SUBURBAN RST"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-396fa884a394c960948f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": null,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET SUBURBAN"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f92de31783af49312a8",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 180,
+      "commercialNames": [
+        "SUBURBAN HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94fbcfb06264e3698f9f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Suburban",
+      "modelId": "chevrolet/suburban",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6162,
+      "powerKw": 315,
+      "commercialNames": [
+        "SUBURBAN HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf8554c38921c721ccba",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5326,
+      "powerKw": 212,
+      "commercialNames": [
+        "TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-385d04505a3a8ec8888d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5327,
+      "powerKw": 212,
+      "commercialNames": [
+        "TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b8887c95e1383b423f7",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5328,
+      "powerKw": 265,
+      "commercialNames": [
+        "CHEVROLET TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a688c16451c3bc5bb8cd",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 309,
+      "commercialNames": [
+        "CHEVROLET TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b64a742f4780b21b14af",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET TAHOE",
+        "TAHOE",
+        "TAHOE HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aed7de0796be917e8bad",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 183,
+      "commercialNames": [
+        "TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6373d5b1dbeba96d0f8",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET TAHOE",
+        "TAHOE",
+        "TAHOE HIGH COUNTRY",
+        "TAHOE RST"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 177,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dd8a7a962276380edf5",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2991,
+      "powerKw": 207,
+      "commercialNames": [
+        "CHEVROLET TAHOE",
+        "TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5ee1ea6bf59a1e02f9f",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "e85",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET TAHOE",
+        "TAHOE HIGH COUNTRY"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c786a8fc350e0beb13a",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6262,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f231f9e9b9b78cbe6a1d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "unknown",
+      "engineCc": 6162,
+      "powerKw": 313,
+      "commercialNames": [
+        "CHEVROLET TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecd74d55e8a6ea618bef",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Tahoe",
+      "modelId": "chevrolet/tahoe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 5328,
+      "powerKw": 265,
+      "commercialNames": [
+        "CHEVROLET TAHOE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98e2473507ae7bd67cdd",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Trail Blazer",
+      "modelId": "chevrolet/trail-blazer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1342,
+      "powerKw": 111,
+      "commercialNames": [
+        "TRAILBLAZER"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52477565852fa367ffed",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Trail Blazer",
+      "modelId": "chevrolet/trail-blazer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1341,
+      "powerKw": 115,
+      "commercialNames": [
+        "CHEVROLET TRAILBLAZER"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d48d8d99ff88f82a026",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Traverse",
+      "modelId": "chevrolet/traverse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3564,
+      "powerKw": 215,
+      "commercialNames": [
+        "TRAVERSE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6df03f581df174ce0e56",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Traverse",
+      "modelId": "chevrolet/traverse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3564,
+      "powerKw": null,
+      "commercialNames": [
+        "TRAVERSE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d633a559399ce14de9d9",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Traverse",
+      "modelId": "chevrolet/traverse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3564,
+      "powerKw": 230,
+      "commercialNames": [
+        "TRAVERSE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4629489f4c977dc2aff8",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Traverse",
+      "modelId": "chevrolet/traverse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3564,
+      "powerKw": 231,
+      "commercialNames": [
+        "CHEVROLET TRAVERSE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07ccd7550e84cce17fb3",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Traverse",
+      "modelId": "chevrolet/traverse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3564,
+      "powerKw": 231,
+      "commercialNames": [
+        "CHEVROLET TRAVERSE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8134304f8c1198b6d22",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Traverse",
+      "modelId": "chevrolet/traverse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2494,
+      "powerKw": 245,
+      "commercialNames": [
+        "CHEVROLET TRAVERSE"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88b6dfea16ef4a75fdc5",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Trax",
+      "modelId": "chevrolet/trax",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 99,
+      "commercialNames": [
+        "TRAX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34a2385a4261e8979db9",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Trax",
+      "modelId": "chevrolet/trax",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1364,
+      "powerKw": 82,
+      "commercialNames": [
+        "TRAX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0e51ad78b53418a6010",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Trax",
+      "modelId": "chevrolet/trax",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "TRAX"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61da326b851463d3665d",
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "canonicalModel": "Volt",
+      "modelId": "chevrolet/volt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1398,
+      "powerKw": 111,
+      "commercialNames": [
+        "VOLT"
+      ],
+      "sourceMakeNames": [
+        "CHEVROLET"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f472ebbf0752b7a6dba",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "200",
+      "modelId": "chrysler/200",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": 135,
+      "commercialNames": [
+        "200"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3faef74a588273315702",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "200",
+      "modelId": "chrysler/200",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 208,
+      "commercialNames": [
+        "200"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-680b37275ade7e96f20f",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "300",
+      "modelId": "chrysler/300",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 218,
+      "commercialNames": [
+        "300"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de25fb1412dff5d3d561",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "300 C",
+      "modelId": "chrysler/300-c",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 270,
+      "commercialNames": [
+        "300C",
+        "CHRYSLER 300C"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-caa0460c416f0001febf",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "300 C",
+      "modelId": "chrysler/300-c",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6417,
+      "powerKw": 350,
+      "commercialNames": [
+        "CHRYSLER 300C"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22c90f2c201ba1e7d8cf",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "300 C",
+      "modelId": "chrysler/300-c",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6423,
+      "powerKw": 362,
+      "commercialNames": [
+        "300C"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94de1920e9a1bebb1ce4",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "300 C",
+      "modelId": "chrysler/300-c",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6417,
+      "powerKw": 362,
+      "commercialNames": [
+        "300C SRT"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b968e2804dc9c52af88",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 214,
+      "commercialNames": [
+        "CHRYSLER PACIFICA",
+        "CHRYSLER PACIFICA LIMITED"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66e26da392fe8b0e43cd",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 194,
+      "commercialNames": [
+        "CHRYSLER PACIFICA",
+        "CHRYSLER PACIFICA HYBRID",
+        "PACIFICA HYBRID",
+        "PACIFICA HYBRID LIMITED S"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c95a4e8d88cc2df74e76",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 211,
+      "commercialNames": [
+        "PACIFICA HYBRID LIMITED",
+        "PACIFICA LIMITED AWD",
+        "PACIFICA TOURING",
+        "PACIFICA TOURING L AWD",
+        "PACIFICA TOURING LTD",
+        "PACIFICA TOURING LTD."
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33cf99a6b10be3415423",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 214,
+      "commercialNames": [
+        "CHRYSLER PACIFICA",
+        "CHRYSLER PACIFICA LIMITED",
+        "PACIFICA",
+        "PACIFICA L",
+        "PACIFICA LIMITED",
+        "PACIFICA LIMITED AWD",
+        "PACIFICA PINNACLE AWD",
+        "PACIFICA S",
+        "PACIFICA S AWD LIMITED",
+        "PACIFICA TOURING LTD",
+        "PACIFICA TOURING LTD."
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d7eba8a4c5e278b6ff8",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3604,
+      "powerKw": 194,
+      "commercialNames": [
+        "PACIFICA HYBRID LIMITED"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56017ba644e3f035385b",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3605,
+      "powerKw": 194,
+      "commercialNames": [
+        "CHRYSLER PACIFICA",
+        "CHRYSLER PACIFICA HYBRID",
+        "PACIFICA",
+        "PACIFICA HYBRID",
+        "PACIFICA HYBRID LIMITED",
+        "PACIFICA HYBRID PINNACLE",
+        "PACIFICA HYBRID TOURING",
+        "PACIFICA HYBRID TOURING L"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 187,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a4f0e9d70ef9bd4679c",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3605,
+      "powerKw": 214,
+      "commercialNames": [
+        "CHRYSLER PACIFICA",
+        "PACIFICA"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23668509f5bbe8217c3e",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 213,
+      "commercialNames": [
+        "PACIFICA"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30a67f8492a31c3e69b4",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3605,
+      "powerKw": 162,
+      "commercialNames": [
+        "CHRYSLER PACIFICA HYBRID",
+        "CHRYSLER PACIFICA HYBRID LIMIT",
+        "PACIFICA HYBRID",
+        "PACIFICA HYBRID LIMITED"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0a75475e56426868ce4",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3605,
+      "powerKw": 164,
+      "commercialNames": [
+        "CHRYSLER PACIFICA HYBRID"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-331050db0c8e3599f362",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3604,
+      "powerKw": 180,
+      "commercialNames": [
+        "PACIFICA HYBRID"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48af2ee3109acf239ad2",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pacifica",
+      "modelId": "chrysler/pacifica",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3604,
+      "powerKw": 211,
+      "commercialNames": [
+        "PACIFICA"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1adbda15c4127a4ee689",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Pt Cruiser",
+      "modelId": "chrysler/pt-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2429,
+      "powerKw": 105,
+      "commercialNames": [
+        "PT CRUISER"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c341ec899fbe900c3cc5",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Town & Country",
+      "modelId": "chrysler/town-and-country",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3605,
+      "powerKw": 211,
+      "commercialNames": [
+        "TOWN AND COUNTRY TOURING"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70e4ba04169d88436d30",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Voyager",
+      "modelId": "chrysler/voyager",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 214,
+      "commercialNames": [
+        "VOYAGER"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a7fea691819d2ae65c8",
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "canonicalModel": "Voyager",
+      "modelId": "chrysler/voyager",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 214,
+      "commercialNames": [
+        "VOYAGER"
+      ],
+      "sourceMakeNames": [
+        "CHRYSLER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a75e548b8d42a1b62ef",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "1",
+      "modelId": "cirelli/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "CIRELLI 1",
+        "CIRELLI 1 CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 77,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d62ff73bb426347507ab",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "2",
+      "modelId": "cirelli/2",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "CIRELLI 2",
+        "CIRELLI 2 CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7269ffb7c42dcce16fc",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "2",
+      "modelId": "cirelli/2",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "CIRELLI 2 CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-055cbd43ba34826f9c64",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "3",
+      "modelId": "cirelli/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 102,
+      "commercialNames": [
+        "CIRELLI 3",
+        "CIRELLI 3 SPORT"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50be152c46a3090d5c60",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "3",
+      "modelId": "cirelli/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 98,
+      "commercialNames": [
+        "CIRELLI 3"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-416d8ff853267bd27451",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "4",
+      "modelId": "cirelli/4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 130,
+      "commercialNames": [
+        "CIRELLI 4",
+        "CIRELLI 4 CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae8f990b68cd822e9705",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "4",
+      "modelId": "cirelli/4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "CIRELLI 4 PLUG-IN"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9631ea47af616c777835",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "5",
+      "modelId": "cirelli/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1481,
+      "powerKw": 130,
+      "commercialNames": [
+        "CIRELLI 5 BIFUEL",
+        "CIRELLI 5 BIFUEL CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 118,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe49ac8b80b5fd8a22f8",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "5",
+      "modelId": "cirelli/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1481,
+      "powerKw": 130,
+      "commercialNames": [
+        "CIRELLI 5",
+        "CIRELLI 5 BIFUEL",
+        "CIRELLI 5 CROSS",
+        "CIRELLI 5 SPORT"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 153,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2c111dcf32309185164",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "7",
+      "modelId": "cirelli/7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1481,
+      "powerKw": 130,
+      "commercialNames": [
+        "CIRELLI 7 BIFUEL",
+        "CIRELLI 7 BIFUEL CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bba01f01925f611a64e",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "7",
+      "modelId": "cirelli/7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1481,
+      "powerKw": 130,
+      "commercialNames": [
+        "CIRELLI 7",
+        "CIRELLI 7 CROSS"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ac64cf711e48262e74c",
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "canonicalModel": "Sport Coupe",
+      "modelId": "cirelli/sport-coupe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 101,
+      "commercialNames": [
+        "CIRELLI SPORT COUPE'"
+      ],
+      "sourceMakeNames": [
+        "CIRELLI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0330a8427a237dc3d29",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Ami",
+      "modelId": "citroen/ami",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "AMI"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9ae3d5d9e1b8f9f9a0e",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO",
+        "BERLINGO FEEL BLUEHDI S S",
+        "BERLINGO FEEL BLUEHDI S S AUTO",
+        "BERLINGO FEEL PURETECH S S",
+        "BERLINGO FLAIR BLUEHDI S S",
+        "BERLINGO FLAIR BLUEHDI S S A",
+        "BERLINGO FLAIR XTR B-HDI SS A",
+        "BERLINGO FLAIR XTR BLUEHDI S S"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1524,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aace8f9ee7510cbdf08b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 56,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ccdb9bf3ba3a9f69313",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "BERLINGO",
+        "Berlingo",
+        "BERLINGO / 1.5 / HDI L1",
+        "BERLINGO / 1.5 / HDI L2",
+        "BERLINGO / 15 / HDI L1",
+        "BERLINGO / 15 / HDI L2",
+        "BERLINGO 1.5 HDI L1",
+        "BERLINGO 15 HDI L1",
+        "BERLINGO 15 HDI L2",
+        "BERLINGO F-STYLE WAV",
+        "BERLINGO TALLA M BLUEHDI 100 S&S FEEL",
+        "BERLINGO TALLA M BLUEHDI 100 S&S FEEL (SOLO STOCK)",
+        "BERLINGO TALLA M BLUEHDI 100 S&S FEEL PACK",
+        "BERLINGO TALLA M BLUEHDI 100 S&S FEEL PACK (SOLO S",
+        "BERLINGO TALLA M BLUEHDI 100 S&S LIVE PACK",
+        "BERLINGO TALLA M BLUEHDI 100 S&S LIVE PACK (SOLO S",
+        "BERLINGO TALLA M BLUEHDI 100 S&S SHINE",
+        "BERLINGO TALLA M BLUEHDI 100 S&S SHINE (SOLO STOC",
+        "BERLINGO TALLA M BLUEHDI 100 S&S SHINE (SOLO STOCK",
+        "BERLINGO TALLA M BLUEHDI 100 SS 6V MAX",
+        "BERLINGO TALLA M BLUEHDI 100 SS 6V PLUS",
+        "BERLINGO TALLA M BLUEHDI 100 SS FEEL",
+        "BERLINGO TALLA XL BLUEHDI 100 S&S FEEL (SOLO STOCK",
+        "BERLINGO TALLA XL BLUEHDI 100 S&S LIVE PACK (SOLO",
+        "BERLINGO TALLA XL BLUEHDI 100 SS 6V PLUS",
+        "BERLINGO TRIPOD",
+        "BERLINGO-ROLFI"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 40,
+      "registrations": 71234,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d9dac796ef778bb770b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "Berlingo",
+        "BERLINGO",
+        "BERLINGO / 1.5 / HDI AUT. L1",
+        "BERLINGO / 1.5 / HDI AUT. L2",
+        "BERLINGO / 1.5 / HDI L1",
+        "BERLINGO / 1.5 / HDI L1 AUT.",
+        "BERLINGO / 1.5 / HDI L2",
+        "BERLINGO / 1.5 / HDI L2 AUT.",
+        "BERLINGO / 15 / HDI AUT L1",
+        "BERLINGO / 15 / HDI L1",
+        "BERLINGO / 15 / HDI L2",
+        "BERLINGO 1.5 HDI AUT. L1",
+        "BERLINGO 1.5 HDI AUT. L2",
+        "BERLINGO 1.5 HDI L1",
+        "BERLINGO 1.5 HDI L2",
+        "BERLINGO 15 HDI L1",
+        "BERLINGO 15 HDI L1 AUT",
+        "BERLINGO 15 HDI L2",
+        "BERLINGO 15 HDI L2 AUT",
+        "BERLINGO REC",
+        "BERLINGO TALLA M BLUEHDI 130 S&S FEEL PACK",
+        "BERLINGO TALLA M BLUEHDI 130 S&S FEEL PACK (SOLO S",
+        "BERLINGO TALLA M BLUEHDI 130 S&S SHINE",
+        "BERLINGO TALLA M BLUEHDI 130 S&S SHINE (SOLO STOC",
+        "BERLINGO TALLA M BLUEHDI 130 S&S SHINE (SOLO STOCK",
+        "BERLINGO TALLA M BLUEHDI 130 SS EAT8 MAX",
+        "BERLINGO TALLA XL BLUEHDI 130 S&S FEEL PACK (SOLO",
+        "BERLINGO TALLA XL BLUEHDI 130 S&S SHINE",
+        "BERLINGO TALLA XL BLUEHDI 130 S&S SHINE (SOLO STOC",
+        "BERLINGO TALLA XL BLUEHDI 130 S&S SHINE 7PLAZAS (S",
+        "BERLINGO TALLA XL BLUEHDI 130 SS EAT8 MAX",
+        "BERLINGO TALLA XL BLUEHDI 130 SS EAT8 PLUS",
+        "BERLINGO TRIPOD",
+        "BERLINGO-ROLFI",
+        "CITROEN BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 52,
+      "registrations": 64892,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-307be52f9146777a5f1c",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 600,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-180dd6d69ffa721c2dce",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1500,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO 650 EN-PRISE BHDI SS",
+        "BERLINGO 650 EN-PRISE BLUEHDI",
+        "BERLINGO FEEL BLUEHDI",
+        "BERLINGO FEEL BLUEHDI S S",
+        "BERLINGO FEEL BLUEHDI S S AUTO",
+        "BERLINGO FLAIR BLUEHDI",
+        "BERLINGO FLAIR BLUEHDI S S",
+        "BERLINGO FLAIR BLUEHDI S S A",
+        "BERLINGO FLAIR XTR BLUEHDI",
+        "BERLINGO FLAIR XTR BLUEHDI S S"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 1507,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f22676b4143606c8930",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO MULTISPACE FEEL B-HDI"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-539860b764eb7dce86d3",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 73,
+      "commercialNames": [
+        "BERLINGO",
+        "Berlingo",
+        "BERLINGO MULTISPACE FEEL B-HDI"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c6d655cab889f832e7e",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb562521c2e5bd29ee4c",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 35,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 93,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b981abd84644bc95f07b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 49,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6778ee22e8b13692ef7",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "Berlingo"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5628945a6343d71aefc",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO MULTISPACE FEEL"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfac57fd5134dcdfbf0e",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "Berlingo",
+        "BERLINGO",
+        "BERLINGO / 1.2 / L1",
+        "BERLINGO / 1.2 / L2",
+        "BERLINGO / 12 / L1",
+        "BERLINGO 1.2 L1",
+        "BERLINGO 12 L1",
+        "BERLINGO 12 L2",
+        "BERLINGO TALLA M 1.2 PURETECH 110 S&S 6V FEEL (SOL",
+        "BERLINGO TALLA M PURETECH 110 S&S 6V FEEL",
+        "BERLINGO TALLA M PURETECH 110 S&S 6V FEEL (SOLO ST",
+        "BERLINGO TALLA M PURETECH 110 S&S 6V LIVE PACK (SO",
+        "BERLINGO TALLA M PURETECH 110 S&S FEEL (SOLO STOCK",
+        "BERLINGO TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 27093,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d64c17635d8ce25cca8",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "Berlingo",
+        "BERLINGO",
+        "BERLINGO / 1.2 / AUT. L1",
+        "BERLINGO / 1.2 / AUT. L2",
+        "BERLINGO / 12 / AUT L2",
+        "BERLINGO 12 L1 AUT",
+        "BERLINGO 12 L2 AUT",
+        "BERLINGO F-STYLE WAV"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 18744,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c424993c388b05a01464",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1200,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO FEEL PURETECH S S",
+        "BERLINGO FLAIR PURETECH S S",
+        "BERLINGO FLAIR PURETECH S S A"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 194,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-093e4add96d29757c624",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO FEEL PURETECH S S"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e479f0327f9b6ee80d09",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46373659aa66040a6827",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1500,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO FEEL BLUEHDI S S"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-683db3a4fbdccc7a598b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c6a985083dd4c33d89a",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 55,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cd7f6a3cc679da48001",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 84,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fe9222316cc97f11293",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 57,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0f7ee5bebd4f6f6f13f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "Berlingo",
+        "BERLINGO",
+        "BERLINGO / 100 / ELEK L1",
+        "BERLINGO / 100 / ELEK L2",
+        "BERLINGO / 100 / ELEK. L1",
+        "BERLINGO / 100 / ELEK. L2",
+        "BERLINGO 100 ELEK. L1",
+        "BERLINGO 100 ELEK. L2"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ea1f09c6c163c322f08",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-240727092ded2d8ec0e7",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1360,
+      "powerKw": 55,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f06312b23b7029cd596",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 66,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b1edacb346b2b92c502",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 68,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-258981c9bc96c03daef1",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 88,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70fe401601bc3cf5bb80",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 55,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4e06eeec45c79a8ec4d",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1560,
+      "powerKw": 82,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95f7799cd6719c4b4a84",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1589,
+      "powerKw": 68,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bfe15e5e82b67118f79",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 97,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5f66ef7624f476f03a5",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb3bcf2d1df729ca346f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "Berlingo",
+      "modelId": "citroen/berlingo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1587,
+      "powerKw": 85,
+      "commercialNames": [
+        "BERLINGO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20aedf268f82c3aaecfa",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "BX",
+      "modelId": "citroen/bx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1905,
+      "powerKw": 51,
+      "commercialNames": [
+        "BX"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-538a3ea495759f308737",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C-Crosser",
+      "modelId": "citroen/c-crosser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": null,
+      "commercialNames": [
+        "C-CROSSER"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfc1ad608121776f8e18",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C-Elysee",
+      "modelId": "citroen/c-elysee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "C-ELYSEE",
+        "C-ELYSEE / 1.5 / HDI",
+        "C-ELYSEE 15 HDI"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2441,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8677439f7801b271565",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C-Elysee",
+      "modelId": "citroen/c-elysee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 61,
+      "commercialNames": [
+        "C-ELYSEE",
+        "C-ELYSÉE"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f52059b18aefb839595e",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C-Zero",
+      "modelId": "citroen/c-zero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 35,
+      "commercialNames": [
+        "C-ZERO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3284,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd7f2b78fddb13a79850",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C-Zero",
+      "modelId": "citroen/c-zero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 49,
+      "commercialNames": [
+        "C-ZERO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 249,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-297423b6f35069f73ae0",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C1",
+      "modelId": "citroen/c1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "C1"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-188b814245918ea90a33",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C1",
+      "modelId": "citroen/c1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "C1 AIRSCAPE FEEL",
+        "C1 AIRSCAPE FLAIR",
+        "C1 AIRSCAPE SHINE",
+        "C1 AIRSCAPE URBAN RIDE",
+        "C1 FEEL",
+        "C1 FLAIR",
+        "C1 JCC +",
+        "C1 ORIGINS",
+        "C1 SENSE",
+        "C1 SHINE",
+        "C1 TOUCH",
+        "C1 URBAN RIDE"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 7702,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8970cf9deaa3573ac46f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C1",
+      "modelId": "citroen/c1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 51,
+      "commercialNames": [
+        "C1"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b4697f946578db551b4",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C1",
+      "modelId": "citroen/c1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "C 1",
+        "C1",
+        "C1 VTI 72 S&S 5 PUERTAS BERLINA CITY EDITION (SOLO",
+        "C1 VTI 72 S&S 5 PUERTAS DESCAPOTABLE AIRSCAPE SHIN",
+        "CITROEN C1"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 137122,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e37d6271dcd2a83623df",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C1",
+      "modelId": "citroen/c1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 50,
+      "commercialNames": [
+        "C1"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1ebc53397a3f50f585b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bfb9db26c1415f046c6",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "C 3",
+        "C3",
+        "C3 / 1.5 / HDI",
+        "C3 / 15 / HDI",
+        "C3 15 HDI",
+        "C3 ORIGIN BLUE HDI 100 S&S 6V PLUS"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 183000,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d91fef07c363eb078ba",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "C3",
+        "C3 AIRCROOS"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5517,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e7422ae98089c618e34",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 490,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3889a2683d2f0b597500",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1500,
+      "powerKw": null,
+      "commercialNames": [
+        "C3 FEEL BLUEHDI S S",
+        "C3 FLAIR + BLUEHDI S S",
+        "C3 FLAIR BLUEHDI S S",
+        "C3 SHINE + BLUEHDI S S"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 430,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c20bf81ab00887010ab",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1199,
+      "powerKw": 61,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9357202709adfac30025",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "C3",
+        "C3 AIRCROOS",
+        "C3 FEEL PURETECH S S",
+        "C3 FLAIR + PURETECH S S",
+        "C3 FLAIR NAV ED PURETECH S S",
+        "C3 FLAIR PURETECH",
+        "C3 FLAIR PURETECH S S",
+        "C3 ORIGINS PURETECH S S",
+        "C3 SENSE PURETECH S S",
+        "C3 SHINE + PURETECH S S",
+        "C3 SHINE PURETECH S S",
+        "C3 TOUCH PURETECH",
+        "C3 TOUCH PURETECH S S"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 15173,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa2f412a52e01278b2e0",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 50,
+      "commercialNames": [
+        "C 3",
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 141,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab0602811abf72edcb94",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 61,
+      "commercialNames": [
+        "C 3",
+        "C3",
+        "C3 / 1.2 /",
+        "C3 / 12 /",
+        "C3 12",
+        "C3 ORIGIN PURETECH 83 S&S MAX",
+        "C3 ORIGIN PURETECH 83 S&S PLUS",
+        "C3 ORIGIN PURETECH 83 S&S YOU!",
+        "C3 ORIGIN PURETECH 83 SS MAX",
+        "C3.",
+        "CITROEN C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 600771,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8068998f9276aa69bf65",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "C 3",
+        "C3",
+        "C3 ?6.4 PURETECH 110 S&S C S?RIES (SOLO STOCK)",
+        "C3 / 1.2",
+        "C3 / 1.2 /",
+        "C3 / 1.2 / AUT.",
+        "C3 / 12 /",
+        "C3 / 12 / AUT",
+        "C3 12",
+        "C3 12 AUT",
+        "C3 AIRCROS",
+        "C3 ORIGIN PURETECH 110 S&S 6V MAX",
+        "C3 ORIGIN PURETECH 110 S&S EAT6 MAX",
+        "C3 PT110",
+        "C3 PT110 COLLECTION",
+        "C3 PT110& COLLECTIO",
+        "C3 PT110S & COLLECTION",
+        "C3 PT110S& COLLECTIO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN",
+        "CITROËN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 190227,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46f3837e49d73d76b509",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 83,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66dfbcbfbbb2d3224feb",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1183,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b93cc4e860beeed5ac9",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1200,
+      "powerKw": null,
+      "commercialNames": [
+        "C3 FEEL NAV ED PURETECH SS",
+        "C3 FLAIR + PURETECH S S",
+        "C3 FLAIR + PURETECH S S AUTO",
+        "C3 FLAIR PURETECH S S",
+        "C3 FLAIR PURETECH S S AUTO",
+        "C3 SHINE + PURETECH S S",
+        "C3 SHINE + PURETECH S S AUTO",
+        "C3 SHINE PURETECH S S",
+        "C3 SHINE PURETECH S S AUTO"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2054,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c987b95ae3097e11030",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 55,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a868d02f2ed2ae596d97",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "C3 PT110"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f15ffd27b433399e2033",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1398,
+      "powerKw": 50,
+      "commercialNames": [
+        "C3 1.4 HDI"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9961fb152a1bed31787e",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 68,
+      "commercialNames": [
+        "C3",
+        "C3 HDI 90 CV",
+        "C3 HDI 90CV TONIC"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d322679134c6ca5a757",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 73,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-028f0673afb19546cf38",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-903cd069d7edd462e924",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 81,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9df7ef46fd8ffdf2d88d",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1560,
+      "powerKw": 88,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d52d88e43d15a515ac96",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1165,
+      "powerKw": 61,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ec9b83186fe5686d95f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 49,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e4ec5aea16cf197669b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 51,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07e6ccefa2b07f4d2d30",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 52,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83848aee4f3a7ef0be86",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 53,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-623fe1f7cdb818071a4a",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 55,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-537f4c603decff706c45",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 59,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-298806a8fc08b19b2d1f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 67,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 89,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-593217c4e90608caa35a",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 68,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16c676b9aa0cf25d2da2",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 69,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-473c2ab0778380797359",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 70,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ab2b81da937357797fc",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 72,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84d102cce33cfd176f9f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "C 3",
+        "C3",
+        "C3 / 1.2 /",
+        "C3 1.2",
+        "C3 1.2 AUT.",
+        "C3 SMARTCAR",
+        "C3 VAN"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 131847,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e807eb0942ca88fe1cf",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 75,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e3d053daf6f9aa89bb2",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 79,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8674b6a9f13a266ac9ae",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 80,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f7cdc64365948262efb",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 84,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1721a80e9b40ac34a8a6",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 85,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55653ab9a6708f43df8e",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 88,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e2fb8ed3df63632cbe5",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 90,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c846b8fc310430fad2ad",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 91,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e434f55936b62b714e44",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 92,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-427b2891429c9c14c998",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 95,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c661212893fe1e32908",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 110,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 55,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-496d6659fcaefbce381b",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 112,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa52bdc6d66332b70bd5",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 114,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49f16034d9cd3fc49980",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 116,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-943be41c05221a72360f",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 117,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b225a1afbc50b6c8e41",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 120,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ca1a64925479865db57",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 131,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b07ea616bacb72223d1c",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 132,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5d942b9dd8c813d61b6",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 135,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fa5903ad43d539d21d5",
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "canonicalModel": "C3",
+      "modelId": "citroen/c3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 137,
+      "commercialNames": [
+        "C3"
+      ],
+      "sourceMakeNames": [
+        "CITROEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

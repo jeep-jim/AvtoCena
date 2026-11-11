@@ -1,0 +1,349 @@
+{
+  "version": 3,
+  "completed": true,
+  "checkedAt": "2026-09-07T00:48:53.769Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 4,
+  "sampleLimit": 1,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "europe",
+      "requests": [
+        {
+          "origin": "https://www.mobile.de",
+          "path": "/consumer/api/search/srp",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        },
+        {
+          "origin": "https://www.mobile.de",
+          "path": "/consumer/api/search/vip",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        }
+      ],
+      "sourceId": "mobile_de_open",
+      "listingRows": 21,
+      "normalizedRows": 21,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [
+        {
+          "sourceOfferId": "442234185",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "fuel": "petrol",
+            "engineCc": 1373,
+            "powerHp": 110,
+            "sourcePrice": 24970,
+            "sourceCurrency": "EUR"
+          },
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "totalRub": 4598763,
+          "calculationStatus": "estimated",
+          "breakdown": [
+            {
+              "id": "car",
+              "title": "Цена автомобиля",
+              "amountRub": 2401215,
+              "kind": "car",
+              "amountType": "manual",
+              "source": "vehicle",
+              "note": "Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: 2511215 ₽"
+            },
+            {
+              "id": "security-deposit",
+              "title": "Обеспечительный платёж",
+              "amountRub": 110000,
+              "kind": "deposit",
+              "amountType": "fixed",
+              "source": "market_config",
+              "note": "Засчитывается в стоимость автомобиля"
+            },
+            {
+              "id": "topavto-commission",
+              "title": "Комиссия Автодилера",
+              "amountRub": 90000,
+              "kind": "commission",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "export",
+              "title": "Экспортные расходы",
+              "amountRub": 100000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "logistics",
+              "title": "Логистика",
+              "amountRub": 350000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "broker",
+              "title": "Брокер",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "svh",
+              "title": "СВХ",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "laboratory",
+              "title": "Лаборатория",
+              "amountRub": 15000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "sbkts",
+              "title": "СБКТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "epts",
+              "title": "ЭПТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "rf-delivery",
+              "title": "Доставка по РФ",
+              "amountRub": 120000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "customs",
+              "title": "Таможенная пошлина",
+              "amountRub": 1218924,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated",
+              "note": "Включая таможенное оформление, акциз и НДС, если они применимы"
+            },
+            {
+              "id": "utilization-fee",
+              "title": "Утилизационный сбор",
+              "amountRub": 3400,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated"
+            },
+            {
+              "id": "exchange-reserve",
+              "title": "Резерв на изменение курса",
+              "amountRub": 50224,
+              "kind": "reserve",
+              "amountType": "percent",
+              "source": "market_config",
+              "note": "2% от стоимости авто"
+            }
+          ],
+          "currencyRate": {
+            "currency": "EUR",
+            "cbrRate": 100.5693,
+            "nominal": 1,
+            "effectiveRate": 100.5693,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-07T00:49:15.011Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 24970,
+            "sourcePriceRub": 2511215
+          },
+          "eurRate": {
+            "currency": "EUR",
+            "cbrRate": 100.5693,
+            "nominal": 1,
+            "effectiveRate": 100.5693,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-07T00:49:15.011Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 1,
+            "sourcePriceRub": 101
+          },
+          "publicDisplay": {
+            "calculationStatus": "estimated",
+            "totalRub": 4598763,
+            "businessConfigVersion": "market_europe_v2",
+            "priceDeltaFromCalculationRub": 0,
+            "pricingSpecificationsChanged": false,
+            "credible": false,
+            "credibilityEvidence": {
+              "sourceAllowed": true,
+              "semanticRejection": "semantic_bodyType_ambiguous",
+              "credibleImageCount": 28,
+              "bodyEvidence": {
+                "source": "mobile.de consumer SRP/VIP category",
+                "rawValues": [
+                  "OffRoad",
+                  "SUV/Geländewagen/Pickup, Jahreswagen"
+                ],
+                "status": "ambiguous"
+              }
+            },
+            "eligible": true,
+            "reason": "recent_economical_calculated",
+            "detailRub": 4598763,
+            "cardRub": 4598763,
+            "pricesAgree": true,
+            "projectionCanRender": true,
+            "breakdownSumRub": 4598763,
+            "breakdownMatchesTotal": true
+          },
+          "detailNetworkRequests": 1,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "engineCc": 1373,
+            "powerHp": 110,
+            "sourcePrice": 24970,
+            "sourceCurrency": "EUR"
+          },
+          "changedFields": []
+        }
+      ],
+      "pages": [
+        {
+          "cursor": "1",
+          "returnedRows": 21,
+          "diagnostics": {
+            "listingRows": 26,
+            "rejectedRows": 5
+          },
+          "health": {
+            "ok": true,
+            "message": "mobile.de BFF power_001_085_2026 page=1/25 parsed=21 total=26059",
+            "checkedAt": "2026-09-07T00:49:03.740Z",
+            "httpStatus": 200,
+            "contentType": "application/json; charset=utf-8"
+          }
+        }
+      ],
+      "sourceHealth": {
+        "ok": true,
+        "message": "mobile.de BFF power_001_085_2026 page=1/25 parsed=21 total=26059",
+        "checkedAt": "2026-09-07T00:49:03.740Z",
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8"
+      },
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": 26,
+        "adapterRejectedRows": 5,
+        "adapterUnexaminedRows": 0,
+        "returnedRows": 21,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 21,
+        "unexaminedRows": 20,
+        "examined": 1,
+        "calculated": 1,
+        "allowedYearExamined": 1,
+        "allowedYearCalculated": 1,
+        "passingAllFilters": 1,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "samples": [
+        {
+          "sourceOfferId": "442234185",
+          "make": "Suzuki",
+          "model": "(SX4) S-Cross",
+          "year": 2026,
+          "engineCc": 1373,
+          "powerHp": 110,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 1
+}

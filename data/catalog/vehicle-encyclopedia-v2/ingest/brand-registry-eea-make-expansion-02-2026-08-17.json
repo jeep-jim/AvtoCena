@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "brabus",
+          "canonicalName": "Brabus",
+          "slug": "brabus",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "BRABUS are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2023, 2024, 2025 and 88 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bugatti",
+          "canonicalName": "Bugatti",
+          "slug": "bugatti",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "BUGATTI are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2025 and 73 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "cirelli",
+          "canonicalName": "Cirelli",
+          "slug": "cirelli",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "CIRELLI are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2024, 2025 and 557 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dallara",
+          "canonicalName": "Dallara",
+          "slug": "dallara",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "DALLARA are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 162 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "donkervoort",
+          "canonicalName": "Donkervoort",
+          "slug": "donkervoort",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "DONKERVOORT are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 99 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ego-mobile",
+          "canonicalName": "e.GO",
+          "slug": "e-go",
+          "aliases": [
+            {
+              "value": "EGO",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "E.GO and EGO are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 1767 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "elaris",
+          "canonicalName": "Elaris",
+          "slug": "elaris",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "ELARIS are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024 and 378 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "exlantix",
+          "canonicalName": "Exlantix",
+          "slug": "exlantix",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "EXLANTIX are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2025 and 133 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ktm",
+          "canonicalName": "KTM",
+          "slug": "ktm",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "KTM are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 167 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mobilize",
+          "canonicalName": "Mobilize",
+          "slug": "mobilize",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "MOBILIZE are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023 and 80 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "moke",
+          "canonicalName": "Moke",
+          "slug": "moke",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "MOKE are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2023, 2024, 2025 and 122 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ruf",
+          "canonicalName": "RUF",
+          "slug": "ruf",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "RUF are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 91 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "secma",
+          "canonicalName": "SECMA",
+          "slug": "secma",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SECMA are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 468 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suda",
+          "canonicalName": "Suda",
+          "slug": "suda",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SUDA are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022 and 336 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "togg",
+          "canonicalName": "Togg",
+          "slug": "togg",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "TOGG are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 159 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "yudo",
+          "canonicalName": "Yudo",
+          "slug": "yudo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "YUDO are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2023, 2024, 2025 and 425 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "zhidou",
+          "canonicalName": "Zhidou",
+          "slug": "zhidou",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "ZHIDOU are exact registered make values in the EEA passenger-car datasets."
+            }
+          ],
+          "researchNotes": [
+            "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 100 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+            "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

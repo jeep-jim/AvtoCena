@@ -1,0 +1,111 @@
+{
+  "batch": "research-2026-10-22-audi-a6-2020-history-1",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "00624e6c77b6541109a32d66",
+      "changes": [
+        {
+          "variantId": "9f2603dfc5909ad8f1a00190",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "f8224230a230b8e93e7f830c",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "64592f65271a22e83e18c39b",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "b4ac102c4885379e324c6de3",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "b21da1305843868df77f1553",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "337f640271bcf7aeeda3a8db",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        },
+        {
+          "variantId": "abac414c2ea0bcbe5bc737e4",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "transmission",
+            "drive"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-21T23:28:16.190Z",
+  "finishedAt": "2026-10-21T23:28:21.637Z"
+}

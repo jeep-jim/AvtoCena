@@ -1,0 +1,3782 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4-2024-1",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9a25b435f03ff9ad07957627",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - TELECAMERA/ADAS/FULL LED/BAULE ELETTRICO",
+      "expectedDigest": "d644ee647ce96a79c8ac03ffb258ea4e56cc42f455a5fc35dd3c57b7a45085aa",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 136,
+        "powerKw": 100,
+        "icePowerKw": 100,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 30 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 100 кВт / 136 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2160 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6c8b1955a1eb082aa70133c65e724536e2317b931cac559bb02e9ff9039b6030",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "63e13fd86745b01f89dcf80a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO",
+      "expectedDigest": "1f9ff8eebe7c611e947b20cb721df9661e899b5088d14b321c41c5d60357301d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 136,
+        "powerKw": 100,
+        "icePowerKw": 100,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 30 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 100 кВт / 136 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2160 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6c8b1955a1eb082aa70133c65e724536e2317b931cac559bb02e9ff9039b6030",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "83474d3057753a8007315b8c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 30 TDI S tronic | NAVI | ACC | LED |",
+      "expectedDigest": "8203df7c0eb24bb4becdf68c66b803c1de22c58f95cae0bbe19789b063d1d3e9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 136,
+        "powerKw": 100,
+        "icePowerKw": 100,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 30 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 100 кВт / 136 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2160 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/921/file_en/6761efb37ce6a3a81d1737bb72b0c9859aac9ee7/eTD-Audi-A4-Avant-30-TDI-S_tronic-100kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6c8b1955a1eb082aa70133c65e724536e2317b931cac559bb02e9ff9039b6030",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1d3ffe3f29553caebca0848c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI Navi/3-Z-Klima/SHZ/18 Zoll",
+      "expectedDigest": "d20fbdbe64ca5afb9fff080c6875af661a167d0f0a215b1a0ede1470043474ea",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, 2024. Заводская таблица 2024-06-13: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2115 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "123eaf984ccb85daa33e6b94537e67a0238e82b1205f9befae5e7384c41d469f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2b28e1c72b9e22da5824115d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI S-TR NAVI+2xPDC+ACC+SHZ+LM",
+      "expectedDigest": "b0c23cea4d49512ff69cb6261a9556eb3a83d9a7f0f139ed4ddee85a90dcd5dc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, 2024. Заводская таблица 2024-06-13: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2115 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "123eaf984ccb85daa33e6b94537e67a0238e82b1205f9befae5e7384c41d469f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6bd06b26c36bffdb7ce99edd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limo 35 TFSI S tronic Navi Sitzheizung Temp.",
+      "expectedDigest": "9d265817f2d3e31f4b3450050f10bb22ae12614c43eb45d4d0620a9656991aa6",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/816/file_en/cd22704fc6ea58ac2814dabc5a480bbf42a32691/eTD-Audi-A4-Sedan-35-TFSI-S_tronic-110kW-MHEV_240320.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 35 TFSI, 2024. Заводская таблица 2024-03-20: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2040 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/816/file_en/cd22704fc6ea58ac2814dabc5a480bbf42a32691/eTD-Audi-A4-Sedan-35-TFSI-S_tronic-110kW-MHEV_240320.pdf",
+            "date": "2024-03-20",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "d8cc347d4ec11e7d16d031bc799b2a7999cd6cf618c210e06f7549edfd5ff965",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a8854828fa54a9f30e2b1f92",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limousine 35 TFSi S-Line Competition 150 Pk a",
+      "expectedDigest": "29a6fd57b0eb420449d6145d80e9f7083b00e4fb50d729f635852e5f8b800424",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2040
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/816/file_en/cd22704fc6ea58ac2814dabc5a480bbf42a32691/eTD-Audi-A4-Sedan-35-TFSI-S_tronic-110kW-MHEV_240320.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 35 TFSI, 2024. Заводская таблица 2024-03-20: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2040 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/816/file_en/cd22704fc6ea58ac2814dabc5a480bbf42a32691/eTD-Audi-A4-Sedan-35-TFSI-S_tronic-110kW-MHEV_240320.pdf",
+            "date": "2024-03-20",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "d8cc347d4ec11e7d16d031bc799b2a7999cd6cf618c210e06f7549edfd5ff965",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e949f1abbffe746b5b464072",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI Advanced *NAV*LED*KAMERA*VIRTUA",
+      "expectedDigest": "7bae16edb3ad1dd21f7acb396dc27391640a545f47bff246ded4e27c7f4164e9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, 2024. Заводская таблица 2024-06-13: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2115 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "123eaf984ccb85daa33e6b94537e67a0238e82b1205f9befae5e7384c41d469f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5e522c03a07d1fbf84c41218",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI S line LED/ACC/AHK/SHZ/Navi/PDC",
+      "expectedDigest": "bd8e9d4d7ddd0e69b068cba417b2ad9469fcbbadd04ed396f26e2f84067e2fa7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, 2024. Заводская таблица 2024-06-13: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2115 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "123eaf984ccb85daa33e6b94537e67a0238e82b1205f9befae5e7384c41d469f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "eb2f5781f0fde30615cb1005",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI S tronic S line 1.Hand",
+      "expectedDigest": "81ededff93e3abe2d1802a4168b89aa4970749c4c2ba474ec700b80db9f40e90",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, 2024. Заводская таблица 2024-06-13: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2115 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "123eaf984ccb85daa33e6b94537e67a0238e82b1205f9befae5e7384c41d469f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ff69300ffd620c27e1bdb0ba",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI | 2024 | 99.654 km | Automaat | AdaptiveCruise | Led | PDC | ParkPilot | Navi | CarPlay | DAB",
+      "expectedDigest": "b23280a52c945ac77fb3688e0f2a4283de20ce47bbfdb27bea3238117f74ef3c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2115
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, 2024. Заводская таблица 2024-06-13: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2115 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/923/file_en/d185fee5de0e83440b6fe2e19ac9268e85619480/eTD-Audi-A4-Avant-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "123eaf984ccb85daa33e6b94537e67a0238e82b1205f9befae5e7384c41d469f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "227c96e1f0370db74627d09f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S tronic advanced NaviPlus Leder",
+      "expectedDigest": "74f8e41ff43cc0da3f40a1ff40725749b2dd802a768737a6c1e556e6d0e98b2f",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b40e5809479f32dd7dd16e38",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant advanced S-Line 35 TDI B&O LED NAVI SHZ",
+      "expectedDigest": "40aa784f6f40e7171f21d047d326c7eaddaaf375124575432083d5ba9dbbf710",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6b71f4f6784b50b909c3d6f5",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI ACC KAMERA DAB",
+      "expectedDigest": "afb5fe8330553b9e01ed11bc49c3993913dad31a8350a25d1826042f958625ba",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ac387da110eadc05ba613e58",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S tro*Matrix*Navi+*Sportsitze*Ka",
+      "expectedDigest": "6a08dbaf71947094d7a5f6a4b093550b9d4f5626957e9bccf98af3fb8a4d9e6c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "36984d4ce6e9397707c35586",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI advanced/NAVI/KAM/LED/TOP/",
+      "expectedDigest": "ee615d254a37708a77bcedf1a8df9fee6bfc913ec8fddf9f12eec8ba13ee3566",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0d83c60a880e6676c7dc3490",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant Advanced 35TDI S-Tr. Business-Paket LED",
+      "expectedDigest": "fb9e89961677d7d08323539fa7853973a0ce5c76ca9c07a8b21b76b5367587ba",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0a552215fbe50abf7f664d6b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S tronic / AHK / Kamera / NAVI",
+      "expectedDigest": "02d874b4ee3849e15c2b6d71dc1b33fe5d1668b1387872996ea5439fe9c10ca9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8db57fec1f904cde5078e83d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant Advanced 35TDI S-Tr. Business Paket",
+      "expectedDigest": "1b3c900c840e759c77fd22d67ab37712cf4e842ce2b354c78ea0c5c1d7201bf2",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2eff5a43fc57c22265de306e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S-tronic LED+ACC+Navi+Kamera+AHK",
+      "expectedDigest": "cffc39d074fc5151b0187694baa91c7db11cc1583f6910335a03074828250edf",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0985abbbd4cbf2862a7a02c9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S tronic Navi LED",
+      "expectedDigest": "b72ba1d3e88061805c76f770565f1a8293d8f0ec69a85307326a138b8679f58f",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "de5b635bd1ee3d5a35bf46ab",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S tronic 1.Hand 8-fach",
+      "expectedDigest": "f7871166cd197c1285da20dd4f5077f4d06a877730e58835922a89d944c8e4eb",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2c0dd27f3730add12c343610",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI Business, LED, Kamera, Interface",
+      "expectedDigest": "abd237f827e945a9ab46d40a24b4655de2c68a349875cff16e54b90030d9c57d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "96f35647c934c1dd38811c43",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S-Tr. AHK Panoramadach",
+      "expectedDigest": "e8480728601366c2ca26b4c64db7ab5e93a6af931ef02a9e03e2b6913a62d9dd",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "31fb84e6e46f18fffda9e085",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "AVANT 35TDi S LINE LED/TEMPO./KAM./CARPL/NAVI",
+      "expectedDigest": "113d1ce79bae9658aac842f4ae8a76bfadd94f671d5e9ea8c376d3eba18e0e4a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5179ce671bc205d80c5ce46b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI - Voll-LED - Keyless-Go",
+      "expectedDigest": "7ecd4af5a6fc4810e73ea659782b89baec70798e281f1c020aefd9369dd017b5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "97d924eac0491aa3dd4fe47f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant advanced 35 2.0 TDI S-tronic",
+      "expectedDigest": "311153cf539b32dfd42b153ac868d268cb6ce7ff5de5030145019e67022a8c68",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5355d3d22252ce758bb6f889",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI LED Pano Kamera Navi Sitzheizung",
+      "expectedDigest": "f9429cd4538667fd32af903244de49192a830417ca36bbce544a8c85415dc850",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2f8f681bbbe013bac83c59be",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S tronic",
+      "expectedDigest": "a28b38ca7386a8802ce415cfcfaa7b80bfb27c38ec9ae189ea8bea5c6543d3a6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a0ef157d69086ae58209bed5",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant A4 Avant 35 TDI S tronic LED Navi APS F",
+      "expectedDigest": "66e73a316f926f9a93f17c8f0ac12f005d78498add855259036b19aa8d53fa23",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a66fef13d8772dc837f24fec",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant advanced 35 TDI S tr AHK/Nav/LED/Assist",
+      "expectedDigest": "69e2fad611d9c73673f28a4355731dad00940e6aa7e4c1f8b1e9edb6d11629e4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "fd9c3ab8db3e28860ada116d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI LED,Navi,SmartphoneInt,PDC+,Spor",
+      "expectedDigest": "5bacc2eb6dd74546e893a4c79d76a719557fa5be300c7c429786a736bca02a27",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "50f145fd6f217268cdc88ab5",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI Navi,SmartphoneInt,PDC+,Sports.",
+      "expectedDigest": "202a94d00b708d400b97d35210b802270a72f1f709562cec306494756a9e4df9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d06689d5dd95870c5d3da3ab",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "35 2.0 TDI Avant advanced LED+NAVI+SHZ+PDC+BC",
+      "expectedDigest": "c66d8b5db38995a1c16956c6ffd3459a776757738057f67e56976c1509323f91",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e66f1fe7f2afb1e3852518c2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI LED,Navi,SmartphoneInt.,Sportsit",
+      "expectedDigest": "37a589f3c04abefab4233b0f643eaefb96addc7cca100705e01cd1caeb8757a7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d7d1f1ad3d698c9eb8712ecc",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant Advanced 35 TDI S tronic*Navi*Alu*Audi",
+      "expectedDigest": "5b4000aa9d4668e6ebf5e59042cca68320956c6c20bd057b5bb22ae6b5b5d201",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "44b9c8f6ef600657d7310b39",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant A4 Avant 35 TDI S tronic LED Navi AHK A",
+      "expectedDigest": "57cb8fd8e1f1cdf06a3430c7d6919dfc5aa491070639b61b101b56fd3cded2a3",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "eddcfa6f719dbdb3f35f664c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S line A4 Avant 35 TDI S tronic S line",
+      "expectedDigest": "d47cef4f386c81e14bdb84b9b272eaf228541d1a393fa5d8d6fb39f53961dbf5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "106d682cb7756ac74b892ac1",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI Stronic LED Navi RFK Stdhzg AHK",
+      "expectedDigest": "04f51093d4a46650efe79b1a083dbc046f2937bbc6eb1dc34ac0ac49c85b7831",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "24da1250398a4515b0f028dc",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI LED PDC+ AHK Navi Sitzheizung",
+      "expectedDigest": "63c77f27f2cc7d5385587db74e60e367bf194536b904fc2739f4f10fcfdb1af5",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "319f5971f779bb27c0499d3a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant advanced 35TDI Stronic Navi virtual ACC",
+      "expectedDigest": "9872dc52615b8a16082ad76fe4dcd868a1ac38a39e9405038c4e7c65ff3754f6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1edfff33ea3650ac10cf4404",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI Keyless Kamera LED CarPlay ACC",
+      "expectedDigest": "6ea626eae2f7f5b44fa885b396880f91b22eaff32f52deb71ad8e165b26cb91a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4aa7c4526521b05cf61b67ed",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S line 35 TDI 120(163) kW(PS) S tronic",
+      "expectedDigest": "36f6d96db5303f513b5f47cba6e7f52622e5ca90981883f08fb66e4ad30bd036",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c343669270ecb48347e478e0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI S line SPURHALTE+KAMERA+LED+AHK",
+      "expectedDigest": "0d01042483ea24a9165798df2f6f6a9c74f40e273452aa8140280c38b5b9d6b7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "fe363f48481605f811e555e8",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI LED AHK ACC Kamera Navi Carplay",
+      "expectedDigest": "29426745d0e3549d6dd768142439bfc89319fc7d4dc2b365c68a4a08caeff16c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "418f4d09c8fe1fed53117beb",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TDI Competition|S-LINE|VIRTUAL|1.HD",
+      "expectedDigest": "22521145473671ec2c20bf4a27fbeaa75429423d4bd9f3c03dae44e8f4faa01a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "816b7e38177f47954ad5ab81",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 2.0 TDI S-tronic advanced AHK LED AS",
+      "expectedDigest": "c28d79cf8214e995658ac3829122d828e46d656c988990c13b70ea53f3da129a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5c3a7a49829a9884e5296dd3",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S-Line 35TDI S-Tr. VirtualCockpit",
+      "expectedDigest": "35ac1e04917c1ad4e443d6bc402cea54adc30a30e971161738e743b69c18600a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3ef2ce55591065e2977158d6",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "35 TDI Avant S-Tronic S-Line - MATRIX/ADAS/CERCHI 19\"/LUCI PLUS",
+      "expectedDigest": "a9453dbb3ec8de053ef37cae78b0fd4f548989530c2d7e7b5059c42e12018d24",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, 2024. Заводская таблица 2024-06-13: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2165 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/922/file_en/58dcc9e4af24b62823f5a825ccb59b84aa2b0e5b/eTD-Audi-A4-Avant-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ee307faae73ba7bddebd6293cb065a528cabf330ec4c9b26ab446198edfc2946",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c3d8f0159e46d3f926454d3f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S line 40TDI Stronic qu. Navi HuD ACC",
+      "expectedDigest": "d6c0414e0161e229b25bdce64587d51103dcbee09237cc8171052fd182d3ecab",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e29e486bdbb4e39c5901e3e4",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic quattro advanced NaviPl",
+      "expectedDigest": "b10c57b8a4a397023fb2eb491b9f94e9a2ee682b00a5e04410f1a04bb21b890a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6601a4d1b50e85a0347ed2ea",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI qu. S tronic Matrix-LED AHK ACC",
+      "expectedDigest": "89d4b7808df1e4fd0593129c9e4f92e25b0950eaf9cda5b021ca6773cd64385a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3378d7481e3c25d733c72fb9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant advanced 40 TDI quattro S tronic NAVI+",
+      "expectedDigest": "34dd080f354f6630aec494f0345f0c4c19c2e522b5b4f625e946b2558e1c0bc1",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "dac3f55a5e8b3fce5f373785",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI qu. HUD, Sound, Navi, PDC, SHZ",
+      "expectedDigest": "ad2e0578ccf5ac8f289fc9f6e1fa4cf379e128b51426d052d9376d3c3163780b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "22579a632abbd34e84de431a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI qu S LINE 18Z. STANDHZ,360°,AHK",
+      "expectedDigest": "ccd4ea88c87c5b4d00303c4bc1d39e9588d9560ccad89b72d0ba95b7379e7754",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "b73df0606b8038d8c4a76b86",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic quattro advanced",
+      "expectedDigest": "85ed3c15b8d702e2398c7a213226c5deaccb5f9de66281d989e5d3f2beae4e4c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9c773ec77e78997809df0ce6",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S-Line 40 TDI quattro B&O LED NAVI+ SHZ",
+      "expectedDigest": "e4b657a26def9fadcdabcb3967a811d1f4c6789ee944eb8323cc6857936e32e7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7f6d5573fc4827f595f9ee41",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant Advanced 40 TDI qu. AHK RFK LED Keyless",
+      "expectedDigest": "4385a85d393fb604911413a4e5ce04bf42c2712f616b56c76d75e1d1ae939f08",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "a4ec2dafb1b0528fdf6599ff",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI quattro Stronic Matrix LED Navi",
+      "expectedDigest": "c581bdf41de58e5e5005b374f9a6164fdd5ca052367eac725af239bb1a266915",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7c04938865e4db8f1031ff04",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI quattro S-line *1.HAND*ACC*360°*",
+      "expectedDigest": "72645200e1149a23bd7488dd64fffcbb9fa211942dd1333c0b7b9e7cfa2c2d2b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7dba30e62daecd75697fda44",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S line 40TFSI quattro NAVI LED HUD SHZ",
+      "expectedDigest": "ff9abfe4523cc168173cc92e712521e4d8b1430d0243bc58a209f233299c0aea",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2200
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1065/file_en/1269bed89476fdacc4aa99f4d29c8358399423f3/eTD-Audi-A4-Avant-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2024. Заводская таблица 2024-06-13: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2200 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1065/file_en/1269bed89476fdacc4aa99f4d29c8358399423f3/eTD-Audi-A4-Avant-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "e38e1e18eac71bb936b852027b0fed3dfa8759bdcc2de2945ae8e539f314a0e2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "07ef0226c95ad9f1824c5f43",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI qu KAMERA,KEYLESS,ACC,PANORAMA",
+      "expectedDigest": "47c465f198bd73614cc257752729b630b7841705ba1c2ac26eadeff00c038cab",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0c840927661c15d7c425ac51",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic quattro*NAVI*LED*360°*",
+      "expectedDigest": "db77a7f22b881ce763ae27b441d6f8dfed326054a759d7f50a934936efdbcf45",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "97f71f060eaa36f2001f1bcb",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant S line 40 TDI quattro Stdhz. Matrix RFK",
+      "expectedDigest": "839b278d94cf9effca98e1159938c90b090ec140be1161116477f82b6e280af4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2230
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2024. Заводская таблица 2024-06-13: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV, допустимая полная масса 2230 кг. Сопоставлены кузов, год, мотор, объём и мощность исходной записи, КПП; для40/45 привод должен быть явно указан в названии или исходном поле. Неизвестный привод этих версий пропущен. Электрическая мощность сети12В не принята за тяговую или сертифицированную30-минутную. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/820/file_en/63bd2b6f220a72316068f1c5d69a7b8fba613ded/eTD-Audi-A4-Avant-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "c6d2acb8053c54f49b4bbb99de925a34ea09990dcd1daee4cb56e5ade09680c7",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

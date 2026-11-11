@@ -1,0 +1,296 @@
+{
+  "releaseSha": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+  "calculationVersion": "1aefa5db1c632f403c0735eedfc247dd59447aaf45ab890ae74de34546156cb8",
+  "checkedAt": "2026-10-25T15:38:36Z",
+  "catalogGeneration": "gen_1792702445675_8c312f85",
+  "verifiedSameOfferChecks": [
+    {
+      "offerId": "48aa977dd5befa273b758091",
+      "make": "XPeng",
+      "model": "P7",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "9d2d0b045d7921b632fe986b",
+      "make": "XPeng",
+      "model": "P7+",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "440973d3334b545a6a3d183b",
+      "make": "XPeng",
+      "model": "P7",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "40cf5a354e70d7df66f77ddc",
+      "make": "Xiaomi",
+      "model": "SU7 Ultra",
+      "beforePreviewRub": null,
+      "afterPreviewRub": 11963682,
+      "precedent": {
+        "kw": 490,
+        "method": "same_model_only",
+        "certified": false,
+        "requiresConfirmation": true
+      },
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "88aba15edacd9de8f96b320a",
+      "make": "Xiaomi",
+      "model": "SU7 Ultra",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "2ee9c455b517e09897ec11d7",
+      "make": "Xiaomi",
+      "model": "SU7 Ultra",
+      "beforePreviewRub": null,
+      "afterPreviewRub": 11633837,
+      "precedent": {
+        "kw": 490,
+        "method": "same_model_only",
+        "certified": false,
+        "requiresConfirmation": true
+      },
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "da58942270d189e96034645c",
+      "make": "Nio",
+      "model": "ES8",
+      "beforePreviewRub": null,
+      "afterPreviewRub": 6910677,
+      "precedent": {
+        "kw": 105,
+        "method": "nearest_compatible_mechanics",
+        "certified": false,
+        "requiresConfirmation": true
+      },
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "4d015de2e992152841c344d7",
+      "make": "Nio",
+      "model": "ES8",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "b595dd0372209177377bead7",
+      "make": "Nio",
+      "model": "ES8",
+      "beforePreviewRub": null,
+      "afterPreviewRub": 6910677,
+      "precedent": {
+        "kw": 105,
+        "method": "nearest_compatible_mechanics",
+        "certified": false,
+        "requiresConfirmation": true
+      },
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "7c65af5e91ac935df14e707a",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "222fe9116ba08e733b14871d",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    },
+    {
+      "offerId": "0b2d4f71cf32c06ffb33cca5",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "beforePreviewRub": null,
+      "afterPreviewRub": null,
+      "precedent": null,
+      "sourcePower30Unchanged": true
+    }
+  ],
+  "verifiedNewPreviewCountInSample": 4,
+  "priceIndexComparison": {
+    "previousRelease": "475f4ae858a2eec6247b6023baa8b450673e9a2d",
+    "before": {
+      "china": 168919,
+      "korea": 3469,
+      "europe": 38604,
+      "uae": 8,
+      "georgia": 11
+    },
+    "after": {
+      "china": 173580,
+      "korea": 3470,
+      "europe": 39974,
+      "uae": 8,
+      "georgia": 11
+    },
+    "netIncrease": 6032,
+    "meaning": "Rows with a calculated price in prepared budget indexes, not all precedent estimates or unique model count."
+  },
+  "publicCalculationChecks": {
+    "checkedAt": "2026-10-25T15:39:08Z",
+    "releaseSha": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+    "samples": [
+      {
+        "id": "40cf5a354e70d7df66f77ddc",
+        "parameters": {
+          "year": 2025,
+          "fuel": "electric",
+          "powerHp": 1548,
+          "power30MinKw": 490,
+          "vehicleCategory": "M1",
+          "deliveryCity": "Новокузнецк"
+        },
+        "verified": true,
+        "result": {
+          "totalRub": 12083682,
+          "power30Precedent": {
+            "kw": 490,
+            "method": "same_model_only",
+            "certified": false,
+            "requiresConfirmation": true
+          },
+          "label": "Предварительный расчёт по близкой версии",
+          "requiresConfirmation": true,
+          "warnings": [
+            "Доставка: Уссурийск → Новокузнецк: около 120 000 ₽. Предварительный тариф, подтвердим перед заказом.",
+            "Льготный коэффициент физического лица применяется только при соблюдении условий личного пользования; для ДВС и иных гибридов дополнительно требуется объём не более 3000 см³ и мощность не более 117,68 кВт, для электромобилей и последовательных гибридов — не более 58,84 кВт.",
+            "Таможенная стоимость должна включать цену автомобиля и подтверждённые расходы по доставке до границы ЕАЭС; логистика не подставляется автоматически.",
+            "Месяц выпуска неизвестен: для расчёта принято 1 июля указанного года. Уточните дату перед переходом возрастной границы.",
+            "Льготный утильсбор рассчитан как для первого ввоза физлицом для личного пользования. Право на льготу должно быть подтверждено перед оплатой.",
+            "Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю.",
+            "30-минутная мощность 490 кВт подобрана по близкой версии. Стоимость предварительная; мощность нужно подтвердить по документам автомобиля."
+          ]
+        }
+      },
+      {
+        "id": "da58942270d189e96034645c",
+        "parameters": {
+          "year": 2025,
+          "fuel": "electric",
+          "powerHp": 707,
+          "power30MinKw": 105,
+          "vehicleCategory": "M1",
+          "deliveryCity": "Новокузнецк"
+        },
+        "verified": true,
+        "result": {
+          "totalRub": 7030677,
+          "power30Precedent": {
+            "kw": 105,
+            "method": "nearest_compatible_mechanics",
+            "certified": false,
+            "requiresConfirmation": true
+          },
+          "label": "Предварительный расчёт по близкой версии",
+          "requiresConfirmation": true,
+          "warnings": [
+            "Доставка: Уссурийск → Новокузнецк: около 120 000 ₽. Предварительный тариф, подтвердим перед заказом.",
+            "Льготный коэффициент физического лица применяется только при соблюдении условий личного пользования; для ДВС и иных гибридов дополнительно требуется объём не более 3000 см³ и мощность не более 117,68 кВт, для электромобилей и последовательных гибридов — не более 58,84 кВт.",
+            "Таможенная стоимость должна включать цену автомобиля и подтверждённые расходы по доставке до границы ЕАЭС; логистика не подставляется автоматически.",
+            "Месяц выпуска неизвестен: для расчёта принято 1 июля указанного года. Уточните дату перед переходом возрастной границы.",
+            "Льготный утильсбор рассчитан как для первого ввоза физлицом для личного пользования. Право на льготу должно быть подтверждено перед оплатой.",
+            "Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю.",
+            "30-минутная мощность 105 кВт подобрана по близкой версии. Стоимость предварительная; мощность нужно подтвердить по документам автомобиля."
+          ]
+        }
+      }
+    ]
+  },
+  "publicHtmlCheck": {
+    "checkedAt": "2026-10-25T15:40:42Z",
+    "url": "https://avtocena.com/cars/offer/nio-es8-2025--da58942270d189e96034645c",
+    "checks": {
+      "http200": true,
+      "estimateDraft105": true,
+      "warningElement": true,
+      "warningCopy": true
+    },
+    "browserVisualCheck": "not_completed_browser_received_502_while_HTTP_request_returned_200"
+  },
+  "limitations": [
+    "Catalog is not fully populated. Pass 4: 22473 estimates,18884 version ranges,764 preserved existing values,41234 without compatible precedent.",
+    "No certified fields changed. A model precedent remains preliminary and requires vehicle-document confirmation.",
+    "Incomplete Li L6 examples remain seller-only. Manufacturer ICE evidence is saved separately for follow-up.",
+    "Visual browser check could not complete: that browser returned502, while direct HTTP200 and API checks succeeded."
+  ],
+  "workflow": {
+    "runId": 40204655890,
+    "jobId": 121203076636,
+    "conclusion": "success",
+    "profileTestsPassed": 267,
+    "storageTestsPassed": 24,
+    "publicVerification": {
+      "version": 1,
+      "release": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+      "startedAt": "2026-10-25T15:38:10.481Z",
+      "groups": 529,
+      "variants": 4862,
+      "fields": 22609,
+      "verified": true,
+      "finishedAt": "2026-10-25T15:42:17.021Z"
+    }
+  },
+  "precedentPopulation": {
+    "runId": 40201727938,
+    "jobId": 121196641449,
+    "key": "knowledge/encyclopedia/power30-precedents/runs/2026-10-25-site-models-04/manifest.json",
+    "summary": {
+      "startedAt": "2026-10-25T14:32:41.593Z",
+      "catalog": {
+        "checked": 83355,
+        "byStatus": {
+          "no_compatible_documented_precedent": 41234,
+          "range_requires_version": 18884,
+          "estimated": 22473,
+          "existing_value_preserved": 764
+        }
+      },
+      "encyclopedia": {
+        "models": 2371,
+        "checked": 21842,
+        "byStatus": {
+          "estimated": 6198,
+          "no_compatible_documented_precedent": 11150,
+          "range_requires_version": 4417,
+          "existing_value_preserved": 77
+        }
+      },
+      "storageWrites": 260,
+      "certifiedFieldWrites": 0,
+      "finishedAt": "2026-10-25T14:40:42.057Z",
+      "bindings": 105197,
+      "resolutions": 1277,
+      "references": 13130,
+      "reusableProfiles": 8720,
+      "activeModelKeys": 2693
+    },
+    "readback": true
+  }
+}

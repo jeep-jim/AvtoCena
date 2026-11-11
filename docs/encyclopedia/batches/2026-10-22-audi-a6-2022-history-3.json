@@ -1,0 +1,4099 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-2022-history-3",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3819113259cdf541f8734df1",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S tronic sport*PANO*LED*KAMERA*",
+      "expectedDigest": "edd5c4d2147ae51feb1bfe39720e7c893a9cbf66ee101eb8b9133036e6eae0f1",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c66aef19a2885299bbfb1925",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant sport 45 TFSI quattro S tronic *S line*",
+      "expectedDigest": "5e490adc4189bf7af387a46a975c02ef984358ef70789bedd63ea1e68775c2b6",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3f7c76de7f7396f6ad65fd03",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic sport S line",
+      "expectedDigest": "2c9f32dc856f9cf556dbd3f5500542532640ed8308915a36e72cf75e0043fc17",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 45 TFSI: 1984 см³, ДВС 195 кВт/265 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "753b06a54e0bb67c81c2665b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI Q DESIGN LED, VOLL-LEDER, APPLE",
+      "expectedDigest": "a29819fbb50f7ac5c9d65d8078d41293abb09f9f69fe0a996a326423d23d9106",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "156b5670f1f8c8553d50fc8d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro Sport ACC/PANO/HUD/LEDER",
+      "expectedDigest": "c8cf3fae4e7241dc4355a7db37afd1b70c21e656fcbd742d8c4c322c17e7bac9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "08ea7ae007d3805a272fa559",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "3.0 Avant 50 TDI Quattro-Automatik-AHK",
+      "expectedDigest": "14533abca25cdf805e42b4125b81c059009cdfc5a83712924da849f441902210",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0b2179b271be6ea6434a4d6b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro S tronic sport NAVI KLIM",
+      "expectedDigest": "49a4aec4f1ab361ef114d964c1c2321c9d33eb4cf0185a4f4ae933cb9ef27919",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d2f969822e6fd189ac46e8df",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro sport S-line ACC|LED|HuD",
+      "expectedDigest": "b562d9c58694575eaba21d72415ecdd6757a5b2cd61f1b5b5a18ebf9039356b5",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "952ec53296b71b2f161c91fa",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant design 50 TDI qu.AHK 4xSHZ KAM ACC SOUN",
+      "expectedDigest": "70930d0e77baaf6f05e3cadbe24fb5fb297e7b7ae7795290bebe8928b2b52b86",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "33be6eff30afe7387957e241",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant S line 50 TDI quattro tiptronic NAVI TO",
+      "expectedDigest": "4124f6490c21c28fddd0c219fad4d9bef13f9c110877163a08d4ba60b490964a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "e95f940f5e968f6e04963c87",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro sport*MEMORY*HUD*KAM*VIR",
+      "expectedDigest": "172c650d40b8c88df33a24cd3cef9c7c3883f74d791f69a7f362ad76250c12ad",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6c64593509a122c6939b5b9f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limousine 50 TDI QU SPORT LED+NAV+B&O+PDC+AHK",
+      "expectedDigest": "f55a185b4991049e768f52011ef62b1f79119e59fcc7ddede7cc6d63082933b4",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "20616cdddcc0697fcda5581e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro tiptronic sport | AHK",
+      "expectedDigest": "ae604412e4ec2008c009466bd2e909ff2f4a94ab546f505d015875a07198de03",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8297dd2e6bbdaae8cc1dc7d6",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu S LINE 19Z KEYLESS,ACC,KAMERA",
+      "expectedDigest": "7fbd780976bf37c25361134281bce5d115d1edef26a2838c292d97762585fe1a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "77664032121467275f344fe9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50TDI quattro sport/Head-Up/LED/DAB/ACC",
+      "expectedDigest": "bcce20a294f7dace0e0e235c3f7461f82c9947e9318b3ce58dfcdd95cd584972",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "596ead725931ab73c38d4396",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI QU 2xS-LINE LED+NAVI+B&O+PDC+ACC",
+      "expectedDigest": "5d0c2876c6573a454d28a64c5f74d829474ef92740395fc7c04745db40a39a24",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5b1195ee6da4471e274c4057",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu. tiptronic sport LED 19 PANO",
+      "expectedDigest": "5af2e37fad1bf1c6112a0ad5ced82800a7d258c05986108cb46d488d6f80f859",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "10835ca11de884ea361856b5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro design AHK+LED+Navi+ACC",
+      "expectedDigest": "204608a7e2e824e9789716dfc06d95b85f8e3f439a7a7ec1de7852d79b63e4f5",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d3fa94b92bc8afd4bbcb9e9e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro S line*2.Hand*LED*Leder",
+      "expectedDigest": "43698d7c09644ad889432b0d560c86dca7060e6dc8e18207f0bd47147e0e56af",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a4ef0717b941c9187acbd5f2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro sport AHK S-Line ACC LED",
+      "expectedDigest": "6891facfb75dd0b279ef256806c720f09666f5dcff5783db7e33113291e365bd",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3fc09927aecfb1c0112b82e3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant Sport 50 TDI quattro Pano HUD ACC AHK",
+      "expectedDigest": "ad62ac18dd0782bbd78230783c023cc373735153c7953420deedeef207e6de45",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "11a1447618608f19364d2918",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro MATRIX+HUD+KAMERA+STANDH",
+      "expectedDigest": "5c5444bb33027f3068283f70337387de0abc3d070f166b55713d462aec1ba3cd",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f8fddf838eac9c37edcfd5cf",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu/Tip. *Sport*LED*RüKam*Navi*",
+      "expectedDigest": "73f2673d798061afc0a1934d67a3d2964829ee84ffaad628bcca4d789c210768",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "67fd228679e6a0e77d4b276e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu S LINE 19Z PANO,HEADUP,KAMERA",
+      "expectedDigest": "9464b781b90ffd6a172623e4cba16f7ca707c038067b5e15bf8b9a9f82ba569f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c87b58871107347f3c28b876",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant A6 Avant 50 TDI quattro tiptronic MLED",
+      "expectedDigest": "741a83bb2518aad28e0073a97957a6980ee36c08ba91144b075b677cdd3cc7f9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "378feb3dbd13417bce9d445e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI q. Tiptr. Sport, LED, Pano, HUD",
+      "expectedDigest": "a89e4cd6aa29a2dc994cd0ecd2afdeda92bc4948740aacf674b69a6c74da4790",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "36a13f5722322cffaf78162d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI QUATTRO SPORT +PANO+GRA",
+      "expectedDigest": "c1798fd14762b69e34e1dccb9bb0be8137aa09282ef0c6dddfc567db6e7fb5d7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "bee204d74119c66eb15cc5bc",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "AVANT 50TDi Q TEMPOMAT/CARPLAY/SRA/DSP/APS+",
+      "expectedDigest": "a52696a4ed2f1e232b437640f71ace4c6348c7a7e5ce71197984bfc9082c88c2",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fbcb6cc40d46bbdabc34b2a0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant S line 50 TDI quattro virtual Cockpit/",
+      "expectedDigest": "5ef5698316ac813c8f75a92e5105f4726b9ed2ecd61b2f74ea0a62dd82faecad",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "db8ac80eeb876ca06f24ab19",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro design MMI LEDER 19\" RFK",
+      "expectedDigest": "8f39484b8545d81697fc9b6b01873eb7633738bb02f7238f1a7193c3fc8250d2",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "98edf15351b08585a588a0c5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu. LED Pano HuD Kamera Carplay",
+      "expectedDigest": "d01d6dc93273a728757520c1fb44b133e698615c878a5b08cc975a22660d4662",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c4591dc7bdc5fbcd583f0d1f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant Sport 50 TDI *PANO*HUD*ACC*KAMERA*LHZ+S",
+      "expectedDigest": "b0f37a19736612e26a334878e4013bf2146e8cd723cf42b5cb6680a80c4f8c0d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "18dd66426e6e3fbb580d567e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu. LED Pano HuD Kamera Leder",
+      "expectedDigest": "dbf96e0a47dea9cf9154c64981e9714d24e8ded32fa9ef8bbafe87303c2ade5e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "43c233e23963667e0dd16da0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI sport qu.S-tronic,LED,Pano,Leder",
+      "expectedDigest": "d7d12f2a247983b474311adf4f21ac84fe1af7200aca914a33e630fad509d0fe",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4a01988befdd0efa4a48dae7",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant basis 50 TDI quattro SOTCLOSE/NAVI/21ZO",
+      "expectedDigest": "9cc5c1d7a4ae245cd4381fd535bd853f37292240ce58634a49e865c214ceee13",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "58b25905dc2747053ca40f08",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro sport*STH*inkl. Garantie",
+      "expectedDigest": "acddfa904a20cac2a4fb549f78cbe9b1b0888af7d9069e5a4609c256f62c52f8",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2030fff3fd952f97d12f0b81",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI QU 2xS-LINE MATRIX+B&O+AHK+PANO",
+      "expectedDigest": "d3ac422ccc733bef52523af92a32ff92c7739e4a2d01830c39fb3ed7f84fd9e8",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1a8f934ce2db4177999b11a5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI qu.S-line,HD-Matrix,B&O,ad.Air,L",
+      "expectedDigest": "7aef1baa9247818af2a7743040ad550ea2e18e8eda1ad2db0f54dc285e2a590e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2a61b15b1e9511656d2537c9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro tiptronic sport 8-fach",
+      "expectedDigest": "c21b6195daed9f179b5b8f976db130ba3a58a1f664e5f89d61caf99b26fb6574",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "60a86b32fbed23161a170c01",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 50 TDI quattro Sport/S-Line *21Zoll*",
+      "expectedDigest": "51f606b20e866253a9dffb87047e4c3d547b70bd25606a346c442bdf78142eb4",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f4d72e1fad63a4f13f5f66f2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant sport 55 TFSI quattro S tronic PANO*RFK",
+      "expectedDigest": "d8f9ff8173b4a6174255cfdd3da9d177a60bef25f9dc5e6cdfe8c7fb32e8545d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "338c4228abcc6789eae053d7",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim. 55 TFSI quattro design / LED / LEDER",
+      "expectedDigest": "3ac19dac6644eaa3b4216682897d9c1519ec3d8f80df4fb319c54caaac142a38",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7e7c2ff9d6c6cbf742dd2175",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI q. S-Tronic S-Line, LED, B&O",
+      "expectedDigest": "cb7628091ab19b96edd0a0743c120f9802a3f5bcf33178be8ecb4a6670d04a90",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a2478af9ad9fe1a855003598",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant Sport 55 TFSI Pano Memory VCplus",
+      "expectedDigest": "169fb071ae83ed3e8f7772a9e90b035a54821d40e9b9f037ef8e34b52e7efb18",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "62235de8e68b6a5b17cff359",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI qu sport S Line Pano HUD Virt",
+      "expectedDigest": "41e9e827d6825676692ed75ae925a8ff52e0517bd89bde0f4961fd09d3fb3998",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ba929aab5c45b33cb7526c38",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limo 55 TFSI qu. LED/RFK/Navi+/Memory/SHZ",
+      "expectedDigest": "da24c4e6aa2a8c6feb55c9238f1893eba85adb1313f40aee0738972a07caf3ad",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2ccb79ac7f1846439123a226",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limousine 55TFSI quattro S tron",
+      "expectedDigest": "d5c488fec5201a0cef99f864e29bc5a2b0cd4dbb0b21eb6527edae8e5e3989ac",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5d1df3a5e7b3d60d22ccbfce",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro S tronic MMI Navi plus",
+      "expectedDigest": "72d1558f2f7cfb8b1c51ca6bb41267b58d41db1b9e874489f72fb136279f97c3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a452896f53f70472e41ece1a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limo 55TFSI qu. S line/LED/Kamera/Navi+/Leder",
+      "expectedDigest": "e316cbd431eedd9f6d68fdb2e8f0a1c95f20d32298efb7f0551b237e8be452aa",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9a8a38d5b0c21a4ca2992802",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro sport S line Plus ACC+M",
+      "expectedDigest": "9f29877e8f8a4300679c2a4c18823d42f752b0cca912ee2689cf0234cc59cf30",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c7fb09e83c534d4fd1976274",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI Q 2x S LINE BLACK LM20 PANO eSI",
+      "expectedDigest": "53dc2955cb8ef4f7fe39805e9f9e9a4fc3560f7d069ac76982812ce3e3be8a54",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "389e2a0306a60d181f483493",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro sport/S line/LED/Kamera",
+      "expectedDigest": "4e06686b76744e1000d0ae4758bbdc63b7cd09f7f9701332e4697b5c8a4aaeac",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "cb1ff156c10935a2e3f28978",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limousine 55 TFSI qu S LINE 20Z. PANO,KEYLESS",
+      "expectedDigest": "e914f115bbb6b1fc4c4e154903bff63517357a66eaa721fa5228878ff3f03202",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f7cfc7d4006d42256d060e42",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Lim. 55 TFSI quattro Sport *20Zoll*PANORAMA*",
+      "expectedDigest": "c5a59a073a094cb4687e7e6f39f458717fec66d53e41944e8649b63cd3ca433b",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ba4b55da429f3f1a25053da0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro S tronic sport 8-fach",
+      "expectedDigest": "52ca73a7f6fd04723b9843500eaa22fbb9f43b7469ed6685f0abc6b43bd1e21f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c8a47ec2b623caefc037d55e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI S-LINE ACC Kamera Navi PDC AHK",
+      "expectedDigest": "6214b76fbf221d1be213dd0c6b96d148f53eca70e8d92948393bf04e71bc7e63",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5f7b9b36e7a368a723a5b27a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant S line 55 TFSI AHK ACC RFK SHZ Navi PDC",
+      "expectedDigest": "bba24d7811701c05cfcd7e44487ef1428a259da5cd4958df7c47c7c7d377286d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "403749175e083ab4b892ea6d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI qu. S line *20Z*Matrix*HeadUp*",
+      "expectedDigest": "35c72a6c9a040ea6ab81cc0262e9228b0a2784a22da54abb5b9dec17d8c8d7e1",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d38763366ea02e7195365cf9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro Nav ACC Pano Sound 360°",
+      "expectedDigest": "3201ae42b749358971dff9a7892a4eddd23c57135473162b78faa7770996b9da",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b4db5105999f312bd072950d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Limousine 55 TFSI QU S-TR S-LINE LED+HuD+AHK",
+      "expectedDigest": "37babf4cd4ad65ec2e6f2f122019ce52fb2e75fafc7272ec5fd2c5c254e21dad",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Limousine 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ccef85a5e7cd1d2e9e9606c2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro S line LED*HuD*RFK*ACC",
+      "expectedDigest": "b0b9f1d12881ccc9cbd6c7d5ca729d285e1bbb331809860255717f04967accb8",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c92fb6e4fc47cf85a10915f2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI S line 20Z*RFK*Matrix*HuD*Pano",
+      "expectedDigest": "44e29c38c82d61c887c50e196a5569b4e606474541c27f933e3e07b447b5ae63",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0ac826d017783f0b6dd049a8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55 TFSI quattro S line LED*Pano*HuD*",
+      "expectedDigest": "c2c09d7fed52ff851a7d5a757858d29718bfb722a039ee56f560ba429ab4467e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "456ed6b5776128dccbe8b500",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 55TFSI S-tronic quattro *S-Line*Navi+BT",
+      "expectedDigest": "726460cb6cf9a289cefc3514be4fb507efbefaf00902d56c5c0da674c4b2d17b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2022-08-12, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.131–134: двигатель/топливо/привод/КПП;стр.110:MHEV;стр.140:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Документ прочитан через веб-индекс; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/a9d19a87da0f7a707944b51bb29033b6b55b9ea4c682cbafbe98d75774688119.pdf",
+            "date": "2022-08-12",
+            "pages": [
+              110,
+              131,
+              132,
+              133,
+              134,
+              140
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "indexed factory PDF archive"
+          }
+        ]
+      }
+    }
+  ]
+}

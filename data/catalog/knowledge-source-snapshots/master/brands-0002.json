@@ -1,0 +1,3574 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_brand",
+  "chunk": 2,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "omoda",
+      "canonicalName": "OMODA",
+      "observedNames": [
+        "OMODA",
+        "Omoda"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "opel",
+      "canonicalName": "Opel",
+      "observedNames": [
+        "Opel"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 43
+    },
+    {
+      "sourceKey": "ora",
+      "canonicalName": "ORA",
+      "observedNames": [
+        "ORA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "oshan",
+      "canonicalName": "Oshan",
+      "observedNames": [
+        "Oshan"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "packard",
+      "canonicalName": "Packard",
+      "observedNames": [
+        "Packard"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 20
+    },
+    {
+      "sourceKey": "pagani",
+      "canonicalName": "Pagani",
+      "observedNames": [
+        "Pagani"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "panhard",
+      "canonicalName": "Panhard",
+      "observedNames": [
+        "Panhard"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "panther",
+      "canonicalName": "Panther",
+      "observedNames": [
+        "Panther"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "perodua",
+      "canonicalName": "Perodua",
+      "observedNames": [
+        "Perodua"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "peugeot",
+      "canonicalName": "Peugeot",
+      "observedNames": [
+        "Peugeot"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2"
+      ],
+      "modelCount": 59
+    },
+    {
+      "sourceKey": "pgo",
+      "canonicalName": "PGO",
+      "observedNames": [
+        "PGO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "piaggio",
+      "canonicalName": "Piaggio",
+      "observedNames": [
+        "Piaggio"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "pininfarina",
+      "canonicalName": "Pininfarina",
+      "observedNames": [
+        "Pininfarina"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "plymouth",
+      "canonicalName": "Plymouth",
+      "observedNames": [
+        "Plymouth"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 53
+    },
+    {
+      "sourceKey": "polaris",
+      "canonicalName": "Polaris",
+      "observedNames": [
+        "Polaris"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "polestar",
+      "canonicalName": "Polestar",
+      "observedNames": [
+        "Polestar"
+      ],
+      "markets": [
+        "us",
+        "canada",
+        "global"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 26
+    },
+    {
+      "sourceKey": "polestar极星",
+      "canonicalName": "Polestar极星",
+      "observedNames": [
+        "Polestar极星"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "polskifiat",
+      "canonicalName": "Polski-Fiat",
+      "observedNames": [
+        "Polski-Fiat"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "pontiac",
+      "canonicalName": "Pontiac",
+      "observedNames": [
+        "Pontiac"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2"
+      ],
+      "modelCount": 45
+    },
+    {
+      "sourceKey": "porsche",
+      "canonicalName": "Porsche",
+      "observedNames": [
+        "Porsche"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "modelCount": 107
+    },
+    {
+      "sourceKey": "prince",
+      "canonicalName": "Prince",
+      "observedNames": [
+        "Prince"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "princess",
+      "canonicalName": "Princess",
+      "observedNames": [
+        "Princess"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "proton",
+      "canonicalName": "Proton",
+      "observedNames": [
+        "Proton"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 12
+    },
+    {
+      "sourceKey": "puch",
+      "canonicalName": "Puch",
+      "observedNames": [
+        "Puch"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "ram",
+      "canonicalName": "RAM",
+      "observedNames": [
+        "RAM",
+        "Ram"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "rambler",
+      "canonicalName": "Rambler",
+      "observedNames": [
+        "Rambler"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 14
+    },
+    {
+      "sourceKey": "ravon",
+      "canonicalName": "Ravon",
+      "observedNames": [
+        "Ravon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "reliant",
+      "canonicalName": "Reliant",
+      "observedNames": [
+        "Reliant"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "renault",
+      "canonicalName": "Renault",
+      "observedNames": [
+        "Renault"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 73
+    },
+    {
+      "sourceKey": "reo",
+      "canonicalName": "Reo",
+      "observedNames": [
+        "Reo"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "riley",
+      "canonicalName": "Riley",
+      "observedNames": [
+        "Riley"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 22
+    },
+    {
+      "sourceKey": "rivian",
+      "canonicalName": "Rivian",
+      "observedNames": [
+        "Rivian"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic",
+        "avtocena-v2"
+      ],
+      "modelCount": 101
+    },
+    {
+      "sourceKey": "rollsroyce",
+      "canonicalName": "Rolls-Royce",
+      "observedNames": [
+        "Rolls-Royce"
+      ],
+      "markets": [
+        "global",
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2",
+        "canada-nrcan",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "modelCount": 58
+    },
+    {
+      "sourceKey": "roushperformance",
+      "canonicalName": "Roush Performance",
+      "observedNames": [
+        "Roush Performance"
+      ],
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "rover",
+      "canonicalName": "Rover",
+      "observedNames": [
+        "Rover"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 58
+    },
+    {
+      "sourceKey": "rox极石",
+      "canonicalName": "ROX极石",
+      "observedNames": [
+        "ROX极石"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "ruf",
+      "canonicalName": "RUF",
+      "observedNames": [
+        "RUF"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "rufautomobile",
+      "canonicalName": "RUF Automobile",
+      "observedNames": [
+        "RUF Automobile"
+      ],
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "saab",
+      "canonicalName": "Saab",
+      "observedNames": [
+        "Saab"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 13
+    },
+    {
+      "sourceKey": "sachsenring",
+      "canonicalName": "Sachsenring",
+      "observedNames": [
+        "Sachsenring"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "saturn",
+      "canonicalName": "Saturn",
+      "observedNames": [
+        "Saturn"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "scion",
+      "canonicalName": "Scion",
+      "observedNames": [
+        "Scion"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "seat",
+      "canonicalName": "SEAT",
+      "observedNames": [
+        "SEAT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2"
+      ],
+      "modelCount": 17
+    },
+    {
+      "sourceKey": "secma",
+      "canonicalName": "SECMA",
+      "observedNames": [
+        "SECMA"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "seres",
+      "canonicalName": "Seres",
+      "observedNames": [
+        "Seres"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "shangjie",
+      "canonicalName": "SHANGJIE",
+      "observedNames": [
+        "SHANGJIE"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "shelby",
+      "canonicalName": "Shelby",
+      "observedNames": [
+        "Shelby"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "simca",
+      "canonicalName": "Simca",
+      "observedNames": [
+        "Simca"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 18
+    },
+    {
+      "sourceKey": "singer",
+      "canonicalName": "Singer",
+      "observedNames": [
+        "Singer"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "skoda",
+      "canonicalName": "Skoda",
+      "observedNames": [
+        "Skoda"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 14
+    },
+    {
+      "sourceKey": "škoda",
+      "canonicalName": "Škoda",
+      "observedNames": [
+        "Škoda"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 33
+    },
+    {
+      "sourceKey": "skywell",
+      "canonicalName": "Skywell",
+      "observedNames": [
+        "Skywell"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "skyworth",
+      "canonicalName": "Skyworth",
+      "observedNames": [
+        "Skyworth"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "smart",
+      "canonicalName": "Smart",
+      "observedNames": [
+        "Smart",
+        "smart"
+      ],
+      "markets": [
+        "global",
+        "china"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "autohome-china"
+      ],
+      "modelCount": 28
+    },
+    {
+      "sourceKey": "solaris",
+      "canonicalName": "Solaris",
+      "observedNames": [
+        "Solaris"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "sollers",
+      "canonicalName": "Sollers",
+      "observedNames": [
+        "Sollers"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "songsanmotors",
+      "canonicalName": "SONGSAN MOTORS",
+      "observedNames": [
+        "SONGSAN MOTORS"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "spartan",
+      "canonicalName": "Spartan",
+      "observedNames": [
+        "Spartan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "sportequipe",
+      "canonicalName": "Sportequipe",
+      "observedNames": [
+        "Sportequipe"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "spyker",
+      "canonicalName": "Spyker",
+      "observedNames": [
+        "Spyker"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "shineray",
+      "canonicalName": "SRM Shineray",
+      "observedNames": [
+        "Shineray"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "srmshineray",
+      "canonicalName": "SRM Shineray",
+      "observedNames": [
+        "SRM Shineray"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "srt",
+      "canonicalName": "Srt",
+      "observedNames": [
+        "Srt"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "ssangyong",
+      "canonicalName": "SsangYong",
+      "observedNames": [
+        "SsangYong"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "standard",
+      "canonicalName": "Standard",
+      "observedNames": [
+        "Standard"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "stelato",
+      "canonicalName": "STELATO",
+      "observedNames": [
+        "STELATO"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "steyrpuch",
+      "canonicalName": "Steyr-Puch",
+      "observedNames": [
+        "Steyr-Puch"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "stuarttaylor",
+      "canonicalName": "Stuart Taylor",
+      "observedNames": [
+        "Stuart Taylor"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "studebaker",
+      "canonicalName": "Studebaker",
+      "observedNames": [
+        "Studebaker"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 18
+    },
+    {
+      "sourceKey": "stutz",
+      "canonicalName": "Stutz",
+      "observedNames": [
+        "Stutz"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "subaru",
+      "canonicalName": "Subaru",
+      "observedNames": [
+        "Subaru"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic",
+        "canada-nrcan"
+      ],
+      "modelCount": 63
+    },
+    {
+      "sourceKey": "suda",
+      "canonicalName": "Suda",
+      "observedNames": [
+        "Suda"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "sunbeam",
+      "canonicalName": "Sunbeam",
+      "observedNames": [
+        "Sunbeam"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 17
+    },
+    {
+      "sourceKey": "superior",
+      "canonicalName": "Superior",
+      "observedNames": [
+        "Superior"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "suzuki",
+      "canonicalName": "Suzuki",
+      "observedNames": [
+        "Suzuki"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 65
+    },
+    {
+      "sourceKey": "swallow",
+      "canonicalName": "Swallow",
+      "observedNames": [
+        "Swallow"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "swm",
+      "canonicalName": "SWM",
+      "observedNames": [
+        "SWM"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "swm斯威汽车",
+      "canonicalName": "SWM斯威汽车",
+      "observedNames": [
+        "SWM斯威汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "sylva",
+      "canonicalName": "Sylva",
+      "observedNames": [
+        "Sylva"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "talbot",
+      "canonicalName": "Talbot",
+      "observedNames": [
+        "Talbot"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "tata",
+      "canonicalName": "TATA",
+      "observedNames": [
+        "Tata"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "tenet",
+      "canonicalName": "TENET",
+      "observedNames": [
+        "TENET"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "tesla",
+      "canonicalName": "Tesla",
+      "observedNames": [
+        "Tesla"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic",
+        "canada-nrcan",
+        "avtocena-v2"
+      ],
+      "modelCount": 61
+    },
+    {
+      "sourceKey": "think",
+      "canonicalName": "Think",
+      "observedNames": [
+        "Think"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "tiger",
+      "canonicalName": "Tiger",
+      "observedNames": [
+        "Tiger"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "tmt",
+      "canonicalName": "TMT",
+      "observedNames": [
+        "TMT"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "togg",
+      "canonicalName": "Togg",
+      "observedNames": [
+        "Togg"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "tothesfiai",
+      "canonicalName": "Toth Es Fiai",
+      "observedNames": [
+        "Toth Es Fiai"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "toyota",
+      "canonicalName": "Toyota",
+      "observedNames": [
+        "Toyota"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic",
+        "canada-nrcan"
+      ],
+      "modelCount": 269
+    },
+    {
+      "sourceKey": "trabant",
+      "canonicalName": "Trabant",
+      "observedNames": [
+        "Trabant"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 10
+    },
+    {
+      "sourceKey": "triumph",
+      "canonicalName": "Triumph",
+      "observedNames": [
+        "Triumph"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 58
+    },
+    {
+      "sourceKey": "tvr",
+      "canonicalName": "TVR",
+      "observedNames": [
+        "TVR"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 18
+    },
+    {
+      "sourceKey": "uaz",
+      "canonicalName": "UAZ",
+      "observedNames": [
+        "UAZ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "valiant",
+      "canonicalName": "Valiant",
+      "observedNames": [
+        "Valiant"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "vandenplas",
+      "canonicalName": "Vanden Plas",
+      "observedNames": [
+        "Vanden Plas"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "vanster",
+      "canonicalName": "Vanster",
+      "observedNames": [
+        "Vanster"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "vauxhall",
+      "canonicalName": "Vauxhall",
+      "observedNames": [
+        "Vauxhall"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2"
+      ],
+      "modelCount": 47
+    },
+    {
+      "sourceKey": "vinfast",
+      "canonicalName": "VinFast",
+      "observedNames": [
+        "VinFast",
+        "Vinfast"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic",
+        "canada-nrcan"
+      ],
+      "modelCount": 10
+    },
+    {
+      "sourceKey": "volga",
+      "canonicalName": "Volga",
+      "observedNames": [
+        "Volga"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "volkswagen",
+      "canonicalName": "Volkswagen",
+      "observedNames": [
+        "Volkswagen"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic",
+        "canada-nrcan"
+      ],
+      "modelCount": 110
+    },
+    {
+      "sourceKey": "volvo",
+      "canonicalName": "Volvo",
+      "observedNames": [
+        "Volvo"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic",
+        "canada-nrcan"
+      ],
+      "modelCount": 122
+    },
+    {
+      "sourceKey": "voyah",
+      "canonicalName": "Voyah",
+      "observedNames": [
+        "Voyah"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "wald",
+      "canonicalName": "WALD",
+      "observedNames": [
+        "WALD"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "wartburg",
+      "canonicalName": "Wartburg",
+      "observedNames": [
+        "Wartburg"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "westfaliamobilgmbh",
+      "canonicalName": "Westfalia Mobil Gmbh",
+      "observedNames": [
+        "Westfalia Mobil Gmbh"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "westfield",
+      "canonicalName": "Westfield",
+      "observedNames": [
+        "Westfield"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "willys",
+      "canonicalName": "Willys",
+      "observedNames": [
+        "Willys"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "avtocena-v2"
+      ],
+      "modelCount": 24
+    },
+    {
+      "sourceKey": "wolseley",
+      "canonicalName": "Wolseley",
+      "observedNames": [
+        "Wolseley"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 9
+    },
+    {
+      "sourceKey": "wuling",
+      "canonicalName": "Wuling",
+      "observedNames": [
+        "Wuling"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 29
+    },
+    {
+      "sourceKey": "xcite",
+      "canonicalName": "XCITE",
+      "observedNames": [
+        "XCITE"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "xev",
+      "canonicalName": "Xev",
+      "observedNames": [
+        "Xev"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "xiaomi",
+      "canonicalName": "Xiaomi",
+      "observedNames": [
+        "Xiaomi"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "xpeng",
+      "canonicalName": "XPeng",
+      "observedNames": [
+        "XPeng"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 10
+    },
+    {
+      "sourceKey": "yucon",
+      "canonicalName": "Yucon",
+      "observedNames": [
+        "Yucon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "yudo",
+      "canonicalName": "Yudo",
+      "observedNames": [
+        "Yudo"
+      ],
+      "markets": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "yugo",
+      "canonicalName": "Yugo",
+      "observedNames": [
+        "Yugo"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "zastava",
+      "canonicalName": "Zastava",
+      "observedNames": [
+        "Zastava"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "zaz",
+      "canonicalName": "ZAZ",
+      "observedNames": [
+        "ZAZ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "zeekr",
+      "canonicalName": "Zeekr",
+      "observedNames": [
+        "Zeekr"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "zenos",
+      "canonicalName": "Zenos",
+      "observedNames": [
+        "Zenos"
+      ],
+      "markets": [
+        "global"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "기아주식회사",
+      "canonicalName": "기아 주식회사",
+      "observedNames": [
+        "기아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 606
+    },
+    {
+      "sourceKey": "로터스카스코리아주식회사",
+      "canonicalName": "로터스카스코리아 주식회사",
+      "observedNames": [
+        "로터스카스코리아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 20
+    },
+    {
+      "sourceKey": "르노코리아주식회사",
+      "canonicalName": "르노코리아 주식회사",
+      "observedNames": [
+        "르노코리아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 39
+    },
+    {
+      "sourceKey": "메르세데스벤츠코리아주",
+      "canonicalName": "메르세데스-벤츠코리아(주)",
+      "observedNames": [
+        "메르세데스-벤츠코리아(주)"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 169
+    },
+    {
+      "sourceKey": "브리타니아오토주식회사",
+      "canonicalName": "브리타니아오토 주식회사",
+      "observedNames": [
+        "브리타니아오토 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "비바모빌리티주식회사",
+      "canonicalName": "비바모빌리티 주식회사",
+      "observedNames": [
+        "비바모빌리티 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "비와이디코리아유한회사",
+      "canonicalName": "비와이디코리아 유한회사",
+      "observedNames": [
+        "비와이디코리아 유한회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "비와이디코리아오토유한회사",
+      "canonicalName": "비와이디코리아오토 유한회사",
+      "observedNames": [
+        "비와이디코리아오토 유한회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "스텔란티스코리아주식회사",
+      "canonicalName": "스텔란티스코리아 주식회사",
+      "observedNames": [
+        "스텔란티스코리아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 71
+    },
+    {
+      "sourceKey": "에프엘오토코리아유한회사",
+      "canonicalName": "에프엘오토코리아 유한회사",
+      "observedNames": [
+        "에프엘오토코리아 유한회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 35
+    },
+    {
+      "sourceKey": "엠티알주식회사",
+      "canonicalName": "엠티알 주식회사",
+      "observedNames": [
+        "엠티알 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "이브이앤솔루션주식회사",
+      "canonicalName": "이브이앤솔루션 주식회사",
+      "observedNames": [
+        "이브이앤솔루션 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "제이스모빌리티주식회사",
+      "canonicalName": "제이스모빌리티 주식회사",
+      "observedNames": [
+        "제이스모빌리티 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "주식회사마이브",
+      "canonicalName": "주식회사 마이브",
+      "observedNames": [
+        "주식회사 마이브"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "주식회사모빌리티네트웍스",
+      "canonicalName": "주식회사 모빌리티네트웍스",
+      "observedNames": [
+        "주식회사 모빌리티네트웍스"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "주식회사쎄보모빌리티",
+      "canonicalName": "주식회사 쎄보모빌리티",
+      "observedNames": [
+        "주식회사 쎄보모빌리티"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "주식회사이브이케이엠씨",
+      "canonicalName": "주식회사 이브이케이엠씨",
+      "observedNames": [
+        "주식회사 이브이케이엠씨"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "주식회사한국쓰리축",
+      "canonicalName": "주식회사 한국쓰리축",
+      "observedNames": [
+        "주식회사 한국쓰리축"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "지엠아시아퍼시픽지역본부주식회사",
+      "canonicalName": "지엠아시아퍼시픽지역본부 주식회사",
+      "observedNames": [
+        "지엠아시아퍼시픽지역본부 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 20
+    },
+    {
+      "sourceKey": "지커인텔리전트테크놀로지코리아주식회사",
+      "canonicalName": "지커인텔리전트테크놀로지코리아 주식회사",
+      "observedNames": [
+        "지커인텔리전트테크놀로지코리아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "차봇모터스주식회사",
+      "canonicalName": "차봇모터스 주식회사",
+      "observedNames": [
+        "차봇모터스 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "케이지모빌리티주식회사",
+      "canonicalName": "케이지모빌리티 주식회사",
+      "observedNames": [
+        "케이지모빌리티 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 110
+    },
+    {
+      "sourceKey": "테라팩토리주식회사",
+      "canonicalName": "테라팩토리 주식회사",
+      "observedNames": [
+        "테라팩토리 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "테슬라코리아유한회사",
+      "canonicalName": "테슬라코리아 유한회사",
+      "observedNames": [
+        "테슬라코리아 유한회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 12
+    },
+    {
+      "sourceKey": "파츠몰에이투지",
+      "canonicalName": "파츠몰에이투지",
+      "observedNames": [
+        "파츠몰에이투지"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "포르쉐코리아주식회사",
+      "canonicalName": "포르쉐코리아 주식회사",
+      "observedNames": [
+        "포르쉐코리아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 59
+    },
+    {
+      "sourceKey": "폭스바겐그룹코리아주식회사",
+      "canonicalName": "폭스바겐그룹코리아 주식회사",
+      "observedNames": [
+        "폭스바겐그룹코리아 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 138
+    },
+    {
+      "sourceKey": "폴스타오토모티브코리아유한회사",
+      "canonicalName": "폴스타오토모티브코리아 유한회사",
+      "observedNames": [
+        "폴스타오토모티브코리아 유한회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 9
+    },
+    {
+      "sourceKey": "피닉스코리아주",
+      "canonicalName": "피닉스코리아(주)",
+      "observedNames": [
+        "피닉스코리아(주)"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "한국닛산주",
+      "canonicalName": "한국닛산(주)",
+      "observedNames": [
+        "한국닛산(주)"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "한국상용트럭주식회사",
+      "canonicalName": "한국상용트럭 주식회사",
+      "observedNames": [
+        "한국상용트럭 주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "한국지엠주식회사",
+      "canonicalName": "한국지엠주식회사",
+      "observedNames": [
+        "한국지엠주식회사"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 24
+    },
+    {
+      "sourceKey": "한국토요타자동차주",
+      "canonicalName": "한국토요타자동차(주)",
+      "observedNames": [
+        "한국토요타자동차(주)"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 38
+    },
+    {
+      "sourceKey": "현대자동차주",
+      "canonicalName": "현대자동차(주)",
+      "observedNames": [
+        "현대자동차(주)"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 1063
+    },
+    {
+      "sourceKey": "혼다코리아주",
+      "canonicalName": "혼다코리아(주)",
+      "observedNames": [
+        "혼다코리아(주)"
+      ],
+      "markets": [
+        "korea"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "アウディ",
+      "canonicalName": "アウディ",
+      "observedNames": [
+        "アウディ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "アバルト",
+      "canonicalName": "アバルト",
+      "observedNames": [
+        "アバルト"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "アルファロメオ",
+      "canonicalName": "アルファロメオ",
+      "observedNames": [
+        "アルファロメオ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "いすゞ",
+      "canonicalName": "いすゞ",
+      "observedNames": [
+        "いすゞ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "クライスラー",
+      "canonicalName": "クライスラー",
+      "observedNames": [
+        "クライスラー"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "ジープ",
+      "canonicalName": "ジープ",
+      "observedNames": [
+        "ジープ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 13
+    },
+    {
+      "sourceKey": "シトロエン",
+      "canonicalName": "シトロエン",
+      "observedNames": [
+        "シトロエン"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "ジャガー",
+      "canonicalName": "ジャガー",
+      "observedNames": [
+        "ジャガー"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "スズキ",
+      "canonicalName": "スズキ",
+      "observedNames": [
+        "スズキ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 10
+    },
+    {
+      "sourceKey": "スバル",
+      "canonicalName": "スバル",
+      "observedNames": [
+        "スバル"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "スマート",
+      "canonicalName": "スマート",
+      "observedNames": [
+        "スマート"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "ダイハツ",
+      "canonicalName": "ダイハツ",
+      "observedNames": [
+        "ダイハツ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "ダッジ",
+      "canonicalName": "ダッジ",
+      "observedNames": [
+        "ダッジ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "トヨタ",
+      "canonicalName": "トヨタ",
+      "observedNames": [
+        "トヨタ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 21
+    },
+    {
+      "sourceKey": "ニッサン",
+      "canonicalName": "ニッサン",
+      "observedNames": [
+        "ニッサン"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 18
+    },
+    {
+      "sourceKey": "ニッサンmt",
+      "canonicalName": "ニッサンMT",
+      "observedNames": [
+        "ニッサンMT"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "フィアット",
+      "canonicalName": "フィアット",
+      "observedNames": [
+        "フィアット"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 10
+    },
+    {
+      "sourceKey": "フォルクスワーゲン",
+      "canonicalName": "フォルクスワーゲン",
+      "observedNames": [
+        "フォルクスワーゲン"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "プジョー",
+      "canonicalName": "プジョー",
+      "observedNames": [
+        "プジョー"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "ベンツ",
+      "canonicalName": "ベンツ",
+      "observedNames": [
+        "ベンツ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "ポルシェ",
+      "canonicalName": "ポルシェ",
+      "observedNames": [
+        "ポルシェ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "ボルボ",
+      "canonicalName": "ボルボ",
+      "observedNames": [
+        "ボルボ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "ホンダ",
+      "canonicalName": "ホンダ",
+      "observedNames": [
+        "ホンダ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "マツダ",
+      "canonicalName": "マツダ",
+      "observedNames": [
+        "マツダ"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "ランドローバー",
+      "canonicalName": "ランドローバー",
+      "observedNames": [
+        "ランドローバー"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "ルノー",
+      "canonicalName": "ルノー",
+      "observedNames": [
+        "ルノー"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "レクサス",
+      "canonicalName": "レクサス",
+      "observedNames": [
+        "レクサス"
+      ],
+      "markets": [
+        "japan"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "一汽",
+      "canonicalName": "一汽",
+      "observedNames": [
+        "一汽"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "一汽凌河牌",
+      "canonicalName": "一汽凌河牌",
+      "observedNames": [
+        "一汽凌河牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 77
+    },
+    {
+      "sourceKey": "一汽牌",
+      "canonicalName": "一汽牌",
+      "observedNames": [
+        "一汽牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "万象汽车",
+      "canonicalName": "万象汽车",
+      "observedNames": [
+        "万象汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "万达客车",
+      "canonicalName": "万达客车",
+      "observedNames": [
+        "万达客车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "三一牌",
+      "canonicalName": "三一牌",
+      "observedNames": [
+        "三一牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 1221
+    },
+    {
+      "sourceKey": "三菱",
+      "canonicalName": "三菱",
+      "observedNames": [
+        "三菱"
+      ],
+      "markets": [
+        "japan",
+        "china"
+      ],
+      "sources": [
+        "mlit-japan-fuel-economy",
+        "autohome-china"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "上喆",
+      "canonicalName": "上喆",
+      "observedNames": [
+        "上喆"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "上汽跃进",
+      "canonicalName": "上汽跃进",
+      "observedNames": [
+        "上汽跃进"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "上汽飞凡牌",
+      "canonicalName": "上汽飞凡牌",
+      "observedNames": [
+        "上汽飞凡牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "上驰牌",
+      "canonicalName": "上驰牌",
+      "observedNames": [
+        "上驰牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "世极",
+      "canonicalName": "世极",
+      "observedNames": [
+        "世极"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "东南",
+      "canonicalName": "东南",
+      "observedNames": [
+        "东南"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "东南牌",
+      "canonicalName": "东南牌",
+      "observedNames": [
+        "东南牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "东风",
+      "canonicalName": "东风",
+      "observedNames": [
+        "东风"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 34
+    },
+    {
+      "sourceKey": "东风奕派",
+      "canonicalName": "东风奕派",
+      "observedNames": [
+        "东风奕派"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "东风富康",
+      "canonicalName": "东风富康",
+      "observedNames": [
+        "东风富康"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "东风小康",
+      "canonicalName": "东风小康",
+      "observedNames": [
+        "东风小康"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 23
+    },
+    {
+      "sourceKey": "东风御风",
+      "canonicalName": "东风御风",
+      "observedNames": [
+        "东风御风"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "东风日产牌",
+      "canonicalName": "东风日产牌",
+      "observedNames": [
+        "东风日产牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 13
+    },
+    {
+      "sourceKey": "东风牌",
+      "canonicalName": "东风牌",
+      "observedNames": [
+        "东风牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 303
+    },
+    {
+      "sourceKey": "东风风光",
+      "canonicalName": "东风风光",
+      "observedNames": [
+        "东风风光"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 9
+    },
+    {
+      "sourceKey": "东风风度",
+      "canonicalName": "东风风度",
+      "observedNames": [
+        "东风风度"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "东风风神",
+      "canonicalName": "东风风神",
+      "observedNames": [
+        "东风风神"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 13
+    },
+    {
+      "sourceKey": "东风风行",
+      "canonicalName": "东风风行",
+      "observedNames": [
+        "东风风行"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 18
+    },
+    {
+      "sourceKey": "东鸥牌",
+      "canonicalName": "东鸥牌",
+      "observedNames": [
+        "东鸥牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "中兴",
+      "canonicalName": "中兴",
+      "observedNames": [
+        "中兴"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "中国重汽",
+      "canonicalName": "中国重汽",
+      "observedNames": [
+        "中国重汽"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "中国重汽vgv",
+      "canonicalName": "中国重汽VGV",
+      "observedNames": [
+        "中国重汽VGV"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "中意房车",
+      "canonicalName": "中意房车",
+      "observedNames": [
+        "中意房车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "中通客车",
+      "canonicalName": "中通客车",
+      "observedNames": [
+        "中通客车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "丰田",
+      "canonicalName": "丰田",
+      "observedNames": [
+        "丰田"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 38
+    },
+    {
+      "sourceKey": "丰田toyota牌",
+      "canonicalName": "丰田(TOYOTA)牌",
+      "observedNames": [
+        "丰田(TOYOTA)牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 117
+    },
+    {
+      "sourceKey": "乐道",
+      "canonicalName": "乐道",
+      "observedNames": [
+        "乐道"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "乘龙牌",
+      "canonicalName": "乘龙牌",
+      "observedNames": [
+        "乘龙牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 235
+    },
+    {
+      "sourceKey": "九龙",
+      "canonicalName": "九龙",
+      "observedNames": [
+        "九龙"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "予风汽车",
+      "canonicalName": "予风汽车",
+      "observedNames": [
+        "予风汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "事业永盛牌",
+      "canonicalName": "事业永盛牌",
+      "observedNames": [
+        "事业永盛牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 28
+    },
+    {
+      "sourceKey": "云度",
+      "canonicalName": "云度",
+      "observedNames": [
+        "云度"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "五十铃",
+      "canonicalName": "五十铃",
+      "observedNames": [
+        "五十铃"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 14
+    },
+    {
+      "sourceKey": "五菱汽车",
+      "canonicalName": "五菱汽车",
+      "observedNames": [
+        "五菱汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 50
+    },
+    {
+      "sourceKey": "五菱牌",
+      "canonicalName": "五菱牌",
+      "observedNames": [
+        "五菱牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 181
+    },
+    {
+      "sourceKey": "交大神舟牌",
+      "canonicalName": "交大神舟牌",
+      "observedNames": [
+        "交大神舟牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 9
+    },
+    {
+      "sourceKey": "享界",
+      "canonicalName": "享界",
+      "observedNames": [
+        "享界"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "仁拓博歌",
+      "canonicalName": "仁拓博歌",
+      "observedNames": [
+        "仁拓博歌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "仰望",
+      "canonicalName": "仰望",
+      "observedNames": [
+        "仰望"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 4
+    },
+    {
+      "sourceKey": "伟昊汽车",
+      "canonicalName": "伟昊汽车",
+      "observedNames": [
+        "伟昊汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "依维柯",
+      "canonicalName": "依维柯",
+      "observedNames": [
+        "依维柯"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "保时捷",
+      "canonicalName": "保时捷",
+      "observedNames": [
+        "保时捷"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 9
+    },
+    {
+      "sourceKey": "克慕勒",
+      "canonicalName": "克慕勒",
+      "observedNames": [
+        "克慕勒"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "克蒂汽车",
+      "canonicalName": "克蒂汽车",
+      "observedNames": [
+        "克蒂汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "兰博基尼",
+      "canonicalName": "兰博基尼",
+      "observedNames": [
+        "兰博基尼"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 5
+    },
+    {
+      "sourceKey": "凌宝汽车",
+      "canonicalName": "凌宝汽车",
+      "observedNames": [
+        "凌宝汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "凤凰牌",
+      "canonicalName": "凤凰牌",
+      "observedNames": [
+        "凤凰牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 21
+    },
+    {
+      "sourceKey": "凯翼",
+      "canonicalName": "凯翼",
+      "observedNames": [
+        "凯翼"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 12
+    },
+    {
+      "sourceKey": "凯迪拉克",
+      "canonicalName": "凯迪拉克",
+      "observedNames": [
+        "凯迪拉克"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "凯迪拉克cadillac牌",
+      "canonicalName": "凯迪拉克(CADILLAC)牌",
+      "observedNames": [
+        "凯迪拉克(CADILLAC)牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 26
+    },
+    {
+      "sourceKey": "凯马",
+      "canonicalName": "凯马",
+      "observedNames": [
+        "凯马"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "创维汽车",
+      "canonicalName": "创维汽车",
+      "observedNames": [
+        "创维汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "别克",
+      "canonicalName": "别克",
+      "observedNames": [
+        "别克"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 17
+    },
+    {
+      "sourceKey": "别克buick牌",
+      "canonicalName": "别克(BUICK)牌",
+      "observedNames": [
+        "别克(BUICK)牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 77
+    },
+    {
+      "sourceKey": "劳斯莱斯",
+      "canonicalName": "劳斯莱斯",
+      "observedNames": [
+        "劳斯莱斯"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 3
+    },
+    {
+      "sourceKey": "北京汽车",
+      "canonicalName": "北京汽车",
+      "observedNames": [
+        "北京汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 9
+    },
+    {
+      "sourceKey": "北京汽车制造厂",
+      "canonicalName": "北京汽车制造厂",
+      "observedNames": [
+        "北京汽车制造厂"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 15
+    },
+    {
+      "sourceKey": "北京越野",
+      "canonicalName": "北京越野",
+      "observedNames": [
+        "北京越野"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 11
+    },
+    {
+      "sourceKey": "北汽昌河",
+      "canonicalName": "北汽昌河",
+      "observedNames": [
+        "北汽昌河"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    },
+    {
+      "sourceKey": "北汽泰普",
+      "canonicalName": "北汽泰普",
+      "observedNames": [
+        "北汽泰普"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 7
+    },
+    {
+      "sourceKey": "北汽瑞翔",
+      "canonicalName": "北汽瑞翔",
+      "observedNames": [
+        "北汽瑞翔"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 6
+    }
+  ]
+}

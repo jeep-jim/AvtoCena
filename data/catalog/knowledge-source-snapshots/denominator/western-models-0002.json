@@ -1,0 +1,3311 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 2,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "audi:ttscoupe",
+      "make": "Audi",
+      "model": "TTS Coupe",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:ttscoupequattro",
+      "make": "Audi",
+      "model": "TTS Coupe quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "bentley:bentayga",
+      "make": "Bentley",
+      "model": "Bentayga",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bentley:bentaygaewb",
+      "make": "Bentley",
+      "model": "Bentayga EWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bentley:bentaygahybrid",
+      "make": "Bentley",
+      "model": "Bentayga Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bentley:bentaygaspeed",
+      "make": "Bentley",
+      "model": "Bentayga Speed",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "bentley:continental",
+      "make": "Bentley",
+      "model": "Continental",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bentley:continentalgt",
+      "make": "Bentley",
+      "model": "Continental GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bentley:continentalgtconvertible",
+      "make": "Bentley",
+      "model": "Continental GT Convertible",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bentley:continentalgtconvertiblespeed",
+      "make": "Bentley",
+      "model": "Continental GT Convertible Speed",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bentley:continentalgtspeed",
+      "make": "Bentley",
+      "model": "Continental GT Speed",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "bentley:continentalgtc",
+      "make": "Bentley",
+      "model": "Continental GTC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bentley:continentalgtcspeed",
+      "make": "Bentley",
+      "model": "Continental GTC Speed",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bentley:flyingspur",
+      "make": "Bentley",
+      "model": "Flying Spur",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bentley:flyingspurhybrid",
+      "make": "Bentley",
+      "model": "Flying Spur Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "bentley:flyingspurspeed",
+      "make": "Bentley",
+      "model": "Flying Spur Speed",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bentley:mulsanne",
+      "make": "Bentley",
+      "model": "Mulsanne",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:2series",
+      "make": "BMW",
+      "model": "2 Series",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:228xdrivegrancoupe",
+      "make": "BMW",
+      "model": "228 xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:228ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "228i xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:230icabriolet",
+      "make": "BMW",
+      "model": "230i Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:230icoupe",
+      "make": "BMW",
+      "model": "230i Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:230ixdrivecabriolet",
+      "make": "BMW",
+      "model": "230i xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:230ixdrivecoupe",
+      "make": "BMW",
+      "model": "230i xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:3series",
+      "make": "BMW",
+      "model": "3 Series",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:330e",
+      "make": "BMW",
+      "model": "330e",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:330esedan",
+      "make": "BMW",
+      "model": "330e Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:330exdrive",
+      "make": "BMW",
+      "model": "330e xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:330exdrivesedan",
+      "make": "BMW",
+      "model": "330e xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:330i",
+      "make": "BMW",
+      "model": "330i",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:330ixdrivesedan",
+      "make": "BMW",
+      "model": "330i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:4series",
+      "make": "BMW",
+      "model": "4 Series",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:430icoupe",
+      "make": "BMW",
+      "model": "430i Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:430ixdrivecabriolet",
+      "make": "BMW",
+      "model": "430i xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:430ixdrivecoupe",
+      "make": "BMW",
+      "model": "430i xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:430ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "430i xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:440icoupe",
+      "make": "BMW",
+      "model": "440i Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:440ixdrivecabriolet",
+      "make": "BMW",
+      "model": "440i xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:440ixdrivecoupe",
+      "make": "BMW",
+      "model": "440i xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:440ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "440i xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:5series",
+      "make": "BMW",
+      "model": "5 Series",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:530e",
+      "make": "BMW",
+      "model": "530e",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:530exdrive",
+      "make": "BMW",
+      "model": "530e xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:530exdrivesedan",
+      "make": "BMW",
+      "model": "530e xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:530i",
+      "make": "BMW",
+      "model": "530i",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:530ixdrivesedan",
+      "make": "BMW",
+      "model": "530i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:540i",
+      "make": "BMW",
+      "model": "540i",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:540ixdrivesedan",
+      "make": "BMW",
+      "model": "540i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:550exdrivesedan",
+      "make": "BMW",
+      "model": "550e xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:7series",
+      "make": "BMW",
+      "model": "7 Series",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:740i",
+      "make": "BMW",
+      "model": "740i",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:745lexdrive",
+      "make": "BMW",
+      "model": "745Le xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:750exdrivesedan",
+      "make": "BMW",
+      "model": "750e xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:750ixdrivesedan",
+      "make": "BMW",
+      "model": "750i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:750lixdrivesedan",
+      "make": "BMW",
+      "model": "750Li xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:760ixdrivesedan",
+      "make": "BMW",
+      "model": "760i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:8series",
+      "make": "BMW",
+      "model": "8 Series",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:alpinab7",
+      "make": "BMW",
+      "model": "Alpina B7",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:alpinab7xdrive",
+      "make": "BMW",
+      "model": "Alpina B7 xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:alpinab8grancoupe",
+      "make": "BMW",
+      "model": "Alpina B8 Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:alpinaxb7",
+      "make": "BMW",
+      "model": "Alpina XB7",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i3",
+      "make": "BMW",
+      "model": "i3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:i3120ah",
+      "make": "BMW",
+      "model": "i3 (120 Ah)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:i3rex120ah",
+      "make": "BMW",
+      "model": "i3 REx (120 Ah)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:i3s120ah",
+      "make": "BMW",
+      "model": "i3s (120 Ah)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:i3srex120ah",
+      "make": "BMW",
+      "model": "i3s REx (120 Ah)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:i4",
+      "make": "BMW",
+      "model": "i4",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i4edrive35grancoupe18wheels",
+      "make": "BMW",
+      "model": "i4 eDrive35 Gran Coupe (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:i4edrive35grancoupe19wheels",
+      "make": "BMW",
+      "model": "i4 eDrive35 Gran Coupe (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:i4edrive4018wheels",
+      "make": "BMW",
+      "model": "i4 eDrive40 (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:i4edrive4019wheels",
+      "make": "BMW",
+      "model": "i4 eDrive40 (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:i4edrive40grancoupe18wheels",
+      "make": "BMW",
+      "model": "i4 eDrive40 Gran Coupe (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i4edrive40grancoupe19wheels",
+      "make": "BMW",
+      "model": "i4 eDrive40 Gran Coupe (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i4m50grancoupe19wheels",
+      "make": "BMW",
+      "model": "i4 M50 Gran Coupe (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:i4m50grancoupe20wheels",
+      "make": "BMW",
+      "model": "i4 M50 Gran Coupe (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:i4m50xdrive19wheels",
+      "make": "BMW",
+      "model": "i4 M50 xDrive (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:i4m50xdrive20wheels",
+      "make": "BMW",
+      "model": "i4 M50 xDrive (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:i4m50xdrivegrancoupe19wheels",
+      "make": "BMW",
+      "model": "i4 M50 xDrive Gran Coupe (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:i4m50xdrivegrancoupe20wheels",
+      "make": "BMW",
+      "model": "i4 M50 xDrive Gran Coupe (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:i4m60xdrivegrancoupe19wheels",
+      "make": "BMW",
+      "model": "i4 M60 xDrive Gran Coupe (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i4m60xdrivegrancoupe20wheels",
+      "make": "BMW",
+      "model": "i4 M60 xDrive Gran Coupe (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i4xdrive40grancoupe18wheels",
+      "make": "BMW",
+      "model": "i4 xDrive40 Gran Coupe (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i4xdrive40grancoupe19wheels",
+      "make": "BMW",
+      "model": "i4 xDrive40 Gran Coupe (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i5",
+      "make": "BMW",
+      "model": "i5",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:i5m60sedan19wheels",
+      "make": "BMW",
+      "model": "i5 M60 Sedan (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:i5m60sedan20wheels",
+      "make": "BMW",
+      "model": "i5 M60 Sedan (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:i5m60sedan21wheels",
+      "make": "BMW",
+      "model": "i5 M60 Sedan (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:i5m60xdrivesedan19wheels",
+      "make": "BMW",
+      "model": "i5 M60 xDrive Sedan (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i5m60xdrivesedan20wheels",
+      "make": "BMW",
+      "model": "i5 M60 xDrive Sedan (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i5m60xdrivesedan21wheels",
+      "make": "BMW",
+      "model": "i5 M60 xDrive Sedan (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i5xdrive40sedan19wheels",
+      "make": "BMW",
+      "model": "i5 xDrive40 Sedan (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i5xdrive40sedan20wheels",
+      "make": "BMW",
+      "model": "i5 xDrive40 Sedan (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i5xdrive40sedan21wheels",
+      "make": "BMW",
+      "model": "i5 xDrive40 Sedan (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i7",
+      "make": "BMW",
+      "model": "i7",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:i7m70xdrivesedan20wheels",
+      "make": "BMW",
+      "model": "i7 M70 xDrive Sedan (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i7m70xdrivesedan21wheels",
+      "make": "BMW",
+      "model": "i7 M70 xDrive Sedan (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i7xdrive6019wheels",
+      "make": "BMW",
+      "model": "i7 xDrive60 (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:i7xdrive6020wheels",
+      "make": "BMW",
+      "model": "i7 xDrive60 (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:i7xdrive6021wheels",
+      "make": "BMW",
+      "model": "i7 xDrive60 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:i7xdrive60sedan19wheels",
+      "make": "BMW",
+      "model": "i7 xDrive60 Sedan (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i7xdrive60sedan20wheels",
+      "make": "BMW",
+      "model": "i7 xDrive60 Sedan (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i7xdrive60sedan21wheels",
+      "make": "BMW",
+      "model": "i7 xDrive60 Sedan (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:i8",
+      "make": "BMW",
+      "model": "i8",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:i8coupe",
+      "make": "BMW",
+      "model": "i8 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:i8roadster",
+      "make": "BMW",
+      "model": "i8 Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:ix",
+      "make": "BMW",
+      "model": "iX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixm6021wheels",
+      "make": "BMW",
+      "model": "iX M60 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixm6022wheels",
+      "make": "BMW",
+      "model": "iX M60 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixm7021wheels",
+      "make": "BMW",
+      "model": "iX M70 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixm7022wheels",
+      "make": "BMW",
+      "model": "iX M70 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixm7023wheels",
+      "make": "BMW",
+      "model": "iX M70 (23\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive4020wheels",
+      "make": "BMW",
+      "model": "iX xDrive40 (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixxdrive4021wheels",
+      "make": "BMW",
+      "model": "iX xDrive40 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixxdrive4022wheels",
+      "make": "BMW",
+      "model": "iX xDrive40 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixxdrive4520wheels",
+      "make": "BMW",
+      "model": "iX xDrive45 (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive4521wheels",
+      "make": "BMW",
+      "model": "iX xDrive45 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive4522wheels",
+      "make": "BMW",
+      "model": "iX xDrive45 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive4523wheels",
+      "make": "BMW",
+      "model": "iX xDrive45 (23\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive5020wheels",
+      "make": "BMW",
+      "model": "iX xDrive50 (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixxdrive5021wheels",
+      "make": "BMW",
+      "model": "iX xDrive50 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixxdrive5022wheels",
+      "make": "BMW",
+      "model": "iX xDrive50 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:ixxdrive6020wheels",
+      "make": "BMW",
+      "model": "iX xDrive60 (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive6021wheels",
+      "make": "BMW",
+      "model": "iX xDrive60 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive6022wheels",
+      "make": "BMW",
+      "model": "iX xDrive60 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ixxdrive6023wheels",
+      "make": "BMW",
+      "model": "iX xDrive60 (23\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:ix3",
+      "make": "BMW",
+      "model": "iX3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:m",
+      "make": "BMW",
+      "model": "M",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:m2competition",
+      "make": "BMW",
+      "model": "M2 Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:m2coupe",
+      "make": "BMW",
+      "model": "M2 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m2coupecs",
+      "make": "BMW",
+      "model": "M2 Coupe CS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m2cs",
+      "make": "BMW",
+      "model": "M2 CS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m235ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "M235i xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:m240icabriolet",
+      "make": "BMW",
+      "model": "M240i Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m240icoupe",
+      "make": "BMW",
+      "model": "M240i Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m240icoupemperformance",
+      "make": "BMW",
+      "model": "M240i Coupe M Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m240ixdrivecabriolet",
+      "make": "BMW",
+      "model": "M240i xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "bmw:m240ixdrivecoupe",
+      "make": "BMW",
+      "model": "M240i xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m240ixdrivecoupemperformance",
+      "make": "BMW",
+      "model": "M240i xDrive Coupe M Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m3",
+      "make": "BMW",
+      "model": "M3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:m3competitionmxdrivesedan",
+      "make": "BMW",
+      "model": "M3 Competition M xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m3competitionsedan",
+      "make": "BMW",
+      "model": "M3 Competition Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m3competitionsedanmxdrive",
+      "make": "BMW",
+      "model": "M3 Competition Sedan M xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m3cssedan",
+      "make": "BMW",
+      "model": "M3 CS Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:m3sedan",
+      "make": "BMW",
+      "model": "M3 Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m340i",
+      "make": "BMW",
+      "model": "M340i",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:m340ixdrivesedan",
+      "make": "BMW",
+      "model": "M340i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m4cabriolet",
+      "make": "BMW",
+      "model": "M4 Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m4cabrioletcompetition",
+      "make": "BMW",
+      "model": "M4 Cabriolet Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m4competitioncabriolet",
+      "make": "BMW",
+      "model": "M4 Competition Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m4competitioncabrioletmxdrive",
+      "make": "BMW",
+      "model": "M4 Competition Cabriolet M xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m4competitioncoupe",
+      "make": "BMW",
+      "model": "M4 Competition Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m4competitioncoupemxdrive",
+      "make": "BMW",
+      "model": "M4 Competition Coupe M xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m4competitionmxdrivecabriolet",
+      "make": "BMW",
+      "model": "M4 Competition M xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m4competitionmxdrivecoupe",
+      "make": "BMW",
+      "model": "M4 Competition M xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m4coupe",
+      "make": "BMW",
+      "model": "M4 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m4coupecompetition",
+      "make": "BMW",
+      "model": "M4 Coupe Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m4cs",
+      "make": "BMW",
+      "model": "M4 CS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:m4cscoupe",
+      "make": "BMW",
+      "model": "M4 CS Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m4cslcoupe",
+      "make": "BMW",
+      "model": "M4 CSL Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:m440ixdrivecabriolet",
+      "make": "BMW",
+      "model": "M440i xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m440ixdrivecoupe",
+      "make": "BMW",
+      "model": "M440i xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m440ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "M440i xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m5",
+      "make": "BMW",
+      "model": "M5",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "bmw:m5competition",
+      "make": "BMW",
+      "model": "M5 Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m5competitionsedan",
+      "make": "BMW",
+      "model": "M5 Competition Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:m5cs",
+      "make": "BMW",
+      "model": "M5 CS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m5sedan",
+      "make": "BMW",
+      "model": "M5 Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m5touring",
+      "make": "BMW",
+      "model": "M5 Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m550ixdrivesedan",
+      "make": "BMW",
+      "model": "M550i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:m760ixdrivesedan",
+      "make": "BMW",
+      "model": "M760i xDrive Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m8cabriolet",
+      "make": "BMW",
+      "model": "M8 Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m8cabrioletcompetition",
+      "make": "BMW",
+      "model": "M8 Cabriolet Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m8competitioncabriolet",
+      "make": "BMW",
+      "model": "M8 Competition Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m8competitioncoupe",
+      "make": "BMW",
+      "model": "M8 Competition Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m8competitiongrancoupe",
+      "make": "BMW",
+      "model": "M8 Competition Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:m8coupe",
+      "make": "BMW",
+      "model": "M8 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m8coupecompetition",
+      "make": "BMW",
+      "model": "M8 Coupe Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m8grancoupe",
+      "make": "BMW",
+      "model": "M8 Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m8grancoupecompetition",
+      "make": "BMW",
+      "model": "M8 Gran Coupe Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:m850ixdrivecabriolet",
+      "make": "BMW",
+      "model": "M850i xDrive Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m850ixdrivecoupe",
+      "make": "BMW",
+      "model": "M850i xDrive Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:m850ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "M850i xDrive Gran Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x1",
+      "make": "BMW",
+      "model": "X1",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x1m35i",
+      "make": "BMW",
+      "model": "X1 M35i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x1m35ixdrive",
+      "make": "BMW",
+      "model": "X1 M35i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x1xdrive28i",
+      "make": "BMW",
+      "model": "X1 xDrive28i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x2",
+      "make": "BMW",
+      "model": "X2",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x2m35i",
+      "make": "BMW",
+      "model": "X2 M35i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x2m35ixdrive",
+      "make": "BMW",
+      "model": "X2 M35i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x2xdrive28i",
+      "make": "BMW",
+      "model": "X2 xDrive28i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x3",
+      "make": "BMW",
+      "model": "X3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x330xdrive",
+      "make": "BMW",
+      "model": "X3 30 xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x3m",
+      "make": "BMW",
+      "model": "X3 M",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x3mcompetition",
+      "make": "BMW",
+      "model": "X3 M Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x3m40i",
+      "make": "BMW",
+      "model": "X3 M40i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x3m50xdrive",
+      "make": "BMW",
+      "model": "X3 M50 xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x3m50ixdrive",
+      "make": "BMW",
+      "model": "X3 M50i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x3xdrive30e",
+      "make": "BMW",
+      "model": "X3 xDrive30e",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x3xdrive30i",
+      "make": "BMW",
+      "model": "X3 xDrive30i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x4",
+      "make": "BMW",
+      "model": "X4",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x4m",
+      "make": "BMW",
+      "model": "X4 M",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x4mcompetition",
+      "make": "BMW",
+      "model": "X4 M Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x4m40i",
+      "make": "BMW",
+      "model": "X4 M40i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x4m40ixdrive",
+      "make": "BMW",
+      "model": "X4 M40i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x4xdrive30i",
+      "make": "BMW",
+      "model": "X4 xDrive30i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:x5",
+      "make": "BMW",
+      "model": "X5",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:x5m",
+      "make": "BMW",
+      "model": "X5 M",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:x5mcompetition",
+      "make": "BMW",
+      "model": "X5 M Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x5m50i",
+      "make": "BMW",
+      "model": "X5 M50i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:x5m60i",
+      "make": "BMW",
+      "model": "X5 M60i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x5m60ixdrive",
+      "make": "BMW",
+      "model": "X5 M60i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x5xdrive40i",
+      "make": "BMW",
+      "model": "X5 xDrive40i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x5xdrive45e",
+      "make": "BMW",
+      "model": "X5 xDrive45e",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:x5xdrive50e",
+      "make": "BMW",
+      "model": "X5 xDrive50e",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x5xdrive50i",
+      "make": "BMW",
+      "model": "X5 xDrive50i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:x6",
+      "make": "BMW",
+      "model": "X6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:x6m",
+      "make": "BMW",
+      "model": "X6 M",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:x6mcompetition",
+      "make": "BMW",
+      "model": "X6 M Competition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x6m50i",
+      "make": "BMW",
+      "model": "X6 M50i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "bmw:x6m60i",
+      "make": "BMW",
+      "model": "X6 M60i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x6m60ixdrive",
+      "make": "BMW",
+      "model": "X6 M60i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x6xdrive40i",
+      "make": "BMW",
+      "model": "X6 xDrive40i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x7",
+      "make": "BMW",
+      "model": "X7",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "bmw:x7m50i",
+      "make": "BMW",
+      "model": "X7 M50i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "bmw:x7m60i",
+      "make": "BMW",
+      "model": "X7 M60i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:x7m60ixdrive",
+      "make": "BMW",
+      "model": "X7 M60i xDrive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x7xdrive40i",
+      "make": "BMW",
+      "model": "X7 xDrive40i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:x7xdrive50i",
+      "make": "BMW",
+      "model": "X7 xDrive50i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bmw:xm",
+      "make": "BMW",
+      "model": "XM",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:xmlabel",
+      "make": "BMW",
+      "model": "XM Label",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:xmlabelred",
+      "make": "BMW",
+      "model": "XM Label Red",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "bmw:z4",
+      "make": "BMW",
+      "model": "Z4",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:z4m40i",
+      "make": "BMW",
+      "model": "Z4 M40i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:z4m40iroadster",
+      "make": "BMW",
+      "model": "Z4 M40i Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bmw:z4sdrive30i",
+      "make": "BMW",
+      "model": "Z4 sDrive30i",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "bmw:z4sdrive30iroadster",
+      "make": "BMW",
+      "model": "Z4 sDrive30i Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "bugatti:chiron",
+      "make": "Bugatti",
+      "model": "Chiron",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "bugatti:chironpursport",
+      "make": "Bugatti",
+      "model": "Chiron Pur Sport",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "bugatti:chironsupersport",
+      "make": "Bugatti",
+      "model": "Chiron Super Sport",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "bugatti:divo",
+      "make": "Bugatti",
+      "model": "Divo",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "bugatti:mistral",
+      "make": "Bugatti",
+      "model": "Mistral",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "bugattirimac:nevera",
+      "make": "Bugatti Rimac",
+      "model": "Nevera",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:enclave",
+      "make": "Buick",
+      "model": "Enclave",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "buick:enclaveawd",
+      "make": "Buick",
+      "model": "Enclave AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:encore",
+      "make": "Buick",
+      "model": "Encore",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:encoresidi",
+      "make": "Buick",
+      "model": "Encore (SIDI)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "buick:encoreawd",
+      "make": "Buick",
+      "model": "Encore AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "buick:encoreawdsidi",
+      "make": "Buick",
+      "model": "Encore AWD (SIDI)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "buick:encoregx",
+      "make": "Buick",
+      "model": "Encore GX",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:encoregxawd",
+      "make": "Buick",
+      "model": "Encore GX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    }
+  ]
+}

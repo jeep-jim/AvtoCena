@@ -1,0 +1,124 @@
+name: Owner REG storage attribution 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/reg-storage-owner-inventory-20261107.yml']
+permissions:
+  contents: read
+concurrency:
+  group: reg-storage-growth-audit
+  cancel-in-progress: false
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Read current instructions and roadmap without changing them
+        run: |
+          test -s AGENTS.md
+          test -s roadmap.md
+          tail -n 65 roadmap.md > "$RUNNER_TEMP/owner-storage-roadmap-tail.txt"
+      - name: Inventory metadata and exact operational manifests, never mutate storage
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '2'
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '20000'
+        run: |
+          cat > .github/diagnostics/owner-storage-readonly.tmp.mjs <<'JS'
+          import fs from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          import {ObjectJsonStorage} from '../../apps/web/lib/data.ts';
+          const origin='https://s3.regru.cloud',bucket=process.env.YC_OBJECT_STORAGE_BUCKET;
+          const prefix=process.env.YC_OBJECT_STORAGE_PREFIX.replace(/^\/+|\/+$/g,'')+'/';
+          const allowed=['catalog/manifest.json','catalog/previous-manifest.json','catalog/internal/manifest.json','catalog/storage-maintenance.json','catalog/storage-cleanup-report.json','catalog/import-lock.json'];
+          const paths=new Set(allowed.map(p=>'/'+bucket+'/'+prefix+p));
+          const started=Date.now(),deadline=started+12*60*1000;
+          const originalFetch=globalThis.fetch;
+          const pages={current:0,versions:0,uploads:0},completed={current:false,versions:false,uploads:false};
+          let requests=0;
+          globalThis.fetch=async(input,options)=>{
+            const url=new URL(input);assert.equal(url.origin,origin);assert.equal(options?.method,'GET');
+            assert.ok(++requests<=3000&&Date.now()<deadline,'audit_read_budget_exhausted');
+            const root=url.pathname==='/'+bucket;
+            const kind=root&&url.searchParams.get('list-type')==='2'?'current':root&&url.searchParams.has('versions')?'versions':root&&url.searchParams.has('uploads')?'uploads':null;
+            assert.ok(kind||(root&&url.searchParams.has('versioning'))||paths.has(decodeURIComponent(url.pathname))||(!root&&url.searchParams.has('uploadId')),'unapproved_read');
+            const response=await originalFetch(input,options);
+            if(kind&&response.ok){
+              const xml=await response.clone().text();assert.match(xml,/<IsTruncated>(true|false)<\/IsTruncated>/);
+              const truncated=xml.includes('<IsTruncated>true</IsTruncated>');
+              if(truncated)assert.match(xml,kind==='current'?/<NextContinuationToken>[^<]+<\/NextContinuationToken>/:/<NextKeyMarker>[^<]+<\/NextKeyMarker>/);
+              pages[kind]++;if(!truncated)completed[kind]=true;
+            }
+            return response;
+          };
+          const sum=rows=>rows.reduce((n,x)=>n+Number(x.size||0),0);
+          const stat=rows=>({objects:rows.length,bytes:sum(rows),GB:sum(rows)/1e9,GiB:sum(rows)/2**30});
+          const storage=new ObjectJsonStorage();
+          const report={startedAt:new Date(started).toISOString(),run:process.env.GITHUB_RUN_ID,source:'REG S3',scope:'One configured bucket, metadata plus six allowlisted operational manifests; no listing bodies, customer records, writes, deletion, cleanup locks or supplier access.',limitations:['Listing is not an atomic snapshot; concurrent writers may change totals.','Unreferenced generation is not an authorization to delete it.'],errors:[]};
+          const save=()=>fs.writeFile('owner-storage-attribution.json',JSON.stringify(report,null,2));
+          const safeError=e=>String(e?.message||'read_failed').match(/object_storage_[a-z_]+_\d{3}/)?.[0]||'read_failed';
+          try{
+            const manifests={};
+            for(const p of allowed){try{manifests[p]=await storage.readJson(p,null);}catch(e){report.errors.push({stage:p,error:safeError(e)});}}
+            const all=await storage.listBucketObjects('');assert.ok(completed.current,'incomplete_current_inventory');
+            assert.equal(new Set(all.map(x=>x.key)).size,all.length,'duplicate_inventory_keys');
+            for(const x of all)assert.ok(Number.isSafeInteger(x.size)&&x.size>=0,'invalid_size');
+            const app=all.filter(x=>x.key.startsWith(prefix)).map(x=>({...x,key:x.key.slice(prefix.length)}));
+            report.current=stat(all);report.application=stat(app);report.outsideApplication=stat(all.filter(x=>!x.key.startsWith(prefix)));
+            const groupMap=new Map(),catalogMap=new Map(),extensionMap=new Map(),genMap=new Map();
+            const add=(map,key,item)=>{const v=map.get(key)||{name:key,objects:0,bytes:0};v.objects++;v.bytes+=item.size;map.set(key,v);};
+            const classify=key=>/astra/i.test(key)?'ASTRA':/encyclopedia|vehicle-knowledge|vehicle-model/i.test(key)?'encyclopedia':key.startsWith('catalog/generations/')?'catalog-generations':key.startsWith('catalog/internal/')?'catalog-internal':key.startsWith('catalog/images/')?'catalog-images':key.startsWith('catalog/runtime-budget-prices-')?'budget-price-snapshots':key.startsWith('catalog/runtime-sort-prices-')?'sort-price-snapshots':key.startsWith('catalog/runtime/')?'catalog-runtime':key.startsWith('catalog/public/')?'catalog-public-projections':key.startsWith('catalog/')?'catalog-other':/^(crm|leads|clients)\//.test(key)?'CRM':'other';
+            for(const item of all){const inApp=item.key.startsWith(prefix),key=inApp?item.key.slice(prefix.length):item.key;add(groupMap,inApp?classify(key):'outside-app-prefix',item);}
+            for(const item of app){
+              const key=item.key,parts=key.split('/');
+              if(parts[0]==='catalog')add(catalogMap,parts.slice(0,Math.min(parts.length-1,parts[1]==='internal'?3:2)).join('/'),item);
+              const ext=key.match(/\.([a-zA-Z0-9]{1,8})$/)?.[1]?.toLowerCase()||'(other)';add(extensionMap,ext,item);
+              const generation=key.match(/^catalog\/generations\/(gen_\d+_[-a-z0-9]+)\//i)?.[1];if(generation)add(genMap,generation,item);
+            }
+            const ranked=map=>[...map.values()].sort((a,b)=>b.bytes-a.bytes);
+            report.groups=ranked(groupMap);report.catalogPrefixes=ranked(catalogMap);report.extensions=ranked(extensionMap).slice(0,20);
+            const publicId=manifests['catalog/manifest.json']?.generationId||null,previousId=manifests['catalog/previous-manifest.json']?.generationId||null,internalId=manifests['catalog/internal/manifest.json']?.generationId||null;
+            const ids=new Set([publicId,previousId,internalId].filter(Boolean));
+            const newest=[...genMap.keys()].sort((a,b)=>Number(b.split('_')[1])-Number(a.split('_')[1])).slice(0,2);
+            newest.forEach(id=>ids.add(id));
+            report.manifestGenerations={publicId,previousId,internalId,newestTwo:newest};
+            report.generations=ranked(genMap).map(v=>({...v,createdAt:new Date(Number(v.name.split('_')[1])).toISOString(),protectedByCurrentCleanupRule:ids.has(v.name)}));
+            report.oldUnprotectedGenerationSummary=stat(app.filter(x=>{const id=x.key.match(/^catalog\/generations\/(gen_(\d+)_[-a-z0-9]+)\//i);return id&&!ids.has(id[1])&&Number(id[2])<started-6*3600000;}));
+            const maintenance=manifests['catalog/storage-maintenance.json'],cleanup=manifests['catalog/storage-cleanup-report.json'],lock=manifests['catalog/import-lock.json'];
+            report.savedMaintenance=maintenance?{checkedAt:maintenance.checkedAt,beforeBytes:maintenance.beforeBytes,afterBytes:maintenance.afterBytes,deletedObjects:maintenance.deletedObjects,reason:maintenance.reason,deferred:maintenance.deferred}:null;
+            report.savedCleanup=cleanup?{finishedAt:cleanup.finishedAt,dryRun:cleanup.dryRun,blocked:cleanup.blocked,blockReason:cleanup.blockReason,planned:cleanup.planned,deleted:cleanup.deleted,protectedGenerations:cleanup.protectedGenerations,physicalBucketBytes:cleanup.physicalBucketInventory?.bytes,errorCount:cleanup.errors?.length}:null;
+            report.writer={active:Number.isFinite(Date.parse(lock?.lockedUntil||''))&&Date.parse(lock.lockedUntil)>Date.now(),operationType:lock?.operationType||null,lockedUntil:lock?.lockedUntil||null};
+            await save();console.log('CURRENT_ATTRIBUTION',JSON.stringify({current:report.current,groups:report.groups,generations:report.generations.length,oldUnprotectedGenerationSummary:report.oldUnprotectedGenerationSummary}));
+            try{const v=await storage.listObjectVersions();assert.ok(completed.versions);report.versions={...stat(v.filter(x=>!x.deleteMarker)),nonCurrent:stat(v.filter(x=>!x.deleteMarker&&!x.isLatest)),deleteMarkers:v.filter(x=>x.deleteMarker).length};}catch(e){report.errors.push({stage:'versions',error:safeError(e)});}
+            await save();
+            try{const u=await storage.listMultipartUploads();assert.ok(completed.uploads);report.multipart={uploads:u.length,parts:u.reduce((n,x)=>n+x.parts,0),bytes:u.reduce((n,x)=>n+x.bytes,0)};}catch(e){report.errors.push({stage:'multipart',error:safeError(e)});}
+            try{const after=await storage.readJson('catalog/manifest.json',null);report.publicGenerationUnchanged=after?.generationId===publicId;}catch(e){report.publicGenerationUnchanged=null;}
+            report.finishedAt=new Date().toISOString();report.requests=requests;report.pages=pages;report.completed=completed;await save();
+            console.log('AUDIT_FINISHED',JSON.stringify({current:report.current,versions:report.versions,multipart:report.multipart,savedMaintenance:report.savedMaintenance,savedCleanup:report.savedCleanup,publicGenerationUnchanged:report.publicGenerationUnchanged,errors:report.errors}));
+          }catch(e){report.errors.push({stage:'inventory',error:safeError(e)});report.finishedAt=new Date().toISOString();await save();console.error('AUDIT_FAILED',safeError(e));process.exitCode=1;}
+          JS
+          node --check .github/diagnostics/owner-storage-readonly.tmp.mjs
+          node --import tsx .github/diagnostics/owner-storage-readonly.tmp.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-storage-attribution-20261107
+          path: owner-storage-attribution.json
+          if-no-files-found: warn
+          retention-days: 14

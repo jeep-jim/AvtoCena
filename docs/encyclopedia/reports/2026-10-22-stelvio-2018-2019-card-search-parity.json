@@ -1,0 +1,80 @@
+{
+  "checkedAt": "2026-10-22T12:08:48.363589+00:00",
+  "state": "partial_europe_pass_korea_search_restricted",
+  "release": "75e91fe67467183520e7d0facde137260a0469f6",
+  "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+  "europeRepeatedExactVariants": {
+    "passed": true,
+    "count": 3,
+    "checks": [
+      {
+        "offerId": "59703791a42836ef76179621",
+        "fieldsEqual": {
+          "engineCc": true,
+          "powerHp": true,
+          "powerKw": true,
+          "totalRub": true,
+          "calculationStatus": true,
+          "powerDataSource": true
+        }
+      },
+      {
+        "offerId": "afef809354c3dbc4975fdbec",
+        "fieldsEqual": {
+          "engineCc": true,
+          "powerHp": true,
+          "powerKw": true,
+          "totalRub": true,
+          "calculationStatus": true,
+          "powerDataSource": true
+        }
+      },
+      {
+        "offerId": "a4646082dba9ee0d25be6e48",
+        "fieldsEqual": {
+          "engineCc": true,
+          "powerHp": true,
+          "powerKw": true,
+          "totalRub": true,
+          "calculationStatus": true,
+          "powerDataSource": true
+        }
+      }
+    ]
+  },
+  "sonataCardReadback": {
+    "id": "ajes-korea-6d1ocW5lV5Cl77",
+    "engineCc": 1999,
+    "powerHp": 160,
+    "powerKw": 117.68,
+    "totalRub": 3560003,
+    "calculationStatus": "estimated",
+    "powerDataSource": "permanent_encyclopedia:3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07"
+  },
+  "sonataSearchParityConfirmed": false,
+  "searchDiagnostic": {
+    "checkedAt": "2026-10-22T12:07:34.131565+00:00",
+    "rows": [
+      {
+        "url": "https://avtocena.com/api/catalog/search?market=europe&make=Alfa+Romeo&model=Giulia&yearFrom=2024&yearTo=2025&pageSize=48",
+        "status": 200,
+        "durationSeconds": 3.65,
+        "error": null,
+        "total": 16
+      },
+      {
+        "url": "https://avtocena.com/api/catalog/search?market=korea&make=Hyundai&model=Sonata&yearFrom=2024&yearTo=2024&pageSize=48",
+        "status": 503,
+        "durationSeconds": 6.3,
+        "error": {
+          "ok": false,
+          "error": "japan_search_unavailable",
+          "reason": "visitor_restricted"
+        },
+        "total": null
+      }
+    ]
+  },
+  "accessRestrictionsBypassed": false,
+  "scope": "Existing active index only; current Stelvio batches are not claimed active"
+}

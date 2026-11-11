@@ -1,0 +1,2245 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-stelvio",
+  "entries": [
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "6e9f7ab7283cc7b2c388ba9c",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2026,
+      "trim": "2.2 210cv Q4 Intensa TETTO PANORAMA APRIBILE",
+      "expectedDigest": "ec51fe158b924c795b70023e6c9da97f1422a7cf995242039bfa30ca854f38c2",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-price-lists/283?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2026: заводская таблица 01.04.2026. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), полный привод Q4. Название/оснащение не подтверждалось и не переименовано. Наблюдаемые2200см³ исправлены. Для Intensa2026 точная серия/стандарт кВт ещё требуют документа; powerKw/icePowerKw не подтверждены. Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-price-lists/283?v=1777453145",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "0126447d8157c8a701f03b481be371c2f05ae4070f9ea31865339975cbdef28e",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "394987de08b9a24517851c6a",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2025,
+      "trim": "2.2 t veloce q4 210cv auto",
+      "expectedDigest": "bd340ec4d44fb57e1397815a9f18c93afb7a16dbd0a9665c3e81c08bad7fcf91",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2025: заводская таблица 01.04.2025, MY24. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), полный привод Q4. В источниках встречаются154/155кВт; эти поля не подтверждены. MY24 в названии2025 согласуется с заводским прайсом2025 для MY24. Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              28,
+              29,
+              30
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "09986a7db475620cad7360ee",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2025,
+      "trim": "Stelvio 2.2 Turbodiesel 210 CV AT8 Q4 Veloce MY25",
+      "expectedDigest": "68b0fb2316ebce86830ada6fc14280a763b4d42db3550cf0cb4e106f08ea2a2d",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2025: заводская таблица 01.04.2025, MY24. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), полный привод Q4. В источниках встречаются154/155кВт; эти поля не подтверждены. MY24 в названии2025 согласуется с заводским прайсом2025 для MY24. Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              28,
+              29,
+              30
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "de7c36f0d9be23de2b6517e2",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2025,
+      "trim": "2.2 TD 210 CV Veloce AT8 Q4 MY24",
+      "expectedDigest": "fce1763b7f6613a3dbe991b41fad292863fd943d6db9eda904d89993414c22f5",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2025: заводская таблица 01.04.2025, MY24. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), полный привод Q4. В источниках встречаются154/155кВт; эти поля не подтверждены. MY24 в названии2025 согласуется с заводским прайсом2025 для MY24. Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              28,
+              29,
+              30
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "b576e43946d8eb5f9649e919",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2025,
+      "trim": "2.2 Turbodiesel 210 CV AT8 Q4 Intensa Limited e.",
+      "expectedDigest": "b6793e220adc1c6b6025360a43c242fbfd70107938782c39cab1e29f234beaf5",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Intensa",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2025: заводская таблица 01.04.2025, MY24. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), полный привод Q4. В источниках встречаются154/155кВт; эти поля не подтверждены. MY24 в названии2025 согласуется с заводским прайсом2025 для MY24. Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              28,
+              29,
+              30
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "29aea0472a884b72569e2bfb",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2024,
+      "trim": "Sprint Q4",
+      "expectedDigest": "47b0cfda8c89bcfb642e05db232996c9c146091354e3237a7e84fd756bce0053",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy24del22gennaio2024-65bd02252b5d8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2024: заводская таблица 22.01.2024. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy24del22gennaio2024-65bd02252b5d8.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "16c24a76522145096d81a41177dd83b96df017bdecdf506841613580d832fa40",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "922e45f4d3e7bf1324a873e6",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2024,
+      "trim": "ALFA ROMEO STELVIO Q4 2.0 SPRINT TURBO AT8 280 CV",
+      "expectedDigest": "db49530440ddc39dd4cdc54a467bd7e2d0550fe746d1e664a1c2037b711ba5ea",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Sprint",
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy24del22gennaio2024-65bd02252b5d8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2024: заводская таблица 22.01.2024. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy24del22gennaio2024-65bd02252b5d8.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "16c24a76522145096d81a41177dd83b96df017bdecdf506841613580d832fa40",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "8f95603e1249f244f09b4dfb",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2023,
+      "trim": "2.2 TD 160 CV AT8 RWD Sprint",
+      "expectedDigest": "c146026d2092a92db5c6de15a058abc37cbe2ac7a181a8aa809e9d6edbaf30f6",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 RWD Sprint",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2023: заводская таблица 01.08.2023. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 160 метрических л.с. (CV/PS), 118 кВт максимальной мощности ДВС, задний привод.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "1094e8cbee67b795978e41b42575adb30c21feb695440f2a3fb5a25cc25790e1",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "993f67d616b11037d117f74e",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2023,
+      "trim": "2.2 Turbo Ti",
+      "expectedDigest": "4bc7ef60d5b74a70e86cc47b569b34694df76c15d900cfbbb409334479486639",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2023: заводская таблица 01.08.2023. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "1094e8cbee67b795978e41b42575adb30c21feb695440f2a3fb5a25cc25790e1",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "b68f46a90357347310b59620",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2023,
+      "trim": "2.2 Turbodiesel 210 CV AT8 Q4 Sprint",
+      "expectedDigest": "c8dc81afe9ada6542bacfdc09f1c650bc97f672dc434d10d4fde110146462823",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Sprint",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2023: заводская таблица 01.08.2023. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "1094e8cbee67b795978e41b42575adb30c21feb695440f2a3fb5a25cc25790e1",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "199c1a5861a3d110bb73a5c1",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2023,
+      "trim": "2.2 t Super Q4 210cv auto RESTYL/15.000KM",
+      "expectedDigest": "6b1684bfdf7c709c838e414f16332aae82c48c3db3fda18f4314405c4a30d4c2",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Super",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2023: заводская таблица 01.08.2023. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2301_08_2023-650c0befbcbc6.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "1094e8cbee67b795978e41b42575adb30c21feb695440f2a3fb5a25cc25790e1",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "69bcd93bec99d939331aca45",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 Turbodiesel 160 CV AT8 RWD Business",
+      "expectedDigest": "ce7b6520ea98823e323913e1394ed4df893eb1d714eb9b736b0849f34a02a9fa",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 160 метрических л.с. (CV/PS), 118 кВт максимальной мощности ДВС, задний привод. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "b62b254be2c653adf4915dce",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 t Business rwd 160cv auto",
+      "expectedDigest": "24bfd60360a3835af0902a2b75ff2e3779a13c5e147706a1244b15812cc57a34",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 160 метрических л.с. (CV/PS), 118 кВт максимальной мощности ДВС, задний привод. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "27ed14248efe266a96e0262a",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 MJD / TI / SCHUIFDAK / CARPLAY / KEYLESS / GPS / CAMERA / DAB / XENON / BLIS / ACC",
+      "expectedDigest": "c24f72b0887de723755a5787cdd43c495d2a429b590887d83ee1ad86506cc657",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "96253a0f88ede5d407dd93b9",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 t Super Business Q4 190cv - UNIPRO - IVA ESPOSTA - STORICO TAGLIANDI",
+      "expectedDigest": "45ddf785fcabc1be5e7facf54142d4d42e40f985abd978e3bd6e3768082591ed",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Super Business",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "150df96708115daf7951af39",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "ALFA ROMEO - Stelvio 2.2 Turbodiesel 190 CV AT8",
+      "expectedDigest": "d58a7967b2f5b0e81dacb643c0a2abd3bbf59c4ab654b6e20e80ba3ad5113fbf",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "ea80ef32e9ac6b12f92ab00c",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "Stelvio 2022 2.2 t Sprint Q4 190cv auto",
+      "expectedDigest": "57f0b8f9ed7846cd0aed8c8179715dcb156c5b63339a2f5aae9302932475bd49",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Sprint",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "8fccc46ab1b1963303fddc74",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 Turbodiesel 190 CV AT8 Q4 Sprint",
+      "expectedDigest": "2c2b940771a9dfd2648e19ce3c7054fd5fe363b893fcce8aa33936fee28f1490",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 190 PS AT8 Q4 Sprint",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "27803012e146004c4db4660d",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "Stelvio 2.2 Turbodiesel 190 CV AT8 Q4 Executive",
+      "expectedDigest": "8680638cd1a51daaae8bab622bf778d01f2c86129eea536e179bf5469af3a46f",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "f018e72a6dbb367cf9a03370",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 t Veloce Q4 210cv auto",
+      "expectedDigest": "175b3bf557430ebd22e73683192d2fae96c0d68da1b9b9c13d50643b970797df",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "c20facbfa1a7278ed99ca3ea",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 Turbodiesel 210 CV AT8 Q4 Veloce",
+      "expectedDigest": "ddf2adeb93289cac7b4707b14ce18dd20014b8a1224e529c46df6a226950ebc6",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "550a5b1445d9d1557fc91090",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.2 t Veloce Q4 210cv auto prezzo REALE",
+      "expectedDigest": "b593c6840a962da5ba04b40e72e0fdebfbd5e3f62a8d8ec29144a8ee716e9dfa",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "5a056782cef50a5f50295104",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2022,
+      "trim": "2.0 Turbo 6C Villa d'Este Q4",
+      "expectedDigest": "671219b2a65c9b11f24bb2a080ad8e5d2c2315447496d3b737a7429bce1f2f8c",
+      "patch": {
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2022: заводская таблица 01.08.2022. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, полный привод Q4. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoarstelviomy2201_08_22-62e7fc6774e5f.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "7baf07743b86c91abb2ea759d082fce5b98503e1e3326f22849b9ca4778d6827",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "9fa8ba92d63c1adb02c9d998",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2021,
+      "trim": "2.2 MJD Super Toit Ouvrant Pano. Line Assist CarPlay * 12 à 36 MOIS GARANTIE *",
+      "expectedDigest": "4633ece1a5950a8e7551f1df85cfe19bc24fb32da1a10053ad2fba92c6f3c38a",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2021: заводская таблица 04.01.2021. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+            "pages": [
+              24,
+              25
+            ],
+            "sha256": "c6957854e31627bcbfad67782e60e5723e12dc7367e0f946397fcfc763c336b7",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "23d484fa5ad7ff5b0c33946a",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2021,
+      "trim": "2.2 MJD TI/1eigenr/92500km/Carplay/Camera/Led/Leder/Navi/Cruise/Clima...",
+      "expectedDigest": "d4c6b88c39a23bbaba4ff67cff0b2f5c9240492efee735989b4d25474fb3b12f",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2021: заводская таблица 04.01.2021. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+            "pages": [
+              24,
+              25
+            ],
+            "sha256": "c6957854e31627bcbfad67782e60e5723e12dc7367e0f946397fcfc763c336b7",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "8c09b85dc24d7187f9599d2f",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2021,
+      "trim": "Stelvio 2.2 t Veloce Ti Q4 210cv auto",
+      "expectedDigest": "42c8263de6cb7768b025bc83eaea5624717880499ab1746efaca30f4795b26db",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce Ti",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2021: заводская таблица 04.01.2021. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+            "pages": [
+              24,
+              25
+            ],
+            "sha256": "c6957854e31627bcbfad67782e60e5723e12dc7367e0f946397fcfc763c336b7",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/alfa-romeo-prsente-le-nouveau-stelvio-veloce-ti-my21",
+            "fields": [
+              "trim",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "1d2d3cf82091d4fba3020d22",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2021,
+      "trim": "Stelvio 2.2 Turbodiesel 210 CV AT8 Q4 Ti",
+      "expectedDigest": "78cba7b4dcf888880fc472129d2a5007e2cb5a97aa74df54f01c282a4e97560c",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2021: заводская таблица 04.01.2021. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+            "pages": [
+              24,
+              25
+            ],
+            "sha256": "c6957854e31627bcbfad67782e60e5723e12dc7367e0f946397fcfc763c336b7",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "91f25c600a0ede3a8f9ee8c8",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2021,
+      "trim": "2.0 *VELOCE Q4*XENON-PANO-AHK-R.KAM-MEMO",
+      "expectedDigest": "d23a37acc47daf88186fa8d4f71606d01ee0c7cdfdcf350f951bc8fa490c857c",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2021: заводская таблица 04.01.2021. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+            "pages": [
+              24,
+              25
+            ],
+            "sha256": "c6957854e31627bcbfad67782e60e5723e12dc7367e0f946397fcfc763c336b7",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/fr-fr/alfa-romeo/press/alfa-romeo-prsente-le-nouveau-stelvio-veloce-ti-my21",
+            "fields": [
+              "trim",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "fa383a9035ab411f512f64c0",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbodiesel 160 CV AT8 RWD Super",
+      "expectedDigest": "b6dabe7f3a25ebf4c2da704f4cb832fd06a7b01f366567aa1e1a13345950cd06",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 160 метрических л.с. (CV/PS), 118 кВт максимальной мощности ДВС, задний привод. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "22fad31f53c359e0c8314cf4",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 Turbodiesel 190 CV AT8 Q4 Ti",
+      "expectedDigest": "ccd1b920fa8bda5ed32e87fd6d802145035c0b87d61b99d6999ee5f1526f0d56",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "779c57aedc70523d8bb41647",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 t Business Q4 190cv auto",
+      "expectedDigest": "4bafd18f86f0770057bdc004b42d1988980b8c14b1efbdf0057f62a33d6ccef0",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "5e669434a1f7daf1323ce251",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 t Sprint Q4 190cv auto con garanzia 12-48 M",
+      "expectedDigest": "4b61b1480d28a663bc177b6d5a75fa4f7dda4660c9fab819ccb37d6c8ce23264",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "871cf5674ab72be7f468d68e",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Stelvio 2.2 Turbodiesel 190 CV AT8 Q4 Ti",
+      "expectedDigest": "03e149ac1398b7043ad4a814d4dea436fdabd63a2dacdf7ca4c2c4c7448b1462",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, полный привод Q4. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "01ebfd5b14962560de81226f",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Stelvio 2.2 TDI Executive RWD 190cv AT8 PREZZO REALE!!!!!",
+      "expectedDigest": "f418e50f2a46e523741976878f3bce28f757aa3d1c14d61f3e3295400a7fcd21",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, задний привод. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "18f4c612586bc3b9fde37323",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 t Business rwd 190cv auto",
+      "expectedDigest": "122a6646b0a8f2d0575122d3466c38c5798cb30d0550fa952eb09e0de8e30f96",
+      "patch": {
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС, задний привод. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "bbe53bc0a7cf851b65c300fa",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 Benzine Autom. Q4 - Apple Car Play - Topstaat!",
+      "expectedDigest": "a552eface2b846fa06a179a9b3c7a4186a1842fff5a931c43e1a4aff0345cacb",
+      "patch": {
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, полный привод Q4. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "1d1981aef0a48ea44141e130",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Super Q4 8-FACH-ALU*NAVI*CARPLAY*RFK*PDC",
+      "expectedDigest": "ed0c7a4ee7536e5b4effb9b07109fedcdaf6bae0ae2a8f4a7d873e75bba0e2a4",
+      "patch": {
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, полный привод Q4. Мощность и конкретное исполнение двигателя неоднозначны; подтверждены только общие поля семейства, а не наблюдаемая мощность. Название/оснащение не подтверждалось и не переименовано.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "9df95dc3b065b7d36179df7d",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.2 JTDM Veloce Q4",
+      "expectedDigest": "b78ad6913bc3082946908febd810358219df080936dd3334b627948e0f535017",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 210,
+        "powerKw": 154,
+        "icePowerKw": 154,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 2143 см³, дизельный ДВС, автоматическая КПП AT8, 210 метрических л.с. (CV/PS), 154 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          },
+          {
+            "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/new-alfa-romeo-giulia-and-stelvio-my2020-driving-experience-reaches-a-whole-new-level",
+            "fields": [
+              "trim",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "3fa7f427de05dc68fd001fc4",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "2.0 t Veloce Q4 280cv auto",
+      "expectedDigest": "95f977dd50d453b8d6cf6cecaaf66011c145d66c5ae28d8982f1a052f6580437",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          },
+          {
+            "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/new-alfa-romeo-giulia-and-stelvio-my2020-driving-experience-reaches-a-whole-new-level",
+            "fields": [
+              "trim",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "0d734c400f4417df7f272d30",
+      "variantId": "e4840b180924519bd75d22fd",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2020,
+      "trim": "Veloce Q4 Performance Xenon Kamera ACC",
+      "expectedDigest": "13e3fceb708990bf2533b4389190acbbea43636b9a6040973b0975d9db091612",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+        "checkedAt": "2026-10-22",
+        "statement": "Stelvio 2020: заводская таблица MY20. Подтверждено 1995 см³, бензиновый ДВС, автоматическая КПП AT8, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС, полный привод Q4.  Разрешённая полная масса и код двигателя не найдены; снаряжённая масса не перенесена.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/it-it/download-model-document/123?v=1777453145",
+            "pages": [
+              1
+            ],
+            "sha256": "9aef838f776576625c6560e9dd46dc3f3aa0246fada01ed420f9894a96d48514",
+            "fields": [
+              "trim",
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/stelvio",
+            "identity": "Linked document explicitly named Stelvio MY20",
+            "fields": []
+          },
+          {
+            "url": "https://www.media.stellantis.com/em-en/alfa-romeo/press/new-alfa-romeo-giulia-and-stelvio-my2020-driving-experience-reaches-a-whole-new-level",
+            "fields": [
+              "trim",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

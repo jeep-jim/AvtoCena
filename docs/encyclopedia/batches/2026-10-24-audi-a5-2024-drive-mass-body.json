@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a5-2024-drive-mass-body",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c1a026593d2f50395308c8e8",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback S-Line",
+      "expectedRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "expectedDigest": "64f840b929be4522b650be60a54d72379bc57668d8ddf8c4fe99fc34b15ba9f4",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1071/file_de/5b33f6a2a0c8ac5098f1dc993170c6b9cf45cb10/TD-Audi-A5-Sportback-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская техническая таблица Audi A5 Sportback для Германии, редакция13.06.2024,стр1–2. Сверены2024год, Sportback/SB, существующие объём,PS,kW,топливо и автоматическаяКПП; значениямощности не добавляются. Привод указан в разделеDrivetrain/Antrieb, полнаямасса — последнее значениеgross weight limit/Zul.Gesamtgewicht, не снаряжённаямасса. MHEV/пиковые3.1kW не становятся30-минутноймощностью; прежнийpowertrainKind не переопределяется.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1071/file_de/5b33f6a2a0c8ac5098f1dc993170c6b9cf45cb10/TD-Audi-A5-Sportback-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "sourceSha256": "2f29d86b6c7682e7f3331a648e451116b6ef999f33055a83f74e8a09606543ab",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница1: Drivetrain / Antrieb",
+            "edition": "13.06.2024"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1071/file_de/5b33f6a2a0c8ac5098f1dc993170c6b9cf45cb10/TD-Audi-A5-Sportback-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "sourceSha256": "2f29d86b6c7682e7f3331a648e451116b6ef999f33055a83f74e8a09606543ab",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница2: gross weight limit / Zul.Gesamtgewicht",
+            "edition": "13.06.2024"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b3a2f7b68e7e23054ba75eab",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "SB 35d AT7 Advan LED/APPLE/SHZ/RFK/18\"LM/8Fa",
+      "expectedRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "expectedDigest": "ac68804cb498061f35d0f1104438f3e93895b52e23164c77a7d22abbd28d7075",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2120
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская техническая таблица Audi A5 Sportback для Германии, редакция13.06.2024,стр1–2. Сверены2024год, Sportback/SB, существующие объём,PS,kW,топливо и автоматическаяКПП; значениямощности не добавляются. Привод указан в разделеDrivetrain/Antrieb, полнаямасса — последнее значениеgross weight limit/Zul.Gesamtgewicht, не снаряжённаямасса. MHEV/пиковые3.1kW не становятся30-минутноймощностью; прежнийpowertrainKind не переопределяется.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "sourceSha256": "51b29c25be99c0831138dac9e0c68c8d56e8e80eba50f0f54858a0ddcf134c11",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница1: Drivetrain / Antrieb",
+            "edition": "13.06.2024"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "sourceSha256": "51b29c25be99c0831138dac9e0c68c8d56e8e80eba50f0f54858a0ddcf134c11",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница2: gross weight limit / Zul.Gesamtgewicht",
+            "edition": "13.06.2024"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d56431281f2ed6da59ac6b03",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback S line 45 TFSI MATRIX LED SHZ RFK",
+      "expectedRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "expectedDigest": "ef5822f56ffa7d29dee5a59379e17d439396f2efadda5b6c658a75d90b608894",
+      "patch": {
+        "drive": "awd",
+        "grossVehicleWeightKg": 2175
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская техническая таблица Audi A5 Sportback для Германии, редакция13.06.2024,стр1–2. Сверены2024год, Sportback/SB, существующие объём,PS,kW,топливо и автоматическаяКПП; значениямощности не добавляются. Привод указан в разделеDrivetrain/Antrieb, полнаямасса — последнее значениеgross weight limit/Zul.Gesamtgewicht, не снаряжённаямасса. MHEV/пиковые3.1kW не становятся30-минутноймощностью; прежнийpowertrainKind не переопределяется.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "sourceSha256": "7bc60624c670e9c0f11715a0ff16d891cad80e4ae1f03eb1cb5fcf2e706208b2",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница1: Drivetrain / Antrieb",
+            "edition": "13.06.2024"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "sourceSha256": "7bc60624c670e9c0f11715a0ff16d891cad80e4ae1f03eb1cb5fcf2e706208b2",
+            "checkedAt": "2026-10-24",
+            "selector": "Страница2: gross weight limit / Zul.Gesamtgewicht",
+            "edition": "13.06.2024"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "63750b261ce43b6a3161e9f3",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Cabriolet 40 TFSI S tronic S line Virtual/Nav",
+      "expectedRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "expectedDigest": "77743737523570dd40cbb6214db8a72dcd6167a89f9b249cbad8eccf450edf5e",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A5__Cabrio_2017-2024_2d_GD_PL.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi: A5/S5 Cabriolet2017–2024. Исходнаястрока2024 явно содержит Cabrio/Cabriolet; подтверждёнтолькоотсутствующийкузов. Двигатель/мощность/год не меняются.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A5__Cabrio_2017-2024_2d_GD_PL.pdf",
+            "sourceSha256": "40307f11b7020f72c33e8b4f638ddd092fb3aaeb34799f591d750f1ad12f13f0",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: названиекузова иприменимостьгода",
+            "edition": "08/2020; 2017–2024"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "1c48c348a9bc3c00144c95c2",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Cabrio S line 45 TFSI quattro ACC B+O HUD SHZ",
+      "expectedRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "expectedDigest": "f851248b9791f856bce43f481523d629799e7e6686a90e7e2ecd73337eb370f3",
+      "patch": {
+        "bodyType": "convertible"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A5__Cabrio_2017-2024_2d_GD_PL.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi: A5/S5 Cabriolet2017–2024. Исходнаястрока2024 явно содержит Cabrio/Cabriolet; подтверждёнтолькоотсутствующийкузов. Двигатель/мощность/год не меняются.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A5__Cabrio_2017-2024_2d_GD_PL.pdf",
+            "sourceSha256": "40307f11b7020f72c33e8b4f638ddd092fb3aaeb34799f591d750f1ad12f13f0",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: названиекузова иприменимостьгода",
+            "edition": "08/2020; 2017–2024"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d468db5ac096473e43034c7f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "NeuesModTFSI 150kW_TechPak_SLine_Lim.",
+      "expectedRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+      "expectedDigest": "494e8a75244371a5b49d4ba63c44cf4ff661ba4378f03b74375b67adcc21fbbb",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская аварийная карта Audi: A5/S5 Avant/Saloon from2024. Исходнаястрока2024 явно содержит NeuesMod и Lim.; подтверждёнтолькоотсутствующийкузов. Двигатель/мощность/год не меняются.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/microsites/audi-com/en/rescue/rescue-data-sheets/datenblaetter/a5/Audi_A5_Avant-Sedan_Stationwagon_2024_5d_GD_EN.pdf",
+            "sourceSha256": "43b8ff4db17bc3a0813594c05ad01c74ff5742a81da712805610ded2a2015121",
+            "checkedAt": "2026-10-24",
+            "selector": "Страницы1–2: названиекузова иприменимостьгода",
+            "edition": "02 (04/2025), from 2024"
+          }
+        }
+      }
+    }
+  ]
+}

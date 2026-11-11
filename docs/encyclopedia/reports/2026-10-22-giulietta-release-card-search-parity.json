@@ -1,0 +1,178 @@
+{
+  "checkedAt": "2026-10-22T07:33:07.210929+00:00",
+  "release": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+  "indexDigest": "15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+  "healthReadback": {
+    "ok": true,
+    "releaseSha": "6df5eec0cb26d399e6efe6055d449ff9815bb0ad",
+    "calculationVersion": "92c4c809fd05b2ecb213c4cad64cc8f3c81ad5b0e6b6266efa142b420ab7a788"
+  },
+  "scope": "Three repeated exact Giulia variants and Sonata 2024 2.0 Exclusive; not a claim that new historical Giulietta rows match current offers",
+  "passed": true,
+  "rows": [
+    {
+      "offerId": "59703791a42836ef76179621",
+      "checks": {
+        "engineCc": {
+          "search": 1995,
+          "card": 1995,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 280,
+          "card": 280,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "card": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6689748,
+          "card": 6689748,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "gen_1792548716303_1c83fca2"
+    },
+    {
+      "offerId": "afef809354c3dbc4975fdbec",
+      "checks": {
+        "engineCc": {
+          "search": 1995,
+          "card": 1995,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 280,
+          "card": 280,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "card": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6586321,
+          "card": 6586321,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "gen_1792548716303_1c83fca2"
+    },
+    {
+      "offerId": "a4646082dba9ee0d25be6e48",
+      "checks": {
+        "engineCc": {
+          "search": 1995,
+          "card": 1995,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 280,
+          "card": 280,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 206,
+          "card": 206,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "card": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6793173,
+          "card": 6793173,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "gen_1792548716303_1c83fca2"
+    },
+    {
+      "offerId": "ajes-korea-6d1ocW5lV5Cl77",
+      "checks": {
+        "engineCc": {
+          "search": 1999,
+          "card": 1999,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 160,
+          "card": 160,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "card": "permanent_encyclopedia:15160b9233a8a4fe537d5aeeaf40e4bd6db7a455cb572cfc2083c7771e5bb698",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3560003,
+          "card": 3560003,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "generationId": "2026-10-22T07:29:14.456Z"
+    }
+  ]
+}

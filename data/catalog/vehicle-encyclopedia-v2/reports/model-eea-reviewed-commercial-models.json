@@ -1,0 +1,680 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "manuallyReviewedModelBoundariesOnly": true,
+    "trimsAndPowertrainsNotPromoted": true,
+    "observationYearsNotUsedAsProductionBoundaries": true,
+    "crossBrandManufacturerRowsRetainedOnlyWhenCommercialIdentityIsExplicit": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 81,
+    "newReviewModels": 33,
+    "brands": 17,
+    "observedRegistrations": 6612230,
+    "observedSpecificationGroups": 3986,
+    "officialManufacturerSources": 4
+  },
+  "records": [
+    {
+      "id": "audi/a4",
+      "brandId": "audi",
+      "canonicalName": "A4",
+      "sourceNames": [
+        "A4 ALLROAD QUATTRO",
+        "A4 AVANT",
+        "A4 LIMOUSINE"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 354936,
+      "specificationGroups": 282,
+      "officialSourceId": null
+    },
+    {
+      "id": "bmw/1-series",
+      "brandId": "bmw",
+      "canonicalName": "1 Series",
+      "sourceNames": [
+        "116D",
+        "116I",
+        "118 D",
+        "118I",
+        "120",
+        "120D",
+        "120I",
+        "M135I XDRIVE",
+        "SERIE 1"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 530042,
+      "specificationGroups": 248,
+      "officialSourceId": null
+    },
+    {
+      "id": "bmw/3-series",
+      "brandId": "bmw",
+      "canonicalName": "3 Series",
+      "sourceNames": [
+        "318D",
+        "318I",
+        "320D",
+        "320D XDRIVE",
+        "320E",
+        "320I",
+        "330 D XDRIVE",
+        "330 E",
+        "330 E XDRIVE",
+        "330I"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 514241,
+      "specificationGroups": 371,
+      "officialSourceId": null
+    },
+    {
+      "id": "citroen/berlingo",
+      "brandId": "citroen",
+      "canonicalName": "Berlingo",
+      "sourceNames": [
+        "BERLINGO"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 171375,
+      "specificationGroups": 59,
+      "officialSourceId": null
+    },
+    {
+      "id": "dacia/dokker",
+      "brandId": "dacia",
+      "canonicalName": "Dokker",
+      "sourceNames": [
+        "DOKKER"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "registrations": 65782,
+      "specificationGroups": 20,
+      "officialSourceId": null
+    },
+    {
+      "id": "dacia/lodgy",
+      "brandId": "dacia",
+      "canonicalName": "Lodgy",
+      "sourceNames": [
+        "LODGY"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "registrations": 80368,
+      "specificationGroups": 32,
+      "officialSourceId": null
+    },
+    {
+      "id": "ds-automobiles/ds-4",
+      "brandId": "ds-automobiles",
+      "canonicalName": "DS 4",
+      "sourceNames": [
+        "DS4"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 47661,
+      "specificationGroups": 104,
+      "officialSourceId": null
+    },
+    {
+      "id": "ford/transit",
+      "brandId": "ford",
+      "canonicalName": "Transit",
+      "sourceNames": [
+        "TRANSIT"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 31442,
+      "specificationGroups": 92,
+      "officialSourceId": null
+    },
+    {
+      "id": "ford/transit-custom",
+      "brandId": "ford",
+      "canonicalName": "Transit Custom",
+      "sourceNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 84661,
+      "specificationGroups": 132,
+      "officialSourceId": null
+    },
+    {
+      "id": "honda/hr-v",
+      "brandId": "honda",
+      "canonicalName": "HR-V",
+      "sourceNames": [
+        "HRV"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 74179,
+      "specificationGroups": 73,
+      "officialSourceId": null
+    },
+    {
+      "id": "kia/sportage",
+      "brandId": "kia",
+      "canonicalName": "Sportage",
+      "sourceNames": [
+        "SPORTAGE"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 647565,
+      "specificationGroups": 98,
+      "officialSourceId": null
+    },
+    {
+      "id": "mazda/cx-5",
+      "brandId": "mazda",
+      "canonicalName": "CX-5",
+      "sourceNames": [
+        "CX 5",
+        "MAZDA CX 5"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 176877,
+      "specificationGroups": 240,
+      "officialSourceId": null
+    },
+    {
+      "id": "mercedes-benz/a-class",
+      "brandId": "mercedes-benz",
+      "canonicalName": "A-Class",
+      "sourceNames": [
+        "A 160",
+        "A 180",
+        "A 180 D",
+        "A 200",
+        "A 200 D",
+        "A 250 E"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 566126,
+      "specificationGroups": 216,
+      "officialSourceId": null
+    },
+    {
+      "id": "mercedes-benz/b-class",
+      "brandId": "mercedes-benz",
+      "canonicalName": "B-Class",
+      "sourceNames": [
+        "B 180",
+        "B 180 D",
+        "B 200",
+        "B 200 D",
+        "B 250E"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 171062,
+      "specificationGroups": 130,
+      "officialSourceId": null
+    },
+    {
+      "id": "mercedes-benz/c-class",
+      "brandId": "mercedes-benz",
+      "canonicalName": "C-Class",
+      "sourceNames": [
+        "C 180",
+        "C 200",
+        "C 200 D",
+        "C 220 D",
+        "C 220 D 4MATIC",
+        "C 300 D",
+        "C 300 DE",
+        "C 300 E"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 373912,
+      "specificationGroups": 332,
+      "officialSourceId": null
+    },
+    {
+      "id": "mercedes-benz/citan",
+      "brandId": "mercedes-benz",
+      "canonicalName": "Citan",
+      "sourceNames": [
+        "CITAN"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 19841,
+      "specificationGroups": 53,
+      "officialSourceId": null
+    },
+    {
+      "id": "mercedes-benz/sprinter",
+      "brandId": "mercedes-benz",
+      "canonicalName": "Sprinter",
+      "sourceNames": [
+        "SPRINTER"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 19328,
+      "specificationGroups": 112,
+      "officialSourceId": null
+    },
+    {
+      "id": "mini/one",
+      "brandId": "mini",
+      "canonicalName": "One",
+      "sourceNames": [
+        "ONE"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "registrations": 72143,
+      "specificationGroups": 15,
+      "officialSourceId": null
+    },
+    {
+      "id": "nissan/qashqai",
+      "brandId": "nissan",
+      "canonicalName": "Qashqai",
+      "sourceNames": [
+        "NISSAN QASHQAI",
+        "QASHQAI"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 709987,
+      "specificationGroups": 133,
+      "officialSourceId": null
+    },
+    {
+      "id": "nissan/townstar",
+      "brandId": "nissan",
+      "canonicalName": "Townstar",
+      "sourceNames": [
+        "TOWNSTAR"
+      ],
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 18795,
+      "specificationGroups": 13,
+      "officialSourceId": null
+    },
+    {
+      "id": "nissan/x-trail",
+      "brandId": "nissan",
+      "canonicalName": "X-Trail",
+      "sourceNames": [
+        "NISSAN X-TRAIL",
+        "X TRAIL"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 110249,
+      "specificationGroups": 108,
+      "officialSourceId": null
+    },
+    {
+      "id": "opel/combo",
+      "brandId": "opel",
+      "canonicalName": "Combo",
+      "sourceNames": [
+        "COMBO LIFE"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 53575,
+      "specificationGroups": 42,
+      "officialSourceId": null
+    },
+    {
+      "id": "peugeot/expert",
+      "brandId": "peugeot",
+      "canonicalName": "Expert",
+      "sourceNames": [
+        "EXPERT"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 6847,
+      "specificationGroups": 38,
+      "officialSourceId": null
+    },
+    {
+      "id": "peugeot/rifter",
+      "brandId": "peugeot",
+      "canonicalName": "Rifter",
+      "sourceNames": [
+        "RIFTER"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 115457,
+      "specificationGroups": 38,
+      "officialSourceId": null
+    },
+    {
+      "id": "renault/kangoo",
+      "brandId": "renault",
+      "canonicalName": "Kangoo",
+      "sourceNames": [
+        "KANGOO"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 109680,
+      "specificationGroups": 37,
+      "officialSourceId": null
+    },
+    {
+      "id": "renault/trafic",
+      "brandId": "renault",
+      "canonicalName": "Trafic",
+      "sourceNames": [
+        "TRAFIC"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 87999,
+      "specificationGroups": 43,
+      "officialSourceId": null
+    },
+    {
+      "id": "toyota/camry",
+      "brandId": "toyota",
+      "canonicalName": "Camry",
+      "sourceNames": [
+        "TOYOTA CAMRY"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 42051,
+      "specificationGroups": 14,
+      "officialSourceId": null
+    },
+    {
+      "id": "toyota/proace",
+      "brandId": "toyota",
+      "canonicalName": "Proace",
+      "sourceNames": [
+        "PROACE"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 84944,
+      "specificationGroups": 60,
+      "officialSourceId": null
+    },
+    {
+      "id": "toyota/proace-city-verso",
+      "brandId": "toyota",
+      "canonicalName": "Proace City Verso",
+      "sourceNames": [
+        "Proace City Verso"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 87713,
+      "specificationGroups": 42,
+      "officialSourceId": null
+    },
+    {
+      "id": "volkswagen/caddy",
+      "brandId": "volkswagen",
+      "canonicalName": "Caddy",
+      "sourceNames": [
+        "CADDY"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 213921,
+      "specificationGroups": 198,
+      "officialSourceId": null
+    },
+    {
+      "id": "volkswagen/multivan",
+      "brandId": "volkswagen",
+      "canonicalName": "Multivan",
+      "sourceNames": [
+        "MULTIVAN"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 151350,
+      "specificationGroups": 142,
+      "officialSourceId": null
+    },
+    {
+      "id": "volkswagen/t-cross",
+      "brandId": "volkswagen",
+      "canonicalName": "T-Cross",
+      "sourceNames": [
+        "T CROSS"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 762306,
+      "specificationGroups": 281,
+      "officialSourceId": null
+    },
+    {
+      "id": "volkswagen/touareg",
+      "brandId": "volkswagen",
+      "canonicalName": "Touareg",
+      "sourceNames": [
+        "TOUAREG"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 55815,
+      "specificationGroups": 188,
+      "officialSourceId": null
+    }
+  ]
+}

@@ -1,0 +1,7971 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 11,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "astonmartin:dbssuperleggera",
+      "make": "Aston Martin",
+      "model": "DBS Superleggera",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:dbsv12",
+      "make": "Aston Martin",
+      "model": "DBS V12",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:dbx",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbx",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Dbx"
+      },
+      "aliases": [
+        "Aston Martin DBX",
+        "DBX"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:dbx727",
+      "make": "Aston Martin",
+      "model": "DBX 727",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:dbxs",
+      "make": "Aston Martin",
+      "model": "Dbx S",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbx-s",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Dbx S"
+      },
+      "aliases": [
+        "DBX S"
+      ],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:dbxv8",
+      "make": "Aston Martin",
+      "model": "DBX V8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:dbx707",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbx707",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DBX707"
+      },
+      "aliases": [
+        "DBX 707"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:lagonda",
+      "make": "Aston Martin",
+      "model": "Lagonda",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:rapide",
+      "make": "Aston Martin",
+      "model": "Rapide",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/rapide",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Rapide"
+      },
+      "aliases": [
+        "RAPIDE AMR",
+        "Rapide AMR",
+        "RAPIDE AMR V12 AUTO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:speedster",
+      "make": "Aston Martin",
+      "model": "Speedster",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/speedster",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Speedster"
+      },
+      "aliases": [
+        "SPEEDSTER"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:v12vantage",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:v8",
+      "make": "Aston Martin",
+      "model": "V8",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/v8",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "V8"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:valhalla",
+      "make": "Aston Martin",
+      "model": "Valhalla",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/valhalla",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Valhalla"
+      },
+      "aliases": [
+        "VALHALLA"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:valkyrie",
+      "make": "Aston Martin",
+      "model": "Valkyrie",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/valkyrie",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Valkyrie"
+      },
+      "aliases": [
+        "VALKYRIE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:valour",
+      "make": "Aston Martin",
+      "model": "Valour",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/valour",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Valour"
+      },
+      "aliases": [
+        "VALOUR"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "my",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:vanquish",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/vanquish",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Vanquish"
+      },
+      "aliases": [
+        "VANQUISH"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:vanquishcoupe",
+      "make": "Aston Martin",
+      "model": "Vanquish Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:vanquishvolante",
+      "make": "Aston Martin",
+      "model": "Vanquish Volante",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:vantage",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/vantage",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Vantage"
+      },
+      "aliases": [
+        "VANTAGE"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:vantagemanual",
+      "make": "Aston Martin",
+      "model": "Vantage Manual",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:vantagev8",
+      "make": "Aston Martin",
+      "model": "Vantage V8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:virage",
+      "make": "Aston Martin",
+      "model": "Virage",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "astonmartin:zagato",
+      "make": "Aston Martin",
+      "model": "Zagato",
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "auburn:851",
+      "make": "Auburn",
+      "model": "851",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:100",
+      "make": "Audi",
+      "model": "100",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:200",
+      "make": "Audi",
+      "model": "200",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:4000",
+      "make": "Audi",
+      "model": "4000",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:5000",
+      "make": "Audi",
+      "model": "5000",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:60",
+      "make": "Audi",
+      "model": "60",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:80",
+      "make": "Audi",
+      "model": "80",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:90",
+      "make": "Audi",
+      "model": "90",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a1",
+      "make": "Audi",
+      "model": "A1",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a1",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A1"
+      },
+      "aliases": [
+        "Audi A1",
+        "A1/ A1 Spetback 1.4 TFSI",
+        "A1/ A1 Sportback 1.0TFSI (S-tronic)",
+        "A1/ A1 Sportback 1.4 TFSI cylinder on demand (S-tronic)",
+        "A1/ A1 Sportback 1.4 TFSI (S-tronic)",
+        "A1 Sportback 25 TFSI (S-tronic)",
+        "A1 Sportback 35 TFSI cylinder on demand (S-tronic)",
+        "A1 Sportback Citycarver 30 TFSI (S-tronic)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a2",
+      "make": "Audi",
+      "model": "A2",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a2",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A2"
+      },
+      "aliases": [
+        "AUDI A2"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a3",
+      "make": "Audi",
+      "model": "A3",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A3"
+      },
+      "aliases": [
+        "AUDI A3",
+        "A3 40 TFSI (S-tronic)",
+        "A3 Sedan 1.4 TFSI cylinder on demand (S-tronic)",
+        "A3 Sedan 1.4 TFSI (S-tronic)",
+        "A3 Sedan 1.8 TFSI quattro (S-tronic)",
+        "A3 Sedan 2.0 TFSI quattro (S-tronic)",
+        "A3 Sedan 30 TFSI A3 Sedan 1.4 TFSI (S-tronic)",
+        "A3 Sedan 30 TFSI (S-tronic)",
+        "A3 Sedan 40 TFSI quattro A3 Sedan 2.0 TFSI quattro (S-tronic)",
+        "A3 Sedan 40 TFSI quattro (S-tronic)",
+        "A3 Sportback 1.4 TFSI cylinder on demand (S-tronic)",
+        "A3 Sportback 1.4 TFSI (S-tronic)",
+        "A3 Sportback 1.8 TFSI quattro (S-tronic)",
+        "A3 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A3 Sportback 30 TFSI A3 Sportback 1.4 TFSI (S-tronic)",
+        "A3 Sportback 30 TFSI (S-tronic)",
+        "A3 Sportback 40 TFSI quattro A3 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A3 Sportback 40 TFSI quattro (S-tronic)",
+        "A3 Sportback 40 TFSI quattro (S-tronic) A3 Sedan 40 TFSI quattro (S-tronic)",
+        "A3 Sportback / Sedan 30 TFSI (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a340tfsiquattro",
+      "make": "Audi",
+      "model": "A3 40 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a3cabrioletquattro",
+      "make": "Audi",
+      "model": "A3 Cabriolet quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a3quattro",
+      "make": "Audi",
+      "model": "A3 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a3sedan40tfsiquattro",
+      "make": "Audi",
+      "model": "A3 Sedan 40 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a4",
+      "make": "Audi",
+      "model": "A4",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a4",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A4"
+      },
+      "aliases": [
+        "A4 ALLROAD QUATTRO",
+        "A4 AVANT",
+        "A4 LIMOUSINE",
+        "A4 1.4 TFSI A4 Avant 1.4 TFSI (S-tronic)",
+        "A4 2.0 TFSI A4 Avant 2.0 TFSI",
+        "A4 2.0 TFSI A4 Avant 2.0 TFSI (S-tronic)",
+        "A4 2.0 TFSI quattro A4 Avant 2.0 TFSI quattro (S-tronic)",
+        "A4 2.0 TFSI quattro (S-tronic)",
+        "A4 2.0 TFSI (S-tronic)",
+        "A4 35 TDI A4 Avant 35 TDI (S-tronic)",
+        "A4 35 TFSI A4 Avant 35 TFSI (S-tronic)",
+        "A4 35 TFSI A4 Avant 35 TFSI (S-tronic) A4 1.4 TFSI A4 Avant 1.4 TFSI (S-tronic)",
+        "A4 35 TFSI (S-tronic)",
+        "A4 40 TDI quattro A4 Avant 40 TDI quattro (S-tronic)",
+        "A4 40 TDI quattro (S-tronic)",
+        "A4 40 TFSI (S-tronic)",
+        "A4 40 TFSI (S-tronic) A4 2.0 TFSI (S-tronic)",
+        "A4 45 TFSI quattro A4 Avant 45 TFSI quattro (S-tronic)",
+        "A4 45 TFSI quattro (S-tronic)",
+        "A4 45 TFSI quattro (S-tronic) A4 2.0 TFSI quattro (S-tronic)",
+        "A4 allroad quattro (S-tronic)",
+        "A4 allroad (S-tronic)",
+        "A4 Avant 2.0 TFSI quattro (S-tronic)",
+        "A4 Avant 2.0 TFSI (S-tronic)",
+        "A4 Avant 40 TDI quattro (S-tronic)",
+        "A4 Avant 40 TFSI (S-tronic)",
+        "A4 Avant 40 TFSI (S-tronic) A4 Avant 2.0 TFSI (S-tronic)",
+        "A4 Avant 45 TFSI quattro (S-tronic)",
+        "A4 Avant 45 TFSI quattro (S-tronic) A4 Avant 2.0 TFSI quattro (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a445tfsiquattro",
+      "make": "Audi",
+      "model": "A4 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a4allroad45tfsiquattro",
+      "make": "Audi",
+      "model": "A4 allroad 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a4allroadquattro",
+      "make": "Audi",
+      "model": "A4 allroad quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a4quattro",
+      "make": "Audi",
+      "model": "A4 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a4sedan40tfsiquattro",
+      "make": "Audi",
+      "model": "A4 Sedan 40 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a4sedan45tfsiquattro",
+      "make": "Audi",
+      "model": "A4 Sedan 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5",
+      "make": "Audi",
+      "model": "A5",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a5",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A5"
+      },
+      "aliases": [
+        "AUDI A5",
+        "A5 2.0 TFSI quattro (S-tronic)",
+        "A5 Avant TDI quattro 150kW (S-tronic)",
+        "A5 Avant TFSI 110kW (S-tronic)",
+        "A5 Avant TFSI quattro 150kW (S-tronic)",
+        "A5 Cabriolet 2.0 TFSI quattro (S-tronic)",
+        "A5 Cabriolet 45 TFSI quattro A5 Cabriolet 2.0TFSI quattro (S-tronic)",
+        "A5 Cabriolet 45 TFSI quattro (S-tronic)",
+        "A5 Coupe 2.0TFSI quattro (S-tronic)",
+        "A5 Coupe 40 TDI quattro (S-tronic)",
+        "A5 Coupe 45 TFSI quattro A5 Coupe 2.0TFSI quattro (S-tronic)",
+        "A5 Coupe 45 TFSI quattro (S-tronic)",
+        "A5 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A5 Sportback 2.0TFSI (S-tronic)",
+        "A5 Sportback 35 TDI (S-tronic)",
+        "A5 Sportback 40 TDI quattro (S-tronic)",
+        "A5 Sportback 40 TFSI A5 Sportback 2.0TFSI (S-tronic)",
+        "A5 Sportback 40 TFSI (S-tronic)",
+        "A5 Sportback 45 TFSI quattro A5 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A5 Sportback 45 TFSI quattro (S-tronic)",
+        "A5 TDI quattro 150kW (S-tronic)",
+        "A5 TDI quattro 150kW (S-tronic) A5 Avant TDI quattro 150kW (S-tronic)",
+        "A5 TFSI 110kW (S-tronic)",
+        "A5 TFSI quattro 150kW (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5cabriolet45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Cabriolet 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5cabrioletquattro",
+      "make": "Audi",
+      "model": "A5 Cabriolet quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5coup45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Coup 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5coupe45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Coupe 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5quattro",
+      "make": "Audi",
+      "model": "A5 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5sedanquattro",
+      "make": "Audi",
+      "model": "A5 Sedan quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5sportback45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Sportback 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5sportbackquattro",
+      "make": "Audi",
+      "model": "A5 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a5tfsiquattro",
+      "make": "Audi",
+      "model": "A5 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6",
+      "make": "Audi",
+      "model": "A6",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a6",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A6"
+      },
+      "aliases": [
+        "A 6 ALLROAD QUATTRO",
+        "A 6 AVANT",
+        "A 6 LIMOUSINE",
+        "A6 1.8 TFSI (S-tronic)",
+        "A6 2.0 TFSI quattro A6 Avant 2.0 TFSI quattro (S-tronic)",
+        "A6 2.8 FSI quattro A6 Avant 2.8 FSI quattro (S-tronic)",
+        "A6 3.0 TFSI quattro (S-tronic)",
+        "A6 3.0 TFSI quattro A6 Avant 3.0 TFSI quattro (S-tronic)",
+        "A6 40 TDI quattro",
+        "A6 40 TDI quattro (S-tronic)",
+        "A6 40 TDI quattro A6 Avant 40 TDI quattro (S-tronic)",
+        "A6 45 TFSI quattro / A6 Avant 45 TFSI quattro (S-tronic)",
+        "A6 55 TFSI quattro (S-tronic)",
+        "A6 55 TFSI quattro A6 Avant 55 TFSI quattro (S-tronic)",
+        "A6 55 TFSI quattro air sus A6 Avant 55 TFSI quattro air sus (S-tronic)",
+        "A6 allroad quattro (S-tronic)",
+        "A6 Avant 1.8 TFSI (S-tronic)",
+        "A6 Avant 3.0 TFSI quattro (S-tronic)",
+        "A6 Avant 40 TDI quattro (S-tronic)",
+        "A6 Avant 45 TFSI quattro (S-tronic)",
+        "AUDI A6"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a645tfsiquattro",
+      "make": "Audi",
+      "model": "A6 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a655tfsiquattro",
+      "make": "Audi",
+      "model": "A6 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a660etron",
+      "make": "Audi",
+      "model": "A6 60 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a660etronultra",
+      "make": "Audi",
+      "model": "A6 60 e-tron ultra",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6allroad",
+      "make": "Audi",
+      "model": "A6 allroad",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6allroad55tfsiquattro",
+      "make": "Audi",
+      "model": "A6 allroad 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6etron",
+      "make": "Audi",
+      "model": "A6 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6quattro",
+      "make": "Audi",
+      "model": "A6 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6sedan45tfsiquattro",
+      "make": "Audi",
+      "model": "A6 Sedan 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a6sedan55tfsiquattro",
+      "make": "Audi",
+      "model": "A6 Sedan 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a7",
+      "make": "Audi",
+      "model": "A7",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a7",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A7"
+      },
+      "aliases": [
+        "A 7 SPORTBACK",
+        "A7 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A7 Sportback 3.0 TFSI quattro (S-tronic)",
+        "A7 Sportback 40 TDI quattro",
+        "A7 Sportback 40 TDI quattro (S-tronic)",
+        "A7 Sportback 45 TFSI quattro (S-tronic)",
+        "A7 Sportback 55 TFSI quattro (S-tronic)",
+        "AUDI A7"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a7quattro",
+      "make": "Audi",
+      "model": "A7 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a7sportback",
+      "make": "Audi",
+      "model": "A7 Sportback",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a7sportback55tfsiequattro",
+      "make": "Audi",
+      "model": "A7 Sportback 55 TFSI e quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a7sportback55tfsiquattro",
+      "make": "Audi",
+      "model": "A7 Sportback 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8",
+      "make": "Audi",
+      "model": "A8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A8"
+      },
+      "aliases": [
+        "A 8",
+        "AUDI A8",
+        "A8 3.0 TFSI quattro",
+        "A8 4.0 TFSI quattro",
+        "A8 4.2 FSI quattro",
+        "A8 55 TFSI quattro",
+        "A8 60 TFSI quattro",
+        "A8 L 4.0 TFSI quattro",
+        "A8L 4.2 FSI quattro",
+        "A8 L 60 TFSI quattro",
+        "A8 L W12 6.3 FSI quattro"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8l55tfsiquattro",
+      "make": "Audi",
+      "model": "A8 L 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8lsedan55tfsiquattro",
+      "make": "Audi",
+      "model": "A8 L Sedan 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8lsedan60tfsiequattro",
+      "make": "Audi",
+      "model": "A8 L Sedan 60 TFSI e quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8lsedan60tfsiquattro",
+      "make": "Audi",
+      "model": "A8 L Sedan 60 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8quattro",
+      "make": "Audi",
+      "model": "A8 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:a8l",
+      "make": "Audi",
+      "model": "A8L",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ai",
+      "make": "Audi",
+      "model": "Ai",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:allnewq5sportbacktfsiquattro",
+      "make": "Audi",
+      "model": "All-new Q5 Sportback TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:allnewq5tfsiquattro",
+      "make": "Audi",
+      "model": "All-new Q5 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:allnewsq5quattro",
+      "make": "Audi",
+      "model": "All-new SQ5 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:allnewsq5sportbackquattro",
+      "make": "Audi",
+      "model": "All-new SQ5 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:allroad",
+      "make": "Audi",
+      "model": "Allroad",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/allroad",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Allroad"
+      },
+      "aliases": [
+        "AUDI ALLROAD"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:cabriolet",
+      "make": "Audi",
+      "model": "Cabriolet",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audichina:e5sportback",
+      "make": "AUDI China",
+      "model": "E5 Sportback",
+      "canonical": {
+        "brandId": "audi-china",
+        "modelId": "audi-china/e5-sportback",
+        "canonicalMake": "AUDI China",
+        "canonicalModel": "E5 Sportback"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Sportback"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2025,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audichina:e7x",
+      "make": "AUDI China",
+      "model": "E7X",
+      "canonical": {
+        "brandId": "audi-china",
+        "modelId": "audi-china/e7x",
+        "canonicalMake": "AUDI China",
+        "canonicalModel": "E7X"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2026,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:coupe",
+      "make": "Audi",
+      "model": "Coupe",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etron",
+      "make": "Audi",
+      "model": "e-tron",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/e-tron",
+        "canonicalMake": "Audi",
+        "canonicalModel": "e-tron"
+      },
+      "aliases": [
+        "AUDI E TRON",
+        "Audi e-tron",
+        "AUDI E-TRON",
+        "E-TRON"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etron55quattro",
+      "make": "Audi",
+      "model": "e-tron 55 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etrongt",
+      "make": "Audi",
+      "model": "e-tron GT",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/e-tron-gt",
+        "canonicalMake": "Audi",
+        "canonicalModel": "e-tron GT"
+      },
+      "aliases": [
+        "AUDI E-TRON GT",
+        "E TRON GT",
+        "E-TRON GT",
+        "E-TRON GT / /"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etrons",
+      "make": "Audi",
+      "model": "e-tron S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etronssportbackquattro20wheels",
+      "make": "Audi",
+      "model": "e-tron S Sportback quattro (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etronssportbackquattro21or22wheels",
+      "make": "Audi",
+      "model": "e-tron S Sportback quattro (21\" or 22\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etronsportback",
+      "make": "Audi",
+      "model": "e-tron Sportback",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:etronsportback55quattro",
+      "make": "Audi",
+      "model": "e-tron Sportback 55 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q2",
+      "make": "Audi",
+      "model": "Q2",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q2",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q2"
+      },
+      "aliases": [
+        "Audi Q2",
+        "Q2 1.0 TFSI (S-tronic)",
+        "Q2 1.4 TFSI cylinder on demand (S-tronic)",
+        "Q2 30 TFSI Q2 1.0 TFSI(S-tronic)",
+        "Q2 30 TFSI (S-tronic)",
+        "Q2 35 TDI quattro (S-tronic)",
+        "Q2 35 TDI (S-tronic)",
+        "Q2 35 TFSI cylinder on demand Q2 1.4 TFSI cylinder on demand (S-tronic)",
+        "Q2 35 TFSI cylinder on demand (S-tronic)",
+        "Q2 35 TFSI (S-tronic)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q3",
+      "make": "Audi",
+      "model": "Q3",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q3"
+      },
+      "aliases": [
+        "Audi Q3",
+        "Q3 1.4 TFSI",
+        "Q3 2.0 TFSI quattro (S-tronic)",
+        "Q3 35 TDI quattro",
+        "Q3 35 TDI quattro (S-tronic)",
+        "Q3 35 TFSI Sportback (S-tronic)",
+        "Q3 35 TFSI (S-tronic)",
+        "Q3 40 TDI quattro (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q340tfsiquattro",
+      "make": "Audi",
+      "model": "Q3 40 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q345tfsiquattro",
+      "make": "Audi",
+      "model": "Q3 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q3quattro",
+      "make": "Audi",
+      "model": "Q3 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q3tfsiquattro",
+      "make": "Audi",
+      "model": "Q3 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q4",
+      "make": "Audi",
+      "model": "Q4",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q4",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q4"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q445etron",
+      "make": "Audi",
+      "model": "Q4 45 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q450etron",
+      "make": "Audi",
+      "model": "Q4 50 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q450etronquattro",
+      "make": "Audi",
+      "model": "Q4 50 e-tron quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q450etronsportbackquattro",
+      "make": "Audi",
+      "model": "Q4 50 e-tron Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q455etron",
+      "make": "Audi",
+      "model": "Q4 55 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q455etronquattro",
+      "make": "Audi",
+      "model": "Q4 55 e-tron quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q4etron",
+      "make": "Audi",
+      "model": "Q4 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q4sportback50etron",
+      "make": "Audi",
+      "model": "Q4 Sportback 50 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q4sportback50etronquattro",
+      "make": "Audi",
+      "model": "Q4 Sportback 50 e-tron quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q4sportback55etron",
+      "make": "Audi",
+      "model": "Q4 Sportback 55 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q4sportback55etronquattro",
+      "make": "Audi",
+      "model": "Q4 Sportback 55 e-tron quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q5",
+      "make": "Audi",
+      "model": "Q5",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q5",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q5"
+      },
+      "aliases": [
+        "AUDI Q5",
+        "Q 5",
+        "Q5 2.0 TFSI quattro",
+        "Q5 2.0 TFSI quattro air sus",
+        "Q5 2.0 TFSI quattro air sus (S-tronic)",
+        "Q5 2.0 TFSI quattro (S-tronic)",
+        "Q5 40 TDI quattro air sus (S-tronic)",
+        "Q5 40 TDI quattro (S-tronic)",
+        "Q5 40 TDI quattro (S-tronic) air sus",
+        "Q5 45 TFSI quattro air sus (S-tronic)",
+        "Q5 45 TFSI quattro air sus (S-tronic) Q5 2.0 TFSI quattro air sus (S-tronic)",
+        "Q5 45 TFSI quattro Q5 2.0 TFSI quattro (S-tronic)",
+        "Q5 45 TFSI quattro (S-tronic)",
+        "Q5 Sportback 40 TDI quattro (S-tronic)",
+        "Q5 Sportback 40 TDI quattro (S-tronic) air sus SB",
+        "Q5 Sportback TDI quattro 150kW (S-tronic)",
+        "Q5 Sportback TFSI quattro 150kW air sus (S-tronic)",
+        "Q5 Sportback TFSI quattro 150kW (S-tronic)",
+        "Q5 TDI quattro 150kW (S-tronic)",
+        "Q5 TDI quattro 150kW (S-tronic) Q5 Sportback TDI quattro 150kW (S-tronic)",
+        "Q5 TFSI quattro 150kW air sus (S-tronic)",
+        "Q5 TFSI quattro 150kW air sus (S-tronic) Q5 Sportback TFSI quattro 150kW air sus (S-tronic)",
+        "Q5 TFSI quattro 150kW (S-tronic)",
+        "Q5 TFSI quattro 150kW (S-tronic) Q5 Sportback TFSI quattro 150kW (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q540tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 40 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q545tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q555tfsiequattro",
+      "make": "Audi",
+      "model": "Q5 55 TFSI e quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q5sportback45tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 Sportback 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q5sportbacktfsiquattro",
+      "make": "Audi",
+      "model": "Q5 Sportback TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q5tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q5tfsie",
+      "make": "Audi",
+      "model": "Q5 TFSIe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q6",
+      "make": "Audi",
+      "model": "Q6",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q6",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q6"
+      },
+      "aliases": [
+        "Audi Q6"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q660etronquattro19wheels",
+      "make": "Audi",
+      "model": "Q6 60 e-tron quattro (19\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q660etronquattro20wheels",
+      "make": "Audi",
+      "model": "Q6 60 e-tron quattro (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q6etron",
+      "make": "Audi",
+      "model": "Q6 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q6sportback60etronquattro19wheels",
+      "make": "Audi",
+      "model": "Q6 Sportback 60 e-tron quattro (19\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q6sportback60etronquattro20wheels",
+      "make": "Audi",
+      "model": "Q6 Sportback 60 e-tron quattro (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q6suvetron",
+      "make": "Audi",
+      "model": "Q6 SUV e-tron",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q6-e-tron",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q6 SUV e-tron"
+      },
+      "aliases": [
+        "Q6 e-tron",
+        "아우디 Q6 e-트론"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2024,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q7",
+      "make": "Audi",
+      "model": "Q7",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q7",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q7"
+      },
+      "aliases": [
+        "Audi Q7",
+        "Q7 2.0 TFSI quattro",
+        "Q7 2.0 TFSI quattro air sus",
+        "Q7 3.0 TFSI quattro",
+        "Q7 3.0 TFSI quattro Air-Sus",
+        "Q7 45 TFSI quattro",
+        "Q7 45 TFSI quattro air sus",
+        "Q7 45 TFSI quattro air sus Q7 2.0 TFSI quattro air sus",
+        "Q7 45 TFSI quattro Q7 2.0 TFSI quattro",
+        "Q7 50 TDI quattro",
+        "Q7 50 TDI quattro air sus",
+        "Q7 55 TFSI quattro",
+        "Q7 55 TFSI quattro air sus",
+        "Q7 55 TFSI quattro air sus Q7 3.0 TFSI quattro air sus",
+        "Q7 55 TFSI quattro Q7 3.0 TFSI quattro"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q745tfsiquattro",
+      "make": "Audi",
+      "model": "Q7 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q755tfsiquattro",
+      "make": "Audi",
+      "model": "Q7 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8",
+      "make": "Audi",
+      "model": "Q8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q8"
+      },
+      "aliases": [
+        "Audi Q8",
+        "Q 8 SPORTBACK 55 E TRON",
+        "Q8 50 TDI quattro",
+        "Q8 50 TDI quattro air sus",
+        "Q8 55 TFSI quattro",
+        "Q8 55 TFSI quattro air sus"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q855tfsiquattro",
+      "make": "Audi",
+      "model": "Q8 55 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8etron",
+      "make": "Audi",
+      "model": "Q8 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8etron20wheels",
+      "make": "Audi",
+      "model": "Q8 e-tron (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8etron21wheels",
+      "make": "Audi",
+      "model": "Q8 e-tron (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8sportbacketron",
+      "make": "Audi",
+      "model": "Q8 Sportback e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8sportbacketron20wheels",
+      "make": "Audi",
+      "model": "Q8 Sportback e-tron (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:q8sportbacketron21wheels",
+      "make": "Audi",
+      "model": "Q8 Sportback e-tron (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:quattro",
+      "make": "Audi",
+      "model": "Quattro",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8",
+      "make": "Audi",
+      "model": "R8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/r8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "R8"
+      },
+      "aliases": [
+        "AUDI R8"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8coupperformance",
+      "make": "Audi",
+      "model": "R8 Coup Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8coupperformancequattro",
+      "make": "Audi",
+      "model": "R8 Coup Performance quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8coupe",
+      "make": "Audi",
+      "model": "R8 Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8coupeperformance",
+      "make": "Audi",
+      "model": "R8 Coupe Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8coupeperformancequattro",
+      "make": "Audi",
+      "model": "R8 Coupe Performance quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8coupequattro",
+      "make": "Audi",
+      "model": "R8 Coupe quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8gtcoup",
+      "make": "Audi",
+      "model": "R8 GT Coup",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8spyder",
+      "make": "Audi",
+      "model": "R8 Spyder",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8spyderperformance",
+      "make": "Audi",
+      "model": "R8 Spyder Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8spyderperformancequattro",
+      "make": "Audi",
+      "model": "R8 Spyder Performance quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:r8spyderquattro",
+      "make": "Audi",
+      "model": "R8 Spyder quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs",
+      "make": "Audi",
+      "model": "RS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs5coup",
+      "make": "Audi",
+      "model": "RS 5 Coup",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs5coupquattro",
+      "make": "Audi",
+      "model": "RS 5 Coup quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs5coupequattro",
+      "make": "Audi",
+      "model": "RS 5 Coupe quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs5sportback",
+      "make": "Audi",
+      "model": "RS 5 Sportback",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs5sportbackquattro",
+      "make": "Audi",
+      "model": "RS 5 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs6avant",
+      "make": "Audi",
+      "model": "RS 6 Avant",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs6avantgt",
+      "make": "Audi",
+      "model": "RS 6 Avant GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs6avantperformance",
+      "make": "Audi",
+      "model": "RS 6 Avant performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs6avantquattro",
+      "make": "Audi",
+      "model": "RS 6 Avant quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs6avantquattroperformance",
+      "make": "Audi",
+      "model": "RS 6 Avant quattro performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs7sportbackperformance",
+      "make": "Audi",
+      "model": "RS 7 Sportback performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs7sportbackquattro",
+      "make": "Audi",
+      "model": "RS 7 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs7sportbackquattroperformance",
+      "make": "Audi",
+      "model": "RS 7 Sportback quattro performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsetron",
+      "make": "Audi",
+      "model": "RS e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsetrongt",
+      "make": "Audi",
+      "model": "RS E-Tron GT",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rs-e-tron-gt",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RS E-Tron GT"
+      },
+      "aliases": [
+        "AUDI RS E-TRON GT",
+        "RS E TRON GT",
+        "RS E-TRON GT",
+        "RS e-tron GT",
+        "RS E-TRON GT / /"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsetrongtquattroperformance",
+      "make": "Audi",
+      "model": "RS e-tron GT quattro performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsq8performance",
+      "make": "Audi",
+      "model": "RS Q8 performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsq8quattro",
+      "make": "Audi",
+      "model": "RS Q8 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs2",
+      "make": "Audi",
+      "model": "RS2",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs3",
+      "make": "Audi",
+      "model": "RS3",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rs3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RS3"
+      },
+      "aliases": [
+        "AUDI RS 3",
+        "AUDI RS3",
+        "RS 3",
+        "RS3 Sedan (S-tronic)",
+        "RS3 Sportback (S-tronic)",
+        "RS3 (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "canada",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs4",
+      "make": "Audi",
+      "model": "RS4",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rs4",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RS4"
+      },
+      "aliases": [
+        "AUDI RS4",
+        "RS 4 AUDI SPORT ED TFSI QUAT A",
+        "RS 4 AVANT 29 TFSI Q AUT",
+        "RS 4 BRONZE ED TFSI QUAT A",
+        "RS 4 CARBON BLACK TFSI QUAT A",
+        "RS 4 TFSI QUATTRO AUTO",
+        "RS 4 VORSPRUNG TFSI QUATTRO A",
+        "RS4 Avant",
+        "RS4 Avant (S-tronic)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs5",
+      "make": "Audi",
+      "model": "RS5",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rs5",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RS5"
+      },
+      "aliases": [
+        "AUDI RS5",
+        "RS 5 / SPORTBACK 2.9 / TFSI Q AUT.",
+        "RS 5 AUDI SPORT ED TFSI QUAT A",
+        "RS 5 CARBON BLACK TFSI QUAT A",
+        "RS 5 COUP",
+        "RS 5 SPORBACK",
+        "RS 5 TFSI QUATTRO AUTO",
+        "RS 5 VORSPRUNG TFSI QUATTRO A",
+        "RS5 Coupe",
+        "RS5 Coupe (S-tronic)",
+        "RS5 Sportback"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs6",
+      "make": "Audi",
+      "model": "RS6",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rs6",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RS6"
+      },
+      "aliases": [
+        "Audi RS6",
+        "RS 6 AVANT 40 TFSI Q AUT",
+        "RS 6 CRBN BLK TFSI MHEV QUAT A",
+        "RS 6 GT AVANT",
+        "RS 6 LAUNCH ED TFSI MHEV QTO A",
+        "RS 6 TFSI MHEV QUATTRO AUTO",
+        "RS 6 V-SPRUNG TFSI MHEV QUAT A",
+        "RS6 Avant",
+        "RS6 Avant air sus"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rs7",
+      "make": "Audi",
+      "model": "RS7",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rs7",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RS7"
+      },
+      "aliases": [
+        "AUDI RS7",
+        "RS 7 / 4.0 / TFSI Q AUT.",
+        "RS 7 CRBN BLK TFSI MHEV QUAT A",
+        "RS 7 TFSI MHEV QUATTRO AUTO",
+        "RS 7 V-SPRUNG TFSI MHEV QUAT A",
+        "RS7 Sportback",
+        "RS7 Sportback air sus"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsq3",
+      "make": "Audi",
+      "model": "RSQ3",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rsq3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RSQ3"
+      },
+      "aliases": [
+        "RS Q3 SPORT ED TFSI QUATTRO SA",
+        "RS Q3 SPORTBACK",
+        "RS Q3 SPORTBACK 25 TFSI Q AUT",
+        "RS Q3 SPOTBACK",
+        "RS Q3 TFSI QUATTRO S-A",
+        "RS Q3 VSPRUNG TFSI QUATTRO SA",
+        "RSQ3",
+        "RSQ3 RSQ3 Sportback (S-tronic)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:rsq8",
+      "make": "Audi",
+      "model": "RSQ8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/rsq8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "RSQ8"
+      },
+      "aliases": [
+        "RS Q8 / 4.0 / TFSI Q AUT.",
+        "RS Q8 CARBN BLK TFSI MHEV QT A",
+        "RS Q8 TFSI MHEV QUATTRO AUTO",
+        "RS Q8 VSPRUNG TFSI MHEV QUAT A",
+        "RSQ8"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:setron",
+      "make": "Audi",
+      "model": "S e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:setrongt",
+      "make": "Audi",
+      "model": "S E-Tron GT",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s-e-tron-gt",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S E-Tron GT"
+      },
+      "aliases": [
+        "AUDI S E-TRON GT",
+        "S E TRON GT",
+        "S E-TRON GT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:setrongt20wheels",
+      "make": "Audi",
+      "model": "S e-tron GT (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:setrongt21wheels",
+      "make": "Audi",
+      "model": "S e-tron GT (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s1",
+      "make": "Audi",
+      "model": "S1",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s1",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S1"
+      },
+      "aliases": [
+        "S1 SPORTBACK",
+        "S1 / S1Sportback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s2",
+      "make": "Audi",
+      "model": "S2",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s3",
+      "make": "Audi",
+      "model": "S3",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S3"
+      },
+      "aliases": [
+        "Audi S3",
+        "S3 Sedan (S-tronic)",
+        "S3 Sportback / Sedan (S-tronic)",
+        "S3 Sportback (S-tronic)",
+        "S3 (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s3quattro",
+      "make": "Audi",
+      "model": "S3 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s3sedanquattro",
+      "make": "Audi",
+      "model": "S3 Sedan quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s4",
+      "make": "Audi",
+      "model": "S4",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s4",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S4"
+      },
+      "aliases": [
+        "Audi S4",
+        "S4 Avant",
+        "S4 / S4 Avant",
+        "S4 / S4 Avant (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s4quattro",
+      "make": "Audi",
+      "model": "S4 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s4sedanquattro",
+      "make": "Audi",
+      "model": "S4 Sedan quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5",
+      "make": "Audi",
+      "model": "S5",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s5",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S5"
+      },
+      "aliases": [
+        "AUDI S5",
+        "S5 Avant (S-tronic)",
+        "S5 Cabriolet (S-tronic)",
+        "S5 Coupe",
+        "S5 Coupe (S-tronic)",
+        "S5 Sportback",
+        "S5 Sportback (S-tronic)",
+        "S5 (S-tronic)",
+        "S5 (S-tronic) S5 Avant (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5cabriolet",
+      "make": "Audi",
+      "model": "S5 Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5cabrioletquattro",
+      "make": "Audi",
+      "model": "S5 Cabriolet quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5coupquattro",
+      "make": "Audi",
+      "model": "S5 Coup quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5coupequattro",
+      "make": "Audi",
+      "model": "S5 Coupe quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5sedanquattro",
+      "make": "Audi",
+      "model": "S5 Sedan quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5sportback",
+      "make": "Audi",
+      "model": "S5 Sportback",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s5sportbackquattro",
+      "make": "Audi",
+      "model": "S5 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s6",
+      "make": "Audi",
+      "model": "S6",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s6",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S6"
+      },
+      "aliases": [
+        "S6",
+        "S6 S6 Avant",
+        "S6 / S6 Avant (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s6etron",
+      "make": "Audi",
+      "model": "S6 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s6etronquattro20wheels",
+      "make": "Audi",
+      "model": "S6 e-tron quattro (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s6etronquattro21wheels",
+      "make": "Audi",
+      "model": "S6 e-tron quattro (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s6quattro",
+      "make": "Audi",
+      "model": "S6 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s6sedanquattro",
+      "make": "Audi",
+      "model": "S6 Sedan quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s7",
+      "make": "Audi",
+      "model": "S7",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s7",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S7"
+      },
+      "aliases": [
+        "AUDI S7",
+        "S7 Sportback",
+        "S7 Sportback (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s7quattro",
+      "make": "Audi",
+      "model": "S7 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s7sportbackquattro",
+      "make": "Audi",
+      "model": "S7 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s8",
+      "make": "Audi",
+      "model": "S8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/s8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "S8"
+      },
+      "aliases": [
+        "S8",
+        "S8 plus"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s8quattro",
+      "make": "Audi",
+      "model": "S8 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:s8sedanquattro",
+      "make": "Audi",
+      "model": "S8 Sedan quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq2",
+      "make": "Audi",
+      "model": "SQ2",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/sq2",
+        "canonicalMake": "Audi",
+        "canonicalModel": "SQ2"
+      },
+      "aliases": [
+        "AUDI SQ2",
+        "SQ2 (S-tronic)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq5",
+      "make": "Audi",
+      "model": "SQ5",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/sq5",
+        "canonicalMake": "Audi",
+        "canonicalModel": "SQ5"
+      },
+      "aliases": [
+        "SQ5",
+        "SQ5 Air-Sus",
+        "SQ5 air sus (S-tronic)",
+        "SQ5 (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq5quattro",
+      "make": "Audi",
+      "model": "SQ5 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq5sportbackquattro",
+      "make": "Audi",
+      "model": "SQ5 Sportback quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq6",
+      "make": "Audi",
+      "model": "SQ6",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/sq6",
+        "canonicalMake": "Audi",
+        "canonicalModel": "SQ6"
+      },
+      "aliases": [
+        "AUDI SQ6 E-TRON",
+        "AUDI SQ6 SPORTBACK E-TRON",
+        "SQ6 E-TRON",
+        "SQ6 SB E TRON",
+        "SQ6 SB E-TRON",
+        "SQ6 SPORTBACK E-TRON",
+        "SQ6 SUV E TRON",
+        "SQ6 SUV E-TRON",
+        "SQ6 SUV ETRON"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq6etron",
+      "make": "Audi",
+      "model": "SQ6 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq6sportbacketronquattro",
+      "make": "Audi",
+      "model": "SQ6 Sportback e-tron quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq7",
+      "make": "Audi",
+      "model": "SQ7",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/sq7",
+        "canonicalMake": "Audi",
+        "canonicalModel": "SQ7"
+      },
+      "aliases": [
+        "SQ7"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq7quattro",
+      "make": "Audi",
+      "model": "SQ7 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8",
+      "make": "Audi",
+      "model": "SQ8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/sq8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "SQ8"
+      },
+      "aliases": [
+        "SQ8"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8etron",
+      "make": "Audi",
+      "model": "SQ8 e-tron",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8etron20wheels",
+      "make": "Audi",
+      "model": "SQ8 e-tron (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8etron21or22wheels",
+      "make": "Audi",
+      "model": "SQ8 e-tron (21\" or 22\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8quattro",
+      "make": "Audi",
+      "model": "SQ8 quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8sportbacketron20wheels",
+      "make": "Audi",
+      "model": "SQ8 Sportback e-tron (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:sq8sportbacketron21or22wheels",
+      "make": "Audi",
+      "model": "SQ8 Sportback e-tron (21\" or 22\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:tt",
+      "make": "Audi",
+      "model": "TT",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/tt",
+        "canonicalMake": "Audi",
+        "canonicalModel": "TT"
+      },
+      "aliases": [
+        "AUDI TT",
+        "TT 40 Coupe TFSI (S-tronic)",
+        "TT 40 TFSI (S-tronic)",
+        "TT 45 Coupe TFSI quattro (S-tronic)",
+        "TT 45 TFSI quattro (S-tronic)",
+        "TT Coupé 1.8TFSI (S-tronic)",
+        "TT Coupé 2.0TFSI quattro (S-tronic)",
+        "TT Coupé 2.0 TFSI quattro TT Roadster (S-tronic)",
+        "TT Coupé 2.0TFSI (S-tronic)",
+        "TT Coupé 40 TFSI (S-tronic)",
+        "TT Coupé 45 TFSI quattro (S-tronic)",
+        "TT Roadster 2.0TFSI quattro (S-tronic)",
+        "TT Roadster 45 TFSI quattro (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttcoup45tfsiquattro",
+      "make": "Audi",
+      "model": "TT Coup 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttcoupe45tfsiquattro",
+      "make": "Audi",
+      "model": "TT Coupe 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttcoupequattro",
+      "make": "Audi",
+      "model": "TT Coupe quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttroadster45tfsiquattro",
+      "make": "Audi",
+      "model": "TT Roadster 45 TFSI quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttroadsterquattro",
+      "make": "Audi",
+      "model": "TT Roadster quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttrs",
+      "make": "Audi",
+      "model": "TT RS",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/tt-rs",
+        "canonicalMake": "Audi",
+        "canonicalModel": "TT RS"
+      },
+      "aliases": [
+        "TTRS AUDI SPRT ED TFSI QUAT SA",
+        "TTRS Coupe",
+        "TTRS Coupé (S-tronic)",
+        "TTRS Roadster",
+        "TTRS TFSI QUATTRO S-A",
+        "TTRS VORSPRUNG TFSI QUATTRO SA"
+      ],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttrscoupequattro",
+      "make": "Audi",
+      "model": "TT RS Coupe quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:tts",
+      "make": "Audi",
+      "model": "TTS",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/tts",
+        "canonicalMake": "Audi",
+        "canonicalModel": "TTS"
+      },
+      "aliases": [
+        "TTS Coupé 2.0TFSI quattro (S-tronic)",
+        "TTS Coupé (S-tronic)",
+        "TTS (S-tronic)"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttscoupquattro",
+      "make": "Audi",
+      "model": "TTS Coup quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttscoupe",
+      "make": "Audi",
+      "model": "TTS Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:ttscoupequattro",
+      "make": "Audi",
+      "model": "TTS Coupe quattro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "audi:v8",
+      "make": "Audi",
+      "model": "V8",
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:10",
+      "make": "Austin",
+      "model": "10",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:10hp",
+      "make": "Austin",
+      "model": "10 Hp",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:1100",
+      "make": "Austin",
+      "model": "1100",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:12",
+      "make": "Austin",
+      "model": "12",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:124ascot",
+      "make": "Austin",
+      "model": "12 / 4 Ascot",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:124clifton",
+      "make": "Austin",
+      "model": "12/4 Clifton",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:1300",
+      "make": "Austin",
+      "model": "1300",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:14",
+      "make": "Austin",
+      "model": "14",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:16",
+      "make": "Austin",
+      "model": "16",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "checkedAt": "2026-10-25T15:40:35.749792+00:00",
+  "release": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+  "calculationVersion": "1aefa5db1c632f403c0735eedfc247dd59447aaf45ab890ae74de34546156cb8",
+  "scope": "Same 12 public card IDs before and after activation, not catalog-wide coverage. Values are preliminary deliveredCalculationPreview; original certified fields remain unchanged. Queries include model families (SU7 includes Ultra).",
+  "groups": [
+    {
+      "model": [
+        "XPeng",
+        "P7"
+      ],
+      "sameIds": true,
+      "total": 778,
+      "items": [
+        {
+          "id": "48aa977dd5befa273b758091",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "P7"
+        },
+        {
+          "id": "9d2d0b045d7921b632fe986b",
+          "power30MinKw": null,
+          "powertrainKind": "series_hybrid",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "P7+"
+        },
+        {
+          "id": "440973d3334b545a6a3d183b",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "P7"
+        }
+      ]
+    },
+    {
+      "model": [
+        "Xiaomi",
+        "SU7"
+      ],
+      "sameIds": true,
+      "total": 1275,
+      "items": [
+        {
+          "id": "40cf5a354e70d7df66f77ddc",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": {
+            "totalRub": 11963682,
+            "currencyRate": {
+              "currency": "CNY",
+              "cbrRate": 12.0557,
+              "nominal": 1,
+              "effectiveRate": 12.0557,
+              "rateDate": "2026-10-24",
+              "fetchedAt": "2026-10-25T15:35:01.997Z",
+              "rateSource": "cbr_live",
+              "sourcePrice": 368000,
+              "sourcePriceRub": 4436498
+            },
+            "deliveryPricingBasis": {
+              "subtotalRub": 11706079,
+              "deliveryRub": 0,
+              "percents": []
+            },
+            "power30Precedent": {
+              "kw": 490,
+              "method": "same_model_only",
+              "certified": false,
+              "requiresConfirmation": true
+            }
+          },
+          "actualModel": "SU7 Ultra"
+        },
+        {
+          "id": "88aba15edacd9de8f96b320a",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "SU7 Ultra"
+        },
+        {
+          "id": "2ee9c455b517e09897ec11d7",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": {
+            "totalRub": 11633837,
+            "currencyRate": {
+              "currency": "CNY",
+              "cbrRate": 12.0557,
+              "nominal": 1,
+              "effectiveRate": 12.0557,
+              "rateDate": "2026-10-24",
+              "fetchedAt": "2026-10-25T15:35:01.997Z",
+              "rateSource": "cbr_live",
+              "sourcePrice": 348800,
+              "sourcePriceRub": 4205028
+            },
+            "deliveryPricingBasis": {
+              "subtotalRub": 11381326,
+              "deliveryRub": 0,
+              "percents": []
+            },
+            "power30Precedent": {
+              "kw": 490,
+              "method": "same_model_only",
+              "certified": false,
+              "requiresConfirmation": true
+            }
+          },
+          "actualModel": "SU7 Ultra"
+        }
+      ]
+    },
+    {
+      "model": [
+        "Nio",
+        "ES8"
+      ],
+      "sameIds": true,
+      "total": 696,
+      "items": [
+        {
+          "id": "da58942270d189e96034645c",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": {
+            "totalRub": 6910677,
+            "currencyRate": {
+              "currency": "CNY",
+              "cbrRate": 12.0557,
+              "nominal": 1,
+              "effectiveRate": 12.0557,
+              "rateDate": "2026-10-24",
+              "fetchedAt": "2026-10-25T15:35:01.997Z",
+              "rateSource": "cbr_live",
+              "sourcePrice": 279800,
+              "sourcePriceRub": 3373185
+            },
+            "deliveryPricingBasis": {
+              "subtotalRub": 6676467,
+              "deliveryRub": 0,
+              "percents": []
+            },
+            "power30Precedent": {
+              "kw": 105,
+              "method": "nearest_compatible_mechanics",
+              "certified": false,
+              "requiresConfirmation": true
+            }
+          },
+          "actualModel": "ES8"
+        },
+        {
+          "id": "4d015de2e992152841c344d7",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "ES8"
+        },
+        {
+          "id": "b595dd0372209177377bead7",
+          "power30MinKw": null,
+          "powertrainKind": "electric",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": {
+            "totalRub": 6910677,
+            "currencyRate": {
+              "currency": "CNY",
+              "cbrRate": 12.0557,
+              "nominal": 1,
+              "effectiveRate": 12.0557,
+              "rateDate": "2026-10-24",
+              "fetchedAt": "2026-10-25T15:35:01.997Z",
+              "rateSource": "cbr_live",
+              "sourcePrice": 279800,
+              "sourcePriceRub": 3373185
+            },
+            "deliveryPricingBasis": {
+              "subtotalRub": 6676467,
+              "deliveryRub": 0,
+              "percents": []
+            },
+            "power30Precedent": {
+              "kw": 105,
+              "method": "nearest_compatible_mechanics",
+              "certified": false,
+              "requiresConfirmation": true
+            }
+          },
+          "actualModel": "ES8"
+        }
+      ]
+    },
+    {
+      "model": [
+        "Li Auto",
+        "Li L6"
+      ],
+      "sameIds": true,
+      "total": 595,
+      "items": [
+        {
+          "id": "7c65af5e91ac935df14e707a",
+          "power30MinKw": null,
+          "powertrainKind": "other_hybrid",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "Li L6"
+        },
+        {
+          "id": "222fe9116ba08e733b14871d",
+          "power30MinKw": null,
+          "powertrainKind": "other_hybrid",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "Li L6"
+        },
+        {
+          "id": "0b2d4f71cf32c06ffb33cca5",
+          "power30MinKw": null,
+          "powertrainKind": "other_hybrid",
+          "icePowerKw": null,
+          "calculationStatus": "needs_data",
+          "catalogPricingMode": "seller",
+          "totalRub": null,
+          "deliveredCalculationPreview": null,
+          "actualModel": "Li L6"
+        }
+      ]
+    }
+  ],
+  "checked": 12,
+  "withPreliminaryPrice": 4,
+  "manufacturerIceReadback": [
+    {
+      "year": 2024,
+      "revision": "9ef22a38-147c-48ec-8f2b-0cf61ad1e5a2",
+      "count": 7,
+      "withIce110": 7
+    },
+    {
+      "year": 2025,
+      "revision": "9ef22a38-147c-48ec-8f2b-0cf61ad1e5a2",
+      "count": 12,
+      "withIce110": 12
+    },
+    {
+      "year": 2026,
+      "revision": "9ef22a38-147c-48ec-8f2b-0cf61ad1e5a2",
+      "count": 7,
+      "withIce110": 7
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T08:55:18.791736+00:00",
+  "modelId": "8cf3dbb7884fe919bce44c62",
+  "year": 2025,
+  "beforeRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+  "afterRevision": "6056ed30-48a1-4926-bf1f-ab314e1b29fc",
+  "passed": true,
+  "targetedValues": 14,
+  "untargetedRowsUnchanged": 85,
+  "variantIdsPreserved": 99,
+  "privateProvenanceExposed": false,
+  "rows": [
+    {
+      "variantId": "ae6c6d78fe213a9578ed345e",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "75a948ea0c1391280f1bad66",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "17f4a4b4ae1658189f507b07",
+      "bodyType": "sedan",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "9b346242d6f38df86817936f",
+      "bodyType": "sedan",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "3fab2bcac051ad2c6978e13d",
+      "bodyType": "sedan",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "17327ee4c09c0b239d9e011c",
+      "bodyType": "sedan",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "5d1341c45a05c8a4f36b8e2f",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "3b76a8b80496bfa82ff25f67",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "690e1eae227659a31b7b164d",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "179c41517625a54d112bb7af",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "55f3d39cfb48e1afeb3aae09",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "1761dcc23c7203f96f4fb51e",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "8fce91ed11bd97ed8fe60294",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    },
+    {
+      "variantId": "11a533a6ce912bd2fec9a7c3",
+      "bodyType": "wagon",
+      "changedFields": [
+        "bodyType",
+        "status"
+      ]
+    }
+  ],
+  "beforeFileSha256": "0502f40405b9450c1c01a070dc261b3497986246925358b5b5a514b4720b5018",
+  "afterFileSha256": "be55ad7e8aa8e9df5729b27d2a8045ba457aab211f964fcc2fd80649089fb0f7"
+}

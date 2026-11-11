@@ -1,0 +1,118 @@
+name: Apply finance UI main once 20260813
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-finance-ui-main-once-20260813.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Apply UI-only finance fixes to latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin fix/finance-ui-final-20260813
+
+          # 1) Homepage: remove the mobile duplicate explicitly and fix clipping.
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/home/HomePageClient.tsx')
+          s = p.read_text()
+
+          old = '<div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>'
+          new = '<div className="ac-budget-desktop hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>'
+          if old in s:
+              s = s.replace(old, new, 1)
+          elif new not in s:
+              raise SystemExit('homepage top budget anchor changed')
+
+          s = s.replace(
+              'ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6',
+              'ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6',
+          )
+          s = s.replace('bottom-[-2px]', 'bottom-0').replace('bottom-[-3px]', 'bottom-0')
+
+          css_anchor = '@media(max-width:1023px){.ac-home-page .ac-budget-mobile'
+          css_replacement = '@media(max-width:1023px){.ac-home-page .ac-budget-desktop{display:none!important}.ac-home-page .ac-budget-mobile'
+          if css_anchor in s:
+              s = s.replace(css_anchor, css_replacement, 1)
+          elif '.ac-budget-desktop{display:none!important}' not in s:
+              raise SystemExit('homepage mobile CSS anchor changed')
+
+          required = [
+              'ac-budget-desktop hidden',
+              '.ac-budget-desktop{display:none!important}',
+              'emptyLabel="Бюджет"',
+              'ac-finance-card relative min-h-[206px] overflow-hidden',
+              'bottom-0',
+          ]
+          for token in required:
+              if token not in s:
+                  raise SystemExit(f'homepage missing {token}')
+          if 'bottom-[-2px]' in s or 'bottom-[-3px]' in s:
+              raise SystemExit('negative mascot bottom remains on homepage')
+          p.write_text(s)
+          PY
+
+          # 2) Offer details: use the already verified finance-card component.
+          git show origin/fix/finance-ui-final-20260813:apps/web/components/catalog/OfferFinanceCards.tsx > apps/web/components/catalog/OfferFinanceCards.tsx
+
+          # 3) Mount finance cards without replacing any other offer-layout changes.
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/app/(public)/cars/offer/[id]/layout.tsx')
+          s = p.read_text()
+          import_line = 'import { OfferFinanceCards } from "@/components/catalog/OfferFinanceCards";\n'
+          if import_line not in s:
+              anchor = 'import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabilizer";\n'
+              if anchor not in s:
+                  raise SystemExit('offer layout import anchor changed')
+              s = s.replace(anchor, import_line + anchor, 1)
+          mount = '    <OfferFinanceCards />\n'
+          if mount not in s:
+              anchor = '    <OfferSpecGridStabilizer />\n'
+              if anchor not in s:
+                  raise SystemExit('offer layout mount anchor changed')
+              s = s.replace(anchor, mount + anchor, 1)
+          p.write_text(s)
+          PY
+
+          grep -q 'ac-finance-card.*overflow-hidden' apps/web/components/home/HomePageClient.tsx
+          grep -q 'ac-budget-desktop.*hidden' apps/web/components/home/HomePageClient.tsx
+          grep -q 'emptyLabel="Бюджет"' apps/web/components/home/HomePageClient.tsx
+          grep -q 'bottom-0' apps/web/components/catalog/OfferFinanceCards.tsx
+          grep -q 'window.innerWidth >= 1280 && breakdown.open' apps/web/components/catalog/OfferFinanceCards.tsx
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: git diff --check
+
+      - name: Commit final UI result without overwriting concurrent main work
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/apply-finance-ui-main-once-20260813.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/components/home/HomePageClient.tsx apps/web/components/catalog/OfferFinanceCards.tsx 'apps/web/app/(public)/cars/offer/[id]/layout.tsx'
+          git add -u .github/workflows/apply-finance-ui-main-once-20260813.yml
+          git commit -m 'Fix finance cards clipping and mobile budget duplicate'
+          git pull --rebase origin main
+          git push origin HEAD:main

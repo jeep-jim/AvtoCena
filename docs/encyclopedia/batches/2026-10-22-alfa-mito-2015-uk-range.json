@@ -1,0 +1,1345 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2015-uk-range",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "524c803e2d4adae773db92e6",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 MPI 78 PS S/S Progression",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Progression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57.3,
+        "icePowerKw": 57.3,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.B37.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B37.2; 1.4 MPI 78 PS S/S Progression; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "9bb3dd008ac2c1b84d2aaf2d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "0.9 TwinAir 105 PS S/S Progression",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Progression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.B3B.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3B.2; 0.9 TwinAir 105 PS S/S Progression; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "30b6144f38b0bb80878a5d6e",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "0.9 TwinAir 105 PS S/S Junior",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Junior",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.J3B.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3B.2; 0.9 TwinAir 105 PS S/S Junior; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "7a3b7c6b60aa28a86a8b82bc",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "0.9 TwinAir 105 PS S/S Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E3B.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "bd6903f433ce48347f814d9f",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "0.9 TwinAir 105 PS S/S QV Line",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "0.9 TwinAir 105 PS S/S QV Line",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 105,
+        "engineCc": 875,
+        "powerKw": 77,
+        "icePowerKw": 77,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B6000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E3B.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 204,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3B.2; 0.9 TwinAir 105 PS S/S QV Line; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "913e23cd7de10a6642162ce4",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E3G.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "25f26f75ae6a294b4bb714d0",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 TB MultiAir 140 PS S/S TCT QV Line",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.4 TB MultiAir 140 PS S/S TCT QV Line",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 140,
+        "engineCc": 1368,
+        "powerKw": 103,
+        "icePowerKw": 103,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "955B1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E3G.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3G.2; 1.4 TB MultiAir 140 PS S/S TCT QV Line; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "59f6905704f6388e39105ab9",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 170,
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "dct",
+        "engineCode": "940A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.Q3D.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2014_2018_TCT_83_145_MITO_604.38.751_EN_01_06.14_SC_CT.pdf",
+            "pdfPage": 19,
+            "checkedAt": "2026-10-22",
+            "selector": "145.Q3D.2; 1.4 TB MultiAir 170 PS S/S TCT Quadrifoglio Verde; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "76ef4532428457af978b3779",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.3 JTDM 85 PS S/S Progression",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.3 JTDM 85 PS S/S Progression",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 1248,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.B3F.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "145.B3F.2; 1.3 JTDM 85 PS S/S Progression; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "e4af81a8b3598505f365c681",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.3 JTDM 85 PS S/S Junior",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.3 JTDM 85 PS S/S Junior",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 1248,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.J3F.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "145.J3F.2; 1.3 JTDM 85 PS S/S Junior; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "df17074feafe1b9805b37b63",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.3 JTDM 85 PS S/S Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.3 JTDM 85 PS S/S Distinctive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 1248,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E3F.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 208,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E3F.2; 1.3 JTDM 85 PS S/S Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "b94b2b1b25406e0fffa7cfa4",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS S/S Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S Distinctive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E39.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S Distinctive; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "8afcfd135de166bdbcdf34e0",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2015,
+      "trim": "1.6 JTDM 120 PS S/S QV Line",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "da089dcd-4aba-4553-9f57-e18b63ea0371",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S QV Line",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация2015 и код145.E39.2 подтверждены заводским UK-прайсом:PDFстр7, техническая таблицастр12. Внутренняя дата06/2015, хотя файл архива помечен07/2015. Коды двигателей сверены по руководству60438743 редакции10/2015 иTCT60438751 редакции05/2014. Архив AROC хранит заводские оригиналы. Метрическая мощность из таблицыEC; для78PS оставлено более точное57,3кВт собственной таблицы, не округлённые57 общего руководства. КоробкиTCT не смешаны с механикой. QV Line — комплектация прайса, не двигатель170PS. Полная масса/4или5мест и30-минутная мощность не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 7,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; trim"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Price_List_07_2015.pdf",
+            "pdfPage": 12,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2015_83_145_MITO_604.38.743_EN_03_10.15_L_LG.pdf",
+            "pdfPage": 209,
+            "checkedAt": "2026-10-22",
+            "selector": "145.E39.2; 1.6 JTDM 120 PS S/S QV Line; engineCode"
+          }
+        }
+      }
+    }
+  ]
+}

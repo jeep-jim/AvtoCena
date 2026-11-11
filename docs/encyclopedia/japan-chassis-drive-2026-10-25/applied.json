@@ -1,0 +1,29 @@
+{
+  "runId": 40161517645,
+  "jobId": 121073899726,
+  "commit": "0eae7bb5730b54bf20d1c0328a2e072e7737a31d",
+  "verified": true,
+  "changes": 92,
+  "modelCount": 16,
+  "reference": {
+    "dryRun": false,
+    "groups": 335,
+    "confirmed": 219,
+    "ambiguous": 45,
+    "unresolved": 71,
+    "parts": 6,
+    "digest": "ddb5b05b29088cadfc43445e952baf3c70eb013ce8b443c2581d80a876a3f8fc"
+  },
+  "batches": [
+    {
+      "batch": "research-japan-chassis-drive-2026-10-25-0000",
+      "changes": 64,
+      "skipped": []
+    },
+    {
+      "batch": "research-japan-chassis-drive-2026-10-25-0001",
+      "changes": 28,
+      "skipped": []
+    }
+  ]
+}

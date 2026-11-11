@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {encyclopediaReviewDisplay,variantReviewClass} from '../apps/web/components/encyclopedia/review-state';
+import {encyclopediaWithManagement,managementParameters} from '../apps/web/lib/catalog/management-knowledge';
+import {modelKey} from '../apps/web/lib/encyclopedia/calculation-index';
+const row:any={id:'original',year:2025,fuel:'petrol',engineCc:1998,powerHp:150,status:'observed',markets:[],observedCount:1};
+const record:any={id:'kia',make:'Kia',model:'Sportage',photo:'',revision:'one',updatedAt:'2026-11-01',variants:[row]};
+const key=modelKey(record.make,record.model);
+const fact:any={offerId:'card',year:2025,key,savedAt:'2026-11-01T07:00:00Z',values:{fuel:'petrol',engineCc:1998,powerHp:150,drive:'awd',bodyType:'suv',transmission:'automatic'}};
+const index:any={version:1,revision:'one',models:{[key]:{card:fact}}};
+test('card-filled existing observation is blue review without mutating stored evidence or applying gates',()=>{
+ const before=structuredClone(record),applied=encyclopediaWithManagement(record,index,2025),display=encyclopediaReviewDisplay(record,applied);
+ assert.equal(display.variants[0].drive,'awd');assert.equal(display.variants[0].status,'review');assert.equal(variantReviewClass(display.variants[0]),'ac-ency-row-review');assert.deepEqual(record,before);
+ assert.equal(managementParameters({...row,id:'other',make:'Kia',model:'Sportage'},index).drive,'awd','unconfirmed card facts are already applicable');
+});
+test('new card variant stays pending and visible',()=>{const original={...record,variants:[]};const viewed=encyclopediaReviewDisplay(original,encyclopediaWithManagement(original,index,2025));assert.equal(viewed.variants.length,1);assert.equal(viewed.variants[0].status,'review');});
+test('confirmed complete record stays green after matching card contributions',()=>{const original={...record,variants:[{...row,...fact.values,status:'verified',manualEditedAt:'2026-11-01T08:00:00Z'}]};const viewed=encyclopediaReviewDisplay(original,encyclopediaWithManagement(original,index,2025));assert.equal(viewed.variants[0].status,'verified');assert.equal(variantReviewClass(viewed.variants[0]),'ac-ency-row-verified');});
+test('newly filled fields do not inherit an old confirmation',()=>{const original={...record,variants:[{...row,status:'verified'}]};assert.equal(encyclopediaReviewDisplay(original,encyclopediaWithManagement(original,index,2025)).variants[0].status,'review');});
+test('completeness alone does not claim confirmation',()=>{assert.equal(variantReviewClass({...row,...fact.values}),'');assert.equal(variantReviewClass({...row,status:'review',powerHp:undefined}),'ac-ency-row-review');});
+test('display preserves every applied value and does not alter original status storage',()=>{const applied=encyclopediaWithManagement(record,index,2025),viewed=encyclopediaReviewDisplay(record,applied);assert.deepEqual(viewed.variants.map(({status,...v})=>v),applied.variants.map(({status,...v})=>v));assert.equal(applied.variants[0].status,'observed');});

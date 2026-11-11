@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-23T08:02:39.968Z",
+  "batch": "research-2026-10-23-audi-a1-2023-2025-body",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 50,
+  "newVariants": 0,
+  "updatedVariants": 50,
+  "confirmedFields": 50,
+  "compiledCalculationFields": 50,
+  "beforeRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+  "afterRevision": "f1afdff4-20f7-45f6-b467-247de44f3ed1",
+  "variantsBefore": 394,
+  "variantsAfter": 394,
+  "unchangedVariantsPreserved": 344,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 50,
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  }
+}

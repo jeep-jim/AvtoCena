@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import http from 'node:http';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import postcss from 'postcss';
+import tailwindcss from 'tailwindcss';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const out='artifacts/client-calculation';fs.mkdirSync(out,{recursive:true});
+await build({entryPoints:['tests/browser/client-calculation-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
+const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/home/CitySelector.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-surface:white;--ac-surface-2:#eee;--ac-text:#111;--ac-muted:#555}body{padding:16px}',{from:undefined});fs.writeFileSync(`${out}/app.css`,css.css);
+const server=http.createServer((req,res)=>{const name=req.url.split('?')[0];if(['/fixture.js','/fixture.css','/app.css'].includes(name)){res.setHeader('Content-Type',name.endsWith('.js')?'text/javascript':'text/css');res.end(fs.readFileSync(out+name));return;}res.setHeader('Content-Type','text/html');res.end('<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"><div id="root"></div><script src="/fixture.js"></script>');});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+try{
+ const context=await browser.newContext({viewport:{width:390,height:844}});
+ await context.addInitScript(()=>{localStorage.setItem('avtocena_city','Москва');Object.defineProperty(navigator,'share',{value:undefined});Object.defineProperty(navigator,'clipboard',{value:{writeText:async v=>{window.shared=v}}});});
+ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ const calculation={totalRub:2120000,breakdown:[],currencyRate:{currency:'CNY',effectiveRate:12.5,sourcePrice:100000}};
+ await page.route('**/api/catalog/offer/qa/calculate',r=>r.fulfill({json:calculation}));
+ await page.route('**/api/catalog/offer/qa/save',r=>r.fulfill({json:{version:'client-version',draft:r.request().postDataJSON().draft,calculation,savedAt:new Date().toISOString(),savedByName:'Сотрудник'}}));
+ await page.goto(origin+'/?mode=admin');
+ const city=page.getByRole('button',{name:/Выбрать город. Сейчас:/});await city.waitFor();assert.match(await city.getAttribute('aria-label'),/Ваш город/);
+ await city.click();await page.getByRole('dialog',{name:'Выбор города'}).getByRole('textbox').fill('Новокуз');await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:/Новокузнецк/}).first().click();
+ assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Москва');assert.ok(!page.url().includes('city='));
+ await page.getByRole('button',{name:'Применить к расчёту для клиента'}).click();await page.getByRole('button',{name:'Да',exact:true}).click();await page.getByRole('status').filter({hasText:'Сохранено'}).waitFor();
+ await page.getByRole('button',{name:'Поделиться ссылкой'}).click();assert.match(await page.evaluate(()=>window.shared),/calculation=client-version/);
+ await page.reload();await city.waitFor();assert.match(await city.getAttribute('aria-label'),/Ваш город/);
+ await page.goto(origin+'/?mode=public');await page.getByRole('button',{name:'Выбрать город. Сейчас: Москва'}).waitFor();
+ await page.goto(origin+'/?mode=shared');await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).waitFor();assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Москва');
+ await page.screenshot({path:`${out}/shared-city.png`});assert.deepEqual(errors,[]);console.log(JSON.stringify({adminCityEphemeral:true,publicCityPersonal:true,sharedCityPreserved:true,shareLinkVersion:true,errors}));
+}finally{await browser.close();await new Promise(r=>server.close(r));}

@@ -1,0 +1,7140 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 23,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-01849e4b5a7c3a684358",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO 09 TCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 86122,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60a7f932d66485dba5d2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 70,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19008b620f23b76021f3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 993,
+      "powerKw": 54,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb60c8edf9c1bc181837",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO ACCESS SCE",
+        "SANDERO COMFORT SCE",
+        "SANDERO ESSENTIAL SCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2638,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0f3a1f74b3e217b32f3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO / 1.0 /"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 125601,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffc0da07fd7bbd2e913e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 54,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO / 1.0 /",
+        "SANDERO 10"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 91602,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef67dc99f31c8231d587",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO / 1.0 /",
+        "SANDERO / 1.0 / AUT.",
+        "SANDERO / 10 /",
+        "SANDERO 1.0",
+        "SANDERO 1.0 AUT.",
+        "SANDERO III"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 522680,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7081d2de35c717e76b4",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO / 1.0 /",
+        "SANDERO 10"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 34733,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8da57f98987449220b6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3750,
+      "powerKw": 70,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ecbc55f509f44b5abe5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 57,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e1e0ea1ad0df4400c5f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 64,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97bf7a40ff4db1b02eb5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10f1184a2a8e1091758e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 76,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f288e5e4a71de1f556b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 100,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e8603b1d4bfeb193321",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-652aeb8f16e555d389c3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1298,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4020f1ec0450230a074a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4c8ab20f680a1b04ce5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 165,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7774c2d69e28f2f672b0",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO 1.0"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 34029,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7225411ecac7c49ab7f2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1598,
+      "powerKw": 62,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a24b8fa31a0a7bbcb83",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5784a0bcbca584fff0b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be22b2658b49cc9b231a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23e41b600718d13227af",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ab799458f1a67eb65a4",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 57,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5af4254612ebb5c548f6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8963c316761076e92c95",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 62,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a6efe65644d68eac955",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1496,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2fd3cf5a50e293c7ec8",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 747,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b919d385fabc61a69881",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": 90,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cc832105012d363b5f7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "ng",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71d981fbbbc1cb606f77",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 660,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff0b9dc8a66594fced25",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 58,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29cb6391de74deca47b0",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-598a2c41ed071877ef7d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc72d5dd7c5baef64c03",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9348c33a34e2e6259e99",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero Stepway",
+      "modelId": "dacia/sandero-stepway",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO STEPWAY COMFORT B-DCI",
+        "SANDERO STEPWAY ESSENTIAL BDCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8ad6650a7482896f951",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero Stepway",
+      "modelId": "dacia/sandero-stepway",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "SANDERO STEPWAY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1957dcf276c42619eac6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero Stepway",
+      "modelId": "dacia/sandero-stepway",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO STEPWAY COMFORT TCE",
+        "SANDERO STEPWAY ESSENTIAL TCE",
+        "SANDERO STEPWAY SE TWENTY TCE",
+        "SANDERO STEPWAY TECHROAD TCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 4987,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acdd81acb616df797f7a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero Stepway",
+      "modelId": "dacia/sandero-stepway",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO STEPWAY ESSENTIAL SCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 351,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7519f4834a97bd3371f6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 18,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 37050,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2991c44728db1157161",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 33,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 94126,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-494a4035da0b7d821f37",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "SPRING",
+        "SPRING EXTREME 65"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 20883,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-653c8935b591615f490e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 19,
+      "commercialNames": [
+        "SPRING",
+        "SPRING / /"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 10548,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8a778c1dc1fb054a7f7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 48,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 51876,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9781cbc8f821b350c8d7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c00456ea3f0cfb40a929",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6967a7f9999460267be2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 48,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5079b0bdf8f428ca9ff3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 46,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5a7e2e1b021149ae2d0",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7041c29916bbf135671",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 58,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a89915187405fbd0bedd",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ad949cc1a71d9873ed5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa3a48c9df9c27183e2d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef0f7d22bf310ea2c1b5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e516dee2e052865b143",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-633294fca9b2fe1a11cb",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ba034eb7beea772d290",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec1b83880245303a03da",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12c6280f0a57b5941cdc",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-972e61791b77743e475f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 124,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e97df73e5867ce16742b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Spring",
+      "modelId": "dacia/spring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "SPRING"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f6da4bfe33c8a09498b",
+      "brandId": "daihatsu",
+      "brand": "Daihatsu",
+      "canonicalModel": "Terios",
+      "modelId": "daihatsu/terios",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1298,
+      "powerKw": 63,
+      "commercialNames": [
+        "TERIOS"
+      ],
+      "sourceMakeNames": [
+        "DAIHATSU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6aed46bcfa04fd70a83d",
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "canonicalModel": "Stradale",
+      "modelId": "dallara/stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 292,
+      "commercialNames": [
+        "Dallara Stradale",
+        "DALLARA STRADALE",
+        "STRADALE"
+      ],
+      "sourceMakeNames": [
+        "DALLARA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3038b01a1b42404adc27",
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "canonicalModel": "Stradale",
+      "modelId": "dallara/stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 293,
+      "commercialNames": [
+        "DALLARA STRADALE",
+        "STRADALE"
+      ],
+      "sourceMakeNames": [
+        "DALLARA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 136,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d12321569c286d75a02c",
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "canonicalModel": "Stradale",
+      "modelId": "dallara/stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2261,
+      "powerKw": 150,
+      "commercialNames": [
+        "DALLARA STRADALE"
+      ],
+      "sourceMakeNames": [
+        "DALLARA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b293ec60061a4a58f090",
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "canonicalModel": "Stradale",
+      "modelId": "dallara/stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": 293,
+      "commercialNames": [
+        "DALLARA STRADALE"
+      ],
+      "sourceMakeNames": [
+        "DALLARA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ec490f42bab9c11239f",
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "canonicalModel": "Stradale",
+      "modelId": "dallara/stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2261,
+      "powerKw": null,
+      "commercialNames": [
+        "STRADALE"
+      ],
+      "sourceMakeNames": [
+        "DALLARA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-672a8c6946a40f1368df",
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "canonicalModel": "S05",
+      "modelId": "deepal/s05",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "DEEPAL S05"
+      ],
+      "sourceMakeNames": [
+        "DEEPAL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d598dc30b39e9d5f189",
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "canonicalModel": "S05",
+      "modelId": "deepal/s05",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 127,
+      "commercialNames": [
+        "DEEPAL S05"
+      ],
+      "sourceMakeNames": [
+        "DEEPAL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31a5884d4531a41a20fc",
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "canonicalModel": "S05",
+      "modelId": "deepal/s05",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "DEEPAL S05",
+        "S05",
+        "S05- DEEPAL S05"
+      ],
+      "sourceMakeNames": [
+        "DEEPAL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 312,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20a006887e804af33d2d",
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "canonicalModel": "S05",
+      "modelId": "deepal/s05",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "S05- DEEPAL S05"
+      ],
+      "sourceMakeNames": [
+        "DEEPAL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a26bce1fec07533abc29",
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "canonicalModel": "S07",
+      "modelId": "deepal/s07",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "DEEPAL S07",
+        "DEEPAL S07-S07-DEEPAL_S07-DEEP",
+        "S07"
+      ],
+      "sourceMakeNames": [
+        "DEEPAL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 118,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2250867a272d4a5ea639",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4f9a3d342ee318217ca",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "580",
+        "580 LPG"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 324,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-889145e8e00891b2bef8",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb6cb797bc91c02488b1",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1761,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06fcf11772e2c7e4305e",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-627c2f53a852a91cc575",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 69,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-713b918ff7a96a2db4d7",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 106,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e8b5b2a850d28844213",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "580",
+      "modelId": "dfsk/580",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "ng",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "580"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab96bd388b7035926bc0",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "E5",
+      "modelId": "dfsk/e5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "DFSK E5"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8dc678a34d2ae2922d71",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "E5",
+      "modelId": "dfsk/e5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "DFSK E5",
+        "E5"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 920,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e68dcff710111b097b87",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "E5",
+      "modelId": "dfsk/e5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "DFSK E5"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a6ee88ed57bf686868a",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "E5",
+      "modelId": "dfsk/e5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "E5"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aedafbe57a80a10547e",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "E5",
+      "modelId": "dfsk/e5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "DFSK E5"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-600cf667e20adc3090a1",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "E5",
+      "modelId": "dfsk/e5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "DFSK E5"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6190a911f9a6895ad1bc",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "Fengon500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b87446964ca08286f595",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "FENGON 500",
+        "FENGON500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2194,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de292e5101a09e54316b",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "FENGON500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0deecaf2f6d2c4e6f5ee",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "FENGON 500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ec4ab88516e00838fac",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 78,
+      "commercialNames": [
+        "Fengon 500",
+        "FENGON 500",
+        "Fengon500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29220f3e10041f0d6f6f",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 78,
+      "commercialNames": [
+        "FENGON 500",
+        "FENGON 500-MT",
+        "Fengon500",
+        "FENGON500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 155,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97bee064661794bb3a3b",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "FENGON 500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-038cd61840c0a3abf1de",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "FENGON 500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73ea40e2f257d2f4785a",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 500",
+      "modelId": "dfsk/fengon-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 82,
+      "commercialNames": [
+        "FENGON500"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e26337531710457dd949",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 600",
+      "modelId": "dfsk/fengon-600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1499,
+      "powerKw": 130,
+      "commercialNames": [
+        "FENGON 600"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6817211a8aa2285fd8d2",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 600",
+      "modelId": "dfsk/fengon-600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 120,
+      "commercialNames": [
+        "FENGON 600"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f00eed29f6441877fa6d",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 600",
+      "modelId": "dfsk/fengon-600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 130,
+      "commercialNames": [
+        "FENGON 600"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 570,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41b0576fe031cdb5ade1",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 600",
+      "modelId": "dfsk/fengon-600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "FENGON 600"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eccb28e193d791233bb0",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Fengon 600",
+      "modelId": "dfsk/fengon-600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "FENGON 600"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b8e821431c56809673d",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 50,
+      "commercialNames": [
+        "SERES 3",
+        "SERES 3 /"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 432,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3061643f747e0cd5216d",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "SERES 3",
+        "SERES3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1070,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92157848df6c7d880d7b",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 185,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67268595c437df729340",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "SERES 3",
+        "SERES-3",
+        "SERES3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 287,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9caef9e473dd2bdfdab0",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c882d61c219777d3043",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61e6fd59b398eaaf5806",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fde5752de04ce1d4c2fd",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eec36f0aefaa305f2b27",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d31d84ab1a001c7cb2a1",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-403363e0e6b9e88c71fc",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34b0f2321c960ad4a169",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-231abaad92edc14c031b",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11c35d9d522dd992fa0e",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bcdc6ed01fdf448acfd",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5677bf86b6828b2c6c8f",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68d364408d075f7f4906",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7c2108ae59cfad5c02d",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c82282106d9cfc383821",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 173,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ae8d65260b4814a4198",
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "canonicalModel": "Seres 3",
+      "modelId": "dfsk/seres-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "SERES 3"
+      ],
+      "sourceMakeNames": [
+        "DFSK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd36e1c8ab3192da94d5",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Caravan",
+      "modelId": "dodge/caravan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3600,
+      "powerKw": 211,
+      "commercialNames": [
+        "CARAVAN"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba21579ac40b67f33038",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Caravan",
+      "modelId": "dodge/caravan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3600,
+      "powerKw": 208,
+      "commercialNames": [
+        "CARAVAN"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9de2637be6a7e731c52",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "E85",
+      "engineCc": 6166,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHALLENGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b54c312e0465b172898f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "E85",
+      "engineCc": 6417,
+      "powerKw": 362,
+      "commercialNames": [
+        "CHALLENGER R T 392"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b94856ea989a525230c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3605,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHALLENGER SXT",
+        "DODGE CHALLENGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1d3949baf2a3fc768b3",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6417,
+      "powerKw": 362,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER R T",
+        "CHALLENGER R/T",
+        "CHALLENGER R/T SCAT PACK",
+        "CHALLENGER SCAT PACK",
+        "CHALLENGER SRT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3029d248c26387085834",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHALLENGER SRT HELLCAT WB",
+        "DODGE CHALLENGER HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a36589e9fee8126a1aae",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 224,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER GT AWD",
+        "CHALLENGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b65b180a99842749895",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER AWD",
+        "CHALLENGER GT",
+        "CHALLENGER SXT",
+        "CHALLENGER SXT AWD",
+        "CHALLENGER SXT PLUS",
+        "DODGE CHALLENGER",
+        "DODGE CHALLENGER GT",
+        "DODGE CHALLENGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 286,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-885ad57c6656fa18130f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER SXT",
+        "DODGE CHALLENGER",
+        "DODGE CHALLENGER GT",
+        "DODGE CHALLENGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1eda9cbb1ecf87c6ef8",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 277,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER R T",
+        "CHALLENGER R/T",
+        "CHALLENGER T/A"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 443,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d6dcf0de389d99879bf",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 280,
+      "commercialNames": [
+        "DODGE CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4e46c031deb1dbb81bd",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 527,
+      "commercialNames": [
+        "CHALLENGER SRT",
+        "CHALLENGER SRT HELLCAT",
+        "DODGE CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2431e069cee4115098c8",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER HELLCAT JAILBREAK",
+        "CHALLENGER SRT",
+        "CHALLENGER SRT HELLCAT",
+        "CHALLENGER SRT HELLCAT WB",
+        "DODGE CHALLENGER",
+        "DODGE CHALLENGER HELLCAT",
+        "DODGE CHALLENGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 601,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d469bf29e328fe7a819b",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 594,
+      "commercialNames": [
+        "CHALLENGER HELLCAT REDEYE",
+        "CHALLENGER SRT REDEYE WB",
+        "DODGE CHALLENGER",
+        "DODGE CHALLENGER HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f865eff1b8f6e4ae03b",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 595,
+      "commercialNames": [
+        "CHALLENGER HELLCAT",
+        "CHALLENGER HELLCAT REDEYE",
+        "CHALLENGER REDEYE",
+        "CHALLENGER SRT HELLCAT REDEYE",
+        "CHALLENGER SRT HELLCAT WB",
+        "CHALLENGER SRT REDEYE WB"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 79,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b208315c20b40a8429da",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 626,
+      "commercialNames": [
+        "DODGE CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bedf28b45a1d158824d8",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 653,
+      "commercialNames": [
+        "CHALLENGER HELLCAT XR WB",
+        "CHALLENGER SRT HELLCAT",
+        "CHALLENGER SRT HELLCAT WB"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-158f4d89731f3e43e988",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 362,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER 392",
+        "CHALLENGER R T",
+        "CHALLENGER R T 392",
+        "CHALLENGER R T SCAT PACK",
+        "CHALLENGER R T SCAT PACK7",
+        "CHALLENGER R/T",
+        "CHALLENGER R/T SCAT PACK",
+        "CHALLENGER SCAT PACK",
+        "CHALLENGER SHAKEDOWN",
+        "CHALLENGER SRT",
+        "CHALLENGER SRT 392",
+        "CHALLENGER SRT-8",
+        "CHALLENGER T T SCAT PACK",
+        "DODGE CHALLENGER",
+        "DODGE CHALLENGER R T",
+        "DODGE CHALLENGER SRT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 1679,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e8667c05a4a333f0481",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 363,
+      "commercialNames": [
+        "CHALLENGER R T SCAT PACK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-364f1932a8c8fd25df0b",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6418,
+      "powerKw": 362,
+      "commercialNames": [
+        "CHALLENGER R T SCAT PACK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d7bf351ee91e4575314",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 274,
+      "commercialNames": [
+        "CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fdfd229a0f31d277f8d",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 361,
+      "commercialNames": [
+        "CHALLENGER R/T SCAT PACK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dd4fa47805cbac479bb",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3604,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHALLENGER SXT",
+        "DODGE CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7823e00dd6f8cde4a55c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 5654,
+      "powerKw": 277,
+      "commercialNames": [
+        "CHALLENGER R T",
+        "CHALLENGER R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6f20f08567dd863db82",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6166,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHALLENGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3b43a423928b7d177b2",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3166,
+      "powerKw": 594,
+      "commercialNames": [
+        "DODGE CHALLENGER HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d398d37f7c51653efea",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "e85",
+      "engineCc": 5654,
+      "powerKw": 277,
+      "commercialNames": [
+        "CHALLENGER R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26a2092db1cdd165eed1",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3604,
+      "powerKw": 224,
+      "commercialNames": [
+        "CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9051e92fc2c974025f9",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3518,
+      "powerKw": 187,
+      "commercialNames": [
+        "CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07dd580abcda825a6b35",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3604,
+      "powerKw": 67,
+      "commercialNames": [
+        "DODGE CHALLENGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb7a4431255bda5a1e2c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3604,
+      "powerKw": 178,
+      "commercialNames": [
+        "DODGE CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ccf8801c717a88cd80f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3660,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHALLENGER GT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2eb976c06cad7760257e",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5654,
+      "powerKw": 29,
+      "commercialNames": [
+        "DODGE CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bb382da5a819df1884d",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5654,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHALLENGER R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d17fcde3af5a40a1e431",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5654,
+      "powerKw": 279,
+      "commercialNames": [
+        "CHALLENGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc52a565b4f1f0f0e129",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 601,
+      "commercialNames": [
+        "CHALLENGER",
+        "CHALLENGER BLACK GHOST",
+        "CHALLENGER HELLCAT",
+        "CHALLENGER JAILBREAK",
+        "DODGE CHALLENGER HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9606d21959a600a9df8e",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 367,
+      "commercialNames": [
+        "CHALLENGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d528c482eefde64f0fd3",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 764,
+      "commercialNames": [
+        "CHALLENGER SRT DEMON 170",
+        "DODGE CHALLENGER DEMON"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b008ea4a5e0501bf634b",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Challenger",
+      "modelId": "dodge/challenger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 602,
+      "commercialNames": [
+        "CHALLENGER SRT SUPERSTOCK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f4a51a955224124f4a5",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "E85",
+      "engineCc": 3604,
+      "powerKw": 224,
+      "commercialNames": [
+        "CHARGER GT AWD"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27282cfd8639e9683e16",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "E85",
+      "engineCc": 6166,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHARGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d97b63ce9ecceb1770fd",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3605,
+      "powerKw": 218,
+      "commercialNames": [
+        "DODGE CHARGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-355a427f741d61cb596e",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2604,
+      "powerKw": 218,
+      "commercialNames": [
+        "DODGE CHARGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb25b8e04c2099bde1e5",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2736,
+      "powerKw": 133,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-167e4f1334baf21c0628",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 218,
+      "commercialNames": [
+        "CHARGER GT",
+        "DODGE CHARGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80bdcdb5cb46cbd20001",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 224,
+      "commercialNames": [
+        "CHARGER",
+        "CHARGER AWD",
+        "CHARGER GT",
+        "CHARGER GT AWD",
+        "CHARGER SXT",
+        "CHARGER SXT AWD",
+        "DODGE CHARGER GT",
+        "DODGE CHARGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a020630ab5d43c3cbc09",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 527,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce7b35680bcf2bb452f4",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 218,
+      "commercialNames": [
+        "CHARGER",
+        "DODGE CHARGER",
+        "DODGE CHARGER GT",
+        "DODGE CHARGER SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e929b0149c8da6e8d0cf",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 227,
+      "commercialNames": [
+        "CHARGER",
+        "CHARGER GT AWD",
+        "DODGE CHARGER GT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3aefb5383439e714cab",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 274,
+      "commercialNames": [
+        "CHARGER R/T",
+        "DODGE CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abcb3dc5de6252855085",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 276,
+      "commercialNames": [
+        "CHARGER",
+        "CHARGER R T",
+        "CHARGER R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e265207f9a5ea285d39",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 527,
+      "commercialNames": [
+        "CHARGER SRT",
+        "CHARGER SRT HELLCAT",
+        "CHARGER SRT HELLCAT WB"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 140,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6972740b0706f20dfe0",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHARGER SRT HELLCAT",
+        "CHARGER SRT HELLCAT JAILBREAK",
+        "DODGE CHARGER",
+        "DODGE CHARGER HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 69,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3ffa47a3a2e1dae1a7f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 227,
+      "commercialNames": [
+        "DODGE CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32a011518f26262e15e5",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 362,
+      "commercialNames": [
+        "CHARGER",
+        "CHARGER 392",
+        "CHARGER SCAT PACK",
+        "CHARGER SCAT PACK WB",
+        "CHARGER SRT",
+        "CHARGER SRT 392",
+        "CHARGER SRT 392 WB",
+        "DODGE CHARGER SRT 8"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 512,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b26f3feabffc9edc00f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6417,
+      "powerKw": 362,
+      "commercialNames": [
+        "CHARGER 392",
+        "CHARGER SCAT PACK",
+        "CHARGER SCAT PACK WB",
+        "CHARGER SRT 392",
+        "CHARGER SRT 392 WB"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-407e1341660c5c77ecdf",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 600,
+      "commercialNames": [
+        "DODGE CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63700faf9cbb145715ee",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 653,
+      "commercialNames": [
+        "CHARGER SRT HELLCAT WB"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a5521a5c226d3bb213a",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6166,
+      "powerKw": 527,
+      "commercialNames": [
+        "CHARGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14400e34c2cbd9201068",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 215,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-877f3e7a3801691b1a22",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 272,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc0f876723926e82a4a0",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 273,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53c335da63f1c2492564",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 356,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb33ec8cb5bdf39ba200",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 6166,
+      "powerKw": 535,
+      "commercialNames": [
+        "CHARGER SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-901db1ca8ef1cd916ae9",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 595,
+      "commercialNames": [
+        "CHARGER HELLCAT REDEYE"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3caaf2e07ade49fc014f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 601,
+      "commercialNames": [
+        "CHARGER HELLCAT JAILBREAK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-180765bb3f3346c76c91",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3605,
+      "powerKw": 224,
+      "commercialNames": [
+        "CHARGER"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-340a88b9cf53d4ac0f26",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 594,
+      "commercialNames": [
+        "CHARGER HELLCAT REDEYE"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19a959de8d5f693e6f60",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6166,
+      "powerKw": 604,
+      "commercialNames": [
+        "CHARGER HELLCAT JAILBREAK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de21c37254ae6a58d8ed",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Charger",
+      "modelId": "dodge/charger",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 470,
+      "commercialNames": [
+        "DODGE CHARGER DAYTONA"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88137d169d6543f4eb3c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Dart",
+      "modelId": "dodge/dart",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 118,
+      "commercialNames": [
+        "DART"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b144e3545302c9ff299",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Dart",
+      "modelId": "dodge/dart",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 118,
+      "commercialNames": [
+        "DART"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-825e5b6e1db3fc34b6d3",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "E85",
+      "engineCc": 5654,
+      "powerKw": 268,
+      "commercialNames": [
+        "DODGE DURANGO R/T",
+        "DURANGO",
+        "DURANGO R T AWD",
+        "DURANGO R/T AWD",
+        "DURANGO R/T SUPERTRACK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 82,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4aea29c5bee200a74ba",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "E85",
+      "engineCc": 6417,
+      "powerKw": 354,
+      "commercialNames": [
+        "DODGE DURANGO SRT AWD"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed4ffbc2d71f00cb421c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": null,
+      "powerKw": 268,
+      "commercialNames": [
+        "DODGE DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4ac2e226c950f39e2f7",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 5654,
+      "powerKw": 268,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DODGE DURANGO AWD",
+        "DODGE DURANGO R T",
+        "DODGE DURANGO R T 345",
+        "DODGE DURANGO R/T",
+        "DODGE DURANGO RT",
+        "DURANGO",
+        "DURANGO R T",
+        "DURANGO R T SUPERTRACK",
+        "DURANGO R/T",
+        "DURANGO R/T SUPERTRACK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 698,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4efce87960ab0645a10",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6410,
+      "powerKw": 354,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DODGE DURANGO SRT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a912d293a86d748e0660",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6417,
+      "powerKw": 354,
+      "commercialNames": [
+        "DODGE DURANGO SRT",
+        "DODGE DURANGO SRT 392",
+        "DURANGO SRT",
+        "DURANGO SRT 392",
+        "DURANGO SRT 392 AWD",
+        "DURANGO SRT AWD"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98caabff18615a2202bc",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6424,
+      "powerKw": 354,
+      "commercialNames": [
+        "DURANGO SRT 392 HEMI"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20389534942221f5780e",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 216,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0c92b0586907540bf00",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 268,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DODGE DURANGO R T",
+        "DODGE DURANGO R/T",
+        "DURANGO",
+        "DURANGO R T",
+        "DURANGO R T AWD",
+        "DURANGO R/T",
+        "DURANGO R/T SUPERTRACK"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 655,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb5da5c05f8467193a29",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6410,
+      "powerKw": 354,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DODGE DURANGO SRT",
+        "DURANGO SRT 392 HEMI"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 75,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42de587bffee8d951e5b",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 354,
+      "commercialNames": [
+        "DODGE DURANGO SRT",
+        "DODGE DURANGO SRT 392",
+        "DURANGO",
+        "DURANGO SRT 382 AWD",
+        "DURANGO SRT 392",
+        "DURANGO SRT 392 AWD"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 194,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8c058dbce5c0735494a",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6424,
+      "powerKw": 354,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DURANGO SRT",
+        "DURANGO SRT 392 HEMI"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c3674393c46d071854d",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 217,
+      "commercialNames": [
+        "DURANGO GT RWD"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a48eeef2e37bca982924",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 368,
+      "commercialNames": [
+        "DODGE DURANGO R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67c45db3f7ae48f99719",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 522,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DODGE DURANGO HELLCAT",
+        "DURANGO HELLCAT",
+        "DURANGO SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcb8572051d39b9671de",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 529,
+      "commercialNames": [
+        "DURANGO HELLCAT",
+        "DURANGO SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-517ac9ff8eccfa636e19",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3604,
+      "powerKw": 217,
+      "commercialNames": [
+        "DODGE DURANGO GT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83ae161632e6b2479462",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3604,
+      "powerKw": 220,
+      "commercialNames": [
+        "DODGE DURANGO",
+        "DODGE DURANGO GT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d8a17e927e6a0f81e18",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 213,
+      "commercialNames": [
+        "DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64d548abbddbc4ba44a2",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 220,
+      "commercialNames": [
+        "DODGE DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40cd55ffa48603f5f5e5",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 264,
+      "commercialNames": [
+        "DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b7b83320d8793378d64",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3604,
+      "powerKw": 216,
+      "commercialNames": [
+        "DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8f697992ee612bdd6b6",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3604,
+      "powerKw": 215,
+      "commercialNames": [
+        "DURANGO"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9eb66f10a024a2a3bf7",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 5654,
+      "powerKw": 183,
+      "commercialNames": [
+        "DODGE DURANGO R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aadf4a17821c620c78c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 5654,
+      "powerKw": 265,
+      "commercialNames": [
+        "DODGE DURANGO R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef004b8b7dacb4b01ca6",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 5854,
+      "powerKw": 268,
+      "commercialNames": [
+        "DODGE DURANGO R/T"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbcaa552810a0e10611c",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 6166,
+      "powerKw": 529,
+      "commercialNames": [
+        "DURANGO SRT HELLCAT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9206c050698114c6952",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Durango",
+      "modelId": "dodge/durango",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "e85",
+      "engineCc": 3604,
+      "powerKw": 216,
+      "commercialNames": [
+        "DODGE DURANGO SXT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28f67ea4e952659c1623",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Grand Caravan",
+      "modelId": "dodge/grand-caravan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 211,
+      "commercialNames": [
+        "DODGE GRAND CARAVAN",
+        "DODGE GRAND CARAVAN R/T",
+        "GRAND CARAVAN"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d5319b72c73bef031c7",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Grand Caravan",
+      "modelId": "dodge/grand-caravan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3778,
+      "powerKw": 160,
+      "commercialNames": [
+        "GRAND CARAVAN"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca6148b220b3a08fbca9",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Hornet",
+      "modelId": "dodge/hornet",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 200,
+      "commercialNames": [
+        "HORNET",
+        "HORNET GT"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba73854ec17315828fae",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Journey",
+      "modelId": "dodge/journey",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 211,
+      "commercialNames": [
+        "DODGE JOURNEY"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3dd59baf8ce75fefc78",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Journey",
+      "modelId": "dodge/journey",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3600,
+      "powerKw": 136,
+      "commercialNames": [
+        "JOURNEY"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-867a129f3c004abd5d7f",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Ram",
+      "modelId": "dodge/ram",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3701,
+      "powerKw": 208,
+      "commercialNames": [
+        "RAM"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5732b62d25355c6e573",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Ram",
+      "modelId": "dodge/ram",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 523,
+      "commercialNames": [
+        "RAM 1500 TRX"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18b2030beab6f7290449",
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "canonicalModel": "Ram 2500",
+      "modelId": "dodge/ram-2500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6417,
+      "powerKw": 306,
+      "commercialNames": [
+        "RAM 2500"
+      ],
+      "sourceMakeNames": [
+        "DODGE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6af1c6f79df628c7926",
+      "brandId": "dongfeng",
+      "brand": "Dongfeng",
+      "canonicalModel": "Box",
+      "modelId": "dongfeng/box",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 30,
+      "commercialNames": [
+        "BOX",
+        "BOX / /",
+        "BOX PREMIUM",
+        "BOX STYLE"
+      ],
+      "sourceMakeNames": [
+        "DONGFENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 590,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f122a28428952b2868a6",
+      "brandId": "dongfeng",
+      "brand": "Dongfeng",
+      "canonicalModel": "Box",
+      "modelId": "dongfeng/box",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "BOX"
+      ],
+      "sourceMakeNames": [
+        "DONG FENG",
+        "DONGFENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1726,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f0be0a4eedd948a2882",
+      "brandId": "dongfeng",
+      "brand": "Dongfeng",
+      "canonicalModel": "Box",
+      "modelId": "dongfeng/box",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "BOX"
+      ],
+      "sourceMakeNames": [
+        "DONGFENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da8e7a10abcd62d7476",
+      "brandId": "donkervoort",
+      "brand": "Donkervoort",
+      "canonicalModel": "F22",
+      "modelId": "donkervoort/f22",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2480,
+      "powerKw": 345,
+      "commercialNames": [
+        "F22"
+      ],
+      "sourceMakeNames": [
+        "DONKERVOORT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0d89a9e3bf300a67e65",
+      "brandId": "donkervoort",
+      "brand": "Donkervoort",
+      "canonicalModel": "GTO",
+      "modelId": "donkervoort/gto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2480,
+      "powerKw": 265,
+      "commercialNames": [
+        "GTO-INDIVIDUAL",
+        "GTO-INDIVIDUAL SERIES",
+        "GTO-JD70"
+      ],
+      "sourceMakeNames": [
+        "DONKERVOORT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb6de7f3434011f2264a",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "3.0",
+      "modelId": "dr-automobiles/3-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "DR3"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 806,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83da516fd05ddf4ae889",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "3.0",
+      "modelId": "dr-automobiles/3-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 86,
+      "commercialNames": [
+        "DR 3.0",
+        "DR 30",
+        "DR3",
+        "DR3.0",
+        "DR30"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 11857,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97fda80fa5413e0c2096",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "3.0",
+      "modelId": "dr-automobiles/3-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "DR3"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdb690472fe795e54a54",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "3.0",
+      "modelId": "dr-automobiles/3-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 86,
+      "commercialNames": [
+        "DR 3",
+        "DR 3.0",
+        "DR 30",
+        "DR3",
+        "DR3.0",
+        "DR30"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 1692,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed55c65471130c294a3e",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "3.0",
+      "modelId": "dr-automobiles/3-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "DR 3",
+        "DR3.0",
+        "DR30"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-caa69743a6098431b4e9",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1590,
+      "powerKw": 84,
+      "commercialNames": [
+        "DR4"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1538,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08fb9e646c424da4348c",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1590,
+      "powerKw": 84,
+      "commercialNames": [
+        "DR4"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5517a916dc19057459e3",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "4.0",
+        "DR 4.0",
+        "DR 40"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1ac9578398d3839fd1d",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 86,
+      "commercialNames": [
+        "DR 4.0",
+        "DR 40"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 16928,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01a016ac80651511916d",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "4.0",
+        "DR 4.0"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28c4ed130317b69a441e",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "DR 4.0",
+        "DR 40"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1449,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8fe8de9dc23351060d2",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 86,
+      "commercialNames": [
+        "DR 4.0",
+        "DR 40"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3035,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a4d5d2029e3a3401fdd",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "4.0",
+      "modelId": "dr-automobiles/4-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "DR 4.0"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93c36a12991bd9b927d6",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "5.0",
+      "modelId": "dr-automobiles/5-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 86,
+      "commercialNames": [
+        "DR 5.0",
+        "DR 50"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 15616,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc9e3b8ee2dce0d4967f",
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "canonicalModel": "5.0",
+      "modelId": "dr-automobiles/5-0",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "5.0",
+        "DR 5.0",
+        "DR 50"
+      ],
+      "sourceMakeNames": [
+        "DR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 14028,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

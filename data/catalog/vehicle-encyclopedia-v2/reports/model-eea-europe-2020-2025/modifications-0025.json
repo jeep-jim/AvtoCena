@@ -1,0 +1,7089 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 25,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-e677a86a0f89437117b0",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "GTC4Lusso",
+      "modelId": "ferrari/gtc4lusso",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6262,
+      "powerKw": 585,
+      "commercialNames": [
+        "GTC4 LUSSO"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6ad8660209ccc9508ea",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "GTC4Lusso T",
+      "modelId": "ferrari/gtc4lusso-t",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": null,
+      "commercialNames": [
+        "GTC4 LUSSO T V8"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d8a97a1b0a38613ccc9",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "GTC4Lusso T",
+      "modelId": "ferrari/gtc4lusso-t",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": 449,
+      "commercialNames": [
+        "GTC4 LUSSO T",
+        "GTC4 LussoT",
+        "GTC4Lusso T",
+        "GTC4LUSSO T",
+        "GTC4LUSSOT"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c467be988aa96cd80b31",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Monza",
+      "modelId": "ferrari/monza",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6496,
+      "powerKw": null,
+      "commercialNames": [
+        "MONZA SP2 S-A"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6f44e6d1198c6545e9a",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Monza",
+      "modelId": "ferrari/monza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6496,
+      "powerKw": 592,
+      "commercialNames": [
+        "MONZA",
+        "MONZA SP2"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 175,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13fd0b86c7a0b89133db",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Monza SP1",
+      "modelId": "ferrari/monza-sp1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6496,
+      "powerKw": null,
+      "commercialNames": [
+        "MONZA SP1 S-A"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d21686aa0a5e761548f",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Monza SP1",
+      "modelId": "ferrari/monza-sp1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6496,
+      "powerKw": 592,
+      "commercialNames": [
+        "MONZA SP1"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-720ce7dfc172dd1242bd",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Portofino",
+      "modelId": "ferrari/portofino",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": null,
+      "commercialNames": [
+        "PORTOFINO",
+        "PORTOFINO S-A"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 438,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cdcc94eef4693fcdd69",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Portofino",
+      "modelId": "ferrari/portofino",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": 441,
+      "commercialNames": [
+        "Portofino",
+        "PORTOFINO"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1181,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c498141f35ecc99a92d",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Portofino",
+      "modelId": "ferrari/portofino",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": 456,
+      "commercialNames": [
+        "PORTOFINO"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8645a34727829954e952",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Portofino M",
+      "modelId": "ferrari/portofino-m",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": 456,
+      "commercialNames": [
+        "FERRARI PORTOFINO M",
+        "PORTOFINO M",
+        "PORTOFINO M / /"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1087,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f391f7a0a84a032feab",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Portofino M",
+      "modelId": "ferrari/portofino-m",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3855,
+      "powerKw": 441,
+      "commercialNames": [
+        "FERRARI PORTOFINO M"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cbb9ec576554d04c55f",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Purosangue",
+      "modelId": "ferrari/purosangue",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6496,
+      "powerKw": 529,
+      "commercialNames": [
+        "FERRARI PUROSANGUE",
+        "PUROSANGUE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1713,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41e22f6ebc5fe64d5ac9",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Purosangue",
+      "modelId": "ferrari/purosangue",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 6496,
+      "powerKw": 529,
+      "commercialNames": [
+        "FERRARI PUROSANGUE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b78f481c14cfc7d95a7",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Purosangue",
+      "modelId": "ferrari/purosangue",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6496,
+      "powerKw": null,
+      "commercialNames": [
+        "FERRARI PUROSANGUE",
+        "PUROSANGUE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a476c2adedab424bf4d",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma",
+      "modelId": "ferrari/roma",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": null,
+      "commercialNames": [
+        "ROMA S-A"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ea0238477ce5e6b4661",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma",
+      "modelId": "ferrari/roma",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": 456,
+      "commercialNames": [
+        "FERRARI ROMA",
+        "ROMA"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 3032,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-226dd87aa34624ecf368",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma",
+      "modelId": "ferrari/roma",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1855,
+      "powerKw": 456,
+      "commercialNames": [
+        "ROMA"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ac3109c857008cdc6ee",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma",
+      "modelId": "ferrari/roma",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3855,
+      "powerKw": 458,
+      "commercialNames": [
+        "Ferrari Roma"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b84b4a2821d3408bc9cc",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma",
+      "modelId": "ferrari/roma",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3855,
+      "powerKw": 441,
+      "commercialNames": [
+        "FERRARI ROMA"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd549e7a8fe1e56788c2",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma Spider",
+      "modelId": "ferrari/roma-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3855,
+      "powerKw": 456,
+      "commercialNames": [
+        "FERRARI ROMA SPIDER",
+        "ROMA SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1233,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a69deeab73d19c523713",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "Roma Spider",
+      "modelId": "ferrari/roma-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3855,
+      "powerKw": null,
+      "commercialNames": [
+        "ROMA SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2f397edf7d01579969d",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90",
+      "modelId": "ferrari/sf90",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3990,
+      "powerKw": null,
+      "commercialNames": [
+        "SF90 ASSETTO FIORANO S-A"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-097b9fe6ec839d32fdd0",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90",
+      "modelId": "ferrari/sf90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF90"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-349f811db7dc4764f3eb",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90",
+      "modelId": "ferrari/sf90",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3990,
+      "powerKw": 586,
+      "commercialNames": [
+        "SF90 XX TRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dff175715f1ed123f6bd",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Spider",
+      "modelId": "ferrari/sf90-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF 90 SPIDER",
+        "SF90 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f75c6f74f8d6dd86e58",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Spider",
+      "modelId": "ferrari/sf90-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF 90 SPIDER",
+        "SF90 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f3209c9345efdbe5ea8",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Spider",
+      "modelId": "ferrari/sf90-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF90 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3fb44d0a783923020f3",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Spider",
+      "modelId": "ferrari/sf90-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3990,
+      "powerKw": 249,
+      "commercialNames": [
+        "SF90 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aac813123a4bc396d763",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Spider",
+      "modelId": "ferrari/sf90-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3990,
+      "powerKw": null,
+      "commercialNames": [
+        "SF90 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79f6257b62e8fb54cec3",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Spider",
+      "modelId": "ferrari/sf90-spider",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3990,
+      "powerKw": 586,
+      "commercialNames": [
+        "SF90 SPIDER XX SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7683b7fe366479eeb7f",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Stradale",
+      "modelId": "ferrari/sf90-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF 90 STRADALE",
+        "SF90 STRADALE",
+        "SF90 STRADALE /"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0dae091ef971fedc15d",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Stradale",
+      "modelId": "ferrari/sf90-stradale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3990,
+      "powerKw": null,
+      "commercialNames": [
+        "SF90 STRADALE S-A"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca69e3d6a3d38b94e8cc",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Stradale",
+      "modelId": "ferrari/sf90-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF 90 STRADALE",
+        "SF90 STRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 1484,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28e963a69eb1ee5f1e35",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Stradale",
+      "modelId": "ferrari/sf90-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 3990,
+      "powerKw": 574,
+      "commercialNames": [
+        "SF90 STRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43f0303f5df3e65bbd4f",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 Stradale",
+      "modelId": "ferrari/sf90-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3990,
+      "powerKw": 249,
+      "commercialNames": [
+        "SF90 STRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f4bf5bd742d31d6ae98",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 XX Spider",
+      "modelId": "ferrari/sf90-xx-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3990,
+      "powerKw": 586,
+      "commercialNames": [
+        "SF 90 XX SPIDER",
+        "SF90 XX SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 136,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da11832491b78c4b0ac",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 XX Spider",
+      "modelId": "ferrari/sf90-xx-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3990,
+      "powerKw": null,
+      "commercialNames": [
+        "SF90 XX SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89275ce555d72ae19923",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 XX Stradale",
+      "modelId": "ferrari/sf90-xx-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3990,
+      "powerKw": 586,
+      "commercialNames": [
+        "SF90 XX STRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ac4a1f94f7fddb2464d",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 XX Stradale",
+      "modelId": "ferrari/sf90-xx-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3990,
+      "powerKw": 586,
+      "commercialNames": [
+        "SF 90 XX STRADALE",
+        "SF90 XX STRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4270e85262eb3f7a9492",
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "canonicalModel": "SF90 XX Stradale",
+      "modelId": "ferrari/sf90-xx-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3990,
+      "powerKw": null,
+      "commercialNames": [
+        "SF90 XX STRADALE"
+      ],
+      "sourceMakeNames": [
+        "FERRARI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1836a9c23e5d6da247bd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "124 Spider",
+      "modelId": "fiat/124-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "124 SPIDER",
+        "FIAT 124 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4470dc9c1d644e086b6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 603,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccd0eed8108143f721fc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9eacf54a82f5468881c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 107,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e30d5032cfc7160115c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 132,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd7ac7dc51c89ec9b87d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1676,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78536b5956eaa323890c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 43,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 103246,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26ddfd3885ed832b84df",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-811391931fc87df58789",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 87,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 116669,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a92c8df2ebec94f2d462",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 11755,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0709f3b00ba3fd6548b9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bf1ce11c24db7d8411c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": null,
+      "commercialNames": [
+        "500 C ROCKSTAR TWINAIR",
+        "500 C S TWINAIR",
+        "500 C SPORT TWINAIR",
+        "500 C STAR TWINAIR",
+        "500 LOUNGE TWINAIR",
+        "500 ROCKSTAR TWINAIR",
+        "500 S TWINAIR",
+        "500 SPORT TWINAIR",
+        "500 STAR TWINAIR"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 706,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-268588f7569fd92ccd76",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": 62,
+      "commercialNames": [
+        "500",
+        "FIAT 500",
+        "FIAT 500 ? 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1877,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ff5d1a3309c9a9d3340",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": 63,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2187,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b74712f6cbbb2f635db9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "500 C DOLCEVITA MHEV",
+        "500 C LAUNCH EDITION MHEV",
+        "500 C LOUNGE MHEV",
+        "500 C POP MHEV",
+        "500 C ROCKSTAR MHEV",
+        "500 C SPORT MHEV",
+        "500 C STAR MHEV",
+        "500 DOLCEVITA MHEV",
+        "500 LAUNCH EDITION MHEV",
+        "500 LOUNGE MHEV",
+        "500 POP MHEV",
+        "500 ROCKSTAR MHEV",
+        "500 SPORT MHEV",
+        "500 STAR MHEV",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 15746,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70a4bc3cb7fd1aa6fe7f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "500",
+        "500 SE DOLCEVITA",
+        "500 SE DOLCEVITA 1 BSG 6V",
+        "FIAT 500",
+        "Fiat 500",
+        "FIAT 500 ? 500 ABARTH",
+        "FIAT 500 / 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT",
+        "Fiat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 165980,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-953d7a261ee5f909a146",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "500",
+        "500 / 1.0 /",
+        "500 / 1.0 / HYBRID",
+        "500 / 1.0 / HYBRID C CONNECT",
+        "500 / 1.0 / HYBRID C DOLCEVITA",
+        "500 / 1.0 / HYBRID C SPORT",
+        "500 / 1.0 / HYBRID CONNECT",
+        "500 / 1.0 / HYBRID CONNECT C",
+        "500 / 1.0 / HYBRID CULT",
+        "500 / 1.0 / HYBRID DOLCEVITA",
+        "500 / 1.0 / HYBRID DOLCEVITA C",
+        "500 / 1.0 / HYBRID SPORT",
+        "500 / 1.0 / HYBRID SPORT C",
+        "500 / 10 /",
+        "500 / 10 / HYBRID DOLCEVITA",
+        "500 1.0",
+        "500 10",
+        "FIAT 500",
+        "FIAT 500 ?",
+        "FIAT 500 ? 500 ABARTH",
+        "FIAT 500 / 10 / HYBRID",
+        "FIAT 500 /500 ABARTH",
+        "FIAT 500 CAMBRIO",
+        "FIAT 500 H 500 ABARTH",
+        "FIAT 500 I 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 44,
+      "registrations": 358053,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab1c02342432d64ac458",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "500",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45363d3aea12f8427b6e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": null,
+      "commercialNames": [
+        "500 120TH ANNIVERSARY",
+        "500 C 120TH ANNIVERSARY",
+        "500 C 120TH ANNIVERSARY S-A",
+        "500 C COLLEZIONE",
+        "500 C DOLCEVITA",
+        "500 C DOLCEVITA S-A",
+        "500 C LOUNGE",
+        "500 C LOUNGE S-A",
+        "500 C POP",
+        "500 C POP S-A",
+        "500 C ROCKSTAR",
+        "500 C ROCKSTAR S-A",
+        "500 C S",
+        "500 C SPORT",
+        "500 C SPORT S-A",
+        "500 C STAR",
+        "500 C STAR S-A",
+        "500 COLLEZIONE",
+        "500 DOLCEVITA",
+        "500 DOLCEVITA S-A",
+        "500 LOUNGE",
+        "500 LOUNGE S-A",
+        "500 POP",
+        "500 POP S-A",
+        "500 ROCKSTAR",
+        "500 ROCKSTAR S-A",
+        "500 S",
+        "500 SPORT",
+        "500 SPORT S-A",
+        "500 STAR",
+        "500 STAR S-A"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 31,
+      "registrations": 13890,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44ba7ca8e71626d50056",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "500",
+        "500 / 1.2 /",
+        "500 / 1.2 / CA",
+        "500 1.2 LOUNGE",
+        "500 12",
+        "500 12 CA",
+        "500 12 CA SPORT",
+        "500 12 SPORT",
+        "FIAT 500",
+        "FIAT 500 ? 500 ABARTH",
+        "FIAT 500 ? ABARTH 500",
+        "FIAT 500 / 500 ABARTH",
+        "FIAT FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 110963,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8958365aa1ffa75c3c3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 107,
+      "commercialNames": [
+        "500",
+        "500 C ABARTH",
+        "FIAT 500 ? 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 700,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3450389809abc69b83a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 118,
+      "commercialNames": [
+        "FIAT 500 ? 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6aa15937383d0597dec2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 121,
+      "commercialNames": [
+        "500",
+        "500 C ABARTH",
+        "FIAT 500 ? 500 ABARTH",
+        "FIAT 500 / 500 ABARTH",
+        "FIAT 500 I 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 715,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2af0e5006ec0ad587c85",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 132,
+      "commercialNames": [
+        "500",
+        "500 C ABARTH",
+        "FIAT 500 ? 500 ABARTH",
+        "FIAT 500 / 500 ABARTH",
+        "FIAT 500 I 500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 245,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f077734eb9274f8eed2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 606,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e828da947f6a9565995",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 33873,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8a1a69faaae35acf631",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": 59,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89f617689051cbced6a9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 74,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92842574f592dc072632",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 120,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6800297359940d0535df",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2666,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-133b8de7d835ba707de7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-989e965609842c097d07",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 52,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b31782d755a81faaac1f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 8,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-126def56b2d178a05118",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 47,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e982853eb3365b315c8c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff1de58ee83adc4b32a6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 57,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51d199ec88439880484c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9216507d6b9c774bbe4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-106e1a9ebcff6a2cb913",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef8dc4c639cbcb625ce1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1ffc7f6acbdea5a06a6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70cfcfd9b4ac7fb3b392",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-600f4894c640a2370901",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-615dd0653eb3110b648a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-156a78cf1b3a5c372821",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ce35578d40fa370f109",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e3c877e76d3b3785a0a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b927299570721759d3f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e1d2406a3746acb2a8b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78afd1f96c2a877bf996",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7890389a9a19fcce21d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7c95e09ee6c46df9195",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34c11a200854f288e643",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-319f64d06c8fc3aadb12",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdf02e96a8e6b4a74758",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2872c8a3c08f9f599be3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93246adf7db19c2336a5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efe5fe3bd11226159572",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec2ee2cb2cfdd0d9c800",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1e27d3823da16e34852",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37d65b4a1b62f358ae53",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd6137df2ef7336be3c1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac2966da79cb1b7856af",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 258,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dff26ef26da7c20e7a45",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6586ccfc9fcb92a39153",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad1619d1ccfb5b870d2a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e50e0275863ec3707079",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-effc40d557990e750033",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab6830a2c1a463eb5879",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25166207eda89572c899",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f35ec4b13ffe9e1e567",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db8f46e72d075d2f4da5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fcf3ad88562d5455c21",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b43cc5887ff1988e74f9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74b6231748709d25dd1b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 79,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bae919d87409025ce289",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-304e12a438e72beb6a5f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7688067dd9e9337f80fe",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13c20abceb952618566a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1272a917f66990def17",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1d9c26fe3fccc3356f9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2c2ac01101806cc3b3e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0879e2b1612a66315eb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04e4fbcc69b2b26344d8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ae642fea2de36ff4dfd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85b0bf3706632064b6dd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-953a94cdd7a6a0cb4d96",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a40c485ee0a5d9c992c2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ee5c40a0b430d29aa7e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a62cd9200589caf5f266",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 120,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-416076756a92a0b40a4c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 125,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-656ea6937321ccc27f8e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-778e0fbbc66a2c3bed76",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdc5b18cf0febe94fb9b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 135,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8071b0ce8eb839f0b29f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 136,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21d6a90e626ed890a27d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 137,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79ada7a1752fc44c1fcf",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 140,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5f711770efcde940bef",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 141,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2329c6535f838d6f094d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 142,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-552f0dfa6fc7726b7342",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 143,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7df749863d6f0442efd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 145,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3aa8a488ec0dbeee309",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 147,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5174048c24c830f05998",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cac25fc2d61b22168dc3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 165,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c2b93ce45f0737d947b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 170,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47c7696d124ed2910e79",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 173,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ea6d2ffe8ad5e2fb68a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 174,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65c839141b87c24ea882",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 180,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4957e301cbbb7a0d65fd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 187,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4f524ae7d71c16e4f98",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 190,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27ec45549133d0681df3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 195,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55086e3c3faf0c9302fb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 200,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c8b874df8fa1e442826",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 210,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c324fc7d8552edc114ca",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 221,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76b3d1e723b2ad3d58ea",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 243,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e397b072bc19701e5ea",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 250,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81996e28883a9df7f023",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 253,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25337df15bc0979594fa",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 265,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c8de521dbf3902110c6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 280,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9b60698cc4b5c9e94bd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 320,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-107fa028dde8989cd275",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 338,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcec433fe9c601426fed",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 404,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c92249f72721e1e85325",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 410,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5d38484b98fe8701513",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16d2a6c66e1df81d1e88",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23b74cfaad42a3812747",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 341,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-129a1910e65cb9be4dc8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500",
+      "modelId": "fiat/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 48,
+      "commercialNames": [
+        "500 HYBRID",
+        "FIAT 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 986,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27e48c88766630c48685",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 118,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54c0382f0ddf0df79387",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 99,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-534183f07cb71e874c60",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-96e52bbb8313f176f3ae",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 107,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1389,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4de39f3615ff2ac1a3c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 118,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dcd548affe83b3f3a9f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 120,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-856edb0ccfaafb443fc4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 121,
+      "commercialNames": [
+        "500 ABARTH",
+        "500 ABARTH - NEWTRON"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1705,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00397bcf594860941976",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 Abarth",
+      "modelId": "fiat/500-abarth",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 132,
+      "commercialNames": [
+        "500 ABARTH"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1224,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2b36a820505f92b5db0",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 E",
+      "modelId": "fiat/500-e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 43,
+      "commercialNames": [
+        "500 / E /",
+        "500 / E / 3+1",
+        "500 / E / C",
+        "500 E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 96,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e55eb4eaf9f9797c78b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 E",
+      "modelId": "fiat/500-e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "500E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71c30f7a18e46595d2b6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 E",
+      "modelId": "fiat/500-e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 87,
+      "commercialNames": [
+        "500 E",
+        "500E",
+        "FIAT 500E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 448,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7debefc7b946c9686aa5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 E",
+      "modelId": "fiat/500-e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "500E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-217022dbc35ab73ff579",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIAT 500 L",
+        "FIAT 500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49a2c85b30870b55173b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "500L",
+        "FIAT 500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 29390,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d06c3bbd9d1d2c55caf",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f9c4848662c98ed7f07",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "FIAT 500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e064744974ce42dc0c33",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "500L",
+        "FIAT 500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 5722,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e87a1bd996066c9b53a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a481a6d6527fe251d8b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7c0b78f53d4c3528abf",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "500L 120TH ANNIVERSARY",
+        "500L CITY CROSS",
+        "500L CROSS",
+        "500L URBAN"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 446,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31eddf35ce19cd634dc8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "500 L",
+        "500L",
+        "500L / 1.4 / 16V",
+        "500L 14 16V",
+        "FIAT 500 L",
+        "FIAT 500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 56764,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f15903fcfb3472eabf0c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 L",
+      "modelId": "fiat/500-l",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": 77,
+      "commercialNames": [
+        "FIAT 500L"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6eb69be6a032ce30e11",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "500X",
+        "500X / 1.3 / JTD",
+        "500X / 13 / JTD",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 77398,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a485843bdb6d80902a9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-790700c4a8236f025afc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "500X CROSS",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-368712d1ee502b33fe6c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2028,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd4e4fd9502e63d44db8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "500X",
+        "500X / 1.6 / JTD TCT CROSS",
+        "500X 16 JTD URBAN",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 22481,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-302a07a7c0beac004f38",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 26064,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c188bab1ae99c0edcef",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 110,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 170,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bc5fe9659293d9470d4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fca979105bc309ad40d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b5b56bfab69bc8e9e76",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "500X",
+        "500X 120TH ANNIVERSARY",
+        "500X CITY CROSS",
+        "500X CROSS",
+        "500X CROSS +",
+        "500X LOUNGE",
+        "500X S-DESIGN",
+        "500X SPORT",
+        "500X URBAN",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 3130,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f58cf124ecbae31fd994",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 3743,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15adc1700cd75644f4fa",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "500 X",
+        "500X",
+        "500X / 1.0",
+        "500X / 1.0 / CROSS",
+        "500X / 1.0 / SPORT",
+        "500X / 1.0 / URBAN",
+        "500X / 1.0 CROSS",
+        "500X / 10",
+        "500X / 10 / SPORT",
+        "500X 1.0",
+        "500X 10 CROSS",
+        "500X 10 URBAN",
+        "Fiat 500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT",
+        "Fiat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 108335,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a21d0807602d15034d4a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "500X 120TH ANNIVERSARY S-A",
+        "500X CITY CROSS S-A",
+        "500X CROSS S-A",
+        "500X LOUNGE S-A",
+        "500X S-DESIGN S-A",
+        "500X SPORT S-A"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1410,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e61d09f61504909c45ba",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 11,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 154,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-659b7a38ac3ac61e9048",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 88,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5c95edd04a196aa0f70",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "500 X",
+        "500X",
+        "500X 13 TCT CROSS",
+        "500X 13 TCT URBAN",
+        "FIAT 500 X",
+        "Fiat 500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT",
+        "Fiat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 27807,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e54e9880e4e02d66e5f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 111,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2203,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bab7d38ab3b9723a1aa",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b3ca94cc8f2e2c098a2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "500X URBAN"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7524188ebb30ae3d0dd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 499,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c482de35dea2fd5a3a3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 82,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e5767fa9d1ec43849fd",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "500X",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60d8f308726ae34ad42d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "commercialNames": [
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d028335d0a619a51ad1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8faf527b1ce9d10201e9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "500 X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b91cf05b5c5d31672a10",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "500X",
+        "500X / 1.5 /",
+        "500X / 1.5T / CA HYBRID",
+        "500X / 15 /",
+        "500X / 15 / SPORT",
+        "500X / 15T / CA HYBRID",
+        "500X 1.5",
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 20157,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33563915786774a1f5e6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1500,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIAT 500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50dac8e2b417f23e0796",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": 132,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb6908db8a187ccead5b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-233923c6915a9112ae62",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dacd4411629bc1e95071",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1224c1f5f0f112beff73",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8c41abbdc9c5e838262",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "500 X",
+      "modelId": "fiat/500-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "500X"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-535eff8c4b67bfe711aa",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "600 BB",
+        "600 DB"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0094e14eca9cbd21b9c4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "600 BB"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ce9b2f4564470145528",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 225,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92d1000371c35e05004a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 57,
+      "commercialNames": [
+        "600",
+        "600 ABARTH",
+        "FIAT 600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8de211ead3cc6bca8f75",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 610,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14bb297f4b29bbaec5d1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13158,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac391c0efcda71b5905a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 15,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-880cb3b326b86a37d3b5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca67a74b6d5da22dc0fb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "600",
+        "600 / 1.2 /",
+        "600 1.2"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 49205,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b90627317df0a4c8746",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "600",
+        "600 1.2"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11673,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a978d9fbeb32490ec411",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 174,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2185cc696547e28484ef",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7237291c4fd23d821109",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 731,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef8cdcf6b1deb980fbcb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 124,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42ed36dbfbf6def75199",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f54dd47b904b99482adf",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600",
+      "modelId": "fiat/600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "600"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ff6ffd99c922d9a3e78",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600 E",
+      "modelId": "fiat/600-e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "600E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c1cc0ed03d2221dd6c8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "600 E",
+      "modelId": "fiat/600-e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "600 E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8c3e50c4c26f206a7b2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "640",
+      "modelId": "fiat/640",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "640 SB"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-102826f06162ed97855d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "850",
+      "modelId": "fiat/850",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 843,
+      "powerKw": 35,
+      "commercialNames": [
+        "850 SPECIAL"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e91ddca2de6f84ce935",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 124 Spider",
+      "modelId": "fiat/abarth-124-spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "commercialNames": [
+        "ABARTH 124 SPIDER"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b962ffc13337cc0e1196",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 107,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e2a617b55e1de9c9c1a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 121,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7054eea3cb5d08abb47b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 132,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95d43a4ac9b03c417f6b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 99,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 377,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4af9a12f4a55da3120b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 107,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5920,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9193d1032c43178803fb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 118,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 421,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

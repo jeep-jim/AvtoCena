@@ -1,8 +1,6 @@
 import collections
 import json
 import subprocess
-import io
-import tarfile
 
 name = 'avtocena-release-c57dc8ccefeb'
 meta = json.loads(subprocess.check_output(['docker', 'inspect', name]))[0]
@@ -37,11 +35,3 @@ print('SLOW_READS', json.dumps(sorted(reads, key=lambda row: row.get('ms', 0), r
 print('FAILURE_STACKS', json.dumps(stacks[-160:]))
 live = json.loads(subprocess.check_output(['docker', 'inspect', 'avtocena-production']))[0]
 print('RETAINED_PRODUCTION', json.dumps({'image': live['Image'], 'running': live['State']['Running'], 'memoryLimit': live['HostConfig']['Memory'], 'nanoCpus': live['HostConfig']['NanoCpus']}))
-for chunk, columns in [('4053.js', [13337]), ('2279.js', [5609]), ('7272.js', [3158, 2937])]:
-    archive = subprocess.check_output(['docker', 'cp', name + ':/app/apps/web/.next/server/chunks/' + chunk, '-'])
-    with tarfile.open(fileobj=io.BytesIO(archive)) as files:
-        member = next(item for item in files.getmembers() if item.isfile())
-        assert member.size < 8_000_000
-        source = files.extractfile(member).read().decode()
-    for column in columns:
-        print('STACK_CODE', json.dumps({'chunk': chunk, 'column': column, 'code': source[max(0, column - 1400):column + 1400]}))

@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a8-2026-phev",
+  "entries": [
+    {
+      "modelId": "1314a66b16c62faefdaa7675",
+      "variantId": "9f537c963e903c1b45c20b1c",
+      "make": "Audi",
+      "model": "A8",
+      "year": 2026,
+      "trim": "60 TFSI e Quattro Tiptronic (340 kW)",
+      "expectedDigest": "a994d6c7a33fb8bdfbc614de4c597cbae0b78f4def06bc6ed5f0b99816bc970c",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "systemPowerKw": 340,
+        "motorPeakKw": 100,
+        "batteryKwh": 17.9,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/ie/assets/downloads/product-guides/my26/A8_MY26.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A8 MY2026: год подтверждён обложкой, PHEV60 TFSIe quattro tiptronic — стр.2/24; таблицы визуально проверены. Заводской технический лист340кВт (файл251215), стр.1: ДВС2995см³/250кВт/340PS, система340кВт/462PS, электромотор пик100кВт, АКБ17.9кВт·ч gross (14.4 net), quattro и8-ступенчатый гидротрансформаторный автомат. Подтверждены только указанные11 полей. Continuous electrical output60кВт НЕ объявлен30-минутной мощностью; power30MinKw не заполняется. Полная масса не перенесена из-за неустановленной длины кузова. Дополнительные опции в названии комплектации не подтверждались.",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/ie/assets/downloads/product-guides/my26/A8_MY26.pdf",
+            "edition": "MY2026",
+            "pages": [
+              1,
+              2,
+              24,
+              25
+            ],
+            "sha256": "d4b491970cd8a11c9afaf28714907dbf9d140c0f341ac2ad62671be1dc7d83bd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "drive",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1141/file_en/04c20499c359997cf95dd60eb22db309f783941f/eTD-Audi-A8-60-TFSIe-quattro-tiptronic-340kW_251215.pdf",
+            "edition": "Technical sheet filename251215",
+            "pages": [
+              1
+            ],
+            "sha256": "864a93bfc69d675b075b369e7127b204ccb34aeaffb6d515c0c463fe8caadc32",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "batteryKwh",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1314a66b16c62faefdaa7675",
+      "variantId": "5f609fc704ce5d8fac73bb91",
+      "make": "Audi",
+      "model": "A8",
+      "year": 2026,
+      "trim": "60 TFSIe qu tip*Air*HUD*Pano*Matrix*Virtual*N",
+      "expectedDigest": "d3e16c7c59fcc0c70f13b5c67f2054424df929cb3d39cf0ed873d5fb7af1ccdb",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "systemPowerKw": 340,
+        "motorPeakKw": 100,
+        "batteryKwh": 17.9,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/ie/assets/downloads/product-guides/my26/A8_MY26.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A8 MY2026: год подтверждён обложкой, PHEV60 TFSIe quattro tiptronic — стр.2/24; таблицы визуально проверены. Заводской технический лист340кВт (файл251215), стр.1: ДВС2995см³/250кВт/340PS, система340кВт/462PS, электромотор пик100кВт, АКБ17.9кВт·ч gross (14.4 net), quattro и8-ступенчатый гидротрансформаторный автомат. Подтверждены только указанные11 полей. Continuous electrical output60кВт НЕ объявлен30-минутной мощностью; power30MinKw не заполняется. Полная масса не перенесена из-за неустановленной длины кузова. Дополнительные опции в названии комплектации не подтверждались.",
+        "additionalSources": [
+          {
+            "url": "https://media.audi.com/is/content/audi/country/ie/assets/downloads/product-guides/my26/A8_MY26.pdf",
+            "edition": "MY2026",
+            "pages": [
+              1,
+              2,
+              24,
+              25
+            ],
+            "sha256": "d4b491970cd8a11c9afaf28714907dbf9d140c0f341ac2ad62671be1dc7d83bd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "drive",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1141/file_en/04c20499c359997cf95dd60eb22db309f783941f/eTD-Audi-A8-60-TFSIe-quattro-tiptronic-340kW_251215.pdf",
+            "edition": "Technical sheet filename251215",
+            "pages": [
+              1
+            ],
+            "sha256": "864a93bfc69d675b075b369e7127b204ccb34aeaffb6d515c0c463fe8caadc32",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "batteryKwh",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

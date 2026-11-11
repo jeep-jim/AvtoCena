@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a4l-2026-drive-mass",
+  "entries": [
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "make": "Audi",
+      "model": "A4L",
+      "variantId": "4675f0047702b30735be4fe2",
+      "year": 2026,
+      "trim": "2026款 200万辆悦享版 40 TFSI 时尚动感型",
+      "expectedRevision": "04240a9c-c707-433c-b85a-407bf48a4717",
+      "expectedDigest": "a2944871a632427bfda87ba5a0f3711c3dfaea8e58d22151afabe48af6882a18",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Audi A4L 200万辆悦享版, редакция2026.Q1, стр9/14: для40TFSI 时尚动感 и豪华动感 передний привод и разрешённая полная масса2080кг. Снаряжённая1640кг не используется как полная. Только два отсутствующих поля; год, исходная идентичность и мощности сохранены. 140кВт не является подтверждённой30-минутной мощностью.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "Audi China / 一汽–大众",
+            "selector": "Страница9, 驱动方式: 前轮驱动",
+            "edition": "2026.Q1",
+            "editionPage": 14
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "Audi China / 一汽–大众",
+            "selector": "Страница9, 允许总重量 [Kg]:2080",
+            "edition": "2026.Q1",
+            "editionPage": 14
+          }
+        }
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "make": "Audi",
+      "model": "A4L",
+      "variantId": "68352bf85e49c0cde9ea17ad",
+      "year": 2026,
+      "trim": "2026款 200万辆悦享版 40 TFSI 豪华动感型",
+      "expectedRevision": "04240a9c-c707-433c-b85a-407bf48a4717",
+      "expectedDigest": "1d2e2f31d36172ed44901fa716e8c2cac91908f0d5bd0ae4a7f63c8e36c0a5f9",
+      "patch": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Audi A4L 200万辆悦享版, редакция2026.Q1, стр9/14: для40TFSI 时尚动感 и豪华动感 передний привод и разрешённая полная масса2080кг. Снаряжённая1640кг не используется как полная. Только два отсутствующих поля; год, исходная идентичность и мощности сохранены. 140кВт не является подтверждённой30-минутной мощностью.",
+        "fieldSources": {
+          "drive": {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "Audi China / 一汽–大众",
+            "selector": "Страница9, 驱动方式: 前轮驱动",
+            "edition": "2026.Q1",
+            "editionPage": 14
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a4/%E5%A5%A5%E8%BF%AAA4L%E6%8A%98%E9%A1%B5.pdf",
+            "sourceSha256": "0d5b2b3b6525fcb7668da9cf7dfbde9e16206ae899c42dd39ff2b42819ed546b",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "Audi China / 一汽–大众",
+            "selector": "Страница9, 允许总重量 [Kg]:2080",
+            "edition": "2026.Q1",
+            "editionPage": 14
+          }
+        }
+      }
+    }
+  ]
+}

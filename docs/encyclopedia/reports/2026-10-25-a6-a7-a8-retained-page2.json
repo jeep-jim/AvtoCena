@@ -1,0 +1,356 @@
+{
+  "checkedAt": "2026-10-25T02:03:26.355100+00:00",
+  "workflow": 40152017239,
+  "artifact": 12582673013,
+  "artifactSha256": "8cab35fbbd0f116b4ff4cfc2d4457e95efdb279ff80911e5c47bc0a618932025",
+  "snapshot": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+  "checkpoint": {
+    "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
+    "saved": 8403,
+    "visited": 13045,
+    "pending": 253,
+    "updatedAt": "2026-10-22T19:38:18.897Z",
+    "failures": [
+      {
+        "at": "2026-10-22T09:14:03.805Z",
+        "category": "unclassified"
+      },
+      {
+        "at": "2026-10-22T19:38:18.897Z",
+        "category": "redirect_outside_catalog"
+      }
+    ]
+  },
+  "reviewedRows": 44,
+  "reviewedTotal": 108,
+  "noOverlap": true,
+  "groupsOnPage": {
+    "audi/a6": 32,
+    "audi/a7": 12
+  },
+  "groupsAllPages": {
+    "audi/a6": 74,
+    "audi/a7": 34,
+    "audi/a8": 0
+  },
+  "remainingAfterPage": 0,
+  "nextAfterDigest": "fdc946246520a2a8d835f06df587e0dc8c661ede6528002566ad190f42a3b15d",
+  "supplierRequests": 0,
+  "storageWrites": 0,
+  "verifiedFieldsAdded": 0,
+  "findings": [
+    "All108 retained2024 rows reviewed. No A8 rows have an eligible2024 period in this saved selection; this does not imply no A8 model or data.",
+    "FWD/AWD conflicts remain for A6 1984cc195/180/165kW and1968cc150kW; A7 1984cc180kW also has both drives.",
+    "Keep2994/2995 displacement variants and China sedan/Sportback distinction; no blind corrections."
+  ],
+  "evidenceRefs": [
+    {
+      "recordDigest": "a71df0a76f94ca9b6f72669d94bd4f17b9a8cb3b18e2deebfb5192dfbdcf000c",
+      "contentDigest": "60b2a2307339b88ca9054830d77e8d7d3740af9ffcced0d5b2a7738cbced023d",
+      "url": "https://www.drom.ru/catalog/audi/a6/512941/",
+      "retrievedAt": "2026-10-22T15:04:45.038Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "a8c5313715252ccc0be7a4b4ee5e4143919b7ca3afdcfd63c8ddeae6ff362c7a",
+      "contentDigest": "a1d4bd620281aad6e832664a09e866aac90514b24f1c0ff879090cc6c212e7f6",
+      "url": "https://www.drom.ru/catalog/audi/a6/512925/",
+      "retrievedAt": "2026-10-22T15:04:00.916Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "a98c192429aeae23209dd3284167007c5c64167aed8c0cd377b233e2c8249e3e",
+      "contentDigest": "4f23346f69542037e6836a26f3da95e1ffaa09371c86fb69e8e15baa425c03d2",
+      "url": "https://www.drom.ru/catalog/audi/a6/549326/",
+      "retrievedAt": "2026-10-22T15:00:15.868Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "ab994b605cd7bce1b6a6305d12481c620a68510dbd0346682aaa0b1b8308817c",
+      "contentDigest": "fbd6ff1093d541c57687b7afaf21578c9a2ed1d42b981c728533958f91d9c76d",
+      "url": "https://www.drom.ru/catalog/audi/a7/561391/",
+      "retrievedAt": "2026-10-22T15:19:32.114Z",
+      "period": "2022 - 2024"
+    },
+    {
+      "recordDigest": "aecd7ab5afea8f10d70a161eacab3977c71e713ff9806d679d6b0c49bbf1a7f7",
+      "contentDigest": "105180fdf33235a8cfe16cb27f152078bcd453ce2ec4d93eab3ba1fcafff5b46",
+      "url": "https://www.drom.ru/catalog/audi/a6/512908/",
+      "retrievedAt": "2026-10-22T15:03:08.612Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "b008f6faf19640727d08975a9491cacba048d9e7fe6bb95cf99ad93f0569e2a5",
+      "contentDigest": "aae83dbdc50f4fa0d87e8e21fc8adf3ab558fe7686a317d4e1acabb2d08a3351",
+      "url": "https://www.drom.ru/catalog/audi/a6/512949/",
+      "retrievedAt": "2026-10-22T15:05:12.993Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "b0c1013ca304dbec3023e6d49ddf7eeb902f8fb0a2e8caefc18f8c51527efd56",
+      "contentDigest": "4e5fd20836ce9328fde3568b4df30d8aa311f4629a3d82ea35ba454cc1090924",
+      "url": "https://www.drom.ru/catalog/audi/a6/512913/",
+      "retrievedAt": "2026-10-22T15:03:25.435Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "b1a8e09e1b49064243908395c97ec97a25a2cb7952442e26cc45d6f8ed3b77e8",
+      "contentDigest": "e8376c7215ea6d0f48442384b7036f9d9c7684de2f9c9095c59b6497056ded22",
+      "url": "https://www.drom.ru/catalog/audi/a6/549323/",
+      "retrievedAt": "2026-10-22T15:00:12.786Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "b689022336ef9473f13ad084ddd46d6161e7bb527ac9aca7e85a85241dd1701f",
+      "contentDigest": "20dd6eb45917475319c1fc94ed8c4aff86fa8e4215feee49b90586f99a3742b7",
+      "url": "https://www.drom.ru/catalog/audi/a6/512923/",
+      "retrievedAt": "2026-10-22T15:03:54.668Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "bbf15502669eba49f71b24a11cc65aca5b928c5ee1b1c56353625c62f01853aa",
+      "contentDigest": "0c3ca66400fb8ff1f34428bbac7c352dbdae5b5b1b2a3e46aa8c66f7c9e103c6",
+      "url": "https://www.drom.ru/catalog/audi/a6/549329/",
+      "retrievedAt": "2026-10-22T15:00:25.288Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "be882a492000fb77dc43d6ad5c3c88299c39851c72a61fa16f40dd582bbcc94b",
+      "contentDigest": "82246667a2edeac283a44ff6876b6082d456a9091e139439846f0e9f59f94359",
+      "url": "https://www.drom.ru/catalog/audi/a6/549334/",
+      "retrievedAt": "2026-10-22T15:00:34.250Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "c60acac4ea925fa2f70f4a94da497920406c921432bfff7607d997103003ef36",
+      "contentDigest": "8d6329f6d0465e5d6994af7b08be0d0c378e699a8e8711852914ff31d98627b3",
+      "url": "https://www.drom.ru/catalog/audi/a7/561414/",
+      "retrievedAt": "2026-10-22T15:20:26.454Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "c6d9e0729b2147b5b941c556043cfdaea033baaa88d05fbe146b92e6792b326b",
+      "contentDigest": "13f652fbb1d809356947b22dcf579d0d9a6d7c26180d3edda0c410eecca87586",
+      "url": "https://www.drom.ru/catalog/audi/a6/549331/",
+      "retrievedAt": "2026-10-22T15:00:30.418Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "c7c684c05ef68c2b1b69a87bd5a40e1cd4516a3058eba713cb54a1207a8bbe10",
+      "contentDigest": "6997d7f0ba9207dcfe417500b81e2ca7889c6fcaea440ff806173f0d6f3cea61",
+      "url": "https://www.drom.ru/catalog/audi/a7/561418/",
+      "retrievedAt": "2026-10-22T15:20:41.829Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "cb537ea82ec8ad03be35000f34425feedadcae2f1b95888652e524a7db82e7df",
+      "contentDigest": "77a2a0f57e0c8de0f4c7da60b960a097f9bd5c7459e34fd3b75a15ac8f982a66",
+      "url": "https://www.drom.ru/catalog/audi/a6/549683/",
+      "retrievedAt": "2026-10-22T15:02:58.954Z",
+      "period": "октябрь 2023 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "cb87c57cf93ffc388618a6e895cb549ca31a6d104e2976af6024c57cca23a009",
+      "contentDigest": "8fd64787bce73b95d03d1e8830c066a452649fe68074212eca6550d2d7097d60",
+      "url": "https://www.drom.ru/catalog/audi/a6/549671/",
+      "retrievedAt": "2026-10-22T15:02:33.590Z",
+      "period": "октябрь 2023 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "cd7601075b6a21393c22157d7d5be99a9fd9a188d40e50f1a10b22b810b13113",
+      "contentDigest": "39f36136706f6fd442d3285d1abc4bd69f961310056edd82d3481db65202ba0c",
+      "url": "https://www.drom.ru/catalog/audi/a6/512937/",
+      "retrievedAt": "2026-10-22T15:04:32.731Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "cfc08d1b46990add6aacee24c3420d16ba2ea24186318b7fdc0dcdcd5c3c97b2",
+      "contentDigest": "1ea79d92a0632469aebe0808d8504b8b1e1de19b138e7ff2b574377868212c8d",
+      "url": "https://www.drom.ru/catalog/audi/a7/561408/",
+      "retrievedAt": "2026-10-22T15:20:15.991Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "d0977529a74694bff6f1d25e7543efc2d577de26968a0e61f2e439e2eb0aad0a",
+      "contentDigest": "7177c06314b619f43ffb8b60ad53919ed55235d510cc23930e15ab4fa3e6148d",
+      "url": "https://www.drom.ru/catalog/audi/a7/561419/",
+      "retrievedAt": "2026-10-22T15:20:46.083Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "d118fcc1aff28c7ab9e5c3122169dded514595b5081d8ae02f8b4de9fdd7f872",
+      "contentDigest": "07c5f2b6b6e3f7a6fb2cbacd40a1d7a806ecf9796c6b5e3ac7504483b7283dca",
+      "url": "https://www.drom.ru/catalog/audi/a7/561386/",
+      "retrievedAt": "2026-10-22T15:19:28.677Z",
+      "period": "2022 - 2024"
+    },
+    {
+      "recordDigest": "d157933ca848ce89d29289d224122f4147e4b163b8355b2f41373982f1477f05",
+      "contentDigest": "ac5d344783456a27eb7ac375e1b84c84a2b9af6181af69ba3e771bcbc1ab974c",
+      "url": "https://www.drom.ru/catalog/audi/a6/549370/",
+      "retrievedAt": "2026-10-22T15:01:32.896Z",
+      "period": "2022 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "d4520af3dd48a1ef8095a0cc7d1e76bfc3bcbedbb4b04363f9c274d09d00559f",
+      "contentDigest": "22613798007a6a9d9ff5a61a31d8a2c5bede87be01ef3eb80c3ce5656488c224",
+      "url": "https://www.drom.ru/catalog/audi/a6/549335/",
+      "retrievedAt": "2026-10-22T15:00:38.184Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "d4bf9eeae8c0c70423cae5354fad365479afc9874f7e1824ad163f1494ea5130",
+      "contentDigest": "4cce06669c6ab391ba9e5d14e4777f025acc5a4047800d0eb6090808f4af19cb",
+      "url": "https://www.drom.ru/catalog/audi/a6/512935/",
+      "retrievedAt": "2026-10-22T15:04:16.823Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "d4f3aa33ac87db5333d1926092b13979593a1761b48712577bd0ae444a75f2e9",
+      "contentDigest": "5fcb5ede1151e72f6b4e92a22ac5646340b4a5c3b3c8489292431b04400ed7ce",
+      "url": "https://www.drom.ru/catalog/audi/a6/512909/",
+      "retrievedAt": "2026-10-22T15:03:12.699Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "d67299a8322d0462f617e97b3cea4546056f7b424830d7ebeda18b3605172165",
+      "contentDigest": "718dda6a7ab1d03fe5994d4445508d6aafac6d89b79c47efe12dd949834d2fbd",
+      "url": "https://www.drom.ru/catalog/audi/a6/549376/",
+      "retrievedAt": "2026-10-22T15:01:48.268Z",
+      "period": "2022 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "d6bd4c17b2c0033fdb026f44cc43f00968025d2204e5d99cce5acc626f2bd415",
+      "contentDigest": "5e2b9e814eafe95c988789cdc52e3e57d793e1e46989f962dde1f3376ebe1fc1",
+      "url": "https://www.drom.ru/catalog/audi/a6/512942/",
+      "retrievedAt": "2026-10-22T15:04:48.214Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "d7755a39e6fb21a6ed2f9c2f9498aa3ad85f7de7b1fe0acfead45ff68d05b889",
+      "contentDigest": "39496d1ab8f7025a86534a3e12aef59a2d83cfbd6d1aba0fd74c1da1eef3a8e8",
+      "url": "https://www.drom.ru/catalog/audi/a6/512922/",
+      "retrievedAt": "2026-10-22T15:03:51.778Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "d988cd206ad928ec2c58079fb2545731abc5a25934c05db313b372ec989084cb",
+      "contentDigest": "c7fd3317f46bde2583bbee77b75741054e81779a1f874891c3d0ea09cce07a34",
+      "url": "https://www.drom.ru/catalog/audi/a6/549674/",
+      "retrievedAt": "2026-10-22T15:02:38.268Z",
+      "period": "октябрь 2023 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "da77756f02a22f0b4a0659b6e1c915ef5d56af80dc25fce9374e11355c9544dd",
+      "contentDigest": "c3c20a347084e6a8054431aea6417e44f6373196138bc220144b32686043ec25",
+      "url": "https://www.drom.ru/catalog/audi/a7/555620/",
+      "retrievedAt": "2026-10-22T15:18:10.287Z",
+      "period": "2024 - 2025"
+    },
+    {
+      "recordDigest": "dbe3438f870b72bee8dce1b353ed77ea2aa473bbb32fb1ca5d5baabc00defe28",
+      "contentDigest": "4fe2d519e3d18c4b870e340c046cf903ae2fea809ee9e6cb28469351dd64a523",
+      "url": "https://www.drom.ru/catalog/audi/a6/549363/",
+      "retrievedAt": "2026-10-22T15:01:03.831Z",
+      "period": "2023 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "dc1a0639df57b284c168d3ea8ef22a8a83a720d1115f869d6a7b8307a76cf3b6",
+      "contentDigest": "95d2d43f3c9f4a8781b7f3c2b1f558745ebaa3395f75bd7f17cae3277576a6c5",
+      "url": "https://www.drom.ru/catalog/audi/a7/561417/",
+      "retrievedAt": "2026-10-22T15:20:36.594Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "e31c66df0b20042f9a01448b81191cc30620b05fa0a503f31ffe5cd0b5f7f7e2",
+      "contentDigest": "4d46e86437ecef50f1f6256207f88513fd9022be80c7b7e94cdd8b793ccf5091",
+      "url": "https://www.drom.ru/catalog/audi/a6/549251/",
+      "retrievedAt": "2026-10-22T14:58:56.326Z",
+      "period": "2020 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "e3d3ca35ec3cdea859b1bc3b2010d78d735c98c34a324e9041acc4d38c3b69ac",
+      "contentDigest": "761977b558db323f006d012a32e24a42b090b33f3630d16ce2889c21f44b5ae9",
+      "url": "https://www.drom.ru/catalog/audi/a6/549680/",
+      "retrievedAt": "2026-10-22T15:02:51.939Z",
+      "period": "октябрь 2023 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "ea042afbb0f0c9bb804b758a600665e48ad9f0338831a98616cc032fdee9e5a7",
+      "contentDigest": "ccac6703d84acf00d101bd9b027a07406e70772d82c8434f38f397d2f0ed088e",
+      "url": "https://www.drom.ru/catalog/audi/a6/549358/",
+      "retrievedAt": "2026-10-22T15:00:44.725Z",
+      "period": "2023 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "ea609836b0ca60ae99aef6711b21dc171b8bd4ac4d3489f40374704e412b4554",
+      "contentDigest": "f92ea3cbf0aa97b776f4b3798a6af4e4d2f675c645e63f6d1f742d9a7b445ec5",
+      "url": "https://www.drom.ru/catalog/audi/a6/549369/",
+      "retrievedAt": "2026-10-22T15:01:26.869Z",
+      "period": "2022 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "ef26c486d8c400ccd21cc8ad0b02ea79586b2344f26e37251a7974b24a88fcfe",
+      "contentDigest": "9001a6544ca386ccc9c180bb38235b5e8dafadba5949b4b8ec92af465fdeafc8",
+      "url": "https://www.drom.ru/catalog/audi/a6/512938/",
+      "retrievedAt": "2026-10-22T15:04:35.726Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "eff3836cc60b5981e78424f1a5053a79cd68c09ebcad227c0223f40298e8837a",
+      "contentDigest": "5f353a4786944da725af4fc6186cc043b2bd4683edd5104c42686a4bb0382e9c",
+      "url": "https://www.drom.ru/catalog/audi/a7/561416/",
+      "retrievedAt": "2026-10-22T15:20:30.108Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "f06e15a54edf11334e63122dae3812c66270cfd47cd945ed65ed90145343a2e3",
+      "contentDigest": "c7a6e647ab49f918b9f87488f3c33210e6fe2435f4ae316a2a0c5e3feccea131",
+      "url": "https://www.drom.ru/catalog/audi/a6/549327/",
+      "retrievedAt": "2026-10-22T15:00:20.166Z",
+      "period": "ноябрь 2021 - ноябрь 2024"
+    },
+    {
+      "recordDigest": "f3e702d23f595644fef45ae23d3cfe5364f9642ae028b54f79fbffb99dff81b1",
+      "contentDigest": "a12942ddbc2754108d68f7671397fe9e93414b26c6fc8ea12fca128c5d423e41",
+      "url": "https://www.drom.ru/catalog/audi/a7/561384/",
+      "retrievedAt": "2026-10-22T15:19:21.957Z",
+      "period": "2022 - 2024"
+    },
+    {
+      "recordDigest": "f47464ee7f154db2d83c3e465df4b1f30e57acc6aed1c76b2d83266c1f6176e4",
+      "contentDigest": "7d751f5a4e4a4b2ca4e59ec2ed45b0733dd212027efd9462faa1a53d19859f5e",
+      "url": "https://www.drom.ru/catalog/audi/a6/512880/",
+      "retrievedAt": "2026-10-22T15:06:54.848Z",
+      "period": "ноябрь 2024 - октябрь 2025"
+    },
+    {
+      "recordDigest": "f6f539bd1de11564772754fd363d4c3e3b7c51574545414380de55b2754d8549",
+      "contentDigest": "8275411bc298e2c7cb43c1709994ebcbb180a107cd34f3c1018eca72b5512fc2",
+      "url": "https://www.drom.ru/catalog/audi/a7/561400/",
+      "retrievedAt": "2026-10-22T15:19:59.227Z",
+      "period": "2023 - 2024"
+    },
+    {
+      "recordDigest": "f722f2e73f72cf6bcdfc20327d61de72486da36259a776db2cf78e64c6248743",
+      "contentDigest": "cbe54358295b87c33d228059a3eadb8dc42913135bd8555ea53c9f22e5b6d649",
+      "url": "https://www.drom.ru/catalog/audi/a6/512907/",
+      "retrievedAt": "2026-10-22T15:03:05.089Z",
+      "period": "2023 - 2025"
+    },
+    {
+      "recordDigest": "f7ce9b39cbcb63ac3555a62dd223aadefc235f9d98fe14c73c1bdeddf031b2b0",
+      "contentDigest": "18b4e9731cd84c3bce2002f9924856051fbdcd42244ea214dba6ac0594eea07c",
+      "url": "https://www.drom.ru/catalog/audi/a7/555628/",
+      "retrievedAt": "2026-10-22T15:18:40.407Z",
+      "period": "2024 - 2025"
+    },
+    {
+      "recordDigest": "fdc946246520a2a8d835f06df587e0dc8c661ede6528002566ad190f42a3b15d",
+      "contentDigest": "b1add164d92e3f73348eee9c738285d179e03113baed5d7cf093156b73e6b21b",
+      "url": "https://www.drom.ru/catalog/audi/a6/549667/",
+      "retrievedAt": "2026-10-22T15:02:21.933Z",
+      "period": "2022 - ноябрь 2024"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+name: REG storage — read-only size breakdown
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5 * * *"
+  push:
+    branches: [main]
+    paths: ['.github/workflows/reg-storage-growth.yml']
+permissions:
+  contents: read
+concurrency:
+  group: reg-storage-growth-audit
+  cancel-in-progress: false
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - run: npm ci
+      - name: List metadata only; no object reads or deletion
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+        run: node --import tsx .github/diagnostics/reg-storage-growth.mjs
+      - name: Save capacity report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: storage-capacity
+          path: storage-capacity.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Read server disk and memory capacity
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import shutil,json
+          usage=shutil.disk_usage('/opt/avtocena')
+          percent=100*usage.used/usage.total
+          print(json.dumps({'serverDisk':{'totalBytes':usage.total,'usedBytes':usage.used,'freeBytes':usage.free,'usedPercent':round(percent,2)}}))
+          if percent>=80: print('::warning::Server disk usage above 80%; review retention or increase disk capacity')
+          with open('/proc/meminfo') as stream:
+              memory={line.split(':')[0]:int(line.split()[1])*1024 for line in stream if line.startswith(('MemTotal:','MemAvailable:'))}
+          print(json.dumps({'serverMemory':memory}))
+          PY

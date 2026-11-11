@@ -1,0 +1,26 @@
+name: Diagnose Che168 rejected rows
+on:
+  workflow_dispatch:
+  # Live source diagnostics require an explicit manual run.
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Inspect bounded API sample without production writes
+        env:
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          # Reproduce the failed post-snapshot replay without downloading /offers.
+          CHE168_DIAGNOSE_CHANGE_ID: '11957335'
+          CHE168_DIAGNOSE_404: '1'
+          CHE168_DIAGNOSE_SNAPSHOT_AT: '2026-10-08T20:26:33.000Z'
+          CHE168_DIAGNOSE_SCAN_PAGES: '0'
+        run: node --import tsx scripts/catalog-auto-api-che168-diagnose.mjs

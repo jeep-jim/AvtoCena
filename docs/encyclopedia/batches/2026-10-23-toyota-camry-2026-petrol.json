@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-camry-2026-petrol",
+  "entries": [
+    {
+      "modelId": "76f504335c4103fa35725836",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2026,
+      "trim": "Toyota CAMRY 2.0 GVP LUXURY AT",
+      "variantId": "1a1e65af3e68c70e93aae593",
+      "expectedDigest": "59041fa1c69ddcb6e85732962acbbb82aa217c40d710763ff264516c0a389e2c",
+      "patch": {
+        "engineCc": 1987,
+        "powerKw": 127,
+        "icePowerKw": 127,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "drive": "fwd",
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица2026款凯美瑞规格配置表,стр.1: бензиновые китайские Camry2.0E精英版 и2.0GVP豪华版,1987см³,127кВт при6600об/мин,переднийпривод,седан. Существующая экспортная2.0GVP Luxury2026 вUAE совпадает по точномуназваниюкомплектации и бензиновомутопливу; независимые заводскиеданные, не мощность/объём продавца. Китайские названия переведены, originalTrim сохранён. Для китайских строк округлённые127.24кВт заменены прямыми заводскими127кВт, исходные173PS сохранены. Не переносить на2.0HGVPгибрид,2.5илидругиегоды."
+      }
+    },
+    {
+      "modelId": "76f504335c4103fa35725836",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2026,
+      "trim": "2.0E 精英版",
+      "variantId": "728242413feca626cfc404b3",
+      "expectedDigest": "6b61c54ccdf5fcfed7b99262914018937751f65b6555e112a9f65b2f98c46bff",
+      "patch": {
+        "trim": "2.0E Elite Edition",
+        "engineCc": 1987,
+        "powerKw": 127,
+        "icePowerKw": 127
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица2026款凯美瑞规格配置表,стр.1: бензиновые китайские Camry2.0E精英版 и2.0GVP豪华版,1987см³,127кВт при6600об/мин,переднийпривод,седан. Существующая экспортная2.0GVP Luxury2026 вUAE совпадает по точномуназваниюкомплектации и бензиновомутопливу; независимые заводскиеданные, не мощность/объём продавца. Китайские названия переведены, originalTrim сохранён. Для китайских строк округлённые127.24кВт заменены прямыми заводскими127кВт, исходные173PS сохранены. Не переносить на2.0HGVPгибрид,2.5илидругиегоды."
+      }
+    },
+    {
+      "modelId": "76f504335c4103fa35725836",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2026,
+      "trim": "2.0GVP 豪华版",
+      "variantId": "a15ed711a2c977e464aef257",
+      "expectedDigest": "3d145313bd2814d3fc2d0de31489b069c54c5939b4d0a3fc33ee5c507e82035b",
+      "patch": {
+        "trim": "2.0GVP Luxury Edition",
+        "engineCc": 1987,
+        "powerKw": 127,
+        "icePowerKw": 127
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/camry.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица2026款凯美瑞规格配置表,стр.1: бензиновые китайские Camry2.0E精英版 и2.0GVP豪华版,1987см³,127кВт при6600об/мин,переднийпривод,седан. Существующая экспортная2.0GVP Luxury2026 вUAE совпадает по точномуназваниюкомплектации и бензиновомутопливу; независимые заводскиеданные, не мощность/объём продавца. Китайские названия переведены, originalTrim сохранён. Для китайских строк округлённые127.24кВт заменены прямыми заводскими127кВт, исходные173PS сохранены. Не переносить на2.0HGVPгибрид,2.5илидругиегоды."
+      }
+    }
+  ]
+}

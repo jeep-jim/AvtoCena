@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-22T10:19:07.761807+00:00",
+  "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+  "mode": "readback",
+  "variants": 3,
+  "fields": 30,
+  "passed": true,
+  "rows": [
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "2c43fa2db097b77b9a2d449b",
+      "year": 2013,
+      "revision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "fields": 10,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "91a37c45afb89ec0ba5274d5",
+      "year": 2013,
+      "revision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "fields": 10,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "9311182529b04bc6a35687e2",
+      "year": 2013,
+      "revision": "c40c850d-2a8d-4a65-8247-e65c7c6c2c24",
+      "fields": 10,
+      "historyPassed": true,
+      "sourcePassed": true
+    }
+  ]
+}

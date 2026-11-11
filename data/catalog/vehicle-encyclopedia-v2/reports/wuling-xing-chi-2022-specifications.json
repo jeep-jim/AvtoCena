@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-18",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 2,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 2
+  },
+  "modelId": "wuling/xingchi",
+  "canonicalName": "Xing Chi",
+  "generationIds": [
+    "wuling/xingchi/launch-2022"
+  ],
+  "variantIds": [
+    "wuling/xingchi/launch-2022/1-5l-6mt-freedom",
+    "wuling/xingchi/launch-2022/1-5l-cvt-play"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "exactManufacturerValuesOnly": true,
+    "simulatedCvtStepsNotStoredAsGears": true,
+    "horsepowerNotCalculated": true,
+    "remainingLaunchGradesQueued": 4,
+    "automaticPublicationReady": false
+  }
+}

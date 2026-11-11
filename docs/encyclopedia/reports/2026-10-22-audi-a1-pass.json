@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T02:59:28.205619+07:00",
+  "model": "Audi A1",
+  "readVariantsAllYears": 394,
+  "researchedYear": 2025,
+  "inspectedVariantsForYear": 67,
+  "savedVariants": 30,
+  "confirmedFieldAssertions": 270,
+  "retryVariantsInResearchedYear": 37,
+  "remainingYearVariants": 327,
+  "batch": "research-2026-10-22-audi-a1-2025",
+  "commit": "73c367124d2cf11c57c1696a70e1c3a3c6374913",
+  "workflowRun": 39666162833,
+  "job": 119451658848,
+  "status": "success",
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a1.json",
+  "readbackReport": "docs/encyclopedia/reports/2026-10-22-audi-a1-2025-readback.json",
+  "integration": {
+    "status": "not_implemented",
+    "visitorRequestSearchOrSyncAdded": false
+  },
+  "notes": [
+    "Все30 patch/evidence/status повторно прочитаны после SUCCESS.",
+    "270 полевых подтверждений включают уже наблюдавшиеся значения,не только заполнение пустых ячеек.",
+    "Ни одна строка не повышена целиком до verified."
+  ]
+}

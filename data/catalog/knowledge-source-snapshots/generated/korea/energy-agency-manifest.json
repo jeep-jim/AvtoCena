@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "korea-energy-agency-efficiency",
+  "authority": "government_efficiency",
+  "fetchedAt": "2026-08-22T10:47:52.579Z",
+  "status": "complete",
+  "page": "https://min24.energy.or.kr/trans_hp/AHP/HP_03/HP_03_01_010.do",
+  "contentUrl": "https://min24.energy.or.kr/trans_hp/cmn/AHP_L.do",
+  "collection": {
+    "method": "official_live_catalog_query",
+    "releaseYearFrom": 2020,
+    "releaseYearTo": 2026
+  },
+  "raw": {
+    "bytes": 5198726,
+    "sha256": "f1ca0bce599d0b8169fe0f166b899fc7eff985b58ba809e39af6b2b611ff16f1",
+    "encoding": "utf-8-json",
+    "storedInGit": false
+  },
+  "counts": {
+    "models": 3370,
+    "responseRows": 3370,
+    "byReleaseYear": {
+      "2020": 452,
+      "2021": 547,
+      "2022": 495,
+      "2023": 537,
+      "2024": 659,
+      "2025": 451,
+      "2026": 229
+    }
+  },
+  "files": [
+    "energy-agency-models-0001.json",
+    "energy-agency-models-0002.json",
+    "energy-agency-models-0003.json",
+    "energy-agency-models-0004.json"
+  ]
+}

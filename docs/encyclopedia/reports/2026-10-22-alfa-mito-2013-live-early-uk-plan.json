@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-10-22T10:16:47.308Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+  "sourceRevision": "7f7bdaab-36e9-471d-86e0-bb5164cc8da6",
+  "variants": 3,
+  "newVariants": 3,
+  "fields": 30,
+  "changes": [
+    {
+      "variantId": "2c43fa2db097b77b9a2d449b",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "91a37c45afb89ec0ba5274d5",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "9311182529b04bc6a35687e2",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    }
+  ]
+}

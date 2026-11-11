@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 13,
+    "newModels": 13,
+    "officialManufacturerSources": 13,
+    "newMlitWorkbookSources": 3,
+    "totalNewSources": 16,
+    "modelsWithMlitIntersection": 13
+  },
+  "reviewed": [
+    {
+      "id": "nissan/nv100-clipper-rio",
+      "canonicalName": "NV100 Clipper Rio",
+      "officialSourceId": "src-nissan-nv100-clipper-rio-japan-archive-2026",
+      "exactSourceNames": [
+        "NV100クリッパー リオ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "nissan/clipper-rio",
+      "canonicalName": "CLIPPER RIO",
+      "officialSourceId": "src-nissan-clipper-rio-japan-current-2026",
+      "exactSourceNames": [
+        "クリッパーリオ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "nissan/wingroad",
+      "canonicalName": "WINGROAD",
+      "officialSourceId": "src-nissan-wingroad-japan-archive-2026",
+      "exactSourceNames": [
+        "ウイングロード",
+        "ウィングロード"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "id": "nissan/sylphy",
+      "canonicalName": "SYLPHY",
+      "officialSourceId": "src-nissan-sylphy-japan-archive-2026",
+      "exactSourceNames": [
+        "シルフィ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "nissan/dayz-roox",
+      "canonicalName": "DAYZ ROOX",
+      "officialSourceId": "src-nissan-dayz-roox-japan-archive-2026",
+      "exactSourceNames": [
+        "デイズ ルークス"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "nissan/moco",
+      "canonicalName": "MOCO",
+      "officialSourceId": "src-nissan-moco-japan-archive-2026",
+      "exactSourceNames": [
+        "モコ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015
+      ]
+    },
+    {
+      "id": "nissan/lafesta",
+      "canonicalName": "Lafesta",
+      "officialSourceId": "src-nissan-lafesta-japan-archive-2026",
+      "exactSourceNames": [
+        "ラフェスタ ハイウェイスター",
+        "ラフェスタ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "mazda/biante",
+      "canonicalName": "Biante",
+      "officialSourceId": "src-mazda-biante-japan-archive-2026",
+      "exactSourceNames": [
+        "ビアンテ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "mazda/premacy",
+      "canonicalName": "Premacy",
+      "officialSourceId": "src-mazda-premacy-japan-archive-2026",
+      "exactSourceNames": [
+        "プレマシー"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "mazda/verisa",
+      "canonicalName": "Verisa",
+      "officialSourceId": "src-mazda-verisa-japan-archive-2026",
+      "exactSourceNames": [
+        "ベリーサ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016
+      ]
+    },
+    {
+      "id": "suzuki/mr-wagon",
+      "canonicalName": "MR Wagon",
+      "officialSourceId": "src-suzuki-mr-wagon-japan-archive-2026",
+      "exactSourceNames": [
+        "MRワゴン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016
+      ]
+    },
+    {
+      "id": "suzuki/kizashi",
+      "canonicalName": "Kizashi",
+      "officialSourceId": "src-suzuki-kizashi-japan-archive-2026",
+      "exactSourceNames": [
+        "キザシ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016
+      ]
+    },
+    {
+      "id": "suzuki/splash",
+      "canonicalName": "Splash",
+      "officialSourceId": "src-suzuki-splash-japan-archive-2026",
+      "exactSourceNames": [
+        "スプラッシュ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+name: Verify price, delivery and inventory corrections
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/lib/catalog/ajes-source-url.ts'
+      - 'apps/web/lib/catalog/ajes-offer.ts'
+      - 'apps/web/lib/catalog/rates.ts'
+      - 'apps/web/lib/catalog/city-delivery.ts'
+      - 'apps/web/lib/catalog/heavy-vehicle-families.ts'
+      - 'apps/web/lib/catalog/inventory-admission.ts'
+      - 'tests/catalog-official-rate.test.ts'
+      - '.github/workflows/verify-ajes-source-fields.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-source-url.test.ts tests/ajes-stock-feed.test.ts tests/ajes-japan-feed.test.ts tests/catalog-official-rate.test.ts tests/city-delivery.test.ts tests/card-city-delivery.test.ts tests/catalog-owner-open-inventory.test.ts tests/catalog-auto-api-dubicars.test.ts tests/catalog-pickup-inventory-scope.test.ts tests/market-logistics-usd.test.ts
+      - run: npm run typecheck

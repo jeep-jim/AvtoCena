@@ -1,0 +1,15 @@
+# Directory UI and saved manager calculation previews — 2026-09-22
+
+User requested a theme-neutral sticky search/alphabet, only the active letter red/white, a performance investigation, and saved manager calculations reflected in every market's preview.
+
+Directory: remove the clipping scroll container (`overflow-x-hidden` → `overflow-x-clip`), measure the actual header/panel heights, jump to groups with the correct offset, update a single active letter during scrolling and search. Use neutral light/dark letter buttons and a page-tone panel instead of the hardcoded black backdrop. Disable brand-link automatic prefetch and cache the computed canonical counts for 60 seconds with a bounded 1 MB cache. Counts are refreshed from current inventory, not permanently snapshotted.
+
+Performance evidence before publication: a successful production probe returned 200, 99 brand links, 120 resources and 13 RSC requests during initial viewing. Proxy-measured TTFB was 22.776 seconds; an earlier probe did not load the catalogue. These are environment-dependent observations, not a benchmark or proof that this directory causes every site slowdown. Code showed automatic brand-link prefetch and request-only count memoization. No quantitative whole-site speedup claimed.
+
+Saved calculations previously existed only on the detail page. New saves update a compact derived preview index, matched to the source/offer identity; a separate publication workflow migrates existing saved records outside public requests. Public requests never list saved files or read one object per visible car. Each rendered batch reads the shared index. A bounded browser refresh batches up to 50 visible IDs per request, including back-navigation/focus, so restored React card nodes do not retain old prices. Employee identity and internal matching metadata are omitted from responses. The existing server-authorized save endpoint still calculates the amount itself.
+
+Preview price/parameters are an explicit saved-scenario display overlay, not new imported-source evidence. Imported prices retain their public validation gate. Saved total and delivery city match the detail's saved scenario; another selected city does not silently add freight twice. Auction status remains limited to auction cards. Save notifications invalidate browser values. No payment/tariff formulas changed.
+
+Validation: typecheck; saved persistence/identity/version conflict tests; all six markets; negative/non-finite totals; public endpoint bounds/privacy; existing public-price and Japan preview tests. Local real Next/browser fixture at 390/1440 px in both themes verified sticky offset, exact active M after navigation, search, no overflow or client errors. Six cards received one batched refresh and displayed the updated saved total, 1498 cc, 150 hp and saved delivery city. Test fixture not shipped. Existing source-text contract tests updated to recognize the separately validated saved-scenario path while preserving the imported-price gate.
+
+CI, migration, deployment and production verification will be recorded in the pull request completion checkpoint.

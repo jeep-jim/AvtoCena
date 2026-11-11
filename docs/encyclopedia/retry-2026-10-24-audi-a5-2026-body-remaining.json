@@ -1,0 +1,1557 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T05:58:29.083967+00:00",
+  "modelId": "8cf3dbb7884fe919bce44c62",
+  "year": 2026,
+  "beforeRevision": "a8789e5c-38d2-5340-a89c-ff13fa65ae54",
+  "inspectedRows": 129,
+  "selectedBodyVariants": 30,
+  "remainingBody": [
+    {
+      "variantId": "b0c72437d151ebabf974aa30",
+      "trim": "TDI LEDER BF-DISPLAY MATRIX 360° eS",
+      "reason": "Название не различает Avant и Saloon"
+    },
+    {
+      "variantId": "85b5e4e15b3c2ebb7a858b78",
+      "trim": "TDI quattro 150 kW LED*RFK*ACC*Sound*",
+      "reason": "Название не различает Avant и Saloon"
+    },
+    {
+      "variantId": "1a406d9be49ba55e2a0ef32e",
+      "trim": "TDI S tronic S line ACC/360° Kamera/Lane/Sid",
+      "reason": "Название не различает Avant и Saloon"
+    },
+    {
+      "variantId": "5abfd48356edf59c0801c044",
+      "trim": "edition one TFSI 150 kW S tronic",
+      "reason": "Название не различает Avant и Saloon"
+    },
+    {
+      "variantId": "1213cfad559a67b7458a674c",
+      "trim": "Limousine e-hybrid quattro 220 kW",
+      "reason": "Нужна отдельная карта e-hybrid/точная идентичность"
+    },
+    {
+      "variantId": "e761bcd0e0375eed1f7452f1",
+      "trim": "Avant quattro HYBRID AHK CAM ACC LM19 EKLAPPE",
+      "reason": "Нужна отдельная карта e-hybrid/точная идентичность"
+    }
+  ],
+  "remainingFields": [
+    {
+      "variantId": "05490097ffcc2d0ddae5c9ba",
+      "year": 2026,
+      "trim": "가솔린 2.0 40 TFSI S-Line",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "a23ccd39c7f914fd05912da9",
+      "year": 2026,
+      "trim": "Sportback 40 TFSI quattro 豪华动感型",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "engineCc",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "5a1c2efa98d59b31aded6df1",
+      "year": 2026,
+      "trim": "Avant TFSI ACC Navi RüKa Sitzh. Sportsitze",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "6bbed8edb0ea120249da80f0",
+      "year": 2026,
+      "trim": "Avant TFSI LED+ eSPORTSITZE KAMERA ASSIST",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "4ac05bbcba3bd31b28b1920f",
+      "year": 2026,
+      "trim": "Avant TFSI AHK vorbe. LED+ Navi Rüka Sports.",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "fb8d1298419fa6f924c7ec91",
+      "year": 2026,
+      "trim": "Avant TFSI LED+ Navi RüKa AHK ACC SHZ V-Cockp",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7c344d58ce507971ef35c6f3",
+      "year": 2026,
+      "trim": "Avant TFSI 110 kW S tronic Navi LED SHZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "0b130d8f43cf4c0269c56ef5",
+      "year": 2026,
+      "trim": "Avant TFSI 110 kW S tronic Navi LED SHZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "06c96a0a05cc91313799a6f1",
+      "year": 2026,
+      "trim": "Avant TFSI Advanced AHK-Vorb./RFK/ACC/LED+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "2e602edc93de1056d0435651",
+      "year": 2026,
+      "trim": "Avant TFSI 110 kW S tronic virt.Cockpit/Navi plus/",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "f945ca30eab62eaf7e57e65d",
+      "year": 2026,
+      "trim": "Sportback Collection Edition 40 TFSI quattro Luxury Dynamic Type",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "c440c6afbd734ad5940412b1",
+      "year": 2026,
+      "trim": "Lim. TDI AHK vorb. LED Navi RüKa Sportsi. 17\"",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "56533f94048a0b964122f997",
+      "year": 2026,
+      "trim": "Avant TDI Stronic Navi LED ACC EPH CarPlay",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "77bc341a120da9bb66f2a2a9",
+      "year": 2026,
+      "trim": "Limousine TDI KAMERA SOUND eSPORTSITZE ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "803b15313402e864969ec2d3",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW S tronic Rfk Navi LE",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "034690b5af204cebd48cdc15",
+      "year": 2026,
+      "trim": "Limousine TDI KAMERA eSPORTSITZE SOUND PRIVAC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "86f53c2db83e21a781e744df",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW S-tronic LED NAV ACC SHZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "9871f131e3d0d970829f1556",
+      "year": 2026,
+      "trim": "Lim. TDI S-TRONIC LED NAV PLUS SHZ PDC MUFU",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "0668efd2a1dcfbf683c63915",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW Navi Digitales Cockpit L",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "b0acb170774f1a5f274dc46d",
+      "year": 2026,
+      "trim": "Limousine TDI Stronic,LED,ACC,Navi+,Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "645bd20d279b841a3326b2e3",
+      "year": 2026,
+      "trim": "Limousine 2.0 TDI 150 kW S tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "ea440915816d9eb96a10e2ac",
+      "year": 2026,
+      "trim": "Limousine TFSI Q NAVI SPORTSITZE ASSIST KAMER",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "5b2e1e947020f29f6b7c4ddb",
+      "year": 2026,
+      "trim": "Avant TDI 150 kW S tronic virt.Cockpit/LED/Na",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "e9b0fe06eb678caaedc321a7",
+      "year": 2026,
+      "trim": "Avant TDI 150 kW S tronic virt.Cockpit/LED/ N",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "f6c8a973b6618429d1c046db",
+      "year": 2026,
+      "trim": "Avant TDI 150 kW S tr. AHK-ACC-Kamera-LED+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "f34a3f2c093dfd3e852282f1",
+      "year": 2026,
+      "trim": "Avant TDI S tronic Navi Kamera 18Zoll ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "23352a52929f61885237b6c8",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW S tr. Leder - ACC - Matr",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "912103276d632198015ec69d",
+      "year": 2026,
+      "trim": "Avant TDI 150 kW S tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "76a48cf1db22240d18f9c56c",
+      "year": 2026,
+      "trim": "Avant TDI s tronic LED+/Cam/AZV/ACC/Navi",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "48eabe99a5a9e2fb5786a63c",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW S tr. Matrix-ACC-360 Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "537aa5ed0e60b50a5bd637d5",
+      "year": 2026,
+      "trim": "Limousine TFSI quattro S tronic LED Navi SHZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "5eb44b4f2d6244b2415b91c1",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW S tr. Matrix-ACC-360 Kam",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "c9693bdc6f08451ebe112cac",
+      "year": 2026,
+      "trim": "Limousine TDI LEDER 360° BF-DISPLAY eSPORTSIT",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "f9516abc0ca83b1dd322c8c4",
+      "year": 2026,
+      "trim": "Limousine TDI LEDER 360 BF-DISPLAY eSPORTSITZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "b0c72437d151ebabf974aa30",
+      "year": 2026,
+      "trim": "TDI LEDER BF-DISPLAY MATRIX 360° eS",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "8cd919bcf83faf6dedb1e4f1",
+      "year": 2026,
+      "trim": "Limousine TDI LEDER 360° eSPORTSITZE BF-DISPL",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "cf0f172d22dc06a0a1da4d88",
+      "year": 2026,
+      "trim": "Avant TDI S tronic ACC/Navi+/Memory/Privacy/K",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "e6384cc03284555327cdbfe2",
+      "year": 2026,
+      "trim": "Avant TDI quattro 150 kW S tronic virt.Cockpi",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "d83b35fb95e3c5bcbd45ca9b",
+      "year": 2026,
+      "trim": "Avant TDI S-tronic +ACC+AHK+LEDER+LED++INTERF",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "53cd32d397d83b47506be909",
+      "year": 2026,
+      "trim": "Avant TDI 150 kW S tronic ACC LED Navi Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "d3e7088f4588dd4bedc4b4fa",
+      "year": 2026,
+      "trim": "Avant TDI quattro 150 kW LED*RFK*ACC*Sound*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "3f3473f912e643213219bbcf",
+      "year": 2026,
+      "trim": "Avant TDI quattro 150 kW LED*ACC*RFK*Virtual*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "85b5e4e15b3c2ebb7a858b78",
+      "year": 2026,
+      "trim": "TDI quattro 150 kW LED*RFK*ACC*Sound*",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "4d83cd85e6b4321236e081fd",
+      "year": 2026,
+      "trim": "Avant TDI S tronic LED/ACC/Navi+/Memory/Kamer",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "08c20460583f17b22a382908",
+      "year": 2026,
+      "trim": "Avant TDI S tronic LED+/ACC/Navi+/Privacy/Mem",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "b2d74cb1548f54506fcb0abf",
+      "year": 2026,
+      "trim": "Avant TDI quattro AHK-Vorb./ACC/RFK/LED+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "14b0c5a4253e0f70ce3f181d",
+      "year": 2026,
+      "trim": "Limousine TFSI Stronic,LED+,Tech,AHK,ACC,Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "53c39fce9ce05b027a762fc2",
+      "year": 2026,
+      "trim": "Avant TDI Stronic,LED+,Tech,AHK,Leder,ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "0420d86ca47582a7f0e55afc",
+      "year": 2026,
+      "trim": "Limousine TDI S tronic MATRIX 360° TECH PLUS",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "e5ba098e11c55a2ce89b2af2",
+      "year": 2026,
+      "trim": "Avant TDI S tronic LED+/ACC/Navi+/Memory/Kame",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "d74db60d7e5bf49020e5245b",
+      "year": 2026,
+      "trim": "Limousine TDI*NAVI*MATRIX*SHZ*PDC*KLIMA*LEDER",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "b536b1f5ea34d4cf5608257d",
+      "year": 2026,
+      "trim": "Avant TDI S tronic Kamera/Navi+/LED+/ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "9721c8828c2f8b700f04f0d8",
+      "year": 2026,
+      "trim": "Avant TDI S tronic ACC/LED+/Navi+/Privacy/Mem",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "654f1a1670851c41f0429c12",
+      "year": 2026,
+      "trim": "Avant TDI S tronic Navi+/Kamera/ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "a6e5448720be1f2189d5875f",
+      "year": 2026,
+      "trim": "Avant TDI S tronic Kamera/ACC/Navi+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "375fddd601943945ae6d22a3",
+      "year": 2026,
+      "trim": "Avant TFSI LEDER HuD BuO ASSIST",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "e01038e22b6c6f833f010053",
+      "year": 2026,
+      "trim": "Avant TFSI ACC Navi+ Kamera B&O HUD Leder LM1",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "1acd3073b3403240fa490ddd",
+      "year": 2026,
+      "trim": "Avant TDI S tronic LED+/ACC/Navi+/Memory/AHK/",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "344b7479dfb13acdf41da907",
+      "year": 2026,
+      "trim": "Avant TDI quattro AHK-Vorb./RFK/18''/ACC/LED+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "2a153cd69b04cf361e0fca69",
+      "year": 2026,
+      "trim": "Avant TDI Stronic,LED+,Navi+,ACC,Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "2becb85c446116e2f8241465",
+      "year": 2026,
+      "trim": "Avant TFSI 150KW Memory/HUD/Cam/B&O/Leder",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7ea24ad2ee5be683dc40a9b3",
+      "year": 2026,
+      "trim": "Avant TFSI S tronic *LED+*B&O*HuD*ACC*R-CAM*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "83318224747e6683e7872365",
+      "year": 2026,
+      "trim": "Avant TFSI S-tronic +ACC+HUD+B&O+LEDER+LED++",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "470aa98f0f146ad22c0dec46",
+      "year": 2026,
+      "trim": "Avant TFSI s tronic LED+/Navi/Memory/AZV/Cam",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "1a406d9be49ba55e2a0ef32e",
+      "year": 2026,
+      "trim": "TDI S tronic S line ACC/360° Kamera/Lane/Sid",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "3ef9f2a2bdcc9a8d867f6b56",
+      "year": 2026,
+      "trim": "Avant TDI Tech LED Memory PDC+ ACC KAMERA 17\"",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "11ee853c3a28908961b56922",
+      "year": 2026,
+      "trim": "Avant TDI Tech LED AHK MEMORY KAMERA ACC PDC+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7c73266a05e93e658dec8f8a",
+      "year": 2026,
+      "trim": "Avant 40TDI quattro NAVI LED RFK PDC SHZ VC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "cc2fb7c2e8ddf5e937adcfd0",
+      "year": 2026,
+      "trim": "Avant TDI AHK/Leder/RFK/18''/ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "6befcb052c97674a4d21c962",
+      "year": 2026,
+      "trim": "Avant TDI qu. Stronic,LED+,ACC,Tech,Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "d5159b68833edfad8aa234d8",
+      "year": 2026,
+      "trim": "Avant TDI Stronic,LED+,AHK,Leder,ACC,Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "6ab2820e6b1173799561fe8d",
+      "year": 2026,
+      "trim": "Limousine TDI 150 kW S tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "19f2e5716bec3a3548b2f3ac",
+      "year": 2026,
+      "trim": "Avant TDI 2x S line Tech-Plus Paket-Schwarz MMI Matrix ACC 360°",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "0ac86c8934a7ba1de77ff3b3",
+      "year": 2026,
+      "trim": "Avant TDI quattro 150 kW S tronic RFK NAV",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "0fa0011f474f19ac00428f0a",
+      "year": 2026,
+      "trim": "Avant TFSI 150 kW LED*B&O*HuD*RFK*ACC*Virtual",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "5da72861635e26d26d32752e",
+      "year": 2026,
+      "trim": "Avant 40 TFSI S tro*B&O*HUD*LED+*Virtual*Navi",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "ee67061bf479f06cbb442ca1",
+      "year": 2026,
+      "trim": "Avant TFSI quattro 150 kW S tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "44bbffb9f1ab8fb469124ccd",
+      "year": 2026,
+      "trim": "Avant TFSI qu. S tronic Kamera/ACC/Navi+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "ce39acc3549a76b48729e808",
+      "year": 2026,
+      "trim": "Avant TDI qu. S tronic LED+/ACC/Navi+/Memory/",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "2ca8cc76d823f1edcfece72b",
+      "year": 2026,
+      "trim": "Avant TDI qu. S tronic LED+ACC/Navi+/Memory/K",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "ec6c2b2489ba151079819c75",
+      "year": 2026,
+      "trim": "Avant TFSI quattro 150 kW S tronic ACC LED LM",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "1f066e9161d6dcc0d85c6e4a",
+      "year": 2026,
+      "trim": "Avant TFSI S tronic Kamera/Leder/ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "b758ecffbdd7b2e00b9eb1a0",
+      "year": 2026,
+      "trim": "Avant TDI S tronic Leder/Kamera/AHK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "58ed75a5b1d11107983fda1c",
+      "year": 2026,
+      "trim": "Avant TDI Tech Memory AHK LED PDC+ KAMERA 18\"",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "8cbefbdf99772c71e0710211",
+      "year": 2026,
+      "trim": "Avant TDI S tronic AHK/Kamera/Navi+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "82fd86905f9950794feb987c",
+      "year": 2026,
+      "trim": "Avant TDI S tronic AHK/Leder/Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "fcf3cecf8e73d124bbc418a3",
+      "year": 2026,
+      "trim": "Avant TDI qu Tech LED Memory KAMERA PDC+ 18\"",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "9f5766e2a1e1338e425ab3e6",
+      "year": 2026,
+      "trim": "Avant TDI Tech LED AHK KAMERA MEMORY PDC+ ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "4d31905998d42fc299402762",
+      "year": 2026,
+      "trim": "Avant 2.0TFSI quattro NAVI LED RFK ACC SHZ VC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "f12517266099de1431cdcbdf",
+      "year": 2026,
+      "trim": "Avant TFSI advanced Stronic,LED+,AHK,Leder,Te",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "c48f21bc923deb7773bd17d7",
+      "year": 2026,
+      "trim": "Avant TFSI qu.Stronic,LED+,Tech,ACC,Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "0c7e738d07a7ceda057f978c",
+      "year": 2026,
+      "trim": "Avant TDI qu. S tronic Kamera/ACC/Navi+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "c469078d0ac1b6cdafd932ce",
+      "year": 2026,
+      "trim": "Avant TDI qu. S tronic ACC/Kamera/Navi+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7ee8023275a905ae9f12e852",
+      "year": 2026,
+      "trim": "Avant TDI 150 kW S tronic AHK ACC LED Navi LM",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "b104819ece7d0e2ed0e0a9b2",
+      "year": 2026,
+      "trim": "Avant TFSI Q LED+ KAMERA AHK LM18",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "80a79b9799886f0f08875ada",
+      "year": 2026,
+      "trim": "Avant TFSI 150kW LED+NAVI+HuD+B&O+RFK+ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "5044e088119695027542feba",
+      "year": 2026,
+      "trim": "Avant TFSI S tronic HuD/B&O/Leder",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "fc92ad8bed83a9d4a06c648f",
+      "year": 2026,
+      "trim": "Avant TFSI S tronic ACC/HuD/B&O/Leder/Navi",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "960a50a57fc0289f635c5937",
+      "year": 2026,
+      "trim": "Limousine TFSI S-Line Plus *ACC*Leder*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "94e635ccf0198dc303e3b64f",
+      "year": 2026,
+      "trim": "Avant TFSI quattro S tronic Rückfahrkamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "66b14678bc808092bfc3dbe2",
+      "year": 2026,
+      "trim": "Avant TFSI qu. LED Kamera Carplay",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "00c165853cca6f02bba4b863",
+      "year": 2026,
+      "trim": "Limousine TFSI quattro*NAVI*LED*KAMERA*HUD*B&",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7c9460b732f115d8b596a98b",
+      "year": 2026,
+      "trim": "Limousine TFSI quattro 150 kW S tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "692b36dd9daf2bbd3992028a",
+      "year": 2026,
+      "trim": "Avant 2.0 TFSI quattro LED+ ACC Kamera GWP",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "8c27975295e1b158224278d3",
+      "year": 2026,
+      "trim": "A5 Limo TDI S LINE 360° LEDER BF-DI",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "2ac3dc771e4893146b4ad851",
+      "year": 2026,
+      "trim": "Avant TDI Q PANO LEDER ASSIST AHK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "d84ca863d74b79410b2f418a",
+      "year": 2026,
+      "trim": "A5 Avant 2.0 tfsi S-line 204cv s-tronic",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "5abfd48356edf59c0801c044",
+      "year": 2026,
+      "trim": "edition one TFSI 150 kW S tronic",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "4f422cba14962234bc8ae9e5",
+      "year": 2026,
+      "trim": "Lim. 2,0TDI DSG 2x S line Tech-Plus Matrix e.Heckklappe ACC Virtual MMI-NAVI",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "engineCc"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "9b267de126ef4a2dd88e07d5",
+      "year": 2026,
+      "trim": "Avant 2.0 TDI S line s-tronic *PROMO*",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "1213cfad559a67b7458a674c",
+      "year": 2026,
+      "trim": "Limousine e-hybrid quattro 220 kW",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "bfa47ed36669908f2d302a86",
+      "year": 2026,
+      "trim": "Avant e-hybrid QUATT +LED+AHK+KAMERA+VCP+ALU+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "f452a999c21ca7a196467617",
+      "year": 2026,
+      "trim": "Avant e-hybrid Q S LINE LM19 KAMERA eSITZE LE",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "23314e09cc808e8d2ef18647",
+      "year": 2026,
+      "trim": "Avant eHybrid Q 2x S LINE LM19 ASSIST eSITZE",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "010119629141fbf70cc2d660",
+      "year": 2026,
+      "trim": "Avant TFSI e-hybrid Q LM19 SPORTSITZE KAMERA",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "aa49936a692a056de4a07446",
+      "year": 2026,
+      "trim": "Avant e-hybrid qu. S tronic Navi+/ACC/Kamera",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "e761bcd0e0375eed1f7452f1",
+      "year": 2026,
+      "trim": "Avant quattro HYBRID AHK CAM ACC LM19 EKLAPPE",
+      "unconfirmedFields": [
+        "bodyType",
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7dbf8162a117df88c2faf413",
+      "year": 2026,
+      "trim": "Avant e-hybrid quattro 220 kW S tronic ACC LM",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "7afc0781a98fb7a0ce7470ea",
+      "year": 2026,
+      "trim": "Avant e-hybrid qu. LED/R-Kamera/ACC+Fahren/19",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "62b7c894352c0ca8f0b17adc",
+      "year": 2026,
+      "trim": "Avant e-hybrid QUATT MATRIX+KAMERA+VCP+LM+NAV",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "4b97ecdae89c17bf9e96f97c",
+      "year": 2026,
+      "trim": "Avant e-hybrid QUATT +LED+AHK+KAMERA+VCP+NAV+",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "137d3633f6ecaae20b3dd7d4",
+      "year": 2026,
+      "trim": "Avant TFSIe qu. LED AHK Kam. Navi Standklima",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "9a2680c8a228364c3f7d8c4a",
+      "year": 2026,
+      "trim": "Avant e-hybrid quattro S tronic AHK Standhzg",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "011e48c3a501a04ead0c2af4",
+      "year": 2026,
+      "trim": "Avant e-hybrid quattro 220 kW MMI ACC RFK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "aff8e8b1ec7ffa30662502ac",
+      "year": 2026,
+      "trim": "Avant e-hybrid quattro S tronic Navi LED SHZ",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "21e3b9b619eb481f5580a55e",
+      "year": 2026,
+      "trim": "Avant e-hybrid quattro 220 kW S tronic AHK/Rf",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "9a561c7f5ec187dae60e38de",
+      "year": 2026,
+      "trim": "Avant e-hybrid quattro S tronic Standhzg ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "2473fd28008bf928137a14d1",
+      "year": 2026,
+      "trim": "Avant e-hybrid e-hybrid quattro S tronic AHK",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    },
+    {
+      "variantId": "23e770dc951d7a3c014ef7e4",
+      "year": 2026,
+      "trim": "Avant e-hybrid e-hybrid quattro S tronic ACC",
+      "unconfirmedFields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg",
+        "drive",
+        "icePowerKw"
+      ],
+      "reason": "Подтверждается только выбранный кузов. Остальные технические поля требуют точного источника; 30-минутная мощность не выводится."
+    }
+  ],
+  "priorRetry": "docs/encyclopedia/retry-2026-10-22-audi-a5.json",
+  "modelComplete": false,
+  "afterRevision": "b34b53ca-42e3-441d-ae0b-a4af3b1e0cc2",
+  "appliedBatch": "research-2026-10-24-audi-a5-2026-body"
+}

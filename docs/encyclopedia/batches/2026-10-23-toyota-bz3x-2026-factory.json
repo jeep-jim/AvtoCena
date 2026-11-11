@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-bz3x-2026-factory",
+  "entries": [
+    {
+      "modelId": "44569aac2d2feadaf45ab8ce",
+      "make": "Toyota",
+      "model": "bZ3X",
+      "year": 2026,
+      "trim": "520 Pro",
+      "variantId": "89a4bd94c4230defb1eb0f74",
+      "expectedDigest": "fc58d55dbc397d738cfe85c16b75adec1e9271a423019d1911f316b34ae7321a",
+      "patch": {
+        "motorPeakKw": 150,
+        "batteryKwh": 58.37,
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "motorPeakKw",
+        "batteryKwh",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица bZ3X, редакция май2026, стр.1: 520 Pro и 520 Pro LiDAR — максимальная мощность мотора150 кВт, батарея58.37 кВт·ч, кузов SUV. Значения сверены с заводской таблицей /minisite/campaigns/bozhi3xTable/js/hevmap.js и соответствием колонок в LoadData_pc.js. 激光雷达版 переведено как LiDAR Edition. Только три существующие точно сопоставленные строки2026; 2025,Pro+,Max,безымянные и bz7 не изменяются. 30-минутной мощности в документе нет."
+      }
+    },
+    {
+      "modelId": "44569aac2d2feadaf45ab8ce",
+      "make": "Toyota",
+      "model": "bZ3X",
+      "year": 2026,
+      "trim": "520 Pro LiDAR Edition",
+      "variantId": "508514b597ff60021078d92b",
+      "expectedDigest": "d5bd9acbf353da42a54db0b2c631001fc91750641f657462a3a6a62a0d4fd9a3",
+      "patch": {
+        "motorPeakKw": 150,
+        "batteryKwh": 58.37,
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "motorPeakKw",
+        "batteryKwh",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица bZ3X, редакция май2026, стр.1: 520 Pro и 520 Pro LiDAR — максимальная мощность мотора150 кВт, батарея58.37 кВт·ч, кузов SUV. Значения сверены с заводской таблицей /minisite/campaigns/bozhi3xTable/js/hevmap.js и соответствием колонок в LoadData_pc.js. 激光雷达版 переведено как LiDAR Edition. Только три существующие точно сопоставленные строки2026; 2025,Pro+,Max,безымянные и bz7 не изменяются. 30-минутной мощности в документе нет."
+      }
+    },
+    {
+      "modelId": "44569aac2d2feadaf45ab8ce",
+      "make": "Toyota",
+      "model": "bZ3X",
+      "year": 2026,
+      "trim": "520 Pro 激光雷达版",
+      "variantId": "68d03aaf9cf5012e67ad1fb0",
+      "expectedDigest": "47dae1da46d308111ce19a9d50acc02094f9db3e1d9d48d57c66c8c149a0836b",
+      "patch": {
+        "motorPeakKw": 150,
+        "batteryKwh": 58.37,
+        "bodyType": "suv",
+        "trim": "520 Pro LiDAR Edition"
+      },
+      "confirmedFields": [
+        "motorPeakKw",
+        "batteryKwh",
+        "bodyType",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.gac-toyota.com.cn/download/configpdf/bozhi3x.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводская таблица bZ3X, редакция май2026, стр.1: 520 Pro и 520 Pro LiDAR — максимальная мощность мотора150 кВт, батарея58.37 кВт·ч, кузов SUV. Значения сверены с заводской таблицей /minisite/campaigns/bozhi3xTable/js/hevmap.js и соответствием колонок в LoadData_pc.js. 激光雷达版 переведено как LiDAR Edition. Только три существующие точно сопоставленные строки2026; 2025,Pro+,Max,безымянные и bz7 не изменяются. 30-минутной мощности в документе нет."
+      }
+    }
+  ]
+}

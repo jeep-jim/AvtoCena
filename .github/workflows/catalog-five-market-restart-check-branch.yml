@@ -1,0 +1,57 @@
+name: Encar source model identity and MyAuto evidence check v5
+on:
+  push:
+    branches: [feat/catalog-europe-kcar-generation-canary-20260907]
+    paths:
+      - .github/workflows/catalog-five-market-restart-check-branch.yml
+permissions:
+  contents: read
+concurrency:
+  group: catalog-five-market-restart-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - { market: korea, source: encar_direct }
+          - { market: georgia, source: myauto_georgia_list }
+    env:
+      PILOT_ALLOW_EXISTING_BRIDGE: '1'
+      PILOT_MARKETS: ${{ matrix.market }}
+      PILOT_REGISTERED_SOURCE_ID: ${{ matrix.source }}
+      PILOT_SAMPLE_LIMIT: '20'
+      PILOT_PAGE_LIMIT: '1'
+      PILOT_REQUEST_LIMIT: '50'
+      PILOT_TIMEOUT_MS: '45000'
+      PILOT_REQUEST_INTERVAL_MS: '1000'
+      PILOT_RESPONSE_EVIDENCE: '1'
+      PILOT_REPORT: restart-${{ matrix.market }}-${{ matrix.source }}.json
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify source URL and production pause guards
+        run: node --import tsx --test tests/catalog-generation-canary.test.ts tests/catalog-production-pause.test.ts
+      - name: Fresh listing, details and exact calculations using production settings
+        run: node --import tsx scripts/catalog-five-market-restart-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: restart-${{ matrix.market }}-${{ matrix.source }}
+          path: restart-${{ matrix.market }}-${{ matrix.source }}.json
+          retention-days: 14

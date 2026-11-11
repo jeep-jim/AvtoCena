@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import {getJsonStorage} from '../../apps/web/lib/data.ts';
+import {MANIFEST} from '../../apps/web/lib/encyclopedia/records.ts';
+import {checksum} from '../../apps/web/lib/encyclopedia/calculation-index.ts';
+import {isEncyclopediaCar} from '../../apps/web/lib/encyclopedia/scope.ts';
+const storage=getJsonStorage();if(storage.driver!=='object')throw Error('object_required');storage.writeJson=async()=>{throw Error('read_only');};
+const digest='5c71ef244646ad8132908b469edde4d4615b0a477b756684fea3769f8b762d98';
+const index=await storage.readJson(`knowledge/encyclopedia/calculation-indexes/${digest}.json`,null);if(index?.digest!==digest||checksum(index.models)!==digest)throw Error('index_checksum');
+const manifest=await storage.readJson(MANIFEST,null),models=manifest.models.filter(isEncyclopediaCar);
+const facts=new Map(Object.values(index.models).flat().map(f=>[f.modelId+':'+f.variantId,f]));
+const report={checkedAt:new Date().toISOString(),indexDigest:digest,manifestMatchesIndex:checksum(manifest.models.map(x=>[x.id,x.revision,x.key]))===index.manifestDigest,models:0,withPower30:0,byReason:{},byOrigin:{},examples:{},storageWrites:0};let cursor=0;
+await Promise.all(Array.from({length:6},async()=>{for(;;){const m=models[cursor++];if(!m)return;const r=await storage.readJson(m.key,null);if(r?.revision!==m.revision)throw Error('revision');report.models++;
+for(const v of r.variants||[]){if(!(Number(v.power30MinKw)>0))continue;report.withPower30++;const f=facts.get(r.id+':'+v.id);const history=[...(v.researchEvidenceHistory||[]),v.researchEvidence].filter(Boolean);const origin=v.astraEvidence?'astra_technical':history.some(e=>e.source?.corpusDigest)?'astra_annual':'other';report.byOrigin[origin]=(report.byOrigin[origin]||0)+1;
+const reason=f?.revision===r.revision&&Number(f.values?.power30MinKw)===Number(v.power30MinKw)?'supported':!Number.isInteger(v.year)?'no_model_year':!v.trim?'no_trim':f&&f.revision!==r.revision?'revision_changed':!history.some(e=>e.fields?.includes('power30MinKw'))?'no_field_evidence':!history.some(e=>e.fields?.includes('power30MinKw')&&(e.source?.certificationDocument||e.source?.type==='owner_confirmed'))?'no_certification_document':'evidence_identity_or_value_requires_review';
+report.byReason[reason]=(report.byReason[reason]||0)+1;const samples=report.examples[reason]||=[];if(samples.length<12)samples.push({modelId:r.id,variantId:v.id,make:r.make,model:r.model,year:v.year,trim:v.trim,power30MinKw:v.power30MinKw,origin,powertrainKind:v.powertrainKind,technicalIdentity:v.astraIdentity,hasChassis:Boolean(v.chassisCode),hasEngineCode:Boolean(v.engineCode)});
+}}}));
+await fs.mkdir('reports',{recursive:true});await fs.writeFile('reports/power30-blockers.json',JSON.stringify(report,null,2));console.log('POWER30_BLOCKERS',JSON.stringify(report));

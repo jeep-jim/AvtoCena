@@ -1,0 +1,34 @@
+name: Regcloud — inspect home snapshot metadata
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-home-metadata.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-home-diagnostics
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci
+      - name: Read bounded metadata without full projections or provider calls
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/regcloud-home-metadata.mjs

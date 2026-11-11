@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 20,
+    "newModels": 20,
+    "officialManufacturerSources": 20,
+    "newMlitWorkbookSources": 4,
+    "totalNewSources": 24,
+    "modelsWithMlitIntersection": 19
+  },
+  "reviewed": [
+    {
+      "id": "toyota/raize",
+      "canonicalName": "Raize",
+      "officialSourceId": "src-toyota-raize-japan-current-2026",
+      "exactSourceNames": [
+        "ライズ"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "nissan/aura",
+      "canonicalName": "AURA",
+      "officialSourceId": "src-nissan-aura-japan-current-2026",
+      "exactSourceNames": [
+        "オーラ",
+        "ノート オーラ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "nissan/elgrand",
+      "canonicalName": "ELGRAND",
+      "officialSourceId": "src-nissan-elgrand-japan-current-2026",
+      "exactSourceNames": [
+        "エルグランド"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2026
+      ]
+    },
+    {
+      "id": "nissan/caravan",
+      "canonicalName": "CARAVAN",
+      "officialSourceId": "src-nissan-caravan-japan-current-2026",
+      "exactSourceNames": [
+        "キャラバン",
+        "NV350 キャラバン"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "suzuki/landy",
+      "canonicalName": "Landy",
+      "officialSourceId": "src-suzuki-landy-japan-current-2026",
+      "exactSourceNames": [
+        "ランディ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "suzuki/wagon-r-smile",
+      "canonicalName": "Wagon R Smile",
+      "officialSourceId": "src-suzuki-wagon-r-smile-japan-current-2026",
+      "exactSourceNames": [
+        "ワゴンR スマイル"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "suzuki/lapin",
+      "canonicalName": "Lapin",
+      "officialSourceId": "src-suzuki-lapin-japan-current-2026",
+      "exactSourceNames": [
+        "ラパン",
+        "アルト ラパン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "suzuki/xbee",
+      "canonicalName": "Xbee",
+      "officialSourceId": "src-suzuki-xbee-japan-current-2026",
+      "exactSourceNames": [
+        "クロスビー"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "mazda/flair",
+      "canonicalName": "FLAIR",
+      "officialSourceId": "src-mazda-flair-japan-current-2026",
+      "exactSourceNames": [
+        "フレア"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "mazda/flair-wagon",
+      "canonicalName": "FLAIR WAGON",
+      "officialSourceId": "src-mazda-flair-wagon-japan-current-2026",
+      "exactSourceNames": [
+        "フレア ワゴン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "mazda/flair-crossover",
+      "canonicalName": "FLAIR CROSSOVER",
+      "officialSourceId": "src-mazda-flair-crossover-japan-current-2026",
+      "exactSourceNames": [
+        "フレア クロスオーバー"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "mazda/carol",
+      "canonicalName": "CAROL",
+      "officialSourceId": "src-mazda-carol-japan-current-2026",
+      "exactSourceNames": [
+        "キャロル"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "subaru/chiffon",
+      "canonicalName": "Chiffon",
+      "officialSourceId": "src-subaru-chiffon-japan-current-2026",
+      "exactSourceNames": [
+        "シフォン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "subaru/pleo-plus",
+      "canonicalName": "Pleo Plus",
+      "officialSourceId": "src-subaru-pleo-plus-japan-current-2026",
+      "exactSourceNames": [
+        "プレオ プラス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "subaru/rex",
+      "canonicalName": "Rex",
+      "officialSourceId": "src-subaru-rex-japan-current-2026",
+      "exactSourceNames": [
+        "レックス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "mitsubishi/delica-d5",
+      "canonicalName": "Delica D:5",
+      "officialSourceId": "src-mitsubishi-delica-d5-japan-current-2026",
+      "exactSourceNames": [
+        "デリカD:5"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "mitsubishi/delica-d2",
+      "canonicalName": "Delica D:2",
+      "officialSourceId": "src-mitsubishi-delica-d2-japan-current-2026",
+      "exactSourceNames": [
+        "デリカD:2"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "mitsubishi/town-box",
+      "canonicalName": "Town Box",
+      "officialSourceId": "src-mitsubishi-town-box-japan-current-2026",
+      "exactSourceNames": [
+        "タウンボックス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "daihatsu/move-canbus",
+      "canonicalName": "Move Canbus",
+      "officialSourceId": "src-daihatsu-move-canbus-japan-current-2026",
+      "exactSourceNames": [
+        "ムーヴ キャンバス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "daihatsu/thor",
+      "canonicalName": "Thor",
+      "officialSourceId": "src-daihatsu-thor-japan-current-2026",
+      "exactSourceNames": [
+        "トール"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    }
+  ]
+}

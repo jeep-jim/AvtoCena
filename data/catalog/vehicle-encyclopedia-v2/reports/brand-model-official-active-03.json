@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "priorityWindow": "Active global passenger/light-commercial ranges, 2020-2026",
+    "officialIdentitySourceRequired": true,
+    "technicalConfigurationsNotInferred": true,
+    "untracedLogoCandidatesRejected": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedBrands": 3,
+    "newSources": 3,
+    "newBrands": 3,
+    "newModels": 20
+  },
+  "brandIds": [
+    "jmev",
+    "micro",
+    "srm-shineray"
+  ],
+  "modelIds": [
+    "jmev/elight",
+    "jmev/ev2",
+    "jmev/ev3",
+    "jmev/ewind",
+    "micro/microlino",
+    "srm-shineray/e3",
+    "srm-shineray/e3l",
+    "srm-shineray/m3",
+    "srm-shineray/m7",
+    "srm-shineray/t1",
+    "srm-shineray/t1-ev",
+    "srm-shineray/t3",
+    "srm-shineray/t3-ev",
+    "srm-shineray/t3l-ev",
+    "srm-shineray/t5",
+    "srm-shineray/t5l-ev",
+    "srm-shineray/x30",
+    "srm-shineray/x30-ev",
+    "srm-shineray/x30l",
+    "srm-shineray/x30l-ev"
+  ]
+}

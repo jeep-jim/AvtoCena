@@ -1,0 +1,151 @@
+{
+  "checkedAt": "2026-10-22T02:06:45.739Z",
+  "state": "prepared_not_applied",
+  "entries": 12,
+  "fieldConfirmations": 48,
+  "plans": [
+    {
+      "model": "595",
+      "year": 2021,
+      "changes": [
+        {
+          "variantId": "24cc60f93710caf192a3f67d",
+          "fields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "ee6b16fb9c6752b576d8dd53",
+          "fields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "c3ee2a34f4c635b7c8fcc0c5",
+          "fields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "fuel",
+            "powertrainKind"
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "model": "595",
+      "year": 2018,
+      "changes": [
+        {
+          "variantId": "9dd33cf62eaf6070e88ed694",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "model": "595",
+      "year": 2020,
+      "changes": [
+        {
+          "variantId": "a92047b3c45cd70478577001",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "0dd6a825e0210aa95781150b",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "d0b25d90400664c5b148fc55",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "7a5ca3918f78eba6c5c7ee64",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "model": "595",
+      "year": 2022,
+      "changes": [
+        {
+          "variantId": "87eec9b87634c46a1c20839b",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "78d4bedb60486654d5cf1c9e",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "544c06f3df9a929644870d79",
+          "fields": [
+            "powerHp",
+            "fuel",
+            "powertrainKind"
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "model": "695",
+      "year": 2020,
+      "changes": [
+        {
+          "variantId": "121f419c9f55687794514794",
+          "fields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "fuel",
+            "powertrainKind"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ]
+}

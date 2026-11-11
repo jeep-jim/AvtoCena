@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-25T01:36:55.361543+00:00",
+  "batch": "research-2026-10-25-audi-a3-final-mechanical-drive",
+  "sha256": "df852d4c89ada1577753f969490aa9abe8d32866901d463c71164102b97e933d",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "afterRevision": "b4e2d2b2-826e-4de6-b312-cdba66a55911",
+  "apiReadback": true,
+  "fieldsChecked": 7,
+  "variants": 7,
+  "years": [
+    {
+      "year": 2024,
+      "revision": "b4e2d2b2-826e-4de6-b312-cdba66a55911",
+      "rows": 126,
+      "checkedFields": 3,
+      "otherRowsUnchanged": 123
+    },
+    {
+      "year": 2025,
+      "revision": "b4e2d2b2-826e-4de6-b312-cdba66a55911",
+      "rows": 143,
+      "checkedFields": 4,
+      "otherRowsUnchanged": 139
+    }
+  ],
+  "counts": {
+    "newValues": 7,
+    "correctedValues": 0,
+    "attestedUnchanged": 0
+  },
+  "unknownBodiesPreserved": [],
+  "newModels": 0,
+  "certified30minAdded": 0,
+  "installed": false,
+  "workflow": 40151235233,
+  "job": 121043032216,
+  "preflightWorkflow": 40151127192
+}

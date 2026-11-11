@@ -1,0 +1,46 @@
+name: Retire obsolete Yandex Cloud jobs 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/retire-legacy-yandex-jobs-20261107.yml']
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: retire-legacy-yandex-jobs
+  cancel-in-progress: false
+jobs:
+  retire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - name: Retire exact obsolete jobs, not CRM advertising or market collection
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import assert from 'node:assert/strict';
+          const base='https://api.github.com/repos/jeep-jim/AvtoCena',headers={Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json'};
+          async function read(path){const r=await fetch(base+path,{headers,signal:AbortSignal.timeout(15000)});assert.equal(r.ok,true,'read_'+r.status);return r.json();}
+          const report={at:new Date().toISOString(),ownerAuthorization:'2026-11-07 remove unused Yandex Cloud',replacements:[],retired:[],notTouched:['CRM','dealer billing','Yandex Metrika','Yandex Direct','market collectors']};
+          for(const name of ['regcloud-prices.yml','regcloud-overview.yml','regcloud-deploy.yml']){const w=await read('/actions/workflows/'+name);assert.equal(w.state,'active','REG replacement disabled');report.replacements.push({path:w.path,id:w.id,state:w.state});}
+          const targets=[['catalog-budget-shared-warmup.yml',379212077],['catalog-overview-read-model.yml',332609349],['catalog-storage-cleanup.yml',322837493],['container-registry-cleanup.yml',362031427],['deploy-yandex.yml',309867776]];
+          fs.mkdirSync('legacy-retirement',{recursive:true});
+          for(const [name,id] of targets){
+            const w=await read('/actions/workflows/'+id);assert.equal(w.path,'.github/workflows/'+name);assert.ok(['active','disabled_manually','disabled_inactivity'].includes(w.state));
+            const runs=await read(`/actions/workflows/${id}/runs?status=in_progress&per_page=1`);assert.equal(runs.total_count,0,'legacy job currently running');
+            if(w.state==='active'){const r=await fetch(base+`/actions/workflows/${id}/disable`,{method:'PUT',headers,signal:AbortSignal.timeout(15000)});assert.equal(r.status,204,'disable_failed');}
+            const check=await read('/actions/workflows/'+id);assert.notEqual(check.state,'active');report.retired.push({id,path:check.path,previous:w.state,state:check.state});
+            fs.writeFileSync('legacy-retirement/report.json',JSON.stringify(report,null,2));
+          }
+          console.log(JSON.stringify(report));
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: legacy-yandex-workflow-retirement
+          path: legacy-retirement
+          retention-days: 14

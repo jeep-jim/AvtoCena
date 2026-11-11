@@ -1,0 +1,146 @@
+{
+  "checkedAt": "2026-10-22T04:07:05.435Z",
+  "batch": "research-2026-10-22-aion-ut-europe-exact",
+  "batchDigest": "3edbe537c436454a8fca5ff3d1c9d18d83763a1d552ddfb4e87a8fe3288ea96d",
+  "state": "prepared_not_applied",
+  "originalVariantsRead": 17,
+  "variants": 2,
+  "newVariants": 1,
+  "fields": 17,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "c959b64e2b9527a0b181c839",
+        "fields": [
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a2d347ec5139c3529e9552f8",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "bodyType",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "motorPeakKw",
+          "batteryKwh",
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "retry": [
+    {
+      "variantId": "c4a5bc9e151389bd5c0d3096",
+      "year": 2025,
+      "reason": "Отсутствует точное исполнение; нельзя выбирать батарею и мощность по одному названию модели."
+    },
+    {
+      "variantId": "825b0bfe5cec366d3b95ffef",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "e2092f78957bbed646852b0e",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "5e0ac648e5bb421a8dd63f91",
+      "year": 2025,
+      "reason": "Отсутствует точное исполнение; нельзя выбирать батарею и мощность по одному названию модели."
+    },
+    {
+      "variantId": "d6029cd42a92b8355bb863a1",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "02227d937659543eb4f9cebf",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "cc0a0621aa7e86e74bf47959",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "e8455f065653bd60bc07fd3f",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "58cd5e85ba3098cfe7f9edcb",
+      "year": 2025,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "f7a98b4b11299cdb107b885f",
+      "year": 2026,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "0591c9f47ebcec0101268a0a",
+      "year": 2026,
+      "reason": "Отсутствует точное исполнение; нельзя выбирать батарею и мощность по одному названию модели."
+    },
+    {
+      "variantId": "fd05d0a5fe99c14f58090acb",
+      "year": 2026,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "b56af785fbb4956a6bc0f05e",
+      "year": 2026,
+      "reason": "Отсутствует точное исполнение; нельзя выбирать батарею и мощность по одному названию модели."
+    },
+    {
+      "variantId": "f8eb494a5a30a7dcdf3cead8",
+      "year": 2026,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "eb6cc1217b9713efea9abfa6",
+      "year": 2026,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    },
+    {
+      "variantId": "c7147970ef2dc049d2af2c65",
+      "year": 2026,
+      "reason": "Нужна историческая заводская таблица 330/420 и точная идентификация батареи; текущий ответ cid62/version2025 содержит только 530 Ningde."
+    }
+  ],
+  "missingFields": [
+    "power30MinKw",
+    "engineCode"
+  ],
+  "sourceReview": {
+    "currentChinaTable": "https://www.aion.com.cn/Home/Api/getCarinfos",
+    "request": {
+      "cid": "62",
+      "version": "2025"
+    },
+    "returnedVersion": "530 Ningde",
+    "returnedPowerPeakKw": 100,
+    "returnedBatteryKwh": 56.684,
+    "notAppliedToHistorical330Or420": true,
+    "europeBatteryCapacity": {
+      "grossKwh": 62,
+      "netKwh": 60
+    },
+    "yearEvidence": "https://www.gacgroup.com/en-eu/news/article/gac-to-host-european-premiere-of-the-aion-ut-in-milan-82"
+  },
+  "historicalExpansionComplete": false
+}

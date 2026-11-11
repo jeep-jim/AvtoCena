@@ -1,0 +1,30 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+
+const page = fs.readFileSync(new URL("../apps/web/app/(public)/cars/autocatalog/page.tsx", import.meta.url), "utf8");
+const directory = fs.readFileSync(new URL("../apps/web/components/catalog/AutocatalogBrandDirectory.tsx", import.meta.url), "utf8");
+
+test("autocatalog hero contains only the useful title instead of explanatory boxes", () => {
+  assert.match(page, />Энциклопедия автомобилей<\/h1>/);
+  assert.doesNotMatch(page, /Марка → модель → характеристики/);
+  assert.doesNotMatch(page, /Нормальная база автомобилей/);
+  assert.doesNotMatch(page, /Источник каждого факта сохраняется/);
+  assert.doesNotMatch(page, /Неизвестные названия идут на проверку/);
+  assert.doesNotMatch(page, /stats\.models|stats\.specifications/);
+});
+
+test("search and alphabet stay sticky while letter groups are no longer giant containers", () => {
+  assert.match(directory, /sticky top-\[64px\]/);
+  assert.match(directory, /grid-cols-\[repeat\(auto-fit,minmax\(32px,1fr\)\)\]/);
+  assert.doesNotMatch(directory, /scroll-mt-44 rounded-\[1\.7rem\] bg-\[var\(--ac-surface\)\]/);
+  assert.doesNotMatch(directory, /rounded-\[1\.6rem\].*backdrop-blur-xl/);
+});
+
+
+test("permanent encyclopedia does not disappear with live inventory",()=>{
+ assert.match(page,/readEncyclopedia/);
+ assert.doesNotMatch(page,/readAutocatalogCounts|brand\.offerCount > 0/);
+ assert.ok(page.indexOf('<DirectoryFilters') < page.indexOf('className="ac-ency-results"'),'filters precede the full-width directory');
+ assert.doesNotMatch(page,/ac-ency-layout/);
+});

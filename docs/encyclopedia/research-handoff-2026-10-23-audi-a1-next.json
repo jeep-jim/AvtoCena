@@ -1,0 +1,549 @@
+{
+  "version": 2,
+  "checkedAt": "2026-10-23T06:07:44.798Z",
+  "previousHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1.json",
+  "next": {
+    "modelId": "d5a8af35e3698aa33eaea9a9",
+    "make": "Audi",
+    "model": "A1",
+    "revision": "90e47836-c51c-4ea4-9337-22fdbdcbb486",
+    "variants": 394,
+    "researchedVariants": 161,
+    "firstCursor": {
+      "variantId": "5f973861584569feb263cbd6",
+      "year": 2021,
+      "trim": "Sportback S line 35 TFSI S tronic *LED*",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "missingSupportedFields": [
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+    },
+    "nextBoundedCandidates": [
+      {
+        "variantId": "5f973861584569feb263cbd6",
+        "year": 2021,
+        "trim": "Sportback S line 35 TFSI S tronic *LED*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "99f60f04585b31eca4c5bdab",
+        "year": 2021,
+        "trim": "allstreet Citycarver S-tronic virtual",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "b6b63df8950542c249ddea9e",
+        "year": 2021,
+        "trim": "citycarver 30 TFSI Aut.*LED*CAM*LIMITER*ALU*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "38fa35d3419127a1ed8c9cdb",
+        "year": 2021,
+        "trim": "citycarver 30 TFSI basis SHZ PDC Virtual Cock",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "10f5540e93650e6d151a21b4",
+        "year": 2021,
+        "trim": "citycarver 30 TFSI S tronic LED*NAV*SHZ*PDC*K",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "adf669a0807b75c4a6bafd90",
+        "year": 2021,
+        "trim": "citycarver 35 TFSI Aut.*NAVI*LED*ACC*CAM*PDC*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "7c1faaf04fbea6fa4f40f3ee",
+        "year": 2021,
+        "trim": "citycarver allstreet *LED*App Connect*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "fc41e9915a3a843441e774c5",
+        "year": 2021,
+        "trim": "II 2019 Citycarver - A1 Citycarver 30 1.0 tfsi Adm",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "871b367332a4ce114c12a5e6",
+        "year": 2021,
+        "trim": "S Line Sportback Automat Sportpaket Digitales",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "93f4ad33f0c1643b0d2bab35",
+        "year": 2021,
+        "trim": "Sportback 1.0 TFSI S-tronic Tempo SHZ Klima",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "86b2a07098ed13cec3a2fad0",
+        "year": 2021,
+        "trim": "Sportback 25 TFSI citycarver LED virtual Smar",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      },
+      {
+        "variantId": "b55a671d91a3194be72d50e9",
+        "year": 2021,
+        "trim": "SPORTBACK 95 PS ( * SITZHEIZUNG * KLIMA * )",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "f8451b472e4fc52264378da1",
+        "year": 2021,
+        "trim": "Sportback S line *PDC*GRA*LED*17 ZOLL LM*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "6a1d2588a8f5d32839a1c922",
+        "year": 2021,
+        "trim": "Sportback S-line PRE SENSE / TEMP / SPURWECHS",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "126d48104c9d11718a1abb61",
+        "year": 2021,
+        "trim": "SPORTBACK TFSI S line S tronic 18\" GewindeFW",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "d471656648d95cc24c81cede",
+        "year": 2021,
+        "trim": "Sportback*Navi*SHZ*PDC*Tempo*",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "702411f59e1016e8bf0c72f6",
+        "year": 2022,
+        "trim": "1.0 25 TFSI Advanced Aut. Virtual CarPlay Kl",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "402d0fc576cd73d12a3f9cb8",
+        "year": 2022,
+        "trim": "1.0 TFSI 30 S line Comp. S-tronic SHZ LED KAM",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "2eef71ef5ace144ba570d507",
+        "year": 2022,
+        "trim": "25 1.0 tfsi Admired my20",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Проверять только реальные пробелы; уже подтверждённые/сохранённые факты не повторять"
+      },
+      {
+        "variantId": "89f053bc4235154d8f07886f",
+        "year": 2022,
+        "trim": "30 citycarver Sitzhzg.|PDC|Klima|USB",
+        "factoryConfirmedFields": [],
+        "otherSupportedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ],
+        "missingSupportedFields": [
+          "drive",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "reason": "Нужна отдельная годовая таблица citycarver/allstreet; Sportback масса не переносится"
+      }
+    ],
+    "nextAction": "Продолжить неизвестные поля A1 со следующего курсора, отдельныйretryдлянеоднозначныхстрок. Не повторять50/58. Существующие2022–2026иранние годы остаются; затемAudiA3."
+  },
+  "completedBatch": {
+    "batch": "research-2026-10-23-audi-a1-body-and-gaps",
+    "variantIds": [
+      "7dfd375be96026fe715a2552",
+      "bda09efbe8eb948321b83256",
+      "3672547816a45e92b0f925f3",
+      "c4692da2bd8c081d497676e5",
+      "68b706abb67fc110caaa60d3",
+      "80add971c12643cec32dd675",
+      "a268d4e1135f28832d4f10ee",
+      "d27c802bf8c6f1cbf589dd43",
+      "3717ed8ae30fb484c3e4b6f6",
+      "6c042c57a41c81afdd9a94ee",
+      "91c8cbe9d450e648af614ca0",
+      "ffc99e18e86dae5c1be416d9",
+      "95b1503bad2b78e9594afe97",
+      "9906e7f24d719cb76d582d58",
+      "8802441121b5a25703c95b90",
+      "96afd8e9c510d045ee539784",
+      "e19a7be565ec6b3b1604b85e",
+      "9199f213e4588425df04a97e",
+      "ea45a10258da54c11be2581f",
+      "0c53215dc48b6ef78715a2d6",
+      "8d5a847dfc2acf76361cf6df",
+      "d3d997de225cd36c40008c89",
+      "a1f749af8defa8f09a5468cd",
+      "099acb4e9e8338738e89806f",
+      "d67d31e44edb6b327b07718a",
+      "320796dd07f2275b26d23b5f",
+      "72620ab17e0807e81324eab5",
+      "f95df91baf96702e327e29bc",
+      "c439bb15ebd35d51e7c17de5",
+      "637fc038c45d573de30fed03",
+      "724d9a32dbace1d4a83423ff",
+      "5847529c6698e7ebcac1a6e0",
+      "c2a0440c31b2f9b5a0d6fa91",
+      "d79e145768cf994a2cf592d0",
+      "7db3e6ee0ebaa96f6521dcfe",
+      "a99e35c55844f5c8e16f9af2",
+      "7ba53eb38e5e7b52efbe3ef3",
+      "11fdc77fda45738e78defd69",
+      "353f3d085728c2c0786c2367",
+      "5e6cf3e02c3910d666638df4",
+      "ecaefc80fbd7349a298ad3a6",
+      "d8b0d678d0c38314e37b74b8",
+      "902312025bcc4faec4666a2f",
+      "1d953f9188b24a1d63b7db16",
+      "0a464545224816d6dda165bf",
+      "63e2f418b088faaf9872647d",
+      "c7d5b2fca55e27003ecaad70",
+      "536cae4e21d832dc88148344",
+      "4a97486d6c18512f4e3e9fec",
+      "b68fec2e70330a6acf539acc"
+    ],
+    "fields": 58,
+    "apiReadback": true
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-remaining.json",
+  "coordination": {
+    "writesPaused": false,
+    "servingRelease": "025980454268fa9841ffab34b119037f348a1a11",
+    "servingIndex": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "newBatchIncluded": false,
+    "doNotDuplicate": [
+      "manual release",
+      "reference reuse",
+      "full China",
+      "UI code",
+      "powertrain coverage audit"
+    ]
+  }
+}

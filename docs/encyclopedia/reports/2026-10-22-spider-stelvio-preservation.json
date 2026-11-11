@@ -1,0 +1,78 @@
+{
+  "spider": {
+    "checkedAt": "2026-10-22T11:12:27.354343+00:00",
+    "modelId": "d9d48f8457c33f7e466d6c6e",
+    "revision": "fd58d4e1-923b-4b00-b30c-d0f68a6c491e",
+    "variants": 35,
+    "duplicateExactNamedIdentities": 0,
+    "passed": true,
+    "baselineVariants": 3,
+    "untouchedPreserved": 3,
+    "newVariants": 32
+  },
+  "stelvio": {
+    "checkedAt": "2026-10-22T11:12:27.359160+00:00",
+    "modelId": "0d734c400f4417df7f272d30",
+    "revision": "0c4d5a97-a22c-4b2c-8c37-dfe2ee36a8eb",
+    "variants": 173,
+    "duplicateExactNamedIdentities": 8,
+    "passed": true,
+    "new2017Variants": 15,
+    "baselineVariants": 158,
+    "untouchedPreserved": 158,
+    "newDuplicateExactNamedIdentities": 0,
+    "preexistingDuplicateNamedExcess": 8,
+    "preexistingDuplicateGroups": [
+      {
+        "year": 2020,
+        "trim": "2.0 turbo 280 ps at8 q4 veloce",
+        "ids": [
+          "3fa7f427de05dc68fd001fc4",
+          "e4840b180924519bd75d22fd"
+        ]
+      },
+      {
+        "year": 2022,
+        "trim": "alfa romeo stelvio",
+        "ids": [
+          "fb9a989f57964fc0192f85c0",
+          "3f12c77e9fcd454ecc9c8537"
+        ]
+      },
+      {
+        "year": 2022,
+        "trim": "2.2 turbo diesel 190 ps at8 q4 sprint",
+        "ids": [
+          "ea80ef32e9ac6b12f92ab00c",
+          "8fccc46ab1b1963303fddc74"
+        ]
+      },
+      {
+        "year": 2022,
+        "trim": "2.2 turbo diesel 210 ps at8 q4 veloce",
+        "ids": [
+          "f018e72a6dbb367cf9a03370",
+          "c20facbfa1a7278ed99ca3ea",
+          "550a5b1445d9d1557fc91090"
+        ]
+      },
+      {
+        "year": 2024,
+        "trim": "2.0 turbo 280 ps at8 q4 sprint",
+        "ids": [
+          "29aea0472a884b72569e2bfb",
+          "922e45f4d3e7bf1324a873e6"
+        ]
+      },
+      {
+        "year": 2025,
+        "trim": "2.2 turbo diesel 210 ps at8 q4 veloce",
+        "ids": [
+          "394987de08b9a24517851c6a",
+          "09986a7db475620cad7360ee",
+          "de7c36f0d9be23de2b6517e2"
+        ]
+      }
+    ]
+  }
+}

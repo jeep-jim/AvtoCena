@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-999-mhev-power",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d13dbaae2d2bb417df3289fa",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "30 TFSI S LINE MHEV S tronic | KEYLESS | LED | VIRTUAL COCKPIT | 18\" | ZETELVERW. | PDC | CRUISE CONTROL",
+      "expectedDigest": "26e52224ec567bb5390013d04dc602c9277a8a036945ce4cf58046b6702a1008",
+      "patch": {
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-mediacenter.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+        "additionalUrls": [
+          "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_de/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/TD-Audi-A3-Sportback-30-TFSI-S_tronic-81kW-MHEV_230919.pdf",
+          "https://www.audi.gr/dam/nemo/gr/pricelist-prospect/pricelist/old_pricelists/oldpricelists2024/AUDI_pricelist_2024.02.23_with%20extras_MY24.pdf"
+        ],
+        "checkedAt": "2026-10-25",
+        "statement": "Заводские таблицы Audi от 19.09.2023 для обоих кузовов A3 30 TFSI S tronic MHEV подтверждают 999 см³, ДВС 81 кВт/110 PS и передний привод. Официальная таблица Audi MY2024 от 23.02.2024 отдельно подтверждает 999/81/110 для 8YAAKG и 8YSAKG. Сохранённые год2024, 999см³,30TFSI,MHEV и автомат совпадают. Неизвестный кузов не назначается: переносимые поля одинаковы для Sedan и Sportback. 30-минутная и пиковая мощность электромотора не выводятся."
+      }
+    }
+  ]
+}

@@ -1,0 +1,1667 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a5l-exact",
+  "entries": [
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "8954e594f1cd847e4f62773d",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2026款 2.0T 全域智混版 quattro",
+      "expectedDigest": "a3dc015f8469393f601c182bf049bc968ecfdd3c262a11c497cbbebc17bc68da",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2430,
+        "trim": "2.0T All-domain Hybrid Edition quattro"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T All-domain Hybrid Edition quattro. Заводская таблица, стр. 14: 1984 см³, ДВС 200 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2430 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 272. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "01bace32e1a4c10db2e6d55c",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2.0T Sport Edition",
+      "expectedDigest": "e620369ad490659f98d43f621f5e580a2aab183d4bd8a0ed26f9fe527e1d0433",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 125,
+        "powerHp": 170,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Sport Edition. Заводская таблица, стр. 14: 1984 см³, ДВС 125 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 170. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "5d0d6e2c4db2c664d7661cd5",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2026款 2.0T 运动版",
+      "expectedDigest": "b1d776a8e8f752c0dde0b60729add7bff4b34529d3f10e49986443d5cae8dffe",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 125,
+        "powerHp": 170,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270,
+        "trim": "2.0T Sport Edition"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Sport Edition. Заводская таблица, стр. 14: 1984 см³, ДВС 125 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 170. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "9a0b8dac56da883edce963e4",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2.0T Sport Edition Plus",
+      "expectedDigest": "2ee8a7d7bd611ef72244ee50325c10dd4021d844675fd1c246084135f8299dbb",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Sport Edition Plus. Заводская таблица, стр. 14: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "f6b120e345cb48f90b136c4f",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2.0T Sport Edition quattro",
+      "expectedDigest": "c3ed3b77bd7f4d56744e051e20fc67a86db910335eef7c985192a82be872251c",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Sport Edition quattro. Заводская таблица, стр. 14: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2340 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "56d1a9c096c481795bed91b9",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2.0T 乾崑智驾版",
+      "expectedDigest": "1b8100459c20a29f2ade18e9434a0276a7ae0f7c240b65ce21449501ab79d0b6",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280,
+        "trim": "2.0T Qiankun Intelligent Driving Edition"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Qiankun Intelligent Driving Edition. Заводская таблица, стр. 14: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "1b3e0a9dec030e45297653cf",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2026款 2.0T 运动版 Plus",
+      "expectedDigest": "a846226f1169067927efb3deedcafd5b16d5ec5b8bb5801a63e793fe2ddb48d0",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280,
+        "trim": "2.0T Sport Edition Plus"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Sport Edition Plus. Заводская таблица, стр. 14: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "4d1aa409a79b4b0a26438208",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2026款 2.0T 乾崑智驾版",
+      "expectedDigest": "d60623f7adc64bb7325669447337c2e5b8c5393c38f864fac8b8798dbea3a343",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280,
+        "trim": "2.0T Qiankun Intelligent Driving Edition"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Qiankun Intelligent Driving Edition. Заводская таблица, стр. 14: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "e30ac9b2f52d815e3f585f14",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2026,
+      "trim": "2026款 2.0T 运动版 quattro",
+      "expectedDigest": "e4885aaee9349758a6463cc9a41142f87dbabc198019490a036b7d86f6b37f54",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2340,
+        "trim": "2.0T Sport Edition quattro"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2026.Q2, точная версия 2.0T Sport Edition quattro. Заводская таблица, стр. 14: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2340 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a5/0421/A5L%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.Q2",
+            "pages": [
+              14
+            ],
+            "sha256": "603a9c4e1c0849afb398b3e76561b1e56aa9e4335c23eaceb80422781dd21e27",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "0ad258fef073edaa770e2ac9",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2025,
+      "trim": "2.0T Sport Edition",
+      "expectedDigest": "0093194929ce684daf68bb7024eee0850abde0710e806d28f9c43b78ec0171ff",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 125,
+        "powerHp": 170,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2025.Q4, точная версия 2.0T Sport Edition. Заводская таблица, стр. 13: 1984 см³, ДВС 125 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 170. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+            "edition": "2025.Q4",
+            "pages": [
+              13
+            ],
+            "sha256": "afeead63242586becfdb2fddbdc70965739f0fc6160acda8fc6a80da9b95dab5",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "a49fa0b7dfff45ba734c2691",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2025,
+      "trim": "2.0T Sport Edition Plus",
+      "expectedDigest": "6c353c5bf46fb59a7894f7c3f4e6f7cedf8d527496a422c7a851c79a9d5843f7",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2025.Q4, точная версия 2.0T Sport Edition Plus. Заводская таблица, стр. 13: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+            "edition": "2025.Q4",
+            "pages": [
+              13
+            ],
+            "sha256": "afeead63242586becfdb2fddbdc70965739f0fc6160acda8fc6a80da9b95dab5",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "0104085198d674d532f379d9",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2025,
+      "trim": "2025 2.0T Sport Edition Plus",
+      "expectedDigest": "cc8788100a93ed620f4d46fe026496ac227352e853f07ba18f559b0bab588600",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2025.Q4, точная версия 2.0T Sport Edition Plus. Заводская таблица, стр. 13: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+            "edition": "2025.Q4",
+            "pages": [
+              13
+            ],
+            "sha256": "afeead63242586becfdb2fddbdc70965739f0fc6160acda8fc6a80da9b95dab5",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "6ef3d67a29f6e1ff2ec080b9",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2025,
+      "trim": "2.0T 乾崑智驾版",
+      "expectedDigest": "0a8618e8bb6193fa88be4a048794e8600345bab59caddcab1b793dc8f77138de",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2280,
+        "trim": "2.0T Qiankun Intelligent Driving Edition"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2025.Q4, точная версия 2.0T Qiankun Intelligent Driving Edition. Заводская таблица, стр. 13: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2280 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+            "edition": "2025.Q4",
+            "pages": [
+              13
+            ],
+            "sha256": "afeead63242586becfdb2fddbdc70965739f0fc6160acda8fc6a80da9b95dab5",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e024a48871eadd5a09dc133b",
+      "variantId": "af5da7d8216b73c99e63c8d1",
+      "make": "Audi",
+      "model": "A5L",
+      "year": 2025,
+      "trim": "2.0T Sport Edition quattro",
+      "expectedDigest": "ebb3fba18961024a737722beb3a57843ffae3bf664a51eaa3ef61024fcacfaef",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2340
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A5L, редакция 2025.Q4, точная версия 2.0T Sport Edition quattro. Заводская таблица, стр. 13: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2340 кг (не снаряжённая). Л.с. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Год сопоставлен с датированной редакцией; год записи не изменён. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a5l1031/%E4%B8%80%E6%B1%BD%E5%A5%A5%E8%BF%AA_A5L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5NEW.pdf",
+            "edition": "2025.Q4",
+            "pages": [
+              13
+            ],
+            "sha256": "afeead63242586becfdb2fddbdc70965739f0fc6160acda8fc6a80da9b95dab5",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "efb940b0e1629da8922f61d3",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI quattro 200kW 旗舰型",
+      "expectedDigest": "776ede02065defe62278c58a2e02b931b583f3a6b89389df68e65b6f5ecc73ca",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2430,
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "trim": "TFSI quattro 200kW Flagship"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI quattro 200kW Flagship. Заводская таблица, стр. 3: 1984 см³, ДВС 200 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2430 кг (не снаряжённая). 272 PS указаны заводом; MHEV plus указан для этой колонки. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "b8009e4262b7f8e22e088c15",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI quattro 200kW 旗舰智曜型",
+      "expectedDigest": "103b948e4beeaf431f7f01185c7f3a94b1d62c24d2915e45a1a6845f3814cdf3",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2430,
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "trim": "TFSI quattro 200kW Flagship Zhiyao"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI quattro 200kW Flagship Zhiyao. Заводская таблица, стр. 3: 1984 см³, ДВС 200 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2430 кг (не снаряжённая). 272 PS указаны заводом; MHEV plus указан для этой колонки. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "64c997927b316dbeb011a3d3",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 焕新款 TFSI quattro 200kW 旗舰智曜型",
+      "expectedDigest": "15c372a715eb7331fce93397eca450666754f296f665fa6f45d810d53530cc1b",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2430,
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "trim": "Refreshed TFSI quattro 200kW Flagship Zhiyao"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI quattro 200kW Flagship Zhiyao. Заводская таблица, стр. 3: 1984 см³, ДВС 200 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2430 кг (не снаряжённая). 272 PS указаны заводом; MHEV plus указан для этой колонки. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "4053022f6a818e4fd353bf1d",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 焕新款 TFSI quattro 200kW 旗舰型",
+      "expectedDigest": "51b5f8b24ed99a5c4bc0e8529ab81f8579fccd8132af48357edb996b6d2b4e18",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2430,
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "trim": "Refreshed TFSI quattro 200kW Flagship"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI quattro 200kW Flagship. Заводская таблица, стр. 3: 1984 см³, ДВС 200 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2430 кг (не снаряжённая). 272 PS указаны заводом; MHEV plus указан для этой колонки. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "bd461a329ad2d31351d323c6",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "焕新款 TFSI 150kW 豪华型",
+      "expectedDigest": "0cddd705d6161aa615213510ef206e37b548f0e630eef9e01fa823129cb1b7d3",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "Refreshed TFSI 150kW Luxury"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI 150kW Luxury. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "9c39a5011f3b1c678f702c3f",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "TFSI 150kW Premium quattro Type",
+      "expectedDigest": "4899e6aa9f0b6d227b534a6b8d19fd85526ba4d8f22184a3ba3493e2f49b46fb",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2335,
+        "fuel": "petrol",
+        "powertrainKind": "combustion"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI 150kW Premium quattro. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2335 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "391b92c413dc94bb899e5f44",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 焕新款 TFSI 150kW 豪华型",
+      "expectedDigest": "881daf68c4aa078f87e269acc238cd3e8774bd2fbdafbe71a41a2a1c1af9b768",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "Refreshed TFSI 150kW Luxury"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI 150kW Luxury. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "762722f03220c49f3edbfd2c",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI 150kW 豪华型",
+      "expectedDigest": "8364e327a40d0269dbfdeb7456777d27df19e4574ff088452f1b539e97a3bacd",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "TFSI 150kW Luxury"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI 150kW Luxury. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "d99c9c0551aa8cdc653292c3",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 焕新款 TFSI 150kW 尊享quattro型",
+      "expectedDigest": "6c0354db742807004112a162437f6984b1d97247a4730ea7e4260a25f7ab735a",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2335,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "Refreshed TFSI 150kW Premium quattro"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI 150kW Premium quattro. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2335 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "9b10f257f3c22bd472a34924",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI 150kW 尊享quattro型",
+      "expectedDigest": "6554f1d62afae4d04e5fca40f71fec77b03a0434dcb11e18d78d7234a04723cb",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2335,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "TFSI 150kW Premium quattro"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI 150kW Premium quattro. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2335 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "eeeb992bc2085e8b54cda23c",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 焕新款 TFSI 150kW 智领型",
+      "expectedDigest": "162637589d01f0821677f830ebc754f02630211e3c397ee8efb968c9162ca179",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "Refreshed TFSI 150kW Zhiling"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI 150kW Zhiling. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "362848e5c25c90e4e2305985",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI 150kW 智领型",
+      "expectedDigest": "2a1e3c9942f85fed172d2eb56a0802421d8d61c215498cbd96608dd8f376e712",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2270,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "TFSI 150kW Zhiling"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI 150kW Zhiling. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2270 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "603ba007c8f6299b1db9bbfa",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI quattro 150kW 红运限定版",
+      "expectedDigest": "1fbd665d8e4c10d15fb0ca0e526eea80fc404b5e35853c1864fd0fcf3bd306ad",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2335,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "TFSI quattro 150kW Hongyun Limited Edition"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI quattro 150kW Hongyun Limited Edition. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2335 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "383f5bd156ee1a14a4a1359a",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 焕新款 TFSI 150kW 智领quattro型",
+      "expectedDigest": "93570e9c73e0da05e1f029cd48857e0a87971f86e613d8f7be9c51352163636f",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2335,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "Refreshed TFSI 150kW Zhiling quattro"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026 Refreshed, точная версия Refreshed TFSI 150kW Zhiling quattro. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2335 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260511/20260324-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_2026%E7%84%95%E6%96%B0%E6%AC%BE_1920x1080px.pdf",
+            "edition": "2026 Refreshed",
+            "pages": [
+              3
+            ],
+            "sha256": "9dc5daa8600a8ed7901f14cef5784bba30afc0ac74445771843532c6bcfb9fdc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "47f57970b91ad3f3a25ad452",
+      "variantId": "a6e5bae29a4e4f413d89fafc",
+      "make": "Audi",
+      "model": "A5L Sportback",
+      "year": 2026,
+      "trim": "2026款 TFSI 150kW 智领quattro型",
+      "expectedDigest": "98852b0551c5791869da36702c961a1ffa6d9375a04dbdff69be99d355012b68",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2335,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "trim": "TFSI 150kW Zhiling quattro"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "fuel",
+        "powertrainKind",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A5L Sportback, редакция 2026, точная версия TFSI 150kW Zhiling quattro. Заводская таблица, стр. 3: 1984 см³, ДВС 150 кВт, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2335 кг (не снаряжённая). 204 PS указаны заводом; Гибридная система отсутствует в этой колонке. Стандартная и обновлённая версии проверены по разным таблицам. Название комплектации передано по-английски; Qiankun/Zhiling/Zhiyao/Hongyun — транслитерация собственных названий. Код двигателя, тяговая электрическая, системная и 30-минутная мощности этим источником не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/A5L/20260103/1223-%E5%A5%A5%E8%BF%AAA5L%20sportback%E9%85%8D%E7%BD%AE%E8%A1%A8_1920x1080px(1).pdf",
+            "edition": "2026",
+            "pages": [
+              3
+            ],
+            "sha256": "4e7cc9b640b61fc4e018274b04212975c1422e1e94dc64bfecdfbf4373bf83d1",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "fuel",
+              "powertrainKind",
+              "trim"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerOrGovernmentIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 6,
+    "newModels": 6,
+    "officialManufacturerSources": 5,
+    "officialGovernmentSources": 6,
+    "newMlitWorkbookSources": 6,
+    "totalNewSources": 11,
+    "modelsWithMlitIntersection": 6
+  },
+  "reviewed": [
+    {
+      "id": "lexus/gs",
+      "canonicalName": "GS",
+      "officialSourceId": "src-lexus-gs-japan-archive-2026",
+      "exactSourceNames": [
+        "GS200t",
+        "GS250",
+        "GS300",
+        "GS300h",
+        "GS350",
+        "GS450h"
+      ],
+      "mlitCandidateIdentities": 6,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "lexus/hs",
+      "canonicalName": "HS",
+      "officialSourceId": "src-lexus-hs-japan-archive-2026",
+      "exactSourceNames": [
+        "HS250h"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "volvo/xc70",
+      "canonicalName": "XC70",
+      "officialSourceId": "src-volvo-xc70-japan-archive-2026",
+      "exactSourceNames": [
+        "ボルボXC70"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "land-rover/freelander-2",
+      "canonicalName": "Freelander 2",
+      "officialSourceId": "src-land-rover-freelander-2-japan-archive-2026",
+      "exactSourceNames": [
+        "フリーランダー 2"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "id": "abarth/124-spider",
+      "canonicalName": "124 Spider",
+      "officialSourceId": "src-abarth-124-spider-japan-archive-2026",
+      "exactSourceNames": [
+        "Abarth 124 Spider"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2023
+      ]
+    },
+    {
+      "id": "dodge/nitro",
+      "canonicalName": "Nitro",
+      "officialSourceId": "src-dodge-nitro-nhtsa-vpic-2026",
+      "exactSourceNames": [
+        "ナイトロ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ]
+    }
+  ]
+}

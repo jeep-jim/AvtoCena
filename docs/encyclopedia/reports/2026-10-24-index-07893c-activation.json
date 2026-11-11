@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "state": "installed_and_public_gates_verified",
+  "release": "10f4579b9f8adc91aaef49c435923c466f4fd9bc",
+  "workflow": 40012399412,
+  "job": 120616099378,
+  "indexDigest": "07893c43e0f82e0b724c9d03b0dfeac013d3f4f9f23cca7cc6d19254fc55c417",
+  "manifestDigest": "8ff1e7043f54a2f3a3f5e97c455fe43e1d627a42279155a9fbe16d426623c69b",
+  "snapshotCreatedAt": "2026-10-23T19:38:17.506Z",
+  "coverageArtifact": 12526853496,
+  "coverageArtifactSha256": "729deca9759195ec9030a8e94391d088fb6c1ddf8aa43344be1bc155c86ae0a2",
+  "coverage": {
+    "brands": 271,
+    "models": 4451,
+    "variants": 345392,
+    "requiredValuesPresent": 49806,
+    "requiredValuesSupported": 48149
+  },
+  "models": [
+    {
+      "id": "f40e34e905b8ca09f3636eda",
+      "make": "Audi",
+      "model": "A3",
+      "revision": "9315ca88-ca6b-4671-87ac-adebad6c751f",
+      "variants": 3663
+    },
+    {
+      "id": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "revision": "e0da5d62-1767-4de7-84e2-0749ee79bc94",
+      "variants": 3723
+    }
+  ],
+  "astraVerification": {
+    "version": 1,
+    "indexDigest": "07893c43e0f82e0b724c9d03b0dfeac013d3f4f9f23cca7cc6d19254fc55c417",
+    "manifestDigest": "8ff1e7043f54a2f3a3f5e97c455fe43e1d627a42279155a9fbe16d426623c69b",
+    "verified": true,
+    "plans": [
+      {
+        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+        "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+        "plans": 1,
+        "models": 2895,
+        "annualVariants": 5,
+        "calculationFields": 31,
+        "descriptiveFields": 1,
+        "unknownYearVariantsOutsideIndex": 230447,
+        "annualChanges": [
+          {
+            "modelId": "0d734c400f4417df7f272d30",
+            "make": "Alfa Romeo",
+            "model": "Stelvio",
+            "variantId": "1d1981aef0a48ea44141e130",
+            "year": 2020,
+            "trim": "Super Q4 8-FACH-ALU*NAVI*CARPLAY*RFK*PDC",
+            "fields": {
+              "powerKw": 206,
+              "icePowerKw": 206
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "2c88956153fa4e45660291bf",
+            "year": 2025,
+            "trim": "M35i xDrive LED~HEADUP~KAMERA360~H&K~ACC~",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "572ad1ae2ab2c50aa5092d1d",
+            "year": 2025,
+            "trim": "M35i xDrive AHK|20\"LM|Head-Up|Parkassist.-Plu",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "724ccf336cb1e7aacb4eec9e",
+            "year": 2023,
+            "trim": "M35i xDrive",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "e71c8376467b1da6bc08a8b7",
+            "make": "BMW",
+            "model": "i5",
+            "variantId": "c31f0df22cec7cf907072ca6",
+            "year": 2026,
+            "trim": "xDrive40 Touring",
+            "fields": {
+              "fuel": "electric",
+              "powertrainKind": "electric",
+              "powerKw": 290,
+              "motorPeakKw": 290,
+              "transmission": "automatic",
+              "engineCode": "HA0002N0"
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv"
+          }
+        ]
+      }
+    ]
+  },
+  "dbxRepair": {
+    "workflow": 40010362345,
+    "job": 120608866265,
+    "verified": true,
+    "changedObjects": 6,
+    "changedValues": 0,
+    "artifact": 12526726820,
+    "artifactSha256": "d91a13367a884c21442e45f0317bb42c0f1f2ef7a011bcb525931c3305b3ca79",
+    "report": "docs/diagnostics/2026-10-24-dbx-fuel-evidence-apply.json"
+  },
+  "publicAcceptance": {
+    "report": "docs/diagnostics/2026-10-24-dbx-10f4579-public-acceptance.json",
+    "dbxTargetParity": true,
+    "comparedFields": 12,
+    "budgetBoundary": true,
+    "visualAccepted": false
+  },
+  "pendingCodeOutsideRelease": [
+    "1f207982be86b1d39edad08bae0d04c393075175"
+  ],
+  "limitations": [
+    "Coverage does not certify every factory field or price.",
+    "A3 body parity fix is outside this release.",
+    "Production owner/manager bot roles and visual acceptance remain open."
+  ],
+  "checkedAt": "2026-10-23T20:09:16Z",
+  "activatedAt": "2026-10-23T20:04:53.973Z",
+  "workflowConclusion": "success",
+  "calculationVersion": "2145c6c096c58083c21251fa53653e0977ccb1631c44b92385e44e436c7eb322",
+  "requiredBatchVerification": {
+    "batches": 22,
+    "variants": 606,
+    "fields": 817,
+    "identityFields": 7,
+    "descriptiveFieldsOutsideIndex": 48,
+    "verified": true
+  },
+  "publicEncyclopediaGate": {
+    "groups": 22,
+    "variants": 303,
+    "fields": 447,
+    "verified": true,
+    "finishedAt": "2026-10-23T20:05:27.749Z",
+    "artifact": 12528961379,
+    "artifactSha256": "b9445cfafd12bfa048b9051f35b48fe871f5e606ef65a8c926471a2e7817ad26"
+  },
+  "newlyActivatedBatches": [
+    "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a6-2020-2024-avant-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-tail-body.json"
+  ],
+  "newlyActivatedFields": 163,
+  "postSnapshotBatches": [
+    "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-body.json"
+  ],
+  "postSnapshotFields": 50
+}

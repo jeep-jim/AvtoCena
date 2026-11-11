@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-24T12:13:02.685009+00:00",
+  "passed": true,
+  "modelId": "2ab5223df203c25d980af841",
+  "variantId": "453b9230d027ab3fd83e6b81",
+  "beforeRevision": "3778856d-e77e-5f62-a908-625c7f2eecbc",
+  "afterRevision": "4a1f8a6c-e146-46b1-8a8a-f03056e926e8",
+  "fields": {
+    "fuel": "petrol",
+    "powertrainKind": "combustion",
+    "engineCode": "R06A",
+    "powerHp": 46,
+    "powerKw": 34,
+    "icePowerKw": 34
+  },
+  "changedFields": [
+    "status",
+    "powerHp",
+    "engineCode",
+    "icePowerKw",
+    "powertrainKind",
+    "fuel",
+    "powerKw"
+  ],
+  "untargetedUnchanged": 2,
+  "engineCcPreserved": 660,
+  "driveStillUnknown": true,
+  "power30MinStillUnknown": true,
+  "privateProvenanceExposed": false
+}

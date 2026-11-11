@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T04:05:43.479Z",
+  "next": {
+    "modelId": "0f90ccb1a0cf0280fa416811",
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "revision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2",
+    "variants": 66,
+    "priorityYears": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "action": "Продолжить поздние Vantage/F1 Edition и общие подтверждённые поля существующей V8 2023. Не повторять31новуюверсию13–16/20–21 и уточнения19/25. Неподтверждённое — retry, затем существующий Audi A1."
+  },
+  "nextModelAfterThisGroup": {
+    "modelId": "d5a8af35e3698aa33eaea9a9",
+    "make": "Audi",
+    "model": "A1",
+    "action": "Следующая существующая модель очереди; старый проход доAudiA8 не означает полноты."
+  },
+  "sourceLeads": [
+    {
+      "url": "https://media.astonmartin.com/aston-martin-celebrates-110th-anniversary-with-reveal-of-special-logo-on-amr23-formula-1-car-84253",
+      "date": "2023-02-13",
+      "status": "Найден первичный релиз: продолжение производства Vantage F1 Edition в2023 и535PS. Полную таблицу/кузова/год проверить; в эту партию не записано."
+    },
+    {
+      "url": "https://media.astonmartin.com/aston-martin-opens-its-doors-to-santan-dave-and-stormzy",
+      "date": "2021-07-29",
+      "status": "Найден первичный релиз:20 Vantage F1 Edition перед поставкой. Годовая/кузовная спецификация ещё не подтверждена."
+    },
+    {
+      "url": "https://media.astonmartin.com/introducing-new-vantage-engineered-for-real-drivers/?lang=eng",
+      "date": "2024-02-12",
+      "status": "Заводской релиз новой Vantage; не переносить25MY на2024 без отдельного подтверждения фактического года."
+    }
+  ],
+  "completedBatch": {
+    "id": "research-2026-10-23-aston-vantage",
+    "commit": "cb13e69a63b8cf5ab11e1b2f513736e1a04f687d",
+    "workflow": 39898174510,
+    "job": 120233346531,
+    "newVariants": 31,
+    "updatedVariants": 2,
+    "fields": 247,
+    "compiledCalculationFields": 214,
+    "apiReadback": true,
+    "repeatBatch": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-remaining.json",
+  "allModelsComplete": false,
+  "index": {
+    "observedRelease": "2c88879b72463fa02e7eeba9a2d0529ac5f578d7",
+    "observedCalculationVersion": "d700f68f2c1e0d14574433e613b9346b06f495ac80cc7adf6ae408225a1de14e",
+    "activeIndexFromVerifiedActivation": "3e2d3574026706d7bce8a2885c38bd8b2e8cf5da4ff97a4d2713769d3c9593b4",
+    "previous14BatchesActivated": true,
+    "activationConfirmed": false,
+    "newBatchMembership": "saved_after_active_3e2d35_snapshot",
+    "duplicateReleaseRequested": false,
+    "nextAction": "Включить только новую Vantage-партию в следующий согласованный штатный индекс/подготовку цен. Прежние14активированных не повторять. Не запускать слепой deploy с неподтверждённым переносом DBX fuel provenance; этот участок сопровождается отдельно.",
+    "blockingContext": "В main есть неустановленное generic DBX fuel confirmation изменение; старые проекции требуют bounded переноса и приёмки. Исследовательская задача не меняет этот код/данные и не запускает второй независимый выпуск."
+  }
+}

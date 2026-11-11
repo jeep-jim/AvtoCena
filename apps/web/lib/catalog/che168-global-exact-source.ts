@@ -1,0 +1,625 @@
+import {assertCollectionEnabled} from './collection-controls';
+import { che168BoundPageParameters, che168BoundApiParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
+import crypto from "node:crypto";
+import { chinaSourceProductionDate } from "./china-owner-policy";
+import { stableOfferId } from "./storage";
+import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { canonicalSourceFuel } from "./powertrain-safety";
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
+
+const API_BASE = "https://globalapi.che168.com";
+const SITE_BASE = "https://global.che168.com";
+const APP_ID = "2046";
+const PAGE_SIZE = 24;
+// Che168 exposes the complete dealer inventory through vehicle_list=1.
+// vehicle_list=0 is only the much smaller promoted/certified lane and cannot
+// represent the available Global inventory on its own.
+const FULL_INVENTORY_LIST = 1;
+const HEADERS = {
+  accept: "application/json,text/plain,*/*",
+  "accept-language": "en-US,en;q=0.9,zh-CN;q=0.7",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  origin: SITE_BASE,
+  referer: `${SITE_BASE}/en/used-cars`,
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+};
+const IMAGE_RE = /^https:\/\/erscglobal2\.autoimg\.cn\/escimg\/auto\/.+\/1400x0_c42_autohomecar__.+\.(?:jpe?g|webp|png|avif)(?:[?#].*)?$/i;
+
+export type Che168GlobalListRow = {
+  infoid: number;
+  carname?: string;
+  cname?: string;
+  brandname?: string;
+  seriesname?: string;
+  specname?: string;
+  dealerid?: number;
+  mileage?: string | number;
+  price?: string | number;
+  regdate?: string;
+  fuelname?: string;
+  imageurl?: string;
+  cert_status?: number;
+  claim_status?: number;
+  mr_status?: number;
+};
+
+type Che168GlobalDetail = Che168GlobalListRow & {
+  brandid?: number;
+  seriesid?: number;
+  specid?: number;
+  dealeid?: number;
+  producedate?: string;
+  yearname?: string;
+  engine?: string;
+  gearbox?: string;
+  steering?: string;
+  drivingmode?: string;
+  level?: string;
+  setcount?: string | number;
+  structuredoor?: string | number;
+  structure?: string;
+  color?: string;
+  dimension?: string;
+  curbweight?: string | number;
+  catepiclist?: Array<{ title?: string; list?: string[] }>;
+  paramkey?: string;
+  report_url?: string;
+  export_fee?: string | number;
+  port_fee?: string | number;
+  vincode?: string;
+  remark?: string;
+  manufacturedate?: string;
+};
+
+type ApiEnvelope<T> = {
+  returncode?: number;
+  message?: string;
+  result?: T;
+};
+
+type SearchResult = {
+  totalcount?: number;
+  pagesize?: number;
+  pageindex?: number;
+  pagecount?: number;
+  queryid?: string;
+  carlist?: Che168GlobalListRow[];
+};
+
+type BrandPartition = { id: string; name: string };
+
+function che168BrandPartitions(payload: unknown) {
+  const found = new Map<string, BrandPartition>();
+  const visit = (value: unknown, depth = 0) => {
+    if (depth > 8 || value == null) return;
+    if (Array.isArray(value)) { for (const item of value) visit(item, depth + 1); return; }
+    if (typeof value !== "object") return;
+    const row = value as Record<string, unknown>;
+    const id = text(row.brandid ?? row.brandId ?? row.bid ?? row.id);
+    if (/^\d+$/.test(id)) found.set(id, { id, name: text(row.brandname ?? row.brandName ?? row.name ?? row.label) });
+    for (const child of Object.values(row)) if (child && typeof child === "object") visit(child, depth + 1);
+  };
+  visit(payload);
+  const preferred = /toyota|honda|nissan|volkswagen|mazda|hyundai|kia|suzuki|chevrolet|ford|geely|chery|changan|haval|gac|wuling/i;
+  return [...found.values()].sort((a, b) => Number(!preferred.test(a.name)) - Number(!preferred.test(b.name))
+    || a.name.localeCompare(b.name, "en") || Number(a.id) - Number(b.id));
+}
+
+function text(value: unknown) {
+  return String(value ?? "").replace(/\s+/g, " ").trim();
+}
+function positiveNumber(value: unknown) {
+  const n = Number(String(value ?? "").replace(/,/g, "").trim());
+  return Number.isFinite(n) && n > 0 ? n : undefined;
+}
+function integer(value: unknown) {
+  const n = positiveNumber(value);
+  return n ? Math.round(n) : undefined;
+}
+function yearOf(row: Pick<Che168GlobalListRow, "specname" | "carname" | "regdate"> & Partial<Pick<Che168GlobalDetail, "yearname" | "producedate" | "manufacturedate">>) {
+  const candidates = [row.specname, row.carname, row.yearname, row.producedate, row.manufacturedate, row.regdate];
+  for (const value of candidates) {
+    const year = Number(text(value).match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
+    if (year >= 1980 && year <= new Date().getUTCFullYear() + 1) return year;
+  }
+  return 0;
+}
+function modelOf(make: string, series: string) {
+  const normalized = text(series);
+  if (!normalized) return "";
+  const escaped = make.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return normalized.replace(new RegExp(`^${escaped}\\s+`, "i"), "").trim() || normalized;
+}
+type Che168EvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+
+type Che168MetricEvidence = {
+  value?: number;
+  rawValues: string[];
+  status: Che168EvidenceStatus;
+};
+
+type Che168FuelEvidence = {
+  value?: string;
+  rawValues: string[];
+  status: Che168EvidenceStatus;
+};
+
+function rounded(value: number) {
+  return Math.round(value * 10) / 10;
+}
+
+function explicitRange(value: string) {
+  return /\d\s*(?:-|–|—|~|～|至|到)\s*\d/.test(value);
+}
+
+function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che168MetricEvidence {
+  const raw = text(rawValue);
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  if (explicitRange(raw)) return { rawValues, status: "ambiguous" };
+
+  const values: number[] = [];
+  if (field === "engineCc") {
+    for (const match of raw.matchAll(/\b(\d{3,5})\s*(?:cc|cm3|cm³|mL)(?![a-z0-9³])/gi)) {
+      const value = integer(match[1]);
+      if (value && value >= 300 && value <= 10_000) values.push(value);
+    }
+    // Litres can reveal conflicting labels, but never attest exact cc.
+    const litreLabels = [...raw.matchAll(/\b(\d+(?:[.,]\d+)?)\s*[LT]\b/gi)].map(match => Number(match[1].replace(",", ".")));
+    if (new Set(litreLabels).size > 1) return { rawValues, status: "conflict" };
+    if (values.length && litreLabels.some(litres => values.some(cc => Math.abs(cc / 1_000 - litres) > 0.051))) return { rawValues, status: "conflict" };
+  } else {
+    for (const match of raw.matchAll(/(?<![\d.])(\d{2,4}(?:[.,]\d+)?)\s*(?:horsepower|hp|ps|bhp)(?=\b|[LVIW]\d)/gi)) {
+      const value = Number(match[1].replace(",", "."));
+      if (Number.isFinite(value) && value >= 20 && value <= 2_500) values.push(rounded(value));
+    }
+    for (const match of raw.matchAll(/\b(\d{2,4}(?:[.,]\d+)?)\s*kW\b/gi)) {
+      const value = Number(match[1].replace(",", "."));
+      if (Number.isFinite(value) && value >= 10 && value <= 2_000) values.push(rounded(value * 1.3596216173));
+    }
+  }
+
+  const unique = [...new Set(values)];
+  if (!unique.length) return { rawValues, status: "missing" };
+  if (Math.max(...unique) - Math.min(...unique) > (field === "powerHp" ? 1 : 0)) {
+    return { rawValues, status: "conflict" };
+  }
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function che168Fuel(value: unknown) {
+  // Literal Russian label returned by Che168 specparam for Range Extender.
+  const label = text(value);
+  return canonicalSourceFuel(/^Продл[её]нный запас хода$/i.test(label) ? 'Range Extender' : label);
+}
+
+function fuelEvidence(...raw: unknown[]): Che168FuelEvidence {
+  const rawValues = [...new Set(raw.map(text).filter(Boolean))];
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const canonical = rawValues.map(che168Fuel);
+  if (canonical.some((value) => !value)) return { rawValues, status: "ambiguous" };
+  const unique = [...new Set(canonical as string[])];
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function yearEvidence(...raw: unknown[]): Che168MetricEvidence {
+  const values = raw.map(Number).filter((value) => Number.isInteger(value) && value >= 1980 && value <= new Date().getUTCFullYear() + 1);
+  const rawValues = values.map(String);
+  if (!values.length) return { rawValues, status: "missing" };
+  const unique = [...new Set(values)];
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function powertrainKindForFuel(fuel: string | undefined, ...rawValues: unknown[]) {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid" && /range[ -]?(?:extender|extended)|extended[ -]?range|增程/i.test(rawValues.map(text).join(" "))) return "series_hybrid" as const;
+  if (fuel === "hybrid") return "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
+}
+
+export function che168GlobalSpecificationEvidence(args: {
+  listingYear?: unknown;
+  detailYear?: unknown;
+  listingFuel?: unknown;
+  detailFuel?: unknown;
+  detailEngine?: unknown;
+}) {
+  return {
+    year: yearEvidence(args.listingYear, args.detailYear),
+    fuel: fuelEvidence(args.listingFuel, args.detailFuel),
+    engineCc: metricEvidence(args.detailEngine, "engineCc"),
+    powerHp: metricEvidence(args.detailEngine, "powerHp"),
+  };
+}
+function sourceUrl(id: string | number) {
+  return `${SITE_BASE}/en/detail/${id}`;
+}
+function remoteImage(url: string): CatalogImage {
+  const mimeType = /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.avif(?:[?#]|$)/i.test(url) ? "image/avif" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : "image/jpeg";
+  return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType };
+}
+function exactGallery(detail: Che168GlobalDetail) {
+  const urls = (detail.catepiclist || [])
+    .flatMap((group) => Array.isArray(group?.list) ? group.list : [])
+    .map((url) => text(url))
+    .filter((url) => IMAGE_RE.test(url));
+  return [...new Set(urls)].slice(0, Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))));
+}
+
+export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
+  sourceId = "autohome_used_china_open";
+  market = "china" as const;
+  accessMode = "public_json" as const;
+  private readonly deviceId = crypto.randomUUID();
+  private parameterPageBlocked: string | null = null;
+  private specificationApiBlocked = false;
+  private specificationOptionsBlocked = false;
+  private specificationCache = new Map<number, Promise<{parameters: any; options: any}>>();
+  private brandPartitionsPromise: Promise<BrandPartition[]> | null = null;
+
+  private params(extra: Record<string, string | number> = {}) {
+    const params = new URLSearchParams({
+      _appid: APP_ID,
+      deviceid: this.deviceId,
+      language: "en",
+      fromsource: "0",
+    });
+    for (const [key, value] of Object.entries(extra)) params.set(key, String(value));
+    return params;
+  }
+
+  private async getJson<T>(url: string, referer = `${SITE_BASE}/en/used-cars`) {
+    await assertCollectionEnabled('autohome_used_china_open');
+    const response = await fetch(url, {
+      headers: { ...HEADERS, referer },
+      redirect: "error",
+      signal: AbortSignal.timeout(Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
+    });
+    const body = await response.text();
+    if (che168BrowserChallenge(body)) throw new Error("che168_global_bot_challenge");
+    if (!response.ok) throw new Error(`che168_global_http_${response.status}:${url}`);
+    let parsed: ApiEnvelope<T>;
+    try { parsed = JSON.parse(body) as ApiEnvelope<T>; }
+    catch { throw new Error(`che168_global_invalid_json_${response.status}:${url}`); }
+    if (Number(parsed.returncode) !== 0 || !parsed.result) {
+      throw new Error(`che168_global_api_error_${parsed.returncode ?? "unknown"}:${text(parsed.message)}`);
+    }
+    return { response, result: parsed.result };
+  }
+
+  private brandPartitions() {
+    if (!this.brandPartitionsPromise) this.brandPartitionsPromise = (async () => {
+      const params = this.params({ language: "en" });
+      try {
+        const { result } = await this.getJson<unknown>(`${API_BASE}/api/v1/brand?${params.toString()}`);
+        const partitions = che168BrandPartitions(result);
+        if (partitions.length) return partitions;
+      } catch {
+        // The unpartitioned full-inventory lane remains a safe fallback. Its
+        // health report makes the reduced coverage explicit if brand discovery
+        // is temporarily unavailable.
+      }
+      return [{ id: "", name: "all" }];
+    })();
+    return this.brandPartitionsPromise;
+  }
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const partitions = await this.brandPartitions();
+    let state = { version: 2, brandIndex: 0, page: 1 };
+    if (cursor?.trim().startsWith("{")) {
+      try {
+        const parsed = JSON.parse(cursor);
+        if (Number(parsed?.version) === 2) state = {
+          version: 2,
+          brandIndex: Math.max(0, Number(parsed.brandIndex || 0)),
+          page: Math.max(1, Number(parsed.page || 1)),
+        };
+      } catch { /* restart safely from the first partition */ }
+    }
+    while (state.brandIndex < partitions.length) {
+      const partition = partitions[state.brandIndex];
+      const params = this.params({ pageindex: state.page, pagesize: PAGE_SIZE, sort: 0, vehicle_list: FULL_INVENTORY_LIST });
+      if (partition.id) params.set("brandid", partition.id);
+      const url = `${API_BASE}/api/v1/search?${params.toString()}`;
+      const { response, result } = await this.getJson<SearchResult>(url);
+      const listed = Array.isArray(result.carlist) ? result.carlist : [];
+      const items = listed.filter((row) => Number(row?.infoid) > 0);
+      const pageCount = Math.max(0, Number(result.pagecount || 0));
+      const totalCount = Math.max(0, Number(result.totalcount || 0));
+      const partitionFinished = !items.length || (pageCount > 0 && state.page >= pageCount);
+      const next = partitionFinished
+        ? { version: 2, brandIndex: state.brandIndex + 1, page: 1 }
+        : { version: 2, brandIndex: state.brandIndex, page: state.page + 1 };
+      const finished = next.brandIndex >= partitions.length;
+      if (items.length) return {
+        items,
+        nextCursor: finished ? null : JSON.stringify(next),
+        finished,
+        count: totalCount || items.length,
+        diagnostics: { listingRows: listed.length, rejectedRows: listed.length - items.length },
+        health: {
+          ok: true,
+          message: `Che168 Global full inventory brand=${partition.name || partition.id || "all"} (${state.brandIndex + 1}/${partitions.length}) page=${state.page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,
+          checkedAt: new Date().toISOString(),
+          httpStatus: response.status,
+          contentType: response.headers.get("content-type") || "",
+        },
+      };
+      state = next;
+    }
+    return { items: [], finished: true, nextCursor: null, count: 0, health: {
+      ok: true,
+      message: `Che168 Global full inventory exhausted ${partitions.length} brand partitions`,
+      checkedAt: new Date().toISOString(),
+    } };
+  }
+
+  normalizeOffer(raw: unknown): VehicleOffer | null {
+    const row = raw as Che168GlobalListRow;
+    const id = String(row?.infoid || "").trim();
+    const make = text(row?.brandname);
+    const model = modelOf(make, text(row?.seriesname));
+    const title = text(row?.carname) || [make, model, text(row?.specname)].filter(Boolean).join(" ");
+    const year = yearOf(row || {});
+    const price = positiveNumber(row?.price);
+    if (!id || !make || !model || !title || !year || !price) return null;
+    const now = new Date().toISOString();
+    const evidence = che168GlobalSpecificationEvidence({ listingYear: year, listingFuel: row?.fuelname });
+    const offer = normalizeVehicleOfferSpecs({
+      id: stableOfferId(this.sourceId, id),
+      sourceId: this.sourceId,
+      sourceOfferId: id,
+      market: "china",
+      offerType: "fixed",
+      status: "active",
+      catalogKind: "listing",
+      sourceTitle: title,
+      make,
+      model,
+      trim: text(row?.specname) || undefined,
+      year,
+      mileageKm: integer(row?.mileage),
+      fuel: evidence.fuel.status === "exact" ? evidence.fuel.value : undefined,
+      powertrainKind: powertrainKindForFuel(evidence.fuel.status === "exact" ? evidence.fuel.value : undefined, row?.fuelname),
+      productionDate: undefined,
+      sourcePrice: price,
+      sourceCurrency: "USD",
+      priceMode: "fixed",
+      images: [],
+      totalRub: null,
+      calculationStatus: "needs_data",
+      firstSeenAt: now,
+      updatedAt: now,
+      operational: {
+        sourceUrl: sourceUrl(id),
+        sourceVenueName: "Che168 Global",
+        sourceTitle: title,
+        sourceCity: text(row?.cname) || undefined,
+        registrationDate: text(row.regdate),
+        exactDetail: false,
+        exactFields: true,
+        exactPhotos: false,
+        galleryVerified: false,
+        galleryImageCount: 0,
+        gallerySafetyMode: "che168_global_carinfo_catepiclist_v1",
+        galleryStoredAs: "json_urls",
+        semanticEvidence: {
+          year: { source: "che168_global_listing", ...evidence.year },
+          fuel: { source: "che168_global_listing", ...evidence.fuel },
+          engineCc: { source: "che168_global_carinfo", ...evidence.engineCc },
+          powerHp: { source: "che168_global_carinfo", ...evidence.powerHp },
+        },
+        raw: { listing: row, detailIdentityVerified: false, photoIdentityVerified: false },
+      },
+    } as VehicleOffer);
+    // Listing titles and trims can contain model-family displacement tokens.
+    // Che168's exact engine/power contract begins only at the identity-bound
+    // carinfo response, so generic normalization must not promote them early.
+    offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    offer.powertrainKind = powertrainKindForFuel(offer.fuel, row?.fuelname);
+    offer.engineCc = undefined;
+    offer.powerHp = undefined;
+    offer.powerKw = undefined;
+    offer.icePowerKw = undefined;
+    offer.utilizationPowerKw = undefined;
+    offer.powerDataConfidence = undefined;
+    offer.powerDataSource = undefined;
+    return offer;
+  }
+
+  private async fetchDetail(offer: VehicleOffer) {
+    const id = String(offer.sourceOfferId || "");
+    if (!/^\d+$/.test(id)) throw new Error("che168_global_invalid_offer_id");
+    const params = this.params();
+    const url = `${API_BASE}/api/v1/carinfo/${id}?${params.toString()}`;
+    const { result } = await this.getJson<Che168GlobalDetail>(url, sourceUrl(id));
+    if (String(result.infoid || "") !== id) throw new Error(`che168_global_detail_identity_mismatch:${id}:${result.infoid || ""}`);
+    return result;
+  }
+
+  private specificationTables(specId: number) {
+    const existing = this.specificationCache.get(specId);
+    if (existing) return existing;
+    const task = (async () => {
+      const parameters = await this.getJson<any>(`${API_BASE}/api/v1/specparam?${this.params({specid:specId,language:"ru"})}`);
+      const options = this.specificationOptionsBlocked ? null : await this.getJson<any>(`${API_BASE}/api/v1/specconfig?${this.params({specid:specId,language:"ru"})}`).catch(error => {
+        if (/http_(401|403|429)/.test(String(error))) this.specificationOptionsBlocked = true;
+        return null;
+      });
+      return {parameters:{returncode:0,result:parameters.result},options:options ? {returncode:0,result:options.result} : null};
+    })();
+    if (this.specificationCache.size >= 512) this.specificationCache.delete(this.specificationCache.keys().next().value!);
+    this.specificationCache.set(specId, task);
+    return task;
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    return this.enrichDetail(offer, await this.fetchDetail(offer));
+  }
+
+  async refreshSavedSpecifications(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const detail = (offer.operational?.raw as any)?.detail as Che168GlobalDetail | undefined;
+    if (offer.sourceId !== this.sourceId || !offer.operational?.exactDetail
+      || String(detail?.infoid) !== String(offer.sourceOfferId) || !detail?.specid) {
+      throw new Error("che168_saved_detail_identity_unverified");
+    }
+    return this.enrichDetail(offer, detail);
+  }
+
+  private async enrichDetail(offer: VehicleOffer, detail: Che168GlobalDetail): Promise<CatalogImage[]> {
+    const id = String(offer.sourceOfferId);
+    const make = text(detail.brandname) || offer.make;
+    const model = modelOf(make, text(detail.seriesname)) || offer.model;
+    const title = text(detail.carname) || offer.sourceTitle;
+    const detailYear = yearOf(detail);
+    const price = positiveNumber(detail.price);
+    let pageParameters: ReturnType<typeof che168BoundPageParameters> = null;
+    let parameterStatus = Number(detail.specid) > 0 ? "not_requested" : "spec_id_missing";
+    if (Number(detail.specid) > 0 && !this.specificationApiBlocked) {
+      try {
+        const tables = await this.specificationTables(Number(detail.specid));
+        pageParameters = che168BoundApiParameters(tables.parameters, tables.options, id, Number(detail.specid));
+        if (pageParameters) parameterStatus = tables.options ? "received_api" : "received_api_parameters_only";
+      } catch (error) {
+        parameterStatus = "specification_api_unavailable";
+        if (/http_(401|403|429)/.test(String(error))) this.specificationApiBlocked = true;
+      }
+    }
+    // Public page carries a table bound to both this listing and this spec ID.
+    if (!pageParameters && Number(detail.specid) > 0 && !this.parameterPageBlocked && !this.specificationApiBlocked) {
+      await assertCollectionEnabled('autohome_used_china_open');
+    const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
+      parameterStatus = response ? `http_${response.status}` : "request_failed";
+      if (response && [401, 403, 429].includes(response.status)) this.parameterPageBlocked = `http_${response.status}`;
+      if (response?.ok) {
+        const markup = await response.text();
+        if (che168BrowserChallenge(markup)) this.parameterPageBlocked = "browser_challenge";
+        else {
+          pageParameters = che168BoundPageParameters(markup, id, Number(detail.specid));
+          parameterStatus = pageParameters ? (pageParameters.groups.length ? "received" : "empty_table") : "identity_bound_table_not_found";
+        }
+      }
+    }
+    let detailEngine = text(detail.engine);
+    const tableFuel = pageParameters?.fuelValues.map(che168Fuel) || [];
+    const tableFuelConsistent = tableFuel.length > 0 && tableFuel.every(fuel => Boolean(fuel) && fuel === che168Fuel(detail.fuelname));
+    if (pageParameters && tableFuelConsistent) {
+      if (pageParameters.engineCc.status === "exact") detailEngine += ` ${pageParameters.engineCc.value} cc`;
+      if (pageParameters.powerHp.status === "exact") detailEngine += ` ${pageParameters.powerHp.value} hp`;
+    }
+    const manufactureDate = chinaSourceProductionDate(detail.manufacturedate || detail.producedate);
+    const manufactureYear = manufactureDate ? Number(manufactureDate.slice(0,4)) : undefined;
+    const evidence = che168GlobalSpecificationEvidence({
+      // Model-year labels describe a trim; a bound manufacturing date describes this car.
+      listingYear: manufactureYear || offer.year,
+      detailYear: manufactureYear || detailYear,
+      listingFuel: ((offer.operational?.raw as any)?.listing as Che168GlobalListRow | undefined)?.fuelname,
+      detailFuel: detail.fuelname,
+      detailEngine,
+    });
+    if (pageParameters && !tableFuelConsistent) evidence.fuel = { rawValues: [String(detail.fuelname || ""), ...pageParameters.fuelValues], status: "conflict" };
+    if (pageParameters && tableFuelConsistent) {
+      if (pageParameters.engineCc.status === "conflict") evidence.engineCc = pageParameters.engineCc;
+      if (pageParameters.powerHp.status === "conflict") evidence.powerHp = pageParameters.powerHp;
+    }
+    // Preserve the literal API witness alongside the combined parameter evidence.
+    // Source-only collectors verify this exact original text, not a rewritten label.
+    for (const field of ["engineCc", "powerHp"] as const) {
+      evidence[field].rawValues = [...new Set([text(detail.engine), ...evidence[field].rawValues].filter(Boolean))];
+    }
+    const gallery = exactGallery(detail);
+    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+    const verifiedGallery = gallery.length >= minimum;
+
+    offer.make = make;
+    offer.model = model;
+    offer.sourceTitle = title;
+    offer.trim = text(detail.specname) || offer.trim;
+    if (evidence.year.status === "exact" && evidence.year.value) offer.year = evidence.year.value;
+    offer.productionDate = manufactureDate || offer.productionDate;
+    offer.mileageKm = integer(detail.mileage) || offer.mileageKm;
+    offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    offer.powertrainKind = powertrainKindForFuel(offer.fuel, ...evidence.fuel.rawValues);
+    offer.engineType = text(detail.engine) || offer.engineType;
+    offer.engineCc = evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
+    offer.transmission = text(detail.gearbox) || offer.transmission;
+    offer.drive = text(detail.drivingmode) || offer.drive;
+    offer.bodyType = text(detail.structure) || offer.bodyType;
+    offer.color = text(detail.color) || offer.color;
+    offer.vin = text(detail.vincode) || offer.vin;
+    if (evidence.powerHp.status === "exact" && evidence.powerHp.value) {
+      offer.powerHp = evidence.powerHp.value;
+      offer.powerKw = Math.round((evidence.powerHp.value * 0.73549875) * 10) / 10;
+      offer.powerDataConfidence = "source_exact";
+      offer.powerDataSource = "Che168 Global carinfo API";
+    } else {
+      offer.powerHp = undefined;
+      offer.powerKw = undefined;
+      offer.icePowerKw = undefined;
+      offer.utilizationPowerKw = undefined;
+      offer.powerDataConfidence = undefined;
+      offer.powerDataSource = undefined;
+    }
+    if (price) offer.sourcePrice = price;
+    offer.sourceCurrency = "USD";
+    offer.operational = {
+      ...(offer.operational || {}),
+      sourceUrl: sourceUrl(id),
+      sourceVenueName: "Che168 Global",
+      sourceTitle: title,
+      sourceCity: text(detail.cname) || offer.operational?.sourceCity,
+      registrationDate: text(detail.regdate),
+      exactDetail: true,
+      exactFields: true,
+      exactPhotos: verifiedGallery,
+      galleryVerified: verifiedGallery,
+      galleryImageCount: gallery.length,
+      photoIdentityVerified: verifiedGallery,
+      gallerySafetyMode: "che168_global_carinfo_catepiclist_v1",
+      galleryStoredAs: "json_urls",
+      sourceSpecifications: pageParameters ? {
+        version: 1, sourceId: this.sourceId, sourceOfferId: id,
+        specificationId: String(pageParameters.specId), sourceUrl: sourceUrl(id),
+        capturedAt: new Date().toISOString(), groups: pageParameters.groups,
+      } : undefined,
+      specificationCollection: {
+        status: pageParameters ? parameterStatus : this.parameterPageBlocked || parameterStatus,
+        language: parameterStatus.startsWith("received_api") ? "ru" : "en",
+        groupCount: pageParameters?.groups.length || 0,
+        fieldCount: pageParameters?.groups.reduce((total, group) => total + group.items.length, 0) || 0,
+      },
+      semanticEvidence: {
+        ...((offer.operational as any)?.semanticEvidence || {}),
+        productionDate: {source: "che168_global_carinfo_manufacturedate", status: manufactureDate ? "exact" : "missing", value: manufactureDate},
+        year: { source: manufactureDate ? "che168_global_carinfo_manufacturedate" : "che168_global_listing_and_carinfo", ...evidence.year },
+        fuel: { source: "che168_global_listing_and_carinfo", ...evidence.fuel },
+        engineCc: { source: pageParameters && tableFuelConsistent ? "che168_global_identity_bound_parameters" : "che168_global_carinfo", ...evidence.engineCc },
+        powerHp: { source: pageParameters && tableFuelConsistent ? "che168_global_carinfo_and_bound_parameters" : "che168_global_carinfo", ...evidence.powerHp },
+      },
+      raw: { listing: (offer.operational?.raw as any)?.listing, detail, boundPageParameters: pageParameters ? {...pageParameters,groups:undefined} : null, boundPageStatus: this.parameterPageBlocked || (pageParameters ? "bound_parameters_received" : "parameters_unavailable"), detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
+    };
+    const engineEvidenceReady = offer.powertrainKind === "electric" || evidence.engineCc.status === "exact";
+    if (evidence.year.status !== "exact" || evidence.fuel.status !== "exact" || !engineEvidenceReady || evidence.powerHp.status !== "exact") {
+      offer.calculationStatus = "needs_data";
+    }
+    return gallery.map(remoteImage);
+  }
+
+  mapStatus(): OfferStatus { return "active"; }
+
+  async healthCheck(): Promise<SourceRunHealth> {
+    try {
+      const page = await this.fetchPage("1");
+      return page.health || { ok: Boolean(page.items.length), message: `Che168 Global API items=${page.items.length}`, checkedAt: new Date().toISOString() };
+    } catch (error) {
+      return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() };
+    }
+  }
+}
+
+export const che168GlobalExactSource = new Che168GlobalExactAdapter();

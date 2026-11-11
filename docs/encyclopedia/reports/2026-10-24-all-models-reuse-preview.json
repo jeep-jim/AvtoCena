@@ -1,0 +1,32 @@
+{
+  "mode": "preview",
+  "startedAt": "2026-10-24T01:41:01.804Z",
+  "manifestDigest": "37da0b2fdcacac92c538586634e756aae65bec54c181bd4f664c5dce218aacda",
+  "indexDigest": "8dcd407da0302307639b11b068992c8ff61087ae5c0f235200a52c5261f6e20a",
+  "planDigest": "c5b9212fad31e03d0b7209689102433f416b8ad263b154f264da0e0efe74f0a7",
+  "modelsRead": 4451,
+  "donorIndexDigest": "8dcd407da0302307639b11b068992c8ff61087ae5c0f235200a52c5261f6e20a",
+  "modelsChanged": 1,
+  "variants": 1,
+  "fields": 0,
+  "evidenceFields": 1,
+  "models": [
+    {
+      "id": "40081c8780af46ffe80f55a7",
+      "make": "Nio",
+      "model": "ET5T",
+      "expectedRevision": "badff664-77eb-47ad-b336-15c568a5faeb",
+      "changes": [
+        {
+          "variantId": "7f52470e6594a81a79fbf80d",
+          "fields": [],
+          "evidenceFields": [
+            "powertrainKind"
+          ]
+        }
+      ]
+    }
+  ],
+  "savedModels": 0,
+  "savedFields": 0
+}

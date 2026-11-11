@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "mode": "save_estimates",
+  "runId": "2026-10-26-priority-makes-06",
+  "indexDigest": "df6bdaaded2ee9b3180a93227ca926992b7097d4d43df13e8b931f8bf6e04e08",
+  "requestedAt": "2026-10-26",
+  "reason": "Save expanded 118 source records after successful pass5; retain priority ordering, model aliases and all real ambiguity",
+  "priorityMakes": [
+    "Tesla",
+    "Toyota",
+    "Honda",
+    "Mazda",
+    "Lexus",
+    "Kia",
+    "Hyundai",
+    "Mercedes-Benz",
+    "BMW"
+  ],
+  "waitForPreparedIndexSeconds": 0
+}

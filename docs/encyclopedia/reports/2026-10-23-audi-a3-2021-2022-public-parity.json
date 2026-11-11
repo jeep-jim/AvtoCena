@@ -1,0 +1,611 @@
+{
+  "checkedAt": "2026-10-23T11:02:42.945610+00:00",
+  "passed": false,
+  "scope": "Audi A3 Europe: первая доступная строка новой партии (либо первая строка ответа) и первые две повторяющиеся группы ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+  "offersFound": 7,
+  "offersChecked": 7,
+  "comparisons": 91,
+  "generationId": "gen_1792702445675_8c312f85",
+  "rows": [
+    {
+      "offerId": "55e67cfe4d0a70a53cd9640c",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5663445,
+          "card": 5663445,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "c77aaf888711c39b03326bb0",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5663445,
+          "card": 5663445,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "2d8104efd4fbca37a6ab8a3f",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5663445,
+          "card": 5663445,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "38347fa3e342af8d39eb6cca",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "card": "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5663445,
+          "card": 5663445,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "3b783a66af3b69634f611db2",
+      "checks": {
+        "year": {
+          "search": 2021,
+          "card": 2021,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+          "card": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1498,
+          "card": 1498,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "Schaltgetriebe",
+          "card": null,
+          "equal": false
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3067912,
+          "card": 3067912,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        },
+        "transmission": {
+          "search": "Schaltgetriebe",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "f83de00bd581160509188e47",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "sportback 2.0 tdi s line edition 116cv",
+          "card": "sportback 2.0 tdi s line edition 116cv",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": 1905,
+          "card": 1905,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1968,
+          "card": 1968,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 116,
+          "card": 116,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "manual",
+          "card": "manual",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5589626,
+          "card": 5589626,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "bfa817f22a846040e02abc76",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "sportback 2.0 tdi s line edition 116cv",
+          "card": "sportback 2.0 tdi s line edition 116cv",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": 1905,
+          "card": 1905,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1968,
+          "card": 1968,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 116,
+          "card": 116,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 85,
+          "card": 85,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "manual",
+          "card": "manual",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "card": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5452920,
+          "card": 5452920,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    }
+  ],
+  "unavailable": [],
+  "repeatedExactModificationGroups": 2,
+  "repeatedGroups": [
+    {
+      "identity": [
+        "2026",
+        "SB TFSI S tronic 2x S line/LED/Kamera/Navi+/SHZ",
+        "",
+        "automatic",
+        "1498",
+        "150"
+      ],
+      "offerIds": [
+        "55e67cfe4d0a70a53cd9640c",
+        "c77aaf888711c39b03326bb0",
+        "2d8104efd4fbca37a6ab8a3f",
+        "38347fa3e342af8d39eb6cca"
+      ],
+      "allCardsChecked": true
+    },
+    {
+      "identity": [
+        "2026",
+        "sportback 2.0 tdi s line edition 116cv",
+        "",
+        "manual",
+        "1968",
+        "116"
+      ],
+      "offerIds": [
+        "f83de00bd581160509188e47",
+        "bfa817f22a846040e02abc76"
+      ],
+      "allCardsChecked": true
+    }
+  ],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 48,
+  "catalogTotalReported": 780,
+  "note": "Повторяющиеся модификации — отдельные объявления с уникальными id, не новые дубликаты энциклопедии. Новые50полей ещё не включены в servingиндекс; это проверка текущейпубликации8846926. React$undefined/пустая строка нормализованы как отсутствие значения; исходные различия сохранены.",
+  "repeat": {
+    "checkedAt": "2026-10-23T11:01:47.487488+00:00",
+    "offerId": "3b783a66af3b69634f611db2",
+    "search": {
+      "id": "3b783a66af3b69634f611db2",
+      "year": 2021,
+      "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+      "transmission": "Schaltgetriebe",
+      "engineCc": 1498,
+      "powerHp": 150,
+      "totalRub": 3067912,
+      "calculationStatus": "estimated",
+      "powerDataSource": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9"
+    },
+    "card": {
+      "id": "3b783a66af3b69634f611db2",
+      "year": 2021,
+      "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+      "transmission": "$undefined",
+      "engineCc": 1498,
+      "powerHp": 150,
+      "totalRub": 3067912,
+      "calculationStatus": "estimated",
+      "powerDataSource": "permanent_encyclopedia:b7c38297717eb90c049ac827b46c691f4a9f697a6a255c93a51d63aef734c8d9"
+    },
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "8846926f8679b3c43be81af3467fb23ef6d94aec",
+      "calculationVersion": "373bfb1fce689ec8232bd3870547959bfae9b367f2219571d22ce169cd675040"
+    }
+  },
+  "matched": 90,
+  "mismatched": 1
+}

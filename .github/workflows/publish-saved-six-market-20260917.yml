@@ -1,0 +1,71 @@
+name: Publish saved verified markets 20260917
+on:
+  push:
+    branches: [fix/finish-fresh-catalog-20260917]
+    paths: ['.github/workflows/publish-saved-six-market-20260917.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: publish-saved-markets-20260917
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_SELLER_INVENTORY: '1'
+      CATALOG_PUBLICATION_DRY_RUN: '0'
+      CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
+      CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '2'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '8'
+      CATALOG_READ_CONCURRENCY: '4'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - name: Verify publication safety and storage contracts
+        run: node --import tsx --test tests/catalog-inventory-regression.test.ts tests/catalog-internal-stream.test.ts tests/catalog-safe-public-pricing.test.ts
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fresh-*
+          path: saved-artifacts
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - name: Prepare saved market inputs
+        run: |
+          mkdir -p catalog-intake-input
+          for market in china europe korea uae georgia; do
+            cp -a "saved-artifacts/fresh-$market" "catalog-intake-input/catalog-intake-$market"
+          done
+          node --import tsx scripts/catalog-intake-to-publication.mjs
+      - name: Publish each market with preservation gates
+        run: |
+          set -euo pipefail
+          heap=$(node -e 'const fs=require("fs");const m=Number(fs.readFileSync("/proc/meminfo","utf8").match(/MemTotal:\s+(\d+)/)[1]);const h=Math.floor(m/1024*.75);if(h<7000)throw Error("Insufficient runner memory");console.log(h)')
+          for market in china europe korea uae georgia; do
+            CATALOG_REBUILD_MARKETS="$market" CATALOG_REBUILD_PUBLISH_REPORT="publication-$market.json" node --max-old-space-size="$heap" --import tsx scripts/catalog-publish-market.mjs
+          done
+      - name: Audit published data
+        run: |
+          node --import tsx scripts/catalog-audit-current-readmodel-parity.mjs
+          node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saved-market-publication-20260917
+          path: |
+            publication-*.json
+            catalog-current-readmodel-parity.json
+            catalog-visible-calculation-coverage.json
+          retention-days: 30

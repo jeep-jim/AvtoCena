@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T00:56:05.379345+00:00",
+  "passed": true,
+  "scope": "Ограниченная выборка Audi A4 Europe: 48 предложений, одна контрольная карточка/13 сравнений; повторяющихся точных групп в этой выборке нет. Новая партия послеснимковая, не активирована.",
+  "offersChecked": 1,
+  "comparisons": 13,
+  "matched": 13,
+  "rows": [
+    {
+      "offerId": "3415b52e8c4bc8274de0fafe",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Limousine 35 TFSI S tronic S line BlackEditio",
+          "card": "Limousine 35 TFSI S tronic S line BlackEditio",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "saved_source:mobile_de_open:49140916965664",
+          "card": "saved_source:mobile_de_open:49140916965664",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3592397,
+          "card": 3592397,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    }
+  ],
+  "unavailable": [],
+  "repeatedGroups": [],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 48,
+  "catalogTotalReported": 1196,
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "sameRelease": true,
+  "generationId": "gen_1792702445675_8c312f85"
+}

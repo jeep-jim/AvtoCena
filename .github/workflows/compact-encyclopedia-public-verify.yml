@@ -1,0 +1,62 @@
+name: Verify installed compact encyclopedia evidence
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/compact-encyclopedia-public-verify.json']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Bind verification to the installed release and its successful evidence artifact
+        id: request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64,json,os,re,urllib.request
+          request=json.load(open('.github/market-runs/compact-encyclopedia-public-verify.json'))
+          release=request['release'];run=request['runId']
+          assert re.fullmatch('[a-f0-9]{40}',release) and isinstance(run,int)
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["GITHUB_REPOSITORY"]}/actions/runs/{run}',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN']})
+          with urllib.request.urlopen(req) as response:metadata=json.load(response)
+          assert metadata['head_sha']==release and metadata['status']=='completed'
+          req=urllib.request.Request(f'https://api.github.com/repos/{os.environ["GITHUB_REPOSITORY"]}/contents/.github/market-runs/regcloud-deploy.json?ref={release}',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN']})
+          with urllib.request.urlopen(req) as response:marker=json.load(response)
+          with open('.github/market-runs/regcloud-deploy.json','wb') as f:f.write(base64.b64decode(marker['content']))
+          with open(os.environ['GITHUB_ENV'],'a') as f:f.write('EXPECTED_RELEASE='+release+'\n')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('run='+str(run)+'\n')
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: encyclopedia-coverage
+          path: reports
+          run-id: ${{ steps.request.outputs.run }}
+          github-token: ${{ github.token }}
+      - name: Verify public grouped rows against release-bound original variants
+        env:
+          ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+        run: node --import tsx scripts/encyclopedia/verify-public-release.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: installed-public-encyclopedia-verification
+          path: reports/encyclopedia-public-release.json

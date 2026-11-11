@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T15:32:05.895Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 8,
+  "markets": [
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/uae/used",
+          "method": "GET",
+          "status": null
+        }
+      ],
+      "sourceId": "dubicars_uae_exact",
+      "status": "blocked_or_failed",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Up to three details per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

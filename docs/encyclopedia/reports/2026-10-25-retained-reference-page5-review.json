@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-24T23:11:06.022724+00:00",
+  "workflow": 40141151246,
+  "job": 121012981498,
+  "artifact": 12578413907,
+  "artifactSha256": "f860eee5f6088b5261f032a60617a9a569a6141f3cb38e3dc06f1cb88d5a19a2",
+  "recordsRead": 8403,
+  "recordSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+  "checkpoint": {
+    "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
+    "saved": 8403,
+    "visited": 13045,
+    "pending": 253,
+    "updatedAt": "2026-10-22T19:38:18.897Z",
+    "failures": [
+      {
+        "at": "2026-10-22T09:14:03.805Z",
+        "category": "unclassified"
+      },
+      {
+        "at": "2026-10-22T19:38:18.897Z",
+        "category": "redirect_outside_catalog"
+      }
+    ]
+  },
+  "reviewedRows": 11,
+  "reviewedRowsCumulative": 267,
+  "remainingSourceRows": 0,
+  "nextAfterDigest": "fe687a556b684f89b8dcda393d63ad37a41fc83f4cce873f38a5aeeeadbdad1e",
+  "groupsOnPage": {
+    "audi/a3": 7,
+    "audi/a5": 4
+  },
+  "scope": "audi/a3,audi/a4,audi/a5;2024 only",
+  "classification": "unverified_reference",
+  "verifiedFieldsAdded": 0,
+  "supplierRequests": 0,
+  "storageWrites": 0,
+  "recordDigests": [
+    "f3b0fcff50f6e6d53b02c58e6d1e0adca7e57aecd2f6d0494abbcab62b32b6e3",
+    "f3e4ca70fc902687941af91fb3dc06204c6adc246d88911ba7dee83488ca0806",
+    "f40f08623bab797f8c323c1c75aec2e6b72f3e88f6e3a1f60b344122ff12095a",
+    "f508724696b064234025226f4b390b349c71e9fd6b4d0062fc46dfc1963f2a55",
+    "f51f516367b86b22538707618cccbf0b65d1ea2e347193e4849e9655aecab75d",
+    "f6cc61cff6522de82f4d147a83d49c859a627d7fb422e30c79231260b429d26c",
+    "f8f9b630127c1113ade0bac1857c4a702e0c3acd588a71f7a01521b27ab000b8",
+    "f9e01d5909aaaa9b7b85035756043d04c5e00bfca8438c4fa31043c2f3e19304",
+    "f9e35fa628c5ad2697407bab29bbdf7c61a51bd2fee0acf2a2ceb56c2c21f8ad",
+    "fa400eb3a54295698d7b3452ada6c78cd10c375aed987c2dcb5bff2ac03a677f",
+    "fe687a556b684f89b8dcda393d63ad37a41fc83f4cce873f38a5aeeeadbdad1e"
+  ],
+  "findings": [
+    "A3/2024:1395 DJS150PS and1498 DPCA150PS coexist with same8Y chassis; year/body/power alone cannot choose displacement. Retain unnamed and35TFSI ambiguity.",
+    "A3/late2024:1498 DSV160PS exists alongside1498 DXD116PS andDPCA150PS; no power imputation from1498 alone.",
+    "A5/2024:F53 coupe1984 has190/204/265PS andFWD/AWD. Require engine code or equally exact technical identity; no badge-only transfer.",
+    "All11 rows remain unverified_reference; sources retained asDrom, not manufacturer. No new corpus/collector/supplier request."
+  ]
+}

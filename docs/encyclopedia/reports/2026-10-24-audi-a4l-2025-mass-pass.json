@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T05:01:40.762805+00:00",
+  "batch": "research-2026-10-24-audi-a4l-2025-mass",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a4l-2025-mass.json",
+  "batchSha256": "da9c16410a0210d772f186e0f9aca9240535a8fd11b483b5e9f6acfeef7891d2",
+  "commit": "507fe8fbb8b5760b4fbe85706664414f56d056f3",
+  "workflow": 40064456017,
+  "job": 120784662669,
+  "conclusion": "success",
+  "applyFinishedAt": "2026-10-24T04:59:40.016Z",
+  "variants": 3,
+  "newVariants": 0,
+  "fields": 3,
+  "apiReadback": true,
+  "includedInIndex": false,
+  "indexStatus": "pending_membership_and_public_gate",
+  "beforeRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+  "afterRevision": "73e24623-5418-48b3-9c7a-9e0ea0ff5d64",
+  "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-pass.json",
+  "readbackReport": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-readback.json",
+  "applyResults": [
+    {
+      "batch": "research-2026-10-24-audi-a4l-2025-mass",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "c2365f94a908e7e90f14976e",
+          "changes": [
+            {
+              "variantId": "af7e4655e9743ce9c42f2532",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "365d04491870787ca8e2d719",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "b5207ac185ede58209545175",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T04:59:29.920Z",
+      "finishedAt": "2026-10-24T04:59:33.206Z"
+    },
+    {
+      "batch": "research-2026-10-24-audi-a4l-2025-mass",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "c2365f94a908e7e90f14976e",
+          "changes": [
+            {
+              "variantId": "af7e4655e9743ce9c42f2532",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "365d04491870787ca8e2d719",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "b5207ac185ede58209545175",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-24T04:59:33.426Z",
+      "finishedAt": "2026-10-24T04:59:40.016Z"
+    }
+  ],
+  "preflight": {
+    "commit": "5865d01175becda524f4af9bd2a842980bf47a3f",
+    "workflow": 40064358901,
+    "job": 120784363676,
+    "checkedAt": "2026-10-24T04:57:57.325Z",
+    "readOnly": true,
+    "rawProvenanceExposed": false
+  },
+  "source": {
+    "sha256": "60121123f1790cdcbeb350467c9ff422f8c5c45ddb944c8eb66b97ed304b7352",
+    "edition": "2025.Q3",
+    "pages": [
+      9,
+      15
+    ],
+    "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2025/a4l/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf"
+  },
+  "validation": {
+    "localGuardTests": 11,
+    "localGuardTestsPassed": true,
+    "batchValid": true,
+    "sourceHashVerified": true,
+    "workflowGuardsPassed": true,
+    "fullDigestCAS": true,
+    "untargeted2025Unchanged": 10
+  },
+  "releaseCoordination": {
+    "alreadyRunning": 40063954959,
+    "release": "ff789bf2ee773f50909921c4aaebbc54997c02cc",
+    "preparePrivateIndex": "success_before_apply",
+    "postSnapshot": true,
+    "queuedManualRelease": 40064400814,
+    "noDuplicateReleaseRequested": true
+  },
+  "next": {
+    "modelId": "8cf3dbb7884fe919bce44c62",
+    "make": "Audi",
+    "model": "A5",
+    "year": 2026,
+    "variantId": "2e602edc93de1056d0435651",
+    "trim": "Avant TFSI 110 kW S tronic virt.Cockpit/Navi plus/",
+    "missingValueFields": [
+      "bodyType"
+    ],
+    "state": "requires_exact_source_review",
+    "reason": "Следующая существующая модель после ограниченной группы A4L; 129 строк 2026 прочитаны, 36 без кузова. Сохранённые источники и точный год ещё требуется проверить."
+  },
+  "modelComplete": false,
+  "allModelsComplete": false,
+  "publicParity": {
+    "passed": true,
+    "offers": 4,
+    "comparisons": 52,
+    "matched": 52,
+    "report": "docs/encyclopedia/reports/2026-10-24-audi-a4l-2025-mass-public-parity.json",
+    "newBatchActivationProved": false
+  }
+}

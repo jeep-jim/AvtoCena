@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-cupra-leon-phev-component-power",
+  "entries": [
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2021,
+      "trim": "1.4 e-Hybrid Sportstourer VZ Business | Pano | Sfe",
+      "variantId": "50812b3b593469303a8e4e0b",
+      "expectedDigest": "a4969ab2c0bd7f10832eb1d096d5f0efdd11d4308f02438fd158e9b5fa0882ab",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2022,
+      "trim": "Cupra Leon Sportstourer 1.4 e-HYBRID 150kW DSG",
+      "variantId": "cb43e32cf9e493ec06624c50",
+      "expectedDigest": "0ab7764adfe12dca16cc0fd397f3eb657620688610a72406bbd86b830a6b8905",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2022,
+      "trim": "Sportstourer e-Hybrid 1.4 TSI DSG VZ COPPER DCC...",
+      "variantId": "f1d797cc968a333b16e2054a",
+      "expectedDigest": "7e2199cc753bca502c2ffc37a11895386102d14c3916461b0d79a14fee3f5c88",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2023,
+      "trim": "1.4 e-Hybrid 245pk DSG-6 Adrenaline",
+      "variantId": "839824dd02fa5cc47f5258ce",
+      "expectedDigest": "06d666d7361a96bca827ddfcaeef97949591505c2b2abb67f115cf97130931e9",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2023,
+      "trim": "1.4 e-hybrid VZ 245cv dsg PLUG-IN",
+      "variantId": "db9ca8bda2f8450044eefd7e",
+      "expectedDigest": "91a9bf5ffc0742e00d495da135d5c97d2039404740bcf1001f0f70c050966b6d",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2024,
+      "trim": "VZ e-Hybrid Pano Navi Ambiente SOH 98,5%",
+      "variantId": "bc1ab97beb1f7a4f92a50822",
+      "expectedDigest": "5a304f22d8d738a989e842a2f62ad5f301f4019ff436600fbcc1a43ab487acc6",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2024,
+      "trim": "Sportstourer e-Hybrid",
+      "variantId": "5726c26b3e79069b5643a5da",
+      "expectedDigest": "162ab45a8ca408c3f4d307d1e65b661639c25aaadb28d22acae5c11f6f7cca5f",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "36050a1f4ba506db31d21ffd",
+      "make": "Cupra",
+      "model": "Leon",
+      "year": 2024,
+      "trim": "Sportstourer 1.4 TSI eHybrid DSG VZ 5-J-GAR KAMERA",
+      "variantId": "f15ca17832ab2a9afc88a35a",
+      "expectedDigest": "9c2c831411cb569359b5335e39a3e549653b64042c8bbc7cc0dac25578a67691",
+      "patch": {
+        "icePowerKw": 110,
+        "motorPeakKw": 85
+      },
+      "confirmedFields": [
+        "icePowerKw",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводской каталог CUPRA Leon / Leon Sportstourer, PDF стр. 44 (печатные 86–87): для обеих версий 1.4 TSI e-HYBRID 204/245 PS, 1395 см³ указаны ДВС 110 кВт (150 PS) и пиковая мощность электромотора 85 кВт. Заводское сообщение от 28.06.2021 подтверждает этот состав силовой установки. Сопоставлены существующие модель, год, объём и явный тип e-Hybrid. Добавлены только отсутствующие icePowerKw и motorPeakKw; прежние powerHp, powerKw, fuel, kind и идентичность сохранены. 85 кВт — пиковая мощность, не 30-минутная; 30min остаётся неизвестной.",
+        "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+        "supportingUrl": "https://www.seat-cupra-mediacenter.com/CUPRA-Brand/presskits/CUPRA-Leon-Driving-Experience/powertrains",
+        "fieldSources": {
+          "icePowerKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ENGINE Maximum power110(150), обе1.4eHYBRID204/245колонки"
+          },
+          "motorPeakKw": {
+            "url": "https://www.cupraofficial.ps/content/dam/public/cupra-website/generic/pdf/cupra-new-leon-catalogue-2024.pdf",
+            "sourceSha256": "50c20e9379857b562de9c4ec8539ac7bb6fa0b4528a1b093614c826110912d7d",
+            "checkedAt": "2026-10-24",
+            "selector": "PDF44, ELECTRIC ENGINE Maximum power85(116), пиковая, не30min"
+          }
+        }
+      }
+    }
+  ]
+}

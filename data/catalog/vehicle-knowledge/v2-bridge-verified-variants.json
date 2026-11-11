@@ -1,0 +1,103 @@
+[
+  {
+    "id": "toyota/hilux/uk-2025/2-4-diesel-150-auto-4wd",
+    "modelId": "toyota/hilux",
+    "make": "Toyota",
+    "model": "Hilux",
+    "generation": "8th generation",
+    "yearFrom": 2025,
+    "yearTo": 2025,
+    "engineCc": 2393,
+    "fuel": "Diesel",
+    "transmission": "6-speed automatic",
+    "drive": "4WD",
+    "powertrainKind": "combustion",
+    "powerHp": 150,
+    "powerKw": 110,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "toyota-uk-hilux-2025-brochure"
+    ],
+    "sourceUrl": "https://www.toyota.co.uk/content/dam/toyota/nmsc/united-kingdom/brochure/hilux.pdf",
+    "verifiedAt": "2026-08-20",
+    "active": true,
+    "market": "United Kingdom",
+    "name": "2.4 D-4D 150 hp Automatic 4WD"
+  },
+  {
+    "id": "toyota/hilux/uk-2025/2-8-diesel-204-manual-4wd",
+    "modelId": "toyota/hilux",
+    "make": "Toyota",
+    "model": "Hilux",
+    "generation": "8th generation",
+    "yearFrom": 2025,
+    "yearTo": 2025,
+    "engineCc": 2755,
+    "fuel": "Diesel",
+    "transmission": "6-speed manual",
+    "drive": "4WD",
+    "powertrainKind": "combustion",
+    "powerHp": 204,
+    "powerKw": 150,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "toyota-uk-hilux-2025-brochure"
+    ],
+    "sourceUrl": "https://www.toyota.co.uk/content/dam/toyota/nmsc/united-kingdom/brochure/hilux.pdf",
+    "verifiedAt": "2026-08-20",
+    "active": true,
+    "market": "United Kingdom",
+    "name": "2.8 D-4D 204 hp Manual 4WD"
+  },
+  {
+    "id": "toyota/hilux/uk-2025/2-8-diesel-204-auto-4wd",
+    "modelId": "toyota/hilux",
+    "make": "Toyota",
+    "model": "Hilux",
+    "generation": "8th generation",
+    "yearFrom": 2025,
+    "yearTo": 2025,
+    "engineCc": 2755,
+    "fuel": "Diesel",
+    "transmission": "6-speed automatic",
+    "drive": "4WD",
+    "powertrainKind": "combustion",
+    "powerHp": 204,
+    "powerKw": 150,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "toyota-uk-hilux-2025-brochure"
+    ],
+    "sourceUrl": "https://www.toyota.co.uk/content/dam/toyota/nmsc/united-kingdom/brochure/hilux.pdf",
+    "verifiedAt": "2026-08-20",
+    "active": true,
+    "market": "United Kingdom",
+    "name": "2.8 D-4D 204 hp Automatic 4WD"
+  },
+  {
+    "id": "toyota/hilux/uk-2025/2-8-diesel-48v-204-auto-4wd",
+    "modelId": "toyota/hilux",
+    "make": "Toyota",
+    "model": "Hilux",
+    "generation": "8th generation",
+    "yearFrom": 2025,
+    "yearTo": 2025,
+    "engineCc": 2755,
+    "fuel": "Diesel",
+    "transmission": "6-speed automatic",
+    "drive": "4WD",
+    "powertrainKind": "other_hybrid",
+    "powerHp": 204,
+    "powerKw": 150,
+    "icePowerKw": 150,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "toyota-uk-hilux-2025-brochure"
+    ],
+    "sourceUrl": "https://www.toyota.co.uk/content/dam/toyota/nmsc/united-kingdom/brochure/hilux.pdf",
+    "verifiedAt": "2026-08-20",
+    "active": true,
+    "market": "United Kingdom",
+    "name": "2.8 D-4D 48V Hybrid 204 hp Automatic 4WD"
+  }
+]

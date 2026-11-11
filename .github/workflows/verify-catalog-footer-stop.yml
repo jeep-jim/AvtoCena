@@ -1,0 +1,32 @@
+name: Verify mobile catalog footer stop
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/layout/CatalogFooterStop*'
+      - 'apps/web/components/layout/PublicLegalFooter.tsx'
+      - 'tests/browser/catalog-footer-stop*'
+      - '.github/workflows/verify-catalog-footer-stop.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/footer-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify native touch momentum and second gesture
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/footer-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-footer-stop.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-footer-stop
+          path: artifacts/catalog-footer-stop
+          retention-days: 7

@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-10-22T08:14:15.902Z",
+  "modelId": "76763ca9fc792df61980328c",
+  "items": [
+    {
+      "year": 2026,
+      "fields": [
+        "trim"
+      ],
+      "reason": "URL295 выдаёт разные редакции: поисковый текст19.10.2026, фактический PDF29.07.2026. Luna Rossa и новые MVS.2 не созданы до прямого получения/визуальной проверки октябрьского файла.",
+      "url": "https://www.media.stellantis.com/it-it/download-price-lists/295"
+    },
+    {
+      "year": 2026,
+      "fields": [
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ],
+      "reason": "В июльском прайсе только масса без нагрузки/полезная нагрузка и пиковая мощность. Не вычислять полную массу и не подменять30мин."
+    },
+    {
+      "year": 2024,
+      "fields": [
+        "trim",
+        "year",
+        "engineCc",
+        "powerHp",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Первичный мануал найден, требуется визуальная проверка и точное сопоставление136/156/280 и ранней240PS.",
+      "source": "https://www.alfaromeo.bg/content/dam/alfa/bg/maintenance-e-book/2025/83_966_JUNIOR_530_05_129_EN_01_06_24_L_LG.pdf"
+    }
+  ],
+  "nextCursor": "Alfa Romeo Junior2024 и октябрь2026; после завершения проверки первичных файлов MiTo2008+"
+}

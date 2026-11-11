@@ -1,0 +1,48 @@
+name: Regcloud — inspect failed candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-candidate-check.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read bounded error categories without customer data
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          candidate=avtocena-release-a2a25dffc24c
+          test "$(docker inspect --format '{{.State.Running}}' "$candidate")" = false
+          docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}} exit={{.State.ExitCode}}' "$candidate"
+          docker logs --since 2h --tail 12000 "$candidate" 2>&1 | python3 -c 'import sys,json,re,collections
+          lines=sys.stdin.read().splitlines();groups=collections.Counter();slow=[]
+          for line in lines:
+              if "catalog_storage_read " in line:
+                  try:
+                      row=json.loads(line.split("catalog_storage_read ",1)[1]);path=row["path"];parts=path.split("/");kind="/".join(parts[:2])
+                      if "indexes/" in path:kind="indexes/"+path.split("indexes/",1)[1].split("/",1)[0]
+                      groups[kind]+=1;slow.append({"kind":kind,"ms":row["ms"],"found":row.get("found")})
+                  except:pass
+          print("READ_GROUPS",json.dumps(groups));print("SLOWEST",json.dumps(sorted(slow,key=lambda x:x["ms"],reverse=True)[:20]))
+          text="\n".join(lines)
+          print("ERROR_COUNTS",json.dumps({p:text.count(p) for p in ["heap out of memory","Reached heap limit","FATAL ERROR","object_storage_response_timeout","catalog_budget_context_changed","catalog_budget_snapshot_invalid","catalog_budget_replay_invalid","catalog_display_price_rows_missing","visitor_restricted","client_ip_missing","Error:"]}))
+          print("ERROR_CODES",json.dumps(collections.Counter(re.findall(r"Error: ([a-zA-Z][a-zA-Z0-9_]{3,80})",text))))'
+          REMOTE

@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-25T01:32:49.043883+00:00",
+  "batch": "research-2026-10-25-audi-a3-diesel-allstreet-gaps",
+  "sha256": "6dfbee246f0753be9a6f33d7d5c7d966e5621a38b590e28ed413d3aa5988d810",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "afterRevision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+  "apiReadback": true,
+  "fieldsChecked": 15,
+  "variants": 13,
+  "years": [
+    {
+      "year": 2022,
+      "revision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+      "rows": 201,
+      "checkedFields": 7,
+      "otherRowsUnchanged": 194
+    },
+    {
+      "year": 2025,
+      "revision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+      "rows": 143,
+      "checkedFields": 4,
+      "otherRowsUnchanged": 139
+    },
+    {
+      "year": 2026,
+      "revision": "79f7be75-7031-4e7d-8c06-c13fb457f181",
+      "rows": 102,
+      "checkedFields": 4,
+      "otherRowsUnchanged": 100
+    }
+  ],
+  "counts": {
+    "newValues": 15,
+    "correctedValues": 0,
+    "attestedUnchanged": 0
+  },
+  "unknownBodiesPreserved": [],
+  "newModels": 0,
+  "certified30minAdded": 0,
+  "installed": false,
+  "workflow": 40150951695,
+  "job": 121042213091,
+  "preflightWorkflow": 40150692347
+}

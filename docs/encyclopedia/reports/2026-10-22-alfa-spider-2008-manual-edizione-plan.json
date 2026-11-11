@@ -1,0 +1,169 @@
+{
+  "checkedAt": "2026-10-22T10:59:12.714Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-spider-2008-manual-edizione",
+  "sourceRevision": "2e4cc2bc-2baf-43e2-9e54-c23a00444272",
+  "variants": 9,
+  "newVariants": 9,
+  "fields": 104,
+  "changes": [
+    {
+      "variantId": "e74805cd39469f98eecf95e5",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "0eca67a9c5ae6a1ef424e50b",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "6e1ec0a237995ea8dc80ee19",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ]
+    },
+    {
+      "variantId": "9fc129e62fbdff9b6754cc1e",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "0a18d62530e3fa33611bb2d9",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "117bf52a4e6bf0b9dd601c43",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "1b2db8adc36d9eb267a215fb",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "0eb120c9d8a2e9d655c91d73",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "364a8bad68322d7769855ae1",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ]
+    }
+  ]
+}

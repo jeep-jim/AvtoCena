@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 15,
+    "newModels": 15,
+    "officialManufacturerSources": 15,
+    "newMlitWorkbookSources": 3,
+    "totalNewSources": 18,
+    "modelsWithMlitIntersection": 6
+  },
+  "reviewed": [
+    {
+      "id": "toyota/century",
+      "canonicalName": "Century",
+      "officialSourceId": "src-toyota-century-japan-current-2026",
+      "exactSourceNames": [
+        "センチュリー"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "toyota/pixis-epoch",
+      "canonicalName": "Pixis Epoch",
+      "officialSourceId": "src-toyota-pixis-epoch-japan-current-2026",
+      "exactSourceNames": [
+        "ピクシス エポック"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "toyota/pixis-van",
+      "canonicalName": "Pixis Van",
+      "officialSourceId": "src-toyota-pixis-van-japan-current-2026",
+      "exactSourceNames": [
+        "ピクシス バン"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "nissan/skyline",
+      "canonicalName": "SKYLINE",
+      "officialSourceId": "src-nissan-skyline-japan-current-2026",
+      "exactSourceNames": [
+        "スカイライン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "suzuki/every",
+      "canonicalName": "Every",
+      "officialSourceId": "src-suzuki-every-japan-current-2026",
+      "exactSourceNames": [
+        "エブリイ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "suzuki/carry",
+      "canonicalName": "Carry",
+      "officialSourceId": "src-suzuki-carry-japan-current-2026",
+      "exactSourceNames": [
+        "キャリイ"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "mazda/scrum-wagon",
+      "canonicalName": "SCRUM WAGON",
+      "officialSourceId": "src-mazda-scrum-wagon-japan-current-2026",
+      "exactSourceNames": [],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "mazda/familia-van",
+      "canonicalName": "FAMILIA VAN",
+      "officialSourceId": "src-mazda-familia-van-japan-current-2026",
+      "exactSourceNames": [],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "mazda/scrum-van",
+      "canonicalName": "SCRUM VAN",
+      "officialSourceId": "src-mazda-scrum-van-japan-current-2026",
+      "exactSourceNames": [],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "mazda/bongo-van",
+      "canonicalName": "BONGO VAN",
+      "officialSourceId": "src-mazda-bongo-van-japan-current-2026",
+      "exactSourceNames": [],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "subaru/stella",
+      "canonicalName": "Stella",
+      "officialSourceId": "src-subaru-stella-japan-current-2026",
+      "exactSourceNames": [
+        "ステラ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "daihatsu/copen",
+      "canonicalName": "Copen",
+      "officialSourceId": "src-daihatsu-copen-japan-current-2026",
+      "exactSourceNames": [
+        "コペン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "daihatsu/atrai",
+      "canonicalName": "Atrai",
+      "officialSourceId": "src-daihatsu-atrai-japan-current-2026",
+      "exactSourceNames": [
+        "アトレー"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "honda/n-van",
+      "canonicalName": "N-VAN",
+      "officialSourceId": "src-honda-n-van-japan-current-2026",
+      "exactSourceNames": [],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "honda/n-van-e",
+      "canonicalName": "N-VAN e:",
+      "officialSourceId": "src-honda-n-van-e-japan-current-2026",
+      "exactSourceNames": [],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    }
+  ]
+}

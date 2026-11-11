@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-10-23T23:26:10.877923+00:00",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "slices": [
+    2024,
+    2025,
+    2026
+  ],
+  "revisions": [
+    "27d4b571-523c-4219-ab9a-22e73363e898"
+  ],
+  "matchedTargets": 132,
+  "uniqueTargets": 132,
+  "valuesMatched": true,
+  "identityMatched": true,
+  "sourceEvidenceMatched": 132,
+  "writes": 0,
+  "checks": [
+    {
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+      "batchId": "research-2026-10-24-audi-a3-2024-2025-body",
+      "matched": 50,
+      "canonicalSha256": "45d6cd021d8a8485681cc82c35a518c389eb99f6754895cd7dcdb5f9251e3227"
+    },
+    {
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2025-2026-body.json",
+      "batchId": "research-2026-10-24-audi-a3-2025-2026-body",
+      "matched": 50,
+      "canonicalSha256": "40c339d19526f58a1415214645527ac51c0f7d2f5fc2741f9435182f31110f60"
+    },
+    {
+      "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2026-tail-body.json",
+      "batchId": "research-2026-10-24-audi-a3-2026-tail-body",
+      "matched": 32,
+      "canonicalSha256": "28997ffced95be2c98b9f55dd6fc61bce8c978d1c173e7559344a2a25af5046c"
+    }
+  ],
+  "scope": "Fresh bounded public readback of 132 saved bodyType values and exact year/trim/source evidence. Not index activation or 132 complete calculations."
+}

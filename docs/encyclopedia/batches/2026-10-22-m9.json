@@ -1,0 +1,1192 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-m9",
+  "entries": [
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "79417945064418c945dc0320",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "2025 Extended Range Ultra 52kWh 6-Seater",
+      "expectedDigest": "b2682d4b08170f570ba34d63c27f739df499f217e356984fc42517ecdb62cd63",
+      "patch": {
+        "trim": "2025 Extended Range Ultra 52kWh 6-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "8404ab03c9e35f1976374876",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "2025 Extended Range Max 52kWh 6-Seater",
+      "expectedDigest": "40ff0d657ab3049a6ae413ac00e66255fadc85b3ad5eb095125fd7458f4b909c",
+      "patch": {
+        "trim": "2025 Extended Range Max 52kWh 6-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Max, 6 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "f5482b81c1cf4bb071978590",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "增程 Ultra版 52kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "cd7b571f998c0d1d8660cf66598e0afe538b99e41275908cae03dd1b6d56c5d5",
+      "patch": {
+        "trim": "EREV Ultra 52kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "edd6cb014e9910beeece6fa2",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "增程 Max版 52kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "2187c927dd877dd8a3f36a0eec695eb676b622e9ab4c4a38b8856777cb55b201",
+      "patch": {
+        "trim": "EREV Max 52kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Max, 6 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "979ce5e59e27b8c02034804a",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EREV Ultra Edition 52kWh 5 seats Edition",
+      "expectedDigest": "1b9b8184d8971ed90491b26d3e09d3f4a8d1c549eacd3e23e2ab531dff0361c8",
+      "patch": {
+        "trim": "EREV Ultra Edition 52kWh 5 seats Edition",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "a551ad0c5c54892b3ec1544a",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "增程 Ultra版 52kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "026ef8009c1a8840add026510a5d8cb6228849ad5307350f7f81241e1ca18538",
+      "patch": {
+        "trim": "EREV Ultra 52kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "a138c154622b63d15c2beb8e",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "增程 Max版 52kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "db4d571ab97463df6780a65607000ae1a628adce5f8fffefd0219775205bba5c",
+      "patch": {
+        "trim": "EREV Max 52kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Max, 5 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "eccd3b08ec51954acb21ddce",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "增程 Ultra版 52kWh 5座版（896线激光雷达）",
+      "expectedDigest": "ea8edfcd4abb40b784bde9d99fc0b0f4aa8eb70287fa1e3bbb4e461ba4afed56",
+      "patch": {
+        "trim": "EREV Ultra 52kWh 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. LiDAR 896. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "4fd6c13b996b11e066361c72",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "增程 Ultra版 52kWh 6座版（896线激光雷达）",
+      "expectedDigest": "1551d3d8f3b3bcb4014fd67debd6b082984866bdd013b15961f7e12c57ac8036",
+      "patch": {
+        "trim": "EREV Ultra 52kWh 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. LiDAR 896. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "27240d1fd62bf55e42b9d844",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EREV Ultra Edition 52kWh 6 seats Edition",
+      "expectedDigest": "e5a11492e3329657a5c84334fb3140b26e4a5578aac78877cb4a3f5d30e7ebed",
+      "patch": {
+        "trim": "EREV Ultra Edition 52kWh 6 seats Edition",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 52,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3165
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 52кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 165/200кВт; сумма не подставлена как мощность системы. Руководство 2025, стр.427: HG15T,1496см³, разрешённая масса3165кг. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM92025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              427
+            ],
+            "sha256": "3d5bbac8d871210f851404c5af2b4b8dbe0385001cc1dc86c3f05fd6a8ff7924",
+            "fields": [
+              "engineCc",
+              "engineCode",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "653fce9f051facf93fe3432e",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "纯电 Max版 100kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "edbdba7a5afba63997ff36291fd52353f484b0e4376bbebc1d7307518ac1cb73",
+      "patch": {
+        "trim": "EV Max 100kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Max, 6 мест, электромобиль, полный привод, батарея 100кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 160/230кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "fee0be61de712e2d67a7e4c7",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "纯电 Ultra版 100kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "2e2c5bc07a046001df57baac9843a6ea21f54da23067113ad866bf4577e53e71",
+      "patch": {
+        "trim": "EV Ultra 100kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 6 мест, электромобиль, полный привод, батарея 100кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 160/230кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "d3467053f8d988d481646311",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "纯电 Ultra版 100kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "9a7343ae67018b5ed4b1fa576ac5c900e0ab854088df34e035fbe0c8ba896c9f",
+      "patch": {
+        "trim": "EV Ultra 100kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 5 мест, электромобиль, полный привод, батарея 100кВт·ч. LiDAR 192. Пиковая мощность переднего/заднего моторов: 160/230кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "159c2fcb21ce3dc374e35447",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Ultra Edition 100kWh 5 seats Edition",
+      "expectedDigest": "d5e71259c112dfbdc0475305e38b274f770267934932be7471444070f921078b",
+      "patch": {
+        "trim": "EV Ultra Edition 100kWh 5 seats Edition",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 5 мест, электромобиль, полный привод, батарея 100кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 160/230кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "bea695aba078d9ef6cbbb463",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "EV Max Edition 100kWh 6 seats Edition",
+      "expectedDigest": "e13c4d623a9db3a099ddce27a2669a95c8f995d611cf8f35ed09b59a88e542d8",
+      "patch": {
+        "trim": "EV Max Edition 100kWh 6 seats Edition",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Max, 6 мест, электромобиль, полный привод, батарея 100кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 160/230кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "752b9e7c1ff6394b12b28ddc",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2025,
+      "trim": "纯电 Ultra版 100kWh 5座版（896线激光雷达）",
+      "expectedDigest": "d78d87231f4de1e4f496e556938827a4e475a564f29b29e1df437607c5fa8b4c",
+      "patch": {
+        "trim": "EV Ultra 100kWh 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m9/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2025 Ultra, 5 мест, электромобиль, полный привод, батарея 100кВт·ч. LiDAR 896. Пиковая мощность переднего/заднего моторов: 160/230кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "19ce2b0211c3bd3bca6512e1",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra版 5座",
+      "expectedDigest": "fe6aa0f34f79fa9b86c1c15b7c360912b2a22997faadc810b71d5c5f063d8554",
+      "patch": {
+        "trim": "2026 EREV Ultra 5-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 75.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 75.4кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы. Руководство 2026, стр.468: HG15T,1496см³. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              468
+            ],
+            "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "cf1ac4fa2fdac9d45ac59848",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 增程 Max+版 6座",
+      "expectedDigest": "bf8a9d4be73cef33bfb6c1f39eb368cca3c050f33e6d217392d248bc91bc1c88",
+      "patch": {
+        "trim": "2026 EREV Max+ 6-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 60,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Max+, 6 мест, последовательный гибрид, полный привод, батарея 60кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы. Руководство 2026, стр.468: HG15T,1496см³. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              468
+            ],
+            "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "63e5c07ca8f3a79820520774",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 增程 Ultimate 领世加长版 6座",
+      "expectedDigest": "c2dd1fbfe26146e7b49d2752e06757651db6457d222223938bb892705b94fe53",
+      "patch": {
+        "trim": "2026 EREV Ultimate LWB 6-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 75.4,
+        "engineCc": 1997,
+        "engineCode": "HG20T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultimate LWB (удлинённая версия), 6 мест, последовательный гибрид, полный привод, батарея 75.4кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/(222+222)кВт; сумма не подставлена как мощность системы. Руководство 2026, стр.468: HG20T,1997см³. Мощность ДВС нетто/номинальная 130/133кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              468
+            ],
+            "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "e7093ec601cf7d0f764ff08f",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 增程 Ultimate 领世加长版 5座",
+      "expectedDigest": "c865f2fefb44695c0712b68d99b359705eb1f437dbeeaaab3757a25e063040cd",
+      "patch": {
+        "trim": "2026 EREV Ultimate LWB 5-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 75.4,
+        "engineCc": 1997,
+        "engineCode": "HG20T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultimate LWB (удлинённая версия), 5 мест, последовательный гибрид, полный привод, батарея 75.4кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/(222+222)кВт; сумма не подставлена как мощность системы. Руководство 2026, стр.468: HG20T,1997см³. Мощность ДВС нетто/номинальная 130/133кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              468
+            ],
+            "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "91fe1c2ab1a29d8df51c922f",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultra版 5座",
+      "expectedDigest": "7e5d25f648310fcc30aac243cfd7db47052079394b53381139adcbe253eab28a",
+      "patch": {
+        "trim": "2026 EV Ultra 5-seat",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 120,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultra, 5 мест, электромобиль, полный привод, батарея 120кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "c044cfddbd24414d1c6df17e",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultimate 领世加长版 6座",
+      "expectedDigest": "ca753430f6f0be40af8ef8f6df479ddc30e9fde6d971edace863179a111090b9",
+      "patch": {
+        "trim": "2026 EV Ultimate LWB 6-seat",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 120,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultimate LWB (удлинённая версия), 6 мест, электромобиль, полный привод, батарея 120кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "a3360aae7557b06397a0251e",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultra版 6座",
+      "expectedDigest": "e2b7338839768e7ced10d8fabb4737a7631291d7ccd7f46c1432993605a33ae1",
+      "patch": {
+        "trim": "2026 EV Ultra 6-seat",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 120,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultra, 6 мест, электромобиль, полный привод, батарея 120кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "2bd1bb216a1009cab3c1f8df",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra版 6座",
+      "expectedDigest": "686540da072031bcd4de52b7030e1b87b18a05c95d558c0289e757c0f3f9e1c6",
+      "patch": {
+        "trim": "2026 EREV Ultra 6-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 75.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 75.4кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы. Руководство 2026, стр.468: HG15T,1496см³. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              468
+            ],
+            "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "4a2f0bffea5b329b80aa700b",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 增程 Max+版 5座",
+      "expectedDigest": "8b8846ae36c61dedf5d3ffd3d0f3d987ee5e8e3d9934f6f1fe2abd75bd0a7215",
+      "patch": {
+        "trim": "2026 EREV Max+ 5-seat",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 60,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Max+, 5 мест, последовательный гибрид, полный привод, батарея 60кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы. Руководство 2026, стр.468: HG15T,1496см³. Мощность ДВС нетто/номинальная 115/118кВт оставлена пояснением. https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM92026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              468
+            ],
+            "sha256": "080dfed6df61af39cbe39cf5e7fab148530a778ed340b76e46972f30a3cd0f3f",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "2fc461186ceb1d1dd58e6f1a",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 纯电 Max+版 6座",
+      "expectedDigest": "b2db248ce74a98efa75a537c077cb9fcd7373060096e7950b64e79da591aaccb",
+      "patch": {
+        "trim": "2026 EV Max+ 6-seat",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 120,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Max+, 6 мест, электромобиль, полный привод, батарея 120кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "5218ecf50ea3d0526c4f281e",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultimate 领世加长版 5座",
+      "expectedDigest": "c5efe82d268da4c88e6ba8128438b3af973234f8b203dc0f6f23c12c36c98fc2",
+      "patch": {
+        "trim": "2026 EV Ultimate LWB 5-seat",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 120,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Ultimate LWB (удлинённая версия), 5 мест, электромобиль, полный привод, батарея 120кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    },
+    {
+      "modelId": "06aa61c491bf051c20b852b8",
+      "variantId": "ebcb6192aca84c4c309d2c50",
+      "make": "AITO",
+      "model": "M9",
+      "year": 2026,
+      "trim": "2026款 纯电 Max+版 5座",
+      "expectedDigest": "e4b45c4daf495644ffdaa12c325a755ac07e32ae7e369b5efda09372e6c903cb",
+      "patch": {
+        "trim": "2026 EV Max+ 5-seat",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 120,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m9-new/configuration/",
+        "checkedAt": "2026-10-22",
+        "statement": "M9 2026 Max+, 5 мест, электромобиль, полный привод, батарея 120кВт·ч. Версия лидара не приписана. Пиковая мощность переднего/заднего моторов: 220/277кВт; сумма не подставлена как мощность системы.  30-минутная мощность не подтверждена и не заменена номинальной. Перевод КПП не подтверждает наблюдение."
+      }
+    }
+  ]
+}

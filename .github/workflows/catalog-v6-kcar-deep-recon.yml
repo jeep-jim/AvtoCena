@@ -1,0 +1,33 @@
+name: Catalog V6 · K Car deep reconnaissance
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog-v6-kcar-deep-recon.yml"
+      - "scripts/kcar-deep-recon.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Extract live K Car search/API implementation
+        run: node scripts/kcar-deep-recon.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kcar-deep-recon
+          path: |
+            kcar-deep-recon.json
+            kcar-*.js
+          if-no-files-found: warn
+          retention-days: 1

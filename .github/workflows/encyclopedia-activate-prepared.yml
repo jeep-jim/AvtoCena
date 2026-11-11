@@ -1,0 +1,97 @@
+name: Encyclopedia — activate verified prepared interface
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/encyclopedia-activate-prepared.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  activate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Verify exact UI-only prepared release
+        run: |
+          python3 - <<'CHECK'
+          import subprocess
+          baseline='9bcb73912c41e1a7611c7fddb4e42e7a7ef7298e'
+          target='a6161476bffac98c78a15dbb051d47143ee89728'
+          allowed={
+            '.github/market-runs/regcloud-deploy.json','AGENTS.md','roadmap.md',
+            'apps/web/app/(public)/cars/autocatalog/[id]/page.tsx',
+            'apps/web/app/(public)/cars/autocatalog/encyclopedia.css',
+            'apps/web/app/(public)/cars/autocatalog/page.tsx',
+            'apps/web/components/catalog/CatalogBreadcrumbs.tsx',
+            'apps/web/components/catalog/CatalogChevron.tsx',
+            'apps/web/components/catalog/CatalogContent.tsx',
+            'apps/web/components/catalog/CatalogFilters.tsx',
+            'apps/web/components/catalog/CatalogSelectionContext.tsx',
+            'apps/web/components/catalog/CatalogViewIcon.tsx',
+            'apps/web/components/encyclopedia/CreateModel.tsx',
+            'apps/web/components/encyclopedia/DirectoryFilters.tsx',
+            'apps/web/components/encyclopedia/KnowledgeDirectory.tsx',
+            'apps/web/components/encyclopedia/ModelEditor.tsx',
+            'apps/web/lib/encyclopedia/presentation.ts',
+            'tests/autocatalog-flat-ui.test.ts','tests/encyclopedia-presentation.test.ts',
+            'tests/permanent-encyclopedia.test.ts',
+          }
+          changed=set(subprocess.check_output(['git','diff','--name-only',baseline,target],text=True).splitlines())
+          assert changed and changed<=allowed, sorted(changed-allowed)
+          # Existing activation and rollback gates must be byte-identical.
+          for path in ['scripts/regcloud-deploy-production.sh','scripts/regcloud-resource-sampler.py']:
+            values=[subprocess.check_output(['git','show',ref+':'+path]) for ref in [baseline,target,'HEAD']]
+            assert values[0]==values[1]==values[2], path
+          print('Exact prepared release changes only reviewed encyclopedia presentation and shared UI components; API, storage, calculation and activation code unchanged.')
+          CHECK
+      - name: Activate existing image with unchanged calculation version and rollback gates
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          release=a6161476bffac98c78a15dbb051d47143ee89728
+          remote_dir="/opt/avtocena/releases/$release"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          release=a6161476bffac98c78a15dbb051d47143ee89728
+          calculator=4f82e9c79091ca5dc766e62584c7469dc5432be807575a5bee8edcc562f864c9
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
+          python3 - <<'HEALTH'
+          import json,urllib.request
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=20) as r:d=json.load(r)
+          assert d['releaseSha']=='9bcb73912c41e1a7611c7fddb4e42e7a7ef7298e', 'Production changed; review required'
+          assert d['calculationVersion']=='4f82e9c79091ca5dc766e62584c7469dc5432be807575a5bee8edcc562f864c9', 'Calculation version changed; review required'
+          HEALTH
+          bash "/opt/avtocena/releases/$release/regcloud-deploy-production.sh" "$release" "$calculator"
+          REMOTE
+      - name: Verify encyclopedia page and retained model data
+        run: |
+          python3 - <<'VERIFY'
+          import urllib.request,json
+          base='https://avtocena.com'
+          with urllib.request.urlopen(base+'/api/health',timeout=20) as r:health=json.load(r)
+          assert health['releaseSha']=='a6161476bffac98c78a15dbb051d47143ee89728'
+          for path in ['/cars/autocatalog','/cars/autocatalog/f1a594b37ed0983c19c4dd81']:
+            with urllib.request.urlopen(base+path,timeout=90) as r:html=r.read().decode()
+            assert '</html>' in html and '$RX(' not in html
+            print(json.dumps({'path':path,'http':200,'bytes':len(html)},ensure_ascii=False))
+          with urllib.request.urlopen(base+'/api/encyclopedia/f1a594b37ed0983c19c4dd81?year=2021',timeout=30) as r:d=json.load(r)
+          print('Encyclopedia model endpoint available; browser acceptance still required.')
+          VERIFY

@@ -1,0 +1,750 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-aston-db9-gt-2015-2016",
+  "entries": [
+    {
+      "modelId": "d9beb45b880f70fa01286ee4",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "year": 2015,
+      "variantId": "77ce44fa44d72d8ba05c5211",
+      "trim": "V12 GT Coupe Touchtronic II",
+      "operation": "create",
+      "expectedRevision": "2d1de275-ffd8-4b68-8c21-d904cdecc621",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 GT Coupe Touchtronic II",
+        "bodyType": "coupe",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 5935,
+        "powerHp": 547,
+        "powerKw": 403,
+        "icePowerKw": 403
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DB9 GT Coupe, 2015: заводская таблица отдельно подтверждает5935см³,547PS,403kW иTouchtronicII6AT. Годы выпуска2015–IIквартал2016 подтверждены заводским регистрационным документом2018,стр92. Имя архивного файла не используется как доказательствоMY. Полная масса,топливо,привод и код двигателя в этой партии не подтверждены; показатели обычнойDB9 не переносились.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "bodyType": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powertrainKind": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "transmission": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "engineCc": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powerHp": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "PS"
+          },
+          "powerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d9beb45b880f70fa01286ee4",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "year": 2015,
+      "variantId": "f99d09aa7c6be7bf3f7b13a8",
+      "trim": "V12 GT Volante Touchtronic II",
+      "operation": "create",
+      "expectedRevision": "2d1de275-ffd8-4b68-8c21-d904cdecc621",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 GT Volante Touchtronic II",
+        "bodyType": "convertible",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 5935,
+        "powerHp": 547,
+        "powerKw": 403,
+        "icePowerKw": 403
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DB9 GT Volante, 2015: заводская таблица отдельно подтверждает5935см³,547PS,403kW иTouchtronicII6AT. Годы выпуска2015–IIквартал2016 подтверждены заводским регистрационным документом2018,стр92. Имя архивного файла не используется как доказательствоMY. Полная масса,топливо,привод и код двигателя в этой партии не подтверждены; показатели обычнойDB9 не переносились.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "bodyType": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powertrainKind": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "transmission": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "engineCc": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powerHp": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "PS"
+          },
+          "powerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2015,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d9beb45b880f70fa01286ee4",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "year": 2016,
+      "variantId": "adb7e02fe7e41959b823366b",
+      "trim": "V12 GT Coupe Touchtronic II",
+      "operation": "create",
+      "expectedRevision": "2d1de275-ffd8-4b68-8c21-d904cdecc621",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 GT Coupe Touchtronic II",
+        "bodyType": "coupe",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 5935,
+        "powerHp": 547,
+        "powerKw": 403,
+        "icePowerKw": 403
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DB9 GT Coupe, 2016: заводская таблица отдельно подтверждает5935см³,547PS,403kW иTouchtronicII6AT. Годы выпуска2015–IIквартал2016 подтверждены заводским регистрационным документом2018,стр92. Имя архивного файла не используется как доказательствоMY. Полная масса,топливо,привод и код двигателя в этой партии не подтверждены; показатели обычнойDB9 не переносились.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "bodyType": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powertrainKind": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "transmission": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "engineCc": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powerHp": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "PS"
+          },
+          "powerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT COUPE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d9beb45b880f70fa01286ee4",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "year": 2016,
+      "variantId": "0e299f9ad8621fc3ff773d1e",
+      "trim": "V12 GT Volante Touchtronic II",
+      "operation": "create",
+      "expectedRevision": "2d1de275-ffd8-4b68-8c21-d904cdecc621",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V12 GT Volante Touchtronic II",
+        "bodyType": "convertible",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 5935,
+        "powerHp": 547,
+        "powerKw": 403,
+        "icePowerKw": 403
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "DB9 GT Volante, 2016: заводская таблица отдельно подтверждает5935см³,547PS,403kW иTouchtronicII6AT. Годы выпуска2015–IIквартал2016 подтверждены заводским регистрационным документом2018,стр92. Имя архивного файла не используется как доказательствоMY. Полная масса,топливо,привод и код двигателя в этой партии не подтверждены; показатели обычнойDB9 не переносились.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "bodyType": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powertrainKind": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "transmission": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "engineCc": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            }
+          },
+          "powerHp": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "PS"
+          },
+          "powerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          },
+          "icePowerKw": {
+            "url": "https://autohistorypreservationsociety.org/wp-content/uploads/2016-ASTON-MARTIN-Brochure-Full-Line-Pg-1-15.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводская брошюра модельного ряда в открытом историческом архиве; не редакционная статья",
+            "sourceSha256": "c6af6ce357e29ea74aae18995056aa76cba09c8303e583a2a0b088f9e6a5bf11",
+            "pdfPage": 13,
+            "printedPage": 25,
+            "selector": "DB9 GT VOLANTE",
+            "year": 2016,
+            "yearBasis": "Год выпуска в подтверждённом заводом периоде 2015–II квартал2016; не утверждение о модельном годе по имени архивного файла",
+            "yearSource": {
+              "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/aston-martin-lagonda---registration-document---29-08-2018.pdf?rev=008a1953fb804895879137a6478813cf",
+              "pdfPage": 92,
+              "sourceSha256": "b22afab64f96bdec54f66026df85e11287daec44d0e8a909eae828e8d1e3871a",
+              "documentDate": "2018-08-29"
+            },
+            "unit": "kW"
+          }
+        }
+      }
+    }
+  ]
+}

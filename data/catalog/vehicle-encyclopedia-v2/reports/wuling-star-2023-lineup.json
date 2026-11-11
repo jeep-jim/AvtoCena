@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 2,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 2
+  },
+  "modelId": "wuling/xingyun",
+  "canonicalName": "Star",
+  "retainedAliases": [
+    "Xingyun",
+    "五菱 星云"
+  ],
+  "generationIds": [
+    "wuling/xingyun/launch-lineup-2023"
+  ],
+  "variantIds": [
+    "wuling/xingyun/launch-lineup-2023/standard",
+    "wuling/xingyun/launch-lineup-2023/flagship"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "localizedAndRomanizedAliasesRetained": true,
+    "exactLaunchGradesOnly": true,
+    "nominalDisplacementNotConverted": true,
+    "ambiguousPowerRejected": true,
+    "automaticPublicationReady": false
+  }
+}

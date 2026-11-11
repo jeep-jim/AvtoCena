@@ -1,0 +1,7158 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 85,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-02adbf977f1a507a4b23",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Multivan",
+      "modelId": "volkswagen/multivan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "MULTIVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b5dd5b46a313fe54c69",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Multivan",
+      "modelId": "volkswagen/multivan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 142,
+      "commercialNames": [
+        "MULTIVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d54258c778def0ba719c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Multivan",
+      "modelId": "volkswagen/multivan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "MULTIVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 123,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-649944d36d59e694776b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Multivan",
+      "modelId": "volkswagen/multivan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1964,
+      "powerKw": 150,
+      "commercialNames": [
+        "MULTIVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1b0849236e14f1be296",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Multivan",
+      "modelId": "volkswagen/multivan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "MULTIVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e43c70002e7a8dfadcd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Multivan",
+      "modelId": "volkswagen/multivan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": 130,
+      "commercialNames": [
+        "MULTIVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32ac2316092b66b70f60",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14e5866e1ecfb6775eaf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT SE NAV TDI S-A",
+        "PASSAT SE TDI S-A",
+        "PASSAT SEL TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1702,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e1e614fe7ab06ec8118",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 476,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a0a2f1b9a2600bd814f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT 16 TDI AUT",
+        "PASSAT VARIANT 16 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5198,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef376eb08d55bb299410",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1896,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bce027d278229de271f7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT ALLTRACK TDI 4MOTION SA",
+        "PASSAT R-LINE ED TDI 4MOT S-A",
+        "PASSAT R-LINE TDI",
+        "PASSAT R-LINE TDI 4MOTION S-A",
+        "PASSAT R-LINE TDI S-A",
+        "PASSAT SE NAV TDI",
+        "PASSAT SE NAV TDI S-A",
+        "PASSAT SE TDI",
+        "PASSAT SE TDI S-A",
+        "PASSAT SEL TDI",
+        "PASSAT SEL TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 8338,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1323534cbd3903526c2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3966,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a5eba9079c3de04c8d9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 2.0 / TDI AUT.",
+        "PASSAT / VARIANT 2.0 / TDI AUT.",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 2.0 TDI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 23666,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e279db5ee3af40d0f95d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 103,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12ade52cf73c3391265b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 2.0 / TDI",
+        "PASSAT / 2.0 / TDI AUT.",
+        "PASSAT / VARIANT 2.0 / TDI",
+        "PASSAT / VARIANT 2.0 / TDI AUT.",
+        "PASSAT / VARIANT 20 / TDI",
+        "PASSAT / VARIANT 20 / TDI AUT",
+        "PASSAT 20 TDI",
+        "PASSAT 20 TDI AUT",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 2.0 TDI AUT.",
+        "PASSAT VARIANT 20 TDI",
+        "PASSAT VARIANT 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 45,
+      "registrations": 202556,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d127305ad9f089b3ac3b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 125,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT CC"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0ea0405222ab3b201d2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 2.0 / TDI 4M AUT.",
+        "PASSAT / VARIANT 2.0 / TDI 4M AUT.",
+        "PASSAT / VARIANT 2.0 / TDI AUT.",
+        "PASSAT 20 TDI 4M AUT",
+        "PASSAT 20 TDI AUT",
+        "PASSAT VARIANT 20 TDI 4M AUT",
+        "PASSAT VARIANT 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 6733,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba1e9d5c112885980b1d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 2.0 / TDI 4M AUT.",
+        "PASSAT / 2.0 / TDI AUT.",
+        "PASSAT / VARIANT 2.0 / TDI 4M AUT.",
+        "PASSAT / VARIANT 2.0 / TDI AUT.",
+        "PASSAT / VARIANT 20 / TDI 4M AUT",
+        "PASSAT / VARIANT 20 / TDI AUT",
+        "PASSAT 20 TDI 4M AUT",
+        "PASSAT 20 TDI AUT",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 20 TDI 4M AUT",
+        "PASSAT VARIANT 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 36,
+      "registrations": 47474,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9e9c3e35705627057c4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 176,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 2.0 / TDI 4M AUT.",
+        "PASSAT 20 TDI 4M AUT",
+        "PASSAT VARIANT 20 TDI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1002,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1295c1fd3a08485daf7d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 144,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebda80bde583a0ae549f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 92,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9575f8f1b26d33a435cf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36a35309982efde31b85",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 182,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf90fac4adca55bacb45",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT R-LINE TSI EVO",
+        "PASSAT R-LINE TSI EVO S-A",
+        "PASSAT SE NAV TSI EVO",
+        "PASSAT SE NAV TSI EVO S-A",
+        "PASSAT SE TSI EVO",
+        "PASSAT SE TSI EVO S-A",
+        "PASSAT SEL TSI EVO",
+        "PASSAT SEL TSI EVO S-A",
+        "PASSAT SEL TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 4498,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9640d3b37cde5bafc32e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 705,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-722a91eb66745feea5ca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 1.5 / TSI",
+        "PASSAT / 1.5 / TSI AUT.",
+        "PASSAT / VARIANT 1.5 / TSI",
+        "PASSAT / VARIANT 1.5 / TSI AUT.",
+        "PASSAT / VARIANT 15 / TSI",
+        "PASSAT / VARIANT 15 / TSI AUT",
+        "PASSAT 15 TSI",
+        "PASSAT 15 TSI AUT",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 1.5 TSI AUT.",
+        "PASSAT VARIANT 15 TSI",
+        "PASSAT VARIANT 15 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "Volkswagen",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 45,
+      "registrations": 81041,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-583aace99504825c2283",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT R-LINE ED TSI 4MOT S-A",
+        "PASSAT R-LINE TSI 4MOTION S-A",
+        "PASSAT R-LINE TSI S-A",
+        "PASSAT SEL TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 703,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-562605ab7b01bcf142b3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 280,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e3f6615e04c400b8a70",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / 2.0 / TSI AUT.",
+        "PASSAT / VARIANT 2.0 / TSI AUT.",
+        "PASSAT / VARIANT 20 / TSI AUT",
+        "PASSAT 20 TSI AUT",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 20 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "Volkswagen",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 9221,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c052c638e797efca917",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT VARIANT 20 TSI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 565,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db02deee90843814acb6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 206,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / VARIANT 2.0 / TSI 4M AUT.",
+        "PASSAT / VARIANT 20 / TSI 4M AUT",
+        "PASSAT VARIANT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1474,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-218d498ba886600e4e1b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2500,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23f86fab9ffd8232f3a2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT GTE ADVANCE S-A",
+        "PASSAT GTE S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1870,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd9ff835580452691b75",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 55,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 148,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9c95f07a7ccf1479488",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 148,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55ee968c787d9932bce8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / VARIANT 1.4 / TSI AUT.",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 14 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 57066,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58d1d043f2cca959f9b0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d14ccc1a90b050571d04",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 130,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a3cbd6ef3e31b6d7e68",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 137,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df151f6841a7afaac40b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 162,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09f316c9765cc7589301",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3597,
+      "powerKw": 220,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-972c7c4484a2d7f47ec9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-127d20c5b5bfc5123009",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / VARIANT 1.5 / TSI AUT.",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 14519,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e770656658fd28fc5c09",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / VARIANT 1.5 / TSI AUT.",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 10616,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0410aa98b7139095adfc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1896,
+      "powerKw": 77,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1f4892ed9e6c3cc301d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e849e74c2eeb40d49d2e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 118,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2698ab075518529794c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1781,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85eabb4e07e7c10109c9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a9ba2ea2aef43d7af15",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 125,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26bf012974b077e0f7db",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2480,
+      "powerKw": 125,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a7632b0f546ae90aa65",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24879c61cd1be874129b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1896,
+      "powerKw": 96,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f1b762d7fde6566e44d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 49,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51307f2e9785badf40b6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 51,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb1497f3f6bbbd25d1d9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 55,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0b6c46e15331390a5ae",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 61,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4a7987a0e169136fcbd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87f85faaaaf23fd8cdb7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 68,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6dea203107ccb28f7c6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 69,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ad0815e07855ff96521",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 70,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecf9cd10f6b4c4976a82",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 72,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae4dedcfec1a29155faf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 73,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a581e4fe6412e6cfe98",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 74,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb3525398c5dce6f53df",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 75,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-253e06822e74004931de",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 81,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a239e666ad6fcc74c375",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26b814522d3ed237bf3f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 88,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28709c2493c8fc205bc7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 91,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-196b36285749c39e4dad",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 95,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee242f4d5f92632dd8bb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 96,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1707c64611da0097f549",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 112,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1a9d8b06c07977a5546",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 116,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13fc000f47f75a19a4e5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 117,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94a9e35c12583faed35a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1b2ecfc590ac7386efa",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 129,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56e7a28fa087cabd60c0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 130,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4ee101ee4162716420d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 131,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34350356967dd86a0a0b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 132,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b07c725cbe25ba9b57e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 137,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63b302eb7bcf373cb8e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 141,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-007eb07db7661438d903",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 142,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / VARIANT 2.0 / TDI 4M AUT.",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 2.0 TDI 4M AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 11278,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99a040ff5340c2de4fd1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 143,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f29105b7e1ff7efe34e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-350b5d564e539159d3ed",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 173,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b434c75ba42fc522d8da",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 184,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd4bc68be32af2614747",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 190,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1190441a9aa4bae47174",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 200,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61f9382829d92f16a4df",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 210,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac488025889e25575e58",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 228,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8213b19b8f768f223aee",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 243,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3d868d6c4603c558231",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 245,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be78127fe55f411714cc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 250,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd134c5fcaf13350f12e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 280,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc37c06243e1f70e97e3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 460,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c110bf0550931fededa",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1390,
+      "powerKw": 118,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cb2bcb19719ee6666e7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 51,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4ba32e1ea8ce2615c25",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 53,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d09de6650c8ecabd7887",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2346e18d6b54d804b77",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45cbdcbb35a3b4fc7928",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93072dcc1bcae67c4474",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db07ca4a4e5b482f2953",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6859b8b28c6b49d93ec7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8ec51629783da30b755",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 74,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-206ebf94c59bb4cd2500",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 77,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c2f86ef09e474a35eaf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11d3192fe95076dff43a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3197507ec12a2073e730",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 88,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49dba3a6f512ff172675",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdbb17f18c7d1e990967",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 92,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ac351db6309ae896226",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9c244a0151f4924cea4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f766f61753bec41b7f0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5cb8fff0865c1738a43",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 116,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-969c94f4f2f5f31f8b95",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f057b091bc1500c384f3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0495d500ebf87eb61ee3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 145,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8506e05f07f50ffd00ea",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 147,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d06def6caf5eeba0606e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 150,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b77942db9bc6d7c48927",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 170,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c54b67e8dad6feb03135",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 173,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77f74d82d72e247d2dc6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 210,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d11c7a98082884deabea",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-701f8abf1a8f97a71767",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d0e79015a6e589de159",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 53,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-881b0a91578c92c9ebec",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 61,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcb75975809849908c47",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 67,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9861298d50340ee858b9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 68,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54fa3cd77bf38be8835c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 81,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8bc6ab632e85dbefb97",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 95,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79cf5d8c8ac8e4928788",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7495414d57e033d701c7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 173,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e1360695ad2b21bb6c1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT / VARIANT 2.0 / TSI 4M AUT.",
+        "PASSAT VARIANT",
+        "PASSAT VARIANT 2.0 TSI 4M AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 1125,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc9f5dc1b60f004ebb16",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 210,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ce88abbc6602f3b86d9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ede04488e5d442a7e2d5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "PASSAT",
+        "PASSAT VARIANT 2.0 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 191,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fed7563c392812b03e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 190,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d62e1cdeebd0935c022",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ec5318fcc57df4db3a7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59c5aaeae601321a02b6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 125,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec214a0f75b2e49cf6f5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1896,
+      "powerKw": 74,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b160c1439ba94500c80",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 157,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a91990432db14b31d99f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Passat",
+      "modelId": "volkswagen/passat",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSAT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-914cf66e1ee9d59fb77c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-273e0a87c63a0558e57b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1422,
+      "powerKw": 55,
+      "commercialNames": [
+        "POLO",
+        "POLO 14 TDI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cec7f1a2d3fba4ee8f27",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "POLO BEATS TDI",
+        "POLO SE TDI",
+        "POLO SEL TDI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 142,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c30e12c18f9df9724223",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 59,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 216,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdfd48fd1dbc526e3435",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 70,
+      "commercialNames": [
+        "POLO",
+        "POLO 16 TDI",
+        "POLO 16 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 16706,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d567df198c76ed7f0e4e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1170,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38df5a5c1879a6d8a235",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 60,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3b64526901c65606f19",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "NG",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 23481,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9647b7af7083cfe918dd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 150,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a35566fbe5f25554574",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb100b64fedc90642ad5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "POLO",
+        "POLO BEATS EVO",
+        "POLO BEATS TSI",
+        "POLO BEATS TSI S-A",
+        "POLO MATCH EVO",
+        "POLO MATCH TSI",
+        "POLO MATCH TSI S-A",
+        "POLO R-LINE TSI",
+        "POLO R-LINE TSI S-A",
+        "POLO S EVO",
+        "POLO SE EVO",
+        "POLO SE TECH EDITION EVO",
+        "POLO SE TSI",
+        "POLO SE TSI S-A",
+        "POLO SEL TSI",
+        "POLO SEL TSI S-A",
+        "POLO UNITED EVO",
+        "POLO UNITED TSI",
+        "POLO UNITED TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 50347,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2686bb9359f1433b3d76",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 48,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38be9284673ea4b4aa8a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f28b65858f4814dc6c6a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 59,
+      "commercialNames": [
+        "POLO",
+        "POLO / 1.0 /",
+        "POLO 10",
+        "VOLKSWAGEN POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 130373,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52f548a0c22e8f893872",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 63,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-004b5df4437ce3590ea2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "POLO",
+        "POLO / 1.0 / TSI",
+        "POLO / 1.0 / TSI AUT.",
+        "POLO / 10 / TSI",
+        "POLO / 10 / TSI AUT",
+        "POLO 1.0 TSI",
+        "POLO 1.0 TSI AUT.",
+        "POLO 10 TSI",
+        "POLO 10 TSI AUT",
+        "POLO CUV",
+        "VOLKSWAGEN POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN AG",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 492382,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3db8e9d8ae8c2fae87a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "POLO",
+        "POLO / 1.0 / TSI",
+        "POLO / 1.0 / TSI AUT.",
+        "POLO / 10 / TSI AUT",
+        "POLO 1.0 TSI AUT.",
+        "POLO CUV"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 53299,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-372b54737174301fde6e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "POLO",
+        "POLO / 1.0 / TSI AUT.",
+        "POLO 1.0 TSI AUT.",
+        "POLO 10 TSI",
+        "POLO 10 TSI AUT",
+        "POLO CUV",
+        "VOLKSWAGEN POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 42824,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5a7c2254d39140a22b0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1198,
+      "powerKw": 51,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfcc9a7847744e16b8fa",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 55,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3fb9fe22ae59a64250c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "POLO",
+        "POLO / 1.5 / TSI AUT.",
+        "POLO 15 TSI AUT",
+        "POLO CUV"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 6011,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f8bc810630826a04dfa",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "POLO",
+        "POLO GTI PLUS TSI S-A",
+        "POLO GTI TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 3622,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76a8bff52c8b83ebbfdd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 85,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 596,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6800fdd3445ef25b4277",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 147,
+      "commercialNames": [
+        "POLO",
+        "POLO 20 GTI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 3902,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e493d0fc755f1877e04",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdf1e3c9f6143659f3f0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eb3f4259305b8bf75c0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-736f1b57a9a8dfa05810",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1f4980910b93841d479",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN V W"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15ceca03d5a9fec0687f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 60,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3a563e3c45b088f4391",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 62,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-382bdc7c54bb434c748a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 99,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7926af83fb5dee5b7749",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12c8f6ddd5fab2797db5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 77,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac0f52e5dd2538ddb44a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 81,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dec1bd34ba6016d1078",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1198,
+      "powerKw": 40,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d66ad08a992c53c17cd9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 63,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd1c0e04215222f5bf4f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc95e5006a36a2261945",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3498371eaed183d5fd0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 83,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc7cd9d292c68555a45f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a355ca0ff1232bebf24e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c98b73e8bfaa5703b7e3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 152,
+      "commercialNames": [
+        "POLO",
+        "POLO / 2.0 / GTI AUT.",
+        "POLO / 2.0 / TSI AUT.",
+        "POLO / 20 / GTI AUT",
+        "POLO 2.0 TSI AUT.",
+        "VOLKSWAGEN POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGENVW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 22522,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9efbb38b17e1ba1a032",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1422,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41a2f698965e0332d4e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 55,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e79058125e2ce3857227",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 70,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ea1e6a202cf19b3ebf3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af54523a5086604ff5a6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 94,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce9215f64a9afccb3a91",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1198,
+      "powerKw": 47,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60dd5b909624412d56c0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 59,
+      "commercialNames": [
+        "POLO",
+        "POLO CROSS"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6d3fee6ccf8ef8b0f22",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 132,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db281ce3eecb857a361c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "POLO VIVO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e1a032562acee8c4256",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2debd55d30bef029ddf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-570b133890f3c0f206d1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34484a4cc23bfca6774f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b76e733f5908b3cff762",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9e38d6f8d4227066a39",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be7f83db46406ddb0e29",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-927fca16bb12c4c5f47f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-772af3389ef326e5e619",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca9f1803f34ef78a3fdd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5e6c8db5f07fe427985",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70a306f68a1cc161e78b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42103a9a7e04b15142bb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 77,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ab6be82813b9f2650ae",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 79,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4a930cf4977a44343f9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d44e4fe4f926f5b27fd7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73fd02b6a97c16a9a43b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bae549eb7573cf65abbd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be528119feacbe1272d2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2317db6fe45fb79bcf2c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c14c8e009d5af05e0e9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cefe8a25edb2517f718c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eacb6bcfca951793a42b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 114,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c3e3dfc5d1edcd7fc65",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7f690870a61049c129e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 114,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72a834fba16c9b5b78ed",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93b370aad6a1f8e95fe1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e0c44bd99b31df06a45",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 118,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1057dd10843e828818ee",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 120,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8bdc7f2a5f510edc8bd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 121,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f345b7d21f51d0cfc18b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 129,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f23a62cfa6c6fef0a56f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-975a53bd1edbbeecedda",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1de0849442f7ed182a03",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 133,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-234e12830d91e40e9f83",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 135,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3afccea7243e84936ee",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 136,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc3d55f5911dbeec46e5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 137,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25d0970576ba17916dbc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 140,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b7de5ec254a3d51bcb4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 141,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-243f6a046489fef2c47f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 142,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-146bb7db4ca4f25b5f18",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 143,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5a6e9559da08af00a28",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 145,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61f659102836bfe7eaa1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 147,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ecf75970481a666cc7a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5783ee35812dc16c6427",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 155,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-666aa91984867cd382d2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 170,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1885c0b90ccea91d53c0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 173,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39fdb44468b572bf7e23",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 174,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-880e3f491af833a8c730",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 180,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e0afa5842878ca93901",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 183,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03b79bfe3ae4bbc98d4c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 184,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-721679795e16d38767b6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 185,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4f70b208adec2c14eb9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Polo",
+      "modelId": "volkswagen/polo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 195,
+      "commercialNames": [
+        "POLO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

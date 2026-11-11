@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "productionYearsNotInferred": true,
+    "generationsAndVariantsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 3,
+    "newModels": 3,
+    "newSources": 2
+  },
+  "modelIds": [
+    "vauxhall/combo-life",
+    "vauxhall/vivaro-life",
+    "volkswagen/crafter"
+  ]
+}

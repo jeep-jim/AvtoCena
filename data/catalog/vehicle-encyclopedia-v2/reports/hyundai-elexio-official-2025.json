@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 1,
+    "newModels": 1,
+    "newGenerations": 1,
+    "newVariants": 1
+  },
+  "sourceIds": [
+    "src-hyundai-elexio-china-launch-2025"
+  ],
+  "modelIds": [
+    "hyundai/elexio"
+  ],
+  "generationIds": [
+    "hyundai/elexio/e-gmp"
+  ],
+  "variantIds": [
+    "hyundai/elexio/e-gmp/china-722-km-cltc"
+  ],
+  "policy": {
+    "englishCanonicalNameRequired": true,
+    "localizedNameSearchOnly": true,
+    "unspecifiedBatteryBasisRejected": true,
+    "power30MinNotDerived": true,
+    "automaticPublicationReady": false
+  }
+}

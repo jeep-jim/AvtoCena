@@ -1,0 +1,553 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T07:01:56.168Z",
+  "batch": "research-2026-10-23-audi-a1-next-gaps",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 50,
+  "newVariants": 0,
+  "updatedVariants": 50,
+  "confirmedFields": 51,
+  "compiledCalculationFields": 51,
+  "beforeRevision": "90e47836-c51c-4ea4-9337-22fdbdcbb486",
+  "afterRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+  "variantsBefore": 394,
+  "variantsAfter": 394,
+  "unchangedVariantsPreserved": 344,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 50,
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  },
+  "make": "Audi",
+  "model": "A1",
+  "modelId": "d5a8af35e3698aa33eaea9a9",
+  "commit": "fbd685f14aabec2a94cbf00b9bddf8275612e123",
+  "workflow": 39914987028,
+  "job": 120286427686,
+  "workflowConclusion": "success",
+  "independentApiYears": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "fieldBreakdown": {
+    "bodyType": 50,
+    "drive": 1
+  },
+  "yearsChanged": [
+    2021,
+    2022,
+    2023
+  ],
+  "sourceReview": {
+    "sources": {
+      "rescue2020": {
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+        "checkedAt": "2026-10-23",
+        "sourcePublisher": "AUDI AG",
+        "sourceNature": "Заводская спасательная карта, официальный сайт Audi"
+      },
+      "de35-2021": {
+        "url": "https://www.autozentrum-dobler.com/default-wAssets/docs/Mietwagen-Ausstattungs-PDFs/A1-Sportback_1003_verkleinert.pdf",
+        "sourceSha256": "f84e9c8e82e09d5270f0b1a399ddebb0ca108c456b9497fc5789eff3aa0208d9",
+        "checkedAt": "2026-10-23",
+        "sourcePublisher": "AUDI AG",
+        "sourceNature": "Оригинальная распечатка конфигуратора Audi, опубликована дилером"
+      },
+      "lv2022": {
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3Ac7dbdf43-66ac-4d32-af86-642b5f31b0d6/original/as/A1_CL_LV.pdf",
+        "sourceSha256": "b218197eb9acb8f5c78ee228a8c7e39899e6e14215b49499caa1b2e29a92c4a5",
+        "checkedAt": "2026-10-23",
+        "sourcePublisher": "AUDI AG",
+        "sourceNature": "Заводской каталог Audi Latvia, 01.11.2022"
+      }
+    },
+    "reviewedOnly": {
+      "lv2022": "Хеш совпадает с прежним источником; ранее подтверждённые значения не переписывались. На странице 41 нет явного переднего привода, 25/40 TFSI отсутствуют. Новых полей по этой таблице в партии нет."
+    },
+    "massRetry": {
+      "variantId": "5f973861584569feb263cbd6",
+      "values": [
+        1705,
+        1710
+      ],
+      "reason": "Без точной даты/омологации строка 2021 недостаточна для выбора между июльской конфигурацией и поздней спецификацией; не усреднять и не выбирать предположительно.",
+      "lead": "https://www.rupteur.ch/de/targa/1aq612",
+      "leadIsAppliedEvidence": false
+    },
+    "technicalPagesVisuallyReviewed": [
+      "Audi A9DPV7KB 22.07.2021 page9",
+      "Audi Latvia01.11.2022 page41"
+    ],
+    "existingBodyEvidencePreviouslyVisuallyReviewed": true
+  },
+  "researchGuards": {
+    "passed": 8,
+    "total": 8
+  },
+  "researchedVariantsAfter": 193,
+  "publicParity": {
+    "checkedAt": "2026-10-23T07:01:56.232925+00:00",
+    "passed": true,
+    "scope": "Audi A1 Europe: точный курсор2021 и повторяющиеся группы первого ограниченного ответа; не веськаталог: публичная выдача/карточки наблюдаемого выпуска; новая партия не активирована",
+    "offersFound": 5,
+    "offersChecked": 5,
+    "comparisons": 65,
+    "generationId": "gen_1792702445675_8c312f85",
+    "rows": [
+      {
+        "offerId": "2d22b1e3039961f84a598dd3",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+            "card": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 999,
+            "card": 999,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 81,
+            "card": 81,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 81,
+            "card": 81,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3343862,
+            "card": 3343862,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "7ac8344a62d591a1cd65ec40",
+        "checks": {
+          "year": {
+            "search": 2021,
+            "card": 2021,
+            "equal": true
+          },
+          "trim": {
+            "search": "Sportback S line 35 TFSI S tronic *LED*",
+            "card": "Sportback S line 35 TFSI S tronic *LED*",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3286273,
+            "card": 3286273,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "972ebb253a74720057370e18",
+        "checks": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+            "card": "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 999,
+            "card": 999,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 81,
+            "card": 81,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 81,
+            "card": 81,
+            "equal": true
+          },
+          "drive": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3223016,
+            "card": 3223016,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {
+          "drive": {
+            "search": "",
+            "card": "$undefined"
+          }
+        }
+      },
+      {
+        "offerId": "05fc486ea893def7802576ed",
+        "checks": {
+          "year": {
+            "search": 2025,
+            "card": 2025,
+            "equal": true
+          },
+          "trim": {
+            "search": "A1 SPB 30 TFSI S tronic Identity Black",
+            "card": "A1 SPB 30 TFSI S tronic Identity Black",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": 1680,
+            "card": 1680,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 999,
+            "card": 999,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 116,
+            "card": 116,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3944246,
+            "card": 3944246,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      },
+      {
+        "offerId": "a9c9de9ce3160424c0190481",
+        "checks": {
+          "year": {
+            "search": 2025,
+            "card": 2025,
+            "equal": true
+          },
+          "trim": {
+            "search": "A1 SPB 30 TFSI S tronic Identity Black",
+            "card": "A1 SPB 30 TFSI S tronic Identity Black",
+            "equal": true
+          },
+          "bodyType": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "grossVehicleWeightKg": {
+            "search": 1680,
+            "card": 1680,
+            "equal": true
+          },
+          "engineCc": {
+            "search": 999,
+            "card": 999,
+            "equal": true
+          },
+          "powerHp": {
+            "search": 116,
+            "card": 116,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 85,
+            "card": 85,
+            "equal": true
+          },
+          "drive": {
+            "search": "fwd",
+            "card": "fwd",
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "powerDataSource": {
+            "search": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "card": "permanent_encyclopedia:36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 4135632,
+            "card": 4135632,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "rawRepresentationDifferences": {}
+      }
+    ],
+    "unavailable": [],
+    "repeatedExactModificationGroups": 2,
+    "repeatedGroups": [
+      {
+        "identity": [
+          "2023",
+          "allstreet 30 1.0 tfsi identity contrast 110cv s tr",
+          "",
+          "automatic",
+          "999",
+          "110"
+        ],
+        "offerIds": [
+          "2d22b1e3039961f84a598dd3",
+          "972ebb253a74720057370e18"
+        ],
+        "allCardsChecked": true
+      },
+      {
+        "identity": [
+          "2025",
+          "A1 SPB 30 TFSI S tronic Identity Black",
+          "",
+          "automatic",
+          "999",
+          "116"
+        ],
+        "offerIds": [
+          "05fc486ea893def7802576ed",
+          "a9c9de9ce3160424c0190481"
+        ],
+        "allCardsChecked": true
+      }
+    ],
+    "duplicateOfferIds": 0,
+    "rowsReturned": 48,
+    "catalogTotalReported": 313,
+    "note": "Повторяющиеся модификации — отдельные объявления с уникальными id, не новые дубликаты энциклопедии. Новые51поле ещё не включены в servingиндекс; это проверка текущейпубликации0259804. React$undefined/пустая строка нормализованы как отсутствие значения; исходные различия сохранены."
+  },
+  "releaseState": {
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+      "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "025980454268fa9841ffab34b119037f348a1a11",
+      "calculationVersion": "b66d3801d7193a68315f5fbe0ba403ac8c81c401b6d2715563389050f7d17b04"
+    },
+    "index": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+    "newBatchPending": true,
+    "newBatchActivationConfirmed": false,
+    "duplicateDeployRequested": false,
+    "nextAction": "Включить51поле вместе с остальными накопленными партиями в следующий согласованный индекс; проверить членство и публичное применение. Никакой новый deploy этой сессией не запрошен."
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-audi-a1-next-remaining.json",
+  "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2023-next.json",
+  "allModelsComplete": false,
+  "collectorsCalculationRulesGuardsSecretsChanged": false,
+  "appliedAt": "2026-10-23T07:01:11.566Z",
+  "priorPublicTimeoutsResolved": {
+    "offerIds": [
+      "972ebb253a74720057370e18",
+      "05fc486ea893def7802576ed"
+    ],
+    "currentReadback": "PASS",
+    "wholeCatalogCertified": false
+  }
+}

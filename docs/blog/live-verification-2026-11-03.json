@@ -1,0 +1,307 @@
+{
+  "expectedRelease": "3b73315578e96faaa4817a2b57fca81aa66dc0f3",
+  "checkedAt": "2026-11-03T04:31:19Z",
+  "health": {
+    "http": 200,
+    "secondsFull": 4.73,
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "3b73315578e96faaa4817a2b57fca81aa66dc0f3",
+    "calculationVersion": "269f2d89176f2d6344c163d72d7b6d52fc299387c493410f9d0bc488ad35d4f8"
+  },
+  "articles": [
+    {
+      "slug": "bmw-city-assistant-2027-driver-role",
+      "url": "https://avtocena.com/blog/bmw-city-assistant-2027-driver-role",
+      "http": 200,
+      "secondsFirstByte": 4.07,
+      "secondsFull": 4.35,
+      "coverSecondsFull": 3.555,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "bmw-m3-six-generations-guide",
+      "url": "https://avtocena.com/blog/bmw-m3-six-generations-guide",
+      "http": 200,
+      "secondsFirstByte": 4.229,
+      "secondsFull": 4.672,
+      "coverSecondsFull": 4.029,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "porsche-pccm-plus-retrofit-compatibility",
+      "url": "https://avtocena.com/blog/porsche-pccm-plus-retrofit-compatibility",
+      "http": 200,
+      "secondsFirstByte": 3.941,
+      "secondsFull": 4.226,
+      "coverSecondsFull": 5.002,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "porsche-mission-s-design-vision",
+      "url": "https://avtocena.com/blog/porsche-mission-s-design-vision",
+      "http": 200,
+      "secondsFirstByte": 3.131,
+      "secondsFull": 3.41,
+      "coverSecondsFull": 4.932,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "bmw-hvo-fuel-approval-guide",
+      "url": "https://avtocena.com/blog/bmw-hvo-fuel-approval-guide",
+      "http": 200,
+      "secondsFirstByte": 5.123,
+      "secondsFull": 5.407,
+      "coverSecondsFull": 3.499,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "renault-kangoo-52-kwh-pending-range",
+      "url": "https://avtocena.com/blog/renault-kangoo-52-kwh-pending-range",
+      "http": 200,
+      "secondsFirstByte": 5.022,
+      "secondsFull": 5.298,
+      "coverSecondsFull": 3.514,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "alpine-a310-vision-heritage-study",
+      "url": "https://avtocena.com/blog/alpine-a310-vision-heritage-study",
+      "http": 200,
+      "secondsFirstByte": 3.651,
+      "secondsFull": 3.93,
+      "coverSecondsFull": 3.749,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "renault-4-roof-range-battery-choice",
+      "url": "https://avtocena.com/blog/renault-4-roof-range-battery-choice",
+      "http": 200,
+      "secondsFirstByte": 3.644,
+      "secondsFull": 3.933,
+      "coverSecondsFull": 3.729,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "bmw-ix4-launch-plan-2027",
+      "url": "https://avtocena.com/blog/bmw-ix4-launch-plan-2027",
+      "http": 200,
+      "secondsFirstByte": 4.265,
+      "secondsFull": 4.544,
+      "coverSecondsFull": 3.682,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    },
+    {
+      "slug": "bmw-3-series-production-geography",
+      "url": "https://avtocena.com/blog/bmw-3-series-production-geography",
+      "http": 200,
+      "secondsFirstByte": 4.246,
+      "secondsFull": 4.519,
+      "coverSecondsFull": 3.692,
+      "checks": {
+        "http": true,
+        "title": true,
+        "lastParagraph": true,
+        "canonical": true,
+        "cover": true,
+        "credit": true,
+        "sources": true,
+        "related": true,
+        "jsonLd": true,
+        "noErrorStream": true,
+        "coverBytes": true
+      },
+      "pass": true
+    }
+  ],
+  "listingPages": [
+    {
+      "page": 1,
+      "http": 200,
+      "links": [
+        "/blog/alpine-a310-vision-heritage-study",
+        "/blog/bmw-3-series-production-geography",
+        "/blog/bmw-city-assistant-2027-driver-role",
+        "/blog/bmw-hvo-fuel-approval-guide",
+        "/blog/bmw-ix4-launch-plan-2027",
+        "/blog/bmw-m3-six-generations-guide",
+        "/blog/porsche-mission-s-design-vision",
+        "/blog/porsche-pccm-plus-retrofit-compatibility",
+        "/blog/renault-4-roof-range-battery-choice",
+        "/blog/renault-kangoo-52-kwh-pending-range",
+        "/blog/deeside-carbon-neutral-factory-boundaries",
+        "/blog/hydrogen-trucks-infrastructure-2030"
+      ],
+      "secondsFull": 4.108
+    },
+    {
+      "page": 2,
+      "http": 200,
+      "links": [
+        "/blog/hyundai-display-themes-region-check",
+        "/blog/hyundai-interbrand-value-not-reliability",
+        "/blog/inclusive-mobility-cities-2026",
+        "/blog/made-with-europe-position-not-law",
+        "/blog/toyota-europe-sales-electrified-2026",
+        "/blog/toyota-hybrid-15-platform-2026",
+        "/blog/toyota-waymo-bz4x-2027-plan",
+        "/blog/woven-city-mobility-test-city-2026",
+        "/blog/bmw-gen6-battery-800v-2026",
+        "/blog/car-of-the-year-2027-seven-electric-finalists",
+        "/blog/derek-bell-85-let-2026",
+        "/blog/hyundai-tucson-n-line-equipment-2026"
+      ],
+      "secondsFull": 4.864
+    },
+    {
+      "page": 3,
+      "http": 200,
+      "links": [
+        "/blog/ioniq-6-uk-2026-trims-range",
+        "/blog/jeju-v2g-electric-car-grid-2026",
+        "/blog/land-cruiser-fj-prototype-guide",
+        "/blog/porsche-e-shift-virtual-gears-guide",
+        "/blog/staria-cargo-electric-van-route-guide",
+        "/blog/toyota-rav4-phev-japan-2026-guide",
+        "/blog/toyota-prius-1997-kak-nachinalsya-seriynyy-gibrid",
+        "/blog/toyota-corolla-60-let-2026"
+      ],
+      "secondsFull": 4.038
+    }
+  ],
+  "sitemap": {
+    "http": 200,
+    "secondsFull": 4.671,
+    "newUrls": {
+      "bmw-city-assistant-2027-driver-role": true,
+      "bmw-m3-six-generations-guide": true,
+      "porsche-pccm-plus-retrofit-compatibility": true,
+      "porsche-mission-s-design-vision": true,
+      "bmw-hvo-fuel-approval-guide": true,
+      "renault-kangoo-52-kwh-pending-range": true,
+      "alpine-a310-vision-heritage-study": true,
+      "renault-4-roof-range-battery-choice": true,
+      "bmw-ix4-launch-plan-2027": true,
+      "bmw-3-series-production-geography": true
+    }
+  },
+  "pass": true
+}

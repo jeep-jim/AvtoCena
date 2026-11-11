@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {StableBudgetSelectionCache} from '../apps/web/lib/catalog/stable-budget-selection';
+import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
+const tuple=(id:string,year=2024)=>['china',100,null,null,false,{id,make:'BMW',model:'X3',year,block:0}] as any;
+test('request cache expiry retains metadata identity and derived facets, but changed authorities invalidate it',async()=>{
+ let now=0,loads=0,facets=0;
+ const stable=new StableBudgetSelectionCache(),index:any={generationId:'g',rows:[tuple('a'),tuple('b')]};
+ const requests=new DetailReadCache<any[]>({maxEntries:1,maxBytes:10000,ttlMs:30_000,concurrency:1,now:()=>now});
+ const derived=new WeakMap<object,string[]>();
+ const read=(context:string,source=index)=>requests.get(context+':'+now,()=>stable.get(source,context,'any',async()=>{loads++;return source.rows.filter((r:any)=>context==='day2:rev2'?r[5].id!=='a':true);}));
+ const makeFacets=(rows:any[])=>{let result=derived.get(rows);if(!result){facets++;result=rows.map(r=>r[5].id);derived.set(rows,result);}return result;};
+ const first=await read('day1:rev1');makeFacets(first);now=30_001;
+ const refreshed=await read('day1:rev1');assert.equal(refreshed,first);makeFacets(refreshed);
+ assert.equal(loads,1);assert.equal(facets,1);
+ now=305_001;assert.equal(await read('day1:rev1'),first);
+ const edited=await read('day2:rev2');assert.deepEqual(makeFacets(edited),['b']);assert.notEqual(edited,first);
+ const replacement={...index,rows:[tuple('b',2025)]};now+=30_001;
+ assert.equal((await read('day2:rev2',replacement))[0][5].year,2025);
+ stable.clear();assert.notEqual(await read('day1:rev1'),first);
+});
+test('market scopes stay separate, coalesce pending work, bound variants and retry errors',async()=>{
+ const cache=new StableBudgetSelectionCache(),index:any={};let calls=0;
+ const load=async()=>{calls++;return [tuple(String(calls))];};
+ const [a,b]=await Promise.all([cache.get(index,'day:rev','china',load),cache.get(index,'day:rev','china',load)]);
+ assert.equal(a,b);assert.equal(calls,1);
+ assert.notEqual(await cache.get(index,'day:rev','europe',load),a);
+ await assert.rejects(cache.get(index,'day:rev','failure',async()=>{throw Error('read_failed');}),/read_failed/);
+ await cache.get(index,'day:rev','failure',load);
+ for(let i=0;i<8;i++)await cache.get(index,'day:rev','scope-'+i,load);
+ assert.notEqual(await cache.get(index,'day:rev','china',load),a);
+});

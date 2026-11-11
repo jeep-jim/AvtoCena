@@ -1,0 +1,4 @@
+{
+  "reason": "Production confirmed stopped exit139, oomKilled=false; previous recovery failed before mutation on stopped-container NetworkSettings. Corrected lookup uses persisted HostConfig.PortBindings; retry guarded one-time recovery.",
+  "at": "2026-10-31T08:29:00Z"
+}

@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T17:54:42.928Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-24-audi-a3-2023-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a3-2023-body.json",
+  "batchSha256": "176774c69b9203dd385a188d8d86fe9f73dbcd8256b0e313e6bf45280c61f69f",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "beforeRevision": "714cb419-1c3f-4993-af14-0154d29bbcb9",
+  "variantsRead": 3663,
+  "variantsPlanned": 50,
+  "fieldsPlanned": 50,
+  "newVariants": 0,
+  "untargetedRowsPreserved": 3613,
+  "allExistingValuesPreserved": true,
+  "priorFieldSourcesPreserved": true,
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "compiledFields": 50,
+  "guardTestsPassed": 11,
+  "manualPreserved": true,
+  "unknownCertifiedPowerNotInferred": true,
+  "replayPassed": true,
+  "sources": [
+    {
+      "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+      "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+      "bytes": 79371,
+      "retrievedAt": "2026-10-23T17:54:18.696249+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+      "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+      "bytes": 47629,
+      "retrievedAt": "2026-10-23T17:54:23.701393+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+      "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+      "bytes": 66509,
+      "retrievedAt": "2026-10-23T17:54:27.171158+00:00"
+    }
+  ],
+  "cursorBefore": "a9d1e29fc96ba2a231ba2fb2",
+  "cursorAfterApply": "60c11ad25d56220e7229c26e",
+  "remainingSelectedYearBodyAfterApply": 44,
+  "apiReadbackAfterApply": false,
+  "activationConfirmed": false,
+  "applyDeferredReason": null,
+  "releasedAfterWorkflow": 39988848904,
+  "annualRowsRead": 1111,
+  "unknownYearAstraRowsPreserved": 2552,
+  "nextCandidate": {
+    "variantId": "60c11ad25d56220e7229c26e",
+    "year": 2023,
+    "trim": "Sportback 35 TFSI S line+DSG+PANO+KAMERA+SHZ+LED"
+  }
+}

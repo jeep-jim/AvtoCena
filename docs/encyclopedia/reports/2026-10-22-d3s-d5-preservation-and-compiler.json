@@ -1,0 +1,144 @@
+{
+  "checkedAt": "2026-10-22T16:05:08.606Z",
+  "passed": true,
+  "manualWrites": 0,
+  "duplicatesAdded": 0,
+  "compiler": "unchanged production calculation-index.ts",
+  "activationConfirmed": false,
+  "models": [
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "model": "D3",
+      "revision": "c2af14d2-438f-4cf6-92f2-757219316135",
+      "newVariants": 6,
+      "confirmedFields": 58,
+      "calculationFields": 44,
+      "preservedExistingVariants": 33,
+      "totalVariants": 39,
+      "researchedVariants": 38,
+      "rows": [
+        {
+          "id": "fbd81a42406586dafeb64435",
+          "year": 2020,
+          "compiledFields": [
+            "bodyType",
+            "drive",
+            "engineCc",
+            "fuel",
+            "icePowerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        },
+        {
+          "id": "87599e518f3488cbcc697b7d",
+          "year": 2020,
+          "compiledFields": [
+            "bodyType",
+            "drive",
+            "engineCc",
+            "fuel",
+            "icePowerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        },
+        {
+          "id": "6019cb80bfa8e93061294bea",
+          "year": 2021,
+          "compiledFields": [
+            "bodyType",
+            "drive",
+            "engineCc",
+            "fuel",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        },
+        {
+          "id": "92ef699ba7310a52024f5dd1",
+          "year": 2021,
+          "compiledFields": [
+            "bodyType",
+            "drive",
+            "engineCc",
+            "fuel",
+            "grossVehicleWeightKg",
+            "icePowerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        },
+        {
+          "id": "309539928fab481c2f1fd81e",
+          "year": 2023,
+          "compiledFields": [
+            "bodyType",
+            "drive",
+            "engineCc",
+            "fuel",
+            "icePowerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        },
+        {
+          "id": "8039f238d7e7a927932f4b61",
+          "year": 2023,
+          "compiledFields": [
+            "bodyType",
+            "drive",
+            "engineCc",
+            "fuel",
+            "icePowerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        }
+      ]
+    },
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "model": "D5",
+      "revision": "3a2ea0cf-b603-4df6-92c3-a9d50126c1db",
+      "newVariants": 2,
+      "confirmedFields": 18,
+      "calculationFields": 16,
+      "preservedExistingVariants": 1,
+      "totalVariants": 3,
+      "researchedVariants": 3,
+      "rows": [
+        {
+          "id": "dbbd3da8fd54efed73321e91",
+          "year": 2013,
+          "compiledFields": [
+            "bodyType",
+            "engineCc",
+            "fuel",
+            "icePowerKw",
+            "powerHp",
+            "powerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        },
+        {
+          "id": "e683c895d3a5d644aad03823",
+          "year": 2013,
+          "compiledFields": [
+            "bodyType",
+            "engineCc",
+            "fuel",
+            "icePowerKw",
+            "powerHp",
+            "powerKw",
+            "powertrainKind",
+            "transmission"
+          ]
+        }
+      ]
+    }
+  ]
+}

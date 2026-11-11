@@ -1,0 +1,918 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alpina-d3-2008-2009-factory",
+  "entries": [
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2008,
+      "operation": "create",
+      "variantId": "0beddff274774d267a4b9935",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe 6MT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс ALPINA от05.03.2008, сохранённый bimmerarchiv.de с указанием автора. Подтверждены купе Bi-Turbo214PS/157кВт, дизель и две коробки:6-ступенчатая механика и SWITCH-TRONIC. Точные см³, полная масса, привод и коды из более позднего каталога не перенесены. Седан/Touring в анонсе только планируются на осень; требуют отдельного подтверждения. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); trim"
+          },
+          "bodyType": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); bodyType"
+          },
+          "fuel": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; 6MT (без скобок); transmission"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2008,
+      "operation": "create",
+      "variantId": "d413cd6006473a9fedebad2e",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe SWITCH-TRONIC",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской анонс ALPINA от05.03.2008, сохранённый bimmerarchiv.de с указанием автора. Подтверждены купе Bi-Turbo214PS/157кВт, дизель и две коробки:6-ступенчатая механика и SWITCH-TRONIC. Точные см³, полная масса, привод и коды из более позднего каталога не перенесены. Седан/Touring в анонсе только планируются на осень; требуют отдельного подтверждения. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); trim"
+          },
+          "bodyType": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); bodyType"
+          },
+          "fuel": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://www.bimmerarchiv.de/artikel/2008-03-05-das-neue-bmw-alpina-d3-biturbo-coupe.html",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2008-03-05",
+            "selector": "D3 Bi-Turbo 2008; Coupe; SWITCH-TRONIC (значения в скобках); transmission"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2009,
+      "operation": "create",
+      "variantId": "9204cd548a3b7707c8d5ef51",
+      "trim": "2.0 Bi-Turbo 214 PS Saloon 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Saloon 6MT",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual",
+        "engineCc": 1995,
+        "grossVehicleWeightKg": 2000
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской каталог ALPINA, редакция April 2009, архивная копия на ekladata.com; первичный автор ALPINA, хост не заводской. PDF11: 1995см³,157кВт/214PS (211bhp отдельно), дизель, механика/SWITCH-TRONIC, разрешённая полная масса по кузову и коробке; PDF12 подтверждает дату. Таблица визуально сверена. Название файла с2008 не использовано как год. Привод и коды в таблице явно не указаны, оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); trim"
+          },
+          "bodyType": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); bodyType"
+          },
+          "fuel": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); powerHp"
+          },
+          "powerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); transmission"
+          },
+          "engineCc": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); engineCc"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; 6MT (без скобок); grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2009,
+      "operation": "create",
+      "variantId": "19db2539ed413bf35a567f43",
+      "trim": "2.0 Bi-Turbo 214 PS Saloon SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Saloon SWITCH-TRONIC",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "grossVehicleWeightKg": 2010
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской каталог ALPINA, редакция April 2009, архивная копия на ekladata.com; первичный автор ALPINA, хост не заводской. PDF11: 1995см³,157кВт/214PS (211bhp отдельно), дизель, механика/SWITCH-TRONIC, разрешённая полная масса по кузову и коробке; PDF12 подтверждает дату. Таблица визуально сверена. Название файла с2008 не использовано как год. Привод и коды в таблице явно не указаны, оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); trim"
+          },
+          "bodyType": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); bodyType"
+          },
+          "fuel": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); powerHp"
+          },
+          "powerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); transmission"
+          },
+          "engineCc": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); engineCc"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Saloon; SWITCH-TRONIC (значения в скобках); grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2009,
+      "operation": "create",
+      "variantId": "6fd7c8a2e95e5ceedd91d5d6",
+      "trim": "2.0 Bi-Turbo 214 PS Touring 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Touring 6MT",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual",
+        "engineCc": 1995,
+        "grossVehicleWeightKg": 2090
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской каталог ALPINA, редакция April 2009, архивная копия на ekladata.com; первичный автор ALPINA, хост не заводской. PDF11: 1995см³,157кВт/214PS (211bhp отдельно), дизель, механика/SWITCH-TRONIC, разрешённая полная масса по кузову и коробке; PDF12 подтверждает дату. Таблица визуально сверена. Название файла с2008 не использовано как год. Привод и коды в таблице явно не указаны, оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); trim"
+          },
+          "bodyType": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); bodyType"
+          },
+          "fuel": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); powerHp"
+          },
+          "powerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); transmission"
+          },
+          "engineCc": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); engineCc"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; 6MT (без скобок); grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2009,
+      "operation": "create",
+      "variantId": "5232870d45d996e1b36de0e1",
+      "trim": "2.0 Bi-Turbo 214 PS Touring SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Touring SWITCH-TRONIC",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "grossVehicleWeightKg": 2100
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской каталог ALPINA, редакция April 2009, архивная копия на ekladata.com; первичный автор ALPINA, хост не заводской. PDF11: 1995см³,157кВт/214PS (211bhp отдельно), дизель, механика/SWITCH-TRONIC, разрешённая полная масса по кузову и коробке; PDF12 подтверждает дату. Таблица визуально сверена. Название файла с2008 не использовано как год. Привод и коды в таблице явно не указаны, оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); trim"
+          },
+          "bodyType": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); bodyType"
+          },
+          "fuel": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); powerHp"
+          },
+          "powerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); transmission"
+          },
+          "engineCc": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); engineCc"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Touring; SWITCH-TRONIC (значения в скобках); grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2009,
+      "operation": "create",
+      "variantId": "c95e2c689b52d94f5453546d",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe 6MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe 6MT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual",
+        "engineCc": 1995,
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской каталог ALPINA, редакция April 2009, архивная копия на ekladata.com; первичный автор ALPINA, хост не заводской. PDF11: 1995см³,157кВт/214PS (211bhp отдельно), дизель, механика/SWITCH-TRONIC, разрешённая полная масса по кузову и коробке; PDF12 подтверждает дату. Таблица визуально сверена. Название файла с2008 не использовано как год. Привод и коды в таблице явно не указаны, оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); trim"
+          },
+          "bodyType": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); bodyType"
+          },
+          "fuel": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); powerHp"
+          },
+          "powerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); transmission"
+          },
+          "engineCc": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); engineCc"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; 6MT (без скобок); grossVehicleWeightKg"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2009,
+      "operation": "create",
+      "variantId": "2768176fb7c9b8c273c02d11",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "3e176e1e-117a-46dc-854b-b8f597663cd0",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe SWITCH-TRONIC",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic",
+        "engineCc": 1995,
+        "grossVehicleWeightKg": 1970
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCc",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской каталог ALPINA, редакция April 2009, архивная копия на ekladata.com; первичный автор ALPINA, хост не заводской. PDF11: 1995см³,157кВт/214PS (211bhp отдельно), дизель, механика/SWITCH-TRONIC, разрешённая полная масса по кузову и коробке; PDF12 подтверждает дату. Таблица визуально сверена. Название файла с2008 не использовано как год. Привод и коды в таблице явно не указаны, оставлены пустыми. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); trim"
+          },
+          "bodyType": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); bodyType"
+          },
+          "fuel": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); fuel"
+          },
+          "powertrainKind": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); powerHp"
+          },
+          "powerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); icePowerKw"
+          },
+          "transmission": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); transmission"
+          },
+          "engineCc": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); engineCc"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://ekladata.com/eRJKnSTquzRWJpKUaDp65wRpO4U.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2009-04",
+            "pdfPage": 11,
+            "datePage": 12,
+            "selector": "D3 Bi-Turbo 2009; Coupe; SWITCH-TRONIC (значения в скобках); grossVehicleWeightKg"
+          }
+        }
+      }
+    }
+  ]
+}

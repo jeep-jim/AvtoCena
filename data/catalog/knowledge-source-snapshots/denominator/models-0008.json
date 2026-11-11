@@ -1,0 +1,8059 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 8,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "ford:explorer",
+      "make": "Ford",
+      "model": "Explorer",
+      "aliases": [
+        "EXPLORER",
+        "FORD EXPLORER"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/explorer",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Explorer"
+      }
+    },
+    {
+      "key": "ford:explorersporttrac",
+      "make": "Ford",
+      "model": "Explorer Sport Trac",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:f100",
+      "make": "Ford",
+      "model": "F-100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:f150",
+      "make": "Ford",
+      "model": "F-150",
+      "aliases": [
+        "F 150",
+        "F150",
+        "FORD F-150"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/f-150",
+        "canonicalMake": "Ford",
+        "canonicalModel": "F-150"
+      }
+    },
+    {
+      "key": "ford:f150lightning",
+      "make": "Ford",
+      "model": "F-150 Lightning",
+      "aliases": [
+        "F-150 LIGHTNING"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/f-150-lightning",
+        "canonicalMake": "Ford",
+        "canonicalModel": "F-150 Lightning"
+      }
+    },
+    {
+      "key": "ford:f250",
+      "make": "Ford",
+      "model": "F-250",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:fairlane",
+      "make": "Ford",
+      "model": "Fairlane",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:fairmont",
+      "make": "Ford",
+      "model": "Fairmont",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:falcon",
+      "make": "Ford",
+      "model": "Falcon",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:festiva",
+      "make": "Ford",
+      "model": "Festiva",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:fiesta",
+      "make": "Ford",
+      "model": "Fiesta",
+      "aliases": [
+        "FIESTA",
+        "FORD FIESTA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/fiesta",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Fiesta"
+      }
+    },
+    {
+      "key": "ford:figo",
+      "make": "Ford",
+      "model": "Figo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:fivehundred",
+      "make": "Ford",
+      "model": "Five Hundred",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:flash",
+      "make": "Ford",
+      "model": "Flash",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:flash03m08",
+      "make": "Ford",
+      "model": "Flash 03 M08",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:flex",
+      "make": "Ford",
+      "model": "Flex",
+      "aliases": [
+        "FLEX"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/flex",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Flex"
+      }
+    },
+    {
+      "key": "ford:focus",
+      "make": "Ford",
+      "model": "Focus",
+      "aliases": [
+        "FOCUS",
+        "FORD FOCUS"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/focus",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Focus"
+      }
+    },
+    {
+      "key": "ford:fordor",
+      "make": "Ford",
+      "model": "Fordor",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:fordson",
+      "make": "Ford",
+      "model": "Fordson",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:freedom",
+      "make": "Ford",
+      "model": "Freedom",
+      "aliases": [
+        "FREEDOM GRAND RS",
+        "FREEDOM GRAND RS AUTO",
+        "FREEDOM RS"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/freedom",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Freedom"
+      }
+    },
+    {
+      "key": "ford:freestar",
+      "make": "Ford",
+      "model": "Freestar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:freestyle",
+      "make": "Ford",
+      "model": "Freestyle",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:fusion",
+      "make": "Ford",
+      "model": "Fusion",
+      "aliases": [
+        "FORD FUSION",
+        "FUSION"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/fusion",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Fusion"
+      }
+    },
+    {
+      "key": "ford:galaxie",
+      "make": "Ford",
+      "model": "Galaxie",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:galaxy",
+      "make": "Ford",
+      "model": "Galaxy",
+      "aliases": [
+        "Ford Galaxy"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/galaxy",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Galaxy"
+      }
+    },
+    {
+      "key": "ford:genesis",
+      "make": "Ford",
+      "model": "Genesis",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:gpw",
+      "make": "Ford",
+      "model": "Gpw",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:grantorino",
+      "make": "Ford",
+      "model": "Gran Torino",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:granada",
+      "make": "Ford",
+      "model": "Granada",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:grandcmax",
+      "make": "Ford",
+      "model": "Grand C-Max",
+      "aliases": [
+        "GRAND C-MAX",
+        "Grand C-MAX"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/grand-c-max",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Grand C-Max"
+      }
+    },
+    {
+      "key": "ford:grandmarquis",
+      "make": "Ford",
+      "model": "Grand Marquis",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:gt",
+      "make": "Ford",
+      "model": "GT",
+      "aliases": [
+        "FORD GT"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/gt",
+        "canonicalMake": "Ford",
+        "canonicalModel": "GT"
+      }
+    },
+    {
+      "key": "ford:gt40",
+      "make": "Ford",
+      "model": "GT40",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:independence",
+      "make": "Ford",
+      "model": "Independence",
+      "aliases": [
+        "INDEPENDENCE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/independence",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Independence"
+      }
+    },
+    {
+      "key": "ford:ka",
+      "make": "Ford",
+      "model": "Ka",
+      "aliases": [
+        "Ford Ka"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/ka",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Ka"
+      }
+    },
+    {
+      "key": "ford:kuga",
+      "make": "Ford",
+      "model": "Kuga",
+      "aliases": [
+        "Ford Kuga"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/kuga",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Kuga"
+      }
+    },
+    {
+      "key": "ford:ltd",
+      "make": "Ford",
+      "model": "L T D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:laser",
+      "make": "Ford",
+      "model": "Laser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:lincoln",
+      "make": "Ford",
+      "model": "Lincoln",
+      "aliases": [
+        "LINCOLN"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/lincoln",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Lincoln"
+      }
+    },
+    {
+      "key": "ford:lincolncontinental",
+      "make": "Ford",
+      "model": "Lincoln Continental",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:lincolntowncar",
+      "make": "Ford",
+      "model": "Lincoln Town Car",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:ltdcrownvictoria",
+      "make": "Ford",
+      "model": "Ltd Crown Victoria",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:m151a1",
+      "make": "Ford",
+      "model": "M151A1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:mainline",
+      "make": "Ford",
+      "model": "Mainline",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:maverick",
+      "make": "Ford",
+      "model": "Maverick",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:mb",
+      "make": "Ford",
+      "model": "Mb",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:mercury",
+      "make": "Ford",
+      "model": "Mercury",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:mercurycougar",
+      "make": "Ford",
+      "model": "Mercury Cougar",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:model",
+      "make": "Ford",
+      "model": "Model",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:model18",
+      "make": "Ford",
+      "model": "Model 18",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:model40",
+      "make": "Ford",
+      "model": "Model 40",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:modela",
+      "make": "Ford",
+      "model": "Model A",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:modelb",
+      "make": "Ford",
+      "model": "Model B",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:modelt",
+      "make": "Ford",
+      "model": "Model T",
+      "aliases": [
+        "Tin Lizzie"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:modely",
+      "make": "Ford",
+      "model": "Model Y",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:mondeo",
+      "make": "Ford",
+      "model": "Mondeo",
+      "aliases": [
+        "MONDEO"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/mondeo",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Mondeo"
+      }
+    },
+    {
+      "key": "ford:mustang",
+      "make": "Ford",
+      "model": "Mustang",
+      "aliases": [
+        "FORD MUSTANG",
+        "MUSTANG",
+        "Stang"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/mustang",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Mustang"
+      }
+    },
+    {
+      "key": "ford:mustangmache",
+      "make": "Ford",
+      "model": "Mustang Mach-E",
+      "aliases": [
+        "MACH-E",
+        "MACH-E BASE SR",
+        "MACH-E GT",
+        "MACH-E PREMIUM"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": 2026,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/mustang-mach-e",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Mustang Mach-E"
+      }
+    },
+    {
+      "key": "ford:navigator",
+      "make": "Ford",
+      "model": "Navigator",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:nugget",
+      "make": "Ford",
+      "model": "Nugget",
+      "aliases": [
+        "FORD NUGGET",
+        "NUGGET"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/nugget",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Nugget"
+      }
+    },
+    {
+      "key": "ford:orion",
+      "make": "Ford",
+      "model": "Orion",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:panelvan",
+      "make": "Ford",
+      "model": "Panel Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:phaeton",
+      "make": "Ford",
+      "model": "Phaeton",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:pickup",
+      "make": "Ford",
+      "model": "Pick-Up",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:pilot",
+      "make": "Ford",
+      "model": "Pilot",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:pinto",
+      "make": "Ford",
+      "model": "Pinto",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:popular",
+      "make": "Ford",
+      "model": "Popular",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:prefect",
+      "make": "Ford",
+      "model": "Prefect",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:probe",
+      "make": "Ford",
+      "model": "Probe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:puma",
+      "make": "Ford",
+      "model": "Puma",
+      "aliases": [
+        "Ford Puma"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/puma",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Puma"
+      }
+    },
+    {
+      "key": "ford:ranchwagon",
+      "make": "Ford",
+      "model": "Ranch Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:ranchero",
+      "make": "Ford",
+      "model": "Ranchero",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:rancherogt",
+      "make": "Ford",
+      "model": "Ranchero GT",
+      "aliases": [],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:ranger",
+      "make": "Ford",
+      "model": "Ranger",
+      "aliases": [
+        "RANGER"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/ranger",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Ranger"
+      }
+    },
+    {
+      "key": "ford:rimorarf54s3",
+      "make": "Ford",
+      "model": "Rimor ARF54S3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:roadstar",
+      "make": "Ford",
+      "model": "Roadstar",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:rs1600",
+      "make": "Ford",
+      "model": "RS 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:rs200",
+      "make": "Ford",
+      "model": "RS 200",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:rs2000",
+      "make": "Ford",
+      "model": "RS 2000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:smax",
+      "make": "Ford",
+      "model": "S-Max",
+      "aliases": [
+        "Ford S-Max"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/s-max",
+        "canonicalMake": "Ford",
+        "canonicalModel": "S-Max"
+      }
+    },
+    {
+      "key": "ford:sapphire",
+      "make": "Ford",
+      "model": "Sapphire",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:scorpio",
+      "make": "Ford",
+      "model": "Scorpio",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:sed07",
+      "make": "Ford",
+      "model": "SED07",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:sedantudor",
+      "make": "Ford",
+      "model": "Sedan Tudor",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:shelby",
+      "make": "Ford",
+      "model": "Shelby",
+      "aliases": [
+        "FORD SHELBY GT 350R COUPE",
+        "SHELBY GT 500",
+        "SHELBY GTE",
+        "SHELBY MUSTANG"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/shelby",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Shelby"
+      }
+    },
+    {
+      "key": "ford:sierra",
+      "make": "Ford",
+      "model": "Sierra",
+      "aliases": [
+        "SIERRA SAPPHIRE GLX I"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/sierra",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Sierra"
+      }
+    },
+    {
+      "key": "ford:sierracosworth",
+      "make": "Ford",
+      "model": "Sierra Cosworth",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:sierraxr4i",
+      "make": "Ford",
+      "model": "Sierra XR4i",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:sierraxr4x4",
+      "make": "Ford",
+      "model": "Sierra XR4X4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:skyliner",
+      "make": "Ford",
+      "model": "Skyliner",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:special",
+      "make": "Ford",
+      "model": "Special",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:speedster",
+      "make": "Ford",
+      "model": "Speedster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:sport",
+      "make": "Ford",
+      "model": "Sport",
+      "aliases": [
+        "SPORT 340",
+        "SPORT 340 UP",
+        "SPORT 363"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/sport",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Sport"
+      }
+    },
+    {
+      "key": "ford:sports",
+      "make": "Ford",
+      "model": "Sports",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:streetka",
+      "make": "Ford",
+      "model": "Street Ka",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:sunliner",
+      "make": "Ford",
+      "model": "Sunliner",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:superdeluxe",
+      "make": "Ford",
+      "model": "Super De Luxe",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:taunus",
+      "make": "Ford",
+      "model": "Taunus",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:taunus12m",
+      "make": "Ford",
+      "model": "Taunus 12M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:taunus15m",
+      "make": "Ford",
+      "model": "Taunus 15M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:taunus17m",
+      "make": "Ford",
+      "model": "Taunus 17M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:taunus20m",
+      "make": "Ford",
+      "model": "Taunus 20M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:taurus",
+      "make": "Ford",
+      "model": "Taurus",
+      "aliases": [
+        "TAURUS"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/taurus",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Taurus"
+      }
+    },
+    {
+      "key": "ford:taurusx",
+      "make": "Ford",
+      "model": "Taurus X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:telstar",
+      "make": "Ford",
+      "model": "Telstar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:tempo",
+      "make": "Ford",
+      "model": "Tempo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:territory",
+      "make": "Ford",
+      "model": "Territory",
+      "aliases": [
+        "Ford Territory"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/territory",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Territory"
+      }
+    },
+    {
+      "key": "ford:thunderbird",
+      "make": "Ford",
+      "model": "Thunderbird",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:torino",
+      "make": "Ford",
+      "model": "Torino",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:tourer",
+      "make": "Ford",
+      "model": "Tourer",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:touring",
+      "make": "Ford",
+      "model": "Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:tourneo",
+      "make": "Ford",
+      "model": "Tourneo",
+      "aliases": [
+        "Ford Tourneo"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/tourneo",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Tourneo"
+      }
+    },
+    {
+      "key": "ford:tourneoconnect",
+      "make": "Ford",
+      "model": "Tourneo Connect",
+      "aliases": [
+        "GR TOURNEO CONNECT ACTIVE",
+        "GR TOURNEO CONNECT AMB",
+        "GR TOURNEO CONNECT TIT",
+        "GR TOURNEO CONNECT TREND",
+        "GR. TOURNEO CONNECT ACT.",
+        "GR. TOURNEO CONNECT TR.",
+        "GR.TOURNEO CONNECT",
+        "GR.TOURNEO CONNECT SPORT",
+        "GRAND TOURNEO CONNECT AMF-BRUNS",
+        "GRAND TOURNEO CONNECT TRIPOD"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/tourneo-connect",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Tourneo Connect"
+      }
+    },
+    {
+      "key": "ford:town",
+      "make": "Ford",
+      "model": "Town",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:transit",
+      "make": "Ford",
+      "model": "Transit",
+      "aliases": [
+        "TRANSIT"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/transit",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Transit"
+      }
+    },
+    {
+      "key": "ford:transitcustom",
+      "make": "Ford",
+      "model": "Transit Custom",
+      "aliases": [
+        "TRANSIT CUSTOM"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/transit-custom",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Transit Custom"
+      }
+    },
+    {
+      "key": "ford:trigano",
+      "make": "Ford",
+      "model": "Trigano",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:tt",
+      "make": "Ford",
+      "model": "TT",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:tudor",
+      "make": "Ford",
+      "model": "Tudor",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:tudora",
+      "make": "Ford",
+      "model": "Tudor A",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:v8",
+      "make": "Ford",
+      "model": "V-8",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:vedette",
+      "make": "Ford",
+      "model": "Vedette",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:vendome",
+      "make": "Ford",
+      "model": "Vendome",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:victoria",
+      "make": "Ford",
+      "model": "Victoria",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:welcome",
+      "make": "Ford",
+      "model": "Welcome",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:windstar",
+      "make": "Ford",
+      "model": "Windstar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:xl",
+      "make": "Ford",
+      "model": "XL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:y",
+      "make": "Ford",
+      "model": "Y",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:zephyr",
+      "make": "Ford",
+      "model": "Zephyr",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:zodiac",
+      "make": "Ford",
+      "model": "Zodiac",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "forthing:forthing4",
+      "make": "Forthing",
+      "model": "Forthing 4",
+      "aliases": [
+        "FORTHING 4",
+        "FORTHING 4 PHEV"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "forthing",
+        "modelId": "forthing/forthing-4",
+        "canonicalMake": "Forthing",
+        "canonicalModel": "Forthing 4"
+      }
+    },
+    {
+      "key": "forthing:forthing5",
+      "make": "Forthing",
+      "model": "Forthing 5",
+      "aliases": [
+        "FORTHING 5"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "forthing",
+        "modelId": "forthing/forthing-5",
+        "canonicalMake": "Forthing",
+        "canonicalModel": "Forthing 5"
+      }
+    },
+    {
+      "key": "forthing:friday",
+      "make": "Forthing",
+      "model": "Friday",
+      "aliases": [
+        "FRIDAY 1.5T DCT",
+        "FRIDAY 1.5T DCT DUAL-FUEL",
+        "FRIDAY EV",
+        "FRIDAY HEV 1.5T",
+        "FRIDAY S7"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "forthing",
+        "modelId": "forthing/friday",
+        "canonicalMake": "Forthing",
+        "canonicalModel": "Friday"
+      }
+    },
+    {
+      "key": "forthing:t5evo",
+      "make": "Forthing",
+      "model": "T5 EVO",
+      "aliases": [
+        "T5 EVO",
+        "T5 EVO / 1.5 / AUT.",
+        "T5 EVO 1.5T DCT",
+        "T5 EVO EV",
+        "T5 EVO HEV / 1.5 / AUT."
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "forthing",
+        "modelId": "forthing/t5-evo",
+        "canonicalMake": "Forthing",
+        "canonicalModel": "T5 EVO"
+      }
+    },
+    {
+      "key": "fso:polonez",
+      "make": "FSO",
+      "model": "Polonez",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gac:aion",
+      "make": "GAC",
+      "model": "Aion",
+      "aliases": [
+        "AION"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gac",
+        "modelId": "gac/aion",
+        "canonicalMake": "GAC",
+        "canonicalModel": "Aion"
+      }
+    },
+    {
+      "key": "gac:gs3",
+      "make": "GAC",
+      "model": "GS3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gac",
+        "modelId": null,
+        "canonicalMake": "GAC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gac:m8",
+      "make": "GAC",
+      "model": "M8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gac",
+        "modelId": null,
+        "canonicalMake": "GAC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gaz:21",
+      "make": "GAZ",
+      "model": "21",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gaz:24",
+      "make": "GAZ",
+      "model": "24",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gaz:2401",
+      "make": "GAZ",
+      "model": "2401",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gaz:69",
+      "make": "GAZ",
+      "model": "69",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gaz:69m",
+      "make": "GAZ",
+      "model": "69M",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gaz:m21",
+      "make": "GAZ",
+      "model": "M21",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gaz:volga",
+      "make": "GAZ",
+      "model": "Volga",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "geely:atlaspro",
+      "make": "Geely",
+      "model": "Atlas Pro",
+      "aliases": [
+        "ATLAS PRO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/atlas-pro",
+        "canonicalMake": "Geely",
+        "canonicalModel": "Atlas Pro"
+      }
+    },
+    {
+      "key": "geely:cityray",
+      "make": "Geely",
+      "model": "Cityray",
+      "aliases": [
+        "CITYRAY"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/cityray",
+        "canonicalMake": "Geely",
+        "canonicalModel": "Cityray"
+      }
+    },
+    {
+      "key": "geely:coolray",
+      "make": "Geely",
+      "model": "Coolray",
+      "aliases": [
+        "COOLRAY"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/coolray",
+        "canonicalMake": "Geely",
+        "canonicalModel": "Coolray"
+      }
+    },
+    {
+      "key": "geely:e5",
+      "make": "Geely",
+      "model": "E5",
+      "aliases": [
+        "GEELY E5- GEELY EX5- GEELY E05"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/e5",
+        "canonicalMake": "Geely",
+        "canonicalModel": "E5"
+      }
+    },
+    {
+      "key": "geely:emgrand7",
+      "make": "Geely",
+      "model": "Emgrand 7",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": null,
+        "canonicalMake": "Geely",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geely:ex5",
+      "make": "Geely",
+      "model": "EX5",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": 2024,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/ex5",
+        "canonicalMake": "Geely",
+        "canonicalModel": "EX5"
+      }
+    },
+    {
+      "key": "geely:galaxye5",
+      "make": "Geely",
+      "model": "Galaxy E5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": null,
+        "canonicalMake": "Geely",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geely:lc",
+      "make": "Geely",
+      "model": "LC",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": null,
+        "canonicalMake": "Geely",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geely:mk",
+      "make": "Geely",
+      "model": "Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": null,
+        "canonicalMake": "Geely",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geely:starray",
+      "make": "Geely",
+      "model": "Starray",
+      "aliases": [
+        "STARRAY",
+        "STARRAY 2.0 4WD 8AT"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/starray",
+        "canonicalMake": "Geely",
+        "canonicalModel": "Starray"
+      }
+    },
+    {
+      "key": "geely:starrayemi",
+      "make": "Geely",
+      "model": "Starray EM-i",
+      "aliases": [
+        "STARRAY EM-I"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "modelId": "geely/starray-em-i",
+        "canonicalMake": "Geely",
+        "canonicalModel": "Starray EM-i"
+      }
+    },
+    {
+      "key": "genesis:electrifiedg80",
+      "make": "Genesis",
+      "model": "Electrified G80",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": null,
+        "canonicalMake": "Genesis",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "genesis:electrifiedgv70",
+      "make": "Genesis",
+      "model": "Electrified GV70",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": null,
+        "canonicalMake": "Genesis",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "genesis:g70",
+      "make": "Genesis",
+      "model": "G70",
+      "aliases": [
+        "GENESIS G70"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": "genesis/g70",
+        "canonicalMake": "Genesis",
+        "canonicalModel": "G70"
+      }
+    },
+    {
+      "key": "genesis:g80",
+      "make": "Genesis",
+      "model": "G80",
+      "aliases": [
+        "GENESIS G80"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": "genesis/g80",
+        "canonicalMake": "Genesis",
+        "canonicalModel": "G80"
+      }
+    },
+    {
+      "key": "genesis:g90",
+      "make": "Genesis",
+      "model": "G90",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": null,
+        "canonicalMake": "Genesis",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "genesis:gv60",
+      "make": "Genesis",
+      "model": "GV60",
+      "aliases": [
+        "GENESIS GV60"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": "genesis/gv60",
+        "canonicalMake": "Genesis",
+        "canonicalModel": "GV60"
+      }
+    },
+    {
+      "key": "genesis:gv60advanced",
+      "make": "Genesis",
+      "model": "GV60 Advanced",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": null,
+        "canonicalMake": "Genesis",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "genesis:gv60performance",
+      "make": "Genesis",
+      "model": "GV60 Performance",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": null,
+        "canonicalMake": "Genesis",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "genesis:gv70",
+      "make": "Genesis",
+      "model": "GV70",
+      "aliases": [
+        "GENESIS GV70"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": "genesis/gv70",
+        "canonicalMake": "Genesis",
+        "canonicalModel": "GV70"
+      }
+    },
+    {
+      "key": "genesis:gv80",
+      "make": "Genesis",
+      "model": "GV80",
+      "aliases": [
+        "GENESIS GV80"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "modelId": "genesis/gv80",
+        "canonicalMake": "Genesis",
+        "canonicalModel": "GV80"
+      }
+    },
+    {
+      "key": "geo:metro",
+      "make": "Geo",
+      "model": "Metro",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geo",
+        "modelId": null,
+        "canonicalMake": "Geo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geo:metrolsi",
+      "make": "Geo",
+      "model": "Metro Lsi",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geo",
+        "modelId": null,
+        "canonicalMake": "Geo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geo:storm",
+      "make": "Geo",
+      "model": "Storm",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geo",
+        "modelId": null,
+        "canonicalMake": "Geo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geo:tracker",
+      "make": "Geo",
+      "model": "Tracker",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geo",
+        "modelId": null,
+        "canonicalMake": "Geo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "geo:trackervan",
+      "make": "Geo",
+      "model": "Tracker Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geo",
+        "modelId": null,
+        "canonicalMake": "Geo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ginetta:g15",
+      "make": "Ginetta",
+      "model": "G15",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ginetta:g4",
+      "make": "Ginetta",
+      "model": "G4",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gmdaewoo:kalos",
+      "make": "Gm Daewoo",
+      "model": "Kalos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gmdaewoo:lacetti",
+      "make": "Gm Daewoo",
+      "model": "Lacetti",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gmdaewoo:matiz",
+      "make": "Gm Daewoo",
+      "model": "Matiz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gmc:1500",
+      "make": "GMC",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:acadia",
+      "make": "GMC",
+      "model": "Acadia",
+      "aliases": [
+        "ACADIA",
+        "GMC ACADIA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/acadia",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Acadia"
+      }
+    },
+    {
+      "key": "gmc:blazer",
+      "make": "GMC",
+      "model": "Blazer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:c1500suburban",
+      "make": "GMC",
+      "model": "C1500 Suburban",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:canyon",
+      "make": "GMC",
+      "model": "Canyon",
+      "aliases": [
+        "CANYON"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/canyon",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Canyon"
+      }
+    },
+    {
+      "key": "gmc:canyonat4x",
+      "make": "GMC",
+      "model": "Canyon AT4X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:canyonat4xaev",
+      "make": "GMC",
+      "model": "Canyon AT4X Aev",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:canyoncrewcab",
+      "make": "GMC",
+      "model": "Canyon Crew Cab",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:chevroletcamaro",
+      "make": "GMC",
+      "model": "Chevrolet-Camaro",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:envoy",
+      "make": "GMC",
+      "model": "Envoy",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:envoyslt",
+      "make": "GMC",
+      "model": "Envoy Slt",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:envoyxuv",
+      "make": "GMC",
+      "model": "Envoy Xuv",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:hummer",
+      "make": "GMC",
+      "model": "Hummer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:hummerev",
+      "make": "GMC",
+      "model": "Hummer EV",
+      "aliases": [
+        "HUMMER EV"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/hummer-ev",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Hummer EV"
+      }
+    },
+    {
+      "key": "gmc:hummerh3",
+      "make": "GMC",
+      "model": "Hummer H3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:jimmy",
+      "make": "GMC",
+      "model": "Jimmy",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:k2500sierra",
+      "make": "GMC",
+      "model": "K2500 Sierra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:palmbeach",
+      "make": "GMC",
+      "model": "Palm Beach",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:pickup",
+      "make": "GMC",
+      "model": "Pick-Up",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:s15jimmy",
+      "make": "GMC",
+      "model": "S15 Jimmy",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:safari",
+      "make": "GMC",
+      "model": "Safari",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:safarivan",
+      "make": "GMC",
+      "model": "Safari Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:savana",
+      "make": "GMC",
+      "model": "Savana",
+      "aliases": [
+        "GMC SAVANA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/savana",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Savana"
+      }
+    },
+    {
+      "key": "gmc:savana1500",
+      "make": "GMC",
+      "model": "Savana 1500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:savanacargo",
+      "make": "GMC",
+      "model": "Savana Cargo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:savanapassenger",
+      "make": "GMC",
+      "model": "Savana Passenger",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sierra",
+      "make": "GMC",
+      "model": "Sierra",
+      "aliases": [
+        "SIERRA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/sierra",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Sierra"
+      }
+    },
+    {
+      "key": "gmc:sierra15",
+      "make": "GMC",
+      "model": "Sierra 15",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sierra1500",
+      "make": "GMC",
+      "model": "Sierra 1500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sierraclassic",
+      "make": "GMC",
+      "model": "Sierra Classic",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sierraclassic1500",
+      "make": "GMC",
+      "model": "Sierra Classic 1500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sierraev",
+      "make": "GMC",
+      "model": "Sierra EV",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sierragrande",
+      "make": "GMC",
+      "model": "Sierra Grande",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:sonoma",
+      "make": "GMC",
+      "model": "Sonoma",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:suburban",
+      "make": "GMC",
+      "model": "Suburban",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:terrain",
+      "make": "GMC",
+      "model": "Terrain",
+      "aliases": [
+        "GMC TERRAIN",
+        "TERRAIN"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/terrain",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Terrain"
+      }
+    },
+    {
+      "key": "gmc:terraindenali",
+      "make": "GMC",
+      "model": "Terrain Denali",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:typhoon",
+      "make": "GMC",
+      "model": "Typhoon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:vandura",
+      "make": "GMC",
+      "model": "Vandura",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:vandura2500",
+      "make": "GMC",
+      "model": "Vandura 2500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:vandura35",
+      "make": "GMC",
+      "model": "Vandura 35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": null,
+        "canonicalMake": "GMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "gmc:yukon",
+      "make": "GMC",
+      "model": "Yukon",
+      "aliases": [
+        "GMC YUKON",
+        "YUKON"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/yukon",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Yukon"
+      }
+    },
+    {
+      "key": "gmc:yukondenali",
+      "make": "GMC",
+      "model": "Yukon Denali",
+      "aliases": [
+        "YUKON DENALI"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "modelId": "gmc/yukon-denali",
+        "canonicalMake": "GMC",
+        "canonicalModel": "Yukon Denali"
+      }
+    },
+    {
+      "key": "goggomobil:t400",
+      "make": "Goggomobil",
+      "model": "T400",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "goliath:1100",
+      "make": "Goliath",
+      "model": "1100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "goliath:hansa1100",
+      "make": "Goliath",
+      "model": "Hansa 1100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "graham:615",
+      "make": "Graham",
+      "model": "615",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "graham:paige",
+      "make": "Graham",
+      "model": "Paige",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "greatwall:funkycat",
+      "make": "Great Wall",
+      "model": "Funky Cat",
+      "aliases": [
+        "FUNKY CAT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/funky-cat",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Funky Cat"
+      }
+    },
+    {
+      "key": "greatwall:havalh2w",
+      "make": "Great Wall",
+      "model": "Haval H2W",
+      "aliases": [
+        "HAVAL H2W GPL",
+        "HAVAL H2W LPG"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/haval-h2w",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Haval H2W"
+      }
+    },
+    {
+      "key": "greatwall:havalh6",
+      "make": "Great Wall",
+      "model": "Haval H6",
+      "aliases": [
+        "HAVAL H6"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/haval-h6",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Haval H6"
+      }
+    },
+    {
+      "key": "greatwall:havaljolion",
+      "make": "Great Wall",
+      "model": "Haval Jolion",
+      "aliases": [
+        "HAVAL JOLION"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/haval-jolion",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Haval Jolion"
+      }
+    },
+    {
+      "key": "greatwall:ora",
+      "make": "Great Wall",
+      "model": "Ora",
+      "aliases": [
+        "ORA LIGHTNING CAT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/ora",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Ora"
+      }
+    },
+    {
+      "key": "greatwall:ora03",
+      "make": "Great Wall",
+      "model": "Ora 03",
+      "aliases": [
+        "ORA 03"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/ora-03",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Ora 03"
+      }
+    },
+    {
+      "key": "greatwall:ora07",
+      "make": "Great Wall",
+      "model": "Ora 07",
+      "aliases": [
+        "ORA 07"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/ora-07",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Ora 07"
+      }
+    },
+    {
+      "key": "greatwall:orafunkycat",
+      "make": "Great Wall",
+      "model": "Ora Funky Cat",
+      "aliases": [
+        "ORA FUNKY CAT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/ora-funky-cat",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Ora Funky Cat"
+      }
+    },
+    {
+      "key": "greatwall:tank",
+      "make": "Great Wall",
+      "model": "Tank",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": null,
+        "canonicalMake": "Great Wall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "greatwall:tank300",
+      "make": "Great Wall",
+      "model": "Tank 300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": null,
+        "canonicalMake": "Great Wall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "greatwall:tank500",
+      "make": "Great Wall",
+      "model": "Tank 500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": null,
+        "canonicalMake": "Great Wall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "greatwall:voleexc30",
+      "make": "Great Wall",
+      "model": "Voleex C30",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": null,
+        "canonicalMake": "Great Wall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "greatwall:wey03",
+      "make": "Great Wall",
+      "model": "Wey 03",
+      "aliases": [
+        "WEY 03"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/wey-03",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Wey 03"
+      }
+    },
+    {
+      "key": "greatwall:wey05",
+      "make": "Great Wall",
+      "model": "Wey 05",
+      "aliases": [
+        "WEY 05"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/wey-05",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Wey 05"
+      }
+    },
+    {
+      "key": "greatwall:weycoffee01",
+      "make": "Great Wall",
+      "model": "Wey Coffee 01",
+      "aliases": [
+        "WEY COFFEE 01"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/wey-coffee-01",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Wey Coffee 01"
+      }
+    },
+    {
+      "key": "greatwall:weycoffee02",
+      "make": "Great Wall",
+      "model": "Wey Coffee 02",
+      "aliases": [
+        "WEY COFFEE 02"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": "great-wall/wey-coffee-02",
+        "canonicalMake": "Great Wall",
+        "canonicalModel": "Wey Coffee 02"
+      }
+    },
+    {
+      "key": "greatwall:weyg9",
+      "make": "Great Wall",
+      "model": "Wey G9",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "modelId": null,
+        "canonicalMake": "Great Wall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "haval:h2",
+      "make": "Haval",
+      "model": "H2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "haval",
+        "modelId": "haval/h2",
+        "canonicalMake": "Haval",
+        "canonicalModel": "H2"
+      }
+    },
+    {
+      "key": "haval:h6",
+      "make": "Haval",
+      "model": "H6",
+      "aliases": [
+        "HAVAL H6"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": 2021,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "haval",
+        "modelId": "haval/h6",
+        "canonicalMake": "Haval",
+        "canonicalModel": "H6"
+      }
+    },
+    {
+      "key": "haval:h6gt",
+      "make": "Haval",
+      "model": "H6 GT",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "haval",
+        "modelId": null,
+        "canonicalMake": "Haval",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "haval:h9",
+      "make": "Haval",
+      "model": "H9",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "haval",
+        "modelId": "haval/h9",
+        "canonicalMake": "Haval",
+        "canonicalModel": "H9"
+      }
+    },
+    {
+      "key": "haval:jolion",
+      "make": "Haval",
+      "model": "Jolion",
+      "aliases": [
+        "JOLION"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "haval",
+        "modelId": "haval/jolion",
+        "canonicalMake": "Haval",
+        "canonicalModel": "Jolion"
+      }
+    },
+    {
+      "key": "hillman:avenger",
+      "make": "Hillman",
+      "model": "Avenger",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hillman:hunter",
+      "make": "Hillman",
+      "model": "Hunter",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hillman:husky",
+      "make": "Hillman",
+      "model": "Husky",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hillman:imp",
+      "make": "Hillman",
+      "model": "Imp",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    }
+  ]
+}

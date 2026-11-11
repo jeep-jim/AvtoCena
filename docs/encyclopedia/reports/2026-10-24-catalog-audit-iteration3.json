@@ -1,0 +1,369 @@
+{
+  "checkedAt": "2026-10-24T06:51:56.062Z",
+  "indexDigest": "af3b1dce3eb131e3f196f5e1a79bdd2421178ac7e131d4e76ee07732ab4f3830",
+  "generationId": "gen_1792702445675_8c312f85",
+  "previewChanges": 0,
+  "scope": "Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.",
+  "markets": {
+    "korea": {
+      "rows": 9926,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 4204,
+      "baselineMatched": 37,
+      "technicalMatched": 44,
+      "newlyFilledRecords": 14,
+      "newlyFilledFields": 14,
+      "newlyCompleteSpecifications": 44,
+      "newlyCompletePending": 2,
+      "newlyFilledByField": {
+        "bodyType": 14
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 44
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 71,
+      "afterMissingByField": {
+        "power30MinKw": 9926,
+        "drive": 6385,
+        "bodyType": 6638,
+        "engineCode": 9926,
+        "grossVehicleWeightKg": 9926,
+        "engineCc": 807,
+        "powerHp": 6517,
+        "powerKw": 6517,
+        "icePowerKw": 6521
+      },
+      "unmatchedReasons": {
+        "model_absent_from_calculation_index": 4197,
+        "year_absent_from_calculation_index": 1525,
+        "no_compatible_field_consensus": 4123
+      },
+      "retainedDelivered": 2771
+    },
+    "uae": {
+      "rows": 22045,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 11714,
+      "baselineMatched": 12,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 8,
+      "afterMissingByField": {
+        "engineCc": 22036,
+        "powerHp": 22036,
+        "powerKw": 22035,
+        "icePowerKw": 22036,
+        "power30MinKw": 22045,
+        "engineCode": 22045,
+        "grossVehicleWeightKg": 22045,
+        "drive": 1620,
+        "bodyType": 314,
+        "transmission": 134
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 11702,
+        "model_absent_from_calculation_index": 5303,
+        "year_absent_from_calculation_index": 5028
+      },
+      "retainedDelivered": 0
+    },
+    "europe": {
+      "rows": 46127,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 46095,
+      "baselineMatched": 36723,
+      "technicalMatched": 2907,
+      "newlyFilledRecords": 5,
+      "newlyFilledFields": 10,
+      "newlyCompleteSpecifications": 2599,
+      "newlyCompletePending": 2,
+      "newlyFilledByField": {
+        "drive": 5,
+        "grossVehicleWeightKg": 5
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 2599
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 33128,
+      "afterMissingByField": {
+        "power30MinKw": 46093,
+        "drive": 44988,
+        "bodyType": 24608,
+        "engineCode": 46111,
+        "grossVehicleWeightKg": 45841,
+        "engineCc": 2377,
+        "transmission": 16,
+        "fuel": 1221,
+        "powertrainKind": 675,
+        "icePowerKw": 6428,
+        "powerHp": 692,
+        "powerKw": 692
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 6465,
+        "model_absent_from_calculation_index": 31,
+        "year_absent_from_calculation_index": 1
+      },
+      "retainedDelivered": 38527
+    },
+    "georgia": {
+      "rows": 1706,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 1192,
+      "baselineMatched": 0,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 0,
+      "afterMissingByField": {
+        "engineCc": 1706,
+        "power30MinKw": 1706,
+        "drive": 1706,
+        "engineCode": 1706,
+        "grossVehicleWeightKg": 1706,
+        "transmission": 48,
+        "bodyType": 70,
+        "powerHp": 1432,
+        "powerKw": 1432,
+        "icePowerKw": 1432,
+        "fuel": 66,
+        "powertrainKind": 66
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 1192,
+        "year_absent_from_calculation_index": 161,
+        "model_absent_from_calculation_index": 353
+      },
+      "retainedDelivered": 0
+    },
+    "china": {
+      "rows": 244471,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 161351,
+      "baselineMatched": 72083,
+      "technicalMatched": 66331,
+      "newlyFilledRecords": 3414,
+      "newlyFilledFields": 5069,
+      "newlyCompleteSpecifications": 46244,
+      "newlyCompletePending": 230,
+      "newlyFilledByField": {
+        "bodyType": 2734,
+        "grossVehicleWeightKg": 1726,
+        "transmission": 61,
+        "engineCode": 546,
+        "power30MinKw": 1,
+        "icePowerKw": 1
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 46244
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 84357,
+      "afterMissingByField": {
+        "power30MinKw": 244428,
+        "transmission": 1196,
+        "engineCode": 243590,
+        "grossVehicleWeightKg": 211196,
+        "bodyType": 129124,
+        "drive": 4480,
+        "engineCc": 38254,
+        "fuel": 2099,
+        "powertrainKind": 2109,
+        "icePowerKw": 75148,
+        "powerHp": 25104,
+        "powerKw": 25111
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 22937,
+        "year_absent_from_calculation_index": 73819,
+        "model_absent_from_calculation_index": 9301
+      },
+      "retainedDelivered": 160545
+    },
+    "japan": {
+      "rows": 529,
+      "withTechnicalCode": 529,
+      "modelYearKnown": 124,
+      "baselineMatched": 3,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 0,
+      "afterMissingByField": {
+        "fuel": 380,
+        "powertrainKind": 526,
+        "powerHp": 529,
+        "powerKw": 529,
+        "icePowerKw": 529,
+        "power30MinKw": 529,
+        "transmission": 417,
+        "bodyType": 526,
+        "engineCode": 529,
+        "grossVehicleWeightKg": 529,
+        "drive": 179,
+        "engineCc": 2
+      },
+      "unmatchedReasons": {
+        "year_absent_from_calculation_index": 254,
+        "no_compatible_field_consensus": 121,
+        "model_absent_from_calculation_index": 151
+      },
+      "retainedDelivered": 0
+    }
+  },
+  "japanCache": {
+    "slots": 128,
+    "uniqueLots": 529,
+    "converted": 529,
+    "rejected": 0
+  },
+  "interpretation": {
+    "baseline": "specificationIdentity:false versus true on the pinned af3 index, not incremental gain versus currently installed release",
+    "japan": "bounded saved cache; factory-fuel enrichment outside this matcher is not applied by this audit",
+    "prices": "retainedDelivered comes from catalog projection; final retained price caches must be measured independently",
+    "completeCatalog": false
+  },
+  "workflow": "https://github.com/jeep-jim/AvtoCena/actions/runs/40071791932",
+  "publication": {
+    "pullRequest": "https://github.com/jeep-jim/AvtoCena/pull/1510",
+    "mergeSha": "40ae389937a1f6143d7a6e22b63a57ce3ab0aec4",
+    "releaseSha": "761e5cd8e912dd40f0632b3bd3448b9bcab136c2",
+    "deployment": "https://github.com/jeep-jim/AvtoCena/actions/runs/40071996832",
+    "status": "success"
+  },
+  "validation": {
+    "focusedRegressionCases": 60,
+    "releaseGateCases": 142,
+    "typecheck": "pass",
+    "localBrowserViewports": [
+      390,
+      1440
+    ],
+    "fullCI": "not_green",
+    "preexistingFailuresReproducedOnBaseline": [
+      "catalog-public-truth-seo legacy typo flag expectation",
+      "site-chat-dealer-routing server-only module resolution",
+      "owner-polish heading theme color"
+    ],
+    "baselineSha": "6d72fda572eed12bfc22f6f0c97ab9d6f8b50b10",
+    "publishedJourneyWorkflow": {
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/40071791977",
+      "status": "failure",
+      "reason": "Timed out waiting for this release or verified descendant before deployment completed; browser steps skipped."
+    },
+    "dubicarsWorkflow": {
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/40071786137",
+      "status": "failure",
+      "reason": "Same preexisting catalog-public-truth-seo legacy typo flag expectation reproduced on unchanged baseline."
+    },
+    "browserEnvironment": "Chromium through the configured outbound proxy; proxy certificate bypass only in this local test context. Image requests blocked. Waited for interactive filter readiness before load-more."
+  },
+  "productionBeforeThisRelease": {
+    "releaseSha": "6c347ef8d31dfc63b89256aaebe41b1ff130defd",
+    "priceAudit": "https://github.com/jeep-jim/AvtoCena/actions/runs/40071307718",
+    "retainedDeliveredByMarket": {
+      "china": 160818,
+      "europe": 38575,
+      "korea": 2781,
+      "uae": 7,
+      "georgia": 0
+    },
+    "retainedDeliveredTotal": 202181,
+    "hybridDeliveredTotal": 73,
+    "electricDeliveredTotal": 2,
+    "japanIndependentCount": 615131,
+    "japanCountCheckedAt": "2026-10-24T06:51:00.104Z"
+  },
+  "remainingGaps": [
+    "230447 ASTRA technical variants without model year do not enter the annual calculation index; 15193 technical rows with 30-minute power remain outside this path.",
+    "Japan audit is a bounded cache with many missing annual model facts. Existing knowledge-core Japan routing uses score-based variant selection; it was not enabled as a substitute for confirmed specifications.",
+    "Brand fix consolidates directory headings, not underlying stored variants; complete deduplication of records is not claimed.",
+    "Aggregate page count is an upper bound because final admission is evaluated during cursor traversal.",
+    "Full catalogue completeness and new production price totals are not established by this matcher audit."
+  ],
+  "productionAfterThisRelease": {
+    "releaseSha": "761e5cd8e912dd40f0632b3bd3448b9bcab136c2",
+    "calculationVersion": "fe4aabf54a5e1413399fb26e916c8781b6d51571dbf07488e4fe2f7f319f0984",
+    "healthOk": true,
+    "retainedDeliveredByMarket": {
+      "china": 160818,
+      "europe": 38575,
+      "korea": 2781,
+      "uae": 7,
+      "georgia": 0
+    },
+    "retainedDeliveredTotal": 202181,
+    "retainedDeliveredChange": 0,
+    "priceEvidence": "Terminal deployment job 120807383317 budget log at 2026-10-24T07:17:39Z",
+    "publicFieldVerification": {
+      "groups": 34,
+      "variants": 616,
+      "fields": 798,
+      "verified": true,
+      "finishedAt": "2026-10-24T07:22:05.275Z"
+    },
+    "directoryBrowser": {
+      "headings": 260,
+      "canonicalCitroenGroups": 1,
+      "canonicalDSGroups": 1
+    },
+    "japanBrowser": {
+      "shown": "Показано 24",
+      "aggregate": "Найдено 615 131 · до 25 631 стр.",
+      "cards": 24,
+      "afterLoadMore": 43,
+      "mobileOverflow": false
+    },
+    "browser": {
+      "at": "2026-10-24T07:25:46.018Z",
+      "expectedRelease": "761e5cd8e912dd40f0632b3bd3448b9bcab136c2",
+      "health": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "761e5cd8e912dd40f0632b3bd3448b9bcab136c2",
+        "calculationVersion": "fe4aabf54a5e1413399fb26e916c8781b6d51571dbf07488e4fe2f7f319f0984"
+      },
+      "encyclopedia": {
+        "headings": 260,
+        "citroen": [
+          "Citroen"
+        ],
+        "ds": [
+          "DS"
+        ]
+      },
+      "japan": {
+        "shown": "Показано 24",
+        "aggregate": "Найдено 615 131 · до 25 631 стр.",
+        "cards": 24,
+        "afterLoadMore": 43,
+        "mobileOverflow": false
+      },
+      "passed": true
+    }
+  }
+}

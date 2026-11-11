@@ -1,0 +1,169 @@
+{
+  "id": "02defbbae91fe890a6b1dc3c",
+  "sourceId": "proauctions_japan_stat",
+  "sourceOfferId": "30222301",
+  "market": "japan",
+  "status": "active",
+  "offerType": "auction",
+  "catalogKind": "auction_result",
+  "auctionResult": "sold",
+  "auctionPriceKind": "published_result",
+  "priceMode": "fixed",
+  "make": "Toyota",
+  "model": "Corolla Cross",
+  "year": 2023,
+  "trim": "Z",
+  "sourceTitle": "Toyota Corolla Cross",
+  "sourcePrice": 3077000,
+  "sourceCurrency": "JPY",
+  "totalRub": null,
+  "calculationStatus": "needs_data",
+  "auctionDate": "2026-09-17",
+  "auctionName": "TAA Touhoku",
+  "lotNumber": "2002",
+  "auctionGrade": "4.5",
+  "mileageKm": 44000,
+  "fuel": "petrol",
+  "powertrainKind": "combustion",
+  "powerHp": 140,
+  "powerKw": 103,
+  "firstSeenAt": "2026-09-18T05:55:41.425Z",
+  "updatedAt": "2026-09-18T05:55:41.425Z",
+  "operational": {
+    "sourceUrl": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+    "exactDetail": true,
+    "photoIdentityVerified": true,
+    "chassisCode": "ZSG10",
+    "semanticEvidence": {
+      "year": {
+        "status": "exact",
+        "value": 2023,
+        "source": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+        "rawValues": []
+      },
+      "engineCc": {
+        "status": "ambiguous",
+        "value": 1800,
+        "source": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+        "rawValues": []
+      },
+      "fuel": {
+        "status": "exact",
+        "value": "gasoline",
+        "source": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+        "rawValues": []
+      },
+      "powerHp": {
+        "status": "exact",
+        "value": 140,
+        "source": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+        "rawValues": []
+      },
+      "powertrainKind": {
+        "status": "exact",
+        "value": "combustion",
+        "source": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+        "rawValues": []
+      }
+    },
+    "sourceSpecifications": {
+      "version": 1,
+      "sourceId": "proauctions_japan_stat",
+      "sourceOfferId": "30222301",
+      "specificationId": "30222301",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/30222301.html",
+      "capturedAt": "2026-09-18T05:55:41.425Z",
+      "groups": [
+        {
+          "name": "Характеристики аукциона",
+          "items": [
+            {
+              "name": "Год",
+              "value": "2023"
+            },
+            {
+              "name": "Тип кузова",
+              "value": "Джип/SUV"
+            },
+            {
+              "name": "Комплектация",
+              "value": "Z"
+            },
+            {
+              "name": "Поколение",
+              "value": "1"
+            },
+            {
+              "name": "Номер кузова",
+              "value": "ZSG10"
+            },
+            {
+              "name": "Объем, см³",
+              "value": "1800"
+            },
+            {
+              "name": "Мощность",
+              "value": "140 л.с. (103.0 кВт)"
+            },
+            {
+              "name": "Трансмиссия",
+              "value": "FAT"
+            },
+            {
+              "name": "Пробег, км",
+              "value": "44 000"
+            },
+            {
+              "name": "Оценка",
+              "value": "4.5"
+            }
+          ]
+        }
+      ]
+    },
+    "knowledgeCore": {
+      "version": 1,
+      "source": "vehicle-encyclopedia-v2",
+      "modelId": "toyota/corolla-cross",
+      "generationId": null,
+      "variantId": null,
+      "score": null,
+      "fieldsApplied": [],
+      "modelIdentity": {
+        "modelId": "toyota/corolla-cross",
+        "source": "canonical_or_safe_alias"
+      },
+      "variantResolution": {
+        "reason": "verified_variants_missing",
+        "referenceVariants": 31,
+        "verifiedVariants": 0
+      },
+      "sourceCorpusConnected": true,
+      "sourceIdentityCount": 1,
+      "sourceConflictCount": 4,
+      "modelImageCandidates": [],
+      "modelImageBinaryVerified": false,
+      "legacyFallbackApplied": true
+    },
+    "publicJapanSoldIdentityVerified": true,
+    "publicJapanSoldPriceVerified": true
+  },
+  "bodyType": "suv",
+  "icePowerKw": 103,
+  "utilizationPowerKw": 103,
+  "powerDataConfidence": "estimated",
+  "previousTotalRub": null,
+  "priceDeltaRub": null,
+  "publicSpecificationVerified": false,
+  "catalogPricingMode": "seller",
+  "sellerPriceRub": 1666780,
+  "encyclopediaDisplayIdentity": {
+    "version": 1,
+    "rawMake": "Toyota",
+    "rawModel": "Corolla Cross",
+    "modelId": "toyota/corolla-cross",
+    "canonicalMake": "Toyota",
+    "canonicalModel": "Corolla Cross",
+    "match": "exact"
+  }
+}

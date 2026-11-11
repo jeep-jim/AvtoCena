@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a6-phev-components",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "19546d351da89b2741b05ede",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "A6 Avant PHEV 50 TFSI e QUATTRO*S-LINE*S-TRONIC*TREKH",
+      "expectedDigest": "da60e93c10cf2f82f16aba612691871a55d85bb21a858917d91cee379fcb4860",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+        "sourceSha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+            "sha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+            "sha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8ab4254904ad4efddeb0b8ab",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant advanced 50 TFSI e quattro S tronic",
+      "expectedDigest": "131bc227c5a4cd7f3715163ba4728dcd13f6c1ba2fb1e9d34d57ce22cc9ecc4c",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+        "sourceSha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+            "sha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+            "sha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "88d9a0095604c289e773cc32",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant sport 50 2.0 TFSI e quattro S-tronic",
+      "expectedDigest": "fa8c0a696a5227ac1be11071b14e7a80e4d55b1a14313e3b69e8f7eff5f649c3",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195,
+        "systemPowerKw": 220
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+        "sourceSha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+            "sha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw",
+              "systemPowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "80a29957ee5f3da7be0c9130",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 50 TFSI e quattro*VIRTUAL*KAM*HUP*LED",
+      "expectedDigest": "a97443428ce13e786b61faca8cb9438af21647184105558e03c9366368c9fef9",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195,
+        "systemPowerKw": 220
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+        "sourceSha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+            "sha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw",
+              "systemPowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8209b3eacbedddf42eb12b11",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant TFSI e Q S LINE UPE91 LM20 MEMORY HuD B",
+      "expectedDigest": "0548d67bf47014d0f7a591d79bf73b1f55d8ec921d3a9f8b5a00755ed3417340",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195,
+        "systemPowerKw": 220
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+        "sourceSha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+            "sha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw",
+              "systemPowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fdfafab5c07c5803a96b62f2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "55 TFSI e qttr S line Matrix ACC Pano B&O HUD",
+      "expectedDigest": "bdf7dab541ff056d911b9e706199f34f4cd7566a1e18b2b12d0a89a871fcad51",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195,
+        "systemPowerKw": 270
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+        "sourceSha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+            "sha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw",
+              "systemPowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "040dee035faea25d827d2cc0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant PHEV 55TFSIe Quattro Competition S-LINE/B&O/ACC/360CAM/MATRIX/21\"RS WHEELS/KEYLESS",
+      "expectedDigest": "e767368fb21903b300c285b1fcff8e50c3f19f9c6bc716500e7b520c77745863",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195,
+        "systemPowerKw": 270
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+        "sourceSha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+            "sha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw",
+              "systemPowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "65674706d8a00c63149435b3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant 55 TFSI e quattro S line Kamera Head-Up",
+      "expectedDigest": "c2b38cfe37bc3957cd2fc86501f283df1a74b23416ca861d912586ad306e96c1",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "awd",
+        "icePowerKw": 195,
+        "systemPowerKw": 270
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "icePowerKw",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+        "sourceSha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+        "checkedAt": "2026-10-25",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+            "sha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "drive",
+              "icePowerKw",
+              "systemPowerKw"
+            ]
+          }
+        ],
+        "statement": "Заводские таблицы Audi A6 Avant от 29.08.2024: 1984 см³, 7-ступенчатая S tronic, подключаемый бензиновый гибрид и quattro AWD. ДВС 195 кВт отделён от системных 220/270 кВт. При известной только мощности195 кВт системная не выбирается: переносятся лишь общие подтверждённые поля обоих вариантов. Старые icePowerKw220/270 не имеют manual/research/ASTRA/reference подтверждений по preflight и исправляются на195; прежние общая мощность и кузов сохраняются. Continuous electrical55 кВт не является достаточным доказательством сертифицированной30-минутной мощности и не переносится."
+      }
+    }
+  ]
+}

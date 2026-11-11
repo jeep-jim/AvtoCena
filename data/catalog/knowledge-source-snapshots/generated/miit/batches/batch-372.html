@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>公告产品技术参数查询</title>
+
+<link rel="stylesheet" type="text/css" href="../../gonggao_xxgk/miiteidc_res/result_table.css">
+<script type="text/javascript" src="../../gonggao_xxgk/miiteidc_res/jquery.js"></script>
+<script type="text/javascript" src="../../gonggao_xxgk/js/gg_xxgk_cp_pc.js"></script>
+<link rel="stylesheet" type="text/css" href="../../gonggao_xxgk/css/bg31.css" />
+<style type="text/css">
+html,body{height:100%}
+body,form,table,td{margin:0;padding:0;}
+a{
+    text-decoration:none;
+}
+.clear {clear:both;}
+#mainPanel{
+    margin:0 0 0 0;padding:0 0 0 0;
+    width:100%; height:100%;
+}
+.banner {
+    width:100%; height:45%;margin:0 0 0 0;padding:0 0 0 0;
+    background:url('../../gonggao_xxgk/miiteidc_res/img/xxgk/xxgk_head.jpg') no-repeat;
+    background-size: 100%;}
+.queryPanel{
+    margin:auto;width:700px;height:300px;
+    border:0px red solid;
+    padding:10px 0 0 0;
+}
+#footer {
+position: relative;
+margin-top: -60px;
+height: 60px;
+width:100%;
+padding:10px 0 10px 0;
+font-size:12px;
+clear:both;
+}
+#footer1{
+position:fixed; bottom:0;width:100%;
+margin:auto;padding:10px 0 10px 0;
+font-size:12px;
+}
+</style>
+
+</head>
+<body>
+<div id="mainPanel">
+  <div class="wrapper31">
+		<div class="banner31">
+			<img src="../../gonggao_xxgk/miiteidc_res/img/xxgk/banner31.png"/>
+		</div>
+		<div class="nav31">
+			<ul>
+				<li><a href="https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/index?querylb=qy" target="myEnterprisePage">企业信息</a></li>
+				<li><a href="https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/index" target="myProductPage">产品信息</a></li>
+				<li class="active31"><a href="https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=396&querylb=cp&qyinfolb=" target="myProductBatchPage">产品分批查询</a></li>
+				<li ><a href="https://service.miit-eidc.org.cn/jcjg2/institution.html" target="myInstitutionPage">检测机构</a></li>
+				<li><a href="https://service.miit-eidc.org.cn/jcjg2/site.html" target="mySitePage">试验场地</a></li>
+				<li><a href="https://service.miit-eidc.org.cn/eidcdatsrv/gonggao/login.jsp" target="myBulletinPage">公告数据</a></li>
+			</ul>
+		</div>
+<!--<div id="banner" class="banner"></div>-->
+<div class="clear"></div>
+
+<div style="margin:auto;font-size:14px;padding:3px 0px;">
+<table width="100%">
+<tr><td align="center">
+<form>
+  <table style="width: 1200px; margin-top: 30px;">
+    <!-- <tr>
+			<td colspan="5" align="center" style="height:42px;">
+        <span th:utext="${'第&nbsp;'+pc+'&nbsp;批公告产品数据查询'}" style="font-size:24px;font-weight:bold;"></span>
+      </td>
+	  </tr> -->
+  	<tr>
+  		<td>企业名称：</td>
+  		<td><input type="text" id="query_qymc_input" name="qymc" value="" size="60"></input></td>
+  		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  		<td>产品商标：</td>
+  		<td><input type="text" id="query_cpsb_input"  name="cpsb" value="" size="60"></input></td>
+  	</tr>
+  	<tr>
+  		<td>车辆型号：</td>
+  		<td><input type="text" id="query_clxh_input"  name="clxh" value="" size="60"></input></td>
+  		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  		<td>车辆名称：</td>
+  		<td><input type="text" id="query_clmc_input"  name="clmc" value="" size="60"></input></td>
+  	</tr>
+
+		<tr>
+			<td>
+				<span class="pc31">第</span>
+			</td>
+			<td>
+				<input class="pc31 pcinput31" id="query_pc_input" name="query_pc_input" value="398"></input>
+				<span class="pc31">批公告产品数据查询</span>
+			</td>
+			<td></td>
+			<td></td>
+			<td>
+				<input type="reset" name="reset" value="重填"></input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" id="query_button" onclick="doQuery()" name="query_button" value="查询"></input>
+			</td>
+		</tr>
+
+  	<!-- <tr><td colspan="5" align='center'>&nbsp;</td></tr>
+  	<tr><td colspan="5" align='center'>
+  		<input type="reset" name="reset" value="重填"></input>
+  		  		&nbsp;&nbsp;
+  		<input type="button" id="query_button" onclick="doQuery()" name="query_button" value="查询"></input>
+  	</td></tr> -->
+
+<tr><td  colspan="5" align='center'>
+<div id="query_status"></div>
+</td></tr>
+<tr><td  colspan="5" align='center'>
+<div id="query_result"></div>
+</td></tr>
+<tr><td  colspan="5" align='center'>
+<div id="query_page_ctrl"></div>
+</td></tr>
+</table>
+<!--<input type="hidden" id="query_pc_input" name="query_pc_input" th:value="${pc}" ></input>-->
+<input type="hidden" id="query_cplb_input" name="query_cplb_input" value="0" ></input>
+<input type="hidden" id="query_scdz_input" name="query_scdz_input" value=""></input>
+<input type="hidden" id="query_cxtype_input" name="query_cxtype_input" value=""></input>
+
+
+<input type="hidden" id="query_qymc_q_val" value="">
+<input type="hidden" id="query_cpsb_q_val" value="">
+<input type="hidden" id="query_clxh_q_val" value="">
+<input type="hidden" id="query_clmc_q_val" value="">
+<input type="hidden" id="query_scdz_q_val" value="">
+<input type="hidden" id="query_pc_q_val" value="">
+<input type="hidden" id="query_cxtype_q_val" value="">
+<input type="hidden" id="query_cplb_q_val" value="">
+<input type="hidden" id="query_page_num" value="">
+
+</form>
+</td></tr>
+</table>
+	<div class="clear"></div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="clear"></div>
+<div id="footer">
+<table width="100%"><tr><td align="center">
+工业和信息化部装备工业发展中心主办&nbsp;&nbsp;&nbsp;&nbsp;版权所有©2018-4-27&nbsp;&nbsp;&nbsp;&nbsp;京ICP备18021518号
+<br/><br/>
+单位地址：北京市海淀区万寿路27号院8号楼&nbsp;&nbsp;&nbsp;&nbsp;邮编：100846
+</td></tr></table>
+</div>
+</div>
+</div>
+</body></html>

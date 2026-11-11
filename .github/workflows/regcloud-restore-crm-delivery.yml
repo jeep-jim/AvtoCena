@@ -1,0 +1,35 @@
+name: Regcloud — restore CRM notification delivery
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-restore-crm-delivery.json']
+permissions:
+  contents: read
+  actions: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable only CRM delivery and run the existing delivery queue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          assert os.environ['GITHUB_REPOSITORY']=='jeep-jim/AvtoCena'
+          assert os.environ['GITHUB_REF']=='refs/heads/main'
+          base='https://api.github.com/repos/jeep-jim/AvtoCena/actions/workflows/crm-telegram-delivery.yml'
+          def call(suffix='',method='GET',body=None):
+              request=urllib.request.Request(base+suffix,method=method,data=json.dumps(body).encode() if body else None,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(request,timeout=30) as response:
+                  data=response.read()
+                  return json.loads(data) if data else None
+          state=call()['state']
+          print('CRM delivery prior state:',state)
+          if state=='disabled_manually':call('/enable','PUT')
+          elif state!='active':raise RuntimeError('Unexpected workflow state')
+          assert call()['state']=='active'
+          call('/dispatches','POST',{'ref':'main','inputs':{'operation':'deliver'}})
+          print('CRM delivery active; existing notification queue dispatched')
+          PY

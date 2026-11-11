@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "releaseReady": false,
+  "completionClaimAllowed": false,
+  "targetWindows": {
+    "japan": "2015-2026",
+    "otherActiveMarkets": "2020-2026"
+  },
+  "totals": {
+    "source": 928,
+    "brand": 255,
+    "model": 1619,
+    "generation": 1293,
+    "facelift": 105,
+    "variant": 19240,
+    "media": 449
+  },
+  "status": {
+    "brand": {
+      "review": 3,
+      "seed": 243,
+      "verified": 9
+    },
+    "model": {
+      "review": 1560,
+      "seed": 34,
+      "verified": 25
+    },
+    "generation": {
+      "review": 1232,
+      "seed": 35,
+      "verified": 26
+    },
+    "facelift": {
+      "review": 93,
+      "seed": 3,
+      "verified": 9
+    },
+    "variant": {
+      "review": 18941,
+      "seed": 38,
+      "verified": 261
+    },
+    "media": {
+      "approved": 59,
+      "review": 390
+    }
+  },
+  "quality": {
+    "validationErrors": 0,
+    "safeAliasCollisions": 0,
+    "sourceConflicts": 0
+  },
+  "sources": {
+    "records": 928,
+    "domains": 131,
+    "types": {
+      "authoritative_catalog": 114,
+      "government_registry": 232,
+      "manufacturer": 350,
+      "manufacturer_technical_document": 93,
+      "secondary_reference": 3,
+      "wikidata": 76,
+      "wikimedia_commons": 60
+    }
+  },
+  "aliases": {
+    "safeBrandAliases": 99,
+    "safeModelAliases": 2520,
+    "localizedAliases": 851
+  },
+  "search": {
+    "entries": 105620,
+    "collisions": 35
+  },
+  "logos": {
+    "technicalPairsReady": 195,
+    "missingTechnicalPairs": 60,
+    "publicationApprovedPairs": 0,
+    "publicationReadyBrands": 0,
+    "exactCanvas": "90x60 transparent PNG"
+  },
+  "media": {
+    "approvedCanonicalCovers": 59,
+    "modelsWithApprovedCanonicalCover": 59,
+    "modelsMissingApprovedCanonicalCover": 1560
+  },
+  "variantFieldCoverage": {
+    "engineCc": {
+      "count": 15980,
+      "percent": 83.06
+    },
+    "fuel": {
+      "count": 19043,
+      "percent": 98.98
+    },
+    "transmission": {
+      "count": 1708,
+      "percent": 8.88
+    },
+    "drive": {
+      "count": 1769,
+      "percent": 9.19
+    },
+    "powerHp": {
+      "count": 1563,
+      "percent": 8.12
+    },
+    "powerKw": {
+      "count": 16336,
+      "percent": 84.91
+    },
+    "power30MinKw": {
+      "count": 0,
+      "percent": 0
+    },
+    "batteryGrossKwh": {
+      "count": 1,
+      "percent": 0.01
+    },
+    "rangeKm": {
+      "count": 91,
+      "percent": 0.47
+    },
+    "lengthMm": {
+      "count": 202,
+      "percent": 1.05
+    },
+    "curbWeightKg": {
+      "count": 72,
+      "percent": 0.37
+    }
+  },
+  "releaseBlockers": [
+    "60 brands lack a complete source-traced 90x60 dark/light logo pair",
+    "195 technical logo pairs still require publication/rights approval",
+    "1560 models lack an approved canonical cover",
+    "1560 models and 18941 variants remain review-only",
+    "V2 is intentionally disconnected from the production resolver, pricing engine, SEO routes and deploy pipeline"
+  ],
+  "migrationArtifact": "reports/proposed-production-migration.md"
+}

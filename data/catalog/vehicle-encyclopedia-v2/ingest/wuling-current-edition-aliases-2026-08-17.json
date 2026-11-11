@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang",
+          "brandId": "wuling",
+          "canonicalName": "Hongguang",
+          "slug": "hongguang",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 宏光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-red-current-zh-2026"
+              ]
+            },
+            {
+              "value": "五菱 宏光纯电版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-bev-spec"
+              ]
+            },
+            {
+              "value": "五菱 宏光增程版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-spec"
+              ]
+            }
+          ],
+          "productionFrom": "2010",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [
+            "BEV",
+            "EREV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-red-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch history dates the Hongguang family to 2010 and explicitly describes its 2024 BEV and 2025 EREV MPV forms."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "The 2024 BEV and 2025 EREV source-backed configurations are staged below; publication and pricing remain disconnected.",
+            "Current full Chinese edition titles are retained as source-backed aliases of one English canonical model, never as duplicate models."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo-plus",
+          "brandId": "wuling",
+          "canonicalName": "Bingo Plus",
+          "slug": "bingo-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 缤果PLUS",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            },
+            {
+              "value": "五菱 缤果SUV五座版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-suv-five-seat-launch-2024"
+              ]
+            }
+          ],
+          "productionFrom": "2024-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-en-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official English current-range page supplies the public Latin identity and portfolio powertrain grouping."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+              "fields": [
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW dates the five-seat launch to 2024-09-20."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+              "fields": [
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Every official row is a battery-electric five-door hatchback."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Three exact 2024 five-seat configurations are staged below; publication and pricing remain disconnected.",
+            "Current full Chinese edition titles are retained as source-backed aliases of one English canonical model, never as duplicate models."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/zhiguang",
+          "brandId": "wuling",
+          "canonicalName": "Zhiguang",
+          "slug": "zhiguang",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 之光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-red-current-zh-2026"
+              ]
+            },
+            {
+              "value": "五菱 之光EV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-zhiguang-ev-spec"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [
+            "BEV",
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-red-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+              "fields": [
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Van is the normalized public body classification for SGMW's explicitly described new-energy microvan; the current family retains BEV and ICE forms."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Three exact 2025 Zhiguang EV configurations are staged below; publication and pricing remain disconnected.",
+            "Current full Chinese edition titles are retained as source-backed aliases of one English canonical model, never as duplicate models."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

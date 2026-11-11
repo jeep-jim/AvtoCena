@@ -1,0 +1,9 @@
+{
+  "sourceRunId": 35167936226,
+  "jptradeImageVerificationRunId": 35186348125,
+  "markets": ["korea", "china", "europe", "uae", "georgia", "japan"],
+  "mode": "publish-saved-artifacts-sequentially",
+  "newSourceCollection": false,
+  "requestedAt": "2026-09-17T09:55:00Z",
+  "reason": "Publish the already collected six-market artifacts once, preserve retained sources such as Encar through normal retention gates, and regenerate source-balanced public projections without starting another crawl."
+}

@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-25T02:14:17.826772+00:00",
+  "workflow": 40153361000,
+  "job": 121049371622,
+  "conclusion": "success",
+  "window": {
+    "since": "12h",
+    "maxLines": 20000
+  },
+  "errorCounts": {
+    "visitor_restricted": 3296,
+    "operation_failed": 79,
+    "request_timeout": 4
+  },
+  "proxy": {
+    "realIpFromRemoteAddr": true,
+    "realIpFromIncomingHeader": false,
+    "realIpModuleDirective": false
+  },
+  "publicProbe": {
+    "checkedAt": "2026-10-25T02:12:48.233518+00:00",
+    "health": {
+      "http": 200,
+      "data": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+        "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+      }
+    },
+    "korea": {
+      "http": 503,
+      "response": {
+        "ok": false,
+        "error": "japan_search_unavailable",
+        "reason": "visitor_restricted"
+      },
+      "items": 0
+    }
+  },
+  "limits": [
+    "Counts aggregate AJES tables; they do not prove that every visitor or every market is blocked.",
+    "No supplier bodies, addresses, credentials or SQL retained.",
+    "Japan earlier partial/stale response is not valid live acceptance; Korea current503 explicitly visitor_restricted.",
+    "No alternate IP, relay, collector, lock reset or relaxed guard used."
+  ],
+  "next": "Continue sole deploy40153126396. After installed scoped-v1, require an honest fresh successful Japan result before guarded repair; external visitor refusal must not be bypassed."
+}

@@ -1,0 +1,80 @@
+{
+  "checkedAt": "2026-10-22T08:12:49.855291+00:00",
+  "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
+  "mode": "readback",
+  "variants": 7,
+  "fields": 41,
+  "passed": true,
+  "rows": [
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "1a2ee1648fe65a65ec42cd1a",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 2,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "06a6704e2a4b4b2cb4eb1475",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 1,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "f4b0a5283cc484beebaca960",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 1,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "f279b6854a3f7d2c03e0dada",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "65c33ec518dcc40f19e256c6",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 8,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "dde8919268e31011d24bed5b",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 10,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4d973d6b87b550835d88bfe6",
+      "year": 2025,
+      "revision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+      "fields": 10,
+      "historyPassed": true,
+      "sourcePassed": true
+    }
+  ],
+  "commit": "c33d03eb627e6e79dad33e483b43d5e91ab24a60",
+  "workflow": 39745875814,
+  "workflowConclusion": "success",
+  "guardTests": {
+    "pass": 8,
+    "fail": 0
+  }
+}

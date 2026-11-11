@@ -1,0 +1,144 @@
+{
+  "checkedAt": "2026-10-22T07:13:26.206Z",
+  "modelId": "cb49c6bb46e8dd8caf106b34",
+  "years": [
+    2014,
+    2015
+  ],
+  "items": [
+    {
+      "variantIds": [
+        "33acfc6bf009896bf48eca20",
+        "ad71eda71acd60bd1d49df3d",
+        "f6c27fd92147e0dc1856b2ae"
+      ],
+      "fields": [
+        "powerKw",
+        "icePowerKw"
+      ],
+      "reason": "128 кВт в IT-прайсах и 129 кВт в DE-материалах для 175 PS; нужна омологационная сверка."
+    },
+    {
+      "variantIds": [
+        "781838ad0b7b3e0d9c3b2f65",
+        "2a84ed37ee12fe174e1d29fd",
+        "c7fd3af9751f710c4206a536",
+        "466444b5e15a0d8905fa0882",
+        "e9db2451be0fc7da1ed6d463",
+        "8fe03fc080b2b9e3205d39cf",
+        "d8bca64b28613074173b1825",
+        "01ada968d6c1bf52a270b4bb",
+        "936d022c7a6f212bb1ea722d",
+        "da9320bb0035b7ee9d4838f8",
+        "8a7265210c85a19afbf137f9",
+        "13256503e98ab6cb77a55494",
+        "da31d7efc38610bc25fd57cd",
+        "072f0994ffbdc2c8748e3d79",
+        "4926c7198f70c4b52b80adec",
+        "e6c44de5b82463f66497edf6",
+        "449bc556465e1538e75881ae",
+        "db1fb73dc4cccacbd8e4d9dc",
+        "efaf854d01e02785229821d0",
+        "0a14f58af71fbe436e5e17b2",
+        "7ca508fdf2925e87e2ab0002",
+        "dd871b5bba2f18b0b4c8d590",
+        "68dcec0e69b79e333aceb976"
+      ],
+      "fields": [
+        "transmission"
+      ],
+      "reason": "Нет прямого подтверждения коробки в выбранной строке прайса; отсутствие TCT не доказательство."
+    },
+    {
+      "variantIds": [
+        "781838ad0b7b3e0d9c3b2f65",
+        "2a84ed37ee12fe174e1d29fd",
+        "c7fd3af9751f710c4206a536",
+        "99e7071ae2ddadcf61f51cde",
+        "466444b5e15a0d8905fa0882",
+        "e9db2451be0fc7da1ed6d463",
+        "33acfc6bf009896bf48eca20",
+        "8fe03fc080b2b9e3205d39cf",
+        "d8bca64b28613074173b1825",
+        "01ada968d6c1bf52a270b4bb",
+        "936d022c7a6f212bb1ea722d",
+        "da9320bb0035b7ee9d4838f8",
+        "8a7265210c85a19afbf137f9",
+        "037cba6824b5b48aef3c56e3",
+        "07f4ad9062fce797ed03fe5a",
+        "13256503e98ab6cb77a55494",
+        "da31d7efc38610bc25fd57cd",
+        "072f0994ffbdc2c8748e3d79",
+        "4926c7198f70c4b52b80adec",
+        "e6c44de5b82463f66497edf6",
+        "449bc556465e1538e75881ae",
+        "db1fb73dc4cccacbd8e4d9dc",
+        "efaf854d01e02785229821d0",
+        "0a14f58af71fbe436e5e17b2",
+        "7ca508fdf2925e87e2ab0002",
+        "dd871b5bba2f18b0b4c8d590",
+        "68dcec0e69b79e333aceb976",
+        "ad71eda71acd60bd1d49df3d",
+        "f6c27fd92147e0dc1856b2ae"
+      ],
+      "fields": [
+        "drive"
+      ],
+      "reason": "Нет явной технической таблицы точного года/исполнения."
+    },
+    {
+      "variantIds": [
+        "781838ad0b7b3e0d9c3b2f65",
+        "2a84ed37ee12fe174e1d29fd",
+        "c7fd3af9751f710c4206a536",
+        "99e7071ae2ddadcf61f51cde",
+        "466444b5e15a0d8905fa0882",
+        "e9db2451be0fc7da1ed6d463",
+        "33acfc6bf009896bf48eca20",
+        "8fe03fc080b2b9e3205d39cf",
+        "b1d3afb8d120d93ff4f689d2",
+        "260772691ade04b802120258",
+        "3ef0e99bb3e837cc82633d27",
+        "d8bca64b28613074173b1825",
+        "01ada968d6c1bf52a270b4bb",
+        "936d022c7a6f212bb1ea722d",
+        "da9320bb0035b7ee9d4838f8",
+        "8a7265210c85a19afbf137f9",
+        "037cba6824b5b48aef3c56e3",
+        "07f4ad9062fce797ed03fe5a",
+        "13256503e98ab6cb77a55494",
+        "da31d7efc38610bc25fd57cd",
+        "072f0994ffbdc2c8748e3d79",
+        "4926c7198f70c4b52b80adec",
+        "e6c44de5b82463f66497edf6",
+        "449bc556465e1538e75881ae",
+        "db1fb73dc4cccacbd8e4d9dc",
+        "efaf854d01e02785229821d0",
+        "0a14f58af71fbe436e5e17b2",
+        "7ca508fdf2925e87e2ab0002",
+        "dd871b5bba2f18b0b4c8d590",
+        "68dcec0e69b79e333aceb976",
+        "ad71eda71acd60bd1d49df3d",
+        "f6c27fd92147e0dc1856b2ae"
+      ],
+      "fields": [
+        "engineCode",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Не подтверждены. Снаряжённую/буксируемую массу не считать полной."
+    },
+    {
+      "fields": [
+        "trim",
+        "year"
+      ],
+      "reason": "Следующий курсор Giulietta 2015: Collezione/Sprint Speciale и ранние исполнения года; проверить техническую идентичность пакетов, затем 2016. Прайс 28.05.2015 — отдельный источник; поздние 2013 MY2014 остаются retry.",
+      "sources": [
+        "https://www.media.stellantis.com/uploads/it/2015/Listini/150608_Alfa-Romeo-Giulietta_listino.pdf",
+        "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-via-gli-ordini-della-nuova-alfa-romeo-giulietta-collezione",
+        "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-giulietta-sprint-speciale-il-massimo-della-sportivita"
+      ]
+    }
+  ]
+}

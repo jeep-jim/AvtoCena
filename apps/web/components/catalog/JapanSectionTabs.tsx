@@ -1,0 +1,5 @@
+import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
+export function JapanSectionTabs({active,params={}}: {active:"all"|"auction"|"green";params?:Record<string,string|undefined>}) {
+ const query=new URLSearchParams(Object.entries(params).filter(([k,v])=>!!v&&!['market','stock','page'].includes(k)) as [string,string][]);
+ return <nav aria-label="Автомобили из Японии" className="flex flex-wrap gap-2 text-xs sm:text-sm font-black"><Link href={`/cars?market=japan${query.size?'&'+query:''}`} aria-current={active!=='green'?'page':undefined} className="ac-market-all-link shrink-0 whitespace-nowrap rounded-xl px-3 py-3 sm:px-4" style={active!=='green'?{background:'#ff353d',color:'#fff'}:undefined}>Аукционы Японии</Link><Link href={`/cars/green${query.size?'?'+query:''}`} aria-current={active==='green'?'page':undefined} className="ac-market-all-link ac-green-button shrink-0 whitespace-nowrap rounded-xl px-3 py-3 sm:px-4" style={active==='green'?{background:'#1db65d',color:'#fff'}:undefined}>В наличии</Link></nav>;
+}

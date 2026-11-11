@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-23T10:03:02.297Z",
+  "batch": "research-2026-10-23-audi-a3-2020-2021-body",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 50,
+  "newVariants": 0,
+  "updatedVariants": 50,
+  "confirmedFields": 50,
+  "compiledCalculationFields": 50,
+  "beforeRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+  "afterRevision": "ad100c5d-3c7e-44f7-81ac-81405e4aa2e8",
+  "variantsBefore": 1111,
+  "variantsAfter": 1111,
+  "unchangedVariantsPreserved": 1061,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 50,
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  }
+}

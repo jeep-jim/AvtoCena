@@ -1,0 +1,7394 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 56,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-1aae0249420b9d5e0545",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 84,
+      "commercialNames": [
+        "Sprinter",
+        "SPRINTER",
+        "Sprinter 311CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ",
+        "Mercedes-Benz"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 815,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42f51167da2a95b76600",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 105,
+      "commercialNames": [
+        "Sprinter",
+        "SPRINTER",
+        "SPRINTER 214 CDI",
+        "SPRINTER AMBULANCIA",
+        "SPRINTER L2H2",
+        "SPRINTER L3H2",
+        "SPRINTER TRIFFLEXAIR",
+        "SPRINTER TRIFLEXAIR"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ",
+        "Mercedes-Benz"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 16,
+      "registrations": 2167,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fcd3a70b7eac0074d4a",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 120,
+      "commercialNames": [
+        "SPRINTER",
+        "Sprinter",
+        "SPRINTER 316 CDI",
+        "Sprinter 316 CDI",
+        "SPRINTER 316 CDI AUT",
+        "Sprinter 316CDI",
+        "SPRINTER 316CDI 37KO",
+        "SPRINTER-TOMASSINI AU 09",
+        "SPRINTER-TOMASSINI AU/09"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ",
+        "Mercedes-Benz"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 18,
+      "registrations": 4344,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2d21915953fc881705f",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 130,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e886363dde41cac36fc7",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2957,
+      "powerKw": 140,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22d45af634f5536b8917",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 140,
+      "commercialNames": [
+        "SPRINTER",
+        "Sprinter",
+        "SPRINTER-TOMASSINI AU 09",
+        "SPRINTER-TOMASSINI AU/09",
+        "SPRINTER/CARLEX SPRINTER URBAN"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 13,
+      "registrations": 1908,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8638a63a5ac772160f84",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 84,
+      "commercialNames": [
+        "Sprinter",
+        "SPRINTER",
+        "SPRINTER L2H2"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 822,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e60a7fb0d4c7b773e528",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 125,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d79d41b45c867f3c076",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 120,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bc37ce02c9ac8188bc8",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 125,
+      "commercialNames": [
+        "SPRINTER",
+        "Sprinter",
+        "SPRINTER / 317 TOURER / CDI AUT.",
+        "SPRINTER 217 TOURER CDI AUT.",
+        "SPRINTER 317 CDI",
+        "SPRINTER 317 CDI 37 KA",
+        "SPRINTER 317 CDI 37 KO",
+        "SPRINTER 317 CDI 37KA",
+        "SPRINTER 317CDI",
+        "SPRINTER 317CDI 37 KO",
+        "SPRINTER 317CDI 37KA",
+        "SPRINTER 317CDI 37KO",
+        "SPRINTER 317CDI KO",
+        "SPRINTER 906AC35"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES- BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 4285,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0384ab0a07cb1c1d9b1",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 140,
+      "commercialNames": [
+        "Sprinter",
+        "SPRINTER",
+        "SPRINTER / 319 TOURER / CDI",
+        "SPRINTER / 319 TOURER / CDI AUT.",
+        "SPRINTER 317CDI 37KO",
+        "Sprinter 319 CDI",
+        "SPRINTER 319 CDI",
+        "SPRINTER 319 CDI 37 KA",
+        "SPRINTER 319 CDI 37KA",
+        "SPRINTER 319 TOURER CDI AUT.",
+        "SPRINTER 319/CDI 37KO",
+        "SPRINTER 319CDI 37KA",
+        "SPRINTER 319CDI 37KO",
+        "SPRINTER 319CDI KO",
+        "SPRINTER 906AC35",
+        "SPRINTER NORANTZ"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES- BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 2085,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0863dc72be36bac36987",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 10,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a3d4790b14d9a21f8ab",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1991,
+      "powerKw": 140,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd98c8f4d112403596fe",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 118,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee6bf9523eec09b0c5bb",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 370,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d9611fe827824158e83",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 13,
+      "commercialNames": [
+        "SPRINTER",
+        "SPRINTER L3H2"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29dde40fc7d098e43d4e",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1951,
+      "powerKw": 110,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a72fa9b380f20fcfacd",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1950,
+      "powerKw": 125,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae917e7a825249a509df",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1951,
+      "powerKw": 105,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ce27acb18f8206399ca",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9fc6164839849aa4535",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Sprinter",
+      "modelId": "mercedes-benz/sprinter",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1950,
+      "powerKw": 140,
+      "commercialNames": [
+        "SPRINTER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0862abad69380d47914",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "T-Class",
+      "modelId": "mercedes-benz/t-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "T-CLASS",
+        "T-CLASS TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 4029,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f243dc144fb8902f35a0",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "T-Class",
+      "modelId": "mercedes-benz/t-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "T-CLASS"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES BENZ",
+        "MERCEDES-AMG",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77234f29b31ccb28fff2",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "T-Class",
+      "modelId": "mercedes-benz/t-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "T-CLASS"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3774,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2c33819cab3e23ac2fb",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "T-Class",
+      "modelId": "mercedes-benz/t-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "T-CLASS"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 127,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-008e86e2bb8778272c8f",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "T-Class",
+      "modelId": "mercedes-benz/t-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "T-CLASS"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a9d480f563fc3c95b87",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "T-Class",
+      "modelId": "mercedes-benz/t-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "T-CLASS",
+        "T-CLASS TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30a08667911f3a520aa0",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 120,
+      "commercialNames": [
+        "V-KLASSE",
+        "V-Klasse"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 27460,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cac7aa4ebc794417ff9",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 140,
+      "commercialNames": [
+        "V KLASSE",
+        "V-CLASS",
+        "V-KLASSE",
+        "V-Klasse",
+        "V-KLASSE EXCLUSIVE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES -BENZ",
+        "MERCEDES BENZ",
+        "Mercedes-Benz",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 56526,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ab710b82a9e2aeed518",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 176,
+      "commercialNames": [
+        "V KLASSE",
+        "V-KLASSE",
+        "V-klasse"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 22082,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faab5800e7ab5b692db9",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 100,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81ae63624772d508c779",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 120,
+      "commercialNames": [
+        "V-KLASSE",
+        "V-KLASSE MARCO POLO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 85,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3730907cbf673e47686c",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 140,
+      "commercialNames": [
+        "V-KLASSE",
+        "V-KLASSE MARCO POLO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bae7f0b5df134c810767",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 174,
+      "commercialNames": [
+        "V-KLASSE",
+        "V-KLASSE 4-MATIC"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 176,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d9b267c665971a69717",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 176,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a7d5761e5344474dd1c",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 100,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8893d31c904553cf015f",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 120,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 188,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1aa8a487529162cbbce2",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 140,
+      "commercialNames": [
+        "V KLASSE",
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 550,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5255b96da60e83ec94da",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "V-KLASSE",
+        "V-KLASSE EQV"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9679cb92fb7d0fb4dde",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "V-KLASSE",
+        "V-KLASSE EQ",
+        "V-KLASSE EQ 300",
+        "V-KLASSE EQV",
+        "V-KLASSE EQV 300"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-618efd486e79d7aa3884",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1951,
+      "powerKw": 155,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f00b3ffb3037d18f27b",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1991,
+      "powerKw": 155,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8c7355c0862b26edc64",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 174,
+      "commercialNames": [
+        "V KLASSE",
+        "V-KLASSE",
+        "V-Klasse",
+        "V-KLASSE RØYKDYKKERBIL"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES -BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-AMG",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 72519,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-202ecdc5998c037145db",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1555,
+      "powerKw": 140,
+      "commercialNames": [
+        "V KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de647ddc33eb8149f5ae",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 175,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e78bbb1dc361ba82ee6",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1993,
+      "powerKw": 170,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-111d617331b0a45027fe",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 137,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43884de897df17823a6c",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1951,
+      "powerKw": 178,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c4e3913d5e783e89740",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df050d520b444c763dbf",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1991,
+      "powerKw": 170,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd84c9cf0caa37f0f873",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 190,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fe34a6e53e037de395a",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 195,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0d4f19691f367f746dc",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1999,
+      "powerKw": 170,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1a9ae7ce2e8b1e9352e",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 170,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 418,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6009815be0b63124022",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1999,
+      "powerKw": 170,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c33b2f9c522e96859e52",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": null,
+      "powerKw": 174,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7af9db09d6481c2818a6",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": null,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1292,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a0f39b68734e376576b",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9017c044febbf8ede369",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": null,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e559f0d8dc0e4f572baf",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "V-Class",
+      "modelId": "mercedes-benz/v-class",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 120,
+      "commercialNames": [
+        "V-KLASSE"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c07abfc177387390ef5",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vaneo",
+      "modelId": "mercedes-benz/vaneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1689,
+      "powerKw": 67,
+      "commercialNames": [
+        "VANEO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77c4657257f2955c2bde",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 65,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47f5c00732d0881c6989",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c87cd86ed5d36621d541",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1750,
+      "powerKw": null,
+      "commercialNames": [
+        "VITO 110CDI TOURER PRO",
+        "VITO 114CDI TOURER PRO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ea1873413066403714d",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1750,
+      "powerKw": 75,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER",
+        "Vito Tourer",
+        "Vito Tourer 110CDI",
+        "VITO,"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ",
+        "Mercedes-Benz"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 1869,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14d59648b573e55dcb7f",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1750,
+      "powerKw": 100,
+      "commercialNames": [
+        "VITO",
+        "VITO MIXTA 114 CDI",
+        "VITO MIXTO 114 CDI",
+        "VITO TOURER",
+        "Vito Tourer",
+        "VITO TOURER 114 CDI",
+        "Vito Tourer 114CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ",
+        "Mercedes-Benz"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 13,
+      "registrations": 1743,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46a41b419ea40237215e",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": null,
+      "commercialNames": [
+        "VITO",
+        "VITO 114CDI TOURER PRO AUTO",
+        "VITO 114CDI TOURER SELECT AUTO",
+        "VITO 116CDI TOURER PRO AUTO",
+        "VITO 116CDI TOURER SELECT AUTO",
+        "VITO 119CDI TOURER PRO AUTO",
+        "VITO 119CDI TOURER SELECT AUTO",
+        "VITO 119CDI TOURER SPORT AUTO",
+        "VITO TOUER",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 1031,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfd3da28887b695a94a1",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 100,
+      "commercialNames": [
+        "MERCEDES-BENZ VITO TOURER 114 CDI",
+        "VITO",
+        "VITO MIXTA 114 CDI",
+        "VITO MIXTO 114 CDI AUT",
+        "VITO TOURER",
+        "Vito Tourer",
+        "VITO TOURER / 114 / CDI AUT.",
+        "VITO TOURER 114 CDI",
+        "VITO TOURER 114 CDI AUT",
+        "Vito Tourer 114CDI",
+        "VITO TOURER PRO",
+        "VITO TOYRER",
+        "VITO-TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 36,
+      "registrations": 27073,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b750d49a99671b60bd1",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 120,
+      "commercialNames": [
+        "VITO",
+        "Vito 116 CDI",
+        "VITO AG 1950 CM3 A",
+        "VITO MIXTO 116 CDI AUT",
+        "VITO TOURER",
+        "Vito Tourer",
+        "VITO TOURER / 116 / CDI AUT.",
+        "VITO TOURER / 119 / CDI AUT.",
+        "Vito Tourer 116 CDI",
+        "VITO TOURER 116 CDI",
+        "VITO TOURER 116 CDI AUT",
+        "VITO TOURER 116 CDI AUT.",
+        "VITO TOURER PRO",
+        "VITO TOURIER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES - BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 44,
+      "registrations": 39496,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-307a886a238fe880461a",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 140,
+      "commercialNames": [
+        "VITO",
+        "VITO A2 ROYKDYKKER",
+        "VITO MIXTA 119 CDI",
+        "VITO MIXTO / 119 / CDI AUT.",
+        "VITO MIXTO 119 CDI AUT",
+        "VITO TOUER",
+        "VITO TOURER",
+        "Vito Tourer",
+        "VITO TOURER / 116 / CDI AUT.",
+        "VITO TOURER / 119 / CDI AUT.",
+        "VITO TOURER 119 CDI",
+        "VITO TOURER 119 CDI AUT",
+        "VITO TOURER 119 CDI AUT.",
+        "Vito Tourer 119CDI",
+        "VITO TOURER PRO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 38,
+      "registrations": 23095,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25582154007139dcd0bb",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 176,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER",
+        "Vito Tourer"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 639,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f853e562e3419fdc1d67",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 120,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3e89bd19b7ece33d86b",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 140,
+      "commercialNames": [
+        "VITO",
+        "VITO MIXTO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c9b9ba087fbf8835b91",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 170,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bec00eed91f545c08e1",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": null,
+      "commercialNames": [
+        "VITO 114 BLUETEC TOURER PRO",
+        "VITO 114 BLUETEC TOURER SELECT",
+        "VITO 116 BLUETEC TOURER PRO",
+        "VITO 116 BLUETEC TOURER SELECT",
+        "VITO 119 B-TEC TOURER SELECT A",
+        "VITO TAXI+ COMPACT 114CDI AUTO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9071c27735228c1be46",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 100,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER",
+        "Vito Tourer",
+        "Vito Tourer 114CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 242,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf80ff481fb1d4f9145e",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 120,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER",
+        "Vito Tourer 116 CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 166,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e24ce303655f1b0bbff9",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 140,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 67,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-007fee8ed791a7ba132f",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2151,
+      "powerKw": 90,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-271110ba0fb9fd907b60",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2cee4a582f256b28804",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "VITO EQ",
+        "VITO TOURER",
+        "VITO TOURER E-CELL",
+        "VITO TOURER EQ"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d988f818970ea6048391",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1991,
+      "powerKw": 155,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f785652f258a97cf6de",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bc5814b975f590a62e4",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 174,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER",
+        "Vito Tourer",
+        "VITO TOURER / 124 / CDI AUT.",
+        "VITO TOURER 124 CDI",
+        "VITO TOURER 124 CDI AUT.",
+        "Vito Tourer 124CDI",
+        "VITO TOURER PRO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES BENZ",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 6185,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b669c341edccab0f6fb",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 174,
+      "commercialNames": [
+        "VITO TOURER",
+        "VITO TOURER PRO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc24821ea6f67844dcbd",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1950,
+      "powerKw": 100,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73f0b03549931c0106f2",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 11,
+      "commercialNames": [
+        "Vito Tourer 111 CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcf616d6672436c9822d",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 7,
+      "commercialNames": [
+        "VITO FURG?N 110 CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd9041716d092e48deb8",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1950,
+      "powerKw": 75,
+      "commercialNames": [
+        "Vito"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f853bed839b0f9a21b21",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1951,
+      "powerKw": 100,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-933823bd0c95c180d969",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 70,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2694e269ea4770bd1feb",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1950,
+      "powerKw": 120,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER 116 CDI"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35d94cf0e231b09e3fa2",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1993,
+      "powerKw": 170,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-949f33a5830beb76ccf2",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 67,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2da47591cf2ff9cd4205",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 95,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd94b21c4616417b2475",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 131,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14d1cf982df399341e27",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9b326e1c807b92118b7",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db419937089bd442b166",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1991,
+      "powerKw": 170,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bb209883b2cd4056e37",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 190,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-793bbca645d852697001",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 170,
+      "commercialNames": [
+        "VITO",
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES",
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 93,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-daa95a47d63c859c89be",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1950,
+      "powerKw": 58,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d19c771e954f7713c22",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2148,
+      "powerKw": 80,
+      "commercialNames": [
+        "VITO 111 CDI 4X4"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0abed3ab7baa8085cfa3",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1950,
+      "powerKw": 100,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be027726ee5917fe9a26",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1950,
+      "powerKw": 140,
+      "commercialNames": [
+        "VITO"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a58c5a2ed33b65a276a",
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "canonicalModel": "Vito",
+      "modelId": "mercedes-benz/vito",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": null,
+      "commercialNames": [
+        "VITO TOURER"
+      ],
+      "sourceMakeNames": [
+        "MERCEDES-BENZ"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-405c5628f4d7acb46054",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3762339147b355842bde",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a42173f8889b2b06727",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 235,
+      "commercialNames": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 124,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ae62c3bbccb9951d3ef",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 418,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c79ea0989fe3eb4ef7f",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 375,
+      "commercialNames": [
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29debfb93cc6cf75fabb",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 400,
+      "commercialNames": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1012,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d02ed4ecf5c7aeabbc8d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75e4ad8977b67f11630b",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 58,
+      "commercialNames": [
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2687a395e5f851fcd4e1",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-151b44f90dbbb3c5fb15",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f993f4ee812e7df950e3",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4eda8dd8bc0f028994a",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Cyberster",
+      "modelId": "mg-motor/cyberster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 231,
+      "commercialNames": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ea1c819050c0d6aefa4",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "EHS",
+      "modelId": "mg-motor/ehs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "EHS",
+        "MG EHS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 435,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a63877a5a29cc7636dbc",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "EHS",
+      "modelId": "mg-motor/ehs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "EHS",
+        "EHS /",
+        "EHS PLUG-IN HY",
+        "EHS PLUG-IN HYBRID",
+        "MG EHS",
+        "MG eHS Plug-in Hybrid",
+        "MG EHS Plug-in Hybrid",
+        "MG EHS PLUG-IN HYBRID",
+        "MG EHS PLUG-IN HYBRID (RX6)",
+        "MG EHS PLUG-IN HYBRID /",
+        "MG MG EHS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 24309,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-feb16ba04920aad58afa",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "EHS",
+      "modelId": "mg-motor/ehs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1490,
+      "powerKw": 90,
+      "commercialNames": [
+        "EHS PLUG-IN HYBRID",
+        "MG EHS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-072bf69019955da6138e",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "EHS",
+      "modelId": "mg-motor/ehs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1490,
+      "powerKw": 116,
+      "commercialNames": [
+        "MG EHS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d899271addab479b7483",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "EHS",
+      "modelId": "mg-motor/ehs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": 105,
+      "commercialNames": [
+        "MG EHS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 59,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15f87ad918113855183d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": null,
+      "commercialNames": [
+        "HS EXCITE",
+        "HS EXCITE S-A",
+        "HS EXCLUSIVE",
+        "HS EXCLUSIVE S-A",
+        "HS EXPLORE"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1609,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f595b2ae729498021ee",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "HS",
+        "HS EXCITE",
+        "HS EXCITE S-A",
+        "HS EXCLUSIVE",
+        "HS EXCLUSIVE S-A",
+        "HS EXPLORE",
+        "MG HS",
+        "MG HS / 1.5 /",
+        "MG HS / 1.5 / AUT.",
+        "MG HS / 15 /",
+        "MG HS / 15 / AUT"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 29609,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-918994fdcfd12303bd13",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1495,
+      "powerKw": null,
+      "commercialNames": [
+        "HS EXCITE S-A",
+        "HS EXCLUSIVE S-A"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1305,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-885140c2c64d4e665ac5",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1495,
+      "powerKw": 119,
+      "commercialNames": [
+        "HS EXCITE S-A",
+        "HS EXCLUSIVE S-A"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1305,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16e3e2249164047759c5",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": null,
+      "powerKw": 119,
+      "commercialNames": [
+        "MG HS PHEV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a76689fecee753987f98",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1490,
+      "powerKw": null,
+      "commercialNames": [
+        "HS EXCITE PHEV AUTO",
+        "HS EXCLUSIVE PHEV AUTO"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 174,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-782978d45d5bb454f645",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "HS",
+        "HS EXCITE PHEV AUTO",
+        "HS EXCLUSIVE PHEV AUTO",
+        "HS PHEV",
+        "MG HS / 15 /",
+        "MG HS PHEV",
+        "MG HS Plug-in Hybrid"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 693,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7d85ab762a0af88d040",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 119,
+      "commercialNames": [
+        "HS PHEV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a54393d81df7e7d79646",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "MG HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d933119f60a4dad41941",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1480,
+      "powerKw": 119,
+      "commercialNames": [
+        "HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4582964910e471b27462",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": 105,
+      "commercialNames": [
+        "HS",
+        "HS HYBRID+",
+        "MG HS",
+        "MG HS 1.5 AUT.",
+        "MG HS HYBRID",
+        "MG HS HYBRID PLUS",
+        "MG HS HYBRID+",
+        "MG HS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 5466,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be203381418d8141cd45",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": 125,
+      "commercialNames": [
+        "HS",
+        "MG HS",
+        "MG HS / 1.5 /",
+        "MG HS / 1.5 / AUT.",
+        "MG HS 1.5",
+        "MG HS 1.5 AUT."
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 14415,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-775e9598307cafbe5cd4",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 115,
+      "commercialNames": [
+        "HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dbad1503785026e7467",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 119,
+      "commercialNames": [
+        "HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-021fb292a4aecd69fba3",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": 105,
+      "commercialNames": [
+        "HS",
+        "HS PLUG-IN HYBRID",
+        "MG HS",
+        "MG HS 1.5",
+        "MG HS HYBRID+",
+        "MG HS MG HS PLUG-IN HYBRID MG EHS PLUG-IN HYBRID",
+        "MG HS PLUG-IN HYBRID",
+        "MG HS- MG EHS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 22383,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5724ce0526578984a4b",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": 135,
+      "commercialNames": [
+        "MG HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 137,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75d78edd06c2ec9114bc",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": 245,
+      "commercialNames": [
+        "MG HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 392,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59501fd784f83931661d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "HS",
+        "MG HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80bf993ba7a02c52e7f3",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1496,
+      "powerKw": 125,
+      "commercialNames": [
+        "MG HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8814afda808fa7ae9c46",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "HS",
+        "HS HYBRID+",
+        "HS PLUG-IN HYBRID",
+        "MG HS",
+        "MG HS HYBEID+",
+        "MG HS HYBRID+",
+        "MG HS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5439,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f575399b027219b1987",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1490,
+      "powerKw": 46,
+      "commercialNames": [
+        "HS PHEV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df84c54587f9fbf14ece",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1490,
+      "powerKw": 85,
+      "commercialNames": [
+        "HS PHEV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a16610949eb09ae8c2f",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "HS HYBRID+",
+        "MG HS HYBRID+",
+        "MG HS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a25310f40705ea911111",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "HS",
+      "modelId": "mg-motor/hs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1496,
+      "powerKw": 110,
+      "commercialNames": [
+        "MG HS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 161,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09e8609ac9afefe6b271",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "IM5",
+      "modelId": "mg-motor/im5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 217,
+      "commercialNames": [
+        "IM 5"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07e4d81703cdb77c5b44",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "IM5",
+      "modelId": "mg-motor/im5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "IM 5"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94aebd7a238e55aa62fb",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "IM5",
+      "modelId": "mg-motor/im5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 372,
+      "commercialNames": [
+        "IM 5"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 84,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09c006f3c0f75d86b952",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "IM6",
+      "modelId": "mg-motor/im6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "IM6"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-876a8f3f6a3654398373",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "IM6",
+      "modelId": "mg-motor/im6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 372,
+      "commercialNames": [
+        "IM 6"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 320,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34e249eb292e60ec1e2d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 40,
+      "commercialNames": [
+        "MG MARVEL R",
+        "MG MARVEL R ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 485,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a70fb54b561dad475f3e",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "MG Marvel R Electric",
+        "MG MARVEL R ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 208,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33c7f0dd4bdfb084c761",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "MARVEL R ELECTRIC",
+        "MARVEL R ELETRIC / /",
+        "MG MARVEL R",
+        "MG MARVEL R ELECTRIC",
+        "MG MARVEL R ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 557,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab1eb31b8713193fbc42",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "MARVEL R ELECTRIC",
+        "MG MARVEL R ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 4649,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86d906e024c2b6849c8d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "MARVEL R ELETRIC / /",
+        "MG MARVEL R",
+        "MG MARVEL R ELECTRIC",
+        "MG MARVEL R ELETRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 590,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-715f1fb711b960279340",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "MARVEL R",
+        "MARVEL R ELECTRIC",
+        "MG MARVEL R",
+        "MG MARVEL R ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 7157,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb2a75a41521c80e483e",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "Marvel R",
+      "modelId": "mg-motor/marvel-r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 212,
+      "commercialNames": [
+        "MARVEL R ELECTRIC",
+        "MG MARVEL R",
+        "MG MARVEL R ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 3229,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f92fdbb02d47e6c74b5",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "MG MG3 HYBRID+",
+        "MG3 HEV",
+        "MG3 HYBRID",
+        "MG3 HYBRID+",
+        "MG3 HYBRID+ / 1.5 / AUT.",
+        "MG3 HYBRID+ 1.5 AUT.",
+        "MG3 ZS"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG",
+        "MG-"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 53473,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c8d8e53edfcd7e2503c",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 100,
+      "commercialNames": [
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 304,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d5e4fbe8787a527a58c",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "MG3 HYBRID",
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 632,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-376bedffee96a7014fa6",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-649973f8c5db83c4b96d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": null,
+      "commercialNames": [
+        "MG3"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa4644047b8d2eaa2733",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": 85,
+      "commercialNames": [
+        "MG3",
+        "MG3 1.5",
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12648,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9451e08d1e6634e5cb7f",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 114,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbe5fff1900db0d69051",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 58,
+      "commercialNames": [
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90ea5ea4451d4db973c8",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 92,
+      "commercialNames": [
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ab2aacb2f61db93d6c0",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG3",
+      "modelId": "mg-motor/mg3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "MG3 HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d2527630e3ec3d5e0e1",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 54,
+      "commercialNames": [
+        "MG4 ELECRTIC",
+        "MG4 ELECTRIC",
+        "MG4 ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1661,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faa71436bab1b86b1ea9",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "MG4 ELECRTIC",
+        "MG4 ELECTRIC",
+        "MG4 ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 3299,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37b2dfbf7edfd6ca0563",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "MG MG 4 ELECTRIC",
+        "MG4",
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 42961,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c208f18ec2702fe77c96",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "MG 4",
+        "MG 4 ELECTRIC",
+        "MG MG 4 ELECTRIC",
+        "MG4",
+        "MG4 Electric",
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 52492,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e1857ead8e87aa27ae1",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 260,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-280ce3fb60a3ff8a58f8",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "MG4 ELECRTIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1328e2d60ba2f533a43e",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "MG4 ELECTRIC",
+        "MG4 ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 381,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d68e213f081ea11c9c65",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 67,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17d74d6a71ed31c9beb4",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 152,
+      "commercialNames": [
+        "MG4 ELECTRIC",
+        "MG4 ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 258,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a3827e7ca4f3b815f66",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 811,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f2c16ff2e9ccfff9d7f",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2843,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b96c00bf6a757b5cdb90",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2640,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e550b40184e16f69f03f",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be79480b05c0618dc2cc",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG4",
+      "modelId": "mg-motor/mg4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "MG4 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07fab483b170ada0f160",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "MG5",
+        "MG5 ELECTRIC",
+        "MG5 ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 933,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd3b28a43b4d794326ae",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "MG5",
+        "MG5 ELECTRIC",
+        "MG5 ELETRIC",
+        "MG5 SE EV",
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 12793,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c2ac539563bdbda2a37",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a474ee8f3319e2d91751",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "MG5 ELECTRIC",
+        "MG5 ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 231,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e4adf4ffc0d40f7301e",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "MG5 ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 3546,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba4f14c4d357ecacbd19",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2550b699648a30b892da",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "MG5 HS PHEV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1638f670944b740e4a6d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 58,
+      "commercialNames": [
+        "MG5 SE EV",
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b10b8f659afcf9d6a2d9",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27ea1cb120b1ba9cdd9b",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 111,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecc9a0f59c7a341d2e51",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c43b3a8dd952bca51d7",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 124,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94c63699f205206265ce",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MG5",
+      "modelId": "mg-motor/mg5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "MG5 SW EV"
+      ],
+      "sourceMakeNames": [
+        "M G"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a223982b44afb40855fa",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS5 EV",
+      "modelId": "mg-motor/mgs5-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG S5 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 121,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ca1dad081f063f1fb06",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS5 EV",
+      "modelId": "mg-motor/mgs5-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 54,
+      "commercialNames": [
+        "MG S5 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8959a195585aa14f20ab",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS5 EV",
+      "modelId": "mg-motor/mgs5-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "MG S5 EV",
+        "MG S5 EV, MG ZS EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 249,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52f9113a4fbe72dd0ee3",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS5 EV",
+      "modelId": "mg-motor/mgs5-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "MG S5 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1076,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b67346a26f177d16f0ff",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS5 EV",
+      "modelId": "mg-motor/mgs5-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "MG S5 EV",
+        "MGS5 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5380,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8960f3133ed75faeca99",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS6 EV",
+      "modelId": "mg-motor/mgs6-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 119,
+      "commercialNames": [
+        "MG S6 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-900ed3064fe4101dea25",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS6 EV",
+      "modelId": "mg-motor/mgs6-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "MG S6 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 77,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75c4e8a617274147c6b0",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "MGS6 EV",
+      "modelId": "mg-motor/mgs6-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 299,
+      "commercialNames": [
+        "MG S6 EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb5f244c5636279d1502",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG ZS",
+        "ZS EXCITE EV",
+        "ZS EXCLUSIVE EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5587,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d0715d8878a99dda6a4",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "MG ZS E1",
+        "MG ZS WV",
+        "ZS",
+        "ZS EXCITE EV",
+        "ZS EXCLUSIVE EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 5881,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6736f4b4db14c5089003",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "ZS EXCITE T-GDI AUTO",
+        "ZS EXCITE TURBO AUTO",
+        "ZS EXCLUSIVE T-GDI AUTO",
+        "ZS EXCLUSIVE TURBO AUTO",
+        "ZS LIMITED EDITION AUTO"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2818,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27a653eaaea001f3fafa",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d714213e23ab5efd2ea",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 82,
+      "commercialNames": [
+        "MG ZS",
+        "MG ZS /",
+        "MG ZS / 1.0 /",
+        "MG ZS / 1.0 / AUT.",
+        "MG ZS / 10 /",
+        "MG ZS / 10 / AUT",
+        "MG ZS AUT /",
+        "MG-ZS",
+        "ZS",
+        "ZS /",
+        "ZS AUT. /",
+        "ZS EXCITE T-GDI AUTO",
+        "ZS EXCITE TURBO AUTO",
+        "ZS EXCLUSIVE T-GDI AUTO",
+        "ZS EXCLUSIVE TURBO AUTO",
+        "ZS LIMITED EDITION AUTO"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 42545,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-399d602a4896434e8cf0",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "MG ZS",
+        "ZS",
+        "ZS EXCITE",
+        "ZS EXCITE VTI-TECH",
+        "ZS EXCLUSIVE",
+        "ZS EXCLUSIVE VTI-TECH",
+        "ZS LIMITED EDITION"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 6299,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebe1565e1a0db1275ba7",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "MG ZS",
+        "MG ZS /",
+        "MG ZS / 1.5 /",
+        "MG ZS / 15 /",
+        "MG ZS 1.5",
+        "MG ZS 1.5 ESSENTIAL PLUS",
+        "MG ZS-ROEWE ZS",
+        "ZS",
+        "ZS /",
+        "ZS 1.5L",
+        "ZS EXCITE",
+        "ZS EXCITE VTI-TECH",
+        "ZS EXCLUSIVE",
+        "ZS EXCLUSIVE VTI-TECH",
+        "ZS LIMITED EDITION"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 113027,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48184327d67918d13d72",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81cffe9789846d3bb651",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdb0e790ebcc1d8d91fc",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c99400f28e822931853a",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99df0dabe826fe618382",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03aa257bb19b10189c49",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 82,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f714f58019f66a3533aa",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 78,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8de8f5209ad3a2f768b",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 11,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1da36de8e871e4e5e44",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1494,
+      "powerKw": 78,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb00d3e193a025a05e9d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "MG MG ZS",
+        "MG ZS",
+        "MG ZS HYBRID",
+        "MG ZS HYBRID / 1.5 /",
+        "MG ZS HYBRID 1.5",
+        "MG ZS HYBRID+",
+        "MG ZS MG ZS HYBRID MG ZS HYBRID+",
+        "MG ZS/MG ZS HYBRID/MG ZS HYBRID+",
+        "MG-ZS",
+        "ZS",
+        "ZS HEV"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG",
+        "MG-"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 58200,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf090848f9522d3a01f3",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 79,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-347523284f09215b4d3c",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 98,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7d1eab3823542a58f9d",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 100,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04f39c9ed27805de144c",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 78,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4848f768020eb4eaa2d4",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1357,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-713dc75de2d6e262e01a",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-416e5c42a6f4149372ad",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": null,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc133b3ff2380b959834",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": 85,
+      "commercialNames": [
+        "MG ZS",
+        "MG ZS 1.5",
+        "MG ZS MG ZS HYBRID MG ZS HYBRID+"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10157,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86cfcb73d9e8326f8ff1",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 115,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5bbe2f3c70a26085811",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS",
+      "modelId": "mg-motor/zs",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "MG ZS"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fd3c6fb417e19afd882",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MG ZS EV",
+        "ZS EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 218,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa6ba5d4255d6820f7b1",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "MG ZS EV",
+        "ZS EV",
+        "ZS EV /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 8211,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e108d941ce57e7967188",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "MG MGZS EV",
+        "MG ZS EV",
+        "MGZS EV",
+        "ZS EV",
+        "ZS EV /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 25357,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a608ac701fab1dafd28",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "MG ZS EV",
+        "MG ZS EV /",
+        "MG ZS EV / /",
+        "ZS EV /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-793113cdb30a007c7737",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "MG ZS EV",
+        "MG ZS EV / /"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 744,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b462f70d7c7a5b43a40",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "MG ZS EV",
+        "ZS EV"
+      ],
+      "sourceMakeNames": [
+        "M G",
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 23670,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0e2f50b88a9e30c2564",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "MG ZS EV",
+        "ZS EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 6871,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1aa51f87911975fc0933",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 119,
+      "commercialNames": [
+        "MG ZS EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a60a91ce84934b94ccbb",
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "canonicalModel": "ZS EV",
+      "modelId": "mg-motor/zs-ev",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "ZS EV"
+      ],
+      "sourceMakeNames": [
+        "MG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82f33ff7b19bc72627d2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ACEMAN E",
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 84,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82b5df842a551799557b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "ACEMAN E",
+        "ACEMAN E / / AUT.",
+        "ACEMAN E AUT.",
+        "MINI ACEMAN E"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 643,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35ccae10683fa308eca8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "ACEMAN SE",
+        "ACEMAN SE / / AUT.",
+        "ACEMAN SE AUT.",
+        "MINI ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1629,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab8f5ef22cfc59eb8c51",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "ACEMAN",
+        "ACEMAN E",
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7201,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9c57cbae11bb5859298",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "ACEMAN",
+        "ACEMAN E",
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 11078,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad499f782a36b91782fc",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 58,
+      "commercialNames": [
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f33d89669e7b4007f724",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "ACEMAN E",
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d7a3508eb4750b01e43",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "ACEMAN E"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a20acaf0a609d53f1db",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8198d46208eb484869c5",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Aceman",
+      "modelId": "mini/aceman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "ACEMAN",
+        "ACEMAN SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

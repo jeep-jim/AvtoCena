@@ -1,0 +1,3747 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a3-2022-1",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "375269ee12ea12a60e836daa",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limo 1.0 30 TFSI Aut. LED Virtual Sport-Leat",
+      "expectedDigest": "ab4a184b9b8cd33ee806d7e59f6838d98f4d4a229a41b54820298ae54b408339",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "698b01c1f7af5560830ac2b6",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI*AUTOMATIK*ACC*CARPLAY*",
+      "expectedDigest": "d4eb5c1aaf4db29fc4ed4e0fedc1750bfbee7a2bd44c27b97e95ceaddcfc899b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "222aab836c913db117931d94",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced * 1.H * R-KAM *ACC",
+      "expectedDigest": "b56fcebdca3eb60b120007a03ec85e4f7a4b5b9410a0fd38385e729c341d574e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ff7072b1661cef6816cde624",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced * 1.H * R-KAM *ACC",
+      "expectedDigest": "0800a5ddbe057f5bfc03275b9c6d67a9caff84b8532b23ebd02b964f42cc0b5b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "800d0ffaa7731304ce2a7962",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 1.0 TFSI 30 advanced MMI Navigation",
+      "expectedDigest": "75a68cef28a64b099df9de0b00ffecf63abdf65a43e38d5c65ed3359a1906587",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4d5bb32cfb925c83e5edd392",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI LED NAVI ASSIST TEMPOMAT PDC",
+      "expectedDigest": "f1db6f7c95382bd8a6fbf3207ffbb10c43cf524753d8d3226cf82d7572361108",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1775 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ad48fa5fbacf7e1826d152d6",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI Business Spiegel+ el.Heck v",
+      "expectedDigest": "0c4c9e001677f63c94c4afc5bd364117eb54b0dd4d79758ce5a658d04d621124",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7db31469a3243008f144f1bd",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI S line/Teilleder/Matrix",
+      "expectedDigest": "1773aae3cc80249e30f1b7160c2a71da3c2b759bdfc8844d12d02489a68e36ef",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "96d4b78423d0f4809d0872e7",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI *1.Hand",
+      "expectedDigest": "0a729548adb58caadf48e06d6341247a01e08a34dc0e3b03e079da0fb19e2857",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9b6ef99009ebc421d4b96c47",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine TFSI Parklenk,LED,Virtual Cockpit",
+      "expectedDigest": "5decb9c14eccd992baeec94025ce6f8d1db31641114822a037126b367840f783",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2678b8afc2d8cc56b3467809",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI ADVANCED RFK+GRA+DAB+MFL",
+      "expectedDigest": "56870d1468f08a06144563be701a18bed94a0da39b0d29f0f769751461f2f512",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "533c1e54da0983c7f6ea125d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI basis",
+      "expectedDigest": "23b81500c8039864425f4536abb6bdde5c0bbfbe47d99da62c90252a6514c46f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ca54b61f14be347a27cc3118",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI Adv. S tronic *ACC*NAV+*",
+      "expectedDigest": "f1f2475ed70bd929c749679640c8fe371856d5d2de129b2d7ec47a3eb903b963",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2b71116664ed39eee8fb4b94",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI Advanced edition",
+      "expectedDigest": "a033818652e4d49ab1122dc01e169032702f42040890df6f245fae1e3f64303c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c2189ff45a7e928aef602c7a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30TFSI Sportback*S-Tronic*LED*Kamera*SHZ*Lane",
+      "expectedDigest": "f56d61d47c13c73615afb2aa8c3a8859d0043a01a72cf992d85d2bbedf75f719",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f107e574f4ec420d3f68daf8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced MMI PDC 18\"",
+      "expectedDigest": "f3396a5f13e18efc98222a89f069d7baba4c4de041941e6fd8b7b9022c4975a7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5a24345fc8881943365a2112",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TFSI S line Sportback S line",
+      "expectedDigest": "a4a3633d81168c4055ec39f5bbdc6279c0c791ead0a3cabdfb4924b08570e1da",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "85ca7465a98813bf21a09b57",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced*NAVI*LED*AHK*1HAND",
+      "expectedDigest": "7c2f83e588403754e2d74731e284f2a5d3f952d40f57ac9079d8ad9b01f32858",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "29bccd1de45d200e7b28992b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI Aut LED NAVI TEMPOMAT PDC",
+      "expectedDigest": "f85567792718e61805b823f3e0fa2e037770fc502fee483e6eda3370f3ac01e9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "cf3423bb2d962854e9373d9f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI basis|1.HD|PDC|APPLE CAR",
+      "expectedDigest": "c9f638905b4a06083ae382defcb0ed0cad7fb2cdee9e84f8a5bafbb6eb5b6d56",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8599b2146d0b28057e17dc04",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced LED App-Connect",
+      "expectedDigest": "7c126f4ab2e84ace83ac7163cc30afe3b9b9e3811c0b70b03bb610a5d16143a7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "660c2a685a4b75ed0431ad9a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI advanced SitzH PDC GRA",
+      "expectedDigest": "c287572bc3c6551002067e9109fa63f8480733fc44824eddadd44b7bf910f1b2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1775 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8f3c7f9f760602a54399de2d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI KEYLESS,CARPLAY,ACC,18ZOLL",
+      "expectedDigest": "65564c899bc6ef8b7e7633645fa0a90aea07d021df81ce17080fd3f6f0b38bbe",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c9081c9f70038d002411cfc3",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI S line",
+      "expectedDigest": "014f8696dec2ba230f74fd2a86b4bd6a41da1a4d70b8130038742804d90c2e55",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ad76a15c72933ec50ab0c86b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced SitzH GRA Kamera",
+      "expectedDigest": "2df7ee0e9dfccc243b5b0b2e6e79bd9075c73a24e1a825df68826c4e2410dc1b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b0dac3b0633d4ac681eaaddb",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced *AHK*RFK*DAB*",
+      "expectedDigest": "c4a7e2b8eb156370e8004bd32e273926973fe34c75c9e28a403a0edb0cc006b8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b6b07bf2bb9d11d9771780c6",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI KEYLESS,ACC,KAMERA,CARPLAY",
+      "expectedDigest": "9fafc08363ac6381533d4c1ddd19cf9d257175966764cc6267280b9bc7cb3e16",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ee0e109d02aa9487c1a46429",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI CARPLAY,VIRTUAL,PARKASSIST",
+      "expectedDigest": "da10eb255f559bff1551eee1445150fea8cf72d5825b336ba81dda82f21cb470",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b646db66815c6bce3db0e795",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "SB 30 TFSI S-line S-tronic",
+      "expectedDigest": "e67aafbcaefd7da44f2834f02dfd82e5642195314b349ca57e9e8cc3dfeae60b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5bf4bc5f15ac668eceda3c41",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI S-tronic advanced LED Navi",
+      "expectedDigest": "8e29788067ad03de194c973afb3c9d887918d53f7cde77c49efd1f9eecaf1359",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f8bed0338efc1f154fd591d0",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI PANO,AMBIENTE,KAMERA,1.HAND",
+      "expectedDigest": "c264716073dc08cf5b07a16b802ebc43354b45ca7d93711a4d31d14faa729030",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "08aee30ef6bc6c5701f0442d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine advanced 30 TFSI Rückfahrkamera Kom",
+      "expectedDigest": "c3ac00c1e9fb71fa29f5f27416a8c779e1a2a715296d6cf6b1715710a3cb25de",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7b90e487d2157bdd31d74ef3",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI S tronic advanced S line",
+      "expectedDigest": "7fae786d17710d7a605df8e4e07e51980c2a095195b05dd11774f0059fa08881",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5205b08614831dd84974b3d5",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced LED AHK Lane Assis",
+      "expectedDigest": "801f98fee7d60c3f863ee370cc7ccc20bbf7470e7dce0f75b3db0a06db2189a9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b094f23e1cb066f1ecaadc5a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine advanced 30TFSI Stronic Navi LED AC",
+      "expectedDigest": "0ca1b3a38ff2e176ee56d109fac7244d68044dfe11e4b65e4924973d64a22393",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "582eabf4393902e46c5e02fa",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback S-Line 30 TFSI S-Tronic AHK/18/",
+      "expectedDigest": "0299b1bf2f69c9e0c2250d6d8b45f2c5b66f528d8588323bb619b0b5e90e1474",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0dc8fe20adb8ef05355d4132",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback advanced 30 TFSI S tronic",
+      "expectedDigest": "d4de5ba5a833e1f9f553056e528aefed9dc89d9d48cff6fce9c1b525f6c74800",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "29d44207afdbbcaa1e77bebf",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced LED Navi Tempomat",
+      "expectedDigest": "b560a2c805e66be890c10393068db972c20727a6c7abdfc485a5b8a2b8c160b1",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "87e9ffc79f671a3d4dff5ae9",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI S line | LED | SITZHEIZUNG",
+      "expectedDigest": "0a8c2c4534a468629e41f844f4ba5734a8e70cb6904c240f127ae85d5b840d5a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1775 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "810a0c8a34d9d10420354e7c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI S line - GPS - APP - CAMERA - SIEG CH - ATTELAGE",
+      "expectedDigest": "7430a022be0260e6adef4a2074efac1ee2ef00c9df919b67d933d70c714a6544",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "07f2829339e978693f3d277f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Lim. 30 TFSI Adv. S tronic *ACC*R-CAM*NAV+*",
+      "expectedDigest": "09e0db50167e0f7a697f57b0ee4b96b3c1264a7058a74e6162b2dc40e89cdbf8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "280569ecf05e6ee7f5f051cf",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced S line AHK",
+      "expectedDigest": "bd5d7fa5127e56392310565e9c3d144f0da93bdcfe893920260545fdd30889fc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1770
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1770 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ba2b685c3c91d9d3db790da1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TFSI S tronic advanced AHK SHZ A",
+      "expectedDigest": "298d37b4531c131b0e587e41dba0fe848ebc86a9b37b1f41ea9a5fe26362bd52",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1840
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.135: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1840 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              135
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "df2f026842b9b74dd73c7a1f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI S-line LED/MMI/EPH/Assist/u",
+      "expectedDigest": "df2508beb8ad28e931c216bce0f09c5f1c2f98aafbf85b41e19f30fa81dc4c5e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9ba71f6ca121ded56eee8921",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "sportback 30 1.0 tfsi mhev 110CV Business Advanced s-tronic",
+      "expectedDigest": "7baa1b6bb96ee96d97fef2f228bf7302587eefc23fdc7add0ea4424fe1025737",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a97bcc75f00aafcb2916756b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "4ª serie - A3 SPB 30 TFSI S tronic Business",
+      "expectedDigest": "08bc598c45bbcd605f5a56c023f9a97d10e2275ce0a9b6010370da92ef4906b9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 999,
+        "powerHp": 110,
+        "powerKw": 81,
+        "icePowerKw": 81,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1835
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TFSI 81 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.130: 999 см³,110 PS/81 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1835 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Mild-Hybrid для30/35TFSI S tronic подтверждён настр.25. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              25,
+              130
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "32fd6169f80dfc5cf6f86a42",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback advanced 2.0 30 TDI Alu17''|virt.Co",
+      "expectedDigest": "f17f9be7f8a4d3695d97d56429c57d35f07924c05d7028c378d202fac0269d5d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1905 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "baad335c157a3f4ad38bae11",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI Fahrschulausstattung",
+      "expectedDigest": "2f3a661a61e104ba7909db32776c9c2b84468fa03f8f6858381ace7efc6a200b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1905 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8ae438e5abf663268a54498d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TDI Limousine, Navi,",
+      "expectedDigest": "f8306d60b7caf7821167e5a668a8b1693cdbf8af0fd6ee47176b354cfb5396f4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TDI 85 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.137: 1968 см³,116 PS/85 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1905 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              137
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b6f153d45fee09f0c6b46c0a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI KEYLESS,CARPLAY,ACC,AMBIENTE",
+      "expectedDigest": "04b0b6884a3af82ebc268bc387c59fbd1d578663cbc1e892a7f02850b4f676d4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "26b5f1368514f6984e847eb5",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S-TR ADVANCED RFK+GRA+SHZ+17",
+      "expectedDigest": "7831afecb3aeb59b8c1aebbd5c40434f7677141c1fbe8fcf7c6c7a0b2884d79c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e6ede2cb784f09f2b2d1c768",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI LED-Sch., MMI Plus, GRA, PDC",
+      "expectedDigest": "bc219842f373303ee53099a0e278d15e923bda68d033d86301501a9438e79f07",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1905 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5b6a4cb8924ef86f43a1d76a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "SB 30 TDI Aut LED LEDER NAVI SITZHZG ASSIST",
+      "expectedDigest": "4d7063174d49f63ede0b70354450485b696fbf39f683b70f25dccdca2faed838",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0024cc0a275afdca3b2324f8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI advanced",
+      "expectedDigest": "e5d90fa023479d0d2737be5a6a04810c58b6ad790a12aa781d44f59ab29cf0fc",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3b798526ecaf2b83477cf039",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "30 TDI Sportback S tronic advanced 8-fach",
+      "expectedDigest": "de2ba79d9c9e3e90c64ad6b699b1049f1c43eea6555fd3c3d9eb41e759ee7d4d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d98a63d63135ecc415e22668",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI ADVANCED AHK PRIVACY PDC",
+      "expectedDigest": "b58eef6415a3c158c47dd2e518acee8f91b851b26c8cb632839201014845a94a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "53fc4746de86218051674b8d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI LED Kamera",
+      "expectedDigest": "88239e543abb378a408786ecd2f137a25bf475b0efe49430020a8ddde9a07a6b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1905 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5756e76e3285a6ee8d81170f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30TDI S tronic advanced ACCadapt. G",
+      "expectedDigest": "62a72892fe67d2b4d87d0ec72d6d4e33f198330feb76d2d48d3bf194807dbf6f",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "be3d2d62b8393fae8ddfd273",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI ACC LED NAVI+ VIRTUAL",
+      "expectedDigest": "b25a9c534c82ed4f85fcc3f48c146328f95ac757e6ba8236287ac453ecff689a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1202d455bfcf1cc953e96508",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Limousine 30 TDI basis",
+      "expectedDigest": "504f87eb9dd4302338a394163eff1386c2ba5fcd317f65db4779029d54b3a903",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1925
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.137: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1925 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              137
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "20081fe6088fc79c95084f3e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S tronic El. Panodach Navi D",
+      "expectedDigest": "87be49ad2e3d55205fa80257f0c7b6876742c3f23d157418176e9bb3fc2186e6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b6e81025d0cee9cef8d5ac47",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "SB 30 TDI \"advanced\" LED*SITZH*NAVI*VIRTUA",
+      "expectedDigest": "8e8d9ff5e6fcd42019bc131127f274d8e132d8b84b87aa226f83e45ab798baf2",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,МКПП. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,6 ступеней,допустимая полная масса 1905 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9d72c5c85df7b711d2cb1a1b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI Navi ACC StandHzg Business",
+      "expectedDigest": "bb00679736364f100db525decb1b4b15a4b01b2d70708c6f69d7acc7272dc531",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "32cd8b3df9bb1a56bb71d307",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S-Line LED Navi Kamera Sitzh",
+      "expectedDigest": "9d4baed71915cc9a1bef6dc0f6bc9ea3b8ea8c543395f032c3491c452e84f0a6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1920
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback,MY2022,TDI 85 кВт,S tronic. Официальный прайс Audi MY2022 от10.03.2022,стр.132: 1968 см³,116 PS/85 кВт ДВС,передний привод,7 ступеней,допустимая полная масса 1920 кг. Сопоставлены кузов,год,мотор,объём и мощность исходной записи,КПП. Обычный ДВС. Строка массы выбрана по точной колонке КПП; снаряжённая масса не использована. Код двигателя,рекламные опции и30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn%3Aaaid%3Aaem%3A3504617f-72c6-42cf-970c-fb4d2f2b598d/original/as/preisliste_a3-sportback_a3-limousine_s3-sportback_s3-limousine_a3-sportback-g-tron_a3-sportback-tfsi-e.pdf",
+            "date": "2022-03-10",
+            "pages": [
+              132
+            ],
+            "sha256": "0f480d8aa937fbf1e2c3bab2889d2b92145ce60381da7784823f157983274f46",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

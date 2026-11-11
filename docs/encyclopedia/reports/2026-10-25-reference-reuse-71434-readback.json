@@ -1,0 +1,2320 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T19:17:13.557Z",
+  "planDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
+  "apply": {
+    "workflow": 40123387423,
+    "job": 120959559881,
+    "conclusion": "success",
+    "receipt": {
+      "mode": "apply",
+      "startedAt": "2026-10-24T19:05:21.115Z",
+      "manifestDigest": "eec8e463217e99c1478b4f85fb7ecca29c556d68fbeaf13c40fd4967477e024e",
+      "indexDigest": "bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20",
+      "planDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
+      "modelsRead": 4451,
+      "donorIndexDigest": "bd6556d39b1943d7c055d122a415883bdd899667d6f5921d14f04ffb028f2b20",
+      "modelsChanged": 219,
+      "variants": 415,
+      "fields": 559,
+      "evidenceFields": 579,
+      "savedModels": 219,
+      "savedFields": 559,
+      "finishedAt": "2026-10-24T19:11:24.001Z"
+    },
+    "artifact": 12571619595,
+    "artifactSha256": "3603d250a0058bc87b0f04d6c7d6dbbd78adebe828963090e3f9fc44e39ce640"
+  },
+  "fieldCounts": {
+    "bodyType": 247,
+    "grossVehicleWeightKg": 225,
+    "transmission": 35,
+    "drive": 23,
+    "engineCode": 18,
+    "engineCc": 10,
+    "icePowerKw": 1,
+    "power30MinKw": 0
+  },
+  "publicReadback": {
+    "planDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
+    "workflow": 40123387423,
+    "check": "independent_public_revision_readback",
+    "rows": [
+      {
+        "id": "397dafd58568424776ec74d6",
+        "make": "212",
+        "model": "T01",
+        "previousRevision": "95b4645c-c3cd-40fa-862c-1edfaec8e08b",
+        "revision": "bbc8c443-ed72-42c6-a1d7-65a69b22ee55",
+        "updatedAt": "2026-10-24T19:05:21.613Z",
+        "checkedAt": "2026-10-24T19:09:16.071524+00:00",
+        "ok": true
+      },
+      {
+        "id": "4d958d92ab5c90cd78582a28",
+        "make": "Acura",
+        "model": "Rdx",
+        "previousRevision": "8c63d888-cbd4-4ed9-a784-c0ed54879ff6",
+        "revision": "9ca2464f-8627-4b5c-a80b-b338f0e41a94",
+        "updatedAt": "2026-10-24T19:05:21.633Z",
+        "checkedAt": "2026-10-24T19:09:16.072051+00:00",
+        "ok": true
+      },
+      {
+        "id": "cfb5857e13b7258b88b369f4",
+        "make": "AITO",
+        "model": "M5",
+        "previousRevision": "0a5b5eb6-779a-4c6f-9042-e5cb25ed2113",
+        "revision": "6aec8f23-198d-4c2f-b025-c450d0c176ea",
+        "updatedAt": "2026-10-24T19:05:21.639Z",
+        "checkedAt": "2026-10-24T19:09:16.072443+00:00",
+        "ok": true
+      },
+      {
+        "id": "a509545256f3729336fdfc6f",
+        "make": "AITO",
+        "model": "M6",
+        "previousRevision": "cf5ca0e0-72e3-47c4-8e62-a4463505d614",
+        "revision": "2030ecdc-259e-483e-8fc2-5632a8f0046e",
+        "updatedAt": "2026-10-24T19:05:21.652Z",
+        "checkedAt": "2026-10-24T19:09:16.072937+00:00",
+        "ok": true
+      },
+      {
+        "id": "b3f19fa0f1975e57410dd272",
+        "make": "AITO",
+        "model": "M7",
+        "previousRevision": "0bd0f969-79c1-4166-a3ef-2e8685b8cf21",
+        "revision": "b5f9f119-5ab3-4c77-a9e5-a1577f75e5a7",
+        "updatedAt": "2026-10-24T19:05:21.659Z",
+        "checkedAt": "2026-10-24T19:09:22.637969+00:00",
+        "ok": true
+      },
+      {
+        "id": "b0972339b8a7f3fc37bf8d6b",
+        "make": "AITO",
+        "model": "M8",
+        "previousRevision": "1f54ad69-afd4-4cb8-a5ab-c406c5271df5",
+        "revision": "ecd70782-b707-4783-86b4-a7f2beda2b6a",
+        "updatedAt": "2026-10-24T19:05:21.696Z",
+        "checkedAt": "2026-10-24T19:09:22.714679+00:00",
+        "ok": true
+      },
+      {
+        "id": "06aa61c491bf051c20b852b8",
+        "make": "AITO",
+        "model": "M9",
+        "previousRevision": "3c9c43a8-c942-4ea7-b59f-cf5f9eef422c",
+        "revision": "29da7623-e9a5-4d88-afb6-de0fd6672e7f",
+        "updatedAt": "2026-10-24T19:05:21.710Z",
+        "checkedAt": "2026-10-24T19:09:22.718632+00:00",
+        "ok": true
+      },
+      {
+        "id": "c2365f94a908e7e90f14976e",
+        "make": "Audi",
+        "model": "A4L",
+        "previousRevision": "73e24623-5418-48b3-9c7a-9e0ea0ff5d64",
+        "revision": "a48e2502-0d81-41ee-8e69-b9f93c33fe5b",
+        "updatedAt": "2026-10-24T19:05:21.730Z",
+        "checkedAt": "2026-10-24T19:09:22.744930+00:00",
+        "ok": true
+      },
+      {
+        "id": "e024a48871eadd5a09dc133b",
+        "make": "Audi",
+        "model": "A5L",
+        "previousRevision": "9a3d753b-91d1-487b-b231-0737de13fc37",
+        "revision": "cf298518-f518-4e94-b0d2-72c6fa655c73",
+        "updatedAt": "2026-10-24T19:05:21.750Z",
+        "checkedAt": "2026-10-24T19:09:32.822889+00:00",
+        "ok": true
+      },
+      {
+        "id": "47f57970b91ad3f3a25ad452",
+        "make": "Audi",
+        "model": "A5L Sportback",
+        "previousRevision": "1cd0c6da-5734-44ca-90fd-95d4b4d88ccd",
+        "revision": "43653dce-9d05-4a3c-bd09-b483893a036e",
+        "updatedAt": "2026-10-24T19:05:21.753Z",
+        "checkedAt": "2026-10-24T19:09:32.945382+00:00",
+        "ok": true
+      },
+      {
+        "id": "e43873f0a3de40762a376dff",
+        "make": "Audi",
+        "model": "A6L",
+        "previousRevision": "c32ffdac-d3dc-4bf8-8ca5-f4717c22f0cd",
+        "revision": "4b6ca00e-7811-41cc-a301-bba062a6a8d6",
+        "updatedAt": "2026-10-24T19:05:21.761Z",
+        "checkedAt": "2026-10-24T19:09:33.673554+00:00",
+        "ok": true
+      },
+      {
+        "id": "021e791ffb62f82fef85b08a",
+        "make": "Audi",
+        "model": "A7L",
+        "previousRevision": "6820aa5f-ed47-449c-af98-dd7f8e635177",
+        "revision": "856abbd1-1801-4c19-89e2-61481b9f7f2f",
+        "updatedAt": "2026-10-24T19:05:21.796Z",
+        "checkedAt": "2026-10-24T19:09:34.835866+00:00",
+        "ok": true
+      },
+      {
+        "id": "c11f90d723c950171f1cbc8a",
+        "make": "Audi",
+        "model": "Q5L",
+        "previousRevision": "b91b8537-27a0-44f1-aa48-ca46674f9143",
+        "revision": "4ca4b89d-eac6-404a-89e8-86fba636ec10",
+        "updatedAt": "2026-10-24T19:05:21.829Z",
+        "checkedAt": "2026-10-24T19:09:37.982317+00:00",
+        "ok": true
+      },
+      {
+        "id": "ae9c95bec45eed9c02fb3c7f",
+        "make": "Avatr",
+        "model": "12",
+        "previousRevision": "745c15db-e5c8-4e2c-bc9e-b89ea955ac26",
+        "revision": "96631c1c-5cb6-4037-8bef-389b94c4ac38",
+        "updatedAt": "2026-10-24T19:05:21.861Z",
+        "checkedAt": "2026-10-24T19:09:37.987412+00:00",
+        "ok": true
+      },
+      {
+        "id": "de1aa88db6a8b165ddc59561",
+        "make": "BAIC",
+        "model": "X3",
+        "previousRevision": "97ccd903-d439-45fe-bc96-5a7985d6a650",
+        "revision": "766f3b2d-a9aa-4333-b69d-ff33e30e7b3d",
+        "updatedAt": "2026-10-24T19:05:21.880Z",
+        "checkedAt": "2026-10-24T19:09:38.007576+00:00",
+        "ok": true
+      },
+      {
+        "id": "b58aa1982a70714f761485f4",
+        "make": "Baojun",
+        "model": "310W",
+        "previousRevision": "75ecce1c-755e-441c-871d-6266125dc47e",
+        "revision": "63e243e1-213e-49bc-9cb7-15cda4630783",
+        "updatedAt": "2026-10-24T19:05:21.881Z",
+        "checkedAt": "2026-10-24T19:09:38.009350+00:00",
+        "ok": true
+      },
+      {
+        "id": "b64443d99b479b8514f3cd8b",
+        "make": "Baojun",
+        "model": "730",
+        "previousRevision": "31553e2a-0c5a-4ac2-8e89-4871d6474345",
+        "revision": "16913531-8296-4a1e-b01c-7b25b8947cdc",
+        "updatedAt": "2026-10-24T19:05:21.887Z",
+        "checkedAt": "2026-10-24T19:09:43.083689+00:00",
+        "ok": true
+      },
+      {
+        "id": "9ea2b351f9f803f555a47fdf",
+        "make": "Baojun",
+        "model": "RC-5",
+        "previousRevision": "296ad4f7-7f28-40f8-8d6b-8ee9c5db8f14",
+        "revision": "2f4513a3-29d7-4190-a36e-03f391b08b77",
+        "updatedAt": "2026-10-24T19:05:21.898Z",
+        "checkedAt": "2026-10-24T19:09:43.172717+00:00",
+        "ok": true
+      },
+      {
+        "id": "a17ca79b7eb3632ca5084cea",
+        "make": "Baojun",
+        "model": "RS-3",
+        "previousRevision": "8dc2502f-d2ec-4cd3-9807-7a3f3ca9cc28",
+        "revision": "c35af9f1-8a70-40c0-8a3d-74506421797f",
+        "updatedAt": "2026-10-24T19:05:21.899Z",
+        "checkedAt": "2026-10-24T19:09:43.173201+00:00",
+        "ok": true
+      },
+      {
+        "id": "4dd4984aa8a0a87be2c93595",
+        "make": "Baojun",
+        "model": "Valli",
+        "previousRevision": "4ea068aa-2e6e-4866-9623-4760932d9a14",
+        "revision": "af5201e4-b950-4d52-88a5-f0d5a584c46d",
+        "updatedAt": "2026-10-24T19:05:21.899Z",
+        "checkedAt": "2026-10-24T19:09:43.186355+00:00",
+        "ok": true
+      },
+      {
+        "id": "7b0403e5c1176d57d6823d1f",
+        "make": "Baojun",
+        "model": "Xiangjing",
+        "previousRevision": "f052366e-ace6-4166-9657-9930d3e71c74",
+        "revision": "14ac34bd-aeb4-45f7-97cb-3ef6c3f1c248",
+        "updatedAt": "2026-10-24T19:05:21.900Z",
+        "checkedAt": "2026-10-24T19:09:48.209797+00:00",
+        "ok": true
+      },
+      {
+        "id": "ed74ac9a21dfda62fa51f374",
+        "make": "Baojun",
+        "model": "Yunhai",
+        "previousRevision": "7da01dd1-ebaa-41f3-8290-d81f359c0b57",
+        "revision": "3906cb12-523e-4658-a81f-72331b8f3f74",
+        "updatedAt": "2026-10-24T19:05:21.905Z",
+        "checkedAt": "2026-10-24T19:09:48.468246+00:00",
+        "ok": true
+      },
+      {
+        "id": "846c6fe0c183d7340e4108cc",
+        "make": "BAW",
+        "model": "212 Classic",
+        "previousRevision": "6530035d-93a0-4c2c-a1ce-5f313d4993bd",
+        "revision": "3b19d2e9-b537-484d-9d5d-4cc069b0000b",
+        "updatedAt": "2026-10-24T19:05:21.907Z",
+        "checkedAt": "2026-10-24T19:09:48.469020+00:00",
+        "ok": true
+      },
+      {
+        "id": "ea714ff425b72cc7f2eb107b",
+        "make": "BAW",
+        "model": "Ruisheng Ace M7",
+        "previousRevision": "0284c3eb-02ee-48c8-a262-968a62b1b274",
+        "revision": "a6e85e5a-8f34-49be-a295-ba0b3bc50bae",
+        "updatedAt": "2026-10-24T19:05:21.908Z",
+        "checkedAt": "2026-10-24T19:09:48.534525+00:00",
+        "ok": true
+      },
+      {
+        "id": "62cd2a90af9a1a3a718a987d",
+        "make": "Bestune",
+        "model": "B70",
+        "previousRevision": "0bee7154-6f70-4f44-9571-f0c44a688379",
+        "revision": "c7a35969-e7f8-4b49-900c-28adb8737a10",
+        "updatedAt": "2026-10-24T19:05:21.911Z",
+        "checkedAt": "2026-10-24T19:09:53.345982+00:00",
+        "ok": true
+      },
+      {
+        "id": "d7db602aad03d788a3ed62af",
+        "make": "Bestune",
+        "model": "T55",
+        "previousRevision": "bb2f2df9-8ac0-44ff-bb76-a9df48d48e88",
+        "revision": "babc22b7-249d-414e-9c30-eceab0c4d252",
+        "updatedAt": "2026-10-24T19:05:21.945Z",
+        "checkedAt": "2026-10-24T19:09:53.366438+00:00",
+        "ok": true
+      },
+      {
+        "id": "c2f90cc081fc8a804c524d76",
+        "make": "Bestune",
+        "model": "T77",
+        "previousRevision": "dd6c00d0-3fc1-4929-a7ae-5aa2b8362da7",
+        "revision": "6bb73636-3c4e-4e85-9ffe-892031f77df4",
+        "updatedAt": "2026-10-24T19:05:21.946Z",
+        "checkedAt": "2026-10-24T19:09:53.404360+00:00",
+        "ok": true
+      },
+      {
+        "id": "c4d92777472802c6675146c0",
+        "make": "Bestune",
+        "model": "T90",
+        "previousRevision": "5b7dfa20-ff1c-4916-a98b-7e1a46f925e1",
+        "revision": "b0aa2764-6c89-4919-bb84-e25516bc292b",
+        "updatedAt": "2026-10-24T19:05:21.947Z",
+        "checkedAt": "2026-10-24T19:09:53.417550+00:00",
+        "ok": true
+      },
+      {
+        "id": "814d6dc6cd7ce0ccd991b18b",
+        "make": "Bestune",
+        "model": "T99",
+        "previousRevision": "54ecafa5-a175-4cc7-a302-dfaaa1ab4103",
+        "revision": "4f5fb721-b8d5-4bd0-8f57-8fe9e48a84e9",
+        "updatedAt": "2026-10-24T19:05:21.948Z",
+        "checkedAt": "2026-10-24T19:10:00.925795+00:00",
+        "ok": true
+      },
+      {
+        "id": "6f237f222fc10467af4cf861",
+        "make": "BMW",
+        "model": "218",
+        "previousRevision": "d626e211-7f58-4aa9-aa3c-7718f79e2e1e",
+        "revision": "fc2e3cde-8c2f-4cb4-ab80-39762f1196da",
+        "updatedAt": "2026-10-24T19:05:22.011Z",
+        "checkedAt": "2026-10-24T19:10:00.964310+00:00",
+        "ok": true
+      },
+      {
+        "id": "4d5f026741d065a413d38f5a",
+        "make": "BMW",
+        "model": "318",
+        "previousRevision": "8400dc8b-1510-4ac4-b323-e68aa7c5d88f",
+        "revision": "593c6600-189f-4630-adaf-2a5b5f754c88",
+        "updatedAt": "2026-10-24T19:05:22.119Z",
+        "checkedAt": "2026-10-24T19:10:00.977759+00:00",
+        "ok": true
+      },
+      {
+        "id": "8157c1b92bd0fb9d1a551565",
+        "make": "BMW",
+        "model": "330",
+        "previousRevision": "07789702-d6a2-40a3-80fc-d534ed30ea3e",
+        "revision": "196149d5-2b59-4636-8660-ec3e0d9b2b45",
+        "updatedAt": "2026-10-24T19:05:22.386Z",
+        "checkedAt": "2026-10-24T19:10:00.986650+00:00",
+        "ok": true
+      },
+      {
+        "id": "8f536b9ddd609476fc44387c",
+        "make": "BMW",
+        "model": "340",
+        "previousRevision": "99984763-fee2-45f4-b897-bf7b2fd2383a",
+        "revision": "3326b7a5-0b0f-4005-8475-674b0831be64",
+        "updatedAt": "2026-10-24T19:05:22.563Z",
+        "checkedAt": "2026-10-24T19:10:07.437082+00:00",
+        "ok": true
+      },
+      {
+        "id": "e6671ef8479fa2b20dc62d0b",
+        "make": "BMW",
+        "model": "420 Gran Coupé",
+        "previousRevision": "f568f4c4-1ab1-4cbc-8069-de9535d4802c",
+        "revision": "bb4a7288-df27-4573-8281-35c3d99027f4",
+        "updatedAt": "2026-10-24T19:05:22.568Z",
+        "checkedAt": "2026-10-24T19:10:07.454146+00:00",
+        "ok": true
+      },
+      {
+        "id": "aba5023cfb4691617fef7794",
+        "make": "BMW",
+        "model": "520",
+        "previousRevision": "6c41a6d5-c6be-4fbe-88ef-c8a72143d796",
+        "revision": "21553217-cb0e-4f8e-9923-ac4c48c71085",
+        "updatedAt": "2026-10-24T19:05:22.585Z",
+        "checkedAt": "2026-10-24T19:10:08.816087+00:00",
+        "ok": true
+      },
+      {
+        "id": "5da5ee9a8f467719e6dfa2e8",
+        "make": "BMW",
+        "model": "530",
+        "previousRevision": "2a63fd2a-03ef-4173-97b8-91a14042087e",
+        "revision": "c9c2a4f6-2a12-4063-bd79-8c15da656e59",
+        "updatedAt": "2026-10-24T19:05:22.632Z",
+        "checkedAt": "2026-10-24T19:10:08.871580+00:00",
+        "ok": true
+      },
+      {
+        "id": "2a445c038fc68e73e5412472",
+        "make": "BMW",
+        "model": "540",
+        "previousRevision": "0b9149e5-9079-436a-aef9-f9b6128ba6b5",
+        "revision": "add396b6-a541-4516-932f-f6c88f035218",
+        "updatedAt": "2026-10-24T19:05:22.738Z",
+        "checkedAt": "2026-10-24T19:10:12.445833+00:00",
+        "ok": true
+      },
+      {
+        "id": "83e93fb0cc3fb69ace028e16",
+        "make": "BMW",
+        "model": "M235L",
+        "previousRevision": "ea22d9e6-76d0-4d61-8d16-5d5905ef1ab0",
+        "revision": "74471e1a-e306-4789-b721-2b4d754f8b4c",
+        "updatedAt": "2026-10-24T19:05:22.780Z",
+        "checkedAt": "2026-10-24T19:10:12.461478+00:00",
+        "ok": true
+      },
+      {
+        "id": "c9bec56d00a41715daa4ea42",
+        "make": "BMW",
+        "model": "M440",
+        "previousRevision": "77b72986-5bcb-48f5-973c-c41b1a95f14f",
+        "revision": "28fbf945-5caa-43f0-b955-69f8bc58bd4b",
+        "updatedAt": "2026-10-24T19:05:22.781Z",
+        "checkedAt": "2026-10-24T19:10:12.501479+00:00",
+        "ok": true
+      },
+      {
+        "id": "ed34a43d99cc7e7b2bdc262f",
+        "make": "BMW",
+        "model": "M550",
+        "previousRevision": "b37cd6a5-44a1-422c-9770-aa217356346d",
+        "revision": "aa616f28-a4f1-4136-bc66-e9f03b524c69",
+        "updatedAt": "2026-10-24T19:05:22.791Z",
+        "checkedAt": "2026-10-24T19:10:12.534039+00:00",
+        "ok": true
+      },
+      {
+        "id": "f98c6510eb149e2dc50aeafd",
+        "make": "BMW",
+        "model": "M850",
+        "previousRevision": "9606dc12-b7bb-4a8d-8d9d-f8b763bededf",
+        "revision": "621cbc5d-9254-41cd-9dc9-f2a075abe3cf",
+        "updatedAt": "2026-10-24T19:05:22.792Z",
+        "checkedAt": "2026-10-24T19:10:20.052582+00:00",
+        "ok": true
+      },
+      {
+        "id": "366a4f538be2c77650af86b6",
+        "make": "Buick",
+        "model": "Electra Encasa",
+        "previousRevision": "44b6f595-813c-448d-a4d3-bf812052f2c0",
+        "revision": "6d7b5e1a-053f-4a33-a049-4752f939fafc",
+        "updatedAt": "2026-10-24T19:05:22.798Z",
+        "checkedAt": "2026-10-24T19:10:20.053659+00:00",
+        "ok": true
+      },
+      {
+        "id": "4d0c0b1ecb2a6c960b58dfa7",
+        "make": "Buick",
+        "model": "Electra L7",
+        "previousRevision": "fb7ebaac-902d-4344-b6f9-08c71edad5a9",
+        "revision": "2e62e799-c5a8-4bc5-b39f-cc76ce051386",
+        "updatedAt": "2026-10-24T19:05:22.799Z",
+        "checkedAt": "2026-10-24T19:10:20.104231+00:00",
+        "ok": true
+      },
+      {
+        "id": "35f8bfddf622ac6d81a29b97",
+        "make": "Buick",
+        "model": "Enclave",
+        "previousRevision": "9aedad65-9fb6-4da3-81a7-b0859a3ba9e1",
+        "revision": "3774585c-79bb-4619-a4c5-3e3c20560258",
+        "updatedAt": "2026-10-24T19:05:22.799Z",
+        "checkedAt": "2026-10-24T19:10:20.111818+00:00",
+        "ok": true
+      },
+      {
+        "id": "6e527022bdc4890362a5382d",
+        "make": "Buick",
+        "model": "Encore",
+        "previousRevision": "5cf0af9c-a3c1-4055-8979-7d11cec9a932",
+        "revision": "fa3e7b5f-b0ca-48a6-a3fd-456a56b2d576",
+        "updatedAt": "2026-10-24T19:05:22.802Z",
+        "checkedAt": "2026-10-24T19:10:24.984715+00:00",
+        "ok": true
+      },
+      {
+        "id": "e4300f5473023f465362d92a",
+        "make": "Buick",
+        "model": "Envision Plus",
+        "previousRevision": "aa5f4ce9-d5ef-4543-bbb6-50b7931594e8",
+        "revision": "aef371e8-aebd-4644-9012-be5a5103c673",
+        "updatedAt": "2026-10-24T19:05:22.806Z",
+        "checkedAt": "2026-10-24T19:10:24.985159+00:00",
+        "ok": true
+      },
+      {
+        "id": "300c5b45d9beb1babcebcc42",
+        "make": "Buick",
+        "model": "Envision S",
+        "previousRevision": "9646a2de-3f09-4ee4-9e0d-ae07dcd8e201",
+        "revision": "a0a848ab-0567-4dda-8723-3b59d34240a3",
+        "updatedAt": "2026-10-24T19:05:22.816Z",
+        "checkedAt": "2026-10-24T19:10:25.008736+00:00",
+        "ok": true
+      },
+      {
+        "id": "40154fb0db7770647f1d31f4",
+        "make": "Buick",
+        "model": "Envista",
+        "previousRevision": "473b6d8c-cf15-4e9d-9236-8ab1e026b382",
+        "revision": "46e25fde-9da8-4725-a08a-a5a8e53e18fa",
+        "updatedAt": "2026-10-24T19:05:22.822Z",
+        "checkedAt": "2026-10-24T19:10:25.131383+00:00",
+        "ok": true
+      },
+      {
+        "id": "29fe40ac2e36a1df377b0327",
+        "make": "Buick",
+        "model": "Excelle",
+        "previousRevision": "5e2efa8a-e419-4f44-a400-9703b59876bc",
+        "revision": "a1b870e5-00ff-4cab-a3ca-8731a29c711b",
+        "updatedAt": "2026-10-24T19:05:22.823Z",
+        "checkedAt": "2026-10-24T19:10:31.711382+00:00",
+        "ok": true
+      },
+      {
+        "id": "826c5efb609b88fca8063e79",
+        "make": "Buick",
+        "model": "GL8 Hybrid",
+        "previousRevision": "37036c87-c6c5-415d-b48b-591305b2cec7",
+        "revision": "66bb2344-0c05-4c81-8187-94e15350f2f3",
+        "updatedAt": "2026-10-24T19:05:22.935Z",
+        "checkedAt": "2026-10-24T19:10:31.743885+00:00",
+        "ok": true
+      },
+      {
+        "id": "c1fd9006ef8cc8303d65ce46",
+        "make": "Buick",
+        "model": "Velite 6",
+        "previousRevision": "cd0982de-7863-40ef-98ef-3e3180b07f50",
+        "revision": "7fe551f2-ce65-4840-90d4-6b67ba0f0d50",
+        "updatedAt": "2026-10-24T19:05:22.950Z",
+        "checkedAt": "2026-10-24T19:10:31.780870+00:00",
+        "ok": true
+      },
+      {
+        "id": "158df14ce7f4761202356695",
+        "make": "Buick",
+        "model": "Verano",
+        "previousRevision": "abcbfe93-c01f-489d-9046-20cf4f415468",
+        "revision": "ebc731d6-7ff2-4d98-9a42-f21aacaa06eb",
+        "updatedAt": "2026-10-24T19:05:22.956Z",
+        "checkedAt": "2026-10-24T19:10:31.793818+00:00",
+        "ok": true
+      },
+      {
+        "id": "b75f76a32fc25e1163ecd3eb",
+        "make": "BYD",
+        "model": "Destroyer 05",
+        "previousRevision": "142dd638-c497-4899-b75f-5c558d9e97ba",
+        "revision": "6c54e14f-97db-4331-9216-7ad26b4e20e6",
+        "updatedAt": "2026-10-24T19:05:22.967Z",
+        "checkedAt": "2026-10-24T19:10:39.276600+00:00",
+        "ok": true
+      },
+      {
+        "id": "a72dba8acefff295e31ceb60",
+        "make": "BYD",
+        "model": "Frigate 07",
+        "previousRevision": "e0969666-edeb-48c9-9888-e7f7e3db1d8f",
+        "revision": "67589edd-cfbc-47dd-84a0-925f92c573a9",
+        "updatedAt": "2026-10-24T19:05:22.975Z",
+        "checkedAt": "2026-10-24T19:10:39.287059+00:00",
+        "ok": true
+      },
+      {
+        "id": "6b87aa8a8afc2b489578b198",
+        "make": "BYD",
+        "model": "L DM-i",
+        "previousRevision": "e67c9269-fb26-46ca-859c-4e4fe7613b88",
+        "revision": "bd333bdc-dad7-423e-9186-ba6d7e3daf13",
+        "updatedAt": "2026-10-24T19:05:22.978Z",
+        "checkedAt": "2026-10-24T19:10:39.318266+00:00",
+        "ok": true
+      },
+      {
+        "id": "bec2628eed85933b4f94d627",
+        "make": "BYD",
+        "model": "M9",
+        "previousRevision": "29dd7b7f-68a1-4bf2-98d9-f1f7eedde087",
+        "revision": "6dc152b2-b23a-4c65-8643-0275d31b11b9",
+        "updatedAt": "2026-10-24T19:05:22.989Z",
+        "checkedAt": "2026-10-24T19:10:39.392316+00:00",
+        "ok": true
+      },
+      {
+        "id": "3a72f9755b74426f51b7b12c",
+        "make": "BYD",
+        "model": "MAX New Energy",
+        "previousRevision": "c72fb2c4-57f0-4b77-8631-732d06ff192b",
+        "revision": "482d9b96-f75e-43de-a914-033d8384229e",
+        "updatedAt": "2026-10-24T19:05:22.992Z",
+        "checkedAt": "2026-10-24T19:10:47.028437+00:00",
+        "ok": true
+      },
+      {
+        "id": "d31d7db53ed273e03bbd56f1",
+        "make": "BYD",
+        "model": "Pro New Energy",
+        "previousRevision": "0db277ec-44d6-4c8a-b7e4-38298bde716f",
+        "revision": "4b54f1f0-2b85-45a3-b041-aa06f16a0186",
+        "updatedAt": "2026-10-24T19:05:23.002Z",
+        "checkedAt": "2026-10-24T19:10:47.028948+00:00",
+        "ok": true
+      },
+      {
+        "id": "3b3c227ad7041ee1a880ff4e",
+        "make": "BYD",
+        "model": "Qin",
+        "previousRevision": "6967d5ef-9ef8-46f8-8a6c-40281a41817b",
+        "revision": "7f47a2fa-4dc1-4a9f-a0eb-2e86e5e12431",
+        "updatedAt": "2026-10-24T19:05:23.017Z",
+        "checkedAt": "2026-10-24T19:10:47.030413+00:00",
+        "ok": true
+      },
+      {
+        "id": "f2ea400c1b77ca7894ad6181",
+        "make": "BYD",
+        "model": "Qin PLUS",
+        "previousRevision": "c8fbe020-5056-4519-9c2f-a338823b839b",
+        "revision": "61db051e-bccb-4232-bfb0-eeef45b1197c",
+        "updatedAt": "2026-10-24T19:05:23.028Z",
+        "checkedAt": "2026-10-24T19:10:47.137167+00:00",
+        "ok": true
+      },
+      {
+        "id": "1d94cb0169bb1ad92224c78a",
+        "make": "BYD",
+        "model": "Sealion",
+        "previousRevision": "ded8382b-1c0b-47be-adea-01d9eaa2bdea",
+        "revision": "ff0d8b45-7989-46d8-b551-d7a34f8e55f3",
+        "updatedAt": "2026-10-24T19:05:23.081Z",
+        "checkedAt": "2026-10-24T19:10:52.013988+00:00",
+        "ok": true
+      },
+      {
+        "id": "b21f3103e1dca9fd09b7c60c",
+        "make": "BYD",
+        "model": "Song",
+        "previousRevision": "27919987-0a87-4819-a345-aaf8ce9f0d6a",
+        "revision": "bf572c98-109e-4008-97df-4f57aff24632",
+        "updatedAt": "2026-10-24T19:05:23.097Z",
+        "checkedAt": "2026-10-24T19:10:52.086936+00:00",
+        "ok": true
+      },
+      {
+        "id": "016ca7f6789f7ae320c9f8e7",
+        "make": "BYD",
+        "model": "Xia",
+        "previousRevision": "f3307c85-32e0-460c-b46c-4bb50d5de79b",
+        "revision": "7abc80ab-c136-41bf-9bff-1bdcd983c7ed",
+        "updatedAt": "2026-10-24T19:05:23.099Z",
+        "checkedAt": "2026-10-24T19:10:52.375968+00:00",
+        "ok": true
+      },
+      {
+        "id": "148fbbe060879b48039b78de",
+        "make": "Cadillac",
+        "model": "CT4",
+        "previousRevision": "20933c0c-cbd6-454c-a516-9776522deb52",
+        "revision": "cf9d2d30-8880-4041-85a4-67597ce5e354",
+        "updatedAt": "2026-10-24T19:05:23.115Z",
+        "checkedAt": "2026-10-24T19:10:52.417732+00:00",
+        "ok": true
+      },
+      {
+        "id": "5707fbf8579c6d96ecb277e2",
+        "make": "Cadillac",
+        "model": "GT4",
+        "previousRevision": "344af81c-d38c-421d-a8de-fc311ce16e19",
+        "revision": "1ed4266e-907b-4ad6-ba10-d9786de2ccec",
+        "updatedAt": "2026-10-24T19:05:23.156Z",
+        "checkedAt": "2026-10-24T19:10:56.367588+00:00",
+        "ok": true
+      },
+      {
+        "id": "18fcbb21b275476eb08450f2",
+        "make": "Cadillac",
+        "model": "XT6",
+        "previousRevision": "3e1e5c22-5b74-4db8-9e6a-ecb9b8e5ea23",
+        "revision": "e253a95a-9dff-4f7c-8719-087605d72c9d",
+        "updatedAt": "2026-10-24T19:05:23.158Z",
+        "checkedAt": "2026-10-24T19:10:56.486533+00:00",
+        "ok": true
+      },
+      {
+        "id": "fe0019c270e21142c7add101",
+        "make": "Changan",
+        "model": "UNI-V",
+        "previousRevision": "2fadcf5b-d8e6-41f9-9929-963513cde5b0",
+        "revision": "31d64862-a933-4a7e-b496-9124070b3f59",
+        "updatedAt": "2026-10-24T19:05:23.233Z",
+        "checkedAt": "2026-10-24T19:10:56.486951+00:00",
+        "ok": true
+      },
+      {
+        "id": "36050a1f4ba506db31d21ffd",
+        "make": "Cupra",
+        "model": "Leon",
+        "previousRevision": "8fd196dd-6745-4c04-9622-fd1738ca2942",
+        "revision": "de018b84-9642-425f-865d-4b3633a1f7eb",
+        "updatedAt": "2026-10-24T19:05:23.331Z",
+        "checkedAt": "2026-10-24T19:10:56.554158+00:00",
+        "ok": true
+      },
+      {
+        "id": "97bce79564cbd2165d0b7d21",
+        "make": "Deepal",
+        "model": "L07",
+        "previousRevision": "eb8bfba6-e1b1-4759-a55e-1c5b125330b2",
+        "revision": "ca2dea3e-9a0e-477e-a704-9924b441359a",
+        "updatedAt": "2026-10-24T19:05:24.367Z",
+        "checkedAt": "2026-10-24T19:11:04.005067+00:00",
+        "ok": true
+      },
+      {
+        "id": "4bd5212914a2ba333b2547b9",
+        "make": "Deepal",
+        "model": "S07",
+        "previousRevision": "501ca2bc-b70e-46d8-b939-3df2a533089d",
+        "revision": "2a5d7ee5-64ea-40e0-9acb-f431c8ae5b59",
+        "updatedAt": "2026-10-24T19:05:24.376Z",
+        "checkedAt": "2026-10-24T19:11:04.184237+00:00",
+        "ok": true
+      },
+      {
+        "id": "f12bcb025d378d72840d64c1",
+        "make": "Deepal",
+        "model": "SL03",
+        "previousRevision": "0383377a-d31d-4285-8f11-ba8886d77d39",
+        "revision": "2ad031d5-dcf9-4c76-b82c-5b25eae4e484",
+        "updatedAt": "2026-10-24T19:05:24.385Z",
+        "checkedAt": "2026-10-24T19:11:04.410531+00:00",
+        "ok": true
+      },
+      {
+        "id": "6c3b3e394d4ff656b8810340",
+        "make": "Denza",
+        "model": "N8L",
+        "previousRevision": "1a9530fd-4350-4826-857e-bac53183960b",
+        "revision": "47fbfc6a-3348-4d26-9c3d-88b0549c0c51",
+        "updatedAt": "2026-10-24T19:05:24.407Z",
+        "checkedAt": "2026-10-24T19:11:04.771523+00:00",
+        "ok": true
+      },
+      {
+        "id": "287be03af448a7a77c18e843",
+        "make": "Denza",
+        "model": "N9",
+        "previousRevision": "4a5039e0-cecb-4da8-9ae7-9fcad72d587a",
+        "revision": "3291fdb5-458a-4394-b0a6-4910dcc583ce",
+        "updatedAt": "2026-10-24T19:05:24.408Z",
+        "checkedAt": "2026-10-24T19:11:09.605914+00:00",
+        "ok": true
+      },
+      {
+        "id": "2c13f557a3d2afbf1f08e5c5",
+        "make": "Denza",
+        "model": "Z9",
+        "previousRevision": "88f78b86-8d1b-408c-9f0e-9f1903701488",
+        "revision": "58f52f2d-c2b4-417a-8dfa-fdd8c46a89b6",
+        "updatedAt": "2026-10-24T19:05:24.410Z",
+        "checkedAt": "2026-10-24T19:11:09.784339+00:00",
+        "ok": true
+      },
+      {
+        "id": "5b3f3855d6b25b16e29e7ed7",
+        "make": "EXEED",
+        "model": "ES",
+        "previousRevision": "a6675a31-cd3b-4d75-98f1-cda835cbb312",
+        "revision": "551ced74-d803-4a21-a69f-37e3cecce9b0",
+        "updatedAt": "2026-10-24T19:05:24.427Z",
+        "checkedAt": "2026-10-24T19:11:10.527017+00:00",
+        "ok": true
+      },
+      {
+        "id": "4598662ad6aa77cdc224d67b",
+        "make": "EXEED",
+        "model": "Landmark",
+        "previousRevision": "219898c0-0023-4d50-918a-16a2fa311ec2",
+        "revision": "a983cddc-4e3f-4640-922c-8e9df7fa5f57",
+        "updatedAt": "2026-10-24T19:05:24.428Z",
+        "checkedAt": "2026-10-24T19:11:10.639502+00:00",
+        "ok": true
+      },
+      {
+        "id": "a7c690edc61f10bc4897ce67",
+        "make": "EXEED",
+        "model": "Lingyun",
+        "previousRevision": "787b1f87-5d6a-4330-a01f-5637aaf90fc7",
+        "revision": "a2fd3590-41d6-4dc5-9bf3-98246d175622",
+        "updatedAt": "2026-10-24T19:05:24.431Z",
+        "checkedAt": "2026-10-24T19:11:14.574107+00:00",
+        "ok": true
+      },
+      {
+        "id": "b33afb38c6fcad54dd430655",
+        "make": "EXEED",
+        "model": "Yaoguang C-DM",
+        "previousRevision": "9ffe0126-315d-44c5-b221-4c373dd0c368",
+        "revision": "4bcda474-9e4d-4979-bf44-8847d95a72d9",
+        "updatedAt": "2026-10-24T19:05:24.434Z",
+        "checkedAt": "2026-10-24T19:11:15.432822+00:00",
+        "ok": true
+      },
+      {
+        "id": "73953a0d49490c11c9c5fe61",
+        "make": "EXEED",
+        "model": "Zhaofeng",
+        "previousRevision": "b155ff67-198f-4dcf-b58b-b2e6f1a157e7",
+        "revision": "1c10d933-2f03-44f1-83cd-cc39840bc875",
+        "updatedAt": "2026-10-24T19:05:24.435Z",
+        "checkedAt": "2026-10-24T19:11:15.551380+00:00",
+        "ok": true
+      },
+      {
+        "id": "0b3ba297b2d954b78f772a21",
+        "make": "Ford",
+        "model": "Ranger",
+        "previousRevision": "1f207c40-f925-4370-b998-067a44565ace",
+        "revision": "df8fc447-d46c-4fc9-b560-fbda921acbe3",
+        "updatedAt": "2026-10-24T19:05:24.457Z",
+        "checkedAt": "2026-10-24T19:11:15.996489+00:00",
+        "ok": true
+      },
+      {
+        "id": "ff3b59dc838354f8b489ab06",
+        "make": "Foton",
+        "model": "Tuyano",
+        "previousRevision": "ccdffdeb-e4ed-4aa0-ac74-db84b9033d94",
+        "revision": "bcdc9836-214b-4a66-823a-e49b700a9643",
+        "updatedAt": "2026-10-24T19:05:24.512Z",
+        "checkedAt": "2026-10-24T19:11:19.629246+00:00",
+        "ok": true
+      },
+      {
+        "id": "0f923f8c98ef0e8aa462314b",
+        "make": "Geely",
+        "model": "Emgrand",
+        "previousRevision": "e61ae3fd-f724-44bd-8223-ccae88f97a0a",
+        "revision": "e6142285-5e7c-4d6b-a3b6-b4a80494464f",
+        "updatedAt": "2026-10-24T19:05:24.546Z",
+        "checkedAt": "2026-10-24T19:11:19.650996+00:00",
+        "ok": true
+      },
+      {
+        "id": "a5edfedfe66bc73a8e72c178",
+        "make": "Genesis",
+        "model": "GV80",
+        "previousRevision": "be8c5e91-661c-4075-b1e4-fc4a31758d2b",
+        "revision": "23f717dd-53e3-462c-8193-73a198f16a79",
+        "updatedAt": "2026-10-24T19:05:24.594Z",
+        "checkedAt": "2026-10-24T19:11:19.672942+00:00",
+        "ok": true
+      },
+      {
+        "id": "39f825b4ff85f825ee942ca7",
+        "make": "Great Wall",
+        "model": "Fengjun 5",
+        "previousRevision": "2a0525bc-2238-43e9-8319-abb8d72529c9",
+        "revision": "a335fb45-f171-4bc4-aff2-4b718af66918",
+        "updatedAt": "2026-10-24T19:05:24.600Z",
+        "checkedAt": "2026-10-24T19:11:19.889950+00:00",
+        "ok": true
+      },
+      {
+        "id": "ccd498fac8f2eba975e6a139",
+        "make": "Great Wall",
+        "model": "Fengjun 7",
+        "previousRevision": "9925d31b-b77f-499d-9d4f-08f49ceb60f5",
+        "revision": "113bbc0a-d7f9-4bd2-9dc5-f72e7641c118",
+        "updatedAt": "2026-10-24T19:05:24.602Z",
+        "checkedAt": "2026-10-24T19:11:24.721964+00:00",
+        "ok": true
+      },
+      {
+        "id": "ce2d421abe6daa937d9808d0",
+        "make": "Great Wall",
+        "model": "King Kong Pao",
+        "previousRevision": "85f6e209-c95d-495c-8912-ae462c10bc4f",
+        "revision": "a6a9ce23-ad67-459c-a944-5ee8e1b27d30",
+        "updatedAt": "2026-10-24T19:05:24.603Z",
+        "checkedAt": "2026-10-24T19:11:24.888148+00:00",
+        "ok": true
+      },
+      {
+        "id": "66f992fd20b24655756a2caa",
+        "make": "Great Wall",
+        "model": "Pao",
+        "previousRevision": "65933275-d222-4f4a-be5b-be4ccba1e8d8",
+        "revision": "7fffa764-f73b-4b15-8e95-2e4d57f98c04",
+        "updatedAt": "2026-10-24T19:05:24.605Z",
+        "checkedAt": "2026-10-24T19:11:24.889341+00:00",
+        "ok": true
+      },
+      {
+        "id": "cc4fef25005da0dd8761045e",
+        "make": "Haima",
+        "model": "7X",
+        "previousRevision": "9ec9b749-3d0f-4597-99b7-b3a29271ddcc",
+        "revision": "a3b09d41-f33f-401a-9780-c301c738b230",
+        "updatedAt": "2026-10-24T19:05:24.623Z",
+        "checkedAt": "2026-10-24T19:11:24.912760+00:00",
+        "ok": true
+      },
+      {
+        "id": "b7570ccf9a3f35a7c5258602",
+        "make": "Haval",
+        "model": "H5",
+        "previousRevision": "bd382e52-e6ae-49f0-97ad-49fbecf984cb",
+        "revision": "3261c0a9-4cca-4fdf-87a1-29dd7832a32f",
+        "updatedAt": "2026-10-24T19:05:24.641Z",
+        "checkedAt": "2026-10-24T19:11:32.413703+00:00",
+        "ok": true
+      },
+      {
+        "id": "6bbf85eca0b3c5b141b70a0c",
+        "make": "Haval",
+        "model": "H9",
+        "previousRevision": "4f153d98-7966-407f-9112-a51a8044dd7d",
+        "revision": "aefcb506-bc0e-431e-aef6-f2456ed13e98",
+        "updatedAt": "2026-10-24T19:05:24.665Z",
+        "checkedAt": "2026-10-24T19:11:32.479693+00:00",
+        "ok": true
+      },
+      {
+        "id": "d403492196a0faafc2a9fa1f",
+        "make": "Honda",
+        "model": "UR-V",
+        "previousRevision": "04b0f363-3159-4563-92e5-6f9266391aaf",
+        "revision": "86d3e557-4849-49d2-963a-74949d1d9f68",
+        "updatedAt": "2026-10-24T19:05:24.717Z",
+        "checkedAt": "2026-10-24T19:11:32.480622+00:00",
+        "ok": true
+      },
+      {
+        "id": "b10bd853bd00a08c2f42ca43",
+        "make": "Hongqi",
+        "model": "H6",
+        "previousRevision": "f6649d07-c904-45ee-a869-3ba7760eefb7",
+        "revision": "99068b2f-9800-43b5-8b65-56e842ca32c2",
+        "updatedAt": "2026-10-24T19:05:24.763Z",
+        "checkedAt": "2026-10-24T19:11:32.494772+00:00",
+        "ok": true
+      },
+      {
+        "id": "8a40b864401d1d8f160a7990",
+        "make": "Hongqi",
+        "model": "H7",
+        "previousRevision": "9175bedb-8fa3-4651-b7ff-827cdd80ba0f",
+        "revision": "282cdd41-54be-49f0-b680-991aa68008ff",
+        "updatedAt": "2026-10-24T19:05:24.771Z",
+        "checkedAt": "2026-10-24T19:11:37.579534+00:00",
+        "ok": true
+      },
+      {
+        "id": "d0105f86c9c9ff8f0ae032ce",
+        "make": "Hongqi",
+        "model": "H9",
+        "previousRevision": "caf2f675-7de5-4f62-86ae-ac5ad45fac8e",
+        "revision": "85e475fb-413d-4719-a087-59ed8c5f6dfb",
+        "updatedAt": "2026-10-24T19:05:24.771Z",
+        "checkedAt": "2026-10-24T19:11:37.667670+00:00",
+        "ok": true
+      },
+      {
+        "id": "85fd098b434b1a7b62edfc7d",
+        "make": "Hongqi",
+        "model": "HQ9 PHEV",
+        "previousRevision": "5fbc163c-1c4a-42df-be71-d62462683804",
+        "revision": "72405fc1-8bd3-47bb-adfb-00693d53deb5",
+        "updatedAt": "2026-10-24T19:05:24.775Z",
+        "checkedAt": "2026-10-24T19:11:37.727413+00:00",
+        "ok": true
+      },
+      {
+        "id": "2bf0649debe3ac3c9accb711",
+        "make": "Hongqi",
+        "model": "HS3",
+        "previousRevision": "9ee689aa-80b5-4a85-a958-894a63fdbf0a",
+        "revision": "5c46b109-b398-4b86-8b0f-cc8f7f098a33",
+        "updatedAt": "2026-10-24T19:05:24.777Z",
+        "checkedAt": "2026-10-24T19:11:37.745930+00:00",
+        "ok": true
+      },
+      {
+        "id": "461ae860e91519550a6f86bb",
+        "make": "Hongqi",
+        "model": "HS3 PHEV",
+        "previousRevision": "5b9930cf-de01-4a4e-8ff3-56f99a0fbcee",
+        "revision": "6df7325e-c14f-40d2-8d97-bf08e4aaf716",
+        "updatedAt": "2026-10-24T19:05:24.779Z",
+        "checkedAt": "2026-10-24T19:11:46.331820+00:00",
+        "ok": true
+      },
+      {
+        "id": "4c281c8c37aa0caa59b4e325",
+        "make": "Hongqi",
+        "model": "HS5",
+        "previousRevision": "af4a4ad3-29ec-4d5e-83a8-05c96bdd9482",
+        "revision": "fb25dd6e-bc93-4cca-9571-481ab28d60a0",
+        "updatedAt": "2026-10-24T19:05:24.783Z",
+        "checkedAt": "2026-10-24T19:11:46.450832+00:00",
+        "ok": true
+      },
+      {
+        "id": "a527052923e36259f6a20150",
+        "make": "Hongqi",
+        "model": "HS7",
+        "previousRevision": "055efed9-2ede-47f6-a2f4-940e85b5a8bd",
+        "revision": "b578ba14-2c91-4312-9762-9dcad2814368",
+        "updatedAt": "2026-10-24T19:05:24.789Z",
+        "checkedAt": "2026-10-24T19:11:46.590161+00:00",
+        "ok": true
+      },
+      {
+        "id": "cd1b2926e2b1c642fba9da06",
+        "make": "Infiniti",
+        "model": "QX55",
+        "previousRevision": "0f65544b-3136-440c-bcc5-0e8f4fb0e500",
+        "revision": "f9a3760f-8d0f-4fe8-b2b8-951c9449e049",
+        "updatedAt": "2026-10-24T19:05:24.822Z",
+        "checkedAt": "2026-10-24T19:11:46.616954+00:00",
+        "ok": true
+      },
+      {
+        "id": "df85174dff503926e6ba7f9d",
+        "make": "Infiniti",
+        "model": "QX60",
+        "previousRevision": "48e1e454-d2b1-453e-aac3-08b0fda5abf2",
+        "revision": "89fa0450-cd73-4945-b36f-afdb35f62db0",
+        "updatedAt": "2026-10-24T19:05:24.823Z",
+        "checkedAt": "2026-10-24T19:11:54.126293+00:00",
+        "ok": true
+      },
+      {
+        "id": "995c341ce0499e1d74fadd57",
+        "make": "Isuzu",
+        "model": "RE-MAX Ruimai",
+        "previousRevision": "91cfc36f-c5e2-4eb7-9a86-c5f3a96536d3",
+        "revision": "1a4022ea-5982-4a68-ae09-64b3d5229a20",
+        "updatedAt": "2026-10-24T19:05:24.826Z",
+        "checkedAt": "2026-10-24T19:11:54.132405+00:00",
+        "ok": true
+      },
+      {
+        "id": "d7d962c41b246381323bf0ca",
+        "make": "IVECO",
+        "model": "Daily",
+        "previousRevision": "c2b9ef52-88f9-40d1-a71a-965bb6fede0f",
+        "revision": "7cffd719-f081-4610-9267-f48fde90e4af",
+        "updatedAt": "2026-10-24T19:05:24.826Z",
+        "checkedAt": "2026-10-24T19:11:54.133732+00:00",
+        "ok": true
+      },
+      {
+        "id": "802b8129fec2e32bf81ec21e",
+        "make": "JAC",
+        "model": "A5",
+        "previousRevision": "582906e6-2776-4da1-8ae8-c6e9d502ddd6",
+        "revision": "469dd9ff-ea19-4dbc-87f5-3563fff2e357",
+        "updatedAt": "2026-10-24T19:05:24.829Z",
+        "checkedAt": "2026-10-24T19:11:54.162728+00:00",
+        "ok": true
+      },
+      {
+        "id": "39b30ccd37d7d3369da758d4",
+        "make": "JAC",
+        "model": "Refine M3",
+        "previousRevision": "f610b3eb-9fc9-48e5-9c2d-44d7beba1a20",
+        "revision": "75968f4a-4776-4801-bf2a-35e12a30bcac",
+        "updatedAt": "2026-10-24T19:05:24.831Z",
+        "checkedAt": "2026-10-24T19:12:01.905475+00:00",
+        "ok": true
+      },
+      {
+        "id": "24f8cb22e25a0bf41e3f1137",
+        "make": "JAC",
+        "model": "Refine M4",
+        "previousRevision": "2998b969-ad8c-40a9-9ec2-0ea117652b45",
+        "revision": "287de516-8ce2-4fab-bc06-6d7af1da6bda",
+        "updatedAt": "2026-10-24T19:05:24.834Z",
+        "checkedAt": "2026-10-24T19:12:01.994003+00:00",
+        "ok": true
+      },
+      {
+        "id": "df18b6021f0f9753c07e6c9c",
+        "make": "JAC",
+        "model": "T8",
+        "previousRevision": "50b15241-391d-4f78-82d6-fb13c8fb70dc",
+        "revision": "a75a4b9f-52d1-44b4-ae08-7f62adbbd6c2",
+        "updatedAt": "2026-10-24T19:05:24.837Z",
+        "checkedAt": "2026-10-24T19:12:02.143409+00:00",
+        "ok": true
+      },
+      {
+        "id": "3227f763680de4bdded38e0a",
+        "make": "JAC",
+        "model": "Xingrui",
+        "previousRevision": "ad8e71b3-f791-4eb8-8e7d-dce9822bc4d6",
+        "revision": "25b43cef-8ee4-4455-892a-7b83d434fa34",
+        "updatedAt": "2026-10-24T19:05:24.838Z",
+        "checkedAt": "2026-10-24T19:12:02.155578+00:00",
+        "ok": true
+      },
+      {
+        "id": "77da09a54cc679b33704b63b",
+        "make": "Jaguar",
+        "model": "XEL",
+        "previousRevision": "9117043b-e4db-4a81-bae8-700a90f03988",
+        "revision": "74ade7b9-db62-4f9e-ba26-cd67c76290aa",
+        "updatedAt": "2026-10-24T19:05:24.840Z",
+        "checkedAt": "2026-10-24T19:12:07.274134+00:00",
+        "ok": true
+      },
+      {
+        "id": "bece39f73e7903abe0c827d0",
+        "make": "Jaguar",
+        "model": "XFL",
+        "previousRevision": "aeb218fb-7da8-45c2-848b-9e2ea591782c",
+        "revision": "be635e4b-859e-4f8e-8950-3a9bb3c54877",
+        "updatedAt": "2026-10-24T19:05:24.850Z",
+        "checkedAt": "2026-10-24T19:12:07.297061+00:00",
+        "ok": true
+      },
+      {
+        "id": "05fa8a2369651db0da6843e5",
+        "make": "Jeep",
+        "model": "Grand Commander",
+        "previousRevision": "66d858dd-d88c-4001-be6c-ad33b5ef6c37",
+        "revision": "27f3ca81-cb65-4b14-9ff1-35771a840691",
+        "updatedAt": "2026-10-24T19:05:24.858Z",
+        "checkedAt": "2026-10-24T19:12:07.519699+00:00",
+        "ok": true
+      },
+      {
+        "id": "5251ed1ddd969fd4b04dea54",
+        "make": "Jetour",
+        "model": "Dasheng",
+        "previousRevision": "ae6d5cab-81c2-4827-badc-f57bf58d8188",
+        "revision": "4652d1c3-6cf6-43cc-8642-8637425061aa",
+        "updatedAt": "2026-10-24T19:05:24.863Z",
+        "checkedAt": "2026-10-24T19:12:07.579987+00:00",
+        "ok": true
+      },
+      {
+        "id": "0a0714c8d23c3ae3e3db36ec",
+        "make": "Jetour",
+        "model": "Traveller",
+        "previousRevision": "77d75a15-a5c2-43a7-8f43-051dea0c042a",
+        "revision": "97df2183-6cac-4e5e-a297-6559f9619116",
+        "updatedAt": "2026-10-24T19:05:24.876Z",
+        "checkedAt": "2026-10-24T19:12:15.393619+00:00",
+        "ok": true
+      },
+      {
+        "id": "6335ef5681d024d4e5c16f01",
+        "make": "Jetour",
+        "model": "X70",
+        "previousRevision": "e525f5a2-9353-4339-9bd5-9727ef4cf8f4",
+        "revision": "ac9aa9d3-9f43-4056-9fcf-c13f9c0b8ab3",
+        "updatedAt": "2026-10-24T19:05:24.894Z",
+        "checkedAt": "2026-10-24T19:12:15.439627+00:00",
+        "ok": true
+      },
+      {
+        "id": "08a8067984c0375c2f276d0f",
+        "make": "Jetour",
+        "model": "X70 C-DM",
+        "previousRevision": "4a33328d-877a-465b-ae49-02202d3cf46b",
+        "revision": "e126844a-b0a4-461c-992e-451194e8a17d",
+        "updatedAt": "2026-10-24T19:05:24.904Z",
+        "checkedAt": "2026-10-24T19:12:15.493181+00:00",
+        "ok": true
+      },
+      {
+        "id": "f04ab1e2f9038e05a42de3f8",
+        "make": "Jetour",
+        "model": "X70 PLUS",
+        "previousRevision": "cddaa39c-6adb-4c2b-b5a2-b08c2baf10a6",
+        "revision": "aa29eb9f-0baa-4bb1-a411-0f3e1c281b95",
+        "updatedAt": "2026-10-24T19:05:24.904Z",
+        "checkedAt": "2026-10-24T19:12:15.670301+00:00",
+        "ok": true
+      },
+      {
+        "id": "377562d239e6436236d7d0ff",
+        "make": "Jetour",
+        "model": "X70 PRO",
+        "previousRevision": "f44773bf-2fd8-4cc0-a254-4109eb1247e5",
+        "revision": "2f55bec6-6b28-479c-b0bb-9115063bb7e5",
+        "updatedAt": "2026-10-24T19:05:24.960Z",
+        "checkedAt": "2026-10-24T19:12:20.577381+00:00",
+        "ok": true
+      },
+      {
+        "id": "38bd85563ae83f33135b47b1",
+        "make": "Jetour",
+        "model": "X70M",
+        "previousRevision": "476b66c3-3a4e-4f2d-a7f9-a3d3d5a5836b",
+        "revision": "3d7199c5-68c9-499b-a4b9-774a2283d3ff",
+        "updatedAt": "2026-10-24T19:05:24.961Z",
+        "checkedAt": "2026-10-24T19:12:20.604688+00:00",
+        "ok": true
+      },
+      {
+        "id": "fac68badba9a8a370736c694",
+        "make": "Jetour",
+        "model": "X70S",
+        "previousRevision": "7bc1b460-6b63-4f58-b7a4-c7ce3e3a1ea4",
+        "revision": "c18db879-1dd5-4422-bde0-326ba1233202",
+        "updatedAt": "2026-10-24T19:05:24.962Z",
+        "checkedAt": "2026-10-24T19:12:20.618987+00:00",
+        "ok": true
+      },
+      {
+        "id": "84ec4de77890aca66b0fb86d",
+        "make": "Jetour",
+        "model": "X90 PLUS",
+        "previousRevision": "cf4c0fc6-9cbb-483a-ba36-0cf24b651ad2",
+        "revision": "5f50c4a0-d7a7-4832-bde1-fd18eaf2a38a",
+        "updatedAt": "2026-10-24T19:05:24.964Z",
+        "checkedAt": "2026-10-24T19:12:20.706133+00:00",
+        "ok": true
+      },
+      {
+        "id": "56fee09a3910397ba4f032a5",
+        "make": "Jetour",
+        "model": "X90 PRO",
+        "previousRevision": "2a407dc5-25c1-4076-9f74-a5003f0e6efd",
+        "revision": "72012e1a-6886-4949-a1e7-0f35cd3c43a0",
+        "updatedAt": "2026-10-24T19:05:24.970Z",
+        "checkedAt": "2026-10-24T19:12:28.154385+00:00",
+        "ok": true
+      },
+      {
+        "id": "aa89ba40648a8c91391301e1",
+        "make": "Jetta",
+        "model": "VA7",
+        "previousRevision": "2ce2c34e-30a0-4ef4-bd19-e4cc0e771fcc",
+        "revision": "9533ea74-1d3d-4dd5-b80f-ba6999a8481e",
+        "updatedAt": "2026-10-24T19:05:24.975Z",
+        "checkedAt": "2026-10-24T19:12:28.173657+00:00",
+        "ok": true
+      },
+      {
+        "id": "c9ee81ff4d120705cc9089bd",
+        "make": "Jetta",
+        "model": "VS5",
+        "previousRevision": "9ca38d32-b3df-4235-9d12-0fe52f9e8871",
+        "revision": "b2c5281e-2199-42ab-9904-faed15f37da3",
+        "updatedAt": "2026-10-24T19:05:24.975Z",
+        "checkedAt": "2026-10-24T19:12:28.228587+00:00",
+        "ok": true
+      },
+      {
+        "id": "b20a9b3bfc870a3ad5eff8a0",
+        "make": "Jetta",
+        "model": "VS7",
+        "previousRevision": "8b6a8e35-a23b-4a3f-b4bc-e1600d1b77eb",
+        "revision": "d4b83d64-d815-425f-890d-f3a338f8636c",
+        "updatedAt": "2026-10-24T19:05:25.007Z",
+        "checkedAt": "2026-10-24T19:12:29.999008+00:00",
+        "ok": true
+      },
+      {
+        "id": "16f723aaa792aaf54643d4d2",
+        "make": "Jinbei",
+        "model": "Golden Sea Lion Classic",
+        "previousRevision": "4c4044a4-b8c2-4fc8-afc5-12410eb3dbac",
+        "revision": "328883f9-9994-4cc1-be63-4700b46c2fe8",
+        "updatedAt": "2026-10-24T19:05:25.053Z",
+        "checkedAt": "2026-10-24T19:12:33.843733+00:00",
+        "ok": true
+      },
+      {
+        "id": "e3fd3cfa9e63a8520957105d",
+        "make": "Jinbei",
+        "model": "Hiace X30L",
+        "previousRevision": "39a1ddde-8c27-4cad-b953-bd5f2e3df2d0",
+        "revision": "9edc2d01-0d19-4771-9803-2435b47e68b1",
+        "updatedAt": "2026-10-24T19:05:25.055Z",
+        "checkedAt": "2026-10-24T19:12:34.056940+00:00",
+        "ok": true
+      },
+      {
+        "id": "c0aa681dd4a3588fb3bdfa97",
+        "make": "JMC",
+        "model": "Baodian",
+        "previousRevision": "d52027b0-c9bf-4181-a46a-5aafdcfa2e45",
+        "revision": "dcb7ecb6-e3b4-4a71-9300-2b2b31c932d6",
+        "updatedAt": "2026-10-24T19:05:25.057Z",
+        "checkedAt": "2026-10-24T19:12:34.633560+00:00",
+        "ok": true
+      },
+      {
+        "id": "52a97ac8a7cf507de1f0b022",
+        "make": "JMC",
+        "model": "Tesla",
+        "previousRevision": "b9922a19-5dbc-4d94-a059-f3113630f66a",
+        "revision": "86cef81b-5c97-41a7-867b-e8edeb669766",
+        "updatedAt": "2026-10-24T19:05:25.060Z",
+        "checkedAt": "2026-10-24T19:12:35.209652+00:00",
+        "ok": true
+      },
+      {
+        "id": "8768953989c156367f82ddd2",
+        "make": "JMC",
+        "model": "Yuhu 7",
+        "previousRevision": "231dc8f8-a3ad-44f8-bec6-8d261bee7f0d",
+        "revision": "20dcbc82-c32a-4c9a-acd6-4f0f4a1d0724",
+        "updatedAt": "2026-10-24T19:05:25.061Z",
+        "checkedAt": "2026-10-24T19:12:41.994127+00:00",
+        "ok": true
+      },
+      {
+        "id": "6663e7b3a53330eeab697fd4",
+        "make": "Kia",
+        "model": "Seltos",
+        "previousRevision": "a30fcf9e-7bf9-4bd2-882e-eea4ede4ea4e",
+        "revision": "fade2a52-2a2e-43c3-aaf7-fa6f05e8afa0",
+        "updatedAt": "2026-10-24T19:05:25.100Z",
+        "checkedAt": "2026-10-24T19:12:42.055478+00:00",
+        "ok": true
+      },
+      {
+        "id": "7d6b6a3a36fa0e5d3f2eaabd",
+        "make": "Land Rover",
+        "model": "Evoque PHEV",
+        "previousRevision": "817b143e-7cd3-41b1-a38c-30a15304a672",
+        "revision": "d0f8f7b1-f831-4b4d-9534-a1bf549daf23",
+        "updatedAt": "2026-10-24T19:05:25.107Z",
+        "checkedAt": "2026-10-24T19:12:42.076889+00:00",
+        "ok": true
+      },
+      {
+        "id": "82fc1b47eff6daaae6ab6fba",
+        "make": "Land Rover",
+        "model": "Sport",
+        "previousRevision": "6c85dc23-8092-4f2b-8ba0-f91f014d1cf2",
+        "revision": "ccfe8e37-c376-4d19-98a0-9bd4d89f08ab",
+        "updatedAt": "2026-10-24T19:05:25.108Z",
+        "checkedAt": "2026-10-24T19:12:42.081115+00:00",
+        "ok": true
+      },
+      {
+        "id": "4c6c75c351f8028acf30c97d",
+        "make": "Land Rover",
+        "model": "Sport PHEV",
+        "previousRevision": "1cc18e4d-fecb-46d6-9458-8b702c293a4b",
+        "revision": "f5a0d6be-c9b1-49ba-9c4c-19b593a10c28",
+        "updatedAt": "2026-10-24T19:05:25.119Z",
+        "checkedAt": "2026-10-24T19:12:47.158831+00:00",
+        "ok": true
+      },
+      {
+        "id": "f984a1c4575b211de1906a0a",
+        "make": "Land Rover",
+        "model": "Velar",
+        "previousRevision": "80101601-5377-48ad-8977-4e59cdf26f14",
+        "revision": "03da7701-cbed-4922-bdba-0f8e6b87fbe7",
+        "updatedAt": "2026-10-24T19:05:25.121Z",
+        "checkedAt": "2026-10-24T19:12:47.197677+00:00",
+        "ok": true
+      },
+      {
+        "id": "dc8c29cdcb44577e7444722f",
+        "make": "Leapmotor",
+        "model": "C01",
+        "previousRevision": "e773ed3e-3051-4f5f-9af8-c281e8dcc0ee",
+        "revision": "251ba483-1c2a-4f2a-95ec-32e676015b0d",
+        "updatedAt": "2026-10-24T19:05:25.130Z",
+        "checkedAt": "2026-10-24T19:12:47.198383+00:00",
+        "ok": true
+      },
+      {
+        "id": "81ffde712cc5fa8d1e03c3a7",
+        "make": "Leapmotor",
+        "model": "C11",
+        "previousRevision": "7a583d81-fd06-4600-8ab5-3a76bcbd466c",
+        "revision": "6472a887-caae-4731-9c76-50f7bc5a8211",
+        "updatedAt": "2026-10-24T19:05:25.133Z",
+        "checkedAt": "2026-10-24T19:12:47.202092+00:00",
+        "ok": true
+      },
+      {
+        "id": "8e9e85e8f5e915287d74dd0a",
+        "make": "Leapmotor",
+        "model": "C16",
+        "previousRevision": "a253e877-079a-4116-bb15-a5fcd1fa4340",
+        "revision": "e724cbd7-5440-4d61-b6c2-7ac22849604b",
+        "updatedAt": "2026-10-24T19:05:25.140Z",
+        "checkedAt": "2026-10-24T19:12:53.311508+00:00",
+        "ok": true
+      },
+      {
+        "id": "3ea459a4893054859e046cc6",
+        "make": "Leapmotor",
+        "model": "D19",
+        "previousRevision": "fb0ab692-3543-42e3-ae28-49f2797c710f",
+        "revision": "91b8b025-1601-428c-8a64-338ca442854d",
+        "updatedAt": "2026-10-24T19:05:25.148Z",
+        "checkedAt": "2026-10-24T19:12:53.410541+00:00",
+        "ok": true
+      },
+      {
+        "id": "07b09173ca294984dea747d3",
+        "make": "LEVC",
+        "model": "TX",
+        "previousRevision": "8e5debdf-58a4-41c7-98a4-d4b3604eabab",
+        "revision": "274baddb-8017-4694-9da1-655560da54b8",
+        "updatedAt": "2026-10-24T19:05:25.151Z",
+        "checkedAt": "2026-10-24T19:12:53.667432+00:00",
+        "ok": true
+      },
+      {
+        "id": "a89063f75687555839b774d7",
+        "make": "Li Auto",
+        "model": "Li L6",
+        "previousRevision": "370bff70-1713-4929-bce6-1bfd7ba4c148",
+        "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+        "updatedAt": "2026-10-24T19:05:25.161Z",
+        "checkedAt": "2026-10-24T19:12:53.688219+00:00",
+        "ok": true
+      },
+      {
+        "id": "78dbeacc78cc013594ba9b11",
+        "make": "Li Auto",
+        "model": "Li ONE",
+        "previousRevision": "147e07f4-65b1-46cc-9b35-286c21580d07",
+        "revision": "32e69c49-a6f6-4666-a7ad-536896568ce3",
+        "updatedAt": "2026-10-24T19:05:25.183Z",
+        "checkedAt": "2026-10-24T19:12:58.681403+00:00",
+        "ok": true
+      },
+      {
+        "id": "c7e336628a21a7da94a5429d",
+        "make": "Lincoln",
+        "model": "Corsair",
+        "previousRevision": "3a95c46c-ccd6-474d-9aeb-95394a0f59e5",
+        "revision": "be86fe4e-bfe9-4f9c-b8b8-1f7bce733cc3",
+        "updatedAt": "2026-10-24T19:05:25.198Z",
+        "checkedAt": "2026-10-24T19:12:58.715706+00:00",
+        "ok": true
+      },
+      {
+        "id": "4a27e11f01e73d4c4c188a28",
+        "make": "Lincoln",
+        "model": "Nautilus",
+        "previousRevision": "14b3116b-d1e4-46d8-be73-ed46b1171d25",
+        "revision": "de246f02-aa26-4dfd-a681-51dc1ca230a6",
+        "updatedAt": "2026-10-24T19:05:25.208Z",
+        "checkedAt": "2026-10-24T19:12:58.750299+00:00",
+        "ok": true
+      },
+      {
+        "id": "4fecf4872b36f5f06bce2b11",
+        "make": "Lincoln",
+        "model": "Z",
+        "previousRevision": "a3495aba-f4ed-41b3-ab64-b2174e41133c",
+        "revision": "2a8b4033-8323-4fc7-b93b-2e3c9662ae9d",
+        "updatedAt": "2026-10-24T19:05:25.222Z",
+        "checkedAt": "2026-10-24T19:12:58.777752+00:00",
+        "ok": true
+      },
+      {
+        "id": "6cbe26f17b89ce5a2004a70f",
+        "make": "Lotus",
+        "model": "FOR ME",
+        "previousRevision": "9bdfb3bb-66b4-4801-89d5-46dd608cd630",
+        "revision": "56989abc-e200-45f3-b727-4a4328309b29",
+        "updatedAt": "2026-10-24T19:05:25.231Z",
+        "checkedAt": "2026-10-24T19:13:03.787871+00:00",
+        "ok": true
+      },
+      {
+        "id": "0d07ae465684edef644b83ec",
+        "make": "Lynk & Co",
+        "model": "06 EM-P",
+        "previousRevision": "cb8d9d70-59b5-4f0b-aa5c-aa61be787f03",
+        "revision": "029099c4-d706-4ef7-9ab6-b4432c760ca4",
+        "updatedAt": "2026-10-24T19:05:25.233Z",
+        "checkedAt": "2026-10-24T19:13:03.825103+00:00",
+        "ok": true
+      },
+      {
+        "id": "4d9d26cf4cba172e4cfb4379",
+        "make": "Lynk & Co",
+        "model": "07 EM-P",
+        "previousRevision": "037f160e-be3d-4496-9b4f-89e484920c9d",
+        "revision": "bf4ff5ce-8c78-4ee8-b14b-3ecb852dab52",
+        "updatedAt": "2026-10-24T19:05:25.235Z",
+        "checkedAt": "2026-10-24T19:13:03.882157+00:00",
+        "ok": true
+      },
+      {
+        "id": "801a4c63ac3e6a228725000e",
+        "make": "Lynk & Co",
+        "model": "09 EM-P",
+        "previousRevision": "bc5084a5-9080-4f99-8db0-b64806d23a7d",
+        "revision": "64be7fea-8dac-45b3-a5db-2296d136103d",
+        "updatedAt": "2026-10-24T19:05:25.238Z",
+        "checkedAt": "2026-10-24T19:13:03.943803+00:00",
+        "ok": true
+      },
+      {
+        "id": "ac6ce3ba46ff551aba44f0b9",
+        "make": "Lynk & Co",
+        "model": "900",
+        "previousRevision": "a00432b9-a4b7-4c0e-a805-1dd8a9fd8351",
+        "revision": "65f7659a-ca84-46e1-92a5-781ab0c02acb",
+        "updatedAt": "2026-10-24T19:05:25.239Z",
+        "checkedAt": "2026-10-24T19:13:08.803833+00:00",
+        "ok": true
+      },
+      {
+        "id": "969c0071a02b6200a0a8dc51",
+        "make": "Maxus",
+        "model": "D60",
+        "previousRevision": "67128aaa-cb2f-4c22-b127-779903a8ed3d",
+        "revision": "e7833ba2-dc6e-48d0-baa5-7a1f3fd81ac0",
+        "updatedAt": "2026-10-24T19:05:25.245Z",
+        "checkedAt": "2026-10-24T19:13:08.855077+00:00",
+        "ok": true
+      },
+      {
+        "id": "dd2084afaeab6a973df821dc",
+        "make": "Maxus",
+        "model": "D90 Pro",
+        "previousRevision": "49a0a71c-9dce-4e58-80e2-94fad923c78b",
+        "revision": "4657e641-50ab-4827-a48f-93d83a14a075",
+        "updatedAt": "2026-10-24T19:05:25.246Z",
+        "checkedAt": "2026-10-24T19:13:08.856722+00:00",
+        "ok": true
+      },
+      {
+        "id": "dd80e303fc39b97934c3ec6b",
+        "make": "Maxus",
+        "model": "Dajia 7",
+        "previousRevision": "e6cbd82e-744d-4be2-b15b-a1b7b28bf55c",
+        "revision": "49e4a261-963f-4044-a2e7-67cf2fcb55b4",
+        "updatedAt": "2026-10-24T19:05:25.246Z",
+        "checkedAt": "2026-10-24T19:13:08.862429+00:00",
+        "ok": true
+      },
+      {
+        "id": "8cc75f6345644208b6308bca",
+        "make": "Maxus",
+        "model": "G10",
+        "previousRevision": "76f7c907-d253-4ec5-93ae-e420ef81d4cd",
+        "revision": "c3a36da3-3bf3-4414-9764-d8a0fc3f853b",
+        "updatedAt": "2026-10-24T19:05:25.248Z",
+        "checkedAt": "2026-10-24T19:13:14.637287+00:00",
+        "ok": true
+      },
+      {
+        "id": "1344d4a606e42845b587ca8b",
+        "make": "Maxus",
+        "model": "G50",
+        "previousRevision": "d335156b-62ea-4c71-9084-e653bc31c340",
+        "revision": "59e45c1a-496d-48fd-8d9e-a2c0322d6f07",
+        "updatedAt": "2026-10-24T19:05:25.253Z",
+        "checkedAt": "2026-10-24T19:13:14.731912+00:00",
+        "ok": true
+      },
+      {
+        "id": "d7df47880983d4afb993461c",
+        "make": "Maxus",
+        "model": "T60",
+        "previousRevision": "2e2c4623-f69c-46b8-b5c8-c742cb2f49ee",
+        "revision": "0fc3de27-e1e5-4680-895b-26844325034f",
+        "updatedAt": "2026-10-24T19:05:25.267Z",
+        "checkedAt": "2026-10-24T19:13:14.806224+00:00",
+        "ok": true
+      },
+      {
+        "id": "099ab8c74b67bdadbec52d50",
+        "make": "Maxus",
+        "model": "Territory",
+        "previousRevision": "722c383d-dfe5-490b-81a7-ac6552f1589f",
+        "revision": "f77bc214-5312-412a-b57f-0f8c01c38541",
+        "updatedAt": "2026-10-24T19:05:25.268Z",
+        "checkedAt": "2026-10-24T19:13:15.697689+00:00",
+        "ok": true
+      },
+      {
+        "id": "32ef8b75a1fb30a413d48005",
+        "make": "Mazda",
+        "model": "CX-50",
+        "previousRevision": "8b90aae4-0206-432b-b873-292b6b62f62b",
+        "revision": "5bb59eb1-4fdf-4a27-97af-a91dfd83fe4a",
+        "updatedAt": "2026-10-24T19:05:25.285Z",
+        "checkedAt": "2026-10-24T19:13:19.702927+00:00",
+        "ok": true
+      },
+      {
+        "id": "5a8af7d72b32bdf5cf53971e",
+        "make": "Mercedes-Benz",
+        "model": "T-Klasse",
+        "previousRevision": "04a55198-4e78-4f69-b199-7a3908e4bce1",
+        "revision": "ae0588f9-3b79-4f2d-8c09-72422da5edb6",
+        "updatedAt": "2026-10-24T19:05:25.301Z",
+        "checkedAt": "2026-10-24T19:13:19.730362+00:00",
+        "ok": true
+      },
+      {
+        "id": "b7b66fc3016a48fe61f8e1c0",
+        "make": "MG",
+        "model": "MG5",
+        "previousRevision": "847e1a6d-8079-40cd-ad1c-054250fa801c",
+        "revision": "9dc4bcf2-5eb3-4de6-a93c-8e60556678ce",
+        "updatedAt": "2026-10-24T19:05:25.307Z",
+        "checkedAt": "2026-10-24T19:13:19.939344+00:00",
+        "ok": true
+      },
+      {
+        "id": "7130a153f3fb03e030eb0c94",
+        "make": "MG",
+        "model": "MG6",
+        "previousRevision": "395e88b0-79e1-429c-bffb-ba459d5886b8",
+        "revision": "b6590639-6739-4bbf-9c4e-2cf604f387fd",
+        "updatedAt": "2026-10-24T19:05:25.325Z",
+        "checkedAt": "2026-10-24T19:13:20.729417+00:00",
+        "ok": true
+      },
+      {
+        "id": "d37fac4885648fbef4f16629",
+        "make": "MG",
+        "model": "MG7",
+        "previousRevision": "c3a83e7a-4a63-46f0-b698-edd5b9dfa915",
+        "revision": "ac0d8adf-d55e-4e40-a9f4-ea887f229b3c",
+        "updatedAt": "2026-10-24T19:05:25.338Z",
+        "checkedAt": "2026-10-24T19:13:27.200334+00:00",
+        "ok": true
+      },
+      {
+        "id": "b726f2f19d3ba44888882c95",
+        "make": "MINI",
+        "model": "Countryman",
+        "previousRevision": "ce750f06-5878-4271-9c57-ae845f9f4763",
+        "revision": "251ebef6-2c6f-4ec6-9c3c-8e145f32844c",
+        "updatedAt": "2026-10-24T19:05:25.350Z",
+        "checkedAt": "2026-10-24T19:13:27.358539+00:00",
+        "ok": true
+      },
+      {
+        "id": "7109a138340a2aa0d23dfe34",
+        "make": "Nissan",
+        "model": "N6",
+        "previousRevision": "7626f033-279f-438e-9ca2-300725666fc1",
+        "revision": "ee43de46-c44f-4019-a827-a57262f7c434",
+        "updatedAt": "2026-10-24T19:05:25.417Z",
+        "checkedAt": "2026-10-24T19:13:27.526013+00:00",
+        "ok": true
+      },
+      {
+        "id": "39b4fe64aa2abebf20a330bf",
+        "make": "Nissan",
+        "model": "SYLPHY",
+        "previousRevision": "00a5385a-8a71-470f-8623-742395ea8e03",
+        "revision": "a14fae5e-86f6-421e-b34d-d1a73ab5392c",
+        "updatedAt": "2026-10-24T19:05:25.422Z",
+        "checkedAt": "2026-10-24T19:13:27.615417+00:00",
+        "ok": true
+      },
+      {
+        "id": "cc0c81a523e1925098f9d13b",
+        "make": "Nissan",
+        "model": "TEANA",
+        "previousRevision": "1b8abec3-27a9-4c78-a0f9-702b2c76a07c",
+        "revision": "6a92df5f-8ed6-473b-9116-d0f8753cc75c",
+        "updatedAt": "2026-10-24T19:05:25.437Z",
+        "checkedAt": "2026-10-24T19:13:32.316597+00:00",
+        "ok": true
+      },
+      {
+        "id": "33b07373a848c51141c533ff",
+        "make": "ORA",
+        "model": "Black Cat",
+        "previousRevision": "df3aa5eb-03eb-40ce-ab38-a372f19560ad",
+        "revision": "33b8d948-0dba-43f7-b8bc-eccbed6dc0e4",
+        "updatedAt": "2026-10-24T19:05:25.449Z",
+        "checkedAt": "2026-10-24T19:13:32.470160+00:00",
+        "ok": true
+      },
+      {
+        "id": "2618386c81addd9a07b930c4",
+        "make": "Roewe",
+        "model": "D7",
+        "previousRevision": "41f86f3f-0dd0-4326-a3f0-a76280d89f84",
+        "revision": "75bc5bd5-a6ed-45ad-82d7-cf5e115346d7",
+        "updatedAt": "2026-10-24T19:05:25.500Z",
+        "checkedAt": "2026-10-24T19:13:32.512294+00:00",
+        "ok": true
+      },
+      {
+        "id": "21d5022ab16c5b92ed06ac7a",
+        "make": "Roewe",
+        "model": "i5",
+        "previousRevision": "ef35df26-0d7d-49fc-8800-3a4631571e8e",
+        "revision": "fbf8cc50-79c0-4416-9c02-923d46023eb7",
+        "updatedAt": "2026-10-24T19:05:25.503Z",
+        "checkedAt": "2026-10-24T19:13:33.175949+00:00",
+        "ok": true
+      },
+      {
+        "id": "3f449d2bb6628927d76a85a6",
+        "make": "Roewe",
+        "model": "i6 MAX",
+        "previousRevision": "77e712cf-901b-462c-9fff-dc63f6f507a3",
+        "revision": "fbace4b2-5d9e-4b3a-bc0e-cc0eb19ef662",
+        "updatedAt": "2026-10-24T19:05:25.518Z",
+        "checkedAt": "2026-10-24T19:13:37.548531+00:00",
+        "ok": true
+      },
+      {
+        "id": "d8f4de6eb629cbcd01bc8018",
+        "make": "Roewe",
+        "model": "iMAX8",
+        "previousRevision": "973d9484-b974-45ed-bbc9-1d5dffabf62a",
+        "revision": "d5c73dfd-2749-4bff-81f1-ec8bfb50041f",
+        "updatedAt": "2026-10-24T19:05:25.522Z",
+        "checkedAt": "2026-10-24T19:13:37.649027+00:00",
+        "ok": true
+      },
+      {
+        "id": "3c471eb15d92deddeaabcab5",
+        "make": "Roewe",
+        "model": "iMAX8 New Energy",
+        "previousRevision": "c4ceac91-51d9-4002-b1f8-d874bd71521a",
+        "revision": "7fe9ed0b-f135-4689-adb3-36d29335d751",
+        "updatedAt": "2026-10-24T19:05:25.526Z",
+        "checkedAt": "2026-10-24T19:13:37.679400+00:00",
+        "ok": true
+      },
+      {
+        "id": "556d16ba9438e5c1be95d900",
+        "make": "Roewe",
+        "model": "M7 DMH",
+        "previousRevision": "14a84cbe-42c6-4f10-ac3d-4376e084945c",
+        "revision": "f3f90001-7161-43f8-84f8-91f111622cb9",
+        "updatedAt": "2026-10-24T19:05:25.527Z",
+        "checkedAt": "2026-10-24T19:13:37.700057+00:00",
+        "ok": true
+      },
+      {
+        "id": "f1b2c39de45fc70e5d169f52",
+        "make": "Roewe",
+        "model": "RX3",
+        "previousRevision": "f3cef214-7919-4ef9-8b9a-7e3f23dd5109",
+        "revision": "637e39a3-89a2-4f39-a4bd-f6a73e994d39",
+        "updatedAt": "2026-10-24T19:05:25.528Z",
+        "checkedAt": "2026-10-24T19:13:45.812377+00:00",
+        "ok": true
+      },
+      {
+        "id": "4b785ac7bcd7981240bbb818",
+        "make": "Roewe",
+        "model": "RX5",
+        "previousRevision": "3d539fb4-9eb6-4417-83c5-d2f72cd6a2bd",
+        "revision": "7d9957db-c608-4821-854d-59622777645b",
+        "updatedAt": "2026-10-24T19:05:25.528Z",
+        "checkedAt": "2026-10-24T19:13:45.893109+00:00",
+        "ok": true
+      },
+      {
+        "id": "f0d73f96add2a025bff997c2",
+        "make": "Roewe",
+        "model": "RX5 MAX",
+        "previousRevision": "a614a485-b658-4624-924f-bb562755f357",
+        "revision": "ecaca1e3-2cae-45bc-b76b-e3a25719639c",
+        "updatedAt": "2026-10-24T19:05:25.534Z",
+        "checkedAt": "2026-10-24T19:13:46.043117+00:00",
+        "ok": true
+      },
+      {
+        "id": "836ab4fa09e1a319a6f34933",
+        "make": "Roewe",
+        "model": "RX5 New Energy",
+        "previousRevision": "14125bb8-eeef-4a57-8753-ed5cc7a4e2b3",
+        "revision": "2a51ab64-6b9b-4754-923c-df8184d8c917",
+        "updatedAt": "2026-10-24T19:05:25.536Z",
+        "checkedAt": "2026-10-24T19:13:46.072805+00:00",
+        "ok": true
+      },
+      {
+        "id": "f8c179fad674381164eacbed",
+        "make": "SHANGJIE",
+        "model": "H5",
+        "previousRevision": "9221806e-1fc7-4e45-9af3-54b4672b12b9",
+        "revision": "00039081-55c8-4e99-9ee8-193b722f808b",
+        "updatedAt": "2026-10-24T19:05:25.540Z",
+        "checkedAt": "2026-10-24T19:13:52.506308+00:00",
+        "ok": true
+      },
+      {
+        "id": "441e2d84b5c50b8f685639b2",
+        "make": "Soueast",
+        "model": "DX8S",
+        "previousRevision": "17462900-529d-4266-b401-71ca7b594dfb",
+        "revision": "25725268-bc0e-4bb3-b49a-a3c4860747f8",
+        "updatedAt": "2026-10-24T19:05:25.543Z",
+        "checkedAt": "2026-10-24T19:13:53.062496+00:00",
+        "ok": true
+      },
+      {
+        "id": "c807041d2c48ba016abf156b",
+        "make": "Tank",
+        "model": "300",
+        "previousRevision": "1eab458b-e197-4a46-a194-e19e7402fabe",
+        "revision": "92eeb162-732e-441a-889a-909cc3306986",
+        "updatedAt": "2026-10-24T19:05:25.550Z",
+        "checkedAt": "2026-10-24T19:13:53.075704+00:00",
+        "ok": true
+      },
+      {
+        "id": "805eff899dc576122f139a51",
+        "make": "Tank",
+        "model": "300 New Energy",
+        "previousRevision": "d283a3fb-c91a-48e8-8ba9-1345d98a0e9e",
+        "revision": "e53662b5-145c-4ec0-9f8e-3c93db7be616",
+        "updatedAt": "2026-10-24T19:05:25.580Z",
+        "checkedAt": "2026-10-24T19:13:53.174005+00:00",
+        "ok": true
+      },
+      {
+        "id": "eb68db5e03dac4df5c7ea6d4",
+        "make": "Tank",
+        "model": "400",
+        "previousRevision": "8b220d1b-d489-493f-aa0e-a4298c99535d",
+        "revision": "9cd37ad7-2582-47b5-b236-e14f49213767",
+        "updatedAt": "2026-10-24T19:05:25.581Z",
+        "checkedAt": "2026-10-24T19:13:57.488071+00:00",
+        "ok": true
+      },
+      {
+        "id": "5582b0a34f30c6b7d7f12f47",
+        "make": "Tank",
+        "model": "400 New Energy",
+        "previousRevision": "f906f0f1-c0b5-49c0-b65c-115bb14988cc",
+        "revision": "08fa41e1-cec7-42ec-aed2-d424b82503e8",
+        "updatedAt": "2026-10-24T19:05:25.582Z",
+        "checkedAt": "2026-10-24T19:13:57.636442+00:00",
+        "ok": true
+      },
+      {
+        "id": "4262e572a4e01c2d072ae920",
+        "make": "Tank",
+        "model": "500 New Energy",
+        "previousRevision": "5460751f-3f2e-4f05-8040-53d79ce4b7a1",
+        "revision": "28cf1a07-cbb9-4f82-b07b-dd0d2195c1eb",
+        "updatedAt": "2026-10-24T19:05:25.595Z",
+        "checkedAt": "2026-10-24T19:13:57.730306+00:00",
+        "ok": true
+      },
+      {
+        "id": "c857fc96af3004c8c3fd049d",
+        "make": "Toyota",
+        "model": "Alphard",
+        "previousRevision": "436f023e-91e0-45c4-933c-1da825123690",
+        "revision": "94f3b681-6693-4fbc-b6b7-b251b448498d",
+        "updatedAt": "2026-10-24T19:05:25.606Z",
+        "checkedAt": "2026-10-24T19:13:57.887031+00:00",
+        "ok": true
+      },
+      {
+        "id": "5823d9c84f21caf71f28d0a0",
+        "make": "Toyota",
+        "model": "Avalon",
+        "previousRevision": "d3f3bcea-dfa2-46cb-b515-4db50987771c",
+        "revision": "e8c9370e-d1ac-4d9a-8d40-b90e92c23388",
+        "updatedAt": "2026-10-24T19:05:25.618Z",
+        "checkedAt": "2026-10-24T19:14:04.156382+00:00",
+        "ok": true
+      },
+      {
+        "id": "cc1dfdb7855d8af2e392983e",
+        "make": "Toyota",
+        "model": "Granvia",
+        "previousRevision": "ea14898c-111a-498c-8c12-0bb44f51b76d",
+        "revision": "bd3c8f4d-b200-476b-ac8a-717936b62cb7",
+        "updatedAt": "2026-10-24T19:05:25.672Z",
+        "checkedAt": "2026-10-24T19:14:04.185888+00:00",
+        "ok": true
+      },
+      {
+        "id": "3d870d7bf91ee7fe069940c7",
+        "make": "Toyota",
+        "model": "Harrier",
+        "previousRevision": "fd6453bb-249f-4941-85e9-239391874814",
+        "revision": "dad782d9-5428-47bc-9fb5-e476603fa4ba",
+        "updatedAt": "2026-10-24T19:05:25.681Z",
+        "checkedAt": "2026-10-24T19:14:07.051576+00:00",
+        "ok": true
+      },
+      {
+        "id": "d4d8f0968460083e5ea3ccf2",
+        "make": "Toyota",
+        "model": "IZOA",
+        "previousRevision": "c04efad7-3edd-4a70-929b-98c101f382b0",
+        "revision": "9faa9e23-8505-47c1-9af0-56a45299c7df",
+        "updatedAt": "2026-10-24T19:05:25.682Z",
+        "checkedAt": "2026-10-24T19:14:07.053363+00:00",
+        "ok": true
+      },
+      {
+        "id": "eb7fc7f66d663debd5a217d9",
+        "make": "Toyota",
+        "model": "Levin",
+        "previousRevision": "ee385e36-ca61-426c-bdd0-7ec46a271412",
+        "revision": "ab4ac2a9-8a9a-4ce7-8e90-3500637a5812",
+        "updatedAt": "2026-10-24T19:05:25.688Z",
+        "checkedAt": "2026-10-24T19:14:09.483004+00:00",
+        "ok": true
+      },
+      {
+        "id": "06ef03d61533b2619f2cf6b7",
+        "make": "Toyota",
+        "model": "Vellfire",
+        "previousRevision": "c0747ecf-af24-4638-b8f3-60a09cb39878",
+        "revision": "2d63fc8d-436f-4269-8504-e4acd0fa9876",
+        "updatedAt": "2026-10-24T19:05:25.726Z",
+        "checkedAt": "2026-10-24T19:14:09.552195+00:00",
+        "ok": true
+      },
+      {
+        "id": "b5a2bab3d56cd5a40727c94a",
+        "make": "Toyota",
+        "model": "Venza",
+        "previousRevision": "394c0f3e-4ec1-485e-9f53-dbeb3fa43cb1",
+        "revision": "5366ee0f-b98b-4eb3-b375-16de1fc598b4",
+        "updatedAt": "2026-10-24T19:05:25.737Z",
+        "checkedAt": "2026-10-24T19:14:09.760653+00:00",
+        "ok": true
+      },
+      {
+        "id": "84a46b5dc067e7d89ffc3988",
+        "make": "Toyota",
+        "model": "Wildlander",
+        "previousRevision": "4d9a04e6-3e84-41d6-abb3-949a7e50ff3c",
+        "revision": "91fbb736-a1df-4e40-936b-58403f76b949",
+        "updatedAt": "2026-10-24T19:05:25.743Z",
+        "checkedAt": "2026-10-24T19:14:09.854746+00:00",
+        "ok": true
+      },
+      {
+        "id": "124d932936e8b0c348fac0f5",
+        "make": "Venucia",
+        "model": "D60",
+        "previousRevision": "b3e56402-1a2f-49ff-8b36-0657c318f370",
+        "revision": "d4deeccb-1a90-4aca-a014-30ae89fa0830",
+        "updatedAt": "2026-10-24T19:05:25.772Z",
+        "checkedAt": "2026-10-24T19:14:16.347077+00:00",
+        "ok": true
+      },
+      {
+        "id": "da253b901a6bc06114bcec27",
+        "make": "Venucia",
+        "model": "V DD-i",
+        "previousRevision": "5a2f48d0-e71e-495e-ae25-98bb59b963b8",
+        "revision": "e5870076-66d6-4931-b151-89a079ae4ce1",
+        "updatedAt": "2026-10-24T19:05:25.779Z",
+        "checkedAt": "2026-10-24T19:14:16.503303+00:00",
+        "ok": true
+      },
+      {
+        "id": "b8099d59bbec446374700d10",
+        "make": "Volkswagen",
+        "model": "Lavida",
+        "previousRevision": "41e6d0a0-1935-4cf9-a95d-a7e15b1a8640",
+        "revision": "a207373b-4e2f-44d3-bfbc-7fa68b8a21f0",
+        "updatedAt": "2026-10-24T19:05:25.805Z",
+        "checkedAt": "2026-10-24T19:14:16.667523+00:00",
+        "ok": true
+      },
+      {
+        "id": "2a104b5cc84d1c6950a6ebef",
+        "make": "Volkswagen",
+        "model": "Sagitar",
+        "previousRevision": "f2544e37-7dac-4c2d-8dc3-dffb9c253b41",
+        "revision": "ada50b4b-a376-4156-95b2-91efc705f2f4",
+        "updatedAt": "2026-10-24T19:05:25.883Z",
+        "checkedAt": "2026-10-24T19:14:16.668545+00:00",
+        "ok": true
+      },
+      {
+        "id": "7f7ffbd12b7d7e112b47a0d1",
+        "make": "Volkswagen",
+        "model": "T6 andere",
+        "previousRevision": "0ede1b5d-474c-4ce8-9d51-f5facb0ed380",
+        "revision": "7fdb8611-735e-4279-8d8a-ddaa0116d215",
+        "updatedAt": "2026-10-24T19:05:25.908Z",
+        "checkedAt": "2026-10-24T19:14:21.470905+00:00",
+        "ok": true
+      },
+      {
+        "id": "7e0410c67d4f4773b157d1ba",
+        "make": "Volkswagen",
+        "model": "T6 Transporter",
+        "previousRevision": "60c4eb0c-d3fd-41b2-a267-108fdad7bcf4",
+        "revision": "dcd27b29-1fc4-4084-b07b-58ead3fd1add",
+        "updatedAt": "2026-10-24T19:05:25.910Z",
+        "checkedAt": "2026-10-24T19:14:21.513931+00:00",
+        "ok": true
+      },
+      {
+        "id": "0e4827bb9d7d9ba3fdf13322",
+        "make": "Volkswagen",
+        "model": "Talagon",
+        "previousRevision": "ee721a3e-c9fa-4f1e-a17c-d49d248af6e1",
+        "revision": "5b406be1-d7bb-41d9-8609-28d26663ae76",
+        "updatedAt": "2026-10-24T19:05:25.938Z",
+        "checkedAt": "2026-10-24T19:14:21.620254+00:00",
+        "ok": true
+      },
+      {
+        "id": "d29372d7e458e25d4f8f93b7",
+        "make": "Volkswagen",
+        "model": "Tavendor",
+        "previousRevision": "6d9d6b63-5643-43ce-a793-fe283594fac8",
+        "revision": "5e5b4b4a-4778-4dd3-92e5-6b6ac59f906a",
+        "updatedAt": "2026-10-24T19:05:25.945Z",
+        "checkedAt": "2026-10-24T19:14:21.669097+00:00",
+        "ok": true
+      },
+      {
+        "id": "b0e3eb309c96f552b656f8b4",
+        "make": "Volkswagen",
+        "model": "Tiguan Allspace",
+        "previousRevision": "105d37ba-4b77-4863-b3a6-a4be8a6d169d",
+        "revision": "db6723e4-3b2f-41b8-8973-47d13128baa0",
+        "updatedAt": "2026-10-24T19:05:25.999Z",
+        "checkedAt": "2026-10-24T19:14:26.510487+00:00",
+        "ok": true
+      },
+      {
+        "id": "71bedd4c24f61f2ecd3f2556",
+        "make": "Voyah",
+        "model": "Dreamer",
+        "previousRevision": "78a0dab5-e51a-49df-8e2c-8b8527a32b3c",
+        "revision": "ff444401-7086-4361-a0d8-21d457c87c44",
+        "updatedAt": "2026-10-24T19:05:26.191Z",
+        "checkedAt": "2026-10-24T19:14:26.620297+00:00",
+        "ok": true
+      },
+      {
+        "id": "ceebc7d4d7f6bc9e8cb01920",
+        "make": "Voyah",
+        "model": "Passion L",
+        "previousRevision": "30981da8-7c16-45f2-a97d-24039bd232bb",
+        "revision": "c10f527c-4855-4a59-986b-f817ce8ecb4e",
+        "updatedAt": "2026-10-24T19:05:26.200Z",
+        "checkedAt": "2026-10-24T19:14:26.671374+00:00",
+        "ok": true
+      },
+      {
+        "id": "15b87627be3123cbfd7b0178",
+        "make": "Voyah",
+        "model": "Taishan",
+        "previousRevision": "49f03185-93ee-4c0f-bf8e-4d997f002301",
+        "revision": "9499d001-d772-4e0a-85c0-da36904a4d9b",
+        "updatedAt": "2026-10-24T19:05:26.201Z",
+        "checkedAt": "2026-10-24T19:14:26.744008+00:00",
+        "ok": true
+      },
+      {
+        "id": "79fa9660de547f8b35ffc1e3",
+        "make": "Voyah",
+        "model": "Taishan X8",
+        "previousRevision": "1e4ae2f6-bdf3-44f6-92ee-e4241f2d5aae",
+        "revision": "9d775b1c-8e15-40fa-a777-4224f7147105",
+        "updatedAt": "2026-10-24T19:05:26.202Z",
+        "checkedAt": "2026-10-24T19:14:31.688669+00:00",
+        "ok": true
+      },
+      {
+        "id": "12a184452f68cc378a0aeb28",
+        "make": "WEY",
+        "model": "Lanshan",
+        "previousRevision": "94a5bb54-27e5-4c6f-9d75-9d37fa71226b",
+        "revision": "5c4ad076-2044-4164-9812-cb4d7ffa767a",
+        "updatedAt": "2026-10-24T19:05:26.207Z",
+        "checkedAt": "2026-10-24T19:14:31.706683+00:00",
+        "ok": true
+      },
+      {
+        "id": "614559cc673e61586fc3d694",
+        "make": "Wuling",
+        "model": "Hongguang",
+        "previousRevision": "ad347158-6b7f-4367-8587-2e37a8900194",
+        "revision": "9eacb5c9-a443-46ed-8a45-0d03e63c382d",
+        "updatedAt": "2026-10-24T19:05:26.225Z",
+        "checkedAt": "2026-10-24T19:14:31.730071+00:00",
+        "ok": true
+      },
+      {
+        "id": "5b04489cdf44baae9298178f",
+        "make": "Wuling",
+        "model": "Hongguang V",
+        "previousRevision": "74b5eceb-50c7-4802-b0a9-037ea104552d",
+        "revision": "5a999631-d444-4828-88f8-f84d0c795511",
+        "updatedAt": "2026-10-24T19:05:26.236Z",
+        "checkedAt": "2026-10-24T19:14:31.827049+00:00",
+        "ok": true
+      },
+      {
+        "id": "060c3c903120d86402e83d54",
+        "make": "Wuling",
+        "model": "Rongguang",
+        "previousRevision": "612410df-0235-4cec-ad25-6d4435ca963e",
+        "revision": "dd4108c2-377a-4caf-b18a-9530a531b1a8",
+        "updatedAt": "2026-10-24T19:05:26.276Z",
+        "checkedAt": "2026-10-24T19:14:37.874936+00:00",
+        "ok": true
+      },
+      {
+        "id": "76994bfd1cd6a90cf5c40bb8",
+        "make": "Wuling",
+        "model": "Rongguang S",
+        "previousRevision": "b4d2fad7-d85a-4817-857f-eb2d93b27a34",
+        "revision": "1e964c69-625f-40f9-8a70-49e99f60fbeb",
+        "updatedAt": "2026-10-24T19:05:26.277Z",
+        "checkedAt": "2026-10-24T19:14:38.028933+00:00",
+        "ok": true
+      },
+      {
+        "id": "ea1254eba8a04c7b17252110",
+        "make": "Wuling",
+        "model": "Xing Chi",
+        "previousRevision": "a47803cc-4aff-46c7-86ea-ce0ef52e5f87",
+        "revision": "916bffdc-e6af-4ebe-a2ab-7b2a09f25bcd",
+        "updatedAt": "2026-10-24T19:05:26.279Z",
+        "checkedAt": "2026-10-24T19:14:39.417319+00:00",
+        "ok": true
+      },
+      {
+        "id": "27531cb9dd83ca30708fbfbb",
+        "make": "Wuling",
+        "model": "Xingguang",
+        "previousRevision": "fcf05180-7c48-4f89-afc2-8700037a009a",
+        "revision": "924f4103-e16d-48ce-942f-94e12feda4f6",
+        "updatedAt": "2026-10-24T19:05:26.281Z",
+        "checkedAt": "2026-10-24T19:14:39.419745+00:00",
+        "ok": true
+      },
+      {
+        "id": "969630d3f96ab0cd2ade9112",
+        "make": "Wuling",
+        "model": "Xingguang 560",
+        "previousRevision": "c05cd076-61ba-4925-940a-5696467c412b",
+        "revision": "423dde11-f993-4b93-bda3-eaecb11630b4",
+        "updatedAt": "2026-10-24T19:05:26.284Z",
+        "checkedAt": "2026-10-24T19:14:42.698609+00:00",
+        "ok": true
+      },
+      {
+        "id": "963d9bf6c7c9331eeb7dfeaa",
+        "make": "Wuling",
+        "model": "Xingguang 560 New Energy",
+        "previousRevision": "845eabd6-a624-4bb1-8ed4-d2c2bc320391",
+        "revision": "d7714f7f-89cd-4dab-944c-517e58b9fc5b",
+        "updatedAt": "2026-10-24T19:05:26.284Z",
+        "checkedAt": "2026-10-24T19:14:43.299279+00:00",
+        "ok": true
+      },
+      {
+        "id": "85c7e418c3c3fb97b998c114",
+        "make": "Wuling",
+        "model": "Xingguang 730 New Energy",
+        "previousRevision": "54a05cd1-9f4c-4728-860e-160d35c1d70c",
+        "revision": "6ac920de-04ea-4125-8a79-d220288f0387",
+        "updatedAt": "2026-10-24T19:05:26.284Z",
+        "checkedAt": "2026-10-24T19:14:43.384486+00:00",
+        "ok": true
+      },
+      {
+        "id": "d4bf8cfcbca08f77d9e19f56",
+        "make": "Wuling",
+        "model": "Zhiguang",
+        "previousRevision": "f1a7ce63-c674-4f9a-8963-0f259b4dac7b",
+        "revision": "50f4cba6-df72-4c5c-92eb-cee373e189bd",
+        "updatedAt": "2026-10-24T19:05:26.288Z",
+        "checkedAt": "2026-10-24T19:14:43.407144+00:00",
+        "ok": true
+      },
+      {
+        "id": "b779f485a0a745f80628824b",
+        "make": "XPeng",
+        "model": "G7",
+        "previousRevision": "601fe319-f959-499b-94e5-ad9e32c4e77e",
+        "revision": "8f5cdbc5-24d0-4614-a31a-dfb1bb4ce417",
+        "updatedAt": "2026-10-24T19:05:26.304Z",
+        "checkedAt": "2026-10-24T19:14:47.812132+00:00",
+        "ok": true
+      },
+      {
+        "id": "c15efbd4ce0a9c97d28f6f4f",
+        "make": "Zeekr",
+        "model": "8X",
+        "previousRevision": "d9e3f302-dfd0-48bb-aa12-8a05213d05a9",
+        "revision": "fc32cea2-cb78-4c76-8ab4-2876bf68e266",
+        "updatedAt": "2026-10-24T19:05:26.358Z",
+        "checkedAt": "2026-10-24T19:14:48.201020+00:00",
+        "ok": true
+      },
+      {
+        "id": "ff374a9ef23b0053496f65b1",
+        "make": "Zeekr",
+        "model": "9X",
+        "previousRevision": "a0b19bb7-f903-4634-9b08-e7188723d1ed",
+        "revision": "bf3b1ce5-179d-4fd5-9fa7-2e1b8e6ca3a0",
+        "updatedAt": "2026-10-24T19:05:26.360Z",
+        "checkedAt": "2026-10-24T19:14:48.201628+00:00",
+        "ok": true
+      }
+    ],
+    "checkedAt": "2026-10-24T19:14:55.443657+00:00",
+    "passed": 219,
+    "total": 219
+  },
+  "activation": {
+    "confirmed": false,
+    "newReleaseRequested": false,
+    "lastConfirmedRelease": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+    "requiredResearchBatches": 40,
+    "publicResearchBatches": 26,
+    "requiredAstraPlans": 3
+  },
+  "repair": {
+    "pr": 1529,
+    "head": "92cefba3e32e4b9b3564999b49086ffc41bac3d9",
+    "merge": "7734c3ade1fed4e9e15ea529ec13fd1a558537e2",
+    "ci": 40123701196,
+    "ciConclusion": "success",
+    "localRegressionTests": 2521,
+    "targetTests": 18,
+    "typecheck": "pass"
+  },
+  "selectorInspection": {
+    "workflow": 40124283764,
+    "job": 120962257469,
+    "conclusion": "success",
+    "publication": {
+      "checkedAt": "2026-10-24T19:13:49.273Z",
+      "generationId": "gen_1792702445675_8c312f85",
+      "writer": {
+        "active": true,
+        "operationType": "catalog_read_model_repair",
+        "operationId": "read-model-repair-ceba1e40-e7fc-4864-8d89-b5b1ae765174",
+        "startedAt": "2026-10-24T19:11:38.606Z",
+        "lockedUntil": "2026-10-24T20:51:38.606Z"
+      }
+    },
+    "generationId": "gen_1792702445675_8c312f85",
+    "requiredMarkets": [
+      "china",
+      "europe",
+      "georgia",
+      "korea",
+      "uae"
+    ],
+    "valid": true,
+    "markets": {
+      "china": {
+        "valid": true,
+        "bytes": 16831291,
+        "rows": 160545,
+        "otherRows": 83926
+      },
+      "europe": {
+        "valid": true,
+        "bytes": 4325699,
+        "rows": 38527,
+        "otherRows": 7600
+      },
+      "georgia": {
+        "valid": true,
+        "bytes": 103211,
+        "rows": 0,
+        "otherRows": 1705
+      },
+      "korea": {
+        "valid": true,
+        "bytes": 666975,
+        "rows": 2761,
+        "otherRows": 7155
+      },
+      "uae": {
+        "valid": true,
+        "bytes": 1168443,
+        "rows": 0,
+        "otherRows": 22039
+      }
+    }
+  },
+  "next": {
+    "blockingRun": 40124113621,
+    "blockingJob": 120961748866,
+    "rule": "Wait for existing budget-index writer terminal and reread lease; do not reset active lock. Then exactly one coordinated release, preserve all prior guards and verify new reuse membership. After actual scoped-v1 health: one guarded repair, then pinned pickup-drive-pricing/checkCatalogFeedback and independent prices.",
+    "noDuplicateApply": true,
+    "referenceCursor": "docs/encyclopedia/research-handoff-2026-10-24-retained-technical-groups.json"
+  }
+}

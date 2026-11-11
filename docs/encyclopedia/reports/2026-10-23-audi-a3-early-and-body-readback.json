@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-23T09:09:16.450Z",
+  "batch": "research-2026-10-23-audi-a3-early-and-body",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 30,
+  "newVariants": 0,
+  "updatedVariants": 30,
+  "confirmedFields": 39,
+  "compiledCalculationFields": 39,
+  "beforeRevision": "b619c16c-de8e-4ede-8349-fc838b2ab91f",
+  "afterRevision": "f2ba58f3-8bbb-47f5-9d5b-56b88dbaddea",
+  "variantsBefore": 1111,
+  "variantsAfter": 1111,
+  "unchangedVariantsPreserved": 1081,
+  "allPreexistingValuesPreserved": true,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 30,
+    "manualInputPreserved": true,
+    "unknownCertifiedPowerNotInferred": true
+  }
+}

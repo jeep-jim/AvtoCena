@@ -1,0 +1,33 @@
+name: Verify seven published calculation cards
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/calculation-acceptance.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/calculation-live --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Wait for reviewed release
+        env:
+          EXPECTED_RELEASE: 71e571f0ba3598f07f569a19d14cb3dae35086dd
+          RELEASE_WAIT_SECONDS: 1800
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/wait-published-release.mjs
+      - name: Verify visible calculated totals without editing or saving offers
+        env:
+          PLAYWRIGHT_MODULE: /tmp/calculation-live/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/calculation-acceptance.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seven-public-calculation-cards
+          path: artifacts/calculation-acceptance
+          retention-days: 7

@@ -1,0 +1,50 @@
+name: Verify dealer workspace
+on:
+  push:
+    branches: [fix/dealer-workspace-20261001]
+  pull_request:
+    paths:
+      - 'apps/web/components/dealers/**'
+      - 'apps/web/components/partners/**'
+      - 'apps/web/lib/dealers/**'
+      - 'apps/web/lib/partners/**'
+      - 'tests/browser/dealer-workspace*'
+      - 'tests/browser/dealer-cabinet-controls*'
+      - 'apps/web/app/(public)/dealer-cabinet/**'
+      - 'apps/web/app/api/dealers/team/**'
+      - 'apps/web/app/api/dealers/profile/**'
+      - 'apps/web/app/api/dealers/presence/**'
+      - 'apps/web/components/crm/**'
+      - 'apps/web/app/(crm)/crm-responsive.css'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/dealer-program.test.ts tests/dealer-showcase.test.ts tests/dealer-access.test.ts tests/dealer-showcase-api.test.ts tests/dealer-team.test.ts tests/dealer-presence-route.test.ts tests/dealer-workflow.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/dealer-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node scripts/prepare-web-assets.mjs
+      - name: Dealer cabinet, gallery, isolated demo, tariffs and multilingual pages
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
+        run: |
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-workspace.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-profile-editor.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-cabinet-controls.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dealer-workspace
+          path: |
+            artifacts/dealer-workspace/*.png
+            artifacts/dealer-profile-editor/*.png
+            artifacts/dealer-cabinet-controls/*.png
+          retention-days: 7

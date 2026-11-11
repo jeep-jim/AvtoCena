@@ -1,0 +1,98 @@
+{
+  "checkedAt": "2026-10-22T08:09:48.589Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-junior-2025-mass-intensa-veloce",
+  "digest": "7b78b23e5450d288461c23e0b3da4754003540bf644e861fdc3462752d85fc52",
+  "sourceModelRevision": "767be136-1760-43a0-9054-90654a6e7634",
+  "variants": 7,
+  "newVariants": 4,
+  "fields": 41,
+  "years": {
+    "2025": 7
+  },
+  "plan": {
+    "changes": [
+      {
+        "variantId": "1a2ee1648fe65a65ec42cd1a",
+        "fields": [
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "06a6704e2a4b4b2cb4eb1475",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f4b0a5283cc484beebaca960",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f279b6854a3f7d2c03e0dada",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "65c33ec518dcc40f19e256c6",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "dde8919268e31011d24bed5b",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "4d973d6b87b550835d88bfe6",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission",
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  }
+}

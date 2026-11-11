@@ -1,0 +1,42 @@
+name: Public page — bounded error check
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read redacted exception fingerprints
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,re,json,collections
+          r=subprocess.run(['docker','logs','--since','2h','--tail','6000','avtocena-production'],capture_output=True,text=True)
+          text=r.stdout+r.stderr
+          print('PUBLIC_ERROR_NAMES',json.dumps(dict(collections.Counter(re.findall(r'(?:Error|Unavailable): ([a-z][a-z_]{2,70})(?=[\s:])',text)))))
+          print('PUBLIC_STACK_FILES',json.dumps(dict(collections.Counter(re.findall(r'(?:server/)?(chunks/[0-9a-f]+\\.js:[0-9]+:[0-9]+)',text)))))
+          lines=text.splitlines()
+          for i,line in enumerate(lines):
+              if 'digest:' not in line:continue
+              context='\\n'.join(lines[max(0,i-9):i+2])
+              print('PUBLIC_DIGEST_CONTEXT',json.dumps({'digest':re.findall(r'[0-9]{6,20}',line),'reasons':re.findall(r'ajes_[a-z_]+',context),'frames':re.findall(r'([a-zA-Z0-9_./() -]*\\.js:[0-9]+:[0-9]+)',context)}))
+          patterns=['object_storage_response_timeout','client_ip_missing','visitor_restricted','MODULE_NOT_FOUND','ChunkLoadError','Loading chunk','Failed to find Server Action','ECONNRESET','ETIMEDOUT','fetch failed','TypeError','ReferenceError','SyntaxError','ENOENT','heap out of memory','NEXT_REDIRECT']
+          print('PUBLIC_ERROR_COUNTS',json.dumps({p:text.count(p) for p in patterns}))
+          print('PUBLIC_ERROR_DIGESTS',json.dumps(dict(collections.Counter(re.findall(r"digest: ['\"]([0-9]{1,20})",text)))))
+          print('PUBLIC_ERROR_PROPERTIES',json.dumps(dict(collections.Counter(re.findall(r"Cannot read properties of (?:undefined|null) \(reading ['\"]([a-zA-Z_$][a-zA-Z0-9_$]{0,50})",text)))))
+          print('PUBLIC_ERROR_FRAMES',json.dumps(dict(collections.Counter(re.findall(r'(/app/apps/web/\.next/server/[^\s:()]{1,180}:[0-9]+:[0-9]+)',text)))))
+          print('PUBLIC_ERROR_CODES',json.dumps(dict(collections.Counter(re.findall(r"code: ['\"]([A-Z_]{2,40})",text)))))
+          PY

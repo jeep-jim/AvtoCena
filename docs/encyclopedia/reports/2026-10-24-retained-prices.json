@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-10-24T05:36:09.050Z",
+  "generationId": "gen_1792702445675_8c312f85",
+  "scope": "Retained five-market price snapshots, checksum-verified and joined by offer ID; not all supplier Japan inventory; not a new calculation.",
+  "markets": {
+    "china": {
+      "retainedOffers": 244471,
+      "snapshotAt": "2026-10-24T05:35:36.552Z",
+      "snapshotKey": "0791369691d066a511c311be8fde8775fc75b98c834c1880c69343e561cebb4f",
+      "pricedOffers": 160777,
+      "sellerOnly": 0,
+      "deliveredTotals": 160777,
+      "unmatchedIds": 0,
+      "byPowertrain": {
+        "combustion": 160735,
+        "hybrid": 41,
+        "electric": 0,
+        "unknown": 1
+      }
+    },
+    "europe": {
+      "retainedOffers": 46127,
+      "snapshotAt": "2026-10-24T05:11:39.382Z",
+      "snapshotKey": "e80e4ee8a7284b37a78a6339b34645ad43e872f1fa35218f92f379c9363f5ec8",
+      "pricedOffers": 38575,
+      "sellerOnly": 0,
+      "deliveredTotals": 38575,
+      "unmatchedIds": 0,
+      "byPowertrain": {
+        "combustion": 38538,
+        "hybrid": 32,
+        "electric": 2,
+        "unknown": 3
+      }
+    },
+    "korea": {
+      "retainedOffers": 9926,
+      "snapshotAt": "2026-10-24T05:10:44.301Z",
+      "snapshotKey": "c877224cd93e60d5299ea5ab0cf663fd632466eb6c96cf86aca1fd266775ed81",
+      "pricedOffers": 2779,
+      "sellerOnly": 0,
+      "deliveredTotals": 2779,
+      "unmatchedIds": 0,
+      "byPowertrain": {
+        "combustion": 2779,
+        "hybrid": 0,
+        "electric": 0,
+        "unknown": 0
+      }
+    },
+    "uae": {
+      "retainedOffers": 22045,
+      "snapshotAt": "2026-10-24T05:10:59.826Z",
+      "snapshotKey": "0c24b5d302764bfa2aaa387977c719c85146af8c2c66ca719f515f45e80e72e9",
+      "pricedOffers": 7,
+      "sellerOnly": 0,
+      "deliveredTotals": 7,
+      "unmatchedIds": 0,
+      "byPowertrain": {
+        "combustion": 7,
+        "hybrid": 0,
+        "electric": 0,
+        "unknown": 0
+      }
+    },
+    "georgia": {
+      "retainedOffers": 1706,
+      "snapshotAt": "2026-10-24T05:11:55.178Z",
+      "snapshotKey": "74c102555b15c5b94f223178db663b691ea610cb20cd21c255ff4fef11fd7807",
+      "pricedOffers": 0,
+      "sellerOnly": 0,
+      "deliveredTotals": 0,
+      "unmatchedIds": 0,
+      "byPowertrain": {
+        "combustion": 0,
+        "hybrid": 0,
+        "electric": 0,
+        "unknown": 0
+      }
+    }
+  },
+  "storageWrites": 0
+}

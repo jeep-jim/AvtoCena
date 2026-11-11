@@ -1,0 +1,48 @@
+{
+  "batch": "research-2026-10-25-audi-a3-999-mhev-power",
+  "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-999-mhev-power.json",
+  "sha256": "c938cc8e70696fc5f6a6a1d0cbaad970fff1f93a7fd8e382d2e4bc50efbd4b57",
+  "workflow": 40133471975,
+  "job": 120989950801,
+  "preflightWorkflow": 40133371388,
+  "variants": 1,
+  "fields": 4,
+  "checkedAt": "2026-10-24T21:17:50.939157+00:00",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "variantId": "d13dbaae2d2bb417df3289fa",
+  "revision": "c121ad35-2926-4ecd-825c-d09cbbc7b273",
+  "fieldChecks": [
+    {
+      "field": "powerHp",
+      "expected": 110,
+      "actual": 110,
+      "pass": true
+    },
+    {
+      "field": "powerKw",
+      "expected": 81,
+      "actual": 81,
+      "pass": true
+    },
+    {
+      "field": "icePowerKw",
+      "expected": 81,
+      "actual": 81,
+      "pass": true
+    },
+    {
+      "field": "drive",
+      "expected": "fwd",
+      "actual": "fwd",
+      "pass": true
+    }
+  ],
+  "existingPublicFieldsUnchanged": true,
+  "otherPublicVariantsUnchanged": true,
+  "unknownBodyPreserved": true,
+  "passed": true,
+  "state": "saved_api_readback_pass_pending_next_index",
+  "newModels": 0,
+  "power30MinKw": 0,
+  "activationConfirmed": false
+}

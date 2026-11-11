@@ -1,0 +1,614 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a6-2020-2024-avant-body",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 55 TFSI e S-Line Quattro Competition 367PK |",
+      "variantId": "23143b45135298397b4e183c",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "d5e820e2db30eb699b3a29489c0738ba0f3c6a5c4f6926612c59615d98f2e5af",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 55 TFSI E Quattro Competition / Leder / CC /",
+      "variantId": "06a03da7beb99d61b04c8975",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "6dacde24ef88df37ede2bf1ddcf860507a34cd00d959303b6819ece4fff236df",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 55 TFSI e quattro Competition Adaptieve Crui",
+      "variantId": "36c79ff3bce4799336fbd0de",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "e90244d6acdc0fb8179e6232a7c876066f38f9470c784880ed28de0aecbe9ea0",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 55 3.0 TFSI ben/ibrid quattro S-line",
+      "variantId": "6c8b0daa4ed72c5f9a9efe95",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "14dfd83c10fe26bda87c79da83888894c8b528eac75ba99b9f3e377c859ad80d",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 2.0TDI MHEV Business QUATTRO S-Tronic MY19",
+      "variantId": "84a398a83791732110a3f3fc",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "8654d0d8f4fe3be0cacf8066df7e324edd82766bde1b87c19b3ee5a0b8eb24f1",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "AVANT 40 TDI MHEV 2.0 QUATTRO ULTRA S TRONIC BUSINESS STATION WAGON",
+      "variantId": "0652e2fb9c28a1d4272f05b3",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "deeb81f97b054b617ecc726161d3c9ddd5bc48ad014f8cbbdab22426fba6c4e2",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 40 TDI HUD B&O AHK LED",
+      "variantId": "13817859c7f8c8b80faae1b0",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "d42dc4b4fd1a25d70d9f811a95d893ccc7afe86f0e764167f3696abc0c6e8c9e",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "55 2.0 TFSI e quattro Avant sport AHK Panorama",
+      "variantId": "64ccf5700b1955955842a53e",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "fda1c531d2f1456b65f843412089ae458f64930a1f885248cbbc0a2965e63670",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "AUDI A6 AVANT 40 2.0 DESIGN TDI S-TRONIC AT7 204 C",
+      "variantId": "7a11d3c72d9680fbb81c3a29",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "144fed8011c52f538ef979ac18a44836e3f7a711cf9a3167e1e900b958ad6777",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "A6 Avant 40 2.0 tdi mhev S-line Business Plus quattro s-tronic",
+      "variantId": "d79a934ddc2aebfd687adcc8",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "2695b2aed15629b6a7ada4cff526a4051a9b2d7f9d6cbbc9f40f755b4be8aa24",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2022,
+      "trim": "Avant 40 2.0 TDI Quattro Ultra S-Tronic Business",
+      "variantId": "e6b345e6a3fe95446ac635ac",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "ca729c143398a86346511af0eb7339d161780c02ab8f44a7f2b45d5413866357",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2023,
+      "trim": "Avant 50 TFSI e quattro Matrix Pano B&O ACC",
+      "variantId": "0f3702d83ad4fd950013e3d6",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "d846899aa71dcbe86baf40cb1b32b47f786343293f6d00a00d897411a4f25049",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2023,
+      "trim": "AVANT 40 TDI MHEV 2.0 QUATTRO ULTRA S TRONIC BUSINESS STATION WAGON",
+      "variantId": "23cadb908c5265863f12ddc1",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "ccecc1812acef4b1d10e9bb93ebc97c69c139d8258e40a84e4e54c59681281f1",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2023,
+      "trim": "Avant 50 2.0 tfsi e Business Plus quattro s-tronic - IVA ESPOSTA",
+      "variantId": "ac003eb5e6a0243db5f0e81b",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "59a3c65d235d43dd71a4798c84f40f53ba7a493fce092c24f52ab1041458c12a",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2023,
+      "trim": "Avant S line 55 TFSIe quattro S tronic HD-MATRIX",
+      "variantId": "c236af49d4e95b7eda32d8d0",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "991c74f781e0acec95de6496668c5f146bf4892d3b09793b39394e11cc63e3f9",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2023,
+      "trim": "Avant 55 TFSI e quattro sport Navi ACC Pano",
+      "variantId": "dafb8a0f5794ba10e1aa6eab",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "54e473e9c343f423e896e3d31c777360201f260b6582a32a16ebb98a2b8af25b",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "Avant PHEV 55TFSIe Quattro Competition S-LINE/B&O/ACC/360CAM/MATRIX/21\"RS WHEELS/KEYLESS",
+      "variantId": "040dee035faea25d827d2cc0",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "ee89c01823a78cba139d51bb190ea7e2e380738a7cfdfc335e082a647b19345a",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "A6 Avant PHEV 50 TFSI e QUATTRO*S-LINE*S-TRONIC*TREKH",
+      "variantId": "19546d351da89b2741b05ede",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "f4303732a8e58090caf7f3994eb659305f6857df7ee172d67b104731e2eb1ebd",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2024,
+      "trim": "40 2.0 TDI Avant quattro sport",
+      "variantId": "92262583dda6ef8b990e47e8",
+      "expectedRevision": "04826e43-b50d-586d-a2ca-ab7c0e1dede8",
+      "expectedDigest": "e42b03d695e9397fcc27b868adbc9f52f5f85ac590b8c1adf599d8fe981e85a3",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская страница Audi A6 Avant поколения до 2025 года подтверждает кузов универсал. Заполнен только отсутствующий bodyType у явно названного Avant; год, trim, двигатель, тип силовой установки, мощности и прежние источники сохранены. Неизвестная 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi.com/en/audi-a6-avant-until-2025-16545",
+            "sourceSha256": "a30cfa87f0bad56b10561d2415d219f7e1cf53cd1f865c004e46bd1101bc55b3",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Архивная заводская страница Audi A6 Avant (until 2025)",
+            "selector": "Вводное описание: A6 Avant — station wagon. Только bodyType у явно названных Avant 2020–2024; никакие прочие параметры поколения не переносятся."
+          }
+        }
+      }
+    }
+  ]
+}

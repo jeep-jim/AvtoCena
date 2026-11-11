@@ -1,0 +1,1045 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-tonale-2023-factory-range",
+  "entries": [
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "fb7054dd010f6f57f01a4aa8",
+      "trim": "1.5 Hybrid 130 PS TCT7 Super",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "bc721923-e6da-4abf-a8f1-6be2e5c39b3e",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Super",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 2,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; trim; точные годовые строки, мощности раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; fuel; точные годовые строки, мощности раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; powertrainKind; точные годовые строки, мощности раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; engineCc; точные годовые строки, мощности раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; icePowerKw; точные годовые строки, мощности раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; transmission; точные годовые строки, мощности раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; drive; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Super; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "6dea545f17acb6f2822d8ba7",
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "expectedDigest": "fbae316a850d666bb399f8a3f0448976659ee698b0973fde050ef165199bc87b",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Sprint; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Sprint; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "64b9c6c34b3a67a8ebbb167e",
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "expectedDigest": "647934c0c50a6f44e05d91cc0218e391957f376acdd622d58c759be4c0fdf4a5",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Sprint; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Sprint; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "ffaf57e6099f8bb84bd33d7e",
+      "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "bc721923-e6da-4abf-a8f1-6be2e5c39b3e",
+      "patch": {
+        "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 96,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 2,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; trim; точные годовые строки, мощности раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; fuel; точные годовые строки, мощности раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; powertrainKind; точные годовые строки, мощности раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; engineCc; точные годовые строки, мощности раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; icePowerKw; точные годовые строки, мощности раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; transmission; точные годовые строки, мощности раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; drive; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 130 PS TCT7 Edizione Speciale; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "828167d420b0a4795d869276",
+      "trim": "1.5 Hybrid 160 PS TCT7 Ti",
+      "expectedDigest": "43d62d9517f6f166b110b1b85f6e5a3d643d7876227112733a99a9eaf707cbf7",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Ti; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Ti; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "959f3a557c44e078c991a799",
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "expectedDigest": "5e799992b39e1ad4e7c4b2428dd76fdeedb4dbfcb834957ecf9f2e902f6be198",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Veloce; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Veloce; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "4159764dd2b742fc785f69fc",
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "expectedDigest": "f22fb144ab7ae654cde459572574385e908415a16ec6a76d99fd8b6c66f243d1",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Veloce; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Veloce; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "a3b27774100d7f9c04995775",
+      "trim": "1.5 Hybrid 160 PS TCT7 Edizione Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "bc721923-e6da-4abf-a8f1-6be2e5c39b3e",
+      "patch": {
+        "trim": "1.5 Hybrid 160 PS TCT7 Edizione Speciale",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 1469,
+        "icePowerKw": 118,
+        "transmission": "dct",
+        "drive": "fwd",
+        "motorPeakKw": 15
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 2,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; trim; точные годовые строки, мощности раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; fuel; точные годовые строки, мощности раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; powertrainKind; точные годовые строки, мощности раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; engineCc; точные годовые строки, мощности раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; icePowerKw; точные годовые строки, мощности раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; transmission; точные годовые строки, мощности раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; drive; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-09-01",
+            "pdfPage": 13,
+            "selector": "Tonale MY2023 1.5 Hybrid 160 PS TCT7 Edizione Speciale; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "6afe5929e36f28f2352577f8",
+      "trim": "1.6 Diesel 130 PS TCT6 Super",
+      "expectedDigest": "bcbebd9dee08f8bd1ef5f4fffb7d5b87a924ba92480b70205962e4ad919b6606",
+      "patch": {
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.6 Diesel 130 PS TCT6 Super; bodyType; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "fd0ea61af46a2424e1d29bed",
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "expectedDigest": "f4841dc1ea4a8c77afbfd2b5dbd07cb26ac0baac652e97af958bfa1fc788ab40",
+      "patch": {
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.6 Diesel 130 PS TCT6 Sprint; bodyType; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "1d79e547243db385c5966f4d",
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "expectedDigest": "46c4b1cb50e7a3dba7c298cd5bdfc198785f0e9cf93f312c0d7801f44e87ad86",
+      "patch": {
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.6 Diesel 130 PS TCT6 Sprint; bodyType; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "2347b3dc16d926aaa45f8d46",
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "expectedDigest": "d553455f6ab6b45f021c918c3ae8330c5fa30ed245100d9e41235e665de441b5",
+      "patch": {
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.6 Diesel 130 PS TCT6 Sprint; bodyType; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "886e71c8eb6e86cd6f8388cf",
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "expectedDigest": "1ca16db83a67f26680f6962c2cb875e085435e741352a472b22c1cdd0369d622",
+      "patch": {
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.6 Diesel 130 PS TCT6 Sprint; bodyType; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "4403b52e952b76359cb05e1b",
+      "trim": "1.6 Diesel 130 PS TCT6 Ti",
+      "expectedDigest": "04bfb880c68d08265ae5988671505291a32b988458a0cdc3d292069cdeb7674c",
+      "patch": {
+        "bodyType": "suv"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/pl/model-pricelist/tonalecennik-64f185bd64c38.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-tonale-hybrid-l-energia-che-muove-ogni-cosa",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-05-05",
+            "selector": "Tonale MY2023 1.6 Diesel 130 PS TCT6 Ti; bodyType; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "e08fae676d942dd5f15edf5a",
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "bc721923-e6da-4abf-a8f1-6be2e5c39b3e",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1332,
+        "icePowerKw": 132,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 90,
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 7,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; trim; точные годовые строки, мощности раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; fuel; точные годовые строки, мощности раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; powertrainKind; точные годовые строки, мощности раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; engineCc; точные годовые строки, мощности раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; icePowerKw; точные годовые строки, мощности раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; transmission; точные годовые строки, мощности раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; drive; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; motorPeakKw; точные годовые строки, мощности раздельно"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti; batteryKwh; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "78953519053fa6eabc187f8c",
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+      "expectedDigest": "5a110d0383faec71c19cc0abc8de0b43dab71a2b5e163bbd11adf4b78bca73c9",
+      "patch": {
+        "bodyType": "suv",
+        "motorPeakKw": 90
+      },
+      "confirmedFields": [
+        "bodyType",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; motorPeakKw; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "variantId": "ee56b396c77522ec9360b310",
+      "trim": "1.3 180 CV PLUG IN HYBRID AT6 VELOCE Q4 SUV",
+      "expectedDigest": "18fe9db61e5bdf07b589ebab30197176f9527a843701e84b50267875b447ffa5",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1332,
+        "icePowerKw": 132,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 90,
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 7,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; trim; точные годовые строки, мощности раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; fuel; точные годовые строки, мощности раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; powertrainKind; точные годовые строки, мощности раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; engineCc; точные годовые строки, мощности раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; icePowerKw; точные годовые строки, мощности раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; transmission; точные годовые строки, мощности раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; drive; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; motorPeakKw; точные годовые строки, мощности раздельно"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce; batteryKwh; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "cff3b237a2a26a9e00708f89",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "d0bbd29f15af34492bbcfe94",
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "bc721923-e6da-4abf-a8f1-6be2e5c39b3e",
+      "patch": {
+        "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale",
+        "bodyType": "suv",
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1332,
+        "icePowerKw": 132,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 90,
+        "batteryKwh": 15.5
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Tonale 2023: первичные прайсы Poland01.09.2023(MY23/год производства2023) и France20.01.2023; PDF2/13 и7/8 визуально сверены. Для существующих исследованных строк добавлены только недостающие подтверждения; старые источники остаются в истории. MHEV15кВт и PHEV90кВт — пиковая мощность электромотора, не30-минутная. ДВС PHEV132кВт не равен системе280PS. Идентичность Ti/Veloce/EdizioneSpeciale подтверждена таблицейTonalePDF7; опечаткаGiuliaнаPDF9не использована. EdizioneSpecialeMY23 ограничена остатками в прайсе; не утверждается текущая продажа. Коды,полнаямасса и30-минутная мощность не угаданы; review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 7,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; trim; точные годовые строки, мощности раздельно"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; bodyType; точные годовые строки, мощности раздельно"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; fuel; точные годовые строки, мощности раздельно"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/al-debutto-tonale-plug-in-hybrid-q4-la-sportivita-efficiente-secondo-alfa-romeo",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-11-17",
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; powertrainKind; точные годовые строки, мощности раздельно"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; engineCc; точные годовые строки, мощности раздельно"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; icePowerKw; точные годовые строки, мощности раздельно"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; transmission; точные годовые строки, мощности раздельно"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; drive; точные годовые строки, мощности раздельно"
+          },
+          "motorPeakKw": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; motorPeakKw; точные годовые строки, мощности раздельно"
+          },
+          "batteryKwh": {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeogammemy2320230120-63d78e0e6742c.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2023-01-20",
+            "pdfPage": 8,
+            "selector": "Tonale MY2023 1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale; batteryKwh; точные годовые строки, мощности раздельно"
+          }
+        }
+      }
+    }
+  ]
+}

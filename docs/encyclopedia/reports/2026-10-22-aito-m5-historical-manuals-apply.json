@@ -1,0 +1,323 @@
+{
+  "checkedAt": "2026-10-22T04:39:40.379Z",
+  "batch": "research-2026-10-22-aito-m5-historical-manuals",
+  "commit": "1231d249913b7ace102d9d3750bf5b626b7c2b1a",
+  "workflow": 39723434737,
+  "job": 119641887336,
+  "conclusion": "success",
+  "guards": {
+    "tests": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "batch": "research-2026-10-22-aito-m5-historical-manuals",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "cfb5857e13b7258b88b369f4",
+          "changes": [
+            {
+              "variantId": "6c0f2f0ae9bdf23bcf8acada",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "5bb6e55e4d6677dbbed024e5",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "fa146b7274525449bb583d4b",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "c14c77796fc23b03c271c130",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg",
+                "motorPeakKw"
+              ]
+            },
+            {
+              "variantId": "658d3f16b0cc51ab218d2654",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "ca8b7c3edae23edecde90b54",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "c5846331dad7bec12b91dbf0",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f0ea570b3f80bf6238152f3f",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "ce271f53c901437ac64461ed",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "53c338d7128c6ca6c84b10ed",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "c202a711d8b0311af5e370f4",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "7931e1704ca0b1fe205a191f",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "2e5a9ac317eb71aba1b62c6e",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "bc9f57abb0d4a364ed651b57",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "ca6cde35f83d073a589720f6",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "02344c9022e3a810af9decde",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "bd99ecb396ab90cfaf9f5747",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:38:20.422Z",
+      "finishedAt": "2026-10-22T04:38:23.561Z"
+    },
+    {
+      "batch": "research-2026-10-22-aito-m5-historical-manuals",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "cfb5857e13b7258b88b369f4",
+          "changes": [
+            {
+              "variantId": "6c0f2f0ae9bdf23bcf8acada",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "5bb6e55e4d6677dbbed024e5",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "fa146b7274525449bb583d4b",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "c14c77796fc23b03c271c130",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg",
+                "motorPeakKw"
+              ]
+            },
+            {
+              "variantId": "658d3f16b0cc51ab218d2654",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "ca8b7c3edae23edecde90b54",
+              "fields": [
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "c5846331dad7bec12b91dbf0",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f0ea570b3f80bf6238152f3f",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "ce271f53c901437ac64461ed",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "53c338d7128c6ca6c84b10ed",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "c202a711d8b0311af5e370f4",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "drive",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "7931e1704ca0b1fe205a191f",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "2e5a9ac317eb71aba1b62c6e",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "bc9f57abb0d4a364ed651b57",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "ca6cde35f83d073a589720f6",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "02344c9022e3a810af9decde",
+              "fields": [
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "bd99ecb396ab90cfaf9f5747",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:38:23.754Z",
+      "finishedAt": "2026-10-22T04:38:29.927Z"
+    }
+  ]
+}

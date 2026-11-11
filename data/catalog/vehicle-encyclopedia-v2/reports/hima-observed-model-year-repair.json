@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "repairedSource": "src-huawei-hicar-current-models-2026",
+  "repairedModels": 15,
+  "rule": "Compatibility model years prove in-window observation but never production start.",
+  "modelIds": [
+    "aito/m5",
+    "aito/m6",
+    "aito/m7",
+    "aito/m8",
+    "luxeed/r7",
+    "luxeed/s7",
+    "luxeed/v9",
+    "maextro/s800",
+    "maextro/v680",
+    "maextro/v800",
+    "shangjie/h5",
+    "shangjie/z7",
+    "shangjie/z7t",
+    "stelato/s9",
+    "stelato/s9t"
+  ]
+}

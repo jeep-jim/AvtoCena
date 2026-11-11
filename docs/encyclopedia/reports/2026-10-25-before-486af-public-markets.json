@@ -1,0 +1,174 @@
+{
+  "checkedAt": "2026-10-25T01:49:02.480173+00:00",
+  "healthBefore": {
+    "http": 200,
+    "seconds": 7.97,
+    "data": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+      "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+    }
+  },
+  "markets": [
+    {
+      "http": 200,
+      "seconds": 3.722,
+      "market": "china",
+      "ok": true,
+      "partial": null,
+      "stale": null,
+      "total": 244471,
+      "countSummary": null,
+      "generationId": "gen_1792702445675_8c312f85",
+      "items": [
+        {
+          "id": "d24fa615fb67ae4957a421ba",
+          "market": "china",
+          "make": "Volkswagen",
+          "model": "Lamando",
+          "year": 2020,
+          "fuel": "petrol",
+          "engineCc": 1395,
+          "powerHp": 150,
+          "drive": "fwd",
+          "totalRub": 1611870,
+          "priceStatus": null
+        }
+      ]
+    },
+    {
+      "http": 200,
+      "seconds": 4.627,
+      "market": "japan",
+      "ok": true,
+      "partial": true,
+      "stale": true,
+      "total": null,
+      "countSummary": {
+        "total": 609164,
+        "stale": false,
+        "observedAt": "2026-10-25T01:21:43.700Z",
+        "upperBound": false
+      },
+      "generationId": "2026-10-25T01:46:21.360Z",
+      "items": [
+        {
+          "id": "ajes-stats-2lapXk6ec6HsT",
+          "market": "japan",
+          "make": "FIAT",
+          "model": "500X",
+          "year": 2017,
+          "fuel": null,
+          "engineCc": 1360,
+          "powerHp": null,
+          "drive": null,
+          "totalRub": null,
+          "priceStatus": null
+        }
+      ]
+    },
+    {
+      "error": "HTTP Error 503: Service Unavailable",
+      "seconds": 4.928,
+      "market": "korea",
+      "ok": null,
+      "partial": null,
+      "stale": null,
+      "total": null,
+      "countSummary": null,
+      "generationId": null,
+      "items": []
+    },
+    {
+      "http": 200,
+      "seconds": 2.696,
+      "market": "uae",
+      "ok": true,
+      "partial": null,
+      "stale": null,
+      "total": 22038,
+      "countSummary": null,
+      "generationId": "gen_1792702445675_8c312f85",
+      "items": [
+        {
+          "id": "56bbcecb51a61b76402371a9",
+          "market": "uae",
+          "make": "Audi",
+          "model": "A3",
+          "year": 2024,
+          "fuel": "petrol",
+          "engineCc": 1498,
+          "powerHp": 150,
+          "drive": "fwd",
+          "totalRub": 3127884,
+          "priceStatus": null
+        }
+      ]
+    },
+    {
+      "http": 200,
+      "seconds": 4.48,
+      "market": "europe",
+      "ok": true,
+      "partial": null,
+      "stale": null,
+      "total": 46125,
+      "countSummary": null,
+      "generationId": "gen_1792702445675_8c312f85",
+      "items": [
+        {
+          "id": "061974864a6a9708c3084fc8",
+          "market": "europe",
+          "make": "Audi",
+          "model": "A3",
+          "year": 2020,
+          "fuel": "diesel",
+          "engineCc": 1968,
+          "powerHp": 150,
+          "drive": "",
+          "totalRub": 4105050,
+          "priceStatus": null
+        }
+      ]
+    },
+    {
+      "http": 200,
+      "seconds": 3.224,
+      "market": "georgia",
+      "ok": true,
+      "partial": null,
+      "stale": null,
+      "total": 1705,
+      "countSummary": null,
+      "generationId": "gen_1792702445675_8c312f85",
+      "items": [
+        {
+          "id": "dc7c298f69c3792d1ad3ccd2",
+          "market": "georgia",
+          "make": "Buick",
+          "model": "Encore",
+          "year": 2023,
+          "fuel": "petrol",
+          "engineCc": null,
+          "powerHp": 137,
+          "drive": "",
+          "totalRub": null,
+          "priceStatus": null
+        }
+      ]
+    }
+  ],
+  "healthAfter": {
+    "http": 200,
+    "seconds": 3.459,
+    "data": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+      "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+    }
+  },
+  "meaning": "Before deployment486af476, not acceptance of new release",
+  "expectedNewRelease": "486af476003314f3631f3b1299bc15cccce57cc1"
+}

@@ -1,0 +1,857 @@
+{
+  "checkedAt": "2026-10-24T07:32:27.079Z",
+  "indexDigest": "8b3f26cd58af545ff0f380bb3ae5b2d0dbb7b3444c1dcf9f0f66a54dfe22b5db",
+  "generationId": "gen_1792702445675_8c312f85",
+  "previewChanges": 0,
+  "scope": "Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.",
+  "markets": {
+    "korea": {
+      "rows": 9926,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 4204,
+      "baselineMatched": 37,
+      "technicalMatched": 44,
+      "newlyFilledRecords": 14,
+      "newlyFilledFields": 14,
+      "newlyCompleteSpecifications": 44,
+      "newlyCompletePending": 2,
+      "newlyFilledByField": {
+        "bodyType": 14
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 44
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 71,
+      "afterMissingByField": {
+        "power30MinKw": 9926,
+        "drive": 6385,
+        "bodyType": 6638,
+        "engineCode": 9926,
+        "grossVehicleWeightKg": 9926,
+        "engineCc": 807,
+        "powerHp": 6517,
+        "powerKw": 6517,
+        "icePowerKw": 6521
+      },
+      "unmatchedReasons": {
+        "model_absent_from_calculation_index": 4197,
+        "year_absent_from_calculation_index": 1525,
+        "no_compatible_field_consensus": 4123
+      },
+      "retainedDelivered": 2771
+    },
+    "uae": {
+      "rows": 22045,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 11714,
+      "baselineMatched": 12,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 8,
+      "afterMissingByField": {
+        "engineCc": 22036,
+        "powerHp": 22036,
+        "powerKw": 22035,
+        "icePowerKw": 22036,
+        "power30MinKw": 22045,
+        "engineCode": 22045,
+        "grossVehicleWeightKg": 22045,
+        "drive": 1620,
+        "bodyType": 314,
+        "transmission": 134
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 11702,
+        "model_absent_from_calculation_index": 5303,
+        "year_absent_from_calculation_index": 5028
+      },
+      "retainedDelivered": 0
+    },
+    "europe": {
+      "rows": 46127,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 46095,
+      "baselineMatched": 36723,
+      "technicalMatched": 2907,
+      "newlyFilledRecords": 5,
+      "newlyFilledFields": 10,
+      "newlyCompleteSpecifications": 2628,
+      "newlyCompletePending": 2,
+      "newlyFilledByField": {
+        "drive": 5,
+        "grossVehicleWeightKg": 5
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 2628
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 33157,
+      "afterMissingByField": {
+        "power30MinKw": 46093,
+        "drive": 44988,
+        "bodyType": 24585,
+        "engineCode": 46111,
+        "grossVehicleWeightKg": 45841,
+        "engineCc": 2377,
+        "transmission": 16,
+        "fuel": 1221,
+        "powertrainKind": 675,
+        "icePowerKw": 6428,
+        "powerHp": 692,
+        "powerKw": 692
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 6465,
+        "model_absent_from_calculation_index": 31,
+        "year_absent_from_calculation_index": 1
+      },
+      "retainedDelivered": 38527
+    },
+    "georgia": {
+      "rows": 1706,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 1192,
+      "baselineMatched": 0,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 0,
+      "afterMissingByField": {
+        "engineCc": 1706,
+        "power30MinKw": 1706,
+        "drive": 1706,
+        "engineCode": 1706,
+        "grossVehicleWeightKg": 1706,
+        "transmission": 48,
+        "bodyType": 70,
+        "powerHp": 1432,
+        "powerKw": 1432,
+        "icePowerKw": 1432,
+        "fuel": 66,
+        "powertrainKind": 66
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 1192,
+        "year_absent_from_calculation_index": 161,
+        "model_absent_from_calculation_index": 353
+      },
+      "retainedDelivered": 0
+    },
+    "china": {
+      "rows": 244471,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 161351,
+      "baselineMatched": 72083,
+      "technicalMatched": 66331,
+      "newlyFilledRecords": 3414,
+      "newlyFilledFields": 5069,
+      "newlyCompleteSpecifications": 46244,
+      "newlyCompletePending": 230,
+      "newlyFilledByField": {
+        "bodyType": 2734,
+        "grossVehicleWeightKg": 1726,
+        "transmission": 61,
+        "engineCode": 546,
+        "power30MinKw": 1,
+        "icePowerKw": 1
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 46244
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0,
+      "afterComplete": 84357,
+      "afterMissingByField": {
+        "power30MinKw": 244428,
+        "transmission": 1196,
+        "engineCode": 243590,
+        "grossVehicleWeightKg": 211196,
+        "bodyType": 129124,
+        "drive": 4480,
+        "engineCc": 38254,
+        "fuel": 2099,
+        "powertrainKind": 2109,
+        "icePowerKw": 75148,
+        "powerHp": 25104,
+        "powerKw": 25111
+      },
+      "unmatchedReasons": {
+        "no_compatible_field_consensus": 22937,
+        "year_absent_from_calculation_index": 73819,
+        "model_absent_from_calculation_index": 9301
+      },
+      "retainedDelivered": 160545
+    },
+    "japan": {
+      "rows": 422,
+      "withTechnicalCode": 422,
+      "modelYearKnown": 102,
+      "baselineMatched": 1,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 4,
+      "japanPreviewAfter": 4,
+      "afterComplete": 0,
+      "afterMissingByField": {
+        "fuel": 324,
+        "powertrainKind": 417,
+        "powerHp": 422,
+        "powerKw": 422,
+        "icePowerKw": 422,
+        "power30MinKw": 422,
+        "transmission": 319,
+        "bodyType": 421,
+        "engineCode": 422,
+        "grossVehicleWeightKg": 422,
+        "drive": 160,
+        "engineCc": 1
+      },
+      "unmatchedReasons": {
+        "year_absent_from_calculation_index": 209,
+        "no_compatible_field_consensus": 101,
+        "model_absent_from_calculation_index": 111
+      },
+      "retainedDelivered": 0
+    }
+  },
+  "japanCache": {
+    "slots": 128,
+    "uniqueLots": 422,
+    "converted": 422,
+    "rejected": 0
+  },
+  "samples": 39,
+  "japanMissingLinks": [
+    {
+      "id": "ajes-stats-ynvwIuHiEuaIRZ",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2018,
+      "trim": "TSI Elegance Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-qmyc3OOSg5lcKbB",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2015,
+      "trim": "",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-4JP5kSrFhGiQTcS",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2008,
+      "trim": "3.2 V6 4モ-ション",
+      "chassisCode": "3CAXZF",
+      "engineCc": 3200,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-X618VgIzExAiGs",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2015,
+      "trim": "",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-25UomtQ920na98U",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2011,
+      "trim": "",
+      "chassisCode": "3CCAX",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2vftuJ65uGTWziC",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2019,
+      "trim": "2.0TSI R Line",
+      "chassisCode": "3CCHH",
+      "engineCc": 2000,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-WaQCtB9VnmI3mk",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2016,
+      "trim": "TSI High Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-WcYrHlvWrfL5xL",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2016,
+      "trim": "TSI High Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-4ylnQ57DNGnsC",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2010,
+      "trim": "",
+      "chassisCode": "3CBWSC",
+      "engineCc": 3600,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-327dzULBuFoy5Kr",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2015,
+      "trim": "TSI Comfort Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1390,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2uKd1aCJ9SAiVmG",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2015,
+      "trim": "TSI High Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-4mqaCwiCC1088X",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2011,
+      "trim": "パサ-トTSI High Line",
+      "chassisCode": "3CCAX",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-31TZ3opJjrphA94",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2013,
+      "trim": "",
+      "chassisCode": "3CCAX",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-X2apkhstFF3mSl",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2021,
+      "trim": "TSI Elegance アド Van ス",
+      "chassisCode": "3CDPC",
+      "engineCc": 1500,
+      "factsForModel": 1176,
+      "factsForYear": 162,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "20tdi4mdsgmatrixnaviahk"
+          ]
+        },
+        {
+          "trim": [
+            "20tdi4motdsgnavkameraacc"
+          ]
+        },
+        {
+          "trim": [
+            "business20tdidsgnavikamera"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-X3jIUb3j58NKpY",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2015,
+      "trim": "TSI High Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "transmission": "automatic",
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-X48qBZ3R1vBG0X",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2018,
+      "trim": "TDI Elegance Line",
+      "chassisCode": "3CDFC",
+      "engineCc": 2000,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-6ryZlNDpTKc2DY",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2017,
+      "trim": "パサ-トTSI Elegance L DCC Package",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2uNPKQmfgUvYjrX",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2021,
+      "trim": "TSI Elegance",
+      "chassisCode": "3CDPC",
+      "engineCc": 1500,
+      "factsForModel": 1176,
+      "factsForYear": 162,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "20tdi4mdsgmatrixnaviahk"
+          ]
+        },
+        {
+          "trim": [
+            "20tdi4motdsgnavkameraacc"
+          ]
+        },
+        {
+          "trim": [
+            "business20tdidsgnavikamera"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-2phII5cdu0yvH44",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2018,
+      "trim": "TDI Elegance Line",
+      "chassisCode": "3CDFC",
+      "engineCc": 2000,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-sCTtfoAZrqbbwf",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2018,
+      "trim": "TSI Elegance Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-3x5kGbgv7IomReT",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2009,
+      "trim": "",
+      "chassisCode": "3CCAWC",
+      "engineCc": 2000,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2uNnF1DO1vb7pRK",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2016,
+      "trim": "TSI High Line",
+      "chassisCode": "3CCZE",
+      "engineCc": 1400,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-aP45MhwFOaCr9Gf",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2018,
+      "trim": "",
+      "chassisCode": "3CDFC",
+      "engineCc": 2000,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-3gW0uv1AOJjDnUe",
+      "make": "VOLKSWAGEN",
+      "model": "PASSAT",
+      "year": 2019,
+      "trim": "TDI High Line",
+      "chassisCode": "3CDFC",
+      "engineCc": 2000,
+      "factsForModel": 1176,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-99zVHV4ewHk29",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2017,
+      "trim": "4WD",
+      "chassisCode": "HT20",
+      "engineCc": 2000,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-YEvOshGnxfDNsK",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2020,
+      "trim": "sDrive20i X Line 4WD",
+      "chassisCode": "AB20",
+      "engineCc": 2000,
+      "factsForModel": 555,
+      "factsForYear": 39,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "sdrive18iadvantagenavihifisportsitze"
+          ]
+        },
+        {
+          "trim": [
+            "xdrive25eadvantagefacellednavikamera"
+          ]
+        },
+        {
+          "trim": [
+            "sdrive25lileadingtype"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-9ZMIK0mEI58RcH",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2017,
+      "trim": "4WD xDrive18d X Line",
+      "chassisCode": "HT20",
+      "engineCc": 2000,
+      "transmission": "automatic",
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-3UkkU638pWWmaf",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2014,
+      "trim": "4WD",
+      "chassisCode": "VM20",
+      "engineCc": 1997,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2kvPgn03OZ4KlBK",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2011,
+      "trim": "SDRIVE18I",
+      "chassisCode": "VL18",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2v5BeHSw8giWahb",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2012,
+      "trim": "SDRIVE18I M Sports Package",
+      "chassisCode": "VL18",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2vezj4EbY1ZyMYD",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2014,
+      "trim": "SDRIVE18I X Line",
+      "chassisCode": "VL18",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2vftuJ65uZBfKRj",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2013,
+      "trim": "SDRIVE20I X Line",
+      "chassisCode": "VL20",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-32fhsB7oOQpdYkb",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2012,
+      "trim": "SDRIVE18I",
+      "chassisCode": "VL18",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-ZxNidJkOKvXK84",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2018,
+      "trim": "sDrive 18i",
+      "chassisCode": "JG15",
+      "engineCc": 1500,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-5iSjdZ2VFdlpvF",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2016,
+      "trim": "X1 xDrive 20I X Line",
+      "chassisCode": "HS20",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-5pdCU2bEvtcaGp",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2023,
+      "trim": "X1 xDrive 20I X Line",
+      "chassisCode": "52EE20",
+      "engineCc": 2000,
+      "factsForModel": 555,
+      "factsForYear": 89,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "xdrive30emsportacchkhudkeylessadled"
+          ]
+        },
+        {
+          "trim": [
+            "2023sdrive25lixdesignpackage"
+          ]
+        },
+        {
+          "trim": [
+            "xd20dxlinekamerahkahkdabpanorama19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-7UbOb0ABFqHkuf",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2021,
+      "trim": "X1 xDrive 18d X Line Comfort P Safety",
+      "chassisCode": "AD20",
+      "engineCc": 1990,
+      "factsForModel": 555,
+      "factsForYear": 127,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "x115dautomatiquegarantie12mois"
+          ]
+        },
+        {
+          "trim": [
+            "2021faceliftsdrive20lifashion"
+          ]
+        },
+        {
+          "trim": [
+            "xdrive20iauthudnavilederledaccshzklim"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-2zTdfpeknVlMBNQ",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2018,
+      "trim": "xDrive18d 4WD 0ウリ Key リ",
+      "chassisCode": "HT20",
+      "engineCc": 2000,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-57DLHD0KajbchF",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2010,
+      "trim": "sDrive 18i",
+      "chassisCode": "VL18",
+      "engineCc": 2000,
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-6YEv8oP7PDBD1AY",
+      "make": "BMW",
+      "model": "X1",
+      "year": 2019,
+      "trim": "xDrive M Sports",
+      "chassisCode": "HT20",
+      "engineCc": 2000,
+      "transmission": "automatic",
+      "factsForModel": 555,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    }
+  ],
+  "savedDetailProbe": [],
+  "notes": [
+    "No production data writes or supplier collection.",
+    "Comparison of specificationIdentity enabled/disabled, not incremental gain versus installed release.",
+    "Japan factory fuel applied equally to both sides, matching production order.",
+    "4 ready Japanese preview inputs are estimates with supplier-reported power, not certified exact power."
+  ]
+}

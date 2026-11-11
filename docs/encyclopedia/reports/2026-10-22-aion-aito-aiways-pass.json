@@ -1,0 +1,209 @@
+{
+  "checkedAt": "2026-10-22T11:54:29.679868+07:00",
+  "batches": [
+    {
+      "batch": "research-2026-10-22-aion-i60-field-provenance",
+      "variants": 8,
+      "fields": 51,
+      "newVariants": 0,
+      "workflow": 39720346067,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aion-i60-field-provenance-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aion-i60-field-provenance-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aion-ut-europe-exact",
+      "variants": 2,
+      "fields": 17,
+      "newVariants": 1,
+      "workflow": 39720654481,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aion-ut-europe-exact-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aion-ut-europe-exact-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aito-m5-historical-manuals",
+      "variants": 17,
+      "fields": 55,
+      "newVariants": 0,
+      "workflow": 39723434737,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+      "variants": 13,
+      "fields": 20,
+      "newVariants": 1,
+      "workflow": 39723671616,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aito-m6-gross-mass-and-edition-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aito-m6-gross-mass-and-edition-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aito-m7-historical-manuals",
+      "variants": 35,
+      "fields": 94,
+      "newVariants": 0,
+      "workflow": 39723853301,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aito-m7-historical-manuals-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aito-m7-historical-manuals-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aito-m7-2026-manuals",
+      "variants": 40,
+      "fields": 64,
+      "newVariants": 0,
+      "workflow": 39724071691,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aito-m8-gross-mass",
+      "variants": 49,
+      "fields": 49,
+      "newVariants": 0,
+      "workflow": 39724407767,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aito-m8-gross-mass-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aito-m8-gross-mass-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aito-m9-generation-fields",
+      "variants": 30,
+      "fields": 45,
+      "newVariants": 0,
+      "workflow": 39724528014,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-readback.json",
+      "apiReadbackPassed": true
+    },
+    {
+      "batch": "research-2026-10-22-aiways-u5-manual-years",
+      "variants": 3,
+      "fields": 18,
+      "newVariants": 3,
+      "workflow": 39724775367,
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-aiways-u5-manual-years-apply.json",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-aiways-u5-manual-years-readback.json",
+      "apiReadbackPassed": true
+    }
+  ],
+  "totals": {
+    "variants": 197,
+    "fieldConfirmations": 413,
+    "newVariants": 5
+  },
+  "correctedM9Ev2025GrossMass": {
+    "records": 4,
+    "fromKg": 1500,
+    "toKg": 3130
+  },
+  "sources": "Заводские таблицы и руководства; ссылки, даты, SHA256 и страницы хранятся в каждой партии.",
+  "integration": {
+    "installedRelease": "5b8453f63b8e4af36092f79f86dbe665e557e969",
+    "installedIndex": "7d4d2834a0f1a9832927b96b736928799ce3d8c3495ca6fcc3ce2bf32befc508",
+    "runningRelease": "0a96094e77e9fc638e7796aafec02f03b9460cbc",
+    "runningWorkflow": 39720853891,
+    "frozenIndexContains": [
+      "research-2026-10-22-aion-i60-field-provenance",
+      "research-2026-10-22-aion-ut-europe-exact"
+    ],
+    "runningStep": "Prepare exact price indexes before activating the release",
+    "pendingNextIndexBatches": [
+      {
+        "batch": "research-2026-10-22-aito-m5-historical-manuals",
+        "commit": "1231d249913b7ace102d9d3750bf5b626b7c2b1a",
+        "workflow": 39723434737,
+        "variants": 17,
+        "fields": 55,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+        "commit": "fb7899063f30cec410c00cc33afcea9f68b067a8",
+        "workflow": 39723671616,
+        "variants": 13,
+        "fields": 20,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aito-m7-historical-manuals",
+        "commit": "f07c764cbee6ea85f3adaed8a5427c051b5a3ec4",
+        "workflow": 39723853301,
+        "variants": 35,
+        "fields": 94,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aito-m7-2026-manuals",
+        "commit": "d003a852d9bd4bee716483d23728be62469943be",
+        "workflow": 39724071691,
+        "variants": 40,
+        "fields": 64,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aito-m8-gross-mass",
+        "commit": "d15cdf5d62572f29560cb05098a4eb4dd5be2ada",
+        "workflow": 39724407767,
+        "variants": 49,
+        "fields": 49,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aito-m9-generation-fields",
+        "commit": "1a59a76ad9f152993504af450f2b086e6327decb",
+        "workflow": 39724528014,
+        "variants": 30,
+        "fields": 45,
+        "apiReadback": true,
+        "includedInIndex": false
+      },
+      {
+        "batch": "research-2026-10-22-aiways-u5-manual-years",
+        "commit": "b287f840a56486e6d9939c84b9336653b6024017",
+        "workflow": 39724775367,
+        "variants": 3,
+        "fields": 18,
+        "apiReadback": true,
+        "includedInIndex": false
+      }
+    ],
+    "visitorRequestSyncAdded": false,
+    "duplicateReleaseStarted": false
+  },
+  "intakes": [
+    {
+      "workflow": 39713120109,
+      "status": "in_progress"
+    },
+    {
+      "workflow": 39716869282,
+      "status": "in_progress"
+    }
+  ],
+  "nextModel": "Alfa Romeo 4C",
+  "retryPlans": [
+    "docs/encyclopedia/reports/2026-10-22-aion-i60-field-provenance-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aion-ut-europe-exact-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aito-m5-historical-manuals-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aito-m6-gross-mass-and-edition-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aito-m7-historical-manuals-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aito-m7-2026-manuals-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aito-m8-gross-mass-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aito-m9-generation-fields-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aiways-u5-manual-years-plan.json",
+    "docs/encyclopedia/reports/2026-10-22-aixam-source-review.json"
+  ],
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false
+}

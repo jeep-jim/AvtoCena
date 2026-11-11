@@ -1,0 +1,589 @@
+{
+  "version": 1,
+  "id": "research-2026-10-21-aito-m5-m6",
+  "entries": [
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "7761daf043ee821f6861de4b",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "2025款 增程 Ultra 后驱版",
+      "expectedDigest": "442ba3df4b76ce440c4e8e5596fba2df542b4a17f28db14a5c5c6377f3d2c0e5",
+      "patch": {
+        "trim": "EREV Ultra RWD",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 42,
+        "motorPeakKw": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra последовательный гибрид с увеличителем запаса хода, задний привод. Батарея 42 кВт·ч. Максимальная мощность единственного заднего электромотора 200 кВт. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "bde50e54f36fc9e725f79c70",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "2025款 纯电 Ultra 后驱版",
+      "expectedDigest": "b155ed532528697e9ccf6bc0f247b7c5335c1f810260f2d2a6219d3f8fb17070",
+      "patch": {
+        "trim": "EV Ultra RWD",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 83,
+        "motorPeakKw": 200,
+        "powerKw": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra электрическая, задний привод. Батарея 83 кВт·ч. Максимальная мощность единственного заднего электромотора 200 кВт. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "84bab1d39cdd153b11cc0070",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "2025款 增程 Ultra 四驱版",
+      "expectedDigest": "eec01258d1e944793f154692127e505e9141cb362b63dd2794df09ec66a04fe1",
+      "patch": {
+        "trim": "EREV Ultra AWD",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 42
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra последовательный гибрид с увеличителем запаса хода, полный привод. Батарея 42 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 200 кВт; суммарная одновременная мощность отдельно не подтверждена. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "9d8099b21e3e2480fb5ae07d",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "2025 Extended Range Ultra AWD",
+      "expectedDigest": "db078e85f6f63d18c4d423801e3e8b8fcc0e44054f781f9cb9e97cb26ec54444",
+      "patch": {
+        "trim": "2025 Extended Range Ultra AWD",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 42
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra последовательный гибрид с увеличителем запаса хода, полный привод. Батарея 42 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 200 кВт; суммарная одновременная мощность отдельно не подтверждена. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "2dfe5d6a58831f91aaa9b076",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EV Ultra RWD Edition",
+      "expectedDigest": "10ba76e865c3a3f481390ea663b3ce976e66d93f903b1672336ca6bed12e68e5",
+      "patch": {
+        "trim": "EV Ultra RWD Edition",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 83,
+        "motorPeakKw": 200,
+        "powerKw": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra электрическая, задний привод. Батарея 83 кВт·ч. Максимальная мощность единственного заднего электромотора 200 кВт. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "df1dbee886050731467d676d",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra RWD Edition",
+      "expectedDigest": "add0b08e942c9a47a4ccbbdeb0c21c394142dea15879afc39f3ab1915a05cbc3",
+      "patch": {
+        "trim": "EREV Ultra RWD Edition",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 42,
+        "motorPeakKw": 200
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra последовательный гибрид с увеличителем запаса хода, задний привод. Батарея 42 кВт·ч. Максимальная мощность единственного заднего электромотора 200 кВт. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "7b5096467972e30be800b516",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra 4WD Edition",
+      "expectedDigest": "c3853456e9196efd83f63d490024a9e8470e19889e614ab2499baee83bd7fbc0",
+      "patch": {
+        "trim": "EREV Ultra 4WD Edition",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 42
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m5-new/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "Ultra последовательный гибрид с увеличителем запаса хода, полный привод. Батарея 42 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 200 кВт; суммарная одновременная мощность отдельно не подтверждена. 30-минутная мощность и разрешённая масса не указаны; снаряжённая масса не переносилась в разрешённую. Для гибрида точные см³ и мощность ДВС не подтверждены. Прочие прежние параметры остаются наблюдениями."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f95ceb79d43685224a299759",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026款 增程 Max",
+      "expectedDigest": "10ee91bb3fd69b8ab0edba84cd93ccaea5578d9ce0d24cf69dddf7f69ec96ed3",
+      "patch": {
+        "trim": "2026 EREV Max",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EREV Max: последовательный гибрид, полный привод, батарея 37 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 180 кВт; сумма не используется как подтверждённая одновременная мощность. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "90641a1cfb521cd2c45d7689",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra",
+      "expectedDigest": "a49aae630cfc11f506d711962d2add6a159dbebd109aa74e6bc7eb06c2a13ad6",
+      "patch": {
+        "trim": "2026 EREV Ultra",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EREV Ultra: последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 180 кВт; сумма не используется как подтверждённая одновременная мощность. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "8c34f3907fa45adb900ed6c0",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultra",
+      "expectedDigest": "ef0bb40dc1085d0db534353d53c69e678b8d68d2692c192e6feaa445e2fb14a5",
+      "patch": {
+        "trim": "2026 EV Ultra",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EV Ultra: электромобиль, полный привод, батарея 100 кВт·ч. Пиковая мощность переднего мотора 160 кВт, заднего 180 кВт; сумма не используется как подтверждённая одновременная мощность. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "478432305a9118c46fd3e4f7",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026款 纯电 Max",
+      "expectedDigest": "f4b940e4467e1bba7e578962f90b7a48f8d677a1cc01714af923eb6c83142b9d",
+      "patch": {
+        "trim": "2026 EV Max",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 81,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EV Max: электромобиль, задний привод, батарея 81 кВт·ч. Максимальная мощность единственного заднего электромотора 227 кВт. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "77adb4c03bdb1412a28109c8",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026款 纯电 Max+ 长续航版",
+      "expectedDigest": "af95d1de2579d75efc1f9fa1c3d0fb512be7037b32249f7fc0dba84206e0973b",
+      "patch": {
+        "trim": "2026 EV Max+ Long Range",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EV Max+ Long Range: электромобиль, задний привод, батарея 100 кВт·ч. Максимальная мощность единственного заднего электромотора 227 кВт. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "235609122d33377c27a6c21a",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026款 增程 Max+ 长续航",
+      "expectedDigest": "5d88e77e291b6224d30fe69e559655a98c76035e0363f7adecc98c5c19f199ad",
+      "patch": {
+        "trim": "2026 EREV Max+ Long Range",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EREV Max+ Long Range: последовательный гибрид, задний привод, батарея 53.4 кВт·ч. Максимальная мощность единственного заднего электромотора 227 кВт. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f76c9efd82f7b91a385b16e0",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "纯电 Max+ 长续航版",
+      "expectedDigest": "5e4ba3c4c23875a02dd3cc0f2f6adb8ca9e9f66d41eaf875397d199d817d4603",
+      "patch": {
+        "trim": "EV Max+ Long Range",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EV Max+ Long Range: электромобиль, задний привод, батарея 100 кВт·ч. Максимальная мощность единственного заднего электромотора 227 кВт. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "49caade874ae04290cb92097",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "纯电 Max+",
+      "expectedDigest": "fc12d282eea3a39f569f3b7ec4b25af0fdcd69135a1ae58939bdd7a19b4329a8",
+      "patch": {
+        "trim": "EV Max+",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 81,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EV Max+: электромобиль, задний привод, батарея 81 кВт·ч. Максимальная мощность единственного заднего электромотора 227 кВт. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "a4888807696fe9d693d3f3b7",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "增程 Max+ 长续航",
+      "expectedDigest": "b9d0efac1c92cd7d3eee131556f5f4c6ece730d7410debf23baf88d5f5597972",
+      "patch": {
+        "trim": "EREV Max+ Long Range",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EREV Max+ Long Range: последовательный гибрид, задний привод, батарея 53.4 кВт·ч. Максимальная мощность единственного заднего электромотора 227 кВт. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f43a569e298d5682ed842aef",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "纯电 Ultra",
+      "expectedDigest": "e8db2c64e28939bd9dd7035fb537759fd44291c24f274a4f44f6c116400cb6d5",
+      "patch": {
+        "trim": "EV Ultra",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EV Ultra: электромобиль, полный привод, батарея 100 кВт·ч. Пиковая мощность переднего мотора 160 кВт, заднего 180 кВт; сумма не используется как подтверждённая одновременная мощность. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "346c7414d8e9062518476566",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "增程 Ultra",
+      "expectedDigest": "b6eecb16961a38ea465a82a123ad93ba9dbe5e22db54acce71eae176f27251aa",
+      "patch": {
+        "trim": "EREV Ultra",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EREV Ultra: последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 180 кВт; сумма не используется как подтверждённая одновременная мощность. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "12ea4ae30cca59af81e4b491",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "增程 Max",
+      "expectedDigest": "d45905fcff115c67bca1992b824502652e6b6a5ea5a4cd5d0837b55df5415a48",
+      "patch": {
+        "trim": "EREV Max",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/model/m6/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "EREV Max: последовательный гибрид, полный привод, батарея 37 кВт·ч. Пиковая мощность переднего мотора 165 кВт, заднего 180 кВт; сумма не используется как подтверждённая одновременная мощность. Long Range означает увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС не подтверждены этой таблицей; прежние непроверенные параметры не получают подтверждения."
+      }
+    }
+  ]
+}

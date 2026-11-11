@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-10-22T04:26:40.563Z",
+  "state": "local_projection_only_not_applied",
+  "models": [
+    {
+      "model": "m5",
+      "before": {
+        "variants": 36,
+        "owner_reference": 211,
+        "manufacturer": 35
+      },
+      "after": {
+        "variants": 36,
+        "owner_reference": 182,
+        "manufacturer": 89
+      },
+      "delta": {
+        "variants": 0,
+        "owner_reference": -29,
+        "manufacturer": 54
+      }
+    },
+    {
+      "model": "m6",
+      "before": {
+        "variants": 13,
+        "manufacturer": 52,
+        "owner_reference": 9
+      },
+      "after": {
+        "variants": 14,
+        "manufacturer": 70,
+        "owner_reference": 9
+      },
+      "delta": {
+        "variants": 1,
+        "manufacturer": 18,
+        "owner_reference": 0
+      }
+    },
+    {
+      "model": "m7",
+      "before": {
+        "variants": 102,
+        "owner_reference": 456,
+        "manufacturer": 126
+      },
+      "after": {
+        "variants": 102,
+        "manufacturer": 284,
+        "owner_reference": 413
+      },
+      "delta": {
+        "variants": 0,
+        "owner_reference": -43,
+        "manufacturer": 158
+      }
+    }
+  ],
+  "variants": 105,
+  "confirmedFields": 233,
+  "calculationRulesUnchanged": true,
+  "doesNotProveNewCompletedPrices": true
+}

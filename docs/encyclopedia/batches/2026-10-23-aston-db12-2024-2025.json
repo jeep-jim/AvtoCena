@@ -1,0 +1,416 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-aston-db12-2024-2025",
+  "entries": [
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2025,
+      "trim": "V8 Coupe",
+      "variantId": "b50b1eb2c3045a0bd18de6e0",
+      "operation": "create",
+      "expectedRevision": "c42367c5-aaaa-4d32-a32c-ccbc2ba1d920",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 680,
+        "powerKw": 500,
+        "icePowerKw": 500,
+        "grossVehicleWeightKg": 2260
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское руководство 25MY: V8 Coupe. Подтверждены только перечисленные поля. Полная масса GVW взята из соответствующего столбца Coupe/Volante: у Volante24MY2360кг,25MY2365кг. Для новых годовых строк используются именно модельные годы. PS и kW переписаны из таблицы, bhp не используются вместо PS. Прежние источники и исходные идентификаторы сохраняются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 230
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 256
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 256
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257,
+            "unit": "PS"
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 257
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 258
+          }
+        }
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2025,
+      "trim": "V8 Volante",
+      "variantId": "6d9a5da576814ebfd985155d",
+      "operation": "create",
+      "expectedRevision": "c42367c5-aaaa-4d32-a32c-ccbc2ba1d920",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "V8 Volante",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 680,
+        "powerKw": 500,
+        "icePowerKw": 500,
+        "grossVehicleWeightKg": 2365
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское руководство 25MY: V8 Volante. Подтверждены только перечисленные поля. Полная масса GVW взята из соответствующего столбца Coupe/Volante: у Volante24MY2360кг,25MY2365кг. Для новых годовых строк используются именно модельные годы. PS и kW переписаны из таблицы, bhp не используются вместо PS. Прежние источники и исходные идентификаторы сохраняются.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "bodyType": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "fuel": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 230
+          },
+          "powertrainKind": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 256
+          },
+          "transmission": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "engineCc": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 256
+          },
+          "powerHp": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257,
+            "unit": "PS"
+          },
+          "powerKw": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "icePowerKw": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 257
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/DB12/25MY/25MY%20DB12%20English%20Owner%20Guide.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2025,
+            "sourceSha256": "80b7f1476bd964431ef2f8380b3f527fe8606e867b94ae64ce97660ac52c293d",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=25MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 258
+          }
+        }
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "V8 Coupe",
+      "variantId": "f3ce66b1dce663d80b2bc58d",
+      "expectedDigest": "b932298b7ca8d6376d4ee4ef5224c6b6d5d651a0b512c81b41bebff53c688103",
+      "patch": {
+        "grossVehicleWeightKg": 2260
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское руководство 24MY: V8 Coupe. Подтверждены только перечисленные поля. Полная масса GVW взята из соответствующего столбца Coupe/Volante: у Volante24MY2360кг,25MY2365кг. Для новых годовых строк используются именно модельные годы. PS и kW переписаны из таблицы, bhp не используются вместо PS. Прежние источники и исходные идентификаторы сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2024,
+            "sourceSha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 251
+          }
+        }
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "V8 Volante",
+      "variantId": "f7fe93cdc70d6d04b466a4f2",
+      "expectedDigest": "4a3e973b98f51f4f92ccc75e6018b1850c1bec61ea3fe44a2a39085650d710f9",
+      "patch": {
+        "grossVehicleWeightKg": 2360
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское руководство 24MY: V8 Volante. Подтверждены только перечисленные поля. Полная масса GVW взята из соответствующего столбца Coupe/Volante: у Volante24MY2360кг,25MY2365кг. Для новых годовых строк используются именно модельные годы. PS и kW переписаны из таблицы, bhp не используются вместо PS. Прежние источники и исходные идентификаторы сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2024,
+            "sourceSha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English",
+            "selector": "V8 Volante",
+            "pdfPage": 251
+          }
+        }
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "V8 Coupe",
+      "variantId": "55f6c826f8e093d1925bd5b1",
+      "expectedDigest": "f9db70ae4fcf82f82dcd6731a419957cc37845aba73f1b6c576396ae76386307",
+      "patch": {
+        "grossVehicleWeightKg": 2260
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Заводское руководство 24MY: V8 Coupe. Подтверждены только перечисленные поля. Полная масса GVW взята из соответствующего столбца Coupe/Volante: у Volante24MY2360кг,25MY2365кг. Для новых годовых строк используются именно модельные годы. PS и kW переписаны из таблицы, bhp не используются вместо PS. Прежние источники и исходные идентификаторы сохраняются.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "Aston Martin",
+            "sourceNature": "Заводское руководство владельца",
+            "modelYear": 2024,
+            "sourceSha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English",
+            "selector": "V8 Coupe",
+            "pdfPage": 251
+          }
+        }
+      }
+    }
+  ]
+}

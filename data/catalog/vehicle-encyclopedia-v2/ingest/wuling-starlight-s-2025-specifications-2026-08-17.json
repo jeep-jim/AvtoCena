@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-wuling-starlight-s-2025-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱星光S 2025款参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=304",
+          "documentId": "SGMW carDetail 304",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "transmission",
+            "drive",
+            "icePowerKw",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "acChargeKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "grossWeightKg",
+            "tankCapacityL",
+            "seats",
+            "doors",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact six-column 2025 model-year manufacturer table. Battery capacities are not mapped because the table does not distinguish gross, usable or rated basis. Motor maximum power is mapped to motorPeakKw, never to 30-minute power."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight-s",
+          "brandId": "wuling",
+          "canonicalName": "Starlight S",
+          "slug": "starlight-s",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光S",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "PHEV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW explicitly labels the table as 2025 model year and identifies every row as a five-door, five-seat SUV with PHEV or BEV powertrain."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom.",
+            "Six exact 2025 China configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight-s/2025-model-year",
+          "modelId": "wuling/starlight-s",
+          "name": "2025 model year",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official model-specific specification is explicitly titled 2025 model year and lists a five-door SUV body for all configurations."
+            }
+          ],
+          "researchNotes": [
+            "Model-year container only; no unverified platform or internal generation code is assigned."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight-s/2025-model-year/60-km-advanced",
+          "modelId": "wuling/starlight-s",
+          "generationId": "wuling/starlight-s/2025-model-year",
+          "faceliftId": null,
+          "name": "60 km Advanced",
+          "aliases": [
+            {
+              "value": "60km 进阶型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-s-2025-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "PHEV",
+          "transmission": "E-CVT",
+          "icePowerKw": 78,
+          "tankCapacityL": 53,
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 60,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 4745,
+          "widthMm": 1890,
+          "heightMm": 1685,
+          "wheelbaseMm": 2800,
+          "curbWeightKg": 1680,
+          "grossWeightKg": 2090,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 170,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh",
+                "transmission",
+                "icePowerKw",
+                "tankCapacityL"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2025 Starlight S specification. FWD normalizes front-engine/front-wheel drive; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery value remains in the source but is not assigned to gross, usable or rated capacity without an explicit manufacturer basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-s/2025-model-year/130-km-leading",
+          "modelId": "wuling/starlight-s",
+          "generationId": "wuling/starlight-s/2025-model-year",
+          "faceliftId": null,
+          "name": "130 km Leading",
+          "aliases": [
+            {
+              "value": "130km 领航型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-s-2025-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "PHEV",
+          "transmission": "E-CVT",
+          "icePowerKw": 78,
+          "tankCapacityL": 53,
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 130,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 4745,
+          "widthMm": 1890,
+          "heightMm": 1680,
+          "wheelbaseMm": 2800,
+          "curbWeightKg": 1745,
+          "grossWeightKg": 2200,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 170,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh",
+                "transmission",
+                "icePowerKw",
+                "tankCapacityL"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2025 Starlight S specification. FWD normalizes front-engine/front-wheel drive; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery value remains in the source but is not assigned to gross, usable or rated capacity without an explicit manufacturer basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-s/2025-model-year/130-km-flagship",
+          "modelId": "wuling/starlight-s",
+          "generationId": "wuling/starlight-s/2025-model-year",
+          "faceliftId": null,
+          "name": "130 km Flagship",
+          "aliases": [
+            {
+              "value": "130km 旗舰型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-s-2025-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "PHEV",
+          "transmission": "E-CVT",
+          "icePowerKw": 78,
+          "tankCapacityL": 53,
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 130,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 4745,
+          "widthMm": 1890,
+          "heightMm": 1680,
+          "wheelbaseMm": 2800,
+          "curbWeightKg": 1790,
+          "grossWeightKg": 2200,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 170,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh",
+                "transmission",
+                "icePowerKw",
+                "tankCapacityL"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2025 Starlight S specification. FWD normalizes front-engine/front-wheel drive; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery value remains in the source but is not assigned to gross, usable or rated capacity without an explicit manufacturer basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-s/2025-model-year/130-km-high-power-flagship",
+          "modelId": "wuling/starlight-s",
+          "generationId": "wuling/starlight-s/2025-model-year",
+          "faceliftId": null,
+          "name": "130 km High-Power Flagship",
+          "aliases": [
+            {
+              "value": "130km 高功率旗舰型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-s-2025-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "PHEV",
+          "transmission": "E-CVT",
+          "icePowerKw": 105,
+          "tankCapacityL": 53,
+          "drive": "FWD",
+          "motorPeakKw": 160,
+          "rangeKm": 130,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 4745,
+          "widthMm": 1890,
+          "heightMm": 1680,
+          "wheelbaseMm": 2800,
+          "curbWeightKg": 1825,
+          "grossWeightKg": 2240,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 185,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh",
+                "transmission",
+                "icePowerKw",
+                "tankCapacityL"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2025 Starlight S specification. FWD normalizes front-engine/front-wheel drive; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery value remains in the source but is not assigned to gross, usable or rated capacity without an explicit manufacturer basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-s/2025-model-year/510-km-leading",
+          "modelId": "wuling/starlight-s",
+          "generationId": "wuling/starlight-s/2025-model-year",
+          "faceliftId": null,
+          "name": "510 km Leading",
+          "aliases": [
+            {
+              "value": "510km 领航型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-s-2025-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 510,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 6.6,
+          "lengthMm": 4745,
+          "widthMm": 1890,
+          "heightMm": 1680,
+          "wheelbaseMm": 2800,
+          "curbWeightKg": 1735,
+          "grossWeightKg": 2190,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2025 Starlight S specification. FWD normalizes front-engine/front-wheel drive; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery value remains in the source but is not assigned to gross, usable or rated capacity without an explicit manufacturer basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-s/2025-model-year/510-km-flagship",
+          "modelId": "wuling/starlight-s",
+          "generationId": "wuling/starlight-s/2025-model-year",
+          "faceliftId": null,
+          "name": "510 km Flagship",
+          "aliases": [
+            {
+              "value": "510km 旗舰型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-s-2025-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 510,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 6.6,
+          "lengthMm": 4745,
+          "widthMm": 1890,
+          "heightMm": 1680,
+          "wheelbaseMm": 2800,
+          "curbWeightKg": 1780,
+          "grossWeightKg": 2190,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2025 Starlight S specification. FWD normalizes front-engine/front-wheel drive; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery value remains in the source but is not assigned to gross, usable or rated capacity without an explicit manufacturer basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

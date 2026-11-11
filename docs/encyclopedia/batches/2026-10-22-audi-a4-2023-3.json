@@ -1,0 +1,4166 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4-2023-3",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3289e9ef209d84968662a424",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI qu ADVANCED KEYLESS,ACC,KAMERA",
+      "expectedDigest": "8c882f59b5a504529c3ec6fb5578318216eba4e8c0cd858712b509c6104103d7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9912ac1422c879ca49e1544b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI QUATTRO S TRONIC NAVI*KAMERA*S",
+      "expectedDigest": "5850dd614bae5e3836126bb8162194d3633d2975be4cbc384743763c86f3606f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4e2f4ad5491914d3472b48b6",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI qu. S tronic advanced AHK/B&O/Hu",
+      "expectedDigest": "50a82463ca22e396e51c664576228e725e4b3206b0c4fe8f8a6d911814bdf609",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e7f59d30a8067d0917befb1f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI Quattro Advanced *LED Navi DAB*",
+      "expectedDigest": "579f30d70c77699407b4c502987d07fb8741f4cfccd588494ba448541a4dea55",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "23311a5d7b765d74fae70443",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro LED AHK Kamera StandHZG",
+      "expectedDigest": "ccb7ddaeacf8246947df7fbefc5412e33435cca0b2ddbe83526c0969cd8bd28a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6618724cd6bf303d004e0514",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI QU S-TR ADVANCED MATRIX+NAV+ACC",
+      "expectedDigest": "625824290d17e8398eba764a705675febd446d1db68c539b75fc87e6d067acad",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8fbb00fa19927ca100b96510",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S line PANO+°360+HUD+B&O",
+      "expectedDigest": "422407fc16f0d42ef5569f53caa6ceea6ed735eb3e7a843210f6310c5f71821d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "1403a1c7f838fe5dc71a3edf",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI qu. S line LED Kamera StandHZG",
+      "expectedDigest": "67ddc25302e3b047c1d04921097368ded0f1e42593dcf23a645486368ffaf419",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "00d7befffd58a69bb4236387",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro LED PDC+ Sitzheizung",
+      "expectedDigest": "c14f2077a027933857187e72d6b4e252430a1101297c2bfc1347a325bbeddb42",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cda55df3ac62cc0b0ddef2d2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant advanced 40TDI quattro NAVI LED B&O AHK",
+      "expectedDigest": "72c90d07da796690ad1b2d06ff7d79fcb77db7156ed8da9eefb1422301ba1be0",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "434dec763175ca1ce17b4311",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic advanced |FLA",
+      "expectedDigest": "9dfb6b667053554994b3630dd506fdb315834c252713186ff088c1c30caec9cb",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "40691d3a4928136f3d2ea4f0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40TDI quattro S-line Scheinwerfer LED T",
+      "expectedDigest": "4e078f818a46790d77cd9ca56e718fb18c8ae8cc5fd999b7b4023c14393345a7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9cb94a698149d859c74e24d8",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro",
+      "expectedDigest": "f0836c4cd2ef7e1c60b9d99b0ca5c3f8f8a36cc60e959716c60be339814242b6",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "edb3637f76d1b3e7348d87e2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro S tronic advanced AHK",
+      "expectedDigest": "609f814727153ca719a804205e448895d88bee4d13b83508bec856408ae4dffd",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8f971dc2a9f60f7c5b980b7e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant advanced 40 TDI qu. AHK, B&O, Business",
+      "expectedDigest": "3f7379b689b14a174d36feee3d60d6b5327ffd1e473327f07a0f9836d655557e",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "51d3740f5dfefd3df79cc9b1",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant advanced 40 TDI qu. AHK, Navi, PDC, SHZ",
+      "expectedDigest": "8383a7317d156117c1c4fbe5a8c003b5c61aa4c4879df41520601f460cbb0f95",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3186cffbe51c7b1bf72a2701",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI qu. S line LED Alcantara Kamera",
+      "expectedDigest": "8762903a6febbce9e469b01825e61ec2568e9362f005888fe78d5abacebf9d56",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4e07cf4c74aaef7f96e4ae7d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro S tronic S line",
+      "expectedDigest": "cff6ff0cff0d4945cd625965f99997013916d61690427e6b0fd80de0b8475992",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8aef1d913d894076f3eb2780",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI QU S-TR S-LINE LED+NAVI+RFK+ACC",
+      "expectedDigest": "9934f37ebc3490e7a88cd82eca5af65485a2be988dea2bbefaf6394c27f26960",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "fae926c1053f49d74065dedf",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI S-TR QU ADVANCED LED+NAV+AHK+SHZ",
+      "expectedDigest": "d3df6afc966418796a21f1a01fe338854bfa5ab626111a89bf8a0c27b52abf66",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "87d62eb51ba78fc713c6f122",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 40 TDI quattro*Matrix*HeadUp*Tou",
+      "expectedDigest": "a4fbd3b4224f539d50e19d1192309866faf3c011b9a91039d469712a0e0b5a34",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f53026739a50349e8c5731ce",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro LED AHK Kamera Alcantara",
+      "expectedDigest": "4a71594506d86d7db1a11c5b60870f5a0b4f04f0885969a9634b61c4ca33e8ee",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "51f506c658404438a9125ffd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S-Line*LEDER*KAMERA*TOUR",
+      "expectedDigest": "c77d36e88af69ab111e11bfd19fcb4992bf256cf7adeae5bbdf9d16076765a45",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5d853e11ecc0d5fc9af647aa",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Lim. 40 TDI quattro advanced AHK LED",
+      "expectedDigest": "b7115de631668c766200644f3cdba9a5dfaf1e6280609cf583245e8b0e271887",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c5eca02ef01fc6e0c39fd9cd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI QU ADVANCED MATRIX+NAVI+RFK+AHK",
+      "expectedDigest": "a95ccf0145a3b405ee294c17e060a9e36b35f57ce5f141de613e10f989ea89ae",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5c88fac215ce8f207bb35e6a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI QU S-TR 2xS-LINE NAV+PDC+ACC+AHK",
+      "expectedDigest": "29efc4f8e88f8bdac4b084e49ca55540dae163c33728d6985f27de1dd15a17e8",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7b38f5a52ea7afd365dc1af0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI qu S line*Navi*Matrix*Alu*AHK*P",
+      "expectedDigest": "20d24c1350b8ab654e7f6152de12bc382a449cb775c9e6ad2616ad60e2a1723e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "14d13a94a87d09385812044b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant Advanced 40 TDI qu. S tr. ACC AHK KAM L",
+      "expectedDigest": "6d4e8efb074d7abdd1f970a4f516d5b16292e3d44b40ce4a566341d8a5c2f034",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "38e34f4be31989e4aed31fb0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI qu S LINE 18 Z. PANO,KEYLESS,SH",
+      "expectedDigest": "0654fe1fe49a1c2cde03b6fcac905e6f3a49c424bfe75e2979f354249aefc9db",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7ce1eceb334ac398d409a488",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro S tronic*s line*B&O*Pan",
+      "expectedDigest": "a3c1951e9415f084cc5626cf8383c1ea69d07536bf47a1675d184a902e826363",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cf40a0a586587e375cad4771",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic S line Matrix P",
+      "expectedDigest": "859ec382de9801ccb5bc2dec706644b82049bcf13ee4b9cd8c7553b47115f5e9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cc36649aed07f65c838da31d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI qu. Matrix AHK PDC+ Navi Carplay",
+      "expectedDigest": "f568250c86ab5f4379e51923b425ab22896323d8ed2b038e00659c547c3c7082",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6523ed5086ec3ede31a03b22",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S-Line 40TDI Quattro AHK Panoramadach",
+      "expectedDigest": "293a69014dd4283f473cfd504d226771931ee777ad4d1b492174959afafd67ba",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6f8614ba36efacdf8b613f6f",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro LED AHK Leder Navi 360°",
+      "expectedDigest": "bf02fe39dd73357bcb8ffe81d48df9945d6fa54e350ee5488481c0c95ca0f205",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "28b0d33ef9ac47829f4ffc49",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 40 TFSI qu. Navi, virtual, Sound",
+      "expectedDigest": "c6f7fe5e477246cab6a9a979635301f4f48c9617630e1f1bcb3e027e7c5e4c34",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "522a4668cf5f098bdfe37b86",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattro 3x S line/HUD/AHK/B&O",
+      "expectedDigest": "88b311ce26eb767273e0185791eb1301d4a5060fdd1686fe12050c5e28d6fd8a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "116eab7237ad3f74ed82ccb0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI qu S line S tronic*Navi*LED*Alu*",
+      "expectedDigest": "d19fe5dd2c3bf08a4121a739a3a43914d4ac9fc1eae05e7f60f517ae99554d06",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ebf5fc00fae09a2f396cea8b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S-Line 40 TFSI qu S-Tr. MATRIX AHK ACC",
+      "expectedDigest": "b7533a18a82f8001ace586f49b2d88d0bb5de92156c2ffe9bdba0411fabb54a8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "ca1d07ea37f5e7608885ce0a",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S tronic advanced 8-fach",
+      "expectedDigest": "7c6f775246c87cf7203f2bdbb47c56b493eef79fb0f60df2c9d585b81b8a9d9a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d9c11a6cf9d4336209761756",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 40TFSI qu Stronic Navi Matrix AC",
+      "expectedDigest": "42ee32e46c1147663fad19885ad6d9edc659da20c39a0510476737ac8f38466e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "fa1a00b0d8654d79054a9553",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TDI quattro S line /NAVI/LED/1.HAND/",
+      "expectedDigest": "7143edb9e8019238d79c481841874685a18ae0715881c14c5fb051ee37a1239b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "99185f50e2f880f8ba2f5f5b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI qu. S tronic S line AHK/Virtual",
+      "expectedDigest": "b0b1feb57aba695c4982f7b30f0346e6b41528dd44c3ce8a36343411d4d9756a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cf61bdc0efc31b85dea4afa2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI qu. S tronic 2x S line Matrix/N",
+      "expectedDigest": "b5a954f2853c9b3cd11242934ae9ac06f061bbfa6a0531ad0a4d31b18b1f50c4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "cc3709138bd11d55f577bf96",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI quattroS line/KAMERA/ACC/MATRIX",
+      "expectedDigest": "7922b90578f9a23e6828dd1ddf890d6b60f38224691f747691dce0189c93db7b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e41fb2700a4d6fa809ce79ec",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 40 TFSI qu. 2x S line AHK Leder Pano",
+      "expectedDigest": "fe336371d5b77b06db39dc2c0be96e308135337b226bacef05fb5d992bb46719",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "aa521255d10cf3e1de627bc2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "40 2.0 TFSI Avant quattro S line AHK Matrix K",
+      "expectedDigest": "8ff717280a859c34d980ca2af75a5b0df27e29c98c76fdef95cf14b314410c19",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "765acbc460bfaff2021aa1e2",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro advanced Pano Carbon",
+      "expectedDigest": "55f17ed71efef7f97bbd608e21c3ba621e423a75053ec70d310d32d5110c5cc2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "66ecb21253eb80356bd1d2b6",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu 2x S line tro*Matrix*Navi+*S",
+      "expectedDigest": "71aa935452b7e6ea80f15e38d25e703815936156839f55d51923979f923fd522",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "6fe9148c4fddb4d7bdb5a731",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI S line quattro APP+AHK+PANO+LED",
+      "expectedDigest": "eea317a1b5a5bdb4df5ea1cd8014198b9bdfab1bb6c6b8ff6126e901fe62df45",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9083ab7886ec33a47595e4fa",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu S Line Navi AHK LED el.Klapp",
+      "expectedDigest": "461542a81022046561473a5dfa640514a155fb22c4f530ac6e5ce5432693124b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "57496639d4b45730cd78372c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 45 TFSI quattro S tronic Navi Plus",
+      "expectedDigest": "3206f147f178fc4342a1836f7661fa389a139bc171ef643901d53feb0ae90f5b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f97484ea58086004cdb49fd0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S line/Head-Up/Leder/",
+      "expectedDigest": "a162ef6035eadd33eeaa26e0f6455ec007d0d1d43b8625758d46597b2f0eeb3a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "42ebe8a72abd63dc28bd8e7e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu MATRIX,360,KEYLESS,B+O,ACC",
+      "expectedDigest": "551ba6187e83a2fc0397229235408851a63a734465066a457cae99a59ddff471",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4f279cd5df211f640e498619",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 2.0 TFSI quattro advanced RFK Navi L",
+      "expectedDigest": "a8a0969c1042276ab2bbc6111753bf33793b8aa356f89a1eae6be5392b8acfae",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "290f238899a1a2f473fd9da7",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro advanced MATRIX AHK",
+      "expectedDigest": "258214230f2fb09f111e8a0c1d1f30da922873b08cfe2bfa8f43d12d67b270c2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "07ee569420d2178d5204c716",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI Qu S-Line Black NAV+MATRIX+ACC",
+      "expectedDigest": "657f046cd05da07b2c33db97d242c5f705a6fe03f8b59acd3b901f5aa2bb7517",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "656e88454e74ff92dc97b1b1",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S line NAVI+KAM+VIR+LED",
+      "expectedDigest": "40883335ccca2c6eb044d9049d51d1570d99b790acb5c1051957b65256f65c60",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "9c6158d6a124d586ad4e534c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant S line 45 TFSI quattro S tronic LED ACC",
+      "expectedDigest": "c1e54c79d9ad32604ecb72c43aae7fb15a820855878989ca85ccb3c21b0213af",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d7469cbb9ec31ef273ddae75",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S-Line Standhzg ACC LED",
+      "expectedDigest": "fdb463a6dec38c0a7642a06e4403fb4e6231e05e565e73138d59e46bd22ea55f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2aeeae1bc8f04047f8aa758e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro S line competition MATR",
+      "expectedDigest": "d90add09842d902c1d27188470bd7cdad08984571149093a85706c54b588c060",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2c42800b36f9ac1bc1073adb",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S line Matrix*Business*B&O*",
+      "expectedDigest": "bf094092be2657c073c50a5e81fcebe2284c58a8c4c3003214d05fc2559ce082",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "400592f60dfa1ca810fa2d87",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI qu. S tronic advanced LED 19 KA",
+      "expectedDigest": "b6f846789201377054a5e9889651f29c40b9a58921628295404469150a32eb09",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "370c64c34e3ad8d0c3b686a1",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro *AUT*NAV*360°*ACC*STHZ*",
+      "expectedDigest": "a9edb7b34a3ef4f9dde129ffa8f885e7187b86f8102ac38c059632352eac3d40",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "35e5c53f737de68d269bedba",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Avant 45 TFSI quattro 3x S line/Pano/Matrix",
+      "expectedDigest": "dc51b644a429a34c5da0b1b04bfc9629e3a9a847bb70eeca94da5720ddad28f2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2023. Прайс AUDI AG от 24.03.2023, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://device.report/m/d3537a36dcd8907e403b090ab6a833937cb674525af0fa2e2cc9fdfcc105c8c0.pdf",
+            "date": "2023-03-24",
+            "pages": [
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              121,
+              122,
+              123,
+              124,
+              125,
+              128
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

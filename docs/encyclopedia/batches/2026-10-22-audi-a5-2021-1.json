@@ -1,0 +1,1734 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a5-2021-1",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "6ebf52dc09008096abb7f29a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 35 TFSI Navi, LED, 1 Hand",
+      "expectedDigest": "619a9c7e7b36ec9e9c621c7e6c65f137c183b09d7759f219d957dd3cea7f0055",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TFSI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d41c734333469a1c1776830a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 35 TFSI S tronic advanced",
+      "expectedDigest": "bcce571e1faa03891fc35eaad9b4a2d1ac35bd5699521045050c17cce2522a2d",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TFSI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "2022e11c2be766a66ee42ecb",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 35 TDI advanced",
+      "expectedDigest": "1c9ca0fd5f8998ff840f149515d5ec635dc03666af4f6863f65f73e25c0487aa",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bc76e0df192b27d0e4505330",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 35 TDI S tronic 1.Hd/Hu/Insp Neu",
+      "expectedDigest": "79b8416c70a7cb3aea536d9260caf5b6fb0f231afdcb2b675fb5c611b221e31b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "9245acaab83568cfc39b0951",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupé 35 TDI ADVANCED LED+NAV+ACC+RFK+AHK+SHZ",
+      "expectedDigest": "09a26e091f64218e2c9bb2b21505551a0a097e2728f9415f7a005da40caf6776",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 35 TDI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d257e77d52d0ebd0e855db06",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sb. 35 TDI*S LINE*LED-AHK-AMBIENT-KEYLESS-APP",
+      "expectedDigest": "c8d300eca61e0b01c1d8610365d66a4f3697c67e046274270aa349aeae585453",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "78e8582a33024df85a8e4797",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "*Sportback*35 TDI*S-tronic*LED*AHK*CAM*V.Cock*",
+      "expectedDigest": "67e4e5c8dce87762a3de9da756cccf3582658a25a04db32aa1be9f20eccc5cb6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "02d96f46504d8cf684f588ea",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "A5 Sportback 35 TDi Business Edition S tronic + Advanced Pack Platinum+PANORAMISCH SCHUIFDAK+ PROMO + GARANTIE!",
+      "expectedDigest": "864efb3b8bbebfa10f06fa1b8c9414f32f8293d4445472dba86f12e5b16de696",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "9650aacd6a5c5cf0764732ba",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupe 40 TDI qu S LINE VIRTUAL,MATRIX,CARPLAY",
+      "expectedDigest": "cafe41f9bd25cb535c14a634f8337731f18cfae89e77b41e3c46693bd7014af0",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "8769a400d2607850913e376d",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "40 2.0 TDI quattro Coupe LED+NAVI+RFK+SHZ+BC",
+      "expectedDigest": "a7e7b1ad5d44415604e048289cad8a841f57cbe274446cf3734d22e1b8b04175",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "8997f92f3193c98739f4912f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback advanced 40TDI quattro NAVI LED RFK",
+      "expectedDigest": "8abefc6d0323cb070f7de759b2a650152e40bdc87ed1e9dc3bcdbfbf71abe85d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d7014134600ef056fa09b7bf",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupé 40 TDI QU S-TR ADVANCED LED+NAVI+PANO",
+      "expectedDigest": "094fa0d8bae17854abb6b44799c548b2ccd4b7ebb4c6d1664b39e05db53660a1",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c98ec08ba1af41c5c7d1c7fd",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupe 40 TDI qu advanced PANO Kam Memory 18\"",
+      "expectedDigest": "c0e19a5f25cbde93a779336457fd2a6058a24415d766cb048988688c8cbfac7d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "27fe6c406a7d2d6ddb161db4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "SpB 40 TDI Qu S-Line NAV+LED+ACC+HEAD-UP",
+      "expectedDigest": "fc3c53d7db3336f41e58b23994439f7aeb1c369c59f4eb6adeea118fcdc9593c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bbfbd688d57cdd3f4a38c445",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 40 TDI quattro S line Aut.*NAVI*ACC",
+      "expectedDigest": "e3ff612b03c7c9ed0683989a2d139b441783f733ba7325ef5c1aa52ccec3e1cb",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ca69dd973c948584d6bc0667",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 40 2.0 tdi mhev quattro 204cv s-tronic",
+      "expectedDigest": "fd5420c519a2e2c7d0f010fb7f910c6e4b7ee4bf095e63de8715832d68bca62d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "3de3bfcb80c77f712660e155",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "45 TFSI S tronic quattro Sportback -",
+      "expectedDigest": "9fb020e6db8c61f5a0d1e99b8622843b82ae4dbfad1115ee17a9c934dbf060b4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ab1cacff8a5a651a0ac11823",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 45 TFSI 265 S tonic 7 quattro",
+      "expectedDigest": "5758990bdb5831e529eda54d73b6e16594178527c62080c55469a9b15d5da8ed",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bb91b67ce4abca290a65b652",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "45 TFSI quattro Sportb. S line",
+      "expectedDigest": "bbdfc56c3dfc0917369d7edb505a4bf87299074216ad7442208996368d49a937",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "efe33fe6e19de774f85b3dd4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 45 TFSI quattro*MATRIX*AHK*KAMERA*",
+      "expectedDigest": "e21c17ac1eafac8e52a09cbd4f67ab42a1fe81460ed5a4ba524d5d27771c5abd",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b7aa9c24b4f287bd60cdf09f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupé 45 TFSI QU S-TR ADVANCED LED+NAV+SHZ+VC",
+      "expectedDigest": "eac6127be87977d4857a8d6edd158e82732e92f1cb9bd352b10bc42ca64edf95",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "4a0aaf882b4ed40cdff19171",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 45 TFSI quattro S Line",
+      "expectedDigest": "42364117aa77b3ba04d9aca115c97b9d1471368d33057d7273b75e5a16070b9b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bda87d3b07e910578060cee3",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "A5 Sportback 45 TFSI quattro S Line Sthzg Pano",
+      "expectedDigest": "75c4c187b6e6c9abcbf9b00a28d0b8edf4a26521833e5841d26614087e08e326",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "a8cde2db268d46ec4c73f0a7",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "45 TFSI S tronic quattro Sportb. S line S...",
+      "expectedDigest": "c681d88b00229adea7f5110f832a81cde22c640d2dd7b6cdaa525f3089e75a75",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0651b1b04f27276fbaaafd4c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Cabrio 45 TFSI qu S line LED VIRTUAL eSITZE",
+      "expectedDigest": "50aad3b6d26bd9ab91449dae49a52b07a7d9da88f38aeb8058bbb3b1d1da671e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 45 TFSI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "48fc268a8620dce1d64ddb5e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Coupe 50 TDI S line tiptronic quattro",
+      "expectedDigest": "d4fe0240a1b376553e41294229af285b8c91f27d1dca4bfe4756dd88c0490457",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 50 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "f16225eb4cddbeb172f85b2a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2021,
+      "trim": "Sportback 50 TDI quattro S-LINE| AHK| LASER|",
+      "expectedDigest": "4ad62bbb14345f20864d7b3892de3f45aa35e4bd7e6a4791f72219078d30ba73",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 50 TDI quattro, 2021. Заводской прайс AUDI AG от17.06.2021, архивная копия у дилера: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://www.borgmann-krefeld.de/fileadmin/audi/audi-borgmann-krefeld-audi-a5-sportback-preisliste-technische-daten.pdf",
+            "date": "2021-06-17",
+            "pages": [
+              1,
+              81,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              132
+            ],
+            "sha256": "2a7245f51ee42576eac10ee62e418925f91641a5c3583a2afad76fb6d1029909",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

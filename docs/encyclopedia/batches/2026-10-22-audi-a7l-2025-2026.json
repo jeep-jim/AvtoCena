@@ -1,0 +1,989 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a7l-2025-2026",
+  "entries": [
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "f25f934a3cd42f4bf7803581",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2025,
+      "trim": "2025款 55 TFSI quattro 旗舰型",
+      "expectedDigest": "a9877ef26e0ed1569b3ce21917ffc6dd77a42576fba49a67f72ed16f444ce28f",
+      "patch": {
+        "trim": "55 TFSI quattro Flagship",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2480
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, MY2025, explicit 25-model heading, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 55 TFSI quattro Flagship: 2995см³, ДВС250кВт/340PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2480кг, не снаряжённая. Бензиновая мягкогибридная система 48V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "MY2025, explicit 25-model heading",
+            "publisher": "SAIC Audi",
+            "sha256": "6aaad1406ff380aa9d7ef3636a28a0e40727016d4ebd04dafc14c6256313bf8a",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "9d20ee0cd3034bf555a5f863",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2025,
+      "trim": "45 TFSI Luxury Type",
+      "expectedDigest": "2d25da2d93fc8ae5eadb3bd94d5c33c971f1c7eceea47a506ce567300f095f49",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2335
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, MY2025, explicit 25-model heading, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI Luxury: 1984см³, ДВС180кВт/245PS, fwd,7-ступенчатая S tronic automatic. Разрешённая полная масса2335кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "MY2025, explicit 25-model heading",
+            "publisher": "SAIC Audi",
+            "sha256": "6aaad1406ff380aa9d7ef3636a28a0e40727016d4ebd04dafc14c6256313bf8a",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "6c88d10468ceeba04835c542",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2025,
+      "trim": "45 TFSI quattro Luxury Enjoy Type",
+      "expectedDigest": "38249135491daa6a44ab952b52a591de7a11564e771e60693f0ebb4bf0c55fdb",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, MY2025, explicit 25-model heading, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Exclusive: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "MY2025, explicit 25-model heading",
+            "publisher": "SAIC Audi",
+            "sha256": "6aaad1406ff380aa9d7ef3636a28a0e40727016d4ebd04dafc14c6256313bf8a",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "d9dd7d39bacb872fb663105e",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2025,
+      "trim": "45 TFSI quattro 奢享型",
+      "expectedDigest": "d95e18703c258e03292c00d040f91872217115ea3d775699d0401c8289f4f653",
+      "patch": {
+        "trim": "45 TFSI quattro Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, MY2025, explicit 25-model heading, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Exclusive: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "MY2025, explicit 25-model heading",
+            "publisher": "SAIC Audi",
+            "sha256": "6aaad1406ff380aa9d7ef3636a28a0e40727016d4ebd04dafc14c6256313bf8a",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "641a19aa26519344ff3b5824",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2025,
+      "trim": "2025款 45 TFSI 豪华型",
+      "expectedDigest": "11cc6fe19a1e045dccb4fc5c219a6b3db817b03c84b7b599dbf18f441b3dc03f",
+      "patch": {
+        "trim": "45 TFSI Luxury",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2335
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, MY2025, explicit 25-model heading, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI Luxury: 1984см³, ДВС180кВт/245PS, fwd,7-ступенчатая S tronic automatic. Разрешённая полная масса2335кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "MY2025, explicit 25-model heading",
+            "publisher": "SAIC Audi",
+            "sha256": "6aaad1406ff380aa9d7ef3636a28a0e40727016d4ebd04dafc14c6256313bf8a",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "fb511e2011f1d959101cf873",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2025,
+      "trim": "2025款 45 TFSI quattro 奢享型",
+      "expectedDigest": "56a21e7e2df80bf78ba6cf2244913d1117290c3430e0d424b7aa2cd6f83dad10",
+      "patch": {
+        "trim": "45 TFSI quattro Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, MY2025, explicit 25-model heading, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Exclusive: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/saic_audi/new_a7l/20250606-mp25%E6%9B%B4%E6%96%B0/%E5%A5%A5%E8%BF%AAA7L%E9%85%8D%E7%BD%AE%E8%A1%A8_digital_%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "MY2025, explicit 25-model heading",
+            "publisher": "SAIC Audi",
+            "sha256": "6aaad1406ff380aa9d7ef3636a28a0e40727016d4ebd04dafc14c6256313bf8a",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "dd82b891daa840de151a0f7d",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 55 TFSI quattro RS 套件竞速版",
+      "expectedDigest": "5fd61d7a9cbce038122c2e35a2d192f0be78c1023d7884b748f7ef549bdca488",
+      "patch": {
+        "trim": "55 TFSI quattro RS Competition Edition",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2480
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current special-edition table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 55 TFSI quattro RS Competition Edition: 2995см³, ДВС250кВт/340PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2480кг, не снаряжённая. Бензиновая мягкогибридная система 48V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current special-edition table",
+            "publisher": "SAIC Audi",
+            "sha256": "fab83bcbf11b142910c31718e5ab2524326cc233b6bd0e5d9e133a33827c1d40",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "d1788162aa381a240421e8f1",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 55 TFSI quattro 旗舰型",
+      "expectedDigest": "675852429589df2e00502f13c832273ad18a8e9de61ba4cf8d32506e2a45efd9",
+      "patch": {
+        "trim": "55 TFSI quattro Flagship",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2480
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current standard table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 55 TFSI quattro Flagship: 2995см³, ДВС250кВт/340PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2480кг, не снаряжённая. Бензиновая мягкогибридная система 48V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current standard table",
+            "publisher": "SAIC Audi",
+            "sha256": "7849208cd235580b4cba477d860b5ef07c9e239cbc6863a56012c4a3eb8f8193",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "51b02c8489a8be995d7a21d3",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 55 TFSI quattro 黑武士版",
+      "expectedDigest": "cb3d50dd70331f2c34b1978cc410908d21d10b8a6eb5167dd1c0e66c78021b62",
+      "patch": {
+        "trim": "55 TFSI quattro Black Warrior Edition",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2480
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current special-edition table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 55 TFSI quattro Black Warrior Edition: 2995см³, ДВС250кВт/340PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2480кг, не снаряжённая. Бензиновая мягкогибридная система 48V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current special-edition table",
+            "publisher": "SAIC Audi",
+            "sha256": "fab83bcbf11b142910c31718e5ab2524326cc233b6bd0e5d9e133a33827c1d40",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "abbb640dcf32a237dbc3a05d",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "45 TFSI quattro Black Warrior Edition",
+      "expectedDigest": "4e36cdfe104414200960e0057097c1e9e2ac583a133a4490efcc9d1c45bf79a0",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current special-edition table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Black Warrior Edition: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current special-edition table",
+            "publisher": "SAIC Audi",
+            "sha256": "fab83bcbf11b142910c31718e5ab2524326cc233b6bd0e5d9e133a33827c1d40",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "3e2924819b3da7672077f567",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "45 TFSI quattro 奢享型",
+      "expectedDigest": "742a0de9d103e483c718ee980a0180abdf646df0de16246f7fd72c48454ff07f",
+      "patch": {
+        "trim": "45 TFSI quattro Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current standard table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Exclusive: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current standard table",
+            "publisher": "SAIC Audi",
+            "sha256": "7849208cd235580b4cba477d860b5ef07c9e239cbc6863a56012c4a3eb8f8193",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "c8c0c43f28f0038a74fdb2de",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "45 TFSI quattro 黑武士版",
+      "expectedDigest": "8880ea1737d71efa07800ca9e68f9931cbd236c8f4208dc160dc25cda4c8b8dc",
+      "patch": {
+        "trim": "45 TFSI quattro Black Warrior Edition",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current special-edition table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Black Warrior Edition: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current special-edition table",
+            "publisher": "SAIC Audi",
+            "sha256": "fab83bcbf11b142910c31718e5ab2524326cc233b6bd0e5d9e133a33827c1d40",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "6273a0c128fee346389fad86",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 45 TFSI 豪华型",
+      "expectedDigest": "432b071ef9592fc55eb0111cddc69343291ca31fb2ea007797aed73247c39aa7",
+      "patch": {
+        "trim": "45 TFSI Luxury",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2335
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current standard table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI Luxury: 1984см³, ДВС180кВт/245PS, fwd,7-ступенчатая S tronic automatic. Разрешённая полная масса2335кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current standard table",
+            "publisher": "SAIC Audi",
+            "sha256": "7849208cd235580b4cba477d860b5ef07c9e239cbc6863a56012c4a3eb8f8193",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "789ce6ae971b9bf9e329aa60",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 45 TFSI quattro 奢享型",
+      "expectedDigest": "e77263d6a979d106ad3ab6345753e56173130882e491cc12fc73d3ff3dfada49",
+      "patch": {
+        "trim": "45 TFSI quattro Exclusive",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current standard table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Exclusive: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E5%B8%B8%E8%A7%84%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current standard table",
+            "publisher": "SAIC Audi",
+            "sha256": "7849208cd235580b4cba477d860b5ef07c9e239cbc6863a56012c4a3eb8f8193",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "e7daabf603f1caba2f67a04e",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 45 TFSI quattro 黑武士版",
+      "expectedDigest": "c5aa325a60807c58444a1315c7b717d15cb2a6df17f4089b2fe6241eb05be773",
+      "patch": {
+        "trim": "45 TFSI quattro Black Warrior Edition",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current special-edition table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro Black Warrior Edition: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current special-edition table",
+            "publisher": "SAIC Audi",
+            "sha256": "fab83bcbf11b142910c31718e5ab2524326cc233b6bd0e5d9e133a33827c1d40",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "021e791ffb62f82fef85b08a",
+      "variantId": "9fc79f68c525e08fecad7a10",
+      "make": "Audi",
+      "model": "A7L",
+      "year": 2026,
+      "trim": "2026款 45 TFSI quattro RS 套件竞速版",
+      "expectedDigest": "7537d2964d6dbb005e75e211af48f602a4f0f957238abd7cfdb6e612c49d373a",
+      "patch": {
+        "trim": "45 TFSI quattro RS Competition Edition",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd",
+        "grossVehicleWeightKg": 2400
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "SAIC Audi A7L, 2026-08-26 official current special-edition table, техническая таблица PDF стр.3 визуально проверена. Точное исполнение 45 TFSI quattro RS Competition Edition: 1984см³, ДВС180кВт/245PS, awd,7-ступенчатая S tronic automatic. Разрешённая полная масса2400кг, не снаряжённая. Бензиновая мягкогибридная система 12V явно указана заводом; mhev не подменяет обычный ДВС. 30-минутная мощность электромотора и код двигателя не найдены. Название при необходимости переведено на английский. Редакция2025 не переносилась на2026: для2026 использованы отдельные действующие таблицы производителя в каталоге20260826, связанные с официальной страницей модели.",
+        "additionalSources": [
+          {
+            "url": "https://www.saic-audi.cn/content/dam/OneWeb/saic_audi/new_a7l/20260826%E9%85%8D%E7%BD%AE%E8%A1%A8/%E4%B8%8A%E6%B1%BD%E5%A5%A5%E8%BF%AAA7L%E7%89%B9%E5%88%AB%E7%89%88%E8%A3%85%E5%A4%87%E8%A1%A8.pdf",
+            "pages": [
+              3
+            ],
+            "edition": "2026-08-26 official current special-edition table",
+            "publisher": "SAIC Audi",
+            "sha256": "fab83bcbf11b142910c31718e5ab2524326cc233b6bd0e5d9e133a33827c1d40",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

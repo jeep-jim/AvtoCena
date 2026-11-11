@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-24T01:27:26.923469+00:00",
+  "cancelWorkflow": 40049339539,
+  "cancelledRuns": [
+    40047702136,
+    40042142717,
+    40038476075,
+    40026092554
+  ],
+  "scheduleCommit": "3d3635d652a0aa40d6042bd9c565fcd785ebf74d",
+  "cron": "0 17 * * *",
+  "timezone": "Asia/Novokuznetsk",
+  "nextWindow": "2026-10-25T00:00:00+07:00",
+  "cadenceAndSourceSwitchesPreserved": true,
+  "followupGuardCommit": "81e96a5f64e0488c749c5075d4a84740e261c940",
+  "derivedIndex40049541295": "completed_success_before_followup_cancel",
+  "leaseReleaseWorkflow": 40049724827,
+  "leaseReleaseCheckedAt": "2026-10-24T01:26:26.975Z",
+  "writerActive": false,
+  "publicGeneration": "gen_1792702445675_8c312f85",
+  "pendingReleaseFields": 224,
+  "releaseActivated": false,
+  "chinaTerminalEvidence": {
+    "beforePersist": "2026-10-23T23:40:02.319Z",
+    "persistValidated": "2026-10-23T23:48:31.269Z",
+    "koreaChunksWritten": "2026-10-24T00:25:32.797Z",
+    "europeChunksWritten": "2026-10-24T00:36:31.773Z",
+    "chinaChunksWritten": "2026-10-24T01:16:57.218Z",
+    "chinaChunks": 483,
+    "chinaStagedOffers": 241389,
+    "publicCutoverConfirmed": false
+  },
+  "scope": "Staged counts are not published counts. Code stages common catalog models under global writer; feed delta ingestion alone does not make publication incremental."
+}

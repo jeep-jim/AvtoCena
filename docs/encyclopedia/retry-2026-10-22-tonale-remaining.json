@@ -1,0 +1,2259 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T20:45:00+07:00",
+  "modelId": "cff3b237a2a26a9e00708f89",
+  "model": "Alfa Romeo Tonale",
+  "reasonGroups": [
+    "Точная техническая идентичность 67 строк без полевого исследования; общие/null trim и неоднозначные названия не назначены произвольным исполнениям.",
+    "Коды двигателей/кузова и разрешённая полная масса для точных версий: отсутствует проверенный оригинал руководства/омологации; масса снаряжённая, payload и прицеп не подставлены.",
+    "MHEV/PHEV: документированная 30-минутная мощность не найдена. MY26 continua15/94кВт без длительности и норматива не признана ни30-минутной, ни пиковой.",
+    "MY26Hybrid175PS:128кВтсистемы,118кВтДВС. PHEV270PS:198кВтсистемы,110кВтДВС. GenericpowerHp/powerKw гибридов не подтверждены для расчётов.",
+    "Майский MY26 прайс не охватывает более позднюю EdizioneLunaRossa и возможные региональные/ранние исполнения. Найден заводской анонс сентября2026, точное сопоставление и поля пока не применены.",
+    "Неназванные/старые комплектацииTi,Veloce,MilanoCortina и внешнерыночные2.0T требуют годовой проверки; 2024старыеTi/Super,2025переход наMY26/175/270 не распространены автоматически.",
+    "Повторы существующих наблюдений сохранены. Переименование старойPHEV180CVVeloce2023 в системную идентичность280PS создаёт явный одноимённый повтор с уже существовавшей строкой; обе исходные идентичности/источники сохранены, новых строк-дублей не создано."
+  ],
+  "scope": "151 строка имеет хотя бы одно поле без подтверждения, включая коды/массу; НЕ количество нерассчитанных объявлений",
+  "rows": [
+    {
+      "variantId": "6caaff631ddc74ae595a1e54",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "23a9dead75bfbf9b689ff48c",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "f9354b461c7d3ab084a63ed4",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "2ddb3616e181a882daf727c9",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "5f462d7e6b29fdcdeb8a5886",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "fc26cf1e706e692d510ba6b3",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "640f3bf7071ec925e57965a6",
+      "year": 2022,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "5fb1cf53036ee22e0523d6e3",
+      "year": 2022,
+      "trim": "1.5 MHEV Edizione Speciale / Gps / Carplay / Full Led / Camera / Capteurs / Cuir",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "101291eca6687a1447e59f2b",
+      "year": 2022,
+      "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "f9e038e46819ea45e9919181",
+      "year": 2022,
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "f06ffc5399fbc811ea73a412",
+      "year": 2022,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "35f8e7c53ddf29fa26f8289e",
+      "year": 2022,
+      "trim": "1.5 Hybrid 130 PS TCT7 Super",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "ebd1ab8cace03d31a0a4426b",
+      "year": 2022,
+      "trim": "1.5 Hybrid 160 PS TCT7 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "3c605ab59d3c6a9ec346a4a4",
+      "year": 2022,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "b3e240b88e267ad5cd235e29",
+      "year": 2022,
+      "trim": "1.5 Hybrid 160 PS TCT7 Edizione Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "a6d3f4805f342cecfd7260c5",
+      "year": 2022,
+      "trim": "1.6 Diesel 130 PS TCT6 Super",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "809b8dfc2463898ff16f05f6",
+      "year": 2022,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "859e865e3b7bdaeddd1d9865",
+      "year": 2022,
+      "trim": "1.6 Diesel 130 PS TCT6 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "4831359aaf06aa989f5b47df",
+      "year": 2022,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "6602be0b2f6a36499c3a0025",
+      "year": 2023,
+      "trim": "Alfa Romeo tonale",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "14affa1886c4dd75eca16077",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "4d1ce187a813a69c982fa313",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "4cc521b9bf7defb589ae8f7d",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "b6e72c117d5efe8d1a896758",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "ed3bd148b0d09cd61d94534e",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "a75f2349bcbedbac7c060b8c",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "dbb99c94585c6cc55eb0728b",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "ee910e4d4173136d1ded616c",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "3f8d77352e95d519ea094f68",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "f9c894e2a9e4ed5ae93b80bc",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "f2c73b329c90f8b322a754a4",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "f9e6ba07e19e6728a8113632",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "87aaa97874e4bced23bd66ac",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "2be803965ad4135ef8a147fd",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "ef53a327bf7792940e5ad283",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "6411bcd0f8aa9949377af516",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "439186ff6f88a404ca04f2c4",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "9fc8c165ece7d8d595549cef",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "ce8146b6e856a64010fda659",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "397702fe3946edb743a361f4",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "f742195fb455505b96fbfc53",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "0cbf785e69890da98c1e1629",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "0b9bad4a00c189b4a09422e7",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "9da1e68be15fc74b804f37db",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "fda27f054cce8dc92be10543",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "37a5375d5955c99051b84055",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "73b3cb360c9776bb80cd8603",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "d285b9272ea64aa800bdc78a",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "606f699300a48d2ffb57f3ee",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "7d31cb9470fcedbe9e4e116d",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "98d83a336ce3793c3a798daa",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "7c2e579af4046782cffa2a8d",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "e63feb846fca45cbd685ba10",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "fee2564937ed9156a46bcd98",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "61cef2b7ffe82591aaa6d893",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "fabccc8dfa975558c7e46b8e",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "8c807d54a479d1918f2687b9",
+      "year": 2023,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "fd0ea61af46a2424e1d29bed",
+      "year": 2023,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "6afe5929e36f28f2352577f8",
+      "year": 2023,
+      "trim": "1.6 Diesel 130 PS TCT6 Super",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "1d79e547243db385c5966f4d",
+      "year": 2023,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "2347b3dc16d926aaa45f8d46",
+      "year": 2023,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "4403b52e952b76359cb05e1b",
+      "year": 2023,
+      "trim": "1.6 Diesel 130 PS TCT6 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "886e71c8eb6e86cd6f8388cf",
+      "year": 2023,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "2637e15ab8dd9e26bfa353f2",
+      "year": 2023,
+      "trim": "1.5T Hybrid Edizione Speciale | NL-auto | Apple Ca",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "6dea545f17acb6f2822d8ba7",
+      "year": 2023,
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "64b9c6c34b3a67a8ebbb167e",
+      "year": 2023,
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "353ed9d393383082bc2475f9",
+      "year": 2023,
+      "trim": "1.5 Pack Performance, Échappements Sport, Toit panoramique/ouvrant",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "828167d420b0a4795d869276",
+      "year": 2023,
+      "trim": "1.5 Hybrid 160 PS TCT7 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "959f3a557c44e078c991a799",
+      "year": 2023,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "4159764dd2b742fc785f69fc",
+      "year": 2023,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "8f7f111defcb9e8fed753448",
+      "year": 2023,
+      "trim": "VELOCE",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "ee56b396c77522ec9360b310",
+      "year": 2023,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "78953519053fa6eabc187f8c",
+      "year": 2023,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "fb7054dd010f6f57f01a4aa8",
+      "year": 2023,
+      "trim": "1.5 Hybrid 130 PS TCT7 Super",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "ffaf57e6099f8bb84bd33d7e",
+      "year": 2023,
+      "trim": "1.5 Hybrid 130 PS TCT7 Edizione Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "a3b27774100d7f9c04995775",
+      "year": 2023,
+      "trim": "1.5 Hybrid 160 PS TCT7 Edizione Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "e08fae676d942dd5f15edf5a",
+      "year": 2023,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "d0bbd29f15af34492bbcfe94",
+      "year": 2023,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Edizione Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "9d1ebec02ac00c5d79a63c2e",
+      "year": 2024,
+      "trim": "VELOCE",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "4552291edc81af2d057d7eea",
+      "year": 2024,
+      "trim": "TI",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "4550d88e73a8247a9500d15d",
+      "year": 2024,
+      "trim": "1.5 Hybrid Sprint LED/ACC/LANE/NAVI",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "f785c4107c71b06cc465a14a",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "167c7fcc616a56ac75abdb2f",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "936f9d74731b3dcbb7af349c",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "f1584771266916b65b46f46a",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "4e159b9f591bb95837079746",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "8109bbf743d15c0071d860ec",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "4d21447dcc6512ce8f69be5f",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "d67a570bc0b0122eac9ece09",
+      "year": 2024,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "d2729bfd1dc8d40bdbcca827",
+      "year": 2024,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "66eeb9976ccf456dbdc5c2af",
+      "year": 2024,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "4b2f4613b7f8e48464e6c8bb",
+      "year": 2024,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "c2db4f070fed0cd2078e18e3",
+      "year": 2024,
+      "trim": "1.6 Diesel 130 PS TCT6 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "423e034c6c863a78742e5b19",
+      "year": 2024,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "ae1b633f6682cba3593ed3e4",
+      "year": 2024,
+      "trim": "VELOCE",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "16619e5acedc343266d0d480",
+      "year": 2024,
+      "trim": "1.5 Veloce 1,5 T4 Aut. ACC+Navi+SHZ+Kam.",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "df6078a4a1011c6814eedc57",
+      "year": 2024,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "b4f5d64b8656d8cd2366e7ab",
+      "year": 2024,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "7b9fd43d85d7db75260aeaa9",
+      "year": 2024,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "915db35f48be856ea70b6776",
+      "year": 2024,
+      "trim": "1.5 Hybrid 130 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "2ac6f6945d726442cec63fb0",
+      "year": 2024,
+      "trim": "1.5 Hybrid 130 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "34bdc5f49105fc5199324a84",
+      "year": 2024,
+      "trim": "1.5 Hybrid 160 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "c260548a7a47d0328ba2557f",
+      "year": 2024,
+      "trim": "1.5 Hybrid 160 PS TCT7 Tributo Italiano",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "4d8a87c1f8491be407a5f587",
+      "year": 2024,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "8877ce9ee7ae92b2b46cf4aa",
+      "year": 2024,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "a67910e9dc228b56cb3e00a3",
+      "year": 2024,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Tributo Italiano",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "89439b159a4c9dc766a14eec",
+      "year": 2025,
+      "trim": "VELOCE",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "e6b4bf148e7693ca294513cc",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "b9ac2298488b05fd2f9be4ae",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "93ed13ff649f8cc88c4acc28",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "69cb6ea53ea1c5794c9502f4",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "2cd48e275ff8a00019726175",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "1327b5c72e6713a2eec62ab2",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "2b1853fbfbd85af67b804e81",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "3bef698f0b48791233b51272",
+      "year": 2025,
+      "trim": null,
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "a754674901583fb302cf0bac",
+      "year": 2025,
+      "trim": "1.6 Diesel 130 PS TCT6 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "ef7f04d13f6e635609c7444d",
+      "year": 2025,
+      "trim": "Milano Cortina",
+      "fieldsNeedingEvidence": [
+        "trim",
+        "engineCc",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "icePowerKw",
+        "powerHp",
+        "powerKw"
+      ]
+    },
+    {
+      "variantId": "1ccda2431324a696ff0342bc",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "5faf372fe3295ed6d4b10c17",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "fc4d713698622a9256da2d3e",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "7f07bc242a678b1a6cfdaaee",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "db3a79c586dda64afa90b2fb",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "2942b298f51f11157dbb63a8",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "a5c91477c82398a7786e7c0d",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "946ac760fe1e094503bb7868",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "f6f934ef4465c10af7c83a68",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "e69b176bba31da91cceefcda",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "10ef9b738515ea378d0d82fa",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "f91bafcfbe217417aa20345f",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "66f2f7e5689c1c662c9e8a71",
+      "year": 2025,
+      "trim": "1.5 Hybrid 160 PS TCT7 Intensa",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "45a9d9803c9de14d3eab2926",
+      "year": 2025,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "ca06c4117121811c8f7f05c7",
+      "year": 2025,
+      "trim": "1.6 Diesel 130 PS TCT6 Intensa",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "90085fb6b676a1433cfa52f1",
+      "year": 2025,
+      "trim": "1.3 Plug-in Hybrid 280 PS AT6 Q4 Intensa",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "373bb189855c9d0053e53a6b",
+      "year": 2026,
+      "trim": "1.6 Diesel 130 PS TCT6 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "a78e77a5067ef745238ee37c",
+      "year": 2026,
+      "trim": "1.6 Diesel 130 PS TCT6 Tonale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "e06dd07ad5c448ced50b1da9",
+      "year": 2026,
+      "trim": "1.6 Diesel 130 PS TCT6 Business",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "27dc52f3d0756150b222ae28",
+      "year": 2026,
+      "trim": "1.6 Diesel 130 PS TCT6 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "055ed0ebbbabf092116bc76a",
+      "year": 2026,
+      "trim": "1.6 Diesel 130 PS TCT6 Sport Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "baf1459b1f71dc963864d2c3",
+      "year": 2026,
+      "trim": "1.6 Diesel 130 PS TCT6 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ]
+    },
+    {
+      "variantId": "697c5898be70fe3bb2dd580d",
+      "year": 2026,
+      "trim": "1.5 Hybrid 175 PS TCT7 Tonale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "7b96af89ef6bcf1b360abc1f",
+      "year": 2026,
+      "trim": "1.5 Hybrid 175 PS TCT7 Business",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "3683c0ba8bcfe13e5f0280e7",
+      "year": 2026,
+      "trim": "1.5 Hybrid 175 PS TCT7 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "49db0ee8a8701b1876645f78",
+      "year": 2026,
+      "trim": "1.5 Hybrid 175 PS TCT7 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "2e736e4ce7d7bdc973a5304e",
+      "year": 2026,
+      "trim": "1.5 Hybrid 175 PS TCT7 Sport Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "156f3d587a74c821707c042a",
+      "year": 2026,
+      "trim": "1.5 Hybrid 175 PS TCT7 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "d654429ad54943c1515fe887",
+      "year": 2026,
+      "trim": "1.3 Plug-in Hybrid 270 PS AT6 Q4 Tonale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "9040c30df3b19b0c426dc12d",
+      "year": 2026,
+      "trim": "1.3 Plug-in Hybrid 270 PS AT6 Q4 Business",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "f4286fa5682241ac0bea5dcb",
+      "year": 2026,
+      "trim": "1.3 Plug-in Hybrid 270 PS AT6 Q4 Sprint",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "5e20856435e91b7312540ff1",
+      "year": 2026,
+      "trim": "1.3 Plug-in Hybrid 270 PS AT6 Q4 Ti",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "69590f28fe4bf5a0866ecc56",
+      "year": 2026,
+      "trim": "1.3 Plug-in Hybrid 270 PS AT6 Q4 Sport Speciale",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    },
+    {
+      "variantId": "1b15258ecb9944f947cf369f",
+      "year": 2026,
+      "trim": "1.3 Plug-in Hybrid 270 PS AT6 Q4 Veloce",
+      "fieldsNeedingEvidence": [
+        "engineCode",
+        "grossVehicleWeightKg",
+        "power30MinKw"
+      ]
+    }
+  ],
+  "pdfChecks": [
+    {
+      "localResearchKey": "pl2022",
+      "sha256": "8211a3bba5f3cac705a46ab87f87facd0c03c58dba598e51cfebd80f9690e94d",
+      "bytes": 5542798
+    },
+    {
+      "localResearchKey": "it2022jul",
+      "sha256": "3e81866e16238bb79c0f388b7de4bc84f7a2c547b07c15b0408537559ebaa9a3",
+      "bytes": 410690
+    },
+    {
+      "localResearchKey": "it2022nov",
+      "sha256": "dc11462856da59675a706a5dc3c65b9e438c68f1647f2c33fe0961d0fd0dc4c0",
+      "bytes": 461922
+    },
+    {
+      "localResearchKey": "pl2023",
+      "sha256": "23a5bcee7df9b45b83771d1a2a0e0d6973a88dd735a1c046f74b23cfae0f7d87",
+      "bytes": 3291709
+    },
+    {
+      "localResearchKey": "fr2023",
+      "sha256": "07b7f935b6000e82872290f524748a33a5b9e18dc45abf1dbfc38fdd7a880093",
+      "bytes": 3373414
+    },
+    {
+      "localResearchKey": "it2024",
+      "sha256": "25f57fdb748ebc36435749c1ecdf43649f114e2d598491384bd6adfc920d9c32",
+      "bytes": 493677
+    },
+    {
+      "localResearchKey": "de2024",
+      "sha256": "30b6fad74a5766014661e16bf67de2b64372318bc6ee10fbd2eca66fb97f4755",
+      "bytes": 210123
+    },
+    {
+      "localResearchKey": "fr2025",
+      "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+      "bytes": 3836733
+    },
+    {
+      "localResearchKey": "it2026",
+      "sha256": "7b2591ea293c6acaee80070a259bf2ef643114325a7dd2ba33c5cf7b3be17cf9",
+      "bytes": 715779
+    }
+  ],
+  "late2026PrimaryLead": "https://www.media.stellantis.com/em-en/alfa-romeo/press/alfa-romeo-edizione-luna-rossa-debuts-in-napoli",
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-alfa.json"
+  ],
+  "duplicates": [
+    {
+      "year": 2023,
+      "trim": "1.6 diesel 130 ps tct6 sprint",
+      "variantIds": [
+        "fd0ea61af46a2424e1d29bed",
+        "1d79e547243db385c5966f4d",
+        "2347b3dc16d926aaa45f8d46",
+        "886e71c8eb6e86cd6f8388cf"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.5 hybrid 130 ps tct7 sprint",
+      "variantIds": [
+        "6dea545f17acb6f2822d8ba7",
+        "64b9c6c34b3a67a8ebbb167e"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "959f3a557c44e078c991a799",
+        "4159764dd2b742fc785f69fc"
+      ]
+    },
+    {
+      "year": 2023,
+      "trim": "1.3 plug-in hybrid 280 ps at6 q4 veloce",
+      "variantIds": [
+        "ee56b396c77522ec9360b310",
+        "78953519053fa6eabc187f8c"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "veloce",
+      "variantIds": [
+        "9d1ebec02ac00c5d79a63c2e",
+        "ae1b633f6682cba3593ed3e4"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "1.6 diesel 130 ps tct6 sprint",
+      "variantIds": [
+        "d2729bfd1dc8d40bdbcca827",
+        "66eeb9976ccf456dbdc5c2af",
+        "4b2f4613b7f8e48464e6c8bb",
+        "423e034c6c863a78742e5b19"
+      ]
+    },
+    {
+      "year": 2024,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "df6078a4a1011c6814eedc57",
+        "b4f5d64b8656d8cd2366e7ab",
+        "7b9fd43d85d7db75260aeaa9"
+      ]
+    },
+    {
+      "year": 2025,
+      "trim": "1.5 hybrid 160 ps tct7 veloce",
+      "variantIds": [
+        "1ccda2431324a696ff0342bc",
+        "5faf372fe3295ed6d4b10c17",
+        "fc4d713698622a9256da2d3e",
+        "7f07bc242a678b1a6cfdaaee"
+      ]
+    },
+    {
+      "year": 2025,
+      "trim": "1.3 plug-in hybrid 280 ps at6 q4 sprint",
+      "variantIds": [
+        "db3a79c586dda64afa90b2fb",
+        "2942b298f51f11157dbb63a8",
+        "a5c91477c82398a7786e7c0d",
+        "946ac760fe1e094503bb7868",
+        "f6f934ef4465c10af7c83a68",
+        "e69b176bba31da91cceefcda"
+      ]
+    }
+  ]
+}

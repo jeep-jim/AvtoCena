@@ -1,0 +1,10 @@
+.ac-assistant-connect{max-width:728px;margin:32px auto;padding:24px;color:var(--ac-text);background:var(--ac-page-bg);line-height:1.7;overflow-wrap:anywhere}
+.ac-assistant-connect h1{font-size:28px;line-height:1.2;font-weight:800;margin:0 0 20px}
+.ac-assistant-connect h2{font-size:19px;line-height:1.4;font-weight:700;margin:28px 0 10px}
+.ac-assistant-connect p{margin:12px 0}
+.ac-assistant-connect ol{list-style:decimal;padding-left:24px;margin:12px 0}
+.ac-assistant-connect li{padding-left:4px;margin:12px 0}
+.ac-assistant-connect a{color:var(--ac-accent);text-decoration:underline;text-underline-offset:3px}
+.ac-assistant-connect a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.ac-assistant-connect code{background:var(--ac-surface-2);border:1px solid var(--ac-border);border-radius:6px;padding:2px 5px;font-size:.9em}
+@media(max-width:600px){.ac-assistant-connect{margin:0 auto;padding:20px}.ac-assistant-connect h1{font-size:25px}}

@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T20:45:00+07:00",
+  "model": "Alfa Romeo Tonale",
+  "modelId": "cff3b237a2a26a9e00708f89",
+  "scope": "Проверенные датированные гаммы2022–2026; не утверждение полной верификации модели",
+  "state": "saved_api_readback_pass_pending_index",
+  "operations": 79,
+  "newVariants": 42,
+  "updatedVariants": 37,
+  "confirmedFields": 484,
+  "newByYear": {
+    "2022": 8,
+    "2023": 5,
+    "2024": 7,
+    "2025": 5,
+    "2026": 17
+  },
+  "finalVariants": 151,
+  "researchedVariants": 84,
+  "revision": "d4d38229-eabc-4275-ac5a-4902be3245ce",
+  "batches": [
+    {
+      "key": "alfa-tonale-2022-factory-range",
+      "commit": "c19fbf1f85e1c9ff0cd355554ab4d7d82de98f1a",
+      "workflow": 39787802588,
+      "variants": 11,
+      "newVariants": 8,
+      "updatedVariants": 3,
+      "fields": 106,
+      "batch": "research-2026-10-22-alfa-tonale-2022-factory-range",
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-tonale-2022-factory-range-readback.json"
+    },
+    {
+      "key": "alfa-tonale-2023-factory-range",
+      "commit": "07d67ac809a8681af1e15abe142a7f2c2016389c",
+      "workflow": 39788396377,
+      "variants": 18,
+      "newVariants": 5,
+      "updatedVariants": 13,
+      "fields": 75,
+      "batch": "research-2026-10-22-alfa-tonale-2023-factory-range",
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-tonale-2023-factory-range-readback.json"
+    },
+    {
+      "key": "alfa-tonale-2024-2026-factory-ranges",
+      "commit": "ca94ecee911e5602df24ef31fef88c16c90bf3e0",
+      "workflow": 39788970714,
+      "variants": 50,
+      "newVariants": 29,
+      "updatedVariants": 21,
+      "fields": 303,
+      "batch": "research-2026-10-22-alfa-tonale-2024-2026-factory-ranges",
+      "workflowConclusion": "success",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-tonale-2024-2026-factory-ranges-readback.json"
+    }
+  ],
+  "validation": {
+    "guards": "8/8PASS",
+    "independentApiReadback": "79/484PASS",
+    "unchangedRecords": 72,
+    "updatedUnpatchedFieldsAndHistory": 37,
+    "calculationFieldsCompiled": 383,
+    "referenceOnlyFields": 55,
+    "identityConfirmations": 46,
+    "productionCompilerChanged": false,
+    "koreaSearchParityConfirmed": false,
+    "sonataCardRub": 3560003,
+    "cardSearchParityOffers": 9,
+    "repeatedTonaleControls": 3,
+    "distinctTonaleControls": 3,
+    "giuliaControls": 3,
+    "sonataCardOnly": 1
+  },
+  "integration": {
+    "checkedAt": "2026-10-22T20:45:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "activeIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "activeReleaseWorkflow": 39781954190,
+    "activeReleaseWorkflowConclusion": "success",
+    "privateIndexPreparedAt": "2026-10-22T12:54:39Z",
+    "newBatchesActivationConfirmed": false,
+    "pendingNewBatches": [
+      "research-2026-10-22-alfa-tonale-2022-factory-range",
+      "research-2026-10-22-alfa-tonale-2023-factory-range",
+      "research-2026-10-22-alfa-tonale-2024-2026-factory-ranges"
+    ],
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "name": "Catalog refresh china",
+      "status": "queued",
+      "conclusion": null
+    },
+    "budgetPreparation": {
+      "id": 39787631986,
+      "name": "Regcloud — prepare shared budget prices",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "После уже запущенной retained-China publication39788307780 один совокупный защищённый выпуск со всеми pending; отдельная задача владельца сопровождает выпуск. Проверить состав индекса, readback, активацию и карточки/выдачу. Не запускать параллельный deploy."
+  },
+  "remaining": [
+    "Точная техническая идентичность 67 строк без полевого исследования; общие/null trim и неоднозначные названия не назначены произвольным исполнениям.",
+    "Коды двигателей/кузова и разрешённая полная масса для точных версий: отсутствует проверенный оригинал руководства/омологации; масса снаряжённая, payload и прицеп не подставлены.",
+    "MHEV/PHEV: документированная 30-минутная мощность не найдена. MY26 continua15/94кВт без длительности и норматива не признана ни30-минутной, ни пиковой.",
+    "MY26Hybrid175PS:128кВтсистемы,118кВтДВС. PHEV270PS:198кВтсистемы,110кВтДВС. GenericpowerHp/powerKw гибридов не подтверждены для расчётов.",
+    "Майский MY26 прайс не охватывает более позднюю EdizioneLunaRossa и возможные региональные/ранние исполнения. Найден заводской анонс сентября2026, точное сопоставление и поля пока не применены.",
+    "Неназванные/старые комплектацииTi,Veloce,MilanoCortina и внешнерыночные2.0T требуют годовой проверки; 2024старыеTi/Super,2025переход наMY26/175/270 не распространены автоматически.",
+    "Повторы существующих наблюдений сохранены. Переименование старойPHEV180CVVeloce2023 в системную идентичность280PS создаёт явный одноимённый повтор с уже существовавшей строкой; обе исходные идентичности/источники сохранены, новых строк-дублей не создано."
+  ],
+  "next": "AlpinaD3 с2008 иD5, затемAlpineA110/A290",
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-tonale-remaining.json",
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-2008.json"
+}

@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-wuling-bingo-2024-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱缤果2024款参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=4",
+          "documentId": "SGMW carDetail 4",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "acChargeKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "doors",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact four-column 2024 model-year table. Battery capacity is not mapped because SGMW does not identify gross, usable or rated basis. Maximum motor power is stored as motorPeakKw, not legal 30-minute power."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/bingo",
+          "brandId": "wuling",
+          "canonicalName": "Bingo",
+          "slug": "bingo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 缤果",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-en-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official English current-range page supplies the public Latin identity and portfolio powertrain grouping."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Every official row is explicitly a 2024 battery-electric five-door, four-seat passenger car; Hatchback is the normalized public body classification."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Four exact 2024 China configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/bingo/2024-model-year",
+          "modelId": "wuling/bingo",
+          "name": "2024 model year",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2024",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "All four rows are explicitly marked 2024 and share a five-door body."
+            }
+          ],
+          "researchNotes": [
+            "Model-year container only; no platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/bingo/2024-model-year/light-203-km",
+          "modelId": "wuling/bingo",
+          "generationId": "wuling/bingo/2024-model-year",
+          "faceliftId": null,
+          "name": "Light 203 km",
+          "aliases": [
+            {
+              "value": "2024轻享款 203km",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-2024-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 30,
+          "rangeKm": 203,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 3950,
+          "widthMm": 1708,
+          "heightMm": 1580,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1010,
+          "seats": 4,
+          "doors": 5,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2024 Bingo table. Front-engine/front-wheel drive is normalized to FWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo/2024-model-year/enjoy-333-km",
+          "modelId": "wuling/bingo",
+          "generationId": "wuling/bingo/2024-model-year",
+          "faceliftId": null,
+          "name": "Enjoy 333 km",
+          "aliases": [
+            {
+              "value": "2024悦享款 333km",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-2024-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 50,
+          "rangeKm": 333,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 3950,
+          "widthMm": 1708,
+          "heightMm": 1580,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1125,
+          "seats": 4,
+          "doors": 5,
+          "topSpeedKmh": 130,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2024 Bingo table. Front-engine/front-wheel drive is normalized to FWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo/2024-model-year/lingxi-connect-333-km",
+          "modelId": "wuling/bingo",
+          "generationId": "wuling/bingo/2024-model-year",
+          "faceliftId": null,
+          "name": "Lingxi Connect 333 km",
+          "aliases": [
+            {
+              "value": "2024灵犀互联款 333km",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-2024-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 50,
+          "rangeKm": 333,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 3950,
+          "widthMm": 1708,
+          "heightMm": 1580,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1140,
+          "seats": 4,
+          "doors": 5,
+          "topSpeedKmh": 130,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2024 Bingo table. Front-engine/front-wheel drive is normalized to FWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo/2024-model-year/lingxi-premium-410-km",
+          "modelId": "wuling/bingo",
+          "generationId": "wuling/bingo/2024-model-year",
+          "faceliftId": null,
+          "name": "Lingxi Premium 410 km",
+          "aliases": [
+            {
+              "value": "2024灵犀尊享款 410km",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-2024-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 50,
+          "rangeKm": 410,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 3950,
+          "widthMm": 1708,
+          "heightMm": 1580,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1185,
+          "seats": 4,
+          "doors": 5,
+          "topSpeedKmh": 130,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's 2024 Bingo table. Front-engine/front-wheel drive is normalized to FWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No peak motor value is reused as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

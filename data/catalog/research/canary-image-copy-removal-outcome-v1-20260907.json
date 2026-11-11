@@ -1,0 +1,50 @@
+{
+  "alreadyAbsent": 0,
+  "artifactsRemoved": [
+    {
+      "id": 10001391217,
+      "verifiedAbsent": true
+    },
+    {
+      "id": 10001412782,
+      "verifiedAbsent": true
+    },
+    {
+      "id": 10001519426,
+      "verifiedAbsent": true
+    }
+  ],
+  "completed": true,
+  "deleted": 148,
+  "expectedBytes": 14914620,
+  "expectedFiles": 148,
+  "finishedAt": "2026-09-07T02:44:19.780Z",
+  "liveCatalogDeletes": 0,
+  "runs": [
+    {
+      "images": 58,
+      "market": "europe",
+      "runId": "34073795968-1",
+      "verifiedReport": "catalog/canaries/34073795968-1/europe/report.json"
+    },
+    {
+      "images": 50,
+      "market": "korea",
+      "runId": "34073795968-1",
+      "verifiedReport": "catalog/canaries/34073795968-1/korea/report.json"
+    },
+    {
+      "images": 40,
+      "market": "europe",
+      "runId": "34074192666-1",
+      "verifiedReport": "catalog/canaries/34074192666-1/europe/report.json"
+    }
+  ],
+  "sourceImageDownloads": 0,
+  "startedAt": "2026-09-07T02:39:41.816Z",
+  "verifiedAbsent": 148,
+  "version": 1,
+  "runId": 34076908088,
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34076908088",
+  "jobId": 101604959790
+}

@@ -1,0 +1,1604 @@
+{
+  "checkedAt": "2026-10-23T16:26:58.508Z",
+  "diagnosticRun": 39986639109,
+  "diagnosticJob": 120527409375,
+  "diagnostic": {
+    "checkedAt": "2026-10-23T16:26:58.508Z",
+    "generationId": "gen_1792702445675_8c312f85",
+    "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+    "rows": [
+      {
+        "id": "3b783a66af3b69634f611db2",
+        "storedProjection": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": "",
+            "bodyType": "",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "normalizedFull": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "indexCandidates": [
+          {
+            "variantId": "74e91c5c36a8a91c18475e22",
+            "revision": "f9f9ce15-2097-5470-a6c5-f820658f3695",
+            "constraints": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1498,
+              "powerHp": 150,
+              "powerKw": 110,
+              "icePowerKw": 110,
+              "transmission": "Schaltgetriebe",
+              "bodyType": "hatchback"
+            },
+            "transmission": "Schaltgetriebe",
+            "transmissionSource": {
+              "kind": "owner_reference",
+              "markets": [
+                "europe"
+              ]
+            }
+          }
+        ],
+        "source": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "sanitizedSource": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "enrichedSanitized": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "safeEnriched": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "full": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "projection": {
+          "values": {
+            "id": "3b783a66af3b69634f611db2",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2021,
+            "trim": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": "",
+            "bodyType": "",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3125790
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": null
+        },
+        "attestedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ]
+      },
+      {
+        "id": "4e3f16f9dc955a3ab40ba0f1",
+        "storedProjection": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": "",
+            "bodyType": "",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "normalizedFull": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "indexCandidates": [
+          {
+            "variantId": "2dc883c46d49ddeed12e5a29",
+            "revision": "f9f9ce15-2097-5470-a6c5-f820658f3695",
+            "constraints": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1498,
+              "powerHp": 150,
+              "powerKw": 110,
+              "icePowerKw": 110,
+              "transmission": "Schaltgetriebe",
+              "bodyType": "hatchback"
+            },
+            "transmission": "Schaltgetriebe",
+            "transmissionSource": {
+              "kind": "owner_reference",
+              "markets": [
+                "europe"
+              ]
+            }
+          }
+        ],
+        "source": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "sanitizedSource": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "enrichedSanitized": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "safeEnriched": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "full": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": null,
+            "bodyType": null,
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "Schaltgetriebe",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "projection": {
+          "values": {
+            "id": "4e3f16f9dc955a3ab40ba0f1",
+            "market": "europe",
+            "make": "Audi",
+            "model": "A3",
+            "year": 2020,
+            "trim": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "Schaltgetriebe",
+            "drive": "",
+            "bodyType": "",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 1498,
+            "powerHp": 150,
+            "powerKw": 110,
+            "icePowerKw": 110,
+            "power30MinKw": null,
+            "calculationStatus": "estimated",
+            "totalRub": 3124746
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission"
+          ],
+          "transmissionEvidence": null
+        },
+        "attestedFields": [
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission"
+        ]
+      },
+      {
+        "id": "b65974b83d5399d588073fc5",
+        "storedProjection": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": null,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "normalizedFull": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "automatic",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "indexCandidates": [
+          {
+            "variantId": "87fb2ca2e0a6e197935d2306",
+            "revision": "c0fb5e53-2378-52f8-ad2e-d8ede6c77f2a",
+            "constraints": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 3982,
+              "powerHp": 707,
+              "powerKw": 520,
+              "icePowerKw": 520,
+              "transmission": "automatic",
+              "drive": "awd",
+              "bodyType": "suv"
+            },
+            "transmission": "automatic",
+            "transmissionSource": {
+              "kind": "manufacturer",
+              "url": "https://media.astonmartin.com/aston-martin-dbx707-apex-grey-full-specification/?lang=eng",
+              "batchId": "research-2026-10-22-aston-rest"
+            }
+          }
+        ],
+        "source": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": null,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "sanitizedSource": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": null,
+            "powerHp": null,
+            "powerKw": null,
+            "icePowerKw": null,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [],
+          "transmissionEvidence": null
+        },
+        "enrichedSanitized": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "automatic",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "safeEnriched": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "automatic",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "full": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ],
+          "transmissionEvidence": {
+            "status": "exact",
+            "value": "automatic",
+            "source": "permanent_encyclopedia:a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519"
+          }
+        },
+        "projection": {
+          "values": {
+            "id": "b65974b83d5399d588073fc5",
+            "market": "uae",
+            "make": "Aston Martin",
+            "model": "Dbx",
+            "year": 2023,
+            "trim": "Aston Martin DBX707",
+            "generation": null,
+            "chassisCode": null,
+            "engineCode": null,
+            "transmission": "automatic",
+            "drive": "awd",
+            "bodyType": "suv",
+            "fuel": "petrol",
+            "powertrainKind": "combustion",
+            "engineCc": 3982,
+            "powerHp": 707,
+            "powerKw": 520,
+            "icePowerKw": 520,
+            "power30MinKw": null,
+            "calculationStatus": "needs_data",
+            "totalRub": null
+          },
+          "audit": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "attestedFields": [
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "transmission",
+            "bodyType"
+          ],
+          "transmissionEvidence": null
+        },
+        "attestedFields": [
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType"
+        ]
+      }
+    ]
+  },
+  "writer": {
+    "checkedAt": "2026-10-23T16:26:05.910Z",
+    "generationId": "gen_1792702445675_8c312f85",
+    "writer": {
+      "active": false,
+      "operationType": "catalog_read_model_repair",
+      "operationId": "read-model-repair-d96c004a-ac8d-4619-8d72-956db9ed7d5e",
+      "startedAt": "2026-10-23T02:40:30.493Z",
+      "lockedUntil": ""
+    }
+  },
+  "finding": {
+    "a3": "Stored full/projection/index retain Schaltgetriebe. Local reproduction proves preferExplicitCombustionPowertrain -> canonicalizeSemanticSourceFields -> transmission drops this unrecognized source word during customs replay. Preserve exact source spelling and display механика without broadening calculation identity matching.",
+    "dbx": "Stored projection fuel evidence remains ambiguous while source/full/new projection are exact. Migration not performed.",
+    "readCost": "Three output IDs did not bound storage I/O: getOfferFromCurrentProjection loaded the shared all-market projection. Completed once; do not repeat without need."
+  },
+  "validation": {
+    "redRegression": true,
+    "targetedTests": 48,
+    "targetedPassed": 48,
+    "webTypeScript": "pass",
+    "broaderTests": {
+      "total": 58,
+      "passed": 57,
+      "failure": "Existing UAE fuel normalization test also fails on unmodified installed source; no guard weakened."
+    }
+  },
+  "publication": "Code prepared; serving 857468e unchanged until separate guarded release."
+}

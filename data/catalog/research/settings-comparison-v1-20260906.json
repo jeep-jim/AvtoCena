@@ -1,0 +1,77 @@
+{
+  "productionWrites": false,
+  "markets": [
+    {
+      "market": "europe",
+      "storedActiveVersionFound": false,
+      "resolvedHashMatches": false,
+      "differingFields": [
+        "contractInitialPaymentRub"
+      ],
+      "differingPriceCalculationFields": [],
+      "priceCalculationFieldsMatch": true
+    },
+    {
+      "market": "korea",
+      "storedActiveVersionFound": false,
+      "resolvedHashMatches": false,
+      "differingFields": [
+        "contractInitialPaymentRub"
+      ],
+      "differingPriceCalculationFields": [],
+      "priceCalculationFieldsMatch": true
+    },
+    {
+      "market": "china",
+      "storedActiveVersionFound": true,
+      "resolvedHashMatches": false,
+      "differingFields": [
+        "logisticsRub"
+      ],
+      "differingPriceCalculationFields": [
+        "logisticsRub"
+      ],
+      "priceCalculationFieldsMatch": false
+    },
+    {
+      "market": "uae",
+      "storedActiveVersionFound": false,
+      "resolvedHashMatches": false,
+      "differingFields": [
+        "contractInitialPaymentRub"
+      ],
+      "differingPriceCalculationFields": [],
+      "priceCalculationFieldsMatch": true
+    },
+    {
+      "market": "georgia",
+      "storedActiveVersionFound": false,
+      "resolvedHashMatches": false,
+      "differingFields": [
+        "contractInitialPaymentRub"
+      ],
+      "differingPriceCalculationFields": [],
+      "priceCalculationFieldsMatch": true
+    }
+  ],
+  "limitation": "Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides.",
+  "engineSource": {
+    "path": "packages/engine/src/calculation/calculateAvtocena.ts",
+    "sha256": "d0afcd3268648ede71bc7bd010cbfd7c93aa0b0a3903b6b9b54d3202b7049f91",
+    "consumedPriceFields": [
+      "brokerRub",
+      "eptsRub",
+      "exchangeRateReservePercent",
+      "exportExpensesRub",
+      "laboratoryRub",
+      "logisticsRub",
+      "otherFixedExpensesRub",
+      "percentExpenses",
+      "rfDeliveryRub",
+      "sbktsRub",
+      "securityDepositRub",
+      "svhRub",
+      "topAvtoCommissionRub"
+    ]
+  }
+}

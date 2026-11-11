@@ -1,0 +1,9 @@
+{
+  "release": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+  "previousRelease": "008643e8929901e366d079b0d5c394e9b4df2350",
+  "originalRun": 42435996958,
+  "preparationMarkets": ["china", "korea", "europe", "uae", "georgia"],
+  "requestedLocalDate": "2026-11-10",
+  "targetLocalWindow": "2026-11-08 12:00-16:00 Asia/Novokuznetsk",
+  "reason": "Explicit owner instruction: roll back to the exact build serving this time window, publish immediately, freeze further changes and preserve ordinary feed schedules. Reuse the retained image and historical functional gates. Do not restore customer or feed data."
+}

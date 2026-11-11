@@ -1,0 +1,95 @@
+{
+  "checkedAt": "2026-10-25T00:10:12.712091+00:00",
+  "batch": "research-2026-10-25-audi-a3-mechanical-continuation",
+  "sha256": "458f15c6ca895bc010d56c817867004804c0c6c46e293a7e26a6bb65776f555c",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "afterRevision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+  "apiReadback": true,
+  "fieldsChecked": 44,
+  "variants": 41,
+  "years": [
+    {
+      "year": 2022,
+      "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "rows": 201,
+      "checkedFields": 16,
+      "otherRowsUnchanged": 185
+    },
+    {
+      "year": 2023,
+      "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "rows": 261,
+      "checkedFields": 5,
+      "otherRowsUnchanged": 256
+    },
+    {
+      "year": 2024,
+      "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "rows": 126,
+      "checkedFields": 7,
+      "otherRowsUnchanged": 121
+    },
+    {
+      "year": 2025,
+      "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "rows": 143,
+      "checkedFields": 11,
+      "otherRowsUnchanged": 133
+    },
+    {
+      "year": 2026,
+      "revision": "de1c9d41-62cb-4a42-93c4-a9b95b238201",
+      "rows": 102,
+      "checkedFields": 5,
+      "otherRowsUnchanged": 97
+    }
+  ],
+  "counts": {
+    "newValues": 44,
+    "correctedValues": 0,
+    "attestedUnchanged": 0
+  },
+  "unknownBodiesPreserved": [
+    "280726c3379fa1caaf9c2010",
+    "46afcb3e543a0e9c909fc08f",
+    "eb60f87870f91e6e9c1fa432",
+    "7bb34be46b2308f73819e115",
+    "37b5846f706f58fc2b49855f",
+    "3d6b0c22e5563f9b0941cc4e",
+    "f4ab279599fc69dba0ab1649",
+    "ac72289c38af2975caa209e1",
+    "8d6441d1d725dffed43b11a2",
+    "4ce99bc09eff732d6f6ba800",
+    "76859e99342f798c3c66b025",
+    "f05f0df8d934b1453c72125c",
+    "0acb36c3cef92335d6f348b1",
+    "4c905d4f522a5acc31255e0b",
+    "9fc03caa7959e6af3ec9986f",
+    "4c4a6df464638a48a9fad704",
+    "57c630e5d1158715a92e75ea",
+    "f1558825ea11eb982dc1d965",
+    "f56540b73b1596da41e6dede",
+    "214834800e6f44a3255f11e4",
+    "6347706adf9e920e6fdee4e2",
+    "7947ba7714e6245da1d7e445",
+    "1c94c61db3f928c3346efc7c",
+    "4ac3853fba2a72f522e14b68",
+    "acd4ac42fe69ed9f5f33a121",
+    "e09e376b5daf439770544384",
+    "46c442d27300f59f7a014455",
+    "b172be6fcb8ce346e28e2965",
+    "b1fb36e9010ee8599b81ebb1",
+    "9b24b406852d10cf4a714c76",
+    "7305c2bcbcdde079867f370a",
+    "7a74be3ee1b6d5bb8ae549fd",
+    "29ee23949165f11f7901ba18",
+    "ad9f400c72a14eb54f12c388",
+    "b36d481ba8c97e9d22740def"
+  ],
+  "newModels": 0,
+  "certified30minAdded": 0,
+  "installed": false,
+  "workflow": 40145557656,
+  "job": 121026002640,
+  "preflightWorkflow": 40145403957
+}

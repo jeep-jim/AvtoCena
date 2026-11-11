@@ -1,0 +1,85 @@
+name: Record owner storage audit 2026-11-07
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/storage-owner-report-20261107.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: storage-owner-report-20261107
+  cancel-in-progress: false
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Wait only for the existing read-only inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os,json,time,urllib.request
+          deadline=time.time()+480
+          url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/42381122197'
+          while True:
+              req=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req,timeout=20) as r:d=json.load(r)
+              assert d['head_sha']=='5aa4bc2cd7fed6b4292d910e1d50f123b6e616c6'
+              if d['status']=='completed':
+                  print('EXISTING_AUDIT_FINISHED',d['conclusion']);break
+              if time.time()>deadline:raise RuntimeError('existing_audit_not_finished')
+              time.sleep(25)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: owner-storage-attribution-20261107
+          run-id: 42381122197
+          github-token: ${{ github.token }}
+          path: audit-input/current
+      - uses: actions/download-artifact@v4
+        with:
+          name: storage-target-comparison-20261107
+          run-id: 42381244165
+          github-token: ${{ github.token }}
+          path: audit-input/target
+      - name: Record aggregate evidence only and preserve concurrent roadmap edits
+        run: |
+          cat > "$RUNNER_TEMP/record-storage.py" <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('audit-input/current/owner-storage-attribution.json').read_text())
+          target=json.loads(Path('audit-input/target/storage-target-comparison.json').read_text())
+          assert report.get('current',{}).get('objects',0)>0
+          assert sum(g['bytes'] for g in report['groups'])==report['current']['bytes']
+          b=report['current']['bytes'];groups={g['name']:g for g in report['groups']}
+          top=sum(groups.get(x,{}).get('bytes',0) for x in ['catalog-generations','catalog-internal'])
+          marker='## 07.11.2026 — откуда 650 ГБ: измерение REG и ошибочное направление плановой очистки'
+          labels={'catalog-generations':'Поколения каталога','catalog-internal':'Внутренние данные каталога','catalog-other':'Прочие данные каталога','encyclopedia':'Энциклопедия','ASTRA':'Материалы ASTRA','outside-app-prefix':'Вне рабочего префикса','catalog-public-projections':'Публичные представления','CRM':'CRM','sort-price-snapshots':'Расчёты сортировки','budget-price-snapshots':'Расчёты бюджета','catalog-runtime':'Оперативные данные','catalog-images':'Изображения каталога','other':'Остальные данные'}
+          lines=[marker,'',f"Свежая инвентаризация REG: {report.get('finishedAt',report['startedAt'])}. Run42381122197; настройки назначения отдельно проверены run42381244165. Только GET метаданных и шести разрешённых служебных манифестов. Нет удаления, записи в хранилище, переключения источников, публикации приложения или чтения клиентских документов.",'',f"Текущие объекты: {report['current']['objects']}; {b} байт = {b/1e9:.6f} GB = {b/2**30:.6f} GiB. Делители указаны явно: 10^9 и 2^30. Скриншот владельца649.92ГБ/1000ГБ получен ранее; единицы/метод учёта панели независимо не подтверждены. Активные записи могут изменять объём во время обхода.",'','| Категория | Объекты | GB (10^9 байт) | GiB (2^30 байт) |','|---|---:|---:|---:|']
+          for g in report['groups']:lines.append(f"| {labels.get(g['name'],g['name'])} | {g['objects']} | {g['bytes']/1e9:.3f} | {g['bytes']/2**30:.3f} |")
+          lines+=['',f'Поколения и внутренние данные вместе: {top/b*100:.3f}% текущего объёма.','',f"Найдено {len(report.get('generations',[]))} поколений. Старые, не входящие в текущий набор защиты cleanup: {report.get('oldUnprotectedGenerationSummary',{})}. Это кандидаты на отдельную проверку ссылок/активного writer, а НЕ подтверждённое разрешение на удаление. Нельзя объявлять весь этот объём безопасно освобождаемым без полного dry-run и сверки всех актуальных ссылок.",'',f"Проверка конфигурации плановой catalog-storage-cleanup.yml: provider={target['cleanupProvider']}, sameEndpointAsREG={target['sameEndpointAsREG']}, sameBucketAsREG={target['sameBucketAsREG']}, samePrefixAsREG={target['samePrefixAsREG']}. Значения ключей не выводились. Её успешный запуск не доказывает очистку рабочего REG.",'',f"Версии объектов: {report.get('versions','не проверены')}. Multipart: {report.get('multipart','не проверен')}. Ошибки/ограничения чтения: {report.get('errors',[])}.",'',f"Сохранённое обслуживание в REG: {report.get('savedMaintenance')}. Сохранённая очистка: {report.get('savedCleanup')}. Активный writer на начале проверки: {report.get('writer')}. Публичное поколение неизменно к концу: {report.get('publicGenerationUnchanged')}.",'','Порядок ремонта: сначала read-only/dry-run именно REG с защитой текущего/предыдущего/внутреннего манифеста, ссылок активных рынков и незавершённой публикации; отдельно проверить старые internal chunks. Затем согласовать удаление точного набора лишних объектов. Не перенаправлять текущую плановую destructive-задачу на REG вслепую. Разбивать разрешённую очистку на ограниченные порции без ослабления guards; сохранять энциклопедию, ручные данные, заявки/CRM, активные объявления и откат. После подтверждения — единая проверяемая конфигурация назначения для публикации, очистки и контроля объёма. Это не доказательство причины всех задержек сайта.','']
+          note='\n'.join(lines)
+          p=Path('roadmap.md');before=p.read_bytes()
+          if marker.encode() not in before:p.write_bytes(before+b'\n\n'+note.encode())
+          assert p.read_bytes().startswith(before)
+          Path('docs/operations/2026-11-07-reg-storage-attribution.md').write_text(note)
+          Path('docs/operations/2026-11-07-reg-storage-attribution.json').write_text(json.dumps({'inventory':report,'targetComparison':target},ensure_ascii=False,indent=2)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python3 "$RUNNER_TEMP/record-storage.py"
+            git diff --check
+            git add -- roadmap.md docs/operations/2026-11-07-reg-storage-attribution.md docs/operations/2026-11-07-reg-storage-attribution.json
+            if git diff --cached --quiet; then break; fi
+            git commit -m 'docs: measured REG storage attribution and legacy cleanup target mismatch'
+            if git push origin HEAD:main; then break; fi
+            test "$attempt" -lt 3
+          done
+          git log -1 --format='%H %s'

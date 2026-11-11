@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-24",
+  "installedRelease": "fc202423e47c6e483cfd1c7c4eec145c165294ac",
+  "calculationVersion": "6773c73813caece5f380486bc58993bb90fc70479e6f09b5bd04658025e16393",
+  "deploy": {
+    "run": 40074712002,
+    "job": 120815625387,
+    "status": "success"
+  },
+  "publicEncyclopediaGate": {
+    "groups": 34,
+    "variants": 616,
+    "fields": 798,
+    "verified": true,
+    "artifact": 12553193769
+  },
+  "encyclopediaIndex": "8b3f26cd58af545ff0f380bb3ae5b2d0dbb7b3444c1dcf9f0f66a54dfe22b5db",
+  "fullRegression": {
+    "tests": 2475,
+    "pass": 2475,
+    "fail": 0,
+    "skipped": 0,
+    "local": true,
+    "githubRun": 40076604407
+  },
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "browser": {
+    "siteControlsChatAccountAuth": {
+      "run": 40076999005,
+      "status": "success"
+    },
+    "dealerMap": {
+      "run": 40075981023,
+      "status": "success"
+    },
+    "ownerPolish": {
+      "localCases": 12,
+      "pass": 12
+    },
+    "retiredAssistantGuard": "passed"
+  },
+  "http": {
+    "home": 200,
+    "chinaCatalog": 200,
+    "retiredAssistantConnect": 404
+  },
+  "retainedPricedRowsFiveMarkets": 202181,
+  "remaining": {
+    "japanAppend": {
+      "http": 503,
+      "error": "japan_search_unavailable",
+      "reason": "visitor_restricted",
+      "verifiedAfterDeployment": true
+    },
+    "koreaAllPhotos": "not fully verified",
+    "unknownCertifiedSpecifications": "remain unknown; no full-coverage claim",
+    "dependencyAudit": {
+      "moderate": 5,
+      "high": 1,
+      "productionHighGate": "passed"
+    }
+  },
+  "collectorRestarted": false,
+  "finalCi": {
+    "run": 40076998994,
+    "job": 120822392951,
+    "status": "success"
+  },
+  "pullRequests": [
+    1511,
+    1512
+  ]
+}

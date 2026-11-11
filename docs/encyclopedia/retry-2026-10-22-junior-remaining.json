@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-22T16:07:07.588606+07:00",
+  "modelId": "76763ca9fc792df61980328c",
+  "items": [
+    {
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "fields": [
+        "power30MinKw"
+      ],
+      "reason": "Сертифицированная30-минутная мощность не найдена; пик/системная мощность не заменяют её."
+    },
+    {
+      "year": 2024,
+      "fields": [
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "У Ibrida136 не подтверждён привод; уEV2024 коробка, уVeloce280 полная масса требуют точной годовой таблицы. Ранняя240PS не приравнивается280PS."
+    },
+    {
+      "year": 2025,
+      "fields": [
+        "trim",
+        "grossVehicleWeightKg",
+        "engineCode"
+      ],
+      "reason": "Ноябрьский заводской PDF503; поздние Milano Cortina2026 и базовый145PS требуют отдельной идентичности; не дублировать ранние безымянные/136PS наблюдения. Intensa ICE100 требует точного датированного источника.",
+      "url": "https://o.media.stellantis.com/uploads/it/attachment/17578/alfaromeojuniormy26listinodel4novembre2025-6908d3239c756.pdf"
+    },
+    {
+      "year": 2026,
+      "fields": [
+        "trim"
+      ],
+      "reason": "Июльская/октябрьская редакции одногоURL расходятся; Luna Rossa ждёт прямой датированный октябрьскийPDF."
+    }
+  ],
+  "nextCursor": "MiTo2008+, к пропускамJunior вернуться отдельным проходом"
+}

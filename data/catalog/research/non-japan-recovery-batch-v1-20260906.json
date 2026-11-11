@@ -1,0 +1,507 @@
+{
+  "date": "2026-09-06",
+  "scope": "Batch code fixes and offline saved-evidence review; no new market coverage measurement",
+  "validation": {
+    "fullSuite": {
+      "tests": 1046,
+      "pass": 1046,
+      "fail": 0,
+      "durationMs": 78525.842826
+    },
+    "additionalSavedRecoverySuite": {
+      "tests": 10,
+      "pass": 10,
+      "note": "Includes one test added after the full suite started"
+    },
+    "typecheck": "success",
+    "productionBuild": "success",
+    "isolatedCompilerBefore": "success",
+    "isolatedCompilerAfter": "success",
+    "finalCi": {
+      "runId": 34039140044,
+      "jobId": 101502577500,
+      "commit": "ffe9985abd8c9a35a0d607abbc4507f4ca5f42ff",
+      "conclusion": "success",
+      "fullSuite": "success",
+      "profileChecks": "success",
+      "typecheck": "success",
+      "productionBuild": "success",
+      "tests": 1047,
+      "passCount": 1047,
+      "fail": 0
+    }
+  },
+  "compilerComparison": {
+    "before": {
+      "markets": {
+        "europe": {
+          "rows": 18289,
+          "engineCc": 15066,
+          "sha256": "88b8fa86378776916d0d99a05a216f46d010226287f4de5ee41b9adec92d0a65"
+        },
+        "us": {
+          "rows": 5175,
+          "engineCc": 4731,
+          "sha256": "d43e9338505e770ff3df15546f36cefad4def7018d10558a466dd7871c515309"
+        },
+        "canada": {
+          "rows": 1014,
+          "engineCc": 962,
+          "sha256": "4d72496a8d7845add00fd2d2dcb5989b662299c0a2436fa192ef6bd79bbfc4fc"
+        },
+        "china": {
+          "rows": 11,
+          "engineCc": 0,
+          "sha256": "9a5e04669b8898023bb9e97e28d6d478515187cc0eaf38beefe7772b62b7c839"
+        }
+      },
+      "quarantinedChinaSpecs": []
+    },
+    "after": {
+      "markets": {
+        "europe": {
+          "rows": 18289,
+          "engineCc": 15066,
+          "sha256": "88b8fa86378776916d0d99a05a216f46d010226287f4de5ee41b9adec92d0a65"
+        },
+        "us": {
+          "rows": 5175,
+          "engineCc": 4731,
+          "sha256": "d43e9338505e770ff3df15546f36cefad4def7018d10558a466dd7871c515309"
+        },
+        "canada": {
+          "rows": 1014,
+          "engineCc": 962,
+          "sha256": "4d72496a8d7845add00fd2d2dcb5989b662299c0a2436fa192ef6bd79bbfc4fc"
+        },
+        "china": {
+          "rows": 11,
+          "engineCc": 0,
+          "sha256": "9a5e04669b8898023bb9e97e28d6d478515187cc0eaf38beefe7772b62b7c839"
+        }
+      },
+      "quarantinedChinaSpecs": [
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023346",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023347",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023348",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023349",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023350",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023351",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023352",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "1023353",
+          "conflicts": {
+            "seriesId": [
+              "5877",
+              "8299"
+            ],
+            "energy": [
+              "汽油",
+              "汽油+CNG"
+            ],
+            "engine": [
+              "2.0L 125马力 L4",
+              "2.0L 136马力 L4"
+            ],
+            "enginePowerHp": [
+              "125",
+              "136"
+            ],
+            "enginePowerKw": [
+              "100",
+              "92"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "76207",
+          "conflicts": {
+            "seriesId": [
+              "5061",
+              "8710"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        },
+        {
+          "kind": "source_spec_identity_conflict",
+          "sourceId": "autohome-china",
+          "specId": "76208",
+          "conflicts": {
+            "seriesId": [
+              "5061",
+              "8710"
+            ]
+          },
+          "disposition": "all_rows_for_spec_withheld_from_runtime"
+        }
+      ]
+    }
+  },
+  "markets": {
+    "uae": {
+      "savedRows": 4647,
+      "automaticAccepted": 0,
+      "blockers": {
+        "fuelPowertrain:unclassified_field_provenance": 4639,
+        "engineCc:unclassified_field_provenance": 4646,
+        "powerHp:non_exact_power_provenance": 4531,
+        "powerHp:powertrain_identity_conflict": 9,
+        "fuelPowertrain:fuel_or_powertrain_missing": 8
+      },
+      "sourceFindings": [
+        {
+          "sourceId": "dubizzle_uae_open",
+          "note": "Samples retain matching parsedId and detailIdentityVerified; exact raw capacity/power must be checked, ranges cannot be restored as facts.",
+          "sampleOfferIds": [
+            "4decc0f52a16f7ddb4485e80",
+            "6bf8c91f9704aa729b7823b3"
+          ]
+        },
+        {
+          "sourceId": "dubicars_uae_exact",
+          "note": "Shown samples retain model-level enrichment, but no raw listing technical payload; no exact source reconstruction proven.",
+          "sampleOfferIds": [
+            "ca8deab2cc8efc73e1eab8ef",
+            "9a5ad2c483f42d0045e1afbf"
+          ]
+        }
+      ]
+    },
+    "georgia": {
+      "savedRows": 216,
+      "automaticAccepted": 0,
+      "blockers": {
+        "fuelPowertrain:unclassified_field_provenance": 216,
+        "engineCc:unclassified_field_provenance": 215,
+        "powerHp:non_exact_power_provenance": 161
+      },
+      "sourceFindings": [
+        {
+          "sourceId": "myauto_georgia_list",
+          "note": "Shown samples retain product engineCc=2000 but not the original engine unit/value; source power is not established by representativePowerHp.",
+          "sampleOfferIds": [
+            "9f1115bb936345fba656dd82",
+            "ba96b0935200c921a1c5728f"
+          ]
+        },
+        {
+          "sourceId": "autopapa_georgia_open",
+          "note": "Shown samples retain detail identity and rounded parsed engines; original explicitly unit-labelled displacement and power evidence still required.",
+          "sampleOfferIds": [
+            "3f832d535ca6f6dc00739024",
+            "64638b272644c0bbb44ff5a2"
+          ]
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "sourceId": "dubizzle_uae_open",
+      "market": "uae",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site scraping, database compilation, commercial exploitation or republication. Requalify only through an explicitly permitted Dubizzle API/feed/partner agreement or written authorization, then re-test exact offer fields.",
+      "blocker": "public_scraping_database_compilation_and_commercial_exploitation_prohibited_plus_exact_engine_power_contract_failed"
+    },
+    {
+      "sourceId": "dubicars_uae_exact",
+      "market": "uae",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, mass copying or commercial reuse without express written consent. Requalify only through a DubiCars-contracted feed/API/integration whose agreement explicitly covers AvtoCena use.",
+      "blocker": "public_scraping_and_commercial_reuse_prohibited_contractual_feed_requires_explicit_scope"
+    },
+    {
+      "sourceId": "myauto_georgia_list",
+      "market": "georgia",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not start inventory/detail crawling from the challenged public route",
+      "blocker": "automation_access_and_reuse_permission_unproven_rules_routes_challenged"
+    },
+    {
+      "sourceId": "autopapa_georgia_open",
+      "market": "georgia",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not crawl inventory/detail pages from the challenged public route",
+      "blocker": "automation_entry_challenged_403_and_permission_unproven"
+    },
+    {
+      "sourceId": "carswitch_uae_candidate",
+      "market": "uae",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "public reference/search support only; do not publish a fully calculated AvtoCena card from CarSwitch alone because exact source-bound offer power is not proven",
+      "blocker": null
+    },
+    {
+      "sourceId": "yallamotor_uae_candidate",
+      "market": "uae",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site collection/republication; YallaMotor terms also limit hyperlink permission to non-commercial use unless separately authorized",
+      "blocker": null
+    },
+    {
+      "sourceId": "automarket_uae_candidate",
+      "market": "uae",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only while automated commercial access/reuse permission remains unproven; do not crawl listing/detail/API routes until AutoMarket supplies an explicitly permitted API/feed/partner agreement or written authorization",
+      "blocker": "automation_and_commercial_reuse_permission_unproven_no_source_declared_legal_link_on_home"
+    },
+    {
+      "sourceId": "cars24_uae_candidate",
+      "market": "uae",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, listing/pricing reuse or republication without prior written CARS24 authorization or an explicitly permitted data feed/API",
+      "blocker": null
+    },
+    {
+      "sourceId": "worldauto_georgia_candidate",
+      "market": "georgia",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization",
+      "blocker": null
+    }
+  ],
+  "limitations": [
+    "Market counts and blockers below are from the saved audit, not a fresh source run.",
+    "Internal samples identify retained field shapes, not completeness across all internal rows.",
+    "Compiled output was written only to isolated temporary directories; repository corpus was not replaced.",
+    "Source qualification is quoted from repository decisions and has not been requalified in this batch."
+  ],
+  "boundaries": {
+    "sourceRequests": 0,
+    "productionWrites": false,
+    "parsersRestarted": false,
+    "japanControlsChanged": false
+  },
+  "inputs": [
+    {
+      "path": "data/catalog/research/china-saved-recovery-v1-20260906.json",
+      "sha256": "496d10df41b7fc275ff65ff96c87d716e98620ee6e8b22534ab8e0f983d013d6"
+    },
+    {
+      "path": "data/catalog/source-qualification-v1.json",
+      "sha256": "6df32eedae1f8d7dfe5820bfd55b09247529f0c69f9ebd4cf65ef331adc0252d"
+    }
+  ],
+  "logs": [
+    {
+      "name": "avtocena-batch-regression-20260906.log",
+      "sha256": "c299b2124265fbe52592d77c1d736131bc6e1cdbc21461eb8025bf8527f78781"
+    },
+    {
+      "name": "avtocena-batch-typecheck-20260906.log",
+      "sha256": "bf76e68ff38657bb6dec42f4bc7afc9fa0e622856a1e10a35fdfe104c7b5001c"
+    },
+    {
+      "name": "avtocena-batch-build-20260906.log",
+      "sha256": "4a56bd60a1f1095cf59c1e6033b34df03a6ebf428afc4707cfd44c98e9ca5668"
+    },
+    {
+      "name": "avtocena-batch-saved-tests.log",
+      "sha256": "11ca364df5fa9d0cd4538c4b745c149e256a13a2a6858b03a2e4ae9ee2d1d70b"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-honda-elysion-2008",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "4cd8822f2d1f6f8449da52be",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige SZ 3.5 FF",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige SZ 3.5 FF",
+        "chassisCode": "RR5",
+        "engineCode": "J35A",
+        "engineCc": 3471,
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "562ca68bf09b22b9fa96cb0b",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige SG HDD NAVI Special Package 3.5 FF",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige SG HDD NAVI Special Package 3.5 FF",
+        "chassisCode": "RR5",
+        "engineCode": "J35A",
+        "engineCc": 3471,
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "a130107f3d7dddb82b575a72",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige SG HDD NAVI Special Package 3.5 4WD",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige SG HDD NAVI Special Package 3.5 4WD",
+        "chassisCode": "RR6",
+        "engineCode": "J35A",
+        "engineCc": 3471,
+        "powerHp": 279,
+        "powerKw": 205,
+        "icePowerKw": 205,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "a08c00c7ba8407b29a212ca5",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige SG 3.5 FF",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige SG 3.5 FF",
+        "chassisCode": "RR5",
+        "engineCode": "J35A",
+        "engineCc": 3471,
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "cdae658f47672e5150bb59bc",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige SG 3.5 4WD",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige SG 3.5 4WD",
+        "chassisCode": "RR6",
+        "engineCode": "J35A",
+        "engineCc": 3471,
+        "powerHp": 279,
+        "powerKw": 205,
+        "icePowerKw": 205,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "1817afcfa1b81b7ebe430971",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige S HDD NAVI Special Package 2.4 FF",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige S HDD NAVI Special Package 2.4 FF",
+        "chassisCode": "RR1",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "d93cdcd2694c46e25af00375",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige S HDD NAVI Special Package 2.4 4WD",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige S HDD NAVI Special Package 2.4 4WD",
+        "chassisCode": "RR2",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "036b0c0352707ca9492ff1b3",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige S 2.4 FF",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige S 2.4 FF",
+        "chassisCode": "RR1",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "e114b064e437ccba377367c3",
+      "variantId": "4dfbbf2ff5260c2c025e5d3c",
+      "make": "Honda",
+      "model": "Elysion",
+      "year": 2008,
+      "trim": "Prestige S 2.4 4WD",
+      "expectedRevision": "dd36cd8f-fb6a-4b41-ade0-be18041451f0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "Prestige S 2.4 4WD",
+        "chassisCode": "RR2",
+        "engineCode": "K24A",
+        "engineCc": 2354,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/auto-archive/elysion/prestige/2008/shogen.html",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской архив Elysion Prestige: выпуск08.2007–11.2008. Точное исполнение и код кузова сверены с колонкой таблицы. Сохранены заводские округлённые кВт иPS; масса с опциями не принята за разрешённую полную массу."
+      }
+    }
+  ]
+}

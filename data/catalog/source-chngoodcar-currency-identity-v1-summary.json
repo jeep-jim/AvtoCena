@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-03T11:20:49.576Z",
+  "mode": "chngoodcar_currency_list_detail_identity_summary_no_write",
+  "productionWrites": false,
+  "classificationMutations": false,
+  "publishAllowedMutations": false,
+  "rawBodiesStored": false,
+  "run": {
+    "runId": 33749118028,
+    "headSha": "465692fbd0330d572be751439b1c65fd7f4b30d4",
+    "artifactId": 9890816758,
+    "artifactDigest": "sha256:6753e46ac9bda101d6ca56c25d535b00f7c5a8687b5f3ff010a297a72c3aa678"
+  },
+  "sourceCurrency": {
+    "currency": "USD",
+    "publicListUrl": "https://www.chngoodcar.com/Home/CarsList",
+    "explicitLabel": "价格(US $)",
+    "stableAcrossRepeats": true,
+    "priceBandsPresent": true,
+    "derivation": "explicit public source label; no numeric-magnitude inference"
+  },
+  "listDetailParity": [
+    {
+      "sourceOfferId": "1245159140309858930",
+      "name": "众泰 云100S",
+      "detailPrice": 2700,
+      "homepageNamePresent": true,
+      "homepageSamePriceNearName": true,
+      "body": "轿车",
+      "fuel": "新能源",
+      "displacementMl": 0,
+      "powerKw": 27,
+      "listingCoreImages": 9
+    },
+    {
+      "sourceOfferId": "1265916925100158976",
+      "name": "现代名驭 2014款 1.8L 手动版",
+      "detailPrice": 2100,
+      "homepageNamePresent": true,
+      "homepageSamePriceNearName": true,
+      "body": "轿车",
+      "fuel": "汽油",
+      "displacementMl": 1795,
+      "powerKw": 94.9,
+      "listingCoreImages": 13
+    },
+    {
+      "sourceOfferId": "1288729215201439744",
+      "name": "现代悦动 2017款 1.6L 手动版",
+      "detailPrice": 2600,
+      "homepageNamePresent": true,
+      "homepageSamePriceNearName": true,
+      "body": "轿车",
+      "fuel": "汽油",
+      "displacementMl": 1591,
+      "powerKw": 90.4,
+      "listingCoreImages": 10
+    },
+    {
+      "sourceOfferId": "2049753443165270016",
+      "name": "马自达CX-50行也 2023款 2.0L 领行版",
+      "detailPrice": 23600,
+      "homepageNamePresent": true,
+      "homepageSamePriceNearName": true,
+      "body": "SUV",
+      "fuel": "汽油",
+      "displacementMl": 2000,
+      "powerKw": 114,
+      "listingCoreImages": 20,
+      "routeOrigin": "official_site_public_search_20260903"
+    }
+  ],
+  "conclusion": "Public source currency semantics and list/detail numeric price identity are now proven for the audited offers. ICE samples expose exact body, fuel, displacement, source power and >=5 offer-core images. EV sample still requires the certified/utilization/30-minute power demanded by the offer-level calculation contract."
+}

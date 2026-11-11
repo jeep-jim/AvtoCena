@@ -1,0 +1,440 @@
+{
+  "modelId": "021e791ffb62f82fef85b08a",
+  "make": "Audi",
+  "model": "A7L",
+  "checkedAt": "2026-10-22",
+  "variantsRead": 76,
+  "unchanged": [
+    {
+      "variantId": "8888f3a542d01fc268333070",
+      "year": 2026,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "bd558463fdb2400660475ad5",
+      "year": 2026,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "55e8753c57561bb4eeef5624",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "8b4dc50206f406bf4fc1fdb2",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "c95c77a9fddb60c288c6bc0b",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "85ff202dd10c60cb92d2f189",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "180e0133be86e59d224a627e",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "326e818b60d47988c15fbc91",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "e62926ab574b9706145e3eca",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "c00edd44599bcdfbf3b6a298",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "1500c370cdf7fe9d16560204",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "2173e66c5c86a05bda800f4e",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "e040e750ffc981e4e6fae8c6",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "07733e723fbf8ba07861fb61",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "928768a560ee025983f1fb8d",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "93f4f87ead69212d6cbd4157",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "1854e74beed0d0a60de16700",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "416c75d540c763636ac31e30",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "1ee464d12b7e3c540e37b6bf",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "cce85ac46f3a9892340c57d8",
+      "year": 2023,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "be4b04249de4be312d451900",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "32048a9c8f98ce1c6faf5960",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "1e4f734591edc850c4806f51",
+      "year": 2023,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "6b1e2e0fcb96f7387a0a1682",
+      "year": 2021,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "6cee1558a61ba40de8e25313",
+      "year": 2021,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "e0811e64cc1a626930ed7092",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "d1b92f2b2f36b1cca0184666",
+      "year": 2022,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "0ba89c7e095fcb647d1a67be",
+      "year": 2022,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "04068844039335ca697f8c89",
+      "year": 2022,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "f50ffb071c42b2716c1178d7",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "d8a55dcdc2299313645fbbcb",
+      "year": 2022,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "06edf1b2cefbfbef171ffbe7",
+      "year": 2022,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "2f32973ad67557c24179397b",
+      "year": 2022,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "dec2d901d5334653a9445af7",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "a468c56c101041f167b13bb6",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "ae8b57c3815ccb59f0e56502",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "1506eca62e3f9a49da24c71e",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "674c638462536192d32a19d1",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "ee015e41fe52c47d3664bdd4",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "7738ba34e96457c3815ab7da",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "b0da64028491e643df42961a",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "f8ad9a1f079c795da8662b6a",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "f8cab42e2e48acf50f9d8f2b",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "1894d39b30bb815b547a1756",
+      "year": 2025,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "381ab586dee0405803a49be5",
+      "year": 2025,
+      "reason": "dated_table_for_exact_special_version_required"
+    },
+    {
+      "variantId": "52cf09f58fdc982385ef5592",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "bf7910674e439256d538872a",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "2e7d7d05d44b9e7f470e0c91",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "8376cc7b08a3261e98b75f3c",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "78fc803c5b3db17625b28a72",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "4daaa221b4ddee1e4440e08e",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "6457e131187ff4251de8e9ea",
+      "year": 2024,
+      "reason": "missing_exact_trim_identity"
+    },
+    {
+      "variantId": "9da7f5b9096df70c96c4d82f",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "80751d5a35894110c87dccc6",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "513900b7902813645b93715b",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "13b6b4f604e28bb80ad6abcf",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "8c67416a76e4dcb64ca477dd",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "b14f9ed463346873b1e57fcc",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "db6dd2791aecf4c38d45c278",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    },
+    {
+      "variantId": "996d9f96b3cdc6880bf8453c",
+      "year": 2024,
+      "reason": "historical_factory_table_pending"
+    }
+  ],
+  "processedGaps": [
+    {
+      "variantId": "3e2924819b3da7672077f567",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "51b02c8489a8be995d7a21d3",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "6273a0c128fee346389fad86",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "641a19aa26519344ff3b5824",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "6c88d10468ceeba04835c542",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "789ce6ae971b9bf9e329aa60",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "9d20ee0cd3034bf555a5f863",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "9fc79f68c525e08fecad7a10",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "abbb640dcf32a237dbc3a05d",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "c8c0c43f28f0038a74fdb2de",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "d1788162aa381a240421e8f1",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "d9dd7d39bacb872fb663105e",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "dd82b891daa840de151a0f7d",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "e7daabf603f1caba2f67a04e",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "f25f934a3cd42f4bf7803581",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "fb511e2011f1d959101cf873",
+      "missing": [
+        "certified_30_minute_motor_power",
+        "engineCode",
+        "batteryKwh"
+      ]
+    }
+  ],
+  "note": "Separate MY2025 standard and 2026-08-26 current standard/special tables reviewed. Historical editions remain pending; no transfer to another model year. MHEV voltage and ICE power are not certified 30-minute motor power."
+}

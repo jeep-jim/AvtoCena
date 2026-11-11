@@ -1,0 +1,12 @@
+{
+  "operation": "owner-china-recover-completed-intake-20261101",
+  "requestedAt": "2026-10-31T17:08:48.182Z",
+  "market": "china",
+  "publishMarkets": [
+    "china"
+  ],
+  "reuseRunId": "41111109988",
+  "refreshMarkets": [],
+  "resetCursors": false,
+  "reason": "Owner-authorized stale-market recovery after independent publication heartbeat fix PR1672 passed full CI. Reuse complete Oct30 source intake, no paid recollection; retain lock ownership, generation, completeness and publication safeguards."
+}

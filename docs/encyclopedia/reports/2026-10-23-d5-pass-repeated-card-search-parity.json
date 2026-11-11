@@ -1,0 +1,188 @@
+{
+  "checkedAt": "2026-10-22T17:05:28.195503+00:00",
+  "passed": true,
+  "scope": "Repeated exact Tonale2023 DieselSprint card/search parity; new Alpina activation is not established",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "68b39b426b6fd507a0bf9b9a",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+          "card": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 131,
+          "card": 131,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "a3a09b4e0fa3566403ee3580",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+          "card": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 131,
+          "card": 131,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "b59cc76d76a080b32ab29fc9",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+          "card": "1.6 DIESEL 130 CV TCT6 SPRINT SUV",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 131,
+          "card": 131,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      }
+    }
+  ]
+}

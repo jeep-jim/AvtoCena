@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-24T14:40:21Z",
+  "initial": {
+    "query": "market=korea&budgetTo=3000000&pageSize=12",
+    "items": 0,
+    "total": null,
+    "interrupted": true,
+    "scanLimited": true,
+    "hasMore": true,
+    "nextCursor": "2.0"
+  },
+  "continuation": {
+    "query": "market=korea&budgetTo=3000000&pageSize=12&after=2.0",
+    "http": 503,
+    "error": "japan_search_unavailable",
+    "reason": "visitor_restricted"
+  },
+  "interpretation": "Recoverable supplier access failure on continuation, not zero inventory. No more retries or bypass. Public six-market budget completeness remains unverified."
+}

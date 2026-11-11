@@ -1,0 +1,1792 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aito-m7-historical-manuals",
+  "entries": [
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "75ab693c01758ff68e452647",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2022,
+      "trim": "2022 1.5T RWD Comfort Edition",
+      "expectedDigest": "99ab67af728cb749834f0458b2dd1d685f4db56a8760a259541cf16620fd30de",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2790
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2790 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "2022 1.5T RWD Comfort Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "2022 1.5T RWD Comfort Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "2022 1.5T RWD Comfort Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "adc7e714cd2bca5b184c5a29",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2022,
+      "trim": "1.5T RWD Comfort Edition",
+      "expectedDigest": "e62777771b9fbf2b74ccaf166e58509742ded9839f2a89bd7a71698745f8cc8d",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2790
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2790 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T RWD Comfort Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T RWD Comfort Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "1.5T RWD Comfort Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "f0bcd6698c5237488a093e21",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2022,
+      "trim": "1.5T 4WD Luxury Edition",
+      "expectedDigest": "429561545f880614e4734330a0493664991f5fb79bbca7415a6ec946f5daea80",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2900
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2900 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T 4WD Luxury Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T 4WD Luxury Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "1.5T 4WD Luxury Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "36c470a8e8a44175a45e450b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "2022 1.5T RWD Comfort Edition",
+      "expectedDigest": "85726efa7f16449b7e88b2b1fd54ebb08d5f7e86efd528c6a96982a3212ec8ef",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2790
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2790 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "2022 1.5T RWD Comfort Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "2022 1.5T RWD Comfort Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "2022 1.5T RWD Comfort Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ac27d8b442e695e1f03553a0",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "2022 1.5T AWD Luxury Edition",
+      "expectedDigest": "b8da8ce624a0c29ebecf63921b5481419e747b7a670d6eeb64c474cf37bfcf8a",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2900
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2900 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "2022 1.5T AWD Luxury Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "2022 1.5T AWD Luxury Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "2022 1.5T AWD Luxury Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "50241385128c99c606a2623a",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T RWD Plus Edition 5 seats",
+      "expectedDigest": "ae64da8d1c3b75ec87d515eb3fe0990e08cc4cdde53144b5eeae5cadd8f889ef",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2820 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "79cc6469099a917d6705ad7d",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T RWD Comfort Edition",
+      "expectedDigest": "affab4fe40728e20e662118860204032773fe70b30535750d0bbb8434c293551",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2790
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2790 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T RWD Comfort Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T RWD Comfort Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "1.5T RWD Comfort Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "4cd7a82d64234883c5cbc7ba",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T Smart Drive RWD Max Edition 5 seats",
+      "expectedDigest": "eea18dcb9fe2cd4f80d5d605480b23be34416cd7cfc5a9175b40c5181ad4c9d0",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2820 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3865141b3785a77afb53dd20",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T RWD Plus Edition 6 seats",
+      "expectedDigest": "67a6f7e74fe0350efe65972061dbbe36ab0986e2443b1bc002ab25121457a068",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2820 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 6 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 6 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 6 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "5ef0c130a9d69ff2971d3958",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T RWD Comfort Edition",
+      "expectedDigest": "fd4cb056c4761c799a9bb8b674eecc68779edc8dc119a40b88f98381e178c98d",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2790
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2790 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T RWD Comfort Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T RWD Comfort Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "1.5T RWD Comfort Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "9622d7f6f49d96d7168f5508",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T Smart Drive 4WD Max Edition 5 seats",
+      "expectedDigest": "9560b86d7af89f0f2f6c5506eba7187af271d99f52a5180f2af9bb35db781ecc",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2910 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d25cc5d99f870a396eb8cc2d",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T 4WD Luxury Edition",
+      "expectedDigest": "8ef554e8a757d1f20051f70a86c856480bd83f4d19add4458d7da0bd19abf769",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2900
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 исходной версии 2022 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 267. Полная разрешённая масса 2900 кг, стр. 266; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f",
+        "pages": [
+          266,
+          267
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T 4WD Luxury Edition"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 267,
+            "selector": "1.5T 4WD Luxury Edition"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 266,
+            "selector": "1.5T 4WD Luxury Edition"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "005e89cbaa243f6defeec223",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2023,
+      "trim": "1.5T 4WD Plus Edition 5 seats",
+      "expectedDigest": "52759a163e12db4a05275d846b729ce289f0ca8dec127bb0a4818af98d1707aa",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2910 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T 4WD Plus Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T 4WD Plus Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T 4WD Plus Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "5f9ebd637d34ec282ddb2f1c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 1.5T Smart Drive 4WD Ultra 5-seater",
+      "expectedDigest": "2a582a318018cbfc619a83cac114c9b78ce346a7c27d7f226ceb5b7148b7e536",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "2024 1.5T Smart Drive 4WD Ultra 5-seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "2024 1.5T Smart Drive 4WD Ultra 5-seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "01e7bb4097f1fa64828415d9",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 1.5T Smart AWD Max Edition 5-Seater",
+      "expectedDigest": "15cf7b4c0df7ca6f519dfb3c20af8a8140d2a33162c8001a4a6dcfaee1d14336",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2910 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 1.5T Smart AWD Max Edition 5-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 1.5T Smart AWD Max Edition 5-Seater"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 1.5T Smart AWD Max Edition 5-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "bd961c9c5c6c0395b2b86181",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 Model 1.5T Smart Drive RWD Max 5-Seater",
+      "expectedDigest": "0b5c18c4eba4855b497fa9682b3df7b179ca56e91637e0328de640cc996d23b6",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2820 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 Model 1.5T Smart Drive RWD Max 5-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 Model 1.5T Smart Drive RWD Max 5-Seater"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 Model 1.5T Smart Drive RWD Max 5-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "2b88e0969f5c46409f367e69",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 1.5T RWD Plus 6-Seater",
+      "expectedDigest": "308ce84a0412e850a8eab04494b7de6f963df6ce9bc9223cd08138b617a47121",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2820 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "2024 1.5T RWD Plus 6-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "2024 1.5T RWD Plus 6-Seater"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "2024 1.5T RWD Plus 6-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "506b0e579f8454868340736e",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 1.5T Smart AWD Max 6-Seater",
+      "expectedDigest": "8a38c9090109bd8615ec505a2fb52bc7b4076898bb187a171194fe9a87b417df",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2910 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 1.5T Smart AWD Max 6-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 1.5T Smart AWD Max 6-Seater"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "2024 1.5T Smart AWD Max 6-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "85ae85ae379640af2e90479c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 1.5T Smart Drive RWD Ultra 6-seater",
+      "expectedDigest": "86e028102c99143219e430a56ea172789b9ec41f2af4ea06b01488e0ecc1e9f7",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "2024 1.5T Smart Drive RWD Ultra 6-seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "2024 1.5T Smart Drive RWD Ultra 6-seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ee4ef54f8d23dbf48567793a",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "2024 1.5T RWD Plus 5-Seater",
+      "expectedDigest": "973050fad2aafec4c3f6455bc87e0c84b1f0d5b2be9274d599d222826a9a6a17",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2820 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "2024 1.5T RWD Plus 5-Seater"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "2024 1.5T RWD Plus 5-Seater"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "2024 1.5T RWD Plus 5-Seater"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d83482d9720dd7b117f1d20a",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Ultra Edition 5 seats",
+      "expectedDigest": "2ed7aac11400dad375cffbb9b3a7f986cea9b11b40db0f23cdafb4880f4e0417",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive RWD Ultra Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive RWD Ultra Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "e2332d919523f47a1afdd2dc",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T RWD Plus Edition 5 seats",
+      "expectedDigest": "bf7b929cb1ab102ab8b5ecd7936a31662999056b2bd97592e203c9db12e14ed0",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2820 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T RWD Plus Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "0ef33d6b7e8269c8fe28e11c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Ultra Edition 5 seats",
+      "expectedDigest": "53af7d00870bd495c5f0c4872956b6c71618c6583d1dadbffa6696bd7badd9f9",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive RWD Ultra Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive RWD Ultra Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "8d035dc7383537ebfde7c316",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Max Edition 5 seats",
+      "expectedDigest": "717c4ee4a1f8a44bb226c8945d52d8562fd5983f2b1eb62e197857f4068ddb3b",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2820 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "70892698bad7db84fbcb4740",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Pro Edition 5 seats",
+      "expectedDigest": "fc2befea882daeeaa0cc4ad38b9b9e04300aec776c205c9bc39b565c9fc2b7c9",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive RWD Pro Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive RWD Pro Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "2a19c4c3809f4978a4d15595",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Max Edition 6 seats",
+      "expectedDigest": "1ceaf8a94414a8a2c5d4c6e5907d7b2114109cdd48b476c7445744e19950da1f",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2820
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2820 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 6 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 6 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive RWD Max Edition 6 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "0c0f8a10ec9acb716d44b2af",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Ultra Edition 6 seats",
+      "expectedDigest": "1ad175f0c343741bff15777f3c5cd57aec1c02d5339fe6bc49488d4c57525cba",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive RWD Ultra Edition 6 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive RWD Ultra Edition 6 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "04a57bdebf3eb2084035db9b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive RWD Pro Edition 6 seats",
+      "expectedDigest": "507ff72a628f5f200884435a6b12355b129cb5d91d13552d3a6955933b079a67",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive RWD Pro Edition 6 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive RWD Pro Edition 6 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "f138d8257a220bb779c21556",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive 4WD Max Edition 5 seats",
+      "expectedDigest": "9ec1b3b3e074ee8eb4d43794c82195567ced9bb5675ddbbf3c583c8fa0afbb59",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2910 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "a7eec0b034d1fc2ee2f14fd5",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive 4WD Ultra Edition 6 seats",
+      "expectedDigest": "6c943acf8ee0d371f847eb9638a9bead1e881e4ff4b1269555a916ff2777f53c",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive 4WD Ultra Edition 6 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive 4WD Ultra Edition 6 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b42005c66547ce5946bbdf01",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive 4WD Ultra Edition 5 seats",
+      "expectedDigest": "601737d7c816eb2b60a49c7a57bc86394b137aabe4665ef395ee3be53f35839e",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive 4WD Ultra Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive 4WD Ultra Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "2684d86867a82e78b1bfb070",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive 4WD Max Edition 6 seats",
+      "expectedDigest": "730730f3a9952c72a8dfc81dac514f0fcb13961954115029a1348814c10cde30",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Max Smart Drive 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 360. Полная разрешённая масса 2910 кг, стр. 360; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5",
+        "pages": [
+          360
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 6 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 6 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Max%E6%99%BA%E9%A9%BE%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 360,
+            "selector": "1.5T Smart Drive 4WD Max Edition 6 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "e4b5f4418b8096c2800a69cb",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive 4WD Pro Edition 5 seats",
+      "expectedDigest": "0e023ed1d4cbb65704adfeb0f0207354eef6abd12563076a4407873c7ec7a718",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive 4WD Pro Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive 4WD Pro Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "041aac86f6ba09a7212c7503",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T Smart Drive 4WD Ultra Edition 5 seats",
+      "expectedDigest": "90d79807e2e1f15e66c082521f2a7ce32bcdb76c8117e628e283438a86ef76a1",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Ultra/Pro 2024 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 376 и 375. Полная масса не выбрана: руководство различает несколько технических кодов. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5",
+        "pages": [
+          375,
+          376
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 376,
+            "selector": "1.5T Smart Drive 4WD Ultra Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Ultra-Pro%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 375,
+            "selector": "1.5T Smart Drive 4WD Ultra Edition 5 seats"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d44faa711298b8d82cec9de4",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2024,
+      "trim": "1.5T 4WD Plus Edition 5 seats",
+      "expectedDigest": "6aff7f81f7224db84212ff43de84b46f54664f87033297d7ee3c9652ae6d9449",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT",
+        "grossVehicleWeightKg": 2910
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводское руководство M7 Plus 2023 года: ДВС H15RT, 1499 мл = 1499 см³, стр. 255. Полная разрешённая масса 2910 кг, стр. 255; снаряжённая масса не использована. Год и исходное исполнение сохранены. Нетто/номинальная мощность ДВС и длительная мощность моторов не перенесены; 30 минут не подтверждены.",
+        "documentSha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348",
+        "pages": [
+          255
+        ],
+        "supportingUrls": [
+          "https://aito.auto/service/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "fieldSources": {
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T 4WD Plus Edition 5 seats"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T 4WD Plus Edition 5 seats"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8CM7Plus%E6%A0%87%E5%87%86%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 255,
+            "selector": "1.5T 4WD Plus Edition 5 seats"
+          }
+        }
+      }
+    }
+  ]
+}

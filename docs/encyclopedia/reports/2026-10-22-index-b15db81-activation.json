@@ -1,0 +1,154 @@
+{
+  "release": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+  "workflow": 39746709502,
+  "job": 119716861912,
+  "conclusion": "success",
+  "index": {
+    "stage": "encyclopedia_index_ready",
+    "modelsRead": 2423,
+    "variants": 67685,
+    "factoryFields": 21080,
+    "ownerReferenceFields": 485126,
+    "manualFields": 0,
+    "digest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+    "manifestDigest": "bc50436001a0c014fc4b150009e1b70ad1591eaaeea8507366c5ce044309a39f",
+    "readback": true
+  },
+  "audit": {
+    "stage": "encyclopedia_calculation_audit",
+    "version": 1,
+    "indexDigest": "3033301f964af348ca6c1a979f8f71f5a9a39daa41f27d6016177364d97c8b07",
+    "generationId": "gen_1792548716303_1c83fca2",
+    "checkedAt": "2026-10-22T08:20:36.993Z",
+    "markets": {
+      "china": {
+        "rows": 132350,
+        "pending": 61579,
+        "exactMatches": 77461,
+        "filledRecords": 454,
+        "filledFields": 689,
+        "completeSpecifications": 275,
+        "calculated": 49,
+        "calculationMissing": {
+          "gross_vehicle_weight_kg": 220,
+          "vehicle_category": 6
+        },
+        "missing": {
+          "unclassified_field_provenance": 35176,
+          "engine_cc_missing": 1788,
+          "fuel_or_powertrain_missing": 869,
+          "peak_power_missing": 17878,
+          "certified_30min_power_missing": 59684
+        }
+      },
+      "korea": {
+        "rows": 9918,
+        "pending": 7155,
+        "exactMatches": 37,
+        "filledRecords": 33,
+        "filledFields": 102,
+        "completeSpecifications": 18,
+        "calculated": 18,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 13456,
+          "engine_cc_missing": 1,
+          "peak_power_missing": 6517,
+          "certified_30min_power_missing": 2022
+        }
+      },
+      "uae": {
+        "rows": 22039,
+        "pending": 22039,
+        "exactMatches": 11,
+        "filledRecords": 9,
+        "filledFields": 35,
+        "completeSpecifications": 6,
+        "calculated": 6,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 22030,
+          "engine_cc_missing": 21629,
+          "peak_power_missing": 22029,
+          "certified_30min_power_missing": 2712,
+          "powertrain_identity_conflict": 1
+        }
+      },
+      "europe": {
+        "rows": 46127,
+        "pending": 7600,
+        "exactMatches": 36731,
+        "filledRecords": 304,
+        "filledFields": 533,
+        "completeSpecifications": 82,
+        "calculated": 2,
+        "calculationMissing": {
+          "vehicle_category": 80
+        },
+        "missing": {
+          "engine_cc_missing": 423,
+          "unclassified_field_provenance": 1764,
+          "fuel_or_powertrain_missing": 1248,
+          "certified_30min_power_missing": 5963,
+          "peak_power_missing": 712
+        }
+      },
+      "georgia": {
+        "rows": 1705,
+        "pending": 1705,
+        "exactMatches": 0,
+        "filledRecords": 0,
+        "filledFields": 0,
+        "completeSpecifications": 0,
+        "calculated": 0,
+        "calculationMissing": {},
+        "missing": {
+          "unclassified_field_provenance": 1639,
+          "engine_cc_missing": 1572,
+          "peak_power_missing": 1431,
+          "certified_30min_power_missing": 391,
+          "fuel_or_powertrain_missing": 66
+        }
+      }
+    },
+    "publicPriceParity": 75,
+    "readback": true
+  },
+  "checkedAt": "2026-10-22T15:35:55.001363+07:00",
+  "apiHealthReadback": true,
+  "health": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "b15db81d37d49bd89de5ae628843a10519b2af5b",
+    "calculationVersion": "f6aadf717e95c4e97e6210a02fa78e45c66cd0f63c33462daa26218f98de2b7a"
+  },
+  "cardSearchParityReport": "docs/encyclopedia/reports/2026-10-22-giulietta-junior-release-card-search-parity.json",
+  "currentPassIncluded": true,
+  "variantsSavedThisPass": 109,
+  "confirmedFieldsSavedThisPass": 711,
+  "newAnnualVariantsThisPass": 86,
+  "calculationFieldsVerified": 607,
+  "referenceOnlyFields": 18,
+  "trimFields": 86,
+  "factoryFieldsDeltaAgainstPreviouslyVerifiedIndex": 607,
+  "sourceRecordsPreserved": 174,
+  "modifiedRecordsHistoryChecked": 23,
+  "matchingTests": {
+    "tests": 24,
+    "passed": 24,
+    "failed": 0
+  },
+  "scope": "Четыре партии Giulietta/Junior включены в согласованный индекс. Это не утверждение, что весь каталог заполнен/рассчитан; исторические строки не равны приросту рассчитанных текущих предложений. 18 справочных полей не входят в неизменённый список расчётных полей.",
+  "technicalReferenceIntake": {
+    "workflow": 39731352531,
+    "status": "completed",
+    "conclusion": "success",
+    "referenceOnly": true
+  },
+  "comparisonReferenceIntake": {
+    "workflow": 39743682918,
+    "status": "in_progress",
+    "conclusion": null,
+    "referenceOnly": true
+  }
+}

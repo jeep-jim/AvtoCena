@@ -1,0 +1,85 @@
+{
+  "checkedAt": "2026-10-24T22:21:19.736455+00:00",
+  "scope": "existing permanent encyclopedia only",
+  "newValues": 50,
+  "correctedValues": 8,
+  "attestedUnchanged": 12,
+  "fieldAssertionsReadBack": 70,
+  "variants": 14,
+  "newModels": 0,
+  "certifiedPowerAdded": 0,
+  "batches": [
+    {
+      "batch": "research-2026-10-25-audi-a3-phev-ice-power",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-ice-power.json",
+      "sha256": "184d7d6bf9be73e3b4ea852f4c1280150cea867a09d158e5d96c0f85d16047e7",
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variants": 3,
+      "fields": 15,
+      "newValues": 12,
+      "correctedValues": 3,
+      "attestedUnchanged": 0,
+      "workflow": 40137439232,
+      "job": 121001852940,
+      "afterRevision": "5962b59e-60c6-49d5-baa7-072c2b46e1a2",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2024-readback.json"
+    },
+    {
+      "batch": "research-2026-10-25-audi-a3-phev-2021-2023",
+      "path": "docs/encyclopedia/batches/2026-10-25-audi-a3-phev-2021-2023.json",
+      "sha256": "8bc601e3786512a881e3e92fbb19251cada92639f48f9f727c6a3085ae3ad8c2",
+      "state": "saved_api_readback_pass_pending_next_index",
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variants": 11,
+      "fields": 55,
+      "newValues": 38,
+      "correctedValues": 5,
+      "attestedUnchanged": 12,
+      "workflow": 40137808086,
+      "job": 121002949989,
+      "afterRevision": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
+      "apiReadback": true,
+      "report": "docs/encyclopedia/reports/2026-10-25-audi-a3-phev-2021-2023-readback.json"
+    }
+  ],
+  "otherRowsUnchanged": 737,
+  "referenceRowsReviewedThisRun": 128,
+  "referenceRowsReviewedCumulative": 256,
+  "remainingSourceRows": 11,
+  "remaining2024Candidates": 17,
+  "sourceReports": [
+    "docs/encyclopedia/reports/2026-10-25-retained-reference-page3-review.json",
+    "docs/encyclopedia/reports/2026-10-25-retained-reference-page4-review.json"
+  ],
+  "installedHealth": {
+    "checkedAt": "2026-10-24T22:17:22.980129+00:00",
+    "status": 200,
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+    "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+  },
+  "activationConfirmed": false,
+  "publicationBlocker": {
+    "workflow": 40124551054,
+    "state": "in_progress",
+    "lastObservedLease": "catalog_v3_publish_china_fc5b3612-769c-4636-84c2-ab810ccaed83",
+    "leaseReadAt": "2026-10-24T22:06:35.017Z",
+    "lockedUntilAtRead": "2026-10-24T22:32:31.076Z",
+    "generationId": "gen_1792702445675_8c312f85",
+    "fiveSelectorsValidAtRead": true
+  },
+  "releaseCandidateCounts": {
+    "required": 46,
+    "public": 32,
+    "astraPlans": 3
+  },
+  "open": [
+    "scoped-v1 not installed",
+    "single chunked repair not performed",
+    "new public prices/JapanAWD/pickup acceptance pending",
+    "globalAJESorder/DBX/performance/fullcatalog incomplete"
+  ]
+}

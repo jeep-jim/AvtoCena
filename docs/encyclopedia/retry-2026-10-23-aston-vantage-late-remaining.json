@@ -1,0 +1,2971 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T05:11:48.174Z",
+  "modelId": "0f90ccb1a0cf0280fa416811",
+  "make": "Aston Martin",
+  "model": "Vantage",
+  "revision": "2753137b-3b83-480d-991e-4d9d40981f1c",
+  "variants": 88,
+  "variantsWithRemainingFields": [
+    {
+      "variantId": "7a4ee429e78224095ef907e5",
+      "year": 2012,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "461e7d3f0727c726251c1e6e",
+      "year": 2012,
+      "trim": "V8 Купе Sportshift 6",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "26126a273210110873e5ebf8",
+      "year": 2012,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "ea900e426ae9fda17f4681fd",
+      "year": 2012,
+      "trim": "V8 Родстер Sportshift 6",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "3a28ecbdbc3b2202305320a7",
+      "year": 2012,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "39af43f5baacc0d2b76a0293",
+      "year": 2012,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "eb145319ae5090104e407896",
+      "year": 2013,
+      "trim": "STANDARD",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "9388c4ce504cdef748057a7d",
+      "year": 2013,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "9b809b5467fe44c1293dfd9a",
+      "year": 2013,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "cbf09717df9e5a99460b1204",
+      "year": 2013,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "6cb6fdcd0cad7f135dde9a62",
+      "year": 2013,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "df6167a06af942d79c1447a7",
+      "year": 2013,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "7b5bebafc8091fd85c41b71c",
+      "year": 2013,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "b4cee746cf99ae2c1c663a41",
+      "year": 2014,
+      "trim": "STANDARD",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "feec646527ead29ebd8fd07d",
+      "year": 2014,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "b4f60e4913909d7ec558e485",
+      "year": 2014,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "818bba7be1c7de08c389b750",
+      "year": 2014,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "f0a01adbc6b6614c553f8cb4",
+      "year": 2014,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "98ffda9b7342e0c27b0b4ca6",
+      "year": 2014,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "101017a69b9561c2f8d5fa46",
+      "year": 2014,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "48adda295d1a41607b00054f",
+      "year": 2015,
+      "trim": "S",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "9bc6f6f37e8872bfd69b5ae5",
+      "year": 2015,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "4a620fa16dfe6ddc2fb7d9f1",
+      "year": 2015,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "6faa710bbee8765c9e9b6258",
+      "year": 2015,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "66da7f45a64fadabfc82f29f",
+      "year": 2015,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "a38140ef9e4b8c167f9062ba",
+      "year": 2015,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "b2e382f6b0d6a81594046c34",
+      "year": 2015,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "827f2301cf4cb4230bc668e2",
+      "year": 2016,
+      "trim": "S",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "487c8b10f6853add40a39ee3",
+      "year": 2016,
+      "trim": "Standard",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "651b61ee7da6782aae16a84b",
+      "year": 2016,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "9f3b54b82a85de1548b25718",
+      "year": 2016,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "0af78fe57ad47112759c5437",
+      "year": 2016,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "5f56041178674024fdd09b69",
+      "year": 2016,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "2bc22adc82c49737ae3b1b94",
+      "year": 2016,
+      "trim": "V8 S Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "8c3f41142a7f1e4295629b57",
+      "year": 2016,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "f0b37b223cb2e43e1944000f",
+      "year": 2016,
+      "trim": "V8 S Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "b5ee264b5c049272126188a6",
+      "year": 2016,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "c14c74b5f2216b3c76464412",
+      "year": 2017,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "7e5164979d0c2afccbe3826e",
+      "year": 2017,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "2cc4331f9492b50ef5f020a8",
+      "year": 2017,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "3a96786f33f315e215d564fe",
+      "year": 2017,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "6d512d1290f58497b05f4b3f",
+      "year": 2019,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "9a55d1500a7ac2b225b7dd7c",
+      "year": 2019,
+      "trim": "V8 AMR Купе 7MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "bcd588c10bf1edf42fb9ec71",
+      "year": 2020,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "fd43dcba0edb6cbb91a37a00",
+      "year": 2020,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "3ac6df15d598a09255e73900",
+      "year": 2020,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "d01f216e56aef8feb270e46a",
+      "year": 2020,
+      "trim": "V8 Twin-Turbo Купе 7MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "c1246a82c261bb5de6fd7054",
+      "year": 2020,
+      "trim": "V8 Twin-Turbo Родстер 8AT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "8e31a9179e69321c68b57bcb",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "6206d8550c09bf65e5066f76",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "2072661ef8336a5c95435830",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "5252065e149c0e1ded7ecfe2",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "37cd3aacf4e0b8a66764727b",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "b4c2c6d450a0d50be7b6c0ad",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "d7ff3a3e1bf10e2b242c44b2",
+      "year": 2021,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "ea4a35eeb881dc8f908d91f7",
+      "year": 2021,
+      "trim": "V8 Twin-Turbo Купе 7MT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "796ec920253ab4c503b0482b",
+      "year": 2021,
+      "trim": "V8 Twin-Turbo Родстер 8AT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "unconfirmedFactoryFields": [
+        "powerHp",
+        "drive",
+        "engineCode"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "66609bba259ae436705fcc5f",
+      "year": 2021,
+      "trim": "V8 F1 Edition Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "1cea87c3eddfa68f7acac1c5",
+      "year": 2021,
+      "trim": "V8 F1 Edition Родстер 8AT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "3c43bf495f7f7d612e8b239d",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "0c33e236e938e80b21ab6593",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "4a8375f4ea57c69594a475c2",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "f44596725402e00df29c1af0",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "0205cfd8ee41dc61fb6ee209",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "3a01c0ba09d2765d98d9c643",
+      "year": 2022,
+      "trim": "V8 F1 Edition Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "8d47a6f6b2fab1b9ca08ec45",
+      "year": 2022,
+      "trim": "V8 F1 Edition Родстер 8AT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "f56f48b10b05e45b7bbe4a60",
+      "year": 2023,
+      "trim": "V8",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "1b14f93c24e20508c93f9fdc",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "551353440ff3e0403fc7ffe4",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "6bb8478b9951d891680b3a16",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "f409b6759d8f62b2e1a97307",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "95e713830249012999164f80",
+      "year": 2023,
+      "trim": "V8 F1 Edition Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "6a48c76247961e15701d5f3d",
+      "year": 2023,
+      "trim": "V8 F1 Edition Родстер 8AT",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "844608cad7ad0f2bceb433a9",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "fe0c6d71a8a63c076121a6f6",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "f83ea2fc8ed01ea738e27f5a",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "5a1a802635a489c8a5526bf6",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "23c7db4696cf6ad665b29278",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "26231ab4190b489ec48d6701",
+      "year": 2024,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "deadae0c5da696139ca0328d",
+      "year": 2025,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "287275fd103e80ebd1ec01cd",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "a05e34979027606cc5787ad8",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "cafc6dd89c98b147db8fcaca",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "abdd119f2c417698dcddb81c",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "b747e8a182eba37d6bb93794",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Нет точного trim; регистрационные наблюдения не превращать в заводскую годовую модификацию по одному объёму/мощности."
+    },
+    {
+      "variantId": "4965964f2c62bac291c16c30",
+      "year": 2025,
+      "trim": "V8 Twin-Turbo Родстер",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "drive",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "3712e4cad3aa240ee12a5386",
+      "year": 2025,
+      "trim": "V8 S Twin-Turbo Купе",
+      "bodyType": "coupe",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    },
+    {
+      "variantId": "aedd8e8e508165e77577ffbe",
+      "year": 2025,
+      "trim": "V8 S Twin-Turbo Родстер",
+      "bodyType": "convertible",
+      "factoryConfirmedFields": [
+        "powertrainKind",
+        "powerHp",
+        "bodyType"
+      ],
+      "otherSupportedFields": [],
+      "missingSupportedFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "unconfirmedFactoryFields": [
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Проверять только неизвестное по точной годовой/технической версии; уже поддержанные значения не повторять."
+    }
+  ],
+  "yearCoverageRetries": [
+    {
+      "years": [
+        2008,
+        2009,
+        2010,
+        2011,
+        2018
+      ],
+      "reason": "Исторические годовые исполнения не закончены; заводские годы и таблицы проверять адресно, основу моделей не пересобирать."
+    },
+    {
+      "years": [
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "reason": "V8 S6MT и специальные серии требуют точного подтверждения. Не распространять общую таблицу коробок на S без подтверждения сочетания."
+    },
+    {
+      "years": [
+        2017
+      ],
+      "reason": "17MY руководство сообщает320кВт без разделения S; созданы4точных исполнения V8 с указанными коробкой/кузовом. Шильдики S/GT/N430 и регионы не угаданы."
+    },
+    {
+      "years": [
+        2022,
+        2023
+      ],
+      "reason": "Базовые V8/AMR и неоднозначная UAE V82023 требуют точной идентичности;535PS F1 Edition не переносить на genericV8."
+    },
+    {
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "reason": "Новые Coupe/Roadster/S созданы только для подтверждённых2024/2025. Точные см³/топливо/коробкаS/GVW и фактический2026 должны подтверждаться отдельно; чужие500кВт/регистрации не присваивать trim."
+    }
+  ],
+  "sourceAccessRetries": [
+    {
+      "url": "https://media.astonmartin.com/aston-martin-vantage-s-the-peak-of-sports-car-performance/?lang=eng",
+      "result": "HTTP403",
+      "bypassed": false,
+      "alternativePublishedSource": "https://www.astonmartin.com/en-us/our-world/news/2025/7/9/aston-martin-vantage-s-the-peak-of-sports-car-performance"
+    },
+    {
+      "url": "https://www.astonmartin.com/-/media/corporate/documents/2024-results/aston-martin-lagonda-h1-2024-results-transcript.pdf?rev=cc590f5334cd45c78c8bbe1d190a3f6d",
+      "result": "HTTP404",
+      "absenceOfDataNotInferred": true
+    }
+  ],
+  "reviewedSources": [
+    {
+      "key": "new-coupe",
+      "url": "https://www.astonmartin.com/en-gb/our-world/news/2024/2/12/introducing-new-vantage-engineered-for-real-drivers",
+      "sha256": "3521084ca426bbd48cb6b68d818b1a3c2e7e4959d460bcd358eaec4c73f980d3",
+      "bytes": 120333
+    },
+    {
+      "key": "new-roadster",
+      "url": "https://www.astonmartin.com/en/our-world/news/2025/1/15/new-vantage-roadster-engineered-for-real-drivers-designed-for-open-air-thrills",
+      "sha256": "0f492500e68838a2f1bfea9684b6e4ce2ebe6b14de7ef3c12afc63409042e5b8",
+      "bytes": 111462
+    },
+    {
+      "key": "f1-2023",
+      "url": "https://www.astonmartin.com/en/our-world/news/2023/2/13/aston-martin-celebrates-110th-anniversary-with-reveal-of-special-logo-on-amr23-formula-1-car",
+      "sha256": "1232aeac06e8e6cb741d5e44714cad16b67d5d1494af9d33a62db6aa1d9f6b4e",
+      "bytes": 98238
+    },
+    {
+      "key": "new-s",
+      "url": "https://www.astonmartin.com/en-us/our-world/news/2025/7/9/aston-martin-vantage-s-the-peak-of-sports-car-performance",
+      "sha256": "6e38b9a165f913494d575d2d466ce1c4db4aed64dd2f2e4c6f390237625aabe0",
+      "bytes": 103181
+    },
+    {
+      "key": "annual2022",
+      "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/annual-reports/aston_martin_annual_report_2022.pdf?rev=6a462584d1c54890a85a324a2663c3d7",
+      "sha256": "1f0dcbd9325b21774134cda204c082e49f9afdd589a22548fc14b4e070eae7c8",
+      "bytes": 9170517
+    },
+    {
+      "key": "fy2025",
+      "url": "https://www.astonmartin.com/-/media/corporate/documents/fy-results-2025/aston-martin-lagonda-fy-2025-results.pdf?rev=cfee91d19eda4499b80f930b2012072c",
+      "sha256": "65fe92b7a7b033ed1efcb66d8d81244b3c3ad79ef37b1c7ef73d878327352f1d",
+      "bytes": 772760
+    },
+    {
+      "key": "h12025",
+      "url": "https://www.astonmartin.com/-/media/corporate/documents/h1-results-2025/aston-martin-lagonda-h1-2025-results.pdf?rev=c4b0893484344eae8bf41d2022d1d3a9",
+      "sha256": "d1a47e6374453dd3bf5ad62023ba8a256cf888d7293abcc8dcba43ab9fbea09e",
+      "bytes": 789250
+    },
+    {
+      "key": "h12024",
+      "url": "https://www.astonmartin.com/-/media/corporate/documents/2024-results/aston-martin-lagonda-h1-2024-results-transcript.pdf?rev=cc590f5334cd45c78c8bbe1d190a3f6d",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "key": "17MY",
+      "url": "https://www.astonmartin.com/guides/HG33-19A321-AA.pdf",
+      "sha256": "c9c97c1c116ab93e5aedd5b49452461176210fb275d23e3520ce55b31eadf9d0",
+      "bytes": 33093462
+    },
+    {
+      "key": "amr2019",
+      "url": "https://www.astonmartin.com/en-us/our-world/news/2019/9/25/vantage-amr-pure-engaging-manual-performance",
+      "sha256": "37942a909ee837fefee2e437698fd886b64c65778a0cc82f8b07290cafec26c7",
+      "bytes": 107669
+    },
+    {
+      "key": "roadster2020",
+      "url": "https://www.astonmartin.com/en-us/our-world/news/2020/2/12/vantage-roadster-uncompromising-performance-meets-pure-emotion",
+      "sha256": "ed4813394475ecbd0dad27adad0e0ec69f2838d90c67ac6d6e372629629883ff",
+      "bytes": 99029
+    },
+    {
+      "key": "fy2019",
+      "url": "https://www.astonmartin.com/-/media/corporate/corporatearchive/documents/results-centre/2019---results-centre/fy---2019/aston-martin-lagonda-fy-results-2019---presentation.pdf?rev=3399ab847fbe4b08b55781e92b1135dc",
+      "sha256": "e974497c4234ff886d134f49feee56e2f0ec958cb22a7d531153d028f2190454",
+      "bytes": 4999834
+    },
+    {
+      "key": "q32020",
+      "url": "https://www.astonmartin.com/en-us/our-world/news/2020/10/27/mercedes-benz-ag-strategic-technology-agreement-new-financing-and-q3-results",
+      "sha256": "38a9f70a1f538d1eb5dfceedb6c5ed42a261b18aebf6103140a0c2f2b7dd4bbc"
+    },
+    {
+      "key": "12MY",
+      "url": "https://www.astonmartin.com/guides/CG33-19A321-AA.pdf",
+      "sha256": "a07958d32c01374a812a5d86c918cbbbd97faf07fc600b3e3cdeda31bba25c7f",
+      "title": "12MY V8 Vantage English Owner Guide"
+    },
+    {
+      "key": "f1-launch",
+      "url": "https://www.astonmartin.com/en-gb/our-world/news/2021/3/22/introducing-the-vantage-f1-edition-race-track-performance-on-the-road",
+      "sha256": "d3e825fc8b61962e0a77fb0362ed5b0b54aeccca7037bceac1b1c37dd10ace14"
+    }
+  ],
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-23-aston-vantage-remaining.json"
+  ],
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false
+}

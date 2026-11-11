@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-berlingo-japan-2023-technical",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "3081cef67244caeae4c406be",
+      "make": "Citroën",
+      "model": "Berlingo",
+      "variantId": "568f54352f950472d0b38b39",
+      "year": 2023,
+      "trim": "SHINE BlueHDi",
+      "expectedRevision": "29a273f7-0c7f-5a5d-ad81-7748839413e0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "SHINE BlueHDi",
+        "chassisCode": "K9CYH01",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 130,
+        "powerKw": 96,
+        "icePowerKw": 96,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://web.citroen.jp/brochure/webcatalog/pdf/berlingo_spec_230403.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Citroën Japan, редакция 03.04.2023, страница 2: японские SHINE BlueHDi и LONG SHINE BlueHDi, также XTR PACK, типы 3DA-K9CYH01 / 3DA-K9CYH01L; дизель 1498 см³, 96 кВт / 130 PS, 8AT, передний привод. Сохраняются отдельные японские исполнения 2023 года, без переноса на предыдущие годы. Снаряжённая масса не является полной; 30-минутная мощность не требуется для ДВС и не заполняется.",
+        "sourceSha256": "48597bc3c643b1fdffb2df9c046316d9012a2c2e469d8effc4070835eeece496",
+        "edition": "2023-04-03",
+        "page": 2
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "3081cef67244caeae4c406be",
+      "make": "Citroën",
+      "model": "Berlingo",
+      "variantId": "2a4a6b9047627031435a823f",
+      "year": 2023,
+      "trim": "SHINE BlueHDi XTR PACK",
+      "expectedRevision": "29a273f7-0c7f-5a5d-ad81-7748839413e0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "SHINE BlueHDi XTR PACK",
+        "chassisCode": "K9CYH01",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 130,
+        "powerKw": 96,
+        "icePowerKw": 96,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://web.citroen.jp/brochure/webcatalog/pdf/berlingo_spec_230403.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Citroën Japan, редакция 03.04.2023, страница 2: японские SHINE BlueHDi и LONG SHINE BlueHDi, также XTR PACK, типы 3DA-K9CYH01 / 3DA-K9CYH01L; дизель 1498 см³, 96 кВт / 130 PS, 8AT, передний привод. Сохраняются отдельные японские исполнения 2023 года, без переноса на предыдущие годы. Снаряжённая масса не является полной; 30-минутная мощность не требуется для ДВС и не заполняется.",
+        "sourceSha256": "48597bc3c643b1fdffb2df9c046316d9012a2c2e469d8effc4070835eeece496",
+        "edition": "2023-04-03",
+        "page": 2
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "3081cef67244caeae4c406be",
+      "make": "Citroën",
+      "model": "Berlingo",
+      "variantId": "4f24344995e2c48812430ee8",
+      "year": 2023,
+      "trim": "LONG SHINE BlueHDi",
+      "expectedRevision": "29a273f7-0c7f-5a5d-ad81-7748839413e0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "LONG SHINE BlueHDi",
+        "chassisCode": "K9CYH01L",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 130,
+        "powerKw": 96,
+        "icePowerKw": 96,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://web.citroen.jp/brochure/webcatalog/pdf/berlingo_spec_230403.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Citroën Japan, редакция 03.04.2023, страница 2: японские SHINE BlueHDi и LONG SHINE BlueHDi, также XTR PACK, типы 3DA-K9CYH01 / 3DA-K9CYH01L; дизель 1498 см³, 96 кВт / 130 PS, 8AT, передний привод. Сохраняются отдельные японские исполнения 2023 года, без переноса на предыдущие годы. Снаряжённая масса не является полной; 30-минутная мощность не требуется для ДВС и не заполняется.",
+        "sourceSha256": "48597bc3c643b1fdffb2df9c046316d9012a2c2e469d8effc4070835eeece496",
+        "edition": "2023-04-03",
+        "page": 2
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "3081cef67244caeae4c406be",
+      "make": "Citroën",
+      "model": "Berlingo",
+      "variantId": "c5e3280f2874b473dd6e010a",
+      "year": 2023,
+      "trim": "LONG SHINE BlueHDi XTR PACK",
+      "expectedRevision": "29a273f7-0c7f-5a5d-ad81-7748839413e0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "LONG SHINE BlueHDi XTR PACK",
+        "chassisCode": "K9CYH01L",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1498,
+        "powerHp": 130,
+        "powerKw": 96,
+        "icePowerKw": 96,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "chassisCode",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://web.citroen.jp/brochure/webcatalog/pdf/berlingo_spec_230403.pdf",
+        "checkedAt": "2026-10-24",
+        "statement": "Заводская таблица Citroën Japan, редакция 03.04.2023, страница 2: японские SHINE BlueHDi и LONG SHINE BlueHDi, также XTR PACK, типы 3DA-K9CYH01 / 3DA-K9CYH01L; дизель 1498 см³, 96 кВт / 130 PS, 8AT, передний привод. Сохраняются отдельные японские исполнения 2023 года, без переноса на предыдущие годы. Снаряжённая масса не является полной; 30-минутная мощность не требуется для ДВС и не заполняется.",
+        "sourceSha256": "48597bc3c643b1fdffb2df9c046316d9012a2c2e469d8effc4070835eeece496",
+        "edition": "2023-04-03",
+        "page": 2
+      }
+    }
+  ]
+}

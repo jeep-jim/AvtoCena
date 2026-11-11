@@ -1,0 +1,373 @@
+{
+  "checkedAt": "2026-10-24T22:17:20.278255+00:00",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "revision": "78a1b805-92ab-42fa-a3c3-eb703664c6d9",
+  "batch": "research-2026-10-25-audi-a3-phev-2021-2023",
+  "workflow": 40137808086,
+  "job": 121002949989,
+  "conclusion": "success",
+  "newValues": 38,
+  "correctedValues": 5,
+  "attestedUnchanged": 12,
+  "checkedFields": 55,
+  "checks": [
+    {
+      "variantId": "c09ed77e97b80cc32c6592db",
+      "year": 2021,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 150,
+          "actual": 150,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "26a525d199cf7c7116d23459",
+      "year": 2021,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "da5c708c2cc1d74db44caf5a",
+      "year": 2021,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "03259e37a6118b191687000c",
+      "year": 2021,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "10e80f5885b4cd8d4b83c457",
+      "year": 2022,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 150,
+          "actual": 150,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "c81cee689c79e9b653ddb7be",
+      "year": 2022,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 150,
+          "actual": 150,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "a2b21c9e0ce0f571c313eaad",
+      "year": 2022,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 150,
+          "actual": 150,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "2c65fc85263c093b232000f0",
+      "year": 2022,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 150,
+          "actual": 150,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "7bbd90b677f59fb70de3d348",
+      "year": 2022,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "b9be32418f5fe0ba64bb2faf",
+      "year": 2022,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    },
+    {
+      "variantId": "1b5a32d82d94c1c0959009e1",
+      "year": 2023,
+      "fields": {
+        "fuel": {
+          "expected": "hybrid",
+          "actual": "hybrid",
+          "pass": true
+        },
+        "powertrainKind": {
+          "expected": "other_hybrid",
+          "actual": "other_hybrid",
+          "pass": true
+        },
+        "drive": {
+          "expected": "fwd",
+          "actual": "fwd",
+          "pass": true
+        },
+        "systemPowerKw": {
+          "expected": 180,
+          "actual": 180,
+          "pass": true
+        },
+        "icePowerKw": {
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      }
+    }
+  ],
+  "otherRowsUnchanged": true,
+  "otherRowsCount": 614,
+  "otherExistingPublicFieldsPreserved": true,
+  "unknownBodiesPreserved": [
+    {
+      "variantId": "03259e37a6118b191687000c",
+      "preserved": true
+    },
+    {
+      "variantId": "2c65fc85263c093b232000f0",
+      "preserved": true
+    }
+  ],
+  "certifiedPowerAdded": 0,
+  "newModels": 0,
+  "state": "saved_public_readback_pass_not_activated",
+  "finishedAt": "2026-10-24T22:16:46.188Z"
+}

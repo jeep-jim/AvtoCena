@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-10-22T09:14:04.374Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-mito-2009-2010-multiair",
+  "digest": "48501ade1fc2dd05d3558899281ce7f8b56e3f8ad535535f4539192607054097",
+  "sourceModelRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+  "variants": 10,
+  "newVariants": 10,
+  "fields": 80,
+  "years": {
+    "2009": 2,
+    "2010": 8
+  },
+  "plan": {
+    "changes": [
+      {
+        "variantId": "1bbb8422bc1f28900a6f7e4a",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw"
+        ]
+      },
+      {
+        "variantId": "1aeb77d251323c78c05e619a",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw"
+        ]
+      },
+      {
+        "variantId": "469db545a1e44735462cd0cd",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive",
+          "transmission",
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "3251301fef989d7e16afa1ec",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive",
+          "transmission",
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "096a3f2763616c1dede26032",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive",
+          "transmission",
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "2943f0cbb3c15164705c27df",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive",
+          "transmission",
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "7f6f9c58b93bd5de30135f22",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive",
+          "transmission",
+          "bodyType"
+        ]
+      },
+      {
+        "variantId": "a7e575384cb5dab52c5e4cad",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive"
+        ]
+      },
+      {
+        "variantId": "32847858cf0969b02e083387",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive"
+        ]
+      },
+      {
+        "variantId": "040b809591dd1ee320e2c5eb",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "powerKw",
+          "icePowerKw",
+          "drive"
+        ]
+      }
+    ],
+    "skipped": []
+  }
+}

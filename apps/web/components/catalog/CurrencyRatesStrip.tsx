@@ -1,0 +1,142 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState, type WheelEvent as ReactWheelEvent } from "react";
+import { currencyName, CurrencyFlag, CurrencyRatesSheet, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
+
+import { loadPublicRates } from "../../lib/catalog/public-rates-client";
+
+type Variant = "mobile" | "desktop";
+
+type Props = {
+  rates?: PublicCurrencyRate[];
+  variant?: Variant;
+  className?: string;
+  showHeading?: boolean;
+};
+
+const DISPLAY_RATES: Record<Variant, Array<[string, number]>> = {
+  desktop: [
+    ["JPY", 100],
+    ["CNY", 1],
+    ["KRW", 1000],
+    ["USD", 1],
+    ["EUR", 1],
+    ["GEL", 1],
+    ["AED", 1],
+    ["GBP", 1],
+    ["PLN", 1],
+    ["CHF", 1],
+  ],
+  mobile: [
+    ["JPY", 100],
+    ["CNY", 1],
+    ["KRW", 1000],
+    ["USD", 1],
+    ["EUR", 1],
+    ["GEL", 1],
+    ["AED", 1],
+  ],
+};
+
+function rateColor(delta: number) {
+  if (delta < 0) return "text-[#31b765]";
+  if (delta > 0) return "text-[#ef3340]";
+  return "text-[var(--ac-muted)]";
+}
+
+function displayRate(rate: PublicCurrencyRate | undefined, amount: number, showRuble: boolean) {
+  if (!rate) return "—";
+  const value = Number(rate.effectiveRate || 0) * amount;
+  const digits = amount > 1 ? 2 : value < 1 ? 4 : 2;
+  const formatted = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(value);
+  return showRuble ? `${formatted} ₽` : formatted;
+}
+
+export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", className = "", showHeading = false }: Props) {
+  const [loadedRates, setLoadedRates] = useState<PublicCurrencyRate[]>(suppliedRates || []);
+  const [open, setOpen] = useState(false);
+  const [initialCurrency, setInitialCurrency] = useState("JPY");
+  const [todayLabel, setTodayLabel] = useState("");
+  const pointer = useRef<{ x: number; moved: boolean } | null>(null);
+
+  useEffect(() => {
+    if (variant === "desktop" || showHeading) setTodayLabel(new Intl.DateTimeFormat("ru-RU").format(new Date()));
+  }, [variant, showHeading]);
+
+  useEffect(() => {
+    if (suppliedRates?.length) {
+      setLoadedRates(suppliedRates);
+      return;
+    }
+    let cancelled = false;
+    loadPublicRates()
+      .then((rates) => {
+        if (!cancelled) setLoadedRates(rates);
+      })
+      .catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [suppliedRates]);
+
+  const rateMap = useMemo(() => new Map(loadedRates.map((rate) => [String(rate.currency).toUpperCase(), rate])), [loadedRates]);
+  const tiles = DISPLAY_RATES[variant];
+
+  const wheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    const node = event.currentTarget;
+    if (node.scrollWidth <= node.clientWidth) return;
+    if(Math.abs(event.deltaY)>=Math.abs(event.deltaX)&&!event.shiftKey)return;
+    const delta = event.shiftKey?event.deltaY:event.deltaX;
+    if (!delta) return;
+    node.scrollLeft += delta;
+    event.preventDefault();
+  };
+
+  const openCurrency = (currency: string) => {
+    if (pointer.current?.moved) {
+      pointer.current = null;
+      return;
+    }
+    setInitialCurrency(currency);
+    setOpen(true);
+  };
+
+  const shell = variant === "desktop"
+    ? "rounded-[1.6rem] p-4"
+    : "w-full min-w-0 max-w-full overflow-hidden rounded-[1.35rem] px-2 py-3";
+  const rail = variant === "desktop"
+    ? "ac-currency-rates-grid grid grid-cols-5 gap-2"
+    : "ac-hide-scrollbar flex w-full min-w-0 touch-auto gap-2 overflow-x-auto overscroll-x-contain";
+
+  return <>
+    <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">
+      {variant === "desktop" || showHeading ? <div className={variant === "desktop" ? "mb-3 flex items-baseline gap-3" : "mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1"}><h3 className="text-lg font-black">Курс валют</h3><span className="text-xs font-medium text-[var(--ac-muted)]">на {todayLabel || "сегодня"} в рублях</span></div> : null}
+      {variant === "desktop" && <p className="mb-3 text-sm text-[var(--ac-muted)]">Пересчитываем по актуальному курсу валют и переводим цену продавца в рубли.</p>}
+      <div
+        className={rail}
+        style={{ WebkitOverflowScrolling: "touch" }}
+        onWheel={wheel}
+        onPointerDown={(event) => { pointer.current = { x: event.clientX, moved: false }; }}
+        onPointerMove={(event) => { if (pointer.current && Math.abs(event.clientX - pointer.current.x) > 7) pointer.current.moved = true; }}
+        onPointerUp={() => { window.setTimeout(() => { pointer.current = null; }, 0); }}
+        onPointerCancel={() => { pointer.current = null; }}
+      >
+        {tiles.map(([currency, amount]) => {
+          const rate = rateMap.get(currency);
+          const delta = Number(rate?.rateDelta || 0) || (Number(rate?.effectiveRate || 0) - Number(rate?.previousEffectiveRate || 0));
+          return <button
+            key={currency}
+            type="button"
+            onClick={() => openCurrency(currency)}
+            className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "ac-currency-rate-tile min-w-0 bg-white/[0.045]" : "min-w-[62px] shrink-0"}`}
+            aria-label={`Открыть курс: ${currencyName(currency)} (${currency})`}
+            title={`${currencyName(currency)} · за ${amount} ${currency}`}
+          >
+            <CurrencyFlag currency={currency} className="h-4 w-6" />
+            <span className="pointer-events-none mt-1 text-[9px] font-black">{currency}</span>
+            <span className={`pointer-events-none mt-0.5 block text-[10px] font-black ${rateColor(delta)}`}>{displayRate(rate, amount, variant !== "desktop")}</span>
+          </button>;
+        })}
+      </div>
+    </section>
+    <CurrencyRatesSheet open={open} onClose={() => setOpen(false)} rates={loadedRates} initialCurrency={initialCurrency} />
+  </>;
+}

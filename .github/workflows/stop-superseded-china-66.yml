@@ -1,0 +1,48 @@
+name: Stop superseded China run 66
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/stop-superseded-china-66.yml']
+  workflow_dispatch:
+permissions:
+  actions: write
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Stop only the owner-approved obsolete scheduled run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, time, urllib.request, urllib.error
+          base = 'https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/39857878662'
+          headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}
+          def request(url, method='GET'):
+              req = urllib.request.Request(url, headers=headers, method=method)
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  body = response.read()
+                  return json.loads(body) if body else {}
+          run = request(base)
+          assert run['id'] == 39857878662
+          assert run['repository']['full_name'] == 'jeep-jim/AvtoCena'
+          assert run['event'] == 'schedule'
+          assert run['path'] == '.github/workflows/catalog-refresh-china.yml'
+          assert run['head_sha'] == '2e22db88887dda655c875b454e73281a3e92f0b7'
+          print(json.dumps({'stage':'before','status':run['status'],'conclusion':run['conclusion']}))
+          if run['status'] != 'completed':
+              try:
+                  request(base + '/force-cancel', 'POST')
+              except urllib.error.HTTPError as error:
+                  if error.code != 409:
+                      raise
+                  assert request(base)['status'] == 'completed'
+              for attempt in range(24):
+                  run = request(base)
+                  if run['status'] == 'completed':
+                      break
+                  time.sleep(5)
+          print(json.dumps({'stage':'after','status':run['status'],'conclusion':run['conclusion']}))
+          assert run['status'] == 'completed', 'Cancellation has not completed'
+          PY

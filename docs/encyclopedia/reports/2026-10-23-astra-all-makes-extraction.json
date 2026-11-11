@@ -1,0 +1,549 @@
+{
+  "version": 1,
+  "sourceUrl": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+  "schemaUrl": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/Testdatensatz_eDatenblatt_mit_Beschreibung.xlsx",
+  "sourceSha256": "4bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf",
+  "sourceBytes": 851983508,
+  "sourceRows": 616197,
+  "selectedMake": null,
+  "selectedRows": 616197,
+  "makes": {
+    "abarth": 88,
+    "alfa romeo": 235,
+    "alpina": 19,
+    "alpine": 287,
+    "aston martin": 19,
+    "audi": 71121,
+    "bentley": 20,
+    "bmw": 56015,
+    "bugatti": 11,
+    "byd": 2336,
+    "cadillac": 13,
+    "chevrolet": 48,
+    "citroen": 603,
+    "cupra": 26736,
+    "dacia": 3779,
+    "ds": 41,
+    "elaris": 1,
+    "etesia": 1,
+    "evum motors": 1,
+    "ferrari": 31,
+    "fiat": 676,
+    "fisker": 4,
+    "ford": 30887,
+    "ford-cng-technik": 1,
+    "geely": 20,
+    "gwm": 3,
+    "honda": 6248,
+    "hyundai": 456,
+    "ineos": 5,
+    "isuzu": 4,
+    "iveco": 22,
+    "jaecoo": 2,
+    "jaguar": 72,
+    "jeep": 203,
+    "kg mobility": 21,
+    "kia": 1036,
+    "ktm": 8,
+    "lamborghini": 34,
+    "land rover": 347,
+    "leapmotor": 3,
+    "lexus": 2302,
+    "lotus": 1,
+    "lucid": 103,
+    "lynk&co": 116,
+    "man": 94,
+    "maserati": 9,
+    "maxus": 90,
+    "mazda": 7642,
+    "mercedes-amg": 912,
+    "mercedes-benz": 91525,
+    "mg": 542,
+    "mini": 8243,
+    "mitsubishi": 19,
+    "nio": 4,
+    "nissan": 179,
+    "omoda": 1,
+    "opel": 1879,
+    "peugeot": 937,
+    "polestar": 2218,
+    "porsche": 11631,
+    "renault": 5710,
+    "rolls royce": 22,
+    "seat": 13420,
+    "skoda": 82886,
+    "skywell": 5,
+    "smart": 637,
+    "ssangyong": 17,
+    "subaru": 11,
+    "suzuki": 420,
+    "tesla": 17877,
+    "toyota": 25443,
+    "tyn.e": 2,
+    "volvo": 17388,
+    "vw": 122357,
+    "xpeng": 60,
+    "zeekr": 38
+  },
+  "technicalGroups": 44829,
+  "status": "source_evidence_only_not_catalog_matched",
+  "groupsWithPositive30Min": 15641,
+  "byMake": [
+    {
+      "make": "abarth",
+      "sourceRows": 88,
+      "technicalGroups": 4,
+      "groupsWithPositive30Min": 4
+    },
+    {
+      "make": "alfa romeo",
+      "sourceRows": 235,
+      "technicalGroups": 45,
+      "groupsWithPositive30Min": 15
+    },
+    {
+      "make": "alpina",
+      "sourceRows": 19,
+      "technicalGroups": 14,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "alpine",
+      "sourceRows": 287,
+      "technicalGroups": 30,
+      "groupsWithPositive30Min": 21
+    },
+    {
+      "make": "aston martin",
+      "sourceRows": 19,
+      "technicalGroups": 13,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "audi",
+      "sourceRows": 71121,
+      "technicalGroups": 7277,
+      "groupsWithPositive30Min": 1355
+    },
+    {
+      "make": "bentley",
+      "sourceRows": 20,
+      "technicalGroups": 15,
+      "groupsWithPositive30Min": 6
+    },
+    {
+      "make": "bmw",
+      "sourceRows": 56015,
+      "technicalGroups": 4120,
+      "groupsWithPositive30Min": 2066
+    },
+    {
+      "make": "bugatti",
+      "sourceRows": 11,
+      "technicalGroups": 11,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "byd",
+      "sourceRows": 2336,
+      "technicalGroups": 69,
+      "groupsWithPositive30Min": 69
+    },
+    {
+      "make": "cadillac",
+      "sourceRows": 13,
+      "technicalGroups": 6,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "chevrolet",
+      "sourceRows": 48,
+      "technicalGroups": 18,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "citroen",
+      "sourceRows": 603,
+      "technicalGroups": 194,
+      "groupsWithPositive30Min": 42
+    },
+    {
+      "make": "cupra",
+      "sourceRows": 26736,
+      "technicalGroups": 962,
+      "groupsWithPositive30Min": 295
+    },
+    {
+      "make": "dacia",
+      "sourceRows": 3779,
+      "technicalGroups": 94,
+      "groupsWithPositive30Min": 49
+    },
+    {
+      "make": "ds",
+      "sourceRows": 41,
+      "technicalGroups": 18,
+      "groupsWithPositive30Min": 3
+    },
+    {
+      "make": "elaris",
+      "sourceRows": 1,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "etesia",
+      "sourceRows": 1,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "evum motors",
+      "sourceRows": 1,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "ferrari",
+      "sourceRows": 31,
+      "technicalGroups": 22,
+      "groupsWithPositive30Min": 12
+    },
+    {
+      "make": "fiat",
+      "sourceRows": 676,
+      "technicalGroups": 117,
+      "groupsWithPositive30Min": 60
+    },
+    {
+      "make": "fisker",
+      "sourceRows": 4,
+      "technicalGroups": 2,
+      "groupsWithPositive30Min": 2
+    },
+    {
+      "make": "ford",
+      "sourceRows": 30887,
+      "technicalGroups": 3140,
+      "groupsWithPositive30Min": 768
+    },
+    {
+      "make": "ford-cng-technik",
+      "sourceRows": 1,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "geely",
+      "sourceRows": 20,
+      "technicalGroups": 4,
+      "groupsWithPositive30Min": 4
+    },
+    {
+      "make": "gwm",
+      "sourceRows": 3,
+      "technicalGroups": 2,
+      "groupsWithPositive30Min": 2
+    },
+    {
+      "make": "honda",
+      "sourceRows": 6248,
+      "technicalGroups": 59,
+      "groupsWithPositive30Min": 56
+    },
+    {
+      "make": "hyundai",
+      "sourceRows": 456,
+      "technicalGroups": 117,
+      "groupsWithPositive30Min": 75
+    },
+    {
+      "make": "ineos",
+      "sourceRows": 5,
+      "technicalGroups": 4,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "isuzu",
+      "sourceRows": 4,
+      "technicalGroups": 4,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "iveco",
+      "sourceRows": 22,
+      "technicalGroups": 20,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "jaecoo",
+      "sourceRows": 2,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "jaguar",
+      "sourceRows": 72,
+      "technicalGroups": 51,
+      "groupsWithPositive30Min": 23
+    },
+    {
+      "make": "jeep",
+      "sourceRows": 203,
+      "technicalGroups": 47,
+      "groupsWithPositive30Min": 39
+    },
+    {
+      "make": "kg mobility",
+      "sourceRows": 21,
+      "technicalGroups": 4,
+      "groupsWithPositive30Min": 2
+    },
+    {
+      "make": "kia",
+      "sourceRows": 1036,
+      "technicalGroups": 104,
+      "groupsWithPositive30Min": 82
+    },
+    {
+      "make": "ktm",
+      "sourceRows": 8,
+      "technicalGroups": 3,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "lamborghini",
+      "sourceRows": 34,
+      "technicalGroups": 14,
+      "groupsWithPositive30Min": 3
+    },
+    {
+      "make": "land rover",
+      "sourceRows": 347,
+      "technicalGroups": 162,
+      "groupsWithPositive30Min": 145
+    },
+    {
+      "make": "leapmotor",
+      "sourceRows": 3,
+      "technicalGroups": 2,
+      "groupsWithPositive30Min": 2
+    },
+    {
+      "make": "lexus",
+      "sourceRows": 2302,
+      "technicalGroups": 131,
+      "groupsWithPositive30Min": 127
+    },
+    {
+      "make": "lotus",
+      "sourceRows": 1,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "lucid",
+      "sourceRows": 103,
+      "technicalGroups": 35,
+      "groupsWithPositive30Min": 35
+    },
+    {
+      "make": "lynk&co",
+      "sourceRows": 116,
+      "technicalGroups": 13,
+      "groupsWithPositive30Min": 13
+    },
+    {
+      "make": "man",
+      "sourceRows": 94,
+      "technicalGroups": 35,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "maserati",
+      "sourceRows": 9,
+      "technicalGroups": 8,
+      "groupsWithPositive30Min": 3
+    },
+    {
+      "make": "maxus",
+      "sourceRows": 90,
+      "technicalGroups": 22,
+      "groupsWithPositive30Min": 17
+    },
+    {
+      "make": "mazda",
+      "sourceRows": 7642,
+      "technicalGroups": 405,
+      "groupsWithPositive30Min": 125
+    },
+    {
+      "make": "mercedes-amg",
+      "sourceRows": 912,
+      "technicalGroups": 161,
+      "groupsWithPositive30Min": 62
+    },
+    {
+      "make": "mercedes-benz",
+      "sourceRows": 91525,
+      "technicalGroups": 12353,
+      "groupsWithPositive30Min": 6769
+    },
+    {
+      "make": "mg",
+      "sourceRows": 542,
+      "technicalGroups": 25,
+      "groupsWithPositive30Min": 20
+    },
+    {
+      "make": "mini",
+      "sourceRows": 8243,
+      "technicalGroups": 289,
+      "groupsWithPositive30Min": 104
+    },
+    {
+      "make": "mitsubishi",
+      "sourceRows": 19,
+      "technicalGroups": 8,
+      "groupsWithPositive30Min": 5
+    },
+    {
+      "make": "nio",
+      "sourceRows": 4,
+      "technicalGroups": 4,
+      "groupsWithPositive30Min": 4
+    },
+    {
+      "make": "nissan",
+      "sourceRows": 179,
+      "technicalGroups": 45,
+      "groupsWithPositive30Min": 22
+    },
+    {
+      "make": "omoda",
+      "sourceRows": 1,
+      "technicalGroups": 1,
+      "groupsWithPositive30Min": 1
+    },
+    {
+      "make": "opel",
+      "sourceRows": 1879,
+      "technicalGroups": 283,
+      "groupsWithPositive30Min": 119
+    },
+    {
+      "make": "peugeot",
+      "sourceRows": 937,
+      "technicalGroups": 202,
+      "groupsWithPositive30Min": 94
+    },
+    {
+      "make": "polestar",
+      "sourceRows": 2218,
+      "technicalGroups": 75,
+      "groupsWithPositive30Min": 75
+    },
+    {
+      "make": "porsche",
+      "sourceRows": 11631,
+      "technicalGroups": 764,
+      "groupsWithPositive30Min": 435
+    },
+    {
+      "make": "renault",
+      "sourceRows": 5710,
+      "technicalGroups": 279,
+      "groupsWithPositive30Min": 170
+    },
+    {
+      "make": "rolls royce",
+      "sourceRows": 22,
+      "technicalGroups": 18,
+      "groupsWithPositive30Min": 3
+    },
+    {
+      "make": "seat",
+      "sourceRows": 13420,
+      "technicalGroups": 798,
+      "groupsWithPositive30Min": 42
+    },
+    {
+      "make": "skoda",
+      "sourceRows": 82886,
+      "technicalGroups": 2879,
+      "groupsWithPositive30Min": 232
+    },
+    {
+      "make": "skywell",
+      "sourceRows": 5,
+      "technicalGroups": 3,
+      "groupsWithPositive30Min": 3
+    },
+    {
+      "make": "smart",
+      "sourceRows": 637,
+      "technicalGroups": 24,
+      "groupsWithPositive30Min": 24
+    },
+    {
+      "make": "ssangyong",
+      "sourceRows": 17,
+      "technicalGroups": 7,
+      "groupsWithPositive30Min": 0
+    },
+    {
+      "make": "subaru",
+      "sourceRows": 11,
+      "technicalGroups": 10,
+      "groupsWithPositive30Min": 4
+    },
+    {
+      "make": "suzuki",
+      "sourceRows": 420,
+      "technicalGroups": 39,
+      "groupsWithPositive30Min": 38
+    },
+    {
+      "make": "tesla",
+      "sourceRows": 17877,
+      "technicalGroups": 238,
+      "groupsWithPositive30Min": 238
+    },
+    {
+      "make": "toyota",
+      "sourceRows": 25443,
+      "technicalGroups": 751,
+      "groupsWithPositive30Min": 456
+    },
+    {
+      "make": "tyn.e",
+      "sourceRows": 2,
+      "technicalGroups": 2,
+      "groupsWithPositive30Min": 2
+    },
+    {
+      "make": "volvo",
+      "sourceRows": 17388,
+      "technicalGroups": 338,
+      "groupsWithPositive30Min": 323
+    },
+    {
+      "make": "vw",
+      "sourceRows": 122357,
+      "technicalGroups": 7792,
+      "groupsWithPositive30Min": 850
+    },
+    {
+      "make": "xpeng",
+      "sourceRows": 60,
+      "technicalGroups": 13,
+      "groupsWithPositive30Min": 13
+    },
+    {
+      "make": "zeekr",
+      "sourceRows": 38,
+      "technicalGroups": 5,
+      "groupsWithPositive30Min": 5
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-24",
+  "unit": {
+    "total": 2475,
+    "pass": 2475,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 273121
+  },
+  "typecheck": "passed",
+  "browserFixtures": {
+    "dealer-map": 4,
+    "owner-polish": 12,
+    "collection-controls": 2
+  },
+  "remotePassed": [
+    40074427447,
+    40074427504
+  ],
+  "deploy": {
+    "run": 40074712002,
+    "release": "fc202423e47c6e483cfd1c7c4eec145c165294ac",
+    "status": "in_progress"
+  },
+  "remaining": [
+    "Japan append:503 visitor_restricted",
+    "Korea complete photo availability unconfirmed",
+    "Unknown certified specifications remain unknown"
+  ],
+  "dependencyAudit": {
+    "moderate": 5,
+    "high": 1,
+    "productionHighGate": "passed"
+  }
+}

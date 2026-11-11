@@ -1,0 +1,1470 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alpina-d3-2010-2011-2013-official-tables",
+  "entries": [
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2010,
+      "operation": "create",
+      "variantId": "3a448b09cc432a72d31cb538",
+      "trim": "2.0 Bi-Turbo 214 PS Saloon MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Saloon MT",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2010-05, PDF57. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Saloon, коробка M,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; trim; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; bodyType; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; fuel; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; powertrainKind; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; engineCc; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; powerHp; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; powerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; icePowerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; M; transmission; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2010,
+      "operation": "create",
+      "variantId": "e437c4e3ffc11a47008fdbfd",
+      "trim": "2.0 Bi-Turbo 214 PS Saloon AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Saloon AT",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2010-05, PDF57. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Saloon, коробка A,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; trim; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; bodyType; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; fuel; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; powertrainKind; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; engineCc; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; powerHp; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; powerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; icePowerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Saloon; A; transmission; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2010,
+      "operation": "create",
+      "variantId": "00b9feb2d9a1e0cf26d88bba",
+      "trim": "2.0 Bi-Turbo 214 PS Touring MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Touring MT",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2010-05, PDF57. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Touring, коробка M,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; trim; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; bodyType; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; fuel; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; powertrainKind; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; engineCc; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; powerHp; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; powerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; icePowerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; transmission; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2010,
+      "operation": "create",
+      "variantId": "c38355b860436e6e37b6f267",
+      "trim": "2.0 Bi-Turbo 214 PS Touring AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Touring AT",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2010-05, PDF57. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Touring, коробка A,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; trim; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; bodyType; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; fuel; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; powertrainKind; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; engineCc; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; powerHp; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; powerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; icePowerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; transmission; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2010,
+      "operation": "create",
+      "variantId": "5a4c53ca53dbd49412663bc8",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe MT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2010-05, PDF57. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Coupe, коробка M,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; trim; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; bodyType; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; fuel; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powertrainKind; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; engineCc; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powerHp; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; icePowerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; transmission; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2010,
+      "operation": "create",
+      "variantId": "2751513048358a4eddb11037",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe AT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2010-05, PDF57. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Coupe, коробка A,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; trim; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; bodyType; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; fuel; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powertrainKind; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; engineCc; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powerHp; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; icePowerKw; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/5159",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2010-05",
+            "pdfPage": 57,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; transmission; дата фактического среза 2010-05",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2011,
+      "operation": "create",
+      "variantId": "7d2e67f5eec87c39ecc2a9c7",
+      "trim": "2.0 Bi-Turbo 214 PS Touring MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Touring MT",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2011-09, PDF58. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Touring, коробка M,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; trim; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; bodyType; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; fuel; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; powertrainKind; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; engineCc; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; powerHp; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; powerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; icePowerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; M; transmission; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2011,
+      "operation": "create",
+      "variantId": "44597f96c7aa6031ea472334",
+      "trim": "2.0 Bi-Turbo 214 PS Touring AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Touring AT",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2011-09, PDF58. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Touring, коробка A,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; trim; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; bodyType; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; fuel; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; powertrainKind; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; engineCc; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; powerHp; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; powerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; icePowerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Touring; A; transmission; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2011,
+      "operation": "create",
+      "variantId": "2d457c174999059a5bcfeb74",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe MT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2011-09, PDF58. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Coupe, коробка M,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; trim; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; bodyType; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; fuel; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powertrainKind; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; engineCc; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powerHp; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; icePowerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; transmission; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2011,
+      "operation": "create",
+      "variantId": "00ff5d5fafed36014862ddd8",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe AT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2011-09, PDF58. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Coupe, коробка A,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; trim; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; bodyType; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; fuel; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powertrainKind; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; engineCc; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powerHp; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; icePowerKw; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/6336",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2011-09",
+            "pdfPage": 58,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; transmission; дата фактического среза 2011-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "04eac6623b5c729e093dbabd",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe MT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe MT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2013-09, PDF31. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Coupe, коробка M,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; trim; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; bodyType; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; fuel; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powertrainKind; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; engineCc; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powerHp; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; powerKw; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; icePowerKw; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; M; transmission; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2013,
+      "operation": "create",
+      "variantId": "5d5fa28832f07b010bbb4691",
+      "trim": "2.0 Bi-Turbo 214 PS Coupe AT",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "0591c232-c484-4d4c-9b6d-6389cf07fb8a",
+      "patch": {
+        "trim": "2.0 Bi-Turbo 214 PS Coupe AT",
+        "bodyType": "coupe",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1995,
+        "powerHp": 214,
+        "powerKw": 157,
+        "icePowerKw": 157,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+        "checkedAt": "2026-10-22",
+        "statement": "Официальная открытая таблица TCS/EnergieSchweiz (BFE), состояние 2013-09, PDF31. Это государственная публикация справочных данных, не заводской документ и не отдельный сертификат омологации. Точная строка D3 BiTurbo Coupe, коробка A,1995см³,157кВт/214PS; голубая строка означает дизель с фильтром. Колонки, легенда и дата визуально сверены. Год относится к датированному предложению модели; каталог2014 со срезом09/2013 не доказывает выпуск2014. Снаряжённая масса не записана как полная. Коды,привод и число ступеней не угаданы. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; trim; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "bodyType": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; bodyType; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "fuel": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; fuel; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powertrainKind": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powertrainKind; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "engineCc": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; engineCc; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerHp": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powerHp; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "powerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; powerKw; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "icePowerKw": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; icePowerKw; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          },
+          "transmission": {
+            "url": "https://pubdb.bfe.admin.ch/fr/publication/download/7301",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2013-09",
+            "pdfPage": 31,
+            "selector": "BMW ALPINA D3 BiTurbo Coupe; A; transmission; дата фактического среза 2013-09",
+            "sourcePublisher": "TCS / EnergieSchweiz / Bundesamt fuer Energie",
+            "sourceNature": "government-published technical reference; not manufacturer"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,2034 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-dr-current-range-2026",
+          "type": "manufacturer",
+          "title": "DR current model range",
+          "publisher": "DR Automobiles",
+          "url": "https://drautomobiles.com/concessionarie/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "it",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official DR range lists DR 1.0 EV, DR 3, DR 5, DR 6.0, DR 6.0 powertrain versions, DR 7.0 PHEV and DR PK8. Model-level records keep powertrain labels below the canonical model boundary."
+        },
+        {
+          "id": "src-sportequipe-current-technical-range-2026",
+          "type": "manufacturer_technical_document",
+          "title": "Sportequipe current technical range",
+          "publisher": "Sportequipe",
+          "url": "https://sportequipe.it/modelli/caratteristiche-tecniche/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "it",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official Sportequipe technical pages identify the numbered model range. Exact engines, bodies and trims remain separate generation/variant work."
+        },
+        {
+          "id": "src-mahindra-europe-kuv100-xuv500-2018",
+          "type": "manufacturer",
+          "title": "Mahindra presents KUV100 and XUV500 in Bulgaria",
+          "publisher": "Mahindra Motors",
+          "url": "https://www.mahindra.it/mahindra-presenta-il-proprio-brand-in-bulgaria/",
+          "documentId": null,
+          "documentDate": "2018-09-27",
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "it",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Mahindra's official European-market announcement identifies KUV100 and XUV500; EEA registrations independently establish in-window 2020-2025 observations."
+        },
+        {
+          "id": "src-man-tge-current-model-2026",
+          "type": "manufacturer_technical_document",
+          "title": "MAN TGE current model overview",
+          "publisher": "MAN Truck & Bus",
+          "url": "https://www.man.eu/de/de/transporter/man-tge/kastenwagen/man-tge-kastenwagen.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "de",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official MAN page identifies TGE and its body derivatives. The canonical model remains TGE; body and gross-weight versions are not promoted to separate models."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi/a4",
+          "brandId": "audi",
+          "canonicalName": "A4",
+          "slug": "a4",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "A4 ALLROAD QUATTRO",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "A4 AVANT",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "A4 LIMOUSINE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 354936 registrations and 282 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/1-series",
+          "brandId": "bmw",
+          "canonicalName": "1 Series",
+          "slug": "1-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "116D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "116I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "118 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "118I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "120",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "120D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "120I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "M135I XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "SERIE 1",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 530042 registrations and 248 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/3-series",
+          "brandId": "bmw",
+          "canonicalName": "3 Series",
+          "slug": "3-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "318D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "318I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "320D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "320D XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "320E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "320I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "330 D XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "330 E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "330 E XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "330I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 514241 registrations and 371 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "citroen/berlingo",
+          "brandId": "citroen",
+          "canonicalName": "Berlingo",
+          "slug": "berlingo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "BERLINGO",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 171375 registrations and 59 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dacia/dokker",
+          "brandId": "dacia",
+          "canonicalName": "Dokker",
+          "slug": "dokker",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "DOKKER",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023; 65782 registrations and 20 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dacia/lodgy",
+          "brandId": "dacia",
+          "canonicalName": "Lodgy",
+          "slug": "lodgy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "LODGY",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023; 80368 registrations and 32 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ds-automobiles/ds-4",
+          "brandId": "ds-automobiles",
+          "canonicalName": "DS 4",
+          "slug": "ds-4",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "DS4",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 47661 registrations and 104 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ford/transit",
+          "brandId": "ford",
+          "canonicalName": "Transit",
+          "slug": "transit",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TRANSIT",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 31442 registrations and 92 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ford/transit-custom",
+          "brandId": "ford",
+          "canonicalName": "Transit Custom",
+          "slug": "transit-custom",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TRANSIT CUSTOM",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 84661 registrations and 132 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/hr-v",
+          "brandId": "honda",
+          "canonicalName": "HR-V",
+          "slug": "hr-v",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "HRV",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 74179 registrations and 73 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kia/sportage",
+          "brandId": "kia",
+          "canonicalName": "Sportage",
+          "slug": "sportage",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "SPORTAGE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 647565 registrations and 98 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/cx-5",
+          "brandId": "mazda",
+          "canonicalName": "CX-5",
+          "slug": "cx-5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "CX 5",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "MAZDA CX 5",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 176877 registrations and 240 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/a-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "A-Class",
+          "slug": "a-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "A 160",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            },
+            {
+              "value": "A 180",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "A 180 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "A 200",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "A 200 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "A 250 E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 566126 registrations and 216 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/b-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "B-Class",
+          "slug": "b-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "B 180",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "B 180 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "B 200",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "B 200 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "B 250E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 171062 registrations and 130 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/c-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "C-Class",
+          "slug": "c-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "C 180",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 200",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 200 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 220 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 220 D 4MATIC",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 300 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 300 DE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "C 300 E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 373912 registrations and 332 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/citan",
+          "brandId": "mercedes-benz",
+          "canonicalName": "Citan",
+          "slug": "citan",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "CITAN",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 19841 registrations and 53 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/sprinter",
+          "brandId": "mercedes-benz",
+          "canonicalName": "Sprinter",
+          "slug": "sprinter",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "SPRINTER",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 19328 registrations and 112 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mini/one",
+          "brandId": "mini",
+          "canonicalName": "One",
+          "slug": "one",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ONE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024; 72143 registrations and 15 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/qashqai",
+          "brandId": "nissan",
+          "canonicalName": "Qashqai",
+          "slug": "qashqai",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "NISSAN QASHQAI",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "QASHQAI",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 709987 registrations and 133 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/townstar",
+          "brandId": "nissan",
+          "canonicalName": "Townstar",
+          "slug": "townstar",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TOWNSTAR",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2022, 2023, 2024, 2025; 18795 registrations and 13 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/x-trail",
+          "brandId": "nissan",
+          "canonicalName": "X-Trail",
+          "slug": "x-trail",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "NISSAN X-TRAIL",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "X TRAIL",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 110249 registrations and 108 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "opel/combo",
+          "brandId": "opel",
+          "canonicalName": "Combo",
+          "slug": "combo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "COMBO LIFE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 53575 registrations and 42 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/expert",
+          "brandId": "peugeot",
+          "canonicalName": "Expert",
+          "slug": "expert",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "EXPERT",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 6847 registrations and 38 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/rifter",
+          "brandId": "peugeot",
+          "canonicalName": "Rifter",
+          "slug": "rifter",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "RIFTER",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 115457 registrations and 38 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "renault/kangoo",
+          "brandId": "renault",
+          "canonicalName": "Kangoo",
+          "slug": "kangoo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "KANGOO",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 109680 registrations and 37 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "renault/trafic",
+          "brandId": "renault",
+          "canonicalName": "Trafic",
+          "slug": "trafic",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TRAFIC",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 87999 registrations and 43 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/camry",
+          "brandId": "toyota",
+          "canonicalName": "Camry",
+          "slug": "camry",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TOYOTA CAMRY",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 42051 registrations and 14 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/proace",
+          "brandId": "toyota",
+          "canonicalName": "Proace",
+          "slug": "proace",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "PROACE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 84944 registrations and 60 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/proace-city-verso",
+          "brandId": "toyota",
+          "canonicalName": "Proace City Verso",
+          "slug": "proace-city-verso",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Proace City Verso",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 87713 registrations and 42 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/caddy",
+          "brandId": "volkswagen",
+          "canonicalName": "Caddy",
+          "slug": "caddy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "CADDY",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 213921 registrations and 198 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/multivan",
+          "brandId": "volkswagen",
+          "canonicalName": "Multivan",
+          "slug": "multivan",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "MULTIVAN",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 151350 registrations and 142 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/t-cross",
+          "brandId": "volkswagen",
+          "canonicalName": "T-Cross",
+          "slug": "t-cross",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "T CROSS",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 762306 registrations and 281 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/touareg",
+          "brandId": "volkswagen",
+          "canonicalName": "Touareg",
+          "slug": "touareg",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TOUAREG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA registered commercial-name identity retained after manual model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024, 2025; 55815 registrations and 188 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the full engine/grade inventory remain pending; no trim or powertrain label has been promoted to a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-10-22T03:50:45.052573+07:00",
+  "model": "Audi A4",
+  "inspectedVariants": 321,
+  "newVariants": 114,
+  "newFields": 1026,
+  "untouchedVariants": 1228,
+  "unresearchedVariants": 1021,
+  "unresearchedYears": [
+    2023,
+    2022,
+    2021,
+    2020,
+    2019,
+    2015
+  ],
+  "retryReasons": {
+    "incomplete_technical_identity": 33,
+    "protected_reference_or_missing_trim": 29,
+    "exact_2024_derivative_source_missing": 3,
+    "local_derivative_translation_and_source_required": 2,
+    "different_derivative_source_required": 14,
+    "drive_variant_not_identified": 85,
+    "model_year_or_registration_year_requires_confirmation": 41
+  },
+  "batches": [
+    {
+      "batch": "research-2026-10-22-audi-a4-2024-1",
+      "commit": "994851ab13cef99cadfb6eea9ed91aa01311f8b4",
+      "workflowRun": 39673175710,
+      "job": 119476078287,
+      "variants": 64,
+      "fields": 576,
+      "readback": "2026-10-22-audi-a4-2024-1-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a4-2024-2",
+      "commit": "63dc505c0e74234776821db9784b23fb61d7344d",
+      "workflowRun": 39673553713,
+      "job": 119477405898,
+      "variants": 50,
+      "fields": 450,
+      "readback": "2026-10-22-audi-a4-2024-2-readback.json"
+    }
+  ],
+  "integration": "not_implemented"
+}

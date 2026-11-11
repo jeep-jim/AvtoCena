@@ -1,0 +1,26 @@
+{
+  "batch": "research-2026-10-22-audi-a6-c9-local",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "2228ea4b3a958f9db1a95edf",
+      "changes": [
+        {
+          "variantId": "caebfade0728fb85619884c5",
+          "fields": [
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "drive",
+            "transmission"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-21T23:29:30.157Z",
+  "finishedAt": "2026-10-21T23:29:36.673Z"
+}

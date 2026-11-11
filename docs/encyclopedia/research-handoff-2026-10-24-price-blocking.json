@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T13:15:26.245Z",
+  "priority": [
+    "fuel",
+    "engineCc",
+    "powerHp",
+    "documented30min",
+    "drive"
+  ],
+  "completed": [
+    {
+      "batch": "research-2026-10-24-suzuki-alto-2023-ha37s-power",
+      "workflow": 40092947510,
+      "fields": 6
+    },
+    {
+      "batch": "research-2026-10-24-audi-a5-2021-2023-body",
+      "workflow": 40093042195,
+      "fields": 32
+    }
+  ],
+  "next": {
+    "modelId": "2ab5223df203c25d980af841",
+    "make": "Suzuki",
+    "model": "Alto",
+    "year": 2022,
+    "offerId": "ajes-stats-2QoalTno4ZkOeah",
+    "chassisCode": "HA37S",
+    "state": "annual_factory_identity_gap",
+    "action": "Подтвердить реальный2022год и точные заводские исполнения; APIгодовойсрез ранее пуст. Guardedcreateтолько с подтверждённойидентичностью/свежейrevision. Не копировать2023год назад безисточника. ЗатемгруппыSupra изtechnical-transfer audit."
+  },
+  "catalogGapCursor": "docs/encyclopedia/reports/2026-10-24-alto-price-gap-cursor.json",
+  "remaining": [
+    "Привод HA37S L: требуется полный ABLE/ABLQ код; FWD/4WD не выбран.",
+    "658 см³ в заводской таблице против имеющихся660 см³: существующее значение сохранено, нужен отдельный разбор происхождения и округления.",
+    "6 строк2023/2024/2025 с manual без chassis не подтверждены японской таблицей.",
+    "2022 API пуст: модельный год не исключён из постоянного охвата.",
+    "24 строки публичной выдачи partial/stale имеют неизвестную powerHp; включение новой партии в расчёты пока не доказано."
+  ],
+  "alphabeticalHandoff": "docs/encyclopedia/research-handoff-2026-10-24-audi-a5-next.json",
+  "technicalReferenceIntake": {
+    "workflow": 39831884392,
+    "job": 120009865681,
+    "state": "blocked_redirect_outside_catalog",
+    "completed": false,
+    "referenceOnly": true,
+    "visited": 13045,
+    "saved": 8403,
+    "pending": 253,
+    "nextUrl": "https://www.drom.ru/catalog/bedford/cf/g_1969_11383/",
+    "error": "redirect_outside_catalog",
+    "checkpointAt": "2026-10-22T19:38:18.897Z",
+    "inspectionWorkflow": 39844493209,
+    "inspectionJob": 120054063098,
+    "checkpointReset": false,
+    "duplicateRunStarted": false,
+    "nextAction": "Не возобновлять тот же запрещённый redirect и не обходить ограничение. Сборщик и checkpoint не изменены; независимое подтверждение заводских данных продолжается."
+  },
+  "guards": [
+    "Не перезапускать запрещённый redirect Drom.",
+    "Не обогащать manual-строки без chassis по японской спецификации.",
+    "Не считать пиковую/системную мощность сертифицированной30мин."
+  ],
+  "allModelsComplete": false,
+  "release": {
+    "release": "33c026e03c3b4a993c0d20adbf392b3acce7a78a",
+    "workflow": 40093257230,
+    "activationConfirmed": true,
+    "indexDigest": "9dabf68d7daee52bbcde50414365fd3794aa76e44b2a642fd1e43da071b9cb19"
+  },
+  "publicBaseline": {
+    "report": "docs/encyclopedia/reports/2026-10-24-alto-public-baseline-parity.json",
+    "passed": true,
+    "offers": 4,
+    "comparisons": 52,
+    "newBatchActivationProved": false,
+    "relatedChecked": false,
+    "driveFilterChecked": false
+  },
+  "publicActivationReport": "docs/encyclopedia/reports/2026-10-24-index-9dabf-activation.json",
+  "relatedChecked": true,
+  "driveFilterBlocker": {
+    "checkedAt": "2026-10-24T13:12:41.639Z",
+    "awd": "HTTP503",
+    "fwd": "HTTP503",
+    "passed": false,
+    "scope": "bounded public Suzuki Alto Japan filters",
+    "cause": "not_diagnosed"
+  },
+  "technicalAudit": {
+    "workflow": 40097057195,
+    "job": 120881404851,
+    "conclusion": "success",
+    "report": "docs/encyclopedia/reports/2026-10-24-installed-technical-transfer.json",
+    "noSupplierRequests": true,
+    "storageWrites": 0
+  },
+  "compoundLinkFix": {
+    "state": "validated_release_requested",
+    "cases": 6
+  }
+}

@@ -1,0 +1,799 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-25T09:54:32.472Z",
+  "manifestDigest": "08b043899a0e14c34cd6ea740174fbac3fff613dadaad3f9a93dce59c317ab30",
+  "models": 4451,
+  "technical": 230447,
+  "power30": 15193,
+  "byMake": {
+    "Abarth": {
+      "technicalPower30": 4,
+      "models": [
+        "500",
+        "600e"
+      ]
+    },
+    "Alfa Romeo": {
+      "technicalPower30": 15,
+      "models": [
+        "Junior",
+        "Tonale"
+      ]
+    },
+    "Alpine": {
+      "technicalPower30": 16,
+      "models": [
+        "A290"
+      ]
+    },
+    "ALPINE": {
+      "technicalPower30": 5,
+      "models": [
+        "A390"
+      ]
+    },
+    "Aston Martin": {
+      "technicalPower30": 1,
+      "models": [
+        "Valhalla"
+      ]
+    },
+    "Audi": {
+      "technicalPower30": 1347,
+      "models": [
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A3",
+        "e-tron",
+        "e-tron GT",
+        "etron Sportback",
+        "Q3",
+        "Q3 Sportback",
+        "Q4",
+        "Q4 e-tron",
+        "Q5",
+        "Q6 SUV e-tron",
+        "Q6",
+        "Q7",
+        "RS E-Tron GT",
+        "RS5",
+        "S e-tron GT",
+        "Q8",
+        "S6",
+        "SQ6",
+        "SQ8"
+      ]
+    },
+    "Bentley": {
+      "technicalPower30": 6,
+      "models": [
+        "Continental",
+        "Continental GT"
+      ]
+    },
+    "BMW": {
+      "technicalPower30": 1851,
+      "models": [
+        "123",
+        "1 Series",
+        "2 Series",
+        "220",
+        "223",
+        "3 Series",
+        "440i",
+        "5 Series",
+        "7 Series",
+        "740",
+        "i3",
+        "i4",
+        "i5",
+        "i7",
+        "iX",
+        "iX1",
+        "iX2",
+        "iX3",
+        "M240i",
+        "M340i",
+        "M440i",
+        "M5",
+        "X1",
+        "X2",
+        "X3",
+        "X5",
+        "X6",
+        "X7",
+        "XM"
+      ]
+    },
+    "BYD": {
+      "technicalPower30": 69,
+      "models": [
+        "Atto 2",
+        "Atto 3",
+        "Dolphin",
+        "Dolphin Surf",
+        "ETP3",
+        "Han",
+        "Seal 6",
+        "Seal U",
+        "SEAL",
+        "Sealion 7",
+        "Tang"
+      ]
+    },
+    "Chevrolet": {
+      "technicalPower30": 1,
+      "models": [
+        "Corvette"
+      ]
+    },
+    "Citroën": {
+      "technicalPower30": 42,
+      "models": [
+        "Berlingo",
+        "C3",
+        "C3 Aircross",
+        "C4",
+        "C5 Aircross",
+        "Jumpy",
+        "Spacetourer"
+      ]
+    },
+    "Citroen": {
+      "technicalPower30": 1,
+      "models": [
+        "e-C5 Airc."
+      ]
+    },
+    "Cupra": {
+      "technicalPower30": 295,
+      "models": [
+        "Born",
+        "Formentor",
+        "Raval",
+        "Tavascan",
+        "Terramar",
+        "Leon"
+      ]
+    },
+    "Dacia": {
+      "technicalPower30": 49,
+      "models": [
+        "Bigster",
+        "Jogger",
+        "Duster",
+        "Spring"
+      ]
+    },
+    "DS Automobiles": {
+      "technicalPower30": 3,
+      "models": [
+        "7",
+        "9"
+      ]
+    },
+    "ELARIS": {
+      "technicalPower30": 1,
+      "models": [
+        "PIO"
+      ]
+    },
+    "ETESIA": {
+      "technicalPower30": 1,
+      "models": [
+        "ET Lander"
+      ]
+    },
+    "Ferrari": {
+      "technicalPower30": 12,
+      "models": [
+        "296",
+        "296 GTB",
+        "SF90",
+        "SF90 Stradale"
+      ]
+    },
+    "Fiat": {
+      "technicalPower30": 60,
+      "models": [
+        "500",
+        "500 X",
+        "600",
+        "Doblo",
+        "Panda",
+        "Scudo",
+        "Tipo",
+        "Ulysse"
+      ]
+    },
+    "Fisker": {
+      "technicalPower30": 2,
+      "models": [
+        "Ocean"
+      ]
+    },
+    "Ford": {
+      "technicalPower30": 758,
+      "models": [
+        "Capri",
+        "Explorer",
+        "Fiesta",
+        "Focus",
+        "Kuga",
+        "Mustang Mach-E",
+        "Puma",
+        "S-Max",
+        "Tourneo",
+        "Tourneo Connect",
+        "Transit",
+        "Transit Custom"
+      ]
+    },
+    "Ford-CNG-Technik": {
+      "technicalPower30": 1,
+      "models": [
+        "Mondeo"
+      ]
+    },
+    "Geely": {
+      "technicalPower30": 4,
+      "models": [
+        "E5",
+        "Starray EM-i"
+      ]
+    },
+    "Genesis": {
+      "technicalPower30": 3,
+      "models": [
+        "GV60"
+      ]
+    },
+    "Great Wall": {
+      "technicalPower30": 2,
+      "models": [
+        "Ora",
+        "WEY Coffee 01"
+      ]
+    },
+    "Honda": {
+      "technicalPower30": 53,
+      "models": [
+        "Civic",
+        "CR-V",
+        "E",
+        "HR-V",
+        "Jazz",
+        "Prelude",
+        "ZR-V"
+      ]
+    },
+    "Hyundai": {
+      "technicalPower30": 81,
+      "models": [
+        "i30",
+        "Inster",
+        "Ioniq 6",
+        "Ioniq",
+        "Kona",
+        "Santa FE",
+        "Ioniq 5",
+        "TUCSON"
+      ]
+    },
+    "JAC": {
+      "technicalPower30": 1,
+      "models": [
+        "E30X"
+      ]
+    },
+    "Jaecoo": {
+      "technicalPower30": 1,
+      "models": [
+        "7 PHEV"
+      ]
+    },
+    "Jaguar": {
+      "technicalPower30": 23,
+      "models": [
+        "E-Pace",
+        "F-Pace",
+        "I-Pace"
+      ]
+    },
+    "Jeep": {
+      "technicalPower30": 39,
+      "models": [
+        "Avenger",
+        "Compass",
+        "Grand Cherokee",
+        "Renegade",
+        "Wrangler Unlimited"
+      ]
+    },
+    "KGM": {
+      "technicalPower30": 2,
+      "models": [
+        "MUSSO EV",
+        "Torres"
+      ]
+    },
+    "Kia": {
+      "technicalPower30": 80,
+      "models": [
+        "Ceed",
+        "EV2",
+        "EV3",
+        "EV4",
+        "EV5",
+        "EV6",
+        "EV9",
+        "Niro",
+        "PV5",
+        "Sorento",
+        "Sportage",
+        "Soul",
+        "X Ceed"
+      ]
+    },
+    "Lamborghini": {
+      "technicalPower30": 3,
+      "models": [
+        "Revuelto",
+        "Urus"
+      ]
+    },
+    "Land Rover": {
+      "technicalPower30": 145,
+      "models": [
+        "Defender",
+        "Discovery",
+        "Discovery Sport",
+        "Range Rover Evoque",
+        "Range Rover",
+        "Range Rover Sport",
+        "Range Rover Velar"
+      ]
+    },
+    "Leapmotor": {
+      "technicalPower30": 3,
+      "models": [
+        "B03X",
+        "C10",
+        "T03"
+      ]
+    },
+    "Lexus": {
+      "technicalPower30": 127,
+      "models": [
+        "ES",
+        "LBX",
+        "LM",
+        "LS",
+        "NX",
+        "RX",
+        "RZ450e",
+        "RZ",
+        "UX"
+      ]
+    },
+    "Lotus": {
+      "technicalPower30": 1,
+      "models": [
+        "Eletre"
+      ]
+    },
+    "Lucid": {
+      "technicalPower30": 35,
+      "models": [
+        "Air",
+        "Gravity"
+      ]
+    },
+    "Lynk & Co": {
+      "technicalPower30": 13,
+      "models": [
+        "01",
+        "02",
+        "08"
+      ]
+    },
+    "Maserati": {
+      "technicalPower30": 3,
+      "models": [
+        "Grecale"
+      ]
+    },
+    "Maxus": {
+      "technicalPower30": 17,
+      "models": [
+        "e-DELIVER 3",
+        "eDELIVER 5",
+        "eDELIVER 9",
+        "eDELIVER 7",
+        "eTERRON 9",
+        "Euniq 6",
+        "MIFA 9",
+        "T90"
+      ]
+    },
+    "Mazda": {
+      "technicalPower30": 125,
+      "models": [
+        "2",
+        "6e",
+        "CX-60",
+        "CX-6e",
+        "CX-80",
+        "MX-30"
+      ]
+    },
+    "Mercedes-Benz": {
+      "technicalPower30": 6609,
+      "models": [
+        "A",
+        "A220",
+        "A250",
+        "AMG",
+        "B-Class",
+        "B250",
+        "AMG GT",
+        "C",
+        "C 220",
+        "C 400",
+        "C300",
+        "CLA",
+        "CLE",
+        "CLE300",
+        "CLE200",
+        "CLS450",
+        "E 450",
+        "E",
+        "E220",
+        "eCitan",
+        "eCitan Tourer",
+        "EQA",
+        "EQB",
+        "EQE",
+        "EQC",
+        "EQS",
+        "Eqt",
+        "EQV",
+        "eVito",
+        "G",
+        "eSprinter",
+        "G500",
+        "G580",
+        "GLA",
+        "GLA220",
+        "GLA250",
+        "GLB",
+        "GLB200",
+        "GLB250",
+        "GLC250",
+        "GLC",
+        "GLE",
+        "GLE350",
+        "GLE450",
+        "GLS",
+        "GLS450",
+        "GLS580",
+        "Maybach EQS 680",
+        "Maybach GLS 600",
+        "Mercedes-Maybach S 680",
+        "ONE",
+        "S",
+        "S 580",
+        "S350d",
+        "S500",
+        "V-Class"
+      ]
+    },
+    "MG": {
+      "technicalPower30": 20,
+      "models": [
+        "3 Hybrid+",
+        "5 Electric",
+        "EHS",
+        "HS",
+        "4 Electric",
+        "S5",
+        "S6 EV",
+        "ZS",
+        "ZS EV"
+      ]
+    },
+    "MINI": {
+      "technicalPower30": 86,
+      "models": [
+        "Aceman",
+        "Cooper",
+        "Countryman",
+        "Jcw"
+      ]
+    },
+    "Mitsubishi": {
+      "technicalPower30": 7,
+      "models": [
+        "Colt",
+        "Eclipse Cross",
+        "ASX"
+      ]
+    },
+    "Nio": {
+      "technicalPower30": 4,
+      "models": [
+        "EL6",
+        "ET5"
+      ]
+    },
+    "Nissan": {
+      "technicalPower30": 27,
+      "models": [
+        "Ariya",
+        "Juke",
+        "INTERSTAR-e",
+        "Micra",
+        "LEAF",
+        "Qashqai",
+        "Townstar",
+        "X-Trail"
+      ]
+    },
+    "OMODA": {
+      "technicalPower30": 1,
+      "models": [
+        "9"
+      ]
+    },
+    "Opel": {
+      "technicalPower30": 120,
+      "models": [
+        "Ampera-e",
+        "Astra",
+        "Combo",
+        "Corsa",
+        "Frontera",
+        "Grandland",
+        "Mokka",
+        "Movano",
+        "Vivaro"
+      ]
+    },
+    "Peugeot": {
+      "technicalPower30": 96,
+      "models": [
+        "2008",
+        "208",
+        "3008",
+        "308",
+        "408",
+        "5008",
+        "e-5008",
+        "Expert",
+        "Partner",
+        "Rifter"
+      ]
+    },
+    "Polestar": {
+      "technicalPower30": 75,
+      "models": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "Porsche": {
+      "technicalPower30": 435,
+      "models": [
+        "911",
+        "Cayenne",
+        "Macan",
+        "Panamera",
+        "Taycan"
+      ]
+    },
+    "Renault": {
+      "technicalPower30": 170,
+      "models": [
+        "4 E-TECH ELECTRIC",
+        "5 E-TECH ELECTRIC",
+        "Austral",
+        "Captur",
+        "Clio",
+        "E-TECH MASTER",
+        "Espace",
+        "Kangoo",
+        "Megane",
+        "Master",
+        "Rafale",
+        "Scenic",
+        "Symbioz",
+        "Twingo",
+        "Zoe"
+      ]
+    },
+    "Rolls-Royce": {
+      "technicalPower30": 3,
+      "models": [
+        "Spectre"
+      ]
+    },
+    "SEAT": {
+      "technicalPower30": 42,
+      "models": [
+        "CUPRA LEON SPORTSTOURER",
+        "Leon",
+        "MII",
+        "Tarraco"
+      ]
+    },
+    "Seres": {
+      "technicalPower30": 8,
+      "models": [
+        "5",
+        "3"
+      ]
+    },
+    "Skoda": {
+      "technicalPower30": 231,
+      "models": [
+        "Enyaq",
+        "Elroq",
+        "Epiq",
+        "Kodiaq",
+        "Octavia",
+        "Superb"
+      ]
+    },
+    "Skywell": {
+      "technicalPower30": 3,
+      "models": [
+        "BE11"
+      ]
+    },
+    "Smart": {
+      "technicalPower30": 24,
+      "models": [
+        "#1",
+        "#3",
+        "#5",
+        "EQ forfour",
+        "EQ fortwo cabrio",
+        "EQ fortwo coupe"
+      ]
+    },
+    "Subaru": {
+      "technicalPower30": 4,
+      "models": [
+        "Forester",
+        "UNCHARTED"
+      ]
+    },
+    "Suzuki": {
+      "technicalPower30": 32,
+      "models": [
+        "Across",
+        "e VITARA",
+        "Ignis",
+        "S-Cross",
+        "Swace",
+        "Swift",
+        "SX4",
+        "Vitara"
+      ]
+    },
+    "Tesla": {
+      "technicalPower30": 236,
+      "models": [
+        "Model 3",
+        "Model X",
+        "Model S",
+        "Model Y"
+      ]
+    },
+    "Toyota": {
+      "technicalPower30": 456,
+      "models": [
+        "Aygo X",
+        "bZ4X",
+        "C-HR",
+        "Camry",
+        "Corolla",
+        "Hilux",
+        "Highlander",
+        "Land Cruiser",
+        "Mirai",
+        "Prius",
+        "Proace",
+        "Proace City Verso",
+        "RAV4",
+        "Urban Cruiser",
+        "Yaris",
+        "Yaris Cross"
+      ]
+    },
+    "Volkswagen": {
+      "technicalPower30": 869,
+      "models": [
+        "Arteon",
+        "Caddy",
+        "CALIFORNIA",
+        "Caravelle",
+        "Crafter",
+        "e-Caravelle",
+        "Id. Buzz",
+        "ID. Polo",
+        "ID.3",
+        "ID.4",
+        "ID.5",
+        "ID.7",
+        "Golf",
+        "Multivan",
+        "Passat",
+        "Tayron",
+        "Tiguan",
+        "Transporter",
+        "Transporter Caravelle",
+        "Up",
+        "Touareg"
+      ]
+    },
+    "Volvo": {
+      "technicalPower30": 312,
+      "models": [
+        "EC40",
+        "ES90",
+        "EX30",
+        "EX40",
+        "EX90",
+        "EX60",
+        "S60",
+        "S90",
+        "V60",
+        "V60 Cross Country",
+        "V90",
+        "V90 Cross Country",
+        "XC40",
+        "XC60",
+        "XC90"
+      ]
+    },
+    "XPeng": {
+      "technicalPower30": 17,
+      "models": [
+        "G6",
+        "G9",
+        "X9",
+        "P7i, P7"
+      ]
+    },
+    "Zeekr": {
+      "technicalPower30": 5,
+      "models": [
+        "7X"
+      ]
+    }
+  },
+  "byDataset": {
+    "edatenblatt": 15129,
+    "tas": 64
+  },
+  "anchors": {
+    "engineCode": 15193,
+    "powerKw": 4297,
+    "motorPeakKw": 15186,
+    "fuel": 15190,
+    "powertrainKind": 15190,
+    "drive": 15193,
+    "transmission": 14379,
+    "bodyType": 13649,
+    "icePowerKw": 10880,
+    "engineCc": 10881
+  },
+  "storageWrites": 0,
+  "runId": 40182539050,
+  "jobId": 121136444658
+}

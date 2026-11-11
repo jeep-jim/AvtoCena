@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2013-live-early-uk",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "2c43fa2db097b77b9a2d449b",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2013,
+      "trim": "0.9 TwinAir 85 PS S/S Live Limited Edition",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "7f7bdaab-36e9-471d-86e0-bb5164cc8da6",
+      "patch": {
+        "trim": "0.9 TwinAir 85 PS S/S Live Limited Edition",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 875,
+        "powerKw": 62.5,
+        "icePowerKw": 62.5,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "312A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-strikes-a-chord-with-new-limited-edition-alfa-mito-live",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год подтверждены заводскими сообщениями21.04.2013 и02.06.2013. Точный TwinAir85 не смешан с новым105; Progression78 не смешан с французским Progression70. Технические поля сверены по заводским руководствам07/2012 и06/2013; архив AROC хранит оригиналы производителя. Метрическая мощностьPS из соответствующего двигателя французского прайса01.02.2013, а не переименованныеUK bhp. Для Live62,5кВт взяты непосредственно из специальной заводской брошюрыPDFстр4; округлённые62кВт общего руководства не подставлены вместо более точной таблицы этой версии. GVW/число мест не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-strikes-a-chord-with-new-limited-edition-alfa-mito-live",
+            "checkedAt": "2026-10-22",
+            "selector": "21.04.2013; new MiTo Live limited edition250; PERFORMANCE:875cc TwinAir85"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Live Limited Edition; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Live Limited Edition; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2013/ALFA_ROMEO/TARIFS/130201_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Live Limited Edition; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Live_Brochure_2013_07.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "SPECIFICATION:875cc TB TwinAir85; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Live_Brochure_2013_07.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "SPECIFICATION:875cc TB TwinAir85; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Live_Brochure_2013_07.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "SPECIFICATION:875cc TB TwinAir85; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Live_Brochure_2013_07.pdf",
+            "pdfPage": 4,
+            "checkedAt": "2026-10-22",
+            "selector": "SPECIFICATION:875cc TB TwinAir85; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Live Limited Edition; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Live Limited Edition; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "91a37c45afb89ec0ba5274d5",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2013,
+      "trim": "0.9 TwinAir 85 PS S/S Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "7f7bdaab-36e9-471d-86e0-bb5164cc8da6",
+      "patch": {
+        "trim": "0.9 TwinAir 85 PS S/S Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 875,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "312A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-buyers-can-out-manoeuvre-the-london-congestion-charge-changes-save-up-to-7-560-till-june-2016",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год подтверждены заводскими сообщениями21.04.2013 и02.06.2013. Точный TwinAir85 не смешан с новым105; Progression78 не смешан с французским Progression70. Технические поля сверены по заводским руководствам07/2012 и06/2013; архив AROC хранит оригиналы производителя. Метрическая мощностьPS из соответствующего двигателя французского прайса01.02.2013, а не переименованныеUK bhp. Для Live62,5кВт взяты непосредственно из специальной заводской брошюрыPDFстр4; округлённые62кВт общего руководства не подставлены вместо более точной таблицы этой версии. GVW/число мест не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-buyers-can-out-manoeuvre-the-london-congestion-charge-changes-save-up-to-7-560-till-june-2016",
+            "checkedAt": "2026-10-22",
+            "selector": "02.06.2013; currently available Sprint TwinAir85,98g CO2"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2013/ALFA_ROMEO/TARIFS/130201_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; engineCode"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "9311182529b04bc6a35687e2",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2013,
+      "trim": "1.4 MPI 78 PS S/S Progression",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "7f7bdaab-36e9-471d-86e0-bb5164cc8da6",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Progression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-buyers-can-out-manoeuvre-the-london-congestion-charge-changes-save-up-to-7-560-till-june-2016",
+        "checkedAt": "2026-10-22",
+        "statement": "Комплектация и год подтверждены заводскими сообщениями21.04.2013 и02.06.2013. Точный TwinAir85 не смешан с новым105; Progression78 не смешан с французским Progression70. Технические поля сверены по заводским руководствам07/2012 и06/2013; архив AROC хранит оригиналы производителя. Метрическая мощностьPS из соответствующего двигателя французского прайса01.02.2013, а не переименованныеUK bhp. Для Live62,5кВт взяты непосредственно из специальной заводской брошюрыPDFстр4; округлённые62кВт общего руководства не подставлены вместо более точной таблицы этой версии. GVW/число мест не угаданы.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/alfa-romeo-buyers-can-out-manoeuvre-the-london-congestion-charge-changes-save-up-to-7-560-till-june-2016",
+            "checkedAt": "2026-10-22",
+            "selector": "02.06.2013; range starts with1.4 8v78 Progression"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2013/ALFA_ROMEO/TARIFS/130201_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; powerHp"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 210,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2014_83_145_MITO_604.38.590_EN_02_06.13_L_LG.pdf",
+            "pdfPage": 205,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; engineCode"
+          }
+        }
+      }
+    }
+  ]
+}

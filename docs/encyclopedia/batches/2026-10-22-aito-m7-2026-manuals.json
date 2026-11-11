@@ -1,0 +1,1726 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aito-m7-2026-manuals",
+  "entries": [
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "8844cb6938e4eb41e4b65d65",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max Long Range 5-seat LiDAR 896",
+      "expectedDigest": "77359830a0970a04868b0814985e634936a7cfc0a737f0a6869f6ef199004c28",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3055
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVR2; полная масса 3055 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод rwd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max Long Range 5-seat LiDAR 896; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max Long Range 5-seat LiDAR 896; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3cd385712d7cdcfdcf005fcd",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max Long Range 5-seat LiDAR 192",
+      "expectedDigest": "fcf5504512543f56c7fc99e24ead0a6d8b8c805e8bb994d8324b43ee1efb314e",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3055
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVR2; полная масса 3055 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод rwd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max Long Range 5-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max Long Range 5-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "79dccb46a2af3ff4cfbcdc6b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Ultra AWD 5-seat LiDAR 192",
+      "expectedDigest": "0aa1d2f79d96626937dfbdf292434dd279613a34590070342e88feb099a9f237",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Ultra AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Ultra AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "328e58843d29c89899e9f9c0",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Ultra AWD 6-seat LiDAR 192",
+      "expectedDigest": "14a81d8809825b00517e452cd6639d4dd0ada8d994c61ffebbd8bb281e021311",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Ultra AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Ultra AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "611ae7061aafc8a3be3e7dd9",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Ultra AWD 6-seat LiDAR 896",
+      "expectedDigest": "8809ea63865d8da4dd49c28e91c6248b17e5f651167c87b63e3363cb818d253f",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Ultra AWD 6-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Ultra AWD 6-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "db3ccc19853f8fd43c8dfce5",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Pro+ AWD 5-seat",
+      "expectedDigest": "8cf1fc4337f3b3bea0058222830bb37911c4724cd8530934af39b619aad1c3b2",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3115
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVAS / SKE6510SSHEVA4S; полная масса 3115 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 37 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Pro+ AWD 5-seat; SKE6510SSHEVAS / SKE6510SSHEVA4S; 37 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Pro+ AWD 5-seat; SKE6510SSHEVAS / SKE6510SSHEVA4S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d56311185f3cc1d81858ea89",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Pro+ AWD 6-seat",
+      "expectedDigest": "e4794a8f6dc8fd558da1b8fb1982a3aff4440dec539ec83411a3460513ecb558",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3115
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVAS / SKE6510SSHEVA4S; полная масса 3115 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 37 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Pro+ AWD 6-seat; SKE6510SSHEVAS / SKE6510SSHEVA4S; 37 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Pro+ AWD 6-seat; SKE6510SSHEVAS / SKE6510SSHEVA4S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ebde5c21ef711fe840e244a1",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max AWD 6-seat LiDAR 896",
+      "expectedDigest": "8ade5a810e942640b41ae3a5c653328abb428b568e24e531f722810899214457",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max AWD 6-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max AWD 6-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "62b8c0ab6d11c7bfc351dbfb",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max AWD 5-seat LiDAR 192",
+      "expectedDigest": "2c16208bff076853ad11054944f7ffc68ce10fe22a271d02d2f86045889ea621",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3b2a809664158930b0b85fde",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max AWD 6-seat LiDAR 192",
+      "expectedDigest": "985ac135b867dedd5616f96b5b3b0c36e854723d0e1274342ed5af6b3a46a111",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b095d411875409dc37cc1f6c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max AWD 5-seat LiDAR 896",
+      "expectedDigest": "0157084fe2ed3954058989582e3e720880368a281425bdc8be75e20c6fce49f6",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max AWD 5-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max AWD 5-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "097dcadfb607af8e54eb4e4d",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max Long Range 6-seat LiDAR 896",
+      "expectedDigest": "4209e85269b751ca04eaaa5c75b7448c3f90029dee86a42c672a09b845c9c8e7",
+      "patch": {
+        "grossVehicleWeightKg": 3025
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVR; полная масса 3025 кг, стр. 414. Привод rwd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max Long Range 6-seat LiDAR 896; SKE6510SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "4df70c968eab41147a02a334",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max Long Range 5-seat LiDAR 896",
+      "expectedDigest": "cf01a4ec7030df8af13a60ffa078cdce022921d7039026250270b802760d5ead",
+      "patch": {
+        "grossVehicleWeightKg": 3025
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVR; полная масса 3025 кг, стр. 414. Привод rwd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max Long Range 5-seat LiDAR 896; SKE6510SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ab30f971974965e74784373f",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max Long Range 6-seat LiDAR 192",
+      "expectedDigest": "bbf0b647a6cef36ba3529ae06305b5f841dfe241687d8fc026d13d547f34e6de",
+      "patch": {
+        "grossVehicleWeightKg": 3025
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVR; полная масса 3025 кг, стр. 414. Привод rwd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max Long Range 6-seat LiDAR 192; SKE6510SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "93f79f09209f894817fb2fbc",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max Long Range 5-seat LiDAR 192",
+      "expectedDigest": "340e0e22890b2e82e2cd0d08fc16673528b7ce06b0e10195c3721a43ed2cb3d7",
+      "patch": {
+        "grossVehicleWeightKg": 3025
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVR; полная масса 3025 кг, стр. 414. Привод rwd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max Long Range 5-seat LiDAR 192; SKE6510SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d25278cc010a438f4fbae188",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max AWD 5-seat LiDAR 896",
+      "expectedDigest": "2262a9138a8c34cbf1dbe4878f3184268ae3eec7ce49f0b8e0bab95fc43ae484",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max AWD 5-seat LiDAR 896; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "a8305fe6ea3a1fceb02c6d81",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max AWD 5-seat LiDAR 192",
+      "expectedDigest": "66880774910400a607d39ad816fef403c9c8bb482d9a36c045916045fbed3f28",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max AWD 5-seat LiDAR 192; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "cc14dd5326c8787de6446212",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max AWD 6-seat LiDAR 192",
+      "expectedDigest": "25aa92fb9ea3cefb24e41ed00b96d4ba76b4cc9053ecb1418e29dd9d05afdf77",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max AWD 6-seat LiDAR 192; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "77407251de0073fa6c1130ca",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Ultra AWD 5-seat LiDAR 192",
+      "expectedDigest": "1e04e83d47c040ef68a9929d244ea5c797506c818a0b0afd3f23983555b558c5",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Ultra AWD 5-seat LiDAR 192; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "07ead93690545d973ff40e98",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Ultra AWD 6-seat LiDAR 192",
+      "expectedDigest": "222b107ea32ae4d19a0b33340e805a7f5b622af9d7f410327b3efc07a03800cd",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Ultra AWD 6-seat LiDAR 192; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ee0f26fba393e9985fda81a7",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Ultra AWD 5-seat LiDAR 896",
+      "expectedDigest": "c5bbcfa876e1962a10410bf5803b174033a4213ee1f9662b67aa1b91749d130a",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Ultra AWD 5-seat LiDAR 896; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "c86d6e83d0fbf5838aa57d91",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Ultra AWD 5-seat LiDAR 896",
+      "expectedDigest": "d3ad88b08db9b3c3f0d73c908e8d6fbe0cd07fe151a5e2931a156b511c058379",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Ultra AWD 5-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Ultra AWD 5-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ebbea5c2429da5a1b9b6e9da",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max Long Range 6-seat LiDAR 192",
+      "expectedDigest": "6bf490bce654643eba874cb853f5cef9a8a6bdda1a8455b951068257e96711a2",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3055
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVR2; полная масса 3055 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод rwd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max Long Range 6-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max Long Range 6-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "d9d9afb4d238d8e1909d6689",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EREV Max Long Range 6-seat LiDAR 896",
+      "expectedDigest": "28a32bc60783850e8e808ddd136524b4110e67762ad0938dc1a53cc202ddd0cd",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3055
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVR2; полная масса 3055 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод rwd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 EREV Max Long Range 6-seat LiDAR 896; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 EREV Max Long Range 6-seat LiDAR 896; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ed37cf8014b9ffbe528cffff",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 EV Max AWD 6-seat LiDAR 896",
+      "expectedDigest": "fda59e19b1c5874322c87cde6cca8ec258ba779736169ff18fb53af57185cbdf",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "2026 EV Max AWD 6-seat LiDAR 896; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "e5ea1bada438e625b02c9fe1",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 Extended Range Max AWD 5-seater",
+      "expectedDigest": "3cd28ea5db7fadb5c026168d834e7ef160a3e48d51f9efc719ea6b901bfb2471",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 Extended Range Max AWD 5-seater; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 Extended Range Max AWD 5-seater; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "6969142102e407c8e7e5d305",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026 Extended Range Ultra AWD 5-Seater",
+      "expectedDigest": "56bf228577eab29ba5fdd5ecc27d34ca9ffb6f02a54c81c99f1c00696895d60e",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "2026 Extended Range Ultra AWD 5-Seater; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "2026 Extended Range Ultra AWD 5-Seater; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "c6c19a45020c5b4bd4650ac2",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Max Long Range 6-seat LiDAR 192",
+      "expectedDigest": "2b0ff53e9a6f408c5c488455383e64a3afeac201ec6ef41f41d68510a2b9388f",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3055
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVR2; полная масса 3055 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод rwd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max Long Range 6-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Max Long Range 6-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ef3132ec879b0e94c968da7a",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EV Max Long Range 5-seat LiDAR 192",
+      "expectedDigest": "5dca781b5d2de9667ed46973fb5ba11b8e9324c3722179c77dc7895d95217606",
+      "patch": {
+        "grossVehicleWeightKg": 3025
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVR; полная масса 3025 кг, стр. 414. Привод rwd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "EV Max Long Range 5-seat LiDAR 192; SKE6510SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b28f9f25932571c578df7b6c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EV Max Long Range 6-seat LiDAR 192",
+      "expectedDigest": "b187befcb1c3e84fb8ce18e979387ea1fbe8ff7b621a1ed5965804941802abd6",
+      "patch": {
+        "grossVehicleWeightKg": 3025
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVR; полная масса 3025 кг, стр. 414. Привод rwd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "EV Max Long Range 6-seat LiDAR 192; SKE6510SBEVR; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "4e3189bfdf9487e0d6d37ce4",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Max Long Range 5-seat LiDAR 192",
+      "expectedDigest": "d3fcbbc0920ca8a2eae9a07a1b76e016dc0fe1353aec38622e45224e033cc1bf",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3055
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVR2; полная масса 3055 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод rwd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max Long Range 5-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Max Long Range 5-seat LiDAR 192; SKE6510SSHEVR2; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "8cdc6e3e5110f7821dcc8738",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EV Ultra AWD 5-seat LiDAR 896",
+      "expectedDigest": "8d6d5f94c715da3d0955e5e0340897862d8a7409748889668c29b95d8be20c02",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "EV Ultra AWD 5-seat LiDAR 896; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "1e02885591b8e555e51bebf4",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EV Max AWD 5-seat LiDAR 192",
+      "expectedDigest": "9920d3e5675707983b8961b3c0879496cd25abad4905d2a58eb7c7a390ff9f67",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "EV Max AWD 5-seat LiDAR 192; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "6184f15798db276c361c01f8",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EV Ultra AWD 5-seat LiDAR 192",
+      "expectedDigest": "bc5deb06da2903088d44c7ffb67852fbdd864cd3b3129d9134005d376c6c939a",
+      "patch": {
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff",
+        "pages": [
+          414
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SBEVAS; полная масса 3130 кг, стр. 414. Привод awd и батарея 100 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 414,
+            "selector": "EV Ultra AWD 5-seat LiDAR 192; SKE6510SBEVAS; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "67687a4dad04b5e393da972b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Ultra AWD 5-seat LiDAR 192",
+      "expectedDigest": "1f09bee229c1aef300525689aba592a8c0fea79e08a62a1c2defc5cb5bcc3b55",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Ultra AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b1cec157f00bb7485dcad1c3",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Pro+ 4WD Edition 5 seats",
+      "expectedDigest": "a19fa3d2ddd67d0cdbd702c13d025938a4e5d14f1963ca030d4ce2b506ff2013",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3115
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVAS / SKE6510SSHEVA4S; полная масса 3115 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 37 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Pro+ 4WD Edition 5 seats; SKE6510SSHEVAS / SKE6510SSHEVA4S; 37 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Pro+ 4WD Edition 5 seats; SKE6510SSHEVAS / SKE6510SSHEVA4S; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "54df62e6831e92382f39ab8b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Max AWD 5-seat LiDAR 192",
+      "expectedDigest": "d43790d917b30a829b8ffd6bf8f8417d22dd7b14d89387a1569240ed477a4fe3",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Max AWD 5-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "1d3bacc32b458d473a645533",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Ultra AWD 5-seat LiDAR 896",
+      "expectedDigest": "71fd80ec908505f997d23821b67fad9517529ae6144973f0e5f44a8c1ccc59d6",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra AWD 5-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Ultra AWD 5-seat LiDAR 896; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b373b840678fd32196fc9eb2",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Ultra AWD 6-seat LiDAR 192",
+      "expectedDigest": "706b2da0cdfba67201866af34f7853b30dd08969d33653a0086e1c03ae609ebf",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Ultra AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Ultra AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "9a3f30ab64aec71c77d45a08",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "EREV Max AWD 6-seat LiDAR 192",
+      "expectedDigest": "2ca53f274e525ad77d65228ad81ca41175e672b085b5b0cfce80b93837c7fcd1",
+      "patch": {
+        "engineCode": "HG15T",
+        "grossVehicleWeightKg": 3130
+      },
+      "confirmedFields": [
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69",
+        "pages": [
+          424,
+          425,
+          426
+        ],
+        "supportingUrls": [
+          "https://hima.auto/wenjie/m7-new/configuration/",
+          "https://aito.auto/service/"
+        ],
+        "statement": "Руководство M7 2026: SKE6510SSHEVA2S / SKE6510SSHEVA5S; полная масса 3130 кг, стр. 424. Код ДВС HG15T, стр. 425; батарея и технический код связаны таблицей на стр. 426. Привод awd и батарея 53.4 кВт·ч ранее подтверждены заводским источником, сохранённым в истории. Снаряжённая масса не использована. Нетто/номинальная и 30-минутная мощности не заполнялись.",
+        "fieldSources": {
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 425,
+            "selector": "EREV Max AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM72026%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 424,
+            "selector": "EREV Max AWD 6-seat LiDAR 192; SKE6510SSHEVA2S / SKE6510SSHEVA5S; 53.4 kWh; awd"
+          }
+        }
+      }
+    }
+  ]
+}

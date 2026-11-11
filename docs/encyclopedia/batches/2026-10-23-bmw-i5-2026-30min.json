@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-bmw-i5-2026-30min",
+  "entries": [
+    {
+      "modelId": "e71c8376467b1da6bc08a8b7",
+      "make": "BMW",
+      "model": "i5",
+      "year": 2026,
+      "trim": "xDrive40 Touring",
+      "variantId": "c31f0df22cec7cf907072ca6",
+      "expectedDigest": "9059acc83db65b736325214c23e80b06b3aec89b3399cda74664f1944eac1c05",
+      "patch": {
+        "power30MinKw": 150,
+        "drive": "awd",
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "drive",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.bmw.de/de/neufahrzeuge/bmw-i/i5/bmw-i5-touring-technische-daten.html",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "BMW official technical declaration: i5 xDrive40 Touring, (Nenn-) Leistung/30-Minuten-Leistung. Manufacturer-declared value; not an individual vehicle CoC.",
+        "statement": "BMW i5 xDrive40 Touring (G61), актуальная европейская версия: производитель отдельно указывает 290 кВт пиковой и 150 кВт 30-минутной мощности, полный привод и кузов Touring. Сопоставлена только существующая запись 2026 xDrive40 Touring/290кВт/394PS/europe. Не переносить на китайские L, другие годы, седан или иные модификации. Источник — заводская техническая декларация, не индивидуальный CoC автомобиля."
+      }
+    }
+  ]
+}

@@ -1,0 +1,548 @@
+{
+  "checkedAt": "2026-10-22T10:41:01.037Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-mito-2016-2018-racer-2015",
+  "sourceRevision": "567a0791-7f50-47fe-96de-463ef11c21cf",
+  "variants": 34,
+  "newVariants": 34,
+  "fields": 333,
+  "changes": [
+    {
+      "variantId": "ee2237cfa6b743b4b0b7bb9f",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "933642a17f177daecf913275",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "001f480673b377b79487adc3",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "f67dccd810fb6fa41e32b4ac",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "f015989a7301af5425071c93",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "4c31ac9fe826720543ab9c00",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "73d2bc0726f5edc0b6eb184d",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "fa66f221f45466cefff5ff0d",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "23eeb2fafdd2563bbd616692",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "5d048984af30414001590b6c",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "a52f64e6e0c6f5d95ee524b8",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "fd0cf56cfbdab08d31622f15",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "9a33c0b3d3bcf46b73d4ce7a",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "cee24d5b79b671f72f6bcffd",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "4389fd90aeba29220a163872",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "eb4041d2a6f04f9258b0f126",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "ef5d2de5f7272eb9a9abd76e",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "d7f934e7da3f20e8bb124598",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "a14593be927173446c86319e",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "635412d2316f01188c488f8a",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "76e5b17cd6a8e7965b8ff00e",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "e297d316fd30af5452266665",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "512dca4edfc6615d5fb35d95",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "1e12520d137532407da7dafc",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "9414705e81eb110f04cda069",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "ed4c9d66b0a4dc160ece9e06",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "1f11bccfb944f416ed3b25e2",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "6cb32630fd0b905736e60587",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "ef99a5cf20a40ff97731abea",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "d2a867e51e947066a4e03d5f",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "79b70ac1724f570b9580768a",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "72a24cbe98ac2c527aa4ef15",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "cdff6ece5173e63be51d85a9",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ]
+    },
+    {
+      "variantId": "c698d4d1751394cb05d24733",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp"
+      ]
+    }
+  ]
+}

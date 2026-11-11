@@ -1,0 +1,1903 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-wuling-red-current-en-2026",
+          "type": "manufacturer",
+          "title": "Wuling Red Badge Model Range",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://wuling.com/en/wulingRed",
+          "documentId": "Wuling Red Badge EN current range",
+          "documentDate": null,
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English model inventory uses Yangguang as the public Latin name. Yangguang is not merged with the separate Wuling Sunshine / 五菱之光 line."
+        },
+        {
+          "id": "src-sgmw-yangguang-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱扬光参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=16",
+          "documentId": "SGMW carDetail 16",
+          "documentDate": null,
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "grossWeightKg",
+            "seats",
+            "acChargeKw"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official eight-column table supplies exact current cargo/passenger grade names and technical values. Battery energy lacks an explicit capacity basis, range cycle is not stated, and 2C is not a charging-kW value; those fields are intentionally not mapped."
+        },
+        {
+          "id": "src-sgmw-yangguang-family-launch-2025",
+          "type": "manufacturer",
+          "title": "五菱扬光家族8款车型上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=51893",
+          "documentId": "SGMW news 51893",
+          "documentDate": "2025-08-06",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official release states the original Yangguang launch was March 2024 and records the refreshed eight-model family matrix unveiled on 2025-07-31."
+        },
+        {
+          "id": "src-sgmw-bingo-s-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "缤果S参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.wuling.com/carDetail?id=306",
+          "documentId": "Wuling carDetail 306",
+          "documentDate": null,
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "acChargeKw"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official five-column table supplies exact 325 km, 430 km and 525 km configurations and explicitly states CLTC. Battery energy lacks a declared gross/usable/rated basis and is not mapped."
+        },
+        {
+          "id": "src-sgmw-bingo-s-launch-2025",
+          "type": "manufacturer",
+          "title": "五菱缤果S正式上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=52756",
+          "documentId": "SGMW news 52756",
+          "documentDate": "2025-09-28",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm",
+            "rangeStandard"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official 2025-09-27 launch lists the four 325 km and 430 km Exclusive/Flagship configurations."
+        },
+        {
+          "id": "src-sgmw-bingo-s-525-launch-2026",
+          "type": "manufacturer",
+          "title": "五菱缤果S 525km旗舰款上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=55367",
+          "documentId": "SGMW news 55367",
+          "documentDate": "2026-03-16",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm",
+            "rangeStandard"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official release adds the exact 525 km Flagship configuration to the Bingo S range in March 2026."
+        },
+        {
+          "id": "src-sgmw-bingo-pro-presale-2026",
+          "type": "manufacturer",
+          "title": "全新五菱缤果Pro开启预售",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=55868",
+          "documentId": "SGMW news 55868",
+          "documentDate": "2026-04-15",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "seats"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official presale release lists all four 330 km and 403 km grades and exact body dimensions. It does not state a range cycle, battery-capacity basis or motor output, so none is inferred."
+        },
+        {
+          "id": "src-sgmw-bingo-pro-launch-2026",
+          "type": "manufacturer",
+          "title": "全新五菱缤果Pro上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=56650",
+          "documentId": "SGMW news 56650",
+          "documentDate": "2026-06-05",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official release records the 2026-05-22 market launch and confirms 330 km and 403 km battery-electric choices."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/yangguang",
+          "brandId": "wuling",
+          "canonicalName": "Yangguang",
+          "slug": "yangguang",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 扬光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-red-current-zh-2026"
+              ]
+            },
+            {
+              "value": "五菱扬光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "productionFrom": "2024-03",
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-red-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-wuling-red-current-en-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling's official English model inventory uses the public Latin name Yangguang; SGMW dates the original launch to March 2024."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official release establishes the production date, battery-electric powertrain and van family body class."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Exact manufacturer configurations are staged below in a grouped mass-model batch; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s",
+          "brandId": "wuling",
+          "canonicalName": "Bingo S",
+          "slug": "bingo-s",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 缤果S",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            },
+            {
+              "value": "五菱缤果S",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-current-spec"
+              ]
+            }
+          ],
+          "productionFrom": "2025-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-s-launch-2025",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official launch dates the five-seat battery-electric Bingo S range to September 2025."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom.",
+            "Exact manufacturer configurations are staged below in a grouped mass-model batch; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-pro",
+          "brandId": "wuling",
+          "canonicalName": "Bingo Pro",
+          "slug": "bingo-pro",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 缤果Pro",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            },
+            {
+              "value": "五菱缤果Pro",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-pro-presale-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2026-05",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-pro-launch-2026",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official release records the Bingo Pro market launch on 2026-05-22 and identifies its 330 km and 403 km battery-electric range choices."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Exact manufacturer configurations are staged below in a grouped mass-model batch; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/yangguang/current-family-2025",
+          "modelId": "wuling/yangguang",
+          "name": "Current family (2025)",
+          "aliases": [
+            {
+              "value": "五菱扬光家族",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-family-launch-2025"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-07",
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer release establishes the launch-family identity, month and normalized body class."
+            }
+          ],
+          "researchNotes": [
+            "Public launch-family container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s/launch-2025",
+          "modelId": "wuling/bingo-s",
+          "name": "Launch generation (2025)",
+          "aliases": [
+            {
+              "value": "五菱缤果S",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-launch-2025"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-s-launch-2025",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer release establishes the launch-family identity, month and normalized body class."
+            }
+          ],
+          "researchNotes": [
+            "Public launch-family container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-pro/launch-2026",
+          "modelId": "wuling/bingo-pro",
+          "name": "Launch generation (2026)",
+          "aliases": [
+            {
+              "value": "全新五菱缤果Pro",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-pro-launch-2026"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2026-05",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-pro-launch-2026",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer release establishes the launch-family identity, month and normalized body class."
+            }
+          ],
+          "researchNotes": [
+            "Public launch-family container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/yangguang/current-family-2025/300km-cargo-practical",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "300 km Cargo Practical",
+          "aliases": [
+            {
+              "value": "300km 封窗版实用型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 300,
+          "topSpeedKmh": 90,
+          "lengthMm": 4985,
+          "widthMm": 1800,
+          "heightMm": 1975,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2905,
+          "seats": 2,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/300km-cargo-comfort",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "300 km Cargo Comfort",
+          "aliases": [
+            {
+              "value": "300km封窗版舒适型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 300,
+          "topSpeedKmh": 90,
+          "lengthMm": 4985,
+          "widthMm": 1800,
+          "heightMm": 1975,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2905,
+          "seats": 2,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/330km-passenger-comfort-6-seat",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "330 km Passenger Comfort 6-seat",
+          "aliases": [
+            {
+              "value": "330km 客车版舒适型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 100,
+          "rangeKm": 330,
+          "topSpeedKmh": 100,
+          "lengthMm": 5010,
+          "widthMm": 1800,
+          "heightMm": 1975,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2305,
+          "seats": 6,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/310km-cargo-catl-custom",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "310 km Cargo CATL Custom",
+          "aliases": [
+            {
+              "value": "310km 封窗版宁德时代定制版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 310,
+          "topSpeedKmh": 90,
+          "lengthMm": 5010,
+          "widthMm": 1800,
+          "heightMm": 1975,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2905,
+          "seats": 2,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/340km-passenger-catl-custom-6-seat",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "340 km Passenger CATL Custom 6-seat",
+          "aliases": [
+            {
+              "value": "340km 客车版宁德时代定制版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 100,
+          "rangeKm": 340,
+          "topSpeedKmh": 100,
+          "lengthMm": 5010,
+          "widthMm": 1800,
+          "heightMm": 1975,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2305,
+          "seats": 6,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/440km-passenger-comfort-6-seat",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "440 km Passenger Comfort 6-seat",
+          "aliases": [
+            {
+              "value": "440km 客车版舒适型",
+              "kind": "localized",
+              "safe": false,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 100,
+          "rangeKm": 440,
+          "topSpeedKmh": 100,
+          "lengthMm": 5010,
+          "widthMm": 1800,
+          "heightMm": 1960,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2420,
+          "seats": 6,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/440km-passenger-comfort-9-seat",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "440 km Passenger Comfort 9-seat",
+          "aliases": [
+            {
+              "value": "440km 客车版舒适型",
+              "kind": "localized",
+              "safe": false,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 100,
+          "rangeKm": 440,
+          "topSpeedKmh": 100,
+          "lengthMm": 5010,
+          "widthMm": 1800,
+          "heightMm": 1960,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2550,
+          "seats": 9,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/yangguang/current-family-2025/440km-operating-9-seat",
+          "modelId": "wuling/yangguang",
+          "generationId": "wuling/yangguang/current-family-2025",
+          "faceliftId": null,
+          "name": "440 km Operating 9-seat",
+          "aliases": [
+            {
+              "value": "440km 营运版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-yangguang-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 100,
+          "rangeKm": 440,
+          "topSpeedKmh": 100,
+          "lengthMm": 5010,
+          "widthMm": 1800,
+          "heightMm": 1960,
+          "wheelbaseMm": 3050,
+          "grossWeightKg": 2550,
+          "seats": 9,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-yangguang-family-launch-2025",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the refreshed eight-model China family introduced on 2025-07-31."
+            },
+            {
+              "sourceId": "src-sgmw-yangguang-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current eight-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "The source does not identify the range cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power, and 2C is not stored as charging kW."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s/launch-2025/325km-exclusive",
+          "modelId": "wuling/bingo-s",
+          "generationId": "wuling/bingo-s/launch-2025",
+          "faceliftId": null,
+          "name": "325 km Exclusive",
+          "aliases": [
+            {
+              "value": "325km 尊享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 325,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 150,
+          "lengthMm": 4265,
+          "widthMm": 1785,
+          "heightMm": 1600,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1250,
+          "seats": 5,
+          "acChargeKw": 3.3,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-s-launch-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the exact grade, launch year and CLTC range."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-s-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from Wuling's current five-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Battery capacity is omitted because the table does not declare gross, usable or rated basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s/launch-2025/325km-flagship",
+          "modelId": "wuling/bingo-s",
+          "generationId": "wuling/bingo-s/launch-2025",
+          "faceliftId": null,
+          "name": "325 km Flagship",
+          "aliases": [
+            {
+              "value": "325km 旗舰款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 325,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 150,
+          "lengthMm": 4265,
+          "widthMm": 1785,
+          "heightMm": 1600,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1250,
+          "seats": 5,
+          "acChargeKw": 3.3,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-s-launch-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the exact grade, launch year and CLTC range."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-s-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from Wuling's current five-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Battery capacity is omitted because the table does not declare gross, usable or rated basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s/launch-2025/430km-exclusive",
+          "modelId": "wuling/bingo-s",
+          "generationId": "wuling/bingo-s/launch-2025",
+          "faceliftId": null,
+          "name": "430 km Exclusive",
+          "aliases": [
+            {
+              "value": "430km 尊享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 430,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 150,
+          "lengthMm": 4265,
+          "widthMm": 1785,
+          "heightMm": 1600,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1325,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-s-launch-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the exact grade, launch year and CLTC range."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-s-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from Wuling's current five-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Battery capacity is omitted because the table does not declare gross, usable or rated basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s/launch-2025/430km-flagship",
+          "modelId": "wuling/bingo-s",
+          "generationId": "wuling/bingo-s/launch-2025",
+          "faceliftId": null,
+          "name": "430 km Flagship",
+          "aliases": [
+            {
+              "value": "430km 旗舰款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 430,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 150,
+          "lengthMm": 4265,
+          "widthMm": 1785,
+          "heightMm": 1600,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1325,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-s-launch-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the exact grade, launch year and CLTC range."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-s-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from Wuling's current five-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Battery capacity is omitted because the table does not declare gross, usable or rated basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-s/launch-2025/525km-flagship",
+          "modelId": "wuling/bingo-s",
+          "generationId": "wuling/bingo-s/launch-2025",
+          "faceliftId": null,
+          "name": "525 km Flagship",
+          "aliases": [
+            {
+              "value": "525km 旗舰款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-s-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 525,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 150,
+          "lengthMm": 4265,
+          "widthMm": 1785,
+          "heightMm": 1600,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1395,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-s-525-launch-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release establishes the exact grade, launch year and CLTC range."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-s-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from Wuling's current five-configuration table."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Battery capacity is omitted because the table does not declare gross, usable or rated basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-pro/launch-2026/330km-exclusive",
+          "modelId": "wuling/bingo-pro",
+          "generationId": "wuling/bingo-pro/launch-2026",
+          "faceliftId": null,
+          "name": "330 km Exclusive",
+          "aliases": [
+            {
+              "value": "330km尊享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-pro-presale-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "rangeKm": 330,
+          "lengthMm": 4050,
+          "widthMm": 1758,
+          "heightMm": 1580,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-pro-presale-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official presale lists the exact grade, range figure, dimensions and five-seat configuration."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-pro-launch-2026",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the May 2026 market launch and both advertised range choices."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Range cycle, motor power, battery capacity, wheelbase, mass and exact charging kW remain empty because the cited releases do not provide them unambiguously."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-pro/launch-2026/330km-flagship",
+          "modelId": "wuling/bingo-pro",
+          "generationId": "wuling/bingo-pro/launch-2026",
+          "faceliftId": null,
+          "name": "330 km Flagship",
+          "aliases": [
+            {
+              "value": "330 km旗舰款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-pro-presale-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "rangeKm": 330,
+          "lengthMm": 4050,
+          "widthMm": 1758,
+          "heightMm": 1580,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-pro-presale-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official presale lists the exact grade, range figure, dimensions and five-seat configuration."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-pro-launch-2026",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the May 2026 market launch and both advertised range choices."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Range cycle, motor power, battery capacity, wheelbase, mass and exact charging kW remain empty because the cited releases do not provide them unambiguously."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-pro/launch-2026/403km-exclusive",
+          "modelId": "wuling/bingo-pro",
+          "generationId": "wuling/bingo-pro/launch-2026",
+          "faceliftId": null,
+          "name": "403 km Exclusive",
+          "aliases": [
+            {
+              "value": "403 km尊享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-pro-presale-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "rangeKm": 403,
+          "lengthMm": 4050,
+          "widthMm": 1758,
+          "heightMm": 1580,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-pro-presale-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official presale lists the exact grade, range figure, dimensions and five-seat configuration."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-pro-launch-2026",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the May 2026 market launch and both advertised range choices."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Range cycle, motor power, battery capacity, wheelbase, mass and exact charging kW remain empty because the cited releases do not provide them unambiguously."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/bingo-pro/launch-2026/403km-flagship",
+          "modelId": "wuling/bingo-pro",
+          "generationId": "wuling/bingo-pro/launch-2026",
+          "faceliftId": null,
+          "name": "403 km Flagship",
+          "aliases": [
+            {
+              "value": "403 km旗舰款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-bingo-pro-presale-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "rangeKm": 403,
+          "lengthMm": 4050,
+          "widthMm": 1758,
+          "heightMm": 1580,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-bingo-pro-presale-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official presale lists the exact grade, range figure, dimensions and five-seat configuration."
+            },
+            {
+              "sourceId": "src-sgmw-bingo-pro-launch-2026",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the May 2026 market launch and both advertised range choices."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation; matching retains the exact Chinese manufacturer alias.",
+            "Range cycle, motor power, battery capacity, wheelbase, mass and exact charging kW remain empty because the cited releases do not provide them unambiguously."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    }
+  ]
+}

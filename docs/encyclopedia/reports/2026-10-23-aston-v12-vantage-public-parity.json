@@ -1,0 +1,181 @@
+{
+  "checkedAt": "2026-10-23T07:59:28+07:00",
+  "passed": true,
+  "scope": "V12 Vantage UAE card/search parity in active index; new batch not activated",
+  "undefinedNormalization": "React Flight $undefined and empty specification string interpreted as absent values. Raw representation differences are retained separately",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "d8fbab1b6aa1e6e797562588",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "v12",
+          "card": "v12",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "drive": {
+          "search": "",
+          "card": null
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "e09313e54478ba27166cebe3",
+      "checks": {
+        "year": {
+          "search": 2016,
+          "card": 2016,
+          "equal": true
+        },
+        "trim": {
+          "search": "Other",
+          "card": "Other",
+          "equal": true
+        },
+        "engineCc": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerHp": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "powerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "totalRub": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "needs_data",
+          "card": "needs_data",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "engineCc": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerHp": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "icePowerKw": {
+          "search": null,
+          "card": "$undefined"
+        },
+        "powerDataSource": {
+          "search": null,
+          "card": "$undefined"
+        }
+      }
+    }
+  ],
+  "market": "uae",
+  "repeatedExactModificationGroups": 0,
+  "offersChecked": 2,
+  "comparisons": 22
+}

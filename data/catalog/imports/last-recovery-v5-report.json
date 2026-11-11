@@ -1,0 +1,331 @@
+{
+  "imported": 343,
+  "updated": 96,
+  "expired": 0,
+  "skipped": 326,
+  "rejectedByQuality": 318,
+  "imageFailures": 202,
+  "underfilledImages": 696,
+  "reusedImageSets": 0,
+  "publicOffers": 646,
+  "publicByMarket": {
+    "korea": 32,
+    "japan": 374,
+    "china": 2,
+    "europe": 9,
+    "uae": 229
+  },
+  "refreshedByMarket": {
+    "korea": 14,
+    "china": 11,
+    "japan": 250,
+    "uae": 164,
+    "europe": 0
+  },
+  "targetPublicOffers": 1250,
+  "targetPerMarket": 250,
+  "targetReached": false,
+  "targetReachedByMarket": false,
+  "missingByMarket": {
+    "korea": 218,
+    "china": 248,
+    "japan": 0,
+    "uae": 21,
+    "europe": 241
+  },
+  "generationId": "gen_1784299128055_41536c54",
+  "sources": [
+    {
+      "sourceId": "encar_direct",
+      "market": "korea",
+      "scanCycleId": "scan_d410ff30-4527-439d-998d-f26fba688822",
+      "ok": true,
+      "seen": 102,
+      "saved": 14,
+      "cursor": "{\"offset\":128,\"cursor\":\"\"}",
+      "sourceExhausted": false,
+      "stoppedByLimit": true,
+      "stoppedByBudget": true,
+      "partialScan": true,
+      "staleEligible": false
+    },
+    {
+      "sourceId": "che168_global",
+      "market": "china",
+      "scanCycleId": "scan_35db2aff-7f46-4e23-a459-adb105011d48",
+      "ok": true,
+      "seen": 0,
+      "saved": 0,
+      "sourceExhausted": true,
+      "stoppedByLimit": false,
+      "stoppedByBudget": false,
+      "partialScan": false,
+      "staleEligible": false
+    },
+    {
+      "sourceId": "autouncle_europe",
+      "market": "europe",
+      "ok": false,
+      "seen": 0,
+      "saved": 0,
+      "error": "autouncle_europe_scoped_zero_status_200_bytes_773365"
+    },
+    {
+      "sourceId": "jpauc_japan",
+      "market": "japan",
+      "ok": false,
+      "seen": 2,
+      "saved": 0,
+      "error": "jpauc_parsed_zero_status_200_bytes_45940"
+    },
+    {
+      "sourceId": "che168_dealer_exact",
+      "market": "china",
+      "ok": false,
+      "seen": 1,
+      "saved": 11,
+      "error": "che168_dealer_zero_429115_1"
+    },
+    {
+      "sourceId": "che168_china_exact",
+      "market": "china",
+      "scanCycleId": "scan_a9ed1c6d-f969-4e4d-9294-9ea71f391800",
+      "ok": true,
+      "seen": 0,
+      "saved": 0,
+      "sourceExhausted": true,
+      "stoppedByLimit": false,
+      "stoppedByBudget": false,
+      "partialScan": false,
+      "staleEligible": false
+    },
+    {
+      "sourceId": "goonet_japan_exact",
+      "market": "japan",
+      "scanCycleId": "scan_8c7561e9-d53f-48e9-b45c-168587e39e52",
+      "ok": true,
+      "seen": 247,
+      "saved": 250,
+      "cursor": "14",
+      "sourceExhausted": false,
+      "stoppedByLimit": true,
+      "stoppedByBudget": false,
+      "partialScan": true,
+      "staleEligible": false
+    },
+    {
+      "sourceId": "dubicars_uae_exact",
+      "market": "uae",
+      "ok": false,
+      "seen": 238,
+      "saved": 97,
+      "error": "dubicars_http_403"
+    },
+    {
+      "sourceId": "otomoto_europe_exact",
+      "market": "europe",
+      "ok": false,
+      "seen": 0,
+      "saved": 0,
+      "error": "otomoto_exact_zero"
+    },
+    {
+      "sourceId": "dubicars_uae",
+      "market": "uae",
+      "scanCycleId": "scan_3b2e2e40-b32f-4ad5-b041-f36b56f2f21c",
+      "ok": true,
+      "seen": 153,
+      "saved": 67,
+      "cursor": "8",
+      "sourceExhausted": false,
+      "stoppedByLimit": true,
+      "stoppedByBudget": false,
+      "partialScan": true,
+      "staleEligible": false
+    },
+    {
+      "sourceId": "autoscout_europe",
+      "market": "europe",
+      "ok": false,
+      "seen": 0,
+      "saved": 0,
+      "error": "autoscout_europe_parsed_zero_status_200_bytes_778182"
+    }
+  ],
+  "exchangeRates": {
+    "updatedAt": "2026-07-17T13:33:41.537Z",
+    "rates": [
+      {
+        "currency": "USD",
+        "cbrRate": 78.6525,
+        "nominal": 1,
+        "effectiveRate": 78.6525,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "moex",
+        "previousEffectiveRate": 78.74,
+        "previousRateDate": "2026-07-17",
+        "rateDelta": -0.08749999999999147
+      },
+      {
+        "currency": "EUR",
+        "cbrRate": 89.3296,
+        "nominal": 1,
+        "effectiveRate": 89.3296,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "moex",
+        "previousEffectiveRate": 95.62,
+        "previousRateDate": "2026-07-17",
+        "rateDelta": -6.290400000000005
+      },
+      {
+        "currency": "CNY",
+        "cbrRate": 11.5585,
+        "nominal": 1,
+        "effectiveRate": 11.5585,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "moex",
+        "previousEffectiveRate": 11.5845,
+        "previousRateDate": "2026-07-17",
+        "rateDelta": -0.0259999999999998
+      },
+      {
+        "currency": "JPY",
+        "cbrRate": 48.2998,
+        "nominal": 100,
+        "effectiveRate": 0.482998,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 0.48079900000000003,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.002198999999999951
+      },
+      {
+        "currency": "KRW",
+        "cbrRate": 52.6048,
+        "nominal": 1000,
+        "effectiveRate": 0.0526048,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 0.0522429,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.00036189999999999833
+      },
+      {
+        "currency": "AED",
+        "cbrRate": 21.3256,
+        "nominal": 1,
+        "effectiveRate": 21.3256,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 21.2272,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.0984000000000016
+      },
+      {
+        "currency": "GBP",
+        "cbrRate": 105.565,
+        "nominal": 1,
+        "effectiveRate": 105.565,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 104.5011,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 1.0639000000000038
+      },
+      {
+        "currency": "PLN",
+        "cbrRate": 20.757,
+        "nominal": 1,
+        "effectiveRate": 20.757,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 20.5805,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.17650000000000077
+      },
+      {
+        "currency": "CHF",
+        "cbrRate": 97.0485,
+        "nominal": 1,
+        "effectiveRate": 97.0485,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 96.2192,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.8293000000000035
+      },
+      {
+        "currency": "SEK",
+        "cbrRate": 80.861,
+        "nominal": 10,
+        "effectiveRate": 8.0861,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 8.056329999999999,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.029770000000000962
+      },
+      {
+        "currency": "NOK",
+        "cbrRate": 80.5063,
+        "nominal": 10,
+        "effectiveRate": 8.05063,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 8.02652,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.024110000000000298
+      },
+      {
+        "currency": "DKK",
+        "cbrRate": 11.9498,
+        "nominal": 1,
+        "effectiveRate": 11.9498,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 11.8938,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.05599999999999916
+      },
+      {
+        "currency": "HUF",
+        "cbrRate": 24.9803,
+        "nominal": 100,
+        "effectiveRate": 0.249803,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 0.247946,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.0018569999999999975
+      },
+      {
+        "currency": "CZK",
+        "cbrRate": 37.1105,
+        "nominal": 10,
+        "effectiveRate": 3.71105,
+        "rateDate": "2026-07-17",
+        "fetchedAt": "2026-07-17T13:33:41.537Z",
+        "rateSource": "cbr",
+        "previousEffectiveRate": 3.6708,
+        "previousRateDate": "2026-07-16",
+        "rateDelta": 0.04025000000000034
+      }
+    ],
+    "errors": []
+  },
+  "durationMs": 3951790,
+  "reportPath": "catalog/imports/latest-public-markets.json"
+}

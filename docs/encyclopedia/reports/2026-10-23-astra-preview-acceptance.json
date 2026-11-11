@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "previewWorkflow": 39949279655,
+  "previewConclusion": "success",
+  "archiveSourceCount": 33,
+  "archiveBytes": 2742966413,
+  "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+  "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+  "counters": {
+    "sourceRecords": 466987,
+    "uniqueTechnicalRecords": 466987,
+    "detailRecords": 1768599,
+    "originalSourceRows": 1038355,
+    "eligibleSourceRecords": 300947,
+    "assignedSourceRecords": 300947,
+    "rejectedSourceRecords": 166040,
+    "sourceDatasets": {
+      "edatenblatt": 44829,
+      "targa": 210673,
+      "tas": 211485
+    },
+    "rejectedReasons": {
+      "outside_passenger_light_van_pickup_scope": 150628,
+      "unknown_commercial_name": 182,
+      "unknown_vehicle_category": 12512,
+      "excluded_vehicle_family": 2718
+    },
+    "existingModelsTotal": 2445,
+    "existingVariantsTotal": 115011,
+    "targetedExistingAnnualVariants": 88062,
+    "targetModels": 2895,
+    "newModels": 2028,
+    "changedExistingModels": 867,
+    "newUnknownYearVariants": 230447,
+    "existingAnnualVariantsChanged": 5,
+    "fieldsFilled": 8,
+    "existingFieldsAttested": 24,
+    "existingAnnualPower30Filled": 0,
+    "heldExistingVariants": 88057,
+    "heldReasons": {
+      "no_exact_technical_match": 62344,
+      "manual_or_unknown_year": 25711,
+      "conflicting_or_incomplete_evidence": 2
+    }
+  },
+  "status": "apply_requested_not_yet_saved",
+  "annualChangedModels": [
+    {
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "counts": {
+        "newUnknownYearVariants": 276,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 0,
+        "existingFieldsAttested": 2,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "make": "BMW",
+      "model": "X2",
+      "counts": {
+        "newUnknownYearVariants": 1109,
+        "existingAnnualVariantsChanged": 3,
+        "fieldsFilled": 6,
+        "existingFieldsAttested": 18,
+        "existingAnnualPower30Filled": 0
+      }
+    },
+    {
+      "make": "BMW",
+      "model": "i5",
+      "counts": {
+        "newUnknownYearVariants": 139,
+        "existingAnnualVariantsChanged": 1,
+        "fieldsFilled": 2,
+        "existingFieldsAttested": 4,
+        "existingAnnualPower30Filled": 0
+      }
+    }
+  ]
+}

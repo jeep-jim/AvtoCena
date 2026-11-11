@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-22T21:15:00+07:00",
+  "modelId": "5dfcc65f1b57038636b1cce6",
+  "model": "Alpina D3",
+  "cursor": {
+    "generation": "F30/F31",
+    "year": 2013,
+    "stage": "найти и проверить точную заводскую гамму; не переносить214PS E9x в350PS F30/F31"
+  },
+  "completedBatches": [
+    {
+      "key": "alpina-d3-2008-2009-factory",
+      "commit": "055b642d9d636b7a9e5b0a28affd08c860a234e9",
+      "workflow": 39792096245,
+      "job": 119870452619,
+      "variants": 8,
+      "newVariants": 8,
+      "fields": 76,
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "batch": "research-2026-10-22-alpina-d3-2008-2009-factory",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2008-2009-factory-readback.json"
+    },
+    {
+      "key": "alpina-d3-2010-2011-2013-official-tables",
+      "commit": "ed3eed26d1f5d66fc2847cea0cc1d1b549c673e1",
+      "workflow": 39792747303,
+      "job": 119872582899,
+      "variants": 12,
+      "newVariants": 12,
+      "fields": 108,
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "applyStepConclusion": "success",
+      "allReportedStepsConclusion": "success",
+      "terminalStatusPending": false,
+      "batch": "research-2026-10-22-alpina-d3-2010-2011-2013-official-tables",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2010-2011-2013-official-tables-readback.json"
+    }
+  ],
+  "nextModels": [
+    "Alpina D5",
+    "Alpine A110",
+    "Alpine A290"
+  ],
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
+  "report": "docs/encyclopedia/reports/2026-10-22-alpina-d3-early-pass.json",
+  "sourceLeads": [
+    {
+      "url": "https://2013.tokyo-motorshow.com/en/showguide/exhibit/01_060_Alpina.html",
+      "state": "найдено, содержимое ещё не проверено"
+    },
+    {
+      "url": "https://news.cision.com/market-engineering/r/new-alpina-d3-bi-turbo-and-b3-bi-turbo--now-available-in-uk,c9874086",
+      "date": "2015-11-25",
+      "state": "прочитан первичный пресс-релиз ALPINA GB через агентство; поля ещё не применены",
+      "warning": "Масса1660/1730кг — снаряжённая. Не переносить2015на2013. Проверить единицы мощности и точные годовые исполнения."
+    }
+  ],
+  "integration": {
+    "checkedAt": "2026-10-22T21:15:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+    "lastKnownActiveIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "newBatchesActivationConfirmed": false,
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "status": "queued",
+      "conclusion": null
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "Один совокупный защищённый индекс после уже сопровождаемой отдельной задачей публикации Китая; проверить членство новых записей и активацию. Не дублировать выпуск."
+  },
+  "doNotRestartEarlyBatches": true,
+  "checkSecondWorkflowTerminalStatus": false
+}

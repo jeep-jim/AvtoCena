@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T15:57:16.696Z",
+  "state": "fresh_preflight_apply_requested",
+  "batch": "research-2026-10-23-audi-a3-2022-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+  "batchSha256": "2ff69af8b3ae2b0e90846d852d1b6db69accb8c8f4183ef2e210f11252c504cc",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "beforeRevision": "f9f9ce15-2097-5470-a6c5-f820658f3695",
+  "variantsRead": 3663,
+  "variantsPlanned": 50,
+  "fieldsPlanned": 50,
+  "newVariants": 0,
+  "untargetedRowsPreserved": 3613,
+  "allExistingValuesPreserved": true,
+  "priorFieldSourcesPreserved": true,
+  "nativeExact": 50,
+  "nativeHeld": [],
+  "compiledFields": 50,
+  "guardTestsPassed": 11,
+  "manualPreserved": true,
+  "unknownCertifiedPowerNotInferred": true,
+  "replayPassed": true,
+  "sources": [
+    {
+      "url": "https://audi-press.jp/press-releases/2021/b7rqqm000001a883.html",
+      "sourceSha256": "6f48c7875edcee176f514b32927a3a015827dd21792192c170c965e6f69a8971",
+      "bytes": 79371,
+      "retrievedAt": "2026-10-23T15:56:03.280232+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2014/crt6ds00000016d3.html",
+      "sourceSha256": "c72bc53b22f64a48c0b8d62c8bbc0c0f57230f513004b1b64fa70970cfa5eda1",
+      "bytes": 47629,
+      "retrievedAt": "2026-10-23T15:56:07.308424+00:00"
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2020/b7rqqm000000uw0w.html",
+      "sourceSha256": "8025df3bb33560af025e7f4c8d6f255a7a08c2eb60590a13ee82e5ff83b4e646",
+      "bytes": 66509,
+      "retrievedAt": "2026-10-23T15:56:13.498129+00:00"
+    }
+  ],
+  "cursorBefore": "2885f631c2c0b7c844ed6357",
+  "cursorAfterApply": "a508272cf730c67bde2fa1e5",
+  "remaining2022BodyAfterApply": 15,
+  "apiReadbackAfterApply": false,
+  "activationConfirmed": false,
+  "applyDeferredReason": null,
+  "releasedAfterIndex": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+  "annualRowsRead": 1111,
+  "unknownYearAstraRowsPreserved": 2552,
+  "nextCandidate": {
+    "variantId": "a508272cf730c67bde2fa1e5",
+    "year": 2022,
+    "trim": "Sportback 35 TFSI S-Tronic AHK, Klima 2-Zonen"
+  },
+  "testedCodeCommit": "056ddb1cca2dbe5104563cae05064f225adf4d5e"
+}

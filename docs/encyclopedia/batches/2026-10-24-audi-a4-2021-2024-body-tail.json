@@ -1,0 +1,2274 @@
+{
+  "version": 1,
+  "id": "research-2026-10-24-audi-a4-2021-2024-body-tail",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "35 TFSI LIMOUSINE|S-LINE SPORTPAKET|VIRTUAL",
+      "variantId": "7337a9ca9f80dfa28391fd25",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "33119d5ccf32cc91aa040a9face97919329156cbacec00c835cc22e8ab256f7b",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 2.0 TDI S-TRO*NAVI*KLIMA*PDC*ZVR**",
+      "variantId": "4a57ba5a44a56a6bd2378196",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "e4f579b3e2ab9e7c0895fbb6565074372147fd444bacd35fa38cb88822aaa3d4",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 35 TDI ADVANCED *LED*NAVI*PDC*ALU*",
+      "variantId": "7e0fc694f5ceb46ccedec972",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "92e911bd6e6a7e88d8a8df5850f7476da5e7217ef26a6731f5362c5c16f76fef",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 40 TDI advanced LED Navigation SHZ",
+      "variantId": "502a20d89b3b872536794bcb",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "d6361a59880167fa2cbed7f779e77bce37d39c7cc7aca5d58708bc1518eb6a15",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 40 TDI advanced Stronic,LED,Tour,Le",
+      "variantId": "eaf70b09dcafc46515a74954",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "5abba2f9e4ebd5e465296bb42c47f76db9ebbe6bd5310279833e1313e28cfff3",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 40 TDI advanced Stronic,LED,Tour,Leder,N",
+      "variantId": "977f1a74514c472f5569da10",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "f27e548360e283222d800155bd1bead6de361b209483b8c02662f93bf170dd07",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 40 TDI S tronic advanced | LED |",
+      "variantId": "cdaf349a183cf1e4ae8afc95",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "276fb50b463a87d660b40b9f2eb4051295ea4c762435ff5904fdc25f48bb2f1c",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 40 TDI S-tronic *ACC*SSD*LED*NAVI*",
+      "variantId": "f93963972c4e5ffb2c97c564",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "a48d0eef3c97ce3a798263fe12de2b90f4d05c509f7bde919a41c6ab7c2a4188",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limousine 40TDI quattro 273,-ohne Anzahlung N",
+      "variantId": "6c63fcb068ed85a38f5872a2",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "ea775093ad8224737ebfccfa16fb9ccdde22348075e8fffee49e0ab56252b4a4",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "40 TDI Limousine Advanced S-Tronic Kamera",
+      "variantId": "b7c69e73981517fcbc8b9b8e",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "9881966d351b93262fb9156c80807752f0b73c09947a8c0d57a70cd16b8f6e01",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 35 TDI advanced Business*Tour*EPH+*",
+      "variantId": "97d5a20aca40c4b705f0e098",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "001b7aed80f2906553b06b2258c3faf9cbd5f26d3dc09a391057339b1f74ef12",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 quattro 2.0 TDI advanced DSG LE",
+      "variantId": "08a7c83f5c89c6687136f6e3",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "1851f0a6b7f8e383df03f9d02c550aa5b73ceb885d147808bd6ef5afb683d7a2",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI",
+      "variantId": "8447d45f8744487cc193ad91",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "cbec1a1b67a761aaa661b0637a03f90c7a4dcc92004b4880b242875e6cc59ac5",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI Kamera Navi virtual Advanced",
+      "variantId": "3bc970b4b328bfd94d3c0023",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "98be6efc445277841f7a8e6151c5fe7fa5d999c13437d1cad02a289df0b610fd",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI KEYLESS,ACC,KAMERA,VIRTUAL",
+      "variantId": "c5431c5341aea689d8ec9856",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "338989c24a2dc3e8745c586a6be12de8bb520512913ca2a0b9fe7a82058cc0e0",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI qu S LINE 18Z KEYLESS,KAMERA",
+      "variantId": "d68b5edede6f1b52936f44d0",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "c3ccc292c7430265872664e7bb11e6b402f761fdfbcbbe487cfd830d94ebc612",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI qu S LINE KEYLESS,KAMERA,SH",
+      "variantId": "c454b0d3506312f5b57fa4d5",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "11961ca831375fa9b26bfd9fca7582646baa64424a7cad08a0a82afd6a2c385f",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI QU S-TR ADVANCED LED+NAV+RFK",
+      "variantId": "918d459c2a0b86fac065afca",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "37835d7a4876a560035184ebd70c82a2133de875a69766344fa3d97f3af9d6f8",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TDI S LINE 18 Z. KEYLESS,KAMERA",
+      "variantId": "bd1edafa077ab4fd5fde8fee",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "621b421a3bdd65716be4b492cd9098e0b52909ae2ef436edee4ed2dc663d0453",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TFSI Q. Kamera LED Navi",
+      "variantId": "4fda8cd24ca1e50ce7c43e34",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "abe75ed70c0c4d53f7d5564bc9bc05e3fced7d025e92ad38245bfee50d23170c",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TFSI S LINE VIRTUAL,ACC,LEDER",
+      "variantId": "928d80a19ca0feb4e214fe82",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "41e340b8a511987f2c3bc5d70ab2e64d01cb749ea103708efa89e249cd54a64b",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Limousine 40 TFSI S tronic S line Navi Kamera",
+      "variantId": "e074b13d8700c037e02c5520",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "00317dd284cdde05cff5f6fe1934483edae212031066f4aae9c6091f5c372743",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "35 2.0 tdi mhev S line SEDAN REAR|ACC|CARPLAY|18'",
+      "variantId": "0ba2ec48688ad1f6dc0b5bd7",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "ce56b0e09b230e5e1289545a6cebb6786864ad5a0c46ea395e58a3efbc4764d9",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 35 TFSI Advanced, LED, AHK, Ambient",
+      "variantId": "66b89d3c5a100a6acf379c95",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "076b67144fac693d2815a0ff990f6ea8accd81428954024f37321a0378c363fc",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 35 TFSI S tronic S line BlackEditio",
+      "variantId": "0c7b209a2ccd1f85a071db24",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "06b4d17cbfaa858f284dfb17a6af71b1ee65715aafa9c80ad0dd78949599a5fc",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 35 TFSI S-Line LED PANO AHK AMBIENT",
+      "variantId": "f28976524a224aacbb2b28f2",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "967b771a36ed7e0a4a7431879c176c65cb4151223b29c488a63a61004349aecb",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 40 TDI qu S LINE 18 Z. KEYLESS,ACC",
+      "variantId": "80d78c52da005fae2f46597e",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "373603b6032c09e71ecd9c42f5bf25b047388c7cf7e9fac69fd14ae971f1808b",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine 45 TFSI quattro S tronic Navi Plus",
+      "variantId": "57496639d4b45730cd78372c",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "06e9a425abe6a8a06fcd176a6989a65603e2f676e7b85ceb7a162da89a215fda",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine advanced 35 TFSI Kamera, Business",
+      "variantId": "4f699d3b0e6d9d13cf16b4a0",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "75d61afb609af78b7681b559230d866a75c48013a04742a996f66d57474a1c23",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "trim": "Limousine advanced 40 TDI Navi, LED",
+      "variantId": "2b3ccbd37d3febf436143ce4",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "ce2389f1766acd3b765123c04df301cc4a514e8ae644a6e8bf176d10c614e51f",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - ADAS/FULL LED/BAULE ELETTRICO",
+      "variantId": "63e13fd86745b01f89dcf80a",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "1ac85b8c420ea59363730c2a24fdafea650d1715ad240b18806e82bd97c64789",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "30 TDI Avant S-Tronic Business Advanced - TELECAMERA/ADAS/FULL LED/BAULE ELETTRICO",
+      "variantId": "9a25b435f03ff9ad07957627",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "b14719b4526c6c218c733e9252a2b4dd6ed8517a9bf919d9ffabd2aecdf9ce15",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "35 TDI Avant S-Tronic S-Line - MATRIX/ADAS/CERCHI 19\"/LUCI PLUS",
+      "variantId": "3ef2ce55591065e2977158d6",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "0f6db787d280c3ed0b028f83f01d61eafd95b257d57a2ba091f317065806a983",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "AVANT 2.0 40 TDI MHEV QUATTRO S LINE EDITION S TRONIC STATION WAGON",
+      "variantId": "491ca205fb36fd81401e01c2",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "e0bf561d61fd6d082b6ba4a67ba6f8d1f4e17ac7475cfa3599510ebf1a821e90",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 35 TFSI | 2024 | 99.654 km | Automaat | AdaptiveCruise | Led | PDC | ParkPilot | Navi | CarPlay | DAB",
+      "variantId": "ff69300ffd620c27e1bdb0ba",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "68483ae42d7ef6d56aa3856ee930314b7b168d60d4b3502ec5481e7b812cc178",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TDI S tronic Business Advanced",
+      "variantId": "b5e2432ce1b5c6aa4a7c5d00",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "ae6ed90eaae1314d362f991875baeeb2e3ef8828514cf5f3855e20a6d76600dd",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Avant 40 TFSI S line/MASSAGE/SHZ//ACC/NAVI",
+      "variantId": "cdd1ded316d1f22a3f4e552a",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "af50856e188c20b9507afd7f551ca416b75cac859684d2e3d36ef5079a899374",
+      "patch": {
+        "bodyType": "wagon"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limousine 35 TFSi S-Line Competition 150 Pk a",
+      "variantId": "a8854828fa54a9f30e2b1f92",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "7b8a83fd2dd07ff83417af08066f9780949378c21d56f024338c8c8511053c15",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limousine 40 TDI QU S-TR LED+2xPDC+PANO+B&O",
+      "variantId": "b2c0d452350b55c55ab6633c",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "8c29a63df946c46d3e9bb8ee41d53a8747e6cf205091fcdb24dc992cea816be4",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limousine 40 TDI quattro advanced LED*RFK*",
+      "variantId": "b376dab12d1698f5d2953f0d",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "fcdeda933e424e46bc4e974986ec7531b208642dfd6d1feb0f259ef69bb90618",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limousine 40 TDI S tronic S line competiton V",
+      "variantId": "151e2939f10b4addb65bfe16",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "a0ec2d3a3f0b4a31947cce2d62539d21c2c1eeed7bde5240ea93e4da1a3a30aa",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2024,
+      "trim": "Limousine 40 TFSI S tronic line MATRIX AHK KA",
+      "variantId": "2effff876a2dae0ee37235a4",
+      "expectedRevision": "a1d548f8-014a-4fa3-a8f6-6d0a72a82d9e",
+      "expectedDigest": "2d48932030481c2b1467062cbe0f3a7c6f548829b4340e56d39d6fe85609cac3",
+      "patch": {
+        "bodyType": "sedan"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+        "checkedAt": "2026-10-24",
+        "statement": "Подтверждён только тип кузова: универсал для явно названного Audi A4 Avant, седан для явно названного Audi A4 Limousine/Sedan. Заводские публикации2016 и2023 прямо классифицируют Avant как station wagon; обновление2020 сохраняет отдельный кузов Avant. Мощности/объём/привод/год/комплектация и прежние источники не изменены; 30-минутная мощность не выводится.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://www.audi-press.jp/press-releases/2016/crt6ds0000001ay5.html",
+            "sourceSha256": "0654dfeffbb5287fd3bd73d51449defdb2c958153f932f1424479fed39a0899f",
+            "bytes": 83590,
+            "retrievedAt": "2026-10-24T00:54:30.053334+00:00",
+            "checkedAt": "2026-10-24",
+            "sourcePublisher": "AUDI AG / Audi Japan",
+            "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+            "selector": "Заголовок и вводный абзац: A4 Avant — station wagon; поколение B9. Только кузов; для Sedan/Limousine основной подтверждающий источник — confirmation2023 с отдельной классификацией A4 sedan и A4 Avant station wagon.",
+            "modelUpdate2020": {
+              "url": "https://audi-press.jp/press-releases/2020/b7rqqm000000wx82.html",
+              "sourceSha256": "27068b82c514760a7034f262e11bfd131ceb240ea23306001b7117b8cf222486",
+              "bytes": 63666,
+              "retrievedAt": "2026-10-24T00:54:33.324271+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Обновление A4/A4 Avant; технические различия двигателей в эту партию не переносятся."
+            },
+            "confirmation2023": {
+              "url": "https://www.audi-press.jp/press-releases/2023/pdhl9j00000018m2.html",
+              "sourceSha256": "235ffae34f562e8ffe78741f586a6f74b7aef345cd5ba666377eec8dfa3f1bb8",
+              "bytes": 65001,
+              "retrievedAt": "2026-10-24T00:54:35.969463+00:00",
+              "checkedAt": "2026-10-24",
+              "sourcePublisher": "AUDI AG / Audi Japan",
+              "sourceNature": "Заводская публикация Audi; только технический факт типа кузова Avant",
+              "selector": "Вводный абзац отдельно перечисляет sedan, station wagon,4-door coupe для A4/A4 Avant/A5 Sportback соответственно."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

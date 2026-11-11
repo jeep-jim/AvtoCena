@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-22T04:27:59.912942+07:00",
+  "newVariants": 404,
+  "newFields": 3108,
+  "groups": [
+    {
+      "model": "Audi A4",
+      "variants": 388,
+      "fields": 2996
+    },
+    {
+      "model": "Audi A4L",
+      "variants": 16,
+      "fields": 112
+    }
+  ],
+  "a4lBatch": {
+    "stem": "2023-2024",
+    "commit": "08715a24469f88763b84d6135fb197369d5c533d",
+    "run": 39678816395,
+    "job": 119495605007,
+    "variants": 16,
+    "fields": 112
+  },
+  "integration": "not_implemented",
+  "applicationChanged": false,
+  "collectorsChanged": false,
+  "note": "Подтверждения включают уже наблюдавшиеся значения,не только заполнение пустых ячеек. Все404 строки review; текущий проход не включает предыдущие516."
+}

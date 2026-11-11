@@ -1,0 +1,861 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T12:08:05.228Z",
+  "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+  "status": "verified_public_calculations_catalog_parity_and_browser",
+  "tests": {
+    "full": {
+      "passed": 2483,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 337221.186366,
+      "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd"
+    },
+    "targeted": {
+      "passed": 84
+    },
+    "typecheck": "passed",
+    "crmLocalClientCases": 8,
+    "crmCiBrowserJob": 120837108484,
+    "crmCi": {
+      "runId": 40081936446,
+      "status": "success",
+      "liveCases": 36,
+      "liveOpenings": 168
+    },
+    "catalogLiveJourney": {
+      "runId": 40085885448,
+      "jobId": 120862487365,
+      "status": "success",
+      "viewportWidths": [
+        390,
+        1440
+      ],
+      "initialCards": 24,
+      "appendedCards": 48,
+      "koreaPhotos": 4
+    },
+    "sevenPublicCards": {
+      "runId": 40092574653,
+      "jobId": 120868107872,
+      "passed": 7,
+      "failed": 0
+    }
+  },
+  "deployments": [
+    {
+      "runId": 40081064561,
+      "release": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
+      "status": "success"
+    },
+    {
+      "runId": 40081936386,
+      "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+      "status": "success"
+    },
+    {
+      "runId": 40085069428,
+      "release": "7d32942c38f631711dfb577bec698099087f3447",
+      "status": "success"
+    },
+    {
+      "runId": 40088542508,
+      "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+      "status": "success"
+    }
+  ],
+  "japanReadOnlyAcceptance": {
+    "rows": 417,
+    "fuelFilled": 48,
+    "readyInputs": 46,
+    "calculationAttempts": 20,
+    "calculated": 20,
+    "failures": [],
+    "examples": [
+      {
+        "id": "ajes-stats-X2apkhstFF3mSl",
+        "model": "PASSAT",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 150,
+        "totalRub": 1566967,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2uNPKQmfgUvYjrX",
+        "model": "PASSAT",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 150,
+        "totalRub": 1552790,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-ZaeoQssZkHWDbr",
+        "model": "TWINGO",
+        "year": 2017,
+        "fuel": "petrol",
+        "powerHp": 90,
+        "totalRub": 634450,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-i6tMpOruUTDho7",
+        "model": "MEGANE",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 159,
+        "totalRub": 848297,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2BUjfTfdIGujpE",
+        "model": "CLIPPER VAN",
+        "year": 2020,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 548997,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2NgfFLkogQyQo",
+        "model": "EVERY",
+        "year": 2016,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 474961,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "model": "ALTO",
+        "year": 2023,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 509539,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2QoalTno4ZkOeah",
+        "model": "ALTO",
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 473833,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2Qu4zJH7wlhOvoG",
+        "model": "EVERY",
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 527572,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2QzWNA1OYHeOMD6",
+        "model": "COROLLA FIELDER",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 103,
+        "totalRub": 1215162,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2R4oUNBpgsZQaN7",
+        "model": "EVERY",
+        "year": 2018,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 492289,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2RUpVosRnEySFSJ",
+        "model": "ALTO",
+        "year": 2023,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 527572,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2RwR32bZyeKRyX8",
+        "model": "EVERY",
+        "year": 2015,
+        "fuel": "petrol",
+        "powerHp": 46,
+        "totalRub": 510666,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2f01P7IiNivukRS",
+        "model": "CLIPPER VAN",
+        "year": 2021,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 648943,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-490SKYIxnUyL97",
+        "model": "CLIPPER VAN",
+        "year": 2020,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 540596,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2WgfhIgtrNNdObd",
+        "model": "CLIPPER VAN",
+        "year": 2017,
+        "fuel": "petrol",
+        "powerHp": 49,
+        "totalRub": 550031,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-4vIM9fAmNIzS4I",
+        "model": "TIIDA",
+        "year": 2011,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 731021,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-2l0HxMdKetc1HDD",
+        "model": "TIIDA",
+        "year": 2008,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 711593,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-27L3awbojpFWGkk",
+        "model": "TIIDA",
+        "year": 2009,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 707393,
+        "estimated": true
+      },
+      {
+        "id": "ajes-stats-27qDVYVBlpZQWZ6",
+        "model": "TIIDA",
+        "year": 2010,
+        "fuel": "petrol",
+        "powerHp": 109,
+        "totalRub": 712118,
+        "estimated": true
+      }
+    ]
+  },
+  "seltosReadOnlyAcceptance": {
+    "id": "bbdc9f4661719617765f19ec",
+    "engineCc": 1999,
+    "powerHp": 149,
+    "totalRub": 2727280,
+    "complete": true,
+    "publiclyConfirmed": true
+  },
+  "limitations": [
+    "Totals exclude domestic Russia delivery.",
+    "Japanese examples use reported source horsepower and remain preliminary/requiresConfirmation.",
+    "Unproven displacement, certified hybrid/electric power, category and mass remain unknown; this is acceptance of the listed examples, not a claim that every catalog listing is complete.",
+    "Supplier availability was intermittent during acceptance; successful final checks do not guarantee future upstream availability."
+  ],
+  "firstPublicVerification": {
+    "checkedAt": "2026-10-24T09:45:30.997883+00:00",
+    "health": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
+        "calculationVersion": "17f9c42ed3c72dd791328afc2a33a65c4ef2b9a96239355f65e8e7ac4c08aa05"
+      }
+    },
+    "markets": {
+      "japan": {
+        "status": 200,
+        "total": null,
+        "returned": 24
+      },
+      "korea": {
+        "status": 200,
+        "total": 78607,
+        "returned": 24
+      },
+      "georgia": {
+        "status": 200,
+        "total": 1705,
+        "returned": 24
+      },
+      "uae": {
+        "status": 200,
+        "total": 22038,
+        "returned": 24
+      },
+      "china": {
+        "status": 200,
+        "total": 244471,
+        "returned": 24
+      },
+      "europe": {
+        "status": 200,
+        "total": 46125,
+        "returned": 24
+      }
+    },
+    "japan": [
+      {
+        "id": "ajes-stats-2NgfFLkogQyQo",
+        "model": "Every",
+        "year": 2016,
+        "japanDeliveredPreview": {
+          "totalRub": 474961,
+          "currencyRate": {
+            "currency": "JPY",
+            "cbrRate": 51.4785,
+            "nominal": 100,
+            "effectiveRate": 0.5147849999999999,
+            "rateDate": "2026-10-24",
+            "fetchedAt": "2026-10-24T09:42:54.389Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 132000,
+            "sourcePriceRub": 67952
+          },
+          "deliveryPricingBasis": {
+            "subtotalRub": 442602,
+            "deliveryRub": 0,
+            "percents": []
+          },
+          "engineCc": 660,
+          "estimated": true
+        },
+        "japanPowerEstimate": {
+          "offerId": "ajes-stats-2NgfFLkogQyQo",
+          "values": [
+            46,
+            49,
+            64
+          ],
+          "requiresConfirmation": true
+        }
+      },
+      {
+        "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "model": "Alto",
+        "year": 2023,
+        "japanDeliveredPreview": {
+          "totalRub": 509539,
+          "currencyRate": {
+            "currency": "JPY",
+            "cbrRate": 51.4785,
+            "nominal": 100,
+            "effectiveRate": 0.5147849999999999,
+            "rateDate": "2026-10-24",
+            "fetchedAt": "2026-10-24T09:42:54.389Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 368000,
+            "sourcePriceRub": 189441
+          },
+          "deliveryPricingBasis": {
+            "subtotalRub": 474750,
+            "deliveryRub": 0,
+            "percents": []
+          },
+          "engineCc": 660,
+          "estimated": true
+        },
+        "japanPowerEstimate": {
+          "offerId": "ajes-stats-2QFQ2qkxr4bP4Ru",
+          "values": [
+            46
+          ],
+          "requiresConfirmation": true
+        }
+      },
+      {
+        "id": "ajes-stats-2QzWNA1OYHeOMD6",
+        "model": "Corolla Fielder",
+        "year": 2021,
+        "japanDeliveredPreview": {
+          "totalRub": 1215162,
+          "currencyRate": {
+            "currency": "JPY",
+            "cbrRate": 51.4785,
+            "nominal": 100,
+            "effectiveRate": 0.5147849999999999,
+            "rateDate": "2026-10-24",
+            "fetchedAt": "2026-10-24T09:42:54.389Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 1050000,
+            "sourcePriceRub": 540524
+          },
+          "deliveryPricingBasis": {
+            "subtotalRub": 1173352,
+            "deliveryRub": 0,
+            "percents": []
+          },
+          "engineCc": 1500,
+          "estimated": true
+        },
+        "japanPowerEstimate": {
+          "offerId": "ajes-stats-2QzWNA1OYHeOMD6",
+          "values": [
+            103
+          ],
+          "requiresConfirmation": true
+        }
+      }
+    ],
+    "koreaDetail": [
+      {
+        "id": "ajes-korea-6d1nkfP5H0ngqu",
+        "url": "https://avtocena.com/cars/offer/genesis-gv80-2-5t-gasoline-awd-2021--ajes-korea-6d1nkfP5H0ngqu",
+        "pricePanels": [
+          "Ориентир без доставки7 405 286₽"
+        ],
+        "breakdown": [
+          {
+            "id": "car",
+            "rub": "2061181",
+            "text": "Цена автомобиля2 061 181 ₽"
+          },
+          {
+            "id": "contract-services",
+            "rub": "110000",
+            "text": "Обеспечительный платёж110 000 ₽"
+          },
+          {
+            "id": "topavto-commission",
+            "rub": "90000",
+            "text": "Комиссия Автодилера90 000 ₽"
+          },
+          {
+            "id": "logistics",
+            "rub": "96646",
+            "text": "Логистика96 646 ₽"
+          },
+          {
+            "id": "broker",
+            "rub": "35000",
+            "text": "Брокер35 000 ₽"
+          },
+          {
+            "id": "svh",
+            "rub": "15000",
+            "text": "СВХ15 000 ₽"
+          },
+          {
+            "id": "laboratory",
+            "rub": "25000",
+            "text": "Лаборатория, СБКТС, ЭПТС25 000 ₽"
+          },
+          {
+            "id": "customs-clearance",
+            "rub": "13541",
+            "text": "Таможенный сбор за оформление13 541 ₽"
+          },
+          {
+            "id": "import-duty",
+            "rub": "1126683",
+            "text": "Единая ставка таможенных платежей1 126 683 ₽"
+          },
+          {
+            "id": "utilization-fee",
+            "rub": "3770400",
+            "text": "Утилизационный сбор3 770 400 ₽?223,59 кВт — выше льготного порога223,59 кВт > 117,68 кВт. Для M1 с ДВС превышен порог мощности льготного утильсбора.Для выбора диапазона утильсбора используется мощность в кВт. Лошадиные силы в объявлении могут быть округлены: 160 л.с. и 118 кВт не означают льготный сбор.Порог 117,68 кВт относится к M1 с ДВС. Для льготы также важны объём до 3 000 см³, ввоз физлицом для личного пользования и соблюдение остальных условий. Для N1, электромобилей и гибридов действуют отдельные правила. Характеристики и право на льготу нужно подтвердить по документам.Разъяснение ФНС о мощности в кВт ↗"
+          },
+          {
+            "id": "exchange-reserve",
+            "rub": "61835",
+            "text": "Резерв на изменение курса61 835 ₽"
+          }
+        ]
+      },
+      {
+        "id": "ajes-korea-6d1nIGC880T51e",
+        "url": "https://avtocena.com/cars/offer/kia-carnival-4-generation-diesel-9-seater-noblesse-2021--ajes-korea-6d1nIGC880T51e",
+        "pricePanels": [
+          "Ориентир без доставки5 999 801₽"
+        ],
+        "breakdown": [
+          {
+            "id": "car",
+            "rub": "1155234",
+            "text": "Цена автомобиля1 155 234 ₽"
+          },
+          {
+            "id": "contract-services",
+            "rub": "110000",
+            "text": "Обеспечительный платёж110 000 ₽"
+          },
+          {
+            "id": "topavto-commission",
+            "rub": "90000",
+            "text": "Комиссия Автодилера90 000 ₽"
+          },
+          {
+            "id": "logistics",
+            "rub": "96646",
+            "text": "Логистика96 646 ₽"
+          },
+          {
+            "id": "broker",
+            "rub": "35000",
+            "text": "Брокер35 000 ₽"
+          },
+          {
+            "id": "svh",
+            "rub": "15000",
+            "text": "СВХ15 000 ₽"
+          },
+          {
+            "id": "laboratory",
+            "rub": "25000",
+            "text": "Лаборатория, СБКТС, ЭПТС25 000 ₽"
+          },
+          {
+            "id": "customs-clearance",
+            "rub": "4924",
+            "text": "Таможенный сбор за оформление4 924 ₽"
+          },
+          {
+            "id": "import-duty",
+            "rub": "931740",
+            "text": "Единая ставка таможенных платежей931 740 ₽"
+          },
+          {
+            "id": "utilization-fee",
+            "rub": "3501600",
+            "text": "Утилизационный сбор3 501 600 ₽?148,57 кВт — выше льготного порога148,57 кВт > 117,68 кВт. Для M1 с ДВС превышен порог мощности льготного утильсбора.Для выбора диапазона утильсбора используется мощность в кВт. Лошадиные силы в объявлении могут быть округлены: 160 л.с. и 118 кВт не означают льготный сбор.Порог 117,68 кВт относится к M1 с ДВС. Для льготы также важны объём до 3 000 см³, ввоз физлицом для личного пользования и соблюдение остальных условий. Для N1, электромобилей и гибридов действуют отдельные правила. Характеристики и право на льготу нужно подтвердить по документам.Разъяснение ФНС о мощности в кВт ↗"
+          },
+          {
+            "id": "exchange-reserve",
+            "rub": "34657",
+            "text": "Резерв на изменение курса34 657 ₽"
+          }
+        ]
+      }
+    ]
+  },
+  "firstPublicGate": {
+    "groups": 38,
+    "variants": 656,
+    "fields": 1010,
+    "verified": true
+  },
+  "firstPublicJapanCalculate": {
+    "status": 200,
+    "matchedCatalogPreview": true,
+    "totals": {
+      "Every2016": 474961,
+      "Alto2023": 509539,
+      "Fielder2021": 1215162
+    },
+    "requiresConfirmation": true
+  },
+  "seltosPublicVerification": {
+    "health": {
+      "status": 200,
+      "data": {
+        "ok": true,
+        "service": "avtocena-web",
+        "releaseSha": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+        "calculationVersion": "6ef7044874e002026f2352e0e5a92647b1c877c9e6f95cafd1cf055e06f4370b"
+      }
+    },
+    "checkedAt": "2026-10-24T10:17:32.569375+00:00",
+    "seltos": {
+      "id": "bbdc9f4661719617765f19ec",
+      "url": "https://avtocena.com/cars/offer/kia-seltos-2023--bbdc9f4661719617765f19ec",
+      "pricePanels": [
+        "Ориентир без доставки2 727 280₽"
+      ],
+      "totalRub": 2727280,
+      "breakdownSum": 2727280,
+      "engineCc": 1999,
+      "powerHp": 149
+    },
+    "markets": {
+      "japan": {
+        "status": 200,
+        "error": null,
+        "returned": 21
+      },
+      "korea": {
+        "status": 503,
+        "error": "japan_search_unavailable",
+        "returned": 0
+      },
+      "georgia": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      },
+      "uae": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      },
+      "china": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      },
+      "europe": {
+        "status": 200,
+        "error": null,
+        "returned": 24
+      }
+    }
+  },
+  "countryman": {
+    "applyRun": 40084909047,
+    "fieldsVerified": 4,
+    "untouchedVariantsVerified": 5,
+    "revision": "8cbe5f65-9791-411f-8927-0c7a00af0b52",
+    "release": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+    "deployRun": 40088542508,
+    "status": "verified",
+    "catalogRub": 2155149,
+    "detailPriceConfirmed": true,
+    "fuelApplyRun": 40088419868,
+    "fuelRevision": "ce750f06-5878-4271-9c57-ae845f9f4763",
+    "catalogPriceConfirmed": true,
+    "fuelRelease": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+    "fuelDeployRun": 40088542508,
+    "detailRub": 2155149
+  },
+  "finalDataGate": {
+    "groups": 39,
+    "variants": 660,
+    "fields": 1014,
+    "verified": true,
+    "release": "7d32942c38f631711dfb577bec698099087f3447"
+  },
+  "finalPublicVerification": {
+    "checkedAt": "2026-10-24T12:06:39.170972+00:00",
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "71e571f0ba3598f07f569a19d14cb3dae35086dd",
+      "calculationVersion": "5d458f646c67329d167586f6cae1944082458f5f17910f79df745ff974d87730"
+    },
+    "checks": [
+      {
+        "id": "bbdc9f4661719617765f19ec",
+        "url": "https://avtocena.com/cars/offer/kia-seltos-2023--bbdc9f4661719617765f19ec",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки2 727 280₽"
+        ],
+        "breakdownSum": 2727280,
+        "expected": 2727280,
+        "passed": true
+      },
+      {
+        "id": "ajes-korea-6d1nkfP5H0ngqu",
+        "url": "https://avtocena.com/cars/offer/genesis-gv80-2-5t-gasoline-awd-2021--ajes-korea-6d1nkfP5H0ngqu",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки7 254 985₽"
+        ],
+        "breakdownSum": 7254985,
+        "expected": 7254985,
+        "passed": true
+      },
+      {
+        "id": "ajes-korea-6d1nIGC880T51e",
+        "url": "https://avtocena.com/cars/offer/kia-carnival-4-generation-diesel-9-seater-noblesse-2021--ajes-korea-6d1nIGC880T51e",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки5 999 801₽"
+        ],
+        "breakdownSum": 5999801,
+        "expected": 5999801,
+        "passed": true
+      },
+      {
+        "id": "367c09969707c8221e8abf9e",
+        "url": "https://avtocena.com/cars/offer/mini-countryman-2020--367c09969707c8221e8abf9e",
+        "status": 200,
+        "pricePanels": [
+          "Ориентир без доставки2 155 149₽"
+        ],
+        "breakdownSum": 2155149,
+        "expected": 2155149,
+        "passed": true
+      },
+      {
+        "id": "ajes-stats-2NgfFLkogQyQo",
+        "status": 200,
+        "totalRub": 474961,
+        "requiresConfirmation": true,
+        "passed": true
+      },
+      {
+        "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+        "status": 200,
+        "totalRub": 509539,
+        "requiresConfirmation": true,
+        "passed": true
+      },
+      {
+        "id": "ajes-stats-2QzWNA1OYHeOMD6",
+        "status": 200,
+        "totalRub": 1215162,
+        "requiresConfirmation": true,
+        "passed": true
+      },
+      {
+        "id": "bbdc9f4661719617765f19ec",
+        "surface": "catalog",
+        "totalRub": 2727280,
+        "expected": 2727280,
+        "passed": true
+      },
+      {
+        "id": "367c09969707c8221e8abf9e",
+        "surface": "catalog",
+        "totalRub": 2155149,
+        "expected": 2155149,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "finalBrowserVerification": [
+    {
+      "id": "bbdc9f4661719617765f19ec",
+      "totalRub": 2727280,
+      "url": "https://avtocena.com/cars/offer/kia-seltos-2023--bbdc9f4661719617765f19ec",
+      "panel": [
+        "Ориентир без доставки2 727 280₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-korea-6d1nkfP5H0ngqu",
+      "totalRub": 7254985,
+      "url": "https://avtocena.com/cars/offer/genesis-gv80-2-5t-gasoline-awd-2021--ajes-korea-6d1nkfP5H0ngqu",
+      "panel": [
+        "Ориентир без доставки7 254 985₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-korea-6d1nIGC880T51e",
+      "totalRub": 5999801,
+      "url": "https://avtocena.com/cars/offer/kia-carnival-4-generation-diesel-9-seater-noblesse-2021--ajes-korea-6d1nIGC880T51e",
+      "panel": [
+        "Ориентир без доставки5 999 801₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "367c09969707c8221e8abf9e",
+      "totalRub": 2155149,
+      "url": "https://avtocena.com/cars/offer/mini-countryman-2020--367c09969707c8221e8abf9e",
+      "panel": [
+        "Ориентир без доставки2 155 149₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-stats-2NgfFLkogQyQo",
+      "totalRub": 474961,
+      "url": "https://avtocena.com/cars/offer/suzuki-every-4wd-pc-2016--ajes-stats-2NgfFLkogQyQo",
+      "panel": [
+        "Ориентир без доставки+266474 961₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-stats-2QFQ2qkxr4bP4Ru",
+      "totalRub": 509539,
+      "url": "https://avtocena.com/cars/offer/suzuki-alto-4wd-2023--ajes-stats-2QFQ2qkxr4bP4Ru",
+      "panel": [
+        "Ориентир без доставки+741509 539₽"
+      ],
+      "passed": true
+    },
+    {
+      "id": "ajes-stats-2QzWNA1OYHeOMD6",
+      "totalRub": 1215162,
+      "url": "https://avtocena.com/cars/offer/toyota-corolla-fielder-4wd-2021--ajes-stats-2QzWNA1OYHeOMD6",
+      "panel": [
+        "Ориентир без доставки+2,1K1 215 162₽"
+      ],
+      "passed": true
+    }
+  ],
+  "finalPublicGate": {
+    "groups": 39,
+    "variants": 664,
+    "fields": 1022,
+    "verified": true,
+    "indexDigest": "747dcb985a21221075c25cf30dae0e37584c0e781271ee99785051b7544cfbb2"
+  },
+  "finalMarkets": {
+    "japan": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "korea": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "georgia": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "uae": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "china": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    },
+    "europe": {
+      "status": 200,
+      "returned": 24,
+      "checkedAt": "2026-10-24T11:58:52.839149+00:00"
+    }
+  },
+  "sourceIncidents": [
+    {
+      "market": "korea",
+      "event": "Search HTTP503 observed earlier; final search HTTP200, browser four320px photos passed in3012ms."
+    },
+    {
+      "market": "japan",
+      "event": "Two transient detail/calculation HTTP503 during simultaneous acceptance; subsequent three calculation responses200, browser all three passed."
+    }
+  ],
+  "quoteChanges": [
+    {
+      "id": "ajes-korea-6d1nkfP5H0ngqu",
+      "currency": "KRW",
+      "beforeSourcePrice": 33900000,
+      "afterSourcePrice": 31500000,
+      "beforeTotalRub": 7405286,
+      "afterTotalRub": 7254985,
+      "afterCarRub": 1915257,
+      "afterExchangeReserveRub": 57458,
+      "reason": "Supplier listing price changed during acceptance; current server ledger and browser agree."
+    }
+  ]
+}

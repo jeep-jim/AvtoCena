@@ -1,0 +1,1024 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alpina-d3s-2020-2021-2023-factory",
+  "entries": [
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2020,
+      "operation": "create",
+      "variantId": "fbd81a42406586dafeb64435",
+      "trim": "S 3.0 Diesel MHEV Limousine Allrad 8AT SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "patch": {
+        "trim": "S 3.0 Diesel MHEV Limousine Allrad 8AT SWITCH-TRONIC",
+        "bodyType": "sedan",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 2993,
+        "icePowerKw": 261,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 8
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская брошюра ALPINA/Nicole от 2020-05-18, PDF14 техническая таблица и PDF16 дата визуально сверены; архивная копия оригинала;2993см³, полная масса не указана, снаряжённая и нагрузка не сложены. Дизельный MHEV48V:261кВт — только ДВС;8кВт — максимальный boost стартер-генератора, не30-минутная мощность. Generic powerHp/powerKw, мощность системы и engineCode не назначены. Год относится к датированному исполнению, не к дате выпуска конкретной машины. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; trim; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; bodyType; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; fuel; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; powertrainKind; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; engineCc; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; icePowerKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; transmission; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "drive": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 5,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; drive; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "motorPeakKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; motorPeakKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2020,
+      "operation": "create",
+      "variantId": "87599e518f3488cbcc697b7d",
+      "trim": "S 3.0 Diesel MHEV Touring Allrad 8AT SWITCH-TRONIC",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "patch": {
+        "trim": "S 3.0 Diesel MHEV Touring Allrad 8AT SWITCH-TRONIC",
+        "bodyType": "wagon",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 2993,
+        "icePowerKw": 261,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 8
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская брошюра ALPINA/Nicole от 2020-05-18, PDF14 техническая таблица и PDF16 дата визуально сверены; архивная копия оригинала;2993см³, полная масса не указана, снаряжённая и нагрузка не сложены. Дизельный MHEV48V:261кВт — только ДВС;8кВт — максимальный boost стартер-генератора, не30-минутная мощность. Generic powerHp/powerKw, мощность системы и engineCode не назначены. Год относится к датированному исполнению, не к дате выпуска конкретной машины. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; trim; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; bodyType; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; fuel; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; powertrainKind; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; engineCc; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; icePowerKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; transmission; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "drive": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 5,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; drive; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          },
+          "motorPeakKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2020-05-18",
+            "sourceSha256": "706a049cc0a5421d23b5920a513b395fda1f4d440c728afc6d56d2d17ca1a86e",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; motorPeakKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2021,
+      "operation": "create",
+      "variantId": "6019cb80bfa8e93061294bea",
+      "trim": "S 3.0 Diesel MHEV Limousine Allrad 8AT SWITCH-TRONIC 3CA-3U40",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "patch": {
+        "trim": "S 3.0 Diesel MHEV Limousine Allrad 8AT SWITCH-TRONIC 3CA-3U40",
+        "bodyType": "sedan",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 2992,
+        "icePowerKw": 261,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 8,
+        "chassisCode": "3CA-3U40",
+        "grossVehicleWeightKg": 2165
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская брошюра ALPINA/Nicole от 2021-02-22, PDF14 техническая таблица и PDF16 дата визуально сверены; официальный хост, тип3CA-3U40,2992см³, полная масса2165/2215кг отдельно от снаряжённой1890/1940. Дизельный MHEV48V:261кВт — только ДВС;8кВт — максимальный boost стартер-генератора, не30-минутная мощность. Generic powerHp/powerKw, мощность системы и engineCode не назначены. Год относится к датированному исполнению, не к дате выпуска конкретной машины. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; trim; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "bodyType": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; bodyType; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "fuel": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; fuel; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "powertrainKind": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; powertrainKind; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "engineCc": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; engineCc; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "icePowerKw": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; icePowerKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "transmission": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; transmission; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "drive": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 5,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; drive; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "motorPeakKw": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; motorPeakKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "chassisCode": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; chassisCode; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; grossVehicleWeightKg; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2021,
+      "operation": "create",
+      "variantId": "92ef699ba7310a52024f5dd1",
+      "trim": "S 3.0 Diesel MHEV Touring Allrad 8AT SWITCH-TRONIC 3CA-3U40",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "patch": {
+        "trim": "S 3.0 Diesel MHEV Touring Allrad 8AT SWITCH-TRONIC 3CA-3U40",
+        "bodyType": "wagon",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 2992,
+        "icePowerKw": 261,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 8,
+        "chassisCode": "3CA-3U40",
+        "grossVehicleWeightKg": 2215
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская брошюра ALPINA/Nicole от 2021-02-22, PDF14 техническая таблица и PDF16 дата визуально сверены; официальный хост, тип3CA-3U40,2992см³, полная масса2165/2215кг отдельно от снаряжённой1890/1940. Дизельный MHEV48V:261кВт — только ДВС;8кВт — максимальный boost стартер-генератора, не30-минутная мощность. Generic powerHp/powerKw, мощность системы и engineCode не назначены. Год относится к датированному исполнению, не к дате выпуска конкретной машины. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; trim; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "bodyType": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; bodyType; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "fuel": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; fuel; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "powertrainKind": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; powertrainKind; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "engineCc": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; engineCc; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "icePowerKw": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; icePowerKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "transmission": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; transmission; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "drive": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 5,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; drive; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "motorPeakKw": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 9,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; motorPeakKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "chassisCode": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; chassisCode; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2021-02-22",
+            "sourceSha256": "dd787af57c4edc2a650d37659fc0df138aa7145e314d44d1b452938ddcaabbc5",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; grossVehicleWeightKg; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer publication on official host"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "309539928fab481c2f1fd81e",
+      "trim": "S 3.0 Diesel MHEV Limousine Allrad 8AT SWITCH-TRONIC LCI MY2023",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "patch": {
+        "trim": "S 3.0 Diesel MHEV Limousine Allrad 8AT SWITCH-TRONIC LCI MY2023",
+        "bodyType": "sedan",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 2993,
+        "icePowerKw": 261,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 8
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская брошюра ALPINA/Nicole от 2022-08-01, PDF14 техническая таблица и PDF16 дата визуально сверены; архивная копия оригинала;2993см³, полная масса не указана, снаряжённая и нагрузка не сложены. Дизельный MHEV48V:261кВт — только ДВС;8кВт — максимальный boost стартер-генератора, не30-минутная мощность. Generic powerHp/powerKw, мощность системы и engineCode не назначены. Файл издан2022, но официальный пресс-релиз25.05.2022 прямо относит обновление кMY2023; создаётся2023, не2022. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; trim; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; bodyType; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; fuel; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 13,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; powertrainKind; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; engineCc; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; icePowerKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; transmission; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "drive": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 6,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; drive; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "motorPeakKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 13,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Limousine; motorPeakKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          }
+        }
+      }
+    },
+    {
+      "modelId": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "year": 2023,
+      "operation": "create",
+      "variantId": "8039f238d7e7a927932f4b61",
+      "trim": "S 3.0 Diesel MHEV Touring Allrad 8AT SWITCH-TRONIC LCI MY2023",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expectedRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+      "patch": {
+        "trim": "S 3.0 Diesel MHEV Touring Allrad 8AT SWITCH-TRONIC LCI MY2023",
+        "bodyType": "wagon",
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "engineCc": 2993,
+        "icePowerKw": 261,
+        "transmission": "automatic",
+        "drive": "awd",
+        "motorPeakKw": 8
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская брошюра ALPINA/Nicole от 2022-08-01, PDF14 техническая таблица и PDF16 дата визуально сверены; архивная копия оригинала;2993см³, полная масса не указана, снаряжённая и нагрузка не сложены. Дизельный MHEV48V:261кВт — только ДВС;8кВт — максимальный boost стартер-генератора, не30-минутная мощность. Generic powerHp/powerKw, мощность системы и engineCode не назначены. Файл издан2022, но официальный пресс-релиз25.05.2022 прямо относит обновление кMY2023; создаётся2023, не2022. Статус review.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; trim; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "bodyType": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; bodyType; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "fuel": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; fuel; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "powertrainKind": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 13,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; powertrainKind; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "engineCc": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; engineCc; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "icePowerKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; icePowerKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "transmission": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 14,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; transmission; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "drive": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 6,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; drive; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          },
+          "motorPeakKw": {
+            "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2022_Alpina_D3S_catalog.pdf",
+            "checkedAt": "2026-10-22",
+            "effectiveAt": "2022-08-01",
+            "sourceSha256": "8713eb9d667ba8e05f6af46dc576b40f0906acdad8a8d262ff953e13ceb36ff9",
+            "pdfPage": 13,
+            "datePage": 16,
+            "selector": "BMW ALPINA D3 S Touring; motorPeakKw; diesel MHEV, ICE and electric boost kept separate",
+            "sourcePublisher": "ALPINA / Nicole Automobiles",
+            "sourceNature": "manufacturer-authored brochure on archival host",
+            "modelYearEvidence": {
+              "url": "https://files.alpina.co.jp/press/img_pdf/images/BMW_ALPINA_D3S_PRESS_2022.pdf",
+              "effectiveAt": "2022-05-25",
+              "sourceSha256": "0272ae6033c4122651d17a9515d9f2fd1dabaacaf3e95b9928c319c185696eda",
+              "pdfPage": 2,
+              "selector": "explicit 2023 model year; introduction planned early2023; not2022 calendar-year technical identity"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

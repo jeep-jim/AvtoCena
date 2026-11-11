@@ -1,0 +1,561 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+  "entries": [
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f95ceb79d43685224a299759",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Max",
+      "expectedDigest": "c5e1accb27d7480bb8aed8cfee9279c26a974e76a66a0a361b13b9b04b97cb67",
+      "patch": {
+        "grossVehicleWeightKg": 2920
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2920 кг для SKE6501DREEVA1F. Таблица батарей, стр. 410: 37 кВт·ч. Заводская конфигурация связывает EREV Max с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Max; SKE6501DREEVA1F; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "90641a1cfb521cd2c45d7689",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Ultra",
+      "expectedDigest": "a2780253cb1bfdf4626765b425967e27103c9747df8a3a62a98fbf59e602a48d",
+      "patch": {
+        "grossVehicleWeightKg": 2940
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2940 кг для SKE6501DREEVA2F. Таблица батарей, стр. 410: 53.4 кВт·ч. Заводская конфигурация связывает EREV Ultra с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Ultra; SKE6501DREEVA2F; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "8c34f3907fa45adb900ed6c0",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EV Ultra",
+      "expectedDigest": "0fb5e1a10387f45f98e41363eb73d958dcfaa86ea395f16655cb77f98383b2b7",
+      "patch": {
+        "grossVehicleWeightKg": 2940
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+        "pages": [
+          406,
+          408
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 406: полная масса 2940 кг для SKE6501DBEVA1F. Таблица батарей, стр. 408: 100 кВт·ч. Заводская конфигурация связывает EV Ultra с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 406,
+            "selector": "EV Ultra; SKE6501DBEVA1F; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "478432305a9118c46fd3e4f7",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EV Max",
+      "expectedDigest": "98eb4035d63a64c646421fc5dd427385b92fc90194ceaaaa19d24cef973b3ccf",
+      "patch": {
+        "grossVehicleWeightKg": 2885
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+        "pages": [
+          406,
+          408
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 406: полная масса 2885 кг для SKE6501DBEVR2 / SKE6501DBEVR3. Таблица батарей, стр. 408: 81 кВт·ч. Заводская конфигурация связывает EV Max с этой батареей и приводом rwd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 406,
+            "selector": "EV Max; SKE6501DBEVR2 / SKE6501DBEVR3; 81 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "77adb4c03bdb1412a28109c8",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EV Max+ Long Range",
+      "expectedDigest": "7f5be633429d42ec8e137d01cc848ee5ae87c8d093219daba2308c0b947a1842",
+      "patch": {
+        "grossVehicleWeightKg": 2835
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+        "pages": [
+          406,
+          408
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 406: полная масса 2835 кг для SKE6501DBEVR1. Таблица батарей, стр. 408: 100 кВт·ч. Заводская конфигурация связывает EV Max+ Long Range с этой батареей и приводом rwd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 406,
+            "selector": "EV Max+ Long Range; SKE6501DBEVR1; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "235609122d33377c27a6c21a",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Max+ Long Range",
+      "expectedDigest": "6a9f78aec7bc799eb6cedbb05d4aefa2b0be49037d85095fac3263335edaa766",
+      "patch": {
+        "grossVehicleWeightKg": 2865
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2865 кг для SKE6501DREEVR1. Таблица батарей, стр. 410: 53.4 кВт·ч. Заводская конфигурация связывает EREV Max+ Long Range с этой батареей и приводом rwd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Max+ Long Range; SKE6501DREEVR1; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f76c9efd82f7b91a385b16e0",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EV Max+ Long Range",
+      "expectedDigest": "6fa8c1e2b1c577e647b885b5a0bc53c2732f1d2c2b9d6b86ac6e7644ea5201e7",
+      "patch": {
+        "grossVehicleWeightKg": 2835
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+        "pages": [
+          406,
+          408
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 406: полная масса 2835 кг для SKE6501DBEVR1. Таблица батарей, стр. 408: 100 кВт·ч. Заводская конфигурация связывает EV Max+ Long Range с этой батареей и приводом rwd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 406,
+            "selector": "EV Max+ Long Range; SKE6501DBEVR1; 100 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "49caade874ae04290cb92097",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EV Max+",
+      "expectedDigest": "9322e9f0d46d535d065e41a23898674346121a2ffe07b9a8dfd56a51056cdfcc",
+      "patch": {
+        "grossVehicleWeightKg": 2885
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+        "pages": [
+          406,
+          408
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 406: полная масса 2885 кг для SKE6501DBEVR2 / SKE6501DBEVR3. Таблица батарей, стр. 408: 81 кВт·ч. Заводская конфигурация связывает EV Max+ с этой батареей и приводом rwd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 406,
+            "selector": "EV Max+; SKE6501DBEVR2 / SKE6501DBEVR3; 81 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "a4888807696fe9d693d3f3b7",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Max+ Long Range",
+      "expectedDigest": "e6856eae7dbf1b96c04de1293a326f6b7ba162131569677430143ba4e6e5ece4",
+      "patch": {
+        "grossVehicleWeightKg": 2865
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2865 кг для SKE6501DREEVR1. Таблица батарей, стр. 410: 53.4 кВт·ч. Заводская конфигурация связывает EREV Max+ Long Range с этой батареей и приводом rwd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Max+ Long Range; SKE6501DREEVR1; 53.4 kWh; rwd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f43a569e298d5682ed842aef",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EV Ultra",
+      "expectedDigest": "ca8df60d13aa4ad43879f44ab2730ce89ea2ba41dd18bc53b9aa7fdbd1b82f06",
+      "patch": {
+        "grossVehicleWeightKg": 2940
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "a3128e44685bf0f43eee416318605045934d2e703340a2061f32ad5baeaf3fb9",
+        "pages": [
+          406,
+          408
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 406: полная масса 2940 кг для SKE6501DBEVA1F. Таблица батарей, стр. 408: 100 кВт·ч. Заводская конфигурация связывает EV Ultra с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 406,
+            "selector": "EV Ultra; SKE6501DBEVA1F; 100 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "346c7414d8e9062518476566",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Ultra",
+      "expectedDigest": "cc545c9c3e188c687a3c689c926710d12022094ffcfc0e47b47d2dafc905d927",
+      "patch": {
+        "grossVehicleWeightKg": 2940
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2940 кг для SKE6501DREEVA2F. Таблица батарей, стр. 410: 53.4 кВт·ч. Заводская конфигурация связывает EREV Ultra с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Ultra; SKE6501DREEVA2F; 53.4 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "12ea4ae30cca59af81e4b491",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Max",
+      "expectedDigest": "300539e9380df1a4acc84c5e65a37bd98b3efb5f0ce61236c1f7002a947d3845",
+      "patch": {
+        "grossVehicleWeightKg": 2920
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2920 кг для SKE6501DREEVA1F. Таблица батарей, стр. 410: 37 кВт·ч. Заводская конфигурация связывает EREV Max с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Max; SKE6501DREEVA1F; 37 kWh; awd"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "abb130ef6af08f54f7a1ae8a",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Max+",
+      "expectedRevision": "4093550b-5e8e-4597-9511-ebbb1f78dee0",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "EREV Max+",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "drive": "awd",
+        "batteryKwh": 37,
+        "engineCc": 1496,
+        "engineCode": "M15T",
+        "grossVehicleWeightKg": 2920
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "batteryKwh",
+        "engineCc",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "checkedAt": "2026-10-22",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "pages": [
+          408,
+          409,
+          410
+        ],
+        "supportingUrls": [
+          "https://aito.auto/model/m6/configuration/",
+          "https://www.seres.cn/p/company.html"
+        ],
+        "statement": "Руководство AITO M6, стр. 408: полная масса 2920 кг для SKE6501DREEVA1F. Таблица батарей, стр. 410: 37 кВт·ч. Заводская конфигурация связывает EREV Max+ с этой батареей и приводом awd. Снаряжённая масса не использована; 30-минутная мощность не подтверждена.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aito.auto/model/m6/configuration/",
+            "checkedAt": "2026-10-22",
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "fuel": {
+            "url": "https://aito.auto/model/m6/configuration/",
+            "checkedAt": "2026-10-22",
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "powertrainKind": {
+            "url": "https://aito.auto/model/m6/configuration/",
+            "checkedAt": "2026-10-22",
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "drive": {
+            "url": "https://aito.auto/model/m6/configuration/",
+            "checkedAt": "2026-10-22",
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "batteryKwh": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 410,
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "engineCc": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 409,
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "engineCode": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 409,
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          },
+          "grossVehicleWeightKg": {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "checkedAt": "2026-10-22",
+            "page": 408,
+            "selector": "EREV Max+; SKE6501DREEVA1F; 37 kWh; awd"
+          }
+        }
+      }
+    }
+  ]
+}

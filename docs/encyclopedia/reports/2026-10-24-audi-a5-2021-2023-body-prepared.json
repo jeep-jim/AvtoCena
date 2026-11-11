@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T11:03:19.881Z",
+  "batch": "research-2026-10-24-audi-a5-2021-2023-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-24-audi-a5-2021-2023-body.json",
+  "batchSha256": "c6d6d7b2ff5b8c120c69f444e2fc1bd71d212bbd3e5fbf0af1afcbf0a686098d",
+  "state": "prepared_waiting_release_snapshot",
+  "variants": 32,
+  "fields": 32,
+  "newVariants": 0,
+  "counts": {
+    "convertible": 19,
+    "coupe": 13
+  },
+  "years": {
+    "2021": 12,
+    "2022": 17,
+    "2023": 3
+  },
+  "reviewedRows": 253,
+  "sourceDocuments": {
+    "coupe": {
+      "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:bda0118e-9266-4260-b594-99c56e86ea80/original/as/Audi_A5__Coupe_2016-2024_2d_GD_EN.pdf",
+      "sha256": "955851f14b0b14b633cdbfbcdb89127ea5a65f36bdd8d85648d08e807f4a09bc",
+      "bytes": 2470103,
+      "edition": "08/2020",
+      "pages": [
+        1,
+        2
+      ]
+    },
+    "cabrio": {
+      "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1da47097-ca3b-40c7-aef3-1df2bfd8d7de/original/as/Audi_A5__Cabrio_2017-2024_2d_GD_EN.pdf",
+      "sha256": "2f0db85d57ac71e8dde752e7086393dddf43f8e09c112fa67c978b7a031444f8",
+      "bytes": 1668445,
+      "edition": "08/2020",
+      "pages": [
+        1,
+        2
+      ]
+    }
+  },
+  "preflight": {
+    "workflow": 40088003570,
+    "job": 120854766351,
+    "conclusion": "success",
+    "checkedAt": "2026-10-24T10:58:58.759Z",
+    "fullDigests": 32
+  },
+  "validation": {
+    "guardTests": 11,
+    "passed": true
+  },
+  "applyRequested": false,
+  "apiReadback": false,
+  "includedInIndex": false,
+  "releaseCoordination": {
+    "workflow": 40085909587,
+    "job": 120854944005,
+    "snapshotReady": false,
+    "duplicateDeployRequested": false,
+    "preparePrivateIndex": "in_progress",
+    "membership": "pending"
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-24-audi-a5-2021-2023-remaining.json",
+  "allModelsComplete": false,
+  "preApplyAnonymousReadback": {
+    "passed": true,
+    "revision": "043cc960-7b74-46d1-8809-e5a531067f5b",
+    "rowsUnchanged": 253
+  },
+  "publicParity": {
+    "report": "docs/encyclopedia/reports/2026-10-24-audi-a5-2021-2023-prepared-public-parity.json",
+    "offers": 7,
+    "comparisons": 91,
+    "passed": true,
+    "newBatchActivationProved": false
+  },
+  "nextAction": "После SUCCESS private index/membership40085909587 проверить свежие CAS и применить существующую32-партию; затем независимыйAPIreadback."
+}

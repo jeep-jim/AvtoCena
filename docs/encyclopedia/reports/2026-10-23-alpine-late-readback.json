@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-10-22T19:04:25.338869+00:00",
+  "batch": "research-2026-10-23-alpine-a110-2024-2025-a290-2024",
+  "passed": true,
+  "rows": [
+    {
+      "model": "A110",
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "beforeRevision": "906f64a4-77aa-4c7d-9869-ec3ddfddfd2d",
+      "afterRevision": "07fc41a8-9194-4b42-b00c-ba429ce20b56",
+      "beforeVariants": 44,
+      "afterVariants": 51,
+      "newVariants": 7,
+      "confirmedFields": 80,
+      "preservedUnchangedVariants": 44,
+      "duplicatesAdded": 0,
+      "manualWrites": 0,
+      "passed": true
+    },
+    {
+      "model": "A290",
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "beforeRevision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "afterRevision": "60256787-10cf-42f5-9dbd-b988727e8324",
+      "beforeVariants": 7,
+      "afterVariants": 12,
+      "newVariants": 5,
+      "confirmedFields": 50,
+      "preservedUnchangedVariants": 7,
+      "duplicatesAdded": 0,
+      "manualWrites": 0,
+      "passed": true
+    }
+  ]
+}

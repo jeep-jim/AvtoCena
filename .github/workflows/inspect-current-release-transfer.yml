@@ -1,0 +1,39 @@
+name: Inspect current release transfer once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-current-release-transfer.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read exact incoming archive progress without changing server data
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -eu
+          for sample in 1 2; do
+            date -u +%FT%TZ
+            df -B1 /
+            for file in /opt/avtocena/staging/incoming/41084069907-1/avtocena-image.tar.gz /opt/avtocena/staging/incoming/41084069907-1/avtocena-image.tar.gz.sha256; do
+              if test -f "$file"; then stat --format='%n bytes=%s modified=%y' "$file"; else echo "not_present $file"; fi
+            done
+            docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' --filter reference=avtocena-regcloud:f6cc2d81f44ed9b7b4d0412ef6b5940df2c740ac
+            ps -eo comm=,stat=,etime= | awk '$1 ~ /^(scp|sftp-server|gzip|docker)$/ {print}'
+            if test "$sample" = 1; then sleep 30; fi
+          done
+          REMOTE

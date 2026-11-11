@@ -1,0 +1,8251 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 9,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "hillman:impsuper",
+      "make": "Hillman",
+      "model": "Imp Super",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hillman:minx",
+      "make": "Hillman",
+      "model": "Minx",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hillman:superminx",
+      "make": "Hillman",
+      "model": "Super Minx",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:acadia",
+      "make": "Holden",
+      "model": "Acadia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:astra",
+      "make": "Holden",
+      "model": "Astra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:barina",
+      "make": "Holden",
+      "model": "Barina",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:berlina",
+      "make": "Holden",
+      "model": "Berlina",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:calais",
+      "make": "Holden",
+      "model": "Calais",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:captiva",
+      "make": "Holden",
+      "model": "Captiva",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:colorado",
+      "make": "Holden",
+      "model": "Colorado",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:commodore",
+      "make": "Holden",
+      "model": "Commodore",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:crewman",
+      "make": "Holden",
+      "model": "Crewman",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:cruze",
+      "make": "Holden",
+      "model": "Cruze",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:equinox",
+      "make": "Holden",
+      "model": "Equinox",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:gts",
+      "make": "Holden",
+      "model": "Gts",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:hsv",
+      "make": "Holden",
+      "model": "Hsv",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:kingswood",
+      "make": "Holden",
+      "model": "Kingswood",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:malibu",
+      "make": "Holden",
+      "model": "Malibu",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:maloo",
+      "make": "Holden",
+      "model": "Maloo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:monaro",
+      "make": "Holden",
+      "model": "Monaro",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:spark",
+      "make": "Holden",
+      "model": "Spark",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:torana",
+      "make": "Holden",
+      "model": "Torana",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:trailblazer",
+      "make": "Holden",
+      "model": "Trailblazer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "holden:trax",
+      "make": "Holden",
+      "model": "Trax",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "honda:accord",
+      "make": "Honda",
+      "model": "Accord",
+      "aliases": [
+        "ACCORD",
+        "アコード",
+        "アコード ハイブリッド"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/accord",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Accord"
+      }
+    },
+    {
+      "key": "honda:accord2",
+      "make": "Honda",
+      "model": "Accord 2",
+      "aliases": [
+        "ACCORD 2.4"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/accord-2",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Accord 2"
+      }
+    },
+    {
+      "key": "honda:accordaerodeck",
+      "make": "Honda",
+      "model": "Accord Aerodeck",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordcrosstour",
+      "make": "Honda",
+      "model": "Accord Crosstour",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accorddx",
+      "make": "Honda",
+      "model": "Accord Dx",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordeuror",
+      "make": "Honda",
+      "model": "Accord Euro-R",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordex",
+      "make": "Honda",
+      "model": "Accord EX",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordlx",
+      "make": "Honda",
+      "model": "Accord LX",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordsport",
+      "make": "Honda",
+      "model": "Accord Sport",
+      "aliases": [
+        "ACCORD SPORT"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/accord-sport",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Accord Sport"
+      }
+    },
+    {
+      "key": "honda:accordsporttouring",
+      "make": "Honda",
+      "model": "Accord Sport/Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordtouring",
+      "make": "Honda",
+      "model": "Accord Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordtyper",
+      "make": "Honda",
+      "model": "Accord Type R",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordv6",
+      "make": "Honda",
+      "model": "Accord V6",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:accordwagon",
+      "make": "Honda",
+      "model": "Accord Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:acty",
+      "make": "Honda",
+      "model": "Acty",
+      "aliases": [
+        "ACTY"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/acty",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Acty"
+      }
+    },
+    {
+      "key": "honda:acura",
+      "make": "Honda",
+      "model": "Acura",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:aerodeck",
+      "make": "Honda",
+      "model": "Aerodeck",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:airwave",
+      "make": "Honda",
+      "model": "Airwave",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:ballade",
+      "make": "Honda",
+      "model": "Ballade",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:beat",
+      "make": "Honda",
+      "model": "Beat",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:city",
+      "make": "Honda",
+      "model": "City",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civic",
+      "make": "Honda",
+      "model": "Civic",
+      "aliases": [
+        "シビック"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2022,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/civic",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Civic"
+      }
+    },
+    {
+      "key": "honda:civic16vti",
+      "make": "Honda",
+      "model": "Civic 1.6VTI",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civic3",
+      "make": "Honda",
+      "model": "Civic 3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civic4",
+      "make": "Honda",
+      "model": "Civic 4",
+      "aliases": [
+        "CIVIC 4 DR"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/civic-4",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Civic 4"
+      }
+    },
+    {
+      "key": "honda:civic4d",
+      "make": "Honda",
+      "model": "Civic 4D",
+      "aliases": [
+        "CIVIC 4D 1.5 ELEGANC",
+        "CIVIC 4D 1.5 EXECUTI",
+        "CIVIC 4D 15 ELEGANC",
+        "CIVIC 4D 15 EXECUTI",
+        "CIVIC 4D SPORT"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/civic-4d",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Civic 4D"
+      }
+    },
+    {
+      "key": "honda:civic5",
+      "make": "Honda",
+      "model": "Civic 5",
+      "aliases": [
+        "CIVIC / 5 VRAT / 2.0 / HEV",
+        "CIVIC / 5 VRAT / 2.0 / TYPE R",
+        "CIVIC / 5 VRAT / 20 / HEV",
+        "CIVIC 5 TUERER",
+        "CIVIC 5 VRAT 2.0 HEV",
+        "CIVIC 5 VRAT 2.0 TYPE R",
+        "CIVIC 5-DORS"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/civic-5",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Civic 5"
+      }
+    },
+    {
+      "key": "honda:civicaerodeck",
+      "make": "Honda",
+      "model": "Civic Aerodeck",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civiccrx",
+      "make": "Honda",
+      "model": "Civic Crx",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civiccrxesi",
+      "make": "Honda",
+      "model": "Civic Crx Esi",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civicdelsol",
+      "make": "Honda",
+      "model": "Civic Del Sol",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civicex",
+      "make": "Honda",
+      "model": "Civic EX",
+      "aliases": [
+        "CIVIC EX I-DTEC",
+        "CIVIC EX I-DTEC AUTO",
+        "CIVIC EX SPORT LINE VTEC",
+        "CIVIC EX SPORT LINE VTEC CVT",
+        "CIVIC EX VTEC",
+        "CIVIC EX VTEC CVT"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/civic-ex",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Civic EX"
+      }
+    },
+    {
+      "key": "honda:civichx",
+      "make": "Honda",
+      "model": "Civic Hx",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civicshuttle",
+      "make": "Honda",
+      "model": "Civic Shuttle",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civicsi",
+      "make": "Honda",
+      "model": "Civic Si",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civicsir",
+      "make": "Honda",
+      "model": "Civic Sir",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:civictyper",
+      "make": "Honda",
+      "model": "Civic Type R",
+      "aliases": [
+        "CIVIC TYPE R",
+        "CIVIC TYPE-R",
+        "HONDA CIVIC TYPE R"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/civic-type-r",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Civic Type R"
+      }
+    },
+    {
+      "key": "honda:civicwagon",
+      "make": "Honda",
+      "model": "Civic Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:clarity",
+      "make": "Honda",
+      "model": "Clarity",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:concerto",
+      "make": "Honda",
+      "model": "Concerto",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:coupe",
+      "make": "Honda",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:cr",
+      "make": "Honda",
+      "model": "Cr",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:crv",
+      "make": "Honda",
+      "model": "CR-V",
+      "aliases": [
+        "CR-V",
+        "CR-V / 1.5 / 2WD",
+        "CR-V / 1.5 / 4WD",
+        "CR-V / 1.5 / 4WD / CVT",
+        "CR-V / 2.0 / 2WD / E-CVT / HIBRID",
+        "CR-V / 2.0 / 4WD / E-CVT / HIBRID",
+        "CR-V / 2.0 / FHEV / AVT / 2WD",
+        "CR-V / 2.0 / FHEV / AVT / 4WD",
+        "CR-V / 2.0 / PHEV / AVT / 2WD",
+        "CR-V 2WD 1.5 ELEGANC",
+        "CR-V 4WD 1.5 ELEGANC",
+        "CR-V 4WD 1.5 LIFESTY",
+        "CR-V 4WD 15 EXECUTI",
+        "CR-V E:HEV",
+        "CR-V E:HEV 2WD 2.0 C",
+        "CR-V E:HEV 2WD 2.0 E",
+        "CR-V E:HEV 2WD 2.0 L",
+        "CR-V E:HEV 2WD 2.0 S",
+        "CR-V E:HEV 4WD 2.0 A",
+        "CR-V E:HEV 4WD 2.0 E",
+        "CR-V E:HEV 4WD 2.0 L",
+        "CR-V E:HEV 4WD 2.0 S",
+        "CR-V E:PHEV",
+        "CR-V HYBRID",
+        "CR-V HYBRID 2WD 2.0",
+        "CR-V HYBRID 4WD 2.0",
+        "CR-V PHEV 2.0 ADVANC",
+        "CR-V S I-MMD 4X2 CVT",
+        "CR-V S I-VTEC 4X2",
+        "CR-V SE I-MMD 4X2 CVT",
+        "CR-V SE I-MMD CVT",
+        "CR-V SE I-VTEC",
+        "CR-V SE I-VTEC 4X2",
+        "CR-V SE I-VTEC CVT",
+        "CR-V SPORT HYBRID",
+        "CR-V SPORT LINE I-MMD CVT",
+        "CR-V SR I-MMD 4X2 CVT",
+        "CR-V SR I-MMD CVT",
+        "CR-V SR I-VTEC",
+        "CR-V SR I-VTEC CVT",
+        "HONDA CR V",
+        "HONDA CR-V AWD"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/cr-v",
+        "canonicalMake": "Honda",
+        "canonicalModel": "CR-V"
+      }
+    },
+    {
+      "key": "honda:crvex",
+      "make": "Honda",
+      "model": "Cr-V EX",
+      "aliases": [
+        "CR-V EX I-MMD CVT",
+        "CR-V EX I-VTEC",
+        "CR-V EX I-VTEC CVT"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/cr-v-ex",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Cr-V EX"
+      }
+    },
+    {
+      "key": "honda:crvtouring",
+      "make": "Honda",
+      "model": "Cr-V Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:crx",
+      "make": "Honda",
+      "model": "CR-X",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:crz",
+      "make": "Honda",
+      "model": "CR-Z",
+      "aliases": [
+        "CR-Z"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/cr-z",
+        "canonicalMake": "Honda",
+        "canonicalModel": "CR-Z"
+      }
+    },
+    {
+      "key": "honda:crossroad",
+      "make": "Honda",
+      "model": "Crossroad",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:crosstour",
+      "make": "Honda",
+      "model": "Crosstour",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:crxdelsol",
+      "make": "Honda",
+      "model": "Crx Del Sol",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:delsol",
+      "make": "Honda",
+      "model": "Del Sol",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:delsolsi",
+      "make": "Honda",
+      "model": "Del Sol Si",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:e",
+      "make": "Honda",
+      "model": "E",
+      "aliases": [
+        "HONDA E",
+        "Honda e"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/e",
+        "canonicalMake": "Honda",
+        "canonicalModel": "E"
+      }
+    },
+    {
+      "key": "honda:eadvance",
+      "make": "Honda",
+      "model": "E Advance",
+      "aliases": [
+        "E ADVANCE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/e-advance",
+        "canonicalMake": "Honda",
+        "canonicalModel": "E Advance"
+      }
+    },
+    {
+      "key": "honda:en1",
+      "make": "Honda",
+      "model": "E:N1",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:eny1",
+      "make": "Honda",
+      "model": "E:NY1",
+      "aliases": [
+        "E NY1",
+        "HONDA E NY1"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/e-ny1",
+        "canonicalMake": "Honda",
+        "canonicalModel": "E:NY1"
+      }
+    },
+    {
+      "key": "honda:edix",
+      "make": "Honda",
+      "model": "Edix",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:element",
+      "make": "Honda",
+      "model": "Element",
+      "aliases": [
+        "ELEMENT"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/element",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Element"
+      }
+    },
+    {
+      "key": "honda:elysion",
+      "make": "Honda",
+      "model": "Elysion",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:fit",
+      "make": "Honda",
+      "model": "Fit",
+      "aliases": [
+        "フィット",
+        "FIT"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2001,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/fit",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Fit"
+      }
+    },
+    {
+      "key": "honda:fitshuttle",
+      "make": "Honda",
+      "model": "FIT SHUTTLE",
+      "aliases": [
+        "フィット シャトル"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/fit-shuttle",
+        "canonicalMake": "Honda",
+        "canonicalModel": "FIT SHUTTLE"
+      }
+    },
+    {
+      "key": "honda:frv",
+      "make": "Honda",
+      "model": "FR-V",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:freed",
+      "make": "Honda",
+      "model": "Freed",
+      "aliases": [
+        "FREED",
+        "FREED+",
+        "フリード",
+        "フリード スパイク"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "my",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/freed",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Freed"
+      }
+    },
+    {
+      "key": "honda:grace",
+      "make": "Honda",
+      "model": "Grace",
+      "aliases": [
+        "GRACE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/grace",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Grace"
+      }
+    },
+    {
+      "key": "honda:hrv",
+      "make": "Honda",
+      "model": "HR-V",
+      "aliases": [
+        "HRV"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/hr-v",
+        "canonicalMake": "Honda",
+        "canonicalModel": "HR-V"
+      }
+    },
+    {
+      "key": "honda:insight",
+      "make": "Honda",
+      "model": "Insight",
+      "aliases": [
+        "INSIGHT",
+        "インサイト"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/insight",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Insight"
+      }
+    },
+    {
+      "key": "honda:insighttouring",
+      "make": "Honda",
+      "model": "Insight Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:inspire",
+      "make": "Honda",
+      "model": "Inspire",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:integra",
+      "make": "Honda",
+      "model": "Integra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:integratyper",
+      "make": "Honda",
+      "model": "Integra Type R",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:jade",
+      "make": "Honda",
+      "model": "Jade",
+      "aliases": [
+        "JADE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/jade",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Jade"
+      }
+    },
+    {
+      "key": "honda:jazz",
+      "make": "Honda",
+      "model": "Jazz",
+      "aliases": [
+        "JAZZ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/jazz",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Jazz"
+      }
+    },
+    {
+      "key": "honda:jazzluxe",
+      "make": "Honda",
+      "model": "Jazz Luxe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:lagreat",
+      "make": "Honda",
+      "model": "Lagreat",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:legend",
+      "make": "Honda",
+      "model": "Legend",
+      "aliases": [
+        "LEGEND"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/legend",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Legend"
+      }
+    },
+    {
+      "key": "honda:logo",
+      "make": "Honda",
+      "model": "Logo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:mobilio",
+      "make": "Honda",
+      "model": "Mobilio",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:nbox",
+      "make": "Honda",
+      "model": "N-BOX",
+      "aliases": [
+        "N BOX",
+        "エヌボックス",
+        "N-BOX +"
+      ],
+      "bodyTypes": [
+        "Kei minivan",
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-box",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-BOX"
+      }
+    },
+    {
+      "key": "honda:nboxslash",
+      "make": "Honda",
+      "model": "N-BOX SLASH",
+      "aliases": [
+        "N BOX SLASH",
+        "N-BOX SLASH"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-box-slash",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-BOX SLASH"
+      }
+    },
+    {
+      "key": "honda:none",
+      "make": "Honda",
+      "model": "N-ONE",
+      "aliases": [
+        "N ONE",
+        "エヌワン",
+        "N-ONE"
+      ],
+      "bodyTypes": [
+        "Kei hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-one",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-ONE"
+      }
+    },
+    {
+      "key": "honda:nonee",
+      "make": "Honda",
+      "model": "N-ONE e:",
+      "aliases": [
+        "N ONE e",
+        "エヌワン イー"
+      ],
+      "bodyTypes": [
+        "Kei passenger car"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-one-e",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-ONE e:"
+      }
+    },
+    {
+      "key": "honda:nvan",
+      "make": "Honda",
+      "model": "N-VAN",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-van",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-VAN"
+      }
+    },
+    {
+      "key": "honda:nvane",
+      "make": "Honda",
+      "model": "N-VAN e:",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-van-e",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-VAN e:"
+      }
+    },
+    {
+      "key": "honda:nwgn",
+      "make": "Honda",
+      "model": "N-WGN",
+      "aliases": [
+        "N WGN",
+        "エヌワゴン",
+        "エヌ ワゴン",
+        "N-WGN"
+      ],
+      "bodyTypes": [
+        "Kei height wagon",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/n-wgn",
+        "canonicalMake": "Honda",
+        "canonicalModel": "N-WGN"
+      }
+    },
+    {
+      "key": "honda:n360",
+      "make": "Honda",
+      "model": "N360",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:n600",
+      "make": "Honda",
+      "model": "N600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:nsx",
+      "make": "Honda",
+      "model": "Nsx",
+      "aliases": [
+        "NSX"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/nsx",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Nsx"
+      }
+    },
+    {
+      "key": "honda:odyssey",
+      "make": "Honda",
+      "model": "Odyssey",
+      "aliases": [
+        "ODYSSEY",
+        "オデッセイ"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/odyssey",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Odyssey"
+      }
+    },
+    {
+      "key": "honda:odysseyabsolute",
+      "make": "Honda",
+      "model": "Odyssey Absolute",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:odysseyex",
+      "make": "Honda",
+      "model": "Odyssey EX",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:odysseyexl",
+      "make": "Honda",
+      "model": "Odyssey EX-L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:odysseytouring",
+      "make": "Honda",
+      "model": "Odyssey Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:p7",
+      "make": "Honda",
+      "model": "P7",
+      "aliases": [
+        "本田 P7"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/p7",
+        "canonicalMake": "Honda",
+        "canonicalModel": "P7"
+      }
+    },
+    {
+      "key": "honda:passport",
+      "make": "Honda",
+      "model": "Passport",
+      "aliases": [
+        "HONDA PASSPORT",
+        "PASSPORT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/passport",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Passport"
+      }
+    },
+    {
+      "key": "honda:pilot",
+      "make": "Honda",
+      "model": "Pilot",
+      "aliases": [
+        "HONDA PILOT",
+        "PILOT"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/pilot",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Pilot"
+      }
+    },
+    {
+      "key": "honda:prelude",
+      "make": "Honda",
+      "model": "Prelude",
+      "aliases": [
+        "PRELUDE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/prelude",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Prelude"
+      }
+    },
+    {
+      "key": "honda:prelude20i",
+      "make": "Honda",
+      "model": "Prelude 2.0I",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:preludeex",
+      "make": "Honda",
+      "model": "Prelude EX",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:prologue",
+      "make": "Honda",
+      "model": "Prologue",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:prologueex",
+      "make": "Honda",
+      "model": "Prologue EX",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:quintet",
+      "make": "Honda",
+      "model": "Quintet",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:ridgeline",
+      "make": "Honda",
+      "model": "Ridgeline",
+      "aliases": [],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:smx",
+      "make": "Honda",
+      "model": "S-MX",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:s2000",
+      "make": "Honda",
+      "model": "S2000",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:s600",
+      "make": "Honda",
+      "model": "S600",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:s660",
+      "make": "Honda",
+      "model": "S660",
+      "aliases": [
+        "S660"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/s660",
+        "canonicalMake": "Honda",
+        "canonicalModel": "S660"
+      }
+    },
+    {
+      "key": "honda:s660beta",
+      "make": "Honda",
+      "model": "S660 Beta",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:s7",
+      "make": "Honda",
+      "model": "S7",
+      "aliases": [
+        "本田 S7"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/s7",
+        "canonicalMake": "Honda",
+        "canonicalModel": "S7"
+      }
+    },
+    {
+      "key": "honda:s800",
+      "make": "Honda",
+      "model": "S800",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:saber",
+      "make": "Honda",
+      "model": "Saber",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:shuttle",
+      "make": "Honda",
+      "model": "Shuttle",
+      "aliases": [
+        "SHUTTLE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/shuttle",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Shuttle"
+      }
+    },
+    {
+      "key": "honda:sports",
+      "make": "Honda",
+      "model": "Sports",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:stepwgn",
+      "make": "Honda",
+      "model": "STEP WGN",
+      "aliases": [
+        "ステップワゴン"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/step-wgn",
+        "canonicalMake": "Honda",
+        "canonicalModel": "STEP WGN"
+      }
+    },
+    {
+      "key": "honda:stepwagon",
+      "make": "Honda",
+      "model": "Stepwagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:stream",
+      "make": "Honda",
+      "model": "Stream",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:torneo",
+      "make": "Honda",
+      "model": "Torneo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:vamos",
+      "make": "Honda",
+      "model": "VAMOS",
+      "aliases": [
+        "VAMOS"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/vamos",
+        "canonicalMake": "Honda",
+        "canonicalModel": "VAMOS"
+      }
+    },
+    {
+      "key": "honda:vamoshobio",
+      "make": "Honda",
+      "model": "VAMOS Hobio",
+      "aliases": [
+        "VAMOS Hobio"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/vamos-hobio",
+        "canonicalMake": "Honda",
+        "canonicalModel": "VAMOS Hobio"
+      }
+    },
+    {
+      "key": "honda:vezel",
+      "make": "Honda",
+      "model": "Vezel",
+      "aliases": [
+        "VEZEL",
+        "ヴェゼル"
+      ],
+      "bodyTypes": [
+        "Compact SUV",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/vezel",
+        "canonicalMake": "Honda",
+        "canonicalModel": "Vezel"
+      }
+    },
+    {
+      "key": "honda:vigor",
+      "make": "Honda",
+      "model": "Vigor",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:wrv",
+      "make": "Honda",
+      "model": "WR-V",
+      "aliases": [
+        "ダブリューアールブイ",
+        "Honda WR-V",
+        "WR-V"
+      ],
+      "bodyTypes": [
+        "Compact SUV",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": 2017,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/wr-v",
+        "canonicalMake": "Honda",
+        "canonicalModel": "WR-V"
+      }
+    },
+    {
+      "key": "honda:zest",
+      "make": "Honda",
+      "model": "Zest",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "honda:zrv",
+      "make": "Honda",
+      "model": "ZR-V",
+      "aliases": [
+        "ZR-V"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": "honda/zr-v",
+        "canonicalMake": "Honda",
+        "canonicalModel": "ZR-V"
+      }
+    },
+    {
+      "key": "honda:zrvsport",
+      "make": "Honda",
+      "model": "ZR-V Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "modelId": null,
+        "canonicalMake": "Honda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hongqi:ehs9",
+      "make": "Hongqi",
+      "model": "E-HS9",
+      "aliases": [
+        "HONGQI E-HS9"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hongqi",
+        "modelId": "hongqi/e-hs9",
+        "canonicalMake": "Hongqi",
+        "canonicalModel": "E-HS9"
+      }
+    },
+    {
+      "key": "hotchkiss:480",
+      "make": "Hotchkiss",
+      "model": "480",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hudson:commodore",
+      "make": "Hudson",
+      "model": "Commodore",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hudson:hornet",
+      "make": "Hudson",
+      "model": "Hornet",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hudson:pacemaker",
+      "make": "Hudson",
+      "model": "Pacemaker",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hudson:super",
+      "make": "Hudson",
+      "model": "Super",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hudson:supersix",
+      "make": "Hudson",
+      "model": "Super Six",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hudson:wasp",
+      "make": "Hudson",
+      "model": "Wasp",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:12",
+      "make": "Humber",
+      "model": "12",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:hawk",
+      "make": "Humber",
+      "model": "Hawk",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:humberette",
+      "make": "Humber",
+      "model": "Humberette",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:imperial",
+      "make": "Humber",
+      "model": "Imperial",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:pullman",
+      "make": "Humber",
+      "model": "Pullman",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:sceptre",
+      "make": "Humber",
+      "model": "Sceptre",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:snipe",
+      "make": "Humber",
+      "model": "Snipe",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "humber:supersnipe",
+      "make": "Humber",
+      "model": "Super Snipe",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hummer:h1",
+      "make": "Hummer",
+      "model": "H1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hummer",
+        "modelId": null,
+        "canonicalMake": "Hummer",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hummer:h2",
+      "make": "Hummer",
+      "model": "H2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hummer",
+        "modelId": null,
+        "canonicalMake": "Hummer",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hummer:h2stretch",
+      "make": "Hummer",
+      "model": "H2 Stretch",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hummer",
+        "modelId": null,
+        "canonicalMake": "Hummer",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hummer:h3",
+      "make": "Hummer",
+      "model": "H3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hummer",
+        "modelId": null,
+        "canonicalMake": "Hummer",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hummer:h3t",
+      "make": "Hummer",
+      "model": "H3T",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hummer",
+        "modelId": null,
+        "canonicalMake": "Hummer",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hupmobile:e1",
+      "make": "Hupmobile",
+      "model": "E1",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hupmobile:model20runabout",
+      "make": "Hupmobile",
+      "model": "Model 20 Runabout",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hyundai:accent",
+      "make": "Hyundai",
+      "model": "Accent",
+      "aliases": [
+        "ACCENT"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/accent",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Accent"
+      }
+    },
+    {
+      "key": "hyundai:amica",
+      "make": "Hyundai",
+      "model": "Amica",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:atos",
+      "make": "Hyundai",
+      "model": "Atos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:atoz",
+      "make": "Hyundai",
+      "model": "Atoz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:avante",
+      "make": "Hyundai",
+      "model": "Avante",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:azera",
+      "make": "Hyundai",
+      "model": "Azera",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:bayon",
+      "make": "Hyundai",
+      "model": "Bayon",
+      "aliases": [
+        "Hyundai Bayon"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/bayon",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Bayon"
+      }
+    },
+    {
+      "key": "hyundai:centennial",
+      "make": "Hyundai",
+      "model": "Centennial",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:coupe",
+      "make": "Hyundai",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:creta",
+      "make": "Hyundai",
+      "model": "Creta",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:elantra",
+      "make": "Hyundai",
+      "model": "Elantra",
+      "aliases": [
+        "ELANTRA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/elantra",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Elantra"
+      }
+    },
+    {
+      "key": "hyundai:elexio",
+      "make": "Hyundai",
+      "model": "ELEXIO",
+      "aliases": [
+        "羿欧"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2025,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/elexio",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "ELEXIO"
+      }
+    },
+    {
+      "key": "hyundai:entourage",
+      "make": "Hyundai",
+      "model": "Entourage",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:equus",
+      "make": "Hyundai",
+      "model": "Equus",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:excel",
+      "make": "Hyundai",
+      "model": "Excel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:galloper",
+      "make": "Hyundai",
+      "model": "Galloper",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:genesis",
+      "make": "Hyundai",
+      "model": "Genesis",
+      "aliases": [
+        "GENESIS"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/genesis",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Genesis"
+      }
+    },
+    {
+      "key": "hyundai:getz",
+      "make": "Hyundai",
+      "model": "Getz",
+      "aliases": [
+        "GETZ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/getz",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Getz"
+      }
+    },
+    {
+      "key": "hyundai:grandi10",
+      "make": "Hyundai",
+      "model": "Grand I10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:grandsantafe",
+      "make": "Hyundai",
+      "model": "Grand Santa FE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:grandstarex",
+      "make": "Hyundai",
+      "model": "Grand Starex",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:grandeur",
+      "make": "Hyundai",
+      "model": "Grandeur",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:h1",
+      "make": "Hyundai",
+      "model": "H-1",
+      "aliases": [
+        "H 1",
+        "H-1STAREXGRAND STAREX",
+        "H1"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/h-1",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "H-1"
+      }
+    },
+    {
+      "key": "hyundai:h100",
+      "make": "Hyundai",
+      "model": "H100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:h200",
+      "make": "Hyundai",
+      "model": "H200",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:i10",
+      "make": "Hyundai",
+      "model": "i10",
+      "aliases": [
+        "Hyundai i10"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/i10",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "i10"
+      }
+    },
+    {
+      "key": "hyundai:i20",
+      "make": "Hyundai",
+      "model": "i20",
+      "aliases": [
+        "Hyundai i20",
+        "I 20 N"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/i20",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "i20"
+      }
+    },
+    {
+      "key": "hyundai:i30",
+      "make": "Hyundai",
+      "model": "i30",
+      "aliases": [
+        "Hyundai i 30",
+        "HYUNDAI I 30",
+        "HYUNDAI I30",
+        "i 30",
+        "I 30",
+        "I 30.",
+        "I 30N",
+        "I30",
+        "I30,",
+        "I30.",
+        "I30N / 2.0 / T-GDI HP DCT",
+        "I30N 20 T-GDI HP",
+        "I30N FB / 2.0 / T-GDI HP DCT",
+        "I30N FB 20 T-GDI HP"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/i30",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "i30"
+      }
+    },
+    {
+      "key": "hyundai:i40",
+      "make": "Hyundai",
+      "model": "i40",
+      "aliases": [
+        "HYUNDAI I40",
+        "i 40",
+        "I40"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/i40",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "i40"
+      }
+    },
+    {
+      "key": "hyundai:i45",
+      "make": "Hyundai",
+      "model": "i45",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:i800",
+      "make": "Hyundai",
+      "model": "i800",
+      "aliases": [
+        "I800 SE CRDI",
+        "I800 SE CRDI AUTO",
+        "I800 SE NAV CRDI"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/i800",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "i800"
+      }
+    },
+    {
+      "key": "hyundai:iload",
+      "make": "Hyundai",
+      "model": "Iload",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:imax",
+      "make": "Hyundai",
+      "model": "Imax",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:inster",
+      "make": "Hyundai",
+      "model": "Inster",
+      "aliases": [
+        "INSTER"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/inster",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Inster"
+      }
+    },
+    {
+      "key": "hyundai:ioniq",
+      "make": "Hyundai",
+      "model": "Ioniq",
+      "aliases": [
+        "Hyundai Ioniq"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/ioniq",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Ioniq"
+      }
+    },
+    {
+      "key": "hyundai:ioniq5",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "aliases": [
+        "IONIQ 5",
+        "IONIQ5"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/ioniq-5",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Ioniq 5"
+      }
+    },
+    {
+      "key": "hyundai:ioniq6",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "aliases": [
+        "IONIQ 6",
+        "IONIQ6"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/ioniq-6",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Ioniq 6"
+      }
+    },
+    {
+      "key": "hyundai:ioniq9",
+      "make": "Hyundai",
+      "model": "Ioniq 9",
+      "aliases": [
+        "IONIQ 9",
+        "IONIQ9"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/ioniq-9",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Ioniq 9"
+      }
+    },
+    {
+      "key": "hyundai:ix20",
+      "make": "Hyundai",
+      "model": "ix20",
+      "aliases": [
+        "Hyundai ix20",
+        "IX20"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/ix20",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "ix20"
+      }
+    },
+    {
+      "key": "hyundai:ix35",
+      "make": "Hyundai",
+      "model": "ix35",
+      "aliases": [
+        "Hyundai ix35"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/ix35",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "ix35"
+      }
+    },
+    {
+      "key": "hyundai:ix55",
+      "make": "Hyundai",
+      "model": "ix55",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:kauai",
+      "make": "Hyundai",
+      "model": "Kauai",
+      "aliases": [
+        "KAUAI"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/kauai",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Kauai"
+      }
+    },
+    {
+      "key": "hyundai:kona",
+      "make": "Hyundai",
+      "model": "Kona",
+      "aliases": [
+        "Hyundai Kona",
+        "HyundaiKonaKauai",
+        "KONAKAUAI",
+        "KONAN,KAUAIN"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/kona",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Kona"
+      }
+    },
+    {
+      "key": "hyundai:lantra",
+      "make": "Hyundai",
+      "model": "Lantra",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:lavita",
+      "make": "Hyundai",
+      "model": "Lavita",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:matrix",
+      "make": "Hyundai",
+      "model": "Matrix",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:nexo",
+      "make": "Hyundai",
+      "model": "Nexo",
+      "aliases": [
+        "Hyundai NEXO",
+        "HYUNDAI NEXO",
+        "NEXO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/nexo",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Nexo"
+      }
+    },
+    {
+      "key": "hyundai:palisade",
+      "make": "Hyundai",
+      "model": "Palisade",
+      "aliases": [
+        "HYUNDAI PALISADE",
+        "PALISADE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/palisade",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Palisade"
+      }
+    },
+    {
+      "key": "hyundai:pony",
+      "make": "Hyundai",
+      "model": "Pony",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:scoupe",
+      "make": "Hyundai",
+      "model": "S-Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:santacruz",
+      "make": "Hyundai",
+      "model": "Santa Cruz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:santafe",
+      "make": "Hyundai",
+      "model": "Santa FE",
+      "aliases": [
+        "Hyundai Santa Fe",
+        "HYUNDAI SANTA FE",
+        "SANTA",
+        "Santa Fe",
+        "SANTA FE",
+        "SantaFe",
+        "SANTAFE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/santa-fe",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Santa FE"
+      }
+    },
+    {
+      "key": "hyundai:santamo",
+      "make": "Hyundai",
+      "model": "Santamo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:solaris",
+      "make": "Hyundai",
+      "model": "Solaris",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:sonata",
+      "make": "Hyundai",
+      "model": "Sonata",
+      "aliases": [
+        "SONATA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/sonata",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Sonata"
+      }
+    },
+    {
+      "key": "hyundai:starex",
+      "make": "Hyundai",
+      "model": "Starex",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:stargazer",
+      "make": "Hyundai",
+      "model": "Stargazer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:staria",
+      "make": "Hyundai",
+      "model": "Staria",
+      "aliases": [
+        "STARIA",
+        "STARIAPREMIUM"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/staria",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Staria"
+      }
+    },
+    {
+      "key": "hyundai:stellar",
+      "make": "Hyundai",
+      "model": "Stellar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:terracan",
+      "make": "Hyundai",
+      "model": "Terracan",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:tiburon",
+      "make": "Hyundai",
+      "model": "Tiburon",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:trajet",
+      "make": "Hyundai",
+      "model": "Trajet",
+      "aliases": [
+        "TRAJET"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/trajet",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Trajet"
+      }
+    },
+    {
+      "key": "hyundai:tucson",
+      "make": "Hyundai",
+      "model": "TUCSON",
+      "aliases": [
+        "Tucson",
+        "HyundaiTUCSONix35",
+        "TUCSN PRM SE48V MHEV CRDI2WDSA",
+        "TUCSONIX35"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2020,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/tucson",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "TUCSON"
+      }
+    },
+    {
+      "key": "hyundai:tuscani",
+      "make": "Hyundai",
+      "model": "Tuscani",
+      "aliases": [
+        "TUSCANI"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/tuscani",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Tuscani"
+      }
+    },
+    {
+      "key": "hyundai:veloster",
+      "make": "Hyundai",
+      "model": "Veloster",
+      "aliases": [
+        "VELOSTER"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": "hyundai/veloster",
+        "canonicalMake": "Hyundai",
+        "canonicalModel": "Veloster"
+      }
+    },
+    {
+      "key": "hyundai:venue",
+      "make": "Hyundai",
+      "model": "Venue",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:veracruz",
+      "make": "Hyundai",
+      "model": "Veracruz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "hyundai:xg",
+      "make": "Hyundai",
+      "model": "XG",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "hyundai",
+        "modelId": null,
+        "canonicalMake": "Hyundai",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "icaur:v23",
+      "make": "iCAUR",
+      "model": "V23",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "icaur",
+        "modelId": "icaur/v23",
+        "canonicalMake": "iCAUR",
+        "canonicalModel": "V23"
+      }
+    },
+    {
+      "key": "icaur:v27",
+      "make": "iCAUR",
+      "model": "V27",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "icaur",
+        "modelId": "icaur/v27",
+        "canonicalMake": "iCAUR",
+        "canonicalModel": "V27"
+      }
+    },
+    {
+      "key": "immotors:l6",
+      "make": "IM Motors",
+      "model": "L6",
+      "aliases": [
+        "智己 L6"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "im-motors",
+        "modelId": "im-motors/l6",
+        "canonicalMake": "IM Motors",
+        "canonicalModel": "L6"
+      }
+    },
+    {
+      "key": "immotors:ls6",
+      "make": "IM Motors",
+      "model": "LS6",
+      "aliases": [
+        "智己 LS6"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "im-motors",
+        "modelId": "im-motors/ls6",
+        "canonicalMake": "IM Motors",
+        "canonicalModel": "LS6"
+      }
+    },
+    {
+      "key": "immotors:ls7",
+      "make": "IM Motors",
+      "model": "LS7",
+      "aliases": [
+        "智己 LS7"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "im-motors",
+        "modelId": "im-motors/ls7",
+        "canonicalMake": "IM Motors",
+        "canonicalModel": "LS7"
+      }
+    },
+    {
+      "key": "immotors:ls8",
+      "make": "IM Motors",
+      "model": "LS8",
+      "aliases": [
+        "智己 LS8"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "im-motors",
+        "modelId": "im-motors/ls8",
+        "canonicalMake": "IM Motors",
+        "canonicalModel": "LS8"
+      }
+    },
+    {
+      "key": "immotors:ls9",
+      "make": "IM Motors",
+      "model": "LS9",
+      "aliases": [
+        "智己 LS9"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "im-motors",
+        "modelId": "im-motors/ls9",
+        "canonicalMake": "IM Motors",
+        "canonicalModel": "LS9"
+      }
+    },
+    {
+      "key": "imperial:crown",
+      "make": "Imperial",
+      "model": "Crown",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "imperial:crownsouthampton",
+      "make": "Imperial",
+      "model": "Crown Southampton",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "imperial:custom",
+      "make": "Imperial",
+      "model": "Custom",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "imperial:lebaron",
+      "make": "Imperial",
+      "model": "Le Baron",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-24T20:16:57.491589+00:00",
+  "workflow": 40128515344,
+  "job": 120975012640,
+  "artifact": 12574666229,
+  "artifactSha256": "b7fab3055388c686da03e00b1e8dad0221c96cc1a6c0a4141ab80a219bdf96f4",
+  "recordsRead": 8403,
+  "recordSnapshotDigest": "4833738bb6885d8c756dcc01859538bce96e8637f2ce8e479454a449a76eaadc",
+  "checkpoint": {
+    "digest": "974674b4505d07ca1320702be93136afd94936ef6ee9727c5616ad55eb00cd94",
+    "saved": 8403,
+    "visited": 13045,
+    "pending": 253,
+    "updatedAt": "2026-10-22T19:38:18.897Z",
+    "failures": [
+      {
+        "at": "2026-10-22T09:14:03.805Z",
+        "category": "unclassified"
+      },
+      {
+        "at": "2026-10-22T19:38:18.897Z",
+        "category": "redirect_outside_catalog"
+      }
+    ]
+  },
+  "checkpointCountMatches": true,
+  "groups": [
+    "audi/a3",
+    "audi/a4",
+    "audi/a5"
+  ],
+  "year": 2024,
+  "reviewedRows": 64,
+  "groupsOnPage": {
+    "audi/a5": 31,
+    "audi/a3": 27,
+    "audi/a4": 6
+  },
+  "remainingAfterPage": 203,
+  "nextAfterDigest": "39d127db00febcd73cf670b95b9d3bcbc3e6dc069291b2c4f60becb7a3761464",
+  "sourceClassification": "unverified_reference",
+  "verifiedFieldsAdded": 0,
+  "supplierRequests": 0,
+  "storageWrites": 0,
+  "findings": [
+    "A3 2024 includes1395 and1498 petrol150PS plus999/110PS and1498/116PS. Do not assign displacement or power from the model badge alone.",
+    "A5 1984 petrol varies190/204/252/261/265PS in these retained rows. Exact engine/chassis or technical identity is needed; ordinary equipment names alone do not resolve it.",
+    "A5 record544652 associates F57 with coupe; retain as unresolved source inconsistency, do not create chassis-drive facts from it.",
+    "Periods overlap2024; this is not proof that every included variant was manufactured throughout that year.",
+    "No retained row is promoted automatically. Saved A4 batch uses independently reviewed manufacturer tables."
+  ],
+  "next": "Continue from exact digest with next bounded page; no new collector, no retry of redirect_outside_catalog."
+}

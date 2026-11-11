@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "vehiclesdb-open-catalog",
+  "authority": "open_composite_official_registers",
+  "fetchedAt": "2026-08-22T10:30:39.224Z",
+  "status": "complete",
+  "files": [
+    {
+      "file": "vehiclesdb/manifest.json",
+      "bytes": 9234,
+      "sha256": "3be261492f9241d259a12a51fc4a55b4cfe3a26444146089da90fcb5514ee5ce",
+      "sourceUrl": "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/manifest.json"
+    },
+    {
+      "file": "vehiclesdb/car-makes.json",
+      "bytes": 55650,
+      "sha256": "b1e10ee9095cc393e9832a2c493e6456849144e5b79a5617fd9b8b3c45411632",
+      "sourceUrl": "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/makes.json"
+    },
+    {
+      "file": "vehiclesdb/car-models.json",
+      "bytes": 6518470,
+      "sha256": "dcf5685288486ab874d953b8aded6bc5c67dcb80ea9eed22853f36405dd70d9e",
+      "sourceUrl": "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/models.json"
+    },
+    {
+      "file": "vehiclesdb/ATTRIBUTION.md",
+      "bytes": 7068,
+      "sha256": "c14cf3ed4869664b9c1c2263b872eb0e6cda0d405b6fa26980615f21fe21359d",
+      "sourceUrl": "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/ATTRIBUTION.md"
+    },
+    {
+      "file": "vehiclesdb/SOURCES.md",
+      "bytes": 12439,
+      "sha256": "99588dfc270bba4651b91d37f552dcc0ff3faf5178fa42864454e67fdb175225",
+      "sourceUrl": "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/SOURCES.md"
+    }
+  ],
+  "counts": {
+    "makes": 277,
+    "models": 4895
+  },
+  "errors": [],
+  "notes": [
+    "CC-BY 4.0 attribution files are snapshotted beside the data and must survive compilation."
+  ]
+}

@@ -1,0 +1,27 @@
+name: Validate required catalog source fixes
+
+on:
+  push:
+    paths:
+      - apps/web/lib/catalog/china-exact-sources.ts
+      - tests/china-exact-sources.test.ts
+      - .github/workflows/validate-required-catalog-source-fixes-20260816.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Targeted source parser tests
+        run: node --import tsx --test tests/china-exact-sources.test.ts tests/kbchachacha-exact-source.test.ts
+      - name: TypeScript
+        run: npm run typecheck

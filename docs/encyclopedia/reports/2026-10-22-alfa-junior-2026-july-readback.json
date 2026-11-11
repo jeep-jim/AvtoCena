@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-10-22T08:16:07.332486+00:00",
+  "batch": "research-2026-10-22-alfa-junior-2026-july",
+  "mode": "readback",
+  "variants": 8,
+  "fields": 48,
+  "passed": true,
+  "rows": [
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "78c687ec742a57e93a9b73f2",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 1,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "3b1a2b9b387bf8de7fde2879",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 1,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "ef94301cc861d3114a0541ed",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 1,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "68bf56078ab8c3b00dad2b6f",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "10c32167be53276eb6da22d4",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4b61bf2752e1b8700375cf83",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "2a98b7cbe44d46a17cafab04",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4183feea6ecafd26bf49cef9",
+      "year": 2026,
+      "revision": "30a401fa-fe76-4cc7-9738-cc780f277a03",
+      "fields": 9,
+      "historyPassed": true,
+      "sourcePassed": true
+    }
+  ],
+  "commit": "f4845cad2b6e1cfa39374f218eaf9b23b408eb17",
+  "workflow": 39746380415,
+  "workflowConclusion": "success",
+  "guardTests": {
+    "pass": 8,
+    "fail": 0
+  }
+}

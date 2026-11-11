@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-22T22:59:23.401Z",
+  "batch": "research-2026-10-23-aston-dbx-years-mass",
+  "apiReadback": false,
+  "passed": true,
+  "operations": 9,
+  "newVariants": 3,
+  "updatedVariants": 6,
+  "confirmedFields": 30,
+  "compiledCalculationFields": 27,
+  "unchangedVariantsPreserved": 47,
+  "models": [
+    {
+      "modelId": "41c41db2719c2d3b75470cd9",
+      "model": "Dbx",
+      "beforeRevision": "4a6246e4-eb28-41bd-ab68-a8d4ff49ca80",
+      "afterRevision": "7260aa01-1c0a-4ab5-8b79-386afa5f28fb",
+      "variantsBefore": 45,
+      "variantsAfter": 46,
+      "researchedVariantsAfter": 10
+    },
+    {
+      "modelId": "49f0712914bb0925bd328b09",
+      "model": "DBX707",
+      "beforeRevision": "d40b2beb-0f01-4c61-98b7-be04153aa40e",
+      "afterRevision": "3238765b-29f1-4c6b-b0b2-9d169761acb5",
+      "variantsBefore": 8,
+      "variantsAfter": 10,
+      "researchedVariantsAfter": 4
+    }
+  ],
+  "previousFieldSourcesPreserved": true,
+  "manualWrites": 0,
+  "wholeRowVerified": false,
+  "duplicatesAdded": 0,
+  "nativeMatcher": {
+    "exactCases": 3,
+    "genericIdentityStillBlocked": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true,
+    "yearNotInferred": true
+  },
+  "compilerChanged": false,
+  "activationConfirmed": false
+}

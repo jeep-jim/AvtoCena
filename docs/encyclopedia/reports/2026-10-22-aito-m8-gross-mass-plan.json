@@ -1,0 +1,370 @@
+{
+  "checkedAt": "2026-10-22T04:31:31.801Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-aito-m8-gross-mass",
+  "digest": "de2a24fa5bb412be70a72fa0bb9b0a2b0928ede722eb7437d2334e7f33a812ff",
+  "sourceModelRevision": "98cc5874-5cf1-45c5-8efc-3c3daeb98251",
+  "recordsRead": 59,
+  "variants": 49,
+  "fields": 49,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "0bcf30e916d79ee1fedfb2ce",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "487867bffc38c59eec0dbd96",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f85304f2d66e02e422c6647d",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a68711124774577a9c26fcf8",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "603b0287305f4cbc6365990e",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "6bcf3e4bc2e9275c8176d93c",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "e8ac76acd0f405a20849470b",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "94292f4d13a7c3a887288663",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "15dd52a5734447c38853ded4",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "b43de740195fbfb379299014",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "91a33628284043391fe4d7f7",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "7438b0e82a0a8d9ae980c394",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "975ffe4c1857ed05444b970d",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2fbba4d8425ebe20f1459a1c",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2e204bc26050e23d1e268f05",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "72d2af7ed20dd40bef38b097",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "851dbd2349c34c909e45fc5f",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "1ecc857cdc269ed98d93d1cf",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "8dd99bcaaf34579077f104fb",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "1809dd1134400443df4ba508",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "9c5fd9704733fdc9647e2aac",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "6caec82adedde838cf97a9fe",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "ab6bcb91cf607b79a4b0dd02",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "d9e6a0543e3601641f17a291",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "e88030809cb7f617c4baa923",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2a0a2c2592472ec0cd023c29",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "25a0bf1b98e01c736776301e",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a7b3662ca65af16af868aa73",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "0aa1f57795ee36a93efdcce3",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "4234cafa1f114e8777965b82",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "b246db132ec4cff640ba6bd9",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2b97d855954fe35a3bb6cc3f",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "b7a1996458c447402d00167e",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "1739125a3a517451046f84c2",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a3d0488a804bf099c4c21d00",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f5ffeff9c8132d35b3968592",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "0a6097830626c0045a801be1",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2f69b1306b5b5498380eb2c7",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "14225f4f457153a6e222c732",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "89eb7203776e92f4c300cd24",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "6bf81b62408991f7d273acea",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a9723826352c2eac76382d0e",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "54ffbe05c23484b9853856af",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "9da9a924d9430c9366d3f93f",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "8d56cf38f5629d84b9bcf3e4",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "c63d839221ccbc6455af1a18",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "d626417c63fed7576f270cfd",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "6be173018fcbdfcf2e99afa0",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "db2e450b6ba111cd4d22cdf7",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "retry": [
+    {
+      "variantId": "c46d01ec386313b8469f4128",
+      "year": 2025,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "45223fe8739a72d98580eee8",
+      "year": 2025,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "e2e99148542ab6f3d08b8115",
+      "year": 2025,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "a69e50db9ab06cf3435fa79c",
+      "year": 2025,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "cf7366ad18c75eb8abf578c8",
+      "year": 2026,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "06ceab1fa395bdea882b4730",
+      "year": 2026,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "b01872767253afbe65b6632f",
+      "year": 2026,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "134320330e51d214ac9ff876",
+      "year": 2026,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "85f77cd472032b121570772e",
+      "year": 2026,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    },
+    {
+      "variantId": "f9527960a9ef5924b1a7f45d",
+      "year": 2026,
+      "reason": "Точное исполнение или соответствие года не подтверждены. По одной наблюдаемой массе вариант не выбран."
+    }
+  ],
+  "missingFields": [
+    "power30MinKw",
+    "frontMotor30MinKw",
+    "rearMotor30MinKw",
+    "calculation-eligible icePowerKw"
+  ],
+  "requiresFreshApiCas": true,
+  "dependsOnReleaseWorkflow": 39720853891,
+  "historicalExpansionComplete": false
+}

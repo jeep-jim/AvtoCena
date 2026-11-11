@@ -1,0 +1,33 @@
+import fs from 'node:fs';
+import http from 'node:http';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import postcss from 'postcss';
+import tailwindcss from 'tailwindcss';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const out='artifacts/client-calculation';fs.mkdirSync(out,{recursive:true});
+await build({entryPoints:['tests/browser/client-calculation-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"','process.env':'{}'}});
+const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/home/CitySelector.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-surface:white;--ac-surface-2:#eee;--ac-text:#111;--ac-muted:#555}body{padding:16px}',{from:undefined});fs.writeFileSync(`${out}/app.css`,css.css);
+const server=http.createServer((req,res)=>{const name=req.url.split('?')[0];if(['/fixture.js','/fixture.css','/app.css'].includes(name)){res.setHeader('Content-Type',name.endsWith('.js')?'text/javascript':'text/css');res.end(fs.readFileSync(out+name));return;}res.setHeader('Content-Type','text/html');res.end('<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"><div id="root"></div><script src="/fixture.js"></script>');});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox']});
+try{
+ const context=await browser.newContext({viewport:{width:390,height:844}});
+ await context.addInitScript(()=>localStorage.setItem('avtocena_city','Москва'));
+ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ let effectiveRate=12.5;let calls=0;let lastDraft;
+ await page.route('**/api/catalog/rates',r=>r.fulfill({json:{rates:[{currency:'CNY',effectiveRate,rateDate:'2026-10-06'}]}}));
+ await page.route('**/api/catalog/offer/qa/calculate',r=>{calls++;lastDraft=r.request().postDataJSON();return r.fulfill({json:{totalRub:2120000,breakdown:[{id:'car',amountRub:1260000},{id:'costs',amountRub:860000}],currencyRate:{currency:'CNY',effectiveRate,rateDate:'2026-10-06',sourcePrice:100000}}});});
+ await page.goto(origin+'/?mode=shared');await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).waitFor();
+ await page.waitForTimeout(300);assert.equal(calls,0);
+ effectiveRate=12.6;
+ await page.evaluate(()=>{const now=Date.now();Date.now=()=>now+120000;window.dispatchEvent(new Event('focus'));});
+ await page.waitForFunction(()=>document.querySelector('.ac-offer-price-panel .ac-price')?.textContent?.replace(/\D/g,'')==='2120000');
+ assert.equal(calls,1);assert.equal(lastDraft.deliveryCity,'Новокузнецк');
+ assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Москва');
+ assert.equal(await page.locator('[data-price-line="car"]').getAttribute('data-price-amount-rub'),'1260000');
+ await page.getByRole('button',{name:'Показать курс CNY',exact:true}).click();
+ await page.locator('.ac-rate-chart-native').waitFor();
+ assert.match(await page.locator('.ac-rate-chart-native').innerText(),/2\s*120\s*000/);
+ assert.deepEqual(errors,[]);console.log(JSON.stringify({fullQuoteRefreshed:true,sharedCityPreserved:true,breakdownAndChartMatch:true,requests:calls}));
+}finally{await browser.close();await new Promise(r=>server.close(r));}

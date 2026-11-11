@@ -1,0 +1,119 @@
+{
+  "checkedAt": "2026-10-22T06:18:40.672Z",
+  "release": "75fbb8b63dcb1ea2c5fe817bea7e687df57f8e0f",
+  "workflow": 39729118728,
+  "workflowConclusion": "success",
+  "index": {
+    "stage": "encyclopedia_index_ready",
+    "modelsRead": 2423,
+    "variants": 67370,
+    "factoryFields": 18907,
+    "ownerReferenceFields": 485140,
+    "manualFields": 0,
+    "digest": "23492c2fd0b0111bc71c084df08eec4ce0b2fe4218d12f5e80cf901e39bae377",
+    "manifestDigest": "2460671361f8494159982f4c3b6d110a1be5398c96e13f07d6e8781547b92b30",
+    "readback": true
+  },
+  "markets": {
+    "china": {
+      "rows": 132350,
+      "pending": 61579,
+      "exactMatches": 77461,
+      "filledRecords": 454,
+      "filledFields": 689,
+      "completeSpecifications": 275,
+      "calculated": 49,
+      "calculationMissing": {
+        "gross_vehicle_weight_kg": 220,
+        "vehicle_category": 6
+      },
+      "missing": {
+        "unclassified_field_provenance": 35176,
+        "engine_cc_missing": 1788,
+        "fuel_or_powertrain_missing": 869,
+        "peak_power_missing": 17878,
+        "certified_30min_power_missing": 59684
+      }
+    },
+    "korea": {
+      "rows": 9918,
+      "pending": 7155,
+      "exactMatches": 37,
+      "filledRecords": 33,
+      "filledFields": 102,
+      "completeSpecifications": 18,
+      "calculated": 18,
+      "calculationMissing": {},
+      "missing": {
+        "unclassified_field_provenance": 13456,
+        "engine_cc_missing": 1,
+        "peak_power_missing": 6517,
+        "certified_30min_power_missing": 2022
+      }
+    },
+    "uae": {
+      "rows": 22039,
+      "pending": 22039,
+      "exactMatches": 11,
+      "filledRecords": 9,
+      "filledFields": 35,
+      "completeSpecifications": 6,
+      "calculated": 6,
+      "calculationMissing": {},
+      "missing": {
+        "unclassified_field_provenance": 22030,
+        "engine_cc_missing": 21629,
+        "peak_power_missing": 22029,
+        "certified_30min_power_missing": 2712,
+        "powertrain_identity_conflict": 1
+      }
+    },
+    "europe": {
+      "rows": 46127,
+      "pending": 7600,
+      "exactMatches": 36731,
+      "filledRecords": 302,
+      "filledFields": 531,
+      "completeSpecifications": 82,
+      "calculated": 2,
+      "calculationMissing": {
+        "vehicle_category": 80
+      },
+      "missing": {
+        "engine_cc_missing": 423,
+        "unclassified_field_provenance": 1764,
+        "fuel_or_powertrain_missing": 1248,
+        "certified_30min_power_missing": 5963,
+        "peak_power_missing": 712
+      }
+    },
+    "georgia": {
+      "rows": 1705,
+      "pending": 1705,
+      "exactMatches": 0,
+      "filledRecords": 0,
+      "filledFields": 0,
+      "completeSpecifications": 0,
+      "calculated": 0,
+      "calculationMissing": {},
+      "missing": {
+        "unclassified_field_provenance": 1639,
+        "engine_cc_missing": 1572,
+        "peak_power_missing": 1431,
+        "certified_30min_power_missing": 391,
+        "fuel_or_powertrain_missing": 66
+      }
+    }
+  },
+  "publicPriceParity": 75,
+  "generationId": "gen_1792548716303_1c83fca2",
+  "apiHealthReadback": true,
+  "cardSearchParityReport": "docs/encyclopedia/reports/2026-10-22-giulia-75fbb8b-card-search-parity.json",
+  "currentPassIncluded": false,
+  "failedSubsequentRelease": {
+    "workflow": 39731564487,
+    "commit": "0c8e204cdee54e26ffd0064c9a68a35ac7d0d87a",
+    "reason": "encyclopedia_changed_during_preparation",
+    "context": "Giulia batch was saved during this queued release's index preparation; guard correctly prevented mixed snapshot activation."
+  }
+}

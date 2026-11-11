@@ -1,0 +1,181 @@
+{
+  "checkedAt": "2026-10-22T13:35:48.275Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-tonale-2023-factory-range",
+  "sourceRevision": "bc721923-e6da-4abf-a8f1-6be2e5c39b3e",
+  "variants": 18,
+  "newVariants": 5,
+  "fields": 75,
+  "changes": [
+    {
+      "variantId": "fd0ea61af46a2424e1d29bed",
+      "fields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "6afe5929e36f28f2352577f8",
+      "fields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "1d79e547243db385c5966f4d",
+      "fields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "2347b3dc16d926aaa45f8d46",
+      "fields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "4403b52e952b76359cb05e1b",
+      "fields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "886e71c8eb6e86cd6f8388cf",
+      "fields": [
+        "bodyType"
+      ]
+    },
+    {
+      "variantId": "6dea545f17acb6f2822d8ba7",
+      "fields": [
+        "bodyType",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "64b9c6c34b3a67a8ebbb167e",
+      "fields": [
+        "bodyType",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "828167d420b0a4795d869276",
+      "fields": [
+        "bodyType",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "959f3a557c44e078c991a799",
+      "fields": [
+        "bodyType",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "4159764dd2b742fc785f69fc",
+      "fields": [
+        "bodyType",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "ee56b396c77522ec9360b310",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "78953519053fa6eabc187f8c",
+      "fields": [
+        "bodyType",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "fb7054dd010f6f57f01a4aa8",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "ffaf57e6099f8bb84bd33d7e",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "a3b27774100d7f9c04995775",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw"
+      ]
+    },
+    {
+      "variantId": "e08fae676d942dd5f15edf5a",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ]
+    },
+    {
+      "variantId": "d0bbd29f15af34492bbcfe94",
+      "operation": "create",
+      "fields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "drive",
+        "motorPeakKw",
+        "batteryKwh"
+      ]
+    }
+  ]
+}

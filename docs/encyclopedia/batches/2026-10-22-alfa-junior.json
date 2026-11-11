@@ -1,0 +1,911 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-junior",
+  "entries": [
+    {
+      "modelId": "cb49c6bb46e8dd8caf106b34",
+      "variantId": "5b2c9a2190ceeb9ff56e2b0c",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2021,
+      "trim": "Giulietta III 1.4 t. Sprint 120cv NEOPATENTATI OK",
+      "expectedDigest": "d4f5bd03fe9bbfda9d43a057f7d20a3a3caf216a66477243540864ae63a9f008",
+      "patch": {
+        "trim": "1.4 Turbo 120 PS Sprint",
+        "engineCc": 1368,
+        "powerHp": 120,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "manual",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/210107_listinoargiuliettamy2001gennaio2021-5ff7530cc86b4.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulietta Sprint 2021, заводской прайс 01.01.2021: бензиновый 1.4 Turbo, 1368 см³, 88 кВт / 120 CV. Французская таблица 04.01.2021 подтверждает передний привод и шестиступенчатую механическую КПП. Масса 1280 кг — снаряжённая, не разрешённая полная; поле массы не заполнено.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/210107_listinoargiuliettamy2001gennaio2021-5ff7530cc86b4.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "8ca2d3998144293d9ca6d84a9d1a35d9d8c19f270dc3e4cf95dea5841f3ab274",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicalfaromeomy204janvier-5ff57fc16b01c.pdf",
+            "pages": [
+              3,
+              4
+            ],
+            "sha256": "c6957854e31627bcbfad67782e60e5723e12dc7367e0f946397fcfc763c336b7",
+            "fields": [
+              "transmission",
+              "drive",
+              "engineCc",
+              "powerKw",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "733bb9482a2e0845dba2074f",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Hybrid ibrida Q4",
+      "expectedDigest": "8805619f1bd8c2118a9848c275067ac78bec0bba1e6b56d281350286ff86e802",
+      "patch": {
+        "trim": "1.2 Ibrida Q4 eDCT6",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2025 Ibrida: заводская таблица 01.04.2025 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Q4 явно указан: полный привод; два электромотора по21кВт не суммируются в30-минутную мощность. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/in-aktion-der-neue-alfa-romeo-junior-ibrida-q4-stellt-sein-koennen-bei-ersten-testfahrten-unter-beweis",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "f3d69aa5b413b4366ad98b8b",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Hybrid – ‘SPECIALE’ 136PK / Sfeerverlich. / Massage / Leder/ Carplay / zetelverwarming/ FABRIEKSWAARBORG",
+      "expectedDigest": "f79cd0b80eadc6f2078cd45b751d888e9d96f8f3ffd3670f5958d4de2291cfdf",
+      "patch": {
+        "trim": "1.2 Ibrida 136 PS eDCT6 Speciale",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2025 Ibrida: заводская таблица 01.04.2025 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/in-aktion-der-neue-alfa-romeo-junior-ibrida-q4-stellt-sein-koennen-bei-ersten-testfahrten-unter-beweis",
+            "fields": [
+              "powertrainKind"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/it-it/alfa-romeo/press/alfa-romeo-junior-protagonista-a-milano-per-car-of-the-year-2025",
+            "fields": [
+              "trim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "1cc2cd1c1c176d98b0229603",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 Turbo Ibrida/Valckenier Denderhoutem",
+      "expectedDigest": "31e28e711696049a72367874a62aa72af7a89493eb7247867d5a2e81f88da781",
+      "patch": {
+        "trim": "1.2 Ibrida eDCT6",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2025 Ibrida: заводская таблица 01.04.2025 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/in-aktion-der-neue-alfa-romeo-junior-ibrida-q4-stellt-sein-koennen-bei-ersten-testfahrten-unter-beweis",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "1304ea36ec504909a15383b0",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "Ibrida Q4 1.2 MHEV eAWD e-DCT6",
+      "expectedDigest": "c688c69b15b57ce9244093b839fb5f048e07d7b02de6be437933a2e3cb7acccc",
+      "patch": {
+        "trim": "1.2 Ibrida Q4 eDCT6",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2025 Ibrida: заводская таблица 01.04.2025 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Q4 явно указан: полный привод; два электромотора по21кВт не суммируются в30-минутную мощность. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/in-aktion-der-neue-alfa-romeo-junior-ibrida-q4-stellt-sein-koennen-bei-ersten-testfahrten-unter-beweis",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "1a2ee1648fe65a65ec42cd1a",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "1.2 145CV Hybrid eDCT6 ibrida SPECIALE",
+      "expectedDigest": "9ce75731f644a76cee611aa8151f371ade7d335f22baca891a4b7c0fdb13781e",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Speciale",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2025 Ibrida: заводская таблица 01.04.2025 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/in-aktion-der-neue-alfa-romeo-junior-ibrida-q4-stellt-sein-koennen-bei-ersten-testfahrten-unter-beweis",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "4fe57688c8a5e9c7f0ce47a1",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 145cv Hybrid eDCT6 Speciale #TETTOAPRIBILE",
+      "expectedDigest": "18cad06a16b83f25ded68fa17de52e788b503779c3612ae2b586a088903f24c2",
+      "patch": {
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107
+      },
+      "confirmedFields": [
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. Название Speciale без Sport оставлено как наблюдение; общие параметры двигателя 1.2 Ibrida 145 не зависят от пакета оснащения. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "78c687ec742a57e93a9b73f2",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 ibrida Ti 145cv edct6 Tetto Apribile",
+      "expectedDigest": "9dae1d55cd1100e103e0fd3ed1af01777a902f2457956609add4a14d5b78f7e9",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Ti",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "3b1a2b9b387bf8de7fde2879",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "- Junior 1.2 ibrida 145cv edct6",
+      "expectedDigest": "97f67baeca757042ef37bc7fa12c27f583238b50adc73cf6f09c1b1acb4f1735",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "a4b81e96dee396e8beac72d6",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 ibrida Q4 Sport Speciale 145cv edct6 - KMZERO - STUPENDA !",
+      "expectedDigest": "7dfbe2429587bd7f87172f45a0d0752a48bc5590551bb2fd022f2661ee568c43",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Sport Speciale",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Q4 явно указан: полный привод; два электромотора по21кВт не суммируются в30-минутную мощность. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "c47bf6d9ea0c3830e160668f",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "Junior 1.2 ibrida Q4 Ti 145cv edct6",
+      "expectedDigest": "c1e0c3b47590ca1e9187b14520a3d901b17925f09844d9f3ba6bf8f644efe119",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Q4 Ti",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107,
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Q4 явно указан: полный привод; два электромотора по21кВт не суммируются в30-минутную мощность. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "ef94301cc861d3114a0541ed",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "1.2 Hybrid 145 CV eDCT6 Sprint",
+      "expectedDigest": "4cb7c6c79974c1f73494274ceb66e7d29e2f759e8487bffbad60a9d595c11886",
+      "patch": {
+        "trim": "1.2 Ibrida 145 PS eDCT6 Sprint",
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "trim",
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "bf21dbbbc15b116f1a492d74",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2026,
+      "trim": "Junior 1.2 145 CV Hybrid eDCT6 Speciale",
+      "expectedDigest": "7a65894d579e64e42c65a6cbaf31f75c6bc83d872423fb8e4f4e1a0985f6c19e",
+      "patch": {
+        "engineCc": 1199,
+        "icePowerKw": 100,
+        "fuel": "hybrid",
+        "powertrainKind": "mhev",
+        "transmission": "dct",
+        "systemPowerKw": 107
+      },
+      "confirmedFields": [
+        "engineCc",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "systemPowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior 2026 Ibrida: заводская таблица 01.04.2026 разделяет ДВС 1199 см³, 100 кВт / 136 PS и гибридную систему 107 кВт / 145 PS. 48-вольтовая MHEV, КПП eDCT6. Привод не подтверждался при отсутствии явного обозначения в исходной строке. Название Speciale без Sport оставлено как наблюдение; общие параметры двигателя 1.2 Ibrida 145 не зависят от пакета оснащения. powerHp/powerKw остаются наблюдениями; подтверждены только отдельные мощности ДВС/системы. 30-минутная мощность и разрешённая масса не найдены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/alfaromeojuniormy26listinodel1aprile2026-69ccf96c38ba2.pdf",
+            "pages": [
+              2,
+              3,
+              11
+            ],
+            "sha256": "18944171c85b5a565f3364ba66ef004fae48b5999b4c894aab1ab603d30f5e27",
+            "fields": [
+              "engineCc",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "systemPowerKw"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/alfa-romeo-reforca-posicionamento-do-junior-com-nova-gama-mais-simples-equipada-e-competitiva",
+            "fields": [
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "06a6704e2a4b4b2cb4eb1475",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "e-Junior 54 kWh Elettrica **LED*CARPLAY*DAB* TOP!!",
+      "expectedDigest": "3ef6aca83ac1477fee073be7eb3fa1836d6bbfc576d98696ef5896d3e022545e",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior Elettrica 2025, заводская таблица 01.04.2025: 115 кВт / 156 PS максимальной мощности, передний привод, одноступенчатая трансмиссия, заявленная батарея54кВт·ч. Версия280PS не смешивалась с156PS. 115кВт — максимальная мощность, не30-минутная; сертифицированная30-минутная мощность не найдена. Масса1545кг — снаряжённая, не разрешённая полная.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "powerHp",
+              "powerKw",
+              "motorPeakKw",
+              "batteryKwh",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "76763ca9fc792df61980328c",
+      "variantId": "f4b0a5283cc484beebaca960",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "year": 2025,
+      "trim": "BEV 156CV/115kW elettrica SPECIALE MY25 - PACK TECHNO",
+      "expectedDigest": "f472c0d0a26e10fb922e611f121cf688e695ac2547e897f9f0a055a979e6cd4b",
+      "patch": {
+        "trim": "156 PS Elettrica 54 kWh Speciale",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "powerHp": 156,
+        "powerKw": 115,
+        "motorPeakKw": 115,
+        "batteryKwh": 54,
+        "drive": "fwd",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Junior Elettrica 2025, заводская таблица 01.04.2025: 115 кВт / 156 PS максимальной мощности, передний привод, одноступенчатая трансмиссия, заявленная батарея54кВт·ч. Версия280PS не смешивалась с156PS. 115кВт — максимальная мощность, не30-минутная; сертифицированная30-минутная мощность не найдена. Масса1545кг — снаряжённая, не разрешённая полная.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              3,
+              4,
+              5
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "trim",
+              "fuel",
+              "powertrainKind",
+              "powerHp",
+              "powerKw",
+              "motorPeakKw",
+              "batteryKwh",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

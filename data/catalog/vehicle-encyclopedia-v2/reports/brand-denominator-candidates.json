@@ -1,0 +1,717 @@
+{
+  "schemaVersion": 1,
+  "productionConnected": false,
+  "denominatorState": "expanding",
+  "currentStagedBrands": 255,
+  "completionClaimAllowed": false,
+  "parserMakes": {
+    "parsedFiles": [
+      "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+    ],
+    "totalObservations": 143,
+    "uniqueRawMakes": 39,
+    "resolved": 34,
+    "ambiguous": 0,
+    "identityReviewRequired": 0,
+    "probableParserNoise": 5,
+    "rows": [
+      {
+        "rawMake": "Highly",
+        "occurrences": 23,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_clean",
+          "dubicars_uae"
+        ],
+        "resolution": {
+          "status": "probable-parser-noise",
+          "reason": "official-company-source-identifies-parts-maker-not-vehicle-make",
+          "evidenceUrl": "https://en.highly.cc/About.html"
+        }
+      },
+      {
+        "rawMake": "TOYOTA",
+        "occurrences": 15,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "goonet_japan_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "toyota",
+          "canonicalName": "Toyota",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "NISSAN",
+        "occurrences": 14,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "goonet_japan_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "nissan",
+          "canonicalName": "Nissan",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "기아",
+        "occurrences": 10,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "kia",
+          "canonicalName": "Kia",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Geely Auto",
+        "occurrences": 8,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "guazi_china_export"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "geely",
+          "canonicalName": "Geely",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "현대",
+        "occurrences": 6,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "hyundai",
+          "canonicalName": "Hyundai",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "BYD",
+        "occurrences": 5,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "guazi_china_export"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "byd",
+          "canonicalName": "BYD",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Volkswagen",
+        "occurrences": 5,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open",
+          "guazi_china_export",
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "volkswagen",
+          "canonicalName": "Volkswagen",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Audi",
+        "occurrences": 4,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_clean",
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "audi",
+          "canonicalName": "Audi",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Mercedes-Benz",
+        "occurrences": 4,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open",
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "mercedes-benz",
+          "canonicalName": "Mercedes-Benz",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "제네시스",
+        "occurrences": 4,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "genesis",
+          "canonicalName": "Genesis",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Changan",
+        "occurrences": 3,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "guazi_china_export"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "changan",
+          "canonicalName": "Changan",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Cupra",
+        "occurrences": 3,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open",
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "cupra",
+          "canonicalName": "Cupra",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Skoda",
+        "occurrences": 3,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open",
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "skoda",
+          "canonicalName": "Skoda",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Toyota",
+        "occurrences": 3,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open",
+          "guazi_china_export",
+          "japan_partner_open"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "toyota",
+          "canonicalName": "Toyota",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Volvo",
+        "occurrences": 3,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "volvo",
+          "canonicalName": "Volvo",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Alle",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open"
+        ],
+        "resolution": {
+          "status": "probable-parser-noise",
+          "reason": "generic-non-brand-token"
+        }
+      },
+      {
+        "rawMake": "Bentley",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_clean",
+          "dubicars_uae"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "bentley",
+          "canonicalName": "Bentley",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Hyundai",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "guazi_china_export"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "hyundai",
+          "canonicalName": "Hyundai",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Opel",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "opel",
+          "canonicalName": "Opel",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Peugeot",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open",
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "peugeot",
+          "canonicalName": "Peugeot",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "지프",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "jeep",
+          "canonicalName": "Jeep",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "포르쉐",
+        "occurrences": 2,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "porsche",
+          "canonicalName": "Porsche",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "116",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "otomoto_pl_open"
+        ],
+        "resolution": {
+          "status": "probable-parser-noise",
+          "reason": "empty-or-numeric"
+        }
+      },
+      {
+        "rawMake": "De",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open"
+        ],
+        "resolution": {
+          "status": "probable-parser-noise",
+          "reason": "generic-non-brand-token"
+        }
+      },
+      {
+        "rawMake": "GMC",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_clean"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "gmc",
+          "canonicalName": "GMC",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Honda",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "guazi_china_export"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "honda",
+          "canonicalName": "Honda",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Infiniti",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_uae"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "infiniti",
+          "canonicalName": "Infiniti",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "KG모빌리티(쌍용)",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "kgm",
+          "canonicalName": "KGM",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Location",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_uae"
+        ],
+        "resolution": {
+          "status": "probable-parser-noise",
+          "reason": "generic-non-brand-token"
+        }
+      },
+      {
+        "rawMake": "MG",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "dubicars_uae"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "mg-motor",
+          "canonicalName": "MG",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Nissan",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "gaspedaal_nl_open"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "nissan",
+          "canonicalName": "Nissan",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "Renault",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "standvirtual_pt_open"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "renault",
+          "canonicalName": "Renault",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "SEAT",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "otomoto_europe_exact"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "seat",
+          "canonicalName": "SEAT",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "르노코리아(삼성)",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "renault-samsung",
+          "canonicalName": "Renault Samsung",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "미니",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "mini",
+          "canonicalName": "MINI",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "벤츠",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "mercedes-benz",
+          "canonicalName": "Mercedes-Benz",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "아우디",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "audi",
+          "canonicalName": "Audi",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      },
+      {
+        "rawMake": "포드",
+        "occurrences": 1,
+        "files": [
+          "data/catalog/imports/last-catalog-readonly-audit-v17.json"
+        ],
+        "markets": [],
+        "sources": [
+          "encar_direct"
+        ],
+        "resolution": {
+          "status": "resolved",
+          "brandId": "ford",
+          "canonicalName": "Ford",
+          "reason": "exact-canonical-or-safe-alias"
+        }
+      }
+    ]
+  },
+  "rawLogoArchive": {
+    "archiveFiles": 284,
+    "uniqueLogoIdentities": 198,
+    "matchedV2Brands": 193,
+    "identityReviewRequired": [
+      "derways",
+      "doninvest",
+      "dw-hower",
+      "senat",
+      "vortex"
+    ]
+  },
+  "normalizedLogoPairsWithoutV2Brand": [
+    "barkas",
+    "delorean",
+    "tatra"
+  ],
+  "logoIdentityCandidates": {
+    "uniqueCandidates": 8,
+    "slugs": [
+      "barkas",
+      "delorean",
+      "derways",
+      "doninvest",
+      "dw-hower",
+      "senat",
+      "tatra",
+      "vortex"
+    ],
+    "rule": "A logo filename is discovery evidence only. It cannot create or merge a canonical brand until official identity research confirms it."
+  },
+  "nextGate": "Import a complete raw-make inventory from every active parser run, source-check unresolved identities, then obtain authentic 90x60 light/dark logo pairs for each accepted brand."
+}

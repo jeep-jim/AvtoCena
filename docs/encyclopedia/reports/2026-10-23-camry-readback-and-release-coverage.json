@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-23",
+  "batch": "research-2026-10-23-toyota-camry-2026-factory",
+  "run": 39925160057,
+  "savedVariants": 2,
+  "confirmedFields": 8,
+  "independentReadback": "PASS",
+  "untargetedYearVariantsPreserved": true,
+  "revision": "57a3590e-0395-468a-b45b-ffee80c4a53f",
+  "activeIndex": false,
+  "releaseSnapshot": {
+    "createdAt": "2026-10-23T08:20:22.600Z",
+    "indexDigest": "a800304fa8a702003b2cc22fc9c544fd85ac7814c77ac172f086bd0947a81c9b",
+    "manifestDigest": "8ff34364792ad63d00274758b6eeb26db4d9a0b8f5ee3139f21f433b7d6bc18d",
+    "byPowertrain": {
+      "combustion": {
+        "variants": 85676,
+        "requiredValuesPresent": 49731,
+        "requiredValuesSupported": 48074,
+        "power30MinPresent": 0,
+        "power30MinSupported": 0,
+        "missing": {
+          "trim": 23448,
+          "engineCc": 10748,
+          "powerHpOrKw": 14093,
+          "fuel": 572
+        },
+        "unsupported": {
+          "year": 36640,
+          "fuel": 36612,
+          "powertrainKind": 36649,
+          "engineCc": 26279,
+          "powerHpOrKw": 22627,
+          "trim": 13192
+        },
+        "remaining": 37602,
+        "completePercent": 56.11,
+        "remainingPercent": 43.89
+      },
+      "hybrid": {
+        "variants": 13428,
+        "requiredValuesPresent": 35,
+        "requiredValuesSupported": 35,
+        "power30MinPresent": 37,
+        "power30MinSupported": 37,
+        "missing": {
+          "power30MinKw": 13391,
+          "trim": 1616,
+          "powerHpOrKw": 3282,
+          "engineCc": 1403,
+          "fuel": 21
+        },
+        "unsupported": {
+          "year": 3167,
+          "fuel": 3146,
+          "powertrainKind": 3167,
+          "engineCc": 1967,
+          "powerHpOrKw": 1455,
+          "trim": 1551
+        },
+        "remaining": 13393,
+        "completePercent": 0.26,
+        "remainingPercent": 99.74
+      },
+      "electric": {
+        "variants": 12742,
+        "requiredValuesPresent": 2,
+        "requiredValuesSupported": 2,
+        "power30MinPresent": 2,
+        "power30MinSupported": 2,
+        "missing": {
+          "trim": 5346,
+          "power30MinKw": 12740,
+          "powerHpOrKw": 3646,
+          "fuel": 20
+        },
+        "unsupported": {
+          "year": 6030,
+          "fuel": 6010,
+          "powertrainKind": 6030,
+          "powerHpOrKw": 4555,
+          "trim": 684
+        },
+        "remaining": 12740,
+        "completePercent": 0.02,
+        "remainingPercent": 99.98
+      },
+      "unknown": {
+        "variants": 3099,
+        "requiredValuesPresent": 0,
+        "requiredValuesSupported": 0,
+        "power30MinPresent": 0,
+        "power30MinSupported": 0,
+        "missing": {
+          "trim": 248,
+          "fuel": 1297,
+          "powertrainKind": 3099
+        },
+        "unsupported": {
+          "year": 782,
+          "trim": 534,
+          "fuel": 274
+        },
+        "remaining": 3099,
+        "completePercent": 0,
+        "remainingPercent": 100
+      }
+    },
+    "scope": "Existing permanent encyclopedia only; required field coverage is not proof of exact offer matching or a completed price calculation.",
+    "total": {
+      "brands": 181,
+      "models": 2423,
+      "variants": 114945,
+      "requiredValuesPresent": 49768,
+      "requiredValuesSupported": 48111
+    },
+    "run": 39923658639,
+    "activationVerified": false
+  }
+}

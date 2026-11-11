@@ -1,0 +1,709 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T15:26:18.746Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 8,
+  "markets": [
+    {
+      "market": "korea",
+      "requests": [
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/search/list/drct",
+          "method": "POST",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        },
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/car-info-detail-of-ng",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json"
+        }
+      ],
+      "sourceId": "kcar_korea_open",
+      "listingRows": 3,
+      "normalizedRows": 3,
+      "details": [
+        {
+          "sourceOfferId": "EC61367794",
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "totalRub": 8946009,
+          "calculationStatus": "estimated",
+          "breakdown": [
+            {
+              "id": "car",
+              "title": "Цена автомобиля",
+              "amountRub": 2214663,
+              "kind": "car",
+              "amountType": "manual",
+              "source": "vehicle",
+              "note": "Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: 2324663 ₽"
+            },
+            {
+              "id": "security-deposit",
+              "title": "Обеспечительный платёж",
+              "amountRub": 110000,
+              "kind": "deposit",
+              "amountType": "fixed",
+              "source": "market_config",
+              "note": "Засчитывается в стоимость автомобиля"
+            },
+            {
+              "id": "topavto-commission",
+              "title": "Комиссия Автодилера",
+              "amountRub": 90000,
+              "kind": "commission",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "export",
+              "title": "Экспортные расходы",
+              "amountRub": 70000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "logistics",
+              "title": "Логистика",
+              "amountRub": 250000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "broker",
+              "title": "Брокер",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "svh",
+              "title": "СВХ",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "laboratory",
+              "title": "Лаборатория",
+              "amountRub": 15000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "sbkts",
+              "title": "СБКТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "epts",
+              "title": "ЭПТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "rf-delivery",
+              "title": "Доставка по РФ",
+              "amountRub": 120000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "customs",
+              "title": "Таможенная пошлина",
+              "amountRub": 1269853,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated",
+              "note": "Включая таможенное оформление, акциз и НДС, если они применимы"
+            },
+            {
+              "id": "utilization-fee",
+              "title": "Утилизационный сбор",
+              "amountRub": 4620000,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated"
+            },
+            {
+              "id": "exchange-reserve",
+              "title": "Резерв на изменение курса",
+              "amountRub": 46493,
+              "kind": "reserve",
+              "amountType": "percent",
+              "source": "market_config",
+              "note": "2% от стоимости авто"
+            }
+          ],
+          "currencyRate": {
+            "currency": "KRW",
+            "cbrRate": 63.6894,
+            "nominal": 1000,
+            "effectiveRate": 0.0636894,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-06T15:27:19.384Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 36500000,
+            "sourcePriceRub": 2324663
+          },
+          "eurRate": {
+            "currency": "EUR",
+            "cbrRate": 100.5693,
+            "nominal": 1,
+            "effectiveRate": 100.5693,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-06T15:27:19.384Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 1,
+            "sourcePriceRub": 101
+          }
+        },
+        {
+          "sourceOfferId": "EC61369851",
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "totalRub": 6421289,
+          "calculationStatus": "estimated",
+          "breakdown": [
+            {
+              "id": "car",
+              "title": "Цена автомобиля",
+              "amountRub": 1494973,
+              "kind": "car",
+              "amountType": "manual",
+              "source": "vehicle",
+              "note": "Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: 1604973 ₽"
+            },
+            {
+              "id": "security-deposit",
+              "title": "Обеспечительный платёж",
+              "amountRub": 110000,
+              "kind": "deposit",
+              "amountType": "fixed",
+              "source": "market_config",
+              "note": "Засчитывается в стоимость автомобиля"
+            },
+            {
+              "id": "topavto-commission",
+              "title": "Комиссия Автодилера",
+              "amountRub": 90000,
+              "kind": "commission",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "export",
+              "title": "Экспортные расходы",
+              "amountRub": 70000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "logistics",
+              "title": "Логистика",
+              "amountRub": 250000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "broker",
+              "title": "Брокер",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "svh",
+              "title": "СВХ",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "laboratory",
+              "title": "Лаборатория",
+              "amountRub": 15000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "sbkts",
+              "title": "СБКТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "epts",
+              "title": "ЭПТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "rf-delivery",
+              "title": "Доставка по РФ",
+              "amountRub": 120000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "customs",
+              "title": "Таможенная пошлина",
+              "amountRub": 597617,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated",
+              "note": "Включая таможенное оформление, акциз и НДС, если они применимы"
+            },
+            {
+              "id": "utilization-fee",
+              "title": "Утилизационный сбор",
+              "amountRub": 3501600,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated"
+            },
+            {
+              "id": "exchange-reserve",
+              "title": "Резерв на изменение курса",
+              "amountRub": 32099,
+              "kind": "reserve",
+              "amountType": "percent",
+              "source": "market_config",
+              "note": "2% от стоимости авто"
+            }
+          ],
+          "currencyRate": {
+            "currency": "KRW",
+            "cbrRate": 63.6894,
+            "nominal": 1000,
+            "effectiveRate": 0.0636894,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-06T15:27:19.384Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 25200000,
+            "sourcePriceRub": 1604973
+          },
+          "eurRate": {
+            "currency": "EUR",
+            "cbrRate": 100.5693,
+            "nominal": 1,
+            "effectiveRate": 100.5693,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-06T15:27:19.384Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 1,
+            "sourcePriceRub": 101
+          }
+        },
+        {
+          "sourceOfferId": "EC61372482",
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "totalRub": 5177229,
+          "calculationStatus": "estimated",
+          "breakdown": [
+            {
+              "id": "car",
+              "title": "Цена автомобиля",
+              "amountRub": 1539555,
+              "kind": "car",
+              "amountType": "manual",
+              "source": "vehicle",
+              "note": "Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: 1649555 ₽"
+            },
+            {
+              "id": "security-deposit",
+              "title": "Обеспечительный платёж",
+              "amountRub": 110000,
+              "kind": "deposit",
+              "amountType": "fixed",
+              "source": "market_config",
+              "note": "Засчитывается в стоимость автомобиля"
+            },
+            {
+              "id": "topavto-commission",
+              "title": "Комиссия Автодилера",
+              "amountRub": 90000,
+              "kind": "commission",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "export",
+              "title": "Экспортные расходы",
+              "amountRub": 70000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "logistics",
+              "title": "Логистика",
+              "amountRub": 250000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "broker",
+              "title": "Брокер",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "svh",
+              "title": "СВХ",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "laboratory",
+              "title": "Лаборатория",
+              "amountRub": 15000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "sbkts",
+              "title": "СБКТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "epts",
+              "title": "ЭПТС",
+              "amountRub": 35000,
+              "kind": "service",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "rf-delivery",
+              "title": "Доставка по РФ",
+              "amountRub": 120000,
+              "kind": "logistics",
+              "amountType": "fixed",
+              "source": "market_config"
+            },
+            {
+              "id": "customs",
+              "title": "Таможенная пошлина",
+              "amountRub": 971283,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated",
+              "note": "Включая таможенное оформление, акциз и НДС, если они применимы"
+            },
+            {
+              "id": "utilization-fee",
+              "title": "Утилизационный сбор",
+              "amountRub": 1838400,
+              "kind": "customs",
+              "amountType": "calculated",
+              "source": "calculated"
+            },
+            {
+              "id": "exchange-reserve",
+              "title": "Резерв на изменение курса",
+              "amountRub": 32991,
+              "kind": "reserve",
+              "amountType": "percent",
+              "source": "market_config",
+              "note": "2% от стоимости авто"
+            }
+          ],
+          "currencyRate": {
+            "currency": "KRW",
+            "cbrRate": 63.6894,
+            "nominal": 1000,
+            "effectiveRate": 0.0636894,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-06T15:27:19.384Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 25900000,
+            "sourcePriceRub": 1649555
+          },
+          "eurRate": {
+            "currency": "EUR",
+            "cbrRate": 100.5693,
+            "nominal": 1,
+            "effectiveRate": 100.5693,
+            "rateDate": "2026-09-05",
+            "fetchedAt": "2026-09-06T15:27:19.384Z",
+            "rateSource": "cbr_live",
+            "sourcePrice": 1,
+            "sourcePriceRub": 101
+          }
+        }
+      ],
+      "samples": [
+        {
+          "sourceOfferId": "EC61367794",
+          "make": "제네시스",
+          "model": "G80 (RG3)",
+          "year": 2022,
+          "engineCc": 3470,
+          "powerHp": 380,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "EC61369851",
+          "make": "현대",
+          "model": "더 뉴 싼타페",
+          "year": 2022,
+          "engineCc": 2151,
+          "powerHp": 202,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "EC61372482",
+          "make": "아우디",
+          "model": "Q7 (4M)",
+          "year": 2019,
+          "engineCc": 1984,
+          "powerHp": 252,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    }
+  ],
+  "limitation": "Up to three details per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 1
+}

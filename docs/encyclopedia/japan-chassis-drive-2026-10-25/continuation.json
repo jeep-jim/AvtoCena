@@ -1,0 +1,139 @@
+{
+  "checkedAt": "2026-10-25T08:48:34.574461+00:00",
+  "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+  "reference": {
+    "runId": 40175461901,
+    "jobId": 121115041064,
+    "verified": true,
+    "digest": "f1279341ecb316d76ca00d934844332edc370ef194a05f8f0c338cfb1ad4a27d",
+    "groups": 378,
+    "confirmed": 303,
+    "ambiguous": 49,
+    "unresolved": 26
+  },
+  "annualChanges": 95,
+  "annualUnfilled": {
+    "ambiguous": 65,
+    "unconfirmedOrInvalid": 8
+  },
+  "previousDeploy": {
+    "runId": 40161739675,
+    "commit": "51c72e667390835eedd22368d05f24f25f939918",
+    "observedStatus": "success",
+    "step": "Deploy with rollback and resource measurements",
+    "externalHealthVerified": true
+  },
+  "continuationDeploy": {
+    "runId": 40163645953,
+    "commit": "f73f2cacbaed0ac65972da76b460b0581aebe18d",
+    "observedStatus": "cancelled",
+    "step": "Prepare private encyclopedia index"
+  },
+  "nextSteps": [
+    "303reference and saved-drive repair installed in278a44ff24127527baa6a2c148ca2041ad7a5648;40175461903SUCCESS. Do not launch duplicate deployment.",
+    "General AWD returnedHTTP200with2AWDcachedcars,partial/stale and no total. Porsche same-client request returned503visitor_restricted; no full live Japan/Porsche success claim. Do not retry around this refusal or change IP.",
+    "Verify the owner browser case separately or resolve provider access through authorized support; a code-to-drive mapping does not manufacture unavailable listings.",
+    "Continue only Japan original9missing-primaryproof and49ambiguous groups if owner requests continuation; no old broad automations/ASTRA restart. Preserve95annualpatches and55/41/3guards."
+  ],
+  "automations": "Old broad research automations remain stopped.",
+  "preparedReference": {
+    "groups": 378,
+    "confirmed": 303,
+    "ambiguous": 49,
+    "unresolved": 26,
+    "originalInventoryGroups": 335,
+    "additionalFactoryTypes": 43,
+    "additionalConfirmedPorsche": 40,
+    "pendingDurableReadback": false
+  },
+  "replacementDeploy": {
+    "runId": 40165188901,
+    "commit": "5fc6705650c45459c060b748ac41b609f5d33d89",
+    "observedStatus": "success",
+    "step": "completed",
+    "externalHealthVerified": true,
+    "publicEncyclopedia": {
+      "version": 1,
+      "release": "5fc6705650c45459c060b748ac41b609f5d33d89",
+      "startedAt": "2026-10-25T05:55:07.561Z",
+      "groups": 525,
+      "variants": 4851,
+      "fields": 22551,
+      "verified": true,
+      "finishedAt": "2026-10-25T06:00:08.632Z"
+    }
+  },
+  "queuedDeploy": {
+    "runId": 40166164858,
+    "commit": "5bfcbb97f5c6f44468689e810238a53c48908bb4",
+    "observedStatus": "success",
+    "confirmed": 263,
+    "installed": true,
+    "externalHealthVerified": true
+  },
+  "verification": {
+    "profileTests": 92,
+    "latestDriveTests": 12,
+    "typecheck": "PASS",
+    "newMappingsExecutedInSql": 17,
+    "latestExternalFilter": "General AWD HTTP200 partial/stale,2/2AWD; Porsche AWD HTTP503visitor_restricted on exact installed278a44f. Owner browser result unknown.",
+    "generalAwdPublic": {
+      "checkedAt": "2026-10-25T08:41:17.695921+00:00",
+      "request": "/api/catalog/search?market=japan&drive=awd&page=1&pageSize=2",
+      "expectedRelease": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+      "http": 200,
+      "ok": true,
+      "error": null,
+      "reason": null,
+      "items": 2,
+      "drives": [
+        "awd",
+        "awd"
+      ],
+      "partial": true,
+      "stale": true,
+      "total": null,
+      "hasMore": false
+    },
+    "porscheAwdPublic": {
+      "checkedAt": "2026-10-25T08:42:55.395154+00:00",
+      "request": "/api/catalog/search?market=japan&make=Porsche&drive=awd&page=1&pageSize=2",
+      "expectedRelease": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+      "http": 503,
+      "ok": false,
+      "error": "japan_search_unavailable",
+      "reason": "visitor_restricted",
+      "items": 0,
+      "drives": [],
+      "partial": null,
+      "stale": null,
+      "total": null
+    }
+  },
+  "savedFilterRepair": {
+    "commit": "89b97aeda86e5742f34391a7271ed0039ea5cce9",
+    "deployRunId": 40174008563,
+    "status": "cancelled_before_activation_superseded",
+    "auditRunId": 40174008586,
+    "auditConclusion": "success",
+    "savedRows": 520,
+    "savedPorscheRows": 0,
+    "installedIn": "278a44ff24127527baa6a2c148ca2041ad7a5648"
+  },
+  "latestDeploy": {
+    "runId": 40175461903,
+    "jobId": 121115309426,
+    "commit": "278a44ff24127527baa6a2c148ca2041ad7a5648",
+    "observedStatus": "success",
+    "installed": true,
+    "externalHealthVerified": true,
+    "calculationVersion": "aa0d8ca58c3a82e30ab44118bc33cc9b3f1ace847662a7e9d74d35a740f37208",
+    "publicEncyclopediaVerification": {
+      "groups": 525,
+      "variants": 4851,
+      "fields": 22551,
+      "verified": true,
+      "finishedAt": "2026-10-25T08:45:30.391Z"
+    }
+  }
+}

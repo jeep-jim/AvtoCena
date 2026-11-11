@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 24,
+    "newModels": 23,
+    "officialManufacturerSources": 23,
+    "newMlitWorkbookSources": 0,
+    "totalNewSources": 23,
+    "modelsWithMlitIntersection": 21
+  },
+  "reviewed": [
+    {
+      "id": "toyota/corolla-axio",
+      "canonicalName": "Corolla Axio",
+      "officialSourceId": "src-toyota-corolla-axio-japan-archive-2026",
+      "exactSourceNames": [
+        "カローラ アクシオ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "toyota/corolla-fielder",
+      "canonicalName": "Corolla Fielder",
+      "officialSourceId": "src-toyota-corolla-fielder-japan-archive-2026",
+      "exactSourceNames": [
+        "カローラ フィールダー"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "toyota/passo",
+      "canonicalName": "Passo",
+      "officialSourceId": "src-toyota-passo-japan-archive-2026",
+      "exactSourceNames": [
+        "パッソ"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "toyota/pixis-joy",
+      "canonicalName": "Pixis Joy",
+      "officialSourceId": "src-toyota-pixis-joy-japan-archive-2026",
+      "exactSourceNames": [
+        "ピクシス ジョイ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "toyota/pixis-mega",
+      "canonicalName": "Pixis Mega",
+      "officialSourceId": "src-toyota-pixis-mega-japan-archive-2026",
+      "exactSourceNames": [
+        "ピクシス メガ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "toyota/vitz",
+      "canonicalName": "Vitz",
+      "officialSourceId": "src-toyota-vitz-japan-archive-2026",
+      "exactSourceNames": [
+        "ヴィッツ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "toyota/estima",
+      "canonicalName": "Estima",
+      "officialSourceId": "src-toyota-estima-japan-archive-2026",
+      "exactSourceNames": [
+        "エスティマ",
+        "エスティマ ハイブリッド"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "id": "toyota/mark-x",
+      "canonicalName": "Mark X",
+      "officialSourceId": "src-toyota-mark-x-japan-archive-2026",
+      "exactSourceNames": [
+        "マークX"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "toyota/isis",
+      "canonicalName": "Isis",
+      "officialSourceId": "src-toyota-isis-japan-archive-2026",
+      "exactSourceNames": [
+        "アイシス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "toyota/porte",
+      "canonicalName": "Porte",
+      "officialSourceId": "src-toyota-porte-japan-archive-2026",
+      "exactSourceNames": [
+        "ポルテ"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "toyota/spade",
+      "canonicalName": "Spade",
+      "officialSourceId": "src-toyota-spade-japan-archive-2026",
+      "exactSourceNames": [
+        "スペイド"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "toyota/granace",
+      "canonicalName": "GranAce",
+      "officialSourceId": "src-toyota-granace-japan-archive-2026",
+      "exactSourceNames": [
+        "グランエース"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "toyota/copen",
+      "canonicalName": "Copen",
+      "officialSourceId": "src-toyota-copen-japan-archive-2026",
+      "exactSourceNames": [
+        "コペン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "toyota/wish",
+      "canonicalName": "Wish",
+      "officialSourceId": "src-toyota-wish-japan-archive-2026",
+      "exactSourceNames": [
+        "ウィッシュ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "daihatsu/boon",
+      "canonicalName": "Boon",
+      "officialSourceId": "src-daihatsu-boon-japan-archive-2026",
+      "exactSourceNames": [
+        "ブーン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "daihatsu/cast",
+      "canonicalName": "Cast",
+      "officialSourceId": "src-daihatsu-cast-japan-archive-2026",
+      "exactSourceNames": [
+        "キャスト"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "daihatsu/mira-tocot",
+      "canonicalName": "Mira Tocot",
+      "officialSourceId": "src-daihatsu-mira-tocot-japan-archive-2026",
+      "exactSourceNames": [
+        "ミラ トコット"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "daihatsu/wake",
+      "canonicalName": "Wake",
+      "officialSourceId": "src-daihatsu-wake-japan-archive-2026",
+      "exactSourceNames": [
+        "ウェイク"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "nissan/fuga",
+      "canonicalName": "FUGA",
+      "officialSourceId": "src-nissan-fuga-japan-archive-2026",
+      "exactSourceNames": [
+        "フーガ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "nissan/cima",
+      "canonicalName": "CIMA",
+      "officialSourceId": "src-nissan-cima-japan-archive-2026",
+      "exactSourceNames": [
+        "シーマ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "nissan/cube",
+      "canonicalName": "CUBE",
+      "officialSourceId": "src-nissan-cube-japan-archive-2026",
+      "exactSourceNames": [
+        "キューブ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "nissan/teana",
+      "canonicalName": "TEANA",
+      "officialSourceId": "src-nissan-teana-japan-archive-2026",
+      "exactSourceNames": [
+        "ティアナ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "mitsubishi/pajero",
+      "canonicalName": "Pajero",
+      "officialSourceId": "src-mitsubishi-pajero-japan-archive-2026",
+      "exactSourceNames": [
+        "パジェロ"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    }
+  ]
+}

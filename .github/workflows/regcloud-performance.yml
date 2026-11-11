@@ -1,0 +1,201 @@
+name: Regcloud — measure production performance
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-performance.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Wait for the explicitly requested release
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'WAIT'
+          import json,time,urllib.request
+          expected=json.load(open('.github/market-runs/regcloud-performance.json')).get('release')
+          assert expected and len(expected)==40
+          deadline=time.monotonic()+45*60
+          while True:
+              try:
+                  with urllib.request.urlopen('https://avtocena.com/api/health',timeout=10) as response: health=json.load(response)
+                  if health.get('ok') and health.get('releaseSha')==expected:break
+                  print('WAITING_FOR_RELEASE',health.get('releaseSha'),flush=True)
+              except Exception as error:print('WAITING_FOR_HEALTH',str(error),flush=True)
+              if time.monotonic()>=deadline:raise RuntimeError('requested_release_not_active')
+              time.sleep(30)
+          WAIT
+      - name: Verify running service without restart
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          # The public health can switch before the old container is retired.
+          # Wait for activation to finish before selecting the running port.
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 300 9
+          port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
+          perf_status=0
+          python3 - "$port" <<'PERF' || perf_status=$?
+          import urllib.request,time,json,sys
+          base='http://127.0.0.1:'+sys.argv[1]
+          failures=[]
+          try:
+              with urllib.request.urlopen(base+'/api/health',timeout=15) as r:print('HEALTH',r.read().decode(),flush=True)
+          except Exception as error:
+              failures.append({'path':'/api/health','error':str(error)});print('HEALTH_FAILURE',str(error),flush=True)
+          paths=['/api/catalog/search?market=china&engineTo=1800&powerTo=160&yearFrom=2021&budgetTo=3000000&pageSize=24','/api/catalog/search?market=china&powerTo=160&pageSize=24','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/api/catalog/search?market=korea&make=Hyundai&pageSize=24','/cars?sort=totalRub&city=%D0%A3%D1%81%D1%81%D1%83%D1%80%D0%B8%D0%B9%D1%81%D0%BA','/cars','/cars?sort=totalRubDesc','/api/catalog/search?market=japan&pageSize=24&sort=totalRub','/cars?sort=totalRub','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24','/api/catalog/search?market=korea&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&sort=totalRubDesc','/api/catalog/search?market=china&pageSize=24&sort=totalRub','/api/catalog/search?market=europe&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&budgetTo=3000000','/cars/offer/kia-k5-iii-benzin-2-0-prestige-2021--a877bac6f6ecedcd6101bca2','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb','/api/catalog/search?market=korea&pageSize=24&sort=totalRub']
+          paths += ['/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24&includeFacets=1','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24&page=2','/cars?market=china&engineTo=2000&budgetTo=3000000']
+          paths.insert(0,'/api/catalog/market-counts')
+          for path in paths:
+              start=time.monotonic()
+              try:
+                  with urllib.request.urlopen(base+path,timeout=60) as r:
+                      body=r.read(); result={'path':path,'seconds':round(time.monotonic()-start,3),'status':r.status,'bytes':len(body),'timing':r.headers.get('Server-Timing')}
+                      if path=='/api/catalog/market-counts':
+                          value=json.loads(body);assert value.get('ok') and value.get('total',0)>0 and sum(value['markets'].values())==value['total'];result.update(total=value['total'],markets=value['markets'])
+                      elif path.startswith('/api/'):
+                          value=json.loads(body);assert value.get('total',0)>0 and value.get('items');result.update(total=value.get('total'),items=len(value.get('items',[])),prices=[{'id':x['id'],'rub':x.get('totalRub'),'seller':x.get('sellerPriceRub'),'preview':(x.get('japanDeliveredPreview') or {}).get('totalRub')} for x in value.get('items',[])])
+                      else:assert b'</html>' in body and b'$RX(' not in body and len(body)>50000
+                      print('MEASURE',json.dumps(result),flush=True)
+                      if result['seconds']>1:failures.append({'path':path,'seconds':result['seconds']})
+              except Exception as error:
+                  failures.append({'path':path,'error':str(error)})
+                  print('MEASURE',json.dumps({'path':path,'seconds':round(time.monotonic()-start,3),'error':str(error)}),flush=True)
+          import gzip
+          for path in ['/cars?sort=totalRub','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb']:
+              start=time.monotonic()
+              try:
+                  req=urllib.request.Request('https://avtocena.com'+path,headers={'Accept-Encoding':'gzip','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=60) as r:
+                      headers_seconds=round(time.monotonic()-start,3);wire=r.read();body=gzip.decompress(wire) if r.headers.get('Content-Encoding')=='gzip' else wire
+                      assert b'</html>' in body and b'$RX(' not in body and len(body)>50000
+                      seconds=round(time.monotonic()-start,3)
+                      if seconds>1:failures.append({'domain':path,'seconds':seconds})
+                      print('DOMAIN',json.dumps({'path':path,'seconds':seconds,'headersSeconds':headers_seconds,'wireBytes':len(wire),'htmlBytes':len(body),'encoding':r.headers.get('Content-Encoding')}),flush=True)
+              except Exception as error:
+                  failures.append({'external':path,'error':str(error)})
+          print('PERFORMANCE_GATE',json.dumps({'thresholdSeconds':1,'failures':failures}),flush=True)
+          if failures:raise SystemExit(1)
+          PERF
+          docker logs --since 30m --tail 5000 avtocena-production 2>&1 | python3 -c 'import sys,json; rows=[]; errors=0
+          for line in sys.stdin:
+              if "catalog_storage_read " in line:
+                  try: rows.append(json.loads(line.split("catalog_storage_read ",1)[1]))
+                  except: pass
+              if "heap out of memory" in line or "FATAL ERROR" in line: errors+=1
+          print("SLOW_READS",json.dumps(sorted(rows,key=lambda x:x["ms"],reverse=True)[:45]));print("FATAL_COUNT",errors)'
+          cat /opt/avtocena/metrics/resources.json
+          docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          docker stats --no-stream --format 'container={{.Name}} memory={{.MemUsage}} cpu={{.CPUPerc}}'
+          ps -eo comm,pcpu,rss --sort=-pcpu | python3 -c 'import sys;print("".join(sys.stdin.readlines()[:12]))'
+          python3 - <<'ACCESS'
+          import pathlib,collections,re,json
+          counts=collections.Counter()
+          log=pathlib.Path('/var/log/nginx/access.log')
+          if log.exists():
+              with log.open(errors='replace') as stream: lines=collections.deque(stream,maxlen=5000)
+              for line in lines:
+                  match=re.search(r'"(?:GET|POST|HEAD) ([^ ]+) HTTP/[^"]+" (\d+)',line)
+                  if not match:continue
+                  path=match[1].split('?')[0]
+                  category=next((name for name,prefix in [('market-counts','/api/catalog/market-counts'),('sitemap','/sitemap'),('offer','/cars/offer/'),('catalog-api','/api/catalog/'),('catalog','/cars'),('health','/api/health'),('ai-feed','/ai/') ] if path.startswith(prefix)),'other')
+                  counts[(category,match[2])]+=1
+              print('RECENT_ACCESS_COUNTS',json.dumps([{'route':route,'status':status,'requests':count} for (route,status),count in counts.most_common()]))
+          ACCESS
+          exit "$perf_status"
+          REMOTE
+
+      - name: Check complete public pages from outside the server
+        if: always()
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request,time,json,gzip
+          failures=[]
+          for path in ['/cars?sort=totalRub','/cars?sort=totalRubDesc','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb']:
+              start=time.monotonic()
+              try:
+                  req=urllib.request.Request('https://avtocena.com'+path,headers={'Accept-Encoding':'gzip','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=60) as response:
+                      headers_seconds=round(time.monotonic()-start,3)
+                      wire=response.read();body=gzip.decompress(wire) if response.headers.get('Content-Encoding')=='gzip' else wire
+                      seconds=round(time.monotonic()-start,3)
+                      assert response.status==200 and b'</html>' in body and b'$RX(' not in body and len(body)>50000
+                      print('PUBLIC_RUNNER',json.dumps({'path':path,'seconds':seconds,'headersSeconds':headers_seconds,'wireBytes':len(wire),'htmlBytes':len(body)}),flush=True)
+                      if seconds>1:failures.append({'path':path,'seconds':seconds})
+              except Exception as error:failures.append({'path':path,'error':str(error)})
+          print('PUBLIC_GATE',json.dumps({'thresholdSeconds':1,'failures':failures}),flush=True)
+          if failures:raise SystemExit(1)
+          PYTHON
+
+      - name: Verify crawler budget and retry guidance
+        if: always()
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request,urllib.error,concurrent.futures,json
+          def request(_):
+              req=urllib.request.Request('https://avtocena.com/cars?market=korea',method='HEAD',headers={'User-Agent':'AvtoCenaPerformanceBot/1.0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=45) as r:return {'status':r.status,'retryAfter':r.headers.get('Retry-After')}
+              except urllib.error.HTTPError as e:return {'status':e.code,'retryAfter':e.headers.get('Retry-After')}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:results=list(pool.map(request,range(6)))
+          print('CRAWLER_BUDGET',json.dumps(results))
+          assert all(r['status'] in (200,429) for r in results)
+          assert any(r['status']==429 and r['retryAfter']=='5' for r in results)
+          PYTHON
+
+      - name: Exercise published catalog on mobile and desktop
+        if: always()
+        run: |
+          npm install --prefix "$RUNNER_TEMP/catalog-live" --no-package-lock --ignore-scripts playwright@1.55.0
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/catalog-live/node_modules/playwright/index.mjs" CHROME_BIN="$(command -v google-chrome)" node tests/browser/catalog-live-journey.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-final-performance-journey
+          path: artifacts/catalog-live
+          retention-days: 7
+
+  crm_audit:
+    needs: verify
+    if: always()
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Measure existing public and authenticated CRM pages without writes
+        env:
+          CRM_RELEASE_CHECK: "1"
+          EXPECTED_RELEASE: ${{ github.event.workflow_run.head_sha }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+        run: node --import tsx scripts/crm-runtime-latency.mjs

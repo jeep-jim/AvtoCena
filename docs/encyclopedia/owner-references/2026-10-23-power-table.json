@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "receivedAt": "2026-10-23",
+  "provenance": "Owner supplied and explicitly described as checked exact models in this conversation; not represented as manufacturer certification.",
+  "attachmentName": "image(20261023-075515).png",
+  "attachmentSha256": "d18ff6f71a202121d11374d38172e6e02a3c95d0f115723c2de544bf36029c17",
+  "rules": [
+    "Calculation category is not fuel or peak power.",
+    "Only explicit electric components are summed into power30MinKw.",
+    "Unlabelled mixed-power formulas need component identity confirmation before import.",
+    "Missing model years and trims remain unresolved; GAC S7 alternatives are not merged."
+  ],
+  "rows": [
+    {
+      "row": 1,
+      "originalName": "BYD Leopard 5 / Fangchengbao Bao 5",
+      "originalFormula": "80+80+135двс=295 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": [
+        80,
+        80
+      ],
+      "icePowerKw": 135,
+      "statedCalculationTotalKw": 295,
+      "calculatedMotor30MinSumKw": 160,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 2,
+      "originalName": "GEELY Gelaxy M9 3 мотора",
+      "originalFormula": "115двс+81+76,5+76,5 = 349 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": [
+        81,
+        76.5,
+        76.5
+      ],
+      "icePowerKw": 115,
+      "statedCalculationTotalKw": 349,
+      "calculatedMotor30MinSumKw": 234.0,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 3,
+      "originalName": "Toyota Camry 2.0hybrid",
+      "originalFormula": "112ДВС+58=170квт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": [
+        58
+      ],
+      "icePowerKw": 112,
+      "statedCalculationTotalKw": 170,
+      "calculatedMotor30MinSumKw": 58,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 4,
+      "originalName": "LI L7 2025-2026",
+      "originalFormula": "65+80=145квт",
+      "ownerCalculationCategory": "electric",
+      "motor30MinComponentsKw": [
+        65,
+        80
+      ],
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 145,
+      "calculatedMotor30MinSumKw": 145,
+      "years": [
+        2025,
+        2026
+      ],
+      "drive": null,
+      "state": "ready_for_exact_identity_review"
+    },
+    {
+      "row": 5,
+      "originalName": "VOYAH FREE 318+",
+      "originalFormula": "41+100=141квт",
+      "ownerCalculationCategory": "electric",
+      "motor30MinComponentsKw": [
+        41,
+        100
+      ],
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 141,
+      "calculatedMotor30MinSumKw": 141,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 6,
+      "originalName": "HONDA C-RV 2.0Hybrid",
+      "originalFormula": "110+65=175 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 175,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 7,
+      "originalName": "Voyah Taishan 8X",
+      "originalFormula": "105+67,5+103,5=276 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 276,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 8,
+      "originalName": "Toyota BZ3x pro",
+      "originalFormula": "45кВт",
+      "ownerCalculationCategory": "electric",
+      "motor30MinComponentsKw": [
+        45
+      ],
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 45,
+      "calculatedMotor30MinSumKw": 45,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 9,
+      "originalName": "Changan Q05",
+      "originalFormula": "54 кВт",
+      "ownerCalculationCategory": "electric",
+      "motor30MinComponentsKw": [
+        54
+      ],
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 54,
+      "calculatedMotor30MinSumKw": 54,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 10,
+      "originalName": "Changan A06 до 2027модельного",
+      "originalFormula": "54 кВт",
+      "ownerCalculationCategory": "electric",
+      "motor30MinComponentsKw": [
+        54
+      ],
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 54,
+      "calculatedMotor30MinSumKw": 54,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 11,
+      "originalName": "Changan Q07",
+      "originalFormula": "105+74,25=179,25 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 179.25,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": "fwd",
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 12,
+      "originalName": "LI L6 2024-2026",
+      "originalFormula": "65+69 кВт",
+      "ownerCalculationCategory": "electric",
+      "motor30MinComponentsKw": [
+        65,
+        69
+      ],
+      "icePowerKw": null,
+      "statedCalculationTotalKw": null,
+      "calculatedMotor30MinSumKw": 134,
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "drive": null,
+      "state": "ready_for_exact_identity_review"
+    },
+    {
+      "row": 13,
+      "originalName": "Trumpchi S7 (Gac S7)",
+      "originalFormula": "115+90+30=235 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 235,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 14,
+      "originalName": "Geely Galaxy M7",
+      "originalFormula": "79+78,75=157,75 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 157.75,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": "fwd",
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 15,
+      "originalName": "Zeekr 8x 3 мотора",
+      "originalFormula": "202+130,5+166,5+166,5=665,5 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 665.5,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": null,
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 16,
+      "originalName": "Gac S7",
+      "originalFormula": "115+96+30=241 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 241,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": "awd",
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 17,
+      "originalName": "LYNK & CO 07GT ULTRA 4WD",
+      "originalFormula": "",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": null,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": "awd",
+      "state": "needs_identity_or_component_review"
+    },
+    {
+      "row": 18,
+      "originalName": "BYD SHARK 6 пикап",
+      "originalFormula": "135+90+54=279 кВт",
+      "ownerCalculationCategory": "petrol",
+      "motor30MinComponentsKw": null,
+      "icePowerKw": null,
+      "statedCalculationTotalKw": 279,
+      "calculatedMotor30MinSumKw": null,
+      "years": null,
+      "drive": "awd",
+      "state": "needs_identity_or_component_review"
+    }
+  ]
+}

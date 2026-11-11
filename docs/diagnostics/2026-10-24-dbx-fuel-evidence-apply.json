@@ -1,0 +1,100 @@
+{
+  "planDigest": "b5fae07d6bca04777b6e7b3d735911f24f1f278a0e63eb6ee7cf8754ffde517e",
+  "startedAt": "2026-10-23T19:19:03.844Z",
+  "verified": true,
+  "changedValues": 0,
+  "changedObjects": 6,
+  "applied": [
+    {
+      "path": "catalog/public/projection/uae.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2dab49e82d07e2b7c76c7cb8537dfd99f0c1514ea1b0e48cec46073f5ad84d9f"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection/uae.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2dab49e82d07e2b7c76c7cb8537dfd99f0c1514ea1b0e48cec46073f5ad84d9f"
+    },
+    {
+      "path": "catalog/public/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2e13be3c638f7ad8a6cefa474124ec6d96336dacc7d57cf8a98003e040b5aa18"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2e13be3c638f7ad8a6cefa474124ec6d96336dacc7d57cf8a98003e040b5aa18"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/budget-cards-v3/1215.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "a885118080a90dfa7119d984a0ba3b056f00db22ffcb1551707541ef9cd28720"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-parts/all/30-eb72d51d62b90260c06918d531087e73db328313dedbaf8adb7eba2625e6da76.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "eb72d51d62b90260c06918d531087e73db328313dedbaf8adb7eba2625e6da76"
+    }
+  ],
+  "rootDigest": "a2fc523b5501caf46aec25ea3a1c168ec9dabe4c4c6a465ad502d40879299e6f",
+  "backupBase": "catalog/repairs/fuel-evidence/b5fae07d6bca04777b6e7b3d735911f24f1f278a0e63eb6ee7cf8754ffde517e/",
+  "finishedAt": "2026-10-23T19:28:29.541Z",
+  "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+  "generationId": "gen_1792702445675_8c312f85",
+  "progress": [
+    {
+      "path": "catalog/public/projection/uae.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2dab49e82d07e2b7c76c7cb8537dfd99f0c1514ea1b0e48cec46073f5ad84d9f"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection/uae.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2dab49e82d07e2b7c76c7cb8537dfd99f0c1514ea1b0e48cec46073f5ad84d9f"
+    },
+    {
+      "path": "catalog/public/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2e13be3c638f7ad8a6cefa474124ec6d96336dacc7d57cf8a98003e040b5aa18"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "2e13be3c638f7ad8a6cefa474124ec6d96336dacc7d57cf8a98003e040b5aa18"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/budget-cards-v3/1215.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "a885118080a90dfa7119d984a0ba3b056f00db22ffcb1551707541ef9cd28720"
+    },
+    {
+      "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-parts/all/30-eb72d51d62b90260c06918d531087e73db328313dedbaf8adb7eba2625e6da76.json",
+      "changed": [
+        "b65974b83d5399d588073fc5"
+      ],
+      "sha256": "eb72d51d62b90260c06918d531087e73db328313dedbaf8adb7eba2625e6da76"
+    }
+  ]
+}

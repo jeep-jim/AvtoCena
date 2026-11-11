@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23",
+  "brand": "Li Auto",
+  "baselineIndexDigest": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+  "baselineVariants": 251,
+  "completedMandatoryAfterOwnerBatch": 35,
+  "remainingMandatory": 216,
+  "activeIndexContainsOwnerBatch": false,
+  "models": [
+    {
+      "id": "726127455df96c1b21478116",
+      "model": "i6",
+      "variants": 2,
+      "mandatoryComplete": 0,
+      "remaining": 2,
+      "missingAtBaseline": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      }
+    },
+    {
+      "id": "3f8372bb9ab1c822f1411fc5",
+      "model": "i8",
+      "variants": 2,
+      "mandatoryComplete": 0,
+      "remaining": 2,
+      "missingAtBaseline": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      }
+    },
+    {
+      "id": "8b60f0ffcc521f344a4e6ce0",
+      "model": "i9",
+      "variants": 1,
+      "mandatoryComplete": 0,
+      "remaining": 1,
+      "missingAtBaseline": {
+        "powerHpOrKw": 1,
+        "power30MinKw": 1
+      }
+    },
+    {
+      "id": "e6c60cefa0b0464429b01622",
+      "model": "L6",
+      "variants": 1,
+      "mandatoryComplete": 0,
+      "remaining": 1,
+      "missingAtBaseline": {
+        "powerHpOrKw": 1,
+        "power30MinKw": 1
+      }
+    },
+    {
+      "id": "b596bd9d20dc328c633c713d",
+      "model": "L7",
+      "variants": 1,
+      "mandatoryComplete": 0,
+      "remaining": 1,
+      "missingAtBaseline": {
+        "engineCc": 1,
+        "powerHpOrKw": 1,
+        "power30MinKw": 1
+      }
+    },
+    {
+      "id": "d6bce5d21e79956e8f823b64",
+      "model": "L8",
+      "variants": 2,
+      "mandatoryComplete": 0,
+      "remaining": 2,
+      "missingAtBaseline": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      }
+    },
+    {
+      "id": "ad0d0603347cd9a8116cec97",
+      "model": "L9",
+      "variants": 6,
+      "mandatoryComplete": 0,
+      "remaining": 6,
+      "missingAtBaseline": {
+        "powerHpOrKw": 6,
+        "power30MinKw": 6,
+        "engineCc": 3
+      }
+    },
+    {
+      "id": "04d6a0a71f4dcd3930b5f831",
+      "model": "Li i6",
+      "variants": 20,
+      "mandatoryComplete": 0,
+      "remaining": 20,
+      "missingAtBaseline": {
+        "powerHpOrKw": 12,
+        "power30MinKw": 20,
+        "trim": 7
+      }
+    },
+    {
+      "id": "8e43af6a33cb998daa3d8a87",
+      "model": "Li i8",
+      "variants": 7,
+      "mandatoryComplete": 0,
+      "remaining": 7,
+      "missingAtBaseline": {
+        "powerHpOrKw": 4,
+        "power30MinKw": 7,
+        "trim": 2
+      }
+    },
+    {
+      "id": "a89063f75687555839b774d7",
+      "model": "Li L6",
+      "variants": 26,
+      "mandatoryComplete": 21,
+      "remaining": 5,
+      "missingAtBaseline": {
+        "power30MinKw": 26,
+        "trim": 5
+      }
+    },
+    {
+      "id": "b3ca490776504ef749b116ed",
+      "model": "Li L7",
+      "variants": 49,
+      "mandatoryComplete": 14,
+      "remaining": 35,
+      "missingAtBaseline": {
+        "power30MinKw": 49,
+        "trim": 7,
+        "engineCc": 6,
+        "powerHpOrKw": 5
+      }
+    },
+    {
+      "id": "31c75980220a947e4ffef313",
+      "model": "Li L8",
+      "variants": 49,
+      "mandatoryComplete": 0,
+      "remaining": 49,
+      "missingAtBaseline": {
+        "power30MinKw": 49,
+        "trim": 8,
+        "engineCc": 1
+      }
+    },
+    {
+      "id": "706ecc88386efd98cb81a1b1",
+      "model": "Li L9",
+      "variants": 41,
+      "mandatoryComplete": 0,
+      "remaining": 41,
+      "missingAtBaseline": {
+        "trim": 9,
+        "power30MinKw": 41,
+        "engineCc": 2,
+        "powerHpOrKw": 2
+      }
+    },
+    {
+      "id": "ddedb6eb1529506f70168f7f",
+      "model": "Li MEGA",
+      "variants": 15,
+      "mandatoryComplete": 0,
+      "remaining": 15,
+      "missingAtBaseline": {
+        "powerHpOrKw": 9,
+        "power30MinKw": 15,
+        "trim": 3
+      }
+    },
+    {
+      "id": "78dbeacc78cc013594ba9b11",
+      "model": "Li ONE",
+      "variants": 27,
+      "mandatoryComplete": 0,
+      "remaining": 27,
+      "missingAtBaseline": {
+        "power30MinKw": 27,
+        "trim": 7,
+        "engineCc": 3,
+        "powerHpOrKw": 1
+      }
+    },
+    {
+      "id": "198e4e4881d229e930682acc",
+      "model": "MEGA",
+      "variants": 2,
+      "mandatoryComplete": 0,
+      "remaining": 2,
+      "missingAtBaseline": {
+        "powerHpOrKw": 2,
+        "power30MinKw": 2
+      }
+    }
+  ],
+  "candidateSourcesNotApplied": [
+    {
+      "url": "https://www.drom.ru/catalog/li/l9/529040/",
+      "reason": "Secondary source; exact type-approval/CoC and annual applicability required."
+    },
+    {
+      "url": "https://www.drom.ru/catalog/li/l8/492093/",
+      "reason": "Secondary source; exact type-approval/CoC and annual applicability required."
+    },
+    {
+      "url": "https://csb.broker/services/power30min",
+      "reason": "Broker reference table; model/year and manufacturer documentation not verified."
+    }
+  ],
+  "heldRowsReport": "docs/encyclopedia/reports/2026-10-23-owner-li-preflight.json",
+  "ownerTable": "docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+  "next": "Continue Li Auto remaining exact fields; then Toyota owner-table matches and ICE families. Do not call whole brand complete."
+}

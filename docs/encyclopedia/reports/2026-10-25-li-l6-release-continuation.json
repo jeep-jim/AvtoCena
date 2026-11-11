@@ -1,0 +1,42 @@
+{
+  "release": "9503f4b4baecc4d72bf033c96f28cfbe85ee8934",
+  "runId": 40208568165,
+  "prepareJobId": 121214838884,
+  "status": "installation_in_progress_not_publicly_verified",
+  "lastVerifiedPublicRelease": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+  "savedManufacturerFields": 26,
+  "localTestsPassed": 51,
+  "typecheck": "web_and_engine_pass",
+  "requiredBatches": 57,
+  "publicBatches": 43,
+  "astraPlans": 3,
+  "acceptance": {
+    "offerIds": [
+      "7c65af5e91ac935df14e707a",
+      "222fe9116ba08e733b14871d",
+      "0b2d4f71cf32c06ffb33cca5"
+    ],
+    "verify": [
+      "exact public health release",
+      "same source offer identities",
+      "series_hybrid from reviewed subtype",
+      "icePowerKw=110 from manufacturer",
+      "power30MinKw=134 from existing owner evidence if unambiguous",
+      "nonempty calculation",
+      "manual parameters and explicit source conflicts preserved",
+      "required/public release guards pass"
+    ]
+  },
+  "previousReleasePriceIndexGain": {
+    "china": 4661,
+    "europe": 1370,
+    "korea": 1,
+    "total": 6032,
+    "sourceJobs": [
+      121169171867,
+      121203076636
+    ],
+    "scope": "Same catalog generation; prepared budget index rows with calculated price, not all 22473 precedent estimates."
+  },
+  "remaining": "Full EV/HEV catalog completion remains unfinished; do not duplicate active release or restart collectors."
+}

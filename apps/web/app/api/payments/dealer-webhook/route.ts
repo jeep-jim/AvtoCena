@@ -1,0 +1,4 @@
+import {readBook} from '@/lib/dealers/billing/store';
+import {checkPayment} from '@/lib/dealers/billing/payments';
+import {validDealerId} from '@/lib/dealers/showcase-store';
+export async function POST(request:Request){try{const raw=await request.text();if(raw.length>20000)return new Response(null,{status:413});const body=JSON.parse(raw),p=body.object;if(!['payment.succeeded','payment.canceled'].includes(body.event))return Response.json({ok:true});const id=p?.metadata?.dealerId,orderId=p?.metadata?.orderId;if(typeof id!=='string'||!validDealerId(id)||typeof orderId!=='string')return new Response(null,{status:400});const book=await readBook(id),o=book.orders.find(o=>o.id===orderId&&o.providerId===p.id);if(!o)return new Response(null,{status:404});await checkPayment(id,orderId);return Response.json({ok:true});}catch{return Response.json({error:'payment_verification_pending'},{status:503});}}

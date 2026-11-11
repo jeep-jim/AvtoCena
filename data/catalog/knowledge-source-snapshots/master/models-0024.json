@@ -1,0 +1,8161 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 24,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "iso:grifo",
+      "make": "Iso",
+      "model": "Grifo",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isorivolta:lele",
+      "make": "Iso Rivolta",
+      "model": "Lele",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:amigo",
+      "make": "Isuzu",
+      "model": "Amigo",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:ascender",
+      "make": "Isuzu",
+      "model": "Ascender",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:axiom",
+      "make": "Isuzu",
+      "model": "Axiom",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:bellet",
+      "make": "Isuzu",
+      "model": "Bellet",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:bellett",
+      "make": "Isuzu",
+      "model": "Bellett",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:bighorn",
+      "make": "Isuzu",
+      "model": "Bighorn",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:crewcab",
+      "make": "Isuzu",
+      "model": "Crew Cab",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:dmax",
+      "make": "Isuzu",
+      "model": "D-Max",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": "isuzu/d-max",
+        "canonicalMake": "Isuzu",
+        "canonicalModel": "D-Max"
+      },
+      "aliases": [
+        "D-MAX",
+        "DMAX"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:gemini",
+      "make": "Isuzu",
+      "model": "Gemini",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:hombrepickup",
+      "make": "Isuzu",
+      "model": "Hombre Pickup",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:mu",
+      "make": "Isuzu",
+      "model": "Mu",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:mux",
+      "make": "Isuzu",
+      "model": "Mu-X",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": "isuzu/mu-x",
+        "canonicalMake": "Isuzu",
+        "canonicalModel": "Mu-X"
+      },
+      "aliases": [
+        "MU-X"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:oasis",
+      "make": "Isuzu",
+      "model": "Oasis",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:piazza",
+      "make": "Isuzu",
+      "model": "Piazza",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:piazzaturbo",
+      "make": "Isuzu",
+      "model": "Piazza Turbo",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:trooper",
+      "make": "Isuzu",
+      "model": "Trooper",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:ubs",
+      "make": "Isuzu",
+      "model": "Ubs",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "isuzu:vehicross",
+      "make": "Isuzu",
+      "model": "Vehicross",
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "izh:2125",
+      "make": "IZh",
+      "model": "2125",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jac:ejs4",
+      "make": "JAC",
+      "model": "E-JS4",
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/e-js4",
+        "canonicalMake": "JAC",
+        "canonicalModel": "E-JS4"
+      },
+      "aliases": [
+        "E-JS4"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jac:e30x",
+      "make": "JAC",
+      "model": "E30X",
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/e30x",
+        "canonicalMake": "JAC",
+        "canonicalModel": "E30X"
+      },
+      "aliases": [
+        "E30X",
+        "E30X; E30X; E-JS3; E-JS3",
+        "E30X; E30X; E-JS3; ES3; E"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jac:es4",
+      "make": "JAC",
+      "model": "ES4",
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/es4",
+        "canonicalMake": "JAC",
+        "canonicalModel": "ES4"
+      },
+      "aliases": [
+        "ES4",
+        "ES4 ESE14 E-S4 E-JS4"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jac:iev7s",
+      "make": "JAC",
+      "model": "iEV7S",
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/iev7s",
+        "canonicalMake": "JAC",
+        "canonicalModel": "iEV7S"
+      },
+      "aliases": [
+        "IEV7S",
+        "IEV7S E-S2 E-S2",
+        "IEV7S, E-S2"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jac:js4",
+      "make": "JAC",
+      "model": "JS4",
+      "canonical": {
+        "brandId": "jac",
+        "modelId": null,
+        "canonicalMake": "JAC",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jac:js6",
+      "make": "JAC",
+      "model": "JS6",
+      "canonical": {
+        "brandId": "jac",
+        "modelId": null,
+        "canonicalMake": "JAC",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jacyiwei:3",
+      "make": "JAC Yiwei",
+      "model": "3",
+      "canonical": {
+        "brandId": "jac-yiwei",
+        "modelId": "jac-yiwei/3",
+        "canonicalMake": "JAC Yiwei",
+        "canonicalModel": "3"
+      },
+      "aliases": [
+        "钇为3",
+        "E30X"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaecoo:5pure",
+      "make": "Jaecoo",
+      "model": "5 Pure",
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": null,
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaecoo:jaecoo5",
+      "make": "Jaecoo",
+      "model": "Jaecoo 5",
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": "jaecoo/jaecoo-5",
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": "Jaecoo 5"
+      },
+      "aliases": [
+        "JAECOO 5",
+        "JAECOO5"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaecoo:jaecoo6",
+      "make": "Jaecoo",
+      "model": "Jaecoo 6",
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": null,
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaecoo:jaecoo7",
+      "make": "Jaecoo",
+      "model": "Jaecoo 7",
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": "jaecoo/jaecoo-7",
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": "Jaecoo 7"
+      },
+      "aliases": [
+        "JAECOO 7",
+        "JAECOO7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaecoo:jaecoo8",
+      "make": "Jaecoo",
+      "model": "Jaecoo 8",
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": null,
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:24",
+      "make": "Jaguar",
+      "model": "24",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:240",
+      "make": "Jaguar",
+      "model": "240",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:38s",
+      "make": "Jaguar",
+      "model": "3.8S",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:340",
+      "make": "Jaguar",
+      "model": "340",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:340mk",
+      "make": "Jaguar",
+      "model": "340 Mk",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:340mkii",
+      "make": "Jaguar",
+      "model": "340 Mkii",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:385",
+      "make": "Jaguar",
+      "model": "385",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:420",
+      "make": "Jaguar",
+      "model": "420",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:420g",
+      "make": "Jaguar",
+      "model": "420 G",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ctype",
+      "make": "Jaguar",
+      "model": "C-Type",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:dtype",
+      "make": "Jaguar",
+      "model": "D-Type",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:epace",
+      "make": "Jaguar",
+      "model": "E-Pace",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/e-pace",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "E-Pace"
+      },
+      "aliases": [
+        "E-PACE"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:epacep250",
+      "make": "Jaguar",
+      "model": "E-PACE P250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:epacep300",
+      "make": "Jaguar",
+      "model": "E-PACE P300",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:etype",
+      "make": "Jaguar",
+      "model": "E-Type",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpace",
+      "make": "Jaguar",
+      "model": "F-Pace",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/f-pace",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "F-Pace"
+      },
+      "aliases": [
+        "F-PACE"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpace25t",
+      "make": "Jaguar",
+      "model": "F-PACE 25t",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpace30t",
+      "make": "Jaguar",
+      "model": "F-PACE 30t",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpacep250",
+      "make": "Jaguar",
+      "model": "F-PACE P250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpacep340",
+      "make": "Jaguar",
+      "model": "F-PACE P340",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpacep400",
+      "make": "Jaguar",
+      "model": "F-PACE P400",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpacep550svr",
+      "make": "Jaguar",
+      "model": "F-PACE P550 SVR",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpaces",
+      "make": "Jaguar",
+      "model": "F-PACE S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fpacesvr",
+      "make": "Jaguar",
+      "model": "F-PACE SVR",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftype",
+      "make": "Jaguar",
+      "model": "F-Type",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/f-type",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "F-Type"
+      },
+      "aliases": [
+        "F-TYPE",
+        "F-TYPE SVR"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypeconvertible",
+      "make": "Jaguar",
+      "model": "F-TYPE Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypeconvertiblerdynamic",
+      "make": "Jaguar",
+      "model": "F-TYPE Convertible R-Dynamic",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypeconvertiblerdynamicawd",
+      "make": "Jaguar",
+      "model": "F-TYPE Convertible R-Dynamic AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypecoupe",
+      "make": "Jaguar",
+      "model": "F-TYPE Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypecouperdynamic",
+      "make": "Jaguar",
+      "model": "F-TYPE Coupe R-Dynamic",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypecouperdynamicawd",
+      "make": "Jaguar",
+      "model": "F-TYPE Coupe R-Dynamic AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep300convertible",
+      "make": "Jaguar",
+      "model": "F-TYPE P300 Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep300coupe",
+      "make": "Jaguar",
+      "model": "F-TYPE P300 Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep380convertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P380 Convertible AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep380coupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P380 Coupe AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep450convertible",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep450convertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Convertible AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep450coupe",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep450coupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Coupe AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep575convertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P575 Convertible AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypep575coupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P575 Coupe AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftyperawdconvertible",
+      "make": "Jaguar",
+      "model": "F-TYPE R AWD Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftyperawdcoupe",
+      "make": "Jaguar",
+      "model": "F-TYPE R AWD Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftyperconvertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE R Convertible AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypercoupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE R Coupe AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypesvrawdconvertible",
+      "make": "Jaguar",
+      "model": "F-TYPE SVR AWD Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ftypesvrawdcoupe",
+      "make": "Jaguar",
+      "model": "F-TYPE SVR AWD Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:fprd",
+      "make": "Jaguar",
+      "model": "Fp Rd",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ipace",
+      "make": "Jaguar",
+      "model": "I-Pace",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/i-pace",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "I-Pace"
+      },
+      "aliases": [
+        "I PACE",
+        "I-PACE",
+        "JAGUAR I PACE",
+        "JAGUAR I-PACE",
+        "Jaguar I-PACE"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark",
+      "make": "Jaguar",
+      "model": "Mark",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark1",
+      "make": "Jaguar",
+      "model": "Mark 1",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark10",
+      "make": "Jaguar",
+      "model": "Mark 10",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark11",
+      "make": "Jaguar",
+      "model": "Mark 11",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark2",
+      "make": "Jaguar",
+      "model": "Mark 2",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark7",
+      "make": "Jaguar",
+      "model": "Mark 7",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mark8",
+      "make": "Jaguar",
+      "model": "Mark 8",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:marki",
+      "make": "Jaguar",
+      "model": "Mark I",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:markix",
+      "make": "Jaguar",
+      "model": "Mark Ix",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:markx",
+      "make": "Jaguar",
+      "model": "Mark X",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk",
+      "make": "Jaguar",
+      "model": "Mk",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk7m",
+      "make": "Jaguar",
+      "model": "Mk 7 M",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mki",
+      "make": "Jaguar",
+      "model": "Mk I",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mkix",
+      "make": "Jaguar",
+      "model": "Mk Ix",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mkx",
+      "make": "Jaguar",
+      "model": "Mk X",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk1",
+      "make": "Jaguar",
+      "model": "MK1",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk10",
+      "make": "Jaguar",
+      "model": "MK10",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk11",
+      "make": "Jaguar",
+      "model": "MK11",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk2",
+      "make": "Jaguar",
+      "model": "MK2",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk4",
+      "make": "Jaguar",
+      "model": "MK4",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk5",
+      "make": "Jaguar",
+      "model": "MK5",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk7",
+      "make": "Jaguar",
+      "model": "MK7",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mk9",
+      "make": "Jaguar",
+      "model": "MK9",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:mkii",
+      "make": "Jaguar",
+      "model": "Mkii",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:s",
+      "make": "Jaguar",
+      "model": "S",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:stype",
+      "make": "Jaguar",
+      "model": "S-Type",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/s-type",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "S-Type"
+      },
+      "aliases": [
+        "S-TYPE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:stypev6",
+      "make": "Jaguar",
+      "model": "S-Type V6",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:stypev8",
+      "make": "Jaguar",
+      "model": "S-Type V8",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:sovereign",
+      "make": "Jaguar",
+      "model": "Sovereign",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ss",
+      "make": "Jaguar",
+      "model": "Ss",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:ss100",
+      "make": "Jaguar",
+      "model": "SS100",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:superv8",
+      "make": "Jaguar",
+      "model": "Super V8",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:vandenplas",
+      "make": "Jaguar",
+      "model": "Vanden Plas",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xtype",
+      "make": "Jaguar",
+      "model": "X-Type",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/x-type",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "X-Type"
+      },
+      "aliases": [
+        "JAGUAR X-TYPE 30 V6 SPORT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xe",
+      "make": "Jaguar",
+      "model": "Xe",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xe",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xe"
+      },
+      "aliases": [
+        "XE",
+        "XE AWD"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xep250",
+      "make": "Jaguar",
+      "model": "XE P250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xep250awd",
+      "make": "Jaguar",
+      "model": "XE P250 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xep300awd",
+      "make": "Jaguar",
+      "model": "XE P300 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xf",
+      "make": "Jaguar",
+      "model": "XF",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xf",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "XF"
+      },
+      "aliases": [
+        "XF",
+        "XF AWD",
+        "XF Premium Luxury/ XF Portfolio",
+        "XF Sport Brake",
+        "XF Sport Brake AWD"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xf25t",
+      "make": "Jaguar",
+      "model": "XF 25t",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xf25tawd",
+      "make": "Jaguar",
+      "model": "XF 25t AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xf30t",
+      "make": "Jaguar",
+      "model": "XF 30t",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xf30tawd",
+      "make": "Jaguar",
+      "model": "XF 30t AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xfp250",
+      "make": "Jaguar",
+      "model": "XF P250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xfp300awd",
+      "make": "Jaguar",
+      "model": "XF P300 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xfsawd",
+      "make": "Jaguar",
+      "model": "XF S AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xfr",
+      "make": "Jaguar",
+      "model": "Xfr",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xfr",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xfr"
+      },
+      "aliases": [
+        "XFR"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj",
+      "make": "Jaguar",
+      "model": "Xj",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xj",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xj"
+      },
+      "aliases": [
+        "Jaguar XJ",
+        "JAGUAR XJ",
+        "XJ",
+        "XJ Luxury/ Premium Luxury",
+        "XJ Supersport",
+        "XJ Supersport LWB リアビジネスシート仕様",
+        "XJ Supersport LWB/ XJ Portolio LWB",
+        "XJ50 V6 D AUTO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xjs",
+      "make": "Jaguar",
+      "model": "XJ-S",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj12",
+      "make": "Jaguar",
+      "model": "XJ12",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj220",
+      "make": "Jaguar",
+      "model": "XJ220",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj40",
+      "make": "Jaguar",
+      "model": "XJ40",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj42",
+      "make": "Jaguar",
+      "model": "XJ42",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj6",
+      "make": "Jaguar",
+      "model": "XJ6",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xj8",
+      "make": "Jaguar",
+      "model": "XJ8",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xjr",
+      "make": "Jaguar",
+      "model": "Xjr",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xjr",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xjr"
+      },
+      "aliases": [
+        "JAGUAR XJR"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xjrs",
+      "make": "Jaguar",
+      "model": "Xjr-S",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xk",
+      "make": "Jaguar",
+      "model": "Xk",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xk120",
+      "make": "Jaguar",
+      "model": "XK120",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xk140",
+      "make": "Jaguar",
+      "model": "XK140",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xk150",
+      "make": "Jaguar",
+      "model": "XK150",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xk8",
+      "make": "Jaguar",
+      "model": "XK8",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xkr",
+      "make": "Jaguar",
+      "model": "Xkr",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jaguar:xkrs",
+      "make": "Jaguar",
+      "model": "Xkr-S",
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:avenger",
+      "make": "Jeep",
+      "model": "Avenger",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/avenger",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Avenger"
+      },
+      "aliases": [
+        "Jeep Avenger",
+        "アベンジャー 4xe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokee",
+      "make": "Jeep",
+      "model": "Cherokee",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/cherokee",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Cherokee"
+      },
+      "aliases": [
+        "Jeep Cherokee",
+        "チェロキー",
+        "ジープ・チェロキー"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokee4x4activedrivei",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Active Drive I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokee4x4activedriveii",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Active Drive II",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokee4x4activedrivelock",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Active Drive Lock",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokee4x4trailhawkactivedrivelock",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Trailhawk Active Drive Lock",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokeehybrid",
+      "make": "Jeep",
+      "model": "Cherokee Hybrid",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokeesport",
+      "make": "Jeep",
+      "model": "Cherokee Sport",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/cherokee-sport",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Cherokee Sport"
+      },
+      "aliases": [
+        "CHEROKEE SPORT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cherokeewagoneer",
+      "make": "Jeep",
+      "model": "Cherokee Wagoneer",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cj",
+      "make": "Jeep",
+      "model": "Cj",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cj15",
+      "make": "Jeep",
+      "model": "Cj 15",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cj5",
+      "make": "Jeep",
+      "model": "CJ-5",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cj7",
+      "make": "Jeep",
+      "model": "CJ-7",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/cj-7",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "CJ-7"
+      },
+      "aliases": [
+        "CJ7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:cj8",
+      "make": "Jeep",
+      "model": "CJ8",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:commander",
+      "make": "Jeep",
+      "model": "Commander",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/commander",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Commander"
+      },
+      "aliases": [
+        "COMMANDER",
+        "コマンダー"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:compass",
+      "make": "Jeep",
+      "model": "Compass",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/compass",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Compass"
+      },
+      "aliases": [
+        "Jeep Compass",
+        "コンパス"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:compass4x4",
+      "make": "Jeep",
+      "model": "Compass 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:gladiator",
+      "make": "Jeep",
+      "model": "Gladiator",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/gladiator",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Gladiator"
+      },
+      "aliases": [
+        "GLADIATOR"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:gladiator4x4",
+      "make": "Jeep",
+      "model": "Gladiator 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:gladiator4x4ecodiesel",
+      "make": "Jeep",
+      "model": "Gladiator 4X4 EcoDiesel",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:gladiator4x4rubiconecodiesel",
+      "make": "Jeep",
+      "model": "Gladiator 4X4 Rubicon EcoDiesel",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:gladiatorpickup",
+      "make": "Jeep",
+      "model": "Gladiator Pickup",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:gpw",
+      "make": "Jeep",
+      "model": "Gpw",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokee",
+      "make": "Jeep",
+      "model": "Grand Cherokee",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/grand-cherokee",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Grand Cherokee"
+      },
+      "aliases": [
+        "GRAND CHEROKEE",
+        "GRAND-CHEROKEE",
+        "JEEP GRAND CHEROKEE",
+        "グランド チェロキー",
+        "ジープ・グランド チェロキー"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokee4x4",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokee4x4classic",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4 Classic",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokee4x4srt",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4 SRT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokee4x4trackhawk",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4 Trackhawk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokee4xe",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4xe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokeel4x4",
+      "make": "Jeep",
+      "model": "Grand Cherokee L 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokeel4x4classic",
+      "make": "Jeep",
+      "model": "Grand Cherokee L 4X4 Classic",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandcherokeewk4x4",
+      "make": "Jeep",
+      "model": "Grand Cherokee WK 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandwagoneer",
+      "make": "Jeep",
+      "model": "Grand Wagoneer",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/grand-wagoneer",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Grand Wagoneer"
+      },
+      "aliases": [
+        "GRAND WAGONEER",
+        "JEEP GRAND WAGONEER"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandwagoneer4x4",
+      "make": "Jeep",
+      "model": "Grand Wagoneer 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandwagoneer4x4highoutput",
+      "make": "Jeep",
+      "model": "Grand Wagoneer 4X4 (High Output)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandwagoneerl4x4",
+      "make": "Jeep",
+      "model": "Grand Wagoneer L 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:grandwagoneerl4x4highoutput",
+      "make": "Jeep",
+      "model": "Grand Wagoneer L 4X4 (High Output)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:laredo",
+      "make": "Jeep",
+      "model": "Laredo",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:liberty",
+      "make": "Jeep",
+      "model": "Liberty",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/liberty",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Liberty"
+      },
+      "aliases": [
+        "LIBERTY"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:m38a1",
+      "make": "Jeep",
+      "model": "M38A1",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:mb",
+      "make": "Jeep",
+      "model": "Mb",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:patriot",
+      "make": "Jeep",
+      "model": "Patriot",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/patriot",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Patriot"
+      },
+      "aliases": [
+        "PATRIOT",
+        "ジープ・パトリオット"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:recon",
+      "make": "Jeep",
+      "model": "Recon",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:reconmoab4x4",
+      "make": "Jeep",
+      "model": "Recon MOAB 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:renegade",
+      "make": "Jeep",
+      "model": "Renegade",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/renegade",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Renegade"
+      },
+      "aliases": [
+        "Jeep Renegade",
+        "レネゲード",
+        "ジープ・レネゲード"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:renegade4x4",
+      "make": "Jeep",
+      "model": "Renegade 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:renegade4x4trailhawk",
+      "make": "Jeep",
+      "model": "Renegade 4X4 Trailhawk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wagoneer",
+      "make": "Jeep",
+      "model": "Wagoneer",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/wagoneer",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Wagoneer"
+      },
+      "aliases": [
+        "JEEP WAGONEER",
+        "WAGONEER"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wagoneer4x4",
+      "make": "Jeep",
+      "model": "Wagoneer 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wagoneerl4x4",
+      "make": "Jeep",
+      "model": "Wagoneer L 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wagoneers",
+      "make": "Jeep",
+      "model": "Wagoneer S",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wagoneersawdfalkentire",
+      "make": "Jeep",
+      "model": "Wagoneer S AWD (Falken Tire)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wagoneersawdpirellitire",
+      "make": "Jeep",
+      "model": "Wagoneer S AWD (Pirelli Tire)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:willys",
+      "make": "Jeep",
+      "model": "Willys",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wrangler",
+      "make": "Jeep",
+      "model": "Wrangler",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/wrangler",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Wrangler"
+      },
+      "aliases": [
+        "JEEP WRANGLER",
+        "WRANGLER",
+        "ラングラー",
+        "ジープ・ラングラー"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wrangler4x4",
+      "make": "Jeep",
+      "model": "Wrangler 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wrangler4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler 4X4 eTorque",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wrangler4xe",
+      "make": "Jeep",
+      "model": "Wrangler 4xe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjl4x4",
+      "make": "Jeep",
+      "model": "Wrangler JL 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjl4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler JL 4X4 eTorque",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjl4x4rubicon",
+      "make": "Jeep",
+      "model": "Wrangler JL 4X4 Rubicon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjlunlimited4x4",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjlunlimited4x4392",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 392",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjlunlimited4x4ecodiesel",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 EcoDiesel",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjlunlimited4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 eTorque",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjlunlimited4x4rubicon",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 Rubicon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerjlunlimited4x4rubiconecodiesel",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 Rubicon EcoDiesel",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerunlimited",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited",
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/wrangler-unlimited",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Wrangler Unlimited"
+      },
+      "aliases": [
+        "JEEP WRANGLER UNLIMITED",
+        "WRANGLER UNLIMITED",
+        "ラングラー アンリミッテド",
+        "ラングラー アンリミテッド",
+        "ジープ・ラングラー アンリミッテド"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerunlimited4x4",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited 4X4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerunlimited4x4ecodiesel",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited 4X4 EcoDiesel",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:wranglerunlimited4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited 4X4 eTorque",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:大切诺基4xe进口",
+      "make": "Jeep",
+      "model": "大切诺基4xe(进口)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M00/AE/C4/120x90_0_q95_autohomecar__ChxkPWbsHeqABduCACY1CqqkQRo155.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:牧马人",
+      "make": "Jeep",
+      "model": "牧马人",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M06/6C/EB/120x90_0_q95_autohomecar__ChxoHmf1v1-AAG89AC8mQ5mKyQg886.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:牧马人新能源",
+      "make": "Jeep",
+      "model": "牧马人新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g28/M03/98/69/120x90_0_q95_autohomecar__ChxkmmhlJ1OATviXABEw2yAan3o803.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jeep:角斗士",
+      "make": "Jeep",
+      "model": "角斗士",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g30/M06/89/35/120x90_0_q95_autohomecar__ChxknGhkvEiAWtfqAD0hbdORMzk443.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:541r",
+      "make": "Jensen",
+      "model": "541R",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:cv8",
+      "make": "Jensen",
+      "model": "CV8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:ff",
+      "make": "Jensen",
+      "model": "Ff",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:gt",
+      "make": "Jensen",
+      "model": "GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:healey",
+      "make": "Jensen",
+      "model": "Healey",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:healy",
+      "make": "Jensen",
+      "model": "Healy",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:intercepter",
+      "make": "Jensen",
+      "model": "Intercepter",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:interceptor",
+      "make": "Jensen",
+      "model": "Interceptor",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:interceptor111",
+      "make": "Jensen",
+      "model": "Interceptor 111",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:interceptormk",
+      "make": "Jensen",
+      "model": "Interceptor Mk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:jensenhealey",
+      "make": "Jensen",
+      "model": "Jensen-Healey",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:sv8",
+      "make": "Jensen",
+      "model": "S-V8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jensen:sp",
+      "make": "Jensen",
+      "model": "Sp",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jetour:dashing",
+      "make": "Jetour",
+      "model": "Dashing",
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": "jetour/dashing",
+        "canonicalMake": "Jetour",
+        "canonicalModel": "Dashing"
+      },
+      "aliases": [
+        "DASHING"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jetour:t1",
+      "make": "Jetour",
+      "model": "T1",
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jetour:t1idm",
+      "make": "Jetour",
+      "model": "T1 I-Dm",
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jetour:t2",
+      "make": "Jetour",
+      "model": "T2",
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": "jetour/t2",
+        "canonicalMake": "Jetour",
+        "canonicalModel": "T2"
+      },
+      "aliases": [
+        "JETOUR T2"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jetour:x50",
+      "make": "Jetour",
+      "model": "X50",
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jetour:x70plus",
+      "make": "Jetour",
+      "model": "X70 Plus",
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my"
+      ],
+      "regions": [
+        "as",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jmev:elight",
+      "make": "JMEV",
+      "model": "ELIGHT",
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/elight",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "ELIGHT"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jmev:ev2",
+      "make": "JMEV",
+      "model": "EV2",
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/ev2",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "EV2"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jmev:ev3",
+      "make": "JMEV",
+      "model": "EV3",
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/ev3",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "EV3"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "jmev:ewind",
+      "make": "JMEV",
+      "model": "EWIND",
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/ewind",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "EWIND"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "juliacamper:yosemite",
+      "make": "Julia Camper",
+      "model": "Yosemite",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "kaiser:deluxe",
+      "make": "Kaiser",
+      "model": "De Luxe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "kaiser:jeep",
+      "make": "Kaiser",
+      "model": "Jeep",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "kaiser:k545",
+      "make": "Kaiser",
+      "model": "K545",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "kaiser:manhattan",
+      "make": "Kaiser",
+      "model": "Manhattan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "kaiser:special",
+      "make": "Kaiser",
+      "model": "Special",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

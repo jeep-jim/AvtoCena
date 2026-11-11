@@ -1,0 +1,3216 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a3-2025-2026-extra",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9fcf166c877354288b618546",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback advanced 30 TFSI *KAMERA *SITZHEIZU",
+      "expectedDigest": "b32794ff3fe898eea758abf49d59ea983cc6a9bf5ebe13859e85132ee3bfbff2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1830
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1830кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1cbe0b808ad94bd1283daa4b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 30 TFSI advanced ACC Navi Keyless",
+      "expectedDigest": "ea5e4bbd57e3830b1625dd0a19e6940ee4bd2532a30d07d47c51f0f5df442482",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1830
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1830кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "cc766abd526b52be630f1f36",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine 30 TFSI S tronic advanced Navi conn",
+      "expectedDigest": "c0c7a6983162ec8e26707281e9e61c9f70bde5b384cd39e8397c8fdc4a6a674d",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3d5c4dd10de30b87a1bb59f3",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine 30 TFSI",
+      "expectedDigest": "0eb99acdd7ac2097565ce539ed01a172a50fd77e64a3b7e0222438a35ed179fe",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1830
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/750/file_en/8d21c8e15619a58d65f4be514444102e4f926bdb/eTD-Audi-A3-Sedan-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1830кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/750/file_en/8d21c8e15619a58d65f4be514444102e4f926bdb/eTD-Audi-A3-Sedan-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "dd30b3d542f925855bb1eeb74e587b4cacb97f515ee2ac04823e45a96a04269b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "18099f9b73e429e82395c181",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 85 kW TFSI AHK Navi Plus Kamera",
+      "expectedDigest": "5f135c00359a73212f1deb7d51733e8d063d9b95870af32803c9c0baa697cbba",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1830
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1830кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2d6fb5aad577ce7c7bf9218a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine 30 TFSI advanced*NAVI-PLUS*SHZ*VIRT",
+      "expectedDigest": "23d3ca81f8fb511f9f67a1a3ae08d77fc4826b1204dbcd65f210c36de2696976",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "817de1d91ca1e7632d436ed1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI S-Tronic Navi LED virtual AHK",
+      "expectedDigest": "f48a66814b148a6df6a627a9452a7940c5b141bbfcc843c10e9ed2cf676a078b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3cf7241fd195dd5d83d3661173ce10e31df0d5ca26967f5d9b9dd8c545b93f7b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e015f19705fc8cfc81a732e8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI S LINE LED KAMERA OPTIK+ ACC",
+      "expectedDigest": "702f0d4d4271bcde53de32ac0838f1d8bf86651ca9474d7dc0ca3d855c0c2cb3",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1968см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1905кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6afb65ae8fba159e09e5bf2993363ff89a80bf0c0e9c1f80a023a4661cece80f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "925f3ec43d06e90a2d40a27d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI advanced Rückfahrkamera",
+      "expectedDigest": "5d936796a876ffbdacbae9ea973c55bc3a92cc290babe34b1f21a3f82e0aeeda",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1830
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1830кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3513fb55dd3ca9910d8c4f4e57e75ecd8cf77ffc07615435a70f4c944a780589",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4e8ea5cd860f1f2ff433271b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 1.5 TFSI AHK RFK ACC Memory el.Heck",
+      "expectedDigest": "006624b424e858529f65a71388e5f4472f527c03da072a8a1475a150bc393670",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3cf7241fd195dd5d83d3661173ce10e31df0d5ca26967f5d9b9dd8c545b93f7b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "bea4207e5aa14fa9f436605c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Lim TFSI S tronic Navi,Sportsitze,PDC+,Sitzhz",
+      "expectedDigest": "0cd3e51ed8d090955eb60ab404399976365084659926ce9877acf3aebaf080c2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "243103a1d1f81b4d5013053b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine TFSI S line Parkassistent Sportsitz",
+      "expectedDigest": "154fb9d23fe8c5c190ffc9fd18d92d598cdf3db19ac6c6c0287b578dff33d252",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ef61595f450719758f8b9f94",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback advanced TFSI 85 kW S tronic",
+      "expectedDigest": "d75cd628fd9d4f26a4f658d8257c5a930f85829c551a0a56ab862066a23d5db9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3cf7241fd195dd5d83d3661173ce10e31df0d5ca26967f5d9b9dd8c545b93f7b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d5731a92d054248c9c90b947",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback Advanced advanced TFSI 85 kW S tron",
+      "expectedDigest": "c128a887042c36e87baddc6b7ce32c33d8850ed3f28594a19f31454add34c295",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3cf7241fd195dd5d83d3661173ce10e31df0d5ca26967f5d9b9dd8c545b93f7b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "84a6192c0ab18b1079f650b3",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI S tronic advanced AHK*SONOS*LED*...",
+      "expectedDigest": "8a8060f1cd6e0a722525ec6e7d9e762080c0b1196c1aefe891c72993310201fa",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "3cf7241fd195dd5d83d3661173ce10e31df0d5ca26967f5d9b9dd8c545b93f7b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8bf5590647b67b2e7f028fc1",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine 30 TFSI",
+      "expectedDigest": "68aa340090bd8d2bf1a99be844258443e1eca901b58a59aee1bb6f7d4c86a6e3",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 85кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/270/file_en/f44c2f16c107248b3e71ff33aadd7ad8feb8b0ba/eTD-Audi-A3-Sedan-TFSI-S_tronic-85kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "9245611522a83c9873d35d9d19b4f9c203b509e54bc3422454bf1239076a5ddd",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a79bed8402bc863d425e096d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "sportback 2.0 tdi s line edition 116cv",
+      "expectedDigest": "ab3776fdfea8c00d7312f67455b35882894f376da324f964f440be9441654e7a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 85кВт МКПП,2026. Заводская таблица от03.02.2026: 1968см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1905кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "6afb65ae8fba159e09e5bf2993363ff89a80bf0c0e9c1f80a023a4661cece80f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7fe5a99a846859959ce1fd33",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI 110 kW advanced SONOS*HuD*LED*",
+      "expectedDigest": "91aa9c8403c03a130b8aaec2e031185fe7ceeaa4d8d89b0529aa61dd561e469c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e8b18696508729ed60e0248d",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback advanced TDI Stron LED Navi RFK HUD",
+      "expectedDigest": "b164f18f26a81e162d9d736f9f17526452b3b3694fd27c932379437ef8ed7625",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8e823fbd0a049e7c8d3c4314",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Lim TFSI S tronic LED,AHK,Navi,Kamera,18Zoll",
+      "expectedDigest": "1c00f9ba3d69a94a7fd4ad5649864ba9a8c8dd0cf4fcfa2ce74b7a26487a15fe",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1880
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1880кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5832e1f5118f12cb36f7949e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI advanced LED ACC KAMERA PDC HuD",
+      "expectedDigest": "2c65c503d6448e2d4759f6fea6c1e21cf99db879112cd16ec19ab40786a4ad67",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "96972188aff40b40d462edbc",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback S line TDI Stronic Navi ACC EPH",
+      "expectedDigest": "00a7fb0d564b235ecb8ceaf2280161f6176700252a3b22c5e5622b00c2b714ca",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d0b4b39e4f028f873088b6e0",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI S LINE LED KAMERA",
+      "expectedDigest": "d339d3ca6cbf3b6dbf08e897a6878d84b8c3ea2e5059835864fec259113f5fda",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f77a90034a07240f980a921e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limo TFSI S tronic adv./LED/PDC+/AHK/Navi+",
+      "expectedDigest": "fc5784118ffa2c30503af5cd3f0038bda9632e2b5527e898557cea9246faa4fc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1880
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1880кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b900af419adc36689ecfb37e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI S LINE LED NAVI SPORTSITZE eKLA",
+      "expectedDigest": "da158f904ac26d2b826a8715d01d71a3b5e2a9895f307eedfbdbdbeea90bc389",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "af3425184cbc816cdad7eb23",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TDI S LINE LED eSPORTSITZE KAMER",
+      "expectedDigest": "691619692642294e6642c638564c644310c4b90c65c4d38549d080fb3ab97c5d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "69b32b8f129e996ef66ddaae",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TDI S line ACC/RFK/NAV/AHK-Vorb.",
+      "expectedDigest": "ab9eaec05412daeff7342b32fcbd10ba547710e6078eeb3822961ebb988c057b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "571183afb2225fe3fa181474",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TFSI advanced Business+*SONOS*HuD*",
+      "expectedDigest": "23e9a98f67daa04a8030d067bc14527ecfd9dfed53beebc72e1e2ba70871b961",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1845
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1176/file_en/3000505d34f50bbc9d409c309f9c8c5692e635f8/eTD-Audi-A3-Sportback-TFSI-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 110кВт МКПП,2026. Заводская таблица от03.02.2026: 1498см³,150PS/110кВт ДВС,передний привод,6 ступеней,полная допустимая масса1845кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1176/file_en/3000505d34f50bbc9d409c309f9c8c5692e635f8/eTD-Audi-A3-Sportback-TFSI-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "01abc234caed72a8c9c79097345c39181ae8eaa868078fb2988506c2d242de9a",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c5b76230f959cab3abff8667",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TDI S tronic advanced Leder/Navi",
+      "expectedDigest": "7a310b269dfb7086a6fb4107b9059141c183a833f9b1419087c9444b3cf8e9a2",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "238b4b79da7ce81a4ec44211",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TDI S line S-Tronic NAV/RFK/ACC",
+      "expectedDigest": "339463faf0cced3f4d2f7101796499b427658df7eb7bf403b20cd5d72f415c88",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9b3f8b5a5264e0031df8e88a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TDI S line AHK-Vorb./NAV/SH/RFK",
+      "expectedDigest": "6bb9f4849be0bca5c5c32043154a864621e38421d22138981afed23900fdc40c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b3e23e49b3847624dd8719c0",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback TDI VOLLLEDER ACC LED KAMERA",
+      "expectedDigest": "db059c428c442f18a5cd5a6dcf5ec3f42aa7964815440aef06a1cfc14425f994",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "189e3a147a1ae06d86774adb",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Sportback 35 TDI advanced*NAVI-PLUS*LED*KAMER",
+      "expectedDigest": "86747b1de4e208ec300b63c21ff076d4d92aef3e1df837bc5dd390837c54967f",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "1ea82dfecff38b2b9be7f39e",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine 35 TFSI S line S-tronic AHK Navi AC",
+      "expectedDigest": "ec9e60f5f486104bb55aa693cc3de536d6e7c5717f61d2664b66d9d985976a04",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1880
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1880кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3a0b47b8dd3216f6e4a4a7a6",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "Limousine S line TFSI Stronic Navi LED ACC",
+      "expectedDigest": "f6c70b520be436dadd073cd1d97ba6d0bee481154577301e39526d89cd267895",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1880
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1498см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1880кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "7b646094fb15a959362f624528753783806e0f7ceb9952bd39bf25f08ac4333f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5c8504f19c56d2468158b053",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "A3 SPB 35 TDI S tronic S line edition",
+      "expectedDigest": "06ddbb01803bcf8de9850f897c5b11d743a747cc2d37a58677aef9bbf282d17a",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7e3893bdce9a2bdb27ad8b64",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2026,
+      "trim": "A3 Sportback 2.0 tdi S line edition 150c",
+      "expectedDigest": "3acbb381b470949c6969c4f231b3fbcef0e422c65d84e7f050814fe7d646d9d8",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2026. Заводская таблица от03.02.2026: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_260203.pdf",
+            "date": "2026-02-03",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "1d3ee503e83ec4ad6a1aadd218ecc2f65e7153ad4d3678535fd6ddb8a129069d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5f746f42c4115f6323cdb4d7",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 1.5 TFSI advanced Navi+Sitzhzg+LED+",
+      "expectedDigest": "b62cc35547c353a6b012a25dbf4c83e911735781b0630413c9ab970d9eabf20c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2025. Заводская таблица от05.06.2025: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2db3f068b5207622f3e33fbf",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "SPORTBACK TFSI ADVANCED LED NAVI SHZG APPCON",
+      "expectedDigest": "cd5d8565f840304ed3d18b46f2d7950225fcc4a7320723bac6ce0cb5b9765edd",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2025. Заводская таблица от05.06.2025: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "301410cff6f1bc7601df14cf",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 1.5 TFSI advanced NAV+LED+SHZ+ACC",
+      "expectedDigest": "d391a637c21b400ece70d8478cccb59b58b39fc1b0db9e75b6a20ba7b4dd6142",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1830
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт МКПП,2025. Заводская таблица от05.06.2025: 1498см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1830кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/748/file_en/a6ec802e283d3f8ae46af934b3ea82a4e6262f03/eTD-Audi-A3-Sportback-TFSI-85kW_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "88140895e8ddfe852e4be36e0b8b3ae3ed2b6571b243879e1905ade6a6558182",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a02fa0b53bed38a45403d2c4",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "SB 1.5 TFSI advanced MMI NAVI LED ACC RFK SHZ",
+      "expectedDigest": "39e9ecf108be541a0ede9dfca65e92cad9705c8eccfbe1be37b71c383e57fab9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2025. Заводская таблица от05.06.2025: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "25918038f63084aedb5a8eb2",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback S-Tronic 1.5 TFSI Navi Sitzheizung",
+      "expectedDigest": "6451669fed4c9c739407527dab085712444298e9a78d7bdc1872987b31c9feaf",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1865
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI 85кВт S tronic,2025. Заводская таблица от05.06.2025: 1498см³,116PS/85кВт ДВС,передний привод,7 ступеней,полная допустимая масса1865кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1128/file_en/275183fe3c59ed5ce3ddda6dd2ea8154ad752f8b/eTD-Audi-A3-Sportback-TFSI-S_tronic-85kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "4e0c8683a662d1ccfe84bd19d8502f8de15f8e20e19062203d8cfa99611dc47b",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "51989fce6fd705ddac896921",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 2.0 tdi 116cv",
+      "expectedDigest": "fd8ef3185aa72e6f4c2bd913aaef79dd224e710e1bb0ed5ed57638895e31a4eb",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 116,
+        "powerKw": 85,
+        "icePowerKw": 85,
+        "drive": "fwd",
+        "transmission": "manual",
+        "grossVehicleWeightKg": 1905
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 85кВт МКПП,2025. Заводская таблица от05.06.2025: 1968см³,116PS/85кВт ДВС,передний привод,6 ступеней,полная допустимая масса1905кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/260/file_en/796e1a543187e8b116a9e6dc478e2bad707c2ea8/eTD-Audi-A3-Sportback-TDI-85kW_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ba0bccfbdcd6ff5fcf3c09c9f08f6cc27d4d1909ca75d276e34b16829d3d4172",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0bc1eade35a29bfd2fcd9f63",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback TDI ADVANCED LED NAVI KAMERA eKLAPP",
+      "expectedDigest": "5b01743cd01488d018ed5d8d10635e25a85d52b3bab8dfc375dcf23c2b3b0c51",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2025. Заводская таблица от05.06.2025: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ab15c54aa2af361300f55107dc4e8320373f504ba591200f7167c77bd1cfbfb5",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "19d277e8ad648fbb5ec79363",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Limousine 1.5 TFSI advanced Aut LED RADAR NAVI",
+      "expectedDigest": "3c02bd005663890b914a3d12b4cabcf3f8b89e93b255f1012d1d66e2b2d1d28d",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1498,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1880
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sedan TFSI 110кВт S tronic,2025. Заводская таблица от05.06.2025: 1498см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1880кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. MHEV указан в заголовке; электрическая мощность12В не записана как тяговая/30-минутная. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1024/file_en/129200424e04a321f44f3b626ef24be02c1396f0/eTD-Audi-A3-Sedan-TFSI-S_tronic-110kW-MHEV_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "64cb2e63721b427e16a83202aadeb066f3ddca6480e6a8458fc0d3eee097012c",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4e181d11889e128ab9ce9502",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "SB+S-Line+TDI+S-Tronic+P.Business-Plus",
+      "expectedDigest": "349a596f11b7dcd4ee72333d617e339fa9ec799196922a703f5b3c5d666a3209",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "engineCc": 1968,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1960
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_250605.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TDI 110кВт S tronic,2025. Заводская таблица от05.06.2025: 1968см³,150PS/110кВт ДВС,передний привод,7 ступеней,полная допустимая масса1960кг. Сопоставлены кузовное семейство,год,TFSI/TDI,мощность и объём исходной записи,КПП; другие региональные модификации с отличающимися мощностью/объёмом исключены. Обычный ДВС; генератор12В не является тяговым мотором. Код двигателя и рекламные опции не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1018/file_en/187919015cf7213b596cdbb4389de26c49cb3d48/eTD-Audi-A3-Sportback-TDI-S_tronic-110kW_250605.pdf",
+            "date": "2025-06-05",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "ab15c54aa2af361300f55107dc4e8320373f504ba591200f7167c77bd1cfbfb5",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "6dfd2dbad0b195d85838536b",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 40 TFSI e LED/SHZ/Navi+/Kamera/ACC",
+      "expectedDigest": "ea157a16cf22fa84488cc06a7b53cd23b507fb0ea2930519885a002a2c63a035",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 110,
+        "systemPowerKw": 150,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 150 кВт, 2025. Заводская таблица 2025-09-29, стр. 1: 1498 см³, ДВС 110 кВт отдельно от системы 150 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+            "date": "2025-09-29",
+            "pages": [
+              1
+            ],
+            "sha256": "5e377c672ce112169731d9198d845f2208b0f6a275beab722af7b2c1ec0e062d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4bdf465d19ff341c4c512ecb",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 40 TFSI quattro AHK/19''/RFK/NAV",
+      "expectedDigest": "e41420e3d53cec08d9cba17b95380798c14d3b7fa1df92a1a2025ce864265852",
+      "patch": {
+        "fuel": "petrol",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 1985
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1285/file_en/2390c9326d365919a3a1e8a7987c4037c8364f2b/eTD-Audi-A3-Sportback-40-TFSI-quattro-S_tronic-150kW_250411.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback 40 TFSI quattro S tronic, 2025. Заводская таблица 2025-04-11, стр. 1–2: 1984 см³, ДВС 150 кВт / 204 PS, полный привод, 7-ступенчатая S tronic, допустимая полная масса 1985 кг. Сопоставлены кузов, год, 40 TFSI quattro, объём, мощность и КПП. Наличие сети 48 В само по себе не использовано для подтверждения MHEV или мощности тягового мотора; powertrainKind не изменён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1285/file_en/2390c9326d365919a3a1e8a7987c4037c8364f2b/eTD-Audi-A3-Sportback-40-TFSI-quattro-S_tronic-150kW_250411.pdf",
+            "date": "2025-04-11",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "eb578ffc95512bd514e66e5825281fc69fa33573bc5908c8fe821a7544fbaf38",
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c372be518937ef77cf17bb59",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "A3 SPB TFSI e 150 kW S tronic S line edition",
+      "expectedDigest": "cae5479af2bd0b6d1613709848ca56ebf84fe85c222d026aba9a5bd2adc37e1e",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 110,
+        "systemPowerKw": 150,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 150 кВт, 2025. Заводская таблица 2025-09-29, стр. 1: 1498 см³, ДВС 110 кВт отдельно от системы 150 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+            "date": "2025-09-29",
+            "pages": [
+              1
+            ],
+            "sha256": "5e377c672ce112169731d9198d845f2208b0f6a275beab722af7b2c1ec0e062d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "4d6995f9114a1e4afd7eac9c",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 40 TFSI e Advanced NAV/RFK/ACC",
+      "expectedDigest": "aee2317f83007e8c9e86039bd26c636755a8b0e72ce0f23dfbd394c242f0eee6",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 110,
+        "systemPowerKw": 150,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 150 кВт, 2025. Заводская таблица 2025-09-29, стр. 1: 1498 см³, ДВС 110 кВт отдельно от системы 150 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-TFSIe-150kW_250929.pdf",
+            "date": "2025-09-29",
+            "pages": [
+              1
+            ],
+            "sha256": "5e377c672ce112169731d9198d845f2208b0f6a275beab722af7b2c1ec0e062d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a083a1cc0a9a1708d2df6a0a",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 45 TFSIe S line Navi Matrix ACC AHK",
+      "expectedDigest": "57d95344238708a516e090ad1a2792ffaa7ecb24f4944513de989b18abe69820",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 130,
+        "systemPowerKw": 200,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 200 кВт, 2025. Заводская таблица 2025-08-21, стр. 1: 1498 см³, ДВС 130 кВт отдельно от системы 200 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+            "date": "2025-08-21",
+            "pages": [
+              1
+            ],
+            "sha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "0ccc9a14e1d8b62441e6e797",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback TFSIe 2x S LINE PANO MATRIX ALCANTA",
+      "expectedDigest": "7ac0c5617b19b2f8b4838423f924c1baf4eb5491752ff4e7b40eb0b1f2e4813b",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 130,
+        "systemPowerKw": 200,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 200 кВт, 2025. Заводская таблица 2025-08-21, стр. 1: 1498 см³, ДВС 130 кВт отдельно от системы 200 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+            "date": "2025-08-21",
+            "pages": [
+              1
+            ],
+            "sha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3c3ce56d6efb7d13372b6851",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback TFSIe ASSIST 360° AHK LM18",
+      "expectedDigest": "e88443193238bbc8c8e5744114ef2ed017a250691436dc7dab9166f315bddde8",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 130,
+        "systemPowerKw": 200,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 200 кВт, 2025. Заводская таблица 2025-08-21, стр. 1: 1498 см³, ДВС 130 кВт отдельно от системы 200 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+            "date": "2025-08-21",
+            "pages": [
+              1
+            ],
+            "sha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "111270651fd5de91aee4c8c8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback TFSIe 200KW LM18 LED ASSIST 360°",
+      "expectedDigest": "5092d5e2cf3c5dd94ce136a17c9200271553b457f53e1f171900b7c32e4c8cbb",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 130,
+        "systemPowerKw": 200,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 200 кВт, 2025. Заводская таблица 2025-08-21, стр. 1: 1498 см³, ДВС 130 кВт отдельно от системы 200 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+            "date": "2025-08-21",
+            "pages": [
+              1
+            ],
+            "sha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "14692a0ae7ab8bde4ec93e74",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2025,
+      "trim": "Sportback 45 TFSIe S LINE SONOS MATRIX MEMORY",
+      "expectedDigest": "2a4d57ae81286d05b1fb27b1d9409808fd4c4675f3b125ce3d772397beedc230",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "phev",
+        "engineCc": 1498,
+        "icePowerKw": 130,
+        "systemPowerKw": 200,
+        "motorPeakKw": 85,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "systemPowerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A3 Sportback TFSI e 200 кВт, 2025. Заводская таблица 2025-08-21, стр. 1: 1498 см³, ДВС 130 кВт отдельно от системы 200 кВт, пиковая мощность электромотора 85 кВт, передний привод, 6-ступенчатая S tronic. Сопоставлены Sportback, год, TFSI e, объём, системная мощность и КПП исходной записи. Continuous electrical output 55 кВт не подтверждает сертифицированную 30-минутную мощность и не записано в неё. Полная масса имеет стандартный и опциональный варианты; без точного исполнения не заполнена. Общие powerKw/powerHp и ёмкость батареи не менялись.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-TFSIe-200kW_250821.pdf",
+            "date": "2025-08-21",
+            "pages": [
+              1
+            ],
+            "sha256": "4be6e62f72f05acde6e0347de837905034e31f41fa01b434a830787ae48796f2",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "icePowerKw",
+              "systemPowerKw",
+              "motorPeakKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

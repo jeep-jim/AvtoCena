@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 3,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 3
+  },
+  "modelId": "wuling/zhiguang",
+  "generationIds": [
+    "wuling/zhiguang/ev-2025"
+  ],
+  "variantIds": [
+    "wuling/zhiguang/ev-2025/standard-201-km",
+    "wuling/zhiguang/ev-2025/comfort-201-km",
+    "wuling/zhiguang/ev-2025/progress-305-km"
+  ],
+  "policy": {
+    "exactManufacturerValuesOnly": true,
+    "EnglishCanonicalLocalizedAliases": true,
+    "rangeStandardNotInferred": true,
+    "batteryBasisUnspecifiedAndRejected": true,
+    "ratedMotorNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

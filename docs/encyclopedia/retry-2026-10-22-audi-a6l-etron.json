@@ -1,0 +1,29 @@
+{
+  "modelId": "649dd3ac3d5c169544a23005",
+  "checkedAt": "2026-10-22",
+  "unchanged": [
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "f11d8ac80fa7b3b42f5dff65",
+      "year": 2026,
+      "reason": "missing_exact_trim"
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "50ab093fb33ff80844f5bdf1",
+      "year": 2025,
+      "reason": "dated_2025_factory_configuration_not_confirmed"
+    },
+    {
+      "modelId": "649dd3ac3d5c169544a23005",
+      "variantId": "a5067a92b536184073ecf7ff",
+      "year": 2025,
+      "reason": "dated_2025_factory_configuration_not_confirmed"
+    }
+  ],
+  "processedMissing": [
+    "certified_30_minute_power",
+    "grossVehicleWeightKg",
+    "exact_motor_codes"
+  ]
+}

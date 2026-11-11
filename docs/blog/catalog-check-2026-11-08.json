@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-11-08T01:17:00Z",
+  "catalog": [
+    {
+      "url": "/cars?make=Mercedes-Benz&model=SL",
+      "query": "https://avtocena.com/api/catalog/search?make=Mercedes-Benz&model=SL&pageSize=1",
+      "result": "one item returned",
+      "observedItem": {
+        "id": "489d44255952336c7c268178",
+        "market": "china",
+        "make": "Mercedes-Benz",
+        "model": "SL",
+        "year": 2018,
+        "trim": "SL 400"
+      },
+      "editorialUse": "family link only; article explicitly says this is not the SL 55 WTA one-off"
+    },
+    {
+      "url": "/cars?make=BMW&model=X5",
+      "query": "https://avtocena.com/api/catalog/search?make=BMW&model=X5&pageSize=1",
+      "result": "one item returned",
+      "observedItem": {
+        "id": "d8e4f700a4f6c602ad3913bf",
+        "market": "europe",
+        "make": "BMW",
+        "model": "X5",
+        "year": 2021
+      },
+      "editorialUse": "family link only; article explicitly says this is an earlier generation"
+    },
+    {
+      "queries": "Kia, Volkswagen, Nissan and Volvo candidate checks",
+      "result": "subsequent live API requests timed out after 20–25 seconds without a response body",
+      "editorialUse": "no internal links and no availability claims"
+    }
+  ],
+  "preciseCountsClaimed": false
+}

@@ -1,0 +1,934 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a5-2024-1",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "8da4bd63f5f78c75fd8877db",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "A5 Sportback 35 TFSI 3x S-Line Competition Black Edition S-Tronic",
+      "expectedDigest": "54d1776b1a6c0d3c17ef015a93c611b3051fcf8fe9b7454b5f853a129ad2b7dc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1071/file_en/5b33f6a2a0c8ac5098f1dc993170c6b9cf45cb10/eTD-Audi-A5-Sportback-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TFSI,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 110 кВт / 150 PS ДВС, MHEV, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён. Масса взята из колонки кг: эквивалент в фунтах в PDF содержит несоответствие.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1071/file_en/5b33f6a2a0c8ac5098f1dc993170c6b9cf45cb10/eTD-Audi-A5-Sportback-35-TFSI-S_tronic-110kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "7eb3e0ae4de98e99b561c8f5",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 35 TDI Matrix,Kamera,PDC+,Sportsitz",
+      "expectedDigest": "daef23c965fef1c121ee355199eeb08fc4824a6dda4768d2b500cd708bb57781",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2120
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 120 кВт / 163 PS ДВС, MHEV, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2120 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b529b0b3524ab82441f09493",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S tronic adv Navi,Leder,Spor",
+      "expectedDigest": "5a9321ce4a0a1189f4fbea50737f51866248b2fbdb47174a57be74f941426352",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2120
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 120 кВт / 163 PS ДВС, MHEV, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2120 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ac7bbd9a325c423c9db95353",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 35 TDI S line/PANO/Carbon/",
+      "expectedDigest": "b53b783f99384e5a521c43532338270e124728953aa63bab1bcfe08815fe0335",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2120
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 120 кВт / 163 PS ДВС, MHEV, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2120 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "50390e2960303c94a501815e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "35 TDI Sportback LED ACC Kamera Sitzheizung",
+      "expectedDigest": "dbbd38b614f76f50cc942ab04ac2ea63af5baefb54144fa2e735a052691e73d1",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2120
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 120 кВт / 163 PS ДВС, MHEV, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2120 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "cea36c16304848d0f7c9adc0",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "A5 Sportback 35 TDi Business Edition S tronic",
+      "expectedDigest": "346c1ba1e5a06c1fa58c84f6f4d2cd62b29681aa6a675a4e6248667b670aec2c",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2120
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 120 кВт / 163 PS ДВС, MHEV, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2120 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/961/file_en/93d6c3bc2510ab51f06a949ecc7808b0434e8964/eTD-Audi-A5-Sportback-35-TDI-S_tronic-120kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c3d9300117e53128304eb2f5",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 40 TDI qu S line Leder Navi RFK ACC",
+      "expectedDigest": "e65cf482810033204a3a1dacd24b6434e58fa0abee2d55b4138fb5d41b298583",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2210
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/962/file_en/8a5ca1731bd5c3c27fcf3f288f9622ca27467a57/eTD-Audi-A5-Sportback-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 150 кВт / 204 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2210 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/962/file_en/8a5ca1731bd5c3c27fcf3f288f9622ca27467a57/eTD-Audi-A5-Sportback-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c0801a924ff1018a5677557c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 40 TFSI qu. S-Line*Matrix*Navi*Lede",
+      "expectedDigest": "93cfcf0273dfd8b0fae32a21c05d32d126c0d427c7eee7ac90867059ed6713fa",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1072/file_en/56084865a128268c5e39f803a44d8a454daf5298/eTD-Audi-A5-Sportback-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 150 кВт / 204 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2160 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1072/file_en/56084865a128268c5e39f803a44d8a454daf5298/eTD-Audi-A5-Sportback-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "5b37d48f6ba8007a0bf12f58",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 40 TDI quattro S line LED/NAVI/LEDE",
+      "expectedDigest": "05efb978f3184e51acbd08c8b9c23e4a5a0be3e50ec1a434274b3371e610a9d0",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2210
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/962/file_en/8a5ca1731bd5c3c27fcf3f288f9622ca27467a57/eTD-Audi-A5-Sportback-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 150 кВт / 204 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2210 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/962/file_en/8a5ca1731bd5c3c27fcf3f288f9622ca27467a57/eTD-Audi-A5-Sportback-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "63a7f16296c17c4566851154",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 40 TDI quattro S line*DAB*NAVI*",
+      "expectedDigest": "a352270a457cc1d1d684876e4a981270d2c1caf5591dadcb80ecc51d294c8465",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2210
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/962/file_en/8a5ca1731bd5c3c27fcf3f288f9622ca27467a57/eTD-Audi-A5-Sportback-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1968 см³, 150 кВт / 204 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2210 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/962/file_en/8a5ca1731bd5c3c27fcf3f288f9622ca27467a57/eTD-Audi-A5-Sportback-40-TDI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ea35e09f60c0535c213d1f35",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 40 TFSI quattro S line RFK*Matrix",
+      "expectedDigest": "afb94e39e9bc21e30216a8729b8ffdb99407cae4b7df540de18727fe13d7ac7f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1072/file_en/56084865a128268c5e39f803a44d8a454daf5298/eTD-Audi-A5-Sportback-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 150 кВт / 204 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2160 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1072/file_en/56084865a128268c5e39f803a44d8a454daf5298/eTD-Audi-A5-Sportback-40-TFSI-quattro-S_tronic-150kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "aeb37a7d76e398e5637a344e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 45 TFSI quattro Matrix ACC Navi SHZ",
+      "expectedDigest": "1330b3b5931524ae21addf1070c9698e9581350f7229479fc729f0046cc207e5",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2175
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 195 кВт / 265 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2175 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "74b3c0c5f7e33633281bb1b9",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 45TFSI quattro NAVI MATRIX B&O 360°",
+      "expectedDigest": "c081c7dac6ddf527df5d6085262e80cbfbdbe68e77acb924d4007f900821a04b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2175
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 195 кВт / 265 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2175 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "5482efcfd1989a97d4968cfe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback 45 TFSI quattro S tronic S line bus",
+      "expectedDigest": "850ecab56a342209a3e5b2caa282a9aa1df9b6d24ad481175bd1b83e5ea0b8b3",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2175
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 195 кВт / 265 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2175 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "033f8382ad1ce950b102f13a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "Sportback S line 45 TFSI quattro S tronic AHK",
+      "expectedDigest": "576ae9e4a905a8b076f7a484b6e2295c44843030f6df10cdaa5581b383ae92eb",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2175
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 195 кВт / 265 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2175 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "f7ccf8fea1f68a81de670abf",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2024,
+      "trim": "SPORTBACK 45 TFSI QUATTRO S-TRONIC 3x S-LINE 265CV",
+      "expectedDigest": "2d00181c04bea9dcbbf59ca4ba88f4b9473b66ffcb16313bd919c6123cea4bbe",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2175
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro,2024. Заводская таблица AUDI AG от13.06.2024: 1984 см³, 195 кВт / 265 PS ДВС, MHEV, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2175 кг. Совпадают год, кузов, объём, мощность и привод. Мощность электрической сети12В не принята за тяговую или30-минутную; код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1073/file_en/5b4b65c8ae72cd8942fa0df105e4c3743645d7ab/eTD-Audi-A5-Sportback-45-TFSI-quattro-S_tronic-195kW-MHEV_240613.pdf",
+            "date": "2024-06-13",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

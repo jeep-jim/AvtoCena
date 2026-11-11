@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-10-25T01:45:49.401544+00:00",
+  "state": "release_requested_not_installed",
+  "newSaved": {
+    "variants": 28,
+    "newValues": 48,
+    "correctedValues": 7,
+    "attestedUnchanged": 5,
+    "apiFieldsChecked": 60
+  },
+  "nightlyAudi": {
+    "batches": 11,
+    "uniqueVariants": 121,
+    "assertions": 237,
+    "newValues": 204,
+    "correctedValues": 16,
+    "attestedUnchanged": 17
+  },
+  "lastResearch": {
+    "batch": "research-2026-10-25-audi-a6-phev-components",
+    "path": "docs/encyclopedia/batches/2026-10-25-audi-a6-phev-components.json",
+    "sha256": "08b7e854d18b7ef8dab4fd21ec4ea99e4552ed6b7b1a83a23ce079ca5adf010c",
+    "state": "saved_api_readback_pass_pending_next_index",
+    "modelId": "00624e6c77b6541109a32d66",
+    "variants": 8,
+    "fields": 38,
+    "newValues": 26,
+    "correctedValues": 7,
+    "attestedUnchanged": 5,
+    "workflow": 40151670120,
+    "job": 121044304350,
+    "afterRevision": "fcb4d99c-087b-4b2a-bcdf-492158c435e9",
+    "apiReadback": true,
+    "report": "docs/encyclopedia/reports/2026-10-25-audi-a6-phev-components-readback.json"
+  },
+  "publicationPreflight": {
+    "workflow": 40149538202,
+    "attempt": 3,
+    "job": 121043957300,
+    "checkedAt": "2026-10-25T01:40:54.398Z",
+    "writerActive": false,
+    "generationId": "gen_1792702445675_8c312f85",
+    "selectorMarketsValid": 5
+  },
+  "codeFix": {
+    "pr": 1531,
+    "merge": "1ba6dfba9d09ba7a21b43984c7fcca05c1ae7d55",
+    "ci": 40149987618,
+    "fullTests": 2526,
+    "conclusion": "success"
+  },
+  "previousPublicationFailure": {
+    "run": 40124551054,
+    "reason": "budget_selector_requires_bounded_parts",
+    "previousManifestPreserved": true,
+    "collectorRepeated": false
+  },
+  "oldRuntimeWarmup": {
+    "workflow": 40150504235,
+    "job": 121040890792,
+    "conclusion": "failure",
+    "release": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+    "reason": "exact existing page prices China budgetTo3000000,12cards; first1622231 vs1611870",
+    "verified": false,
+    "mainContainsVisibleBudgetPriceFix": true
+  },
+  "releaseRequirements": {
+    "requiredResearchBatches": 51,
+    "publicResearchBatches": 37,
+    "astraPlans": 3,
+    "retainedReuseDigest": "71434f2a1fab147277b0dd4daf4c0403f10e000f8af220890ac2425e0e10245e",
+    "retainedReuseFields": 559
+  },
+  "latestHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+    "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07",
+    "checkedAt": "2026-10-25T01:13:16.890681+00:00"
+  },
+  "japanBeforeRelease": {
+    "checkedAt": "2026-10-25T01:17:19.842221+00:00",
+    "http": 200,
+    "ms": 4682,
+    "ok": true,
+    "total": null,
+    "partial": true,
+    "stale": true,
+    "interrupted": false,
+    "scanLimited": false,
+    "observedAt": "2026-10-25T01:14:14.136Z",
+    "generationId": "2026-10-25T01:14:14.136Z",
+    "countSummary": {
+      "total": 609164,
+      "stale": false,
+      "observedAt": "2026-10-25T00:50:24.765Z",
+      "upperBound": false
+    },
+    "items": [
+      {
+        "id": "ajes-stats-2lapXk6ec6HsT",
+        "market": "japan",
+        "make": "FIAT",
+        "model": "500X",
+        "totalRub": null,
+        "drive": null
+      },
+      {
+        "id": "ajes-stats-4RezlgcHPMvesI",
+        "market": "japan",
+        "make": "MASERATI",
+        "model": "GHIBLI",
+        "totalRub": null,
+        "drive": null
+      },
+      {
+        "id": "ajes-stats-4SAQQpwviH3GhJ",
+        "market": "japan",
+        "make": "PEUGEOT",
+        "model": "3008",
+        "totalRub": null,
+        "drive": "fwd"
+      },
+      {
+        "id": "ajes-stats-6G513JHVxthtL4",
+        "market": "japan",
+        "make": "Renault",
+        "model": "Twingo",
+        "totalRub": null,
+        "drive": null
+      },
+      {
+        "id": "ajes-stats-6tPswnPKlgqrlU",
+        "market": "japan",
+        "make": "CITROEN",
+        "model": "C3",
+        "totalRub": null,
+        "drive": "fwd"
+      }
+    ]
+  },
+  "remaining": {
+    "a3AnnualCandidates": 0,
+    "ambiguous2024Identities": 17,
+    "nextReferenceGroups": [
+      "audi/a6",
+      "audi/a7",
+      "audi/a8"
+    ],
+    "nextReferenceAudit": 40151380145,
+    "wholeCatalogComplete": false
+  },
+  "next": [
+    "Follow sole deployment; inspect exact logs on failure. No research writes until private snapshot isolated.",
+    "Check index51/37/3 and confirmed559reuse, actual health scoped-v1.",
+    "Only after healthy nonpartial AJES Japan perform one guarded chunked repair; no collector.",
+    "Verify counts/parity/details and pinned pickup-drive-pricing/checkCatalogFeedback including actual search/detail prices on6markets."
+  ]
+}

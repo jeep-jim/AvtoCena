@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T02:55:58.309196+00:00",
+  "passed": true,
+  "scope": "Ограниченная выборка Audi A4L China: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована.",
+  "offersChecked": 4,
+  "comparisons": 52,
+  "matched": 52,
+  "rows": [
+    {
+      "offerId": "07f99d493cbbcbe14def4a56",
+      "checks": {
+        "year": {
+          "search": 2015,
+          "card": 2015,
+          "equal": true
+        },
+        "trim": {
+          "search": "30 TFSI Auto Comfort Type",
+          "card": "30 TFSI Auto Comfort Type",
+          "equal": true
+        },
+        "bodyType": {
+          "search": "sedan",
+          "card": "sedan",
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1798,
+          "card": 1798,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 160,
+          "card": 160,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "auto_api_che168_source",
+          "card": "auto_api_che168_source",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 1521882,
+          "card": 1521882,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "bd411bea0bd59bc65c4f9525",
+      "checks": {
+        "year": {
+          "search": 2015,
+          "card": 2015,
+          "equal": true
+        },
+        "trim": {
+          "search": "30 TFSI Auto Comfort Type",
+          "card": "30 TFSI Auto Comfort Type",
+          "equal": true
+        },
+        "bodyType": {
+          "search": "sedan",
+          "card": "sedan",
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1798,
+          "card": 1798,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 160,
+          "card": 160,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "auto_api_che168_source",
+          "card": "auto_api_che168_source",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 1620450,
+          "card": 1620450,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "defc7642a96c5b2250c37bf4",
+      "checks": {
+        "year": {
+          "search": 2016,
+          "card": 2016,
+          "equal": true
+        },
+        "trim": {
+          "search": "30 TFSI Collection Edition Auto Comfort Type",
+          "card": "30 TFSI Collection Edition Auto Comfort Type",
+          "equal": true
+        },
+        "bodyType": {
+          "search": "sedan",
+          "card": "sedan",
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1798,
+          "card": 1798,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 160,
+          "card": 160,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "auto_api_che168_source",
+          "card": "auto_api_che168_source",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 1657412,
+          "card": 1657412,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "e06cbf34b3c00c00dae73dfb",
+      "checks": {
+        "year": {
+          "search": 2016,
+          "card": 2016,
+          "equal": true
+        },
+        "trim": {
+          "search": "30 TFSI Collection Edition Auto Comfort Type",
+          "card": "30 TFSI Collection Edition Auto Comfort Type",
+          "equal": true
+        },
+        "bodyType": {
+          "search": "sedan",
+          "card": "sedan",
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1798,
+          "card": 1798,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 160,
+          "card": 160,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 117.68,
+          "card": 117.68,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "auto_api_che168_source",
+          "card": "auto_api_che168_source",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 1608128,
+          "card": 1608128,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    }
+  ],
+  "unavailable": [],
+  "repeatedGroups": [
+    {
+      "offerIds": [
+        "07f99d493cbbcbe14def4a56",
+        "bd411bea0bd59bc65c4f9525"
+      ],
+      "allCardsChecked": true
+    },
+    {
+      "offerIds": [
+        "defc7642a96c5b2250c37bf4",
+        "e06cbf34b3c00c00dae73dfb"
+      ],
+      "allCardsChecked": true
+    }
+  ],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 48,
+  "catalogTotalReported": 2095,
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+    "calculationVersion": "3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "3d40cad18e00f1c1ff97dcd36c4b4fdeb3a9c226",
+    "calculationVersion": "3ac912ac200e8481ba1c0054941af4d4e27fef51a27a96be415c77a8bbe859fe"
+  },
+  "sameRelease": true,
+  "generationId": "gen_1792702445675_8c312f85"
+}

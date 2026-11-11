@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-22T22:10:00+07:00",
+  "next": "Alpina D3S с 2020 по датированным заводским таблицам; затем D5 и Alpine. Пропуски D3 2014/2019 и остальные поля — отдельный retry.",
+  "modelId": "5dfcc65f1b57038636b1cce6",
+  "lastVerifiedBatch": {
+    "key": "alpina-d3-2013-2018-dated-factory",
+    "commit": "f6932b87eeb4b0238aacbe5df2f31bc9ead270be",
+    "workflow": 39800817651,
+    "job": 119900651053,
+    "variants": 12,
+    "newVariants": 12,
+    "fields": 115,
+    "workflowStatus": "completed",
+    "workflowConclusion": "success",
+    "batch": "research-2026-10-22-alpina-d3-2013-2018-dated-factory",
+    "apiReadback": true,
+    "includedInIndex": false,
+    "indexMembershipState": "applied_after_active_release_index_snapshot",
+    "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2013-2018-dated-factory-readback.json"
+  },
+  "lastKnownRevision": "28deda50-e687-4fdc-801a-109e5a5a2237",
+  "refreshRevisionBeforeWrite": true,
+  "noConcurrentModelWrites": true,
+  "currentModelVariants": 33,
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-2013-2019-remaining.json",
+  "previousRetryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
+  "doNotRepeat": [
+    "research-2026-10-22-alpina-d3-2008-2009-factory",
+    "research-2026-10-22-alpina-d3-2010-2011-2013-official-tables",
+    "research-2026-10-22-alpina-d3-2013-2018-dated-factory"
+  ],
+  "leads": [
+    {
+      "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2020_ALPINA_D3S_catalog.pdf",
+      "state": "text_reviewed_not_applied",
+      "printedDate": "2020-05-18",
+      "pages": "5, 14, 16; перед записью визуально сверить таблицу и дату",
+      "factsToVerify": "Sedan/Touring AWD, 2993 см³, MHEV diesel 48V, ДВС 261кВт/355PS, ZF8HP76. Boost 8кВт/11PS не 30-минутная мощность. Масса1950/2010 снаряжённая, не полная. Не подтверждать generic powerHp/powerKw гибрида."
+    },
+    {
+      "url": "https://kurumacatalog.com/wp-content/uploads/2023/05/2021_Alpina_D3S_catalog.pdf",
+      "state": "unresolved_actual_printed_date",
+      "instruction": "Не доверять 2021 в имени: проверить фактическую дату и таблицу; не переносить2993 из2020."
+    },
+    {
+      "url": "https://kurumacatalog.com/alpina-d3-2/",
+      "state": "archive_index_lead",
+      "instruction": "Ссылка39 содержит каталог2022, нужна точная ссылка и проверка документа. Архивные 2022/2024 спискиопций подтверждают даты/названия, но не двигатель."
+    }
+  ],
+  "integration": {
+    "checkedAt": "2026-10-22T22:10:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+    "lastKnownActiveIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "newBatchesActivationConfirmed": false,
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "status": "queued",
+      "conclusion": null
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "После уже сопровождаемой отдельной задачей retained-China publication включить все pending в один штатный неизменяемый индекс; проверить членство, активацию, карточки и выдачу. Не дублировать выпуск."
+  },
+  "publicationOwner": "Один совокупный следующий выпуск сопровождается отдельной задачей владельца; текущая China publication39788307780 queued."
+}

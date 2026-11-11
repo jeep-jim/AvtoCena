@@ -1,0 +1,8876 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 15,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "bugatti:chiron",
+      "make": "Bugatti",
+      "model": "Chiron",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": "bugatti/chiron",
+        "canonicalMake": "Bugatti",
+        "canonicalModel": "Chiron"
+      },
+      "aliases": [
+        "BUGATTI CHIRON",
+        "CHIRON"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:chironpursport",
+      "make": "Bugatti",
+      "model": "Chiron Pur Sport",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": null,
+        "canonicalMake": "Bugatti",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "canada",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:chironsupersport",
+      "make": "Bugatti",
+      "model": "Chiron Super Sport",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": null,
+        "canonicalMake": "Bugatti",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "canada",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:divo",
+      "make": "Bugatti",
+      "model": "Divo",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": "bugatti/divo",
+        "canonicalMake": "Bugatti",
+        "canonicalModel": "Divo"
+      },
+      "aliases": [
+        "BUGATTI DIVO"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:mistral",
+      "make": "Bugatti",
+      "model": "Mistral",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": "bugatti/mistral",
+        "canonicalMake": "Bugatti",
+        "canonicalModel": "Mistral"
+      },
+      "aliases": [
+        "BUGATTI MISTRAL"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugattirimac:nevera",
+      "make": "Bugatti Rimac",
+      "model": "Nevera",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:type55",
+      "make": "Bugatti",
+      "model": "Type 55",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": null,
+        "canonicalMake": "Bugatti",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:veyron",
+      "make": "Bugatti",
+      "model": "Veyron",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": null,
+        "canonicalMake": "Bugatti",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:10",
+      "make": "Buick",
+      "model": "10",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:25",
+      "make": "Buick",
+      "model": "25",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:40",
+      "make": "Buick",
+      "model": "40",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:41",
+      "make": "Buick",
+      "model": "41",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:47",
+      "make": "Buick",
+      "model": "47",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:55",
+      "make": "Buick",
+      "model": "55",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:apollo",
+      "make": "Buick",
+      "model": "Apollo",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:cascada",
+      "make": "Buick",
+      "model": "Cascada",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:centurion",
+      "make": "Buick",
+      "model": "Centurion",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:century",
+      "make": "Buick",
+      "model": "Century",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:eight",
+      "make": "Buick",
+      "model": "Eight",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:electra",
+      "make": "Buick",
+      "model": "Electra",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:enclave",
+      "make": "Buick",
+      "model": "Enclave",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:enclaveawd",
+      "make": "Buick",
+      "model": "Enclave AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:encore",
+      "make": "Buick",
+      "model": "Encore",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": "buick/encore",
+        "canonicalMake": "Buick",
+        "canonicalModel": "Encore"
+      },
+      "aliases": [
+        "ENCORE"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:encoresidi",
+      "make": "Buick",
+      "model": "Encore (SIDI)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:encoreawd",
+      "make": "Buick",
+      "model": "Encore AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:encoreawdsidi",
+      "make": "Buick",
+      "model": "Encore AWD (SIDI)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:encoregx",
+      "make": "Buick",
+      "model": "Encore Gx",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:encoregxawd",
+      "make": "Buick",
+      "model": "Encore GX AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:envision",
+      "make": "Buick",
+      "model": "Envision",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:envisionawd",
+      "make": "Buick",
+      "model": "Envision AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:envista",
+      "make": "Buick",
+      "model": "Envista",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": "buick/envista",
+        "canonicalMake": "Buick",
+        "canonicalModel": "Envista"
+      },
+      "aliases": [
+        "Buick Envista"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:estatewagon",
+      "make": "Buick",
+      "model": "Estate Wagon",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:gs",
+      "make": "Buick",
+      "model": "GS",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:invicta",
+      "make": "Buick",
+      "model": "Invicta",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:lacrosse",
+      "make": "Buick",
+      "model": "Lacrosse",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": "buick/lacrosse",
+        "canonicalMake": "Buick",
+        "canonicalModel": "Lacrosse"
+      },
+      "aliases": [
+        "LACROSSE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:lesabre",
+      "make": "Buick",
+      "model": "Le Sabre",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:limited",
+      "make": "Buick",
+      "model": "Limited",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:lucerne",
+      "make": "Buick",
+      "model": "Lucerne",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:marquette",
+      "make": "Buick",
+      "model": "Marquette",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:parkavenue",
+      "make": "Buick",
+      "model": "Park Avenue",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:phaeton",
+      "make": "Buick",
+      "model": "Phaeton",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:rainier",
+      "make": "Buick",
+      "model": "Rainier",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:reatta",
+      "make": "Buick",
+      "model": "Reatta",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:regal",
+      "make": "Buick",
+      "model": "Regal",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:regalawd",
+      "make": "Buick",
+      "model": "Regal AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:rendezvous",
+      "make": "Buick",
+      "model": "Rendezvous",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:riviera",
+      "make": "Buick",
+      "model": "Riviera",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:roadmaster",
+      "make": "Buick",
+      "model": "Roadmaster",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:skyhawk",
+      "make": "Buick",
+      "model": "Skyhawk",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:skylark",
+      "make": "Buick",
+      "model": "Skylark",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:special",
+      "make": "Buick",
+      "model": "Special",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:sport",
+      "make": "Buick",
+      "model": "Sport",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:sportwagon",
+      "make": "Buick",
+      "model": "Sport Wagon",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:super",
+      "make": "Buick",
+      "model": "Super",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:superior",
+      "make": "Buick",
+      "model": "Superior",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:terraza",
+      "make": "Buick",
+      "model": "Terraza",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:tourer",
+      "make": "Buick",
+      "model": "Tourer",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:verano",
+      "make": "Buick",
+      "model": "Verano",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "buick:wildcat",
+      "make": "Buick",
+      "model": "Wild Cat",
+      "canonical": {
+        "brandId": "buick",
+        "modelId": null,
+        "canonicalMake": "Buick",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bürstnergmbh:bc6003",
+      "make": "Bürstner Gmbh",
+      "model": "BC6003",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:atto2",
+      "make": "BYD",
+      "model": "Atto 2",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/atto-2",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Atto 2"
+      },
+      "aliases": [
+        "ATTO 2",
+        "BYD ATTO 2"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:atto3",
+      "make": "BYD",
+      "model": "Atto 3",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/atto-3",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Atto 3"
+      },
+      "aliases": [
+        "ATTO 3",
+        "ATTO 3 /",
+        "BYD ATTO 3"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:atto3evo",
+      "make": "BYD",
+      "model": "Atto 3 Evo",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:dolphin",
+      "make": "BYD",
+      "model": "Dolphin",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/dolphin",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Dolphin"
+      },
+      "aliases": [
+        "BYD DOLPHIN",
+        "DOLPHIN"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:dolphing",
+      "make": "BYD",
+      "model": "Dolphin G",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:dolphinsurf",
+      "make": "BYD",
+      "model": "Dolphin Surf",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/dolphin-surf",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Dolphin Surf"
+      },
+      "aliases": [
+        "BYD DOLPHIN SURF",
+        "BYD DOLPHINSURF",
+        "DOLPHIN SURF"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:e6",
+      "make": "BYD",
+      "model": "E6",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/e6",
+        "canonicalMake": "BYD",
+        "canonicalModel": "E6"
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:e6h",
+      "make": "BYD",
+      "model": "E6H",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:e6y",
+      "make": "BYD",
+      "model": "E6Y",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:han",
+      "make": "BYD",
+      "model": "Han",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/han",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Han"
+      },
+      "aliases": [
+        "BYD HAN",
+        "HAN"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:m6",
+      "make": "BYD",
+      "model": "M6",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealion07",
+      "make": "BYD",
+      "model": "Sea Lion 07",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:seagull",
+      "make": "BYD",
+      "model": "Seagull",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/seagull",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Seagull"
+      },
+      "aliases": [
+        "SEAGULL"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:seal",
+      "make": "BYD",
+      "model": "SEAL",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/seal",
+        "canonicalMake": "BYD",
+        "canonicalModel": "SEAL"
+      },
+      "aliases": [
+        "比亞迪海豹",
+        "BYD・シール",
+        "비야디 씰"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "Sedan",
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:seal6",
+      "make": "BYD",
+      "model": "Seal 6",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/seal-6",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Seal 6"
+      },
+      "aliases": [
+        "SEAL6"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealdesignev",
+      "make": "BYD",
+      "model": "Seal Design EV",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealu",
+      "make": "BYD",
+      "model": "Seal U",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/seal-u",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Seal U"
+      },
+      "aliases": [
+        "BYD SEAL U",
+        "SEAL U"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealion",
+      "make": "BYD",
+      "model": "Sealion",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/sealion",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Sealion"
+      },
+      "aliases": [
+        "SEALION"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealion5",
+      "make": "BYD",
+      "model": "Sealion 5",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealion6",
+      "make": "BYD",
+      "model": "Sealion 6",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:sealion7",
+      "make": "BYD",
+      "model": "Sealion 7",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/sealion-7",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Sealion 7"
+      },
+      "aliases": [
+        "BYD SEALION 7",
+        "SEA LION 7",
+        "SEALION 7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:songpro",
+      "make": "BYD",
+      "model": "Song Pro",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/song-pro",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Song Pro"
+      },
+      "aliases": [
+        "SONG PRO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:tang",
+      "make": "BYD",
+      "model": "Tang",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/tang",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Tang"
+      },
+      "aliases": [
+        "BYD Tang",
+        "TANG"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:tangev",
+      "make": "BYD",
+      "model": "Tang EV",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": "byd/tang-ev",
+        "canonicalMake": "BYD",
+        "canonicalModel": "Tang EV"
+      },
+      "aliases": [
+        "TANG EV"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:yuan",
+      "make": "BYD",
+      "model": "Yuan",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:yuanplus",
+      "make": "BYD",
+      "model": "Yuan Plus",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "byd:yuanpro",
+      "make": "BYD",
+      "model": "Yuan Pro",
+      "canonical": {
+        "brandId": "byd",
+        "modelId": null,
+        "canonicalMake": "BYD",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:30",
+      "make": "Cadillac",
+      "model": "30",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:452",
+      "make": "Cadillac",
+      "model": "452",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:allante",
+      "make": "Cadillac",
+      "model": "Allante",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ats",
+      "make": "Cadillac",
+      "model": "Ats",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/ats",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "Ats"
+      },
+      "aliases": [
+        "ATS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:bls",
+      "make": "Cadillac",
+      "model": "Bls",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:brougham",
+      "make": "Cadillac",
+      "model": "Brougham",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:calais",
+      "make": "Cadillac",
+      "model": "Calais",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:catera",
+      "make": "Cadillac",
+      "model": "Catera",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:celestiq",
+      "make": "Cadillac",
+      "model": "Celestiq",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:cimarron",
+      "make": "Cadillac",
+      "model": "Cimarron",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:club",
+      "make": "Cadillac",
+      "model": "Club",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:commercialchassis",
+      "make": "Cadillac",
+      "model": "Commercial Chassis",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct4",
+      "make": "Cadillac",
+      "model": "CT4",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct4awd",
+      "make": "Cadillac",
+      "model": "CT4 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct4v",
+      "make": "Cadillac",
+      "model": "CT4-V",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct4vawd",
+      "make": "Cadillac",
+      "model": "CT4-V AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct4vblackwing",
+      "make": "Cadillac",
+      "model": "CT4-V Blackwing",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct5",
+      "make": "Cadillac",
+      "model": "CT5",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/ct5",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "CT5"
+      },
+      "aliases": [
+        "CADILLAC CT5-V BLACKWING",
+        "CT5-V"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct5awd",
+      "make": "Cadillac",
+      "model": "CT5 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct5v",
+      "make": "Cadillac",
+      "model": "CT5-V",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct5vawd",
+      "make": "Cadillac",
+      "model": "CT5-V AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct5vblackwing",
+      "make": "Cadillac",
+      "model": "CT5-V Blackwing",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct6",
+      "make": "Cadillac",
+      "model": "CT6",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:ct6awd",
+      "make": "Cadillac",
+      "model": "CT6 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:cts",
+      "make": "Cadillac",
+      "model": "Cts",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:deville",
+      "make": "Cadillac",
+      "model": "De Ville",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:dts",
+      "make": "Cadillac",
+      "model": "Dts",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:e",
+      "make": "Cadillac",
+      "model": "E",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:eldorado",
+      "make": "Cadillac",
+      "model": "El Dorado",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/el-dorado",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "El Dorado"
+      },
+      "aliases": [
+        "ELDORADO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:elr",
+      "make": "Cadillac",
+      "model": "Elr",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:escalade",
+      "make": "Cadillac",
+      "model": "Escalade",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/escalade",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "Escalade"
+      },
+      "aliases": [
+        "CADILLAC ESCALADE",
+        "ESCALADE"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:escalade4wd",
+      "make": "Cadillac",
+      "model": "Escalade 4WD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:escalade4wdnostopstart",
+      "make": "Cadillac",
+      "model": "Escalade 4WD (No Stop-Start)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:escalade4wdwithoutstopstart",
+      "make": "Cadillac",
+      "model": "Escalade 4WD (Without Stop-Start)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:escaladeiq",
+      "make": "Cadillac",
+      "model": "Escalade Iq",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:escaladevawd",
+      "make": "Cadillac",
+      "model": "Escalade-V AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:fleetwood",
+      "make": "Cadillac",
+      "model": "Fleetwood",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:fleetwood75",
+      "make": "Cadillac",
+      "model": "Fleetwood 75",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:fleetwoodbrougham",
+      "make": "Cadillac",
+      "model": "Fleetwood Brougham",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:hearse",
+      "make": "Cadillac",
+      "model": "Hearse",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lasalle",
+      "make": "Cadillac",
+      "model": "La Salle",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:limousine",
+      "make": "Cadillac",
+      "model": "Limousine",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriq",
+      "make": "Cadillac",
+      "model": "LYRIQ",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/lyriq",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "LYRIQ"
+      },
+      "aliases": [
+        "Lyriq"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriq115kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriq192kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriqawd",
+      "make": "Cadillac",
+      "model": "LYRIQ AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriqawd115kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ AWD (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriqawd192kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ AWD (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriqv115kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ-V (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:lyriqv192kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ-V (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:modelk",
+      "make": "Cadillac",
+      "model": "Model K",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiq",
+      "make": "Cadillac",
+      "model": "Optiq",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/optiq",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "Optiq"
+      },
+      "aliases": [
+        "OPTIQ"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "gb",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiq115kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiq192kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiqawd115kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ AWD (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiqawd192kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ AWD (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiqv115kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ-V (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:optiqv192kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ-V (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:sd",
+      "make": "Cadillac",
+      "model": "Sd",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:series60",
+      "make": "Cadillac",
+      "model": "Series 60",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:series61",
+      "make": "Cadillac",
+      "model": "Series 61",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:series62",
+      "make": "Cadillac",
+      "model": "Series 62",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:seville",
+      "make": "Cadillac",
+      "model": "Seville",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:sixtyspecial",
+      "make": "Cadillac",
+      "model": "Sixty Special",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:special",
+      "make": "Cadillac",
+      "model": "Special",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:srx",
+      "make": "Cadillac",
+      "model": "Srx",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/srx",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "Srx"
+      },
+      "aliases": [
+        "SRX"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:standard",
+      "make": "Cadillac",
+      "model": "Standard",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:sts",
+      "make": "Cadillac",
+      "model": "Sts",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:suburban",
+      "make": "Cadillac",
+      "model": "Suburban",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:vistiq",
+      "make": "Cadillac",
+      "model": "Vistiq",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/vistiq",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "Vistiq"
+      },
+      "aliases": [
+        "VISTIQ"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:vistiq115kwcharger",
+      "make": "Cadillac",
+      "model": "VISTIQ (11.5 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:vistiq192kwcharger",
+      "make": "Cadillac",
+      "model": "VISTIQ (19.2 kW Charger)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xlr",
+      "make": "Cadillac",
+      "model": "Xlr",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": null,
+        "canonicalMake": "Cadillac",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xt4",
+      "make": "Cadillac",
+      "model": "XT4",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/xt4",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "XT4"
+      },
+      "aliases": [
+        "CADILLAC XT4"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xt4awd",
+      "make": "Cadillac",
+      "model": "XT4 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xt5",
+      "make": "Cadillac",
+      "model": "XT5",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/xt5",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "XT5"
+      },
+      "aliases": [
+        "CADILLAC XT5"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xt5awd",
+      "make": "Cadillac",
+      "model": "XT5 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xt6",
+      "make": "Cadillac",
+      "model": "XT6",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/xt6",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "XT6"
+      },
+      "aliases": [
+        "CADILLAC XT6"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xt6awd",
+      "make": "Cadillac",
+      "model": "XT6 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "cadillac:xts",
+      "make": "Cadillac",
+      "model": "Xts",
+      "canonical": {
+        "brandId": "cadillac",
+        "modelId": "cadillac/xts",
+        "canonicalMake": "Cadillac",
+        "canonicalModel": "Xts"
+      },
+      "aliases": [
+        "XTS (HEARSE)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "campereve:magellan",
+      "make": "Campereve",
+      "model": "Magellan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "carbodies:fairway",
+      "make": "Carbodies",
+      "model": "Fairway",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "carbodies:taxi",
+      "make": "Carbodies",
+      "model": "Taxi",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "carbodies:taxihirecar",
+      "make": "Carbodies",
+      "model": "Taxi/ Hirecar",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "caterhamcarsltd:sevens3",
+      "make": "Caterham Cars Ltd",
+      "model": "Seven S3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "caterhamcarsltd:sevensv",
+      "make": "Caterham Cars Ltd",
+      "model": "Seven Sv",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "caterham:s3",
+      "make": "Caterham",
+      "model": "S3",
+      "canonical": {
+        "brandId": "caterham",
+        "modelId": "caterham/s3",
+        "canonicalMake": "Caterham",
+        "canonicalModel": "S3"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "caterham:seven",
+      "make": "Caterham",
+      "model": "Seven",
+      "canonical": {
+        "brandId": "caterham",
+        "modelId": "caterham/seven",
+        "canonicalMake": "Caterham",
+        "canonicalModel": "Seven"
+      },
+      "aliases": [
+        "SEVEN",
+        "SEVEN CSR",
+        "Seven CSR (D8 VARIANT)",
+        "SEVEN CSR (D8 VARIANT)",
+        "SEVEN S3",
+        "SEVEN S3 (D8 VARIANT)",
+        "SEVEN S3 (DA VARIANT)",
+        "Seven S3 (SG Variant)",
+        "Seven S3 (ZA Variant)",
+        "SEVEN S3 (ZA VARIANT)",
+        "SEVEN S3(DA VARIANT)",
+        "Seven SG (SV Variant)",
+        "Seven SG (SV variant)",
+        "SEVEN SV",
+        "Seven SV",
+        "SEVEN SV (D8 VARIANT)",
+        "SEVEN SV (DA VARIANT)",
+        "SEVEN SV (SG VARIANT)",
+        "Seven SV (SG Variant)",
+        "SEVEN SV / /",
+        "SEVEN SV(D8 VARIANT)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "caterham:superseven",
+      "make": "Caterham",
+      "model": "Super Seven",
+      "canonical": {
+        "brandId": "caterham",
+        "modelId": null,
+        "canonicalMake": "Caterham",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chamonix:spyder",
+      "make": "Chamonix",
+      "model": "Spyder",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changan:cs75plus",
+      "make": "Changan",
+      "model": "CS75 Plus",
+      "canonical": {
+        "brandId": "changan",
+        "modelId": "changan/cs75-plus",
+        "canonicalMake": "Changan",
+        "canonicalModel": "CS75 Plus"
+      },
+      "aliases": [
+        "CS75 PLUS",
+        "Changan CS75 Plus"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changan:deepals07ev",
+      "make": "Changan",
+      "model": "Deepal S07 EV",
+      "canonical": {
+        "brandId": "changan",
+        "modelId": null,
+        "canonicalMake": "Changan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changan:luminldc",
+      "make": "Changan",
+      "model": "Lumin L Dc",
+      "canonical": {
+        "brandId": "changan",
+        "modelId": null,
+        "canonicalMake": "Changan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changannevo:a06",
+      "make": "Changan NEVO",
+      "model": "A06",
+      "canonical": {
+        "brandId": "changan-nevo",
+        "modelId": "changan-nevo/a06",
+        "canonicalMake": "Changan NEVO",
+        "canonicalModel": "A06"
+      },
+      "aliases": [
+        "NEVO A06",
+        "长安启源A06"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changannevo:q05",
+      "make": "Changan NEVO",
+      "model": "Q05",
+      "canonical": {
+        "brandId": "changan-nevo",
+        "modelId": "changan-nevo/q05",
+        "canonicalMake": "Changan NEVO",
+        "canonicalModel": "Q05"
+      },
+      "aliases": [
+        "NEVO Q05",
+        "长安启源Q05"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changannevo:q07",
+      "make": "Changan NEVO",
+      "model": "Q07",
+      "canonical": {
+        "brandId": "changan-nevo",
+        "modelId": "changan-nevo/q07",
+        "canonicalMake": "Changan NEVO",
+        "canonicalModel": "Q07"
+      },
+      "aliases": [
+        "NEVO Q07",
+        "长安启源Q07"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "changan:unik",
+      "make": "Changan",
+      "model": "Uni-K",
+      "canonical": {
+        "brandId": "changan",
+        "modelId": null,
+        "canonicalMake": "Changan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "checker:marathon",
+      "make": "Checker",
+      "model": "Marathon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:eq1",
+      "make": "Chery",
+      "model": "EQ1",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwina8l",
+      "make": "Chery",
+      "model": "Fulwin A8L",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-a8l",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin A8L"
+      },
+      "aliases": [
+        "A8L",
+        "风云A8L",
+        "Fengyun A8L"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwina9",
+      "make": "Chery",
+      "model": "Fulwin A9",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-a9",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin A9"
+      },
+      "aliases": [
+        "A9",
+        "风云A9",
+        "Fengyun A9"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwina9l",
+      "make": "Chery",
+      "model": "Fulwin A9L",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-a9l",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin A9L"
+      },
+      "aliases": [
+        "A9L",
+        "风云A9L",
+        "Fengyun A9L"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwinqq3",
+      "make": "Chery",
+      "model": "Fulwin QQ3",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-qq3",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin QQ3"
+      },
+      "aliases": [
+        "QQ3",
+        "全新QQ3",
+        "Fengyun QQ3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwint10",
+      "make": "Chery",
+      "model": "Fulwin T10",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-t10",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin T10"
+      },
+      "aliases": [
+        "T10",
+        "风云T10",
+        "Fengyun T10"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwint11",
+      "make": "Chery",
+      "model": "Fulwin T11",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-t11",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin T11"
+      },
+      "aliases": [
+        "T11",
+        "风云T11",
+        "Fengyun T11"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwint8",
+      "make": "Chery",
+      "model": "Fulwin T8",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-t8",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin T8"
+      },
+      "aliases": [
+        "T8",
+        "风云T8",
+        "Fengyun T8"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwint9",
+      "make": "Chery",
+      "model": "Fulwin T9",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-t9",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin T9"
+      },
+      "aliases": [
+        "T9",
+        "风云T9",
+        "Fengyun T9",
+        "T9 Long Range",
+        "T9长续航"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwint9l",
+      "make": "Chery",
+      "model": "Fulwin T9L",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-t9l",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin T9L"
+      },
+      "aliases": [
+        "T9L",
+        "风云T9L",
+        "Fengyun T9L"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwinx3",
+      "make": "Chery",
+      "model": "Fulwin X3",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-x3",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin X3"
+      },
+      "aliases": [
+        "X3",
+        "风云X3",
+        "Fengyun X3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwinx3plus",
+      "make": "Chery",
+      "model": "Fulwin X3 Plus",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-x3-plus",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin X3 Plus"
+      },
+      "aliases": [
+        "X3 PLUS",
+        "风云X3 PLUS",
+        "Fengyun X3 PLUS"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:fulwinx3l",
+      "make": "Chery",
+      "model": "Fulwin X3L",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/fulwin-x3l",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Fulwin X3L"
+      },
+      "aliases": [
+        "X3L",
+        "风云X3L",
+        "Fengyun X3L"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:icaur03",
+      "make": "Chery",
+      "model": "iCAUR 03",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:icaurv23",
+      "make": "Chery",
+      "model": "Icaur V23",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:jaecooj5",
+      "make": "Chery",
+      "model": "Jaecoo J5",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:jaecooj7",
+      "make": "Chery",
+      "model": "Jaecoo J7",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:jaecooj8",
+      "make": "Chery",
+      "model": "Jaecoo J8",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:jetourx70",
+      "make": "Chery",
+      "model": "Jetour X70",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:omoda5",
+      "make": "Chery",
+      "model": "Omoda 5",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/omoda-5",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Omoda 5"
+      },
+      "aliases": [
+        "OMODA 5",
+        "OMODA5"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:omoda9",
+      "make": "Chery",
+      "model": "Omoda 9",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/omoda-9",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Omoda 9"
+      },
+      "aliases": [
+        "OMODA 9"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo",
+      "make": "Chery",
+      "model": "Tiggo",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo"
+      },
+      "aliases": [
+        "TIGGO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo2",
+      "make": "Chery",
+      "model": "Tiggo 2",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo2pro",
+      "make": "Chery",
+      "model": "Tiggo 2 Pro",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo4",
+      "make": "Chery",
+      "model": "Tiggo 4",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo-4",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo 4"
+      },
+      "aliases": [
+        "TIGGO4"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo4pro",
+      "make": "Chery",
+      "model": "Tiggo 4 Pro",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": null,
+        "canonicalMake": "Chery",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo7",
+      "make": "Chery",
+      "model": "Tiggo 7",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo-7",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo 7"
+      },
+      "aliases": [
+        "TIGGO 7",
+        "TIGGO7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo7pro",
+      "make": "Chery",
+      "model": "Tiggo 7 Pro",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo-7-pro",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo 7 Pro"
+      },
+      "aliases": [
+        "TIGGO7 PRO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo7promax",
+      "make": "Chery",
+      "model": "Tiggo 7 Pro Max",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo-7-pro-max",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo 7 Pro Max"
+      },
+      "aliases": [
+        "TIGGO 7 Pro Max"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Crossover SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo8",
+      "make": "Chery",
+      "model": "Tiggo 8",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo-8",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo 8"
+      },
+      "aliases": [
+        "TIGGO 8",
+        "TIGGO8"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chery:tiggo9",
+      "make": "Chery",
+      "model": "Tiggo 9",
+      "canonical": {
+        "brandId": "chery",
+        "modelId": "chery/tiggo-9",
+        "canonicalMake": "Chery",
+        "canonicalModel": "Tiggo 9"
+      },
+      "aliases": [
+        "TIGGO 9",
+        "TIGGO9"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:150",
+      "make": "Chevrolet",
+      "model": "150",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:1934",
+      "make": "Chevrolet",
+      "model": "1934",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:210",
+      "make": "Chevrolet",
+      "model": "210",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:2dr",
+      "make": "Chevrolet",
+      "model": "2DR",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:3100",
+      "make": "Chevrolet",
+      "model": "3100",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:350",
+      "make": "Chevrolet",
+      "model": "350",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:4d",
+      "make": "Chevrolet",
+      "model": "4 D",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:490",
+      "make": "Chevrolet",
+      "model": "490",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:4x4",
+      "make": "Chevrolet",
+      "model": "4X4",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:alero",
+      "make": "Chevrolet",
+      "model": "Alero",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:apache",
+      "make": "Chevrolet",
+      "model": "Apache",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:astro",
+      "make": "Chevrolet",
+      "model": "Astro",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:avalanche",
+      "make": "Chevrolet",
+      "model": "Avalanche",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:aveo",
+      "make": "Chevrolet",
+      "model": "Aveo",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": "chevrolet/aveo",
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": "Aveo"
+      },
+      "aliases": [
+        "AVEO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:beauville",
+      "make": "Chevrolet",
+      "model": "Beauville",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:belair",
+      "make": "Chevrolet",
+      "model": "Bel Air",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:beretta",
+      "make": "Chevrolet",
+      "model": "Beretta",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:biscayne",
+      "make": "Chevrolet",
+      "model": "Biscayne",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazer",
+      "make": "Chevrolet",
+      "model": "Blazer",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": "chevrolet/blazer",
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": "Blazer"
+      },
+      "aliases": [
+        "BLAZER",
+        "CHEVROLET BLAZER"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerawd",
+      "make": "Chevrolet",
+      "model": "Blazer AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerev",
+      "make": "Chevrolet",
+      "model": "Blazer EV",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": "chevrolet/blazer-ev",
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": "Blazer EV"
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "Midsize crossover",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerev22wheels",
+      "make": "Chevrolet",
+      "model": "Blazer EV (22\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerev2ltrsawd",
+      "make": "Chevrolet",
+      "model": "Blazer EV 2LT/RS AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerevltrsawd",
+      "make": "Chevrolet",
+      "model": "Blazer EV LT/RS AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerevrs",
+      "make": "Chevrolet",
+      "model": "Blazer EV RS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerevrwd",
+      "make": "Chevrolet",
+      "model": "Blazer EV RWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:blazerevssawd",
+      "make": "Chevrolet",
+      "model": "Blazer EV SS AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:bolt",
+      "make": "Chevrolet",
+      "model": "Bolt",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": "chevrolet/bolt",
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": "Bolt"
+      },
+      "aliases": [
+        "BOLT"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:bolteuv",
+      "make": "Chevrolet",
+      "model": "Bolt Euv",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:boltev",
+      "make": "Chevrolet",
+      "model": "Bolt EV",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:brookwood",
+      "make": "Chevrolet",
+      "model": "Brookwood",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:business",
+      "make": "Chevrolet",
+      "model": "Business",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:c10",
+      "make": "Chevrolet",
+      "model": "C-10",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "chevrolet:c20",
+      "make": "Chevrolet",
+      "model": "C-20",
+      "canonical": {
+        "brandId": "chevrolet",
+        "modelId": null,
+        "canonicalMake": "Chevrolet",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

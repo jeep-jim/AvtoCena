@@ -1,0 +1,111 @@
+{
+  "checkedAt": "2026-10-22T08:14:15.900Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-junior-2026-july",
+  "digest": "d23b0b75a4052413cc6c25995fd7cfe1fb0ef00dc8aaaebf17852a168e16b70c",
+  "sourceModelRevision": "b9fd6709-4533-4c27-ad67-bae78ff5ad38",
+  "variants": 8,
+  "newVariants": 5,
+  "fields": 48,
+  "years": {
+    "2026": 8
+  },
+  "plan": {
+    "changes": [
+      {
+        "variantId": "78c687ec742a57e93a9b73f2",
+        "fields": [
+          "drive"
+        ]
+      },
+      {
+        "variantId": "3b1a2b9b387bf8de7fde2879",
+        "fields": [
+          "drive"
+        ]
+      },
+      {
+        "variantId": "ef94301cc861d3114a0541ed",
+        "fields": [
+          "drive"
+        ]
+      },
+      {
+        "variantId": "68bf56078ab8c3b00dad2b6f",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "engineCc",
+          "icePowerKw",
+          "systemPowerKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "10c32167be53276eb6da22d4",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "4b61bf2752e1b8700375cf83",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "2a98b7cbe44d46a17cafab04",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "4183feea6ecafd26bf49cef9",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "motorPeakKw",
+          "batteryKwh",
+          "drive",
+          "transmission"
+        ]
+      }
+    ],
+    "skipped": []
+  }
+}

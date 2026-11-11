@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T23:59:25.442492+00:00",
+  "passed": true,
+  "scope": "Ограниченная выборка Audi A4 Europe: первая доступная строка партии либо первая строка ответа и две повторяющиеся группы. Новая партия послеснимковая, не активирована.",
+  "offersChecked": 1,
+  "comparisons": 13,
+  "matched": 13,
+  "rows": [
+    {
+      "offerId": "dcff92dd75cff7861df02177",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "Avant 35 TFSI S-Tronic Attraction Business Ed. LED",
+          "card": "Avant 35 TFSI S-Tronic Attraction Business Ed. LED",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3358596,
+          "card": 3358596,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    }
+  ],
+  "unavailable": [],
+  "repeatedGroups": [],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 48,
+  "catalogTotalReported": 1196,
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+    "calculationVersion": "8bc6834f3d4862d16143786c8ead02436b47b89be5bb51df734b4855089a13ef"
+  },
+  "sameRelease": true,
+  "generationId": "gen_1792702445675_8c312f85"
+}

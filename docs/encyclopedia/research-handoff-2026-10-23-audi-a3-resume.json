@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T08:04:10.174Z",
+  "next": {
+    "modelId": "f40e34e905b8ca09f3636eda",
+    "make": "Audi",
+    "model": "A3",
+    "revision": "b619c16c-de8e-4ede-8349-fc838b2ab91f",
+    "firstCursor": {
+      "variantId": "3e8a3edb1ce3a356c1eb150d",
+      "year": 2009,
+      "trim": "Sports Back 1.4TFSI",
+      "chassisCode": "8PCAX",
+      "missingValueFields": [
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg"
+      ],
+      "existingObservedValues": {
+        "engineCc": 1400,
+        "drive": "fwd"
+      },
+      "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD"
+    },
+    "boundedReadYears": [
+      2009,
+      2010,
+      2013
+    ],
+    "boundedReadVariants": 6,
+    "nextBoundedCandidates": [
+      {
+        "variantId": "c98ec4e1792a7635f7ad3f1a",
+        "year": 2009,
+        "trim": "Sports Back",
+        "chassisCode": "8PCAX",
+        "missingValueFields": [
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "existingObservedValues": {
+          "engineCc": 1400,
+          "drive": "fwd"
+        },
+        "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD"
+      },
+      {
+        "variantId": "3e8a3edb1ce3a356c1eb150d",
+        "year": 2009,
+        "trim": "Sports Back 1.4TFSI",
+        "chassisCode": "8PCAX",
+        "missingValueFields": [
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "existingObservedValues": {
+          "engineCc": 1400,
+          "drive": "fwd"
+        },
+        "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD"
+      },
+      {
+        "variantId": "ed3cb10b5e985e4704417df4",
+        "year": 2009,
+        "trim": "A3 Sports Back 1.4TFSI",
+        "chassisCode": "8PCAX",
+        "missingValueFields": [
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "existingObservedValues": {
+          "engineCc": 1400,
+          "transmission": "automatic",
+          "drive": "fwd"
+        },
+        "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD"
+      },
+      {
+        "variantId": "923b1bb129b5eb3558d5e955",
+        "year": 2010,
+        "trim": "Sports Back 1.4TFSI",
+        "chassisCode": "8PCAX",
+        "missingValueFields": [
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "existingObservedValues": {
+          "engineCc": 1400,
+          "transmission": "automatic",
+          "drive": "fwd"
+        },
+        "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD"
+      },
+      {
+        "variantId": "93bb9e8490cceb9233f11ffd",
+        "year": 2013,
+        "trim": null,
+        "chassisCode": "8VCPT",
+        "missingValueFields": [
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "existingObservedValues": {
+          "engineCc": 1400,
+          "drive": "fwd"
+        },
+        "reason": "Отдельный retry идентичности"
+      },
+      {
+        "variantId": "228c5f65d23abc88dc8ab5ee",
+        "year": 2013,
+        "trim": "1.4 TFSI",
+        "chassisCode": "8PCAX",
+        "missingValueFields": [
+          "fuel",
+          "powertrainKind",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "transmission",
+          "bodyType",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ],
+        "existingObservedValues": {
+          "engineCc": 1400,
+          "drive": "fwd"
+        },
+        "reason": "Нужна точная годовая техническая таблица8PCAX; округлённые1400см³ не исправлять без проверки, не подставлять8V/COD"
+      }
+    ],
+    "nextAction": "Продолжить существующую очередь A3 партиями20–50: точные японские8P/8V отдельно, не переносить соседние годы/COD. Сначала проверить технический источник2009 для8PCAX; если не найден, отдельныйretry и следующий пункт прежней очереди. Полный список моделей не собирать."
+  },
+  "previousRetry": "docs/encyclopedia/retry-2026-10-22-audi-a3.json",
+  "a1Remainder": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1-2025-next.json",
+  "a3WritesThisRun": 0,
+  "sourceLeads": [
+    {
+      "url": "https://www.audi-press.jp/press-releases/2009/crt6ds0000000tlx.html",
+      "date": "2009-05-15",
+      "publisher": "Audi Japan",
+      "confirmedScope": "Заводская таблица идентичности: A3 Sportback1.4TFSI ABA-8PCAX существует в2009; мощности/массы/объёма в таблице нет",
+      "applied": false
+    },
+    {
+      "url": "https://www.audi-press.jp/press-releases/2010/crt6ds0000000xze.html",
+      "publisher": "Audi Japan",
+      "confirmedScope": "В2010 приведена та же идентичность ABA-8PCAX; не является технической таблицей мощности",
+      "applied": false
+    }
+  ],
+  "noKnownFactsRepeated": true,
+  "noNewModelFoundation": true
+}

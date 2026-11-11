@@ -1,0 +1,99 @@
+name: Catalog recovery saved evidence 2026-11-07
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/catalog-recovery-saved-evidence-20261107.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalog-recovery-saved-evidence-20261107
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Bundle fixed read-only evidence probe without runtime credentials
+        run: |
+          cat > scripts/catalog-recovery-saved-evidence.tmp.ts <<'TS'
+          import {getJsonStorage} from '../apps/web/lib/data';
+          import {readCalculationIndex,modelKey,applyEncyclopediaCalculation} from '../apps/web/lib/encyclopedia/calculation-index';
+          import {ajesCatalogQuery,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+          import {readAjesQueryCache} from '../apps/web/lib/catalog/ajes-query-cache';
+          import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
+          import {enrichJapanDrive} from '../apps/web/lib/catalog/japan-drive';
+          import {applyJapanFactoryFuel} from '../apps/web/lib/encyclopedia/japan-fuel-reference';
+          import {japanChassisCode} from '../apps/web/lib/encyclopedia/japan-chassis-drive';
+          const safe=(value:unknown)=>String(value??'').replace(/[^\p{L}\p{N} ._+&()-]/gu,'').slice(0,80);
+          async function main(){
+            const index=readCalculationIndex();
+            if(!index){console.log('LOCAL_INDEX_MISSING');process.exitCode=1;return;}
+            console.log('LOCAL_INDEX_METADATA',JSON.stringify({digest:index.digest,models:Object.keys(index.models).length,variants:Object.values(index.models).reduce((n,rows)=>n+rows.length,0)}));
+            // Hypothesis comparison only. No writes and no calculated prices.
+            const normalized={...index,models:Object.fromEntries(Object.entries(index.models).map(([key,rows])=>[key,rows.map(row=>({...row,constraints:{...row.constraints,...(row.constraints.chassisCode?{chassisCode:japanChassisCode(row.constraints.chassisCode)}:{})}}))]))};
+            const storage=getJsonStorage();
+            for(const market of ['japan','korea'])for(const page of [1,2,3]){
+              const q=ajesQuery(ajesCatalogQuery({market,page:String(page),pageSize:'24'}));
+              const saved:any=await readAjesQueryCache(storage,q.sql);
+              const observed=Date.parse(saved?.observedAt||'');
+              const summary:any={market,page,found:!!saved,observedAt:Number.isFinite(observed)?new Date(observed).toISOString():null,items:Array.isArray(saved?.items)?saved.items.length:null,stale:!!saved?.stale,partial:!!saved?.partial,missingAnnualModel:0,unknownPower:0,knownPower:0,knownUnder160:0,prefixHypothesisResolved:0,models:[]};
+              for(const lot of (Array.isArray(saved?.items)?saved.items:[]).slice(0,24)){
+                if(lot.table!==q.table||typeof lot.id!=='string')continue;
+                // Rate 1 is a sentinel to construct technical input only; no price output or pricing pipeline is used.
+                const rate:any={rateSource:'cbr',currency:lot.currency,sourcePrice:lot.finalPriceJpy||lot.sourcePrice,effectiveRate:1};
+                const input=ajesOffer(lot,rate,saved.observedAt);
+                const annual=(index.models[modelKey(input.make,input.model)]||[]).filter(x=>x.year===input.year);
+                if(!annual.length)summary.missingAnnualModel++;
+                const value=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(input,index),index));
+                if(Number(value.powerHp)>0){summary.knownPower++;if(Number(value.powerHp)<=160)summary.knownUnder160++;}else summary.unknownPower++;
+                const rawCode=input.chassisCode||input.operational?.chassisCode;
+                let prefixResolved=false;
+                if(market==='japan'&&rawCode&&!value.powerHp){
+                  const changed={...input,chassisCode:japanChassisCode(rawCode),operational:{...input.operational,chassisCode:japanChassisCode(rawCode)}};
+                  const hypothesis=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(changed,normalized),normalized));
+                  prefixResolved=Number(hypothesis.powerHp)>0;if(prefixResolved)summary.prefixHypothesisResolved++;
+                }
+                if(summary.models.length<6)summary.models.push({make:safe(input.make),model:safe(input.model),year:Number.isSafeInteger(input.year)?input.year:null,annualCandidates:annual.length,chassisPresent:!!rawCode,prefixedChassis:typeof rawCode==='string'&&/^[A-Z0-9]{1,3}-/.test(rawCode),localPower:!!value.powerHp,prefixHypothesisResolved:prefixResolved});
+              }
+              console.log('SAVED_QUERY_LOCAL_MATCH',JSON.stringify(summary));
+            }
+            for(const kind of ['count','models','makes']){
+              const evidence:any=await storage.readJson('catalog/partner-cache/ajes/evidence/'+kind+'-last.json',null);
+              console.log('AGGREGATE_RESPONSE_SHAPE',JSON.stringify({kind,present:!!evidence,observedAt:typeof evidence?.observedAt==='string'&&Number.isFinite(Date.parse(evidence.observedAt))?new Date(evidence.observedAt).toISOString():null,array:evidence?.array===true,length:Number.isSafeInteger(evidence?.length)?evidence.length:null,fields:Array.isArray(evidence?.fields)?evidence.fields.filter((x:unknown)=>typeof x==='string'&&/^[A-Za-z0-9_()* ]{1,40}$/.test(x)).slice(0,15):[]}));
+            }
+            console.log('READ_ONLY_DONE_NO_SUPPLIER_CALLS');
+          }
+          main().catch(()=>{console.log('SAVED_EVIDENCE_READ_FAILED');process.exitCode=1;});
+          TS
+          node --input-type=module <<'JS'
+          import {build} from 'esbuild';
+          await build({entryPoints:['scripts/catalog-recovery-saved-evidence.tmp.ts'],outfile:'/tmp/catalog-recovery-saved-evidence.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          JS
+      - name: Read six exact saved queries inside the current production container
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file" /tmp/catalog-recovery-saved-evidence.cjs' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'timeout 180 docker exec -i avtocena-production node' < /tmp/catalog-recovery-saved-evidence.cjs | tee saved-evidence.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-recovery-saved-evidence
+          path: saved-evidence.log
+          retention-days: 7

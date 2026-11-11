@@ -1,0 +1,104 @@
+{
+  "checkedAt": "2026-10-22T04:25:50.600396+07:00",
+  "model": "Audi A4",
+  "inspectedVariants": 1021,
+  "newVariants": 388,
+  "newFields": 2996,
+  "newRetryVariants": 633,
+  "cumulativeA4ResearchedVariants": 502,
+  "cumulativeA4UntouchedVariants": 840,
+  "batches": [
+    {
+      "stem": "2023-1",
+      "commit": "f25615f65d11d7a94beb64a614c8c8561d95e534",
+      "run": 39676505107,
+      "job": 119487637111,
+      "variants": 64,
+      "fields": 512,
+      "batch": "research-2026-10-22-audi-a4-2023-1",
+      "readback": "2026-10-22-audi-a4-2023-1-readback.json"
+    },
+    {
+      "stem": "2023-2",
+      "commit": "285dc31442b68ea49261d0043a0f3796cb7b4a23",
+      "run": 39676718728,
+      "job": 119488374317,
+      "variants": 64,
+      "fields": 512,
+      "batch": "research-2026-10-22-audi-a4-2023-2",
+      "readback": "2026-10-22-audi-a4-2023-2-readback.json"
+    },
+    {
+      "stem": "2023-3",
+      "commit": "51301d2bb1454ba9bba57a1ca3cfe4895300158f",
+      "run": 39677006895,
+      "job": 119489377598,
+      "variants": 64,
+      "fields": 512,
+      "batch": "research-2026-10-22-audi-a4-2023-3",
+      "readback": "2026-10-22-audi-a4-2023-3-readback.json"
+    },
+    {
+      "stem": "2023-4",
+      "commit": "9800b0fca9c9f8a147fa502f19db9df5562dcefe",
+      "run": 39677407236,
+      "job": 119490744605,
+      "variants": 23,
+      "fields": 184,
+      "batch": "research-2026-10-22-audi-a4-2023-4",
+      "readback": "2026-10-22-audi-a4-2023-4-readback.json"
+    },
+    {
+      "stem": "2022-1",
+      "commit": "f34b1470b36fd6efaa5491879e8bf4d10c0560f9",
+      "run": 39677691839,
+      "job": 119491723337,
+      "variants": 64,
+      "fields": 462,
+      "batch": "research-2026-10-22-audi-a4-2022-1",
+      "readback": "2026-10-22-audi-a4-2022-1-readback.json"
+    },
+    {
+      "stem": "2022-2",
+      "commit": "1151d35e545313ac7a840b49dba6f02a73cd7f72",
+      "run": 39677942904,
+      "job": 119492606964,
+      "variants": 19,
+      "fields": 152,
+      "batch": "research-2026-10-22-audi-a4-2022-2",
+      "readback": "2026-10-22-audi-a4-2022-2-readback.json"
+    },
+    {
+      "stem": "2021-1",
+      "commit": "0c047ea61fa4dea0b972af20750cfbf9d3706cf2",
+      "run": 39678263256,
+      "job": 119493703190,
+      "variants": 64,
+      "fields": 467,
+      "batch": "research-2026-10-22-audi-a4-2021-1",
+      "readback": "2026-10-22-audi-a4-2021-1-readback.json"
+    },
+    {
+      "stem": "2021-2",
+      "commit": "cea540fa010916a836bba11c0745a58a646955e5",
+      "run": 39678491053,
+      "job": 119494481413,
+      "variants": 26,
+      "fields": 195,
+      "batch": "research-2026-10-22-audi-a4-2021-2",
+      "readback": "2026-10-22-audi-a4-2021-2-readback.json"
+    }
+  ],
+  "retryReasons": {
+    "local_derivative_translation_and_source_required": 7,
+    "incomplete_technical_identity": 191,
+    "protected_reference_or_missing_trim": 126,
+    "observed_identity_conflict": 22,
+    "different_derivative_source_required": 88,
+    "drive_variant_not_identified": 199
+  },
+  "integration": "not_implemented",
+  "applicationChanged": false,
+  "collectorsChanged": false,
+  "note": "Полевые подтверждения включают уже наблюдавшиеся значения, не только заполненные пустые ячейки. Все обработанные строки review. A4 B9: одна строка прочитана, не изменена. Следующая новая группа A4L."
+}

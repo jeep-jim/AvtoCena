@@ -1,0 +1,35 @@
+name: Regcloud — prepare web ingress
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-web-prepare.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-staging
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install and verify ACME ingress and closed application proxy
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          scp "${ssh_opts[@]}" scripts/regcloud-prepare-web.sh root@151.248.113.177:/opt/avtocena/staging/regcloud-prepare-web.sh
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash /opt/avtocena/staging/regcloud-prepare-web.sh'

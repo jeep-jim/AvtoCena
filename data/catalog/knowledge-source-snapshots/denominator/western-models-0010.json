@@ -1,0 +1,3096 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 10,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "toyota:bzawd",
+      "make": "Toyota",
+      "model": "bZ AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:bzlimitedawd",
+      "make": "Toyota",
+      "model": "bZ Limited AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:bzwoodlandawd",
+      "make": "Toyota",
+      "model": "bZ Woodland AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:bzwoodlandawdallterraintire",
+      "make": "Toyota",
+      "model": "bZ Woodland AWD (All-Terrain Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:bz4x",
+      "make": "Toyota",
+      "model": "bZ4X",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:bz4xawd",
+      "make": "Toyota",
+      "model": "bZ4X AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:bz4xawd18wheels",
+      "make": "Toyota",
+      "model": "bZ4X AWD (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:bz4xawd20wheels",
+      "make": "Toyota",
+      "model": "bZ4X AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:chr",
+      "make": "Toyota",
+      "model": "C-HR",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:chrawd18wheels",
+      "make": "Toyota",
+      "model": "C-HR AWD (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:chrawd20wheels",
+      "make": "Toyota",
+      "model": "C-HR AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:camry",
+      "make": "Toyota",
+      "model": "Camry",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:camryawdlese",
+      "make": "Toyota",
+      "model": "Camry AWD LE/SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "toyota:camryawdse",
+      "make": "Toyota",
+      "model": "Camry AWD SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:camryawdsexle",
+      "make": "Toyota",
+      "model": "Camry AWD SE/XLE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:camryawdxlexse",
+      "make": "Toyota",
+      "model": "Camry AWD XLE/XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "toyota:camryawdxse",
+      "make": "Toyota",
+      "model": "Camry AWD XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:camryhybridle",
+      "make": "Toyota",
+      "model": "Camry Hybrid LE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:camryhybridsexlexse",
+      "make": "Toyota",
+      "model": "Camry Hybrid SE/XLE/XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:camryhybridxlese",
+      "make": "Toyota",
+      "model": "Camry Hybrid XLE/SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "toyota:camrylese",
+      "make": "Toyota",
+      "model": "Camry LE/SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:camryse",
+      "make": "Toyota",
+      "model": "Camry SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:camrytrd",
+      "make": "Toyota",
+      "model": "Camry TRD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:camryxlexse",
+      "make": "Toyota",
+      "model": "Camry XLE/XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "toyota:camryxse",
+      "make": "Toyota",
+      "model": "Camry XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:camryxsev6",
+      "make": "Toyota",
+      "model": "Camry XSE V6",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:camryxsev6trd",
+      "make": "Toyota",
+      "model": "Camry XSE V6/TRD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:corolla",
+      "make": "Toyota",
+      "model": "Corolla",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "toyota:corolla1mode",
+      "make": "Toyota",
+      "model": "Corolla (1-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corolla3mode",
+      "make": "Toyota",
+      "model": "Corolla (3-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollaapexedition",
+      "make": "Toyota",
+      "model": "Corolla Apex Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:corollacross",
+      "make": "Toyota",
+      "model": "Corolla Cross",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollacrossawd",
+      "make": "Toyota",
+      "model": "Corolla Cross AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollacrosshybridawd",
+      "make": "Toyota",
+      "model": "Corolla Cross Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollahatchback",
+      "make": "Toyota",
+      "model": "Corolla Hatchback",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollahybrid",
+      "make": "Toyota",
+      "model": "Corolla Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollahybridawd2mode",
+      "make": "Toyota",
+      "model": "Corolla Hybrid AWD (2-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollahybridawd3mode",
+      "make": "Toyota",
+      "model": "Corolla Hybrid AWD (3-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:corollaxle",
+      "make": "Toyota",
+      "model": "Corolla XLE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:corollaxse",
+      "make": "Toyota",
+      "model": "Corolla XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:crown",
+      "make": "Toyota",
+      "model": "Crown",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:crownawd",
+      "make": "Toyota",
+      "model": "Crown AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:crownsignia",
+      "make": "Toyota",
+      "model": "Crown Signia",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:crownsigniaawd",
+      "make": "Toyota",
+      "model": "Crown Signia AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:gr86",
+      "make": "Toyota",
+      "model": "GR 86",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grcorolla",
+      "make": "Toyota",
+      "model": "GR Corolla",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grsupra",
+      "make": "Toyota",
+      "model": "GR Supra",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grsupra20",
+      "make": "Toyota",
+      "model": "GR Supra 2.0",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:grsupra30",
+      "make": "Toyota",
+      "model": "GR Supra 3.0",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grandhighlander",
+      "make": "Toyota",
+      "model": "Grand Highlander",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grandhighlanderawdlexle",
+      "make": "Toyota",
+      "model": "Grand Highlander AWD LE/XLE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grandhighlanderawdlimited",
+      "make": "Toyota",
+      "model": "Grand Highlander AWD Limited",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:grandhighlanderawdlimitedplatinum",
+      "make": "Toyota",
+      "model": "Grand Highlander AWD Limited/Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grandhighlanderawdxle",
+      "make": "Toyota",
+      "model": "Grand Highlander AWD XLE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:grandhighlanderhybridawd",
+      "make": "Toyota",
+      "model": "Grand Highlander Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grandhighlanderhybridawdlimited",
+      "make": "Toyota",
+      "model": "Grand Highlander Hybrid AWD Limited",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:grandhighlanderhybridawdxle",
+      "make": "Toyota",
+      "model": "Grand Highlander Hybrid AWD XLE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:grandhighlanderhybridmaxawd",
+      "make": "Toyota",
+      "model": "Grand Highlander Hybrid MAX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:grandhighlanderplatinumhybridmaxawd",
+      "make": "Toyota",
+      "model": "Grand Highlander Platinum Hybrid MAX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:highlander",
+      "make": "Toyota",
+      "model": "Highlander",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:highlanderawd",
+      "make": "Toyota",
+      "model": "Highlander AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:highlanderhybridawd",
+      "make": "Toyota",
+      "model": "Highlander Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:highlanderhybridawdlimitedplatinum",
+      "make": "Toyota",
+      "model": "Highlander Hybrid AWD Limited/Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:landcruiser",
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "toyota:mirai",
+      "make": "Toyota",
+      "model": "Mirai",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:prius",
+      "make": "Toyota",
+      "model": "Prius",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "toyota:priusawd",
+      "make": "Toyota",
+      "model": "Prius AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:priusc",
+      "make": "Toyota",
+      "model": "Prius c",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "toyota:priuspluginhybridse",
+      "make": "Toyota",
+      "model": "Prius Plug-in Hybrid SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:priuspluginhybridseprimese",
+      "make": "Toyota",
+      "model": "Prius Plug-in Hybrid SE (Prime SE)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:priuspluginhybridxse",
+      "make": "Toyota",
+      "model": "Prius Plug-in Hybrid XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:priuspluginhybridxseprimexse",
+      "make": "Toyota",
+      "model": "Prius Plug-in Hybrid XSE (Prime XSE)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:priusprime",
+      "make": "Toyota",
+      "model": "Prius Prime",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:priusprimese",
+      "make": "Toyota",
+      "model": "Prius Prime SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "toyota:priusprimexse",
+      "make": "Toyota",
+      "model": "Prius Prime XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "toyota:rav4",
+      "make": "Toyota",
+      "model": "RAV4",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4stopstart",
+      "make": "Toyota",
+      "model": "RAV4 (Stop/Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:rav4awd",
+      "make": "Toyota",
+      "model": "RAV4 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:rav4awdstopstart",
+      "make": "Toyota",
+      "model": "RAV4 AWD (Stop/Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:rav4awdle",
+      "make": "Toyota",
+      "model": "RAV4 AWD LE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4awdtrdoffroad",
+      "make": "Toyota",
+      "model": "RAV4 AWD TRD Off-Road",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:rav4awdwoodlandedition",
+      "make": "Toyota",
+      "model": "RAV4 AWD Woodland Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4awdxle",
+      "make": "Toyota",
+      "model": "RAV4 AWD XLE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4awdxselimited",
+      "make": "Toyota",
+      "model": "RAV4 AWD XSE/Limited",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4hybridawd",
+      "make": "Toyota",
+      "model": "RAV4 Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:rav4hybridawdwoodlandedition",
+      "make": "Toyota",
+      "model": "RAV4 Hybrid AWD Woodland Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:rav4pluginhybridprime",
+      "make": "Toyota",
+      "model": "RAV4 Plug-in Hybrid (Prime)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:rav4pluginhybridawdgrsport",
+      "make": "Toyota",
+      "model": "RAV4 Plug-in Hybrid AWD GR SPORT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4pluginhybridawdse",
+      "make": "Toyota",
+      "model": "RAV4 Plug-in Hybrid AWD SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4pluginhybridawdxse",
+      "make": "Toyota",
+      "model": "RAV4 Plug-in Hybrid AWD XSE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4pluginhybridawdxsetechnologypackage",
+      "make": "Toyota",
+      "model": "RAV4 Plug-in Hybrid AWD XSE Technology Package",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:rav4prime",
+      "make": "Toyota",
+      "model": "RAV4 Prime",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:sequoia",
+      "make": "Toyota",
+      "model": "Sequoia",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:sequoia4wd",
+      "make": "Toyota",
+      "model": "Sequoia 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:sienna",
+      "make": "Toyota",
+      "model": "Sienna",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:siennaawd",
+      "make": "Toyota",
+      "model": "Sienna AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tacoma",
+      "make": "Toyota",
+      "model": "Tacoma",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tacoma4wd",
+      "make": "Toyota",
+      "model": "Tacoma 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tacoma4wd2mode",
+      "make": "Toyota",
+      "model": "Tacoma 4WD (2-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tacoma4wd3mode",
+      "make": "Toyota",
+      "model": "Tacoma 4WD (3-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tacoma4wddcabtrdoffroadpro",
+      "make": "Toyota",
+      "model": "Tacoma 4WD D-Cab TRD Off-Road/Pro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "toyota:tacomahybrid4wd",
+      "make": "Toyota",
+      "model": "Tacoma Hybrid 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tacomahybrid4wdlimited",
+      "make": "Toyota",
+      "model": "Tacoma Hybrid 4WD Limited",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tundra",
+      "make": "Toyota",
+      "model": "Tundra",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tundra4wd",
+      "make": "Toyota",
+      "model": "Tundra 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:tundra4wd1mode",
+      "make": "Toyota",
+      "model": "Tundra 4WD (1-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tundra4wd3mode",
+      "make": "Toyota",
+      "model": "Tundra 4WD (3-mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tundra4wd3modetrd",
+      "make": "Toyota",
+      "model": "Tundra 4WD (3-mode)/TRD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "toyota:tundra4wdtrd",
+      "make": "Toyota",
+      "model": "Tundra 4WD TRD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:tundrahybrid4wd",
+      "make": "Toyota",
+      "model": "Tundra Hybrid 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:tundrahybrid4wdtrdpro",
+      "make": "Toyota",
+      "model": "Tundra Hybrid 4WD TRD PRO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:venza",
+      "make": "Toyota",
+      "model": "Venza",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:venzaawd",
+      "make": "Toyota",
+      "model": "Venza AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:yaris",
+      "make": "Toyota",
+      "model": "Yaris",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "toyota:yarissil",
+      "make": "Toyota",
+      "model": "Yaris (SIL)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "vinfast:vf6",
+      "make": "Vinfast",
+      "model": "VF 6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "vinfast:vf7",
+      "make": "Vinfast",
+      "model": "VF 7",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "vinfast:vf8",
+      "make": "Vinfast",
+      "model": "VF 8",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "vinfast:vf9",
+      "make": "Vinfast",
+      "model": "VF 9",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027
+    },
+    {
+      "key": "vinfast:vf7plus",
+      "make": "VinFast",
+      "model": "VF7 PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "vinfast:vf8eco",
+      "make": "VinFast",
+      "model": "VF8 ECO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "vinfast:vf8plus",
+      "make": "VinFast",
+      "model": "VF8 PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "vinfast:vf8plusperformance",
+      "make": "VinFast",
+      "model": "VF8 PLUS Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "vinfast:vf9eco",
+      "make": "VinFast",
+      "model": "VF9 ECO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "vinfast:vf9plus",
+      "make": "VinFast",
+      "model": "VF9 PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:arteon",
+      "make": "Volkswagen",
+      "model": "Arteon",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "volkswagen:arteon4motion",
+      "make": "Volkswagen",
+      "model": "Arteon 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volkswagen:atlas",
+      "make": "Volkswagen",
+      "model": "Atlas",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "volkswagen:atlas4motion",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "volkswagen:atlas4motioncomfortline",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION Comfortline",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:atlas4motionhighlineexecline",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION Highline/Execline",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:atlas4motionpeakedition",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION Peak Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:atlascrosssport",
+      "make": "Volkswagen",
+      "model": "Atlas Cross Sport",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "volkswagen:atlascrosssport4motion",
+      "make": "Volkswagen",
+      "model": "Atlas Cross Sport 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:egolf",
+      "make": "Volkswagen",
+      "model": "e-Golf",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "volkswagen:gli",
+      "make": "Volkswagen",
+      "model": "GLI",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "volkswagen:golf",
+      "make": "Volkswagen",
+      "model": "Golf",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volkswagen:golfr",
+      "make": "Volkswagen",
+      "model": "Golf R",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:golfgti",
+      "make": "Volkswagen",
+      "model": "Golf/GTI",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:gti",
+      "make": "Volkswagen",
+      "model": "GTI",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "volkswagen:idbuzz",
+      "make": "Volkswagen",
+      "model": "ID. Buzz",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:idbuzzpro",
+      "make": "Volkswagen",
+      "model": "ID. Buzz Pro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:idbuzzpro4motion",
+      "make": "Volkswagen",
+      "model": "ID. Buzz Pro 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:id4",
+      "make": "Volkswagen",
+      "model": "ID.4",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:id4awd",
+      "make": "Volkswagen",
+      "model": "ID.4 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:id4awdpro",
+      "make": "Volkswagen",
+      "model": "ID.4 AWD Pro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:id4awdpros",
+      "make": "Volkswagen",
+      "model": "ID.4 AWD Pro S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:id4pro",
+      "make": "Volkswagen",
+      "model": "ID.4 Pro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:id4pros",
+      "make": "Volkswagen",
+      "model": "ID.4 Pro S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:id4s",
+      "make": "Volkswagen",
+      "model": "ID.4 S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "volkswagen:jetta",
+      "make": "Volkswagen",
+      "model": "Jetta",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "volkswagen:jettacomfortlinehighline",
+      "make": "Volkswagen",
+      "model": "Jetta Comfortline/Highline",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "volkswagen:jettagli",
+      "make": "Volkswagen",
+      "model": "Jetta GLI",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:passat",
+      "make": "Volkswagen",
+      "model": "Passat",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volkswagen:taos",
+      "make": "Volkswagen",
+      "model": "Taos",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "volkswagen:taos4motion",
+      "make": "Volkswagen",
+      "model": "Taos 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:tiguan",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "volkswagen:tiguan4motion",
+      "make": "Volkswagen",
+      "model": "Tiguan 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volkswagen:tiguanrline4motion",
+      "make": "Volkswagen",
+      "model": "Tiguan R-Line 4MOTION",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:c40",
+      "make": "Volvo",
+      "model": "C40",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:c40recharge",
+      "make": "Volvo",
+      "model": "C40 Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:c40rechargetwin",
+      "make": "Volvo",
+      "model": "C40 Recharge Twin",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:ec40",
+      "make": "Volvo",
+      "model": "EC40",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ec40twin",
+      "make": "Volvo",
+      "model": "EC40 Twin",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex30",
+      "make": "Volvo",
+      "model": "EX30",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex30crosscountry18wheels",
+      "make": "Volvo",
+      "model": "EX30 Cross Country (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex30crosscountry19wheels",
+      "make": "Volvo",
+      "model": "EX30 Cross Country (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex30singlemotorextrange19and20wheels",
+      "make": "Volvo",
+      "model": "EX30 Single Motor Ext Range (19\" and 20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:ex30singlemotorextendedrange",
+      "make": "Volvo",
+      "model": "EX30 Single Motor Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex30singlemotorextendedrange18wheels",
+      "make": "Volvo",
+      "model": "EX30 Single Motor Extended Range (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:ex30twinperformance",
+      "make": "Volvo",
+      "model": "EX30 Twin Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex40",
+      "make": "Volvo",
+      "model": "EX40",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex40twin",
+      "make": "Volvo",
+      "model": "EX40 Twin",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:ex60",
+      "make": "Volvo",
+      "model": "EX60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "volvo:ex90",
+      "make": "Volvo",
+      "model": "EX90",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "volvo:ex90twinmotor20and22wheels",
+      "make": "Volvo",
+      "model": "EX90 Twin Motor (20\" and 22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:ex90twinmotor21wheels",
+      "make": "Volvo",
+      "model": "EX90 Twin Motor (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:ex90twinmotorperformance20and22wheels",
+      "make": "Volvo",
+      "model": "EX90 Twin Motor Performance (20\" and 22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:ex90twinmotorperformance21wheels",
+      "make": "Volvo",
+      "model": "EX90 Twin Motor Performance (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:s60",
+      "make": "Volvo",
+      "model": "S60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:s60b5",
+      "make": "Volvo",
+      "model": "S60 B5",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "volvo:s60b5awd",
+      "make": "Volvo",
+      "model": "S60 B5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:s60t5",
+      "make": "Volvo",
+      "model": "S60 T5",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:s60t5awd",
+      "make": "Volvo",
+      "model": "S60 T5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:s60t6awd",
+      "make": "Volvo",
+      "model": "S60 T6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:s60t8awd",
+      "make": "Volvo",
+      "model": "S60 T8 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:s60t8awdrecharge",
+      "make": "Volvo",
+      "model": "S60 T8 AWD Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:s60t8awdrechargeextendedrange",
+      "make": "Volvo",
+      "model": "S60 T8 AWD Recharge Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:s90",
+      "make": "Volvo",
+      "model": "S90",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:s90b6awd",
+      "make": "Volvo",
+      "model": "S90 B6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:s90t6awd",
+      "make": "Volvo",
+      "model": "S90 T6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:s90t8awd",
+      "make": "Volvo",
+      "model": "S90 T8 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:s90t8awdrecharge",
+      "make": "Volvo",
+      "model": "S90 T8 AWD Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:s90t8awdrechargeextendedrange",
+      "make": "Volvo",
+      "model": "S90 T8 AWD Recharge Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:v60",
+      "make": "Volvo",
+      "model": "V60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:v60b6awd",
+      "make": "Volvo",
+      "model": "V60 B6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "volvo:v60ccb5awd",
+      "make": "Volvo",
+      "model": "V60 CC B5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:v60cct5awd",
+      "make": "Volvo",
+      "model": "V60 CC T5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:v60t5",
+      "make": "Volvo",
+      "model": "V60 T5",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:v60t6awd",
+      "make": "Volvo",
+      "model": "V60 T6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:v60t8awd",
+      "make": "Volvo",
+      "model": "V60 T8 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "volvo:v60t8awdrecharge",
+      "make": "Volvo",
+      "model": "V60 T8 AWD Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:v60t8awdrechargeextendedrange",
+      "make": "Volvo",
+      "model": "V60 T8 AWD Recharge Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:v90",
+      "make": "Volvo",
+      "model": "V90",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:v90ccb6awd",
+      "make": "Volvo",
+      "model": "V90 CC B6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc40",
+      "make": "Volvo",
+      "model": "XC40",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc40b4awd",
+      "make": "Volvo",
+      "model": "XC40 B4 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "volvo:xc40b5awd",
+      "make": "Volvo",
+      "model": "XC40 B5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc40recharge",
+      "make": "Volvo",
+      "model": "XC40 Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:xc40rechargetwin",
+      "make": "Volvo",
+      "model": "XC40 Recharge Twin",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:xc40t4",
+      "make": "Volvo",
+      "model": "XC40 T4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "volvo:xc40t4awd",
+      "make": "Volvo",
+      "model": "XC40 T4 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:xc40t5awd",
+      "make": "Volvo",
+      "model": "XC40 T5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:xc60",
+      "make": "Volvo",
+      "model": "XC60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "volvo:xc60b5awd",
+      "make": "Volvo",
+      "model": "XC60 B5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc60b6awd",
+      "make": "Volvo",
+      "model": "XC60 B6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "volvo:xc60t5awd",
+      "make": "Volvo",
+      "model": "XC60 T5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:xc60t6awd",
+      "make": "Volvo",
+      "model": "XC60 T6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "volvo:xc60t8awd",
+      "make": "Volvo",
+      "model": "XC60 T8 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc60t8awdrecharge",
+      "make": "Volvo",
+      "model": "XC60 T8 AWD Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:xc60t8awdrechargeextendedrange",
+      "make": "Volvo",
+      "model": "XC60 T8 AWD Recharge Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:xc90",
+      "make": "Volvo",
+      "model": "XC90",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "volvo:xc90b5awd",
+      "make": "Volvo",
+      "model": "XC90 B5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "volvo:xc90b6awd",
+      "make": "Volvo",
+      "model": "XC90 B6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc90t5awd",
+      "make": "Volvo",
+      "model": "XC90 T5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:xc90t6awd",
+      "make": "Volvo",
+      "model": "XC90 T6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "volvo:xc90t8awd",
+      "make": "Volvo",
+      "model": "XC90 T8 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "volvo:xc90t8awdrecharge",
+      "make": "Volvo",
+      "model": "XC90 T8 AWD Recharge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "volvo:xc90t8awdrechargeextendedrange",
+      "make": "Volvo",
+      "model": "XC90 T8 AWD Recharge Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    }
+  ]
+}

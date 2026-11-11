@@ -1,0 +1,223 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:14:47.744Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 100,
+  "sampleLimit": 40,
+  "pageLimit": 2,
+  "markets": [
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://uae.dubizzle.com",
+          "path": "/en/motors/used-cars/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 6183,
+            "sha256": "4756e6e059b84e2f7bd9a73617a4b29ac4219640971ee039d666f531f1322d25",
+            "title": "Pardon Our Interruption",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://uae.dubizzle.com",
+          "path": "/en/motors/used-cars/search/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 6183,
+            "sha256": "64747b4c7f7744dc3927e49864a6b75abdf41ebcadfecb56477be0661f57205b",
+            "title": "Pardon Our Interruption",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://uae.dubizzle.com",
+          "path": "/motors/used-cars/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 6183,
+            "sha256": "266531eb3e8641a4d643a88da62cf254a483429a0045c589c37840648a82d7e0",
+            "title": "Pardon Our Interruption",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://dubai.dubizzle.com",
+          "path": "/motors/used-cars/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 6183,
+            "sha256": "63fe6a292bb74c7220dfff438f95f587c3193622753278bdfa0e151ebf3c34f3",
+            "title": "Pardon Our Interruption",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://dubai.dubizzle.com",
+          "path": "/motors/used-cars/search/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 6183,
+            "sha256": "3c1c3c2c40ee0de58ba3ce03b619a9501419c687d11829dd3f18be7e43b28a0e",
+            "title": "Pardon Our Interruption",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://abudhabi.dubizzle.com",
+          "path": "/motors/used-cars/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 6183,
+            "sha256": "ef4e370fcb6aec31cf35076e265abc8f590d10d0a610ba094cad1681912bc43c",
+            "title": "Pardon Our Interruption",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        }
+      ],
+      "sourceId": "dubizzle_uae_open",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "status": "blocked_or_failed",
+      "error": "dubizzle_exact_blocked_200_imperva_or_challenge:pilot_request_outside_envelope",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+  "businessSettings": {
+    "uae": {
+      "rawActiveVersion": null,
+      "effectiveVersion": "market_uae_system_average_v2",
+      "profileSource": "runtime_average_defaults",
+      "provisional": true,
+      "effectiveHash": "85fb77b6115aaed696ed8270ea173920cbae4cb2ced88b11d5f962153c553b38",
+      "effectiveExpenses": {
+        "securityDepositRub": 110000,
+        "topAvtoCommissionRub": 90000,
+        "contractInitialPaymentRub": 200000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 120000,
+        "logisticsRub": 450000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

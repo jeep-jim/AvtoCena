@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-astra-yaris-cross",
+  "entries": [
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2023,
+      "trim": "Yaris Cross 2021 1.5h Trend fwd 116cv e-cvt",
+      "variantId": "f6d50cfba33a3b7380c0d8e1",
+      "expectedDigest": "881419dcade0995c90d97f19020ac4ea784deccbaf948dbe724d3b5f75b1deb4",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ10(H),approvale6*2018/858*00013*03; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ10(H): ДВС68кВт,30min37кВт,GVW1690кг; все одобрения/версии в2023единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2023,
+      "trim": "Yaris Cross 2021 1.5h Active fwd 116cv e-cvt",
+      "variantId": "3d5ac446e710662bbac46045",
+      "expectedDigest": "89c10915d3dd115d95e4a4fbd2631648cd046907776a0063d73a7de70b6e4197",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ10(H),approvale6*2018/858*00013*03; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ10(H): ДВС68кВт,30min37кВт,GVW1690кг; все одобрения/версии в2023единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2023,
+      "trim": "Yaris Cross 2023 1.5h Trend awd-i TRAZIONE INTEGRALE 116cv e-cvt SENZA OBBLIGO DI FINANZIAMENTO",
+      "variantId": "a04653b933d6a96984481408",
+      "expectedDigest": "b11dda9ab9698de0c155a720dc8f3b084d00bcfbd3f4c7d29f212e77fde1eb33",
+      "patch": {
+        "power30MinKw": 38,
+        "icePowerKw": 68,
+        "drive": "awd",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ15(H),approvale6*2018/858*00013*03; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,AWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ15(H): ДВС68кВт,30min38кВт,GVW1775кг; все одобрения/версии в2023единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2023,
+      "trim": "Hybrid FWD Team Deutschland Navi 360 Kamera LED Sp",
+      "variantId": "0b46f11f0b71aa68cac33235",
+      "expectedDigest": "7038212caa84b7f82af615e8801f598d2c10f1276c010ef8b5ec65f1543d34aa",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ10(H),approvale6*2018/858*00013*03; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ10(H): ДВС68кВт,30min37кВт,GVW1690кг; все одобрения/версии в2023единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2024,
+      "trim": "Yaris Cross 2021 1.5h Premiere fwd 130cv e-cvt",
+      "variantId": "2fea938e8830e566f1407c87",
+      "expectedDigest": "88751d4b38ea94bea0c3dc733336c5c8723fe0e6008e5fc404ddb7f3852a7145",
+      "patch": {
+        "power30MinKw": 43,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ11(H),approvale6*2018/858*00013*04; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid130,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ11(H): ДВС68кВт,30min43кВт,GVW1690кг; все одобрения/версии в2024единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2024,
+      "trim": "1.5h Trend fwd 116cv e-cvt *PROMOZIONE!!",
+      "variantId": "269f9f0c4e3aeb6e9567929f",
+      "expectedDigest": "95c948ac8b3c0a779e298bf4e21445052dffa39c9c78dd5a8f430d54d603c50a",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ10(H),approvale6*2018/858*00013*03; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ10(H): ДВС68кВт,30min37кВт,GVW1690кг; все одобрения/версии в2024единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2024,
+      "trim": "1,5 Hybrid AWD 4X4 Premiere Edit. AHK 1. Hand",
+      "variantId": "4373b9baf701a6517ff7ec70",
+      "expectedDigest": "7a8e1b264de8b3b4c100f8acd9c45a8c68b30c73939ac37e09c74888e436f235",
+      "patch": {
+        "power30MinKw": 38,
+        "icePowerKw": 68,
+        "drive": "awd",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ15(H),approvale6*2018/858*00013*03; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,AWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ15(H): ДВС68кВт,30min38кВт,GVW1775кг; все одобрения/версии в2024единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2025,
+      "trim": "Yaris Cross 2025 1.5h Active fwd 115cv e-cvt",
+      "variantId": "d06ffb37ceb27fbd37541df6",
+      "expectedDigest": "a60519b5baa16bccaf907ca6a7935224d49de8d767b05379ef8af5f9f3e1c311",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ10(H),approvale6*2018/858*00013*04; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid116,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ10(H): ДВС68кВт,30min37кВт,GVW1690кг; все одобрения/версии в2025единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2025,
+      "trim": "Hybrid FWD Teamplayer Navi LED Apple CarPlay Andro",
+      "variantId": "30ed9e173a55e14753ee242d",
+      "expectedDigest": "bbcebc27d4217c7876a8fe4b5d6b2bc74ec66d0313e128037f2fefe07ed41e7a",
+      "patch": {
+        "power30MinKw": 43,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ11(H),approvale6*2018/858*00013*04; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid130,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ11(H): ДВС68кВт,30min43кВт,GVW1690кг; все одобрения/версии в2025единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2026,
+      "trim": "1,5l Hybrid 4x4 Teamplayer Technik NEUES MODELL!",
+      "variantId": "4861ea8e25226dac0a6a62bf",
+      "expectedDigest": "a6d44734864dd9d6cbdc3b93cc0cd75a9b58e8a7593e4c19e124134996231bfd",
+      "patch": {
+        "power30MinKw": 44,
+        "icePowerKw": 68,
+        "drive": "awd",
+        "grossVehicleWeightKg": 1775
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ16(H),approvale6*2018/858*00013*06; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid130,AWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ16(H): ДВС68кВт,30min44кВт,GVW1775кг; все одобрения/версии в2026единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    },
+    {
+      "modelId": "d8009f12751fa56e634db71b",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "year": 2026,
+      "trim": "- 1.5 l 4x2 Hybrid Teamplayer",
+      "variantId": "2b9609a754cbef378e677597",
+      "expectedDigest": "daff5d3da32167bda9ce320867d647cb20d05a79b1859749ead5cfb695cde100",
+      "patch": {
+        "power30MinKw": 43,
+        "icePowerKw": 68,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1690
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA eCoC field27.4 Maximum30minutespower; typeXPB1F(M),variantMXPJ11(H),approvale6*2018/858*00013*06; SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf.",
+        "statement": "Yaris Cross Hybrid130,FWD,1490см³: точнаямодификация появномуFWD/AWD/4x2/4x4 и115/116/130 либо85/96кВт. ASTRAMXPJ11(H): ДВС68кВт,30min43кВт,GVW1690кг; все одобрения/версии в2026единогласны. Связь115/130 ипереднего59/62кВт+заднего3.9 подтверждена https://media.toyota.co.uk/wp-content/uploads/sites/5/pdf/240704-Yaris-Cross-Tech-Specs.pdf . 30min взятаиз27.4,не суммироваласьизпиков. Неизвестныйпривод/неопределённыйHybrid68кВт/2022безгодовыхCoC и2023Hybrid130непереносятся. Исходныегод,powerKw/powerHp,история сохранены."
+      }
+    }
+  ]
+}

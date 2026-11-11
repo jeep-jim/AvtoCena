@@ -1,0 +1,893 @@
+{
+  "checkedAt": "2026-10-22T04:23:37.981Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-aito-m7-historical-manuals",
+  "digest": "904eaf5bcada8c0bc026b5d9d63a8dc3d75f34a9a82e929b47307bbde8af6021",
+  "sourceModelRevision": "72cbfad8-69d9-4722-9423-c38f64c03d6e",
+  "recordsRead": 124,
+  "variants": 35,
+  "fields": 94,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "75ab693c01758ff68e452647",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "adc7e714cd2bca5b184c5a29",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f0bcd6698c5237488a093e21",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "36c470a8e8a44175a45e450b",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "ac27d8b442e695e1f03553a0",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "50241385128c99c606a2623a",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "79cc6469099a917d6705ad7d",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "4cd7a82d64234883c5cbc7ba",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "3865141b3785a77afb53dd20",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "5ef0c130a9d69ff2971d3958",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "9622d7f6f49d96d7168f5508",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "d25cc5d99f870a396eb8cc2d",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "005e89cbaa243f6defeec223",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "5f9ebd637d34ec282ddb2f1c",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "01e7bb4097f1fa64828415d9",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "bd961c9c5c6c0395b2b86181",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2b88e0969f5c46409f367e69",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "506b0e579f8454868340736e",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "85ae85ae379640af2e90479c",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "ee4ef54f8d23dbf48567793a",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "d83482d9720dd7b117f1d20a",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "e2332d919523f47a1afdd2dc",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "0ef33d6b7e8269c8fe28e11c",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "8d035dc7383537ebfde7c316",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "70892698bad7db84fbcb4740",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "2a19c4c3809f4978a4d15595",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "0c0f8a10ec9acb716d44b2af",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "04a57bdebf3eb2084035db9b",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "f138d8257a220bb779c21556",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "a7eec0b034d1fc2ee2f14fd5",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "b42005c66547ce5946bbdf01",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "2684d86867a82e78b1bfb070",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "e4b5f4418b8096c2800a69cb",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "041aac86f6ba09a7212c7503",
+        "fields": [
+          "engineCc",
+          "engineCode"
+        ]
+      },
+      {
+        "variantId": "d44faa711298b8d82cec9de4",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "retry": [
+    {
+      "variantId": "14ea9d2377389a31c9fa1739",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "c4d0177e3eb8e82c1db6e7cb",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "1562862cd0726c04c8546122",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "57bb6a4e6cb4ac35e8a04d21",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "31c46d0c7983055d6bd48a91",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "72c41cf573b8c375bd525f06",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "c1cc909454b657deadbed739",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "c30ed4cf42a2c1c31ca10416",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "c24cee9f2e7caea4cf30b195",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "f128395f8a819368ab5bbd8f",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "803cde5ebbe057406155b622",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "ad3c081c28ff97d485a34545",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "fbd39d11328473c4534ca4d2",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "dc0c64462f6239b3c052b8bc",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "abdcff83fb0a5da2f392c22c",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "57df7453d0dcf4b65cbb60e2",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "be6c3e5883083bcf7b4f74c7",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "0a1904e162796ee792f7b6c8",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "5e5d353813a80e9ac26002bc",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "30e1843bb7925384f278afc7",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "464e8bef4b699096302ac4d5",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "d584fb0baf813ebe73f650bd",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "d1346e8c86c6a27fd83f88a9",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "4898af5e650b0f2e1d4bec13",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "c2224aea602e6ff47ec79807",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "70e6d97a665cbc076cc7cc4f",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "ac27b2f5026905032a678f34",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "f10ce3d78b8fd272f1d4046f",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "fb5e6307cfa0772130970c05",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "648f0706326fffc691fb57b6",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "bfbdeef4f223e9db7b73aeef",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "e88ca2c587c90754a2fd6e7b",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "3b928e47bbbfdfe181e42770",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "11b77801b0369b399b161254",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "b2bc0636ca38bc54db53a6a3",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "255d46039dae4fcae4ca1853",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "117dff310b291a4b24d51917",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "374c24a4dcad02656025f221",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "b8db58eacb6a0555146f15c1",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "8effc04cce63496ebe56762b",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "0624c4e59980797dffdfaf3f",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "35d054c47c4c99c8065634bd",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "d44ae19ad4b2abb736f266e5",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить принадлежность к историческому обновлению и фактический год; названия MY2026 не перенесены на 2025 автоматически."
+    },
+    {
+      "variantId": "8844cb6938e4eb41e4b65d65",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "3cd385712d7cdcfdcf005fcd",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "79dccb46a2af3ff4cfbcdc6b",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "328e58843d29c89899e9f9c0",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "611ae7061aafc8a3be3e7dd9",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "db3ccc19853f8fd43c8dfce5",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "d56311185f3cc1d81858ea89",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ebde5c21ef711fe840e244a1",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ad70003170c83d4802ca279a",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "62b8c0ab6d11c7bfc351dbfb",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "3b2a809664158930b0b85fde",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "b095d411875409dc37cc1f6c",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "097dcadfb607af8e54eb4e4d",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "4df70c968eab41147a02a334",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ab30f971974965e74784373f",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "93f79f09209f894817fb2fbc",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "d25278cc010a438f4fbae188",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "a8305fe6ea3a1fceb02c6d81",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "cc14dd5326c8787de6446212",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "77407251de0073fa6c1130ca",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "07ead93690545d973ff40e98",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ee0f26fba393e9985fda81a7",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "c86d6e83d0fbf5838aa57d91",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ebbea5c2429da5a1b9b6e9da",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "d9d9afb4d238d8e1909d6689",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ed37cf8014b9ffbe528cffff",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "dfcd561f71fd29ac2bbde822",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "09cb0ca85c18d7eb80231a8b",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "08d6c8f92c9c1c888fb19578",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "e5ea1bada438e625b02c9fe1",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "e891b59988a30c32edadd93f",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "6969142102e407c8e7e5d305",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "f87b87d3236009dbc3235808",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Отсутствует точное исполнение."
+    },
+    {
+      "variantId": "c6c19a45020c5b4bd4650ac2",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "ef3132ec879b0e94c968da7a",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "b28f9f25932571c578df7b6c",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "4e3189bfdf9487e0d6d37ce4",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "8cdc6e3e5110f7821dcc8738",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "1e02885591b8e555e51bebf4",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "6184f15798db276c361c01f8",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "67687a4dad04b5e393da972b",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "b1cec157f00bb7485dcad1c3",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "54df62e6831e92382f39ab8b",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "1d3bacc32b458d473a645533",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "b373b840678fd32196fc9eb2",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    },
+    {
+      "variantId": "9a3f30ab64aec71c77d45a08",
+      "year": 2026,
+      "status": "review",
+      "reason": "Включено в следующую отдельно подготовленную партию M7 2026 40/64. Не считать применённым до SUCCESS/readback."
+    }
+  ],
+  "manuals": [
+    {
+      "index": 0,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M72026款增程版使用说明书.pdf",
+      "sha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69"
+    },
+    {
+      "index": 1,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M72026款纯电版使用说明书.pdf",
+      "sha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff"
+    },
+    {
+      "index": 2,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M7Max智驾版使用说明书.pdf",
+      "sha256": "389e8d9c347ff5d41817c22f2dca33a08b0daf83c7d23bad553a9be442ae23a5"
+    },
+    {
+      "index": 3,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M7Plus标准版使用说明书.pdf",
+      "sha256": "1cdd556d16cf58729b0e17d2add38a0e436af790ce04b4603916da13965da348"
+    },
+    {
+      "index": 4,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M7Ultra-Pro使用说明书.pdf",
+      "sha256": "617a079af35ebfc8429bfaa3d2ca3fcc06eb14f9645661e6aaee5b9f76a9fda5"
+    },
+    {
+      "index": 5,
+      "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/问界M7使用说明书.pdf",
+      "sha256": "5ccebf28edf5339986c86963a98b1d6bd32b6178917db58c1c4234eb2c23f16f"
+    }
+  ],
+  "missingFields": [
+    "power30MinKw",
+    "frontMotor30MinKw",
+    "rearMotor30MinKw",
+    "icePowerKw",
+    "batteryKwh",
+    "exact Ultra/Pro product code for grossVehicleWeightKg"
+  ],
+  "current2026SourceReview": {
+    "erev": {
+      "manual": {
+        "index": 0,
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M72026款增程版使用说明书.pdf",
+        "sha256": "dc43c5268cfd595fb9f50f546c0cf2109a68af718137a26bf5d4ef6bd29c6e69"
+      },
+      "enginePage": 425,
+      "engineCc": 1496,
+      "engineCode": "HG15T",
+      "netPowerKw": 115,
+      "ratedPowerKw": 118,
+      "notApplied": true,
+      "massPage": 424,
+      "ambiguousMassByProductCode": true,
+      "massMappingResolvedByBatteryTablePage426": true
+    },
+    "ev": {
+      "manual": {
+        "index": 1,
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/问界M72026款纯电版使用说明书.pdf",
+        "sha256": "376cb4df1c2d2a008fa7b312e3afb968e910df2ba53d0a28355cdfb75aee8fff"
+      },
+      "massPage": 414,
+      "rwdGrossVehicleWeightKg": 3025,
+      "awdGrossVehicleWeightKg": 3130,
+      "notApplied": true
+    },
+    "followUpPreparedBatch": "docs/encyclopedia/batches/2026-10-22-aito-m7-2026-manuals.json"
+  },
+  "dependsOnReleaseWorkflow": 39720853891,
+  "requiresFreshApiCas": true,
+  "historicalExpansionComplete": false
+}

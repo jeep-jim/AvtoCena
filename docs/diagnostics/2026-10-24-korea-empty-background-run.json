@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T22:31:03.324461Z",
+  "workflow": 40032114341,
+  "job": 120683058459,
+  "conclusion": "failure",
+  "terminalError": "catalog_no_fresh_source_offers:korea",
+  "failedAt": "2026-10-23T22:27:20.487Z",
+  "collectionPlan": {
+    "market": "korea",
+    "feed": false,
+    "parsers": "",
+    "controlsRevision": 13,
+    "artifactCreated": false
+  },
+  "artifactId": 12536625356,
+  "artifactSha256": "e43dd6adcba4ccb7434ac180a0d65d632816eafce4f2b6f67deb21180ce86f8c",
+  "artifactDownloadedAndShaVerified": true,
+  "publishReport": {
+    "market": "korea",
+    "published": false,
+    "previousManifestPreserved": true,
+    "skipped": true,
+    "reason": "no_fresh_source_offers",
+    "generationErrors": []
+  },
+  "rootCause": "market-level enabled check includes on-demand AJES Korea, while legacy worker only produces parser intake for Korea; all actual collectors skipped, then empty publication correctly rejected.",
+  "fix": "Use existing collectionWorkflowEnabled alongside market/owner policy before starting collector or publisher. No source switches, cadence, empty-publication guard or on-demand AJES path changed.",
+  "validation": {
+    "actualWorkflowPlannerOfflineTests": 4,
+    "passed": 4,
+    "yamlParsed": true,
+    "diffCheck": true
+  },
+  "rerunRequested": false,
+  "appDeployRequested": false,
+  "limitation": "Workflow correction applies to future invocations; no live provider request or successful Korea publication claimed."
+}

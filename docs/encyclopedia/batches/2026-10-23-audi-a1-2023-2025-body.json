@@ -1,0 +1,1756 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-audi-a1-2023-2025-body",
+  "entries": [
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI Einparkhilfe hinten LM PDC",
+      "variantId": "3851bcdb79e12a0cb313cf3b",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "e1c79b356bb957823a6802cf81b24a6afa102aa2cb8af8818d013f3cb28b1ea3",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI LED KEYLESS DAB+",
+      "variantId": "82ea8334d96a77a4836f7b58",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "5cf92cfe6edacfcbedad98df69cb13ddeed9d7d411b0fafb1bd951bff0eb84ba",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI LED Parkhilfe Sitzheiz",
+      "variantId": "3bae468116f4797be524ea7f",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "57eb29fc22b5c104937eb7dab666d4f57bc5675d3d1ffd5c638474b9e4578273",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI LED*Virtual*Sound*Sitzh.",
+      "variantId": "c2e4df0ab27ad7bbc50159c6",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "41dbef8c520826baacc427ebd69f0e8bf35b07c8f2471d44f7789255c6dc5256",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI LED+MMI NAVI+PDC+VCP+KLIMA+",
+      "variantId": "4c2df5b35458b4ba5def9ce2",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "55bed64fbd26a3eb927fe0d3d29c345a34b7eae61753ed9a436de4cd5ae0225c",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI LM15'' DIGITAL SM.INTERFACE SHZ",
+      "variantId": "73bfd4b20833b46d56a97bc2",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "ce1f5b686286ef031489a4abae4afb8873a0023c6fc0841a794b4f8fefd16574",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI S line Aut.*NAVI*LED*PDC*",
+      "variantId": "4ce98588665ff1c2a3329b9c",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "78c44076b3a0c784dd8f42fafd5829b627b29239ec14acb3a742a71c435b19b3",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 25 TFSI S tronic Virtual/LED",
+      "variantId": "08274c69d53bfe4eaa13ac42",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "8221fe4c31514e903688702d9a043ff6754bfe7a9710580edc9c7ba1c516ed38",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "SPORTBACK 25TFSi S LINE 17Z/ACC/DSP/NAVI/DAB",
+      "variantId": "4c807a305a0e9d1540aa8160",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "e48a7760e97214a90be7a12b709dc876f1198002aa67f89bc7f0cc0a2966c4c9",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "sportback 30 1.0 tfsi admired 110cv s-tronic",
+      "variantId": "62d5d9a029c4412233100449",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "2dcc6a8b64a34250192f8f4771fd0364c1c7b4861b3daa22f5487d6cc5ef9a23",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI /Automatik/Klima/1.Hand",
+      "variantId": "2cefaf019e6780f9df44307b",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "bd9c562cd2657aae80c1a2ce69c4e1f591027b56bcceb8994062a412c17c0295",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI 2x S line CarPlay Sitzh 17\"",
+      "variantId": "734422c22cf0364a28e6cd13",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "8a72d16f210888ed154455544ae57aaacbaf034c51874cb153a395f43c835cb6",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI ADVANCED LED+PDC+SHZ+LM+DAB",
+      "variantId": "535ad69c2f4091d63a7a2389",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "69434f481d713340c48ed482ce7facb36aeb8c5a534d11b91ba6f753e084d2d4",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI advanced Sportsitz SHZ PDC",
+      "variantId": "51c9d4e8e65609356d87c1ee",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "8b74ba75769a9816fdc47714114aac3abe1833a4db8cbbddc1e024885cbb6f2d",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI Business Ed Attraction S tronic - GPS - APP - REG VIT",
+      "variantId": "a20d2757df2001da4fde7750",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "cab458b40f5fe38f37c1069c2dee102435c06d5f2fc8b1a09a7fbd77cc45345f",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI LED KAMERA SHZ ALU CARPLAY",
+      "variantId": "1cdd14eea1ad5aad513c2937",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "95edf7e25cc0a3e4672ce2459b5bce58a5f346517dbdaaf3ab8fcd3930507231",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI S line LED KAMERA SHZ PDC",
+      "variantId": "326b8203f101c9efa6be9e68",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "20be2635f35f7b8930f9a6058daf8736c75150f6bfb5e28f7720a99bbbfb8996",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30 TFSI S tronic Advanced CarPlay",
+      "variantId": "a1c8f6defa7db9aa8eaea650",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "4cd79de252a11d61bb2d7ed54aa8097e1bf4ef0895f4152050ae2ded2996b127",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 30TFSI S-tronic SITZHZ LED ACC",
+      "variantId": "01e65fa3a5411d099a8647a9",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "59ada1f66bf75027aea8268360c6e0596825fd25249693b9796abdc158161057",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 35 TFSI Advanced",
+      "variantId": "86cc3f1c237f2d43cbefe705",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "11573de86ff1500c2baec1312980e62c238db7a6f412e89db9cce15a507434b2",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 35 TFSI S line competition Kamera",
+      "variantId": "7c43f54de616b9181b21a102",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "86392c22a33fb5ad5528bd552ddd82d1885f059b3c42bd90fe1a1309ad867839",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 35 TFSI S-Line Led Virtual Navi Acc Came",
+      "variantId": "055c42d146f171fa8b2aaad6",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "78171f82bcc88d749e0a6f1de0932cac8791f230666368f2a1ede0a43e865bf8",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 35 TFSI S-tronic S-Line Navi ACC",
+      "variantId": "cfb12c554e7f0c4aace71d25",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "9a4d92439b97eeaaf484cee734b4422d493104aa2c5b6641949100d55068edd5",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 40 TFSI S line GRA*Nav*RearView*SHZ",
+      "variantId": "f895cc42cf4242f47b55a27a",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "62d6f5aba3eb87a6282317bbe4df48c24dfcae32f6c202dee48801e3c0d1cdab",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback 40 TFSI S-line LED/ACC/Navi/Kamera/",
+      "variantId": "02d10cf83e66e55f6e1e7ff8",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "bd359e153f75b27af40d1897727c356ed427927e2a327e3bb0835ed67dd3668e",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback advanced 30 TFSI",
+      "variantId": "14f28a350bafb20bde5bd746",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "e3ac7097ccdf87cbf37bbe1f4473d92ae3195a4e3db2406adba32a19c822c5a5",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2023,
+      "trim": "Sportback S line 30 TFSI *S-Line*ACC*Sport*",
+      "variantId": "8a4cb0af563123690d14949c",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "9501eab9cb3d94f9688d39687831400a5903f8ede447c8d18a0fa3969de33a44",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "30 TFSI Sportback S tron *ACC*Kamera*LED*",
+      "variantId": "5008c04a600557a022be8dc4",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "ac952c059f9f26892a3fd188c6f18d87c40ec0afdbde51c86500db16417683bc",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "SB 35 TFSI Aut LED RADAR NAVI SITZHZG R-CAM",
+      "variantId": "a173f5b98a0896b0a0668582",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "65b1aa5b926cdeefe5af8ff397275300ddd944223b406fad5475a74b477a3b94",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "Spb. S line 30 TFSI S INT KAM LED NAVI SHZ",
+      "variantId": "57cfe5c7c2f5f25780fcfdf8",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "81e3171f78154e34abcb8095cba120624a2625ee4215f0a72992e477391d1c45",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "Sportback 25 TFSI LED VIRTUAL CAR PLAY PHONE",
+      "variantId": "83a11f3a0d1049d5973a0dc5",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "bb6efadb1e2622c5ccf02e95909fab90f015ee0effb7bda68f97623fe6265ac5",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "Sportback 25 TFSI*Navi*LED*Alu*Einparkhilfe*V",
+      "variantId": "a7650a6a1777da651f5a97ee",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "b3a79ab3dca867f5a11085ff97c85ff5dd6946ef94e079ba80e5b5023b3bbfdf",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "Sportback 30TFSI*S-LINE*OPTIK-SCHWARZ*NAV*GRA",
+      "variantId": "e8d5bee22883c7b5e836dce7",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "adae0ea8d27289696a7bcb98e0d68d049bab5724a6ae6cffa95aad0fd3941c5f",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2024,
+      "trim": "Sportback S line 30 TFSI 85(116) kW(PS) S tro",
+      "variantId": "96859d64867a9d5650e5234f",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "f85405b3243f389d05b9c92d021309e2261c1328fcc909abb3a4fe4ec6e179cf",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "35 TFSI Sportback Aut. NAV+PDC+DAB+VCOCKPIT",
+      "variantId": "e03ed348e140d2c52bccad37",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "1737fee7e12f0af2de455a2efce517c6e0d2e6349a2f1507aa8d44440aa4188a",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "A1 SPB 30 TFSI S line edition",
+      "variantId": "1b06a90709849891739b696d",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "1fbbd415877dcb19e17c65859f5ff7c8d3c7d3c5f05c55d7e2a2d8a65bb1c276",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "A1 SPB 30 TFSI S tronic Identity Black",
+      "variantId": "680568c7c5a15acee79186af",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "be6b0386202427c0ab1c0a2ae3db2ddc9a379a5a6f88d90e2fed9a7ec9bd54a8",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "II 2019 Sportback Sportback 30 1.0 tfsi S Line Edition 116cv s-tronic",
+      "variantId": "29a0054765ff810703ac41ea",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "603271da3cf053ee46537533b2eb2ca4d21c83e24a241644f1993dcadacc8840",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 25 TFSI adv.S-Tronic, LED, Ambiente",
+      "variantId": "702a46f13b87b4869b838dcb",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "124086183919e476e854fef706ed9010c03c7848f367d84abaacba70b99f1cc5",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 25 TFSI advanced Stronic,LED",
+      "variantId": "e8e440a68430c7d52a92b2de",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "53c0edec4ac180ec99cf252578738ce1d2374bd5409fdab442d4e7932bc95e97",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 25 TFSI advanced,Navi+,VC",
+      "variantId": "bb85a890f1f9bd0ef2016608",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "4ede7a24e8500727ab17045723ef02e21aa95379702395459fcccea978d2412e",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 25 TFSI S tronic LED App KeyGo Kam",
+      "variantId": "be7fb13ed010d30ac5de485b",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "582e989c1912eac77d07c6df9fda2523e223bf859c468a3d0a21f723eff9c358",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 25 TFSI Smart-Int/R-Kamera/Virtual/",
+      "variantId": "3033bb62d25ffb1b1bbfd840",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "5afb3482f8ae21a9c48727079a1d328ee826f012d8bb4a935a19c9024cd09136",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 30 1.0 TFSI 116CV Adrenalin Black Editi",
+      "variantId": "0b9bf3b76ea935fc868ed119",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "34dc2f43f6da0149f0c6348c25d560614954a07c47cdc559b26dfb65c60a67b2",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 30 1.0 tfsi Business 116cv",
+      "variantId": "b52f2680859adff4cdcbecf9",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "bd4a9a19f555d8d3cd8a4f41bf960eca633242ba6747f2d3ad45100600cd1790",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "sportback 30 1.0 tfsi identity black 116cv s-troni",
+      "variantId": "0dad51e009b08fa42d7e54a3",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "6482b99365bd9e785ffe90a1f0121d62a31a22e047df0f0fc90ab026c3b0c306",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 30 TFSI advanced LED RFK Shz",
+      "variantId": "217dbc2768258a5c514ee60d",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "2abdba7dffb16813969854fb85114a088eb8e40d3c56486a260bd8d7786cf98f",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 30 TFSI Advanced LED/GRA/SH",
+      "variantId": "39a22ffbf68d5cbbe67b5b59",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "25b350cd63cf9115caea66f7d8c1a6d10c349d36983792ab9fa19189d295c18e",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 30 TFSI Advanced S-Tronic LED/SH",
+      "variantId": "b2ff2ea7ab99f4d2fb04e065",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "e669d591adf3f1aa2c54e0ae6c740a8297bbde407cfb828b859abb47ba5f47a4",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "d5a8af35e3698aa33eaea9a9",
+      "make": "Audi",
+      "model": "A1",
+      "year": 2025,
+      "trim": "Sportback 30 TFSI advanced*LED*SHZ*KLIMA",
+      "variantId": "4d0cd3f95027abd93b9fa601",
+      "expectedRevision": "7410492b-cc7c-4aae-9c32-bd4d68d4daf7",
+      "expectedDigest": "d92279a259cb2344f73ae5ded534f08488ee3ff113b1495b48b48566abfef5f4",
+      "patch": {
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+        "checkedAt": "2026-10-23",
+        "statement": "Дополнен только отсутствующий тип кузова Audi A1 Sportback поколения с 2018 года по заводской спасательной карте. Исходные год, trim, все ранее сохранённые значения и источники сохранены; городские версии citycarver/allstreet исключены.",
+        "fieldSources": {
+          "bodyType": {
+            "url": "https://media.audi.com/is/content/audi/country/pl/assets/karty-bezpieczenstwa/Audi_A1__Hatchback_2018_5d_GD_PL.pdf",
+            "sourceSha256": "bb82bc590ccc49baa355f20b846cbcc26a5ca211ecfbf8d68512547dcd79b690",
+            "checkedAt": "2026-10-23",
+            "sourcePublisher": "AUDI AG",
+            "sourceNature": "Заводская спасательная карта, официальный сайт Audi",
+            "pdfPage": 1,
+            "selector": "Официальная классификация документа Audi_A1__Hatchback_2018_5d_GD_PL; A1 Sportback, поколение с 2018 года, статус 08/2020",
+            "originalTechnicalSelector": "A1 Sportback / SB / SPB, пятидверный хетчбэк поколения GB",
+            "scope": "Только подтверждённый кузов; мощность, двигатель, трансмиссия и полная масса не выводятся из имени или внешности"
+          }
+        }
+      }
+    }
+  ]
+}

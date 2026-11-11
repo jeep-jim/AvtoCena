@@ -1,0 +1,7105 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 22,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-b89ca53aed46f921c4dd",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Formentor",
+      "modelId": "cupra/formentor",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 118,
+      "commercialNames": [
+        "FORMENTOR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fb44b828b40159c9fa0",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Formentor",
+      "modelId": "cupra/formentor",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORMENTOR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ae0c06760c76abfe54b",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Formentor",
+      "modelId": "cupra/formentor",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 295,
+      "commercialNames": [
+        "FORMENTOR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa8bb7c08d36bf0154cb",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON E-HYBRID150",
+        "CUPRA LEON E-HYBRID180",
+        "CUPRA LEON SP E-HYBRID150",
+        "CUPRA LEON SP E-HYBRID180",
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1969365013401274515",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON FIRST EDITION PHEV S-A",
+        "LEON VZ3 PHEV S-A"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d18de57f003eae4e2c3",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON E",
+        "CUPRA LEON E-HYBRID",
+        "CUPRA LEON E-HYBRID150",
+        "CUPRA LEON E-HYBRID180",
+        "CUPRA LEON SP E-HYBRID18",
+        "CUPRA LEON SP E-HYBRID150",
+        "CUPRA LEON SP E-HYBRID180",
+        "LEON",
+        "LEON E-HYBRID 180",
+        "LEON E-HYBRID150",
+        "LEON E-HYBRID180",
+        "LEON SP E-HYBRID 150 / 1.4 / TSI AUT.",
+        "LEON SP E-HYBRID 180 / 1.4 / TSI AUT.",
+        "LEON SP E-HYBRID150",
+        "LEON SP E-HYBRID180",
+        "LEON SPORTSTOURER"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 44,
+      "registrations": 41544,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-defd192d600297f5dc5d",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON / 2.0 / TSI AUT.",
+        "LEON SP",
+        "LEON SP / 2.0 / TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 6946,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0192024a38897867c47",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 221,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON / 2.0 / TSI AUT.",
+        "LEON 2.0 TSI AUT.",
+        "LEON SP"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 9412,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f21a3b87193a7a419dc4",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 228,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON SP",
+        "LEON SP / 2.0 / TSI 4WD AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 8377,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20f73f1eaf4c16f6ae1b",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON / 1.5 / TSI",
+        "LEON / 1.5 / TSI AUT.",
+        "LEON 1.5 TSI",
+        "LEON 1.5 TSI AUT.",
+        "LEON SP",
+        "LEON SP / 1.5 / TSI",
+        "LEON SP / 1.5 / TSI AUT.",
+        "LEON SP 1.5 TSI",
+        "LEON SP 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 65342,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd44a78ebd4ff28a6a6b",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 245,
+      "commercialNames": [
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON SP",
+        "LEON SP 2.0 TSI 4WD AUT.",
+        "LEON SPORTSTOURER"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 7562,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b20bcf263ce02bfc0d96",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON / 2.0 / TDI AUT.",
+        "LEON 2.0 TDI AUT.",
+        "LEON SP",
+        "LEON SP / 2.0 / TDI AUT.",
+        "LEON SP 2.0 TDI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 14675,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93e87295a93b1a602af8",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON / 2.0 / TSI AUT.",
+        "LEON SP",
+        "LEON SP / 2.0 / TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 5114,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bceeb637a8660cf70945",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "CUPRA LEON SP",
+        "LEON",
+        "LEON SP",
+        "LEON ST CUPRA"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 451,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-deea796115e6efb016f0",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON E-HYBRID",
+        "CUPRA LEON E-HYBRID 200",
+        "CUPRA LEON E-HYBRID200",
+        "CUPRA LEON SP E-HYBRID",
+        "CUPRA LEON SP E-HYBRID20",
+        "CUPRA LEON SP E-HYBRID200",
+        "CUPRA LEON SP EHYBRIDE200",
+        "LEON",
+        "LEON E-HYBRID200 1.5 TSI AUT.",
+        "LEON SP E-HYBRID200",
+        "LEON SP E-HYBRID200 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 8584,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1783a725fbbfb6476b0c",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON SP"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0962fc0a5662459db882",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON E-HYBRID180"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79af7bcbe0c3c11b988f",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 265,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-96a0ca3892b273f6f02d",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON E-HYBRID150",
+        "CUPRA LEON SP",
+        "CUPRA LEON SP E-HYBRID",
+        "CUPRA LEON SP E-HYBRID15",
+        "CUPRA LEON SP E-HYBRID150",
+        "LEON",
+        "LEON SP E-HYBRID150",
+        "LEON SP E-HYBRID150 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 12400,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f99860cc7501ba480c5",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "CUPRA LEON SP"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ab003c72d791c116f0f",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP",
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33d65d897f09490bf812",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "CUPRA LEON SP E-HYBRID200"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd311138a701117f5284",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Leon",
+      "modelId": "cupra/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "CUPRA LEON",
+        "CUPRA LEON SP"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62de503e7f69eb796b8e",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Raval",
+      "modelId": "cupra/raval",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "RAVAL",
+        "RAVAL 166 KW"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c3929bc75b800b424e6",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c649c6691a4de8eb39fc",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1729,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-186b4a967987de7865c7",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 136,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d991b827016b116abd60",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 89,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1711,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ffa013e25ea72954b8d",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38aa67add2cf9d1a1f63",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9fb148979a01fb3ab5d",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72d48bd08742e081b297",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "TAVASCAN",
+        "TAVASCAN / /"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 19336,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16277d09c1449c30159f",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Tavascan",
+      "modelId": "cupra/tavascan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "TAVASCAN"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7610,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bfe6f559f151fd41cdb",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TERRAMAR",
+        "TERRAMAR / 1.5 / TSI AUT.",
+        "TERRAMAR 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 16204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e02ea368277070b134d5",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "TERRAMAR",
+        "TERRAMAR / 2.0 / TSI 4WD AUT.",
+        "TERRAMAR 2.0 TSI 4WD AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7411,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bc8c18122ee89e68918",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TERRAMAR",
+        "TERRAMAR E-HYBIDE",
+        "TERRAMAR E-HYBRID",
+        "TERRAMAR E-HYBRID 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10899,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a0f5257478168d89da6",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "TERRAMAR",
+        "TERRAMAR E-HYBRID",
+        "TERRAMAR E-HYBRID / 1.5 / TSI AUT.",
+        "TERRAMAR E-HYBRID 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 11772,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9f9734419ab74fc0161",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TERRAMAR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06008c2b420c3ba50ef6",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 118,
+      "commercialNames": [
+        "TERRAMAR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22e5b702ee6489279818",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "TERRAMAR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d737db9d3e7cfb7d982",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "TERRAMAR",
+        "TERRAMAR 2.0 TSI 4WD AUT."
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2905,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ffddaeb0ceb00d24d2c",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "TERRAMAR"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe8e2819401f552c2e16",
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "canonicalModel": "Terramar",
+      "modelId": "cupra/terramar",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1408,
+      "powerKw": 110,
+      "commercialNames": [
+        "TERRAMAR E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "CUPRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-911abf1ba1e227c0499f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "e85",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce9076a50db450bdb117",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 694,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-235913e2989758aed1b9",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": 103,
+      "commercialNames": [
+        "BIGSTER",
+        "BIGSTER 1.2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3430,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edbe54ca5df6cd4e2d58",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1799,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-292286bf215f72f2dbfa",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 962,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f67154412c6aadc4e76b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "BIGSTER",
+        "BIGSTER 1.2 4X4"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5677,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-632b1bc27822bcd3eb82",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 103,
+      "commercialNames": [
+        "BIGSTER",
+        "BIGSTER 1.2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10947,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e28aa44bf54824382297",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 905,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2e1f7aa0f4d28170bcc",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "BIGSTER",
+        "BIGSTER 1.8 AUT."
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19117,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7609b7748c01cbc18778",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": 115,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c36032707bbfdfb1d30c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1799,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 928,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83d03a7ddf029e8e8acc",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1799,
+      "powerKw": 80,
+      "commercialNames": [
+        "BIGSTER",
+        "BIGSTER 1.8 AUT."
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15908,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a33129b0623c6efab7e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1799,
+      "powerKw": 800,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b2c7a23401151ddc39b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 107,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b2b236c7ebdfe790ce6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 674,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faf3cce582ff3446de37",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 103,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 591,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83d1197d3a25a24abf3f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1ce9c655932cc99cc8d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1526,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57b5201544cf5d82f325",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1799,
+      "powerKw": null,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02e13538e26c1a374d24",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Bigster",
+      "modelId": "dacia/bigster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1799,
+      "powerKw": 80,
+      "commercialNames": [
+        "BIGSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 701,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccdc8aca0cab4a82f706",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26f66388281e1a6c51a3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 55,
+      "commercialNames": [
+        "DOKKER",
+        "DOKKER 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1763,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d11f8d1f2d36fb8c335",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd6750e3bb8ec7e64a40",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "DOKKER",
+        "DOKKER / 1.5 / DCI",
+        "DOKKER 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 29470,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-597fc215c8c6ef817c42",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e4c5de1bd7724fd9893",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2cb3ba203b04d5744ea",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 80,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac13293ab22876097c64",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "DOKKER",
+        "DOKKER / 1.3 / 16V",
+        "DOKKER 13 16V"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 9142,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93b34fc7b7095e095ea2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "DOKKER",
+        "DOKKER 13 16V"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 25368,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0639c9c06e728247157",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 75,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71a1287ef7b4420eb976",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62a435085f4bca5c3219",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Dokker",
+      "modelId": "dacia/dokker",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 61,
+      "commercialNames": [
+        "DOKKER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12cb0d9fd66e23802eff",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER COMFORT BLUE DCI 4X2",
+        "DUSTER COMFORT BLUE DCI 4X4",
+        "DUSTER ESSENTIAL BLUE DCI 4X2",
+        "DUSTER PRESTIGE BLUE DCI 4X2",
+        "DUSTER PRESTIGE BLUE DCI 4X4",
+        "DUSTER SE TWENTY BLUE DCI 4X2",
+        "DUSTER SE TWENTY BLUE DCI 4X4",
+        "DUSTER TECHROAD BLUE DCI 4X2",
+        "DUSTER TECHROAD BLUE DCI 4X4"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 808,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bbc4bdf24cdd9e2c33f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8412,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-504841b2cfa78283fa5f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e173345780ee4fb193d7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.5 / DCI",
+        "DUSTER / 1.5 / DCI 4X4",
+        "DUSTER 1.5 DCI 4X4"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 130889,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63fcc43e8070b800160e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.5 / DCI",
+        "DUSTER / 1.5 / DCI 4X4",
+        "DUSTER 15 DCI",
+        "DUSTER 15 DCI 4X4"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 239982,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-056b4df52d4b39aed544",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER COMFORT LPG TCE 4X2",
+        "DUSTER ESSENTIAL",
+        "DUSTER ESSENTIAL LPG TCE 4X2",
+        "DUSTER EXTREME",
+        "DUSTER PRESTIGE LPG TCE 4X2",
+        "DUSTER SE TWENTY LPG TCE 4X2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 5132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcdce833cb91a0ce0d02",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.0 /",
+        "DUSTER 1.0"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 161201,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acf327e9fa2397aabc17",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.0 /",
+        "DUSTER 10"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 176800,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a705016702bf10daf22",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e52aeb9afdf01b7d24a5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1461,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d06ed4c22a7dc5ced7cd",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f4c183d4134b012d06a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dd75336cfdda7764728",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5858,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-387073f3b88785b19eac",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER ACCESS TCE 4X2",
+        "DUSTER COMFORT TCE 4X2",
+        "DUSTER ESSENTIAL TCE 4X2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 3350,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebc0acfca56e9c5c6eb6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.0 /"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 36145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48921accf57a4298ed4a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "DACIA DUSTER",
+        "DUSTER",
+        "DUSTER / 1.0 /",
+        "DUSTER 10"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 37602,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93f8655dc052ff5aa049",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f98920a9a4bc1a17aff",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 92,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cace25a94a3c1bf929b3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1330,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER COMFORT TCE 4X2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b6e14ddbc9b6d6eb885",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e12f657cb0401523f911",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.3 / 16V",
+        "DUSTER / 1.3 / 16V 4X4",
+        "DUSTER 1.3 TCe 130",
+        "DUSTER 13 16V",
+        "DUSTER 13 16V 4X4"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 108913,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-981f497c20d85498c2b5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER / 1.3 / 16V 4X4",
+        "DUSTER / 1.3 / 16V AUT.",
+        "DUSTER 13 16V"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 89265,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2c0ac01435e0e5f1493",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1333,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER COMFORT TCE 4X2",
+        "DUSTER PRESTIGE TCE 4X2",
+        "DUSTER PRESTIGE TCE 4X4",
+        "DUSTER SE TWENTY TCE 4X2",
+        "DUSTER TECHROAD TCE 4X2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3797,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fea41c5bf2d1135784ea",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3865fa7e1e4fba73aa6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER COMFORT SCE 4X2",
+        "DUSTER PRESTIGE SCE 4X2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1094,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10d1a0ad67ab0e8cc246",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER 16 16V",
+        "DUSTER 16 16V 4X4"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 590,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-695c718a182fe0343948",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be2290cf6150c21f9f37",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 9,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b389b8bcc5ca526f5a36",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 27,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d391d5be4e7adbe3ebd7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 57,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-128581b110a3fdc3031a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 63,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1be6e01573512d6d17cc",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 64,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3323827e46e7d125443f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54ddb3631e5e1bdafef4",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58e2408bbac71f613f02",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41bc03d7c7dbf8867086",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e72b2c31b08a1de9291",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e7ae86fc0c6b7553dd3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ddc3d78d74c1aed5f1be",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 999,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-249953709c2662ae1972",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00d859111f5e07e44c55",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57d4108e76e8f63547d3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed6d65cab4960d5ad3e8",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 11,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68229483e647d35a40c7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 79,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0d53e71a2c96d419f5f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af4a606e9d4d6a3ba4b7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62f64a0cee25d78a19f1",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 72,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b93ba2b2ecab3bbc1982",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 110,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebc128c474097b4db04b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1461,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3413d97f14931fb9fb9",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cac2b7a487a7e86c085",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 141,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3a21f923bff6d6eb728",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fe87fd34a71da81e5b8",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e0a1df239a5cb8c177f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ae30fce561da97f252f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "DACIA DUSTER",
+        "DUSTER",
+        "DUSTER / 1.2 /",
+        "DUSTER / 1.2 / 4X4",
+        "DUSTER 1.2",
+        "DUSTER 1.2 4X4",
+        "DUSTER 1.5 DCI",
+        "DUSTER."
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 79281,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71522b3f266c191e7780",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1461,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c26d06b5cd9a82142b66",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "DACIA DUSTER",
+        "DUSTER",
+        "DUSTER / 1.6 / AUT.",
+        "DUSTER 1.6 AUT."
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 63757,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98b60151bbbdd5936b0a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6819,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1dc0885d2baf7e3392f4",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4002,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb4cbcbc8873aef45146",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 58,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c31fab4129055bfdb5e2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 118,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3c53b05ea55a37fb9fd",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ee952bc1cee162c22f8",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER 1.2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2759ff6d85441b3eaeed",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": 90,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 72,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d1e109ae947a5adda8b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": 103,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92a3733a419b3f7dd7ce",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 62,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed7ef330bf2665799908",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-812e595114c8a935a4d8",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 124,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8039c16375e194cd562",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1850,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f3c55745d30109c6ac0",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 69,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80eae27fffc9b75277aa",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55c5649df9776ce00ba8",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 103,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1051,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48f108dce9bd2b1945e2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 58,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72da645c8fc02679c1f9",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 113,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b18e89ad2723b93aeed9",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 124,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac188cc015458a9c84b3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 51,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb55c22d28fe0fccae8a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7292a291cc1a6e043779",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a14eda7e0dc41459600",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER 1.8 AUT."
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1825,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff244b622af28ecd9601",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1799,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d9d675b21546b4f4fd3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9042271a29bd4b7d5c8c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 103,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa8fd08fb8e0c60b5a45",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e942ab240653d262b5f3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Duster",
+      "modelId": "dacia/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 92,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da08274d3c252c7eda00",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "JOGGER",
+        "JOGGER / 1.0 /",
+        "JOGGER 1.0"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 91230,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07e3cce15011fc757aa0",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 46107,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab1c7cc1c3c0c6995fab",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 859,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c94fcbeb007d7802bf3",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "JOGGER",
+        "JOGGER / 1.0 /",
+        "JOGGER 1.0"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 87940,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3406ff519cb5921a01ea",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46472e2675d258a2b9ca",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1715,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaf2bddf45a36a3be8b6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01ac16ee28d43c90cad0",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 105,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c26e51a8a0532b008f76",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e27c7717a1fb35ce392",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4606e95ef5c13cf736c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eadd54ba3b48a219c22e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-774dd3624e7af38d7f36",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e670337e20aed0d93888",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53af22c8795f737ace6c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35f6906562c4b7395e96",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7399b0b32521a1f0a1f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b59f665fa389abed908d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f01c9e5cf65ff6ae2dd",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62aabd07d2e667196656",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 137,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94d00c24e24bca7da881",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 140,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50fc41979d410045bfa7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9f0e1ce4f25a0b73446",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 320,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbf883e4ef46f13064a5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 51,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10067,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-450ec4fbad8c11e4bcfc",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "JOGGER",
+        "JOGGER / 1.6 /",
+        "JOGGER 1.6 AUT."
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 32189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7c4477cf24a1d58d885",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 57,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68ee7d3969f1cc4dcc7e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1ccf750c3659546d8ca",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5417d609bcf2fcfaab2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1012,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a283b89d1eba7ce4aef5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d57b763a5ad6859035d1",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1199,
+      "powerKw": 90,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01334a108f0c15fd4242",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-449bb5b007a2a2ee5ebc",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 46,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36d714087bbfeb0a7ef1",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 411,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b286db888cbfbe37d08",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 46,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e4f4b6251bb0e7004d6",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 58,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d62d7060740c0242045d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 168,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b5a8941310cc587aa67",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 223,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a2f3622e8e3d9e7a76c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Jogger",
+      "modelId": "dacia/jogger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "JOGGER"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-274d73c418e8d6cd4f7b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40a54cf7fe7b2da03d16",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "LODGY",
+        "LODGY 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5491,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6960e0c9812bb08c6f05",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "LODGY",
+        "LODGY / 1.5 / DCI",
+        "LODGY 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 39206,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac3531d5b73f4cdc7401",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd98db0c9567ed549f3b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d393d10bf275e5e3d58e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f37ad150f81aeb854d06",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-402617084aeb549e8780",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 75,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ba8bf622149b087da57",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 79,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a45d1e0a6a75dc32134",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 80,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3681,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69e0556ede6413a559a7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d266a7c8be30eca39a70",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 54,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a8029c76b3f4aa0b12a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9028,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-093eb5c68558aaaf315c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "LODGY",
+        "LODGY 13 16V"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 23126,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbe6e79937c7690119e5",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 75,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 271,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e28e911c8edd1157633",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 80,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62034178e73de636fa44",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Lodgy",
+      "modelId": "dacia/lodgy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1598,
+      "powerKw": 80,
+      "commercialNames": [
+        "LODGY"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d03d4451024f101e13d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "LOGAN MCV COMFORT BLUE DCI",
+        "LOGAN MCV ESSENTIAL BLUE DCI",
+        "LOGAN MCV STEPWAY COMFRT B-DCI",
+        "LOGAN MCV STEPWAY TECHROAD DCI",
+        "LOGAN MCV SWAY SE TWENTY B-DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 194,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31cb9c78d19084285fd2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 55,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5296,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8ac80a5a99af2c4b925",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN / 1.5 / DCI",
+        "LOGAN 15 DCI",
+        "LOGAN MCV"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 10609,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f6f4b6d520f6e80a434",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2df37ae63c91e18d9bbf",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 79,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5c86549f7a46d7dbae1",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "LOGAN MCV COMFORT LPG TCE",
+        "LOGAN MCV ESSENTIAL LPG TCE",
+        "LOGAN MCV SWAY COMFORT LPG TCE",
+        "LOGAN MCV SWAY SE TWNTY LPGTCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-132143ba638fb0992399",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 54,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66fa37ca3f7a63869b88",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN MCV"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 18135,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e88a39349f4bf39bdee7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": null,
+      "commercialNames": [
+        "LOGAN MCV COMFORT TCE",
+        "LOGAN MCV ESSENTIAL TCE",
+        "LOGAN MCV STEPWAY COMFORT TCE",
+        "LOGAN MCV STEPWAY TECHROAD TCE",
+        "LOGAN MCV STPWAY SE TWENTY TCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 536,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e38a524fc8f88ecde958",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 54,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3a51ccdee97d1d7328c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "DACIA LOGAN",
+        "LOGAN",
+        "LOGAN 09 TCE",
+        "LOGAN MCV"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 28196,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c73114a68c9e50270e6b",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "LOGAN MCV ACCESS SCE",
+        "LOGAN MCV COMFORT SCE",
+        "LOGAN MCV ESSENTIAL SCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60ac9d536f7a85d419ce",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 54,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN / 1.0 /",
+        "LOGAN 10",
+        "LOGAN MCV"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 17078,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01f28fc3a8c87cd52cbf",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN 10",
+        "LOGAN MCV"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 808,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2427cf1c5844870174e",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 96,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e7027200a1f51a41977",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aecb5035fb9b31157f4d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN / 1.0 /",
+        "LOGAN 1.0"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 54095,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-984ba4e3bd3710d74c7d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2997,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-146248dd0bf2ce8879bf",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "LOGAN",
+        "LOGAN / 1.0 /"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 28609,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d590386dde80cb08b30",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abbf46af9fcd0775ef5f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1149,
+      "powerKw": 54,
+      "commercialNames": [
+        "LOGAN 1.2"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05ed6e6de1ac6b8f841a",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1598,
+      "powerKw": 62,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b97968640c4f0e8a984f",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-646c0d97d1079bc33135",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Logan",
+      "modelId": "dacia/logan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "ng",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "LOGAN"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbec36a053b7e75b6d99",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO COMFORT BLUE DCI",
+        "SANDERO ESSENTIAL BLUE DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec501b0cb0dcc4fdf41d",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 55,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5974,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6e706e105c2d33a41e7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-320d21e5a1bddd2d007c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "DACIA SANDERO",
+        "SANDERO",
+        "SANDERO / 1.5 / DCI",
+        "SANDERO 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 44278,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9aff3a8b4f3794220f13",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47f1abcb880086e410e7",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO COMFORT LPG TCE",
+        "SANDERO ESSENTIAL LPG TCE",
+        "SANDERO STPWAY COMFORT LPG TCE",
+        "SANDERO SWAY ESSENTIAL LPG TCE",
+        "SANDERO SWAY SE TWENTY LPG TCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 3666,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cc60811ae8806782794",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 54,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f33889bc1d0e17d76897",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO / 1.0 /",
+        "SANDERO 1.0",
+        "SANDERO III"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 340229,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3076c969671c11e8b0c",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "SANDERO",
+        "SANDERO / 1.0 /",
+        "SANDERO 10"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 306489,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6059b37cd449b8c6047",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 54,
+      "commercialNames": [
+        "SANDERO"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea0523bb46ed4f1e18f2",
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "canonicalModel": "Sandero",
+      "modelId": "dacia/sandero",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": null,
+      "commercialNames": [
+        "SANDERO COMFORT TCE",
+        "SANDERO ESSENTIAL TCE"
+      ],
+      "sourceMakeNames": [
+        "DACIA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1180,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

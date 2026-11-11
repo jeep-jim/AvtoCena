@@ -1,0 +1,8271 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 37,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "subaru:exiga",
+      "make": "Subaru",
+      "model": "Exiga",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/exiga",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Exiga"
+      },
+      "aliases": [
+        "エクシーガ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:forester",
+      "make": "Subaru",
+      "model": "Forester",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/forester",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Forester"
+      },
+      "aliases": [
+        "FORESTER",
+        "フォレスター"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:foresterawd",
+      "make": "Subaru",
+      "model": "Forester AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:forestereboxerhybridawd",
+      "make": "Subaru",
+      "model": "Forester e-BOXER Hybrid AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:foresterhybridawd",
+      "make": "Subaru",
+      "model": "Forester Hybrid AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:foresterwildernessawd",
+      "make": "Subaru",
+      "model": "Forester Wilderness AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:gft",
+      "make": "Subaru",
+      "model": "Gft",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:gl",
+      "make": "Subaru",
+      "model": "GL",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:glf",
+      "make": "Subaru",
+      "model": "Glf",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:gsr",
+      "make": "Subaru",
+      "model": "Gsr",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:impreza",
+      "make": "Subaru",
+      "model": "Impreza",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/impreza",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Impreza"
+      },
+      "aliases": [
+        "インプレッサ"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 1992,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:impreza4doorawd",
+      "make": "Subaru",
+      "model": "Impreza 4-Door AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:impreza5doorawd",
+      "make": "Subaru",
+      "model": "Impreza 5-Door AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:imprezaawd",
+      "make": "Subaru",
+      "model": "Impreza AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:justy",
+      "make": "Subaru",
+      "model": "Justy",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/justy",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Justy"
+      },
+      "aliases": [
+        "JUSTY",
+        "ジャスティ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:legacy",
+      "make": "Subaru",
+      "model": "Legacy",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/legacy",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Legacy"
+      },
+      "aliases": [
+        "LEGACY",
+        "レガシィ"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:legacyawd",
+      "make": "Subaru",
+      "model": "Legacy AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:leone",
+      "make": "Subaru",
+      "model": "Leone",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:levorg",
+      "make": "Subaru",
+      "model": "Levorg",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/levorg",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Levorg"
+      },
+      "aliases": [
+        "LEVORG",
+        "レヴォーグ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:outback",
+      "make": "Subaru",
+      "model": "Outback",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/outback",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Outback"
+      },
+      "aliases": [
+        "OUTBACK"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:outbackawd",
+      "make": "Subaru",
+      "model": "Outback AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:outbackwildernessawd",
+      "make": "Subaru",
+      "model": "Outback Wilderness AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:pleo",
+      "make": "Subaru",
+      "model": "Pleo",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/pleo",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Pleo"
+      },
+      "aliases": [
+        "プレオ"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:pleoplus",
+      "make": "Subaru",
+      "model": "Pleo Plus",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/pleo-plus",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Pleo Plus"
+      },
+      "aliases": [
+        "プレオ プラス"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:r2",
+      "make": "Subaru",
+      "model": "R2",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:rex",
+      "make": "Subaru",
+      "model": "Rex",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/rex",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Rex"
+      },
+      "aliases": [
+        "レックス"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:rxturbo",
+      "make": "Subaru",
+      "model": "RX Turbo",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:sambar",
+      "make": "Subaru",
+      "model": "Sambar",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:sedan",
+      "make": "Subaru",
+      "model": "Sedan",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:solterra",
+      "make": "Subaru",
+      "model": "Solterra",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/solterra",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Solterra"
+      },
+      "aliases": [
+        "SOLTERRA"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:solterraawd",
+      "make": "Subaru",
+      "model": "Solterra AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:stella",
+      "make": "Subaru",
+      "model": "Stella",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/stella",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Stella"
+      },
+      "aliases": [
+        "ステラ"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:svx",
+      "make": "Subaru",
+      "model": "Svx",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:trailseeker",
+      "make": "Subaru",
+      "model": "Trailseeker",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:trezia",
+      "make": "Subaru",
+      "model": "Trezia",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/trezia",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Trezia"
+      },
+      "aliases": [
+        "トレジア*"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "wagon",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:tribeca",
+      "make": "Subaru",
+      "model": "Tribeca",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:uncharted",
+      "make": "Subaru",
+      "model": "Uncharted",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/uncharted",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Uncharted"
+      },
+      "aliases": [
+        "UNCHARTED"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "de",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:vivio",
+      "make": "Subaru",
+      "model": "Vivio",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:wagon",
+      "make": "Subaru",
+      "model": "Wagon",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:wrx",
+      "make": "Subaru",
+      "model": "Wrx",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/wrx",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Wrx"
+      },
+      "aliases": [
+        "WRX"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:wrxawd",
+      "make": "Subaru",
+      "model": "WRX AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:wrxstiawd",
+      "make": "Subaru",
+      "model": "WRX STI AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:xt",
+      "make": "Subaru",
+      "model": "Xt",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": null,
+        "canonicalMake": "Subaru",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "subaru:xv",
+      "make": "Subaru",
+      "model": "Xv",
+      "canonical": {
+        "brandId": "subaru",
+        "modelId": "subaru/xv",
+        "canonicalMake": "Subaru",
+        "canonicalModel": "Xv"
+      },
+      "aliases": [
+        "XV"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suda:sa01",
+      "make": "Suda",
+      "model": "SA01",
+      "canonical": {
+        "brandId": "suda",
+        "modelId": "suda/sa01",
+        "canonicalMake": "Suda",
+        "canonicalModel": "SA01"
+      },
+      "aliases": [
+        "SUDA SA01"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:1216hp",
+      "make": "Sunbeam",
+      "model": "12-16HP",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:alpine",
+      "make": "Sunbeam",
+      "model": "Alpine",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:alpinegt",
+      "make": "Sunbeam",
+      "model": "Alpine GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:alpineroadster",
+      "make": "Sunbeam",
+      "model": "Alpine Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:alpineseries",
+      "make": "Sunbeam",
+      "model": "Alpine Series",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:hunter",
+      "make": "Sunbeam",
+      "model": "Hunter",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:imp",
+      "make": "Sunbeam",
+      "model": "Imp",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:impsport",
+      "make": "Sunbeam",
+      "model": "Imp Sport",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:mk",
+      "make": "Sunbeam",
+      "model": "Mk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:rapier",
+      "make": "Sunbeam",
+      "model": "Rapier",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:sceptre",
+      "make": "Sunbeam",
+      "model": "Sceptre",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:stiletto",
+      "make": "Sunbeam",
+      "model": "Stiletto",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:talbot",
+      "make": "Sunbeam",
+      "model": "Talbot",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:talbot90",
+      "make": "Sunbeam",
+      "model": "Talbot 90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:tiger",
+      "make": "Sunbeam",
+      "model": "Tiger",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:tourer",
+      "make": "Sunbeam",
+      "model": "Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sunbeam:vogue",
+      "make": "Sunbeam",
+      "model": "Vogue",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "superior:cadillacbroughambegrafenisauto",
+      "make": "Superior",
+      "model": "Cadillac Brougham Begrafenisauto",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:across",
+      "make": "Suzuki",
+      "model": "Across",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/across",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Across"
+      },
+      "aliases": [
+        "ACROSS",
+        "SUZUKI ACROSS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:aerio",
+      "make": "Suzuki",
+      "model": "Aerio",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:alto",
+      "make": "Suzuki",
+      "model": "Alto",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/alto",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Alto"
+      },
+      "aliases": [
+        "アルト"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:altoworks",
+      "make": "Suzuki",
+      "model": "Alto Works",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:baleno",
+      "make": "Suzuki",
+      "model": "Baleno",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/baleno",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Baleno"
+      },
+      "aliases": [
+        "BALENO",
+        "Suzuki BALENO",
+        "バレーノ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:cappuccino",
+      "make": "Suzuki",
+      "model": "Cappuccino",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:carry",
+      "make": "Suzuki",
+      "model": "Carry",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/carry",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Carry"
+      },
+      "aliases": [
+        "キャリイ"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:celerio",
+      "make": "Suzuki",
+      "model": "Celerio",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/celerio",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Celerio"
+      },
+      "aliases": [
+        "CELERIO",
+        "SUZUKI CELERIO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:ciaz",
+      "make": "Suzuki",
+      "model": "Ciaz",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:evitara",
+      "make": "Suzuki",
+      "model": "E Vitara",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/e-vitara",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "E Vitara"
+      },
+      "aliases": [
+        "E VITARA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:equator",
+      "make": "Suzuki",
+      "model": "Equator",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:escudo",
+      "make": "Suzuki",
+      "model": "Escudo",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:esteem",
+      "make": "Suzuki",
+      "model": "Esteem",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:every",
+      "make": "Suzuki",
+      "model": "Every",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/every",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Every"
+      },
+      "aliases": [
+        "エブリイ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:everywagon",
+      "make": "Suzuki",
+      "model": "Every Wagon",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:forenza",
+      "make": "Suzuki",
+      "model": "Forenza",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:fronte",
+      "make": "Suzuki",
+      "model": "Fronte",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:fronx",
+      "make": "Suzuki",
+      "model": "Fronx",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/fronx",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Fronx"
+      },
+      "aliases": [
+        "フロンクス"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:grandvitara",
+      "make": "Suzuki",
+      "model": "Grand Vitara",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/grand-vitara",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Grand Vitara"
+      },
+      "aliases": [
+        "GRAND VITARA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:grandvitarav6",
+      "make": "Suzuki",
+      "model": "Grand Vitara V6",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:hustler",
+      "make": "Suzuki",
+      "model": "Hustler",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/hustler",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Hustler"
+      },
+      "aliases": [
+        "ハスラー"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:ignis",
+      "make": "Suzuki",
+      "model": "Ignis",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/ignis",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Ignis"
+      },
+      "aliases": [
+        "IGNIS",
+        "Suzuki IGNIS",
+        "イグニス"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:jimny",
+      "make": "Suzuki",
+      "model": "Jimny",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/jimny",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Jimny"
+      },
+      "aliases": [
+        "JIMNY",
+        "Suzuki JIMNY",
+        "SUZUKI JIMNY",
+        "ジムニー"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:jimnysierra",
+      "make": "Suzuki",
+      "model": "Jimny Sierra",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:kei",
+      "make": "Suzuki",
+      "model": "Kei",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:kizashi",
+      "make": "Suzuki",
+      "model": "Kizashi",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/kizashi",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Kizashi"
+      },
+      "aliases": [
+        "キザシ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:kizashis",
+      "make": "Suzuki",
+      "model": "Kizashi S",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:landy",
+      "make": "Suzuki",
+      "model": "Landy",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/landy",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Landy"
+      },
+      "aliases": [
+        "ランディ"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:lapin",
+      "make": "Suzuki",
+      "model": "Lapin",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/lapin",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Lapin"
+      },
+      "aliases": [
+        "ラパン",
+        "アルト ラパン"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:liana",
+      "make": "Suzuki",
+      "model": "Liana",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:lj",
+      "make": "Suzuki",
+      "model": "Lj",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:lj80",
+      "make": "Suzuki",
+      "model": "LJ80",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:mrwagon",
+      "make": "Suzuki",
+      "model": "MR Wagon",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/mr-wagon",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "MR Wagon"
+      },
+      "aliases": [
+        "MRワゴン"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:scross",
+      "make": "Suzuki",
+      "model": "S-Cross",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/s-cross",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "S-Cross"
+      },
+      "aliases": [
+        "S - CROSS",
+        "S_CROSS",
+        "S-CROSS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sa310",
+      "make": "Suzuki",
+      "model": "SA310",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:samurai",
+      "make": "Suzuki",
+      "model": "Samurai",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:samuraij",
+      "make": "Suzuki",
+      "model": "Samurai J",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sc",
+      "make": "Suzuki",
+      "model": "Sc",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sidekick",
+      "make": "Suzuki",
+      "model": "Sidekick",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sidekicksport",
+      "make": "Suzuki",
+      "model": "Sidekick Sport",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sj",
+      "make": "Suzuki",
+      "model": "Sj",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sj40",
+      "make": "Suzuki",
+      "model": "Sj 40",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sj410v",
+      "make": "Suzuki",
+      "model": "Sj 410V",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sj410",
+      "make": "Suzuki",
+      "model": "SJ410",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sj410q",
+      "make": "Suzuki",
+      "model": "SJ410Q",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sj413",
+      "make": "Suzuki",
+      "model": "SJ413",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:solio",
+      "make": "Suzuki",
+      "model": "Solio",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/solio",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Solio"
+      },
+      "aliases": [
+        "ソリオ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:spacia",
+      "make": "Suzuki",
+      "model": "Spacia",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/spacia",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Spacia"
+      },
+      "aliases": [
+        "スペーシア"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:splash",
+      "make": "Suzuki",
+      "model": "Splash",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/splash",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Splash"
+      },
+      "aliases": [
+        "スプラッシュ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:st90v",
+      "make": "Suzuki",
+      "model": "ST90V",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:supercarry",
+      "make": "Suzuki",
+      "model": "Super Carry",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:swace",
+      "make": "Suzuki",
+      "model": "Swace",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/swace",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Swace"
+      },
+      "aliases": [
+        "SUZUKI SWACE",
+        "SWACE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:swift",
+      "make": "Suzuki",
+      "model": "Swift",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/swift",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Swift"
+      },
+      "aliases": [
+        "スイフト"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:swiftsport",
+      "make": "Suzuki",
+      "model": "Swift Sport",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/swift-sport",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Swift Sport"
+      },
+      "aliases": [
+        "SWIFT SPORT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sx",
+      "make": "Suzuki",
+      "model": "Sx",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sx4",
+      "make": "Suzuki",
+      "model": "SX4",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/sx4",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "SX4"
+      },
+      "aliases": [
+        "SX4"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:sx4scross",
+      "make": "Suzuki",
+      "model": "SX4 S-Cross",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/sx4-s-cross",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "SX4 S-Cross"
+      },
+      "aliases": [
+        "SX4 S - CROSS",
+        "SX4 S-CROSS",
+        "SX4-S-CROSS",
+        "SX4. S-CROSS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:verona",
+      "make": "Suzuki",
+      "model": "Verona",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:vitara",
+      "make": "Suzuki",
+      "model": "Vitara",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/vitara",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Vitara"
+      },
+      "aliases": [
+        "Suzuki Vitara",
+        "エスクード"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:wagon",
+      "make": "Suzuki",
+      "model": "Wagon",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:wagonr",
+      "make": "Suzuki",
+      "model": "Wagon R",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/wagon-r",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Wagon R"
+      },
+      "aliases": [
+        "ワゴンR"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:wagonrsmile",
+      "make": "Suzuki",
+      "model": "Wagon R Smile",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/wagon-r-smile",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Wagon R Smile"
+      },
+      "aliases": [
+        "ワゴンR スマイル"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:x90",
+      "make": "Suzuki",
+      "model": "X-90",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": null,
+        "canonicalMake": "Suzuki",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:xbee",
+      "make": "Suzuki",
+      "model": "Xbee",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/xbee",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "Xbee"
+      },
+      "aliases": [
+        "クロスビー"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "suzuki:xl7",
+      "make": "Suzuki",
+      "model": "XL7",
+      "canonical": {
+        "brandId": "suzuki",
+        "modelId": "suzuki/xl7",
+        "canonicalMake": "Suzuki",
+        "canonicalModel": "XL7"
+      },
+      "aliases": [
+        "XL-7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swallow:doretti",
+      "make": "Swallow",
+      "model": "Doretti",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm:g01",
+      "make": "SWM",
+      "model": "G01",
+      "canonical": {
+        "brandId": "swm",
+        "modelId": "swm/g01",
+        "canonicalMake": "SWM",
+        "canonicalModel": "G01"
+      },
+      "aliases": [
+        "G01",
+        "G01 G01F",
+        "G01 PRO"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm:g01f",
+      "make": "SWM",
+      "model": "G01F",
+      "canonical": {
+        "brandId": "swm",
+        "modelId": "swm/g01f",
+        "canonicalMake": "SWM",
+        "canonicalModel": "G01F"
+      },
+      "aliases": [
+        "G01F /"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm:g03f",
+      "make": "SWM",
+      "model": "G03F",
+      "canonical": {
+        "brandId": "swm",
+        "modelId": "swm/g03f",
+        "canonicalMake": "SWM",
+        "canonicalModel": "G03F"
+      },
+      "aliases": [
+        "SWM G03F"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm:g05",
+      "make": "SWM",
+      "model": "G05",
+      "canonical": {
+        "brandId": "swm",
+        "modelId": "swm/g05",
+        "canonicalMake": "SWM",
+        "canonicalModel": "G05"
+      },
+      "aliases": [
+        "G05",
+        "G05 KMC A6 KMC A6",
+        "G05; KMC; A6"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威g01ff",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威G01FF",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M06/8F/21/120x90_0_q95_autohomecar__ChxkjmLvVqOAMe5WAB3934LkAFY345.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威g01pro",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威G01Pro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威g05",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威G05",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g28/M00/BA/1D/120x90_0_q95_autohomecar__ChxkmmQfNVKAG35RABB7kuBI90s371.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威x3",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威X3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威x7",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威X7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威大虎",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威大虎",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g28/M0A/9D/83/120x90_0_q95_autohomecar__ChxkmmLV_C2ABMzZACK1LlUJFYk416.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "swm斯威汽车:swm斯威大虎edi",
+      "make": "SWM斯威汽车",
+      "model": "SWM斯威大虎EDi",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g24/M05/70/9F/120x90_0_q95_autohomecar__Chxky2PdMcSAd64QACdwgsks7r4995.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "sylva:striker",
+      "make": "Sylva",
+      "model": "Striker",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:105",
+      "make": "Talbot",
+      "model": "105",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:1510",
+      "make": "Talbot",
+      "model": "1510",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:90",
+      "make": "Talbot",
+      "model": "90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:alpine",
+      "make": "Talbot",
+      "model": "Alpine",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:horizon",
+      "make": "Talbot",
+      "model": "Horizon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:samba",
+      "make": "Talbot",
+      "model": "Samba",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:simcasunbeamlotus",
+      "make": "Talbot",
+      "model": "Simca Sunbeam Lotus",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:solara",
+      "make": "Talbot",
+      "model": "Solara",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:sunbeam",
+      "make": "Talbot",
+      "model": "Sunbeam",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:sunbeamlotus",
+      "make": "Talbot",
+      "model": "Sunbeam Lotus",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "talbot:tagora",
+      "make": "Talbot",
+      "model": "Tagora",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tata:safari",
+      "make": "Tata",
+      "model": "Safari",
+      "canonical": {
+        "brandId": "tata",
+        "modelId": null,
+        "canonicalMake": "TATA",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tenet:t4",
+      "make": "TENET",
+      "model": "T4",
+      "canonical": {
+        "brandId": "tenet",
+        "modelId": "tenet/t4",
+        "canonicalMake": "TENET",
+        "canonicalModel": "T4"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tenet:t4l",
+      "make": "TENET",
+      "model": "T4L",
+      "canonical": {
+        "brandId": "tenet",
+        "modelId": "tenet/t4l",
+        "canonicalMake": "TENET",
+        "canonicalModel": "T4L"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tenet:t7",
+      "make": "TENET",
+      "model": "T7",
+      "canonical": {
+        "brandId": "tenet",
+        "modelId": "tenet/t7",
+        "canonicalMake": "TENET",
+        "canonicalModel": "T7"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tenet:t8",
+      "make": "TENET",
+      "model": "T8",
+      "canonical": {
+        "brandId": "tenet",
+        "modelId": "tenet/t8",
+        "canonicalMake": "TENET",
+        "canonicalModel": "T8"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:cybertruck",
+      "make": "Tesla",
+      "model": "Cybertruck",
+      "canonical": {
+        "brandId": "tesla",
+        "modelId": null,
+        "canonicalMake": "Tesla",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:cybertruckawd",
+      "make": "Tesla",
+      "model": "Cybertruck AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:cybertruckpremium",
+      "make": "Tesla",
+      "model": "Cybertruck Premium",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3",
+      "make": "Tesla",
+      "model": "Model 3",
+      "canonical": {
+        "brandId": "tesla",
+        "modelId": "tesla/model-3",
+        "canonicalMake": "Tesla",
+        "canonicalModel": "Model 3"
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "Sedan",
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrange",
+      "make": "Tesla",
+      "model": "Model 3 Long Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawd",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawdimport",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD (Import)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawdpre11023",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD (pre-1/10/23)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawdperformance18wheels",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD Performance (18\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawdperformance19wheels",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD Performance (19\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawdperformance20wheels",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD Performance (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangeawdi",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3longrangei",
+      "make": "Tesla",
+      "model": "Model 3 Long Range-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3midrange",
+      "make": "Tesla",
+      "model": "Model 3 Mid Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3performance",
+      "make": "Tesla",
+      "model": "Model 3 Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3performanceawd",
+      "make": "Tesla",
+      "model": "Model 3 Performance AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3performancei",
+      "make": "Tesla",
+      "model": "Model 3 Performance-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3premiumawdi",
+      "make": "Tesla",
+      "model": "Model 3 Premium AWD-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3premiumi",
+      "make": "Tesla",
+      "model": "Model 3 Premium-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3rwd",
+      "make": "Tesla",
+      "model": "Model 3 RWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3rwdimport",
+      "make": "Tesla",
+      "model": "Model 3 RWD (Import)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3standardrange",
+      "make": "Tesla",
+      "model": "Model 3 Standard Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:model3standardrangeplus",
+      "make": "Tesla",
+      "model": "Model 3 Standard Range Plus",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:models",
+      "make": "Tesla",
+      "model": "Model S",
+      "canonical": {
+        "brandId": "tesla",
+        "modelId": "tesla/model-s",
+        "canonicalMake": "Tesla",
+        "canonicalModel": "Model S"
+      },
+      "aliases": [
+        "MODEL S",
+        "MODEL S /"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelslongrange",
+      "make": "Tesla",
+      "model": "Model S Long Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelslongrangeplus",
+      "make": "Tesla",
+      "model": "Model S Long Range Plus",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelslongrangepluspre15620",
+      "make": "Tesla",
+      "model": "Model S Long Range Plus (pre-15/6/20)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelsperformance19wheels",
+      "make": "Tesla",
+      "model": "Model S Performance (19\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelsperformance21wheels",
+      "make": "Tesla",
+      "model": "Model S Performance (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelsplaid19wheels",
+      "make": "Tesla",
+      "model": "Model S Plaid (19\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelsplaid21wheels",
+      "make": "Tesla",
+      "model": "Model S Plaid (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelsstandardrange",
+      "make": "Tesla",
+      "model": "Model S Standard Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelx",
+      "make": "Tesla",
+      "model": "Model X",
+      "canonical": {
+        "brandId": "tesla",
+        "modelId": "tesla/model-x",
+        "canonicalMake": "Tesla",
+        "canonicalModel": "Model X"
+      },
+      "aliases": [
+        "MODEL X",
+        "TESLA MODEL X"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxlongrange",
+      "make": "Tesla",
+      "model": "Model X Long Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxlongrangeplus",
+      "make": "Tesla",
+      "model": "Model X Long Range Plus",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxperformance20wheels",
+      "make": "Tesla",
+      "model": "Model X Performance (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxperformance22wheels",
+      "make": "Tesla",
+      "model": "Model X Performance (22\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxplaid",
+      "make": "Tesla",
+      "model": "Model X Plaid",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxplaid20wheels",
+      "make": "Tesla",
+      "model": "Model X Plaid (20\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxplaid22wheels",
+      "make": "Tesla",
+      "model": "Model X Plaid (22\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelxstandardrange",
+      "make": "Tesla",
+      "model": "Model X Standard Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modely",
+      "make": "Tesla",
+      "model": "Model Y",
+      "canonical": {
+        "brandId": "tesla",
+        "modelId": "tesla/model-y",
+        "canonicalMake": "Tesla",
+        "canonicalModel": "Model Y"
+      },
+      "aliases": [
+        "MODEL Y",
+        "TESLA MODEL Y"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyawd",
+      "make": "Tesla",
+      "model": "Model Y AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelylongrangeawd",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelylongrangeawdimport",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD (Import)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelylongrangeawdb",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD-B",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelylongrangeawdbpre61125",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD-B (pre-6/11/25)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelylongrangeawdi",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelylongrangei",
+      "make": "Tesla",
+      "model": "Model Y Long Range-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyperformance",
+      "make": "Tesla",
+      "model": "Model Y Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyperformance21wheels",
+      "make": "Tesla",
+      "model": "Model Y Performance (21\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyperformanceimport",
+      "make": "Tesla",
+      "model": "Model Y Performance (Import)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyperformanceb",
+      "make": "Tesla",
+      "model": "Model Y Performance-B",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyperformancei",
+      "make": "Tesla",
+      "model": "Model Y Performance-I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelypremiumawdb",
+      "make": "Tesla",
+      "model": "Model Y Premium AWD-B",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyrwd",
+      "make": "Tesla",
+      "model": "Model Y RWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyrwdimport",
+      "make": "Tesla",
+      "model": "Model Y RWD (Import)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelyrwdb",
+      "make": "Tesla",
+      "model": "Model Y RWD-B",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelystandardrange",
+      "make": "Tesla",
+      "model": "Model Y Standard Range",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:modelystandardb",
+      "make": "Tesla",
+      "model": "Model Y Standard-B",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tesla:roadster",
+      "make": "Tesla",
+      "model": "Roadster",
+      "canonical": {
+        "brandId": "tesla",
+        "modelId": "tesla/roadster",
+        "canonicalMake": "Tesla",
+        "canonicalModel": "Roadster"
+      },
+      "aliases": [
+        "TESLA ROADSTER"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "think:city",
+      "make": "Think",
+      "model": "City",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tiger:six",
+      "make": "Tiger",
+      "model": "Six",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tmt:ハイラックス",
+      "make": "TMT",
+      "model": "ハイラックス*",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "togg:t10f",
+      "make": "Togg",
+      "model": "T10F",
+      "canonical": {
+        "brandId": "togg",
+        "modelId": "togg/t10f",
+        "canonicalMake": "Togg",
+        "canonicalModel": "T10F"
+      },
+      "aliases": [
+        "T10F"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "togg:t10x",
+      "make": "Togg",
+      "model": "T10X",
+      "canonical": {
+        "brandId": "togg",
+        "modelId": "togg/t10x",
+        "canonicalMake": "Togg",
+        "canonicalModel": "T10X"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tothesfiai:clever",
+      "make": "Toth Es Fiai",
+      "model": "Clever",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:1000",
+      "make": "Toyota",
+      "model": "1000",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:2000gt",
+      "make": "Toyota",
+      "model": "2000GT",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:4runner",
+      "make": "Toyota",
+      "model": "4-Runner",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/4-runner",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "4-Runner"
+      },
+      "aliases": [
+        "4 RUNNER",
+        "4RUNNER",
+        "TOYOTA 4 RUNNER",
+        "TOYOTA 4-RUNNER"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:4runner4wd",
+      "make": "Toyota",
+      "model": "4Runner 4WD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:4runner4wdparttime4wd",
+      "make": "Toyota",
+      "model": "4Runner 4WD (Part-Time 4WD)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:4runner4wdlimited",
+      "make": "Toyota",
+      "model": "4Runner 4WD Limited",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:4runnerhybrid4wdparttime4wd",
+      "make": "Toyota",
+      "model": "4Runner Hybrid 4WD (Part-Time 4WD)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:4runnerhybrid4wdplatinum",
+      "make": "Toyota",
+      "model": "4Runner Hybrid 4WD Platinum",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:86",
+      "make": "Toyota",
+      "model": "86",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/86",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "86"
+      },
+      "aliases": [
+        "86 *2"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:allex",
+      "make": "Toyota",
+      "model": "Allex",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:allion",
+      "make": "Toyota",
+      "model": "Allion",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/allion",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Allion"
+      },
+      "aliases": [
+        "Toyota Allion"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:alphard",
+      "make": "Toyota",
+      "model": "Alphard",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/alphard",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Alphard"
+      },
+      "aliases": [
+        "アルファード"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:altezza",
+      "make": "Toyota",
+      "model": "Altezza",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:aqua",
+      "make": "Toyota",
+      "model": "Aqua",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/aqua",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Aqua"
+      },
+      "aliases": [
+        "アクア"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2011,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:aristo",
+      "make": "Toyota",
+      "model": "Aristo",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:aurion",
+      "make": "Toyota",
+      "model": "Aurion",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:auris",
+      "make": "Toyota",
+      "model": "Auris",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/auris",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Auris"
+      },
+      "aliases": [
+        "AURIS",
+        "TOYOTA AURIS",
+        "オーリス"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:avalon",
+      "make": "Toyota",
+      "model": "Avalon",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/avalon",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Avalon"
+      },
+      "aliases": [
+        "AVALON"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:avalonawd",
+      "make": "Toyota",
+      "model": "Avalon AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:avensis",
+      "make": "Toyota",
+      "model": "Avensis",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/avensis",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Avensis"
+      },
+      "aliases": [
+        "AVENSIS",
+        "TOYOTA AVENSIS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:aygo",
+      "make": "Toyota",
+      "model": "Aygo",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/aygo",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Aygo"
+      },
+      "aliases": [
+        "Toyota Aygo"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:aygox",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/aygo-x",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Aygo X"
+      },
+      "aliases": [
+        "AYGO X",
+        "TOYOTA AYGO X"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:bb",
+      "make": "Toyota",
+      "model": "Bb",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/bb",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Bb"
+      },
+      "aliases": [
+        "bB"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:blade",
+      "make": "Toyota",
+      "model": "Blade",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:brevis",
+      "make": "Toyota",
+      "model": "Brevis",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "toyota:bz",
+      "make": "Toyota",
+      "model": "Bz",
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/bz",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Bz"
+      },
+      "aliases": [
+        "BZ$X"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

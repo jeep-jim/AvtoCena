@@ -1,0 +1,3103 @@
+[
+  {
+    "modelKey": "xpeng:p7",
+    "modelId": "reported:xpeng:p7",
+    "variantId": "p7-rwd-long-range",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 203,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 80
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.autobild.de/artikel/xpeng-p7-rwd-long-range-test-28316449.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_continuous_power",
+        "note": "AUTO BILD own test; continuous output, not original certificate",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "nio:el8",
+    "modelId": "reported:nio:el8",
+    "variantId": "el8-long-range-executive",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 480,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 105
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6478-nio-el8-long-range-executive-inkl-batterie/nio-el8-long-range-executive-inkl-batterie.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "nio:et5touring",
+    "modelId": "reported:nio:et5touring",
+    "variantId": "et5-touring-100kwh",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 360
+    },
+    "values": {
+      "power30MinKw": 100
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6369-nio-et5-touring-100-kwh-inkl-batterie/nio-et5-touring-100-kwh-inkl-batterie.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:seal",
+    "modelId": "reported:byd:seal",
+    "variantId": "seal-design",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 230
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6432-byd-seal-design/byd-seal-design.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:sealu",
+    "modelId": "reported:byd:sealu",
+    "variantId": "seal-u-design",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6433-byd-seal-u-design/byd-seal-u-design.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:atto2",
+    "modelId": "reported:byd:atto2",
+    "variantId": "atto2-boost",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 130
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6544-byd-atto-2-boost/byd-atto-2-boost.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:dolphinsurf",
+    "modelId": "reported:byd:dolphinsurf",
+    "variantId": "dolphin-surf-boost",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 65
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6528-byd-dolphin-surf-boost/byd-dolphin-surf-boost.pdf",
+        "checkedAt": "2026-10-25",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test; continuous output from registration document",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:e2",
+    "modelId": "reported:byd:e2",
+    "variantId": "aa-dv-reference-0",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "BYD-1814-TZ-XS-A",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:yuanpro",
+    "modelId": "reported:byd:yuanpro",
+    "variantId": "aa-dv-reference-1",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "TZ180XSF",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:yuanup",
+    "modelId": "reported:byd:yuanup",
+    "variantId": "aa-dv-reference-2",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 35
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "TZ180XSF",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hongqi:eqm5",
+    "modelId": "reported:hongqi:eqm5",
+    "variantId": "aa-dv-reference-3",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "CAM210PT6",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:su7",
+    "modelId": "reported:xiaomi:su7",
+    "variantId": "aa-dv-reference-4",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:su7ultra",
+    "modelId": "reported:xiaomi:su7ultra",
+    "variantId": "aa-dv-reference-5",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 490
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:yu7",
+    "modelId": "reported:xiaomi:yu7",
+    "variantId": "aa-dv-reference-6",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 135
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "YS190XY106",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "xiaomi:yu7",
+    "modelId": "reported:xiaomi:yu7",
+    "variantId": "aa-dv-reference-7",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "YS210XY103",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "zeekr:001",
+    "modelId": "reported:zeekr:001",
+    "variantId": "aa-dv-reference-8",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "zeekr:001",
+    "modelId": "reported:zeekr:001",
+    "variantId": "aa-dv-reference-9",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 280
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "FR version",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "zeekr:009",
+    "modelId": "reported:zeekr:009",
+    "variantId": "aa-dv-reference-10",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric"
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "aito:m5",
+    "modelId": "reported:aito:m5",
+    "variantId": "aa-dv-reference-11",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 115
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "aito:m9",
+    "modelId": "reported:aito:m9",
+    "variantId": "aa-dv-reference-12",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 114
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinl",
+    "modelId": "reported:byd:qinl",
+    "variantId": "aa-dv-reference-13",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "TZ210XYC",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:tang",
+    "modelId": "reported:byd:tang",
+    "variantId": "aa-dv-reference-14",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "BYD6490ST6HEV10",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:tang",
+    "modelId": "reported:byd:tang",
+    "variantId": "aa-dv-reference-15",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 105
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "BYD6490ST6HEV3",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:levin",
+    "modelId": "reported:toyota:levin",
+    "variantId": "aa-dv-reference-16",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:levin",
+    "modelId": "reported:toyota:levin",
+    "variantId": "aa-dv-reference-17",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 49
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "ZWE219L",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "voyah:free",
+    "modelId": "reported:voyah:free",
+    "variantId": "aa-dv-reference-18",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 170
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": null,
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "voyah:free",
+    "modelId": "reported:voyah:free",
+    "variantId": "aa-dv-reference-19",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid"
+    },
+    "values": {
+      "power30MinKw": 150
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://aa-dv.ru/30-minutnaya-moshchnost.html",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "referenceIdentity": "facelift",
+        "note": "Importer-maintained reference, not a reviewed original certificate. Motor/type code retained as reference identity; no inference that a missing target code matches.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil6",
+    "modelId": "reported:liauto:lil6",
+    "variantId": "wersum-l6-135",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 135
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil7",
+    "modelId": "reported:liauto:lil7",
+    "variantId": "wersum-l7-145",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 145
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil7",
+    "modelId": "reported:liauto:lil7",
+    "variantId": "wersum-l7-148",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 148
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil7",
+    "modelId": "reported:liauto:lil7",
+    "variantId": "wersum-l7-168",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 168
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil8",
+    "modelId": "reported:liauto:lil8",
+    "variantId": "wersum-l8-145",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 145
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil8",
+    "modelId": "reported:liauto:lil8",
+    "variantId": "wersum-l8-165",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lil9",
+    "modelId": "reported:liauto:lil9",
+    "variantId": "wersum-l9-145",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 110
+    },
+    "values": {
+      "power30MinKw": 145
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "liauto:lione",
+    "modelId": "reported:liauto:lione",
+    "variantId": "wersum-one-112",
+    "revision": "2026-10-25",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "powertrainKind": "series_hybrid",
+      "drive": "awd",
+      "icePowerKw": 96
+    },
+    "values": {
+      "power30MinKw": 112
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/li-l7",
+        "checkedAt": "2026-10-25",
+        "measurement": "reported_30minute_power",
+        "note": "Importer reports its L6 certificate and document values for other models; original certificate not reviewed. Multiple reported versions remain a range.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "tesla:model3",
+    "modelId": "reported:tesla:model3",
+    "variantId": "model3-rwd-at6207",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 208,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 100
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6207-tesla-model-3/tesla-model-3.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "tesla:modely",
+    "modelId": "reported:tesla:modely",
+    "variantId": "modely-rwd-maximum-range-at6542",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 220,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 114
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6542-tesla-model-y-maximum-range/tesla-model-y-maximum-range.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "tesla:modely",
+    "modelId": "reported:tesla:modely",
+    "variantId": "modely-awd-maximum-range-at6259",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 378,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 153
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6259-tesla-model-y-maximum-range-awd/tesla-model-y-maximum-range-awd.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:eny1",
+    "modelId": "reported:honda:eny1",
+    "variantId": "eny1-at6395",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6395-honda-eny1/honda-eny1.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:e",
+    "modelId": "reported:honda:e",
+    "variantId": "e-advance-at6073",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 113
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6073-honda-e-advance-paket-17-zoll-bereifung/honda-e-advance-paket-17-zoll-bereifung.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mazda:mx30",
+    "modelId": "reported:mazda:mx30",
+    "variantId": "mx30-electric-adac",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 107
+    },
+    "values": {
+      "power30MinKw": 81
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/v1614584304/ADAC-eV/KOR/Text/PDF/ADAC_Autotest_Mazda_MX_30_e_SKYACTIV_zusuaj.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mazda:6e",
+    "modelId": "reported:mazda:6e",
+    "variantId": "6e-258-at6546",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 190
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6546-mazda-6e-258-takumi-plus/mazda-6e-258-takumi-plus.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev6",
+    "modelId": "reported:kia:ev6",
+    "variantId": "ev6-84-earth-at6472",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168
+    },
+    "values": {
+      "power30MinKw": 56
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6472-kia-ev6-84-kwh-earth/kia-ev6-84-kwh-earth.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev9",
+    "modelId": "reported:kia:ev9",
+    "variantId": "ev9-gt-line-awd-at6383",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 283,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 113
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6383-kia-ev9-gt-line-awd-6-sitzer/kia-ev9-gt-line-awd-6-sitzer.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev3",
+    "modelId": "reported:kia:ev3",
+    "variantId": "ev3-58-earth-at6480",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150
+    },
+    "values": {
+      "power30MinKw": 50
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6480-kia-ev3-583-kwh-earth/kia-ev3-583-kwh-earth.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:niroev",
+    "modelId": "reported:kia:niroev",
+    "variantId": "niro-ev-648-at6251",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150,
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "batteryKwh": 64.8,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 50
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6251-kia-niro-ev-648-kwh-inspiration/kia-niro-ev-648-kwh-inspiration.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year. New generation introduced 2022 per Kia manufacturer release; do not carry this report into earlier e-Niro years.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq5",
+    "modelId": "reported:hyundai:ioniq5",
+    "variantId": "ioniq5-84-at6502",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168
+    },
+    "values": {
+      "power30MinKw": 56
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6502-hyundai-ioniq-5-84-kwh-uniq-2wd/hyundai-ioniq-5-84-kwh-uniq-2wd.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq5",
+    "modelId": "reported:hyundai:ioniq5",
+    "variantId": "ioniq5-726-at6147",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6147-hyundai-ioniq-5-726-kwh-techniq-paket-2wd/hyundai-ioniq-5-726-kwh-techniq-paket-2wd.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq5n",
+    "modelId": "reported:hyundai:ioniq5n",
+    "variantId": "ioniq5n-at6426",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 448
+    },
+    "values": {
+      "power30MinKw": 159
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6426-hyundai-ioniq-5-n/hyundai-ioniq-5-n.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:ioniq6",
+    "modelId": "reported:hyundai:ioniq6",
+    "variantId": "ioniq6-84-at6631",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168,
+      "drive": "rwd"
+    },
+    "values": {
+      "power30MinKw": 56
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6631-hyundai-ioniq-6-84-kwh-centriq/hyundai-ioniq-6-84-kwh-centriq.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own test, continuous output from registration; model precedent only, original certificate not reviewed. Test year not asserted as model year.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corolla",
+    "modelId": "reported:toyota:corolla",
+    "variantId": "corolla18-before-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 53,
+      "drive": "fwd",
+      "yearFrom": 2019,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corolla",
+    "modelId": "reported:toyota:corolla",
+    "variantId": "corolla18-after-49",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 70,
+      "drive": "fwd",
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 49
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. May 2023 transition; year-only 2023 can remain ambiguous.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-fwd-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-awd-59",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 128,
+      "drive": "awd",
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    "values": {
+      "power30MinKw": 59
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:wildlander",
+    "modelId": "reported:toyota:wildlander",
+    "variantId": "wildlander-fwd-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-wildlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:wildlander",
+    "modelId": "reported:toyota:wildlander",
+    "variantId": "wildlander-awd-59",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 128,
+      "drive": "awd",
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 59
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-wildlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:harrier",
+    "modelId": "reported:toyota:harrier",
+    "variantId": "harrier-fwd-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-harrier",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:harrier",
+    "modelId": "reported:toyota:harrier",
+    "variantId": "harrier-awd-59",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 128,
+      "drive": "awd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 59
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-harrier",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-20-new-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:rav4",
+    "modelId": "reported:toyota:rav4",
+    "variantId": "rav4-phev-75",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 132,
+      "motorPeakKw": 174,
+      "drive": "awd",
+      "batteryKwh": 15.98,
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    "values": {
+      "power30MinKw": 75
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-rav4",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:wildlander",
+    "modelId": "reported:toyota:wildlander",
+    "variantId": "wildlander-phev-75",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 132,
+      "motorPeakKw": 174,
+      "drive": "awd",
+      "batteryKwh": 15.98,
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    "values": {
+      "power30MinKw": 75
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-wildlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:highlander",
+    "modelId": "reported:toyota:highlander",
+    "variantId": "highlander-awd-51",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 141,
+      "motorPeakKw": 174,
+      "drive": "awd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 51
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-highlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:highlander",
+    "modelId": "reported:toyota:highlander",
+    "variantId": "highlander-fwd-40",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 141,
+      "motorPeakKw": 134,
+      "drive": "fwd",
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 40
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-highlander",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "corollacross-20-42",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 42
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "corollacross-20-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:frontlander",
+    "modelId": "reported:toyota:frontlander",
+    "variantId": "frontlander-20-42",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 42
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:frontlander",
+    "modelId": "reported:toyota:frontlander",
+    "variantId": "frontlander-20-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Importer reports 58 for own car and 42 for other documents; retain both.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "cross18-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 53,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:corollacross",
+    "modelId": "reported:toyota:corollacross",
+    "variantId": "cross18-38",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1798,
+      "icePowerKw": 72,
+      "motorPeakKw": 53,
+      "drive": "fwd",
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    "values": {
+      "power30MinKw": 38
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-corolla-cross",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry20-xv80-58",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 1987,
+      "icePowerKw": 112,
+      "motorPeakKw": 83,
+      "drive": "fwd",
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 58
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv80-64",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "icePowerKw": 136,
+      "motorPeakKw": 100,
+      "drive": "fwd",
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 64
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv70-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Source reports 37–53; bounds retained, not an invented average.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv70-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Source reports 37–53; bounds retained, not an invented average.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:camry",
+    "modelId": "reported:toyota:camry",
+    "variantId": "camry25-xv70-53",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "motorPeakKw": 88,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2023
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-camry",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Source reports 37–53; bounds retained, not an invented average.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:bz3x",
+    "modelId": "reported:toyota:bz3x",
+    "variantId": "bz3x-own-document-45",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 150,
+      "drive": "fwd",
+      "engineCode": "TZ175XSAY501",
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 45
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-bz3x",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:bz3x",
+    "modelId": "reported:toyota:bz3x",
+    "variantId": "bz3x-other-documents-67.5",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "drive": "fwd",
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 67.5
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-bz3x",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Other versions lack motor/peak identity in source; retain both bounds.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "toyota:bz3x",
+    "modelId": "reported:toyota:bz3x",
+    "variantId": "bz3x-other-documents-74.25",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "drive": "fwd",
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 74.25
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/toyota-bz3x",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. Other versions lack motor/peak identity in source; retain both bounds.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-old-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2494,
+      "icePowerKw": 118,
+      "drive": "fwd",
+      "yearFrom": 2012,
+      "yearTo": 2018
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-29",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 29
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-37",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 37
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-48",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 48
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "lexus:es",
+    "modelId": "reported:lexus:es",
+    "variantId": "es300h-new-88",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "engineCc": 2487,
+      "icePowerKw": 131,
+      "drive": "fwd",
+      "yearFrom": 2018,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 88
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/lexus-es300h",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. All four published alternative document values retained.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:breeze",
+    "modelId": "reported:honda:breeze",
+    "variantId": "breeze-hev-65",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "motorPeakKw": 135,
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/honda-breeze",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:breeze",
+    "modelId": "reported:honda:breeze",
+    "variantId": "breeze-hev-67.5",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "motorPeakKw": 135,
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 67.5
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/honda-breeze",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "honda:breezephev",
+    "modelId": "reported:honda:breezephev",
+    "variantId": "breeze-phev-67.5",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "motorPeakKw": 135,
+      "drive": "fwd",
+      "batteryKwh": 17.7,
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 67.5
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/honda-breeze",
+        "checkedAt": "2026-10-26",
+        "measurement": "importer_reported_document_power",
+        "note": "Importer reports its vehicle/document experience. Original certificate not reviewed. Alternatives retained; not a certified value for another vehicle. ",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev5",
+    "modelId": "reported:kia:ev5",
+    "variantId": "ev5-814-fwd-at6614",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160,
+      "drive": "fwd",
+      "batteryKwh": 81.4
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6614-kia-ev5-814-kwh-gt-line/kia-ev5-814-kwh-gt-line.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "kia:ev5",
+    "modelId": "reported:kia:ev5",
+    "variantId": "ev5-814-awd-at6614",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 195,
+      "drive": "awd",
+      "batteryKwh": 81.4
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/AT6614-kia-ev5-814-kwh-gt-line/kia-ev5-814-kwh-gt-line.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:kona",
+    "modelId": "reported:hyundai:kona",
+    "variantId": "kona-654-fwd-at6366",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 160,
+      "drive": "fwd",
+      "batteryKwh": 65.4,
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    "values": {
+      "power30MinKw": 53
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6366-hyundai-kona-elektro-654-kwh-prime-paket/hyundai-kona-elektro-654-kwh-prime-paket.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "hyundai:inster",
+    "modelId": "reported:hyundai:inster",
+    "variantId": "inster-42-fwd-at6496",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 71,
+      "drive": "fwd",
+      "batteryKwh": 42,
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 24
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6496-hyundai-inster-42-kwh-select/hyundai-inster-42-kwh-select.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "registration_continuous_power",
+        "note": "ADAC own vehicle test; registration continuous output. Nearest model estimate, not a reviewed original certificate. Battery and drive retained to distinguish versions.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "bmw:ix1",
+    "modelId": "reported:bmw:ix1",
+    "variantId": "ix1-xdrive30-at6312",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 230,
+      "drive": "awd",
+      "batteryKwh": 64.7
+    },
+    "values": {
+      "power30MinKw": 94
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://assets.adac.de/image/upload/Autodatenbank/Autotest/at6312-bmw-ix1-xdrive30/bmw-ix1-xdrive30.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "ADAC own test page 13: registration continuous output for tested AWD version; not the sum of separately rated motors, not an original certificate. Battery is usable capacity.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-250-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 111
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-250plus-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 70.5
+    },
+    "values": {
+      "power30MinKw": 95
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-300-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-350-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 215,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQA/Mercedes-Benz-Preisliste--EQA-H243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-250-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 111
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-250plus-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 140,
+      "drive": "fwd",
+      "batteryKwh": 70.5
+    },
+    "values": {
+      "power30MinKw": 95
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-300-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 168,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqb",
+    "modelId": "reported:mercedesbenz:eqb",
+    "variantId": "eqb-350-4matic-oem-202305",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 215,
+      "drive": "awd",
+      "batteryKwh": 66.5
+    },
+    "values": {
+      "power30MinKw": 139
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/EQB/Mercedes-Benz-Preisliste-EQB-X243%20%281%29.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original price/specification brochure valid 2023-05-10, dealer-hosted copy; continuous drivetrain output p5 and drive table. Original type-approval certificate not reviewed. These are version-specific model precedents, not certification of a matched listing.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "mercedesbenz:eqa",
+    "modelId": "reported:mercedesbenz:eqa",
+    "variantId": "eqa-350-4matic-705-oem-202407",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "powerKw": 215,
+      "drive": "awd",
+      "batteryKwh": 70.5,
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    "values": {
+      "power30MinKw": 130
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://mbpassion.de/wp-cb4ef-content/uploads/2024/07/mbpassion.de-mercedes-benz-verzichtet-vollstaendig-auf-preislisten-mercedes-benz-preisliste-eqa-h243.pdf",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_continuous_power",
+        "note": "Mercedes-Benz original brochure valid 2024-07-11, mirrored copy: revised 350 4MATIC with 70.5 kWh battery and 130 kW continuous output. Kept alongside older 66.5 kWh/139 kW version; no arbitrary conflict replacement. Original certificate not reviewed.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-dmi-2021-2022-60",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "engineCc": 1498,
+      "icePowerKw": 78,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-dmi-2021-2022-70",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "engineCc": 1498,
+      "icePowerKw": 78,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-dmi-2023plus-55",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "engineCc": 1498,
+      "icePowerKw": 70,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 55
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-ev-45",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 45
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source peak range 100–150 kW is not replaced with an invented exact peak.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:qinplus",
+    "modelId": "reported:byd:qinplus",
+    "variantId": "qinplus-ev-65",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-qin-plus",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source peak range 100–150 kW is not replaced with an invented exact peak.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmi-fwd-60",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "engineCc": 1497,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source table says 60/70 and its later paragraph includes 90; ambiguity retained. ICE range 96–102 is not asserted as one exact output.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmi-fwd-70",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "engineCc": 1497,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source table says 60/70 and its later paragraph includes 90; ambiguity retained. ICE range 96–102 is not asserted as one exact output.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmi-fwd-90",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "engineCc": 1497,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 90
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source table says 60/70 and its later paragraph includes 90; ambiguity retained. ICE range 96–102 is not asserted as one exact output.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmp-awd-110",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 110
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source specifies 1.5T and ICE 96–102 kW without exact displacement/output; these are not invented.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmp-awd-140",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 140
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source specifies 1.5T and ICE 96–102 kW without exact displacement/output; these are not invented.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-dmp-awd-165",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 165
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion. Source specifies 1.5T and ICE 96–102 kW without exact displacement/output; these are not invented.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-early-dm-awd-55",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "icePowerKw": 141,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 55
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-early-dm-awd-60",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "icePowerKw": 141,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 60
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-early-dm-awd-70",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "icePowerKw": 141,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 70
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-fwd-65",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "fwd"
+    },
+    "values": {
+      "power30MinKw": 65
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-awd-125",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 125
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-awd-171",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 171
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "byd:han",
+    "modelId": "reported:byd:han",
+    "variantId": "han-ev-awd-200",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "electric",
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "drive": "awd"
+    },
+    "values": {
+      "power30MinKw": 200
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://www.wersum.ru/katalog/byd-han",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "WERSUM own published import/document experience; original certificate not reviewed. All reported alternatives retained; interval endpoints are bounds, not proof of an exact certificate value. No peak-to-continuous conversion.",
+        "originalCertificateReviewed": false
+      }
+    }
+  },
+  {
+    "modelKey": "aito:m7",
+    "modelId": "reported:aito:m7",
+    "variantId": "m7-regional-seres-awd-188ps-138p27376",
+    "revision": "2026-10-26",
+    "year": 0,
+    "constraints": {
+      "fuel": "hybrid",
+      "drive": "awd",
+      "icePowerKw": 85.31785,
+      "motorPeakKw": 322.88395,
+      "batteryKwh": 40
+    },
+    "values": {
+      "power30MinKw": 138.27376
+    },
+    "sources": {
+      "power30MinKw": {
+        "kind": "reported_precedent",
+        "url": "https://seres.ru/media-link/aito-seres-m7-pricelist",
+        "checkedAt": "2026-10-26",
+        "measurement": "reported_30_minute_power",
+        "note": "SERES M7 Pro/Max regional model precedent for AITO M7, not exact Chinese homologation. Official distributor brochure states 188 metric hp 30-minute total, 439 metric hp peak, 116 metric hp ICE, AWD, 40 kWh. Values converted with 0.73549875 kW/metric hp; stated hp are rounded. Regional differences retained and known mechanical conflicts rejected; original certificate not reviewed.",
+        "originalCertificateReviewed": false
+      }
+    }
+  }
+]

@@ -1,0 +1,876 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2009-2010-multiair",
+  "entries": [
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "1bbb8422bc1f28900a6f7e4a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 16V MultiAir 135 PS MiTo",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 16V MultiAir 135 PS MiTo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 135,
+        "powerKw": 99,
+        "icePowerKw": 99
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица02.09.2009: MultiAir135PS/99кВт в комплектациях MiTo/Turismo; публикация13.10.2009 подтверждает1368см³ и бензиновый ДВС. Start&Stop не считается гибридом. Передний привод и шестиступенчатая коробка в соседнем абзаце относятся к будущему Quadrifoglio Verde и не перенесены на135PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/revolutionarer-multiair-motor-startet-durch",
+            "publishedAt": "2009-10-13",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/revolutionarer-multiair-motor-startet-durch",
+            "publishedAt": "2009-10-13",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/revolutionarer-multiair-motor-startet-durch",
+            "publishedAt": "2009-10-13",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS MiTo; таблица двух комплектаций и описание двигателя135PS; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "1aeb77d251323c78c05e619a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2009,
+      "trim": "1.4 TB 16V MultiAir 135 PS Turismo",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB 16V MultiAir 135 PS Turismo",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerHp": 135,
+        "powerKw": 99,
+        "icePowerKw": 99
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица02.09.2009: MultiAir135PS/99кВт в комплектациях MiTo/Turismo; публикация13.10.2009 подтверждает1368см³ и бензиновый ДВС. Start&Stop не считается гибридом. Передний привод и шестиступенчатая коробка в соседнем абзаце относятся к будущему Quadrifoglio Verde и не перенесены на135PS.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/revolutionarer-multiair-motor-startet-durch",
+            "publishedAt": "2009-10-13",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/revolutionarer-multiair-motor-startet-durch",
+            "publishedAt": "2009-10-13",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/revolutionarer-multiair-motor-startet-durch",
+            "publishedAt": "2009-10-13",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; engineCc"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; powerHp"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/weltneuheit-multiair-debutiert-im-alfa-romeo-mito-elektrohydraulische-ventilsteuerung-untermauert-position-der-fiat-group-als-ein-technologiefuhrer-im-bereich-powertrain",
+            "publishedAt": "2009-09-02",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB 16V MultiAir 135 PS Turismo; таблица двух комплектаций и описание двигателя135PS; icePowerKw"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "469db545a1e44735462cd0cd",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 99 kW MT5 Lusso",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MultiAir TB 99 kW MT5 Lusso",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет11.03.2010: пять точных строк PRICING сопоставлены трём техническим колонкам.1368см³,99/125кВт, передний привод, MT5/TCT6/MT6 и трёхдверный хэтчбек. TCT с двумя сцеплениями доступна весной2010. Неоднозначное bhp не приравнено PS; powerHp не заполнена. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "3251301fef989d7e16afa1ec",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 99 kW MT5 Veloce",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MultiAir TB 99 kW MT5 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет11.03.2010: пять точных строк PRICING сопоставлены трём техническим колонкам.1368см³,99/125кВт, передний привод, MT5/TCT6/MT6 и трёхдверный хэтчбек. TCT с двумя сцеплениями доступна весной2010. Неоднозначное bhp не приравнено PS; powerHp не заполнена. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW MT5 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "096a3f2763616c1dede26032",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 99 kW TCT6 Lusso",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MultiAir TB 99 kW TCT6 Lusso",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "dct",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет11.03.2010: пять точных строк PRICING сопоставлены трём техническим колонкам.1368см³,99/125кВт, передний привод, MT5/TCT6/MT6 и трёхдверный хэтчбек. TCT с двумя сцеплениями доступна весной2010. Неоднозначное bhp не приравнено PS; powerHp не заполнена. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "2943f0cbb3c15164705c27df",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 99 kW TCT6 Veloce",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MultiAir TB 99 kW TCT6 Veloce",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "dct",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет11.03.2010: пять точных строк PRICING сопоставлены трём техническим колонкам.1368см³,99/125кВт, передний привод, MT5/TCT6/MT6 и трёхдверный хэтчбек. TCT с двумя сцеплениями доступна весной2010. Неоднозначное bhp не приравнено PS; powerHp не заполнена. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 99 kW TCT6 Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "7f6f9c58b93bd5de30135f22",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.4 MultiAir TB 125 kW MT6 Cloverleaf",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MultiAir TB 125 kW MT6 Cloverleaf",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1368,
+        "powerKw": 125,
+        "icePowerKw": 125,
+        "drive": "fwd",
+        "transmission": "manual",
+        "bodyType": "hatchback"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "bodyType"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводской пресс-пакет11.03.2010: пять точных строк PRICING сопоставлены трём техническим колонкам.1368см³,99/125кВт, передний привод, MT5/TCT6/MT6 и трёхдверный хэтчбек. TCT с двумя сцеплениями доступна весной2010. Неоднозначное bhp не приравнено PS; powerHp не заполнена. Масса kerb не выдана за полную.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          },
+          "transmission": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; transmission"
+          },
+          "bodyType": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/new-alfa-mito-multiair-in-uk",
+            "publishedAt": "2010-03-11",
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MultiAir TB 125 kW MT6 Cloverleaf; точная строка PRICING и соответствующая колонка TECHNICAL DATA; bodyType"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "a7e575384cb5dab52c5e4cad",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW Turismo",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM-2 70 kW Turismo",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица15.03.2010: точные исполнения Turismo/Lusso/Veloce, дизель1248см³,70кВт, передний привод. Обозначение95bhp не приравнено метрическимPS. Пять передач не доказывают тип коробки; коробка и полная масса оставлены неизвестными.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Turismo; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "32847858cf0969b02e083387",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW Lusso",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM-2 70 kW Lusso",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица15.03.2010: точные исполнения Turismo/Lusso/Veloce, дизель1248см³,70кВт, передний привод. Обозначение95bhp не приравнено метрическимPS. Пять передач не доказывают тип коробки; коробка и полная масса оставлены неизвестными.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Lusso; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          }
+        }
+      }
+    },
+    {
+      "operation": "create",
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "040b809591dd1ee320e2c5eb",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2010,
+      "trim": "1.3 JTDM-2 70 kW Veloce",
+      "expectedRevision": "ba1bf97e-0009-4906-aeec-afc91c81babd",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM-2 70 kW Veloce",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 1248,
+        "powerKw": 70,
+        "icePowerKw": 70,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+        "checkedAt": "2026-10-22",
+        "statement": "Заводская таблица15.03.2010: точные исполнения Turismo/Lusso/Veloce, дизель1248см³,70кВт, передний привод. Обозначение95bhp не приравнено метрическимPS. Пять передач не доказывают тип коробки; коробка и полная масса оставлены неизвестными.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; trim"
+          },
+          "fuel": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powertrainKind"
+          },
+          "engineCc": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; engineCc"
+          },
+          "powerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; icePowerKw"
+          },
+          "drive": {
+            "url": "https://www.media.stellantis.com/uk-en/alfa-romeo/press/multijet-ii-diesel-power-for-alfa-mito",
+            "publishedAt": "2010-03-15",
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM-2 70 kW Veloce; точная строка PRICING и соответствующая колонка TECHNICAL DATA; drive"
+          }
+        }
+      }
+    }
+  ]
+}

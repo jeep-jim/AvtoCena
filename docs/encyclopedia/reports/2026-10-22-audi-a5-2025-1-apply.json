@@ -1,0 +1,82 @@
+{
+  "batch": "research-2026-10-22-audi-a5-2025-1",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "8cf3dbb7884fe919bce44c62",
+      "changes": [
+        {
+          "variantId": "7cba44fc49b28b2272d1c03e",
+          "fields": [
+            "fuel",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "eb9892a5494e05138a749eec",
+          "fields": [
+            "fuel",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "0f5f3961b465d28c3e5172f4",
+          "fields": [
+            "fuel",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "6d883e3546e95131df01a86f",
+          "fields": [
+            "fuel",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg",
+            "powertrainKind"
+          ]
+        },
+        {
+          "variantId": "179c41517625a54d112bb7af",
+          "fields": [
+            "fuel",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg",
+            "powertrainKind"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-21T22:14:14.119Z",
+  "finishedAt": "2026-10-21T22:14:19.739Z"
+}

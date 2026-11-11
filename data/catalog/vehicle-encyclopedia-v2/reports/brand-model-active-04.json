@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 3,
+    "newBrands": 2,
+    "newModels": 6
+  },
+  "brandIds": [
+    "kuayue",
+    "ciimo"
+  ],
+  "modelIds": [
+    "ciimo/m-nv",
+    "kuayue/d5-reev",
+    "kuayue/v5",
+    "kuayue/v5-ev",
+    "kuayue/v7",
+    "kuayue/v7-ev"
+  ],
+  "policy": {
+    "priorityWindow": "China/Azerbaijan active or 2020-2026 range",
+    "secondaryBrandAliasesRemainUnsafe": true,
+    "technicalConfigurationsNotInferred": true,
+    "untracedLogoCandidatesRejected": true,
+    "automaticPublicationReady": false
+  }
+}

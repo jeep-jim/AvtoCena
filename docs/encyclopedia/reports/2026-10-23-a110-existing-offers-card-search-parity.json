@@ -1,0 +1,128 @@
+{
+  "checkedAt": "2026-10-22T18:36:13.951965+00:00",
+  "passed": true,
+  "scope": "Alpine existing offers card/search parity; does not alone prove new batch index membership",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "f24374af90180dcb90e7efb3",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "S",
+          "card": "S",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1798,
+          "card": 1798,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 300,
+          "card": 300,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 221,
+          "card": 221,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 221,
+          "card": 221,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 9171577,
+          "card": 9171577,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "d040fe8db9657a2e402a91bc",
+      "checks": {
+        "year": {
+          "search": 2020,
+          "card": 2020,
+          "equal": true
+        },
+        "trim": {
+          "search": "Alpine Color Edition 2020 ABS Fahrerairbag Beifahrerairbag Seitenairbag",
+          "card": "Alpine Color Edition 2020 ABS Fahrerairbag Beifahrerairbag Seitenairbag",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1798,
+          "card": 1798,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 292,
+          "card": 292,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 215,
+          "card": 215,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 215,
+          "card": 215,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 9149522,
+          "card": 9149522,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      }
+    }
+  ]
+}

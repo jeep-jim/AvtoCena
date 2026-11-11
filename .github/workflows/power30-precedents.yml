@@ -1,0 +1,43 @@
+name: Encyclopedia — save nearest 30 minute precedents
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/power30-precedents.json']
+permissions:
+  contents: read
+concurrency:
+  group: power30-precedents
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/encyclopedia-power30-precedents.test.mjs
+      - name: Save model precedents for every retained catalog and annual encyclopedia row
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: node --import tsx scripts/encyclopedia/build-power30-precedents.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: power30-precedents
+          path: reports/power30-precedents.json
+          if-no-files-found: ignore

@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-23T18:31:50.572941+00:00",
+  "status": "deferred_writer_active",
+  "commit": "63b6939c50626e6b365f630939e3b2e7ff72bff5",
+  "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/40003695342",
+  "jobId": 120586090403,
+  "terminalConclusion": "failure",
+  "terminalReason": "body_inspection_writer_active",
+  "terminalAt": "2026-10-23T18:30:15.7941542Z",
+  "productionWrites": 0,
+  "offerAndIndexRead": false,
+  "rootCause": "not_established",
+  "publicParityClosed": false,
+  "baselineTests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "blockingWork": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/40001652792",
+    "jobId": 120578982723,
+    "state": "in_progress",
+    "step": "Run node --import tsx scripts/backfill-budget-count-index.mjs"
+  },
+  "next": [
+    "Wait for existing compact job terminal; inspect logs if failed, coordinate with active DBX session through Road.",
+    "If serving release and generation still equal request and writer is free, rerun only failed addressed inspection40003695342; no new import, apply, deploy or full projection read.",
+    "If release/generation changed, refresh target public parity and exact request guards before one new inspection marker.",
+    "Use private source body evidence and exact candidates to reproduce before changing code; do not weaken semantic conflict/manual/source guards."
+  ]
+}

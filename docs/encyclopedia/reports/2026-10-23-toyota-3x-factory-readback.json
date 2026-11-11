@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-23",
+  "batch": "research-2026-10-23-toyota-3x-2026-factory",
+  "run": 39930319667,
+  "savedVariants": 4,
+  "confirmedFields": 16,
+  "literalTranslations": 4,
+  "independentReadback": "PASS",
+  "revision": "e345ce60-ac69-4dca-a9ff-cb41a8bddfa8",
+  "untargetedPreserved": true,
+  "unknown30MinPreserved": true,
+  "pendingNextIndex": true,
+  "sourcePdfSha256": "01e2713782674a5e9357b1a937e697b145b7f47c72359a515eeed1102c6e2267",
+  "compiledCalculationChecks": {
+    "variants": 7,
+    "status": "PASS",
+    "fields": "bZ3X bodyType, 3X powerKw; motorPeakKw and batteryKwh remain descriptive encyclopedia fields, not fields of this calculation index",
+    "power30MinRemainsUnknown": true
+  }
+}

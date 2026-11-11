@@ -1,0 +1,362 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T07:01:38.857791+07:00",
+  "modelId": "62f2bf675810869f68e70d2e",
+  "make": "Aston Martin",
+  "model": "Rapide",
+  "revision": "99832547-5b6f-4500-8078-8747361bc749",
+  "scopeSinceYear": 2008,
+  "allFieldsComplete": false,
+  "historicalExpansionComplete": false,
+  "variantsWithRemainingFields": [
+    {
+      "variantId": "687fb1906ee8fc55ae946ac2",
+      "year": 2010,
+      "trim": "V12 6AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "9e623cb638117eddb256740d",
+      "year": 2011,
+      "trim": "V12 6AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "47c4ceaad32a091b70f5724c",
+      "year": 2012,
+      "trim": "V12 6AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "41853604678a790e8c71fc05",
+      "year": 2014,
+      "trim": "STANDARD",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "UAE STANDARD не определяет точное исполнение Rapide/S; данные продавца о мощности/объёме запрещены. Нужны точный заводской идентификатор и модельный год.",
+      "retry": true
+    },
+    {
+      "variantId": "d7dee218ea082e1f0a2744ee",
+      "year": 2014,
+      "trim": "S V12 6AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "reason": "Годовое руководство подтверждает bhp, но не отдельную точную таблицу PS/кВт; значения не конвертировались и не копировались из16MY. Привод/коды также не подтверждены.",
+      "retry": true
+    },
+    {
+      "variantId": "451a2f9b5ce11c9e0ece570f",
+      "year": 2015,
+      "trim": "S V12 8AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "reason": "Годовое руководство подтверждает bhp, но не отдельную точную таблицу PS/кВт; значения не конвертировались и не копировались из16MY. Привод/коды также не подтверждены.",
+      "retry": true
+    },
+    {
+      "variantId": "f7cf3525e92a0d195ec4bad1",
+      "year": 2016,
+      "trim": "STANDARD",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "UAE STANDARD не определяет точное исполнение Rapide/S; данные продавца о мощности/объёме запрещены. Нужны точный заводской идентификатор и модельный год.",
+      "retry": true
+    },
+    {
+      "variantId": "a9dd2abc6dadf9d7b315441e",
+      "year": 2016,
+      "trim": "S V12 8AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "f9eb23de17c46750f998978e",
+      "year": 2017,
+      "trim": "S V12 8AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "9618504b29e790525e7bdf4f",
+      "year": 2017,
+      "trim": "S V12 8AT Performance Pack",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "83100fa3f924b69a2426c96d",
+      "year": 2018,
+      "trim": "S V12 8AT",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "48c2cea44c4dde73fa2ddf67",
+      "year": 2018,
+      "trim": "S V12 8AT Performance Pack",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "6234d37c6d64518ee2f77896",
+      "year": 2019,
+      "trim": "AMR V12 8AT, стандартные катализаторы",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "6a74a2b162a118cad197f744",
+      "year": 2019,
+      "trim": "AMR V12 8AT, спортивные катализаторы",
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "powerHp",
+        "drive"
+      ],
+      "reason": "Только явно документированные поля переведены в заводские факты. PS не выведены из bhp/кВт; привод и коды требуют отдельной точной таблицы.",
+      "retry": true
+    },
+    {
+      "variantId": "5c55611e6a1d0fc792ffa231",
+      "year": 2020,
+      "trim": null,
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "2020/2021 — регистрационные наблюдения, не подтверждённый модельный год. Не переносить AMR19MY по мощности/объёму; наблюдение2935см³ не исправлять догадкой.",
+      "retry": true
+    },
+    {
+      "variantId": "f852f5d8744986a089312ccf",
+      "year": 2020,
+      "trim": null,
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "2020/2021 — регистрационные наблюдения, не подтверждённый модельный год. Не переносить AMR19MY по мощности/объёму; наблюдение2935см³ не исправлять догадкой.",
+      "retry": true
+    },
+    {
+      "variantId": "a792939c0ec8d4d778060915",
+      "year": 2020,
+      "trim": null,
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "2020/2021 — регистрационные наблюдения, не подтверждённый модельный год. Не переносить AMR19MY по мощности/объёму; наблюдение2935см³ не исправлять догадкой.",
+      "retry": true
+    },
+    {
+      "variantId": "adb231fea702a899080be78f",
+      "year": 2021,
+      "trim": null,
+      "unconfirmedFields": [
+        "chassisCode",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive",
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "2020/2021 — регистрационные наблюдения, не подтверждённый модельный год. Не переносить AMR19MY по мощности/объёму; наблюдение2935см³ не исправлять догадкой.",
+      "retry": true
+    }
+  ],
+  "yearCoverageRetries": [
+    {
+      "years": [
+        2008,
+        2009
+      ],
+      "scope": "Начало серийного выпуска Rapide",
+      "reason": "Найден заводской10MY; более ранние концепт/премьера не доказывают серийное годовое исполнение. Не создавать2008/2009 только из границы охвата."
+    },
+    {
+      "years": [
+        2013
+      ],
+      "scope": "Ранний Rapide и календарный Rapide S",
+      "reason": "Сайт производителя указывает начало семейства S в2013, но14MY не переносится автоматически в календарный2013. Нужна точная годовая спецификация."
+    },
+    {
+      "years": [
+        2014,
+        2015
+      ],
+      "scope": "Точные PS/кВт и календарное переключение6AT/8AT",
+      "reason": "Руководства14MY/15MY подтверждают отдельные коробки; даты регистрации не заменяют MY. 550/552bhp не записаны как PS."
+    },
+    {
+      "years": [
+        2016,
+        2017,
+        2018
+      ],
+      "scope": "Региональные версии, PerformancePack и специальные серии",
+      "reason": "Подтверждённый пакет2017/2018 не распространён на другие годы. 421.3кВт17MY и421кВт18MY сохранены как разные документированные годовые значения."
+    },
+    {
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "scope": "AMR, поздние регистрации и Rapide E",
+      "reason": "19MY различает433/444кВт по катализаторам; спортивные — UK/Europe. Пресс-релиз2018 обещает поставки, не доказывает завершённый календарный выпуск2018. Rapide E требует проверки реального выпуска/модельной идентичности и сертифицированной30-минутной мощности; пиковую не подставлять."
+    }
+  ],
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-aston.json"
+  ],
+  "sourceAccessRetries": [
+    {
+      "url": "https://avtocena.com/api/catalog/search?market=uae&make=Aston%20Martin&model=Rapide&pageSize=64",
+      "firstResult": "read timeout35s",
+      "boundedRetryResult": "HTTP200,2 предложения;22 сравнения карточка/выдача PASS"
+    }
+  ],
+  "calculationIdentityBlockers": {
+    "offerIds": [
+      "f64e069711e5478e80201818",
+      "3a5ac6b8ca27e25b72b43172"
+    ],
+    "reason": "STANDARD2014/2016 без engineCode/chassisCode остаются needs_data; новые V12/S V12 нельзя назначить по одной модели или внешности.",
+    "guardsChanged": false
+  },
+  "nextAction": "Продолжить с V12 Vantage, затем возвращаться к точным пробелам Rapide из этой очереди. 12 успешных операций не повторять."
+}

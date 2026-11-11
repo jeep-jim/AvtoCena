@@ -1,0 +1,81 @@
+name: Retire unused Yandex web container 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/yandex-web-retire-20261107.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: owner-yandex-web-retirement
+  cancel-in-progress: false
+jobs:
+  retire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: 24.22.1}
+      - name: Verify current REG runtime does not depend on a Yandex service endpoint
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p yandex-web-retirement
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY' | tee yandex-web-retirement/reg-runtime.json
+          import subprocess,json,urllib.parse
+          raw=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
+          env=dict(v.split('=',1) for v in raw['Config']['Env'] if '=' in v)
+          assert raw['State']['Running']
+          assert urllib.parse.urlparse(env.get('YC_OBJECT_STORAGE_ENDPOINT','')).hostname=='s3.regru.cloud'
+          dependencies=[k for k,v in env.items() if any(h in v.lower() for h in ['yandexcloud.net','api.cloud.yandex.net','cr.yandex','bbaohms2ccpm3vb4e73t'])]
+          assert not dependencies,'unresolved_runtime_cloud_dependency'
+          print(json.dumps({'running':True,'storageIsREG':True,'yandexServiceDependencies':dependencies,'releaseSha':env.get('AVTOCENA_RELEASE_SHA')}))
+          PY
+      - name: Delete only the identified unused web container; preserve all data stores
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';import dns from 'node:dns/promises';
+          const report={at:new Date().toISOString(),authorization:'Owner 07.11.2026: remove unused Yandex Cloud',containerId:'bbaohms2ccpm3vb4e73t',deleted:false,dataStoresTouched:false};
+          const save=()=>fs.writeFileSync('yandex-web-retirement/report.json',JSON.stringify(report,null,2));
+          const health=async()=>{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)}),h=await r.json();assert.equal(r.status,200);assert.equal(h.ok,true);return {releaseSha:h.releaseSha,calculationVersion:h.calculationVersion};};
+          try{
+            report.before=await health();const runtime=JSON.parse(fs.readFileSync('yandex-web-retirement/reg-runtime.json'));assert.equal(runtime.releaseSha,report.before.releaseSha);
+            const addresses=await dns.resolve4('avtocena.com');assert.ok(addresses.includes('151.248.113.177'),'public_dns_not_REG');report.publicDNSisREG=true;
+            const deploy=await fetch('https://api.github.com/repos/jeep-jim/AvtoCena/actions/workflows/309867776',{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN},signal:AbortSignal.timeout(15000)});assert.equal(deploy.ok,true);assert.equal((await deploy.json()).state,'disabled_manually');
+            const key=JSON.parse(process.env.YC_SA_JSON_CREDENTIALS||'{}'),iam='https://iam.api.cloud.yandex.net/iam/v1/tokens',now=Math.floor(Date.now()/1000),enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');assert.ok(key.id&&key.service_account_id&&key.private_key);
+            const body=enc({alg:'PS256',typ:'JWT',kid:key.id})+'.'+enc({iss:key.service_account_id,aud:iam,iat:now,exp:now+600});
+            const signature=crypto.sign('sha256',Buffer.from(body),{key:key.private_key.slice(key.private_key.indexOf('-----BEGIN')),padding:crypto.constants.RSA_PKCS1_PSS_PADDING,saltLength:32}).toString('base64url');
+            const ir=await fetch(iam,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jwt:body+'.'+signature}),signal:AbortSignal.timeout(15000)});assert.equal(ir.ok,true);const {iamToken}=await ir.json();
+            const headers={Authorization:'Bearer '+iamToken},url='https://serverless-containers.api.cloud.yandex.net/containers/v1/containers/'+report.containerId;
+            const existing=await fetch(url,{headers,signal:AbortSignal.timeout(15000)});
+            if(existing.status===404){report.alreadyAbsent=true;}else{
+              assert.equal(existing.ok,true,'container_inspection_failed');const current=await existing.json();assert.equal(current.id,report.containerId);assert.equal(current.folderId,'b1g9vq73onqb7dp5hgqg');assert.equal(current.name,'avtocena-web');
+              report.identity={id:current.id,folderId:current.folderId,name:current.name,createdAt:current.createdAt};save();
+              const response=await fetch(url,{method:'DELETE',headers,signal:AbortSignal.timeout(30000)});assert.equal(response.ok,true,'container_delete_http_'+response.status);let operation=await response.json();report.operationId=operation.id;save();
+              for(let i=0;!operation.done&&i<90;i++){assert.ok(operation.id);await new Promise(r=>setTimeout(r,2000));const r=await fetch('https://operation.api.cloud.yandex.net/operations/'+encodeURIComponent(operation.id),{headers,signal:AbortSignal.timeout(15000)});assert.equal(r.ok,true);operation=await r.json();}
+              assert.equal(operation.done,true,'operation_pending');assert.ok(!operation.error,'operation_failed');
+              const absent=await fetch(url,{headers,signal:AbortSignal.timeout(15000)});assert.equal(absent.status,404,'container_not_confirmed_absent');report.deleted=true;
+            }
+            report.after=await health();assert.deepEqual(report.after,report.before,'REG_runtime_changed');report.accepted=true;
+          }catch(e){report.error=String(e.message).slice(0,250);report.accepted=false;process.exitCode=1;}
+          finally{save();console.log(JSON.stringify(report));}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yandex-web-retirement
+          path: yandex-web-retirement
+          retention-days: 14

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T02:22:01.823367+07:00",
+  "reviewedModels": 4,
+  "inspectedVariants": 34,
+  "savedVariants": 5,
+  "confirmedFieldAssertions": 36,
+  "untouchedVariants": 29,
+  "batch": "research-2026-10-22-alpina-alpine",
+  "commit": "ace88ecea049800c4a7d76e9357c2c51f768283a",
+  "workflowRun": 39659485947,
+  "job": 119428445511,
+  "status": "success",
+  "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-alpine-readback.json",
+  "applyReport": "docs/encyclopedia/reports/2026-10-22-alpina-alpine-apply.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
+  "integration": {
+    "status": "not_implemented",
+    "visitorRequestSearchOrSyncAdded": false
+  },
+  "notes": [
+    "Counts include confirmations of observed values; not all are newly filled blanks.",
+    "All modified variants remain review."
+  ]
+}

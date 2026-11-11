@@ -1,0 +1,8158 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 29,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "mercedesbenz:300td",
+      "make": "Mercedes-Benz",
+      "model": "300 TD",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:300tdt",
+      "make": "Mercedes-Benz",
+      "model": "300 TDT",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:300te",
+      "make": "Mercedes-Benz",
+      "model": "300 TE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:300te24",
+      "make": "Mercedes-Benz",
+      "model": "300 TE-24",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:3000",
+      "make": "Mercedes-Benz",
+      "model": "3000",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:307d",
+      "make": "Mercedes-Benz",
+      "model": "307 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:308",
+      "make": "Mercedes-Benz",
+      "model": "308",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:308d",
+      "make": "Mercedes-Benz",
+      "model": "308 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:309",
+      "make": "Mercedes-Benz",
+      "model": "309",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:309d",
+      "make": "Mercedes-Benz",
+      "model": "309 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:310",
+      "make": "Mercedes-Benz",
+      "model": "310",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:310d",
+      "make": "Mercedes-Benz",
+      "model": "310 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:310dka",
+      "make": "Mercedes-Benz",
+      "model": "310 D-Ka",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:311",
+      "make": "Mercedes-Benz",
+      "model": "311",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:312",
+      "make": "Mercedes-Benz",
+      "model": "312",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:312d",
+      "make": "Mercedes-Benz",
+      "model": "312 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:313",
+      "make": "Mercedes-Benz",
+      "model": "313",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:315",
+      "make": "Mercedes-Benz",
+      "model": "315",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:316",
+      "make": "Mercedes-Benz",
+      "model": "316",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:316ngt",
+      "make": "Mercedes-Benz",
+      "model": "316 NGT",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:318",
+      "make": "Mercedes-Benz",
+      "model": "318",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:319",
+      "make": "Mercedes-Benz",
+      "model": "319",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:320",
+      "make": "Mercedes-Benz",
+      "model": "320",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:320ce",
+      "make": "Mercedes-Benz",
+      "model": "320 CE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:320e",
+      "make": "Mercedes-Benz",
+      "model": "320 E",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350",
+      "make": "Mercedes-Benz",
+      "model": "350",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/350",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "350"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350gd",
+      "make": "Mercedes-Benz",
+      "model": "350 GD",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350s",
+      "make": "Mercedes-Benz",
+      "model": "350 S",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350sdl",
+      "make": "Mercedes-Benz",
+      "model": "350 SDL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350se",
+      "make": "Mercedes-Benz",
+      "model": "350 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350sl",
+      "make": "Mercedes-Benz",
+      "model": "350 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:350slc",
+      "make": "Mercedes-Benz",
+      "model": "350 SLC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:380",
+      "make": "Mercedes-Benz",
+      "model": "380",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:380se",
+      "make": "Mercedes-Benz",
+      "model": "380 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:380sec",
+      "make": "Mercedes-Benz",
+      "model": "380 SEC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:380sel",
+      "make": "Mercedes-Benz",
+      "model": "380 SEL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:380sl",
+      "make": "Mercedes-Benz",
+      "model": "380 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:380slc",
+      "make": "Mercedes-Benz",
+      "model": "380 SLC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:400",
+      "make": "Mercedes-Benz",
+      "model": "400",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:400e",
+      "make": "Mercedes-Benz",
+      "model": "400 E",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:400se",
+      "make": "Mercedes-Benz",
+      "model": "400 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:408d",
+      "make": "Mercedes-Benz",
+      "model": "408 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:410",
+      "make": "Mercedes-Benz",
+      "model": "410",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:410d",
+      "make": "Mercedes-Benz",
+      "model": "410 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:410ka",
+      "make": "Mercedes-Benz",
+      "model": "410 KA",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:412d",
+      "make": "Mercedes-Benz",
+      "model": "412 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:413",
+      "make": "Mercedes-Benz",
+      "model": "413",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:416",
+      "make": "Mercedes-Benz",
+      "model": "416",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:420",
+      "make": "Mercedes-Benz",
+      "model": "420",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:420se",
+      "make": "Mercedes-Benz",
+      "model": "420 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:420sec",
+      "make": "Mercedes-Benz",
+      "model": "420 SEC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:420sel",
+      "make": "Mercedes-Benz",
+      "model": "420 SEL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:420sl",
+      "make": "Mercedes-Benz",
+      "model": "420 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:450",
+      "make": "Mercedes-Benz",
+      "model": "450",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/450",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "450"
+      },
+      "aliases": [
+        "450 4MATIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:450se",
+      "make": "Mercedes-Benz",
+      "model": "450 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:450sel",
+      "make": "Mercedes-Benz",
+      "model": "450 SEL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:450sl",
+      "make": "Mercedes-Benz",
+      "model": "450 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:450slc",
+      "make": "Mercedes-Benz",
+      "model": "450 SLC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:450sel69",
+      "make": "Mercedes-Benz",
+      "model": "450SEL6.9",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500",
+      "make": "Mercedes-Benz",
+      "model": "500",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500e",
+      "make": "Mercedes-Benz",
+      "model": "500 E",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500s",
+      "make": "Mercedes-Benz",
+      "model": "500 S",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500se",
+      "make": "Mercedes-Benz",
+      "model": "500 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500sec",
+      "make": "Mercedes-Benz",
+      "model": "500 SEC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "my",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500sel",
+      "make": "Mercedes-Benz",
+      "model": "500 SEL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:500sl",
+      "make": "Mercedes-Benz",
+      "model": "500 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:518",
+      "make": "Mercedes-Benz",
+      "model": "518",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:560",
+      "make": "Mercedes-Benz",
+      "model": "560",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:560sec",
+      "make": "Mercedes-Benz",
+      "model": "560 SEC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:560sel",
+      "make": "Mercedes-Benz",
+      "model": "560 SEL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:560sl",
+      "make": "Mercedes-Benz",
+      "model": "560 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:600",
+      "make": "Mercedes-Benz",
+      "model": "600",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:600se",
+      "make": "Mercedes-Benz",
+      "model": "600 SE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:600sec",
+      "make": "Mercedes-Benz",
+      "model": "600 SEC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:600sel",
+      "make": "Mercedes-Benz",
+      "model": "600 SEL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:600sl",
+      "make": "Mercedes-Benz",
+      "model": "600 SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:609d",
+      "make": "Mercedes-Benz",
+      "model": "609 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:63amg",
+      "make": "Mercedes-Benz",
+      "model": "63 AMG",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:814d",
+      "make": "Mercedes-Benz",
+      "model": "814 D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:a2204matic",
+      "make": "Mercedes-Benz",
+      "model": "A 220 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:a2204maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "A 220 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:a2504matichatch",
+      "make": "Mercedes-Benz",
+      "model": "A 250 4MATIC Hatch",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:aclass",
+      "make": "Mercedes-Benz",
+      "model": "A-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/a-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "A-Class"
+      },
+      "aliases": [
+        "A / 250 / 4-MATIC AUT. HYBRID",
+        "A 150",
+        "A 160",
+        "A 170",
+        "A 180",
+        "A 180 D",
+        "A 200",
+        "A 200 D",
+        "A 220",
+        "A 220 4-MATIC AUT",
+        "A 220 4-MATIC AUT. HYBRID",
+        "A 220 4MATIC",
+        "A 220 AMG LINE 4MATIC AUTO",
+        "A 220 AMG LINE AUTO",
+        "A 220 AMG LINE EXECUTIVE AUTO",
+        "A 220 AMG LINE PREM + 4MATIC A",
+        "A 220 AMG LINE PREMIUM + AUTO",
+        "A 220 AMG LINE PREMIUM AUTO",
+        "A 220 AMG LINE PREMIUM D 4M A",
+        "A 220 AMG LINE PREMIUM+ D 4M A",
+        "A 220 D",
+        "A 220 D AMG LINE AUTO",
+        "A 220 D AMG LINE EXECUTIVE A",
+        "A 220 D AMG LINE PREMIUM + A",
+        "A 220 D AMG LINE PREMIUM AUTO",
+        "A 220 D AUT",
+        "A 250",
+        "A 250 4-MATIC AUT",
+        "A 250 AMG LINE AUTO",
+        "A 250 AMG LINE E AUTO",
+        "A 250 AMG LINE EXECUTIVE AUTO",
+        "A 250 AMG LINE EXECUTIVE E A",
+        "A 250 AMG LINE PREMIUM + A",
+        "A 250 AMG LINE PREMIUM + E A",
+        "A 250 AMG LINE PREMIUM AUTO",
+        "A 250 AMG LINE PREMIUM E AUTO",
+        "A 250 AUT",
+        "A 250 E",
+        "A 250 SPORT E AUTO",
+        "A 35 AMG 4MATIC",
+        "A 45 AMG 4MATIC",
+        "A-KLASSE",
+        "A180 セダン",
+        "A200 4MATIC",
+        "A200 SPECIAL EDITION A",
+        "A200d セダン",
+        "A220D 4MATIC",
+        "A22D",
+        "A250 4MATIC",
+        "A250 4MATIC セダン",
+        "A35",
+        "A45 AMG",
+        "Mercedes-AMG A35 4M",
+        "メルセデスAMG A35 4M セダン",
+        "メルセデスAMG A45 4MATIC",
+        "メルセデスAMG A45 S 4M+"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:adriatik",
+      "make": "Mercedes-Benz",
+      "model": "Adriatik",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:ambulance",
+      "make": "Mercedes-Benz",
+      "model": "Ambulance",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amg",
+      "make": "Mercedes-Benz",
+      "model": "AMG",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/amg",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "AMG"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amga354matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG A 35 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amga354matichatch",
+      "make": "Mercedes-Benz",
+      "model": "AMG A 35 4MATIC Hatch",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amga354maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG A 35 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc434matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc434maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc434maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc434maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc434maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63s",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63scabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63scoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63seperformance",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S E Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63ssedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgc63sedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcla354matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 35 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcla354maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 35 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcla454matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 45 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcla454maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 45 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcla45s4maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 45 S 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcle534maticpluscabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLE 53 4MATIC+ Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcle534maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLE 53 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcls534maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLS 53 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgcls534maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLS 53 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge534maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge534maticpluscabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge534maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge534maticplussedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge534maticpluswagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge53hybrid",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 Hybrid",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge53hybridsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 HYBRID Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge53hybridwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 HYBRID Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge634maticplusallterrainwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 4MATIC+ All-Terrain Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge63s4maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 S 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge63s4maticplussedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 S 4MATIC+ Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amge63s4maticpluswagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 S 4MATIC+ Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgeqe4maticplussedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG EQE 4MATIC+ Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgeqe4maticplussuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG EQE 4MATIC+ SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgeqs4maticplussedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG EQS 4MATIC+ Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgg63",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgg634x4squared",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63 4x4 Squared",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgg634x4squaredsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63 4x4 Squared SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgg63suv",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63 SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggla354maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLA 35 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggla354maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLA 35 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggla454maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLA 45 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglb354maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLB 35 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglb354maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLB 35 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglb35suv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLB 35 SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc434matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 43 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc434maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 43 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc434maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 43 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc63s4maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc63s4maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc63s4maticplussuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S 4MATIC+ SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc63seperformancecoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S E PERFORMANCE Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgglc63seperformancesuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S E PERFORMANCE SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggle534maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 53 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggle534maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 53 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggle534maticplussuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 53 4MATIC+ SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggle63s4maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 63 S 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggle63s4maticplussuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 63 S 4MATIC+ SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggls634maticplussuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLS 63 4MATIC+ SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/amg-gt",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "AMG GT"
+      },
+      "aliases": [
+        "メルセデス AMG GT",
+        "メルセデスAMG GT43 4M+",
+        "メルセデスAMG GT43 クーペ",
+        "メルセデスAMG GT53 4M+",
+        "メルセデスAMG GT63 4M+ クーペ",
+        "メルセデスAMG GT63PR 4M+ クーペ",
+        "メルセデスAMG GT63S 4M+",
+        "メルセデス AMG GT S"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt43coupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 43 Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt534maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 53 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt534maticplus4doorcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 53 4MATIC+ 4-Door Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt534maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 53 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt554maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 55 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt634maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt634maticplus4doorcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 4MATIC+ 4-Door Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt634maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt63pro4maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 PRO 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt63s4maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt63s4maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt63seperformance",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S E Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggt63seperformance4doorcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S E PERFORMANCE 4-Door Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggtblackseriescoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT Black Series Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggtccoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT C Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggtcroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT C Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggtrcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT R Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amggtrroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT R Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgs634maticplus",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 4MATIC+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgs634maticpluscabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 4MATIC+ Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgs634maticpluscoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 4MATIC+ Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgs63eperformance",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 E Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgs63eperformancesedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 E PERFORMANCE Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgs65",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 65",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgsl434maticroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG SL 43 4MATIC Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgsl554maticplusroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG SL 55 4MATIC+ Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgsl634maticplusroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG SL 63 4MATIC+ Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:amgslc43",
+      "make": "Mercedes-Benz",
+      "model": "AMG SLC 43",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:atego",
+      "make": "Mercedes-Benz",
+      "model": "Atego",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:bclass",
+      "make": "Mercedes-Benz",
+      "model": "B-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/b-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "B-Class"
+      },
+      "aliases": [
+        "B / 220 D / AUT.",
+        "B / 250 / 4-MATIC AUT. HYBRID",
+        "B / 250 / AUT.",
+        "B / 250 E / AUT. HYBRID",
+        "B 160 D",
+        "B 18 D",
+        "B 180",
+        "B 180 D",
+        "B 200",
+        "B 200 D",
+        "B 220",
+        "B 220 4-MATIC AUT",
+        "B 220 4MATIC",
+        "B 220 AMG LINE D AUTO",
+        "B 220 AMG LINE EXECUTIVE 4M A",
+        "B 220 AMG LINE EXECUTIVE D A",
+        "B 220 AMG LINE PREMIUM + D A",
+        "B 220 AMG LINE PREMIUM 4M A",
+        "B 220 AMG LINE PREMIUM D AUTO",
+        "B 220 CDI 4MATIC",
+        "B 220 D",
+        "B 220 D 4MATIC",
+        "B 250",
+        "B 250 4-MATIC AUT",
+        "B 250 AMG LINE EXECUTIVE AUTO",
+        "B 250 AMG LINE EXECUTIVE E A",
+        "B 250 AMG LINE PREMIUM + AUTO",
+        "B 250 AMG LINE PREMIUM AUTO",
+        "B 250 AMG LINE PREMIUM E AUTO",
+        "B 250 AMG LINE PREMIUM+ E AUTO",
+        "B 250E",
+        "B-KLASSE",
+        "B160",
+        "B250 4MATIC",
+        "B690 MC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:benz",
+      "make": "Mercedes-Benz",
+      "model": "Benz",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/benz",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Benz"
+      },
+      "aliases": [
+        "BENZ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:binz",
+      "make": "Mercedes-Benz",
+      "model": "Binz",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:bm",
+      "make": "Mercedes-Benz",
+      "model": "Bm",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:brabus",
+      "make": "Mercedes-Benz",
+      "model": "Brabus",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:bravia",
+      "make": "Mercedes-Benz",
+      "model": "Bravia",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/bravia",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Bravia"
+      },
+      "aliases": [
+        "BRAVIA SWAN 699"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:burstner",
+      "make": "Mercedes-Benz",
+      "model": "Burstner",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:c3004matic",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:c3004maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:c3004maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:c3004maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:c3004maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:c300sedan",
+      "make": "Mercedes-Benz",
+      "model": "C 300 Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cclass",
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/c-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "C-Class"
+      },
+      "aliases": [
+        "C / 220 T / D 4-MATIC AUT. HYBRID",
+        "C / 220 T / D 4-MATIC AUT. HYBRID ALL-TERRAIN",
+        "C / 220 T / D AUT. HYBRID",
+        "C / 300 / 4-MATIC AUT. HYBRID",
+        "C / 300 / AUT.",
+        "C / 300 T / E AUT. HYBRID",
+        "C 160",
+        "C 160 AUT",
+        "C 180",
+        "C 180D",
+        "C 200",
+        "C 200 D",
+        "C 220",
+        "C 220 AMG LINE D 4MATIC AUTO",
+        "C 220 AMG LINE D AUTO",
+        "C 220 AMG LINE ED PREM + D A",
+        "C 220 AMG LINE ED PREM D A",
+        "C 220 AMG LINE EDITION D 4M A",
+        "C 220 AMG LINE EDITION D AUTO",
+        "C 220 AMG LINE PREMIUM + D A",
+        "C 220 AMG LINE PREMIUM D 4M A",
+        "C 220 AMG LINE PREMIUM D AUTO",
+        "C 220 AMG LINE PREMIUM+ D 4M A",
+        "C 220 AMG LNE ED PREM + D 4M A",
+        "C 220 AMG LNE NGT ED PRM + D A",
+        "C 220 BLUETEC",
+        "C 220 CDI",
+        "C 220 D",
+        "C 220 D 4MATIC",
+        "C 220 d ステーションワゴン",
+        "C 220 SE D AUTO",
+        "C 220 SPORT D AUTO",
+        "C 220 SPORT EDITION PREM + D A",
+        "C 220 SPORT EDITION PREM D A",
+        "C 220 SPORT PREMIUM + D AUTO",
+        "C 220 T D 4-MATIC AUT",
+        "C 220 T D AUT",
+        "C 220D 4MATIC ALL-TERRAI",
+        "C 220D 4MATIC ALL-TERRAIN",
+        "C 230",
+        "C 250 CDI",
+        "C 250 WITH EQ TECHNOLOGY",
+        "C 260 L",
+        "C 300",
+        "C 300 4MATIC",
+        "C 300 4MATIC WITH EQ T.",
+        "C 300 AMG LINE AUTO",
+        "C 300 AMG LINE D AUTO",
+        "C 300 AMG LINE E 4MATIC AUTO",
+        "C 300 AMG LINE ED PREM + A",
+        "C 300 AMG LINE ED PREM + D A",
+        "C 300 AMG LINE ED PREM + DE A",
+        "C 300 AMG LINE ED PREM + E A",
+        "C 300 AMG LINE ED PREM D A",
+        "C 300 AMG LINE ED PREM MHEV A",
+        "C 300 AMG LINE ED PREMIUM DE A",
+        "C 300 AMG LINE ED PREMIUM E A",
+        "C 300 AMG LINE EDITION AUTO",
+        "C 300 AMG LINE EDITION D 4M A",
+        "C 300 AMG LINE EDITION D AUTO",
+        "C 300 AMG LINE EDITION DE AUTO",
+        "C 300 AMG LINE EDITION E AUTO",
+        "C 300 AMG LINE EDITION PREM A",
+        "C 300 AMG LINE EXEC MHEV 4M A",
+        "C 300 AMG LINE NGT ED PREM + A",
+        "C 300 AMG LINE NIGHT ED PREM A",
+        "C 300 AMG LINE PREM MHEV 4M A",
+        "C 300 AMG LINE PREMIUM + AUTO",
+        "C 300 AMG LINE PREMIUM + D A",
+        "C 300 AMG LINE PREMIUM AUTO",
+        "C 300 AMG LINE PREMIUM D 4M A",
+        "C 300 AMG LINE PREMIUM D AUTO",
+        "C 300 AMG LINE PREMIUM E 4M A",
+        "C 300 AMG LINE PREMIUM+ D 4M A",
+        "C 300 AMG LN NGHT ED MHEV 4M A",
+        "C 300 AMG LN NGT ED PRM + DE A",
+        "C 300 AMG LN NGT ED PRM D 4M A",
+        "C 300 AMG LN NGT ED PRM+D 4M A",
+        "C 300 AMG LNE NGT ED PRM + D A",
+        "C 300 D",
+        "C 300 DE",
+        "C 300 E",
+        "C 300 H",
+        "C 300 SPORT ED PREMIUM + DE A",
+        "C 300 SPORT ED PREMIUM DE AUTO",
+        "C 300 SPORT EDITION DE AUTO",
+        "C 300 SPORT EDITION E AUTO",
+        "C 300 SPORT EDITION PREM + A",
+        "C 300 SPORT EDITION PREM E A",
+        "C 300 SPORT MHEV 4MATIC AUTO",
+        "C 300 SPORT PREMIUM AUTO",
+        "C 300 T 4-MATIC AUT. HYBRID",
+        "C 300 T DE AUT HYBRID",
+        "C 300 WITH EQ TECHNOLOGY",
+        "C 300D 4MATIC",
+        "C 320",
+        "C 350 CDI",
+        "C 350 E",
+        "C 400 4MATIC",
+        "C 400 4MATIC WITH EQ T.",
+        "C 400 E 4MATIC",
+        "C 43 AMG",
+        "C 43 AMG 4M",
+        "C 43 AMG 4M KOMBI",
+        "C 63 AMG S",
+        "C 63 AMG S E PERFORMANCE",
+        "C 63 E S 4MATIC",
+        "C 63 E S AMG",
+        "C 63E AMG",
+        "C-KLASSE",
+        "C180 カブリオレ",
+        "C180 クーペ",
+        "C180 ステーションワゴン",
+        "C200 4MATIC",
+        "C200 4MATIC SW",
+        "C200 4MATIC ステーションワゴン",
+        "C200 AMG LN NGT ED PREM MHEV A",
+        "C200 AMG LN NGT ED PRM+ MHEV A",
+        "C200 ステーションワゴン",
+        "C200CGI",
+        "C200CGI ステーションワゴン",
+        "C220d 4MATIC AT",
+        "C220d 4MATIC SW",
+        "C230 ESPRIT KOMP AUTO",
+        "C250",
+        "C250 ステーションワゴン",
+        "C250CGI",
+        "C250CGI クーペ",
+        "C250CGI ステーションワゴン",
+        "C300 AMG LN NGT ED PRM+ MHEV A",
+        "C300 DE 4MATIC",
+        "C300 E 4MATIC",
+        "C300 カブリオレ",
+        "C300 クーペ",
+        "C350",
+        "C350 ステーションワゴン",
+        "C450 AMG 4MATIC",
+        "C450 AMG 4MATIC ステーションワゴン",
+        "C63",
+        "C63 ステーションワゴン",
+        "C63S",
+        "C63S ステーションワゴン",
+        "メルセデス AMG C43 4M SW",
+        "メルセデス AMG C43 4M カブリオレ",
+        "メルセデス AMG C43 4M クーペ",
+        "メルセデス AMG C43 4M ステーションワゴン",
+        "メルセデス AMG C43 4MATIC",
+        "メルセデス AMG C63 クーペ",
+        "メルセデス AMG C63S カブリオレ",
+        "メルセデス AMG C63S クーペ",
+        "メルセデスAMG C63",
+        "メルセデスAMG C63 SW",
+        "メルセデスAMG C63S",
+        "メルセデスAMG C63S SW"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cabriolet",
+      "make": "Mercedes-Benz",
+      "model": "Cabriolet",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:carthago",
+      "make": "Mercedes-Benz",
+      "model": "Carthago",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:citan",
+      "make": "Mercedes-Benz",
+      "model": "Citan",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/citan",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Citan"
+      },
+      "aliases": [
+        "CITAN",
+        "E CITAN TOURER",
+        "ECITAN",
+        "ECITAN TOURER/EQT",
+        "ECITAN TOURIER"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cl",
+      "make": "Mercedes-Benz",
+      "model": "Cl",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cl",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Cl"
+      },
+      "aliases": [
+        "CL 500 550",
+        "CL63",
+        "CL65"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cla",
+      "make": "Mercedes-Benz",
+      "model": "CLA",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cla",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "CLA"
+      },
+      "aliases": [
+        "CLA 180 シューティングブレーク",
+        "CLA 250 4MATIC シューティングブレーク",
+        "CLA 250 シューティングブレーク",
+        "CLA180",
+        "CLA180 SB",
+        "CLA200d",
+        "CLA200d SB",
+        "CLA220 4MATIC",
+        "CLA220 4MATIC SB",
+        "CLA220D",
+        "CLA250",
+        "CLA250 4M SB",
+        "CLA250 4MATIC",
+        "CLA250E",
+        "CLA45 AMG",
+        "CLA45 AMG 4MATIC シューティングブレーク",
+        "メルセデス AMG CLA45 4M",
+        "メルセデスAMG CLA35 4M",
+        "メルセデスAMG CLA35 4M SB",
+        "メルセデスAMG CLA45 S 4M+",
+        "メルセデスAMG CLA45 S 4M+ SB"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cla2504matic",
+      "make": "Mercedes-Benz",
+      "model": "CLA 250 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cla2504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLA 250 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cla250coupe",
+      "make": "Mercedes-Benz",
+      "model": "CLA 250 Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cla3504maticwitheqtechnology",
+      "make": "Mercedes-Benz",
+      "model": "CLA 350 4MATIC with EQ Technology",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:claclass",
+      "make": "Mercedes-Benz",
+      "model": "CLA-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:clase",
+      "make": "Mercedes-Benz",
+      "model": "Clase",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/clase",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Clase"
+      },
+      "aliases": [
+        "CLASE A",
+        "CLASE B",
+        "CLASE C",
+        "CLASE GLB",
+        "CLASE T",
+        "CLASE V"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:classe",
+      "make": "Mercedes-Benz",
+      "model": "Classe",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/classe",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Classe"
+      },
+      "aliases": [
+        "CLASSE A",
+        "CLASSE B",
+        "CLASSE C",
+        "CLASSE CLA",
+        "CLASSE CLE",
+        "CLASSE CLS",
+        "CLASSE E",
+        "CLASSE EQA",
+        "CLASSE EQB",
+        "CLASSE EQC",
+        "CLASSE EQE",
+        "CLASSE EQS",
+        "CLASSE EQV",
+        "CLASSE G",
+        "CLASSE GLA",
+        "CLASSE GLB",
+        "CLASSE GLC",
+        "CLASSE GLE",
+        "CLASSE GLS",
+        "CLASSE S",
+        "CLASSE SL",
+        "CLASSE SLC",
+        "CLASSE T",
+        "CLASSE V",
+        "Classe V 220d",
+        "Classe V 250d",
+        "Classe V 300d"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:clc",
+      "make": "Mercedes-Benz",
+      "model": "Clc",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cle",
+      "make": "Mercedes-Benz",
+      "model": "CLE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cle",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "CLE"
+      },
+      "aliases": [
+        "CLE200",
+        "CLE200 クーペ",
+        "CLE200カブリオレ",
+        "CLE220D",
+        "メルセデスAMG CLE53 4M+ C",
+        "メルセデスAMG CLE53 4M+ CA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cle3004maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "CLE 300 4MATIC Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cle3004maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLE 300 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cle4504maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "CLE 450 4MATIC Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cle4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLE 450 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cleclass",
+      "make": "Mercedes-Benz",
+      "model": "CLE-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:clk",
+      "make": "Mercedes-Benz",
+      "model": "CLK",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cls",
+      "make": "Mercedes-Benz",
+      "model": "CLS",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cls",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "CLS"
+      },
+      "aliases": [
+        "CLS 220 d",
+        "CLS 220 d シューティングブレーク",
+        "CLS400",
+        "CLS400 シューティングブレーク",
+        "CLS450 4MATIC",
+        "CLS550",
+        "CLS550 4MATIC",
+        "CLS63 S",
+        "CLS63S 4MATIC",
+        "CLS63S 4MATIC SB",
+        "メルセデスAMG CLS53 4M+"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cls4504matic",
+      "make": "Mercedes-Benz",
+      "model": "CLS 450 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:cls4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLS 450 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:clsclass",
+      "make": "Mercedes-Benz",
+      "model": "CLS-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:coupe",
+      "make": "Mercedes-Benz",
+      "model": "Coupe",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:d",
+      "make": "Mercedes-Benz",
+      "model": "D",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:daimler",
+      "make": "Mercedes-Benz",
+      "model": "Daimler",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:daimlerchrysler",
+      "make": "Mercedes-Benz",
+      "model": "Daimlerchrysler",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:diesel",
+      "make": "Mercedes-Benz",
+      "model": "Diesel",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e3504matic",
+      "make": "Mercedes-Benz",
+      "model": "E 350 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e3504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "E 350 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e4504matic",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e4504maticallterrainwagon",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC All-Terrain Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e4504maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e4504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:e4504maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Wagon",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eclass",
+      "make": "Mercedes-Benz",
+      "model": "E-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/e-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "E-Class"
+      },
+      "aliases": [
+        "E / 220 T / D 4 MATIC AUT. HYBRID",
+        "E / 300 / AUT. HYBRID",
+        "E / 300 E / 4-MATIC AUT. HYBRID",
+        "E / 300 E / AUT. HYBRID",
+        "E / 300 T DE 4-MATIC AUT. HYBRID",
+        "E / 400 E / 4-MATIC AUT. HYBRID",
+        "E / 400 T / D 4 MATIC AUT. ALL TERAIN",
+        "E / 450 / 4-MATIC AUT. HYBRID",
+        "E / 450 D / 4-MATIC AUT. HYBRID",
+        "E 180",
+        "E 200",
+        "E 200 D",
+        "E 22 D 4MATIC ALLTERRAIN",
+        "E 220",
+        "E 220 4MATIC",
+        "E 220 AMG LINE D 4MATIC AUTO",
+        "E 220 AMG LINE ED PREM + D A",
+        "E 220 AMG LINE ED PREM D A",
+        "E 220 AMG LINE EDITION D AUTO",
+        "E 220 AMG LN NGT ED PRM D 4M A",
+        "E 220 AMG LN NGT ED PRM+D 4M A",
+        "E 220 AMG LNE NGT ED PRM + D A",
+        "E 220 AMG LNE NIGHT ED PRM D A",
+        "E 220 BlueTEC",
+        "E 220 BlueTEC ステーションワゴン",
+        "E 220 CDI",
+        "E 220 D",
+        "E 220 D 4MATIC",
+        "E 220 SPORT D AUTO",
+        "E 220 T D 4 MATIC AUT",
+        "E 220 T D 4 MATIC AUT ALL TERAIN",
+        "E 220 T D AUT",
+        "E 250 CDI",
+        "E 250 CDI 4MATIC",
+        "E 260",
+        "E 260 4MATIC",
+        "E 260 L",
+        "E 300 AMG LINE AUTO",
+        "E 300 AMG LINE D AUTO",
+        "E 300 AMG LINE DE AUTO",
+        "E 300 AMG LINE E AUTO",
+        "E 300 AMG LINE ED PREMIUM D A",
+        "E 300 AMG LINE EDITION D AUTO",
+        "E 300 AMG LINE EDITION DE AUTO",
+        "E 300 AMG LINE EDITION E AUTO",
+        "E 300 AMG LINE NGT ED PREM + A",
+        "E 300 AMG LINE PREMIUM + AUTO",
+        "E 300 AMG LINE PREMIUM + DE A",
+        "E 300 AMG LINE PREMIUM + E A",
+        "E 300 AMG LINE PREMIUM AUTO",
+        "E 300 AMG LINE PREMIUM D AUTO",
+        "E 300 AMG LINE PREMIUM DE AUTO",
+        "E 300 AMG LINE PREMIUM E 4M A",
+        "E 300 AMG LINE PREMIUM E AUTO",
+        "E 300 AMG LINE PREMIUM+ E 4M A",
+        "E 300 AMG LN NGT ED PRM + DE A",
+        "E 300 AMG LN NIGHT ED PREM+D A",
+        "E 300 AMG LNE NGT ED PREM+ E A",
+        "E 300 BLUETEC HYBRID",
+        "E 300 D",
+        "E 300 D 4MATIC",
+        "E 300 D AMG LINE PREMIUM + A",
+        "E 300 D AUT",
+        "E 300 D E ALLTERRAIN",
+        "E 300 DE",
+        "E 300 DE 4MATIC",
+        "E 300 E 4MATIC",
+        "E 300 E L",
+        "E 300 L",
+        "E 300 SE DE AUTO",
+        "E 300 SE E AUTO",
+        "E 300 SE PREMIUM + DE AUTO",
+        "E 300 SE PREMIUM + E AUTO",
+        "E 300 SE PREMIUM DE AUTO",
+        "E 300DE 4MATIC ALLTERRAI",
+        "E 300DE 4MATIC ALLTERRAIN",
+        "E 300E",
+        "E 320",
+        "E 320CDI",
+        "E 330D 4MATIC ALLTERRAIN",
+        "E 350 4MATIC",
+        "E 350 AMG LINE AUTO",
+        "E 350 AMG LINE ED PREM + D A",
+        "E 350 AMG LINE ED PREMIUM D A",
+        "E 350 AMG LINE EDITION D AUTO",
+        "E 350 AMG LINE PREMIUM + AUTO",
+        "E 350 AMG LNE NGHT ED PREM D A",
+        "E 350 AMG LNE NGT ED PREM+ D A",
+        "E 350 BlueTEC",
+        "E 350 BlueTEC ステーションワゴン",
+        "E 350 CDI",
+        "E 350 D",
+        "E 350 E",
+        "E 350 E AMG LINE AUTO",
+        "E 350 E AMG LINE PREMIUM AUTO",
+        "E 400 ALL TERRAIN ED D 4M A",
+        "E 400 AMG LINE D 4MATIC AUTO",
+        "E 400 AMG LINE ED PRM + D 4M A",
+        "E 400 AMG LINE EDITION D 4M A",
+        "E 400 AMG LINE PREM + D 4M A",
+        "E 400 AMG LINE PREMIUM D 4M A",
+        "E 400 AMG LN NGT ED PRM D 4M A",
+        "E 400 AMG LN NGT ED PRM+D 4M A",
+        "E 400 d",
+        "E 400 D 4 MATIC",
+        "E 400 D 4-MATIC AUT",
+        "E 400 D 4MATIC ALLTERRAI",
+        "E 400 D 4MATIC ALLTERRAIN",
+        "E 400 d MATIC AllTerain",
+        "E 400 E 4MATIC",
+        "E 450",
+        "E 450 4MATIC ALLTERRAIN",
+        "E 450 4MATIC C",
+        "E 450 4MATIC STATIONWAGON",
+        "E 450 4MATIC T",
+        "E 450 AMG LINE 4MATIC AUTO",
+        "E 450 AMG LINE ED PREM + 4M A",
+        "E 450 AMG LINE EDITION 4M A",
+        "E 450 AMG LINE PREMIUM + 4M A",
+        "E 450 AMG LN NGT ED PRM + 4M A",
+        "E 450 AMG LNE NGHT ED PREM 4MA",
+        "E 450 AMG LNE NGT ED PRM+ 4M A",
+        "E 450 D 4MATIC",
+        "E 450 D 4MATIC ALLTERRAI",
+        "E 450 D 4MATIC ALLTERRAIN",
+        "E 63 AMG S-MODELL",
+        "E-CLASS",
+        "E-KLASSE",
+        "E200 4MATIC",
+        "E200 4MATIC SW",
+        "E200 4MATIC ステーションワゴン",
+        "E200 カブリオレ",
+        "E200 クーペ",
+        "E200 ステーションワゴン",
+        "E220D 4 MATIC ALLTERRAIN",
+        "E220d 4MATIC AT",
+        "E220d 4MATIC SW",
+        "E220d ステーションワゴン",
+        "E250",
+        "E250 CDI COLEMAN MILNE AUTO",
+        "E250 カブリオレ",
+        "E250 クーペ",
+        "E250 ステーションワゴン",
+        "E300",
+        "E300 4MATIC",
+        "E300 4MATIC ステーションワゴン",
+        "E300 BLUETEC",
+        "E300 E T",
+        "E300 クーペ",
+        "E300 ステーションワゴン",
+        "E300カブリオレ",
+        "E350",
+        "E350 ステーションワゴン",
+        "E400",
+        "E400 4MATIC",
+        "E400 4MATIC カブリオレ",
+        "E400 4MATIC クーペ",
+        "E400 4MATIC ステーションワゴン",
+        "E400 HYBRID",
+        "E400 カブリオレ",
+        "E400 クーペ",
+        "E400 ステーションワゴン",
+        "E450 4M AT",
+        "E450 4MATIC",
+        "E450 4MATIC SW",
+        "E450 4MATIC WITH EQ TECHN",
+        "E450 4MATIC カブリオレ",
+        "E450 4MATIC クーペ",
+        "E450 4MATIC ステーションワゴン",
+        "E53 4MATIC+ カブリオレ",
+        "E53 4MATIC+ クーペ",
+        "E550",
+        "E550 ステーションワゴン",
+        "E63",
+        "E63 4MATIC",
+        "E63 4MATIC ステーションワゴン",
+        "E63S",
+        "E63S 4MATIC",
+        "E63S 4MATIC ステーションワゴン",
+        "メルセデス AMG E43 4M SW",
+        "メルセデス AMG E43 4M ステーションワゴン",
+        "メルセデス AMG E43 4MATIC",
+        "メルセデス AMG E53 4MATIC+",
+        "メルセデス AMG E53 4MATIC+ ステーションワゴン",
+        "メルセデス AMG E63 4M+ ステーションワゴン",
+        "メルセデス AMG E63 4M+SW",
+        "メルセデス AMG E63 4MATIC+",
+        "メルセデス AMG E63S 4M+",
+        "メルセデス AMG E63S 4M+ SW",
+        "メルセデス AMG E63S 4M+ ステーションワゴン",
+        "メルセデスAMG E53 4M+ CA",
+        "メルセデスAMG E53 4M+ SW",
+        "メルセデスAMG E53 4M+ クーペ"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:electric",
+      "make": "Mercedes-Benz",
+      "model": "Electric",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:elnagh",
+      "make": "Mercedes-Benz",
+      "model": "Elnagh",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqa",
+      "make": "Mercedes-Benz",
+      "model": "EQA",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqa",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQA"
+      },
+      "aliases": [
+        "EQA350 4MATIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqb",
+      "make": "Mercedes-Benz",
+      "model": "EQB",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqb",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQB"
+      },
+      "aliases": [
+        "EQB250",
+        "EQB250+"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqb250plus",
+      "make": "Mercedes-Benz",
+      "model": "EQB 250+",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqb3004matic",
+      "make": "Mercedes-Benz",
+      "model": "EQB 300 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqb3504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQB 350 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqc",
+      "make": "Mercedes-Benz",
+      "model": "EQC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqc",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQC"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe",
+      "make": "Mercedes-Benz",
+      "model": "EQE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqe",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQE"
+      },
+      "aliases": [
+        "EQE300",
+        "EQE350"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe3204maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQE 320 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe3204maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQE 320 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe3504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQE 350 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe3504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQE 350 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe5004maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQE 500 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqe5004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQE 500 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqs",
+      "make": "Mercedes-Benz",
+      "model": "EQS",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqs",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQS"
+      },
+      "aliases": [
+        "EQS450"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqs4004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 400 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqs4504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQS 450 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqs4504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 450 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

@@ -1,0 +1,702 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-toyota-astra-yaris-aygox",
+  "entries": [
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 Hybrid 115 Trend",
+      "variantId": "34c80e8c45c1f507a917c2b8",
+      "expectedDigest": "78f8cd116fbab1c708a509af8033883a5dd01d7c4519eb5d6c1e66f34f073e3d",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 HYBRID DYNAMIC -CAMERA|ADAP.CRUISE|DAB|STOELVE",
+      "variantId": "8421288b5b35ca97cc1f04a8",
+      "expectedDigest": "538c09f71d50f4c9362520979b0dbb143c4a1f1c537e3553d5e14d913364bd76",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 Hybrid Launch Edition | 3/6/12MND GARANTIE | A",
+      "variantId": "1b0bf67cf89366fd416bb67d",
+      "expectedDigest": "53d54bc4a26d97c63c4138523e93b0de9c91e254b7c2b15b17dd13e4f9f2a5b5",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 Hybrid Executive Ruim gebruikt, goed onderhoud",
+      "variantId": "22d5fbcab4122b6053342b2f",
+      "expectedDigest": "295c20df121d411490a661b373d93cf9fd6bea5d29bcb1788e512b33ab8a8319",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 Hyb. Dynamic",
+      "variantId": "e66d6a85ea7a02f690e9f694",
+      "expectedDigest": "c3fcc8793ad0959a68439de2cf4838dc48cdaaafc9f5c761327adf910459f943",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "Hybrid Business Edition Shz.+Navi+Sitzh",
+      "variantId": "ec2abfd2610a249d5244c172",
+      "expectedDigest": "2c8d4dbcee2f9b5a4ea88abe74f7293b331b227e966239e8ed67f6156e9ae22e",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 Hybrid Club Comfort Paket SHZ SmartKey",
+      "variantId": "e68a6a348c1e2ca00964e772",
+      "expectedDigest": "f5a8294854b6482afefe5089209d5f6ee0092540aafc0a4be0d2568a38199a2b",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "trim": "1.5 Hybrid Launch Edition | Apple Carplay / Androi",
+      "variantId": "646c4560827013168d8ab021",
+      "expectedDigest": "b3baaad4f9508ad4688f829bf1b409a7ad0d8f5c0b5195bed69d0418aafe2443",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*01. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2021единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2023,
+      "trim": "1.5 Hybrid Comfort CARPLAY",
+      "variantId": "03905a5031e16fff760b7032",
+      "expectedDigest": "0b53dc01ac530d2c2429f5a3262f529d9d443d31f83c9807fa8969568d8a1b58",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*04. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2023единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2024,
+      "trim": "130hp HEV Style Bi-Tone | winter pack",
+      "variantId": "f2b2186932f76983c3730f37",
+      "expectedDigest": "0bd0f9ac54d8b80671396cd028f8f5eaf1f5ab310b22cce3a0792f2ee9c7f6b9",
+      "patch": {
+        "power30MinKw": 43,
+        "icePowerKw": 68,
+        "motorPeakKw": 62,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH13(H), approvale6*2007/46*0437*06. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH13(H),1490см³,ДВС68кВт,электромотор62кВт,30-минутная43кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2024единогласны; годвэнциклопедии не изменяется. Точная Hybrid130 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2024,
+      "trim": "Hybrid Business *CARPLAY*RFK*SHZ*LHZ*ACC*",
+      "variantId": "64705ec9432d8db03c060d62",
+      "expectedDigest": "3ac457a95301742b07ea937223bdd6574ce0dc28fdc9011972be0da9824b2f88",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2024единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2024,
+      "trim": "4ª serie 1.5 130 Hybrid 5 porte Lounge",
+      "variantId": "e63ed7b01cc1bc4c696043cf",
+      "expectedDigest": "9eee85d0ab0671c28417e92e5042b1d3f1a7466163ef54d61f1a9444dce3051d",
+      "patch": {
+        "power30MinKw": 43,
+        "icePowerKw": 68,
+        "motorPeakKw": 62,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH13(H), approvale6*2007/46*0437*06. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH13(H),1490см³,ДВС68кВт,электромотор62кВт,30-минутная43кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2024единогласны; годвэнциклопедии не изменяется. Точная Hybrid130 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2024,
+      "trim": "Hybrid 130 GR Sport",
+      "variantId": "b86c8153607237de97c12153",
+      "expectedDigest": "aec6efccb04595d3fca0263a9a7460891fde670543dceb7c1b22fddbed4a365e",
+      "patch": {
+        "power30MinKw": 43,
+        "icePowerKw": 68,
+        "motorPeakKw": 62,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH13(H), approvale6*2007/46*0437*06. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH13(H),1490см³,ДВС68кВт,электромотор62кВт,30-минутная43кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2024единогласны; годвэнциклопедии не изменяется. Точная Hybrid130 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2025,
+      "trim": "116hp HEV Dynamic",
+      "variantId": "612bb881406b1f04b14f5cb5",
+      "expectedDigest": "2c943c3d8caa620bfd09082154fd15eda3c8539cb4390f4bdff67cd6d4fbf7be",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*07. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2025единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2025,
+      "trim": "Hybrid 116 1.5 VVT-i Teamplayer",
+      "variantId": "eb196694f9344511c7853a4b",
+      "expectedDigest": "c2ac46d3b57bf4b705a2ea71fcb07eff9a5078798122ae1dae29cfcee90783c2",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*07. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2025единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2026,
+      "trim": "Hybrid Teamplayer Digitales Cockpit LED ACC Apple",
+      "variantId": "7ea26f243cb9144d5410b106",
+      "expectedDigest": "b2b7765e2ef6db266095cca324b7eaa2c6ae1bc0fb2f1e8616601a4e5e1fc95e",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*09. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2026,
+      "trim": "Yaris 1.5h 115",
+      "variantId": "cf65f5e150981db8bf845f65",
+      "expectedDigest": "8c86989ec8e6873eb055077021b281407bc7c24628a956e2c3ecc1c21d0df356",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*09. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "cbddcadf5d1b4e564e263ea1",
+      "make": "Toyota",
+      "model": "Yaris",
+      "year": 2026,
+      "trim": "Teamplayer 1.5 Hybrid CVT NAVI SHZ PDC",
+      "variantId": "e84c5441f031af8fc76b41a3",
+      "expectedDigest": "bd05bc9d275243556e26f6c447166086c9c6f41f437823fcfcff452e0b04a487",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "motorPeakKw": 59,
+        "drive": "fwd",
+        "grossVehicleWeightKg": 1615
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "motorPeakKw",
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; XPA1F(EU,M)/MXPH11(H), approvale6*2007/46*0437*09. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Yaris XPA1F(EU,M)/MXPH11(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1615кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная Hybrid116 определена по116/85кВт либо130вtrim; связь59/62MG2 подтверждена https://newsroom.toyota.eu/new-toyota-yaris/ . Неизвестныйвариант68кВт без115/116/130 не выбран. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "116hp HEV Comfort | winter p.",
+      "variantId": "bf87a1ea00ab62cb748a414a",
+      "expectedDigest": "b62cc12d449ac6d3e7043727dcfee10279932d0020ad979b6a9868446b99a3cc",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; AB7(JP)/MABH10(H), approvale6*2018/858*00060*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Aygo X AB7(JP)/MABH10(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1510кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная1.5Hybrid116/85кВт уже независимо подтверждена заводскойпартией251210; прежниеисточники сохранены. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Aygo X 2025 1.5 hybrid Icon e-cvt",
+      "variantId": "fed2b8f69689fe9ec11bfab4",
+      "expectedDigest": "1351991cfb55ab90cd45e403908c2144685a973954884ee73dcbe499065e641d",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; AB7(JP)/MABH10(H), approvale6*2018/858*00060*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Aygo X AB7(JP)/MABH10(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1510кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная1.5Hybrid116/85кВт уже независимо подтверждена заводскойпартией251210; прежниеисточники сохранены. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Hybrid 115 play",
+      "variantId": "819c6081e0362587cf2396f1",
+      "expectedDigest": "4a3a54b5642b22b6f9ce70b6a254fb3d4bb73a5a824531d7b32403d2128d0b6d",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; AB7(JP)/MABH10(H), approvale6*2018/858*00060*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Aygo X AB7(JP)/MABH10(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1510кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная1.5Hybrid116/85кВт уже независимо подтверждена заводскойпартией251210; прежниеисточники сохранены. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Teamplayer 1,5 l Hybrid PDC KLIMA",
+      "variantId": "a732a3f9cabb9ec107d859c4",
+      "expectedDigest": "3a991ea1c246159c5d5732b9ac81051348da106399b6d4914ea61d5f6133d4d0",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; AB7(JP)/MABH10(H), approvale6*2018/858*00060*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Aygo X AB7(JP)/MABH10(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1510кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная1.5Hybrid116/85кВт уже независимо подтверждена заводскойпартией251210; прежниеисточники сохранены. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "1,5 HEV Teamplayer SHZ PDC KLIMA LM BT",
+      "variantId": "e96af44fbc626f43dd64a02f",
+      "expectedDigest": "3dc7803e6a845d41c3ced08574c7aaf19b3e8766ac6898c88e4faa0500df1f24",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; AB7(JP)/MABH10(H), approvale6*2018/858*00060*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Aygo X AB7(JP)/MABH10(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1510кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная1.5Hybrid116/85кВт уже независимо подтверждена заводскойпартией251210; прежниеисточники сохранены. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    },
+    {
+      "modelId": "c85d62456372b76d40d9074c",
+      "make": "Toyota",
+      "model": "Aygo X",
+      "year": 2026,
+      "trim": "Aygo X Hybrid 1.5i zetelverwarming Camera 17 inch",
+      "variantId": "fb6229445f682707cb9807c6",
+      "expectedDigest": "5483d6a336e8c1358bde936e6ed985cc29fadcdfa57fb188f97162d042581a26",
+      "patch": {
+        "power30MinKw": 37,
+        "icePowerKw": 68,
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "power30MinKw",
+        "icePowerKw",
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv",
+        "checkedAt": "2026-10-23",
+        "certificationDocument": "ASTRA official eCoC dataset, field27.4 maximum30minutespower; AB7(JP)/MABH10(H), approvale6*2018/858*00060*05. Dataset SHA2564bf64b39463737e8bbcd4e4ac939e7927d8c6438bf7cd1b100092add6437ebcf; matching versions in companion evidence report.",
+        "statement": "ASTRA eCoC: Aygo X AB7(JP)/MABH10(H),1490см³,ДВС68кВт,электромотор59кВт,30-минутная37кВт,GVW1510кг,ведущаяось1(FWD). Полныйфайл616197строк,все совпадающиеверсии/одобрения для2026единогласны; годвэнциклопедии не изменяется. Точная1.5Hybrid116/85кВт уже независимо подтверждена заводскойпартией251210; прежниеисточники сохранены. Значения powerKw/powerHp сохранены;30minне вычислена изпика. Приоритет официальногоCoC68кВт дляAygo разрешает расхождение67/68взаводскихпрессматериалах."
+      }
+    }
+  ]
+}

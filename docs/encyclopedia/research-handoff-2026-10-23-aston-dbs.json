@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T04:08:00+07:00",
+  "completed": false,
+  "cursor": {
+    "id": "a49dff8aecc0f27d5149f172",
+    "make": "Aston Martin",
+    "model": "Dbs",
+    "displayModel": "DBS",
+    "observedYears": [
+      2025,
+      2024,
+      2023,
+      2022,
+      2021,
+      2020,
+      2019,
+      2013,
+      2012,
+      2011
+    ],
+    "scope": "Все реальные годы с2008; текущие20 строк не ограничивают исторический охват. Сохранить исходную идентичностьDbs для сопоставления."
+  },
+  "previousPass": "docs/encyclopedia/reports/2026-10-23-aston-db9-pass.json",
+  "doNotRepeat": [
+    {
+      "batch": "research-2026-10-23-aston-db9-2008-2015",
+      "workflow": 39853879513,
+      "apiReadback": true
+    },
+    {
+      "batch": "research-2026-10-23-aston-db9-gt-2015-2016",
+      "workflow": 39854387454,
+      "apiReadback": true
+    }
+  ],
+  "requiredNextSteps": [
+    "Прочесть свежие AGENTS/roadmap/queue/continuation и проверить активные runs до записи/выпуска.",
+    "Начать с DBS/Dbs, получить свежие API всех наблюдаемых лет. Не смешивать ранниеDBS,Superleggera и770Ultimate; реальные годы с2008 подтвердить отдельно.",
+    "DB9 две партии26 операций243 полей уже сохранены ипрочитаны. Не начинать их заново;27 строк имеют отдельные пробелы вretry.",
+    "После завершения текущейChinaпубликации согласовать один совокупный штатный индекс, включая7 pending-партий. Не выдавать локальныйcompiler заактивацию.",
+    "Referenceintake остановлен redirect_outside_catalog; не возобновлять запрещённый redirect и не менять guard/collector. Заводское исследование продолжать.",
+    "Затем Dbx, DBX707 и далее; сохранить прежние retry и manual overrides."
+  ],
+  "integration": {
+    "release": "f4d7d22c0dbca3e1ddd6ce6da5c53665f01a0112",
+    "workflow": 39835446552,
+    "state": "activated_verified",
+    "activationConfirmed": true,
+    "indexDigest": "ac7113155504ed6c3005f4766d527562f1a5483f41fb8ec521af667d246140bb",
+    "activationReport": "docs/encyclopedia/reports/2026-10-23-index-ac711-activation.json",
+    "duplicateReleaseRequested": false,
+    "nextAction": "После завершения уже работающей публикации Китая — один согласованный штатный совокупный индекс со всеми pending-партиями. Проверить состав снимка и активацию. Не дублировать сопровождающий выпуск.",
+    "checkedAt": "2026-10-23T04:08:00+07:00",
+    "observedCalculationVersion": "a187991517671830b09825a998be3b0a074a671117f3fb2322a34d51c0a8ee44",
+    "pendingWriterWorkflow": 39840733509,
+    "newBatchesActivated": false,
+    "newCalculationFieldsPreparedLocally": 218,
+    "publisherState": "in_progress",
+    "writerInspectionWorkflow": 39852699392
+  },
+  "retryFiles": [
+    "docs/encyclopedia/retry-2026-10-23-aston-db9-remaining.json",
+    "docs/encyclopedia/retry-2026-10-23-aston-db11-remaining.json",
+    "docs/encyclopedia/retry-2026-10-23-aston-db12-remaining.json"
+  ],
+  "allModelsComplete": false
+}

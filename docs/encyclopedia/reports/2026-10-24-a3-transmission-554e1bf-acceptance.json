@@ -1,0 +1,591 @@
+{
+  "version": 1,
+  "verificationLocalDate": "2026-10-24",
+  "checkedAt": "2026-10-23T17:10:20.729040+00:00",
+  "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+  "workflow": 39988848904,
+  "job": 120535360367,
+  "conclusion": "success",
+  "activatedAt": "2026-10-23T17:08:33.2231310Z",
+  "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d",
+  "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+  "manifestDigest": "346ff6b043559bb8c5631d842f8a92639a16da13f330bbe80cf464d73c277fbe",
+  "indexCreatedAt": "2026-10-23T16:45:39.920Z",
+  "index": {
+    "stage": "encyclopedia_index_ready",
+    "modelsRead": 4451,
+    "variants": 68335,
+    "factoryFields": 27047,
+    "ownerReferenceFields": 486480,
+    "manualFields": 76,
+    "digest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+    "manifestDigest": "346ff6b043559bb8c5631d842f8a92639a16da13f330bbe80cf464d73c277fbe",
+    "readback": true
+  },
+  "membership": {
+    "stage": "required_research_batches_verified",
+    "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+    "batches": 18,
+    "variants": 443,
+    "fields": 654,
+    "identityFields": 7,
+    "descriptiveFieldsOutsideIndex": 48
+  },
+  "astra": {
+    "stage": "required_astra_plans_verified",
+    "indexDigest": "447aaea461906f46da21524eb2c18c4e13741928da7d8f03a3ef72c0a211c6be",
+    "plans": [
+      {
+        "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+        "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+        "plans": 1,
+        "models": 2895,
+        "annualVariants": 5,
+        "calculationFields": 31,
+        "descriptiveFields": 1,
+        "unknownYearVariantsOutsideIndex": 230447,
+        "annualChanges": [
+          {
+            "modelId": "0d734c400f4417df7f272d30",
+            "make": "Alfa Romeo",
+            "model": "Stelvio",
+            "variantId": "1d1981aef0a48ea44141e130",
+            "year": 2020,
+            "trim": "Super Q4 8-FACH-ALU*NAVI*CARPLAY*RFK*PDC",
+            "fields": {
+              "powerKw": 206,
+              "icePowerKw": 206
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "2c88956153fa4e45660291bf",
+            "year": 2025,
+            "trim": "M35i xDrive LED~HEADUP~KAMERA360~H&K~ACC~",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "572ad1ae2ab2c50aa5092d1d",
+            "year": 2025,
+            "trim": "M35i xDrive AHK|20\"LM|Head-Up|Parkassist.-Plu",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "70d0ce1a064bab6a09f30184",
+            "make": "BMW",
+            "model": "X2",
+            "variantId": "724ccf336cb1e7aacb4eec9e",
+            "year": 2023,
+            "trim": "M35i xDrive",
+            "fields": {
+              "fuel": "petrol",
+              "powertrainKind": "combustion",
+              "engineCc": 1998,
+              "powerKw": 221,
+              "icePowerKw": 221,
+              "drive": "awd",
+              "engineCode": "B48A20H",
+              "grossVehicleWeightKg": 2270
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/2000-Typengenehmigungen_TG_TARGA/2200-Basisdaten_TG_ab_1995/TG-Automobil.txt"
+          },
+          {
+            "modelId": "e71c8376467b1da6bc08a8b7",
+            "make": "BMW",
+            "model": "i5",
+            "variantId": "c31f0df22cec7cf907072ca6",
+            "year": 2026,
+            "trim": "xDrive40 Touring",
+            "fields": {
+              "fuel": "electric",
+              "powertrainKind": "electric",
+              "powerKw": 290,
+              "motorPeakKw": 290,
+              "transmission": "automatic",
+              "engineCode": "HA0002N0"
+            },
+            "sourceUrl": "https://opendata.astra.admin.ch/ivzod/3000-eDatenblatt/eDatenblatt.csv"
+          }
+        ]
+      }
+    ]
+  },
+  "publicGate": {
+    "version": 1,
+    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "startedAt": "2026-10-23T17:08:34.234Z",
+    "groups": 16,
+    "variants": 140,
+    "fields": 284,
+    "verified": true,
+    "finishedAt": "2026-10-23T17:09:01.970Z"
+  },
+  "artifacts": [
+    {
+      "id": 12516862968,
+      "name": "encyclopedia-coverage",
+      "sha256": "afc381cb6f7ef2e27f950980c830bdbe966b154953a2abb29ad210a2044bd95d",
+      "downloadedAndHashVerified": true
+    },
+    {
+      "id": 12517993821,
+      "name": "encyclopedia-public-release",
+      "sha256": "5f96b68409c4c171aa5acedfd9cab757f70a6684d9bbcba1d9d32dc354a81de3",
+      "downloadedAndHashVerified": true
+    }
+  ],
+  "coverage": {
+    "brands": 271,
+    "models": 4451,
+    "variants": 345392,
+    "requiredValuesPresent": 49806,
+    "requiredValuesSupported": 48149,
+    "technicalVariantsWithoutYear": 230447,
+    "annualVariants": 114945,
+    "annualModels": 2423,
+    "notFullySupportedAnnualVariants": 66796,
+    "scope": "Required encyclopedia fields only; not priced inventory or fully verified factory specifications."
+  },
+  "activatedBatch": {
+    "batch": "research-2026-10-23-audi-a3-2022-body",
+    "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+    "variants": 50,
+    "fields": 50,
+    "includedInIndex": true
+  },
+  "postSnapshotBatch": {
+    "batch": "research-2026-10-23-audi-a3-2022-2023-body",
+    "workflow": 39991099450,
+    "fields": 50,
+    "includedInIndex": false
+  },
+  "fix": {
+    "commit": "1b3c80ea0441ed4c8e87ee3af2b2bab4464c420f",
+    "rootCause": "canonicalizeSemanticSourceFields in the customs replay erased exact source transmission Schaltgetriebe",
+    "behavior": "Preserves original transmission value and bound evidence; presentation maps exact label to механика",
+    "technicalIdentityMatchingChanged": false
+  },
+  "validation": {
+    "localTargetedTestsPassed": 63,
+    "webTypeScriptPassed": true,
+    "redBeforeGreenAfter": true,
+    "knownUnrelatedTestFailure": {
+      "test": "UAE Petrol + Electricity fuel normalization",
+      "reproducedOnUnmodifiedInstalledBase": true,
+      "guardsWeakened": false
+    },
+    "deploymentMandatoryGates": "exact matching, production dependency audit, storage integrity, index membership, ASTRA, four specification-parity comparisons and public gate PASS"
+  },
+  "publicAcceptance": {
+    "checkedAt": "2026-10-23T17:10:20.729040+00:00",
+    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "healthBefore": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+      "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+    },
+    "rows": [
+      {
+        "name": "a3_2021",
+        "offerId": "3b783a66af3b69634f611db2",
+        "comparisons": {
+          "year": {
+            "search": 2021,
+            "card": 2021,
+            "equal": true
+          },
+          "trim": {
+            "search": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "card": "Sportback 35 TFSI 2x S-LINE MATRIX+NAVI+AHK",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "Schaltgetriebe",
+            "card": "Schaltgetriebe",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3041845,
+            "card": 3041845,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": "механика",
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "a3_2020",
+        "offerId": "4e3f16f9dc955a3ab40ba0f1",
+        "comparisons": {
+          "year": {
+            "search": 2020,
+            "card": 2020,
+            "equal": true
+          },
+          "trim": {
+            "search": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "card": "Sportback 35 TFSI S line *NAVI*LED*TEMPO*PDC*",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1498,
+            "card": 1498,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 150,
+            "card": 150,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 110,
+            "card": 110,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "Schaltgetriebe",
+            "card": "Schaltgetriebe",
+            "equal": true
+          },
+          "totalRub": {
+            "search": 3040832,
+            "card": 3040832,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "estimated",
+            "card": "estimated",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": "механика",
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "dbx",
+        "offerId": "b65974b83d5399d588073fc5",
+        "comparisons": {
+          "year": {
+            "search": 2023,
+            "card": 2023,
+            "equal": true
+          },
+          "trim": {
+            "search": "Aston Martin DBX707",
+            "card": "Aston Martin DBX707",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 3982,
+            "card": 3982,
+            "equal": true
+          },
+          "fuel": {
+            "search": "petrol",
+            "card": "petrol",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "combustion",
+            "card": "combustion",
+            "equal": true
+          },
+          "powerHp": {
+            "search": 707,
+            "card": 707,
+            "equal": true
+          },
+          "powerKw": {
+            "search": 520,
+            "card": 520,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": 520,
+            "card": 520,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "transmission": {
+            "search": "automatic",
+            "card": "automatic",
+            "equal": true
+          },
+          "totalRub": {
+            "search": null,
+            "card": 25031959,
+            "equal": false
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "estimated",
+            "equal": false
+          }
+        },
+        "cardTransmissionLabel": "автомат",
+        "generationId": "gen_1792702445675_8c312f85"
+      },
+      {
+        "name": "li",
+        "offerId": "17b4b13194dc355e6415013f",
+        "comparisons": {
+          "year": {
+            "search": 2026,
+            "card": 2026,
+            "equal": true
+          },
+          "trim": {
+            "search": "2026款 Ultra",
+            "card": "2026款 Ultra",
+            "equal": true
+          },
+          "engineCc": {
+            "search": 1496,
+            "card": 1496,
+            "equal": true
+          },
+          "fuel": {
+            "search": "hybrid",
+            "card": "hybrid",
+            "equal": true
+          },
+          "powertrainKind": {
+            "search": "series_hybrid",
+            "card": "series_hybrid",
+            "equal": true
+          },
+          "powerHp": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "powerKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "icePowerKw": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "power30MinKw": {
+            "search": 134,
+            "card": 134,
+            "equal": true
+          },
+          "transmission": {
+            "search": "电动车单速变速箱",
+            "card": "电动车单速变速箱",
+            "equal": true
+          },
+          "totalRub": {
+            "search": null,
+            "card": null,
+            "equal": true
+          },
+          "calculationStatus": {
+            "search": "needs_data",
+            "card": "needs_data",
+            "equal": true
+          }
+        },
+        "cardTransmissionLabel": null,
+        "generationId": "gen_1792702445675_8c312f85"
+      }
+    ],
+    "requests": [
+      {
+        "name": "li_search_corrected",
+        "path": "/api/catalog/search?market=china&make=Li%20Auto&model=L6&yearFrom=2026&yearTo=2026&pageSize=48",
+        "http": 200,
+        "seconds": 5.483,
+        "bytes": 2055,
+        "checkedAt": "2026-10-23T17:10:13.555536+00:00"
+      },
+      {
+        "name": "health_after",
+        "path": "/api/health",
+        "http": 200,
+        "seconds": 7.119,
+        "bytes": 180,
+        "checkedAt": "2026-10-23T17:10:20.728851+00:00"
+      }
+    ],
+    "scope": "Bounded public API and full target RSC; not visual or entire-catalog acceptance.",
+    "requestLogScope": "requests contains corrected Li query and final health only; initial parallel request observations summarized below",
+    "healthBeforeAt": "2026-10-23T17:09:07.187895Z",
+    "healthAfterAt": "2026-10-23T17:10:20.728851Z",
+    "initialHttpChecks": [
+      {
+        "name": "a3_2021_card",
+        "http": 200,
+        "seconds": 14.407
+      },
+      {
+        "name": "a3_2020_card",
+        "http": 200,
+        "seconds": 14.335
+      },
+      {
+        "name": "dbx_card",
+        "http": 200,
+        "seconds": 15.414
+      },
+      {
+        "name": "li_card",
+        "http": 200,
+        "seconds": 13.427
+      },
+      {
+        "name": "a3_2020_search",
+        "http": 200,
+        "seconds": 7.369
+      },
+      {
+        "name": "a3_2021_search",
+        "http": 200,
+        "seconds": 6.51
+      },
+      {
+        "name": "dbx_search",
+        "http": 200,
+        "seconds": 5.535
+      }
+    ],
+    "queryCorrection": {
+      "initialMake": "LiAuto",
+      "initialHttp": 200,
+      "initialTotal": 0,
+      "correctMakeFromFullCard": "Li Auto",
+      "correctedTotal": 1,
+      "inventoryLossClaim": false
+    },
+    "a3TransmissionParityPassed": true,
+    "allA3ComparedFieldsPassed": true,
+    "liL6CertifiedPowerParityPassed": true,
+    "liL6DeliveredCalculationAccepted": false,
+    "dbxPublicPriceParityPassed": false
+  },
+  "visualAcceptance": {
+    "passed": false,
+    "browser": "cloud Chrome",
+    "url": "https://avtocena.com/cars/offer/3b783a66af3b69634f611db2",
+    "observations": [
+      "502 Bad Gateway / nginx",
+      "one reload: 502 Bad Gateway / nginx"
+    ],
+    "causeEstablished": false,
+    "scope": "Separate HTTP/RSC checks returned 200; visual acceptance and general site stability not established."
+  },
+  "remaining": [
+    "DBX old projection fuel provenance migration and price parity",
+    "production owner/manager assistant grant/revoke acceptance",
+    "visual A3 acceptance after cloud browser 502",
+    "speed target postponed by owner",
+    "post-snapshot research activation and remaining encyclopedia fields"
+  ],
+  "noDuplicate": [
+    "ASTRA import/apply",
+    "full China collection",
+    "reference reuse"
+  ],
+  "allModelsComplete": false
+}

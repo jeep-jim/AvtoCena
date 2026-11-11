@@ -1,0 +1,56 @@
+{
+  "workflowRun": 39972729425,
+  "job": 120479350486,
+  "conclusion": "success",
+  "report": {
+    "version": 1,
+    "mode": "apply",
+    "startedAt": "2026-10-23T14:48:48.544Z",
+    "planDigest": "6d4171054d9ecb1e1b17cd6017c64bf876a00653fb1cd8374c65f61c21ff108e",
+    "corpusDigest": "a2fbd2061021bc1f518e0b05584fb1ba960f091032408f703be4d54f11efe44b",
+    "counters": {
+      "sourceRecords": 466987,
+      "uniqueTechnicalRecords": 466987,
+      "detailRecords": 1768599,
+      "originalSourceRows": 1038355,
+      "eligibleSourceRecords": 300947,
+      "assignedSourceRecords": 300947,
+      "rejectedSourceRecords": 166040,
+      "sourceDatasets": {
+        "edatenblatt": 44829,
+        "targa": 210673,
+        "tas": 211485
+      },
+      "rejectedReasons": {
+        "outside_passenger_light_van_pickup_scope": 150628,
+        "unknown_commercial_name": 182,
+        "unknown_vehicle_category": 12512,
+        "excluded_vehicle_family": 2718
+      },
+      "existingModelsTotal": 2445,
+      "existingVariantsTotal": 115011,
+      "targetedExistingAnnualVariants": 88062,
+      "targetModels": 2895,
+      "newModels": 2028,
+      "changedExistingModels": 867,
+      "newUnknownYearVariants": 230447,
+      "existingAnnualVariantsChanged": 5,
+      "fieldsFilled": 8,
+      "existingFieldsAttested": 24,
+      "existingAnnualPower30Filled": 0,
+      "heldExistingVariants": 88057,
+      "heldReasons": {
+        "no_exact_technical_match": 62344,
+        "manual_or_unknown_year": 25711,
+        "conflicting_or_incomplete_evidence": 2
+      }
+    },
+    "plannedModels": 2895,
+    "savedModels": 2895,
+    "alreadySavedModels": 0,
+    "batches": 91,
+    "indexAssertions": 5,
+    "status": "completed",
+    "finishedAt": "2026-10-23T15:09:51.857Z"
+  }
+}

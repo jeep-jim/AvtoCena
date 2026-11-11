@@ -1,0 +1,1952 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T04:05:43.479Z",
+  "modelId": "0f90ccb1a0cf0280fa416811",
+  "make": "Aston Martin",
+  "model": "Vantage",
+  "revision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2",
+  "variants": 66,
+  "variantsWithRemainingFields": [
+    {
+      "variantId": "eb145319ae5090104e407896",
+      "year": 2013,
+      "trim": "STANDARD",
+      "bodyType": "convertible",
+      "sourceUrl": "https://avtocena.com/cars/offer/dd27187aae4ed022d69476b1",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "9388c4ce504cdef748057a7d",
+      "year": 2013,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "9b809b5467fe44c1293dfd9a",
+      "year": 2013,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "cbf09717df9e5a99460b1204",
+      "year": 2013,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "6cb6fdcd0cad7f135dde9a62",
+      "year": 2013,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "df6167a06af942d79c1447a7",
+      "year": 2013,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "7b5bebafc8091fd85c41b71c",
+      "year": 2013,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "b4cee746cf99ae2c1c663a41",
+      "year": 2014,
+      "trim": "STANDARD",
+      "bodyType": "coupe",
+      "sourceUrl": "https://avtocena.com/cars/offer/c87f938248d99ac6d17b5479",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "feec646527ead29ebd8fd07d",
+      "year": 2014,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "b4f60e4913909d7ec558e485",
+      "year": 2014,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "818bba7be1c7de08c389b750",
+      "year": 2014,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "f0a01adbc6b6614c553f8cb4",
+      "year": 2014,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "98ffda9b7342e0c27b0b4ca6",
+      "year": 2014,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "101017a69b9561c2f8d5fa46",
+      "year": 2014,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "48adda295d1a41607b00054f",
+      "year": 2015,
+      "trim": "S",
+      "bodyType": "coupe",
+      "sourceUrl": "https://avtocena.com/cars/offer/e68620b958b68b10689515f3",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "9bc6f6f37e8872bfd69b5ae5",
+      "year": 2015,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "4a620fa16dfe6ddc2fb7d9f1",
+      "year": 2015,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "6faa710bbee8765c9e9b6258",
+      "year": 2015,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "66da7f45a64fadabfc82f29f",
+      "year": 2015,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "a38140ef9e4b8c167f9062ba",
+      "year": 2015,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "b2e382f6b0d6a81594046c34",
+      "year": 2015,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "827f2301cf4cb4230bc668e2",
+      "year": 2016,
+      "trim": "S",
+      "bodyType": "convertible",
+      "sourceUrl": "https://avtocena.com/cars/offer/6612a43329eb1f5a2373162c",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "487c8b10f6853add40a39ee3",
+      "year": 2016,
+      "trim": "Standard",
+      "bodyType": "coupe",
+      "sourceUrl": "https://avtocena.com/cars/offer/d0b890bd186d2b77bbfd395b",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "651b61ee7da6782aae16a84b",
+      "year": 2016,
+      "trim": "V8 Купе 6MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "9f3b54b82a85de1548b25718",
+      "year": 2016,
+      "trim": "V8 Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "0af78fe57ad47112759c5437",
+      "year": 2016,
+      "trim": "V8 Родстер 6MT",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "5f56041178674024fdd09b69",
+      "year": 2016,
+      "trim": "V8 Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "2bc22adc82c49737ae3b1b94",
+      "year": 2016,
+      "trim": "V8 S Купе 6MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "8c3f41142a7f1e4295629b57",
+      "year": 2016,
+      "trim": "V8 S Купе Sportshift 7",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "f0b37b223cb2e43e1944000f",
+      "year": 2016,
+      "trim": "V8 S Родстер 6MT",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "b5ee264b5c049272126188a6",
+      "year": 2016,
+      "trim": "V8 S Родстер Sportshift 7",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "6d512d1290f58497b05f4b3f",
+      "year": 2019,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://avtocena.com/cars/offer/97d43abe8d94a30022aea505",
+      "factoryConfirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "bcd588c10bf1edf42fb9ec71",
+      "year": 2020,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "fd43dcba0edb6cbb91a37a00",
+      "year": 2020,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "3ac6df15d598a09255e73900",
+      "year": 2020,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/LY63-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "d01f216e56aef8feb270e46a",
+      "year": 2020,
+      "trim": "V8 Twin-Turbo Купе 7MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/LY63-19A321-AB.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "8e31a9179e69321c68b57bcb",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "6206d8550c09bf65e5066f76",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "2072661ef8336a5c95435830",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "5252065e149c0e1ded7ecfe2",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "37cd3aacf4e0b8a66764727b",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "b4c2c6d450a0d50be7b6c0ad",
+      "year": 2021,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "d7ff3a3e1bf10e2b242c44b2",
+      "year": 2021,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/MY63-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "ea4a35eeb881dc8f908d91f7",
+      "year": 2021,
+      "trim": "V8 Twin-Turbo Купе 7MT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://www.astonmartin.com/guides/MY63-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "796ec920253ab4c503b0482b",
+      "year": 2021,
+      "trim": "V8 Twin-Turbo Родстер 8AT",
+      "bodyType": "convertible",
+      "sourceUrl": "https://www.astonmartin.com/guides/MY63-19A321-AA.pdf",
+      "factoryConfirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "bodyType",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "powerHp",
+        "drive",
+        "engineCode",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "3c43bf495f7f7d612e8b239d",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "0c33e236e938e80b21ab6593",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "4a8375f4ea57c69594a475c2",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "f44596725402e00df29c1af0",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "0205cfd8ee41dc61fb6ee209",
+      "year": 2022,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "f56f48b10b05e45b7bbe4a60",
+      "year": 2023,
+      "trim": "V8",
+      "bodyType": "coupe",
+      "sourceUrl": "https://avtocena.com/cars/offer/9d77286dd0e9063b57a52069",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "1b14f93c24e20508c93f9fdc",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "551353440ff3e0403fc7ffe4",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "6bb8478b9951d891680b3a16",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "f409b6759d8f62b2e1a97307",
+      "year": 2023,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "844608cad7ad0f2bceb433a9",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "fe0c6d71a8a63c076121a6f6",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "f83ea2fc8ed01ea738e27f5a",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "5a1a802635a489c8a5526bf6",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "23c7db4696cf6ad665b29278",
+      "year": 2024,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "deadae0c5da696139ca0328d",
+      "year": 2025,
+      "trim": "V8 Twin-Turbo Купе 8AT",
+      "bodyType": "coupe",
+      "sourceUrl": "https://avtocena.com/cars/offer/fd453c555b5f4bf2875d9794",
+      "factoryConfirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission",
+        "trim"
+      ],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "drive",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Проверить оставшиеся поля по точному году/кузову/коробке. bhp не выдавать за PS; отсутствие кода/привода не заполнять по внешнему виду."
+    },
+    {
+      "variantId": "287275fd103e80ebd1ec01cd",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "a05e34979027606cc5787ad8",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "cafc6dd89c98b147db8fcaca",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "abdd119f2c417698dcddb81c",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    },
+    {
+      "variantId": "b747e8a182eba37d6bb93794",
+      "year": 2025,
+      "bodyType": "Passenger car",
+      "factoryConfirmedFields": [],
+      "otherSupportedFields": [],
+      "unconfirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "power30MinKw",
+        "transmission",
+        "drive",
+        "bodyType",
+        "engineCode",
+        "grossVehicleWeightKg",
+        "chassisCode"
+      ],
+      "reason": "Исходное наблюдение без точной технической идентичности. Не назначать мощность/массу по названию или наблюдаемым cc. EEA registration year не равен модельному году."
+    }
+  ],
+  "yearCoverageRetries": [
+    {
+      "years": [
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2017,
+        2018
+      ],
+      "reason": "Исторические годы/серии этой канонической модели ещё не обработаны; список моделей не пересобирать. Годовые таблицы и сочетания подтвердить отдельно."
+    },
+    {
+      "years": [
+        2013,
+        2014,
+        2015
+      ],
+      "reason": "Сочетание V8 S с6MT оставлено для отдельной проверки; общая таблица содержит две коробки, но точная доступность сочетания не утверждалась."
+    },
+    {
+      "years": [
+        2021,
+        2022,
+        2023
+      ],
+      "reason": "F1 Edition и AMR/региональные исполнения требуют точных таблиц. V8 2023 UAE не назначать535PS только по названиюV8."
+    },
+    {
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "reason": "Новые Coupe/Roadster/S: подтвердить год и исполнение. 2025Coupe665PS/490kW уже исследован; не повторять. EEA500kW/489kW не назначатьtrim по мощности."
+    }
+  ],
+  "sourceLeads": [
+    {
+      "url": "https://media.astonmartin.com/aston-martin-celebrates-110th-anniversary-with-reveal-of-special-logo-on-amr23-formula-1-car-84253",
+      "date": "2023-02-13",
+      "status": "Найден первичный релиз: продолжение производства Vantage F1 Edition в2023 и535PS. Полную таблицу/кузова/год проверить; в эту партию не записано."
+    },
+    {
+      "url": "https://media.astonmartin.com/aston-martin-opens-its-doors-to-santan-dave-and-stormzy",
+      "date": "2021-07-29",
+      "status": "Найден первичный релиз:20 Vantage F1 Edition перед поставкой. Годовая/кузовная спецификация ещё не подтверждена."
+    },
+    {
+      "url": "https://media.astonmartin.com/introducing-new-vantage-engineered-for-real-drivers/?lang=eng",
+      "date": "2024-02-12",
+      "status": "Заводской релиз новой Vantage; не переносить25MY на2024 без отдельного подтверждения фактического года."
+    }
+  ],
+  "reviewedGuides": [
+    {
+      "id": "3a26ba38d65248caa79cd7eaa0830452",
+      "url": "https://www.astonmartin.com/guides/Vantage/25MY/25MY Vantage English Owner Guide.pdf",
+      "previewUrl": "",
+      "title": "25MY Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "25MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "25MY"
+        }
+      ],
+      "catalogModel": "Vantage",
+      "file": "Vantage-25MY.pdf",
+      "sha256": "0ee17eba7dc67df44d691f13567bf43ecdda9436cbcc921082724ac0e572bdba",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "8ca6a9288dd947ccaf4fd1cfe0f4f630",
+      "url": "https://www.astonmartin.com/guides/MY63-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "21MY Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "21MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "21MY"
+        }
+      ],
+      "catalogModel": "Vantage",
+      "file": "Vantage-21MY.pdf",
+      "sha256": "3a31f84fdd44b14c63300947caa65c354907949c95ec79c046b6c5428daaca51",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "4cd74f7bf3bd443bb0adcd95d7f9e8b8",
+      "url": "https://www.astonmartin.com/guides/LY63-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "20MY Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "20MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "20MY"
+        }
+      ],
+      "catalogModel": "Vantage",
+      "file": "Vantage-20MY.pdf",
+      "sha256": "59aaaed8839a3705e59f18dc215bad7bfacf9262e3ba626c99f9f05d457f6a9c",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "a2903d739fe046698196e534f56a4dd5",
+      "url": "https://www.astonmartin.com/guides/LY63-19A321-AB.pdf",
+      "previewUrl": "",
+      "title": "20.5MY Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "20.5MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "20.5MY"
+        }
+      ],
+      "catalogModel": "Vantage",
+      "file": "Vantage-20.5MY.pdf",
+      "sha256": "e4e478a6aaa12e67287b6865b34c17fdb5882da9c93083ea79db72d06a891f12",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "b69d6161b09745e1a5e7ae308556c095",
+      "url": "https://www.astonmartin.com/guides/KY63-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "19MY Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "19MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "19MY"
+        }
+      ],
+      "catalogModel": "Vantage",
+      "file": "Vantage-19MY.pdf",
+      "sha256": "e04eecd0ffeb6130d6879b6ee26a9895cd14b09f98b1691636fcf9f830d373b6",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "7302c5a0a1454771b0a2576592c61780",
+      "url": "https://www.astonmartin.com/guides/GG33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "16MY V8 Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "16MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "16MY"
+        }
+      ],
+      "catalogModel": "V8Vantage",
+      "file": "V8Vantage-16MY.pdf",
+      "sha256": "0777fb55636760314351b90071918feae509577beb2968e9ff69152a7bd29277",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "fb8c04ded4014c79bac9444a2f3cfd87",
+      "url": "https://www.astonmartin.com/guides/FG33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "15MY V8 Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "15MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "15MY"
+        }
+      ],
+      "catalogModel": "V8Vantage",
+      "file": "V8Vantage-15MY.pdf",
+      "sha256": "bc3d8c7fcda56c6c762bcab6cddd6fc636b9fa82262406d792ea293f69475e90",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "84df79240d054998be675d6d0db689ab",
+      "url": "https://www.astonmartin.com/guides/EG33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "14MY V8 Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "14MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "14MY"
+        }
+      ],
+      "catalogModel": "V8Vantage",
+      "file": "V8Vantage-14MY.pdf",
+      "sha256": "5571f9b75ad609986c8cc4111d4a10105b8ddfefccb69217e11e81badbb0a7fc",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "id": "d534d6d8aee047cb86b99de52e45117f",
+      "url": "https://www.astonmartin.com/guides/DG33-19A321-AA.pdf",
+      "previewUrl": "",
+      "title": "13MY V8 Vantage English Owner Guide",
+      "tags": [
+        {
+          "name": "year",
+          "value": "13MY"
+        },
+        {
+          "name": "language",
+          "value": "English / Europe"
+        },
+        {
+          "name": "MY",
+          "value": "13MY"
+        }
+      ],
+      "catalogModel": "V8Vantage",
+      "file": "V8Vantage-13MY.pdf",
+      "sha256": "79120c291832ccf35b5b34633d9a33af612c388d8eef6703f15f6dfeae004a24",
+      "checkedAt": "2026-10-23"
+    }
+  ],
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-aston.json",
+    "docs/encyclopedia/research-handoff-2026-10-23-aston-vantage.json"
+  ],
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false
+}

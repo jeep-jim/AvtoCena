@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-23T02:16:30+07:00",
+  "make": "Alpine",
+  "state": "partial_verified_fields",
+  "fullModelPassComplete": false,
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-23-alpine-a110-remaining.json",
+    "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json"
+  ],
+  "nextAlphabeticalModel": {
+    "make": "Aston Martin",
+    "model": "DB11",
+    "modelId": "eff6651568e364a8a5a40e97"
+  },
+  "items": [
+    {
+      "model": "A110",
+      "years": [
+        2024
+      ],
+      "trims": [
+        "R"
+      ],
+      "missingFields": [
+        "точные технические поля годового исполнения"
+      ],
+      "reason": "Прайс MY24 подтверждает отдельную R, но техническая таблица 09/2024 даёт R Turini. Массу и другие отличающиеся характеристики между ними не переносить.",
+      "sources": [
+        "https://www.alpine-rrg.com/user/themes/custom/img/new-models/brochure/CH_DE_PreislisteAlpineA110-12.2023-5.pdf"
+      ],
+      "action": "Найти датированную таблицу R 2024 и сверить с текущими строками/новым CAS."
+    },
+    {
+      "model": "A110",
+      "years": [
+        2025
+      ],
+      "trims": [
+        "R 70",
+        "GT",
+        "S"
+      ],
+      "missingFields": [
+        "drive",
+        "transmission",
+        "bodyType",
+        "grossWeightKg",
+        "точные сроки и исполнения GT/S до смены линейки"
+      ],
+      "reason": "R 70 подтверждена только по сохранённым восьми полям. Таблица base/GTS не доказывает массу/коробку R 70; ранние GT/S не заменять последующей GTS.",
+      "sources": [
+        "https://media.renault.ch/fr/article/21971"
+      ],
+      "action": "Отдельная заводская таблица R 70 и датированные документы ранней линейки2025."
+    },
+    {
+      "model": "A110",
+      "years": [
+        2026
+      ],
+      "trims": [
+        "A110",
+        "GTS",
+        "R 70",
+        "R Ultime"
+      ],
+      "missingFields": [
+        "точные поля годовых/региональных исполнений",
+        "условия заявленной мощности R Ultime"
+      ],
+      "reason": "Прайс 01/2026 озаглавлен MY25 и содержит комплектации, но не полную техническую таблицу. Завод подтверждает производство до июня2026 и начало поставок R Ultime; не копировать прошлогодние технические поля. R 70 RHD уже имеет подтверждённые мощности — сохранить.",
+      "sources": [
+        "https://cdn.group.renault.com/alp/at/price_list/Preisliste_Alpine%20A110_MY25_AT_01_2026.pdf.asset.pdf/562a148e19.pdf",
+        "https://media.alpinecars.com/a-trio-of-iconic-alpine-a110-models-to-star-at-retromobile-classic-event-as-current-version-enters-last-months-of-production/?lang=eng"
+      ],
+      "action": "Проверить регион, топливо/единицы мощности и отдельную техническую таблицу; свежий API/CAS."
+    },
+    {
+      "model": "A290",
+      "years": [
+        2024
+      ],
+      "trims": [
+        "Première Édition"
+      ],
+      "missingFields": [
+        "powerKw",
+        "motorPeakKw",
+        "drive",
+        "transmission",
+        "grossWeightKg",
+        "power30MinKw"
+      ],
+      "reason": "Точно подтверждены шесть сохранённых полей; общая связь с GTS не использована как полевой источник всех остальных характеристик.",
+      "sources": [
+        "https://media.alpinecars.com/alpine-a290-ouverture-des-commandes-et-tarifs-pour-la-france/?lang=fra"
+      ],
+      "action": "Найти таблицу/омологацию Première Édition; цветовые оформления не создавать как технические дубли."
+    },
+    {
+      "model": "A290",
+      "years": [
+        2026
+      ],
+      "trims": [
+        "GT",
+        "GT Premium",
+        "GT Performance",
+        "GTS"
+      ],
+      "missingFields": [
+        "grossWeightKg",
+        "power30MinKw"
+      ],
+      "reason": "NL01/2026 прямо разделяет поставки2026 и склад2025. Таблица даёт снаряжённую массу, не разрешённую полную. Значение1950 из2025 или UK не переносить без точного подтверждения.",
+      "sources": [
+        "https://cdn.group.renault.com/alp/nl/price_list/ALPINE_A290_JANUARI_2026.pdf.asset.pdf/abc3caa627.pdf"
+      ],
+      "action": "Документированная полная масса и 30-минутная мощность точной версии/года."
+    },
+    {
+      "model": "A290",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "missingFields": [
+        "power30MinKw",
+        "vehicleCategory",
+        "идентичность шести исходных непроверенных строк",
+        "региональные GT+/GT Performance+/GTS+ и Collection"
+      ],
+      "reason": "130/160кВт — заводская максимальная мощность, не30-минутная. Наблюдаемое78кВт не считать омологацией. Collection объявлена2026, реальные поставки и версии ещё не проверены; UK+ не отождествлять без проверки.",
+      "sources": [
+        "https://media.alpinecars.com/alpine-placera-lexclusivite-au-coeur-du-mondial-de-lauto-de-paris/?lang=fra"
+      ],
+      "action": "Омологация и подтверждение точных годов/рынков; сохранять источник и ручные поля."
+    },
+    {
+      "model": "A390",
+      "years": [
+        2025,
+        2026
+      ],
+      "state": "canonical_model_discovery_required",
+      "missingFields": [
+        "постоянная модель",
+        "точные годовые модификации"
+      ],
+      "reason": "Модели нет в текущем перечне2423. Guardedcreate исследовательского workflow создаёт варианты только существующей модели; он пропускает modelmissing. Не выдумывать id и не обходить создание канонической модели.",
+      "sources": [
+        "https://media.alpinecars.com/alpine-a390-the-brands-new-sport-fastback-available-to-order-from-4-november-2025/?lang=fra"
+      ],
+      "action": "Через штатный путь обнаружения/создания модели получить канонический id, проверить реальные годы поставок и затем точные партии."
+    }
+  ]
+}

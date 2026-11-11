@@ -1,0 +1,428 @@
+{
+  "checkedAt": "2026-10-22T04:13:38.315Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-aito-m5-historical-manuals",
+  "digest": "3f47fa17c2d82a4cfa89b39abf0260db1e1cbfe687a2ff7522003e2fbe73be27",
+  "sourceModelRevision": "be8ce24e-57ea-4975-bcb6-f27269ce65ee",
+  "recordsRead": 60,
+  "variants": 17,
+  "fields": 55,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "7931e1704ca0b1fe205a191f",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "2e5a9ac317eb71aba1b62c6e",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "bc9f57abb0d4a364ed651b57",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "ca6cde35f83d073a589720f6",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "02344c9022e3a810af9decde",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "bd99ecb396ab90cfaf9f5747",
+        "fields": [
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "ca8b7c3edae23edecde90b54",
+        "fields": [
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "c5846331dad7bec12b91dbf0",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f0ea570b3f80bf6238152f3f",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "ce271f53c901437ac64461ed",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "53c338d7128c6ca6c84b10ed",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "c202a711d8b0311af5e370f4",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "6c0f2f0ae9bdf23bcf8acada",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "5bb6e55e4d6677dbbed024e5",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "fa146b7274525449bb583d4b",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "c14c77796fc23b03c271c130",
+        "fields": [
+          "drive",
+          "grossVehicleWeightKg",
+          "motorPeakKw"
+        ]
+      },
+      {
+        "variantId": "658d3f16b0cc51ab218d2654",
+        "fields": [
+          "engineCc",
+          "engineCode",
+          "drive",
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "retry": [
+    {
+      "variantId": "2e797a0ce509952ec222a252",
+      "year": 2021,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "8f1f9e583549b529aeb4f2ad",
+      "year": 2021,
+      "status": "observed",
+      "reason": "Начало производства и фактический год требуют проверки; год не исправлялся по названию MY2022."
+    },
+    {
+      "variantId": "c3f53447f63a66d9235ec4ee",
+      "year": 2021,
+      "status": "observed",
+      "reason": "Начало производства и фактический год требуют проверки; год не исправлялся по названию MY2022."
+    },
+    {
+      "variantId": "af77f0933001bf7a994d8477",
+      "year": 2021,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "bb5b9cf5ab492a6daf939705",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "6ea786aa942bfb62fcf03334",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "51f964612a61881920c096b4",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "75e27656f38033980ba98926",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "7e2ce9964ea6df6290e3e8ae",
+      "year": 2022,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "edac4371ddabd09ea4586e54",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "1a6b3ad70cecfab14e13000e",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "759689b8ebcd7f9d0ce249e4",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "f0455a28a14afe5c006ffe7c",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "4c52c9147853c679cc0d0103",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "9f505330befcd1f668283149",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "6e0baee2d06508104d268655",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "6009bbc2e0237da3eeefdab5",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "d40d8d9df18a81b40ff6474b",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "c20bab8e2ce1587a9c51a1c3",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "37a1f555306aaf2cbbdb5961",
+      "year": 2023,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "3809b5a50efd92472c237a7a",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "e937d32bf75f4576147a7f60",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "a7521ab36ee1eaf217f5bc72",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "768e4d173617515646374789",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "d44bd050d688ead3f4f608c6",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "c700ba68f22a5c099ea7cef5",
+      "year": 2024,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "7761daf043ee821f6861de4b",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "bde50e54f36fc9e725f79c70",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "84bab1d39cdd153b11cc0070",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "c4fafec4c87eb82c2e4cde34",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "ea65e38f35be1f3f1896cb5c",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "9d8099b21e3e2480fb5ae07d",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "772d777b4a47ca3ff4b6e8b8",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "9f3ff6f81a74a41b8771914d",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "b9d12e9f13478042336da33d",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "2dfe5d6a58831f91aaa9b076",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "df1dbee886050731467d676d",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "4753e5f03498a63f501f9a32",
+      "year": 2025,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "7b5096467972e30be800b516",
+      "year": 2025,
+      "status": "review",
+      "reason": "Ранее подтверждённые поля сохранены; недостающие поля требуют отдельных источников."
+    },
+    {
+      "variantId": "6eab3b2238a25bada29fe0a7",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "15cb0cea171698e1fc573c99",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Нет точного исполнения."
+    },
+    {
+      "variantId": "d2295ef9997e026a922ff4fb",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    },
+    {
+      "variantId": "2e4f77af3a5b609cc67f127f",
+      "year": 2026,
+      "status": "observed",
+      "reason": "Нужно подтвердить точное исполнение и соответствие года/обновления; параметры соседней версии не перенесены."
+    }
+  ],
+  "missingFields": [
+    "power30MinKw",
+    "frontMotor30MinKw",
+    "rearMotor30MinKw",
+    "icePowerKw",
+    "batteryKwh",
+    "exact historical variant expansion"
+  ],
+  "powerNote": "Руководства различают 90/92 и 110/112 кВт ДВС. Значения 42/60/72 кВт моторов обозначены как длительные/номинальные, без явной продолжительности 30 минут. Они не подтверждены как power30MinKw.",
+  "duplicateNote": "Две строки EREV Max RWD Premium Smart Drive Edition 2024 сохранены раздельно: разные ID. Подтверждённые значения одинаковы; объединение записей и изменение правил сопоставления не выполнялись.",
+  "dependsOnReleaseWorkflow": 39720853891,
+  "requiresFreshApiCas": true,
+  "historicalExpansionComplete": false
+}

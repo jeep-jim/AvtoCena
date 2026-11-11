@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-11-10T02:02:29Z",
+  "generationId": "gen_1794098779458_0e64fb1f",
+  "preciseCountsClaimed": false,
+  "catalog": [
+    {
+      "url": "/cars?make=Nissan&model=Patrol",
+      "query": "https://avtocena.com/api/catalog/search?make=Nissan&model=Patrol&pageSize=1",
+      "result": "exact make/model item returned; response partial and countIncomplete",
+      "observedItem": {"id":"cde9c617f75a1f5a1004eb7a","market":"china","make":"Nissan","model":"Patrol","year":2019},
+      "editorialUse": "family link only; article explicitly says this is not Armada Patrol PRO-4X 2027 or archival 60 Series"
+    },
+    {
+      "url": "/cars?make=Volkswagen&model=ID.%20Polo",
+      "query": "https://avtocena.com/api/catalog/search?make=Volkswagen&model=ID.%20Polo&pageSize=1",
+      "result": "exact make/model item returned; response partial and countIncomplete",
+      "observedItem": {"id":"5e00979ee53f57a9b6c710a1","market":"europe","make":"Volkswagen","model":"ID. Polo","year":2026},
+      "editorialUse": "exact family link; no precise count claimed"
+    },
+    {
+      "url": "/cars?make=Lexus&model=ES",
+      "query": "https://avtocena.com/api/catalog/search?make=Lexus&model=ES&pageSize=1",
+      "result": "exact make/model item returned; response partial and countIncomplete",
+      "observedItem": {"id":"bdb9912117202fb93cd87c58","market":"china","make":"Lexus","model":"ES","year":2026},
+      "editorialUse": "family link only; article says observed ES is not confirmed as ES 350e or ES 500e"
+    },
+    {
+      "query": "https://avtocena.com/api/catalog/search?make=Nissan&model=Armada&pageSize=1",
+      "result": "no stable exact result obtained during live check",
+      "editorialUse": "no internal link and no availability claim"
+    },
+    {
+      "query": "https://avtocena.com/api/catalog/search?make=Mercedes-Benz&model=VLE&pageSize=1",
+      "result": "no exact item returned during live check",
+      "editorialUse": "no internal link and no availability claim"
+    },
+    {
+      "query": "https://avtocena.com/api/catalog/search?make=Audi&model=Nuvolari&pageSize=1",
+      "result": "no exact item returned; response partial and countIncomplete",
+      "editorialUse": "no internal link and no availability claim"
+    }
+  ]
+}

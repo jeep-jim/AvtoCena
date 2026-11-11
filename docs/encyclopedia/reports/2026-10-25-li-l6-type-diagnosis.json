@@ -1,0 +1,485 @@
+{
+  "checkedAt": "2026-10-25T15:40:40.607Z",
+  "productionWrites": 0,
+  "bytesRead": 196492226,
+  "request": {
+    "offerId": "7c65af5e91ac935df14e707a",
+    "generationId": "gen_1792702445675_8c312f85",
+    "release": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+    "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0"
+  },
+  "beforeHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+    "calculationVersion": "1aefa5db1c632f403c0735eedfc247dd59447aaf45ab890ae74de34546156cb8"
+  },
+  "afterHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "f12fb5867f4db1bb838968af4df8f7ab36c8bee1",
+    "calculationVersion": "1aefa5db1c632f403c0735eedfc247dd59447aaf45ab890ae74de34546156cb8"
+  },
+  "sourceDigest": "f699b8cfc4730ad1be4b3220cbaf1fe65de35f3f5087aafdb82b2568cdf49d5b",
+  "source": {
+    "values": {
+      "id": "7c65af5e91ac935df14e707a",
+      "sourceId": "autohome_used_china_open",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max Smart Refresh Edition",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "engineCc": 1496,
+      "powerHp": 408,
+      "powerKw": 300.08,
+      "icePowerKw": null,
+      "power30MinKw": null,
+      "drive": "awd",
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "powertrainEvidence": {
+      "fuel": {
+        "status": "exact",
+        "value": "hybrid",
+        "source": "auto_api_che168:engine_type",
+        "rawValues": []
+      },
+      "powertrainKind": null,
+      "icePowerKw": null
+    },
+    "bodyEvidence": null,
+    "attestation": null
+  },
+  "enriched": {
+    "values": {
+      "id": "7c65af5e91ac935df14e707a",
+      "sourceId": "autohome_used_china_open",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max Smart Refresh Edition",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "engineCc": 1496,
+      "powerHp": 408,
+      "powerKw": 300.08,
+      "icePowerKw": null,
+      "power30MinKw": null,
+      "drive": "awd",
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "powertrainEvidence": {
+      "fuel": {
+        "status": "exact",
+        "value": "hybrid",
+        "source": "permanent_encyclopedia:30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+        "rawValues": []
+      },
+      "powertrainKind": {
+        "status": "exact",
+        "value": "other_hybrid",
+        "source": "permanent_encyclopedia:30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+        "rawValues": []
+      },
+      "icePowerKw": null
+    },
+    "bodyEvidence": null,
+    "attestation": {
+      "version": 1,
+      "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+      "sourceIdentity": "[\"7c65af5e91ac935df14e707a\",2025]",
+      "values": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 1496,
+        "powerHp": 408,
+        "powerKw": 300.08,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "provenance": {
+        "fuel": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powertrainKind": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "engineCc": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powerHp": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powerKw": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "transmission": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "drive": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ]
+      },
+      "filledFields": [],
+      "matchMethod": "specification_consensus"
+    }
+  },
+  "canonicalized": {
+    "values": {
+      "id": "7c65af5e91ac935df14e707a",
+      "sourceId": "autohome_used_china_open",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max Smart Refresh Edition",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "engineCc": 1496,
+      "powerHp": 408,
+      "powerKw": 300.08,
+      "icePowerKw": null,
+      "power30MinKw": null,
+      "drive": "awd",
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "powertrainEvidence": {
+      "fuel": {
+        "status": "exact",
+        "value": "hybrid",
+        "source": "permanent_encyclopedia:30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+        "rawValues": []
+      },
+      "powertrainKind": {
+        "status": "exact",
+        "value": "other_hybrid",
+        "source": "permanent_encyclopedia:30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+        "rawValues": []
+      },
+      "icePowerKw": null
+    },
+    "bodyEvidence": null,
+    "attestation": {
+      "version": 1,
+      "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+      "sourceIdentity": "[\"7c65af5e91ac935df14e707a\",2025]",
+      "values": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 1496,
+        "powerHp": 408,
+        "powerKw": 300.08,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "provenance": {
+        "fuel": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powertrainKind": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "engineCc": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powerHp": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powerKw": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "transmission": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "drive": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ]
+      },
+      "filledFields": [],
+      "matchMethod": "specification_consensus"
+    }
+  },
+  "normalized": {
+    "values": {
+      "id": "7c65af5e91ac935df14e707a",
+      "sourceId": "autohome_used_china_open",
+      "make": "Li Auto",
+      "model": "Li L6",
+      "year": 2025,
+      "trim": "Max Smart Refresh Edition",
+      "generation": null,
+      "chassisCode": null,
+      "engineCode": null,
+      "fuel": "hybrid",
+      "powertrainKind": "other_hybrid",
+      "engineCc": 1496,
+      "powerHp": 408,
+      "powerKw": 300.08,
+      "icePowerKw": null,
+      "power30MinKw": null,
+      "drive": "awd",
+      "transmission": "automatic",
+      "bodyType": null
+    },
+    "powertrainEvidence": {
+      "fuel": {
+        "status": "exact",
+        "value": "hybrid",
+        "source": "permanent_encyclopedia:30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+        "rawValues": []
+      },
+      "powertrainKind": {
+        "status": "exact",
+        "value": "other_hybrid",
+        "source": "permanent_encyclopedia:30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+        "rawValues": []
+      },
+      "icePowerKw": null
+    },
+    "bodyEvidence": null,
+    "attestation": {
+      "version": 1,
+      "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+      "sourceIdentity": "[\"7c65af5e91ac935df14e707a\",2025]",
+      "values": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "engineCc": 1496,
+        "powerHp": 408,
+        "powerKw": 300.08,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "provenance": {
+        "fuel": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powertrainKind": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "engineCc": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powerHp": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "powerKw": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "transmission": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ],
+        "drive": [
+          {
+            "modelId": "a89063f75687555839b774d7",
+            "variantId": "76a4d411b9200124107f1bfc",
+            "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+            "kind": "owner_reference",
+            "markets": [
+              "china"
+            ]
+          }
+        ]
+      },
+      "filledFields": [],
+      "matchMethod": "specification_consensus"
+    }
+  },
+  "candidates": [
+    {
+      "variantId": "5af45044c11410b9e6621923",
+      "revision": "c83ad05c-af17-4a99-b59f-e69400c9d8e9",
+      "constraints": {
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "engineCc": 1496,
+        "powerHp": 408,
+        "powerKw": 300.08,
+        "power30MinKw": 134,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "powertrainKind": "series_hybrid",
+      "powertrainSource": {
+        "kind": "manual",
+        "url": "https://github.com/jeep-jim/AvtoCena/blob/main/docs/encyclopedia/owner-references/2026-10-23-power-table.json",
+        "batchId": "research-2026-10-23-owner-li-l6-l7"
+      }
+    }
+  ]
+}

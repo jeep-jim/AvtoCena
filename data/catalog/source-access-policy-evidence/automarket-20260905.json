@@ -1,0 +1,35 @@
+{
+  "apiRequests": 0,
+  "catalogGenerationWrites": false,
+  "classificationMutations": false,
+  "completed": true,
+  "detailRequests": 0,
+  "generatedAt": "2026-09-05T02:00:13.198Z",
+  "guessedRoutes": false,
+  "home": {
+    "capturedBytes": 83462,
+    "contentType": "text/html; charset=utf-8",
+    "finalUrl": "https://www.automarket.ae/",
+    "hashSha256": "6b629a2cb3f80a0a77293075b0a345712b5214e5dbbb3e04081407ceafbcbd93",
+    "status": 200
+  },
+  "homeRequests": 1,
+  "mode": "permission_first_source_declared_legal_link_no_write",
+  "objectStorageWrites": false,
+  "paginationRequests": 0,
+  "permissionConclusion": "no_source_declared_legal_link_detected_on_home_permission_unproven",
+  "policyRequests": 0,
+  "productionWrites": false,
+  "publishAllowedMutations": false,
+  "rawBodiesStored": false,
+  "requestCount": 2,
+  "robots": {
+    "finalUrl": "https://www.automarket.ae/robots.txt",
+    "hashSha256": "e06597809984b91c0e22655a10b6f63b87b9588670b59336f97b08740e860545",
+    "status": 200
+  },
+  "robotsRequests": 1,
+  "sourceDeclaredLegalLinks": [],
+  "sourceId": "automarket_uae_candidate",
+  "version": 1
+}

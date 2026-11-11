@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-gm-wuling-star-launch-en-2023",
+          "type": "manufacturer",
+          "title": "SAIC-GM-Wuling Launches All-New Wuling Star Compact SUV",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2023/Sept/0920-wuling.html",
+          "documentId": "GM China Wuling 2023-09-20 EN",
+          "documentDate": "2023-09-20",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "transmission",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "groundClearanceMm"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English launch establishes Star as the public English model name and states the compact SUV's hybrid engine-battery-motor DHT layout and exact dimensions. Nominal 2.0 L is not converted to exact cc, and ambiguous maximum-power wording is not mapped."
+        },
+        {
+          "id": "src-gm-wuling-xingyun-launch-zh-2023",
+          "type": "manufacturer",
+          "title": "售价8.98万元起，“燃油SUV模范生”五菱星云正式上市",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2023/Sept/0920-wuling.html",
+          "documentId": "GM China Wuling 2023-09-20 ZH",
+          "documentDate": "2023-09-20",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official Chinese launch names exactly two configurations: Standard and Flagship. Prices are evidence only and are not stored in the technical encyclopedia contract."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingyun",
+          "brandId": "wuling",
+          "canonicalName": "Star",
+          "slug": "star",
+          "aliases": [
+            {
+              "value": "Xingyun",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "五菱 星云",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2023-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "HEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-gm-wuling-star-launch-en-2023",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch uses Wuling Star and describes a compact hybrid SUV launched on 2023-09-20."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Canonical public name corrected from a review-only romanization to SGMW's official English name Star; Xingyun remains a searchable transliteration alias.",
+            "Two launch grades are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingyun/launch-lineup-2023",
+          "modelId": "wuling/xingyun",
+          "name": "Launch lineup (2023)",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2023-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-star-launch-en-2023",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch confirms the all-new compact SUV on 2023-09-20."
+            }
+          ],
+          "researchNotes": [
+            "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingyun/launch-lineup-2023/standard",
+          "modelId": "wuling/xingyun",
+          "generationId": "wuling/xingyun/launch-lineup-2023",
+          "faceliftId": null,
+          "name": "Standard",
+          "aliases": [
+            {
+              "value": "标准型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-xingyun-launch-zh-2023"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "HEV",
+          "transmission": "DHT",
+          "lengthMm": 4610,
+          "widthMm": 1810,
+          "heightMm": 1670,
+          "wheelbaseMm": 2700,
+          "groundClearanceMm": 178,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-xingyun-launch-zh-2023",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Chinese launch confirms this exact grade identity in the two-grade 2023 lineup."
+            },
+            {
+              "sourceId": "src-gm-wuling-star-launch-en-2023",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "groundClearanceMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English model launch supplies the shared SUV hybrid DHT layout and exact exterior dimensions."
+            }
+          ],
+          "researchNotes": [
+            "Nominal 2.0 L displacement is not converted to an exact engineCc value.",
+            "The launch release's ambiguous 130 kW wording is intentionally not assigned to motorPeakKw, powerKw or legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/xingyun/launch-lineup-2023/flagship",
+          "modelId": "wuling/xingyun",
+          "generationId": "wuling/xingyun/launch-lineup-2023",
+          "faceliftId": null,
+          "name": "Flagship",
+          "aliases": [
+            {
+              "value": "旗舰型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-xingyun-launch-zh-2023"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "HEV",
+          "transmission": "DHT",
+          "lengthMm": 4610,
+          "widthMm": 1810,
+          "heightMm": 1670,
+          "wheelbaseMm": 2700,
+          "groundClearanceMm": 178,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-xingyun-launch-zh-2023",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Chinese launch confirms this exact grade identity in the two-grade 2023 lineup."
+            },
+            {
+              "sourceId": "src-gm-wuling-star-launch-en-2023",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "groundClearanceMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English model launch supplies the shared SUV hybrid DHT layout and exact exterior dimensions."
+            }
+          ],
+          "researchNotes": [
+            "Nominal 2.0 L displacement is not converted to an exact engineCc value.",
+            "The launch release's ambiguous 130 kW wording is intentionally not assigned to motorPeakKw, powerKw or legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

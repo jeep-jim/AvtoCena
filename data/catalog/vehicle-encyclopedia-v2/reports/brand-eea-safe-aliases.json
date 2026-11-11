@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactFullStringSegmentationRequired": true,
+    "knownSafeSameBrandTermsOnly": true,
+    "crossBrandCompositesRejected": true,
+    "reviewedSourceAliasOverrides": 20,
+    "maximumSegments": 4,
+    "safeAutomaticBrandResolution": true
+  },
+  "totals": {
+    "unresolvedEeaRawMakesReviewed": 1424,
+    "acceptedSafeAliases": 17,
+    "brandsUpdated": 8,
+    "stagedBrandsWithEeaAliases": 12,
+    "ambiguousAliases": 0
+  },
+  "accepted": [
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "rawMake": "FORD-CNG TECHNIK",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "registrations": 11537,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final",
+        "src-eea-co2cars-2024-provisional"
+      ],
+      "rule": "the EEA make value identifies Ford vehicles through the named CNG conversion manufacturer"
+    },
+    {
+      "brandId": "kgm",
+      "brand": "KGM",
+      "rawMake": "KG MOBILITY",
+      "years": [
+        2024,
+        2025
+      ],
+      "registrations": 11517,
+      "sourceIds": [
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional",
+        "src-kgm-actyon-global-2024"
+      ],
+      "rule": "KG Mobility is the company/source spelling for the public KGM vehicle brand"
+    },
+    {
+      "brandId": "mitsubishi",
+      "brand": "Mitsubishi",
+      "rawMake": "MITSUBISHI MOTORS CORPORATION",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "registrations": 9493,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final"
+      ],
+      "rule": "the EEA make value is the manufacturer company name for the Mitsubishi marque"
+    },
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "rawMake": "FORD-CNG-Technik",
+      "years": [
+        2020,
+        2021,
+        2022
+      ],
+      "registrations": 9462,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final"
+      ],
+      "rule": "the EEA make value identifies Ford vehicles through the named CNG conversion manufacturer"
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "rawMake": "GREAT WALL MOTOR CO. LTD.",
+      "years": [
+        2024,
+        2025
+      ],
+      "registrations": 5371,
+      "sourceIds": [
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value is the manufacturer company name for the Great Wall marque"
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "rawMake": "GREAT WALL MOTOR COMPANY LIMITED",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 4903,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final",
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value is the manufacturer company name for the Great Wall marque"
+    },
+    {
+      "brandId": "lamborghini",
+      "brand": "Lamborghini",
+      "rawMake": "AUTOMOBILI LAMBORGHINI S.P.A.",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2024,
+        2025
+      ],
+      "registrations": 1968,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value adds the manufacturer legal suffix to the Lamborghini marque"
+    },
+    {
+      "brandId": "lamborghini",
+      "brand": "Lamborghini",
+      "rawMake": "AUTOMOBILI LAMBORGHINI SPA",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 1735,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final",
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value adds the manufacturer legal suffix to the Lamborghini marque"
+    },
+    {
+      "brandId": "nissan",
+      "brand": "Nissan",
+      "rawMake": "NISSAN AUTOMOTIVE EUROPE",
+      "years": [
+        2020,
+        2021,
+        2022
+      ],
+      "registrations": 1667,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final"
+      ],
+      "rule": "the EEA make value is the regional manufacturer company spelling for the Nissan marque"
+    },
+    {
+      "brandId": "smart",
+      "brand": "Smart",
+      "rawMake": "MCC SMART",
+      "years": [
+        2020,
+        2021,
+        2022
+      ],
+      "registrations": 1620,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final"
+      ],
+      "rule": "MCC smart is the historical manufacturer/source spelling for the smart marque"
+    },
+    {
+      "brandId": "lamborghini",
+      "brand": "Lamborghini",
+      "rawMake": "AUTOMOBILI LAMBORGHINI",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 1191,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final",
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value is the manufacturer company wording for the Lamborghini marque"
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "rawMake": "GREAT WALL MOTOR COMPANY",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 1079,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final",
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value is the manufacturer company name for the Great Wall marque"
+    },
+    {
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "rawMake": "LUCID MOTORS",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 837,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final",
+        "src-eea-co2cars-2023-final",
+        "src-eea-co2cars-2024-provisional",
+        "src-eea-co2cars-2025-provisional"
+      ],
+      "rule": "the EEA make value adds the manufacturer company term to the Lucid marque"
+    },
+    {
+      "brandId": "mitsubishi",
+      "brand": "Mitsubishi",
+      "rawMake": "MITSUBISHI MOTORS THAILAND Ltd.",
+      "years": [
+        2020,
+        2021,
+        2022
+      ],
+      "registrations": 402,
+      "sourceIds": [
+        "src-eea-co2cars-2020-2022-final"
+      ],
+      "rule": "the EEA make value adds the manufacturer subsidiary and legal suffix to the Mitsubishi marque"
+    },
+    {
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "rawMake": "LUCID USA INC",
+      "years": [
+        2024
+      ],
+      "registrations": 50,
+      "sourceIds": [
+        "src-eea-co2cars-2024-provisional"
+      ],
+      "rule": "the EEA make value is the manufacturer company spelling for the Lucid marque"
+    },
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "rawMake": "FORD-CNG-TECHNIK",
+      "years": [
+        2023
+      ],
+      "registrations": 26,
+      "sourceIds": [
+        "src-eea-co2cars-2023-final"
+      ],
+      "rule": "the EEA make value identifies Ford vehicles through the named CNG conversion manufacturer"
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "rawMake": "GREAT WALL MOTOR CO LTD",
+      "years": [
+        2023
+      ],
+      "registrations": 14,
+      "sourceIds": [
+        "src-eea-co2cars-2023-final"
+      ],
+      "rule": "the EEA make value is the manufacturer company name for the Great Wall marque"
+    }
+  ],
+  "ambiguous": []
+}

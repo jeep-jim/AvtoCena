@@ -1,0 +1,569 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T09:57:49.333307+00:00",
+  "passed": true,
+  "scope": "Ограниченная выборка Audi A5 Europe: 7 карточек и две повторяющиеся технические группы. Действующий выпуск, не активация новой партии.",
+  "offersChecked": 7,
+  "comparisons": 91,
+  "matched": 91,
+  "rows": [
+    {
+      "offerId": "b362694ad04a30d7a58e3985",
+      "checks": {
+        "year": {
+          "search": 2024,
+          "card": 2024,
+          "equal": true
+        },
+        "trim": {
+          "search": "Sportback S-Line",
+          "card": "Sportback S-Line",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5254466,
+          "card": 5254466,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "6c14e90eca111cf7547c6507",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "Avant TFSI 110 kW S tronic Navi LED SHZ",
+          "card": "Avant TFSI 110 kW S tronic Navi LED SHZ",
+          "equal": true
+        },
+        "bodyType": {
+          "search": "wagon",
+          "card": "wagon",
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": 2315,
+          "card": 2315,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5278967,
+          "card": 5278967,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "4a89c13fe7866f0a97a892d7",
+      "checks": {
+        "year": {
+          "search": 2026,
+          "card": 2026,
+          "equal": true
+        },
+        "trim": {
+          "search": "Avant TFSI 110 kW S tronic Navi LED SHZ",
+          "card": "Avant TFSI 110 kW S tronic Navi LED SHZ",
+          "equal": true
+        },
+        "bodyType": {
+          "search": "wagon",
+          "card": "wagon",
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": 2315,
+          "card": 2315,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 110,
+          "card": 110,
+          "equal": true
+        },
+        "drive": {
+          "search": "fwd",
+          "card": "fwd",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 5278967,
+          "card": 5278967,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {}
+    },
+    {
+      "offerId": "f360b944a8ad8e7e871e28ef",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "card": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 204,
+          "card": 204,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 7040552,
+          "card": 7040552,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "9b5aa232d80669eeaa52892e",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "card": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 204,
+          "card": 204,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 6905188,
+          "card": 6905188,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "4e95ad3e1070c60e4cdea16c",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "card": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 204,
+          "card": 204,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 7040552,
+          "card": 7040552,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    },
+    {
+      "offerId": "db6c54d159235e14f668a032",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "card": "2.0 TFSI S Line Plus S Tronic*Navi*Matrix*Na",
+          "equal": true
+        },
+        "bodyType": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "grossVehicleWeightKg": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1984,
+          "card": 1984,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 204,
+          "card": 204,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 150,
+          "card": 150,
+          "equal": true
+        },
+        "drive": {
+          "search": null,
+          "card": null,
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "card": "permanent_encyclopedia:d6414b36c694264582932a226ddb232a5206bfbd142b4d4585f63854dc62b38a",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 7040552,
+          "card": 7040552,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      },
+      "rawRepresentationDifferences": {
+        "drive": {
+          "search": "",
+          "card": "$undefined"
+        }
+      }
+    }
+  ],
+  "unavailable": [],
+  "repeatedGroups": [
+    {
+      "offerIds": [
+        "6c14e90eca111cf7547c6507",
+        "4a89c13fe7866f0a97a892d7"
+      ],
+      "allCardsChecked": true
+    },
+    {
+      "offerIds": [
+        "f360b944a8ad8e7e871e28ef",
+        "9b5aa232d80669eeaa52892e",
+        "4e95ad3e1070c60e4cdea16c",
+        "db6c54d159235e14f668a032"
+      ],
+      "allCardsChecked": true
+    }
+  ],
+  "duplicateOfferIds": 0,
+  "rowsReturned": 48,
+  "catalogTotalReported": 420,
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
+    "calculationVersion": "17f9c42ed3c72dd791328afc2a33a65c4ef2b9a96239355f65e8e7ac4c08aa05"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "a2c1f1a9786c3a745dbc096888d8c7e67835c11b",
+    "calculationVersion": "17f9c42ed3c72dd791328afc2a33a65c4ef2b9a96239355f65e8e7ac4c08aa05"
+  },
+  "sameRelease": true,
+  "generationId": "gen_1792702445675_8c312f85"
+}

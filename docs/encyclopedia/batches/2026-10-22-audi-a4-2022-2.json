@@ -1,0 +1,1165 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4-2022-2",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3e143c90e302a5c93ea98498",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant S line S line 40 TDI quattro 150(204) S",
+      "expectedDigest": "afa2679be50b56aa3349cd19c7b5e2ecaeb18b04c52b263b254355f7bd4a78e7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "497ebe00500829d543c5d731",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TFSI quattro advanced",
+      "expectedDigest": "74252acbbef0ee1c0f005d4b287e140c2be22efd73bbbbc4b06899a17a8ab723",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "e9eb1af2d6fb64e356d4bf8b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TDI Qu*Pano*Kam*Leder*Busi*Tour*Stad",
+      "expectedDigest": "a313ec48a622b1e3b9329097e43b9a1f643c29b230e5d1f9e4d6111d90222cb4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "037532f30100fa49be535a3e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TDI S tronic quattro S line Navi LE",
+      "expectedDigest": "c467cc9c4ba0aad27030e350e42782809a4373d4fd376e77ca947904436e0d7b",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TDI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "10c1fc3f8c52f957aa8092d0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TFSI QU S-LINE COMPETITION AHK+PANO+",
+      "expectedDigest": "948a41d0695eee536ceb1e9c9b06b95e386f63d28fb229b3629e4b90d3292cef",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "271e42e443baa2521185e416",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TFSI quattro*S line*STHZ*AHK*19 Zoll",
+      "expectedDigest": "54a9a92ef64ba0565236c617c36c2922e18010eb097cdea3df0f2c19ba290891",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4ae08d8ac91339cdfc1d9225",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TFSI quattro S tronic S line | LED",
+      "expectedDigest": "910777ee762e6b8fb242dc7338feb330015338d87bd2e631f3170f121c653d99",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "939ab07c1a8279d4da067af0",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 40 TFSI Quattro S line S 2022 Camera Garantie!",
+      "expectedDigest": "551ded2dd69012be388473c3fdb1c0506f7a44ad25342c8b97b286d833dd6a43",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 40 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f966d16d03fb3192050a5aea",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro advanced",
+      "expectedDigest": "8f323039ec938339fc9b0ff2afe20ca5b21d70887cd92213fa42d41819d60cd9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d2b6c5ad1cd82f8002e68702",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro Navi virtual Head up",
+      "expectedDigest": "112f6ad9413acf7a433ca424606920d102ec6a77d5f38d3945acf388381d56dc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "05df1a9fd8b0ef2eac9d9730",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic advanced LED",
+      "expectedDigest": "a292d6bb099167c6c9ecf2dc0a0504b0e525d8fa569cf4d9b7bb6eb1fc84d3b4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "af5d7cea37b5c7712c763a67",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic advanced",
+      "expectedDigest": "6f4906f32cb2c29cec50d8a3eb355554f764dedd8e0f73f776f75162915fd53a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7f9e4332c28d6489f7384ea3",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant S line 45 TFSI quattro MATRIX NAVI ACC",
+      "expectedDigest": "4222976773cddf3ff7e3397344d0ee1678ead0f7695866d8a1b8d01c756d736c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "7d7e8cc61c30151c6bd52a01",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI S-LINE QUATTRO ACC KAMERA HI AH",
+      "expectedDigest": "5ef0416dd2afe2b36c691f0728e96fb09904a12ade1ac3aad169d04e20717281",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "71212b0d54c21406bac2192c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S line AHK",
+      "expectedDigest": "f70f469cd33f3be9573273ab4163935b6f459be7571974d15c4d620769d5d1c2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d6218b390f13fb1616cb9bcd",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "45 TFSI Avant S tr. quattro \"3xS-Line\"MATRIX\"",
+      "expectedDigest": "d79f6631704cde451da2cb501b4fa3a5ea9d38cc33a6560a6d4995e8b1d7c9e2",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "eb2ccb6cc4b8b0430adb02e1",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI qu. S-Line H&R 19Z LED Navi",
+      "expectedDigest": "7364f649ccf45b0a1e3462dad913cbc461bad45204935d641c803ee365940253",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "425d89fbee064ac91235bae8",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S tronic S line Navi Ma",
+      "expectedDigest": "19cdbf9020cda50dfa58c21b6964c162ec7597fb872997cb25271650c9876a7b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f51721a0d68d909ad4717e7c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2022,
+      "trim": "Avant 45 TFSI quattro S-line LED Panorama AHK",
+      "expectedDigest": "7c77e9120b14d7ab506bbff5ec145ee274d8f8fa222c5019284ff2b9a1f034bc",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, 2022. Прайс AUDI AG от 10.01.2022, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/82395c6284dab792b92ec1afa6014700221a3794700eaf16fb210a4734e1c58a.pdf",
+            "date": "2022-01-10",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              29,
+              105,
+              134
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

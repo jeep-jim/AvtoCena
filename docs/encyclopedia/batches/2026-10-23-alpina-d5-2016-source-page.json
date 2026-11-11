@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "id": "research-2026-10-23-alpina-d5-2016-source-page",
+  "entries": [
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "make": "Alpina",
+      "model": "D5",
+      "year": 2016,
+      "variantId": "733822c9c8502abfafc202af",
+      "trim": "3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC",
+      "expectedDigest": "86723fc06bff4549316b89fec119b591ef5cd9260f8a515bcce6e5c337993967",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2993,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "powerHp": 350,
+        "powerKw": 257
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальный заводской прайс ALPINA 2016-03, архив auto-preisliste.de. PDF3, печатная стр.2, точная колонка Limousine: дизель, 2993 см³, 257 кВт/350 PS, 8-ступенчатый автомат SWITCH-TRONIC. Дата и таблица визуально проверены. Сохранены только технические факты, без копирования PDF, оформления или редакционных текстов. Привод, коды и полная масса не выведены из других лет. Статус review. Уточнена ссылка на страницу даты: PDF16, а не PDF20; дата 03/2016 также напечатана на проверенной PDF3. Технические значения не менялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; trim",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "bodyType": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; bodyType",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "fuel": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; fuel",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "powertrainKind": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; powertrainKind",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "engineCc": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; engineCc",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "icePowerKw": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; icePowerKw",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "transmission": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; transmission",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "powerHp": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; powerHp",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "powerKw": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Limousine 8AT SWITCH-TRONIC; powerKw",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "make": "Alpina",
+      "model": "D5",
+      "year": 2016,
+      "variantId": "88c470f0b20976eac577bd9e",
+      "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC",
+      "expectedDigest": "9f381bd9edc7106aeb1797f5acca4f9fb78b929c641128a711ab0d7ca288a4f6",
+      "patch": {
+        "trim": "3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC",
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "engineCc": 2993,
+        "icePowerKw": 257,
+        "transmission": "automatic",
+        "powerHp": 350,
+        "powerKw": 257
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "icePowerKw",
+        "transmission",
+        "powerHp",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+        "checkedAt": "2026-10-23",
+        "statement": "Оригинальный заводской прайс ALPINA 2016-03, архив auto-preisliste.de. PDF3, печатная стр.2, точная колонка Touring: дизель, 2993 см³, 257 кВт/350 PS, 8-ступенчатый автомат SWITCH-TRONIC. Дата и таблица визуально проверены. Сохранены только технические факты, без копирования PDF, оформления или редакционных текстов. Привод, коды и полная масса не выведены из других лет. Статус review. Уточнена ссылка на страницу даты: PDF16, а не PDF20; дата 03/2016 также напечатана на проверенной PDF3. Технические значения не менялись.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; trim",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "bodyType": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; bodyType",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "fuel": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; fuel",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "powertrainKind": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; powertrainKind",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "engineCc": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; engineCc",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "icePowerKw": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; icePowerKw",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "transmission": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; transmission",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "powerHp": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; powerHp",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          },
+          "powerKw": {
+            "url": "https://www.auto-preisliste.de/download-preislisten-aller-marken/7-alpina/1177-alpina-d5-f10-f11-2011-2016/18558-2016-03-preisliste-alpina-d5-biturbo",
+            "checkedAt": "2026-10-23",
+            "effectiveAt": "2016-03",
+            "pdfPage": 3,
+            "datePage": 16,
+            "sourceSha256": "3353d47f86e178ccbc7bbebade526ccd7116c854ee8b9520a4417ec6fc86a9fc",
+            "selector": "D5 3.0 Bi-Turbo 350 PS Touring 8AT SWITCH-TRONIC; powerKw",
+            "sourcePublisher": "ALPINA Burkard Bovensiepen GmbH + Co. KG",
+            "sourceNature": "manufacturer original archived copy"
+          }
+        }
+      }
+    }
+  ]
+}

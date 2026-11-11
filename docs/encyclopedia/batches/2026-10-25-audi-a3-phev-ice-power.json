@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "id": "research-2026-10-25-audi-a3-phev-ice-power",
+  "entries": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e92bd483447de5b007a572ce",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "Sportback 40 TFSI e Advanced S-Line",
+      "expectedDigest": "d657c60c958c76590d9bd663de253ce06aa19ad78c72e7c35f760ad4acf089b1",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 150,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+        "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi18.07.2023,стр.1–2:1395см³,40/45TFSIe,6-ступенчатая S tronic,передний привод,бензиновый подключаемый гибрид. ДВС110кВт отделён от системы150/180кВт. Совпадают сохранённые объём,системнаямощность,кузовSportback/хетчбэк и автомат;год2024/имя/общаямощность не меняются. Preflight подтверждает отсутствие manualEdited и research/ASTRA/reference-доказательств старогоicePowerKw150/180, поэтому исправляется именно ошибочная мощностьДВС. Continuous55кВт не объявляется сертифицированной30-минутной мощностью.",
+        "fieldSources": {
+          "fuel": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+            "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "powertrainKind": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+            "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "drive": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+            "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "systemPowerKw": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+            "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "icePowerKw": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf?1698933899=",
+            "sourceSha256": "3af4c80ae9082d49ebfe392f30193b2036ea3fd7d7c6d2bc15ec3b7921038b80",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b4b8e164e959ad294b85fd34",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "Sportback S-Line 45TFSIe S-Line Interieur",
+      "expectedDigest": "e3ac5a4a5c2cbe357dfc0f07eda39e8454b3bb781901a1f51778d68125e477e3",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi18.07.2023,стр.1–2:1395см³,40/45TFSIe,6-ступенчатая S tronic,передний привод,бензиновый подключаемый гибрид. ДВС110кВт отделён от системы150/180кВт. Совпадают сохранённые объём,системнаямощность,кузовSportback/хетчбэк и автомат;год2024/имя/общаямощность не меняются. Preflight подтверждает отсутствие manualEdited и research/ASTRA/reference-доказательств старогоicePowerKw150/180, поэтому исправляется именно ошибочная мощностьДВС. Continuous55кВт не объявляется сертифицированной30-минутной мощностью.",
+        "fieldSources": {
+          "fuel": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "powertrainKind": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "drive": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "systemPowerKw": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "icePowerKw": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          }
+        }
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "420d9493f4aa7a04a8f68b9f",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2024,
+      "trim": "Sportback 45 TFSI E S-LINE ACC B&O VIRTUAL KA",
+      "expectedDigest": "2fb60109ed6a18a1a3198e57c4610ba524ff1240c938abc8f8ca6666fe266228",
+      "patch": {
+        "fuel": "hybrid",
+        "powertrainKind": "other_hybrid",
+        "drive": "fwd",
+        "systemPowerKw": 180,
+        "icePowerKw": 110
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "systemPowerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+        "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+        "checkedAt": "2026-10-25",
+        "statement": "Заводская таблица Audi18.07.2023,стр.1–2:1395см³,40/45TFSIe,6-ступенчатая S tronic,передний привод,бензиновый подключаемый гибрид. ДВС110кВт отделён от системы150/180кВт. Совпадают сохранённые объём,системнаямощность,кузовSportback/хетчбэк и автомат;год2024/имя/общаямощность не меняются. Preflight подтверждает отсутствие manualEdited и research/ASTRA/reference-доказательств старогоicePowerKw150/180, поэтому исправляется именно ошибочная мощностьДВС. Continuous55кВт не объявляется сертифицированной30-минутной мощностью.",
+        "fieldSources": {
+          "fuel": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "powertrainKind": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "drive": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "systemPowerKw": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          },
+          "icePowerKw": {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920=",
+            "sourceSha256": "2f8790f9b2b4ec5d396739297af20e203fbdc5d69a92775d02fe347082117ace",
+            "selector": "18.07.2023 pages1–2:engine110,system150/180,FWD,gasoline/hybrid with AC charging"
+          }
+        }
+      }
+    }
+  ]
+}

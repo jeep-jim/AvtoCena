@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 9,
+    "newModels": 9,
+    "officialManufacturerSources": 8,
+    "newMlitWorkbookSources": 0,
+    "totalNewSources": 8,
+    "modelsWithMlitIntersection": 9
+  },
+  "reviewed": [
+    {
+      "id": "toyota/gr-corolla",
+      "canonicalName": "GR Corolla",
+      "officialSourceId": "src-toyota-gr-corolla-japan-current-2026",
+      "exactSourceNames": [
+        "GRカローラ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "toyota/ist",
+      "canonicalName": "ist",
+      "officialSourceId": "src-toyota-ist-japan-archive-2026",
+      "exactSourceNames": [
+        "イスト"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015
+      ]
+    },
+    {
+      "id": "toyota/prius-alpha",
+      "canonicalName": "Prius α",
+      "officialSourceId": "src-toyota-prius-alpha-japan-archive-2026",
+      "exactSourceNames": [
+        "プリウス α"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "toyota/pixis-space",
+      "canonicalName": "Pixis Space",
+      "officialSourceId": "src-toyota-pixis-space-japan-archive-2026",
+      "exactSourceNames": [
+        "ピクシス スペース"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "id": "toyota/ractis",
+      "canonicalName": "Ractis",
+      "officialSourceId": "src-toyota-ractis-japan-archive-2026",
+      "exactSourceNames": [
+        "ラクティス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015
+      ]
+    },
+    {
+      "id": "honda/fit-shuttle",
+      "canonicalName": "FIT SHUTTLE",
+      "officialSourceId": "src-honda-automobiles-library-2026",
+      "exactSourceNames": [
+        "フィット シャトル"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016
+      ]
+    },
+    {
+      "id": "honda/n-box-slash",
+      "canonicalName": "N-BOX SLASH",
+      "officialSourceId": "src-honda-automobiles-library-2026",
+      "exactSourceNames": [
+        "N-BOX SLASH"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "subaru/exiga",
+      "canonicalName": "Exiga",
+      "officialSourceId": "src-subaru-exiga-japan-archive-2026",
+      "exactSourceNames": [
+        "エクシーガ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "subaru/trezia",
+      "canonicalName": "Trezia",
+      "officialSourceId": "src-subaru-trezia-japan-archive-2026",
+      "exactSourceNames": [
+        "トレジア*"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016
+      ]
+    }
+  ]
+}

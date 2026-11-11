@@ -1,0 +1,177 @@
+{
+  "checkedAt": "2026-10-23T19:16:38.750Z",
+  "mode": "preview",
+  "productionWrites": 0,
+  "verified": true,
+  "planDigest": "b5fae07d6bca04777b6e7b3d735911f24f1f278a0e63eb6ee7cf8754ffde517e",
+  "plan": {
+    "version": 1,
+    "release": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "generationId": "gen_1792702445675_8c312f85",
+    "sources": [
+      {
+        "id": "b65974b83d5399d588073fc5",
+        "digest": "569c9fd8e4e169f617284d84d435033cae02cf3911a7f74f25669cb0189f6691"
+      }
+    ],
+    "pinned": [
+      {
+        "path": "catalog/manifest.json",
+        "etag": "\"f3455e3f75616ded206c8d0a25509a4b\""
+      },
+      {
+        "path": "catalog/public/offers/1c.json",
+        "etag": "\"2a130748cde0136103011a0d144c9ddb\""
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/current-offers/1c3.json",
+        "etag": "\"81bec15528058d2a2e985cf1ae0a0af2\""
+      },
+      {
+        "path": "catalog/public/projection/uae.json",
+        "etag": "\"e5d8331efbe049cf625748000f402223\""
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection/uae.json",
+        "etag": "\"e5d8331efbe049cf625748000f402223\""
+      },
+      {
+        "path": "catalog/public/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+        "etag": "\"f47fc75b1a1b7af41df25e51360874f8\""
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+        "etag": "\"f47fc75b1a1b7af41df25e51360874f8\""
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/budget-markets-v1/ready.json",
+        "etag": "\"786ca06db6bfcd875e525a05c56c84be\""
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/budget-markets-v1/uae.json",
+        "etag": "\"4b2a4b93fdd456d017b2cc1ed801eeac\""
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/budget-cards-v3/1215.json",
+        "etag": "\"a29bbd58d7f8e58265be581607263c6d\""
+      },
+      {
+        "path": "catalog/public/projection/all.json",
+        "etag": "\"bbc5dd5cddf13d823d3034946d237b9c\""
+      }
+    ],
+    "objects": [
+      {
+        "path": "catalog/public/projection/uae.json",
+        "etag": "\"e5d8331efbe049cf625748000f402223\"",
+        "beforeDigest": "f6d5fd87fd2d26e7386030828082fef8322c2eaeecbbcf5b61fdd77c24ffd056",
+        "afterDigest": "2dab49e82d07e2b7c76c7cb8537dfd99f0c1514ea1b0e48cec46073f5ad84d9f",
+        "found": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "changed": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "rows": 22045
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection/uae.json",
+        "etag": "\"e5d8331efbe049cf625748000f402223\"",
+        "beforeDigest": "f6d5fd87fd2d26e7386030828082fef8322c2eaeecbbcf5b61fdd77c24ffd056",
+        "afterDigest": "2dab49e82d07e2b7c76c7cb8537dfd99f0c1514ea1b0e48cec46073f5ad84d9f",
+        "found": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "changed": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "rows": 22045
+      },
+      {
+        "path": "catalog/public/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+        "etag": "\"f47fc75b1a1b7af41df25e51360874f8\"",
+        "beforeDigest": "955038ca252fe29d9b2ca1efa26ec16debcbad5d307967c61b79564d1fdc7b74",
+        "afterDigest": "2e13be3c638f7ad8a6cefa474124ec6d96336dacc7d57cf8a98003e040b5aa18",
+        "found": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "changed": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "rows": 314
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-brand/aston-martin-9af5f7e4f3ea3794.json",
+        "etag": "\"f47fc75b1a1b7af41df25e51360874f8\"",
+        "beforeDigest": "955038ca252fe29d9b2ca1efa26ec16debcbad5d307967c61b79564d1fdc7b74",
+        "afterDigest": "2e13be3c638f7ad8a6cefa474124ec6d96336dacc7d57cf8a98003e040b5aa18",
+        "found": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "changed": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "rows": 314
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/budget-cards-v3/1215.json",
+        "etag": "\"a29bbd58d7f8e58265be581607263c6d\"",
+        "beforeDigest": "4d2daa7f777b1139420dfad529b56c1536ba01d04bb5f9f90b2d15dd439a1c5e",
+        "afterDigest": "a885118080a90dfa7119d984a0ba3b056f00db22ffcb1551707541ef9cd28720",
+        "found": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "changed": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "rows": 256
+      },
+      {
+        "path": "catalog/generations/gen_1792702445675_8c312f85/indexes/projection-parts/all/30-3d36858f2c75dfe90e991d353a3689e2c3231b74325bff0899f172989883dd23.json",
+        "etag": null,
+        "beforeDigest": "3d36858f2c75dfe90e991d353a3689e2c3231b74325bff0899f172989883dd23",
+        "afterDigest": "eb72d51d62b90260c06918d531087e73db328313dedbaf8adb7eba2625e6da76",
+        "found": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "changed": [
+          "b65974b83d5399d588073fc5"
+        ],
+        "rows": 1000
+      }
+    ],
+    "budgetTargets": [
+      {
+        "id": "b65974b83d5399d588073fc5",
+        "block": 1215,
+        "inOtherRows": true,
+        "hasReplay": false,
+        "storedTotal": 0
+      }
+    ]
+  },
+  "beforeHealth": {
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "afterHealth": {
+    "releaseSha": "554e1bfdd3e901c39a3d67c696c21674a1fbe232",
+    "calculationVersion": "e8e61fe0084791a4604b55ffadb192e33a41a50746b7ed2769c392f0f059e71d"
+  },
+  "beforeWriter": {
+    "operationId": "read-model-repair-acff5335-fa4f-4b6f-9408-b0afc7758b12",
+    "lockedUntil": "2026-10-23T18:55:03.906Z"
+  },
+  "afterWriter": {
+    "operationId": "read-model-repair-acff5335-fa4f-4b6f-9408-b0afc7758b12",
+    "lockedUntil": "2026-10-23T18:55:03.906Z"
+  },
+  "partReads": 325,
+  "bytesRead": 684938285,
+  "changedObjects": 6,
+  "changedValues": 0,
+  "remaining": [
+    "Apply requires exact fresh source/generation/ETag checks and writer lease; no apply is implemented by this preview.",
+    "Price snapshots and live search/detail parity require verification after repair."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T21:22:50.569522Z",
+  "installedRelease": "e7a30716fad957202890c82f59274e8f0b2ec38a",
+  "installedIndex": "93e2ea94eece8b495cf6024e4c2fa0c5ed1958e5d263ef719454cfb58ba8e662",
+  "bodyParityAccepted": true,
+  "pendingBatch": "docs/encyclopedia/batches/2026-10-24-audi-a3-2024-2025-body.json",
+  "canonicalDigest": "45d6cd021d8a8485681cc82c35a518c389eb99f6754895cd7dcdb5f9251e3227",
+  "pendingFields": 50,
+  "requiredResearchBatches": 24,
+  "publicResearchBatches": 10,
+  "freshPreflight": {
+    "workflow": 40026042515,
+    "job": 120662380193,
+    "conclusion": "success",
+    "checkedAt": "2026-10-23T21:21:02.570Z",
+    "writerActive": false,
+    "generationId": "gen_1792702445675_8c312f85"
+  },
+  "scheduledCatalogRefresh": {
+    "workflow": 40026092554,
+    "job": 120662842086,
+    "event": "schedule",
+    "createdAt": "2026-10-23T21:20:57Z",
+    "status": "in_progress",
+    "observedStage": "npm ci before owner-switch check/collection",
+    "writerLeaseNotYetObserved": true
+  },
+  "newDeployRequested": false,
+  "researchWritesPaused": false,
+  "nextAction": "After existing scheduled China refresh reaches terminal, read logs/result and fresh publication lease; reconcile pending research and launch one coordinated index release. Do not duplicate/cancel/restart collection or change owner switches. A collector error is not a withdrawal. Current writerActive=false is not proof that the future publish cannot overlap."
+}

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T02:59:28.205619+07:00",
+  "savedVariants": 67,
+  "confirmedFieldAssertions": 543,
+  "groups": [
+    {
+      "group": "Alpina/Alpine",
+      "variants": 5,
+      "fields": 36,
+      "report": "docs/encyclopedia/reports/2026-10-22-alpina-alpine-pass.json"
+    },
+    {
+      "group": "Aston Martin",
+      "variants": 32,
+      "fields": 237,
+      "report": "docs/encyclopedia/reports/2026-10-22-aston-pass.json"
+    },
+    {
+      "group": "Audi A1 2025",
+      "variants": 30,
+      "fields": 270,
+      "report": "docs/encyclopedia/reports/2026-10-22-audi-a1-pass.json"
+    }
+  ],
+  "nextAction": "Audi A1 remaining years,then Audi A3",
+  "integration": {
+    "status": "not_implemented",
+    "visitorRequestSearchOrSyncAdded": false
+  }
+}

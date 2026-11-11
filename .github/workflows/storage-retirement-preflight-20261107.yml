@@ -1,0 +1,70 @@
+name: Owner storage retirement preflight 2026-11-07
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/storage-retirement-preflight-20261107.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: owner-storage-retirement-preflight
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - run: npm ci --ignore-scripts
+      - name: Read current instructions and preserve latest roadmap
+        run: |
+          mkdir -p retirement-preflight
+          cat AGENTS.md
+          tail -n 240 roadmap.md > retirement-preflight/roadmap-tail.md
+          git rev-parse HEAD > retirement-preflight/revision.txt
+      - name: Read REG references and remaining Yandex resources
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node --import tsx .github/diagnostics/storage-retirement-preflight.mjs
+      - name: Read runtime dependency names only
+        if: always()
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY' | tee retirement-preflight/runtime-dependencies.json
+          import subprocess,json,urllib.parse
+          raw=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
+          env=dict(v.split('=',1) for v in raw['Config']['Env'] if '=' in v)
+          report={'environmentNamesWithYandexService':[],'storageIsREG':False,'releaseSha':env.get('AVTOCENA_RELEASE_SHA'),'containerRunning':raw['State']['Running']}
+          for k,v in env.items():
+              if k=='YC_OBJECT_STORAGE_ENDPOINT':report['storageIsREG']=urllib.parse.urlparse(v).hostname=='s3.regru.cloud'
+              if any(h in v.lower() for h in ['yandexcloud.net','api.cloud.yandex.net','cr.yandex']):report['environmentNamesWithYandexService'].append(k)
+          print(json.dumps(report))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: storage-retirement-preflight
+          path: retirement-preflight
+          retention-days: 7

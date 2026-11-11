@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T21:15:00+07:00",
+  "model": "Alpina D3",
+  "modelId": "5dfcc65f1b57038636b1cce6",
+  "scope": "Проверенные ранние годовые исполнения, не полнота модели",
+  "state": "saved_api_readback_pass_pending_index",
+  "operations": 20,
+  "newVariants": 20,
+  "updatedVariants": 0,
+  "confirmedFields": 184,
+  "newByYear": {
+    "2008": 2,
+    "2009": 6,
+    "2010": 6,
+    "2011": 4,
+    "2013": 2
+  },
+  "finalVariants": 21,
+  "researchedVariants": 20,
+  "revision": "29d73d39-a5cd-4061-ab4a-00ce4d665e0a",
+  "batches": [
+    {
+      "key": "alpina-d3-2008-2009-factory",
+      "commit": "055b642d9d636b7a9e5b0a28affd08c860a234e9",
+      "workflow": 39792096245,
+      "job": 119870452619,
+      "variants": 8,
+      "newVariants": 8,
+      "fields": 76,
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "batch": "research-2026-10-22-alpina-d3-2008-2009-factory",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2008-2009-factory-readback.json"
+    },
+    {
+      "key": "alpina-d3-2010-2011-2013-official-tables",
+      "commit": "ed3eed26d1f5d66fc2847cea0cc1d1b549c673e1",
+      "workflow": 39792747303,
+      "job": 119872582899,
+      "variants": 12,
+      "newVariants": 12,
+      "fields": 108,
+      "workflowStatus": "completed",
+      "workflowConclusion": "success",
+      "applyStepConclusion": "success",
+      "allReportedStepsConclusion": "success",
+      "terminalStatusPending": false,
+      "batch": "research-2026-10-22-alpina-d3-2010-2011-2013-official-tables",
+      "apiReadback": true,
+      "includedInIndex": false,
+      "indexMembershipState": "applied_after_active_release_index_snapshot",
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-2010-2011-2013-official-tables-readback.json"
+    }
+  ],
+  "validation": {
+    "guards": "8/8 PASS",
+    "independentApiReadback": "20/184 PASS",
+    "preservedExistingVariants": 1,
+    "manualWrites": 0,
+    "duplicatesAdded": 0,
+    "calculationFieldsCompiled": 164,
+    "identityFields": 20,
+    "productionCompilerChanged": false,
+    "preservationReport": "docs/encyclopedia/reports/2026-10-22-alpina-d3-preservation-and-compiler.json",
+    "freshCardSearchParityConfirmed": false
+  },
+  "sourceScope": {
+    "factory": "Заводской анонс05.03.2008, оригинальная брошюраALPINA April2009 на архивных хостах; автор и хост различаются.",
+    "officialReference": "TCS/EnergieSchweiz/BFE, срезы05/2010,09/2011,09/2013. official_registry, не заводские факты и не индивидуальная омологация. Каталог2014 со срезом2013 создаёт только2013."
+  },
+  "integration": {
+    "checkedAt": "2026-10-22T21:15:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "healthCalculationVersion": "fa43b658e67b948cc36454456d989ca233f8931029209a53221c4464de0be2c5",
+    "lastKnownActiveIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "newBatchesActivationConfirmed": false,
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "status": "queued",
+      "conclusion": null
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "Один совокупный защищённый индекс после уже сопровождаемой отдельной задачей публикации Китая; проверить членство новых записей и активацию. Не дублировать выпуск."
+  },
+  "remaining": [
+    "2008: ранняя одноступенчатая D3 200 PS и фактические даты появления Bi-Turbo Saloon/Touring требуют отдельного годового подтверждения; анонс будущего выпуска не принят за наличие.",
+    "Купе2008: точные1995см³, разрешённая полная масса, привод и коды не перенесены из таблицы2009 без подтверждения.",
+    "2011 Saloon и вся гамма2012: отсутствуют проверенные годовые таблицы. 403/robots у архивов2011/2012 не означает отсутствия моделей; доступ не обходился.",
+    "2010/2011/2013: привод, коды двигателя/кузова, ступени коробки и разрешённая полная масса не подтверждены; колонка снаряжённой массы не использована.",
+    "2009: привод и точные коды двигателя/кузова требуют руководства/омологации.",
+    "D3 F30/F31 с2013, последующие годы и D3S2020+ ещё не пройдены; исходная запись2026 сохранена, её год и идентичность не подтверждены.",
+    "Исторические D3 не проверены в действующих карточках/выдаче: новые партии ещё не активированы в индексе; прежние каталожные проверки не выданы за новые."
+  ],
+  "next": "Alpina D3 F30/F31 с2013, затем поздние D3/D3S, D5 и Alpine",
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-d3-early-remaining.json",
+  "handoff": "docs/encyclopedia/research-handoff-2026-10-22-alpina-d3-2013.json"
+}

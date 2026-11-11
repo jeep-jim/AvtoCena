@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a7-2024-cn",
+  "entries": [
+    {
+      "modelId": "1db9a9057b9919c24b8a0e67",
+      "variantId": "f04604f3e595dfe08638e39c",
+      "make": "Audi",
+      "model": "A7",
+      "year": 2024,
+      "trim": "45 TFSI Select Type",
+      "expectedDigest": "a160976d6a2de89cfef9539ed898db9d18a260a4c35a166898b564fc9d9a8e11",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 195,
+        "powerHp": 265,
+        "icePowerKw": 195,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A7_sportback_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A7 Sportback, китайский заводской каталог из раздела моделей2024, редакция2023.Q4. ТаблицаPDF стр.14, дата стр.20 визуально проверены. Точное исполнение 45 TFSI Select Type: ДВС 1984см³/195кВт, передний привод,7-ступенчатая S tronic с двумя сцеплениями. Метрические л.с. вычислены round(kW/0.73549875). Подтверждены только эти6 полей; тип гибридизации, полная масса и30-минутная мощность не установлены. На строки других годов эта редакция не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A7_sportback_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 / 2024 model section",
+            "pages": [
+              14,
+              20
+            ],
+            "sha256": "7d53498b686e8e59598d70591c6a8d3ff3d3239d485ef3cb9ddc603de76691fc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1db9a9057b9919c24b8a0e67",
+      "variantId": "7646a2ca7c21ba0fa15ab87d",
+      "make": "Audi",
+      "model": "A7",
+      "year": 2024,
+      "trim": "55 TFSI quattro Premium Type",
+      "expectedDigest": "d189d33eed139125afc4a0aef79a2393ec15d2e7f44ee52593889c3c01b0727d",
+      "patch": {
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "drive": "awd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A7_sportback_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A7 Sportback, китайский заводской каталог из раздела моделей2024, редакция2023.Q4. ТаблицаPDF стр.14, дата стр.20 визуально проверены. Точное исполнение 55 TFSI quattro Premium Type: ДВС 2995см³/250кВт, quattro,7-ступенчатая S tronic с двумя сцеплениями. Метрические л.с. вычислены round(kW/0.73549875). Подтверждены только эти6 полей; тип гибридизации, полная масса и30-минутная мощность не установлены. На строки других годов эта редакция не переносилась.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A7_sportback_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 / 2024 model section",
+            "pages": [
+              14,
+              20
+            ],
+            "sha256": "7d53498b686e8e59598d70591c6a8d3ff3d3239d485ef3cb9ddc603de76691fc",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    }
+  ]
+}

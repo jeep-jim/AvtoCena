@@ -1,0 +1,1809 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "miit-road-vehicle-products",
+  "batch": 331,
+  "status": "sampled",
+  "totalExpected": 5670,
+  "products": [
+    {
+      "qymc": "一汽(四川)专用汽车有限公司",
+      "cpsb": "远达牌",
+      "clxh": "SCZ5060XJE6",
+      "clmc": "监测车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W4149670"
+    },
+    {
+      "qymc": "一汽(四川)专用汽车有限公司",
+      "cpsb": "远达牌",
+      "clxh": "SCZ5070ZYS6",
+      "clmc": "压缩式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8163683"
+    },
+    {
+      "qymc": "一汽(四川)专用汽车有限公司",
+      "cpsb": "远达牌",
+      "clxh": "SCZ5071ZXX6",
+      "clmc": "车厢可卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8163293"
+    },
+    {
+      "qymc": "一汽(四川)专用汽车有限公司",
+      "cpsb": "远达牌",
+      "clxh": "SCZ5180TDY6",
+      "clmc": "多功能抑尘车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W2148073"
+    },
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "大众牌",
+      "clxh": "FV6462RADCG",
+      "clmc": "多用途乘用车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1155825"
+    },
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "大众牌",
+      "clxh": "FV7002CABEV",
+      "clmc": "纯电动轿车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156554"
+    },
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "奥迪(AUDI)牌",
+      "clxh": "FV70010CABEV",
+      "clmc": "纯电动轿车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1153424"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1030C1DG1E5",
+      "clmc": "多用途货车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7114034"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1030C1DG1E5",
+      "clmc": "多用途货车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3072316"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1030C1DG2E5",
+      "clmc": "多用途货车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7112439"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1030C1DG2E5",
+      "clmc": "多用途货车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3073858"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1040C0CD1E5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3015593"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1040DCRE5-1",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S8124179"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1040DCRE5-1",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2885811"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1040PCRE5",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S1199273"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1040PCRE5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2819282"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1041DCRE5",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R6184226"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1041DCRE5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2764390"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1081DCRE5",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S5118499"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1081DCRE5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2857410"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1082C1A1E5",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8165344"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1082C1A1E5D",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3284400"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1101DCRE5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2958570"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1110C2A1E5",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8164540"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1110C2A1E5D",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3284760"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1160C2GF1E5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2990285"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1250C3KF4E5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2991045"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL1310C4MF6E5",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3085533"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL2041DCRE5",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2958885"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3040C1D1E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W7158986"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3040C1D1E5D",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3278703"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3041C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3015239"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3042C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3027142"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3043C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3028175"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3044C2FF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3189315"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3120C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2990645"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3121C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3027964"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3160C1DF1E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T9111933"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3160C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2990904"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3161C1DF1E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U2117388"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3161C1DF1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3028301"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3251C2GF3E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U1116148"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3251C2GF3E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3016323"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3251C2KF3E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U1114411"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3251C3KF4E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U1115313"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3251C3KF4E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3015315"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3252C2GF3E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U9117538"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3252C2KF3E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U9118443"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3252C3KF4E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3111063"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3310C3KF6E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U0112602"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3310C3KF6E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3002726"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3311C4MF6E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7113541"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3311C4MF6E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3073305"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3312C4MF6E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V2123217"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3312C4MF6E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3123964"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3312C4NF6E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V2123401"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3312C4PF6E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V2122749"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL3313C4LF6E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3135469"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4180C3FF4E5",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V2122813"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4250C4GF4E5",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T8312714"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4251C4GF4E5",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U4110555"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4251Q4F4E6",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W2149361"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4252C4GF4E5",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V0119954"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4252Q4F4E6",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8165082"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL4253C4F4E5",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W5154259"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5030TYHE5",
+      "clmc": "路面养护车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U3119215"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5040CCYDCRE5",
+      "clmc": "仓栅式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S1199419"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5040CCYDCRE5-1",
+      "clmc": "仓栅式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S8125778"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5040XXYDCRE5",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S1198767"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5040XXYDCRE5-1",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S8125462"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041CCYDCRE5",
+      "clmc": "仓栅式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R6185064"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041CTYE5",
+      "clmc": "桶装垃圾运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V0119862"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041TPBE5",
+      "clmc": "平板运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U1116049"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041TQZDCRE5",
+      "clmc": "清障车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T3139508"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041XCCE5",
+      "clmc": "餐车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W3146417"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041XLCDCRE5",
+      "clmc": "冷藏车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T2134937"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041XLJE5",
+      "clmc": "旅居车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U5120709"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041XXYDCRE5",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R6184932"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5041ZLJE5",
+      "clmc": "自卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U5120691"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5081CCYDCRE5",
+      "clmc": "仓栅式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S5118872"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5081TSLE5",
+      "clmc": "扫路车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T8310842"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5081TXCE5",
+      "clmc": "吸尘车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U1115542"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5081XXYDCRE5",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S5118616"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5101TXSE5",
+      "clmc": "洗扫车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U5120764"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5161TDYE5",
+      "clmc": "多功能抑尘车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V2123408"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5161TXCE5",
+      "clmc": "吸尘车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U9117654"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5161TXSE5",
+      "clmc": "洗扫车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U3119335"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5161XLCE5",
+      "clmc": "冷藏车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U3118756"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5161ZDJE5",
+      "clmc": "压缩式对接垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V0120659"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5161ZXXE5",
+      "clmc": "车厢可卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7113515"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5180XXYC2KF1E5",
+      "clmc": "厢式运输车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2990990"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5181XLCE5",
+      "clmc": "冷藏车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U6122639"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5251GJBE5",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U8115402"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5251GXSE5",
+      "clmc": "清洗洒水车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V0119277"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5251JSQE5",
+      "clmc": "随车起重运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U9118716"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5251ZLJE5",
+      "clmc": "自卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V1121619"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5251ZXXE5",
+      "clmc": "车厢可卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U8116808"
+    },
+    {
+      "qymc": "一汽凌源汽车制造有限公司",
+      "cpsb": "沪尊牌",
+      "clxh": "CAL5310ZLJC4LF6E5",
+      "clmc": "自卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V3124671"
+    },
+    {
+      "qymc": "一汽吉林汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA6440EVL1",
+      "clmc": "纯电动多用途乘用车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156376"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1040K3L1RE5W-2",
+      "clmc": "载货汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1153517"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1040K3L1RE5W-2",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3314574"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1040K6L3E6B",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3315036"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA2040K2L3E5",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2930446"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA2040K2L3RE5",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2937758"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA3040K3L1E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154567"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA3040K3L1E5",
+      "clmc": "自卸汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3316138"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA3040K7L2E5",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R8190345"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA3040K7L2E5-1",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S3113573"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA3040K7L2E5-3",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W3147478"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA3040K7L2E5-4",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8164852"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040CCYK3L1RE5W-2",
+      "clmc": "仓栅式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1155901"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040CCYK6L3E6B",
+      "clmc": "仓栅式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1155930"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040CYFK11LE5W",
+      "clmc": "养蜂车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W4150966"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040XSHK35L3E5-1",
+      "clmc": "售货车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T5349552"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040XSHK6L3E5-1",
+      "clmc": "售货车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T4142262"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040XXYK3L1RE5W-2",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154336"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040XXYK6L3E5-4",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W4151449"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040XXYK6L3E6B",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154119"
+    },
+    {
+      "qymc": "一汽红塔云南汽车制造有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040ZXXK3LE5",
+      "clmc": "车厢可卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V3124314"
+    },
+    {
+      "qymc": "一汽解放汽车有限公司无锡锡柴汽车厂",
+      "cpsb": "凤凰牌",
+      "clxh": "FXC9400XXY",
+      "clmc": "厢式运输半挂车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T2135139"
+    },
+    {
+      "qymc": "一汽解放汽车有限公司无锡锡柴汽车厂",
+      "cpsb": "凤凰牌",
+      "clxh": "FXC9405XYK",
+      "clmc": "翼开启厢式半挂车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154607"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1200P1K2L7T3BE5A80",
+      "clmc": "平头柴油载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2753012"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1250P1K2L5T3BE5A80",
+      "clmc": "平头柴油载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2748607"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1250P1K2L7T3BE5A80",
+      "clmc": "平头柴油载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2748408"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA4163P1K15E5A80",
+      "clmc": "平头柴油牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R2166235"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA4250P25K2T1E5A1",
+      "clmc": "危险品运输半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R3276434"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5041XXYP40L2BEVA84",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156315"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5250XXYP1K2L7T3E5A80-3",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "R4178090"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1256T1E",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2752105"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1257T1E",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3237516"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1E",
+      "clmc": "载货汽车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "2872513"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3257ZZX1E",
+      "clmc": "自卸汽车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W4151311"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM4253T3Z3E",
+      "clmc": "半挂牵引车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1153787"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5165JQZ(STC120C)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T2135826"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5170GXFAP40",
+      "clmc": "压缩空气泡沫消防车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U8115226"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5250ZLJ1E",
+      "clmc": "自卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S6121074"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5255ZLJ1E",
+      "clmc": "自卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T3140391"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5290THBES",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156168"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5310GJB1E",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "S7123822"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5310GJB1EZ",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8165315"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5310ZLJ1E",
+      "clmc": "自卸式垃圾车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T1133922"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5311GJB1EZ",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154078"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5311GJB2F1",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156102"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5316GJB1EA",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8163237"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5337JQZ(STC250E5)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8164946"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5340THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4126649"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5341THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4126660"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5345JQZ(STC250T)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "T6151686"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5349JQZ(STC300E5)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8164658"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5350THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4125762"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5350THB1F",
+      "clmc": "混凝土泵车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3313830"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5351THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4125585"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5352THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V6129533"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5353THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W3147377"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5356THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W0147165"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5356THBEQ",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154034"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5357THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W6155846"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5359THBEB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W7159413"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5359THBEQ",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156532"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5359THBFV",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8165558"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5385JQZ(STC350E5)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W6155861"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5395JQZ(STC400T)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W1145263"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5422JXFJP48",
+      "clmc": "举高喷射消防车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V0120020"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5427THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1155667"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5440THB1E",
+      "clmc": "混凝土泵车底盘",
+      "gppc": 331,
+      "dataTag": "D",
+      "cpid": "3112032"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5440THBF",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W6156893"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5440THBV",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7112871"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5442THBEB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W6157394"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5443THBF",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W3147400"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5443THBV",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8164763"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5445THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4126769"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5445THBES",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8163875"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5445THBV",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W7159024"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5446THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U3119887"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5446THBF",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W6156576"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5448THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W8164153"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5448THBF",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W3148778"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5449THBE",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W7159121"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5451JQZ(STC600T6)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1153249"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5506JQZ(STC900T)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1153217"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5506JQZ(STC900T6)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154539"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5538THB",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4126271"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5540THBF",
+      "clmc": "混凝土泵车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W6157988"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5557JQZ(SAC1300T)",
+      "clmc": "全地面起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "V4126923"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5558JQZ(STC1100T2)",
+      "clmc": "汽车起重机",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154271"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5022XQCN1GC",
+      "clmc": "囚车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1153471"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5022XZHN1GC",
+      "clmc": "指挥车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156254"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5031XJCC1GC-A",
+      "clmc": "检测车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1155928"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5031XKCFAGC-A",
+      "clmc": "勘察车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W5154779"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5031XKCGAGC-A",
+      "clmc": "勘察车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W5152433"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5031XZHFAGC-A",
+      "clmc": "指挥车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W5154131"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5031XZHGAGC-A",
+      "clmc": "指挥车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W5153300"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XGCE8DC-D",
+      "clmc": "工程车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W2147513"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XGCE8DC-D1",
+      "clmc": "工程车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W2148122"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XKCE8DC",
+      "clmc": "勘察车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1156426"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XKCE8DC-D",
+      "clmc": "勘察车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154555"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XKCGADC-A",
+      "clmc": "勘察车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "X1154586"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XXYD8D5-1",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7114471"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XXYD8DC-1",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "W2149595"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5032XXYE8D5-1",
+      "clmc": "厢式运输车",
+      "gppc": 331,
+      "dataTag": "Z",
+      "cpid": "U7113599"
+    }
+  ]
+}

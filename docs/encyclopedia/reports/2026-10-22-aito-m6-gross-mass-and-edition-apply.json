@@ -1,0 +1,215 @@
+{
+  "checkedAt": "2026-10-22T04:41:31.798Z",
+  "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+  "commit": "fb7899063f30cec410c00cc33afcea9f68b067a8",
+  "workflow": 39723671616,
+  "job": 119642630433,
+  "conclusion": "success",
+  "guards": {
+    "tests": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "a509545256f3729336fdfc6f",
+          "changes": [
+            {
+              "variantId": "f95ceb79d43685224a299759",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "90641a1cfb521cd2c45d7689",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "8c34f3907fa45adb900ed6c0",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "478432305a9118c46fd3e4f7",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "77adb4c03bdb1412a28109c8",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "235609122d33377c27a6c21a",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f76c9efd82f7b91a385b16e0",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "49caade874ae04290cb92097",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "a4888807696fe9d693d3f3b7",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f43a569e298d5682ed842aef",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "346c7414d8e9062518476566",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "12ea4ae30cca59af81e4b491",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "abb130ef6af08f54f7a1ae8a",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "batteryKwh",
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:40:54.897Z",
+      "finishedAt": "2026-10-22T04:40:58.107Z"
+    },
+    {
+      "batch": "research-2026-10-22-aito-m6-gross-mass-and-edition",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "a509545256f3729336fdfc6f",
+          "changes": [
+            {
+              "variantId": "f95ceb79d43685224a299759",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "90641a1cfb521cd2c45d7689",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "8c34f3907fa45adb900ed6c0",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "478432305a9118c46fd3e4f7",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "77adb4c03bdb1412a28109c8",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "235609122d33377c27a6c21a",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f76c9efd82f7b91a385b16e0",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "49caade874ae04290cb92097",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "a4888807696fe9d693d3f3b7",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "f43a569e298d5682ed842aef",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "346c7414d8e9062518476566",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "12ea4ae30cca59af81e4b491",
+              "fields": [
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "abb130ef6af08f54f7a1ae8a",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "drive",
+                "batteryKwh",
+                "engineCc",
+                "engineCode",
+                "grossVehicleWeightKg"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:40:58.330Z",
+      "finishedAt": "2026-10-22T04:41:05.503Z"
+    }
+  ]
+}

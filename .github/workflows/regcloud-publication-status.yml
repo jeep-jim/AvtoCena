@@ -1,0 +1,132 @@
+name: Regcloud — read publication lock
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-publication-status.json']
+permissions:
+  contents: read
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Read two metadata objects without changing storage
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          node --import tsx --input-type=module <<'STATUS'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const storage=getJsonStorage();
+          const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);
+          console.log('PUBLICATION_STATUS',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,writer:{active:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,operationId:lock?.operationId,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}}));
+          const {readFile}=await import('node:fs/promises');
+          const marker=JSON.parse(await readFile('.github/market-runs/regcloud-publication-status.json','utf8'));
+          if(marker.inspectBudgetSelectors === true){
+            const {inspectBudgetMarketSelectors}=await import('./apps/web/lib/catalog/storage.ts');
+            const {directory,...report}=await inspectBudgetMarketSelectors();
+            console.log('BUDGET_SELECTOR_INSPECTION',JSON.stringify(report));
+          }
+          if(marker.inspectPreparedAstraRelease){
+            const {verifyPreparedAstraRelease}=await import('./scripts/encyclopedia/verify-prepared-astra.mjs');
+            await verifyPreparedAstraRelease(marker.inspectPreparedAstraRelease);
+          }
+          if(marker.inspectStagedGeneration === true){
+            const internal=await storage.readJson('catalog/internal/manifest.json',null);
+            const generationId=internal?.generationId;
+            if(!/^gen_[0-9]+_[a-z0-9-]+$/.test(generationId||''))throw Error('invalid_staged_generation');
+            const prefix='catalog/generations/'+generationId+'/';
+            const objects=await storage.listObjects(prefix);
+            const groups={};
+            for(const object of objects){
+              const relative=object.key.slice(prefix.length),parts=relative.split('/');
+              const group=parts.slice(0,2).join('/');
+              const value=groups[group]||{objects:0,bytes:0};value.objects++;value.bytes+=Number(object.size||0);groups[group]=value;
+            }
+            const [facets,brands]=await Promise.all([storage.readJson('catalog/public/facets.json',null),storage.readJson('catalog/public/brand-summary.json',null)]);
+            console.log('STAGED_GENERATION_INVENTORY',JSON.stringify({checkedAt:new Date().toISOString(),generationId,activeGeneration:manifest?.generationId,internalUpdatedAt:internal.updatedAt,groups,facetsGeneration:facets?.generationId,brandsGeneration:brands?.generationId,newest:objects.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,12).map(o=>({path:o.key.slice(prefix.length),bytes:o.size,lastModified:o.lastModified}))}));
+          }
+          if(marker.inspectTechnicalReferenceState === true){
+            const state=await storage.readJson('knowledge/encyclopedia/reference-intake/v1/state.json',null);
+            if(!state)throw Error('technical_reference_checkpoint_missing');
+            console.log('TECHNICAL_REFERENCE_CHECKPOINT',JSON.stringify({checkedAt:new Date().toISOString(),updatedAt:state.updatedAt,completed:state.completed===true,visited:state.visited?.length,saved:state.saved,pending:state.pending?.length,nextUrl:state.pending?.[0],latestFailure:state.failed?.slice(-1)}));
+          }
+          if(marker.inspectRelease){
+            const release=marker.inspectRelease, keys=marker.inspectModels;
+            if(!/^[a-f0-9]{40}$/.test(release)||!Array.isArray(keys)||keys.length>5||keys.some(k=>typeof k!=='string'||!/^[a-z0-9]+:[a-z0-9]+$/.test(k)))throw Error('invalid_index_inspection');
+            const health=async()=>{const r=await fetch('https://avtocena.com/api/health',{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('inspection_health_http_'+r.status);const h=await r.json();if(h.releaseSha!==release)throw Error('inspection_release_changed');return h;};
+            await health();
+            const binding=await storage.readJson('knowledge/encyclopedia/calculation-releases/'+release+'.json',null);
+            if(binding?.release!==release||!/^knowledge\/encyclopedia\/calculation-indexes\/[a-f0-9]{64}\.json$/.test(binding?.key||''))throw Error('invalid_index_binding');
+            const index=await storage.readJson(binding.key,null);
+            const {createHash}=await import('node:crypto');
+            if(index?.digest!==binding.digest||createHash('sha256').update(JSON.stringify(index.models)).digest('hex')!==binding.digest)throw Error('index_checksum_mismatch');
+            const models={};
+            for(const key of keys){const rows=index.models[key]||[],batches={};for(const row of rows)for(const source of Object.values(row.sources||{}))if(source.batchId)batches[source.batchId]=(batches[source.batchId]||0)+1;models[key]={variants:rows.length,revisions:[...new Set(rows.map(r=>r.revision))],batchCalculationFields:batches};}
+            if(marker.inspectOfferIds !== undefined){
+              const ids=marker.inspectOfferIds;
+              if(!Array.isArray(ids)||ids.length<1||ids.length>3||ids.some(id=>typeof id!=='string'||!/^[a-f0-9]{24}$/.test(id)))throw Error('invalid_offer_inspection');
+              const {getOfferFromCurrentShard,getOfferFromCurrentProjection,searchProjectionFromOffer}=await import('./apps/web/lib/catalog/storage.ts');
+              const {applyEncyclopediaCalculation,modelKey,token}=await import('./apps/web/lib/encyclopedia/calculation-index.ts');
+              const {applyUaeManualSpecifications}=await import('./apps/web/lib/catalog/uae-manual-specifications.ts');
+              const {safePublicPricing}=await import('./apps/web/lib/catalog/safe-public-pricing.ts');
+              const {normalizeVehicleOfferSpecs}=await import('./apps/web/lib/catalog/spec-normalization.ts');
+              const {SPECIFICATION_AUDIT_FIELDS,classifySpecificationEvidence}=await import('./apps/web/lib/catalog/specification-evidence-audit.ts');
+              const rows=[];
+              for(const id of ids){
+                const source=await getOfferFromCurrentShard(id);
+                if(!source||source.id!==id)throw Error('inspection_offer_missing');
+                const full=applyEncyclopediaCalculation(applyUaeManualSpecifications(source),index);
+                const projected=searchProjectionFromOffer(full);
+                const audit=offer=>Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field=>[field,classifySpecificationEvidence(offer,field)]));
+                const values=offer=>Object.fromEntries(['id','market','make','model','year','trim','generation','chassisCode','engineCode','transmission','drive','bodyType','fuel','powertrainKind','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','calculationStatus','totalRub'].map(key=>[key,offer[key]??null]));
+                const sanitizedSource=safePublicPricing(applyUaeManualSpecifications(source));
+                const enrichedSanitized=applyEncyclopediaCalculation(sanitizedSource,index);
+                const safeEnriched=safePublicPricing(enrichedSanitized);
+                const stage=offer=>offer?({values:values(offer),audit:audit(offer),attestedFields:Object.keys(offer.encyclopediaCalculation?.values||{}),transmissionEvidence:offer.operational?.semanticEvidence?.transmission?{status:offer.operational.semanticEvidence.transmission.status,value:offer.operational.semanticEvidence.transmission.value,source:offer.operational.semanticEvidence.transmission.source}:null}):null;
+                const storedProjection=await getOfferFromCurrentProjection(id);
+                const candidates=(index.models[modelKey(source.make,source.model)]||[]).filter(v=>v.year===source.year&&v.trims.includes(token(source.trim)));
+                if(candidates.length>20)throw Error('inspection_candidates_exceed_bound');
+                rows.push({id,storedProjection:stage(storedProjection),enrichedStoredProjection:stage(applyEncyclopediaCalculation(storedProjection,index)),annualFacts:(index.models[modelKey(source.make,source.model)]||[]).filter(v=>v.year===source.year).map(v=>({variantId:v.variantId,values:v.values,sources:Object.fromEntries(Object.entries(v.sources).map(([f,s])=>[f,{kind:s.kind,batchId:s.batchId}]))})),normalizedFull:stage(normalizeVehicleOfferSpecs(full)),indexCandidates:candidates.map(v=>({variantId:v.variantId,revision:v.revision,constraints:v.constraints,transmission:v.values.transmission,transmissionSource:v.sources.transmission})),source:stage(source),sanitizedSource:stage(sanitizedSource),enrichedSanitized:stage(enrichedSanitized),safeEnriched:stage(safeEnriched),full:stage(full),projection:stage(projected),attestedFields:Object.keys(full.encyclopediaCalculation?.values||{})});
+              }
+              const after=await storage.readJson('catalog/manifest.json',null);
+              if(after?.generationId!==manifest?.generationId)throw Error('inspection_generation_changed');
+              await health();
+              console.log('OFFER_SPECIFICATION_PROVENANCE',JSON.stringify({checkedAt:new Date().toISOString(),generationId:manifest?.generationId,release,indexDigest:index.digest,rows}));
+            }
+            await health();
+            console.log('RELEASE_INDEX_INSPECTION',JSON.stringify({release,digest:index.digest,createdAt:index.createdAt,manifestDigest:index.manifestDigest,models}));
+          }
+          STATUS
+          node --import tsx --input-type=module -e "import fs from 'node:fs'; if(JSON.parse(fs.readFileSync('.github/market-runs/regcloud-publication-status.json')).auditSavedCoverage) await import('./scripts/encyclopedia/audit-saved-coverage.mjs')"
+          node --import tsx --input-type=module -e "import fs from 'node:fs'; if(JSON.parse(fs.readFileSync('.github/market-runs/regcloud-publication-status.json')).previewFuelEvidenceRepair) await import('./scripts/catalog-fuel-evidence-repair-preview.ts')"
+      - name: Preserve read-only coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: encyclopedia-coverage
+          path: reports/encyclopedia-coverage.json
+          if-no-files-found: ignore
+      - name: Preserve addressed fuel evidence preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-fuel-evidence-repair-preview
+          path: reports/catalog-fuel-evidence-repair-preview.json
+          if-no-files-found: ignore
+

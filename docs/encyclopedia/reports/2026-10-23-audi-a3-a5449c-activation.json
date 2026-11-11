@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T16:03:12.067Z",
+  "batch": "research-2026-10-23-audi-a3-2021-2022-body",
+  "fields": 50,
+  "release": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+  "indexDigest": "a5449c46365fd61f690842016bb2478c0575ada014e66bafd5bc567d00f38519",
+  "workflow": 39975111916,
+  "job": 120490462819,
+  "requiredMarkerContainsBatch": true,
+  "terminalConclusion": "success",
+  "requiredResearchMembership": {
+    "batches": 17,
+    "variants": 393,
+    "fields": 604,
+    "identityFields": 7,
+    "descriptiveFieldsOutsideIndex": 48
+  },
+  "publicGate": {
+    "groups": 16,
+    "variants": 90,
+    "fields": 234,
+    "verified": true,
+    "finishedAt": "2026-10-23T15:38:03.291Z",
+    "scope": "Весь перечень выпуска; не дельта данной партии."
+  },
+  "healthBefore": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "calculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f"
+  },
+  "healthAfter": {
+    "ok": true,
+    "service": "avtocena-web",
+    "releaseSha": "857468e26a2502b46ec32913fed6db942ce9c6a4",
+    "calculationVersion": "517a84ded1ba1eca308fea174fb8a0b04d4359a4321c1eb80a20d82cff2e254f"
+  },
+  "publicPricesFullyAccepted": false,
+  "new2022BatchIncluded": false
+}

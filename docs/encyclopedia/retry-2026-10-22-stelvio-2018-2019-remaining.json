@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-22T19:11:12+07:00",
+  "make": "Alfa Romeo",
+  "model": "Stelvio",
+  "modelId": "0d734c400f4417df7f272d30",
+  "sourceRevision": "44aaeb5c-24ef-4ee7-8d2c-582b40b8e2f7",
+  "previousRetryFiles": [
+    "docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json"
+  ],
+  "entries": [
+    {
+      "years": [
+        2018
+      ],
+      "variantIds": [
+        "78bca17fcaa7aa9581395f67"
+      ],
+      "state": "identity_unresolved",
+      "fields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "engineCode"
+      ],
+      "reason": "Исходная строка SUPER обозначает несколько двигателей; нет точного технического идентификатора. Сохранена без изменения. Не использовать UAE seller horsepower/volume."
+    },
+    {
+      "years": [
+        2019
+      ],
+      "variantIds": [
+        "1c6bf6eebed53fab1fd71a68",
+        "1f202a0c09d781df6428a43b",
+        "86c27f663785a71126f43c3b"
+      ],
+      "state": "identity_unresolved",
+      "reason": "Исходные наблюдения QUADRIFOGLIO, SUPER, S не содержат точного технического идентификатора. Заводские полностью обозначенные исполнения созданы отдельно; наблюдения не переименованы и не слиты по одному названию."
+    },
+    {
+      "years": [
+        2019
+      ],
+      "batch": "research-2026-10-22-alfa-stelvio-2019-september-range",
+      "state": "exact_manual_revision_pending",
+      "fields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "reason": "Прайс 23.09.2019 подтверждает гамму и расчётные параметры двигателя. Коды и масса не перенесены автоматически из руководства 2018 или руководства MY20 от 11/2019; нужна точная применимость редакции. Поиск первичных руководств 01/2019 и 03/2019 пока не дал результата."
+    },
+    {
+      "years": [
+        2018
+      ],
+      "state": "historical_range_incomplete",
+      "reason": "Ещё нужны точные ранние исполнения 150/180 PS до Euro 6D-TEMP, региональные комплектации, NRING и поздняя Lusso. Руководство 02/2018 подтверждает двигатели, но не полный перечень сочетаний комплектаций; не создавать вымышленные комбинации.",
+      "sourceLeads": [
+        "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-giulia-quadrifoglio-nring-und-alfa-romeo-stelvio-quadrifoglio-nring-zwei-sondermodelle-im-zeichen-der-legendaren-nordschleife-des-nurburgrings"
+      ]
+    },
+    {
+      "years": [
+        2019
+      ],
+      "state": "historical_range_incomplete",
+      "reason": "Сентябрьская итальянская гамма не исчерпывает региональные серии и переход MY20 в ноябре 2019. Для добавления нужны точные сроки и состав исполнений."
+    },
+    {
+      "years": [
+        2020,
+        2022,
+        2024,
+        2025
+      ],
+      "state": "preexisting_duplicates_need_identity_review",
+      "reason": "Сохранены 6 прежних групп совпадений year/trim/chassis с 8 лишними строками. Не удалять/сливать без сверки исходных идентификаторов и источников.",
+      "detailsFile": "docs/encyclopedia/retry-2026-10-22-spider-stelvio-remaining.json"
+    }
+  ],
+  "resolvedInThisPass": [
+    {
+      "years": [
+        2018
+      ],
+      "field": "powerKw / icePowerKw for 200 PS",
+      "resolution": "Руководство Alfa Romeo 603.93.185 (09/2018), PDF 275, явно указывает 148 кВт ECE и подтверждает прайс 12.09.2018. Это не преобразование из PS; сторонние 147 кВт не перенесены."
+    },
+    {
+      "years": [
+        2018
+      ],
+      "fields": [
+        "engineCode",
+        "chassisCode",
+        "grossVehicleWeightKg"
+      ],
+      "resolution": "Для 21 сентябрьского исполнения подтверждены по точной конфигурации; ранняя Sport Edition 210 PS без AdBlue отдельно подтверждена руководством 02/2018."
+    }
+  ]
+}

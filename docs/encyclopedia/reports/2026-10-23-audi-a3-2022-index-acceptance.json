@@ -1,0 +1,564 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T16:03:12.067Z",
+  "batch": "research-2026-10-23-audi-a3-2022-body",
+  "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a3-2022-body.json",
+  "batchSha256": "2ff69af8b3ae2b0e90846d852d1b6db69accb8c8f4183ef2e210f11252c504cc",
+  "savedRevision": "6f29a0e7-362b-4e30-afff-5d09181883ff",
+  "pendingNextIndex": true,
+  "fields": 50,
+  "variants": 50,
+  "assertions": [
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2885f631c2c0b7c844ed6357",
+      "year": 2022,
+      "trim": "Sportback 30 TDI advanced ACC NAVI+ Virt 18\"",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d98a63d63135ecc415e22668",
+      "year": 2022,
+      "trim": "Sportback 30 TDI ADVANCED AHK PRIVACY PDC",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "baad335c157a3f4ad38bae11",
+      "year": 2022,
+      "trim": "Sportback 30 TDI Fahrschulausstattung",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b6f153d45fee09f0c6b46c0a",
+      "year": 2022,
+      "trim": "Sportback 30 TDI KEYLESS,CARPLAY,ACC,AMBIENTE",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "53fc4746de86218051674b8d",
+      "year": 2022,
+      "trim": "Sportback 30 TDI LED Kamera",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "025eb34ca2dfa92446cc7cbd",
+      "year": 2022,
+      "trim": "Sportback 30 TDI LED Kamera Navi SitzHZG",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e6ede2cb784f09f2b2d1c768",
+      "year": 2022,
+      "trim": "Sportback 30 TDI LED-Sch., MMI Plus, GRA, PDC",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9d72c5c85df7b711d2cb1a1b",
+      "year": 2022,
+      "trim": "Sportback 30 TDI Navi ACC StandHzg Business",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ab0dc37217deb6b49bdaae3c",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S tronic 2xS line MATRIX PAN",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "20081fe6088fc79c95084f3e",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S tronic El. Panodach Navi D",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "32cd8b3df9bb1a56bb71d307",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S-Line LED Navi Kamera Sitzh",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "26b5f1368514f6984e847eb5",
+      "year": 2022,
+      "trim": "Sportback 30 TDI S-TR ADVANCED RFK+GRA+SHZ+17",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "96d4b78423d0f4809d0872e7",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI *1.Hand",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ca54b61f14be347a27cc3118",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI Adv. S tronic *ACC*NAV+*",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "222aab836c913db117931d94",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced * 1.H * R-KAM *ACC",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ff7072b1661cef6816cde624",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced * 1.H * R-KAM *ACC",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b0dac3b0633d4ac681eaaddb",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced *AHK*RFK*DAB*",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5205b08614831dd84974b3d5",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced LED AHK Lane Assis",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8599b2146d0b28057e17dc04",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced LED App-Connect",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "29d44207afdbbcaa1e77bebf",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced LED Navi Tempomat",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "f107e574f4ec420d3f68daf8",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced MMI PDC 18\"",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2678b8afc2d8cc56b3467809",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI ADVANCED RFK+GRA+DAB+MFL",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "280569ecf05e6ee7f5f051cf",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced S line AHK",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ad76a15c72933ec50ab0c86b",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced SitzH GRA Kamera",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "85ca7465a98813bf21a09b57",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI advanced*NAVI*LED*AHK*1HAND",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "533c1e54da0983c7f6ea125d",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI basis",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "cf3423bb2d962854e9373d9f",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI basis|1.HD|PDC|APPLE CAR",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "ad48fa5fbacf7e1826d152d6",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI Business Spiegel+ el.Heck v",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8f3c7f9f760602a54399de2d",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI KEYLESS,CARPLAY,ACC,18ZOLL",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "c9081c9f70038d002411cfc3",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI S line",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "810a0c8a34d9d10420354e7c",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI S line - GPS - APP - CAMERA - SIEG CH - ATTELAGE",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "df2f026842b9b74dd73c7a1f",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI S-line LED/MMI/EPH/Assist/u",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "698b01c1f7af5560830ac2b6",
+      "year": 2022,
+      "trim": "Sportback 30 TFSI*AUTOMATIK*ACC*CARPLAY*",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5756e76e3285a6ee8d81170f",
+      "year": 2022,
+      "trim": "Sportback 30TDI S tronic advanced ACCadapt. G",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "e338696c8db38ed9f2d4891f",
+      "year": 2022,
+      "trim": "Sportback 35 1.5 TFSI",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "90aa94ba0c181a1e0206f35e",
+      "year": 2022,
+      "trim": "sportback 35 1.5 tfsi mhev business advanced s-tro",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "a8c36c37d2cd2111c734e850",
+      "year": 2022,
+      "trim": "Sportback 35 2.0 tdi Business 150CV IVA ESPOSTA",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "641fa1c4c4c6770bfcf28c4b",
+      "year": 2022,
+      "trim": "SPORTBACK 35 ADVANCED +DSG+KLIMA+HUD+LED+ACC+",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "8d159c0997b5b206094833b4",
+      "year": 2022,
+      "trim": "Sportback 35 TDI advanced 2.0d Aut.",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "9db92f169eb61a6bdab2e7e9",
+      "year": 2022,
+      "trim": "Sportback 35 TDI S line #AHK#Virtual#Ambiente",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "65c2bdb7c5ba7a3c971fcf6b",
+      "year": 2022,
+      "trim": "Sportback 35 TDI S Line Navi,Kamera,Sports.",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5e9e3046575864b4d1942236",
+      "year": 2022,
+      "trim": "Sportback 35 TDI S-Line KAMERA/B&O/AMBIENTE",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "5a7cab249aa199d1fd2bdaa6",
+      "year": 2022,
+      "trim": "Sportback 35 TDI-1.HAND-NAVI-LED-KAM-ACC-VIRT",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2880fbf0314f63dd0df6c07c",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI 2x S line Matrix Navi Pano",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "b610789a81d95aa62f72a8e0",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI Advanced edition 150pk/18 inch",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "7d02374a3628b8d731d1bfcd",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI advanced LED Klimaaut. PDC",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "29cc1c2f4ecd21da1572c29b",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI advanced S-tronic LED AHK N",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "2ec6846fbd4d34f098e90e54",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI S tronic S-Line",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "aca6802b19ef20e85f54a018",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI S-LINE +MATRIX+GRA",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "d23466394be5488d11842735",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI S-LINE MATRIX+B&O+AHK+PANO",
+      "fields": {
+        "bodyType": "hatchback"
+      },
+      "sourceKind": "manufacturer",
+      "batchId": "research-2026-10-23-audi-a3-2022-body"
+    }
+  ],
+  "doNotDuplicateDeploy": true
+}

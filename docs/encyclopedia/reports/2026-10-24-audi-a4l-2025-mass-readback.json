@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T05:01:40.762805+00:00",
+  "modelId": "c2365f94a908e7e90f14976e",
+  "year": 2025,
+  "beforeRevision": "c6c4f1c0-7629-4f3a-a544-faf35a40f88f",
+  "afterRevision": "73e24623-5418-48b3-9c7a-9e0ea0ff5d64",
+  "apiUrl": "https://avtocena.com/api/encyclopedia/c2365f94a908e7e90f14976e?year=2025",
+  "rows": 13,
+  "targetVariants": 3,
+  "fields": 3,
+  "checks": [
+    {
+      "variantId": "b5207ac185ede58209545175",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type B&O Star Night Edition",
+      "grossVehicleWeightKg": 2080,
+      "passed": true,
+      "onlyExpectedTechnicalFieldAndReviewStatusChanged": true
+    },
+    {
+      "variantId": "365d04491870787ca8e2d719",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Fashion Dynamic Type",
+      "grossVehicleWeightKg": 2080,
+      "passed": true,
+      "onlyExpectedTechnicalFieldAndReviewStatusChanged": true
+    },
+    {
+      "variantId": "af7e4655e9743ce9c42f2532",
+      "year": 2025,
+      "trim": "200 0k Units Delight Edition 40 TFSI Luxury Dynamic Type",
+      "grossVehicleWeightKg": 2080,
+      "passed": true,
+      "onlyExpectedTechnicalFieldAndReviewStatusChanged": true
+    }
+  ],
+  "untargetedVariants": 10,
+  "untargetedUnchanged": true,
+  "variantIdsPreserved": true,
+  "privateProvenance": "Штатный workflow проверяет сохранённую ревизию; независимый анонимный API проверяет только открытые технические поля, источники скрыты.",
+  "passed": true
+}

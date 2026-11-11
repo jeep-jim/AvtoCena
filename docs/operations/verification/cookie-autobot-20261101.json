@@ -1,0 +1,3385 @@
+{
+  "issue": 1675,
+  "pr": 1679,
+  "verifiedHead": "d759720045e9bd96a7bd6c85282c010c2836d035",
+  "deploymentStatus": "success; installed and live UI accepted",
+  "localRegression": {
+    "passed": 2747,
+    "failed": 0
+  },
+  "githubChecks": {
+    "passed": 15,
+    "failed": 0,
+    "ciRun": 41275289590,
+    "autobotRun": 41275284668,
+    "metrikaRun": 41275289585
+  },
+  "browserFixture": [
+    {
+      "label": "360/light/hydrated",
+      "notice": {
+        "top": 0,
+        "bottom": 88.1875,
+        "height": 88.1875
+      },
+      "header": {
+        "top": 89,
+        "bottom": 154,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 89,
+        "height": 89
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light/settings",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//cars",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//cars/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 201,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//blog",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//blog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 215,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//cars/autocatalog",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//cars/autocatalog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 215,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//cars/offer/test",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light//cars/offer/test/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 215,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/light/short-viewport",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -3,
+        "bottom": 230,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark/hydrated",
+      "notice": {
+        "top": 0,
+        "bottom": 88.1875,
+        "height": 88.1875
+      },
+      "header": {
+        "top": 89,
+        "bottom": 154,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 89,
+        "height": 89
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark/settings",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//cars",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//cars/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 201,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//blog",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//blog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 201,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//cars/autocatalog",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//cars/autocatalog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 215,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//cars/offer/test",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 233,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark//cars/offer/test/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 201,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "360/dark/short-viewport",
+      "notice": {
+        "top": 0,
+        "bottom": 232.78125,
+        "height": 232.78125
+      },
+      "header": {
+        "top": 233,
+        "bottom": 298,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 201,
+        "height": 233
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 360,
+      "viewport": 360,
+      "stored": null
+    },
+    {
+      "label": "390/light/hydrated",
+      "notice": {
+        "top": 0,
+        "bottom": 71.390625,
+        "height": 71.390625
+      },
+      "header": {
+        "top": 72,
+        "bottom": 137,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light/settings",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//cars",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//cars/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 140,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//blog",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -2,
+        "bottom": 170,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//blog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -20,
+        "bottom": 152,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//cars/autocatalog",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//cars/autocatalog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 154,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//cars/offer/test",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light//cars/offer/test/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 154,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/light/short-viewport",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark/hydrated",
+      "notice": {
+        "top": 0,
+        "bottom": 71.390625,
+        "height": 71.390625
+      },
+      "header": {
+        "top": 72,
+        "bottom": 137,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark/settings",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//cars",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//cars/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 140,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//blog",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//blog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -51,
+        "bottom": 121,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//cars/autocatalog",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//cars/autocatalog/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": 154,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//cars/offer/test",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark//cars/offer/test/scroll",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": 140,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "390/dark/short-viewport",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": -6,
+        "bottom": 166,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "768/light/hydrated",
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light/settings",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//cars",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//cars/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": -18,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//blog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//blog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -8,
+        "bottom": -8,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//cars/autocatalog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -1,
+        "bottom": -1,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//cars/autocatalog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -8,
+        "bottom": -8,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//cars/offer/test",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light//cars/offer/test/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -8,
+        "bottom": -8,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/light/short-viewport",
+      "notice": {
+        "top": 338.203125,
+        "bottom": 488,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -3,
+        "bottom": -3,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark/hydrated",
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark/settings",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//cars",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//cars/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -8,
+        "bottom": -8,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//blog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//blog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": -32,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//cars/autocatalog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//cars/autocatalog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": -32,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//cars/offer/test",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark//cars/offer/test/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -51,
+        "bottom": -51,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "768/dark/short-viewport",
+      "notice": {
+        "top": 338.203125,
+        "bottom": 488,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -35,
+        "bottom": -35,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 768,
+      "viewport": 768,
+      "stored": null
+    },
+    {
+      "label": "1440/light/hydrated",
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light/settings",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//cars",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": {
+        "top": 161,
+        "bottom": 205,
+        "height": 44
+      },
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//cars/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": -18,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": {
+        "top": 143,
+        "bottom": 187,
+        "height": 44
+      },
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//blog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//blog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": -32,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//cars/autocatalog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//cars/autocatalog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": -18,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//cars/offer/test",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light//cars/offer/test/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": -32,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/light/short-viewport",
+      "notice": {
+        "top": 338.203125,
+        "bottom": 488,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -6,
+        "bottom": -6,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark/hydrated",
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark/settings",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//cars",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": {
+        "top": 161,
+        "bottom": 205,
+        "height": 44
+      },
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//cars/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -18,
+        "bottom": -18,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": {
+        "top": 143,
+        "bottom": 187,
+        "height": 44
+      },
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//blog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -20,
+        "bottom": -20,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//blog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -3,
+        "bottom": -3,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//cars/autocatalog",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -16,
+        "bottom": -16,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//cars/autocatalog/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -24,
+        "bottom": -24,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//cars/offer/test",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark//cars/offer/test/scroll",
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -8,
+        "bottom": -8,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "1440/dark/short-viewport",
+      "notice": {
+        "top": 338.203125,
+        "bottom": 488,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": -32,
+        "bottom": -32,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1440,
+      "viewport": 1440,
+      "stored": null
+    },
+    {
+      "label": "return-to-public",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    },
+    {
+      "label": "resize-to-desktop",
+      "notice": {
+        "top": 738.203125,
+        "bottom": 888,
+        "height": 149.796875
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 1280,
+      "viewport": 1280,
+      "stored": null
+    },
+    {
+      "label": "resize-to-mobile",
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172
+      },
+      "sticky": null,
+      "toolbar": null,
+      "contact": null,
+      "width": 390,
+      "viewport": 390,
+      "stored": null
+    }
+  ],
+  "liveBefore": [
+    {
+      "label": "/ ready",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 14702,
+      "notice": {
+        "top": 10,
+        "bottom": 99.1875,
+        "height": 89.1875,
+        "left": 10,
+        "right": 380
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 1229,
+      "notice": {
+        "top": 10,
+        "bottom": 99.1875,
+        "height": 89.1875,
+        "left": 10,
+        "right": 380
+      },
+      "header": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ ready",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 9831,
+      "notice": {
+        "top": 10,
+        "bottom": 99.1875,
+        "height": 89.1875,
+        "left": 10,
+        "right": 380
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 840,
+      "notice": {
+        "top": 10,
+        "bottom": 99.1875,
+        "height": 89.1875,
+        "left": 10,
+        "right": 380
+      },
+      "header": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ ready",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 9575,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 2038,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ ready",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 10797,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 2248,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0
+      },
+      "space": null,
+      "height": 850
+    }
+  ],
+  "limitations": [
+    "Browser fixture is not production acceptance",
+    "Live baseline measurements with zero-sized header represent a transient streamed shell; screenshots show the visible header",
+    "Physical phone/address-bar behavior is emulated by viewport resizing, not a physical-device test"
+  ],
+  "cancelledDeployment": {
+    "sha": "9103652f97f8a8017a0811842ab1ddc1f576bdc5",
+    "run": 41275811062,
+    "status": "cancelled during prepare before activation",
+    "reason": "Move UI event constant outside calculation source closure"
+  },
+  "relocation": {
+    "pr": 1680,
+    "head": "958bfeee9fc1d3f32744413429cb947df179f158",
+    "browserMeasurementsPassed": 91,
+    "webTypecheck": "PASS",
+    "calculationVersion": "cb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c",
+    "matchesPreviousProductionRelease": "b595e4dbb0a73cac813d1dac1c6d238d4db58c29",
+    "githubChecks": {
+      "passed": 14,
+      "ciRun": 41277756931,
+      "autobotRun": 41277754207,
+      "metrikaRun": 41277756897
+    }
+  },
+  "releaseSha": "4456a45344d064256b048fb2ee5412d151f5be89",
+  "deploymentRun": 41278375909,
+  "liveAfter": [
+    {
+      "label": "/ ready",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 11734,
+      "requestCount": 80,
+      "notice": {
+        "top": 0,
+        "bottom": 71.390625,
+        "height": 71.390625,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 72,
+        "bottom": 137,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ settings",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 13455,
+      "requestCount": 93,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ scroll",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 14518,
+      "requestCount": 93,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ settled",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 15028,
+      "requestCount": 93,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 1109,
+      "requestCount": 71,
+      "notice": {
+        "top": 0,
+        "bottom": 71.390625,
+        "height": 71.390625,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 72,
+        "bottom": 137,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars settings",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 2647,
+      "requestCount": 78,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars scroll",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 3716,
+      "requestCount": 78,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars settled",
+      "width": 390,
+      "theme": "light",
+      "elapsed": 4226,
+      "requestCount": 78,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ ready",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 15018,
+      "requestCount": 88,
+      "notice": {
+        "top": 0,
+        "bottom": 71.390625,
+        "height": 71.390625,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 72,
+        "bottom": 137,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ settings",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 16399,
+      "requestCount": 95,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ scroll",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 17470,
+      "requestCount": 95,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ settled",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 17976,
+      "requestCount": 95,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 2248,
+      "requestCount": 72,
+      "notice": {
+        "top": 0,
+        "bottom": 71.390625,
+        "height": 71.390625,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 72,
+        "bottom": 137,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 72,
+        "height": 72,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars settings",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 3838,
+      "requestCount": 78,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": 0,
+        "bottom": 172,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars scroll",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 4892,
+      "requestCount": 78,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/cars settled",
+      "width": 390,
+      "theme": "dark",
+      "elapsed": 5442,
+      "requestCount": 79,
+      "notice": {
+        "top": 0,
+        "bottom": 171.984375,
+        "height": 171.984375,
+        "left": 0,
+        "right": 390
+      },
+      "header": {
+        "top": 172,
+        "bottom": 237,
+        "height": 65,
+        "left": 0,
+        "right": 390
+      },
+      "space": {
+        "top": -500,
+        "bottom": -328,
+        "height": 172,
+        "left": 0,
+        "right": 390
+      },
+      "height": 850
+    },
+    {
+      "label": "/ ready",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 14405,
+      "requestCount": 124,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ settings",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 15585,
+      "requestCount": 124,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ scroll",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 16634,
+      "requestCount": 124,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ settled",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 19420,
+      "requestCount": 134,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 3908,
+      "requestCount": 97,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars settings",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 5578,
+      "requestCount": 102,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars scroll",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 6627,
+      "requestCount": 105,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars settled",
+      "width": 1440,
+      "theme": "light",
+      "elapsed": 7132,
+      "requestCount": 105,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ ready",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 15692,
+      "requestCount": 129,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ settings",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 16895,
+      "requestCount": 129,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ scroll",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 17942,
+      "requestCount": 129,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/ settled",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 20689,
+      "requestCount": 154,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars ready",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 4256,
+      "requestCount": 102,
+      "notice": {
+        "top": 772,
+        "bottom": 838,
+        "height": 66,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars settings",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 5964,
+      "requestCount": 118,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars scroll",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 7033,
+      "requestCount": 121,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    },
+    {
+      "label": "/cars settled",
+      "width": 1440,
+      "theme": "dark",
+      "elapsed": 7542,
+      "requestCount": 121,
+      "notice": {
+        "top": 688.203125,
+        "bottom": 838,
+        "height": 149.796875,
+        "left": 12,
+        "right": 572
+      },
+      "header": {
+        "top": 0,
+        "bottom": 65,
+        "height": 65,
+        "left": 0,
+        "right": 1440
+      },
+      "space": null,
+      "height": 850
+    }
+  ],
+  "liveHealth": {
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "4456a45344d064256b048fb2ee5412d151f5be89",
+    "calculationVersion": "cb492830cea0596491d56d3828187a17c791f9c704eb15169ac1549bec16ba9c"
+  },
+  "liveMethod": "Chromium viewport emulation 390/1440 x light/dark, home and /cars, fresh contexts, exact release health, ready/settings/scroll/settled geometry, consent refusal, Autobot hide/reload/footer reopen/unhide. No chat messages or leads sent. First screenshots were captured during smooth scrolling; final screenshots wait for scroll/font settlement. Physical phone/address-bar behavior not independently tested.",
+  "liveResult": {
+    "passed": true,
+    "measurements": 32,
+    "autobotRecoveryPassedContexts": 4
+  },
+  "deploymentCompletedAt": "2026-11-01T06:30:08Z",
+  "serverGates": [
+    {
+      "performanceGate": "summary",
+      "marketScope": "china,korea,europe,uae,georgia",
+      "routes": [
+        "/api/health",
+        "/api/leads",
+        "/login",
+        "/autocalc",
+        "/cars/autocatalog",
+        "/cars?market=china&make=Volkswagen&page=2",
+        "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "/cars?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=china&marketPage=1&page=9",
+        "/cars?market=china",
+        "/cars?market=korea",
+        "/cars?market=europe",
+        "/cars?market=uae",
+        "/cars?market=georgia"
+      ],
+      "samples": 45,
+      "slowSamples": 0,
+      "functionalPassed": true,
+      "performanceAccepted": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "summary",
+      "marketScope": "china,korea,europe,uae,georgia",
+      "routes": [
+        "/api/health",
+        "/api/leads",
+        "/login",
+        "/autocalc",
+        "/cars/autocatalog",
+        "/cars?market=china&make=Volkswagen&page=2",
+        "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "/cars?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=europe&make=BMW&page=2",
+        "/api/catalog/search?market=china&marketPage=1&page=9",
+        "/cars?market=china",
+        "/cars?market=korea",
+        "/cars?market=europe",
+        "/cars?market=uae",
+        "/cars?market=georgia"
+      ],
+      "samples": 45,
+      "slowSamples": 5,
+      "functionalPassed": true,
+      "performanceAccepted": false,
+      "latencyBlocking": false
+    }
+  ],
+  "serverSlowSamples": [
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "seconds": 7.4084,
+      "ceiling": 2,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "seconds": 3.5403,
+      "ceiling": 2,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "seconds": 1.2908,
+      "ceiling": 1,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "seconds": 4.5092,
+      "ceiling": 1,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    },
+    {
+      "performanceGate": "after_directory_ttl",
+      "path": "/cars?market=europe",
+      "seconds": 4.775,
+      "ceiling": 2,
+      "passed": false,
+      "functionalPassed": true,
+      "latencyBlocking": false
+    }
+  ],
+  "encyclopediaVerification": {
+    "version": 1,
+    "release": "4456a45344d064256b048fb2ee5412d151f5be89",
+    "startedAt": "2026-11-01T06:23:58.757Z",
+    "groups": 532,
+    "variants": 4888,
+    "fields": 22635,
+    "groupedVariants": 3809,
+    "privateDescriptions": 2,
+    "verified": true,
+    "finishedAt": "2026-11-01T06:29:59.269Z"
+  }
+}

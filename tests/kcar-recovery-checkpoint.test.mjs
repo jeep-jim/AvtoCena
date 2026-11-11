@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {saveKcarRecovery,restoreKcarRecovery,kcarRecoveryPointer} from '../scripts/lib/kcar-recovery-checkpoint.mjs';
+function fixture(){const files=new Map(),deleted=[];return {files,deleted,storage:{readJson:async(k,f)=>files.get(k)||f,writeJson:async(k,v)=>files.set(k,v),putBinary:async(k,data)=>{const checksum=createHash('sha256').update(data).digest('hex');files.set(k,{data,checksum});return {checksum};},getBinary:async k=>files.get(k),deleteBinary:async k=>{deleted.push(k);files.delete(k);}}};}
+test('interrupted recovery restores exact offers and withdrawals without repeating completed IDs',async()=>{const f=fixture(),state={version:2,startedAt:new Date().toISOString(),complete:false,records:[{id:'a',offer:{sourceOfferId:'EC1',powerHp:100}},{id:'b',withdrawal:{status:'sold'}}]};await saveKcarRecovery(f.storage,state);assert.deepEqual(await restoreKcarRecovery(f.storage),state);});
+test('completed and expired checkpoints start a fresh cycle',async()=>{const f=fixture();await saveKcarRecovery(f.storage,{version:2,startedAt:new Date().toISOString(),complete:true,records:[]});assert.equal(await restoreKcarRecovery(f.storage),null);f.files.set(kcarRecoveryPointer,{complete:false,startedAt:'2000-01-01'});assert.equal(await restoreKcarRecovery(f.storage),null);});
+test('corrupt checkpoint never becomes source evidence',async()=>{const f=fixture();await saveKcarRecovery(f.storage,{version:2,startedAt:new Date().toISOString(),complete:false,records:[]});f.files.get(kcarRecoveryPointer).checksum='bad';await assert.rejects(()=>restoreKcarRecovery(f.storage),/checksum/);});

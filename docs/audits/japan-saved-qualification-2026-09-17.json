@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-09-17T16:29:18+00:00",
+  "scope": [
+    "sferacar",
+    "proauctions"
+  ],
+  "productionWrites": false,
+  "networkRequests": 0,
+  "published": 0,
+  "corroboratingArchiveSha256": "a7b6e64873bfd0c7260a803755dcad79caf38ccad4d0d678c2ea5e693af970ac",
+  "sources": {
+    "sferacar": {
+      "records": 4486,
+      "partsDigestSha256": "b31d7e70f0cff8a9fbd9d845ef9a80fc122c5a098d066bab9d3eca7d76d0ff97",
+      "ledgerSha256": "f0f786a7998f303543a3c949f7f43de5f0ffd17e54467f3a5fd2485eb5f1707f",
+      "decisions": {
+        "rejected": 937,
+        "blocked_pending_evidence": 3549
+      },
+      "corroboratedSoldLots": 0,
+      "twoDecodedPhotosCorroborated": 0,
+      "calculationReady": 0,
+      "publicationReady": 0,
+      "blockerCounts": {
+        "engine_and_powertrain_calculation_evidence_unverified": 4486,
+        "fewer_than_two_photo_urls": 19,
+        "fuel_source_evidence_missing": 4486,
+        "gallery_content_verification_pending": 4486,
+        "gallery_decode_verification_pending": 4486,
+        "positive_price_missing": 322,
+        "power_source_evidence_missing": 4486,
+        "sold_status_and_final_price_unconfirmed": 4486,
+        "year_outside_policy": 656
+      }
+    },
+    "proauctions": {
+      "records": 1726,
+      "partsDigestSha256": "896aa29843c4106597f300daae1a1537ce5c9d43d84b15b49df0877da0a8fa5d",
+      "ledgerSha256": "098eb44c4d16f81b756a64d86ceedf1c565be0a6e84f74f10caa63811c9236e6",
+      "decisions": {
+        "blocked_pending_evidence": 1540,
+        "rejected": 186
+      },
+      "corroboratedSoldLots": 33,
+      "twoDecodedPhotosCorroborated": 33,
+      "calculationReady": 0,
+      "publicationReady": 0,
+      "blockerCounts": {
+        "chassis_missing": 1,
+        "engine_and_powertrain_calculation_evidence_unverified": 1726,
+        "fewer_than_two_photo_urls": 39,
+        "fuel_source_evidence_missing": 1726,
+        "gallery_content_verification_pending": 1726,
+        "gallery_decode_verification_pending": 1693,
+        "power_source_evidence_missing": 36,
+        "sold_status_and_final_price_unconfirmed": 1693,
+        "year_outside_policy": 146
+      }
+    }
+  }
+}

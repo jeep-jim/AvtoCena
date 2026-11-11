@@ -1,0 +1,40 @@
+{
+  "requestedBaseline": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+  "originalSuccessfulRun": 42435996958,
+  "sourceRollbackCommit": "85745c427e792d841619802b5134c63423000031",
+  "sourceRollbackPublished": true,
+  "productionRollbackComplete": false,
+  "activationRun": 42848177344,
+  "activationJob": 129941237787,
+  "activationConclusion": "failure",
+  "preSwitch": {
+    "samples": 48,
+    "functionalPassed": true,
+    "slowSamples": 4
+  },
+  "postSwitch": {
+    "failure": "performance_empty_catalog:/cars?market=europe",
+    "failedAt": "2026-11-10T16:01:29Z",
+    "restoredPriorReleaseAt": "2026-11-10T16:01:39Z"
+  },
+  "activeReleaseVerified": "008643e8929901e366d079b0d5c394e9b4df2350",
+  "health": {
+    "checkedAt": "2026-11-10T16:07:40Z",
+    "httpStatus": 200,
+    "ok": true
+  },
+  "evidenceRun": 42851042709,
+  "evidenceJob": 129951464633,
+  "originalVsCandidate": {
+    "sameImage": true,
+    "differentEnvironmentKeys": [],
+    "sameMounts": true
+  },
+  "scheduledWorkflowFilesUnchanged": 19,
+  "blogAutomation": {
+    "id": "6ae2fb16e0388191ab23df408346ffe7",
+    "isEnabled": false
+  },
+  "applicationFreeze": true,
+  "unchangedActivationRetried": false
+}

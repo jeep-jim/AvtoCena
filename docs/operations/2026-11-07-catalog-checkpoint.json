@@ -1,0 +1,48 @@
+{
+  "at": "2026-11-07T09:48:35.083917+00:00",
+  "deployment": {
+    "run": 42356872095,
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "wait-for-astra",
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
+      },
+      {
+        "name": "prepare",
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
+      }
+    ]
+  },
+  "installedBrowserReadback": {
+    "run": 42360024550,
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "readback",
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
+      }
+    ]
+  },
+  "isolatedSingleRailCandidate": {
+    "run": 42359906366,
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "activeSteps": []
+      }
+    ]
+  }
+}

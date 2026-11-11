@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "runId": 40198670530,
+  "jobId": 121184957947,
+  "conclusion": "success",
+  "key": "knowledge/encyclopedia/power30-precedents/runs/2026-10-25-all-models-01/manifest.json",
+  "summary": {
+    "startedAt": "2026-10-25T13:42:33.517Z",
+    "catalog": {
+      "checked": 83355,
+      "byStatus": {
+        "no_compatible_documented_precedent": 51279,
+        "range_requires_version": 16081,
+        "estimated": 15231,
+        "existing_value_preserved": 764
+      }
+    },
+    "encyclopedia": {
+      "models": 4451,
+      "checked": 21874,
+      "byStatus": {
+        "estimated": 5417,
+        "no_compatible_documented_precedent": 12347,
+        "range_requires_version": 4033,
+        "existing_value_preserved": 77
+      }
+    },
+    "storageWrites": 242,
+    "certifiedFieldWrites": 0,
+    "finishedAt": "2026-10-25T13:53:33.297Z",
+    "bindings": 105229,
+    "resolutions": 1203,
+    "references": 13089
+  },
+  "readback": true,
+  "publicPricesChanged": false,
+  "taskComplete": false,
+  "remaining": "51279 retained catalog rows have no compatible documented precedent; 16081 have multiple nearest values. Estimates are stored in a separate derived registry bound by IDs/input digests and are not yet consumed by the public calculation engine.",
+  "nextRun": 40198950999
+}

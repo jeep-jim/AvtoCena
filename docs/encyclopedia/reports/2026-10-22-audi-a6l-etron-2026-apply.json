@@ -1,0 +1,106 @@
+{
+  "batch": "research-2026-10-22-audi-a6l-etron-2026",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "649dd3ac3d5c169544a23005",
+      "changes": [
+        {
+          "variantId": "90e191ebe2cbdec13e372c27",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "powerHp",
+            "systemPowerKw",
+            "batteryKwh",
+            "motorPeakKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "9f356a457e1120293ec0793d",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "powerHp",
+            "systemPowerKw",
+            "batteryKwh",
+            "motorPeakKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "51db0f66477a5950a1abd83c",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "powerHp",
+            "systemPowerKw",
+            "batteryKwh",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "42b437ba34b3799efd252d0b",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "powerHp",
+            "systemPowerKw",
+            "batteryKwh",
+            "motorPeakKw",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "a2c38b9f6be9d107d3ed68e6",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "powerHp",
+            "systemPowerKw",
+            "batteryKwh",
+            "motorPeakKw"
+          ]
+        },
+        {
+          "variantId": "fd48c4e5fc562cf5d974fc79",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "powerHp",
+            "systemPowerKw",
+            "batteryKwh"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-22T00:03:13.840Z",
+  "finishedAt": "2026-10-22T00:03:21.601Z"
+}

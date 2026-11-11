@@ -1,0 +1,682 @@
+{
+  "version": 18,
+  "checkedAt": "2026-07-18T08:59:39.990Z",
+  "totalStored": 2159,
+  "markets": {
+    "japan": {
+      "stored": 489,
+      "public": 246,
+      "active": 246,
+      "stale": 243,
+      "bySource": {
+        "tcv_japan_open:active": 1,
+        "japan_partner_open:stale": 1,
+        "goonet_japan_exact:stale": 242,
+        "goonet_japan_exact:active": 245
+      },
+      "suspiciousTotals": [
+        {
+          "id": "c28182bb2ec6f37c870e73b4",
+          "sourceId": "tcv_japan_open",
+          "make": "MINI",
+          "model": "Truck",
+          "year": 2026,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null
+        }
+      ]
+    },
+    "korea": {
+      "stored": 526,
+      "public": 500,
+      "active": 500,
+      "stale": 26,
+      "bySource": {
+        "encar_direct:active": 500,
+        "encar_direct:stale": 26
+      },
+      "suspiciousTotals": []
+    },
+    "china": {
+      "stored": 250,
+      "public": 227,
+      "active": 227,
+      "stale": 23,
+      "bySource": {
+        "autohome_used_china_open:active": 1,
+        "che168_dealer_exact:active": 1,
+        "guazi_china_export:active": 225,
+        "guazi_china_export:stale": 23
+      },
+      "suspiciousTotals": []
+    },
+    "uae": {
+      "stored": 625,
+      "public": 137,
+      "active": 137,
+      "stale": 488,
+      "bySource": {
+        "dubicars_clean:stale": 5,
+        "dubicars_uae:stale": 168,
+        "dubicars_uae_exact:active": 137,
+        "dubicars_uae_exact:stale": 315
+      },
+      "suspiciousTotals": []
+    },
+    "europe": {
+      "stored": 269,
+      "public": 209,
+      "active": 209,
+      "stale": 60,
+      "bySource": {
+        "gaspedaal_nl_open:stale": 11,
+        "otomoto_pl_open:stale": 1,
+        "standvirtual_pt_open:stale": 1,
+        "otomoto_europe_exact:active": 209,
+        "otomoto_europe_exact:stale": 47
+      },
+      "suspiciousTotals": [
+        {
+          "id": "364c1e9eae37d7d60028547b",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Renault",
+          "model": "Captur ENERGY TCe 120 EDC LIMITED",
+          "year": 2017,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null
+        },
+        {
+          "id": "dcdcae1b076ea7bf5553dc76",
+          "sourceId": "otomoto_europe_exact",
+          "make": "BMW",
+          "model": "X5 xDrive40d",
+          "year": 2010,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null
+        },
+        {
+          "id": "871dab00ec8c8f15bbb8073b",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Lexus",
+          "model": "RX 350h F Sport Design",
+          "year": 2023,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null
+        },
+        {
+          "id": "efaff861dce3cf9018f44418",
+          "sourceId": "otomoto_europe_exact",
+          "make": "BMW",
+          "model": "Seria 5",
+          "year": 1997,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null
+        }
+      ]
+    }
+  },
+  "duplicateFirstImages": [
+    {
+      "checksum": "de95286edcea8daf17e1c476b46171603af38abe64944562ca514065c189d08a",
+      "rows": [
+        {
+          "id": "27c3cbe1ee72a946232f2bd0",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "ASX BASIC",
+          "year": 2024
+        },
+        {
+          "id": "15365c675e1830f844cc6f51",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Eclipse Cross GLS MIDLINE",
+          "year": 2025
+        },
+        {
+          "id": "ecf65f4fe23c00aa2a864b32",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Eclipse Cross GLS MIDLINE",
+          "year": 2025
+        },
+        {
+          "id": "481947d00d697cf3a27080bc",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Xpander Cross PREMIUM Signature edition",
+          "year": 2024
+        },
+        {
+          "id": "becbac93ae0b50cc4ec9c388",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "ASX GLX LOWLINE BASIC",
+          "year": 2024
+        },
+        {
+          "id": "bbb2cac0027405ceb9e81216",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Xpander Cross PREMIUM HIGH LINE SIGNATURE EDITION",
+          "year": 2024
+        },
+        {
+          "id": "5c943b8d065b63ca64bffe02",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "ASX GLX LOWLINE BASIC",
+          "year": 2024
+        },
+        {
+          "id": "30edf1676f78ba895b8faf3d",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Eclipse Cross GLS MIDLINE",
+          "year": 2025
+        },
+        {
+          "id": "2994fbaeac50dab7f3fdf8e7",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Lexus",
+          "model": "RC350 F SPORT PLATINUM",
+          "year": 2015
+        },
+        {
+          "id": "5fd9ce8328204a6b546b511c",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Land Rover",
+          "model": "Defender URBAN Kit 2022 V8 with Maltik",
+          "year": 2022
+        },
+        {
+          "id": "3da275457ba59767c265390e",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Infiniti",
+          "model": "QX80 GCC 2019 Nardo Grey Unique Interior",
+          "year": 2019
+        },
+        {
+          "id": "ce529bf00b3314d74d293396",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Audi",
+          "model": "RS2 Black Badge | Certified Pre-Owned |",
+          "year": 2025
+        },
+        {
+          "id": "bf025bb0ce4ac23fb1dbf802",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Hyundai",
+          "model": "Staria 3.5L Comfort (9 Seater)",
+          "year": 2025
+        },
+        {
+          "id": "b653179dc185e3808360b03a",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Chevrolet",
+          "model": "Malibu LS LT",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "checksum": "5624414142e1152998d528511da4b2c1a47826d6145b7e41077be574e83735a1",
+      "rows": [
+        {
+          "id": "9c8a192f1cd32c434ff526ff",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Lamborghini",
+          "model": "Urus LAMBORGHINI SE 2026 800 HP |",
+          "year": 2026
+        },
+        {
+          "id": "c15bd56b81a7a1041ac21246",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Lamborghini",
+          "model": "Urus LAMBORGHINI SE 2026 800 HP |",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "ffca03d996dc7fc54361eee1923684994f99dbda315fbeadc5867b1cee62553f",
+      "rows": [
+        {
+          "id": "a1dd3824d6e5e0f49775f9e7",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "dc72f992cc1fe7310bd71c8e",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "checksum": "093d5e41dd12746087850253517bfc99e6a9f369e8088aa0bfe39bd3de504d52",
+      "rows": [
+        {
+          "id": "d49b8309cf2aecdd62c78fae",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Cupra",
+          "model": "Formentor 1.5 eTSI mHEV DSG",
+          "year": 2026
+        },
+        {
+          "id": "a4430746849100f5daf24e8e",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Cupra",
+          "model": "Formentor 1.5 eTSI mHEV DSG",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "cef05b1ad9693eae85f6e15a37812a10306341bc8ce150dd4d300d62ce3cae7a",
+      "rows": [
+        {
+          "id": "382bd9748c9cbf7308320ea4",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Audi",
+          "model": "A3 Sportback",
+          "year": 2026
+        },
+        {
+          "id": "dec258a8367c1d903fc076a3",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Audi",
+          "model": "A3 Sportback",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "ac9ae8c70d42669ccb0b6866acc7acd58a1715c48993ce7d4efad059b5ea95b1",
+      "rows": [
+        {
+          "id": "80bc22bba1838c02c1fdf3dc",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "BMW",
+          "model": "i5",
+          "year": 2026
+        },
+        {
+          "id": "563662bddb3f9e557de19be8",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "BMW",
+          "model": "i5",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "7627d08a2729299b475cbc1117a10ddf19ef7d31962c31b5848ada2aa214f914",
+      "rows": [
+        {
+          "id": "1aa16a22f79d40288c774100",
+          "market": "china",
+          "sourceId": "guazi_china_export",
+          "make": "Geely Auto",
+          "model": "icon 2023 1.5TD Chocolate Luxe Edition",
+          "year": 2023
+        },
+        {
+          "id": "85fd7fea4ce865bfe8c57881",
+          "market": "china",
+          "sourceId": "guazi_china_export",
+          "make": "Geely Auto",
+          "model": "Monjaro L 2024 2.0TD DCT EVO Two-Wheel Drive",
+          "year": 2024
+        }
+      ]
+    }
+  ],
+  "repeatedPrices": [
+    {
+      "key": "korea:encar_direct:1309860",
+      "count": 4,
+      "rows": [
+        {
+          "id": "2eb681620c6e74233a247e3c",
+          "make": "현대",
+          "model": "팰리세이드",
+          "year": 2019
+        },
+        {
+          "id": "39e349d8670f760eb63af190",
+          "make": "현대",
+          "model": "더 뉴 싼타페",
+          "year": 2023
+        },
+        {
+          "id": "ee24023ccc752b21077a19ee",
+          "make": "벤츠",
+          "model": "A-클래스 W177",
+          "year": 2023
+        },
+        {
+          "id": "8b4743af1de77b4fa46744ff",
+          "make": "BMW",
+          "model": "5시리즈 (G30)",
+          "year": 2017
+        }
+      ]
+    },
+    {
+      "key": "korea:encar_direct:625997",
+      "count": 5,
+      "rows": [
+        {
+          "id": "d4491a2607f6c271a9f58d49",
+          "make": "현대",
+          "model": "그랜저 IG",
+          "year": 2017
+        },
+        {
+          "id": "eda80c75b34d9aa088062342",
+          "make": "현대",
+          "model": "그랜드 스타렉스",
+          "year": 2018
+        },
+        {
+          "id": "c0157a8964ebd45b09caaf78",
+          "make": "기아",
+          "model": "올 뉴 K7 하이브리드",
+          "year": 2017
+        },
+        {
+          "id": "168c325863069a75f1155bf0",
+          "make": "현대",
+          "model": "아반떼 (CN7)",
+          "year": 2021
+        },
+        {
+          "id": "4af054234718288e1b091ae2",
+          "make": "포드",
+          "model": "익스플로러",
+          "year": 2016
+        }
+      ]
+    },
+    {
+      "key": "korea:encar_direct:1551842",
+      "count": 4,
+      "rows": [
+        {
+          "id": "124922d91c31f87bb58ad157",
+          "make": "기아",
+          "model": "카니발 4세대",
+          "year": 2021
+        },
+        {
+          "id": "cb722b6c28d7887c4c0a2401",
+          "make": "폭스바겐",
+          "model": "골프 8세대",
+          "year": 2024
+        },
+        {
+          "id": "3b2a13ab415d5579e58c4341",
+          "make": "쉐보레(GM대우)",
+          "model": "트랙스 크로스오버",
+          "year": 2024
+        },
+        {
+          "id": "796712f5097ac77f7693cc06",
+          "make": "현대",
+          "model": "캐스퍼 일렉트릭",
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "key": "korea:encar_direct:710897",
+      "count": 4,
+      "rows": [
+        {
+          "id": "1e84d0f337f38e0f7ae10b03",
+          "make": "제네시스",
+          "model": "G80",
+          "year": 2017
+        },
+        {
+          "id": "a064ea0cdbec8aa2cbb77c1f",
+          "make": "닛산",
+          "model": "무라노 (Z52)",
+          "year": 2016
+        },
+        {
+          "id": "a55251a9bb12bb80a3bac885",
+          "make": "폭스바겐",
+          "model": "골프 7세대",
+          "year": 2015
+        },
+        {
+          "id": "db9846316d0289b5eda4f55b",
+          "make": "현대",
+          "model": "그랜저 IG",
+          "year": 2019
+        }
+      ]
+    },
+    {
+      "key": "japan:goonet_japan_exact:10756331",
+      "count": 4,
+      "rows": [
+        {
+          "id": "28453359d620d4056034d1a8",
+          "make": "TOYOTA",
+          "model": "PRIUS U",
+          "year": 2024
+        },
+        {
+          "id": "46d9e1ba9a8bd405b9ca5213",
+          "make": "TOYOTA",
+          "model": "LAND CRUISER PRADO TX L PACKAGE MATT BLACK",
+          "year": 2023
+        },
+        {
+          "id": "ec92d72ed7fe4a08a207ed13",
+          "make": "TOYOTA",
+          "model": "COROLLA CROSS HYBRID Z",
+          "year": 2026
+        },
+        {
+          "id": "ba70651547cc15198961689c",
+          "make": "TOYOTA",
+          "model": "YARIS CROSS HYBRID Z URBANO",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "key": "uae:dubicars_uae_exact:2031963",
+      "count": 4,
+      "rows": [
+        {
+          "id": "2d727cc5210dbe10a4e85fe7",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "9ae937f19e457ab90bea7cbb",
+          "make": "Mitsubishi",
+          "model": "Outlander PREMIUM Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "a1dd3824d6e5e0f49775f9e7",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "dc72f992cc1fe7310bd71c8e",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "key": "europe:otomoto_europe_exact:4131580",
+      "count": 149,
+      "rows": [
+        {
+          "id": "b006971fc4bd3094059cac87",
+          "make": "RAM",
+          "model": "1500 5.7 Crew Cab Longbed Laramie Black",
+          "year": 2020
+        },
+        {
+          "id": "8617c1a5d5ff9a81ac8b4ec0",
+          "make": "DS Automobiles",
+          "model": "DS 7 Crossback 1.6 E-Tense Performance Line +",
+          "year": 2021
+        },
+        {
+          "id": "5950b3f4e18450dc77393dd6",
+          "make": "Mercedes-Benz",
+          "model": "Klasa S",
+          "year": 2008
+        },
+        {
+          "id": "0e3158e9ae81292082624b2a",
+          "make": "Mercedes-Benz",
+          "model": "SL 500",
+          "year": 2011
+        },
+        {
+          "id": "93f79a8925361ae76986e6b8",
+          "make": "Opel",
+          "model": "Insignia 2.8 T V6 OPC EU6",
+          "year": 2015
+        },
+        {
+          "id": "e6850d358c8919647a678b40",
+          "make": "Jaguar",
+          "model": "XF P250 HSE",
+          "year": 1997
+        },
+        {
+          "id": "f3e4e90cb8b58b889d528206",
+          "make": "Jeep",
+          "model": "Grand Cherokee 3.6 V6 Pentastar 4WD Automatik Overland",
+          "year": 2022
+        },
+        {
+          "id": "970e815a9ce9bf56279d140f",
+          "make": "Jeep",
+          "model": "Compass 1.4 TMair Limited 4WD S&S",
+          "year": 2018
+        },
+        {
+          "id": "1ac954cc857c81f733a1f763",
+          "make": "BMW",
+          "model": "Seria 4 420d xDrive",
+          "year": 1995
+        },
+        {
+          "id": "b60ba6b60273896a4165810b",
+          "make": "Volkswagen",
+          "model": "Polo 1.0 TSI OPF Comfortline",
+          "year": 2019
+        },
+        {
+          "id": "b1c16e537685b6a2e4abb166",
+          "make": "Jeep",
+          "model": "Wrangler Unlimited 2.0 Turbo PHEV 4xe Sahara",
+          "year": 1995
+        },
+        {
+          "id": "b75d1d7a9ea0a7b2b0948656",
+          "make": "Cupra",
+          "model": "Formentor 1.5 TSI DSG",
+          "year": 2023
+        },
+        {
+          "id": "6558512bacb256b48fe4da5f",
+          "make": "Renault",
+          "model": "Kadjar 1.2 Energy TCe Zen",
+          "year": 2016
+        },
+        {
+          "id": "5cd9e4ec286e4060b3571a0f",
+          "make": "Honda",
+          "model": "HR-V",
+          "year": 2025
+        },
+        {
+          "id": "fccad95d048dc4a980111887",
+          "make": "Hyundai",
+          "model": "Tucson",
+          "year": 2019
+        },
+        {
+          "id": "29f56e01f70f21e787df951e",
+          "make": "Volkswagen",
+          "model": "Polo 1.4 16V Highline",
+          "year": 2014
+        },
+        {
+          "id": "7d1a1567530303f78ea2b189",
+          "make": "Fiat",
+          "model": "Punto Evo 1.2 8V",
+          "year": 2012
+        },
+        {
+          "id": "ee8d556564ddd54dcd6fb05a",
+          "make": "Volkswagen",
+          "model": "Golf 1.5 TSI EVO Life",
+          "year": 2022
+        },
+        {
+          "id": "d7f07218d25d39127bc8e173",
+          "make": "Opel",
+          "model": "Mokka 1.6 ecoFLEX Start/Stop Color Edition",
+          "year": 2015
+        },
+        {
+          "id": "d5643a0f46616affdc7729e9",
+          "make": "Suzuki",
+          "model": "Vitara 1.6 (4x4) Allgrip Limited",
+          "year": 2015
+        }
+      ]
+    }
+  ]
+}

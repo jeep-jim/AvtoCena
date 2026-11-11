@@ -1,0 +1,6507 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_asia",
+  "chunk": 18,
+  "records": [
+    {
+      "key": "korea:unknown:bmw320itouring",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 320i Touring",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw330e",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 330e",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420dgrancoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420d Gran Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420dgrancoupeluxuryrde2",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420d Gran Coupe Luxury RDE2",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420dxdrivegrancoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420d xDrive Gran Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420iconvertible",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420i Convertible",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420icoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420i Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420igrancoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420i Gran Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw420igrancoupeleviii",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 420i Gran Coupe LEVIII",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw430iconvertible",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 430i Convertible",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw430iconvertiblemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 430i Convertible M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw430icoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 430i Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520dluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520d Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520dxdriveluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520d xDrive Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520dxdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520d xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520iluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520i Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw520imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 520i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw523d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 523d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw523dxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 523d xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530e",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530e",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530eiperformanceluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530e iPerformance Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530eiperformancemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530e iPerformance M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530eiperformancemsportpackage19",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530e iPerformance M Sport Package(19)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530iluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530i Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530ixdriveluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530i xDrive Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw530ixdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 530i xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw535i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 535i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw540ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 540i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw540ixdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 540i xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw620d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 620d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw620dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 620d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw620dxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 620d xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw620dxdriveluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 620d xDrive Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw620dxdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 620d xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw630ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 630i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw630ixdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 630i xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw640ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 640i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw640ixdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 640i xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw730dxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 730d xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw730dxdrivemsportpackage20",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 730d xDrive M Sport Package(20)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw730ldxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 730Ld xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw730ldxdrivedesignpureexcellence",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 730Ld xDrive Design Pure Excellence",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740dxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740d xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740dxdrivedesignpureexcellence20",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740d xDrive Design Pure Excellence(20)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740dxdrivemsportpackage20",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740d xDrive M Sport Package(20)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740idesignpureexcellence",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740i Design Pure Excellence",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740lixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740Li xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740lixdrivedesignpureexcellence",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740Li xDrive Design Pure Excellence",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw740lixdrivemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 740Li xDrive M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw745eiperformance",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 745e iPerformance",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw745eiperformancedesignpureexcellence20",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 745e iPerformance Design Pure Excellence (20)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw745leiperformance",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 745Le iPerformance",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw745leiperformancedesignpureexcellence",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 745Le iPerformance Design Pure Excellence",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw745leiperformancemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 745Le iPerformance M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw750exdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 750e xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw760li",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 760Li",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw840dxdrivegrancoupemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 840d xDrive Gran Coupe M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw840ixdrivecoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 840i xDrive Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw840ixdrivecoupemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 840i xDrive Coupe M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw840ixdrivegrancoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 840i xDrive Gran Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmw840ixdrivegrancoupemsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW 840i xDrive Gran Coupe M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwactivetourer",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Active Tourer",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwactivetourerjoyrde",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Active Tourer JOY RDE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwactivetourersportrde",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Active Tourer Sport RDE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi3120ah",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i3 120Ah",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi3120ahlux",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i3 120Ah LUX",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi3120ahsolplus",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i3 120Ah SOL plus",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi4edrive40",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i4 eDrive40",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi4m50",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i4 M50",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi5edrive40",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i5 eDrive40",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi7edrive50",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i7 eDrive50",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi7xdrive60",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i7 xDrive60",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwi8roadster",
+      "market": "korea",
+      "make": null,
+      "model": "BMW i8 Roadster",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwixm60",
+      "market": "korea",
+      "make": null,
+      "model": "BMW iX M60",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwixxdrive40",
+      "market": "korea",
+      "make": null,
+      "model": "BMW iX xDrive40",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwixxdrive50",
+      "market": "korea",
+      "make": null,
+      "model": "BMW iX xDrive50",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwix1xdrive30",
+      "market": "korea",
+      "make": null,
+      "model": "BMW iX1 xDrive30",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwix3msport",
+      "market": "korea",
+      "make": null,
+      "model": "BMW iX3 M Sport",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwmcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M COUPE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm135ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M135i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm2",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M2",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm2competition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M2 Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm2competitionpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M2 Competition Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm235ixdrivegrancoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M235i xDrive Gran Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm240ixdrivecoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M240i xDrive Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm3competition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M3 Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm3competitionmxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M3 Competition M xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm340i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M340i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm340ixdrivetouring",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M340i xDrive Touring",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm4competitionconvertiblemxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M4 Competition Convertible M xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm4competitionmxdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M4 Competition M xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm4coupecompetitionpackageleviii",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M4 Coupe Competition Package LEVIII",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm440ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M440i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm440ixdriveconvertible",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M440i xDrive Convertible",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm5competitionpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M5 Competition Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm550ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M550i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm760lixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M760Li xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm8grancoupecompetition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M8 Gran Coupe Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm850ixdrivecoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M850i xDrive Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwm850ixdrivegrancoupe",
+      "market": "korea",
+      "make": null,
+      "model": "BMW M850i xDrive Gran Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1m35ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 M35i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1sdrive18d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 sDrive18d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1sdrive20i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 sDrive20i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1xdrive18d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 xDrive18d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1xdrive18dadvantage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 xDrive18d Advantage",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1xdrive18dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 xDrive18d M sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1xdrive20i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 xDrive20i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1xdrive20iadvantage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 xDrive20i Advantage",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx1xdrive20imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X1 xDrive20i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx2m35i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X2 M35i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx2xdrive18d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X2 xDrive18d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx2xdrive18dadvantage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X2 xDrive18d Advantage",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx2xdrive20i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X2 xDrive20i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx2xdrive20iadvantage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X2 xDrive20i Advantage",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx2xdrive20imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X2 xDrive20i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3m",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 M",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3mcompetition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 M Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3m40i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 M40i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive20d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive20d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive20dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive20d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive20dxline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive20d xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive20i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive20i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive20iluxury",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive20i Luxury",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive30d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive30d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive30dmsportpackagerde",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive30d M Sport Package RDE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive30e",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive30e",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive30emsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive30e M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx3xdrive30exline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X3 xDrive30e xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4m",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 M",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4mcompetition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 M Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4m40i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 M40i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20dmsportx",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20d M Sport X",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20dxline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20d xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20imsportx",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20i M Sport X",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive20ixline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive20i xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx4xdrive30dmsportx",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X4 xDrive30d M Sport X",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5m",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 M",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5mcompetition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 M Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5m50d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 M50d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5m50i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 M50i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive35i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive 35i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive30d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive30d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive30dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive30d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive30dxline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive30d xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive40d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive40d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive40i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive40i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive40imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive40i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive40ixline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive40i xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive45eiperformance",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive45e iPerformance",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx5xdrive50e",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X5 xDrive50e",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6mcompetition",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 M Competition",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6m50d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 M50d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6m50i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 M50i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6m60ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 M60i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive30d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive30d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive30dmsport",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive30d M Sport",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive30dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive30d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive30dxline",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive30d xLine",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive35i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 XDrive35i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive40i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive40i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive40imsport",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive40i M Sport",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx6xdrive40imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X6 xDrive40i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7m50i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 M50i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7m60ixdrive",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 M60i xDrive",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7xdrive30ddesignpureexcellence",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 xDrive 30d Design Pure Excellence",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7xdrive30dmsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 xDrive 30d M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7xdrive40d",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 xDrive40d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7xdrive40i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 xDrive40i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7xdrive40idesignpureexcellence",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 xDrive40i Design Pure Excellence",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwx7xdrive40imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW X7 xDrive40i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwxm",
+      "market": "korea",
+      "make": null,
+      "model": "BMW XM",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwz4m40i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Z4 M40i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwz4sdrive20i",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Z4 sDrive20i",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwz4sdrive20imsportpackage",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Z4 sDrive20i M Sport Package",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bmwz4sdrive20isport",
+      "market": "korea",
+      "make": null,
+      "model": "BMW Z4 sDrive20i Sport",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bronco27",
+      "market": "korea",
+      "make": null,
+      "model": "Bronco 2.7",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bs090",
+      "market": "korea",
+      "make": null,
+      "model": "BS090",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bs106",
+      "market": "korea",
+      "make": null,
+      "model": "BS106",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bs24톤홈로리",
+      "market": "korea",
+      "make": null,
+      "model": "BS2.4톤홈로리",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bs3kl홈로리",
+      "market": "korea",
+      "make": null,
+      "model": "BS3KL홈로리",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:btm21톤세이프티로더",
+      "market": "korea",
+      "make": null,
+      "model": "BTM2.1톤세이프티로더",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:btm렉스턴언더리프트",
+      "market": "korea",
+      "make": null,
+      "model": "BTM렉스턴언더리프트",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:btm봉고더블캡언더리프트",
+      "market": "korea",
+      "make": null,
+      "model": "BTM봉고더블캡언더리프트",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:btm포터언더리프트",
+      "market": "korea",
+      "make": null,
+      "model": "BTM포터언더리프트",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bx212",
+      "market": "korea",
+      "make": null,
+      "model": "BX212",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bx400",
+      "market": "korea",
+      "make": null,
+      "model": "BX400",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bx500ver2",
+      "market": "korea",
+      "make": null,
+      "model": "BX500 ver2",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:bydebus9",
+      "market": "korea",
+      "make": null,
+      "model": "BYD eBus-9",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:c3aircross15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "C3 AirCross 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cadillacct420t",
+      "market": "korea",
+      "make": null,
+      "model": "CADILLAC CT4 2.0T",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cadillacct520t",
+      "market": "korea",
+      "make": null,
+      "model": "CADILLAC CT5 2.0T",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cadillacescalade",
+      "market": "korea",
+      "make": null,
+      "model": "CADILLAC ESCALADE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cadillacescaladeesv",
+      "market": "korea",
+      "make": null,
+      "model": "CADILLAC ESCALADE ESV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cadillacxt4",
+      "market": "korea",
+      "make": null,
+      "model": "CADILLAC XT4",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cadillacxt6",
+      "market": "korea",
+      "make": null,
+      "model": "CADILLAC XT6",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:camaro",
+      "market": "korea",
+      "make": null,
+      "model": "CAMARO",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:captur",
+      "market": "korea",
+      "make": null,
+      "model": "CAPTUR",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cevoc",
+      "market": "korea",
+      "make": null,
+      "model": "CEVO-C",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cevocse",
+      "market": "korea",
+      "make": null,
+      "model": "CEVO-C SE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevroletbolteuv",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET BOLT EUV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevroletboltev",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET BOLT EV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevroletcoloradoawd",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET COLORADO AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevroletcoloradorwd",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET COLORADO RWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevroletequinoxawd",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET EQUINOX AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevroletequinoxfwd",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET EQUINOX FWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevrolettahoeawd",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET TAHOE AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:chevrolettraverseawd",
+      "market": "korea",
+      "make": null,
+      "model": "CHEVROLET TRAVERSE AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:citroenc3aircross15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "Citroen C3 AirCross 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:citroenc4cactus15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "Citroen C4 Cactus 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:citroenc5aircross15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "Citroen C5 AirCross 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:citroengrandc4spacetourer15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "Citroen Grand C4 SPACETOURER 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:citroengrandc4spacetourer20bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "Citroen Grand C4 SPACETOURER 2.0 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cls400d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "CLS400 d 4Matic",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cn더뉴카니발하이리무진",
+      "market": "korea",
+      "make": null,
+      "model": "CN더뉴카니발하이리무진",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cn더뉴카니발하이리무진hev",
+      "market": "korea",
+      "make": null,
+      "model": "CN더뉴카니발하이리무진HEV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cn모터스아이엠하이리무진",
+      "market": "korea",
+      "make": null,
+      "model": "CN모터스(아이엠하이리무진)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cn밴서브카니발하이리무진",
+      "market": "korea",
+      "make": null,
+      "model": "CN밴서브카니발하이리무진",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cn스타리아하이리무진",
+      "market": "korea",
+      "make": null,
+      "model": "CN스타리아하이리무진",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:cn카니발하이리무진",
+      "market": "korea",
+      "make": null,
+      "model": "CN카니발하이리무진",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:continentalgtv8",
+      "market": "korea",
+      "make": null,
+      "model": "Continental GT V8",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:crv",
+      "market": "korea",
+      "make": null,
+      "model": "CR-V",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:crv2wd",
+      "market": "korea",
+      "make": null,
+      "model": "CR-V 2WD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:crv4wd",
+      "market": "korea",
+      "make": null,
+      "model": "CR-V 4WD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:crvhybrid2wd",
+      "market": "korea",
+      "make": null,
+      "model": "CR-V HYBRID 2WD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:crvhybrid4wd",
+      "market": "korea",
+      "make": null,
+      "model": "CR-V HYBRID 4WD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:dk보트트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "D.K보트트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:d2",
+      "market": "korea",
+      "make": null,
+      "model": "D2",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:d2c",
+      "market": "korea",
+      "make": null,
+      "model": "D2C",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:d2p",
+      "market": "korea",
+      "make": null,
+      "model": "D2P",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:dachi캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "DACHI캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:daihatsucopen",
+      "market": "korea",
+      "make": null,
+      "model": "DAIHATSU COPEN",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:defa캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "DEFA캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:dethleffs씨고475캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "DETHLEFFS씨고475캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:dh카니발하이리무진",
+      "market": "korea",
+      "make": null,
+      "model": "DH카니발하이리무진",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ds315bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "DS3 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ds3crossbacketense",
+      "market": "korea",
+      "make": null,
+      "model": "DS3 CROSSBACK E-TENSE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ds4crossback15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "DS4 Crossback 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ds7crossback20bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "DS7 Crossback 2.0 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:etron50quattro",
+      "market": "korea",
+      "make": null,
+      "model": "e-tron 50 quattro",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:etron55quattro",
+      "market": "korea",
+      "make": null,
+      "model": "e-tron 55 quattro",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:etrongtquattro",
+      "market": "korea",
+      "make": null,
+      "model": "e-tron GT quattro",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:etrons",
+      "market": "korea",
+      "make": null,
+      "model": "e-tron S",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:etronsportback50quattro",
+      "market": "korea",
+      "make": null,
+      "model": "e-tron Sportback 50 quattro",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:etronsportback55quattro",
+      "market": "korea",
+      "make": null,
+      "model": "e-tron Sportback 55 quattro",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:e220dcabriolet",
+      "market": "korea",
+      "make": null,
+      "model": "E220 d Cabriolet",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:e300",
+      "market": "korea",
+      "make": null,
+      "model": "E300",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:e3004matic",
+      "market": "korea",
+      "make": null,
+      "model": "E300 4Matic",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:e6",
+      "market": "korea",
+      "make": null,
+      "model": "E6",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:egta캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "EGTA캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:elf",
+      "market": "korea",
+      "make": null,
+      "model": "ELF",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:evj1",
+      "market": "korea",
+      "make": null,
+      "model": "EV J1",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ev6",
+      "market": "korea",
+      "make": null,
+      "model": "EV6",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ev6gt",
+      "market": "korea",
+      "make": null,
+      "model": "EV6 GT",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ev9",
+      "market": "korea",
+      "make": null,
+      "model": "EV9",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:expedition35",
+      "market": "korea",
+      "make": null,
+      "model": "Expedition 3.5",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:expedition35l",
+      "market": "korea",
+      "make": null,
+      "model": "Expedition 3.5L",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:explorer23",
+      "market": "korea",
+      "make": null,
+      "model": "Explorer 2.3",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:explorer23l",
+      "market": "korea",
+      "make": null,
+      "model": "Explorer 2.3L",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:explorer30",
+      "market": "korea",
+      "make": null,
+      "model": "Explorer 3.0",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:explorer30phev",
+      "market": "korea",
+      "make": null,
+      "model": "Explorer 3.0 PHEV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:explorer33fhev",
+      "market": "korea",
+      "make": null,
+      "model": "Explorer 3.3 FHEV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ezloader보트트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "EZ LOADER보트트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:fengonix5",
+      "market": "korea",
+      "make": null,
+      "model": "FENGON ix5",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:fh트랙터",
+      "market": "korea",
+      "make": null,
+      "model": "FH 트랙터",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:flyingspurv8",
+      "market": "korea",
+      "make": null,
+      "model": "Flying Spur V8",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:fm카고",
+      "market": "korea",
+      "make": null,
+      "model": "FM카고",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g4렉스턴",
+      "market": "korea",
+      "make": null,
+      "model": "G4 렉스턴",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g63amg",
+      "market": "korea",
+      "make": null,
+      "model": "G63 AMG",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g70",
+      "market": "korea",
+      "make": null,
+      "model": "G70",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g70슈팅브레이크g70shootingbrake",
+      "market": "korea",
+      "make": null,
+      "model": "G70 슈팅 브레이크(G70 SHOOTING BRAKE)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g80",
+      "market": "korea",
+      "make": null,
+      "model": "G80",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g90",
+      "market": "korea",
+      "make": null,
+      "model": "G90",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g90limousine",
+      "market": "korea",
+      "make": null,
+      "model": "G90 LIMOUSINE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:g90롱휠베이스g90longwheelbase",
+      "market": "korea",
+      "make": null,
+      "model": "G90 롱휠베이스(G90 LONG WHEEL BASE )",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:genesisg90",
+      "market": "korea",
+      "make": null,
+      "model": "GENESIS G90",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:genesisgv80",
+      "market": "korea",
+      "make": null,
+      "model": "GENESIS GV80",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:glc3004matic",
+      "market": "korea",
+      "make": null,
+      "model": "GLC300 4Matic",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gmcsierra",
+      "market": "korea",
+      "make": null,
+      "model": "GMC Sierra",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gmc사바나savana",
+      "market": "korea",
+      "make": null,
+      "model": "GMC사바나(SAVANA)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gmc시에라sierra",
+      "market": "korea",
+      "make": null,
+      "model": "GMC시에라(SIERRA)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gmc시에라sierra1500",
+      "market": "korea",
+      "make": null,
+      "model": "GMC시에라(SIERRA)1500",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:golf20tdi",
+      "market": "korea",
+      "make": null,
+      "model": "Golf 2.0TDI",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:golfgti",
+      "market": "korea",
+      "make": null,
+      "model": "Golf GTI",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:grandc4spacetourer15bluehdi",
+      "market": "korea",
+      "make": null,
+      "model": "Grand C4 SPACETOURER 1.5 BlueHDi",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gv60",
+      "market": "korea",
+      "make": null,
+      "model": "GV60",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gv70",
+      "market": "korea",
+      "make": null,
+      "model": "GV70",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gv80",
+      "market": "korea",
+      "make": null,
+      "model": "GV80",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gv80쿠페gv80coupe",
+      "market": "korea",
+      "make": null,
+      "model": "GV80 쿠페(GV80 Coupe)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gvt고성능소방화학차",
+      "market": "korea",
+      "make": null,
+      "model": "GVT고성능소방화학차",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:gvt소방펌프차",
+      "market": "korea",
+      "make": null,
+      "model": "GVT소방펌프차",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hahn캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "HAHN캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hd보트트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "HD보트트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hobby캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "HOBBY캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hondacivic",
+      "market": "korea",
+      "make": null,
+      "model": "HONDA CIVIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hondastepwagon",
+      "market": "korea",
+      "make": null,
+      "model": "HONDA STEPWAGON",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hrv2wd",
+      "market": "korea",
+      "make": null,
+      "model": "HR-V 2WD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:hrsky540vp고소작업차",
+      "market": "korea",
+      "make": null,
+      "model": "HRSKY540VP고소작업차",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:i30",
+      "market": "korea",
+      "make": null,
+      "model": "i30",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:id4pro",
+      "market": "korea",
+      "make": null,
+      "model": "ID.4 Pro",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:iforwilliams마필운송트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "IFOR WILLIAMS마필운송트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:iforwilliams동물운송트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "IFORWILLIAMS동물운송트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:infinitiqx50",
+      "market": "korea",
+      "make": null,
+      "model": "INFINITI QX50",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:infinitiqx50lwb",
+      "market": "korea",
+      "make": null,
+      "model": "INFINITI QX50 LWB",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:infinitiqx60awd",
+      "market": "korea",
+      "make": null,
+      "model": "INFINITI QX60 AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ito25톤lpg탱크로리",
+      "market": "korea",
+      "make": null,
+      "model": "ITO2.5톤LPG탱크로리",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:ito5톤lpg탱크로리",
+      "market": "korea",
+      "make": null,
+      "model": "ITO5톤LPG탱크로리",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:jeepcompass",
+      "market": "korea",
+      "make": null,
+      "model": "JEEP COMPASS",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:jetta",
+      "market": "korea",
+      "make": null,
+      "model": "Jetta",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:jetta14tsi",
+      "market": "korea",
+      "make": null,
+      "model": "Jetta 1.4 TSI",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:jy카고트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "JY카고트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k3",
+      "market": "korea",
+      "make": null,
+      "model": "K3",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k5",
+      "market": "korea",
+      "make": null,
+      "model": "K5",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k5하이브리드",
+      "market": "korea",
+      "make": null,
+      "model": "K5 하이브리드",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k7",
+      "market": "korea",
+      "make": null,
+      "model": "K7",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k7하이브리드",
+      "market": "korea",
+      "make": null,
+      "model": "K7 하이브리드",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k8",
+      "market": "korea",
+      "make": null,
+      "model": "K8",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k8하이브리드",
+      "market": "korea",
+      "make": null,
+      "model": "K8 하이브리드",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:k9",
+      "market": "korea",
+      "make": null,
+      "model": "K9",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kabe캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "KABE캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:karavan보트트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "KARAVAN보트트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kcm1톤롱바디카고",
+      "market": "korea",
+      "make": null,
+      "model": "KCM1톤롱바디카고",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kcm1톤롱바디표준캡카고",
+      "market": "korea",
+      "make": null,
+      "model": "KCM1톤롱바디표준캡카고",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kc자이안트9인승",
+      "market": "korea",
+      "make": null,
+      "model": "KC자이안트9인승",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kgsnc토레스밴",
+      "market": "korea",
+      "make": null,
+      "model": "KG SnC 토레스 밴",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kiamohave",
+      "market": "korea",
+      "make": null,
+      "model": "KIA MOHAVE",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:kiasedona",
+      "market": "korea",
+      "make": null,
+      "model": "KIA SEDONA",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:leaf",
+      "market": "korea",
+      "make": null,
+      "model": "LEAF",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lexusrx350",
+      "market": "korea",
+      "make": null,
+      "model": "LEXUS RX350",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnaviator30",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Aviator 3.0",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnaviator30phev",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Aviator 3.0 PHEV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolncontinental30awd",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Continental 3.0 AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolncorsair20",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Corsair 2.0",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnmkz20",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln MKZ 2.0",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnmkzhybrid",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln MKZ Hybrid",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnnautilus20l",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Nautilus 2.0L",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnnautilus27awd",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Nautilus 2.7 AWD",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnnavigator35",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Navigator 3.5",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lincolnnavigator35l",
+      "market": "korea",
+      "make": null,
+      "model": "Lincoln Navigator 3.5L",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lmc캠핑트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "LMC캠핑트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:lm카니발하이루프리무진",
+      "market": "korea",
+      "make": null,
+      "model": "LM카니발하이루프리무진",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:magictilt제트스키트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "MAGICTILT제트스키트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:masada2밴",
+      "market": "korea",
+      "make": null,
+      "model": "MASADA 2밴",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:masada3세대2밴",
+      "market": "korea",
+      "make": null,
+      "model": "MASADA 3세대 2밴",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:masada4밴",
+      "market": "korea",
+      "make": null,
+      "model": "MASADA 4밴",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:master",
+      "market": "korea",
+      "make": null,
+      "model": "MASTER",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:maxima",
+      "market": "korea",
+      "make": null,
+      "model": "Maxima",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mazdacx9",
+      "market": "korea",
+      "make": null,
+      "model": "MAZDA CX-9",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mazdamx5",
+      "market": "korea",
+      "make": null,
+      "model": "MAZDA MX-5",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mb보트트레일러",
+      "market": "korea",
+      "make": null,
+      "model": "MB보트트레일러",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mclarengt",
+      "market": "korea",
+      "make": null,
+      "model": "McLaren GT",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenza180d",
+      "market": "korea",
+      "make": null,
+      "model": "MERCEDES BENZ A180D",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze300",
+      "market": "korea",
+      "make": null,
+      "model": "MERCEDES BENZ E300",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglk350",
+      "market": "korea",
+      "make": null,
+      "model": "MERCEDES BENZ GLK350",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgls450",
+      "market": "korea",
+      "make": null,
+      "model": "MERCEDES BENZ GLS450",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamga354matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG A35 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamga454matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG A45 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgc434matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG C43 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgc434maticcabriolet",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG C43 4Matic Cabriolet",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgc434maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG C43 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgc63scoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG C63 S Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgcla45s4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG CLA45 S 4MATIC +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgcls534matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG CLS53 4Matic +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamge534matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG E53 4Matic +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamge534maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG E53 4Matic + Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamge634matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG E63 4Matic+",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgeqe534matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG EQE53 4MATIC +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgeqs534matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG EQS53 4MATIC +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgg63",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG G63",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamggla454matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLA45 4MATIC +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgglb354matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLB 35 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgglc434matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLC 43 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgglc434maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLC 43 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgglc63s4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLC63 S 4MATIC + Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamggle534matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLE 53 4MATIC +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamggle534maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLE 53 4MATIC + Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamggle63s4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GLE63 S 4MATIC + Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamggt434matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GT43 4Matic +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamggt63s4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG GT63 S 4Matic",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgs634maticl",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG S63 4MATIC + L",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgs634maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG S63 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesamgsl634matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-AMG SL63 4MATIC +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenza220",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz A 220",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenza220sedan",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz A 220 Sedan",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenza200dsedan",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz A200 d Sedan",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenza2504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz A250 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc3004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C 300 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc200",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C200",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc2004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C200 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc200cabriolet",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C200 Cabriolet",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc200coupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C200 Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc220d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C220 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc300",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C300",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzc300e4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz C300 e 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzcla2504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz CLA 250 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzcle200coupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz CLE 200 Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzcle4504maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz CLE 450 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzcls300d",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz CLS 300 d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzcls300d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz CLS300 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzcls4504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz CLS450 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze200",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E 200",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze220d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E 220 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze250",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E 250",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze3004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E 300 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze4504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E 450 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze4504maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E 450 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze300d4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E300 d 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze300e4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E300 e 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze3504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E350 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenze4504maticcabriolet",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz E450 4MATIC Cabriolet",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqa250",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQA250",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqb3004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQB300 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqc4004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQC400 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqe350",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQE 350 +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqe3504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQE 350 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqe300",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQE300",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqe3504maticsuv",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQE350 4MATIC SUV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqe5004maticsuv",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQE500 4MATIC SUV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqs350",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQS350",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqs450",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQS450 +",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqs4504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQS450 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqs4504maticsuv",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQS450 4MATIC SUV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzeqs5804maticsuv",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz EQS580 4MATIC SUV",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzg400d",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz G400 d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgla2504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLA 250 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgla220",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLA220",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglb2504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLB 250 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglb200d",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLB200 d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglb220",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLB220",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglc3004maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLC 300 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglc220d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLC220 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglc220d4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLC220 d 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglc3004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLC300 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglc300e4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLC300 e 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzglc300e4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLC300 e 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle300d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE 300 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle400e4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE 400 e 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle4504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE 450 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle450d4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE 450 d 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle350e4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE350 e 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle350e4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE350 e 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgle400d4maticcoupe",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLE400 d 4MATIC Coupe",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgls450d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLS 450 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgls5804matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLS 580 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzgls400d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz GLS400 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs4504matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S 450 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs450d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S 450 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs5004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S 500 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs5604matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S 560 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs5804matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S 580 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs350d",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S350 d",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs400d4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S400 d 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs4504maticl",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S450 4MATIC L",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs550",
+      "market": "korea",
+      "make": null,
+      "model": "MERCEDES-BENZ S550",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs560e",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S560 e",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesbenzs580e4matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Benz S580 e 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesmaybachgls600",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Maybach GLS 600",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2024,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesmaybachgls6004matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Maybach GLS600 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2022,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesmaybachs5604matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Maybach S 560 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesmaybachs580",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Maybach S 580",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesmaybachs5804matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Maybach S580 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2021,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:mercedesmaybachs6804matic",
+      "market": "korea",
+      "make": null,
+      "model": "Mercedes-Maybach S680 4MATIC",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2023,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooper",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperclubman",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Clubman",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperclubman171819",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Clubman(17 18 19)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperclubman18",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Clubman(18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperconvertible",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Convertible",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperconvertible161718",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Convertible(16 17 18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopercountryman",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Countryman",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopercountryman18",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Countryman(18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopercountryman19",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper Countryman(19)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperdclubman",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper D Clubman",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperdclubman171819",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper D Clubman(17 18 19)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperdcountrymanall4",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper D Countryman ALL4",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperdcountrymanall4rde18",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper D Countryman ALL4 RDE(18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperfivedoor",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper five-door",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperfivedoor15",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper five-door(15)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperfivedoor161718",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper five-door(16 17 18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopers",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopersclubman",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S Clubman",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopersclubman18",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S Clubman (18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopersconvertible",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S Convertible",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopersconvertible161718",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S Convertible(16 17 18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperscountrymanall4",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S Countryman ALL4",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicooperscountrymanall418",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S Countryman ALL4(18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopersfivedoor",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S five-door",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopersfivedoor161718",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S five-door(16 17 18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    },
+    {
+      "key": "korea:unknown:minicoopers161718",
+      "market": "korea",
+      "make": null,
+      "model": "MINI Cooper S(16 17 18)",
+      "sources": [
+        "korea-jeju-registration-file"
+      ],
+      "aliases": [],
+      "modelYear": null,
+      "observationYear": 2020,
+      "yearBasis": "first_registration"
+    }
+  ]
+}

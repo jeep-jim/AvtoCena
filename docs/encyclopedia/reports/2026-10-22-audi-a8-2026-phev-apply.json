@@ -1,0 +1,46 @@
+{
+  "batch": "research-2026-10-22-audi-a8-2026-phev",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "1314a66b16c62faefdaa7675",
+      "changes": [
+        {
+          "variantId": "9f537c963e903c1b45c20b1c",
+          "fields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "systemPowerKw",
+            "motorPeakKw",
+            "batteryKwh",
+            "drive",
+            "transmission"
+          ]
+        },
+        {
+          "variantId": "5f609fc704ce5d8fac73bb91",
+          "fields": [
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw",
+            "powerHp",
+            "icePowerKw",
+            "systemPowerKw",
+            "motorPeakKw",
+            "batteryKwh",
+            "drive",
+            "transmission"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-22T01:22:11.836Z",
+  "finishedAt": "2026-10-22T01:22:17.688Z"
+}

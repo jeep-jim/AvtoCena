@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-22T04:53:17.951718+00:00",
+  "batch": "research-2026-10-22-aiways-u5-manual-years",
+  "mode": "readback",
+  "variants": 3,
+  "fields": 18,
+  "passed": true,
+  "rows": [
+    {
+      "modelId": "af6a7cd1cd960b737b731ce2",
+      "variantId": "008689f61d82230a241fd707",
+      "year": 2019,
+      "revision": "fad9d8d6-38e8-4c90-a804-ce370bc14529",
+      "fields": 5,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "af6a7cd1cd960b737b731ce2",
+      "variantId": "b9abe8eb1a372be51abf8d2c",
+      "year": 2021,
+      "revision": "fad9d8d6-38e8-4c90-a804-ce370bc14529",
+      "fields": 6,
+      "historyPassed": true,
+      "sourcePassed": true
+    },
+    {
+      "modelId": "af6a7cd1cd960b737b731ce2",
+      "variantId": "db0d1e5dfb92135d4f882e07",
+      "year": 2021,
+      "revision": "fad9d8d6-38e8-4c90-a804-ce370bc14529",
+      "fields": 7,
+      "historyPassed": true,
+      "sourcePassed": true
+    }
+  ]
+}

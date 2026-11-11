@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-25T01:45:49.401544+00:00",
+  "sources": [
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1246/file_en/7f0e26cb609abb21d456aa30f2b5848e537f3391/eTD-Audi-A6-Avant-50-TFSIe-quattro-S_tronic-195kW_220kW_240829.pdf?1725009815=&disposition=attachment",
+      "sha256": "06fd82db1a6d0c9da39014673ac85f9837ce86701a606451eda084a7dcfc314c",
+      "pages": [
+        1,
+        2
+      ],
+      "systemPowerKw": 220
+    },
+    {
+      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1247/file_en/817b875e54a89e3795d0d19c0c7d0a9ee4991af3/eTD-Audi-A6-Avant-55-TFSIe-quattro-S_tronic-195kW_270kW_240829.pdf?1725009817=&disposition=attachment",
+      "sha256": "17376f0bf1693ac551bf12741dd2a95dbb104af40546fa801313606ee110bd07",
+      "pages": [
+        1,
+        2
+      ],
+      "systemPowerKw": 270
+    }
+  ],
+  "counts": {
+    "newValues": 26,
+    "correctedValues": 7,
+    "attestedUnchanged": 5
+  },
+  "certified30minAdded": 0
+}

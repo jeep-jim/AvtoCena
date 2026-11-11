@@ -1,0 +1,133 @@
+{
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/42930891595",
+  "server": {
+    "release": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+    "appliedAt": "2026-11-11T00:23:23.480470+00:00",
+    "runId": "42930891595",
+    "sources": [
+      {
+        "name": "amazonbot",
+        "source": "https://developer.amazon.com/amazonbot/ip-addresses/",
+        "count": 1292,
+        "creationTime": "2026-09-08T05:24:10.610952+00:00",
+        "sha256": "d975737b48aa038bf22574813d90ea6d9aba8a7560690fd42318d8b9c634cd42"
+      },
+      {
+        "name": "reflectionbot",
+        "source": "https://reflection.ai/bot/ips.json",
+        "count": 2,
+        "creationTime": "2026-09-22T10:00:00.000000",
+        "sha256": "24327394c98e6f5131d11d0974ffce061ad0c74abd6654c8667fb8a55e4fb48c"
+      }
+    ],
+    "checks": [
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/",
+        "status": 403
+      },
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/cars?market=japan",
+        "status": 403
+      },
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/api/catalog/search?market=korea",
+        "status": 403
+      },
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/api/health",
+        "status": 403
+      },
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/robots.txt",
+        "status": 200,
+        "disallowAll": true
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/",
+        "status": 403
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/cars?market=japan",
+        "status": 403
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/api/catalog/search?market=korea",
+        "status": 403
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/api/health",
+        "status": 403
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/robots.txt",
+        "status": 200,
+        "disallowAll": true
+      }
+    ],
+    "health": {
+      "ok": true,
+      "service": "avtocena-web",
+      "catalogProjectionParts": "scoped-v1",
+      "releaseSha": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+      "calculationVersion": "091f4cbc26484a9a3f455dda84eeb8bfc11237796574b549da859efd95889daf"
+    },
+    "originalContainerUnchanged": true,
+    "upstreamUnchanged": true,
+    "applicationRestarted": false,
+    "feedsChanged": false,
+    "nginxSyntaxPassed": true,
+    "isolatedNginxTestsPassed": true,
+    "rulesSha256": "3fa8b35cb0ad9fc1102e7d192cf5257880dda4bf478944615bfc95d781176374"
+  },
+  "public": {
+    "release": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+    "publicVerified": true,
+    "checks": [
+      {
+        "agent": "Mozilla/5.0",
+        "path": "/api/health",
+        "status": 200
+      },
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/cars?market=japan",
+        "status": 403
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/cars?market=korea",
+        "status": 403
+      },
+      {
+        "agent": "Amazonbot/0.1",
+        "path": "/robots.txt",
+        "status": 200
+      },
+      {
+        "agent": "ReflectionBot/1.0",
+        "path": "/robots.txt",
+        "status": 200
+      },
+      {
+        "agent": "Googlebot/2.1",
+        "path": "/api/health",
+        "status": 200
+      },
+      {
+        "agent": "YandexBot/3.0",
+        "path": "/api/health",
+        "status": 200
+      }
+    ]
+  }
+}

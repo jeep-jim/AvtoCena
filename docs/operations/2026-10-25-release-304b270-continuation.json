@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-24T17:43:16Z",
+  "release": {
+    "sha": "304b270cfd2b14be47b579f268d8c0d92df7dc17",
+    "workflow": 40117114655,
+    "status": "in_progress",
+    "waitForAstra": "success",
+    "prepareJob": 120940688218,
+    "prepare": "in_progress",
+    "activationConfirmed": false,
+    "requiredResearchBatches": 40,
+    "publicResearchBatches": 26,
+    "requiredAstraPlans": 3
+  },
+  "publicHealth": {
+    "checkedAt": "2026-10-24T17:42:31.832842+00:00",
+    "releaseSha": "8ec0d8587d9891757f8cdf019f2c9c55adcaef31",
+    "catalogProjectionParts": null,
+    "calculationVersion": "2104e0155a65da57f2850fda838ab9173ef882da3e141f0ff46183f236143c07"
+  },
+  "preparedIndexVerification": {
+    "workflow": 40116771159,
+    "conclusion": "success",
+    "report": "docs/encyclopedia/reports/2026-10-25-prepared-astra-verification.json"
+  },
+  "mergedFixes": [
+    {
+      "pr": 1527,
+      "sha": "1e6440c938a3332a50008d76f9c9e61a915c110c",
+      "ci": 40115107402,
+      "conclusion": "success"
+    },
+    {
+      "pr": 1528,
+      "sha": "30aadd126a92acc9ce7b89d34c08bd2cba2740c5",
+      "ci": 40116008291,
+      "conclusion": "success"
+    }
+  ],
+  "savedValuesThisPass": 0,
+  "repairRequested": false,
+  "publicAcceptancePassed": false,
+  "next": [
+    "Сопроводить существующий40117114655; не ставить второй release/apply.",
+    "При failure читать точный log, исправить причину с тестом; не ослаблять требуемые40/26/3.",
+    "После live304b270+health.catalogProjectionParts=scoped-v1 проверить active/pending/queued и свежий publication lease.",
+    "Запросить один refresh-current-read-models marker. Собственный lease/chunk validation/Japan live preflight теперь исправлены; при провале Japan не обходить проверку.",
+    "После repair подтвердить counts/parity/details; existing pickup-drive-pricing/checkCatalogFeedback привязать к реально установленному SHA; независимые search/detail/related/filter проверки.",
+    "Продолжить сохранённый27-row technical-reference cursor без создания моделей и повторного сбора; API A3/A4/A5 ранее таймауты, нужны свежие revisions дляCAS."
+  ],
+  "openLimitations": [
+    "Publisher retains compact arrays in RAM; not fully bounded memory.",
+    "Global AJES calculated-price ordering across pages remains open.",
+    "DBX old-projection parity and speed<=2s not accepted.",
+    "No full encyclopedia/catalog completion claim."
+  ]
+}

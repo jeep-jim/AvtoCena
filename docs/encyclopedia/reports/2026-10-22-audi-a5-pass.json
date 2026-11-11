@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T05:23:29.142352+07:00",
+  "make": "Audi",
+  "model": "A5",
+  "variants": 131,
+  "confirmedFields": 1080,
+  "batches": [
+    {
+      "stem": "2026-10-22-audi-a5-2026-1",
+      "sha": "9f7cdcd9a25bc95d9ed12aad8393abe3d8d48773",
+      "run": 39684732169,
+      "job": 119515790825,
+      "variants": 32,
+      "fields": 269
+    },
+    {
+      "stem": "2026-10-22-audi-a5-2025-1",
+      "sha": "37f5f003a4c198d55a618d598ba2af5ea257698e",
+      "run": 39684942094,
+      "job": 119516488307,
+      "variants": 5,
+      "fields": 43
+    },
+    {
+      "stem": "2026-10-22-audi-a5-2024-1",
+      "sha": "588992e56d9bb36660463f61c44efd51b2de11b2",
+      "run": 39685130130,
+      "job": 119517129541,
+      "variants": 16,
+      "fields": 144
+    },
+    {
+      "stem": "2026-10-22-audi-a5-2023-1",
+      "sha": "32ee331181586a03519fa7968d2ddd48df8f42d1",
+      "run": 39685424319,
+      "job": 119518139157,
+      "variants": 15,
+      "fields": 120
+    },
+    {
+      "stem": "2026-10-22-audi-a5-2022-1",
+      "sha": "cac3513b7163ea85fab27a3469d2df77b6bdb3f1",
+      "run": 39685660027,
+      "job": 119518941662,
+      "variants": 36,
+      "fields": 288
+    },
+    {
+      "stem": "2026-10-22-audi-a5-2021-1",
+      "sha": "1d4c807486263fb1195f0458e8a6e011f930f633",
+      "run": 39685926605,
+      "job": 119519831741,
+      "variants": 27,
+      "fields": 216
+    }
+  ],
+  "applicationSkips": 0,
+  "independentReadback": "all patch values, source objects, confirmed field arrays, evidence values, batch identity and review status checked",
+  "untouchedA5Variants": 471,
+  "a4lAdditionalRetryVariants": 66,
+  "a5F5RetryVariants": 1,
+  "integration": "NOT_IMPLEMENTED",
+  "nextAlphabeticalModels": [
+    "Audi A5L",
+    "Audi A5L Sportback",
+    "Audi A6"
+  ],
+  "valueDelta": {
+    "counts": {
+      "existing_value_confirmed": 783,
+      "filled_missing": 181,
+      "value_changed": 116
+    },
+    "changedOrFilledFields": {
+      "drive": 121,
+      "grossVehicleWeightKg": 53,
+      "powertrainKind": 110,
+      "fuel": 5,
+      "icePowerKw": 5,
+      "powerHp": 1,
+      "powerKw": 1,
+      "transmission": 1
+    }
+  },
+  "scope": "Research metadata and protected encyclopedia writes only; no collector, frontend or visitor request-path changes."
+}

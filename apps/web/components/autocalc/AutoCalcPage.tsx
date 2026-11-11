@@ -1,0 +1,121 @@
+'use client';
+import { useEffect, useRef, useState, useId } from 'react';
+import {calculationFormSeed,type CalculationFormSeed} from '../../lib/autocalc/form-state';
+import {CATALOG_BRANDS} from '../../lib/catalog/brands';
+import {autoCalcMake,splitAutoCalcIdentity} from '../../lib/autocalc/identity';
+import {PUBLIC_MIN_VEHICLE_YEAR} from '../../lib/catalog/public-year-range';
+import {VehicleModelSearch} from '../catalog/VehicleModelSearch';
+import { Car, Link2, FileDown } from 'lucide-react';
+import { PublicHeader } from '../layout/PublicHeader';
+import {StickyOfferColumn} from '../catalog/StickyOfferColumn';
+import { VehicleGallery } from '../catalog/VehicleGallery';
+import type { OfferCalculationDraft } from '../catalog/OfferCalculationForm';
+import {OfferParameterEditors, type ParameterDraft} from '../catalog/InlineOfferParameters';
+import {ResearchLink} from '../catalog/VehicleResearchLink';
+import {powerUnitPatch,completePowerUnitDraft} from '../../lib/catalog/power-parameter-draft';
+import {validateCustomerParameters} from '../../lib/catalog/customer-parameters';
+import {SourceDirectory} from './SourceDirectory';
+import {KnowledgeSuggestions} from './KnowledgeSuggestions';
+import type {KnowledgeChoice} from '../../lib/autocalc/knowledge';
+import { CitySelector } from '../home/CitySelector';
+import type { SavedCalculationResult } from '../../lib/catalog/saved-offer-calculation';
+const markets:Record<string,string>={japan:'Япония',china:'Китай',korea:'Корея',uae:'ОАЭ',europe:'Европа',georgia:'Грузия'};
+const currencies=['RUB','JPY','CNY','KRW','USD','EUR','AED','GEL'];
+const input='mt-1.5 h-12 w-full min-w-0 rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 text-base text-[var(--ac-text)] outline-none focus:border-red-500';
+const panel='rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-5';
+const rub=(n:number)=>`${Math.round(n).toLocaleString('ru-RU')} ₽`;
+export function AutoCalcPage({initialUrl,initialTitle="",embedded=false,initialSeed={},onSeedChange,onCalculated}:{initialUrl:string;initialTitle?:string;embedded?:boolean;initialSeed?:CalculationFormSeed;onSeedChange?:(seed:CalculationFormSeed)=>void;onCalculated?:(result:SavedCalculationResult|null)=>void}){
+ const seed=useRef(calculationFormSeed(initialSeed)).current,uniqueId=useId(),root=useRef<HTMLElement>(null);
+ const [portalTarget,setPortalTarget]=useState<HTMLElement|null>(null);
+ useEffect(()=>{if(embedded)setPortalTarget(root.current?.closest('dialog')||null);},[embedded]);
+ const callbacks=useRef({onSeedChange,onCalculated});callbacks.current={onSeedChange,onCalculated};
+ const [url,setUrl]=useState(seed.url||initialUrl),[make,setMake]=useState(()=>seed.make||splitAutoCalcIdentity(seed.title||initialTitle).make),[model,setModel]=useState(()=>seed.model||splitAutoCalcIdentity(seed.title||initialTitle).model),[market,setMarket]=useState(seed.market||''),[price,setPrice]=useState(seed.price||''),[currency,setCurrency]=useState(seed.currency||''),[city,setCity]=useState(seed.city||'');
+ const title=[make.trim(),model.trim()].filter(Boolean).join(' ');
+ const editIdentity=()=>{invalidate();setKnowledgeNote('');setReferenceImage('');setReferenceLabel('');};
+ const [images,setImages]=useState<string[]>([]),[draft,setDraft]=useState<Partial<OfferCalculationDraft>>(seed.draft||{}),[notes,setNotes]=useState<string[]>([]),[facts,setFacts]=useState<{label:string;value:string}[]>([]);
+ const [loading,setLoading]=useState(false),[pending,setPending]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(''),[result,setResult]=useState<SavedCalculationResult|null>(null);
+ const [referenceImage,setReferenceImage]=useState(''),[referenceLabel,setReferenceLabel]=useState(''),[knowledgeNote,setKnowledgeNote]=useState('');
+ const calculationTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
+ const [calculatedBody,setCalculatedBody]=useState<any>(null);const revision=useRef(0),controller=useRef<AbortController|null>(null);
+ function invalidate(){revision.current++;setResult(null);setCalculatedBody(null);setError('');setPending(false);}
+ async function load(link:string){
+  controller.current?.abort();const c=new AbortController();controller.current=c;invalidate();setLoading(true);setMessage('Читаем объявление…');
+  setKnowledgeNote('');setReferenceImage('');setReferenceLabel('');setMake('');setModel('');setMarket('');setPrice('');setCurrency('');setImages([]);setDraft({});setNotes([]);setFacts([]);
+  try{const r=await fetch('/api/autocalc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'extract',url:link}),signal:c.signal});const data=await r.json();if(!r.ok)throw Error(data.error);if(c.signal.aborted)return;
+   const identity=splitAutoCalcIdentity(data.title||'');setMake(autoCalcMake(data.make||identity.make));setModel(data.model||identity.model);
+   if(data.draft?.year && Number(data.draft.year)<PUBLIC_MIN_VEHICLE_YEAR){data.draft={...data.draft,year:''};data.notes=[...(data.notes||[]),'АвтоРасчёт доступен для автомобилей от 2008 года. Проверьте год выпуска.'];}
+   setMarket(data.market||'');setPrice(data.price||'');setCurrency(currencies.includes(data.currency)?data.currency:'');setImages(data.images||[]);setDraft(completePowerUnitDraft(data.draft||{}));setNotes(data.notes||[]);setFacts(data.facts||[]);setMessage(data.message);
+  }catch(e){if(!c.signal.aborted){setError(e instanceof Error?e.message:'Не удалось загрузить');setMessage('Заполните данные самостоятельно — расчёт доступен без загрузки объявления.');}}
+  finally{if(!c.signal.aborted)setLoading(false);}
+ }
+ useEffect(()=>{if(initialUrl&&!embedded)void load(initialUrl);return()=>controller.current?.abort();},[initialUrl]);
+ async function calculate(parameters:OfferCalculationDraft){
+  if(calculationTimer.current)clearTimeout(calculationTimer.current);
+  invalidate();const current=revision.current;setPending(true);
+  const body={action:'calculate',url,title,make:autoCalcMake(make),model,market,price,currency,city,draft:parameters};
+  try{const r=await fetch('/api/autocalc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await r.json();if(!r.ok)throw Error(data.error);if(current===revision.current){setResult(data);setCalculatedBody(body);}}
+  catch(e){if(current===revision.current)setError(e instanceof Error?e.message:'Не удалось рассчитать');}finally{if(current===revision.current)setPending(false);}
+ }
+ useEffect(()=>{
+  if(loading||!make.trim()||!model.trim()||!market||!currency||!(Number(price)>0)||!city||!draft.vehicleCategory)return;
+  try{validateCustomerParameters(draft);}catch{return;}
+  calculationTimer.current=setTimeout(()=>void calculate(draft as OfferCalculationDraft),600);
+  return()=>{if(calculationTimer.current)clearTimeout(calculationTimer.current);};
+ },[draft,title,market,currency,price,city,loading]);
+ async function pdf(){
+  if(!calculatedBody)return;setPending(true);setError('');
+  const preview=window.open('about:blank','_blank');if(preview){preview.opener=null;preview.document.title='Подготовка PDF';preview.document.body.textContent='Подготавливаем расчёт…';}
+  try{const r=await fetch('/api/autocalc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...calculatedBody,action:'pdf'})});if(!r.ok)throw Error((await r.json()).error);const link=URL.createObjectURL(await r.blob());if(preview)preview.location.href=link;else window.location.assign(link);setTimeout(()=>URL.revokeObjectURL(link),300000);}
+  catch(e){preview?.close();setError(e instanceof Error?e.message:'Не удалось открыть PDF');}finally{setPending(false);}
+ }
+ function useKnowledge(choice:KnowledgeChoice){
+  invalidate();
+  if(choice.make)setMake(choice.make);if(choice.model)setModel(choice.model);
+  setDraft(old=>completePowerUnitDraft({...choice.draft,...Object.fromEntries(Object.entries(old).filter(([,v])=>v!==''&&v!==undefined))}));
+  const sameMarket=!market||choice.market===market;
+  if(!market&&choice.market)setMarket(choice.market);
+  const sameCurrency=!currency||currency===choice.currency;
+  if(!price&&sameMarket&&sameCurrency&&choice.price&&choice.currency){setPrice(choice.price);setCurrency(choice.currency);}
+  if(choice.image){setReferenceImage(choice.image);setReferenceLabel('Фото выбранного аналога — не вашего объявления');}
+  setKnowledgeNote(`Использован вариант: ${choice.title}. Проверьте комплектацию.${!sameMarket?' Цена другого рынка не подставлена.':''}`);
+ }
+ useEffect(()=>{if(embedded)callbacks.current.onSeedChange?.(calculationFormSeed({url,make,model,market,price,currency,city,draft}));},[url,make,model,market,price,currency,city,draft,embedded]);
+ useEffect(()=>{if(embedded)callbacks.current.onCalculated?.(result);},[result,embedded]);
+ const leadText=[title,url,market&&markets[market],price&&`${price} ${currency}`,city,knowledgeNote,result&&`Расчёт: ${rub(result.totalRub)}`,calculatedBody&&`Параметры: ${JSON.stringify(calculatedBody.draft)}`].filter(Boolean).join('\n');
+ const parametersPanel=<>
+ <div className={panel}><p className="mb-2 text-sm font-bold">Доставка в ваш город</p><CitySelector portalTarget={portalTarget} syncStored={!embedded} persistSelection={!embedded} value={city} onChange={v=>{setCity(v);invalidate();}} onStoredChange={v=>{setCity(v);invalidate();}} triggerLabel={city || "Выберите город"}/></div>
+ <div id={embedded?uniqueId+"-parameters":"autocalc-parameters"} className="ac-autocalc-parameters min-w-0 scroll-mt-24"><fieldset disabled={loading} onChange={invalidate} className="mb-6 grid grid-cols-2 gap-4"><label className="min-w-0 text-xs font-semibold">Марка *<input aria-label="Марка автомобиля" required list={uniqueId+"-makes"} className={input} value={make} onChange={e=>{setMake(e.target.value);editIdentity();}} placeholder="Выберите марку" maxLength={80}/><datalist id={uniqueId+"-makes"}>{CATALOG_BRANDS.map(brand=><option key={brand.name} value={brand.name}/>)}</datalist></label><div className="min-w-0 text-xs font-semibold"><span>Модель *</span><VehicleModelSearch required contextual={false} inputClassName={input} value={model} make={autoCalcMake(make)} placeholder="Введите модель" onValueChange={value=>{setModel(value);editIdentity();}} onMakeChange={value=>{setMake(value);editIdentity();}}/></div><label className="text-xs font-semibold">Страна покупки *<select aria-label="Страна покупки" required className={input} value={market} onChange={e=>setMarket(e.target.value)}><option value="">Выберите</option>{Object.entries(markets).map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label><label className="text-xs font-semibold">Валюта *<select aria-label="Валюта" required className={input} value={currency} onChange={e=>setCurrency(e.target.value)}><option value="">Выберите</option>{currencies.map(c=><option key={c}>{c}</option>)}</select></label><label className="col-span-2 text-xs font-semibold">Цена автомобиля в объявлении *<input required type="number" min="0.01" step="any" className={input} value={price} onChange={e=>setPrice(e.target.value)} placeholder="Укажите цену"/></label></fieldset>
+ <KnowledgeSuggestions title={model} make={autoCalcMake(make)} year={draft.year?String(draft.year):undefined} market={market} disabled={loading} onChoose={useKnowledge} onPreview={(image,label)=>{setReferenceImage(image||'');setReferenceLabel(label||'');}}/>
+ {knowledgeNote?<p className="mb-3 text-xs leading-5 text-[var(--ac-muted)]">{knowledgeNote}</p>:null}
+ <h2 className="text-lg font-bold">Характеристики для расчёта</h2>
+ {notes.map((note,i)=><p key={i} className="mt-2 text-xs leading-5 text-[var(--ac-muted)]">{note}</p>)}
+ <fieldset disabled={loading} className="min-w-0"><OfferParameterEditors draft={draft as ParameterDraft} showCommercial researchContext={[title,markets[market]].filter(Boolean).join(' ')} change={(key,value)=>{invalidate();setDraft(old=>({...old,...powerUnitPatch(key,value,old as ParameterDraft),...(key==='year'?{productionMonth:'',productionDay:''}:{}),...(key==='fuel'?{hybridKind:'',icePowerKw:'',icePowerHp:'',power30MinKw:'',power30MinHp:''}:{})}));}}/></fieldset>
+ {facts.length?<dl className="mt-3 grid grid-cols-2 gap-2 text-xs">{facts.map((fact,i)=><div key={i} className="rounded-xl bg-[var(--ac-surface)] p-3"><dt className="text-[var(--ac-muted)]">{fact.label}</dt><dd className="mt-1 font-semibold">{fact.value}</dd></div>)}</dl>:null}
+ <div className="mt-3"><ResearchLink query={`характеристики двигателя мощность объём тип топлива ${title} ${draft.year||''} ${markets[market]||''}`} label="Уточнить характеристики с ИИ"/></div>
+ <button data-autocalc-primary type="button" onClick={()=>calculate(draft as OfferCalculationDraft)} disabled={pending||loading} className="mt-4 min-h-12 w-full rounded-xl bg-[#e32c39] px-4 font-bold text-white disabled:opacity-50">{pending?'Считаем…':'Рассчитать под ключ'}</button>
+ <div className="mt-4 space-y-4" data-autocalc-result>
+ <div className="rounded-3xl bg-red-500/10 p-5" aria-live="polite"><p className="text-xs font-bold normal-case tracking-normal">Стоимость под ключ</p><p className="mt-2 text-3xl font-black text-[#e32c39]">{result?rub(result.totalRub):'Заполните параметры'}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">{result?(knowledgeNote?'Ориентировочный расчёт по выбранному варианту. Подтвердите характеристики и цену.':'Расчёт по вашим данным. Итоговую стоимость подтвердит менеджер.'):'Укажите цену, страну покупки, город и характеристики.'}</p></div>
+ {result?<details className={panel}><summary className="cursor-pointer font-bold">Структура цены</summary><dl className="mt-4 space-y-3 text-sm">{result.breakdown.map((row,i)=><div key={i} className="flex justify-between gap-4"><dt className="text-[var(--ac-muted)]">{row.label||row.title||row.id}</dt><dd className="shrink-0 font-bold">{rub(row.amountRub)}</dd></div>)}</dl><p className="mt-4 text-xs text-[var(--ac-muted)]">Курс на {result.rateDate||'дату расчёта'}</p>{result.warnings?.map((w:string,i:number)=><p key={i} className="mt-2 text-xs text-[var(--ac-muted)]">{w}</p>)}</details>:null}
+ </div>
+ {error?<p role="alert" className="mt-3 text-sm text-red-500">{error}</p>:null}
+ <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--ac-border)] pt-4"><span className="text-xs text-[var(--ac-muted)]">Не уверены в данных?</span><button type="button" data-autocalc-lead={leadText} className="flex min-h-12 items-center gap-2 text-sm font-bold"><img src="/avatars/manager-red.webp" alt="" width={44} height={44} className="h-11 w-11 object-contain"/><span className="underline decoration-red-400 underline-offset-4">Расчёт у менеджера →</span></button></div></div>
+ </>;
+ if(embedded)return <section ref={root} className="ac-autocalc-page ab-inline-calculation" aria-label="Расчёт автомобиля в чате">{parametersPanel}</section>;
+ return <main className="ac-page-copy ac-offer-page ac-autocalc-page min-h-screen text-[var(--ac-text)]"><PublicHeader backHref="/cars"/><div className="mx-auto max-w-[1480px] px-4 pb-8 pt-7 md:px-8">
+ <p className="text-xs font-bold normal-case tracking-normal text-[var(--ac-muted)]">АвтоЦена / Расчёт по ссылке</p><h1 className="mt-2 text-3xl font-black md:text-4xl">{title||'АвтоРасчёт'}</h1>
+ <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(360px,1fr)]"><StickyOfferColumn desktopFrom="lg"><section className="min-w-0 space-y-5"><form className={panel} onSubmit={e=>{e.preventDefault();void load(url);}}><label htmlFor="autocalc-url" className="text-sm font-bold">Ссылка на автомобиль за границей</label><div className="mt-2 flex flex-col gap-3 sm:flex-row"><input id="autocalc-url" type="url" required value={url} onChange={e=>{controller.current?.abort();setLoading(false);setUrl(e.target.value);invalidate();}} placeholder="Вставьте ссылку на объявление" className={`${input} !mt-0 flex-none sm:flex-1`}/><button data-autocalc-primary disabled={loading} className="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#e32c39] px-6 font-bold text-white disabled:opacity-50"><Link2 size={18}/>{loading?'Загружаем…':'Получить данные'}</button></div><p role="status" className="mt-3 text-sm text-[var(--ac-muted)]">{message||'Вставьте ссылку или заполните данные самостоятельно. Итог появится после заполнения обязательных параметров.'}</p></form>
+ <SourceDirectory/>
+ {images.length?<VehicleGallery images={images} title={title||'Автомобиль'}/>:referenceImage?<div><VehicleGallery images={[referenceImage]} title={`${title} · фото аналога`}/><p className="mt-2 text-xs text-[var(--ac-muted)]">{referenceLabel}</p></div>:<div className="flex min-h-44 flex-col py-8 items-center justify-center gap-4 rounded-[32px] bg-[var(--ac-surface-2)] text-[var(--ac-muted)]"><Car size={76} strokeWidth={1}/><p className="px-6 text-center text-sm">{loading?'Загружаем фотографии…':'Фотографии появятся, если источник предоставит их'}</p></div>}
+ <div className={`${panel} mt-5`}><h2 className="text-lg font-bold">Автомобиль из объявления</h2><p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Проверьте цену, валюту и характеристики перед расчётом. Данные можно изменить — это ваш самостоятельный расчёт.</p>{url&&/^https:\/\//i.test(url)?<a href={url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block break-all text-sm underline underline-offset-4">Открыть объявление ↗</a>:null}</div>
+ <div className="mt-5 flex flex-wrap gap-3"><button type="button" data-autocalc-lead={leadText} className="min-h-14 flex-1 rounded-2xl bg-[#18b64b] px-5 font-bold text-white">{result?'Оставить заявку':<><span className="sm:hidden">Заявка на расчёт</span><span className="hidden sm:inline">Оставить заявку на расчёт</span></>}</button><button type="button" onClick={pdf} disabled={!result||pending} className="flex min-h-14 items-center gap-2 rounded-2xl bg-amber-500 px-5 font-bold text-black disabled:opacity-40"><FileDown size={20}/>PDF</button></div>
+ </section></StickyOfferColumn><StickyOfferColumn desktopFrom="lg"><aside className="min-w-0 space-y-4">
+ {parametersPanel}
+ </aside></StickyOfferColumn></div></div><style jsx global>{`
+ html[data-theme] body main.ac-autocalc-page{background:transparent!important;background-image:none!important}
+ html[data-theme] body .ac-autocalc-page input,html[data-theme] body .ac-autocalc-page select{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
+ html[data-theme][data-theme] body .ac-autocalc-page button[data-autocalc-primary]{color:#fff!important;-webkit-text-fill-color:#fff!important}
+ .ac-autocalc-page h1{overflow-wrap:anywhere}
+
+ .ac-autocalc-page input:required:invalid,.ac-autocalc-page select:required:invalid{border-color:rgba(245,158,11,.55)}
+ `}</style></main>;
+}

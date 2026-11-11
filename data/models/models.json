@@ -1,0 +1,30 @@
+[
+  {
+    "id": "audi-a3-sportback",
+    "brandId": "audi",
+    "name": "A3 Sportback",
+    "markets": [
+      "china",
+      "europe"
+    ],
+    "body": "hatchback"
+  },
+  {
+    "id": "toyota-harrier",
+    "brandId": "toyota",
+    "name": "Harrier",
+    "markets": [
+      "japan"
+    ],
+    "body": "crossover"
+  },
+  {
+    "id": "kia-k5",
+    "brandId": "kia",
+    "name": "K5",
+    "markets": [
+      "korea"
+    ],
+    "body": "sedan"
+  }
+]

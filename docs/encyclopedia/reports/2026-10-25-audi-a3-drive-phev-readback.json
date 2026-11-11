@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-24T23:10:33.108028+00:00",
+  "batch": "research-2026-10-25-audi-a3-2025-2026-drive-phev",
+  "sha256": "01985b29e1fc30c21c5ffe38443e22b0aa0b95b884d699db1a5be9a7cab8cca9",
+  "modelId": "f40e34e905b8ca09f3636eda",
+  "afterRevision": "dab6a586-2841-47c3-a058-ff736969b27d",
+  "apiReadback": true,
+  "fieldsChecked": 28,
+  "variants": 22,
+  "years": [
+    {
+      "year": 2025,
+      "revision": "dab6a586-2841-47c3-a058-ff736969b27d",
+      "rows": 143,
+      "checkedFields": 8,
+      "otherRowsUnchanged": 141
+    },
+    {
+      "year": 2026,
+      "revision": "dab6a586-2841-47c3-a058-ff736969b27d",
+      "rows": 102,
+      "checkedFields": 20,
+      "otherRowsUnchanged": 82
+    }
+  ],
+  "counts": {
+    "newValues": 27,
+    "correctedValues": 1,
+    "attestedUnchanged": 0
+  },
+  "unknownBodiesPreserved": [
+    "8505b9fca1f0da3db02fac4c",
+    "b2ad08df5ba29520df7c527d"
+  ],
+  "newModels": 0,
+  "certified30minAdded": 0,
+  "installed": false,
+  "workflow": 40141534268,
+  "job": 121014117519,
+  "preflightWorkflow": 40141376030,
+  "preflightJob": 121013651347
+}

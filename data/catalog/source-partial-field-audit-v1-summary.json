@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-03T11:08:38.974Z",
+  "mode": "partial_signal_source_bound_field_audit_summary_no_write",
+  "productionWrites": false,
+  "classificationMutations": false,
+  "publishAllowedMutations": false,
+  "rawBodiesStored": false,
+  "run": {
+    "runId": 33747985524,
+    "headSha": "f9d7ffdf5ecfa0d3ea963be48a501887ab9bb26f",
+    "artifactId": 9890402149,
+    "artifactDigest": "sha256:d891247a0217a5e5155f3a089538ef63f4e1588c0e4f0d206d515161db0e4ec6"
+  },
+  "sourceCount": 4,
+  "sampleCount": 4,
+  "allClassificationsDeferred": true,
+  "allPublishAllowedRemainFalse": true,
+  "sources": [
+    {
+      "market": "japan",
+      "sourceId": "carvector_japan_stat_open",
+      "stableReachable": true,
+      "pageRole": ["statistics", "heavy_machinery_sample"],
+      "sample": "https://carvector.com/stat/hitachi/ex55ur-3/ab29a1a3-d845-41fb-a9f8-20a7e4282c6f",
+      "evidence": {
+        "title": "Statistics for Hitachi EX55UR-3 1998 ... – Starting at 750 000 ¥ | CarVector.com",
+        "structuredYear": 1998,
+        "currency": "JPY",
+        "structuredPower": 0,
+        "totalUniqueImages": 2,
+        "offerScopedGalleryAtLeastFive": false
+      },
+      "exactReady": false,
+      "direction": "stop_exact_investment_unless_passenger_vehicle_offer_route_is_discovered",
+      "reason": "Known public sample is an auction/statistics page for heavy machinery and has no listing-bound gallery or complete offer fields."
+    },
+    {
+      "market": "china",
+      "sourceId": "chngoodcar_china_candidate",
+      "stableReachable": true,
+      "sample": "https://www.chngoodcar.com/Home/Cars?id=1245159140309858930",
+      "evidence": {
+        "title": "众泰 云100S_广东好车_打造二手车出口新渠道",
+        "offerScopedGalleryCandidate": true,
+        "offerScopedImageClusters": [9, 8, 7, 7],
+        "visiblePowerContext": ["37 Ps", "27kw"],
+        "visibleChargingContext": true,
+        "currencyNamed": false,
+        "discoveredSecondOfferRoutes": [
+          "https://www.chngoodcar.com/Home/Cars?id=1265916925100158976",
+          "https://www.chngoodcar.com/Home/Cars?id=1265916910290071552",
+          "https://www.chngoodcar.com/Home/Cars?id=1288729215201439744",
+          "https://www.chngoodcar.com/Home/Cars?id=1808030707960770560",
+          "https://www.chngoodcar.com/Home/Cars?id=1245159140309858939"
+        ]
+      },
+      "exactReady": false,
+      "next": "probe only discovered second-offer routes and bind price/currency/powertrain/body/power/gallery to each offer; recommendation-card engine values must not be attributed to the current offer"
+    },
+    {
+      "market": "china",
+      "sourceId": "iautos_china_candidate",
+      "stableReachable": true,
+      "sample": "https://m.iautos.cn/usedcar-15501828.html",
+      "evidence": {
+        "title": "宁波二手2020款 2.0T 自动 改款M运动套装 -第一车网",
+        "explicitEngineLiter": "2.0L",
+        "currencyVisible": true,
+        "namedFuel": false,
+        "namedPower": false,
+        "listingGalleryProven": false,
+        "discoveredConfigurationRoute": "https://m.iautos.cn/configuration-15501828/",
+        "discoveredSecondOfferRoutes": [
+          "https://m.iautos.cn/usedcar-15525978.html",
+          "https://m.iautos.cn/usedcar-15525966.html",
+          "https://m.iautos.cn/usedcar-15525946.html",
+          "https://m.iautos.cn/usedcar-15525901.html",
+          "https://m.iautos.cn/usedcar-15525899.html"
+        ]
+      },
+      "exactReady": false,
+      "next": "probe the discovered same-offer configuration route first; then at most one discovered second offer if the configuration route exposes exact source-bound fields"
+    },
+    {
+      "market": "japan",
+      "sourceId": "exportcar_japan_candidate",
+      "stableReachable": true,
+      "evidenceFingerprintStable": true,
+      "sample": "https://exportcar.jp/auto/?id=27qDVYVBkJg1fdu",
+      "evidence": {
+        "title": "Auto Auctions",
+        "genericShell": true,
+        "namedVehicleFields": 0,
+        "totalImages": 6,
+        "imagesAreSiteChrome": true,
+        "offerScopedGalleryAtLeastFive": false
+      },
+      "exactReady": false,
+      "direction": "stop_exact_investment_for_current_public_route",
+      "reason": "The known vehicle-like URL repeatedly returns a generic auction shell with no bound vehicle fields; all observed images are site chrome/language assets."
+    }
+  ],
+  "next": "targeted discovered-route probe for chngoodcar second offers and iautos same-offer configuration route; do not guess new routes and do not publish"
+}

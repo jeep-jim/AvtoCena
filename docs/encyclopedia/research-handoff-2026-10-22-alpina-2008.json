@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T20:45:00+07:00",
+  "next": [
+    {
+      "id": "5dfcc65f1b57038636b1cce6",
+      "make": "Alpina",
+      "model": "D3",
+      "baselineYears": [
+        2026
+      ],
+      "baselineVariants": 1,
+      "needsFreshApi": true
+    },
+    {
+      "id": "c26b4f6cf8e267db5d1f7503",
+      "make": "Alpina",
+      "model": "D5",
+      "baselineYears": [
+        2022
+      ],
+      "baselineVariants": 1,
+      "needsFreshApi": true
+    },
+    {
+      "id": "cc5a28958f2b1bd3eac176d4",
+      "make": "Alpine",
+      "model": "A110",
+      "baselineYears": [
+        2026,
+        2025,
+        2024,
+        2023,
+        2022,
+        2021,
+        2020
+      ],
+      "baselineVariants": 25,
+      "needsFreshApi": true
+    },
+    {
+      "id": "9f23c75ab6a73713bf64580a",
+      "make": "Alpine",
+      "model": "A290",
+      "baselineYears": [
+        2025,
+        2024
+      ],
+      "baselineVariants": 7,
+      "needsFreshApi": true
+    }
+  ],
+  "coverageSince": 2008,
+  "rule": "Не ограничиваться годами текущего снимка; подтвердить реальные исторические исполнения. Не повторять Tonale; сначала свежиеAGENTS/roadmap/queue, потом источники. До новой записи проверить отсутствие конкурирующей партии.",
+  "lastVerifiedPass": "docs/encyclopedia/reports/2026-10-22-tonale-2022-2026-pass.json",
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-tonale-remaining.json",
+  "integration": {
+    "checkedAt": "2026-10-22T20:45:00+07:00",
+    "state": "saved_and_compiled_pending_next_immutable_index",
+    "activeRelease": "27a073c40317608196df93a7b51fb1b72c5daac8",
+    "activeIndexDigest": "9d7bc045ee7da971343cdfd751f47f317d7e064971dbfb594e39298c575efb85",
+    "activeReleaseWorkflow": 39781954190,
+    "activeReleaseWorkflowConclusion": "success",
+    "privateIndexPreparedAt": "2026-10-22T12:54:39Z",
+    "newBatchesActivationConfirmed": false,
+    "pendingNewBatches": [
+      "research-2026-10-22-alfa-tonale-2022-factory-range",
+      "research-2026-10-22-alfa-tonale-2023-factory-range",
+      "research-2026-10-22-alfa-tonale-2024-2026-factory-ranges"
+    ],
+    "existingChinaPublication": {
+      "id": 39788307780,
+      "name": "Catalog refresh china",
+      "status": "queued",
+      "conclusion": null
+    },
+    "budgetPreparation": {
+      "id": 39787631986,
+      "name": "Regcloud — prepare shared budget prices",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "duplicateReleaseRequested": false,
+    "visitorRequestSearchOrSyncAdded": false,
+    "nextAction": "После уже запущенной retained-China publication39788307780 один совокупный защищённый выпуск со всеми pending; отдельная задача владельца сопровождает выпуск. Проверить состав индекса, readback, активацию и карточки/выдачу. Не запускать параллельный deploy."
+  },
+  "completion": false
+}

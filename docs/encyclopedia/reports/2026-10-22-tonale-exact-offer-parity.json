@@ -1,0 +1,189 @@
+{
+  "checkedAt": "2026-10-22T13:43:43.744912+00:00",
+  "release": "27a073c40317608196df93a7b51fb1b72c5daac8",
+  "passed": true,
+  "scope": "Exact Tonale offers card/search parity; does not establish activation of new research batches",
+  "generationId": "gen_1792660229591_c103ed94",
+  "rows": [
+    {
+      "offerId": "647d75331c2694df539c9551",
+      "checks": {
+        "year": {
+          "search": 2025,
+          "card": 2025,
+          "equal": true
+        },
+        "trim": {
+          "search": "1.6 Veloce 130cv tct6",
+          "card": "1.6 Veloce 130cv tct6",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1598,
+          "card": 1598,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 131,
+          "card": 131,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 4609058,
+          "card": 4609058,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "31de6348cb74a5474f3be841",
+      "checks": {
+        "year": {
+          "search": 2023,
+          "card": 2023,
+          "equal": true
+        },
+        "trim": {
+          "search": "1.6 Ti 130cv tct6",
+          "card": "1.6 Ti 130cv tct6",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1598,
+          "card": 1598,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 131,
+          "card": 131,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3291058,
+          "card": 3291058,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      }
+    },
+    {
+      "offerId": "3766fdf4181751b6c8509cdf",
+      "checks": {
+        "year": {
+          "search": 2024,
+          "card": 2024,
+          "equal": true
+        },
+        "trim": {
+          "search": "1.6 Veloce",
+          "card": "1.6 Veloce",
+          "equal": true
+        },
+        "engineCc": {
+          "search": 1598,
+          "card": 1598,
+          "equal": true
+        },
+        "powerHp": {
+          "search": 131,
+          "card": 131,
+          "equal": true
+        },
+        "powerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "icePowerKw": {
+          "search": 96,
+          "card": 96,
+          "equal": true
+        },
+        "drive": {
+          "search": "",
+          "card": "",
+          "equal": true
+        },
+        "transmission": {
+          "search": "automatic",
+          "card": "automatic",
+          "equal": true
+        },
+        "powerDataSource": {
+          "search": "AutoScout24 named vehicleDetails Power",
+          "card": "AutoScout24 named vehicleDetails Power",
+          "equal": true
+        },
+        "totalRub": {
+          "search": 3680161,
+          "card": 3680161,
+          "equal": true
+        },
+        "calculationStatus": {
+          "search": "estimated",
+          "card": "estimated",
+          "equal": true
+        }
+      }
+    }
+  ]
+}

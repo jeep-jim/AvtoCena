@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-11-07T01:18:00Z",
+  "catalog": [
+    {
+      "url": "/cars?market=europe&make=Opel&model=Grandland&fuel=electric",
+      "title": "Opel Grandland Electric",
+      "total": 4,
+      "match": "exact make/model/fuel; first Electric 97kWh Ultimate, 2026"
+    },
+    {
+      "url": "/cars?market=japan&make=Nissan&model=Elgrand",
+      "title": "Nissan Elgrand",
+      "total": 0,
+      "match": "no active exact result"
+    },
+    {
+      "url": "/cars?market=europe&make=Mazda&model=CX-5",
+      "title": "Mazda CX-5",
+      "total": 25,
+      "match": "exact make/model; mixed generations, article warns to verify generation"
+    },
+    {
+      "url": "/cars?market=europe&make=Renault&model=Trafic",
+      "title": "Renault Trafic",
+      "total": 13,
+      "match": "exact make/model; includes 2026 vehicles"
+    },
+    {
+      "url": "/cars?market=europe&make=Ford&model=Ranger&fuel=hybrid",
+      "title": "Ford Ranger PHEV",
+      "total": 1,
+      "match": "exact make/model/fuel; 2.3 EcoBoost PHEV Wildtrak, 2026"
+    },
+    {
+      "url": "/cars?market=europe&make=Toyota&model=C-HR%2B&fuel=electric",
+      "title": "Toyota C-HR+",
+      "total": 0,
+      "match": "no exact electric result; ordinary C-HR excluded"
+    }
+  ]
+}

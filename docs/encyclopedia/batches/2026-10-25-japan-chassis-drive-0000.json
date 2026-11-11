@@ -1,0 +1,1347 @@
+{
+  "version": 1,
+  "id": "research-japan-chassis-drive-2026-10-25-0000",
+  "entries": [
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "b8f595b6ae62558c934df988",
+      "expectedDigest": "7c174a982e8dfe0d2bb8f3f8f38a44348ab3bca6cf85f989b868b7a8df692a29",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "コンペティツィオ-ネスペシ",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-955142, лист Alfaromeo, строка 10; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "430cdb5dc3f78e9b0530cb55",
+      "expectedDigest": "7e93ee268f831c60b6cc82c881d45a35064d1d8d2b83a6a0a2048cc991a7bbbb",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2020,
+      "trim": "40 TFSI Quattro Sports シグネEd",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001225527.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код ABA-8VCZPF, лист Audi, строка 15; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "232f84754bfe908de7633b43",
+      "expectedDigest": "f9240238ceb9df30be03926f5f79f5ec70848907d60044d72b7f3b201d0ac5aa",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2020,
+      "trim": "30 TFSI Sports S Line パ",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-8VCXSL, лист Audi, строка 15; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "467c0dd9a7eb4dc7469eb65b",
+      "expectedDigest": "d82ba6ffb901208aea81c60f2a6a2d6a04a7c1f8e7c52290a2c0b1942e3f2bd8",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2016,
+      "trim": "1.4TFSI",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-8VCXSL, лист Audi, строка 15; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "cac824ebb1c5aa4b012ce5e7",
+      "expectedDigest": "b1cdf73d47a126d23d5c26c2609e263782e54168560b1409709c448c8f3a6580",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2015,
+      "trim": "1.4TFSI",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-8VCXSL, лист Audi, строка 15; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "3c8c9ebd958ba6bdb05e913e",
+      "expectedDigest": "9416704912de793ffb48815e4cae96dbdc3d61e2b4c8476394f3012625dcc156",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2014,
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-8VCXSL, лист Audi, строка 15; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f40e34e905b8ca09f3636eda",
+      "variantId": "895b026e671d700fd8475cc0",
+      "expectedDigest": "1563576dfcdc5d2800bff1a266738e4c7f6fee666d335f7c28a30fa76bed5223",
+      "make": "Audi",
+      "model": "A3",
+      "year": 2014,
+      "trim": "1.4TFSI",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084242.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-8VCXSL, лист Audi, строка 15; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "1eb6feb56a7cfc67a49f1597",
+      "variantId": "9c199e7a70d7f208f38ed041",
+      "expectedDigest": "7a37060a3d6efb0337ad105e45ab31b35f32eb963f03cc99a525cd1fe12fae0d",
+      "make": "BMW",
+      "model": "3 Series",
+      "year": 2019,
+      "trim": "320d xDrive M Sports 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000234341.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 3DA-5V20, лист 1-7 ディーゼル JC08, строка 69; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "ae9ae9b82247e4f5273a4280",
+      "variantId": "e865e9eeda88c4ddb9f75b42",
+      "expectedDigest": "b77b75d81a6a02d140d8165e74920509e4429fbb4b1632dbde876317a83a43aa",
+      "make": "BMW",
+      "model": "MINI",
+      "year": 2013,
+      "trim": "Cooper -S クラブマン",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-ZG16, лист BMW, строка 23; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "ae9ae9b82247e4f5273a4280",
+      "variantId": "bfc5acdd19d7cb3980bee97e",
+      "expectedDigest": "e1a87d0197ccb49690a245aabddfd282b9cf4f81004e7ad9295e63dade7d2399",
+      "make": "BMW",
+      "model": "MINI",
+      "year": 2012,
+      "trim": "Cooper - Crossover",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989173.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код CBA-ZA16, лист BMW, строка 25; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f26049af804fb2b8890eb77a",
+      "variantId": "f265cbd53387616e0225183c",
+      "expectedDigest": "f45f93f4c97cc89cd47f0d3e351af0dba696d70a6a58e34b17df623db80f4d07",
+      "make": "Citroën",
+      "model": "C3",
+      "year": 2025,
+      "trim": "C3 MAX HV",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001286997.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 3AA-C2HN09, лист 1-1, строка 9; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f26049af804fb2b8890eb77a",
+      "variantId": "7f597b17d509e1e5fa32df4d",
+      "expectedDigest": "e08f7587d41262f4a2887b1ee4e40fcbc8109a6e34fcdbaf4245f403819bbd11",
+      "make": "Citroën",
+      "model": "C3",
+      "year": 2022,
+      "trim": "シャイン",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001337996.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 3BA-A8HN05, лист Citroen, строка 11; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f26049af804fb2b8890eb77a",
+      "variantId": "349705409177d8492a73ed20",
+      "expectedDigest": "582ac90835272850b0cbd07d69ba3fe533c3042abd406680d139e073811a00e0",
+      "make": "Citroën",
+      "model": "C3",
+      "year": 2022,
+      "trim": "サ-フED バイ リップカ-ル",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001337996.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 3BA-A8HN05, лист Citroen, строка 11; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f26049af804fb2b8890eb77a",
+      "variantId": "de2c36fe5e6faed82a223e83",
+      "expectedDigest": "9187ccc1a149be31fcfc00cd8056f75b0aee2f35c926ef80b4f5485beda0e43c",
+      "make": "Citroën",
+      "model": "C3",
+      "year": 2019,
+      "trim": "オリジンズ",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001337996.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 3BA-A8HN05, лист Citroen, строка 11; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "7e7dac465a676df51e2c3f9f",
+      "expectedDigest": "2a8e82a5ed6e9478441f947609184a45014f1f557b97429fd0c7121ac1f562e3",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2019,
+      "trim": "Hybrid EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR7, лист Honda, строка 41; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "bbabcc35715cf4fa9e3cca08",
+      "expectedDigest": "958cb8dfe556166e5276bdbcf7ab0e24c207c94c46c158122a8a039e2bac8e62",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2017,
+      "trim": "EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR7, лист Honda, строка 41; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "11b7307fa01831f9d7a35c88",
+      "expectedDigest": "c9dce09d93159964ed4122cc97c95f6ad1880ecef4a79600b04e1b338a516232",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2017,
+      "trim": "EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR7, лист Honda, строка 41; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "98a3aa00d4e7957fe3fe1695",
+      "expectedDigest": "083d50d30ea3c4e629b4e2fd892526ac3fba62b802916b79e4f742ceecd20a05",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2015,
+      "trim": "Hybrid LX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "34bb059efaecf0e85eeab46d",
+      "expectedDigest": "22ec0f11d3f3b2d43810e4e6f463daf4361fbe56feab69ddf81a3b8d9c06ec95",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2014,
+      "trim": "LX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "6b1c5aa84ebfe3d6f9e62ec4",
+      "expectedDigest": "f085d1ff5616259f5fa8853c99f2996355a69756add29d065a5d51ea7cc78566",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2014,
+      "trim": "EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "b9ac059d939277afc117b6a4",
+      "expectedDigest": "17c54f3848cc4ab14b4fa25de1e785c95216ede2697703fef796e27d53fb435b",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2014,
+      "trim": "Hybrid EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "f929046ef550db7ed3896990",
+      "expectedDigest": "55965ca4f6c3f386bea112362464cffcabf46dbacdd3b8c4e65fd8fb00f2206b",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2014,
+      "trim": "EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "23f95def2c63986d2415bea1",
+      "expectedDigest": "61c7fcf8dd0ac89b65cb986a3c416e91764be73dca2055cd8a6f64bc7010e836",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2013,
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "610de1f56629deea1a5b2f98",
+      "expectedDigest": "fa21fd70cbbb27394012788198f76020def91f4fdf1a980dc04c61c7b6409786",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2013,
+      "trim": "EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "ba98cff9c7a882123bd384a8",
+      "expectedDigest": "fdd55ba788728a9d585dbb2cc8623f610bf812a81aacc0100434f9aa253759bc",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2013,
+      "trim": "LX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0b753941a0def46b9936aefc",
+      "variantId": "70c41edf008e8a87370b434a",
+      "expectedDigest": "1c71a7c9005cbec34a43ba9aec2241d5538602504815ef1eccf23c2850724a6d",
+      "make": "Honda",
+      "model": "Accord",
+      "year": 2013,
+      "trim": "Hybrid EX",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001031309.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-CR6, лист Honda, строка 8; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "f025e7581e950598ae0f491f",
+      "variantId": "b3cd2ed0c468ded66159908f",
+      "expectedDigest": "dae608abd27d82bf7f456ea2b68042d13acbf404e46c7d55f10fdb3a195d8604",
+      "make": "Honda",
+      "model": "E",
+      "year": 2023,
+      "trim": "アド Van ス",
+      "patch": {
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/factbook/auto/Honda-e/202008/P32.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Honda e и Advance, код ZAA-ZC7: RR, задний привод. Заводская таблица, печатная страница 33; проверено по изображению PDF."
+      }
+    },
+    {
+      "modelId": "f025e7581e950598ae0f491f",
+      "variantId": "a39bc31e7af043239f18c670",
+      "expectedDigest": "f48b2824c5f21307bb3a591131b5911b541de2a24971792ca8c769e6c845f78f",
+      "make": "Honda",
+      "model": "E",
+      "year": 2021,
+      "trim": "アド Van ス",
+      "patch": {
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/factbook/auto/Honda-e/202008/P32.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Honda e и Advance, код ZAA-ZC7: RR, задний привод. Заводская таблица, печатная страница 33; проверено по изображению PDF."
+      }
+    },
+    {
+      "modelId": "f025e7581e950598ae0f491f",
+      "variantId": "6eb846e05f7547c6bbed3692",
+      "expectedDigest": "23f512f183727932cc20c423000527b2290dbc0b6455a08ee2e6f51a45d7d8da",
+      "make": "Honda",
+      "model": "E",
+      "year": 2021,
+      "trim": "アド Van ス",
+      "patch": {
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/factbook/auto/Honda-e/202008/P32.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Honda e и Advance, код ZAA-ZC7: RR, задний привод. Заводская таблица, печатная страница 33; проверено по изображению PDF."
+      }
+    },
+    {
+      "modelId": "f025e7581e950598ae0f491f",
+      "variantId": "31406cd08ac99fdd8cd06084",
+      "expectedDigest": "060862ac8ec04c9d4a507503a4b5d6f684d8e27fb3d203170deb48f94ac4d466",
+      "make": "Honda",
+      "model": "E",
+      "year": 2020,
+      "trim": "アド Van ス",
+      "patch": {
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.honda.co.jp/factbook/auto/Honda-e/202008/P32.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Honda e и Advance, код ZAA-ZC7: RR, задний привод. Заводская таблица, печатная страница 33; проверено по изображению PDF."
+      }
+    },
+    {
+      "modelId": "32250066f1b915316ec6fa5a",
+      "variantId": "e077499612c20b4d5f9176ef",
+      "expectedDigest": "afc0288557927652cdf0f238498d3310cf36b9723b4ef6c3660c93ff7d2f6b64",
+      "make": "Jaguar",
+      "model": "E-Pace",
+      "year": 2018,
+      "trim": "4WD Base Grade",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001282821.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код LDA-DF2NA, лист jaguar, строка 16; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "ab1028c4f48bca6e7645a9f0",
+      "expectedDigest": "34a95534da63362e5fd51abd445a7464149e236da15755184c142d51e33ff598",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2026,
+      "trim": "NX350h F Sports 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH25, лист レクサス, строка 23; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "e224730a7bcdc47d916c6afd",
+      "expectedDigest": "d086e6f14d4040fdb397d060ba6e1a7e8771b50df1281124de9a9264e4149cba",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2025,
+      "trim": "NX350h F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH20, лист レクサス, строка 18; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "eebd5e073e2817ffac03c3a8",
+      "expectedDigest": "a9f1cba03116c4b67be9797862aa36b11798221ecaf87d1c83e09de91ea3887b",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2025,
+      "trim": "NX350h F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH20, лист レクサス, строка 18; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "57dc3af531114e6294189cd8",
+      "expectedDigest": "5f5aeae57b8a4f55c115534c400727db47e53396bd10ceb76d0bef1e978b41b6",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2024,
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH20, лист レクサス, строка 18; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "39569f53c75eebc1dcedd24b",
+      "expectedDigest": "d8418ab47714ac960822cce99d816e7f9534264e26a537cae2d731f0b6d03ffa",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2023,
+      "trim": "NX350 F Sports 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 5BA-TAZA25, лист レクサス, строка 61; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "9471b9e78513709991407243",
+      "expectedDigest": "f329e82bd2ce29d2a25c1163b9e3c92354f3773ff4de66be4549817a94de1bb4",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2023,
+      "trim": "NX350h F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH20, лист レクサス, строка 18; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "da680dc6c332ed47494608c7",
+      "expectedDigest": "a865de5c201b2134b5072c763491403df8bfcb7e68ae5b8b7d367982c8733dbb",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2023,
+      "trim": "NX350h Version L 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH25, лист レクサス, строка 23; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "de78e60e5383e405069d698d",
+      "expectedDigest": "6e4e855253c78c7326ef1e8559732118cd9268d1a9f04e9c788f20b313673653",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2023,
+      "trim": "F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/jidosha/content/001474447.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6AA-AAZH20, лист レクサス, строка 18; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "a587782abe84ba12a8eb818e",
+      "expectedDigest": "35e0be208e367970d21f748993324d0377ad65dcb1801e77ede9eba0df41e034",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2021,
+      "trim": "NX300 F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-AGZ10, лист Lexus, строка 28; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "70cc81279cb30037cbb9b2c2",
+      "expectedDigest": "c988c913337ca9071c84ce0856003851264c2cf5d6f70e44bfe80adda9015bff",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2021,
+      "trim": "NX300h スパイス&シック",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "6882c237749c7f9e4fdb4c64",
+      "expectedDigest": "dda2c40de7310c60216a5cc6b2552ed9d6d33b2a60eec88339f97778fe5ad084",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2020,
+      "trim": "NX300h スパイス&シック",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "2f61149b8c932542ee9f1e3a",
+      "expectedDigest": "314fdaf5ebde0461b18ce32273577ac0aeacafb0b2c6267c9ac80a6b19981d43",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2020,
+      "trim": "NX300h Version L",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "dadd9576b265ccf6a445ec2f",
+      "expectedDigest": "9cf932ccb247189d1d1bdc15d708baeef2a88e5b44c5109b2629118159ff19d9",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2019,
+      "trim": "NX300h F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "d69204268f8cab2c323cad11",
+      "expectedDigest": "61daa321336cb6fb6e9b87d7ea6f129a970b76cfd28cdbb68abea5ad41015344",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2019,
+      "trim": "NX300h Version L 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ15, лист Lexus, строка 18; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "2fdc9e596e574e3ba6692205",
+      "expectedDigest": "47059e972c60ded58ad405510811a19973e8a813215e9f16a6c1a3d516215e6f",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2018,
+      "trim": "NX300 I Package",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-AGZ10, лист Lexus, строка 28; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "2627f9a916e0aa8f9c8bf825",
+      "expectedDigest": "1eecd2cc77f3c5eee58f8ee758be3f561f478e34e4ad393e06c8addd314e109c",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2017,
+      "trim": "NX300h F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "b6db0558256af5c2a522a66d",
+      "expectedDigest": "7152ff3f8eb2203cb8e93ec000d8c61f3c723106e8bb9decc3bdd29ed7dde1b3",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2017,
+      "trim": "Urban Style",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "b4f33baa2d974c6640ac6467",
+      "expectedDigest": "6d2e68c6b4686fc2b54a87a2809addb0142a20f66f99b3bea72450bf35935e8c",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2015,
+      "trim": "NX300h Version L",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "665a2273a54e2dcb26fd28dc",
+      "expectedDigest": "a99ccbc6469b726cee79e42d12d5e2cfe45734341dd6694f0e4a5c3908ea4afc",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2015,
+      "trim": "NX300h I Package 4WD",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ15, лист Lexus, строка 18; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "6f512f348428f2062dbef40c",
+      "expectedDigest": "b7ddf0b031e1d2b9163a48099c77563e3334cb351b74eda25bd0d0767b621fb0",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2015,
+      "trim": "NX200t Version L",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-AGZ10, лист Lexus, строка 28; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "89d20088969e30f778e82f0e",
+      "expectedDigest": "e4a5399201beea398eaad0d247b579ab2db101642add9027b66030b210fd0260",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2015,
+      "trim": "F Sports",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "0e7ef1ef213a94b5d7189b63",
+      "variantId": "1ed63cc274bfe83461d20486",
+      "expectedDigest": "a9b42542f016290b4061513857782064fdf83ad429da8b33a90ea96873b1f066",
+      "make": "Lexus",
+      "model": "NX",
+      "year": 2014,
+      "trim": "NX300h Version L",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001084235.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DAA-AYZ10, лист Lexus, строка 16; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "201d102888e084f1f554e84f",
+      "variantId": "e911e6a2e1088f082e8207d1",
+      "expectedDigest": "7a554f2bbceeba279e1e9d4c0e5a55a42940f323eda33f243c3f109a09a9281f",
+      "make": "Mazda",
+      "model": "MAZDA3",
+      "year": 2024,
+      "trim": "15S Black ト-ン Edition",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001191059.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6BA-BP5R, лист 1-1(普通・小型)＜国内＞, строка 26; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "201d102888e084f1f554e84f",
+      "variantId": "8057508faba19fa7e007410c",
+      "expectedDigest": "206321c144eac2d685e1b6da993155a1283d03855c09696bed333df6d017e316",
+      "make": "Mazda",
+      "model": "MAZDA3",
+      "year": 2023,
+      "trim": "15C ホウジンセンヨウ",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001191059.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6BA-BP5R, лист 1-1(普通・小型)＜国内＞, строка 26; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "201d102888e084f1f554e84f",
+      "variantId": "0d404609fa87201117849a8b",
+      "expectedDigest": "7c2a2b07ff1b2934a880e155770aec340ae51fb45e75b53cd5e6c5b832bba2bc",
+      "make": "Mazda",
+      "model": "MAZDA3",
+      "year": 2023,
+      "trim": "15C",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001191059.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6BA-BP5R, лист 1-1(普通・小型)＜国内＞, строка 26; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "201d102888e084f1f554e84f",
+      "variantId": "96d0b6a2771a65858f26d5c7",
+      "expectedDigest": "69b2bf92f4fbc6fa9f55ac5c675ebbd088a2a98f224f2d6f83b9cd3ee4a608d5",
+      "make": "Mazda",
+      "model": "MAZDA3",
+      "year": 2023,
+      "trim": "15C",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001191059.xlsx",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 6BA-BP5R, лист 1-1(普通・小型)＜国内＞, строка 26; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "39df4168d77a3ae59f1d9db0",
+      "variantId": "ca8e137e92fdc364a4800a97",
+      "expectedDigest": "b7e297951b2fae32931de7def70e86d2d890273e4e979022af33b38e8065ca0a",
+      "make": "Mercedes-Benz",
+      "model": "B-Class",
+      "year": 2013,
+      "trim": "B 180 BE SP Tourer",
+      "patch": {
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989174.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-246242, лист Mercedes, строка 12; привод fwd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "e78d6c8b2634e33568648a7a",
+      "variantId": "d719fe566de090c796b20066",
+      "expectedDigest": "d440cabe899751935feeb1118487f2b9b34050cd33d29f92df5523b62e856e30",
+      "make": "Mitsubishi",
+      "model": "OUTLANDER PHEV",
+      "year": 2020,
+      "trim": "4WD G(QC付)",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/spec/pdf/outlander_phev_spec_G_figure.pdf",
+        "checkedAt": "2026-10-25",
+        "statement": "Outlander PHEV GG3W: 4WD. Все комплектации также подтверждены заводской таблицей https://www.mitsubishi-motors.com/jp/newsroom/newsrelease/2020/20201029_1.html"
+      }
+    },
+    {
+      "modelId": "db28cf30f1f3f4fd18ca3669",
+      "variantId": "c0ec912c4b5c8c5d61d65fe4",
+      "expectedDigest": "045e8fa0a044c7c5a4e5f4923399e202052b307be73c7b04c265fa50478ff17e",
+      "make": "Nissan",
+      "model": "Note",
+      "year": 2013,
+      "trim": "4WD X FOUR",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/000989168.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-NE12, лист Nissan, строка 12; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "c5e188a6af1ed8f23439c50b",
+      "expectedDigest": "47b519a5b90b1c22766245475a8159f00e6211a8923ddec56684f87e9311ea2d",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2022,
+      "trim": "4WD 2.0e-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001282806.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код 5AA-GTE, лист Subaru, строка 21; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "b050a4610380a11057cb0988",
+      "expectedDigest": "fbc768d4adfb54d7cfb0588b89b277ab4cb3049625f922d3e3f16679de13f250",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2021,
+      "trim": "4WD 1.6i-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT3, лист Subaru, строка 41; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "5d5187c0b88ed912b4a344a4",
+      "expectedDigest": "1765756f924cfdf732018680c589bee98d9acbdf3a4c0f395d8f22beddef3cc1",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2020,
+      "trim": "4WD 1.6i-L Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT3, лист Subaru, строка 41; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    },
+    {
+      "modelId": "a9f63d1c7716d0d9d82fc48a",
+      "variantId": "2a72b20b2c553ea1140347e3",
+      "expectedDigest": "eed02b1d454eb2cdd5f6fec8e35cc21829bd040ddd1b7fd75636a76ced106b51",
+      "make": "Subaru",
+      "model": "Xv",
+      "year": 2019,
+      "trim": "4WD 2.0i-S Eyesite",
+      "patch": {
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "drive"
+      ],
+      "source": {
+        "type": "official_registry",
+        "url": "https://www.mlit.go.jp/common/001178228.xls",
+        "checkedAt": "2026-10-25",
+        "statement": "MLIT: код DBA-GT7, лист Subaru, строка 48; привод awd. Для этого кода марки в проверенных таблицах нет противоречащего привода. Словарь F/R/A: https://www.mlit.go.jp/jidosha/content/001986917.pdf"
+      }
+    }
+  ]
+}

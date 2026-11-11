@@ -1,0 +1,5 @@
+{
+  "release": "008643e8929901e366d079b0d5c394e9b4df2350",
+  "at": "2026-11-10T12:10:00Z",
+  "reason": "One existing bounded five-second CPU/network sample after verified queue saturation in old and failed candidate. No page probes, collector, deploy or restart; close loopback inspector and verify exact release."
+}

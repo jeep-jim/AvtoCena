@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "candidateModels": 24,
+    "newSources": 3,
+    "newModels": 24
+  },
+  "modelIds": [
+    "wuling/air-ev",
+    "wuling/bingo",
+    "wuling/bingo-plus",
+    "wuling/bingo-pro",
+    "wuling/hongguang",
+    "wuling/hongguang-mini-ev",
+    "wuling/hongguang-plus",
+    "wuling/hongguang-s",
+    "wuling/hongguang-s3",
+    "wuling/hongguang-v",
+    "wuling/jiachen",
+    "wuling/kaijie",
+    "wuling/longka",
+    "wuling/rongguang",
+    "wuling/rongguang-new-pickup",
+    "wuling/rongguang-pickup",
+    "wuling/rongguang-s",
+    "wuling/starlight-l",
+    "wuling/xingchen",
+    "wuling/xingchi",
+    "wuling/xingyun",
+    "wuling/yangguang",
+    "wuling/zhengcheng",
+    "wuling/zhiguang"
+  ],
+  "policy": {
+    "currentOfficialPortfolioOnly": true,
+    "englishPublicIdentityRequired": true,
+    "chineseSourceNamesSearchable": true,
+    "gradesAndGenerationsNotDuplicatedAsModels": true,
+    "unknownProductionDatesRejected": true,
+    "automaticPublicationReady": false
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "checkedAt": "2026-10-24T10:30:47.341Z",
+  "pullRequest": "https://github.com/jeep-jim/AvtoCena/pull/1513",
+  "merge": "d229ee24cc305b1fdde8ab73e0c658904f5f638d",
+  "deployment": {
+    "sha": "eaff18b325f9425c7a08616880deb2bd53ec51f7",
+    "run": 40085909587,
+    "status": "pending behind Countryman40085069428; production acceptance not performed"
+  },
+  "tests": {
+    "localFull": {
+      "passed": 2483,
+      "failed": 0
+    },
+    "typecheck": "PASS",
+    "ci40085309645": "regression, types and production build PASS",
+    "browserAndProfileWorkflows": 7
+  },
+  "beforeForester": {
+    "release": "5d64b2a06a33f9b37c010203f398837ed6e4c711",
+    "total": 197,
+    "calculated": 186,
+    "errors": 188,
+    "first": [
+      {
+        "id": "2891f1753852da959b248817",
+        "price": 0,
+        "seller": 443650
+      },
+      {
+        "id": "6e789ef63f60a38f344455b9",
+        "price": 5536245,
+        "seller": 347204,
+        "engine": 2498
+      },
+      {
+        "id": "032c56f67fb680a6f43c01f4",
+        "price": 5548567,
+        "seller": 359260,
+        "engine": 2498
+      },
+      {
+        "id": "90ca8be3de82441cb39461fe",
+        "price": 5548567,
+        "seller": 359260,
+        "engine": 2498
+      },
+      {
+        "id": "be78111a6c65868641cbd115",
+        "price": 5552251,
+        "seller": 362865,
+        "engine": 2498
+      },
+      {
+        "id": "cef9dbba61c86542385c54d9",
+        "price": 5560888,
+        "seller": 371316,
+        "engine": 2498
+      },
+      {
+        "id": "f2910a45b664a818d7b93ca1",
+        "price": 5569513,
+        "seller": 379755,
+        "engine": 2498
+      },
+      {
+        "id": "c9e55c8e868ea869062257ef",
+        "price": 5581833,
+        "seller": 391810,
+        "engine": 2498
+      }
+    ]
+  },
+  "directory": {
+    "originalBrands": 260,
+    "hiddenPlaceholders": [
+      "UEBRIGE (SIEHE TYP)"
+    ],
+    "conversionGroups": 24,
+    "distinctPresentedBrands": 234,
+    "visibleModelNamesChecked": 4451,
+    "exactModelNameDuplicatesWithinBrand": 0,
+    "missingBundledLogos": [
+      "ARTEGA",
+      "AVANTIER",
+      "BENIMAR",
+      "BINZ",
+      "BLUECAR",
+      "DAIMLER",
+      "ELARIS",
+      "ETESIA",
+      "FRAZER-NASH",
+      "GLOBE-TRAVELLER",
+      "GUMPERT",
+      "HS",
+      "HYMER",
+      "JIAYUAN",
+      "KEWET",
+      "LADA",
+      "LTI",
+      "MARTIN MOTORS",
+      "MATRA",
+      "MEGA",
+      "MIA",
+      "MICRO COMPACT CAR",
+      "MINELLI",
+      "MOWAG",
+      "NORINCO",
+      "PGO",
+      "PUCH",
+      "QUATTRO",
+      "QVALE",
+      "RADICALSPORTSCARS",
+      "RIMAC",
+      "ROOS",
+      "SANTANA",
+      "SECMA",
+      "SOKON",
+      "SOVRA LM",
+      "SUN LIVING",
+      "TAZZARI",
+      "TELCO",
+      "THINK",
+      "TVR",
+      "VANNADO",
+      "WIESMANN",
+      "WINNEBAGO",
+      "WORKHORSE",
+      "ZEM"
+    ]
+  },
+  "remaining": [
+    "Verify production release and full Forester pagination after queued deployment succeeds.",
+    "Online AJES requires a complete calculated index for global delivered-price order; this change sorts received selection only and labels the limitation.",
+    "46 rare brands still lack bundled logos. Similar but distinct model names and technical identities are preserved."
+  ]
+}

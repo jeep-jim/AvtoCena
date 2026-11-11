@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-c9-local",
+  "entries": [
+    {
+      "modelId": "2228ea4b3a958f9db1a95edf",
+      "variantId": "caebfade0728fb85619884c5",
+      "make": "Audi",
+      "model": "A6 C9",
+      "year": 2026,
+      "trim": "40 TDI Quattro S Line",
+      "expectedDigest": "9be9e666cac023f3da9d9f60d6c580f87db2c63ac5ba0b0ef3e9304d106eac3b",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://cdn.audikoreaevent.co.kr/lms/aca/ecatalog/download/A6/2600915_A6%20Digital%20Catalogue%20PDF%20%28002%29.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi Korea / AUDI AG, заводской каталог The new Audi A6, copyright 2026. Точная комплектация A6 40 TDI quattro S-line: стр.52/58 — дизель 1968 см³, 204 PS; стр.57 — полный привод и 7-ступенчатая S tronic. Официальный релиз от20.04.2026 подтверждает седан, эту комплектацию и MHEV Plus. Название и год совпадают с записью. Масса2055кг указана как снаряжённая и не записана в поле полной массы. Точные кВт ДВС, полная масса, код двигателя и30-минутная мощность здесь не подтверждены; кВт не вычислялись из округлённых204 PS. Европейская полная масса не переносилась. PDF скачан; таблица визуально проверена.",
+        "additionalSources": [
+          {
+            "url": "https://cdn.audikoreaevent.co.kr/lms/aca/ecatalog/download/A6/2600915_A6%20Digital%20Catalogue%20PDF%20%28002%29.pdf",
+            "pages": [
+              1,
+              52,
+              57,
+              58
+            ],
+            "sha256": "19580886878c53d1850f02aaf994827c1eea19c2a944225b42fb3f948d4d4bc5",
+            "fields": [
+              "engineCc",
+              "powerHp",
+              "fuel",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "Audi Korea / AUDI AG"
+          },
+          {
+            "url": "https://www.audi.co.kr/ko/aboutaudi/news_article/2026/202604/20260421/20260421",
+            "date": "2026-04-20",
+            "fields": [
+              "bodyType",
+              "powertrainKind"
+            ],
+            "publisher": "Audi Korea"
+          }
+        ]
+      }
+    }
+  ]
+}

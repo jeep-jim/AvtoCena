@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-10-22T04:53:13.578Z",
+  "batch": "research-2026-10-22-aiways-u5-manual-years",
+  "commit": "b287f840a56486e6d9939c84b9336653b6024017",
+  "workflow": 39724775367,
+  "job": 119646071255,
+  "conclusion": "success",
+  "guards": {
+    "tests": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "batch": "research-2026-10-22-aiways-u5-manual-years",
+      "dryRun": true,
+      "models": [
+        {
+          "id": "af6a7cd1cd960b737b731ce2",
+          "changes": [
+            {
+              "variantId": "008689f61d82230a241fd707",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "batteryKwh",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "b9abe8eb1a372be51abf8d2c",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "batteryKwh",
+                "grossVehicleWeightKg",
+                "drive"
+              ]
+            },
+            {
+              "variantId": "db0d1e5dfb92135d4f882e07",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "batteryKwh",
+                "grossVehicleWeightKg",
+                "drive",
+                "motorPeakKw"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:52:46.454Z",
+      "finishedAt": "2026-10-22T04:52:49.021Z"
+    },
+    {
+      "batch": "research-2026-10-22-aiways-u5-manual-years",
+      "dryRun": false,
+      "models": [
+        {
+          "id": "af6a7cd1cd960b737b731ce2",
+          "changes": [
+            {
+              "variantId": "008689f61d82230a241fd707",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "batteryKwh",
+                "grossVehicleWeightKg"
+              ]
+            },
+            {
+              "variantId": "b9abe8eb1a372be51abf8d2c",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "batteryKwh",
+                "grossVehicleWeightKg",
+                "drive"
+              ]
+            },
+            {
+              "variantId": "db0d1e5dfb92135d4f882e07",
+              "operation": "create",
+              "fields": [
+                "trim",
+                "fuel",
+                "powertrainKind",
+                "batteryKwh",
+                "grossVehicleWeightKg",
+                "drive",
+                "motorPeakKw"
+              ]
+            }
+          ],
+          "skipped": []
+        }
+      ],
+      "startedAt": "2026-10-22T04:52:49.258Z",
+      "finishedAt": "2026-10-22T04:52:55.093Z"
+    }
+  ]
+}

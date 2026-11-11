@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-amberauto-official-range-2026",
+          "type": "manufacturer",
+          "title": "AMBERAUTO official current model range",
+          "publisher": "ATR Mobility LLC",
+          "url": "https://amberauto.ru/models",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Current official or brand-authorized range source. Only explicit public identities and vehicle categories are retained; no unlisted trims or technical values are inferred."
+        },
+        {
+          "id": "src-ambertruck-official-range-2026",
+          "type": "manufacturer",
+          "title": "AMBERTRUCK official current model range",
+          "publisher": "AMBERTRUCK / AVTOTOR",
+          "url": "https://ambertruck.ru/models/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Current official or brand-authorized range source. Only explicit public identities and vehicle categories are retained; no unlisted trims or technical values are inferred."
+        },
+        {
+          "id": "src-eonyx-official-range-2026",
+          "type": "manufacturer",
+          "title": "EONYX official current model range",
+          "publisher": "EONYX / AVTOTOR",
+          "url": "https://eonyx.ru/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Current official or brand-authorized range source. Only explicit public identities and vehicle categories are retained; no unlisted trims or technical values are inferred."
+        },
+        {
+          "id": "src-nordcross-authorized-range-2026",
+          "type": "authoritative_catalog",
+          "title": "Nordcross authorized Russian dealer current model page",
+          "publisher": "Major Auto",
+          "url": "https://www.major-auto.ru/models/nordcross/001/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Current official or brand-authorized range source. Only explicit public identities and vehicle categories are retained; no unlisted trims or technical values are inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "amberauto",
+          "canonicalName": "AMBERAUTO",
+          "slug": "amberauto",
+          "aliases": [
+            {
+              "value": "АМБЕРАВТО",
+              "kind": "localized",
+              "safe": true,
+              "language": "ru",
+              "market": "Russia",
+              "sourceIds": [
+                "src-amberauto-official-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-amberauto-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source establishes this active Russian-market brand identity and its English/Latin public canonical name."
+            }
+          ],
+          "researchNotes": [
+            "Authentic archived logo assets are staged at exactly 90 x 60; publication remains blocked pending rights review.",
+            "Complete generation and grade coverage remains required before automatic pricing publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck",
+          "canonicalName": "AMBERTRUCK",
+          "slug": "ambertruck",
+          "aliases": [
+            {
+              "value": "АМБЕРТРАК",
+              "kind": "localized",
+              "safe": true,
+              "language": "ru",
+              "market": "Russia",
+              "sourceIds": [
+                "src-ambertruck-official-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source establishes this active Russian-market brand identity and its English/Latin public canonical name."
+            }
+          ],
+          "researchNotes": [
+            "Authentic archived logo assets are staged at exactly 90 x 60; publication remains blocked pending rights review.",
+            "Complete generation and grade coverage remains required before automatic pricing publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "eonyx",
+          "canonicalName": "EONYX",
+          "slug": "eonyx",
+          "aliases": [
+            {
+              "value": "EONY X",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Russia",
+              "sourceIds": [
+                "src-eonyx-official-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eonyx-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source establishes this active Russian-market brand identity and its English/Latin public canonical name."
+            }
+          ],
+          "researchNotes": [
+            "Authentic archived logo assets are staged at exactly 90 x 60; publication remains blocked pending rights review.",
+            "Complete generation and grade coverage remains required before automatic pricing publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nordcross",
+          "canonicalName": "Nordcross",
+          "slug": "nordcross",
+          "aliases": [],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-nordcross-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source establishes this active Russian-market brand identity and its English/Latin public canonical name."
+            }
+          ],
+          "researchNotes": [
+            "Authentic archived logo assets are staged at exactly 90 x 60; publication remains blocked pending rights review.",
+            "Complete generation and grade coverage remains required before automatic pricing publication."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "amberauto/a5",
+          "brandId": "amberauto",
+          "canonicalName": "A5",
+          "slug": "a5",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "sedan"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-amberauto-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck/ev-160",
+          "brandId": "ambertruck",
+          "canonicalName": "EV 160",
+          "slug": "ev-160",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "truck"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck/ev-75",
+          "brandId": "ambertruck",
+          "canonicalName": "EV 75",
+          "slug": "ev-75",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "truck"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck/jl",
+          "brandId": "ambertruck",
+          "canonicalName": "JL",
+          "slug": "jl",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "truck"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck/jm",
+          "brandId": "ambertruck",
+          "canonicalName": "JM",
+          "slug": "jm",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "truck"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck/sm",
+          "brandId": "ambertruck",
+          "canonicalName": "SM",
+          "slug": "sm",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "truck"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ambertruck/work-nf",
+          "brandId": "ambertruck",
+          "canonicalName": "WORK NF",
+          "slug": "work-nf",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "pickup"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ambertruck-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "eonyx/cargo",
+          "brandId": "eonyx",
+          "canonicalName": "Cargo",
+          "slug": "cargo",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "van"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eonyx-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "eonyx/city",
+          "brandId": "eonyx",
+          "canonicalName": "City",
+          "slug": "city",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "microcar"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eonyx-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "eonyx/pickup",
+          "brandId": "eonyx",
+          "canonicalName": "Pickup",
+          "slug": "pickup",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "pickup"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eonyx-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nordcross/001",
+          "brandId": "nordcross",
+          "canonicalName": "001",
+          "slug": "001",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "suv"
+          ],
+          "powertrainKinds": [
+            "MHEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nordcross-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The official or brand-authorized page explicitly lists the model and its vehicle/powertrain category."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

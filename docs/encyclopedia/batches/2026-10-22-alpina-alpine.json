@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alpina-alpine",
+  "entries": [
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "variantId": "71b48bc7272a7b31b1ee0826",
+      "make": "Alpina",
+      "model": "D5",
+      "year": 2022,
+      "trim": "S Limousine Allrad / Merino Tartufo / Glasdach",
+      "expectedDigest": "dac98bcb5dcda193ad4f9cdabb5df933a9f485b74ab347aa2a434e4bd036a253",
+      "patch": {
+        "trim": "S Saloon AWD",
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "engineCc": 2993,
+        "powerHp": 408,
+        "powerKw": 300,
+        "icePowerKw": 300,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.alpina-automobiles.com/fileadmin/user_upload/PDF_PriceList/2022_03_DE/D5_S/epaper/ausgabe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "D5 S Limousine Allrad: заводской прайс03/2022,стр.2: дизель2993см³,300кВт/408PS,полный привод,8-ступенчатая АКПП. Проверен индексированный текст первичной таблицы; прямая PDF-ссылка теперь перенаправляет на BMW, файл/хеш не получены. Тип гибридизации,код двигателя,полная масса не подтверждены. Список опций объявления убран из названия комплектации.",
+        "additionalSources": [
+          {
+            "url": "https://www.alpina-automobiles.com/fileadmin/user_upload/PDF_PriceList/2022_03_DE/D5_S/epaper/ausgabe.pdf",
+            "pages": [
+              2
+            ],
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "retrieval": "search-indexed manufacturer table; live URL redirects; no PDF hash claimed"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "variantId": "8dd1d0b6bc6fb66eacbea728",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2023,
+      "trim": "S",
+      "expectedDigest": "6556a38deedbf96cf39296a240889b313c544eaacb660f43618576638688269c",
+      "patch": {
+        "trim": "S",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 1798,
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221,
+        "drive": "rwd",
+        "transmission": "dct",
+        "grossVehicleWeightKg": 1360
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://cdn.group.renault.com/alp/cs/brochure/2023_brozura_Alpine_CZ.pdf.asset.pdf/ee0472807a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "A110 S2023: заводская брошюра2023,стр.54 визуально проверена. Бензиновый ДВС1798см³,221кВт/300PS,задний привод,DCT7,кузов купе. Разрешённая полная масса1360кг; это не снаряжённая масса1109–1140кг и не1316кг версииR. Код двигателя не подтверждён.",
+        "additionalSources": [
+          {
+            "url": "https://cdn.group.renault.com/alp/cs/brochure/2023_brozura_Alpine_CZ.pdf.asset.pdf/ee0472807a.pdf",
+            "pages": [
+              54
+            ],
+            "sha256": "92c03873b16ebc1f111862f5c5a91a05fe1a16f94b49e69f19241cf368f8fba3",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          },
+          {
+            "url": "https://presse.alpinecars.de/die-alpine-a110-neuauflage-einer-legende/?lang=deu",
+            "fields": [
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "documentDate": "2023-03-13"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "variantId": "667a5dcf34e75c2607ecc7aa",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2020,
+      "trim": "Alpine Color Edition 2020 ABS Fahrerairbag Beifahrerairbag Seitenairbag",
+      "expectedDigest": "af0c4f5ff0b7d5d76a0dccf759fdb88a45bfd33fa7e26be18f48f0c2ea6d69aa",
+      "patch": {
+        "trim": "Color Edition 2020",
+        "powerHp": 292,
+        "powerKw": 215,
+        "icePowerKw": 215,
+        "drive": "rwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+        "checkedAt": "2026-10-22",
+        "statement": "Color Edition2020: заводской выпуск02.03.2020 явно подтверждает основуA110S и215кВт/292PS. Заводской выпуск13.06.2019 описывает задний привод иDCT7 этой версии; связь сColor Edition прямо подтверждена производителем. Точные1798см³,код двигателя и полная масса для этой серии отдельно не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://presse.alpinecars.de/legende-gt-und-color-edition-2020-neue-sondermodelle-fur-die-alpine-a110/?lang=deu",
+            "fields": [
+              "trim",
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://presse.alpinecars.de/alpine-a110s-mehr-leistung-sportfahrwerk-und-exklusive-optik-1/?lang=deu",
+            "fields": [
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "variantId": "6a948a88a547ecd0caaaccd9",
+      "make": "Alpine",
+      "model": "A110",
+      "year": 2026,
+      "trim": "1.8 Turbo R 70 DCT Euro 6 2dr (EXPORT ONLY) Right hand drive",
+      "expectedDigest": "6c0f9394aa513dbccf853512b25efd3ab52a1490ef3b2c7fe4ea22bf9bb0a84e",
+      "patch": {
+        "powerHp": 300,
+        "powerKw": 221,
+        "icePowerKw": 221
+      },
+      "confirmedFields": [
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.alpinecars.com/alpine-to-celebrate-its-70th-anniversary-with-a-limited-edition-a110-r-70-and-a-revamp-of-its-a110-range/?lang=fra",
+        "checkedAt": "2026-10-22",
+        "statement": "A110 R70: заводской выпуск26.02.2025 подтверждает двигатель300PS/221кВт; французский выпуск24.10.2025 уточняет300ch. Выпуск22.01.2026 подтверждает продолжение именноR70 до завершения производства в2026. Источник — производитель, не значенияUAE-фида. Объём,код,полная масса и спецификацияRHD не подтверждаются этой партией; исходное названиеRHD сохранено.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.alpinecars.com/alpine-to-celebrate-its-70th-anniversary-with-a-limited-edition-a110-r-70-and-a-revamp-of-its-a110-range/?lang=fra",
+            "fields": [
+              "powerKw",
+              "icePowerKw"
+            ]
+          },
+          {
+            "url": "https://media.alpinecars.com/alpine-a110-le-compte-a-rebours-est-lance/?lang=fra",
+            "fields": [
+              "powerHp"
+            ]
+          },
+          {
+            "url": "https://media.alpinecars.com/a-trio-of-iconic-alpine-a110-models-to-star-at-retromobile-classic-event-as-current-version-enters-last-months-of-production/?lang=eng",
+            "fields": [
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "statement": "Подтверждение периода выпуска R70 в2026; технические значения из заводского выпуска R70."
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "variantId": "acb245a53ab18d98fffc65dc",
+      "make": "Alpine",
+      "model": "A290",
+      "year": 2025,
+      "trim": "GTS 52 kWh 220PK | SOH 99,42% | Devialet® Audio |",
+      "expectedDigest": "72f8b5badc42fc7e90642a62a7db4f11b77b02c60f8615ada4844e6e98e0477e",
+      "patch": {
+        "trim": "GTS",
+        "bodyType": "hatchback",
+        "fuel": "electric",
+        "powertrainKind": "bev",
+        "powerKw": 160,
+        "motorPeakKw": 160,
+        "batteryKwh": 52
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "powerKw",
+        "motorPeakKw",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.alpinecars.com/alpine-presents-its-customisation-atelier-on-the-a290-with-exclusive-liveries/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "A290 GTS2025: заводские публикации30.07.2024 и05.11.2025 подтверждают электрический пятидверный хэтчбекGTS,максимальную мощность160кВт и батарею52кВт·ч. SOH и аудиосистема убраны из названия комплектации. 160кВт — максимум,не30-минутная мощность. Ранее записанные218hp не подтверждены. Текущая UK-брошюра создана02.06.2026: её полная масса1950кг не переносится на строку2025.",
+        "additionalSources": [
+          {
+            "url": "https://media.alpinecars.com/alpine-presents-its-customisation-atelier-on-the-a290-with-exclusive-liveries/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "powerKw",
+              "motorPeakKw",
+              "batteryKwh"
+            ]
+          },
+          {
+            "url": "https://media.alpinecars.com/alpine-a290-orders-now-being-taken-and-prices-for-france/?lang=fra",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "batteryKwh"
+            ],
+            "statement": "GTS соответствует старшей электрической версии; публикация30.07.2024."
+          }
+        ]
+      }
+    }
+  ]
+}

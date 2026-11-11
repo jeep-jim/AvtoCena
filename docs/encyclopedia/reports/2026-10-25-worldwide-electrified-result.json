@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-25T13:10:13.998Z",
+  "taskComplete": false,
+  "publication": {
+    "release": "475f4ae858a2eec6247b6023baa8b450673e9a2d",
+    "runId": 40193396870,
+    "jobId": 121169171867,
+    "conclusion": "success",
+    "tests": {
+      "passed": 278,
+      "failed": 0
+    },
+    "publicEncyclopediaVerification": {
+      "version": 1,
+      "release": "475f4ae858a2eec6247b6023baa8b450673e9a2d",
+      "startedAt": "2026-10-25T13:03:27.306Z",
+      "groups": 529,
+      "variants": 4862,
+      "fields": 22609,
+      "verified": true,
+      "finishedAt": "2026-10-25T13:08:22.035Z"
+    }
+  },
+  "coverage": {
+    "version": 1,
+    "scope": "Same retained catalog generation; not all live provider inventory and not full delivered price counts",
+    "before": {
+      "version": 1,
+      "checkedAt": "2026-10-25T12:01:33.072Z",
+      "indexDigest": "11839d1317e7bf5cb55e82bd0cf044ca33e909dd3a28567fa4da47697191db42",
+      "manifestDigest": "08b043899a0e14c34cd6ea740174fbac3fff613dadaad3f9a93dce59c317ab30",
+      "generationId": "gen_1792702445675_8c312f85",
+      "totals": {
+        "checked": 83355,
+        "withPower30": 215,
+        "completeSpecifications": 180,
+        "byFuel": {
+          "electric": 37818,
+          "hybrid": 45537
+        },
+        "blockedFields": {
+          "fuelPowertrain": 26177,
+          "powerHp": 28008,
+          "certifiedPower": 83140,
+          "engineCc": 11984
+        }
+      },
+      "models": 1205,
+      "storageWrites": 0
+    },
+    "after": {
+      "version": 1,
+      "checkedAt": "2026-10-25T12:39:13.295Z",
+      "release": null,
+      "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+      "manifestDigest": "1cb8582047469f9bfad8308f949653388543d06e6fcd6a149e1bfb1bc3f0333a",
+      "generationId": "gen_1792702445675_8c312f85",
+      "totals": {
+        "checked": 83355,
+        "withPower30": 764,
+        "completeSpecifications": 723,
+        "byFuel": {
+          "electric": 37818,
+          "hybrid": 45537
+        },
+        "blockedFields": {
+          "fuelPowertrain": 26177,
+          "powerHp": 28003,
+          "certifiedPower": 82591,
+          "engineCc": 11984
+        }
+      },
+      "reasons": {
+        "insufficient_technical_anchors": 30246,
+        "undocumented_candidate": 1955,
+        "technical_conflict": 5383,
+        "no_model_reference": 45085,
+        "matched": 685,
+        "conflicting_certified_values": 1
+      },
+      "models": 1205,
+      "storageWrites": 0
+    },
+    "delta": {
+      "withPower30": 549,
+      "completeSpecifications": 543
+    },
+    "complete": false
+  },
+  "publicSample": {
+    "version": 1,
+    "checkedAt": "2026-10-25T13:04:46.732Z",
+    "release": "475f4ae858a2eec6247b6023baa8b450673e9a2d",
+    "calculationVersion": "b27c1bd6b6c287e7de893782de433f816522482dce27c2d7fc1d31d628d35eb8",
+    "scope": "Public sample only; complete technical fields and full delivered prices are separate measures.",
+    "samples": [
+      {
+        "make": "BYD",
+        "model": "Dolphin",
+        "total": 864,
+        "items": [
+          {
+            "id": "0ab3b53b5338cb40bdf0230a",
+            "year": 2022,
+            "make": "BYD",
+            "model": "Dolphin",
+            "powerHp": 95,
+            "power30MinKw": 35,
+            "boundAstraEvidence": true,
+            "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+            "totalRub": 1470617,
+            "calculationStatus": "estimated",
+            "publicSpecificationVerified": true
+          },
+          {
+            "id": "3b79e2e30b1ed591287bfa48",
+            "year": 2025,
+            "make": "BYD",
+            "model": "Dolphin",
+            "powerHp": null,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "eedab0e27d2a726ba0a39c9f",
+            "year": 2023,
+            "make": "BYD",
+            "model": "Dolphin",
+            "powerHp": 95,
+            "power30MinKw": 35,
+            "boundAstraEvidence": true,
+            "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+            "totalRub": 1451720,
+            "calculationStatus": "estimated",
+            "publicSpecificationVerified": true
+          },
+          {
+            "id": "c1eecd16c2f36060e5e83592",
+            "year": 2025,
+            "make": "BYD",
+            "model": "Dolphin",
+            "powerHp": null,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "d8b1a03af933519286866c4b",
+            "year": 2023,
+            "make": "BYD",
+            "model": "Dolphin",
+            "powerHp": 95,
+            "power30MinKw": 35,
+            "boundAstraEvidence": true,
+            "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+            "totalRub": 1446565,
+            "calculationStatus": "estimated",
+            "publicSpecificationVerified": true
+          }
+        ]
+      },
+      {
+        "make": "BYD",
+        "model": "Han",
+        "total": 727,
+        "items": [
+          {
+            "id": "bce4396bc69ac29a032a6b42",
+            "year": 2025,
+            "make": "BYD",
+            "model": "Han",
+            "powerHp": 245,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "88ba5bf177cbcf2a1068336a",
+            "year": 2025,
+            "make": "BYD",
+            "model": "Han",
+            "powerHp": 228,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "59744004354d247be839e478",
+            "year": 2024,
+            "make": "BYD",
+            "model": "Han",
+            "powerHp": 228,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "7cdfc70bb82b4d9e6d08d3ed",
+            "year": 2025,
+            "make": "BYD",
+            "model": "Han",
+            "powerHp": 204,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "df87b9002e4154e9a4e22c16",
+            "year": 2023,
+            "make": "BYD",
+            "model": "Han",
+            "powerHp": 228,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          }
+        ]
+      },
+      {
+        "make": "Audi",
+        "model": "Q4 e-tron",
+        "total": 175,
+        "items": [
+          {
+            "id": "473d1b3ed389b50a0b65a75e",
+            "year": 2025,
+            "make": "Audi",
+            "model": "Q4",
+            "powerHp": 204,
+            "power30MinKw": 70,
+            "boundAstraEvidence": true,
+            "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+            "totalRub": 3990041,
+            "calculationStatus": "estimated",
+            "publicSpecificationVerified": true
+          },
+          {
+            "id": "fd646d85c866c1c8b6edd921",
+            "year": 2024,
+            "make": "Audi",
+            "model": "Q4",
+            "powerHp": null,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "5d931b887b8c5dc67372ec07",
+            "year": 2023,
+            "make": "Audi",
+            "model": "Q4",
+            "powerHp": 204,
+            "power30MinKw": 70,
+            "boundAstraEvidence": true,
+            "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "4d435aaecd186ff3a947b216",
+            "year": 2024,
+            "make": "Audi",
+            "model": "Q4",
+            "powerHp": null,
+            "power30MinKw": null,
+            "boundAstraEvidence": false,
+            "indexDigest": null,
+            "totalRub": null,
+            "catalogPricingMode": "seller",
+            "calculationStatus": "needs_data",
+            "publicSpecificationVerified": false
+          },
+          {
+            "id": "00e93b37a5ea5f6bdd69038e",
+            "year": 2025,
+            "make": "Audi",
+            "model": "Q4",
+            "powerHp": 204,
+            "power30MinKw": 70,
+            "boundAstraEvidence": true,
+            "indexDigest": "30765dfae29a4ace47538e13db7eb3efacb40ccff51865a4caa00ddbb04b5ba0",
+            "totalRub": 3533071,
+            "calculationStatus": "estimated",
+            "publicSpecificationVerified": true
+          }
+        ]
+      }
+    ],
+    "dolphinBeforeAfter": {
+      "sameIds": 3,
+      "beforeWith30": 0,
+      "beforeWithDeliveredPrice": 0,
+      "afterWithBound30": 3,
+      "afterWithDeliveredPrice": 3
+    },
+    "verified": true,
+    "remainingPublicExample": {
+      "id": "5d931b887b8c5dc67372ec07",
+      "make": "Audi",
+      "model": "Q4",
+      "year": 2023,
+      "power30MinKw": 70,
+      "reason": "fuelPowertrain:unclassified_field_provenance",
+      "outcome": "seller-only retained; certified power alone does not establish complete calculation evidence"
+    }
+  },
+  "dataApplication": {
+    "batchId": "research-2026-10-25-worldwide-electric-reviewed",
+    "runId": 40192424153,
+    "entries": 11,
+    "models": 3,
+    "skipped": 0,
+    "readback": true
+  },
+  "remaining": "82591 rows in retained snapshot still lack certified30 evidence. 723 complete technical sets are not a count of all live full quotes. Exact modification anchors and additional official30-minute documents remain necessary. No full-coverage claim or background research automation."
+}

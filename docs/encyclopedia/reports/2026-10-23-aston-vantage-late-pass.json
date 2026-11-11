@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-10-23T05:10:15.098Z",
+  "batch": "research-2026-10-23-aston-vantage-late",
+  "passed": true,
+  "apiReadback": true,
+  "operations": 22,
+  "newVariants": 22,
+  "updatedVariants": 0,
+  "confirmedFields": 158,
+  "compiledCalculationFields": 136,
+  "beforeRevision": "6ae62cc5-c4dc-4fe6-a767-d77a8ad8a2d2",
+  "afterRevision": "2753137b-3b83-480d-991e-4d9d40981f1c",
+  "variantsBefore": 66,
+  "variantsAfter": 88,
+  "unchangedVariantsPreserved": 66,
+  "previousFieldSourcesPreserved": true,
+  "duplicatesAdded": 0,
+  "wholeRowVerified": false,
+  "manualWrites": 0,
+  "compilerChanged": false,
+  "activationConfirmed": false,
+  "nativeMatcher": {
+    "exactCases": 22,
+    "genericIdentityStillBlocked": true,
+    "manualInputPreserved": true,
+    "unknownFieldsNotInferred": true
+  },
+  "version": 1,
+  "commit": "9f155687ed5c4a95c58e77e2827d7bfc8ae71579",
+  "workflow": 39904155549,
+  "job": 120252138672,
+  "workflowConclusion": "success",
+  "modelId": "0f90ccb1a0cf0280fa416811",
+  "make": "Aston Martin",
+  "model": "Vantage",
+  "independentApiYears": [
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "researchGuardTests": {
+    "passed": 8,
+    "total": 8
+  },
+  "sourceReview": {
+    "sourceHashesOnEveryField": true,
+    "yearEvidence": "Factory owner-guide catalogue and retrospective corporate production/delivery reports",
+    "factoryTechnicalPagesVisuallyReviewed": [
+      "12MY p203/p208",
+      "17MY p199/p204"
+    ],
+    "no4LToExactCc": true,
+    "noBhpAsPs": true,
+    "noDryMassAsGvw": true,
+    "noInferredSBadge2017": true,
+    "noInferredRoadsterOrSGearbox2025": true
+  },
+  "publicParity": {
+    "passed": true,
+    "offers": 11,
+    "comparisons": 121,
+    "repeatedExactModificationGroups": 2,
+    "report": "docs/encyclopedia/reports/2026-10-23-aston-vantage-late-public-parity.json"
+  },
+  "releaseState": {
+    "healthDuringPublicRead": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+      "calculationVersion": "fa0eb1e56c141553886fbeba4761806fb951f93229c401cf38fa7ebc2986884e"
+    },
+    "healthAfter": {
+      "ok": true,
+      "service": "avtocena-web",
+      "releaseSha": "8329202f1b90ffb4d32bcb154e5c0c568821f258",
+      "calculationVersion": "fa0eb1e56c141553886fbeba4761806fb951f93229c401cf38fa7ebc2986884e"
+    },
+    "existingReleaseWorkflow": 39901961792,
+    "existingReleaseConclusion": "success",
+    "existingSnapshotIndex": "9a83d4be5c8d38f867468bd32731e3e75227ce7cdc958b6bec6215f5975a390b",
+    "previousVantage214IncludedInExistingSnapshot": true,
+    "newBatchIncludedInExistingSnapshot": false,
+    "newBatchActivationConfirmed": false,
+    "duplicateReleaseRequested": false,
+    "nextAction": "Включить только новую партию158/136 в следующий согласованный штатныйиндекс/подготовкуцен. Ручнаясессия сопровождает8329202 иDBX/UI, не дублировать её выпуск/перенос."
+  },
+  "referenceIntake": {
+    "run": 39831884392,
+    "job": 120009865681,
+    "status": "completed",
+    "conclusion": "failure",
+    "checkpointFromRoadmap": {
+      "visited": 13045,
+      "saved": 8403,
+      "pending": 253,
+      "error": "redirect_outside_catalog"
+    },
+    "restarted": false
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-23-aston-vantage-late-remaining.json",
+  "nextHandoff": "docs/encyclopedia/research-handoff-2026-10-23-audi-a1.json",
+  "allModelsComplete": false,
+  "historicalExpansionComplete": false,
+  "collectorsCalculationRulesGuardsSecretsChanged": false,
+  "coordination": {
+    "observedMain": "a02c62471f9901276f769b60793ba1b8a6d195ca",
+    "writesPaused": true,
+    "reason": "Ручнаясессия12:11 готовит guarded repair proof для существующих точных referenceEvidence и согласованный выпуск. Наша партия сохранена05:09:40UTC, до новой паузы. Дальнейшее research-сохранение — только после изоляции следующего согласованного снимка; независимое исследование разрешено.",
+    "doNotDuplicate": [
+      "reference repair preview/apply",
+      "production deploy",
+      "UI changes",
+      "full China collection"
+    ],
+    "newBatchAwaitingNextIndex": true
+  }
+}

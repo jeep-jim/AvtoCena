@@ -1,0 +1,1028 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-mito-2012-uk-sprint-sportiva",
+  "entries": [
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "0ad80ecf2dceceb66e8db53a",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI 78 PS S/S Progression",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Progression",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.4 MPI 78 PS S/S Progression"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 78 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Progression; 1.4 MPI 78 PS S/S Progression; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "ca70f860377d1195bac2eca1",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 MPI 78 PS S/S Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 MPI 78 PS S/S Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 78,
+        "engineCc": 1368,
+        "powerKw": 57,
+        "icePowerKw": 57,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "350A1000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.4 MPI 78 PS S/S Sprint"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 78 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 221,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 MPI 78 PS S/S Sprint; 1.4 MPI 78 PS S/S Sprint; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "895e0d2e952367c3774016b3",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "0.9 TwinAir 85 PS S/S Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "0.9 TwinAir 85 PS S/S Sprint",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 875,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "312A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 0.9 TwinAir 85 PS S/S Sprint"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 85 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sprint; 0.9 TwinAir 85 PS S/S Sprint; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "2b38b70879776ad7499af00c",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "0.9 TwinAir 85 PS S/S Sportiva",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "0.9 TwinAir 85 PS S/S Sportiva",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 875,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "312A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 0.9 TwinAir 85 PS S/S Sportiva"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 85 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 220,
+            "checkedAt": "2026-10-22",
+            "selector": "0.9 TwinAir 85 PS S/S Sportiva; 0.9 TwinAir 85 PS S/S Sportiva; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "56cb82d99b7b6323e9ed84cc",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 135 PS S/S Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 135,
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.4 TB MultiAir 135 PS S/S Distinctive"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 135 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Distinctive; 1.4 TB MultiAir 135 PS S/S Distinctive; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "e4b293f3724f0d032482f06d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 135 PS S/S Sportiva",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S Sportiva",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 135,
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A2000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.4 TB MultiAir 135 PS S/S Sportiva"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 135 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 222,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S Sportiva; 1.4 TB MultiAir 135 PS S/S Sportiva; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "1611fe67552d75d6bfb0482e",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.4 TB MultiAir 135 PS S/S TCT Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.4 TB MultiAir 135 PS S/S TCT Distinctive",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "powerHp": 135,
+        "engineCc": 1368,
+        "powerKw": 99,
+        "icePowerKw": 99,
+        "drive": "fwd",
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.4 TB MultiAir 135 PS S/S TCT Distinctive"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 135 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 13,
+            "checkedAt": "2026-10-22",
+            "selector": "1.4 TB MultiAir 135 PS S/S TCT Distinctive; 1.4 TB MultiAir 135 PS S/S TCT Distinctive; transmission"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "82a4d39ef95b16a1de6d16ac",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.3 JTDM 85 PS S/S Sprint",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.3 JTDM 85 PS S/S Sprint",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 85,
+        "engineCc": 1248,
+        "powerKw": 62,
+        "icePowerKw": 62,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "199B4000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.3 JTDM 85 PS S/S Sprint"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 85 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 224,
+            "checkedAt": "2026-10-22",
+            "selector": "1.3 JTDM 85 PS S/S Sprint; 1.3 JTDM 85 PS S/S Sprint; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "aaf89c7101c0f4d21be7016d",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.6 JTDM 120 PS S/S Distinctive",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S Distinctive",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.6 JTDM 120 PS S/S Distinctive"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 120 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Distinctive; 1.6 JTDM 120 PS S/S Distinctive; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    },
+    {
+      "modelId": "81a4b290257d227a5fd86ee6",
+      "variantId": "63451e0213c3c9ec601d3251",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "year": 2012,
+      "trim": "1.6 JTDM 120 PS S/S Sportiva",
+      "expectedDigest": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "patch": {
+        "trim": "1.6 JTDM 120 PS S/S Sportiva",
+        "fuel": "diesel",
+        "powertrainKind": "combustion",
+        "powerHp": 120,
+        "engineCc": 1598,
+        "powerKw": 88,
+        "icePowerKw": 88,
+        "drive": "fwd",
+        "transmission": "manual",
+        "engineCode": "955A3000"
+      },
+      "confirmedFields": [
+        "trim",
+        "fuel",
+        "powertrainKind",
+        "powerHp",
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Год и наличие точного двигателя в комплектации: заводская брошюра Alfa Romeo UK с выходной датой 09/2012 на PDF стр.1, таблица доступности стр.31 (печатные 56–57), архив AROC. Метрическая мощность PS — соответствующая моторизация в французском прайсе 01.11.2012, ch CEE; британские bhp не переименованы в PS. Технические поля: заводское руководство 60438485, редакция 07/2012, таблицы PDF стр.220–225 и227. TCT отдельно сверена по брошюре стр.13,31, код TCT не угадан. TwinAir: 62 кВт по руководству и французской таблице; округлённые 62,5 из UK не перезаписывают подтверждённое значение. Существующие Distinctive/QV не дублируются. GVW и число мест не выбраны из 4/5-местных вариантов.",
+        "fieldSources": {
+          "trim": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/2012_09_Alfa_MiTo_Brochure.pdf",
+            "pdfPage": 31,
+            "checkedAt": "2026-10-22",
+            "selector": "ENGINES / trim availability: 1.6 JTDM 120 PS S/S Sportiva"
+          },
+          "fuel": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; fuel"
+          },
+          "powertrainKind": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; powertrainKind"
+          },
+          "powerHp": {
+            "url": "https://www.media.stellantis.com/uploads/fr/FR/2012/Alfa_Romeo/TARIFS/121101_AR_TARIF_VP.pdf",
+            "pdfPage": 2,
+            "checkedAt": "2026-10-22",
+            "selector": "Exact corresponding engine; ch CEE / metric PS; 120 PS"
+          },
+          "engineCc": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; engineCc"
+          },
+          "powerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; powerKw"
+          },
+          "icePowerKw": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; icePowerKw"
+          },
+          "drive": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; drive"
+          },
+          "transmission": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 227,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; transmission"
+          },
+          "engineCode": {
+            "url": "https://aroc-uk.com/wp-content/uploads/2023/01/MiTo_Owners_Manual_2013_83_145_MITO_604.38.485_EN_01_07.12_L_LG.pdf",
+            "pdfPage": 225,
+            "checkedAt": "2026-10-22",
+            "selector": "1.6 JTDM 120 PS S/S Sportiva; 1.6 JTDM 120 PS S/S Sportiva; engineCode"
+          }
+        }
+      },
+      "operation": "create",
+      "expectedRevision": "879c5b27-0c0c-470b-b768-f8d263753318"
+    }
+  ]
+}

@@ -1,0 +1,811 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-23T07:52:17Z",
+  "repositoryHead": "5b6d2f687843987c7c8e7538c5707ae0691beb7d",
+  "purpose": "Evidence checklist for the next coordinated index; not a deployment request or live membership proof",
+  "installedRelease": "025980454268fa9841ffab34b119037f348a1a11",
+  "installedIndex": "36991f8e1463b174e02c84a1bff8a0d1fd415a59974f0b017707933738acf34d",
+  "healthHttpStatus": 200,
+  "batches": [
+    {
+      "id": "research-2026-10-23-audi-a1-body-and-gaps",
+      "variants": 50,
+      "fields": 58,
+      "expectedFields": [
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "7dfd375be96026fe715a2552",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "bda09efbe8eb948321b83256",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "3672547816a45e92b0f925f3",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c4692da2bd8c081d497676e5",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "68b706abb67fc110caaa60d3",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "80add971c12643cec32dd675",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "a268d4e1135f28832d4f10ee",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "d27c802bf8c6f1cbf589dd43",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "3717ed8ae30fb484c3e4b6f6",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "6c042c57a41c81afdd9a94ee",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "91c8cbe9d450e648af614ca0",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "ffc99e18e86dae5c1be416d9",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "95b1503bad2b78e9594afe97",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "9906e7f24d719cb76d582d58",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "8802441121b5a25703c95b90",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "96afd8e9c510d045ee539784",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "e19a7be565ec6b3b1604b85e",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "9199f213e4588425df04a97e",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "ea45a10258da54c11be2581f",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "0c53215dc48b6ef78715a2d6",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "8d5a847dfc2acf76361cf6df",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "d3d997de225cd36c40008c89",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "a1f749af8defa8f09a5468cd",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "099acb4e9e8338738e89806f",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "d67d31e44edb6b327b07718a",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "320796dd07f2275b26d23b5f",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "72620ab17e0807e81324eab5",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "f95df91baf96702e327e29bc",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c439bb15ebd35d51e7c17de5",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "637fc038c45d573de30fed03",
+          "values": {
+            "bodyType": "hatchback",
+            "drive": "fwd",
+            "grossVehicleWeightKg": 1675
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "724d9a32dbace1d4a83423ff",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "5847529c6698e7ebcac1a6e0",
+          "values": {
+            "bodyType": "hatchback",
+            "drive": "fwd",
+            "grossVehicleWeightKg": 1675
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c2a0440c31b2f9b5a0d6fa91",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "d79e145768cf994a2cf592d0",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "7db3e6ee0ebaa96f6521dcfe",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "a99e35c55844f5c8e16f9af2",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "7ba53eb38e5e7b52efbe3ef3",
+          "values": {
+            "bodyType": "hatchback",
+            "drive": "fwd",
+            "grossVehicleWeightKg": 1675
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "11fdc77fda45738e78defd69",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "353f3d085728c2c0786c2367",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "5e6cf3e02c3910d666638df4",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "ecaefc80fbd7349a298ad3a6",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "d8b0d678d0c38314e37b74b8",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "902312025bcc4faec4666a2f",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "1d953f9188b24a1d63b7db16",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "0a464545224816d6dda165bf",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "63e2f418b088faaf9872647d",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c7d5b2fca55e27003ecaad70",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "536cae4e21d832dc88148344",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "4a97486d6c18512f4e3e9fec",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "b68fec2e70330a6acf539acc",
+          "values": {
+            "bodyType": "hatchback",
+            "drive": "fwd",
+            "grossVehicleWeightKg": 1655
+          }
+        }
+      ],
+      "workflow": 39909220379,
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a1-body-and-gaps.json",
+      "saved": true,
+      "includedInInstalledIndex": false
+    },
+    {
+      "id": "research-2026-10-23-audi-a1-next-gaps",
+      "variants": 50,
+      "fields": 51,
+      "expectedFields": [
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "5f973861584569feb263cbd6",
+          "values": {
+            "bodyType": "hatchback",
+            "drive": "fwd"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "359539af9a57e53ed829d136",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "13ef702646fce9559f8d7048",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "1d511efb0049044ca3a4dc44",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "cff242f42b256b6562b5a568",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "eef7a30a3544f7667e479863",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c628577aed1cd09b6792dbff",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "e178bb233eeb304f7ee8f34c",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "53dc9a7032c63cc9499fb330",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "47d1880f32188ec68e734d58",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "ee43a77cb9ef35b30fed3181",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "50ee3207dabbe90a89c6216d",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "87b4ab748fae6011a9f8e402",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "9096f0b25120216131eb96d8",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "19457fae5cc31cb4675b1647",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "28b836da1f41b1d963dde427",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "37caf92edca988c2fd647524",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "7c061ecbf63f9d01c733d417",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "abc661b18f9fe85369780814",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "49b4ece8d16f1bf90a42833b",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "cba7c023d6a164b2b56a08c3",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "f96f33ba217405d4489b3713",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "e307caa93e6d9940a29161aa",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "a9bc9d9e7bd9e3595ac0535e",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "8c0c930bd4633ae38658e921",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c45488fd0e4d617fc6aeac08",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "830675ae2d4901926db2eb48",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "a0f15a0ded609bfc8fdb357a",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "ea7a334e9af840acba46e6fd",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "d1356fff15b23837d9247755",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "2cd5b9f8bc5bf7f5b7ceb0bf",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "f6b20957967128dbe9af8eb9",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "b1b61c41eb95cf2d1ebb734b",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "40950b82cfca8a3441c1fa06",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "e5549339809776fde30f0f4e",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "1d2bd685441e29fb8d4bab92",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "84628488b615135c93407ab4",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "89bbcb070e0846aa507d95e1",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "5dd4a67e4250274b802fac55",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c3d7f6bf5d899e5155424ea7",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "87ec11ca0ad0f1b59461e35f",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "b038cdc562da1fd711efc729",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "8f21dd237d125ec91452937d",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "9c01f35d158c9ade1a5169ad",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "19ea98304207db8f50c08165",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "ad0d22a5cc038f742ed02d33",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "4ab7bf47121ca91a33b6194d",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "eae8a3779d7643ccede69823",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "c1b1f9c7f7d1da858d03a7f1",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        },
+        {
+          "modelId": "d5a8af35e3698aa33eaea9a9",
+          "variantId": "2af184aa6c7dbecc1e934463",
+          "values": {
+            "bodyType": "hatchback"
+          }
+        }
+      ],
+      "workflow": 39914987028,
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-audi-a1-next-gaps.json",
+      "saved": true,
+      "includedInInstalledIndex": false
+    },
+    {
+      "id": "research-2026-10-23-bmw-i5-2026-30min",
+      "variants": 1,
+      "fields": 3,
+      "expectedFields": [
+        {
+          "modelId": "e71c8376467b1da6bc08a8b7",
+          "variantId": "c31f0df22cec7cf907072ca6",
+          "values": {
+            "power30MinKw": 150,
+            "drive": "awd",
+            "bodyType": "wagon"
+          }
+        }
+      ],
+      "workflow": 39909676521,
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-bmw-i5-2026-30min.json",
+      "saved": true,
+      "includedInInstalledIndex": false
+    },
+    {
+      "id": "research-2026-10-23-bmw-i4-2026-30min",
+      "variants": 1,
+      "fields": 2,
+      "expectedFields": [
+        {
+          "modelId": "0d2a63de5a497a47027d0eac",
+          "variantId": "65e831d9ceb6aab1b8c5eb81",
+          "values": {
+            "power30MinKw": 125,
+            "drive": "awd"
+          }
+        }
+      ],
+      "workflow": 39909903065,
+      "batchPath": "docs/encyclopedia/batches/2026-10-23-bmw-i4-2026-30min.json",
+      "saved": true,
+      "includedInInstalledIndex": false
+    }
+  ],
+  "models": 3,
+  "variants": 102,
+  "fields": 114,
+  "breakdown": {
+    "bodyType": 101,
+    "drive": 7,
+    "grossVehicleWeightKg": 4,
+    "power30MinKw": 2
+  },
+  "duplicates": [],
+  "evidenceReports": [
+    "docs/encyclopedia/reports/2026-10-23-audi-a1-body-and-gaps-pass.json",
+    "docs/encyclopedia/reports/2026-10-23-audi-a1-next-gaps-pass.json",
+    "docs/encyclopedia/reports/2026-10-23-bmw-30min-progress.json"
+  ],
+  "queueReconciliation": {
+    "audiInPendingNextIndexBatches": true,
+    "bmwInParallelManualResearch": true,
+    "missingResearchWritesDetected": false
+  },
+  "acceptanceRequirements": [
+    "Refresh main and research queue before selecting a release; later batches are outside this checklist.",
+    "Verify every listed model/variant/field value AND allowed field evidence in the isolated compiled index; a matching value alone is insufficient.",
+    "Preserve exact technical identity, source scopes, administrator edits and unknown certified power; no reuse/apply repetition.",
+    "After separately coordinated activation verify health, immutable index digest, shared-price context and public search/detail matching; record unavailable cases honestly.",
+    "BMW values are manufacturer declarations for only the exact 2026 European variants; not individual vehicle CoCs.",
+    "Do not close DBX old-projection migration or claim all offers calculated on the strength of index membership."
+  ],
+  "deploymentRequested": false,
+  "productionDataChanged": false
+}

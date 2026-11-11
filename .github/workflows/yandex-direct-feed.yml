@@ -1,0 +1,48 @@
+name: Publish Yandex Direct feed
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 1 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/publish-yandex-direct-feed.mjs'
+      - 'apps/web/lib/catalog/yandex-direct-*.ts'
+  workflow_run:
+    workflows: ['Catalog refresh green', 'Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe']
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: yandex-direct-feed
+  cancel-in-progress: false
+jobs:
+  publish:
+    # A market can commit a valid new catalog and then fail its full-coverage
+    # audit. Rebuild from the committed manifest even in that case, so ads do
+    # not keep links from the previous generation until the next 3-hour cron.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - run: node --import tsx scripts/publish-yandex-direct-feed.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yandex-direct-feed-report
+          path: yandex-direct-feed-report.json
+          retention-days: 14

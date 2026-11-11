@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-03T10:34:42.238Z",
+  "mode": "source_deficit_recon_summary_no_write",
+  "productionWrites": false,
+  "classificationMutations": false,
+  "publishAllowedMutations": false,
+  "rawBodiesStored": false,
+  "run": {
+    "runId": 33744960785,
+    "headSha": "f9d554b85c1c7608e435df19ce328fe3c66b7eb0",
+    "artifactId": 9889257990,
+    "artifactDigest": "sha256:d7008f31989b6fac8f941349122c1da63a72e2593866b199ed73140310b010db"
+  },
+  "sourceCount": 4,
+  "sampleCount": 8,
+  "allClassificationsDeferred": true,
+  "allPublishAllowedRemainFalse": true,
+  "sources": [
+    {
+      "sourceId": "bobaedream_korea_candidate",
+      "market": "korea",
+      "stableReachable": true,
+      "pageByteStable": false,
+      "galleryEvidence": {
+        "status": "strong_offer_bound_candidate",
+        "samples": [
+          {
+            "sourceOfferId": "2260063",
+            "offerIdInGalleryFragment": true,
+            "galleryClusterImageIdentities": 17,
+            "stableSeriesAcrossRepeats": "Eh11431776047830",
+            "discoveredSpecRoute": "https://www.bobaedream.co.kr/dealguide/carinfo.php?cat=spec&maker_no=3&model_no=1692&level_no=12449&class_no=26958&year_no=2016"
+          },
+          {
+            "sourceOfferId": "2262188",
+            "offerIdInGalleryFragment": true,
+            "galleryClusterImageIdentities": 17,
+            "stableSeriesAcrossRepeats": "Eh12831780885663",
+            "discoveredSpecRoute": "https://www.bobaedream.co.kr/dealguide/carinfo.php?cat=spec&maker_no=49&model_no=1589&level_no=16126&class_no=25294&year_no=2016"
+          }
+        ],
+        "note": "Full-page fingerprint is dynamic, but the offer-bound gallery series itself is stable on both repeats. Final gallery proof requires conservative series normalization."
+      },
+      "remainingDeficits": ["body"],
+      "next": "robots-aware read-only probe of the two discovered same-origin spec routes; do not guess additional endpoints"
+    },
+    {
+      "sourceId": "carswitch_uae_candidate",
+      "market": "uae",
+      "stableReachable": true,
+      "pageByteStable": true,
+      "proven": ["price", "currency", "body", "fuel", "gallery"],
+      "structuredButUnitAmbiguous": ["engineDisplacement"],
+      "samples": [
+        { "sourceOfferId": "864601", "engineDisplacement": "1.5", "price": 49650, "currency": "AED" },
+        { "sourceOfferId": "857416", "engineDisplacement": "5.7", "price": 13500, "currency": "AED" }
+      ],
+      "remainingDeficits": ["engineCc", "powerHp"],
+      "next": "scan the same offer HTML for explicit unit-bearing engine text and source-bound power; generic model averages/ranges are forbidden"
+    },
+    {
+      "sourceId": "cars24_uae_candidate",
+      "market": "uae",
+      "stableReachable": true,
+      "pageByteStable": false,
+      "proven": ["make", "model", "year", "body", "fuel", "currency", "gallery"],
+      "structuredButUnitAmbiguous": ["engineSize"],
+      "samples": [
+        { "sourceOfferId": "9714841569", "engineSize": "1.5" },
+        { "sourceOfferId": "9714841918", "engineSize": "1.8" }
+      ],
+      "remainingDeficits": ["price", "engineCc", "powerHp"],
+      "next": "scan the offer hero/spec HTML for offer-bound AED price and explicit L/cc unit; keep generic convenience-fee priceRange out of vehicle price evidence"
+    },
+    {
+      "sourceId": "dubicars_uae_exact",
+      "market": "uae",
+      "stableReachable": true,
+      "pageByteStable": true,
+      "embeddedOfferEvidence": {
+        "740206": { "imageCount": 11, "fuel": "Petrol", "body": "Hatchback", "priceExport": 8991, "priceCurrency": "USD" },
+        "979972": { "imageCount": 14, "fuel": "Electric", "body": "SUV/Crossover", "priceExport": 54500, "priceCurrency": "USD" }
+      },
+      "galleryEvidence": "offer-bound clusters present; normalize underlying UUID image identities before closing gallery deficit",
+      "remainingDeficits": {
+        "740206": ["engineCc", "powerHp", "gallery"],
+        "979972": ["certifiedPower", "gallery"]
+      },
+      "next": "deduplicate underlying listing image UUIDs; do not use model-range power as offer exact; EV requires certified/utilization/30-minute power if calculation contract requires it"
+    }
+  ]
+}

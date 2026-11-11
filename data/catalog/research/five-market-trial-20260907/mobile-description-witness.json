@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-07",
+  "sourceId": "mobile_de_open",
+  "sourceOfferId": "448617864",
+  "identityMatched": true,
+  "route": "https://www.mobile.de/consumer/api/search/vip",
+  "category": "SmallCar",
+  "attributes": [
+    {
+      "tag": "category",
+      "value": "Kleinwagen, Vorführfahrzeug"
+    },
+    {
+      "tag": "modelRange",
+      "value": "GBAAU4"
+    },
+    {
+      "tag": "cubicCapacity",
+      "value": "999 cm³"
+    },
+    {
+      "tag": "power",
+      "value": "70 kW (95 PS)"
+    },
+    {
+      "tag": "envkv.engineType",
+      "value": "Verbrennungsmotor"
+    },
+    {
+      "tag": "fuel",
+      "value": "Benzin"
+    },
+    {
+      "tag": "transmission",
+      "value": "Schaltgetriebe"
+    },
+    {
+      "tag": "firstRegistration",
+      "value": "02/2026"
+    }
+  ],
+  "observedDriveAttribute": false,
+  "conclusion": "This bound detail has a small-car category, not an exact body shape, and no axle-drive attribute. Neither is filled from model-name guesses.",
+  "imageDownloads": 0
+}

@@ -1,0 +1,1303 @@
+{
+  "checkedAt": "2026-10-24T06:00:24.837Z",
+  "indexDigest": "af3b1dce3eb131e3f196f5e1a79bdd2421178ac7e131d4e76ee07732ab4f3830",
+  "generationId": "gen_1792702445675_8c312f85",
+  "previewChanges": 0,
+  "scope": "Five-market saved projection plus bounded existing Japanese query cache. No supplier requests, no database writes; not whole Japan inventory.",
+  "markets": {
+    "korea": {
+      "rows": 9926,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 4204,
+      "baselineMatched": 37,
+      "technicalMatched": 44,
+      "newlyFilledRecords": 14,
+      "newlyFilledFields": 14,
+      "newlyCompleteSpecifications": 44,
+      "newlyCompletePending": 2,
+      "newlyFilledByField": {
+        "bodyType": 14
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 44
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "uae": {
+      "rows": 22045,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 11714,
+      "baselineMatched": 12,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "europe": {
+      "rows": 46127,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 46095,
+      "baselineMatched": 36723,
+      "technicalMatched": 2907,
+      "newlyFilledRecords": 5,
+      "newlyFilledFields": 10,
+      "newlyCompleteSpecifications": 2599,
+      "newlyCompletePending": 2,
+      "newlyFilledByField": {
+        "drive": 5,
+        "grossVehicleWeightKg": 5
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 2599
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "georgia": {
+      "rows": 1706,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 1192,
+      "baselineMatched": 0,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "china": {
+      "rows": 244471,
+      "withTechnicalCode": 0,
+      "modelYearKnown": 161351,
+      "baselineMatched": 72083,
+      "technicalMatched": 66334,
+      "newlyFilledRecords": 3417,
+      "newlyFilledFields": 5072,
+      "newlyCompleteSpecifications": 46247,
+      "newlyCompletePending": 230,
+      "newlyFilledByField": {
+        "bodyType": 2737,
+        "grossVehicleWeightKg": 1726,
+        "transmission": 61,
+        "engineCode": 546,
+        "power30MinKw": 1,
+        "icePowerKw": 1
+      },
+      "newlyCompleteByPowertrain": {
+        "combustion": 46247
+      },
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    },
+    "japan": {
+      "rows": 462,
+      "withTechnicalCode": 462,
+      "modelYearKnown": 120,
+      "baselineMatched": 3,
+      "technicalMatched": 0,
+      "newlyFilledRecords": 0,
+      "newlyFilledFields": 0,
+      "newlyCompleteSpecifications": 0,
+      "newlyCompletePending": 0,
+      "newlyFilledByField": {},
+      "newlyCompleteByPowertrain": {},
+      "japanPreviewBefore": 0,
+      "japanPreviewAfter": 0
+    }
+  },
+  "japanCache": {
+    "slots": 128,
+    "uniqueLots": 462,
+    "converted": 462,
+    "rejected": 0
+  },
+  "samples": [
+    {
+      "id": "c80c0886921716e247ac33f4",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "7c4abdd2c27adcb561449761",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "7def98194646927e8739bbae",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "1af1df0386363c354f0c51b6",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "a62d68898651bd56e042b862",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "bcc3ba81272d70ba7b5b615d",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "6a2ed12fe820845c1345b3aa",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "21e5e8410eae943192cc186a",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "e325834e95e2a12c3bcf8ba7",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2025,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "dafad446d7aa3a0e69e3edbd",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2023,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "cf6f3a139a376b46ad603cb4",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2023,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "8fca5b79eef98370421a216e",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2023,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "a9bf33281a3f67ac4013d110",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2023,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "b48d5bee02ab20a226eb05d3",
+      "market": "korea",
+      "make": "Genesis",
+      "model": "G80",
+      "year": 2023,
+      "trim": "가솔린 2.5 터보 AWD (세부등급 없음)",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "adada895ba3c9160b6e40f4d",
+      "market": "europe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2026,
+      "trim": "Avant TFSI ACC Navi RüKa Sitzh. Sportsitze",
+      "fields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2315
+      }
+    },
+    {
+      "id": "9c920e12dc42f60ee4e401b5",
+      "market": "europe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2026,
+      "trim": "Avant TFSI LED+ eSPORTSITZE KAMERA ASSIST",
+      "fields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2315
+      }
+    },
+    {
+      "id": "5b16a69c797587ec41eeb0fa",
+      "market": "europe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2026,
+      "trim": "Avant TFSI AHK vorbe. LED+ Navi Rüka Sports.",
+      "fields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2315
+      }
+    },
+    {
+      "id": "58d3d0686b189205f26e0cf2",
+      "market": "europe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2026,
+      "trim": "Avant TFSI LED+ Navi RüKa AHK ACC SHZ V-Cockp",
+      "fields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2315
+      }
+    },
+    {
+      "id": "996df7b2e3cdeb31a455fe20",
+      "market": "europe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2026,
+      "trim": "Avant TFSI Advanced AHK-Vorb./RFK/ACC/LED+",
+      "fields": [
+        "drive",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "drive": "fwd",
+        "grossVehicleWeightKg": 2315
+      }
+    },
+    {
+      "id": "68306e347f1b0d05b4baf950",
+      "market": "china",
+      "make": "Volkswagen",
+      "model": "Sagitar",
+      "year": 2026,
+      "trim": "",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "bodyType": "sedan",
+        "grossVehicleWeightKg": 1780
+      }
+    },
+    {
+      "id": "d4998122085bee7936498bae",
+      "market": "china",
+      "make": "Volkswagen",
+      "model": "T-Cross",
+      "year": 2025,
+      "trim": "",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 1705
+      }
+    },
+    {
+      "id": "79f2951486e079d2cc39d2b1",
+      "market": "china",
+      "make": "Peugeot",
+      "model": "2008",
+      "year": 2025,
+      "trim": "",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 1702
+      }
+    },
+    {
+      "id": "c9281dc9d114a37f88144460",
+      "market": "china",
+      "make": "MINI",
+      "model": "Clubman",
+      "year": 2024,
+      "trim": "",
+      "fields": [
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "grossVehicleWeightKg": 1890
+      }
+    },
+    {
+      "id": "741c2f973e7cc540b175c944",
+      "market": "china",
+      "make": "Baojun",
+      "model": "510",
+      "year": 2022,
+      "trim": "",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 1635
+      }
+    },
+    {
+      "id": "a462e4b52a8b1c5e0a24ace1",
+      "market": "china",
+      "make": "Mercedes-Benz",
+      "model": "GLB",
+      "year": 2022,
+      "trim": "",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "suv"
+      }
+    },
+    {
+      "id": "e4d0f1c643293d834be9eb8e",
+      "market": "china",
+      "make": "Baojun",
+      "model": "RM-5",
+      "year": 2021,
+      "trim": "",
+      "fields": [
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "grossVehicleWeightKg": 2080
+      }
+    },
+    {
+      "id": "21c8ed9b47abcc65456cc407",
+      "market": "china",
+      "make": "BYD",
+      "model": "F3",
+      "year": 2020,
+      "trim": "",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "sedan"
+      }
+    },
+    {
+      "id": "6c496c5018031ee8dc8c0ecb",
+      "market": "china",
+      "make": "Bestune",
+      "model": "T77",
+      "year": 2020,
+      "trim": "",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "suv"
+      }
+    },
+    {
+      "id": "d277062787ec27bd3d39aca8",
+      "market": "china",
+      "make": "Volkswagen",
+      "model": "T-Cross",
+      "year": 2025,
+      "trim": "",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "bodyType": "suv",
+        "grossVehicleWeightKg": 1705
+      }
+    },
+    {
+      "id": "3e9c6ab13036042b3ff0fc47",
+      "market": "china",
+      "make": "Jinbei",
+      "model": "Golden Sea Lion M Classic",
+      "year": 2024,
+      "trim": "",
+      "fields": [
+        "transmission"
+      ],
+      "values": {
+        "transmission": "manual"
+      }
+    },
+    {
+      "id": "ce7012d73c179c9041421ad1",
+      "market": "china",
+      "make": "JAC",
+      "model": "Xingrui",
+      "year": 2024,
+      "trim": "",
+      "fields": [
+        "transmission"
+      ],
+      "values": {
+        "transmission": "manual"
+      }
+    },
+    {
+      "id": "128f1f7d0f1695fdf718b648",
+      "market": "china",
+      "make": "MINI",
+      "model": "Clubman",
+      "year": 2024,
+      "trim": "",
+      "fields": [
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "grossVehicleWeightKg": 1890
+      }
+    },
+    {
+      "id": "e17f2d0e63dbdf64fcf93bb1",
+      "market": "china",
+      "make": "Mercedes-Benz",
+      "model": "B-Class",
+      "year": 2022,
+      "trim": "",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "hatchback"
+      }
+    },
+    {
+      "id": "65b16303ba0f859eddec3d80",
+      "market": "china",
+      "make": "Baojun",
+      "model": "RC-5",
+      "year": 2021,
+      "trim": "",
+      "fields": [
+        "bodyType",
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "bodyType": "liftback",
+        "grossVehicleWeightKg": 1800
+      }
+    },
+    {
+      "id": "c54c603d6a696e42270a4887",
+      "market": "china",
+      "make": "JAC",
+      "model": "A5",
+      "year": 2020,
+      "trim": "",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "liftback"
+      }
+    },
+    {
+      "id": "18976c6d425f01d0e8983a24",
+      "market": "china",
+      "make": "Bestune",
+      "model": "T77",
+      "year": 2020,
+      "trim": "改款 230 TID 自动豪华型 国VI",
+      "fields": [
+        "bodyType"
+      ],
+      "values": {
+        "bodyType": "suv"
+      }
+    },
+    {
+      "id": "fe2967fb1ab6055056ab529b",
+      "market": "china",
+      "make": "JAC",
+      "model": "T8",
+      "year": 2021,
+      "trim": "",
+      "fields": [
+        "transmission"
+      ],
+      "values": {
+        "transmission": "manual"
+      }
+    },
+    {
+      "id": "d3b01f8513f7a8657bcc41e7",
+      "market": "china",
+      "make": "JAC",
+      "model": "Refine M3",
+      "year": 2025,
+      "trim": "",
+      "fields": [
+        "grossVehicleWeightKg"
+      ],
+      "values": {
+        "grossVehicleWeightKg": 2510
+      }
+    },
+    {
+      "id": "082cbaa3fe70992c44058c60",
+      "market": "china",
+      "make": "JAC",
+      "model": "Xingrui",
+      "year": 2024,
+      "trim": "",
+      "fields": [
+        "transmission"
+      ],
+      "values": {
+        "transmission": "manual"
+      }
+    }
+  ],
+  "japanMissingLinks": [
+    {
+      "id": "ajes-stats-25vfOB6ZzDUZcQI",
+      "make": "HONDA",
+      "model": "ACTY TRUCK",
+      "year": 2008,
+      "trim": "",
+      "chassisCode": "HA6",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2HNx7cXG5DuAE4",
+      "make": "HONDA",
+      "model": "N BOX",
+      "year": 2018,
+      "trim": "",
+      "chassisCode": "JF3",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2POP1Pt6jRCMyLR",
+      "make": "HONDA",
+      "model": "GRACE",
+      "year": 2017,
+      "trim": "",
+      "chassisCode": "GM4",
+      "engineCc": 1500,
+      "fuel": "hybrid",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2R0i9DV8IOWQs2v",
+      "make": "HONDA",
+      "model": "FREED",
+      "year": 2019,
+      "trim": "",
+      "chassisCode": "GB7",
+      "engineCc": 1500,
+      "fuel": "hybrid",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-31W39yFYPhYj5X3",
+      "make": "HONDA",
+      "model": "N BOX",
+      "year": 2018,
+      "trim": "4WD",
+      "chassisCode": "JF4",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-54JqfXEPN5Yy6",
+      "make": "HONDA",
+      "model": "SHUTTLE",
+      "year": 2021,
+      "trim": "4WD Hybrid Honda Sensing",
+      "chassisCode": "GP8",
+      "engineCc": 1500,
+      "fuel": "hybrid",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-5KiG7nUjp6Du5X",
+      "make": "HONDA",
+      "model": "ACTY VAN",
+      "year": 2014,
+      "trim": "SDX",
+      "chassisCode": "HH5",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-5ywepKtoHbCVC0",
+      "make": "HONDA",
+      "model": "N WGN",
+      "year": 2014,
+      "trim": "",
+      "chassisCode": "JH1",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-7skHi7OxMdIugd",
+      "make": "HONDA",
+      "model": "FREED",
+      "year": 2018,
+      "trim": "",
+      "chassisCode": "GB5",
+      "engineCc": 1500,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-8dsu3EycBPKI8r",
+      "make": "HONDA",
+      "model": "STEP WAGON",
+      "year": 2009,
+      "trim": "",
+      "chassisCode": "RG1",
+      "engineCc": 2000,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-KTiF2N7DlSS6G",
+      "make": "HONDA",
+      "model": "FIT",
+      "year": 2021,
+      "trim": "",
+      "chassisCode": "GR1",
+      "engineCc": 1300,
+      "factsForModel": 28,
+      "factsForYear": 6,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "15lcvttrendsportproedition"
+          ]
+        },
+        {
+          "trim": [
+            "15lcvtcomfortedition"
+          ]
+        },
+        {
+          "trim": [
+            "15lcvttrendstartedition"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-0WXgzG8XfaGff",
+      "make": "HONDA",
+      "model": "N BOX",
+      "year": 2020,
+      "trim": "Custom G L Honda Sensing",
+      "chassisCode": "JF3",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2TzYMQoAMxv07R",
+      "make": "NISSAN",
+      "model": "SERENA",
+      "year": 2022,
+      "trim": "",
+      "chassisCode": "HFC27",
+      "engineCc": 1200,
+      "fuel": "electric",
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2ZtcDa849uvqlg",
+      "make": "TOYOTA",
+      "model": "TOWN ACE VAN",
+      "year": 2020,
+      "trim": "",
+      "chassisCode": "S412M",
+      "engineCc": 1500,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2eLrVJrqXSHtdWg",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "S321V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2eRl0zL0qeEtvaF",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2017,
+      "trim": "",
+      "chassisCode": "S331V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2eXenq5RSABtMp5",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "S321V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2f01P7IiNivukRS",
+      "make": "NISSAN",
+      "model": "CLIPPER VAN",
+      "year": 2021,
+      "trim": "",
+      "chassisCode": "DR17V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2f48BgoAkWyu4Dt",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "S321V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2feU3X32fEsuC7h",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "S321V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2fkNgNlJI1puTkG",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2022,
+      "trim": "",
+      "chassisCode": "S700V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2fqGuDFsammvaz6",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "S321V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2fwzItZaCIjvrNu",
+      "make": "DAIHATSU",
+      "model": "HIJET VAN",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "S321V",
+      "engineCc": 660,
+      "factsForModel": 0,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2q8RzfOj1MtKWQ",
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2016,
+      "trim": "",
+      "chassisCode": "ZVW30",
+      "engineCc": 1800,
+      "fuel": "hybrid",
+      "factsForModel": 3,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-29KhLp01EHJ8nCm",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2017,
+      "trim": "1.0TFSI Sports",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-WbeokTFxbKayze",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2019,
+      "trim": "30TFSI Sports",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-WdzbtTMwk5ZF34",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2021,
+      "trim": "",
+      "chassisCode": "GADPC",
+      "engineCc": 1500,
+      "transmission": "automatic",
+      "factsForModel": 368,
+      "factsForYear": 37,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "35tfsiadvancednaviplussportsitzsitzheiz"
+          ]
+        },
+        {
+          "trim": [
+            "35tfsibusiness150cv"
+          ]
+        },
+        {
+          "trim": [
+            "35tfsislineahknaviledlmtempoklima"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-Wb4AoQSTrOu7DI",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2018,
+      "trim": "1.4TFSI COD Sports",
+      "chassisCode": "GACZE",
+      "engineCc": 1400,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-WdQtnzr05s0H3S",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2018,
+      "trim": "",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-aYJVylXOskmvFmv",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2018,
+      "trim": "1.0 TFSI Sports",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-aYPOMchwUGjvWAU",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2017,
+      "trim": "1.4TFSIシリンダオンデマンスホ",
+      "chassisCode": "GACZE",
+      "engineCc": 1400,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-aZxLU7ObI6NCMRL",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2017,
+      "trim": "1.0 TFSI Sports",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-5GTiqYl2yr1hJ7",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2024,
+      "trim": "Q2 35TDI Advanced",
+      "chassisCode": "GADFG",
+      "engineCc": 1960,
+      "factsForModel": 368,
+      "factsForYear": 46,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "35tfsi7stronicadvancedledkameraacc"
+          ]
+        },
+        {
+          "trim": [
+            "35tdistronicadvancedslinenaviplusmatr"
+          ]
+        },
+        {
+          "trim": [
+            "30tfsiadvancedledahkkamerapdcvirtual"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-mTIq1elJJEDYjCA",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2017,
+      "trim": "Q2 1.0TFSI Sports",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2vgnGovX2ynZKVO",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2019,
+      "trim": "35TFSIシリンダ-OD Sports",
+      "chassisCode": "GACZE",
+      "engineCc": 1400,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-sDNEUPtw9dLH6E",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2023,
+      "trim": "Q2 35 TFSI Advanced",
+      "chassisCode": "GADPC",
+      "engineCc": 1500,
+      "transmission": "automatic",
+      "factsForModel": 368,
+      "factsForYear": 67,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "30tfsiadvancedledtempomatkamcarpldab"
+          ]
+        },
+        {
+          "trim": [
+            "30tdislineledkameracarplaysitzhzg"
+          ]
+        },
+        {
+          "trim": [
+            "30tdistronicadvancedaccrfkcarplay"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-2IV6LXN48UwWm6",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2019,
+      "trim": "Q2 30TFSI SP",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-2vkgKsB5sN9s8V",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2017,
+      "trim": "Q2 1.0TFSI",
+      "chassisCode": "GACHZ",
+      "engineCc": 990,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    },
+    {
+      "id": "ajes-stats-4l4T8mYP06BFiW",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2020,
+      "trim": "Q2 30TFSI SP",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 9,
+      "withChassis": 0,
+      "donorExamples": [
+        {
+          "trim": [
+            "q230tfsisportfullblack"
+          ]
+        },
+        {
+          "trim": [
+            "3520tdiidentityblackquattrostronic"
+          ]
+        },
+        {
+          "trim": [
+            "16slinetvacauto1propcuirnavigarantie12mois"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajes-stats-2v6vqnjoEZdiJjr",
+      "make": "AUDI",
+      "model": "Q2",
+      "year": 2017,
+      "trim": "1.0TFSI Sports",
+      "chassisCode": "GACHZ",
+      "engineCc": 1000,
+      "factsForModel": 368,
+      "factsForYear": 0,
+      "withChassis": 0,
+      "donorExamples": []
+    }
+  ],
+  "savedDetailProbe": []
+}

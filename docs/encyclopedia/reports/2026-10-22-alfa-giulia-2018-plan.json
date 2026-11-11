@@ -1,0 +1,201 @@
+{
+  "checkedAt": "2026-10-22T05:10:38.498Z",
+  "state": "prepared_not_applied",
+  "batch": "research-2026-10-22-alfa-giulia-2018",
+  "digest": "8a9b4e83a291ac8b214ed5c08838365078ebc9c9b7480b134d31b8e03214bb0d",
+  "sourceModelRevision": "3a8c7572-7fe6-4f36-888b-84316a340454",
+  "variants": 12,
+  "newVariants": 11,
+  "fields": 115,
+  "plan": {
+    "changes": [
+      {
+        "variantId": "a548bee472830fbe53dde94a",
+        "fields": [
+          "engineCc",
+          "powerHp",
+          "fuel",
+          "powertrainKind",
+          "transmission"
+        ]
+      },
+      {
+        "variantId": "961b49a40d36279afd24801c",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "54cead1b73f0a520fe7aad5e",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "9cb297ff28615a7a0c625a59",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "517ed400a20acb3654140dd2",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "64ab9df38c8c7dafcc484c45",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "53461018191724b74fe4aca0",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "f175acbe319da5d375fd9b22",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "dcdb3a312c69dd38390b4e7e",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "402e4c9b50d3b27be8f3687d",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "b29878a735fc17b8433fdf1d",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      },
+      {
+        "variantId": "e5db57687bb6dbb20cc5268b",
+        "operation": "create",
+        "fields": [
+          "trim",
+          "fuel",
+          "powertrainKind",
+          "transmission",
+          "drive",
+          "engineCc",
+          "powerHp",
+          "powerKw",
+          "icePowerKw",
+          "grossVehicleWeightKg"
+        ]
+      }
+    ],
+    "skipped": []
+  }
+}

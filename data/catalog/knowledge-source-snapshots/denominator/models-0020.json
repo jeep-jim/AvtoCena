@@ -1,0 +1,7942 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 20,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "toyota:corollalevin",
+      "make": "Toyota",
+      "model": "Corolla Levin",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:corollarumion",
+      "make": "Toyota",
+      "model": "Corolla Rumion",
+      "aliases": [
+        "カローラ ルミオン"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/corolla-rumion",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Corolla Rumion"
+      }
+    },
+    {
+      "key": "toyota:corollasport",
+      "make": "Toyota",
+      "model": "Corolla Sport",
+      "aliases": [
+        "カローラスポーツ",
+        "カローラ スポーツ"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/corolla-sport",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Corolla Sport"
+      }
+    },
+    {
+      "key": "toyota:corollatouring",
+      "make": "Toyota",
+      "model": "Corolla Touring",
+      "aliases": [
+        "カローラツーリング",
+        "カローラ ツーリング"
+      ],
+      "bodyTypes": [
+        "Station wagon"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/corolla-touring",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Corolla Touring"
+      }
+    },
+    {
+      "key": "toyota:corona",
+      "make": "Toyota",
+      "model": "Corona",
+      "aliases": [
+        "CORONA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/corona",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Corona"
+      }
+    },
+    {
+      "key": "toyota:corsa",
+      "make": "Toyota",
+      "model": "Corsa",
+      "aliases": [
+        "CORSA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/corsa",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Corsa"
+      }
+    },
+    {
+      "key": "toyota:cressida",
+      "make": "Toyota",
+      "model": "Cressida",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:cresta",
+      "make": "Toyota",
+      "model": "Cresta",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:crown",
+      "make": "Toyota",
+      "model": "Crown",
+      "aliases": [
+        "クラウン"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/crown",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Crown"
+      }
+    },
+    {
+      "key": "toyota:crowncomfort",
+      "make": "Toyota",
+      "model": "Crown Comfort",
+      "aliases": [
+        "クラウンコンフォート"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/crown-comfort",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Crown Comfort"
+      }
+    },
+    {
+      "key": "toyota:crownmajesta",
+      "make": "Toyota",
+      "model": "Crown Majesta",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:crownsedan",
+      "make": "Toyota",
+      "model": "Crown Sedan",
+      "aliases": [
+        "クラウンセダン"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/crown-sedan",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Crown Sedan"
+      }
+    },
+    {
+      "key": "toyota:crownsignia",
+      "make": "Toyota",
+      "model": "Crown Signia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:cruiser",
+      "make": "Toyota",
+      "model": "Cruiser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:curren",
+      "make": "Toyota",
+      "model": "Curren",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:dyna",
+      "make": "Toyota",
+      "model": "Dyna",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:ejzx100",
+      "make": "Toyota",
+      "model": "E-JZX100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:echo",
+      "make": "Toyota",
+      "model": "Echo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:esquire",
+      "make": "Toyota",
+      "model": "Esquire",
+      "aliases": [
+        "エスクァイア"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/esquire",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Esquire"
+      }
+    },
+    {
+      "key": "toyota:estima",
+      "make": "Toyota",
+      "model": "Estima",
+      "aliases": [
+        "エスティマ",
+        "エスティマ ハイブリッド"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/estima",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Estima"
+      }
+    },
+    {
+      "key": "toyota:fjcruiser",
+      "make": "Toyota",
+      "model": "Fj Cruiser",
+      "aliases": [
+        "FJ CRUISER",
+        "TOYOTA FJ CRUISER",
+        "FJクルーザー"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/fj-cruiser",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Fj Cruiser"
+      }
+    },
+    {
+      "key": "toyota:fortuner",
+      "make": "Toyota",
+      "model": "Fortuner",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:funcargo",
+      "make": "Toyota",
+      "model": "Fun Cargo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:glanza",
+      "make": "Toyota",
+      "model": "Glanza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:grcorolla",
+      "make": "Toyota",
+      "model": "GR Corolla",
+      "aliases": [
+        "GRカローラ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/gr-corolla",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "GR Corolla"
+      }
+    },
+    {
+      "key": "toyota:grsupra",
+      "make": "Toyota",
+      "model": "Gr Supra",
+      "aliases": [
+        "GR SUPRA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/gr-supra",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Gr Supra"
+      }
+    },
+    {
+      "key": "toyota:gryaris",
+      "make": "Toyota",
+      "model": "Gr Yaris",
+      "aliases": [
+        "GR YARIS",
+        "TOYOTA GR YARIS",
+        "GR ヤリス"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/gr-yaris",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Gr Yaris"
+      }
+    },
+    {
+      "key": "toyota:gr86",
+      "make": "Toyota",
+      "model": "GR86",
+      "aliases": [
+        "GR86"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/gr86",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "GR86"
+      }
+    },
+    {
+      "key": "toyota:granace",
+      "make": "Toyota",
+      "model": "GranAce",
+      "aliases": [
+        "グランエース"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/granace",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "GranAce"
+      }
+    },
+    {
+      "key": "toyota:grandhiace",
+      "make": "Toyota",
+      "model": "Grand Hiace",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:grandhighlander",
+      "make": "Toyota",
+      "model": "Grand Highlander",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:granvia",
+      "make": "Toyota",
+      "model": "Granvia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:gt",
+      "make": "Toyota",
+      "model": "GT",
+      "aliases": [
+        "GT 86 2 0 BOXER D4-S"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/gt",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "GT"
+      }
+    },
+    {
+      "key": "toyota:gt86",
+      "make": "Toyota",
+      "model": "GT86",
+      "aliases": [
+        "TOYOTA GT86"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/gt86",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "GT86"
+      }
+    },
+    {
+      "key": "toyota:harrier",
+      "make": "Toyota",
+      "model": "Harrier",
+      "aliases": [
+        "ハリアー"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/harrier",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Harrier"
+      }
+    },
+    {
+      "key": "toyota:hiace",
+      "make": "Toyota",
+      "model": "HiAce",
+      "aliases": [
+        "ハイエース"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/hiace",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "HiAce"
+      }
+    },
+    {
+      "key": "toyota:hiacemajesty",
+      "make": "Toyota",
+      "model": "Hiace Majesty",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:highlander",
+      "make": "Toyota",
+      "model": "Highlander",
+      "aliases": [
+        "HIGHLANDER",
+        "TOYOTA HIGHLANDER"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/highlander",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Highlander"
+      }
+    },
+    {
+      "key": "toyota:hilux",
+      "make": "Toyota",
+      "model": "Hilux",
+      "aliases": [
+        "TOYOTA HILUX",
+        "ハイラックス"
+      ],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/hilux",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Hilux"
+      }
+    },
+    {
+      "key": "toyota:hiluxsurf",
+      "make": "Toyota",
+      "model": "Hilux Surf",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:innova",
+      "make": "Toyota",
+      "model": "Innova",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:innovazenix",
+      "make": "Toyota",
+      "model": "Innova Zenix",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:ipsum",
+      "make": "Toyota",
+      "model": "Ipsum",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:iq",
+      "make": "Toyota",
+      "model": "iQ",
+      "aliases": [
+        "iQ"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/iq",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "iQ"
+      }
+    },
+    {
+      "key": "toyota:isis",
+      "make": "Toyota",
+      "model": "Isis",
+      "aliases": [
+        "アイシス"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/isis",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Isis"
+      }
+    },
+    {
+      "key": "toyota:ist",
+      "make": "Toyota",
+      "model": "ist",
+      "aliases": [
+        "イスト"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/ist",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "ist"
+      }
+    },
+    {
+      "key": "toyota:jpntaxi",
+      "make": "Toyota",
+      "model": "JPN TAXI",
+      "aliases": [
+        "JPN TAXI"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/jpn-taxi",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "JPN TAXI"
+      }
+    },
+    {
+      "key": "toyota:kluger",
+      "make": "Toyota",
+      "model": "Kluger",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:landcruiser",
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "aliases": [
+        "LAND CRUISER",
+        "LANDCRUISER",
+        "TOYOTA LAND CRUISER",
+        "TOYOTA LANDCRUISER",
+        "ランドクルーザー",
+        "Landcruiser"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/land-cruiser",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Land Cruiser"
+      }
+    },
+    {
+      "key": "toyota:landcruiserprado",
+      "make": "Toyota",
+      "model": "Land Cruiser Prado",
+      "aliases": [
+        "LAND CRUISER PRADO",
+        "TOYOTA LAND CRUISER PRADO",
+        "ランドクルーザー プラド"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/land-cruiser-prado",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Land Cruiser Prado"
+      }
+    },
+    {
+      "key": "toyota:landcruiserv8",
+      "make": "Toyota",
+      "model": "Land Cruiser V8",
+      "aliases": [
+        "TOYOTA LAND CRUISER V8"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/land-cruiser-v8",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Land Cruiser V8"
+      }
+    },
+    {
+      "key": "toyota:liteace",
+      "make": "Toyota",
+      "model": "Lite Ace",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:mark",
+      "make": "Toyota",
+      "model": "Mark",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:markx",
+      "make": "Toyota",
+      "model": "Mark X",
+      "aliases": [
+        "マークX"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/mark-x",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Mark X"
+      }
+    },
+    {
+      "key": "toyota:matrix",
+      "make": "Toyota",
+      "model": "Matrix",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:megacruiser",
+      "make": "Toyota",
+      "model": "Mega Cruiser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:mem",
+      "make": "Toyota",
+      "model": "Mem",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:mirai",
+      "make": "Toyota",
+      "model": "Mirai",
+      "aliases": [
+        "MIRAI",
+        "TOYOTA MIRAI"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/mirai",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Mirai"
+      }
+    },
+    {
+      "key": "toyota:modelf",
+      "make": "Toyota",
+      "model": "Model F",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:mrs",
+      "make": "Toyota",
+      "model": "Mr-S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:mr2",
+      "make": "Toyota",
+      "model": "MR2",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:noah",
+      "make": "Toyota",
+      "model": "Noah",
+      "aliases": [
+        "ノア"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/noah",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Noah"
+      }
+    },
+    {
+      "key": "toyota:paseo",
+      "make": "Toyota",
+      "model": "Paseo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:passo",
+      "make": "Toyota",
+      "model": "Passo",
+      "aliases": [
+        "パッソ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/passo",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Passo"
+      }
+    },
+    {
+      "key": "toyota:picnic",
+      "make": "Toyota",
+      "model": "Picnic",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:pixisepoch",
+      "make": "Toyota",
+      "model": "Pixis Epoch",
+      "aliases": [
+        "ピクシス エポック"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/pixis-epoch",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Pixis Epoch"
+      }
+    },
+    {
+      "key": "toyota:pixisjoy",
+      "make": "Toyota",
+      "model": "Pixis Joy",
+      "aliases": [
+        "ピクシス ジョイ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/pixis-joy",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Pixis Joy"
+      }
+    },
+    {
+      "key": "toyota:pixismega",
+      "make": "Toyota",
+      "model": "Pixis Mega",
+      "aliases": [
+        "ピクシス メガ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/pixis-mega",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Pixis Mega"
+      }
+    },
+    {
+      "key": "toyota:pixisspace",
+      "make": "Toyota",
+      "model": "Pixis Space",
+      "aliases": [
+        "ピクシス スペース"
+      ],
+      "bodyTypes": [
+        "kei-car"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/pixis-space",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Pixis Space"
+      }
+    },
+    {
+      "key": "toyota:pixisvan",
+      "make": "Toyota",
+      "model": "Pixis Van",
+      "aliases": [
+        "ピクシス バン"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/pixis-van",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Pixis Van"
+      }
+    },
+    {
+      "key": "toyota:platz",
+      "make": "Toyota",
+      "model": "Platz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:porte",
+      "make": "Toyota",
+      "model": "Porte",
+      "aliases": [
+        "ポルテ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/porte",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Porte"
+      }
+    },
+    {
+      "key": "toyota:premio",
+      "make": "Toyota",
+      "model": "Premio",
+      "aliases": [
+        "プレミオ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/premio",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Premio"
+      }
+    },
+    {
+      "key": "toyota:previa",
+      "make": "Toyota",
+      "model": "Previa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:prius",
+      "make": "Toyota",
+      "model": "Prius",
+      "aliases": [
+        "プリウス"
+      ],
+      "bodyTypes": [
+        "Sedan",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 1997,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/prius",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Prius"
+      }
+    },
+    {
+      "key": "toyota:priusc",
+      "make": "Toyota",
+      "model": "Prius C",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:priusprime",
+      "make": "Toyota",
+      "model": "Prius Prime",
+      "aliases": [
+        "PRIUS PRIME"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/prius-prime",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Prius Prime"
+      }
+    },
+    {
+      "key": "toyota:priusα",
+      "make": "Toyota",
+      "model": "Prius α",
+      "aliases": [
+        "Prius Alpha",
+        "プリウス α"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/prius-alpha",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Prius α"
+      }
+    },
+    {
+      "key": "toyota:proace",
+      "make": "Toyota",
+      "model": "Proace",
+      "aliases": [
+        "PROACE"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/proace",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Proace"
+      }
+    },
+    {
+      "key": "toyota:proacecityverso",
+      "make": "Toyota",
+      "model": "Proace City Verso",
+      "aliases": [
+        "Proace City Verso"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/proace-city-verso",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Proace City Verso"
+      }
+    },
+    {
+      "key": "toyota:progres",
+      "make": "Toyota",
+      "model": "Progres",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:publica",
+      "make": "Toyota",
+      "model": "Publica",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:ractis",
+      "make": "Toyota",
+      "model": "Ractis",
+      "aliases": [
+        "ラクティス"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/ractis",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Ractis"
+      }
+    },
+    {
+      "key": "toyota:raize",
+      "make": "Toyota",
+      "model": "Raize",
+      "aliases": [
+        "ライズ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/raize",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Raize"
+      }
+    },
+    {
+      "key": "toyota:raum",
+      "make": "Toyota",
+      "model": "Raum",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:rav4",
+      "make": "Toyota",
+      "model": "RAV4",
+      "aliases": [
+        "RAV4"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2026,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/rav4",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "RAV4"
+      }
+    },
+    {
+      "key": "toyota:rav4prime",
+      "make": "Toyota",
+      "model": "RAV4 Prime",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:roomy",
+      "make": "Toyota",
+      "model": "Roomy",
+      "aliases": [
+        "ルーミー"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/roomy",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Roomy"
+      }
+    },
+    {
+      "key": "toyota:rumion",
+      "make": "Toyota",
+      "model": "Rumion",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:runx",
+      "make": "Toyota",
+      "model": "Runx",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:rush",
+      "make": "Toyota",
+      "model": "Rush",
+      "aliases": [
+        "Toyota Rush",
+        "ラッシュ *"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/rush",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Rush"
+      }
+    },
+    {
+      "key": "toyota:sai",
+      "make": "Toyota",
+      "model": "Sai",
+      "aliases": [
+        "SAI"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/sai",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Sai"
+      }
+    },
+    {
+      "key": "toyota:sequoia",
+      "make": "Toyota",
+      "model": "Sequoia",
+      "aliases": [
+        "TOYOTA SEQUOIA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/sequoia",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Sequoia"
+      }
+    },
+    {
+      "key": "toyota:sera",
+      "make": "Toyota",
+      "model": "Sera",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:sienna",
+      "make": "Toyota",
+      "model": "Sienna",
+      "aliases": [
+        "SIENNA",
+        "TOYOTA SIENNA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/sienna",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Sienna"
+      }
+    },
+    {
+      "key": "toyota:sienta",
+      "make": "Toyota",
+      "model": "Sienta",
+      "aliases": [
+        "シエンタ"
+      ],
+      "bodyTypes": [
+        "Minivan",
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/sienta",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Sienta"
+      }
+    },
+    {
+      "key": "toyota:soarer",
+      "make": "Toyota",
+      "model": "Soarer",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:spacio",
+      "make": "Toyota",
+      "model": "Spacio",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:spade",
+      "make": "Toyota",
+      "model": "Spade",
+      "aliases": [
+        "スペイド"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/spade",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Spade"
+      }
+    },
+    {
+      "key": "toyota:starlet",
+      "make": "Toyota",
+      "model": "Starlet",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:supra",
+      "make": "Toyota",
+      "model": "Supra",
+      "aliases": [
+        "SUPRA",
+        "TOYOTA SUPRA",
+        "Toyota Supra",
+        "スープラ"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/supra",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Supra"
+      }
+    },
+    {
+      "key": "toyota:t100",
+      "make": "Toyota",
+      "model": "T100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:tacoma",
+      "make": "Toyota",
+      "model": "Tacoma",
+      "aliases": [
+        "TACOMA",
+        "TOYOTA TACOMA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/tacoma",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Tacoma"
+      }
+    },
+    {
+      "key": "toyota:tank",
+      "make": "Toyota",
+      "model": "Tank",
+      "aliases": [
+        "タンク"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/tank",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Tank"
+      }
+    },
+    {
+      "key": "toyota:tercel",
+      "make": "Toyota",
+      "model": "Tercel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:tourer",
+      "make": "Toyota",
+      "model": "Tourer",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:townace",
+      "make": "Toyota",
+      "model": "Townace",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:truck",
+      "make": "Toyota",
+      "model": "Truck",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:trueno",
+      "make": "Toyota",
+      "model": "Trueno",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:tundra",
+      "make": "Toyota",
+      "model": "Tundra",
+      "aliases": [
+        "TUNDRA"
+      ],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/tundra",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Tundra"
+      }
+    },
+    {
+      "key": "toyota:urbancruiser",
+      "make": "Toyota",
+      "model": "Urban Cruiser",
+      "aliases": [
+        "URBAN CRUISER"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/urban-cruiser",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Urban Cruiser"
+      }
+    },
+    {
+      "key": "toyota:vanguard",
+      "make": "Toyota",
+      "model": "Vanguard",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:vellfire",
+      "make": "Toyota",
+      "model": "Vellfire",
+      "aliases": [
+        "ヴェルファイア"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/vellfire",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Vellfire"
+      }
+    },
+    {
+      "key": "toyota:veloz",
+      "make": "Toyota",
+      "model": "Veloz",
+      "aliases": [
+        "Toyota Veloz"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/veloz",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Veloz"
+      }
+    },
+    {
+      "key": "toyota:venza",
+      "make": "Toyota",
+      "model": "Venza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:verossa",
+      "make": "Toyota",
+      "model": "Verossa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:verso",
+      "make": "Toyota",
+      "model": "Verso",
+      "aliases": [
+        "VERSO"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/verso",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Verso"
+      }
+    },
+    {
+      "key": "toyota:versos",
+      "make": "Toyota",
+      "model": "Verso-S",
+      "aliases": [
+        "VERSO S"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/verso-s",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Verso-S"
+      }
+    },
+    {
+      "key": "toyota:vios",
+      "make": "Toyota",
+      "model": "Vios",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:vista",
+      "make": "Toyota",
+      "model": "Vista",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:vitz",
+      "make": "Toyota",
+      "model": "Vitz",
+      "aliases": [
+        "ヴィッツ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/vitz",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Vitz"
+      }
+    },
+    {
+      "key": "toyota:voxy",
+      "make": "Toyota",
+      "model": "Voxy",
+      "aliases": [
+        "ヴォクシー"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/voxy",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Voxy"
+      }
+    },
+    {
+      "key": "toyota:will",
+      "make": "Toyota",
+      "model": "Will",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:willvs",
+      "make": "Toyota",
+      "model": "Will Vs",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:windom",
+      "make": "Toyota",
+      "model": "Windom",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:wish",
+      "make": "Toyota",
+      "model": "Wish",
+      "aliases": [
+        "ウィッシュ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/wish",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Wish"
+      }
+    },
+    {
+      "key": "toyota:yaris",
+      "make": "Toyota",
+      "model": "Yaris",
+      "aliases": [
+        "ヤリス"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/yaris",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Yaris"
+      }
+    },
+    {
+      "key": "toyota:yarisativ",
+      "make": "Toyota",
+      "model": "Yaris Ativ",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": null,
+        "canonicalMake": "Toyota",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "toyota:yariscross",
+      "make": "Toyota",
+      "model": "Yaris Cross",
+      "aliases": [
+        "ヤリスクロス",
+        "ヤリス クロス"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "toyota",
+        "modelId": "toyota/yaris-cross",
+        "canonicalMake": "Toyota",
+        "canonicalModel": "Yaris Cross"
+      }
+    },
+    {
+      "key": "trabant:601",
+      "make": "Trabant",
+      "model": "601",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:601s",
+      "make": "Trabant",
+      "model": "601 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:601special",
+      "make": "Trabant",
+      "model": "601 Special",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p601ls",
+      "make": "Trabant",
+      "model": "P 601 LS",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p601lx",
+      "make": "Trabant",
+      "model": "P 601 LX",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p50",
+      "make": "Trabant",
+      "model": "P50",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p60",
+      "make": "Trabant",
+      "model": "P60",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p601",
+      "make": "Trabant",
+      "model": "P601",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p601k",
+      "make": "Trabant",
+      "model": "P601 K",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "trabant:p601l",
+      "make": "Trabant",
+      "model": "P601L",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "triumph:1200herald",
+      "make": "Triumph",
+      "model": "1200 Herald",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:1360herald",
+      "make": "Triumph",
+      "model": "13/60 Herald",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:1300",
+      "make": "Triumph",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:1300tc",
+      "make": "Triumph",
+      "model": "1300 Tc",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:1500",
+      "make": "Triumph",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:1500tc",
+      "make": "Triumph",
+      "model": "1500 Tc",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:1800roadster",
+      "make": "Triumph",
+      "model": "1800 Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:20tr3",
+      "make": "Triumph",
+      "model": "20 Tr 3",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2000",
+      "make": "Triumph",
+      "model": "2000",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2000mk2",
+      "make": "Triumph",
+      "model": "2000 MK2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2500",
+      "make": "Triumph",
+      "model": "2500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2500pi",
+      "make": "Triumph",
+      "model": "2500 PI",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2500s",
+      "make": "Triumph",
+      "model": "2500 S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2500sauto",
+      "make": "Triumph",
+      "model": "2500 S Auto",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:2500tc",
+      "make": "Triumph",
+      "model": "2500 Tc",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:dolomite",
+      "make": "Triumph",
+      "model": "Dolomite",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:dolomitesprint",
+      "make": "Triumph",
+      "model": "Dolomite Sprint",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:gloria",
+      "make": "Triumph",
+      "model": "Gloria",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:gt6",
+      "make": "Triumph",
+      "model": "GT6",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:gt6mk3",
+      "make": "Triumph",
+      "model": "GT6 Mk3",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:herald",
+      "make": "Triumph",
+      "model": "Herald",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:herald1250",
+      "make": "Triumph",
+      "model": "Herald 12/50",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:herald1200",
+      "make": "Triumph",
+      "model": "Herald 1200",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:herald1360",
+      "make": "Triumph",
+      "model": "Herald 13/60",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:mayflower",
+      "make": "Triumph",
+      "model": "Mayflower",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:mk2",
+      "make": "Triumph",
+      "model": "MK2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:renown",
+      "make": "Triumph",
+      "model": "Renown",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:roadster",
+      "make": "Triumph",
+      "model": "Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfire",
+      "make": "Triumph",
+      "model": "Spitfire",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfire1500",
+      "make": "Triumph",
+      "model": "Spitfire 1500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfire1500tc",
+      "make": "Triumph",
+      "model": "Spitfire 1500 Tc",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfire4",
+      "make": "Triumph",
+      "model": "Spitfire 4",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfiremk",
+      "make": "Triumph",
+      "model": "Spitfire Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfiremk1v",
+      "make": "Triumph",
+      "model": "Spitfire Mk 1V",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfiremk2",
+      "make": "Triumph",
+      "model": "Spitfire Mk2",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfiremk3",
+      "make": "Triumph",
+      "model": "Spitfire Mk3",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:spitfiremk4",
+      "make": "Triumph",
+      "model": "Spitfire Mk4",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:sports",
+      "make": "Triumph",
+      "model": "Sports",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:stag",
+      "make": "Triumph",
+      "model": "Stag",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:super7",
+      "make": "Triumph",
+      "model": "Super 7",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:toledo",
+      "make": "Triumph",
+      "model": "Toledo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr",
+      "make": "Triumph",
+      "model": "Tr",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr2",
+      "make": "Triumph",
+      "model": "TR2",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr250",
+      "make": "Triumph",
+      "model": "TR250",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr3",
+      "make": "Triumph",
+      "model": "TR3",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr3a",
+      "make": "Triumph",
+      "model": "TR3A",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr4",
+      "make": "Triumph",
+      "model": "TR4",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr4irs",
+      "make": "Triumph",
+      "model": "TR4 Irs",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr4a",
+      "make": "Triumph",
+      "model": "TR4A",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr4airs",
+      "make": "Triumph",
+      "model": "TR4A Irs",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr5",
+      "make": "Triumph",
+      "model": "TR5",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr5pi",
+      "make": "Triumph",
+      "model": "TR5 PI",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr6",
+      "make": "Triumph",
+      "model": "TR6",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr6pi",
+      "make": "Triumph",
+      "model": "TR6 PI",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr7",
+      "make": "Triumph",
+      "model": "TR7",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:tr8",
+      "make": "Triumph",
+      "model": "TR8",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:vitesse",
+      "make": "Triumph",
+      "model": "Vitesse",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "triumph:vitesse6",
+      "make": "Triumph",
+      "model": "Vitesse 6",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:290",
+      "make": "TVR",
+      "model": "290",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:3000m",
+      "make": "TVR",
+      "model": "3000 M",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:3000s",
+      "make": "TVR",
+      "model": "3000S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:350i",
+      "make": "TVR",
+      "model": "350i",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:cerbera",
+      "make": "TVR",
+      "model": "Cerbera",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:chimaera",
+      "make": "TVR",
+      "model": "Chimaera",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:chimaera500",
+      "make": "TVR",
+      "model": "Chimaera 500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:chimera",
+      "make": "TVR",
+      "model": "Chimera",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:grantura",
+      "make": "TVR",
+      "model": "Grantura",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:griffith",
+      "make": "TVR",
+      "model": "Griffith",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:griffith500",
+      "make": "TVR",
+      "model": "Griffith 500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:s3",
+      "make": "TVR",
+      "model": "S3",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:sagaris",
+      "make": "TVR",
+      "model": "Sagaris",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:t350c",
+      "make": "TVR",
+      "model": "T350C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:tamora",
+      "make": "TVR",
+      "model": "Tamora",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:tasmin",
+      "make": "TVR",
+      "model": "Tasmin",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:tuscan",
+      "make": "TVR",
+      "model": "Tuscan",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "tvr:vixen",
+      "make": "TVR",
+      "model": "Vixen",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:2206",
+      "make": "UAZ",
+      "model": "2206",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:3741",
+      "make": "UAZ",
+      "model": "3741",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:3909",
+      "make": "UAZ",
+      "model": "3909",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:3962",
+      "make": "UAZ",
+      "model": "3962",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:452",
+      "make": "UAZ",
+      "model": "452",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:469",
+      "make": "UAZ",
+      "model": "469",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "uaz:469b",
+      "make": "UAZ",
+      "model": "469B",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "valiant:barracuda",
+      "make": "Valiant",
+      "model": "Barracuda",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "valiant:v200",
+      "make": "Valiant",
+      "model": "V-200",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "vandenplas:1500",
+      "make": "Vanden Plas",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "vandenplas:princess",
+      "make": "Vanden Plas",
+      "model": "Princess",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "vandenplas:princess4litrer",
+      "make": "Vanden Plas",
+      "model": "Princess 4 Litre R",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "vanster:vanster",
+      "make": "Vanster",
+      "model": "Vanster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "vauxhall:10",
+      "make": "Vauxhall",
+      "model": "10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:12",
+      "make": "Vauxhall",
+      "model": "12",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:adam",
+      "make": "Vauxhall",
+      "model": "Adam",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:agila",
+      "make": "Vauxhall",
+      "model": "Agila",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:ampera",
+      "make": "Vauxhall",
+      "model": "Ampera",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:antara",
+      "make": "Vauxhall",
+      "model": "Antara",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:astra",
+      "make": "Vauxhall",
+      "model": "Astra",
+      "aliases": [
+        "ASTRA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/astra",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Astra"
+      }
+    },
+    {
+      "key": "vauxhall:calibra",
+      "make": "Vauxhall",
+      "model": "Calibra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:carlton",
+      "make": "Vauxhall",
+      "model": "Carlton",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:cascada",
+      "make": "Vauxhall",
+      "model": "Cascada",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:cavalier",
+      "make": "Vauxhall",
+      "model": "Cavalier",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:chevette",
+      "make": "Vauxhall",
+      "model": "Chevette",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:combolife",
+      "make": "Vauxhall",
+      "model": "Combo Life",
+      "aliases": [
+        "COMBO LIFE DESIGN CDTI S S",
+        "COMBO LIFE DESIGN S S",
+        "COMBO LIFE DESIGN TURBO D S S",
+        "COMBO LIFE EDITION S S",
+        "Combo Life Electric",
+        "COMBO LIFE ELITE S S AUTO",
+        "COMBO LIFE ELITE TURBO D S S A",
+        "COMBO LIFE ENERGY CDTI S S",
+        "COMBO LIFE ENERGY CDTI SS AUTO",
+        "COMBO LIFE ENERGY S S",
+        "COMBO LIFE ENERGY S S AUTO",
+        "COMBO LIFE ENERGY TURBO D S S",
+        "COMBO LIFE SE TURBO D S S",
+        "Combo-e Life"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/combo-life",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Combo Life"
+      }
+    },
+    {
+      "key": "vauxhall:corsa",
+      "make": "Vauxhall",
+      "model": "Corsa",
+      "aliases": [
+        "CORSA E ELITE NAV",
+        "CORSA E SE NAV",
+        "CORSA ELITE",
+        "CORSA ELITE CDTI ECOTEC S S",
+        "CORSA ELITE NAV PREMIUM TRBO A",
+        "CORSA ELITE NAV PREMIUM TRBO D",
+        "CORSA ELITE NAV PREMIUM TURBO",
+        "CORSA ELITE NAV TURBO",
+        "CORSA ELITE NAV TURBO AUTO",
+        "CORSA ELITE NAV TURBO D",
+        "CORSA ELITE TURBO AUTO",
+        "CORSA SE",
+        "CORSA SE NAV",
+        "CORSA SE NAV PREMIUM",
+        "CORSA SE NAV PREMIUM TURBO",
+        "CORSA SE NAV PREMIUM TURBO A",
+        "CORSA SE NAV PREMIUM TURBO D",
+        "CORSA SE NAV TURBO",
+        "CORSA SE NAV TURBO AUTO",
+        "CORSA SE NAV TURBO D",
+        "CORSA SE PREMIUM",
+        "CORSA SE PREMIUM TURBO",
+        "CORSA SE PREMIUM TURBO AUTO",
+        "CORSA SE PREMIUM TURBO D",
+        "CORSA SE TURBO",
+        "CORSA SE TURBO AUTO",
+        "CORSA SE TURBO D",
+        "CORSA SPORT",
+        "CORSA SRI",
+        "CORSA SRI NAV PREMIUM TURBO",
+        "CORSA SRI NAV PREMIUM TURBO D",
+        "CORSA SRI NAV TURBO",
+        "CORSA SRI PREMIUM TURBO",
+        "CORSA SRI PREMIUM TURBO AUTO",
+        "CORSA SRI PREMIUM TURBO D",
+        "CORSA SRI TURBO",
+        "CORSA SRI TURBO D",
+        "CORSA ULTIMATE NAV TURBO AUTO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/corsa",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Corsa"
+      }
+    },
+    {
+      "key": "vauxhall:cresta",
+      "make": "Vauxhall",
+      "model": "Cresta",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:crossland",
+      "make": "Vauxhall",
+      "model": "Crossland",
+      "aliases": [
+        "CROSSLAND X B-NESS ED NAV T A",
+        "CROSSLAND X B-NESS ED NAV TD A",
+        "CROSSLAND X BUSINESS ED NAV",
+        "CROSSLAND X BUSINESS ED NAV T",
+        "CROSSLAND X BUSINESS ED NAV TD",
+        "CROSSLAND X DESIGN LN ECO S S",
+        "CROSSLAND X ELITE",
+        "CROSSLAND X ELITE ECOTEC D S S",
+        "CROSSLAND X ELITE ECOTEC S S",
+        "CROSSLAND X ELITE NAV",
+        "CROSSLAND X ELITE NAV ECO D SS",
+        "CROSSLAND X ELITE NAV ECO S S",
+        "CROSSLAND X ELITE NAV TD AUTO",
+        "CROSSLAND X ELITE NAV TURBO",
+        "CROSSLAND X ELITE NAV TURBO A",
+        "CROSSLAND X ELITE NAV TURBO D",
+        "CROSSLAND X ELITE NAV TURBO SS",
+        "CROSSLAND X ELITE TURBO",
+        "CROSSLAND X ELITE TURBO AUTO",
+        "CROSSLAND X ELITE TURBO D",
+        "CROSSLAND X ELITE TURBO D AUTO",
+        "CROSSLAND X ELITE TURBO S S",
+        "CROSSLAND X ELT NV ETEC T SS A",
+        "CROSSLAND X GRIFFIN",
+        "CROSSLAND X GRIFFIN TURBO",
+        "CROSSLAND X GRIFFIN TURBO AUTO",
+        "CROSSLAND X GRIFFIN TURBO D",
+        "CROSSLAND X GRIFFIN TURBO D A",
+        "CROSSLAND X SE",
+        "CROSSLAND X SE ECOTEC D S S",
+        "CROSSLAND X SE ECOTEC S S",
+        "CROSSLAND X SE NAV",
+        "CROSSLAND X SE NAV ECOTEC S S",
+        "CROSSLAND X SPORT",
+        "CROSSLAND X SPORT NAV PREM T",
+        "CROSSLAND X SPORT NAV PREM T A",
+        "CROSSLAND X SPORT NAV PREM TD",
+        "CROSSLAND X SPORT NAV PREMIUM",
+        "CROSSLAND X SPORT TURBO",
+        "CROSSLAND X SPORT TURBO AUTO",
+        "CROSSLAND X SPORT TURBO D",
+        "CROSSLAND X SPORT TURBO D AUTO",
+        "CROSSLAND X SPT NAV PREM TD A",
+        "CROSSLAND X SRI NAV",
+        "CROSSLAND X SRI NAV TURBO",
+        "CROSSLAND X SRI NAV TURBO AUTO",
+        "CROSSLAND X SRI NAV TURBO D",
+        "CROSSLAND X TEC LN NV ECO D SS",
+        "CROSSLAND X TECH LINE NAV",
+        "CROSSLAND X TECH LN NAV ECO SS"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/crossland",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Crossland"
+      }
+    },
+    {
+      "key": "vauxhall:dx",
+      "make": "Vauxhall",
+      "model": "Dx",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:eaglequest",
+      "make": "Vauxhall",
+      "model": "Eagle Quest",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:firenza",
+      "make": "Vauxhall",
+      "model": "Firenza",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:frontera",
+      "make": "Vauxhall",
+      "model": "Frontera",
+      "aliases": [
+        "FRONTERA"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/frontera",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Frontera"
+      }
+    },
+    {
+      "key": "vauxhall:grandland",
+      "make": "Vauxhall",
+      "model": "Grandland",
+      "aliases": [
+        "G-LAND X BUS ED NAV PRM HYB4 A",
+        "GRANDLAND X B-NESS ED NV T D A",
+        "GRANDLAND X BNESS ED NAV HYB A",
+        "GRANDLAND X BUSINESS ED NAV T",
+        "GRANDLAND X BUSINSS ED NAV T A",
+        "GRANDLAND X BUSINSS ED NAV T D",
+        "GRANDLAND X DESIGN LINE T SS A",
+        "GRANDLAND X ELITE NAV HYB4 A",
+        "GRANDLAND X ELITE NAV PREM T",
+        "GRANDLAND X ELITE NAV PREM T A",
+        "GRANDLAND X ELITE NAV PREM TD",
+        "GRANDLAND X ELITE NAV T D A",
+        "GRANDLAND X ELITE NAV T D SS",
+        "GRANDLAND X ELITE NAV T D SS A",
+        "GRANDLAND X ELITE NAV T SS A",
+        "GRANDLAND X ELITE NAV TURBO",
+        "GRANDLAND X ELITE NAV TURBO A",
+        "GRANDLAND X ELITE NAV TURBO D",
+        "GRANDLAND X ELITE NAV TURBO SS",
+        "GRANDLAND X ELITE NV PREM TD A",
+        "GRANDLAND X GRIFFIN TURBO",
+        "GRANDLAND X GRIFFIN TURBO AUTO",
+        "GRANDLAND X GRIFFIN TURBO D",
+        "GRANDLAND X GRIFFIN TURBO D A",
+        "GRANDLAND X SE NAV HYBRID AUTO",
+        "GRANDLAND X SE PREMIUM TD AUTO",
+        "GRANDLAND X SE PREMIUM TURBO",
+        "GRANDLAND X SE PREMIUM TURBO A",
+        "GRANDLAND X SE PREMIUM TURBO D",
+        "GRANDLAND X SE TURBO",
+        "GRANDLAND X SE TURBO AUTO",
+        "GRANDLAND X SE TURBO D",
+        "GRANDLAND X SE TURBO D AUTO",
+        "GRANDLAND X SE TURBO D S S",
+        "GRANDLAND X SE TURBO D S S A",
+        "GRANDLAND X SE TURBO S S",
+        "GRANDLAND X SE TURBO S S AUTO",
+        "GRANDLAND X SPORT NAV T D SS",
+        "GRANDLAND X SPORT NAV T D SS A",
+        "GRANDLAND X SPORT NAV T SS A",
+        "GRANDLAND X SPORT NAV TURBO SS",
+        "GRANDLAND X SRI NAV HYBRID A",
+        "GRANDLAND X SRI NAV HYBRID4 A",
+        "GRANDLAND X SRI NAV TURBO",
+        "GRANDLAND X SRI NAV TURBO A",
+        "GRANDLAND X SRI NAV TURBO D",
+        "GRANDLAND X SRI NAV TURBO D A",
+        "GRANDLAND X TECH LINE NAV T SS",
+        "GRANDLAND X TECH LN NAV T D SS",
+        "GRANDLAND X TECH LN NAV T SS A",
+        "GRANDLAND X ULTIMATE T D S S A",
+        "GRANDLAND X ULTIMATE TURBO D A",
+        "GRANDLAND X ULTIMTE NAV HYB4 A"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/grandland",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Grandland"
+      }
+    },
+    {
+      "key": "vauxhall:gy",
+      "make": "Vauxhall",
+      "model": "Gy",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    }
+  ]
+}
