@@ -57,8 +57,9 @@ test('six country searches prepare each brand row once, not six times',async()=>
  const markets=['china','korea','japan','uae','europe','georgia'];
  const input=markets.flatMap(market=>Array.from({length:5},(_,i)=>({id:market+i,market,make:'Audi'})));
  let prepared=0;
- const read=new Function('catalogMakeFilterValues','readManifest','readCurrentBrandProjection','prepareCatalogProjectionRows',implementation+';return currentProjectionRows;')(
-  ()=>['Audi'],async()=>({generationId:'test'}),async()=>({generationId:'test',items:input}), (rows:any[])=>{prepared+=rows.length;return rows;});
+ const read=new Function('catalogMakeFilterValues','readManifest','readCurrentBrandProjection','prepareCatalogProjectionRows','projectionModelKeys','projectionIdentityMatches',implementation+';return currentProjectionRows;')(
+  ()=>['Audi'],async()=>({generationId:'test'}),async()=>({generationId:'test',items:input}), (rows:any[])=>{prepared+=rows.length;return rows;},
+  async()=>null,(row:any,params:any)=>!params.market||params.market==='any'||row.market===params.market);
  const results=await Promise.all(markets.map(market=>read({make:'Audi',market,budgetTo:3000000})));
  assert.equal(prepared,input.length);assert.equal(new Set(results.flatMap(r=>r.rows.map((row:any)=>row.id))).size,input.length);
  results.forEach((r,i)=>assert.deepEqual(r.rows,input.filter(row=>row.market===markets[i])));

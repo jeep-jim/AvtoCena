@@ -49,7 +49,7 @@ try{for(const mode of modes)for(const width of [390,1440]){
  report.checks.filtersRetained=['BMW,Toyota'].includes(current.get('make'))&&current.get('model')==='X3|Corolla'&&current.get('powerTo')==='160'&&current.get('city')==='Новокузнецк'&&current.get('selection')==='1';
  // Explicitly removing one model must keep the other selected model.
  if(mode==='after'){await scope.getByRole('button',{name:'Убрать X3',exact:true}).click();assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');report.checks.explicitRemoveOnlyOne=true;}
- if(width===390)await scope.locator('button[data-ac-mobile-close="1"]').click();
+ if(width===390)await page.keyboard.press('Escape');
  await page.goto(origin+`/cars?fixture=${mode}&market=china`);
  await page.getByRole('link',{name:'Автомобиль 10',exact:true}).waitFor();
  await page.getByRole('button',{name:'Показать ещё',exact:true}).click();await page.getByText('Показано 48 из 48',{exact:true}).waitFor();
