@@ -7,6 +7,7 @@ import {readCompressedSelector} from '../../apps/web/lib/catalog/budget-selector
 import {priceCardForCity} from '../../apps/web/lib/catalog/card-city-delivery';
 import {calculatedCatalogPrice} from '../../apps/web/lib/catalog/calculated-price';
 import {modelSearchName} from '../../apps/web/lib/catalog/model-search-name';
+async function main(){
 const output='/tmp/avtocena-search-pilot';
 const storage=getJsonStorage();
 storage.writeJson=async()=>{throw Error('pilot_production_write_forbidden');};
@@ -40,6 +41,7 @@ const cases=[
 ];
 const expected=cases.map((q:any)=>{
  const matching=rows.filter(r=>r.city===q.city&&r.price!==null&&(!q.budget||r.price<=q.budget)&&(!q.make||r.make===q.make)&&(!q.power||r.power!==null&&r.power<=q.power)).sort(compare);
+ assert.ok(matching.length>=q.offset+24,'pilot requires populated pages: '+q.name);
  if(q.descending)matching.reverse();
  return {...q,total:matching.length,ids:matching.slice(q.offset,q.offset+24).map(r=>r.id)};
 });
@@ -49,3 +51,6 @@ await fs.writeFile(output+'/china.csv',rows.map(r=>[r.generation,r.city,r.id,r.m
 await fs.writeFile(output+'/expected.json',JSON.stringify(expected));
 await fs.writeFile(output+'/source.json',JSON.stringify({checkedAt:new Date().toISOString(),generationId:index.generationId,sourceRows:source.length,cityRows:rows.length,storageObjectsRead:objects,sourceChecksum:createHash('sha256').update(JSON.stringify(source.map(r=>r[5].id))).digest('hex'),source:'existing validated immutable China selector; frozen snapshot prices, not fresh live acceptance',productionWrites:0,supplierRequests:0}));
 console.log('SEARCH_PILOT_EXPORT',JSON.stringify({rows:source.length,cityRows:rows.length,objects}));
+
+}
+main().catch(error=>{console.error('SEARCH_PILOT_EXPORT_FAILED',error instanceof Error?error.name:'unknown');process.exitCode=1;});
