@@ -1,7 +1,7 @@
 {
   "release": "3048aede91dbfa4287e038075700e1434ba53e85",
-  "phase": "after-budget-release",
-  "requestedAt": "2026-11-11T12:14:41.684Z",
-  "verifyPartnerBudgets": true,
-  "reason": "Exact3048 accepted by unchanged speed guard at12:14UTC. Compare real China1.5m/2m browser transitions against accepted a182 at390/1280 widths, prices and errors; separately require fresh Japan/Korea1.5m API results. A supplier refusal must remain a failed availability check, not be reported as repaired."
+  "phase": "after-budget-release-without-concurrent-acceptance",
+  "requestedAt": "2026-11-11T12:20:40.491Z",
+  "verifyPartnerBudgets": false,
+  "reason": "First browser run had correct prices but14.495s mobile transition while ASTRA and other acceptance checks ran concurrently. Those have now all finished successfully. Repeat exact browser cases once with request/header/completion timings to isolate the delay. Preserve failed partner availability evidence; make no additional Japan/Korea calls in this run."
 }
