@@ -77,8 +77,10 @@ def production():
 def emit(value):
     print(json.dumps(value, ensure_ascii=False), flush=True)
 
-def probe(base_release, release, calculator, directory, expected_production):
-    image = 'avtocena-home-phases:'+release
+def probe(base_release, release, calculator, directory, expected_production, existing_image=False):
+    if existing_image and base_release != release:
+        raise ValueError('existing_image_must_match_baseline')
+    image = ('avtocena-regcloud:' if existing_image else 'avtocena-home-phases:')+release
     name = 'avtocena-home-phases-'+release[:12]
     old = inspect('avtocena-release-'+base_release[:12])
     baseline(old, base_release)
@@ -186,8 +188,8 @@ def main():
             command('docker', 'cp', 'avtocena-release-'+base_release[:12]+':'+INDEX, str(directory/'calculation-v1.json'))
             (directory/'calculation-v1.json').chmod(0o600)
             emit({'baselineRelease': base_release, 'privateIndexExported': True})
-        elif mode == 'probe':
-            probe(base_release, release, calculator, directory, expected)
+        elif mode in ['probe', 'probe-existing']:
+            probe(base_release, release, calculator, directory, expected, existing_image=mode == 'probe-existing')
         else:
             raise ValueError('unknown_mode')
     finally:

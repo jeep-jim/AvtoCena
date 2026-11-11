@@ -1,0 +1,57 @@
+name: Inspect rejected home phases on the exact stored image once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/owner-home-phase-inspect.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Measure existing phase hooks without activation or supplier IP
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          read -r source production < <(python3 -c 'import json,re;v=json.load(open(".github/market-runs/owner-home-phase-inspect.json"));assert all(re.fullmatch("[a-f0-9]{40}",v[k]) for k in ["source","production"]);print(v["source"],v["production"])')
+          remote_dir="/opt/avtocena/staging/home-phases/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          cleanup() {
+            ssh "${ssh_opts[@]}" root@151.248.113.177 "rm -f '$remote_dir/calculation-v1.json' '$remote_dir/image-index.json' '$remote_dir/runtime.env'" || true
+            rm -f "$key_file"
+          }
+          trap cleanup EXIT
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" scripts/regcloud-home-phases.py "root@151.248.113.177:$remote_dir/probe.py"
+          calculator=$(ssh "${ssh_opts[@]}" root@151.248.113.177 python3 - "$source" <<'PY'
+          import json,re,subprocess,sys
+          release=sys.argv[1];assert re.fullmatch('[a-f0-9]{40}',release)
+          info=json.loads(subprocess.check_output(['docker','inspect','avtocena-release-'+release[:12]]))[0]
+          assert not info['State']['Running'] and info['Config']['Image']=='avtocena-regcloud:'+release
+          env=dict(v.split('=',1) for v in info['Config']['Env'])
+          value=env['AVTOCENA_CALCULATION_VERSION'];assert re.fullmatch('[a-f0-9]{64}',value)
+          print(value)
+          PY
+          )
+          [[ "$calculator" =~ ^[a-f0-9]{64}$ ]]
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_dir/probe.py' export '$source' '$source' '$calculator' '$remote_dir' '$production'"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_dir/probe.py' probe-existing '$source' '$source' '$calculator' '$remote_dir' '$production'" | tee owner-home-phase-inspection.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-home-phase-inspection
+          path: owner-home-phase-inspection.log
