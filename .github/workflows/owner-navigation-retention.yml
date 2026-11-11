@@ -30,6 +30,7 @@ jobs:
           git fetch --depth=1 origin "$RETENTION_BASE_REF"
           npm install --prefix "$RUNNER_TEMP/retention-browser" --no-package-lock --ignore-scripts playwright@1.55.0
           CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-retention.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-navigation-recovery.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection-nested-navigation.mjs
       - uses: actions/upload-artifact@v4

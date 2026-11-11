@@ -41,6 +41,8 @@ type Facets = { makes: string[]; models: Array<{ make: string; model: string; al
 type SortKey = string;
 type SortDir = "asc" | "desc";
 type FilterDraft = {
+  q:string;
+  powerFrom:string;
   salePeriod:string;
   color: string;
   make: string;
@@ -156,6 +158,7 @@ function optionLabel(options: Option[], value: string) { return filterSelections
 function formatNumber(value: number) { return new Intl.NumberFormat("ru-RU").format(Math.round(value)); }
 function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
+    q:initial.q||"",powerFrom:initial.powerFrom||"",
     salePeriod:initial.salePeriod||"",
     color: initial.color || "",
     stock: initial.stock || "",
@@ -163,7 +166,7 @@ function draftFromInitial(initial: Record<string, string>): FilterDraft {
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
     yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: (initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
-    auctionGrade: initial.market === "japan" ? auctionGradeSelections(initial.auctionGrade).join("|") : "",
+    auctionGrade: auctionGradeSelections(initial.auctionGrade).join("|"),
     fuel: filterSelections(initial.fuel || "").flatMap(value=>value === "electrified" ? ["electric", "hybrid"] : [value]).join("|"), drive: initial.drive || "", powerTo: initial.powerTo || "",
   };
 }
@@ -177,8 +180,9 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
 function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
-  if (draft.market === "japan") { add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
-  if(filterSelections(draft.market).includes("japan")&&draft.stock!=="green")add("salePeriod",draft.salePeriod);
+  add("q",draft.q);add("powerFrom",draft.powerFrom);
+  add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade",draft.auctionGrade);add("salePeriod",draft.salePeriod);
+  if(draft.market==="japan")add("stock",draft.stock);
   add("color", draft.color); add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
@@ -442,9 +446,9 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission, draft.stock]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
-  // Green stock gearbox codes are source-specific (for example FAT/IAT);
-  // do not reinterpret them as AT/CVT when the user changes source type.
-  const setField = (key: keyof FilterDraft, value: string) => {if(key==="market"&&value!=="japan")setSortKey(current=>current.split(",").filter(term=>!term.startsWith("auctionDate")).join(","));setDraft((current) => key==="market"?{...current,market:value==="green"?"japan":value,stock:value==="green"?"green":"",auctionGrade:"",...((current.stock==="green")!==(value==="green")?{transmission:""}:{})}:{...current,[key]:value})};
+  // Changing the market changes only that choice; keep explicitly selected
+  // models, gearbox codes and Japan fields so returning does not erase them.
+  const setField = (key: keyof FilterDraft, value: string) => {setDraft((current) => key==="market"?{...current,market:value==="green"?"japan":value,stock:value==="green"?"green":""}:{...current,[key]:value})};
   useEffect(() => {
     if (!draft.make) return;
     const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
@@ -456,12 +460,14 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
     if(draft.color) rows.push({key:"color",label:`Цвет: ${draft.color}`});
-    if(draft.salePeriod&&filterSelections(draft.market).includes("japan")&&draft.stock!=="green")rows.push({key:"salePeriod",label:filterSelections(draft.salePeriod).map(v=>AUCTION_SALE_PERIODS.find(p=>p.value===v)?.label||v).join(", ")});
-    if(draft.market==='japan'&&draft.frameNumber)rows.push({key:'frameNumber',label:`Номер кузова ${draft.frameNumber}`});
-    if(draft.market==='japan'&&draft.chassis)rows.push({key:'chassis',label:`Кузов ${draft.chassis}`});
-    if(draft.market==='japan'&&draft.lotNumber)rows.push({key:'lotNumber',label:`Лот ${draft.lotNumber}`});
+    if(draft.salePeriod)rows.push({key:"salePeriod",label:filterSelections(draft.salePeriod).map(v=>AUCTION_SALE_PERIODS.find(p=>p.value===v)?.label||v).join(", ")});
+    if(draft.frameNumber)rows.push({key:'frameNumber',label:`Номер кузова ${draft.frameNumber}`});
+    if(draft.chassis)rows.push({key:'chassis',label:`Кузов ${draft.chassis}`});
+    if(draft.lotNumber)rows.push({key:'lotNumber',label:`Лот ${draft.lotNumber}`});
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
-    if (draft.market === "japan") auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
+    auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
+    if(draft.q)rows.push({key:'q',label:`Поиск: ${draft.q}`});
+    if(draft.powerFrom)rows.push({key:'powerFrom',label:`От ${draft.powerFrom} л.с.`});
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
     draft.model.split("|").filter(Boolean).forEach(model => rows.push({key:`model:${model}`,label:model}));
     if (draft.stock!=="green") filterSelections(draft.market).forEach(market => rows.push({ key: `market:${market}`, label: optionLabel(markets, market) }));

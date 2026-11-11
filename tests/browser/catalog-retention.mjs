@@ -34,7 +34,7 @@ try{for(const mode of modes)for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const report={mode,width,checks:{}};
  console.log(JSON.stringify({starting:mode,width}));
- await page.goto(origin+`/cars?fixture=${mode}&market=china&make=BMW&model=X3&budget=2500000&powerTo=160&city=Новокузнецк&selection=1`);
+ await page.goto(origin+`/cars?fixture=${mode}&market=china&make=BMW&model=X3&budget=2500000&powerFrom=80&powerTo=160&transmission=cvt&chassis=ZVW30&auctionGrade=4.5&city=Новокузнецк&selection=1`);
  await page.locator('.ac-catalog-filter-panel').waitFor({state:'attached'});
  let scope=page.locator('.ac-catalog-filter-panel');if(width===390){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.getByRole('dialog',{name:'Фильтры каталога'});}
  await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();await scope.locator('[data-facet-value="Toyota"]').click();
@@ -49,6 +49,13 @@ try{for(const mode of modes)for(const width of [390,1440]){
  const current=new URL(page.url()).searchParams;
  report.checks.filtersRetained=['BMW,Toyota'].includes(current.get('make'))&&current.get('model')==='X3|Corolla'&&current.get('powerTo')==='160'&&current.get('city')==='Новокузнецк'&&current.get('selection')==='1';
  console.log(JSON.stringify({stage:'filters',...report}));
+ if(mode==='after'){
+  const market=scope.locator('input[name=market]').locator('..');
+  await market.locator(':scope > button').click();await market.getByRole('button',{name:'Корея',exact:true}).click();await market.getByRole('button',{name:'Китай',exact:true}).click();await market.locator(':scope > button').click();
+  await page.waitForFunction(()=>location.pathname.startsWith('/cars/korea')||new URLSearchParams(location.search).get('market')==='korea');
+  const p=new URL(page.url()).searchParams;
+  report.checks.marketKeepsOtherFilters=p.get('model')==='X3|Corolla'&&p.get('budget')==='1500000'&&p.get('powerFrom')==='80'&&p.get('transmission')==='cvt'&&p.get('chassis')==='ZVW30'&&p.get('auctionGrade')==='4.5';
+ }
  // Explicitly removing one model must keep the other selected model.
  if(mode==='after'){await page.getByRole('button',{name:'Убрать X3',exact:true}).filter({visible:true}).first().click();assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');report.checks.explicitRemoveOnlyOne=true;}
  if(width===390)await page.keyboard.press('Escape');
@@ -64,11 +71,13 @@ try{for(const mode of modes)for(const width of [390,1440]){
  report.checks.newArticleAtTop=await page.evaluate(()=>scrollY<3);
  await page.getByRole('link',{name:'Новый каталог внизу',exact:true}).click();await page.getByRole('heading',{name:'Каталог',exact:true}).waitFor();await page.waitForTimeout(80);
  report.checks.forwardCatalogAtTop=await page.evaluate(()=>scrollY<3);
+ await page.evaluate(()=>scrollTo({top:900,behavior:'instant'}));
  await page.getByRole('link',{name:'Категория Toyota',exact:true}).click();await page.waitForFunction(()=>location.pathname.endsWith('/Toyota')||new URLSearchParams(location.search).get('make')==='Toyota');await page.waitForTimeout(80);
  report.checks.newCategoryAtTop=await page.evaluate(()=>scrollY<3);
  await page.getByRole('link',{name:'Статья с якорем',exact:true}).click();await page.getByRole('heading',{name:'Раздел по якорю',exact:true}).waitFor();await page.waitForTimeout(80);
- report.checks.anchorRespected=await page.evaluate(()=>scrollY>1000);
+ report.checks.anchorRespected=await page.waitForFunction(()=>scrollY>1000,null,{timeout:3000}).then(()=>true,()=>false);
  report.pageErrors=errors;results.push(report);fs.writeFileSync(`${out}/results.json`,JSON.stringify(results,null,2));
+ console.log(JSON.stringify(report));
  if(mode==='after'){assert.deepEqual(errors,[]);for(const [name,passed] of Object.entries(report.checks))assert.equal(passed,true,`${width}: ${name}`);}
- console.log(JSON.stringify(report));await page.close();
+ await page.close();
 }}finally{await browser.close();server.close();}
