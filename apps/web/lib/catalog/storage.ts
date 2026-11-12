@@ -2255,7 +2255,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const manifest=await readManifest();
  const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
+  const index=await readBudgetCountIndex(manifest.generationId,params.market,defaultBrandQuery&&hasBudget).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   // Older selectors cannot distinguish seller-only display prices in default
   // ranking. Keep their authoritative fallback until enriched selectors exist.
@@ -2528,7 +2528,18 @@ const aggregateBudgetIndexCache=new AggregateBudgetIndexCache();
 const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<BudgetCountIndex|null>>();
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const specificationSelectorPath=(name:string)=>`${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}/${name}.json`;
-async function readBudgetCountIndex(generationId:string,market?:string){
+async function readBudgetCountIndex(generationId:string,market?:string,cachedOnly=false){
+ // A brand budget query must not load/decompress an entire country merely to
+ // discover that a small existing brand projection was the cheaper path.
+ // Reuse only a fresh, generation-bound selector already resident in this
+ // process; misses keep the original exact brand search without joining I/O.
+ if(cachedOnly){
+  const keys=market&&MARKETS.includes(market as CatalogMarket)
+   ?[`${generationId}:specifications:${market}`,`${generationId}:compressed:${market}`,`${generationId}:packed:${market}`,`${generationId}:${market}`,generationId]
+   :[generationId];
+  for(const key of keys){const index=budgetIndexCache.peekFresh(key);if(index?.generationId===generationId)return index;}
+  return null;
+ }
  if(market && MARKETS.includes(market as CatalogMarket)){
   const manifest=await readManifest();
   // An explicitly empty partition has no selector. Falling through to the

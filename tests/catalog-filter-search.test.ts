@@ -90,6 +90,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.equal((await countCatalogOffers({market:'korea',engineTo:1600,powerTo:160})).total,1);
       assert.equal((await countCatalogOffers({market:'korea',engineTo:1500,powerTo:160})).total,0);
     } finally {storage.readJsonWithMeta=originalRead;resetCatalogReadCachesForTests();}
+    await countCatalogOffers({market:'korea',yearFrom:2021});
     let projectionReads = 0;
     let brandProjectionReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
@@ -123,7 +124,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.deepEqual(globalResults.items.map((offer) => offer.id), ["filter-target"]);
       assert.deepEqual(globalFacets.models, [{ make: "Hyundai", model: "Avante (CN7)" }]);
       assert.equal(allProjectionReads, 0, "a selected make must not download all markets");
-      assert.equal(brandProjectionReads, 0, "global brand and budget reuse the prepared selector without a brand projection");
+      assert.equal(brandProjectionReads, 1, "a cold global selector preserves one bounded brand projection instead of loading all markets");
       assert.equal(manifestReads, 1, "the current all-market projection must validate the active manifest generation once");
     } finally {
       storage.readJsonWithMeta = originalRead;
@@ -228,6 +229,7 @@ test('prepared brand budget pagination preserves authoritative order and prices 
   for(const city of [undefined,'Новокузнецк'])for(const sort of [undefined,'updatedAt','totalRub','totalRubDesc']){
    const query={market:'korea',make:'Hyundai',model:'Avante (CN7)',powerTo:160,budgetTo:3_000_000,city,sort,pageSize:6};
    resetCatalogReadCachesForTests();
+   await countCatalogOffers({market:query.market,yearFrom:2021});
    const reference=await searchOffersWithoutBudgetIndexForTests({...query,pageSize:48});
    assert.ok(reference.total>6,'fixture must exercise more than one page');
    const seen:string[]=[];
