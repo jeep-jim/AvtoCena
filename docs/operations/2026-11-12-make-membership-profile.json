@@ -1,0 +1,105 @@
+{
+  "scope": "local synthetic make-membership only; not production or whole-route latency",
+  "node": "v24.22.1",
+  "rows": 22000,
+  "rounds": 7,
+  "query": {
+    "make": "Volkswagen"
+  },
+  "samples": [
+    {
+      "mode": "previous",
+      "wallMs": 69.05479800000012,
+      "cpuMs": 94.466,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 18.157327000000123,
+      "cpuMs": 32.846,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 19.00244399999997,
+      "cpuMs": 19.096,
+      "matched": 22000
+    },
+    {
+      "mode": "previous",
+      "wallMs": 61.145397,
+      "cpuMs": 76.759,
+      "matched": 22000
+    },
+    {
+      "mode": "previous",
+      "wallMs": 119.3947189999999,
+      "cpuMs": 106.154,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 226.25694299999986,
+      "cpuMs": 216.953,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 61.008955000000014,
+      "cpuMs": 61.481,
+      "matched": 22000
+    },
+    {
+      "mode": "previous",
+      "wallMs": 113.98844500000018,
+      "cpuMs": 126.592,
+      "matched": 22000
+    },
+    {
+      "mode": "previous",
+      "wallMs": 75.13922300000013,
+      "cpuMs": 92.72,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 17.419908999999734,
+      "cpuMs": 17.399,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 21.036321000000044,
+      "cpuMs": 21.02,
+      "matched": 22000
+    },
+    {
+      "mode": "previous",
+      "wallMs": 53.06002899999976,
+      "cpuMs": 53.042,
+      "matched": 22000
+    },
+    {
+      "mode": "previous",
+      "wallMs": 45.42439999999988,
+      "cpuMs": 44.685,
+      "matched": 22000
+    },
+    {
+      "mode": "compiled",
+      "wallMs": 24.67018700000017,
+      "cpuMs": 24.676,
+      "matched": 22000
+    }
+  ],
+  "median": {
+    "previous": {
+      "wallMs": 69.05479800000012,
+      "cpuMs": 92.72
+    },
+    "compiled": {
+      "wallMs": 21.036321000000044,
+      "cpuMs": 24.676
+    }
+  }
+}
