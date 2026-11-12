@@ -379,3 +379,13 @@ test('completed collectors prepare derivatives even when a later step failed',as
   }));
   assert.deepEqual(watched,names);
 });
+
+
+test('release preparation entrypoint only imports files present in this exact checkout',async()=>{
+ const {readFile,access}=await import('node:fs/promises');
+ const entry=new URL('../scripts/catalog-refresh-generation-pages.mjs',import.meta.url);
+ const source=await readFile(entry,'utf8');
+ const imports=[...source.matchAll(/(?:from\s*|import\s*\()(['"])(\.[^'"]+)\1/g)].map(match=>match[2]);
+ assert.ok(imports.length>=7,'inspect both static and dynamic runtime dependencies');
+ for(const dependency of imports)await assert.doesNotReject(access(new URL(dependency,entry)),`missing release dependency: ${dependency}`);
+});

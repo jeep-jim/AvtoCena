@@ -12,8 +12,7 @@ const selectedMarkets=releaseMarkets(process.env.RELEASE_PREPARATION_MARKETS);
 import {refreshGenerationPages, refreshGenerationPagesWindow} from './lib/catalog-refresh-generation-pages.mjs';
 const {getJsonStorage} = await import('../apps/web/lib/data.ts');
 const {buildCatalogMarketLanding, prepareCatalogProjectionRowsForDate, buildCatalogOverviewFromProjections,
-  catalogMarketLandingPath,searchOffers} = await import('../apps/web/lib/catalog/storage.ts');
-const {prepareEditorialHome}=await import('../apps/web/lib/catalog/editorial-home.ts');
+  catalogMarketLandingPath} = await import('../apps/web/lib/catalog/storage.ts');
 const {catalogOverviewGenerationPath} = await import('../apps/web/lib/catalog/overview.ts');
 const {PUBLIC_CATALOG_MARKETS} = await import('../apps/web/lib/catalog/runtime-config.ts');
 const {datedCatalogPagePath}=await import('../apps/web/lib/catalog/dated-pages.ts');
@@ -35,8 +34,3 @@ await refreshGenerationPagesWindow({
   console.log(JSON.stringify(result,null,2));
   return result;
 }});
-// Separate current-day derivative: preserve raw legacy pages for rollback readers.
-// Exact-image preparation supplies its immutable calculation context. Other
-// contexts safely miss at runtime; future dates keep the original exact search.
-if(process.env.CATALOG_PREPARE_EDITORIAL_HOME!=='false')console.log(JSON.stringify(await prepareEditorialHome({storage,markets:selectedMarkets||PUBLIC_CATALOG_MARKETS,
- search:market=>searchOffers({market,pageSize:12,sort:'updatedAt'})}),null,2));
