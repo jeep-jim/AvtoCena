@@ -1,13 +1,10 @@
 {
-  "sourceSha": "f11285ebb378878832be91dd0b14633ade2351c2",
-  "candidate": 1755,
-  "requestedAt": "2026-11-12T00:03:33.931Z",
-  "reason": "One exact-source release after reviewed independent login and saved-rate overlap. All18 exact-source checks and full controller guard43123630096 passed; original complete server/browser speed, request budget, SHA/nonce and rollback gates unchanged.",
-  "supersedes": [
-    "75c2e6f57cfa4022865217e029a1f5d1671842c3"
-  ],
-  "previousRun": 43111977320,
-  "controllerGuardRun": 43123630096,
-  "controllerGuardCommit": "e3295321836f06da4bbb11b5893f5afe0968d6fc",
-  "rollbackProofRun": 43121673944
+  "sourceSha": "2f0ad5be4eafd85c01733b3a12db5a85b6fabe50",
+  "candidate": 1757,
+  "requestedAt": "2026-11-12T05:37:50.267Z",
+  "reason": "Exact isolated catalog demand-loading release: all8 source checks and full controller/rollback guard passed. Four app files only; no blog changes. Original baselines, complete output, 35/305s, SHA/nonce browser verdict and rollback unchanged.",
+  "previousRun": 43124466735,
+  "controllerGuardRun": 43162510820,
+  "controllerGuardCommit": "74baaba8319c03cdb72dee703987ab3eb269749b",
+  "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
