@@ -1,10 +1,10 @@
 {
-  "sourceSha": "2f0ad5be4eafd85c01733b3a12db5a85b6fabe50",
+  "sourceSha": "6a048c98cc0baef1c8bec44810e6cb75378d871b",
   "candidate": 1757,
-  "requestedAt": "2026-11-12T05:37:50.267Z",
-  "reason": "Exact isolated catalog demand-loading release: all8 source checks and full controller/rollback guard passed. Four app files only; no blog changes. Original baselines, complete output, 35/305s, SHA/nonce browser verdict and rollback unchanged.",
-  "previousRun": 43124466735,
-  "controllerGuardRun": 43162510820,
-  "controllerGuardCommit": "74baaba8319c03cdb72dee703987ab3eb269749b",
+  "requestedAt": "2026-11-12T06:26:06.742021+00:00",
+  "reason": "Correct missing isolated preparation module after pre-activation failure43162678056. All8 exact-source checks including CI43167230897 and controller guard43167311325 passed. Four app paths, original completeness/speed/nonce/rollback guards unchanged.",
+  "previousRun": 43162678056,
+  "controllerGuardRun": 43167311325,
+  "controllerGuardCommit": "d1482fda4b3219056e82dafa42fb045b2103e72d",
   "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
