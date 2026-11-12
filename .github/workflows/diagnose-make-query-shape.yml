@@ -1,0 +1,43 @@
+name: Diagnose HTML and API make-query shape once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-make-query-shape.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-query-shape-diagnostic
+  cancel-in-progress: false
+jobs:
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 7a25739b4476d64834b7f3cdb4bfe7a45ff67f80
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Compare exact empty and omitted model membership without production access
+        run: |
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --input-type=module - <<'PROFILE'
+          import assert from 'node:assert/strict';
+          import {performance} from 'node:perf_hooks';
+          import {catalogSearchProjectionMatches,compileCatalogMakeMembership} from './apps/web/lib/catalog/storage.ts';
+          const rows=Array.from({length:22000},(_,i)=>({id:'synthetic-'+i,market:'china',make:'Volkswagen',model:'Tiguan',year:2023}));
+          const modes=['previousApi','previousHtml','compiled'],samples=[];
+          for(let round=0;round<5;round++)for(const mode of round%2?[...modes].reverse():modes){
+            const start=performance.now(),cpu=process.cpuUsage();
+            const match=mode==='compiled'?compileCatalogMakeMembership('Volkswagen'):row=>catalogSearchProjectionMatches(row,{make:'Volkswagen',model:mode==='previousHtml'?'':undefined});
+            const ids=rows.filter(match).map(row=>row.id),used=process.cpuUsage(cpu),wallMs=performance.now()-start;
+            assert.deepEqual(ids,rows.map(row=>row.id));
+            if(round)samples.push({round,mode,wallMs,cpuMs:(used.user+used.system)/1000,matched:ids.length});
+          }
+          const median=values=>{values.sort((a,b)=>a-b);return (values[1]+values[2])/2};
+          const report={source:'7a25739b4476d64834b7f3cdb4bfe7a45ff67f80',scope:'Synthetic membership loop only. HTML empty model versus API undefined model; same rows. Not whole-route or production acceptance.',rows:rows.length,node:process.version,samples,median:Object.fromEntries(modes.map(mode=>[mode,{wallMs:median(samples.filter(x=>x.mode===mode).map(x=>x.wallMs)),cpuMs:median(samples.filter(x=>x.mode===mode).map(x=>x.cpuMs))}]))};
+          console.log('MAKE_QUERY_SHAPE_REPORT '+JSON.stringify(report));
+          PROFILE
