@@ -13,6 +13,7 @@ import {ajesClient} from './ajes-runtime';
 import {AjesUnavailable} from './ajes-client';
 import {ajesOffer,ajesOfferId} from './ajes-offer';
 import {convertToRub} from './rates';
+import {pageCurrencyConverter} from './page-currency-converter';
 import type {ajesLot,AjesQuery} from './ajes-query';
 import {applyCatalogEditorial,editorialHidden,readCatalogEditorial} from './editorial';
 import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
@@ -35,6 +36,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
  });
  options.measure?.('supplier-read',performance.now()-sourceStart);
  const indexStart=performance.now();const index=await readCatalogEditorial();options.measure?.('editorial-read',performance.now()-indexStart);
+ const convertPagePrice=pageCurrencyConverter(convertToRub);
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
   const detailStart=performance.now();
   if(lot.table==='korea'&&!query.id){
@@ -43,7 +45,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   }
   options.measure?.('detail-cache-sum',performance.now()-detailStart);
   const enrichStart=performance.now();
-  const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
+  const rate=await convertPagePrice(lot.finalPriceJpy||lot.sourcePrice,lot.currency);
   if(!rate)throw Error('ajes_currency_unavailable');
   let offer=ajesOffer(lot,rate,result.observedAt);
   // Exact local release facts also cover auction records. No supplier/detail
