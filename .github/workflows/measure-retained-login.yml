@@ -48,14 +48,14 @@ jobs:
               rows=subprocess.check_output(['docker','top','avtocena-production','-eo','pid,comm'],text=True).splitlines()[1:]
               ticks={}
               for row in rows:
-                  fields=row.split()
-                  if len(fields)==2 and fields[1]=='node':
+                  fields=row.split(maxsplit=1)
+                  if len(fields)==2:
                       try:
                           raw=pathlib.Path('/proc/'+fields[0]+'/stat').read_text().rsplit(')',1)[1].split()
                           ticks[fields[0]]=int(raw[11])+int(raw[12])
                       except (OSError,ValueError,IndexError):pass
               return {'total':sum(total),'idle':total[3]+total[4],'node':ticks}
-          report={'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'identityBefore':before,'healthBefore':health(),'readOnly':True,'scope':'Current retained release on serving host; six bounded serial samples, not original baseline replacement or traffic-free comparison','samples':[]}
+          report={'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'identityBefore':before,'healthBefore':health(),'readOnly':True,'scope':'Current retained release on serving host; all container processes sampled, no command lines; not original baseline replacement or traffic-free comparison','samples':[]}
           for phase,delay in [('first',0),('repeat1',2),('repeat2',2),('after35s',35),('repeat3',2),('repeat4',2)]:
               if delay:time.sleep(delay)
               c0=cpu();started=time.monotonic();observed=datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -64,7 +64,7 @@ jobs:
                       body=response.read();status=response.status
                   seconds=time.monotonic()-started;c1=cpu()
                   nodeTicks=sum(max(0,c1['node'].get(pid,n)-n) for pid,n in c0['node'].items())
-                  record={'phase':phase,'at':observed,'seconds':round(seconds,4),'status':status,'bytes':len(body),'complete':status==200 and b'</html>' in body and b'$RX(' not in body and len(body)>50000,'nodeCpuPercent':round(100*nodeTicks/os.sysconf('SC_CLK_TCK')/seconds,2),'hostCpuPercent':round(100*(1-(c1['idle']-c0['idle'])/max(1,c1['total']-c0['total'])),2)}
+                  record={'phase':phase,'at':observed,'seconds':round(seconds,4),'status':status,'bytes':len(body),'complete':status==200 and b'</html>' in body and b'$RX(' not in body and len(body)>50000,'containerProcessCount':len(c0['node']),'containerProcessCpuPercent':round(100*nodeTicks/os.sysconf('SC_CLK_TCK')/seconds,2) if c0['node'] else None,'hostCpuPercent':round(100*(1-(c1['idle']-c0['idle'])/max(1,c1['total']-c0['total'])),2)}
               except Exception as error:record={'phase':phase,'at':observed,'seconds':round(time.monotonic()-started,4),'errorType':type(error).__name__}
               report['samples'].append(record);print('RETAINED_LOGIN_SAMPLE',json.dumps(record),flush=True)
           report['healthAfter']=health();report['identityAfter']=identity()
