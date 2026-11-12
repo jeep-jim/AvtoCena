@@ -1,0 +1,108 @@
+{
+  "source": "7a25739b4476d64834b7f3cdb4bfe7a45ff67f80",
+  "scope": "Synthetic membership loop only. HTML empty model versus API undefined model; same rows. Not whole-route or production acceptance.",
+  "rows": 22000,
+  "node": "v24.22.1",
+  "samples": [
+    {
+      "round": 1,
+      "mode": "compiled",
+      "wallMs": 10.347549999999956,
+      "cpuMs": 17.033,
+      "matched": 22000
+    },
+    {
+      "round": 1,
+      "mode": "previousHtml",
+      "wallMs": 123.94173300000011,
+      "cpuMs": 138.266,
+      "matched": 22000
+    },
+    {
+      "round": 1,
+      "mode": "previousApi",
+      "wallMs": 28.040400999999974,
+      "cpuMs": 34.212,
+      "matched": 22000
+    },
+    {
+      "round": 2,
+      "mode": "previousApi",
+      "wallMs": 24.637864000000036,
+      "cpuMs": 24.625,
+      "matched": 22000
+    },
+    {
+      "round": 2,
+      "mode": "previousHtml",
+      "wallMs": 118.21252800000002,
+      "cpuMs": 131.667,
+      "matched": 22000
+    },
+    {
+      "round": 2,
+      "mode": "compiled",
+      "wallMs": 6.984327000000121,
+      "cpuMs": 6.973,
+      "matched": 22000
+    },
+    {
+      "round": 3,
+      "mode": "compiled",
+      "wallMs": 7.396545999999944,
+      "cpuMs": 7.586,
+      "matched": 22000
+    },
+    {
+      "round": 3,
+      "mode": "previousHtml",
+      "wallMs": 116.00540000000001,
+      "cpuMs": 117.077,
+      "matched": 22000
+    },
+    {
+      "round": 3,
+      "mode": "previousApi",
+      "wallMs": 19.367964999999913,
+      "cpuMs": 19.357,
+      "matched": 22000
+    },
+    {
+      "round": 4,
+      "mode": "previousApi",
+      "wallMs": 19.707257000000027,
+      "cpuMs": 19.773,
+      "matched": 22000
+    },
+    {
+      "round": 4,
+      "mode": "previousHtml",
+      "wallMs": 116.06341900000007,
+      "cpuMs": 116.75,
+      "matched": 22000
+    },
+    {
+      "round": 4,
+      "mode": "compiled",
+      "wallMs": 6.982993999999962,
+      "cpuMs": 6.975,
+      "matched": 22000
+    }
+  ],
+  "median": {
+    "previousApi": {
+      "wallMs": 22.17256050000003,
+      "cpuMs": 22.198999999999998
+    },
+    "previousHtml": {
+      "wallMs": 117.13797350000004,
+      "cpuMs": 124.372
+    },
+    "compiled": {
+      "wallMs": 7.1904365000000325,
+      "cpuMs": 7.2805
+    }
+  },
+  "workflowRun": 43179563976,
+  "job": 131051946884
+}
