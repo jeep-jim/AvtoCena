@@ -12,15 +12,20 @@ const utilities=await postcss([tailwindcss({content:['apps/web/components/autoca
 fs.writeFileSync(out+'/app.css',utilities.css+'\n'+fs.readFileSync(out+'/app.css','utf8'));
 const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox']});
 try{
- const context=await browser.newContext();let sent;let sendCount=0;let formMode=false;let calculationBody;
+ const context=await browser.newContext();let sent;let sendCount=0;let statusReads=0;let formMode=false;let calculationBody;
  const formSeed={make:'Honda',model:'Fit',market:'japan',currency:'RUB',price:'1000',city:'Кемерово',draft:{year:'2023',productionMonth:'6',fuel:'petrol',engineCc:'1496',powerHp:'110',vehicleCategory:'M1'}};
  await context.route('https://autobot.test/**',route=>{const u=new URL(route.request().url());
- if(u.pathname==='/api/autobot'){if(route.request().method()==='POST'){sendCount++;sent=route.request().postDataJSON();return route.fulfill({json:{text:'Город — Омск.',cards:[],sources:[{title:'Лишний источник',url:'https://unrequested.test/source'}]}});}return route.fulfill({json:{connected:true}});}
+ if(u.pathname==='/api/autobot'){if(route.request().method()==='POST'){sendCount++;sent=route.request().postDataJSON();return route.fulfill({json:{text:'Город — Омск.',cards:[],sources:[{title:'Лишний источник',url:'https://unrequested.test/source'}]}});}statusReads++;return route.fulfill({json:{connected:true}});}
  if(u.pathname.startsWith('/api/'))return route.fulfill({status:403,json:{}});
  if(u.pathname==='/app.js')return route.fulfill({contentType:'text/javascript',body:fs.readFileSync(out+'/app.js','utf8')});
  if(u.pathname==='/app.css')return route.fulfill({contentType:'text/css',body:fs.readFileSync(out+'/app.css','utf8')});
  return route.fulfill({contentType:'text/html',body:'<!doctype html><link rel="stylesheet" href="/app.css"><div id="root"></div><script src="/app.js"></script>'});});
- const page=await context.newPage();await page.goto('https://autobot.test/cars');await page.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
+ const page=await context.newPage();await page.goto('https://autobot.test/cars');
+ await page.getByRole('button',{name:'Открыть АвтоБота',exact:true}).waitFor();
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+ assert.equal(statusReads,0,'closed chat must not request configuration on ordinary pages');
+ await Promise.all([page.waitForResponse(r=>r.url().endsWith('/api/autobot')&&r.request().method()==='GET'),page.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click()]);
+ assert.equal(statusReads,1,'opening chat requests its current configuration once');
  await page.getByLabel('Сообщение АвтоБоту').fill('Мой город Омск');await page.getByRole('button',{name:'Отправить вопрос'}).click();await page.getByText('Город — Омск.',{exact:true}).waitFor();assert.equal(await page.getByRole('link',{name:'Лишний источник'}).count(),0);
  await page.getByLabel('Сообщение АвтоБоту').fill('Сколько стоит');await page.reload();await page.getByText('Город — Омск.',{exact:true}).waitFor();assert.equal(await page.getByLabel('Сообщение АвтоБоту').inputValue(),'Сколько стоит');
  await page.getByRole('button',{name:'Отправить вопрос'}).click();await page.getByRole('button',{name:'Отправить вопрос'}).waitFor();assert.ok(sent.history.some(m=>m.text==='Мой город Омск'));

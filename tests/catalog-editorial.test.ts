@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {getJsonStorage,StorageConflictError} from '../apps/web/lib/data';
 import {applyCatalogEditorial,cleanEditorialInput,editorialHidden,readCatalogEditorial,resetCatalogEditorialCache,saveCatalogEditorial,withCatalogEditorial,EditorialConflict} from '../apps/web/lib/catalog/editorial';
 import {canEditCatalog} from '../apps/web/lib/catalog/editorial-access';
-import {searchOffers,countCatalogOffers,readCatalogBrandCounts,readCatalogBrandModelCounts,readCatalogFacets,readHomeCatalogSnapshot,buildCatalogBrandSummary,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
+import {compileCatalogMakeMembership,searchOffers,countCatalogOffers,readCatalogBrandCounts,readCatalogBrandModelCounts,readCatalogFacets,readHomeCatalogSnapshot,buildCatalogBrandSummary,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
 import {catalogOfferTitle} from '../apps/web/lib/catalog/presentation';
 const actor={id:'owner',displayName:'Редактор'};
@@ -47,7 +47,10 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   resetCatalogEditorialCache();resetCatalogReadCachesForTests();
   const before=await searchOffers({market:'korea',pageSize:1});assert.equal(before.total,3);
   const victim=rows.find(r=>r.id===before.items[0].id)!;
+  const makeMembership=compileCatalogMakeMembership('Hyundai');
+  await withCatalogEditorial(async()=>assert.equal(makeMembership(victim),true));
   let saved=await saveCatalogEditorial(victim,input({title:'Проверенный автомобиль',photos:[photo]}),actor,'Hyundai Avante');
+  await withCatalogEditorial(async()=>assert.equal(makeMembership(victim),false,'compiled query must read current hidden status'));
   for(const params of [{market:'korea',pageSize:1},{market:'korea',make:'Hyundai',pageSize:1},{market:'korea',yearFrom:2022,pageSize:1},{market:'korea',budgetTo:2000000,pageSize:1}]){
    const result=await searchOffers(params);assert.equal(result.total,2);assert.equal(result.items.length,1);assert.notEqual(result.items[0].id,victim.id);
    const next=await searchOffers({...params,page:2});assert.equal(next.items.length,1);assert.notEqual(next.items[0].id,result.items[0].id);assert.notEqual(next.items[0].id,victim.id);
@@ -72,6 +75,7 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   assert.equal((await searchOffers({market:'korea'})).items.some(r=>r.id===victim.id),false);
   await assert.rejects(saveCatalogEditorial(victim,input({version:null}),actor,'Original'),EditorialConflict);
   saved=await saveCatalogEditorial(victim,input({title:saved.title,photos:saved.photos,status:'visible',version:saved.version}),actor,'Original');
+  await withCatalogEditorial(async()=>assert.equal(makeMembership(victim),true,'compiled query must observe restored status'));
   const restored=await searchOffers({market:'korea'});assert.equal(restored.total,3);
   const visible=restored.items.find(r=>r.id===victim.id)!;
   assert.equal(catalogOfferTitle(visible),'Проверенный автомобиль');assert.equal(visible.images[0].url,photo);assert.equal(visible.totalRub,base.totalRub);

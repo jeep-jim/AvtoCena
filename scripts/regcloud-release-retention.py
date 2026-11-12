@@ -9,6 +9,18 @@ import shutil
 import subprocess
 
 
+# Preserve the exact owner-accepted speed baseline independently of age/count.
+# Replace this pin only when a newer release has explicit accepted evidence.
+ACCEPTED_RELEASE = 'a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+ACCEPTED_IMAGE = 'sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f'
+
+
+def pinned_image(image):
+    return (image.get('Id') == ACCEPTED_IMAGE
+            or 'avtocena-regcloud:' + ACCEPTED_RELEASE in (image.get('RepoTags') or [])
+            or image.get('Config', {}).get('Labels', {}).get('org.opencontainers.image.revision') == ACCEPTED_RELEASE)
+
+
 def docker(*args):
     return subprocess.check_output(['docker', *args], text=True)
 
@@ -20,6 +32,9 @@ def inspect_containers():
 
 def eligible(c):
     name = c['Name'].lstrip('/')
+    if (c.get('Image') == ACCEPTED_IMAGE
+            or c['Config'].get('Labels', {}).get('org.opencontainers.image.revision') == ACCEPTED_RELEASE):
+        return False
     return (bool(re.fullmatch(r'avtocena-before-[0-9a-f]{12}', name))
             and c['State']['Status'] == 'exited'
             and c['Config'].get('Labels', {}).get('avtocena.role') == 'production'
@@ -47,6 +62,8 @@ def eligible_old_release(c, now):
 def eligible_unused_image(image, referenced, now):
     """Only old, named application images; never containers or data volumes."""
     tags = image.get('RepoTags') or []
+    if pinned_image(image):
+        return False
     if image.get('Id') in referenced or not tags:
         return False
     if not all(re.fullmatch(r'avtocena-regcloud:[0-9a-f]{40}', t) for t in tags):
@@ -94,6 +111,8 @@ def main():
         referenced = {c['Image'] for c in inspect_containers()}
         for image_id in sorted(removed_images - referenced):
             details = json.loads(docker('image', 'inspect', image_id))[0]
+            if pinned_image(details):
+                continue
             tags = details.get('RepoTags') or []
             # Only application tags, no forced deletion or broad prune.
             if tags and all(re.fullmatch(r'avtocena-regcloud:[0-9a-f]{40}', t) for t in tags):

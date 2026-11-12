@@ -852,6 +852,16 @@ function projectionIdentityMatches(row: Pick<CatalogSearchProjection,'market'|'m
   }
   return true;
 }
+/** Compile the query once for a make-only scan. Admission and editorial values
+ * still come from each row and the current request; nothing is cached globally. */
+export function compileCatalogMakeMembership(make: string) {
+  const wanted = new Set(catalogMakeFilterValues(make).map(value => cleanFacet(value).toLocaleLowerCase("ru-RU")));
+  return (row: CatalogSearchProjection) => {
+    if (editorialHidden(row) || isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
+    const identity = applyCatalogEditorialSpecifications(row);
+    return wanted.has(cleanFacet(identity.make).toLocaleLowerCase("ru-RU"));
+  };
+}
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if(editorialHidden(row))return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
@@ -2223,13 +2233,14 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const compactDefaultQuery=canUseMarketLanding(params)&&(editorialHasHidden(params.market)||Number(params.page||1)*Number(params.pageSize||24)>MARKET_LANDING_LIMIT);
  const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
- const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
- if(defaultBrandQuery && hasBudget)return null;
+ // Budget membership is replayed against current prices below; stored display
+ // ranking is required only for queries without a budget predicate.
+ const defaultDisplayQuery=(!hasBudget && defaultBrandQuery)||compactDefaultQuery;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
  const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
+  const index=await readBudgetCountIndex(manifest.generationId,params.market,defaultBrandQuery&&hasBudget).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   // Older selectors cannot distinguish seller-only display prices in default
   // ranking. Keep their authoritative fallback until enriched selectors exist.
@@ -2269,6 +2280,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows};
   }
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
+  const makeMembership=params.make&&!params.model?compileCatalogMakeMembership(params.make):null;
   // Safety normalization never changes make. Apply editorial values first, then
   // reject unrelated makes before the expensive model/specification matcher.
 
@@ -2279,7 +2291,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const marketKey=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):null;
   let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
-   ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
+   ((!params.make && !params.model) || (makeMembership
+    ? makeMembership({...row[5],market:row[0]} as CatalogSearchProjection)
+    : catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys))) &&
    eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
    (!marketKey || cleanFacet(row[0]).toLocaleLowerCase('ru-RU')===marketKey)
    && fuelMatches(row[5].fuel)
@@ -2291,7 +2305,15 @@ async function readBudgetSelection(params:CatalogSearchParams){
   if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
-   const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
+   // Brand/default-order searches used the bounded brand projection before
+   // this optimization. A missing/stale prepared price snapshot must preserve
+   // that fallback rather than start or join a whole-market replay.
+   const prepared=defaultBrandQuery?await mapWithConcurrency(markets,2,async market=>{
+    const fingerprint=await budgetPricingFingerprint(market);
+    return fingerprint?readPreparedBudgetPrices(pricedIndex,market,fingerprint):null;
+   }):null;
+   if(prepared?.some(rows=>rows===null))return null;
+   const parts=(prepared as BudgetCountIndex['rows'][]|null)??await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
    candidates=matchingBudgetIndex({...index,rows:parts.flat().filter(row=>ids.has(row[5].id))},params,quotes);
   } else if(hasBudget){
    const ids=new Set(candidates.map(row=>row[5].id));
@@ -2494,7 +2516,18 @@ const aggregateBudgetIndexCache=new AggregateBudgetIndexCache();
 const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<BudgetCountIndex|null>>();
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:4*1024*1024,ttlMs:300_000,concurrency:1});
 const specificationSelectorPath=(name:string)=>`${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}/${name}.json`;
-async function readBudgetCountIndex(generationId:string,market?:string){
+async function readBudgetCountIndex(generationId:string,market?:string,cachedOnly=false){
+ // A brand budget query must not load/decompress an entire country merely to
+ // discover that a small existing brand projection was the cheaper path.
+ // Reuse only a fresh, generation-bound selector already resident in this
+ // process; misses keep the original exact brand search without joining I/O.
+ if(cachedOnly){
+  const keys=market&&MARKETS.includes(market as CatalogMarket)
+   ?[`${generationId}:specifications:${market}`,`${generationId}:compressed:${market}`,`${generationId}:packed:${market}`,`${generationId}:${market}`,generationId]
+   :[generationId];
+  for(const key of keys){const index=budgetIndexCache.peekFresh(key);if(index?.generationId===generationId)return index;}
+  return null;
+ }
  if(market && MARKETS.includes(market as CatalogMarket)){
   const manifest=await readManifest();
   // An explicitly empty partition has no selector. Falling through to the
