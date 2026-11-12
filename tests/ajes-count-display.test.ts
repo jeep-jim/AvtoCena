@@ -137,12 +137,12 @@ test('exact base Corolla does not hide other Corollas in supplier search',async(
  assert.deepEqual(resolveAjesModelSelection('Corolla',[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'COROLLA FIELDER'},{model:'CAMRY'}]),{model:'COROLLA|COROLLA CROSS|COROLLA FIELDER'});
 });
 
- test('Japan power discovery ignores supplier alternatives and accepts only explicit owner rules',async()=>{
+ test('Japan approximate power discovery requires every supplier alternative within range',async()=>{
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const filter=ajesResultFilter({market:'japan',powerTo:'160'});
  for(const sourcePower of ['79,98','160','160,200','200,150','','0,98','79,bad','150,2501']){
   const offer={id:'ajes-stats-fixture',market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower}}};
-  assert.equal(filter.matches(offer),false,sourcePower);
+  assert.equal(filter.matches(offer),['79,98','160'].includes(sourcePower),sourcePower);
   assert.equal('powerHp' in offer,false);
  }
  const ownerStepwgn={id:'ajes-stats-owner',market:'japan',make:'HONDA',model:'STEPWGN',fuel:'petrol',powertrainKind:'combustion',operational:{chassisCode:'RP3',raw:{sourceFuel:'P',sourcePower:''}}};

@@ -1,0 +1,165 @@
+{
+  "firstRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/43230598304",
+  "followupRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/43231131609",
+  "reports": [
+    {
+      "checkedAt": "2026-11-12T13:47:39.792Z",
+      "scope": "Fixed aggregates and 24 anonymous power/fuel pairs; counts are not verified technical facts or unique available cars",
+      "results": [
+        {
+          "name": "main_positive",
+          "ms": 104,
+          "count": 88560
+        },
+        {
+          "name": "main_zero",
+          "ms": 96,
+          "count": 5710
+        },
+        {
+          "name": "stats_positive",
+          "ms": 1438,
+          "count": 1484041
+        },
+        {
+          "name": "stats_zero",
+          "ms": 1352,
+          "count": 677229
+        },
+        {
+          "name": "catalog_total",
+          "ms": 4322,
+          "count": 616533
+        },
+        {
+          "name": "catalog_scalar_1_160",
+          "status": 500
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-12T13:50:57.318Z",
+      "scope": "Fixed aggregates and 24 anonymous power/fuel pairs; counts are not verified technical facts or unique available cars",
+      "results": [
+        {
+          "name": "stats_numeric_comparison_1_160",
+          "ms": 1640,
+          "count": 1240018
+        },
+        {
+          "name": "stats_multiple_values",
+          "ms": 1350,
+          "count": 516213
+        },
+        {
+          "name": "catalog_first_24",
+          "ms": 4741,
+          "received": 24,
+          "values": [
+            {
+              "power": "120",
+              "fuel": ""
+            },
+            {
+              "power": "",
+              "fuel": ""
+            },
+            {
+              "power": "133,136",
+              "fuel": ""
+            },
+            {
+              "power": "",
+              "fuel": ""
+            },
+            {
+              "power": "",
+              "fuel": ""
+            },
+            {
+              "power": "49,52",
+              "fuel": ""
+            },
+            {
+              "power": "74",
+              "fuel": "H"
+            },
+            {
+              "power": "74",
+              "fuel": "H"
+            },
+            {
+              "power": "49,52",
+              "fuel": ""
+            },
+            {
+              "power": "49,52",
+              "fuel": ""
+            },
+            {
+              "power": "49,64",
+              "fuel": ""
+            },
+            {
+              "power": "82",
+              "fuel": "H"
+            },
+            {
+              "power": "",
+              "fuel": ""
+            },
+            {
+              "power": "143,158",
+              "fuel": ""
+            },
+            {
+              "power": "82",
+              "fuel": "H"
+            },
+            {
+              "power": "46,49,64",
+              "fuel": ""
+            },
+            {
+              "power": "",
+              "fuel": "H"
+            },
+            {
+              "power": "46,49,64",
+              "fuel": ""
+            },
+            {
+              "power": "133,136",
+              "fuel": ""
+            },
+            {
+              "power": "49,64",
+              "fuel": ""
+            },
+            {
+              "power": "79,83",
+              "fuel": "E"
+            },
+            {
+              "power": "98",
+              "fuel": ""
+            },
+            {
+              "power": "106,98",
+              "fuel": "H"
+            },
+            {
+              "power": "",
+              "fuel": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "First run stopped on HTTP500 for complex catalog scalar regexp predicate. Cause not proven; same query not retried.",
+    "SQL numeric comparison on composite PW is not an exact power count.",
+    "First catalogue sample:24 records,18 with PW,6 missing,12 source-only preliminary <=160 candidates after excluding H/HE/E codes. Full identities/enrichment/pricing not tested by this aggregate diagnostic."
+  ]
+}

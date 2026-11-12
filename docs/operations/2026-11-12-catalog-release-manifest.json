@@ -1,12 +1,17 @@
 {
   "base": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "purpose": "Isolated demand loading, protected prepared brand-budget search, and compiled make-only membership after expired Volkswagen rejection; blog excluded",
+  "purpose": "Isolated Japan preliminary power discovery plus previously reviewed login independent reads; includes prior prepared-search work; no whole-main deployment",
   "appPaths": [
+    "apps/web/app/(public)/login/page.tsx",
     "apps/web/components/autobot/Autobot.tsx",
+    "apps/web/components/catalog/CatalogCard.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
     "apps/web/lib/catalog/ajes-public.ts",
+    "apps/web/lib/catalog/ajes-result-filter.ts",
+    "apps/web/lib/catalog/japan-source-power.ts",
     "apps/web/lib/catalog/page-currency-converter.ts",
-    "apps/web/lib/catalog/storage.ts"
+    "apps/web/lib/catalog/storage.ts",
+    "apps/web/lib/dealers/exchange-rate.ts"
   ],
   "allowedPaths": [
     ".github/workflows/ci.yml",
@@ -21,16 +26,24 @@
     ".github/workflows/regcloud-overview.yml",
     ".github/workflows/regcloud-resume-japan.yml",
     ".github/workflows/regcloud-resume-korea-release.yml",
+    "apps/web/app/(public)/login/page.tsx",
     "apps/web/components/autobot/Autobot.tsx",
+    "apps/web/components/catalog/CatalogCard.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
     "apps/web/lib/catalog/ajes-public.ts",
+    "apps/web/lib/catalog/ajes-result-filter.ts",
+    "apps/web/lib/catalog/japan-source-power.ts",
     "apps/web/lib/catalog/page-currency-converter.ts",
     "apps/web/lib/catalog/storage.ts",
+    "apps/web/lib/dealers/exchange-rate.ts",
     "docs/operations/2026-11-11-accepted-browser-speed-baseline.json",
     "docs/operations/2026-11-11-accepted-speed-baseline.json",
     "docs/operations/2026-11-11-accepted-speed-browser-restored.json",
     "docs/operations/2026-11-11-budget-browser-idle.json",
     "docs/operations/2026-11-12-catalog-release-manifest.json",
+    "docs/operations/2026-11-12-japan-power-discovery-fix.md",
+    "docs/operations/2026-11-12-japan-power-source-evidence.json",
+    "docs/operations/2026-11-12-login-parallel-reads.md",
     "scripts/catalog-refresh-generation-pages.mjs",
     "scripts/lib/accepted-browser-speed.mjs",
     "scripts/lib/catalog-refresh-generation-pages.mjs",
@@ -42,6 +55,7 @@
     "scripts/regcloud-release-retention.py",
     "scripts/verify-frozen-speed-baselines.mjs",
     "tests/accepted-browser-speed.test.mjs",
+    "tests/ajes-count-display.test.ts",
     "tests/browser/autobot-session.mjs",
     "tests/browser/catalog-load-more-fixture.tsx",
     "tests/browser/catalog-load-more.mjs",
@@ -53,6 +67,8 @@
     "tests/catalog-make-only-membership.test.ts",
     "tests/catalog-market-brand-projection.test.ts",
     "tests/catalog-refresh-generation-pages.test.mjs",
+    "tests/japan-source-power.test.ts",
+    "tests/login-parallel-reads.test.ts",
     "tests/page-currency-converter.test.ts",
     "tests/regcloud-browser-handoff.test.py",
     "tests/regcloud-browser-verdict.test.py",
@@ -61,12 +77,15 @@
     "tests/release-speed-guard-contract.test.mjs"
   ],
   "reviews": {
-    "1756": "e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5",
-    "1758": "eb7411e574903fd700d3608a83952b00037fdbf5",
-    "1759": "393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a",
-    "1760": "a8b897fe597fa7832b65081687de95f117191a25",
-    "1762": "94b0d744bb07c17f3b70a6cd864371762ce93c7f",
-    "1763": "201e680c856c206b15bb7506bf2aadac79bed50b"
+    "login": {
+      "pr": 1754,
+      "sha": "933a3ca4c70f934f579bf2ad1d18597507e23314"
+    },
+    "japan": {
+      "pr": 1764,
+      "sha": "1b6c8c0ee65616c0850ae4b74677e62125214d3c",
+      "status": "checks pending"
+    }
   },
   "partnerBudgetsFixed": false
 }

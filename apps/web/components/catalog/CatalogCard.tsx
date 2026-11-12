@@ -1,5 +1,6 @@
 "use client";
 import {japanPowerEstimateLabel} from "@/lib/catalog/ajes-power-estimate";
+import {japanPowerSearchLabel} from "@/lib/catalog/japan-source-power";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import {useState} from "react";
@@ -74,7 +75,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
   const powerScenario = readCatalogPowerScenario(normalizedOffer);
-  const japanPowerLabel = japanPowerEstimateLabel(normalizedOffer);
+  const japanPowerLabel = japanPowerEstimateLabel(normalizedOffer)||japanPowerSearchLabel(normalizedOffer);
   const powerInfo = powerScenario ? null : recyclingPowerInfo(normalizedOffer);
   const powertrainKind = String(normalizedOffer.powertrainKind || "").toLowerCase();
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
