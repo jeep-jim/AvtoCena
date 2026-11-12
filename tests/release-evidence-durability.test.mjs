@@ -86,5 +86,6 @@ test('every optional GitHub mirror follows mandatory private evidence and source
   assert.match(mirror,/^        continue-on-error: true$/m);
   assert.match(mirror,/^        uses: actions\/upload-artifact@v4$/m);
  }
- assert.equal((controller.match(/prior activation may have started/g)||[]).length,3);
+ assert.equal((controller.match(/previous release not terminal/g)||[]).length,3);
+ assert.equal((controller.match(/retained release changed/g)||[]).length,3);
 });
