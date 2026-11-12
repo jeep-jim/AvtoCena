@@ -25997,3 +25997,14 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/905f2e5c3c1dcbadba046e7309b78235a3fba5c7
 
+
+
+### 12.11.2026 — индексы подготовлены; идёт приёмка установки
+
+- Release43177669836, source7a25739b4476d64834b7f3cdb4bfe7a45ff67f80. Этап Prepare exact price indexes before activating the release SUCCESS:08:06:30–08:42:23UTC. Сохранение market_prices, результатов рынков, подготовка браузера и финальный exact-source guard SUCCESS.
+- Deploy with rollback and resource measurements начался08:42:33UTC; на08:51:08UTC IN_PROGRESS. Это не подтверждение установки: server/browser verdict и независимая проверка итоговой версии ещё требуются. Пороги и source head не менялись, параллельная установка не запускалась.
+- Исторический PR1757 закрыт:6a048 отклонён замером Volkswagen after_ttl, новый изолированный кандидат — PR1761/7a257. Ни один отклонённый исходник неизменённо не перезапускался.
+- Блог исключён; JP/KR powerTo=160, права DUMP/полнота, RUM/p95, проверка восстановления и весь семипунктный план остаются незавершёнными.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/4bdc16699faa67b1935d89526d1ef2ea8b0c037e
+
