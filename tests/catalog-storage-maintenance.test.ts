@@ -18,3 +18,15 @@ const run=(root:string)=>spawnSync(process.execPath,['--import',loader,script],{
 test('maintenance deletes expired copies but keeps current, previous, newest and noncatalog data',async()=>{const {root,ids}=await setup();try{const r=run(root);assert.equal(r.status,0,r.stderr);await assert.rejects(fs.access(path.join(root,'data/catalog/generations',ids[1],'indexes/images-by-id.json')));for(const id of [ids[0],ids[2],ids[3]])await fs.access(path.join(root,'data/catalog/generations',id,'indexes/images-by-id.json'));await fs.access(path.join(root,'data/crm/leads.json'));const report=JSON.parse(await fs.readFile(path.join(root,'catalog-storage-maintenance.json'),'utf8'));assert.equal(report.ok,true);assert.equal(report.marketCounts.korea,2);assert.equal(JSON.parse(await fs.readFile(path.join(root,'data/catalog/import-lock.json'),'utf8')).lockedUntil,'');}finally{await fs.rm(root,{recursive:true,force:true});}});
 test('active publisher lock defers cleanup, records inventory and remains owned by publisher',async()=>{const {root,put,ids}=await setup();try{await put('catalog/import-lock.json',{operationId:'publisher',lockedUntil:new Date(Date.now()+600000).toISOString()});const r=run(root);assert.equal(r.status,0,r.stderr);for(const id of ids)await fs.access(path.join(root,'data/catalog/generations',id,'indexes/images-by-id.json'));assert.equal(JSON.parse(await fs.readFile(path.join(root,'data/catalog/import-lock.json'),'utf8')).operationId,'publisher');const report=JSON.parse(await fs.readFile(path.join(root,'catalog-storage-maintenance.json'),'utf8'));assert.equal(report.deferred,true);assert.equal(report.reason,'catalog_writer_busy');assert.equal(report.deletedObjects,0);assert.equal(Number.isSafeInteger(report.currentBytes),true);assert.equal(report.ok,true);}finally{await fs.rm(root,{recursive:true,force:true});}});
 test('unreadable live image index fails before deleting and releases lock',async()=>{const {root,ids}=await setup();try{await fs.unlink(path.join(root,'data/catalog/generations',ids[3],'indexes/images-by-id.json'));const r=run(root);assert.notEqual(r.status,0);await fs.access(path.join(root,'data/catalog/generations',ids[1],'indexes/images-by-id.json'));assert.equal(JSON.parse(await fs.readFile(path.join(root,'data/catalog/import-lock.json'),'utf8')).lockedUntil,'');}finally{await fs.rm(root,{recursive:true,force:true});}});
+
+test('maintenance retains a reused market chunk generation even when the top-level generation is newer',async()=>{
+ const {root,put,ids}=await setup();
+ try{
+  await put('catalog/manifest.json',{generationId:ids[3],markets:{china:{count:1,chunks:[`catalog/generations/${ids[1]}/offers/china/chunk-1.json`]}}});
+  await put(`catalog/generations/${ids[1]}/offers/china/chunk-1.json`,[{id:'retained-car'}]);
+  const r=run(root);assert.equal(r.status,0,r.stderr);
+  await fs.access(path.join(root,`data/catalog/generations/${ids[1]}/offers/china/chunk-1.json`));
+  const report=JSON.parse(await fs.readFile(path.join(root,'catalog-storage-maintenance.json'),'utf8'));
+  assert.ok(report.protectedGenerations.includes(ids[1]));
+ }finally{await fs.rm(root,{recursive:true,force:true});}
+});
