@@ -1,3 +1,12 @@
+# Current recovery checkpoint — 2026-11-12T00:03:33.931Z
+
+- ACTIVATION REQUESTED, NOT ACCEPTED: exactPR1755/f11285ebb378878832be91dd0b14633ade2351c2, all18source checks and full offlineguard43123630096 SUCCESS. Review1754/933a3ca merged2d0e060. Marker-only activation, no whole-main deployment or acceptance-history merge.
+- Await terminal release, mandatory nonce browser verdict and separate public retention check before acceptance/pin. Frozen limits/full-output/requestbudgets/35s/305s/rollback remain. No overlapping release or unchanged retry after measured failure.
+- Retaineda182/e36/c489 independently confirmed43121673944. Rejected75 closedPR1753. JP/KR ordinarypublicsearchworks but1.5mfirstscan0/hasMore; DUMPand14/3cadenceunenabled.
+- Current evidence and next steps:docs/operations/current-incident.md; prior checkpoints below are historical.
+
+---
+
 # Current recovery checkpoint — 2026-11-11T23:56:30.710Z
 
 - STAGED ONLY: isolated PR1755/f11285ebb378878832be91dd0b14633ade2351c2,27app/108changed/109allowed paths,18exactsource checks pending. Review1754/933a3ca all8checks SUCCESS, merged2d0e060. Controller updated but release marker UNCHANGED; run offline guard first. No deploy whole main, no merge acceptance history.

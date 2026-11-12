@@ -1,13 +1,13 @@
 {
-  "sourceSha": "75c2e6f57cfa4022865217e029a1f5d1671842c3",
-  "candidate": 1753,
-  "requestedAt": "2026-11-11T22:27:38.823Z",
-  "reason": "One exact-source release after reviewed conditional encyclopedia revalidation, identical sort order and overlay-history retention correction; all18 source checks and full controller guard43111118387 passed. Frozen performance/browser/rollback gates unchanged.",
+  "sourceSha": "f11285ebb378878832be91dd0b14633ade2351c2",
+  "candidate": 1755,
+  "requestedAt": "2026-11-12T00:03:33.931Z",
+  "reason": "One exact-source release after reviewed independent login and saved-rate overlap. All18 exact-source checks and full controller guard43123630096 passed; original complete server/browser speed, request budget, SHA/nonce and rollback gates unchanged.",
   "supersedes": [
-    "794654a00aa4990b284858f1f01c07ed3f020df4"
+    "75c2e6f57cfa4022865217e029a1f5d1671842c3"
   ],
-  "previousRun": 43098821534,
-  "controllerGuardRun": 43111118387,
-  "controllerGuardCommit": "c1c29d3f3b20b5920991196f19da6e3d30635762",
-  "rollbackProofRun": 43107566632
+  "previousRun": 43111977320,
+  "controllerGuardRun": 43123630096,
+  "controllerGuardCommit": "e3295321836f06da4bbb11b5893f5afe0968d6fc",
+  "rollbackProofRun": 43121673944
 }
