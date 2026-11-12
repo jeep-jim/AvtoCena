@@ -1,3 +1,4 @@
+import {referencedCatalogGenerations} from './lib/catalog-generation-references.mjs';
 import fs from "node:fs/promises";
 import {staleJapanPreviewObjects,stalePriceSnapshotObjects} from "./lib/catalog-runtime-cleanup.mjs";
 import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
@@ -134,6 +135,7 @@ const internalGeneration = String(internalManifest?.generationId || "");
 const previousManifest = await readDataJson("catalog/previous-manifest.json", null);
 const imageCleanupDeferredGenerations = [];
 const protectedGenerations = new Set([
+  ...referencedCatalogGenerations(publicManifest, previousManifest, internalManifest),
   publicGeneration,
   ...(previousManifest?.generationId ? [String(previousManifest.generationId)] : []),
   ...(!EMERGENCY && internalGeneration ? [internalGeneration] : []),
