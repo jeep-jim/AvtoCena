@@ -1,0 +1,49 @@
+[
+  {
+    "url": "https://api.zmaserv.ru/api/v1/catalog?per_page=24",
+    "status": 200,
+    "ttfbSeconds": 7.6491,
+    "readSeconds": 7.8443,
+    "readBytes": 13247,
+    "headers": {
+      "content-type": "application/json",
+      "server": "envoy"
+    },
+    "keys": [
+      "items",
+      "total",
+      "page",
+      "per_page",
+      "pages",
+      "next_cursor"
+    ],
+    "items": 24,
+    "total": 475680,
+    "per_page": 24
+  },
+  {
+    "url": "https://api.zmaserv.ru/api/v1/catalog/facets",
+    "status": 200,
+    "ttfbSeconds": 6.764,
+    "readSeconds": 6.9464,
+    "readBytes": 16012,
+    "headers": {
+      "content-type": "application/json",
+      "server": "envoy"
+    },
+    "keys": [
+      "markets",
+      "brands",
+      "models",
+      "engine_types",
+      "categories",
+      "bodies",
+      "drives",
+      "years",
+      "price"
+    ],
+    "items": 0,
+    "total": null,
+    "per_page": null
+  }
+]
