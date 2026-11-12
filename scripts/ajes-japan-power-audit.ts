@@ -14,15 +14,9 @@ async function main(){
  await assertCollectionEnabled('ajes_japan_feed');
  const password=await ajesPassword();if(!password)throw Error('not_configured');
  const storage=getJsonStorage();
- const catalogue=ajesQuery({table:'stats',aggregate:'count'}).sql;
  const requests=[
-  {name:'main_positive',table:'main',sql:'select count(*) from main where pw>0'},
-  {name:'main_zero',table:'main',sql:'select count(*) from main where pw=0'},
-  {name:'stats_positive',table:'stats',sql:'select count(*) from stats where pw>0'},
-  {name:'stats_zero',table:'stats',sql:'select count(*) from stats where pw=0'},
-  {name:'catalog_total',table:'stats',sql:catalogue},
-  {name:'catalog_scalar_1_160',table:'stats',sql:catalogue+" and pw regexp '^[0-9]+$' and pw>=1 and pw<=160"},
-  {name:'catalog_multiple_values',table:'stats',sql:catalogue+" and pw like '%,%'"},
+  {name:'stats_numeric_comparison_1_160',table:'stats',sql:'select count(*) from stats where pw>0 and pw<=160'},
+  {name:'stats_multiple_values',table:'stats',sql:"select count(*) from stats where pw like '%,%'"},
   {name:'catalog_first_24',table:'stats',sql:ajesQuery({table:'stats',pageSize:24}).sql.replace('select *','select pw,time')},
  ] as const;
  const report:any={checkedAt:new Date().toISOString(),scope:'Fixed aggregates and 24 anonymous power/fuel pairs; counts are not verified technical facts or unique available cars',results:[]};
