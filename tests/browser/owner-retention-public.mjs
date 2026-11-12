@@ -88,12 +88,32 @@ try{
    const q=new URLSearchParams({market,budgetTo:'1500000',pageSize:'6',city:'Москва'});
    const response=await diagnostic.request.get(origin+'/api/catalog/search?'+q,{timeout:35000});
    const value=await response.json().catch(()=>({}));
-   report.partnerBudgets.push({market,status:response.status(),seconds:Number(((performance.now()-started)/1000).toFixed(3)),items:Array.isArray(value.items)?value.items.length:0,total:value.total??null,partial:!!value.partial,stale:!!value.stale,hasMore:!!value.hasMore,interrupted:!!value.interrupted,error:typeof value.error==='string'&&/^[a-z_]{1,64}$/.test(value.error)?value.error:null,serverTiming:response.headers()['server-timing']??null});
+   report.partnerBudgets.push({market,status:response.status(),seconds:Number(((performance.now()-started)/1000).toFixed(3)),items:Array.isArray(value.items)?value.items.length:0,total:value.total??null,partial:!!value.partial,stale:!!value.stale,hasMore:!!value.hasMore,interrupted:!!value.interrupted,scanLimited:!!value.scanLimited,reads:value.reads??null,nextCursor:typeof value.nextCursor==='string'&&/^[1-9]\d{0,6}\.\d{1,2}$/.test(value.nextCursor)?value.nextCursor:null,error:typeof value.error==='string'&&/^[a-z_]{1,64}$/.test(value.error)?value.error:null,serverTiming:response.headers()['server-timing']??null});
   }catch(e){report.partnerBudgets.push({market,seconds:Number(((performance.now()-started)/1000).toFixed(3)),error:String(e.message).slice(0,300)});}
  }
+ report.partnerContinuations=[];
+ // Two explicit ordinary next-page reads at most, only when the first budget
+ // response is empty and supplies a valid continuation. Never crawl the feed.
+ for(const first of report.partnerBudgets.filter(r=>r.status===200&&r.items===0&&r.hasMore&&r.nextCursor&&!r.partial&&!r.stale&&!r.interrupted&&!r.error)){
+  const continuation={market:first.market,requests:[],uniqueItems:0,scope:'at most two explicit continuations; does not turn a slow/empty first response into speed success'};
+  report.partnerContinuations.push(continuation);let cursor=first.nextCursor;const ids=new Set();
+  for(let attempt=0;attempt<2&&cursor;attempt++){
+   const q=new URLSearchParams({market:first.market,budgetTo:'1500000',pageSize:'6',city:'Москва',after:cursor});
+   const started=performance.now();
+   try{
+    const response=await diagnostic.request.get(origin+'/api/catalog/search?'+q,{timeout:35000});
+    const value=await response.json().catch(()=>({})),items=Array.isArray(value.items)?value.items:[];
+    const next=typeof value.nextCursor==='string'&&/^[1-9]\d{0,6}\.\d{1,2}$/.test(value.nextCursor)?value.nextCursor:null;
+    const row={status:response.status(),seconds:Number(((performance.now()-started)/1000).toFixed(3)),items:items.length,partial:!!value.partial,stale:!!value.stale,interrupted:!!value.interrupted,scanLimited:!!value.scanLimited,hasMore:!!value.hasMore,cursorAdvanced:next!==cursor,error:typeof value.error==='string'&&/^[a-z_]{1,64}$/.test(value.error)?value.error:null};
+    for(const item of items)if(typeof item.id==='string')ids.add(item.id);continuation.uniqueItems=ids.size;continuation.requests.push(row);
+    if(response.status()!==200||row.error||row.partial||row.stale||row.interrupted||items.length||!row.hasMore||!next||next===cursor)break;
+    cursor=next;
+   }catch(e){continuation.requests.push({seconds:Number(((performance.now()-started)/1000).toFixed(3)),error:String(e.message).slice(0,300)});break;}
+  }
+ }
  report.partnerHealthAfter=await health(diagnostic);await diagnostic.close();
- report.partnerBudgetsReady=report.partnerBudgets.every(r=>r.status===200&&r.items>0&&!r.partial&&!r.stale&&!r.interrupted&&!r.error);
- report.partnerScope='Two ordinary public budget reads only; not whole-feed completeness, provider DUMP permission or general supplier availability.';
+ report.partnerBudgetsReady=report.partnerBudgets.every(r=>r.status===200&&r.items>0&&!r.partial&&!r.stale&&!r.interrupted&&!r.scanLimited&&!r.error);
+ report.partnerScope='Two initial ordinary public budget reads plus at most two explicit continuations each when empty; not whole-feed completeness, provider DUMP permission or general supplier availability.';
 }catch(error){
  report.error=String(error.message).slice(0,1500);
  if(active){report.failureState=await active.evaluate(()=>({url:location.href,y:scrollY,rows:document.querySelectorAll('article.ac-catalog-card,article.ac-catalog-list-row').length,dialogs:Array.from(document.querySelectorAll('[role=dialog]')).map(n=>n.getAttribute('aria-label')),filters:Array.from(document.querySelectorAll('input[name=model],input[name=make],input[aria-label="Цена: до"]')).map(n=>({name:n.name,label:n.getAttribute('aria-label'),value:n.value})),bodyPosition:document.body.style.position,scrollRestoration:history.scrollRestoration})).catch(()=>null);await active.screenshot({path:out+'/failure.png',fullPage:false}).catch(()=>{});}
