@@ -40,6 +40,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
    index.filterVersion=filterVersion;
    for(const params of [{make:'Hyundai',budgetTo:1710000,yearFrom:2022},{make:'Hyundai',model:'Avante',budgetTo:1710000,yearFrom:2022},{make:'Hyundai',model:'Avante',budgetTo:1710000,yearFrom:2022,sort:'updatedAt'},{budgetTo:1710000,yearFrom:2022},{budgetTo:1710000,yearFrom:2022,mileageTo:50000},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol'},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol|diesel',transmission:'automatic|cvt',drive:'fwd|awd',bodyType:'sedan|hatchback'},{budgetTo:100000,yearFrom:2022,mileageTo:50000}]){
    resetCatalogReadCachesForTests();reads.length=0;
+   if('make' in params)await countCatalogOffers({yearFrom:2022});
    const expected=rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).map(row=>row.id).sort();
    const [results,count,facets,brands]=await Promise.all([searchOffers(params),countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);
    assert.deepEqual(brands.counts,expected.length?{Hyundai:expected.length}:{});
