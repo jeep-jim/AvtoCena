@@ -3,7 +3,7 @@ import {getJsonStorage} from '../apps/web/lib/data';
 async function main(){
 const storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('object_storage_required');
-const allowed=new Set(['catalog/manifest.json','catalog/internal/manifest.json',...['china','uae','europe','georgia','korea'].map(m=>`catalog/intake-cursors/v1/${m}.json`)]);
+const allowed=new Set(['catalog/manifest.json','catalog/internal/manifest.json','catalog/operations/collection-controls-v1.json',...['china','uae','europe','georgia','korea'].map(m=>`catalog/intake-cursors/v1/${m}.json`)]);
 const originalFetch=globalThis.fetch;let requests=0;
 globalThis.fetch=async(input:any,options:any)=>{
  const u=new URL(String(input));
@@ -17,6 +17,8 @@ for(const market of ['china','uae','europe','georgia','korea']){
  const publicMarket=manifest?.markets?.[market],cursor=await read(`catalog/intake-cursors/v1/${market}.json`);
  report.markets[market]={publishedCount:publicMarket?.count??null,publishedChunks:publicMarket?.chunks?.length??null,updatedAt:publicMarket?.updatedAt??null,committedCursorFound:!!cursor,cursorGenerationId:cursor?.generationId??null,cursorUpdatedAt:cursor?.updatedAt??null,sources:(cursor?.sources||[]).map((s:any)=>({sourceId:s.sourceId,provider:s.provider,stopReason:s.stopReason,uniqueOffers:s.uniqueOffers??null,replicaSaved:!!s.replica,mode:s.mode??null}))};
 }
+const controls=await read('catalog/operations/collection-controls-v1.json');
+report.collectionControls=controls?{revision:controls.revision,markets:Object.fromEntries(Object.entries(controls.markets||{}).map(([k,v]:any)=>[k,v.enabled])),sources:Object.fromEntries(Object.entries(controls.sources||{}).map(([k,v]:any)=>[k,v.enabled]))}:null;
 report.internalSources=Object.entries(internal?.sources||{}).map(([id,s]:any)=>({sourceId:id,count:s.count??null,chunks:s.chunks?.length??null}));
 report.requests=requests;
 await fs.writeFile('local-market-readiness.json',JSON.stringify(report,null,2));
