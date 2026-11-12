@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing';
-import { countCatalogOffers, catalogSearchProjectionBalanceSources, catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
+import { countCatalogOffers, catalogSearchProjectionBalanceSources, catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers, searchOffersWithoutBudgetIndexForTests } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
@@ -63,6 +63,12 @@ test("all catalog filters use the projection when optional categorical shards ar
       const isolated = await searchOffers({ market: "korea", [name]: value, pageSize: 10 });
       assert.deepEqual(isolated.items.map((offer) => offer.id), ["filter-target"], `isolated filter failed: ${name}`);
     }
+    for(const city of [undefined,'Новокузнецк'])for(const sort of [undefined,'updatedAt','totalRub','totalRubDesc']){
+      const params={market:'korea',make:'Hyundai',model:'Avante (CN7)',budgetTo:2_300_000,pageSize:6,city,sort};
+      const indexed=await searchOffers(params),reference=await searchOffersWithoutBudgetIndexForTests(params);
+      assert.equal(indexed.total,reference.total);
+      assert.deepEqual(indexed.items.map(row=>[row.id,row.totalRub]),reference.items.map(row=>[row.id,row.totalRub]),'prepared brand budget preserves exact membership, order and visible prices');
+    }
     const filtered = await searchOffers(filters);
     assert.deepEqual(filtered.items.map((offer) => offer.id), ["filter-target"]);
     for (const query of [{}, {city:"Новокузнецк"}, filters, {...filters, city:"Новокузнецк"}, {market:"korea",budgetTo:1}, {market:"korea",yearFrom:2025}]) {
@@ -93,7 +99,7 @@ test("all catalog filters use the projection when optional categorical shards ar
     try {
       await Promise.all([searchOffers(filters), readCatalogFacets(filters)]);
       assert.equal(projectionReads, 0, "a selected make must not download the whole market");
-      assert.equal(brandProjectionReads, 1, "parallel results and facets share one compact brand read");
+      assert.equal(brandProjectionReads, 0, "brand and budget use the prepared selector without downloading the brand projection");
     } finally {
       storage.readJsonWithMeta = originalRead;
     }
@@ -115,7 +121,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.deepEqual(globalResults.items.map((offer) => offer.id), ["filter-target"]);
       assert.deepEqual(globalFacets.models, [{ make: "Hyundai", model: "Avante (CN7)" }]);
       assert.equal(allProjectionReads, 0, "a selected make must not download all markets");
-      assert.equal(brandProjectionReads, 1, "global results and facets share one compact brand read");
+      assert.equal(brandProjectionReads, 0, "global brand and budget reuse the prepared selector without a brand projection");
       assert.equal(manifestReads, 1, "the current all-market projection must validate the active manifest generation once");
     } finally {
       storage.readJsonWithMeta = originalRead;

@@ -2248,8 +2248,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const compactDefaultQuery=canUseMarketLanding(params)&&(editorialHasHidden(params.market)||Number(params.page||1)*Number(params.pageSize||24)>MARKET_LANDING_LIMIT);
  const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
- const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
- if(defaultBrandQuery && hasBudget)return null;
+ // Budget membership is replayed against current prices below; stored display
+ // ranking is required only for queries without a budget predicate.
+ const defaultDisplayQuery=(!hasBudget && defaultBrandQuery)||compactDefaultQuery;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
  const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
