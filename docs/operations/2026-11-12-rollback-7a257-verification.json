@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-11-12T08:54:19.559811+00:00",
+  "readOnly": true,
+  "identityBefore": {
+    "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+    "port": 3000
+  },
+  "localHealthBefore": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "publicHealthBefore": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "failedCandidateRunning": false,
+  "diskBytes": {
+    "total": 102916472832,
+    "used": 68860461056,
+    "free": 34039234560
+  },
+  "loginSamples": [
+    {
+      "phase": "first",
+      "seconds": 0.2702225986868143,
+      "bytes": 175932
+    },
+    {
+      "phase": "repeat",
+      "seconds": 0.2249672431498766,
+      "bytes": 175932
+    },
+    {
+      "phase": "after35s",
+      "seconds": 0.32043149461969733,
+      "bytes": 175932
+    }
+  ],
+  "identityAfter": {
+    "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+    "port": 3000
+  },
+  "localHealthAfter": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "publicHealthAfter": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "scope": "Independent rollback verification; three retained login requests on serving host, not isolated causal evidence or replacement baseline. No deployment/restart/configuration changes."
+}
