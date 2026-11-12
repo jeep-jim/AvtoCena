@@ -1,3 +1,12 @@
+# Current recovery checkpoint — 2026-11-12 Japan supplier follow-up
+
+- STAGED ONLY: isolated PR1765/2ac23e236132bc0119ddb19eb078d7c21d37a91b (10app/61paths), exact-source checks pending. Includes merged1754 login parallel reads missing from rejected7a257 and pending review1764 Japan preliminary PW discovery. No whole-main deploy or acceptance-history merge.
+- Main-based2967 tests, isolated96 tests, both workspaces TypeScript PASS. Controller staged; activation marker UNCHANGED. Require merged1764 exacthead, allsourcechecks, offlineguard and unchanged full server/browser/nonce/rollback gates. Add/verify live Japan power scenario before activation; supplier sample is not browser acceptance.
+- Supplier forbids Japan dump; bounded audit confirms main and stats differ. PW is approximate/composite, not certified power. Korea AutoAPI planned, not purchased/connected; current screenshot is Che168, not Korean credentials. No source switch, secret update or cadence change.
+- Latest details: docs/operations/current-incident.md and roadmap.md. Prior checkpoints below are historical.
+
+---
+
 # Current recovery checkpoint — 2026-11-12T00:03:33.931Z
 
 - ACTIVATION REQUESTED, NOT ACCEPTED: exactPR1755/f11285ebb378878832be91dd0b14633ade2351c2, all18source checks and full offlineguard43123630096 SUCCESS. Review1754/933a3ca merged2d0e060. Marker-only activation, no whole-main deployment or acceptance-history merge.
