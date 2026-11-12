@@ -1,0 +1,185 @@
+{
+  "checkedAt": "2026-11-12T07:34:16.580938+00:00",
+  "identityBefore": {
+    "source": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+    "port": 3000
+  },
+  "healthBefore": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "readOnly": true,
+  "scope": "Six sequential Volkswagen page/API requests on retained release, two 35s gaps. Serving host and concurrent traffic; no cold-process claim, no baseline replacement, no deployment. API is deliberately measured both after HTML and after its own expiry.",
+  "samples": [
+    {
+      "phase": "htmlFirst",
+      "route": "/cars?market=china&make=Volkswagen&page=2",
+      "at": "2026-11-12T07:34:16.632862+00:00",
+      "seconds": 1.7182,
+      "status": 200,
+      "bytes": 532683,
+      "serverTiming": null,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 4811638,
+        "user_usec": 4575961,
+        "system_usec": 235677,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 18,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "containerProcessCpuPercent": 278.77,
+      "hostCpuPercent": 34.88
+    },
+    {
+      "phase": "htmlRepeat",
+      "route": "/cars?market=china&make=Volkswagen&page=2",
+      "at": "2026-11-12T07:34:18.438180+00:00",
+      "seconds": 0.089,
+      "status": 200,
+      "bytes": 529737,
+      "serverTiming": null,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 163015,
+        "user_usec": 152096,
+        "system_usec": 10918,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 2,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "containerProcessCpuPercent": 179.72,
+      "hostCpuPercent": 22.86
+    },
+    {
+      "phase": "htmlAfter35s",
+      "route": "/cars?market=china&make=Volkswagen&page=2",
+      "at": "2026-11-12T07:34:53.615603+00:00",
+      "seconds": 0.0824,
+      "status": 200,
+      "bytes": 532683,
+      "serverTiming": null,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 74192,
+        "user_usec": 67018,
+        "system_usec": 7174,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 1,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "containerProcessCpuPercent": 97.09,
+      "hostCpuPercent": 13.27
+    },
+    {
+      "phase": "apiAfterHtml",
+      "route": "/api/catalog/search?market=china&make=Volkswagen&page=2",
+      "at": "2026-11-12T07:34:53.778350+00:00",
+      "seconds": 0.2355,
+      "status": 200,
+      "bytes": 197092,
+      "serverTiming": "catalog-read;dur=218.5, catalog-pricing;dur=9.8",
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 303796,
+        "user_usec": 294647,
+        "system_usec": 9148,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 3,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "containerProcessCpuPercent": 127.41,
+      "hostCpuPercent": 15.21
+    },
+    {
+      "phase": "apiAfter35s",
+      "route": "/api/catalog/search?market=china&make=Volkswagen&page=2",
+      "at": "2026-11-12T07:35:29.104157+00:00",
+      "seconds": 0.2256,
+      "status": 200,
+      "bytes": 197092,
+      "serverTiming": "catalog-read;dur=210.4, catalog-pricing;dur=8.8",
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 243888,
+        "user_usec": 239267,
+        "system_usec": 4622,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 3,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "containerProcessCpuPercent": 110.81,
+      "hostCpuPercent": 14.35
+    },
+    {
+      "phase": "htmlAfterApi",
+      "route": "/cars?market=china&make=Volkswagen&page=2",
+      "at": "2026-11-12T07:35:29.410215+00:00",
+      "seconds": 0.0681,
+      "status": 200,
+      "bytes": 533239,
+      "serverTiming": null,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 102831,
+        "user_usec": 99562,
+        "system_usec": 3268,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 1,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "containerProcessCpuPercent": 132.07,
+      "hostCpuPercent": 17.86
+    }
+  ],
+  "healthAfter": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "identityAfter": {
+    "source": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+    "port": 3000
+  },
+  "workflowUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/43176185558",
+  "jobId": 131040877320
+}
