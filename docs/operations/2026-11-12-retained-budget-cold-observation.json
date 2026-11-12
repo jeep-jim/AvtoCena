@@ -1,0 +1,114 @@
+{
+  "run": 43147442871,
+  "job": 130948460148,
+  "completedAtUTC": "2026-11-12T03:29:18.818Z",
+  "verified": true,
+  "skipped": false,
+  "measurements": [
+    {
+      "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "generation": "gen_1794357678562_9c0667cb",
+      "warmed": [
+        {
+          "market": "china",
+          "rows": 173809,
+          "ms": 4804
+        },
+        {
+          "market": "korea",
+          "rows": 3453,
+          "ms": 14124
+        },
+        {
+          "market": "uae",
+          "rows": 19,
+          "ms": 20760
+        },
+        {
+          "market": "europe",
+          "rows": 35185,
+          "ms": 60843
+        },
+        {
+          "market": "georgia",
+          "rows": 8,
+          "ms": 3020
+        }
+      ],
+      "sorted": [
+        {
+          "market": "china",
+          "total": 244471,
+          "ms": 4413
+        },
+        {
+          "market": "korea",
+          "total": 9891,
+          "ms": 615
+        },
+        {
+          "market": "europe",
+          "total": 38964,
+          "ms": 453
+        },
+        {
+          "market": "uae",
+          "total": 25662,
+          "ms": 186
+        },
+        {
+          "market": "georgia",
+          "total": 1281,
+          "ms": 10
+        }
+      ],
+      "probes": [
+        {
+          "params": {
+            "market": "china",
+            "budgetTo": 3000000,
+            "pageSize": 12
+          },
+          "total": 76457,
+          "ms": 28527,
+          "cpuMs": 9080,
+          "readBytes": 25471493,
+          "readCount": 255
+        },
+        {
+          "params": {
+            "market": "china",
+            "budgetFrom": 1500000,
+            "budgetTo": 2500000,
+            "city": "Новокузнецк",
+            "yearFrom": 2022,
+            "pageSize": 12
+          },
+          "total": 15289,
+          "ms": 28657,
+          "cpuMs": 8501,
+          "readBytes": 25471493,
+          "readCount": 255
+        },
+        {
+          "params": {
+            "market": "korea",
+            "budgetTo": 3000000,
+            "pageSize": 12
+          },
+          "total": 1103,
+          "ms": 8355,
+          "cpuMs": 2335,
+          "readBytes": 1842626,
+          "readCount": 20
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "GitHub runner cold-process probes, not production or browser timings",
+    "readBytes measures serialized storage values, not network wire bytes",
+    "readCount measures instrumented storage reads, not confirmed independent TCP requests",
+    "These are general budget queries, not a measured brand-budget comparison"
+  ]
+}
