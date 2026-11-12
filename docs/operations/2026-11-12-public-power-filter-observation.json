@@ -1,0 +1,37 @@
+{
+  "dateUTC": "2026-11-12",
+  "scope": "One public read per market from this cloud environment; no stress test; no private source rows stored",
+  "requestTemplate": "https://avtocena.com/api/catalog/search?market={market}&powerTo=160&pageSize=6",
+  "japan": {
+    "http": 200,
+    "elapsedSeconds": 8.673,
+    "serverTiming": "catalog-total;dur=454.4, query-resolution;dur=0.0, supplier-read;dur=441.5, editorial-read;dur=11.3, detail-cache-sum;dur=0.0, enrichment-sum;dur=5.8, pricing;dur=0.0",
+    "items": 0,
+    "total": null,
+    "partial": true,
+    "scanLimited": false,
+    "interrupted": false,
+    "reads": 1,
+    "hasMore": false,
+    "nextCursor": null
+  },
+  "korea": {
+    "http": 200,
+    "elapsedSeconds": 7.143,
+    "serverTiming": "catalog-total;dur=1341.9, query-resolution;dur=0.0, supplier-read;dur=679.8, editorial-read;dur=0.0, detail-cache-sum;dur=2336.3, enrichment-sum;dur=23.0, pricing;dur=0.0",
+    "items": 0,
+    "total": null,
+    "partial": false,
+    "scanLimited": true,
+    "interrupted": false,
+    "reads": 8,
+    "hasMore": true,
+    "nextCursor": "9.0"
+  },
+  "limitations": [
+    "No full inventory count",
+    "No proof of supplier outage",
+    "External elapsed time is not comparable with server duration or user browser latency",
+    "Parallel stage sums are not sequential request latency"
+  ]
+}
