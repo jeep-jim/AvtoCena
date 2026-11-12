@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {defaultShowcase,calculateSpecial,normalizeShowcase,type SpecialOffer} from '../apps/web/lib/dealers/showcase-model';
 import {deliveryDistance,estimateDealerDelivery,deliveryLocation,deliveryCalibrationError} from '../apps/web/lib/dealers/delivery-estimate';
-import {selectCityShowcases} from '../apps/web/lib/dealers/public-showcase';
+import {selectCityShowcases,selectHomeShowcases} from '../apps/web/lib/dealers/public-showcase';
 const s=defaultShowcase('dealer_topavto'),tariffs=s.pricing.tariffs;
 test('delivery anchors are exact; new cities use calibrated geographic estimates',()=>{
  assert.equal(estimateDealerDelivery('Бишкек','Новосибирск',tariffs,true)?.usd,900);
@@ -48,3 +48,19 @@ test('delivery calibration requires two priced known cities at least 100 km away
  assert.ok(deliveryCalibrationError('Бишкек',[tariffs[0],{...tariffs[1],usd:0}]));
  assert.equal(deliveryCalibrationError('Бишкек',tariffs),null);
 });
+
+ test('homepage specials remain nationwide with multiple dealers without moving stock or mutating data',()=>{
+ const pilot=structuredClone(s);
+ pilot.offices=[{id:'nk',city:'Новокузнецк',address:'Адрес',phone:'',hours:'',lat:null,lon:null,photos:[]}];
+ pilot.offers=[{id:'special',availability:'order'},{id:'stock',availability:'stock'},{id:'market',availability:'market'}] as SpecialOffer[];
+ const other={...defaultShowcase('other','Другой'),offices:[{...pilot.offices[0],city:'Москва'}],offers:[{id:'other-special',availability:'order'}] as SpecialOffer[]};
+ const before=structuredClone([pilot,other]);
+ for(const city of ['Москва','Новосибирск','Красноярск']){
+  const result=selectHomeShowcases([pilot,other],city);
+  assert.deepEqual(result.find(d=>d.dealerId===pilot.dealerId)?.offers.map(o=>o.id),['special']);
+  assert.ok(result.some(d=>d.dealerId==='other'));
+ }
+ assert.deepEqual(selectHomeShowcases([pilot,other],'Новокузнецк')[0].offers.map(o=>o.id),['special','stock','market']);
+ assert.deepEqual(selectHomeShowcases([pilot,other],'')[0].offers,pilot.offers);
+ assert.deepEqual([pilot,other],before);
+ });
