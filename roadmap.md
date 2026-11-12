@@ -25953,3 +25953,14 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/49b7f06fb36d33450ea39f2da3272815e05df5c4
 
+
+
+### 12.11.2026 — запущена приёмка7a257, результата установки ещё нет
+
+- Run43177669836: https://github.com/jeep-jim/AvtoCena/actions/runs/43177669836. Маркер86381b9e3860116e043e5c789e49f9b4e373eaac; точный исходник PR1761/7a25739b4476d64834b7f3cdb4bfe7a45ff67f80. Все8source-checks SUCCESS, включая CI43176349867. Полный controller guard43177027313 SUCCESS на49b7f06fb36d33450ea39f2da3272815e05df5c4. Контроллер не менялся после проверки.
+- PR1763/201e680 прошёл все6checks,CI43175986813 SUCCESS,слит aec62c1ec275328d16db2cf9d556b7b417bc3790. Пять app-файлов/50разрешённых путей,новый исходник не равен отклонённому6a. Закреплённые эталоны,полнота,35/305s,SHA/nonce/browser/rollback сохранены. Не менять этот head и не запускать параллельную установку.
+- Перед запуском публичный health07:44:31UTC подтвердил a182/c489. ЖивойAPI Volkswagen page2 вернул24карточки,total21907,usedIndexShards budget-cards-v3/0.json,274.json,1.json — активный путь действительно использует compact selection. Server-Timing read456.3ms/pricing9.4ms относится к одному ответу, не к новому исходнику.
+- Текущий этап: wait-for-astra; проверка точногоPR/reviews/checks уже прошла. Подготовка цен,server/browser приёмка и установка ещё не подтверждены. Блог исключён. JP/KRполнота и весь семипунктный план не объявляются завершёнными.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/19faa034098b85fb2ead018a33f38e95e16f2d96
+
