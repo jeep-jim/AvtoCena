@@ -14,17 +14,6 @@ export async function readBlogPost(slug:string,includeDrafts=false){
  const summary=(await blogIndex(true)).find(p=>p.slug===slug);if(!summary||!includeDrafts&&summary.status!=='published')return null;
  return summary.key?getJsonStorage().readJson<BlogPost|null>(summary.key,null):seeds.find(p=>p.slug===slug)||null;
 }
-/** Share one authoritative index read between the article and related cards.
- * No time-based cache: an unpublished article must disappear immediately.
- */
-export async function readBlogArticle(slug:string){
- const posts=await blogIndex();
- const summary=posts.find(post=>post.slug===slug);
- if(!summary)return null;
- const post=summary.key?await getJsonStorage().readJson<BlogPost|null>(summary.key,null):seeds.find(post=>post.slug===slug)||null;
- if(!post||post.status!=='published')return null;
- return {post,related:posts.filter(row=>row.slug!==slug).slice(0,3)};
-}
 export async function saveBlogPost(input:Record<string,unknown>){
  const clean=cleanBlogPost(input),old=await readBlogPost(clean.slug,true);
  if(old&&old.revision!==input.revision||!old&&input.revision)throw new BlogConflict('Статья уже изменена. Обновите страницу.');

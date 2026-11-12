@@ -75,3 +75,36 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   assert.deepEqual((await readCatalogFacets({budgetTo:1620000,transmission:'manual',city:'Уссурийск'})).transmissions,[],'city delivery must still affect price-bound facet membership');
  }finally{storage.readJsonWithMeta=original;resetCatalogReadCachesForTests();}
 });
+
+
+test('160 hp metadata count covers all matches while six-card pages read only selected blocks',async()=>{
+ const base:any={market:'europe',make:'Audi',model:'A3',year:2024,totalRub:1500000,publicVisibleRub:1500000,mileageKm:10000,engineCc:1598,powerHp:150,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.test/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-11-12T00:00:00Z'};
+ const rows=Array.from({length:20},(_,i)=>({...base,id:`power-page-${i}`,powerHp:i<14?150:i<18?180:undefined}));
+ const generationId='six-card-power',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,i])));
+ const storage=getJsonStorage(),original=storage.readJsonWithMeta,reads:string[]=[];
+ storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
+  reads.push(key);let value:unknown;
+  if(key==='catalog/manifest.json')value={generationId,markets:{europe:{count:rows.length}}};
+  else if(key.endsWith('/budget-count-v2.json'))value=index;
+  else if(key.includes('/budget-cards-v2/')){const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:[rows[block]]};}
+  else if(key.includes('/projection/'))assert.fail('power filter must not read the full projection');
+  else return {found:false,value:fallback};
+  return {found:true,value:value as T};
+ };
+ try{
+  resetCatalogReadCachesForTests();
+  const params={market:'europe',powerTo:160,pageSize:6};
+  const count=await countCatalogOffers(params);
+  assert.equal(count.total,14,'count is not limited to the first six matching offers');
+  assert.equal(reads.filter(k=>k.includes('/budget-cards-')).length,0,'count reads metadata only');
+  const seen=new Set<string>();
+  for(const page of [1,2,3]){
+   reads.length=0;
+   const result=await searchOffers({...params,page});
+   assert.equal(result.total,14);assert.equal(result.items.length,page===3?2:6);
+   assert.equal(reads.filter(k=>k.includes('/budget-cards-')).length,result.items.length,'only this page card blocks are loaded');
+   for(const row of result.items){assert.ok(!seen.has(row.id),'pages must not repeat an offer');seen.add(row.id);assert.equal(row.powerHp,150);}
+  }
+  assert.deepEqual([...seen].sort(),rows.slice(0,14).map(r=>r.id).sort());
+ }finally{storage.readJsonWithMeta=original;resetCatalogReadCachesForTests();}
+});
