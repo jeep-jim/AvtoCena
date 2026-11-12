@@ -26106,3 +26106,14 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/c96aaff1cfb6217671262f7bd4bd7b1c85a0246e
 
+
+
+### 12.11.2026 — свежая ёмкость подтверждена; срочная покупка ресурсов не нужна
+
+- REG audit43250312830/job131294004673 SUCCESS:135747current objects/156952142304bytes=156.952GB;7generations/75.233GB. Versions:noncurrent0;multipart0;errors[];publicGenerationUnchanged=true. Разница7MBмежду обходамиcurrent/versions возможна из-заактивныхзаписей; это неатомарныйснимок. При1TBразница~843GBдоучётаоперационного20%резерва. Это замер,не результаточисткиэтойсессии.
+- VM43250587665/job131294980425 SUCCESS:8logicalCPU,16GBRAM,10.5GiBavailable,29.7GiBdiskfree;productionrunning/a182/c489. НоваяVMилипокупкадисканесоздавались; срочнаянеобходимостьCPU/RAMнеподтверждена. Доказательства docs/operations/2026-11-12-local-data-capacity.json.
+- PR1767/d698532599235175c51c093060f1f868baaa4b4d: защита поколений,на которые ссылаютсяактивные marketchunks,и20%свободногоstorage сверхоценкиновыхкопий.12maintenance+3budgettestsPASS,CIидёт. Livecleanupнепроводилась;39.026GBстарыхнеprotectedпоисторическомуалгоритмунеравныразрешённомуудалению.
+- Запускаетсямалыйread-onlyаудитсохранённыхmanifests/cursorsвсехнеяпонскихрынков,безsupplierrequests/записи,длявыявлениянедостающихлокальныхданных. Релиз43237942492ещёготовитцены;новаяархитектураполностьюпринятойнеобъявляется. КореяAutoAPIожидаетпокупки.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/86837bff82c3c1b3525fc9bac092d9ea30a0ca98
+
