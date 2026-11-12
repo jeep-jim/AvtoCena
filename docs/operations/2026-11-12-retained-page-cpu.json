@@ -1,0 +1,176 @@
+{
+  "checkedAt": "2026-11-12T04:09:46.540840+00:00",
+  "identityBefore": {
+    "source": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+    "port": 3000
+  },
+  "healthBefore": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "readOnly": true,
+  "scope": "Current retained release on serving host; all container processes sampled, no command lines; not original baseline replacement or traffic-free comparison",
+  "samples": [
+    {
+      "phase": "healthFirst",
+      "route": "/api/health",
+      "at": "2026-11-12T04:09:46.594331+00:00",
+      "seconds": 0.0028,
+      "status": 200,
+      "bytes": 217,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 28278,
+        "user_usec": 28194,
+        "system_usec": 84,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 1,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "hostCpuPercent": 25.71
+    },
+    {
+      "phase": "blogFirst",
+      "route": "/blog",
+      "at": "2026-11-12T04:09:46.686957+00:00",
+      "seconds": 0.1698,
+      "status": 200,
+      "bytes": 137309,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 189671,
+        "user_usec": 176699,
+        "system_usec": 12972,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 2,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "hostCpuPercent": 19.65
+    },
+    {
+      "phase": "healthAfterBlog",
+      "route": "/api/health",
+      "at": "2026-11-12T04:09:46.943898+00:00",
+      "seconds": 0.0027,
+      "status": 200,
+      "bytes": 217,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 5613,
+        "user_usec": 5614,
+        "system_usec": 0,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 0,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "hostCpuPercent": 20
+    },
+    {
+      "phase": "blogRepeat",
+      "route": "/blog",
+      "at": "2026-11-12T04:09:49.041875+00:00",
+      "seconds": 0.8137,
+      "status": 200,
+      "bytes": 137309,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 3342151,
+        "user_usec": 3125042,
+        "system_usec": 217109,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 8,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "hostCpuPercent": 52.9
+    },
+    {
+      "phase": "healthAfter35s",
+      "route": "/api/health",
+      "at": "2026-11-12T04:10:24.945236+00:00",
+      "seconds": 0.0036,
+      "status": 200,
+      "bytes": 217,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 3385,
+        "user_usec": 2426,
+        "system_usec": 958,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 0,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "hostCpuPercent": 21.21
+    },
+    {
+      "phase": "blogAfter35s",
+      "route": "/blog",
+      "at": "2026-11-12T04:10:25.024280+00:00",
+      "seconds": 0.0707,
+      "status": 200,
+      "bytes": 137309,
+      "complete": true,
+      "cpuMax": "600000 100000",
+      "cpuStatDelta": {
+        "usage_usec": 53539,
+        "user_usec": 42611,
+        "system_usec": 10927,
+        "nice_usec": 0,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 2,
+        "nr_throttled": 0,
+        "throttled_usec": 0,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "containerProcessCount": 1,
+      "hostCpuPercent": 16.47
+    }
+  ],
+  "healthAfter": {
+    "ok": true,
+    "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+  },
+  "identityAfter": {
+    "source": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "image": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+    "port": 3000
+  },
+  "measurementNotes": [
+    "HTTP seconds measure the complete response on the serving host, not browser rendering.",
+    "CPU counters include diagnostic commands and concurrent traffic; they cannot be attributed to a single request. Process percentage omitted because sample and denominator intervals differ.",
+    "Six samples do not establish p95 or replace frozen acceptance baselines."
+  ]
+}
