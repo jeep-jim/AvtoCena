@@ -1,4 +1,4 @@
 {
-  "requestedAt": "2026-11-12T16:06:12.314Z",
-  "reason": "Verify controller after measured offline work exhausted 90-minute whole-job budget. Candidate57b unchanged; original visitor timing, completeness, browser nonce and rollback gates unchanged. Previous43237942492 terminal cancelled before deployment."
+  "requestedAt": "2026-11-12T16:07:23.263Z",
+  "reason": "Full guard rerun after preserving existing terminal diagnostic label; prior test expected the same label at all three source checks. No evidence or runtime gate removed."
 }
