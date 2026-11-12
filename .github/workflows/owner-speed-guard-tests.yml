@@ -31,6 +31,7 @@ jobs:
           assert trigger=={'push':{'branches':['main'],'paths':['.github/market-runs/owner-navigation-release.json']}}
           assert workflow['permissions']=={'contents':'read','actions':'read'}
           assert workflow['concurrency']=={'group':'regcloud-production-release','cancel-in-progress':False}
+          assert workflow['jobs']['prepare']['timeout-minutes']==150
           scripts=0;guards=0
           with tempfile.TemporaryDirectory() as temp:
               for job in workflow['jobs'].values():
@@ -44,7 +45,7 @@ jobs:
                           if label=='SOURCE_GUARD':
                               compile(body,label,'exec');guards+=1
                               assert "api('pulls/1765')" in body and "1756" in body and all(str(number) in body for number in [1758,1759,1760,1762,1763,1754,1764,1766])
-                              assert "actions/runs/43177669836" in body and "a182cd21b21ecf612b63613d263e5bdd817ea4c0" in body
+                              assert "actions/runs/43237942492" in body and "a182cd21b21ecf612b63613d263e5bdd817ea4c0" in body
                           elif label=='REMOTE':
                               subprocess.run(['bash','-n'],input=body,text=True,check=True)
                           else:
