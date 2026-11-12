@@ -48,6 +48,8 @@ test("all catalog filters use the projection when optional categorical shards ar
         semanticEvidence: {fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1598},powerHp:{status:'exact',value:123}} },
     } as any]);
 
+    const {warmBudgetPriceCaches}=await import('../apps/web/lib/catalog/storage');
+    await warmBudgetPriceCaches(['korea']);
     const manifest = await readDataJson<any>("catalog/manifest.json", {});
     const projection = await readDataJson<any>(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`, {});
     assert.equal(projection.items?.[0]?.bodyType, "sedan");
@@ -221,6 +223,8 @@ test('prepared brand budget pagination preserves authoritative order and prices 
    operational:{sourceUrl:`https://www.encar.com/dc/dc_cardetailview.do?carid=BRAND${i}`,photoIdentityVerified:true,semanticEvidence:{fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1598},powerHp:{status:'exact',value:i>=14&&i<16?180:123}}}
   }));
   await persistCatalogOffers(rows as any);
+  const {warmBudgetPriceCaches}=await import('../apps/web/lib/catalog/storage');
+  await warmBudgetPriceCaches(['korea']);
   for(const city of [undefined,'Новокузнецк'])for(const sort of [undefined,'updatedAt','totalRub','totalRubDesc']){
    const query={market:'korea',make:'Hyundai',model:'Avante (CN7)',powerTo:160,budgetTo:3_000_000,city,sort,pageSize:6};
    resetCatalogReadCachesForTests();
