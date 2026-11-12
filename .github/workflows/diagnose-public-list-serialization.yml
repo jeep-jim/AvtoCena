@@ -1,0 +1,64 @@
+name: Diagnose public list serialization once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-public-list-serialization.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-public-list-serialization-diagnostic
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 7a25739b4476d64834b7f3cdb4bfe7a45ff67f80
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Compare existing public serializer against one live page without changing production
+        run: |
+          node --import tsx --input-type=module - <<'COMPARE'
+          import assert from 'node:assert/strict';
+          import {publicOffer} from './apps/web/lib/catalog/storage.ts';
+          import {normalizeVehicleOfferSpecs} from './apps/web/lib/catalog/spec-normalization.ts';
+          import {presentCatalogOffer} from './apps/web/lib/catalog/presentation.ts';
+          import {catalogPowerDisplay} from './apps/web/lib/catalog/power-display.ts';
+          import {catalogOfferVisibleRub} from './apps/web/lib/catalog/public-priority.ts';
+          import {readCatalogPowerScenario} from './apps/web/lib/catalog/power-scenario.ts';
+          import {recyclingPowerInfo} from './apps/web/lib/catalog/recycling-power.ts';
+          import {hasModificationSelection} from './apps/web/lib/catalog/modification-contract.ts';
+          import {isSellerPricedOffer} from './apps/web/lib/catalog/seller-price-contract.ts';
+          import {chinaCardVariant} from './apps/web/lib/catalog/china-card-variant.ts';
+          const get=async path=>{
+            const response=await fetch('https://avtocena.com'+path,{signal:AbortSignal.timeout(25000)});
+            assert.equal(response.status,200);
+            const text=await response.text();assert.ok(Buffer.byteLength(text)<2000000);
+            return {value:JSON.parse(text),bytes:Buffer.byteLength(text)};
+          };
+          const before=(await get('/api/health')).value;
+          assert.equal(before.ok,true);
+          const {value:page,bytes}=await get('/api/catalog/search?market=china&make=Volkswagen&page=2');
+          assert.equal(page.ok,true);assert.equal(page.items.length,24);assert.ok(page.total>24);
+          const view=raw=>{
+            const selection=hasModificationSelection(raw),seller=isSellerPricedOffer(raw);
+            const n=selection||seller?raw:normalizeVehicleOfferSpecs(raw),p=presentCatalogOffer(n);
+            return {id:raw.id,title:p.title,make:n.make,model:n.model,year:n.year,engineCc:n.engineCc,fuel:n.fuel,powertrainKind:n.powertrainKind,drive:n.drive,transmission:n.transmission,bodyType:n.bodyType,sourcePrice:n.sourcePrice,sourceCurrency:n.sourceCurrency,price:catalogOfferVisibleRub(n),previousTotalRub:n.previousTotalRub,priceDeltaRub:n.priceDeltaRub,power:catalogPowerDisplay(n),scenario:readCatalogPowerScenario(n),recycling:recyclingPowerInfo(n),variant:chinaCardVariant(raw),selection,seller,calculationSnapshot:n.calculationSnapshot,images:n.images};
+          };
+          const projected=page.items.map(row=>publicOffer(structuredClone(row)));
+          const differences=[];
+          for(let i=0;i<page.items.length;i++){
+            const a=view(page.items[i]),b=view(projected[i]);
+            for(const key of Object.keys(a))if(JSON.stringify(a[key])!==JSON.stringify(b[key]))differences.push({row:i,field:key});
+          }
+          const after=(await get('/api/health')).value;
+          assert.equal(after.ok,true);assert.equal(after.releaseSha,before.releaseSha);assert.equal(after.calculationVersion,before.calculationVersion);
+          console.log('PUBLIC_LIST_SERIALIZATION_REPORT '+JSON.stringify({scope:'One live Volkswagen page, comparison in runner only. No production change; no claim for other markets or vehicle types.',release:before.releaseSha,calculationVersion:before.calculationVersion,items:page.items.length,total:page.total,responseBodyBytes:bytes,serializedBeforeBytes:Buffer.byteLength(JSON.stringify(page)),serializedAfterBytes:Buffer.byteLength(JSON.stringify({...page,items:projected})),differences,operationalBefore:page.items.filter(row=>row.operational).length,operationalAfter:projected.filter(row=>row.operational).length}));
+          assert.deepEqual(differences,[],'public serializer changes visible or calculation fields; do not implement without resolving');
+          COMPARE
