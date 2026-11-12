@@ -2317,7 +2317,15 @@ async function readBudgetSelection(params:CatalogSearchParams){
   if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
-   const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
+   // Brand/default-order searches used the bounded brand projection before
+   // this optimization. A missing/stale prepared price snapshot must preserve
+   // that fallback rather than start or join a whole-market replay.
+   const prepared=defaultBrandQuery?await mapWithConcurrency(markets,2,async market=>{
+    const fingerprint=await budgetPricingFingerprint(market);
+    return fingerprint?readPreparedBudgetPrices(pricedIndex,market,fingerprint):null;
+   }):null;
+   if(prepared?.some(rows=>rows===null))return null;
+   const parts=(prepared as BudgetCountIndex['rows'][]|null)??await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
    candidates=matchingBudgetIndex({...index,rows:parts.flat().filter(row=>ids.has(row[5].id))},params,quotes);
   } else if(hasBudget){
    const ids=new Set(candidates.map(row=>row[5].id));
