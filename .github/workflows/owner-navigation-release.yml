@@ -41,7 +41,7 @@ jobs:
           for r in runs['workflow_runs']:
            assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
           previous=api('actions/runs/43237942492')
-          assert previous['status']=='completed' and previous['conclusion']=='cancelled','previous preparation not terminal'
+          assert previous['status']=='completed' and previous['conclusion']=='cancelled','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator changed'
@@ -120,7 +120,7 @@ jobs:
           for r in runs['workflow_runs']:
            assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
           previous=api('actions/runs/43237942492')
-          assert previous['status']=='completed' and previous['conclusion']=='cancelled','previous preparation not terminal'
+          assert previous['status']=='completed' and previous['conclusion']=='cancelled','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator changed'
@@ -468,7 +468,7 @@ jobs:
           for r in runs['workflow_runs']:
            assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
           previous=api('actions/runs/43237942492')
-          assert previous['status']=='completed' and previous['conclusion']=='cancelled','previous preparation not terminal'
+          assert previous['status']=='completed' and previous['conclusion']=='cancelled','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained release changed'
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator changed'
