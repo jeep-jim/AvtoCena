@@ -76,6 +76,38 @@ try{
   report.speedGuard=acceptedBrowserSpeed(report,JSON.parse(fs.readFileSync('docs/operations/2026-11-11-accepted-browser-speed-baseline.json','utf8')));
   assert.ok(report.speedGuard.passed,'accepted_browser_speed_regression');
  }
+ // Additional functional scenarios run after frozen speed measurements.
+ if(marker.verifyJapanAndSpecials){
+  const context=await browser.newContext({viewport:{width:1280,height:900},serviceWorkers:'block',locale:'ru-RU'});
+  const page=await context.newPage();activePage=page;
+  const health=await context.request.get(origin+'/api/health',{timeout:30000});assert.equal((await health.json()).releaseSha,marker.release);
+  report.homeSpecials=[];
+  for(const city of ['Новокузнецк','Москва']){
+   const started=performance.now();
+   assert.equal((await page.goto(origin+'/?city='+encodeURIComponent(city),{waitUntil:'domcontentloaded',timeout:90000})).status(),200);
+   const cards=page.locator('[data-site-block="specials"] a.ac-special-card');
+   await cards.first().waitFor({state:'visible',timeout:45000});
+   const hrefs=await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
+   assert.ok(hrefs.length>0,'homepage special offers must be present in '+city);
+   report.homeSpecials.push({city,hrefs,seconds:Number(((performance.now()-started)/1000).toFixed(3))});
+  }
+  const nk=report.homeSpecials[0].hrefs,moscow=new Set(report.homeSpecials[1].hrefs);
+  assert.ok(nk.every(href=>moscow.has(href)),'hometown special offers must remain visible in Moscow');
+  const started=performance.now();
+  assert.equal((await page.goto(origin+'/cars?market=japan&powerTo=160',{waitUntil:'domcontentloaded',timeout:90000})).status(),200);
+  const cards=page.locator('article.ac-catalog-card,article.ac-catalog-list-row');
+  await cards.first().waitFor({state:'visible',timeout:60000});
+  const texts=await cards.allTextContents();
+  assert.ok(texts.length>0,'Japan <=160 must show actual cards');
+  for(const text of texts){
+   const matches=[...text.matchAll(/(\d+(?:[.,]\d+)?(?:\s*\/\s*\d+(?:[.,]\d+)?)*)\s*л\.с\./g)];
+   assert.ok(matches.length>0,'each Japan card must show its power');
+   assert.ok(matches.every(m=>m[1].split('/').every(v=>Number(v.trim().replace(',','.'))>0&&Number(v.trim().replace(',','.'))<=160)),'displayed Japan power must satisfy <=160');
+  }
+  report.japanPower={cards:texts.length,seconds:Number(((performance.now()-started)/1000).toFixed(3)),passed:true};
+  const ending=await context.request.get(origin+'/api/health',{timeout:30000});assert.equal((await ending.json()).releaseSha,marker.release);
+  await context.close();
+ }
  report.passed=true;
 }catch(error){report.passed=false;report.error=String(error.message).slice(0,800);if(activePage)report.failureState=await activePage.evaluate(()=>({url:location.href,inputs:Array.from(document.querySelectorAll('input[aria-label="Цена: до"]')).map(e=>({value:e.value,visible:!!e.offsetParent})),busy:Array.from(document.querySelectorAll('.ac-catalog-filter-panel')).map(e=>e.getAttribute('aria-busy'))})).catch(()=>null);throw error;}
 finally{fs.writeFileSync('owner-filter-browser-report.json',JSON.stringify(report,null,2)+'\n');console.log('OWNER_FILTER_BROWSER',JSON.stringify(report));await browser.close();}

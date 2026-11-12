@@ -11,7 +11,8 @@
     "apps/web/lib/catalog/japan-source-power.ts",
     "apps/web/lib/catalog/page-currency-converter.ts",
     "apps/web/lib/catalog/storage.ts",
-    "apps/web/lib/dealers/exchange-rate.ts"
+    "apps/web/lib/dealers/exchange-rate.ts",
+    "apps/web/lib/dealers/public-showcase.ts"
   ],
   "allowedPaths": [
     ".github/workflows/ci.yml",
@@ -36,11 +37,13 @@
     "apps/web/lib/catalog/page-currency-converter.ts",
     "apps/web/lib/catalog/storage.ts",
     "apps/web/lib/dealers/exchange-rate.ts",
+    "apps/web/lib/dealers/public-showcase.ts",
     "docs/operations/2026-11-11-accepted-browser-speed-baseline.json",
     "docs/operations/2026-11-11-accepted-speed-baseline.json",
     "docs/operations/2026-11-11-accepted-speed-browser-restored.json",
     "docs/operations/2026-11-11-budget-browser-idle.json",
     "docs/operations/2026-11-12-catalog-release-manifest.json",
+    "docs/operations/2026-11-12-home-specials-all-cities.md",
     "docs/operations/2026-11-12-japan-power-discovery-fix.md",
     "docs/operations/2026-11-12-japan-power-source-evidence.json",
     "docs/operations/2026-11-12-login-parallel-reads.md",
@@ -67,6 +70,7 @@
     "tests/catalog-make-only-membership.test.ts",
     "tests/catalog-market-brand-projection.test.ts",
     "tests/catalog-refresh-generation-pages.test.mjs",
+    "tests/dealer-delivery-estimate.test.ts",
     "tests/japan-source-power.test.ts",
     "tests/login-parallel-reads.test.ts",
     "tests/page-currency-converter.test.ts",
@@ -84,7 +88,11 @@
     "japan": {
       "pr": 1764,
       "sha": "1b6c8c0ee65616c0850ae4b74677e62125214d3c",
-      "status": "checks pending"
+      "status": "merged"
+    },
+    "specials": {
+      "pr": 1766,
+      "sha": "4d6613f0407e2cdb90070c09a6df6a5efb56cfec"
     }
   },
   "partnerBudgetsFixed": false

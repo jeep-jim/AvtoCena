@@ -62,7 +62,7 @@ if [ "$ready" != 1 ]; then
 fi
 python3 - "$release" "$job_dir/marker.json" <<'MARKER'
 import json,sys
-json.dump({'release':sys.argv[1],'phase':'release-required-browser-gate','verifyPartnerBudgets':False,'enforceSpeed':True},open(sys.argv[2],'w'))
+json.dump({'release':sys.argv[1],'phase':'release-required-browser-gate','verifyPartnerBudgets':False,'enforceSpeed':True,'verifyJapanAndSpecials':True},open(sys.argv[2],'w'))
 MARKER
 set +e
 OWNER_FILTER_BROWSER_MARKER="$job_dir/marker.json" CHROME_BIN="$(command -v google-chrome)" node tests/browser/owner-filter-speed-live.mjs
