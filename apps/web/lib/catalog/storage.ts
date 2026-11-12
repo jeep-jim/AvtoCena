@@ -856,6 +856,16 @@ function projectionIdentityMatches(row: Pick<CatalogSearchProjection,'market'|'m
   }
   return true;
 }
+/** Compile the query once for a make-only scan. Admission and editorial values
+ * still come from each row and the current request; nothing is cached globally. */
+export function compileCatalogMakeMembership(make: string) {
+  const wanted = new Set(catalogMakeFilterValues(make).map(value => cleanFacet(value).toLocaleLowerCase("ru-RU")));
+  return (row: CatalogSearchProjection) => {
+    if (editorialHidden(row) || isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
+    const identity = applyCatalogEditorialSpecifications(row);
+    return wanted.has(cleanFacet(identity.make).toLocaleLowerCase("ru-RU"));
+  };
+}
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if(editorialHidden(row))return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
@@ -2295,6 +2305,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows};
   }
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
+  const makeMembership=params.make&&!params.model?compileCatalogMakeMembership(params.make):null;
   // Safety normalization never changes make. Apply editorial values first, then
   // reject unrelated makes before the expensive model/specification matcher.
 
@@ -2305,7 +2316,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const marketKey=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):null;
   let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
-   ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
+   ((!params.make && !params.model) || (makeMembership
+    ? makeMembership({...row[5],market:row[0]} as CatalogSearchProjection)
+    : catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys))) &&
    eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
    (!marketKey || cleanFacet(row[0]).toLocaleLowerCase('ru-RU')===marketKey)
    && fuelMatches(row[5].fuel)
