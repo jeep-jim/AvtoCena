@@ -1,6 +1,6 @@
 {
   "base": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "purpose": "Isolated demand loading plus resident-selector brand budget search with exact cold fallback; no whole-market cold initialization from brand query; blog excluded",
+  "purpose": "Isolated demand loading, protected prepared brand-budget search, and compiled make-only membership after expired Volkswagen rejection; blog excluded",
   "appPaths": [
     "apps/web/components/autobot/Autobot.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -34,6 +34,7 @@
     "scripts/catalog-refresh-generation-pages.mjs",
     "scripts/lib/accepted-browser-speed.mjs",
     "scripts/lib/catalog-refresh-generation-pages.mjs",
+    "scripts/profile-catalog-make-membership.ts",
     "scripts/regcloud-browser-verdict.py",
     "scripts/regcloud-deploy-production.sh",
     "scripts/regcloud-deploy-with-browser.sh",
@@ -47,7 +48,9 @@
     "tests/browser/catalog-navigation-recovery.mjs",
     "tests/browser/owner-filter-speed-live.mjs",
     "tests/catalog-budget-combined.test.ts",
+    "tests/catalog-editorial.test.ts",
     "tests/catalog-filter-search.test.ts",
+    "tests/catalog-make-only-membership.test.ts",
     "tests/catalog-market-brand-projection.test.ts",
     "tests/catalog-refresh-generation-pages.test.mjs",
     "tests/page-currency-converter.test.ts",
@@ -62,7 +65,8 @@
     "1758": "eb7411e574903fd700d3608a83952b00037fdbf5",
     "1759": "393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a",
     "1760": "a8b897fe597fa7832b65081687de95f117191a25",
-    "1762": "94b0d744bb07c17f3b70a6cd864371762ce93c7f"
+    "1762": "94b0d744bb07c17f3b70a6cd864371762ce93c7f",
+    "1763": "201e680c856c206b15bb7506bf2aadac79bed50b"
   },
   "partnerBudgetsFixed": false
 }
