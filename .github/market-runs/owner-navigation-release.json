@@ -1,10 +1,10 @@
 {
   "sourceSha": "57b8223e0a1648a9092cf0a31151c27ccfb5e4dd",
   "candidate": 1765,
-  "requestedAt": "2026-11-12T14:30:43.070Z",
-  "reason": "Owner authorized immediate publication after checks. Nationwide homepage specials review1766/4d6613f passed all8 checks and merged e6dffd98901770c7919d17e43ad14030a0e08610. Isolated candidate57b8223 passed all11 checks including CI43236452857. Exact11app/64paths; requires actual Japan<=160 cards and nationwide special offers in mandatory nonce browser gate after unchanged frozen timing checks. Original rollback/full output/request limits retained.",
-  "previousRun": 43177669836,
-  "controllerGuardRun": 43236590091,
-  "controllerGuardCommit": "812592e5d86f22c4e12c5e97f744aaa3fdc370a0",
+  "requestedAt": "2026-11-12T16:08:50.270Z",
+  "reason": "Owner-authorized source57b release after measured offline preparation exceeded whole-job 90m. Controller budget150m; exact source and original server/browser/SHA/nonce/full-result/rollback gates unchanged. Full guard43255205823 SUCCESS. Independent retained production43255265603 confirmed a182/c489 running at16:08UTC. Prior43237942492 cancelled before deployment; no measured visitor-speed rejection in that run.",
+  "previousRun": 43237942492,
+  "controllerGuardRun": 43255205823,
+  "controllerGuardCommit": "b45ae36b5db65bf63db68e4c9e320d251876c045",
   "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
