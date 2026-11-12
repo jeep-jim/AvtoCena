@@ -25886,3 +25886,14 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/2ca24d2f8cddd0ea16b86e7a67963f21ae4e8a5c
 
+
+
+### 12.11.2026 — холодный selector требует дополнительной защиты до следующей установки
+
+- Последняя успешная фоновая подготовка43147442871/job130948460148 действительно выполнила работу: skipped=false,verified=true,a182,generation gen_1794357678562_9c0667cb. Независимые cold-process пробы Китая: 28527/28657ms,CPU9080/8501ms,25471493 сериализованных байта,255 вызовов чтения; локальная Корея8355ms,CPU2335ms,1842626байт,20чтений. Это GitHub runner, не браузер и не время production. Serialized bytes не равны сетевому трафику. JSON-сводка сохранена в2026-11-12-retained-budget-cold-observation.json.
+- Последующие тесты показали: PR1759/1760 не должен начинать полный selector download при холодном поиске марки. Создан draftPR1762/94b0d744bb07c17f3b70a6cd864371762ce93c7f: только свежий generation-bound selector из памяти, иначе прежний точный brand fallback без старта/ожидания selector I/O.17целевых тестов PASS; расширенный тест cold/expired/generation-changed/missing-price/ready/changed-calculation/invalid PASS; TypeScript обоих пакетов PASS. Exact-headCI выполняется.
+- PR1761/3bb828 все8checks прошёл, НО НЕ ПУБЛИКОВАТЬ этот head: сначала включить проверенный1762 и заново проверить точный исходник. Это ограничение безопасности новой оптимизации; текущий production candidate6a048 не меняется.
+- Активный43168144361 готовит цены перед активацией; установки и ускорения пока не заявлять. Блог исключён, второй production запуск не создавался.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/5be96c5e64a4e47662fde9b76b6c79686784abfe
+
