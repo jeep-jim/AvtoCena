@@ -2223,8 +2223,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const compactDefaultQuery=canUseMarketLanding(params)&&(editorialHasHidden(params.market)||Number(params.page||1)*Number(params.pageSize||24)>MARKET_LANDING_LIMIT);
  const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
- const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
- if(defaultBrandQuery && hasBudget)return null;
+ // Budget membership is replayed against current prices below; stored display
+ // ranking is required only for queries without a budget predicate.
+ const defaultDisplayQuery=(!hasBudget && defaultBrandQuery)||compactDefaultQuery;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
  const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
@@ -2291,7 +2292,15 @@ async function readBudgetSelection(params:CatalogSearchParams){
   if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
-   const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
+   // Brand/default-order searches used the bounded brand projection before
+   // this optimization. A missing/stale prepared price snapshot must preserve
+   // that fallback rather than start or join a whole-market replay.
+   const prepared=defaultBrandQuery?await mapWithConcurrency(markets,2,async market=>{
+    const fingerprint=await budgetPricingFingerprint(market);
+    return fingerprint?readPreparedBudgetPrices(pricedIndex,market,fingerprint):null;
+   }):null;
+   if(prepared?.some(rows=>rows===null))return null;
+   const parts=(prepared as BudgetCountIndex['rows'][]|null)??await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
    candidates=matchingBudgetIndex({...index,rows:parts.flat().filter(row=>ids.has(row[5].id))},params,quotes);
   } else if(hasBudget){
    const ids=new Set(candidates.map(row=>row[5].id));
