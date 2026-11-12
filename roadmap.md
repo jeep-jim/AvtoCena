@@ -25976,3 +25976,13 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/4f8a36a6ae1ad19efea061e281c994a6e2256567
 
+
+
+### 12.11.2026 — синтетическая проверка пустой модели подтверждена; приложение собирается
+
+- Диагностика43179563976/job131051946884 SUCCESS на точном7a257.22000одинаковых строк,4измеренных раунда после прогрева с чередованием порядка,всеIDs равны. Median wall:старыйAPI(model undefined)22.1725605ms;старыйHTML(model "")117.1379735ms;compiled7.1904365ms. Median CPU22.199/124.372/7.2805ms. Это только синтетический membership loop, не production/whole-route latency. Отчёт:2026-11-12-make-query-shape-profile.json.
+- Подтверждён конкретный источник лишней работы: пустое значение model от HTML обходило старую make-only ветку и запускало full normalizer. Новый compiled predicate в уже запущенном7a257 покрывает пустую и отсутствующую модель. Не менять активныйhead.
+- Release43177669836: wait-for-astra,source/reviews,fixture browser и private encyclopedia index прошли; текущий шаг Build existing application without production credentials. Подготовка цен,server/browser acceptance и установленное ускорение ещё не подтверждены. Блог исключён; JP/KRполнота остаётся незавершённой.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/75505627d2221c10608cc8072691ce5c26db9502
+
