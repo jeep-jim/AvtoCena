@@ -1,0 +1,181 @@
+{
+  "inventoryRun": 43250312830,
+  "hostRun": 43250587665,
+  "current": {
+    "current": {
+      "objects": 135747,
+      "bytes": 156952142304,
+      "GB": 156.952142304,
+      "GiB": 146.17307326197624
+    },
+    "groups": [
+      {
+        "name": "catalog-generations",
+        "objects": 50646,
+        "bytes": 75233252527
+      },
+      {
+        "name": "encyclopedia",
+        "objects": 25766,
+        "bytes": 20521801535
+      },
+      {
+        "name": "catalog-other",
+        "objects": 36656,
+        "bytes": 18687103870
+      },
+      {
+        "name": "outside-app-prefix",
+        "objects": 6267,
+        "bytes": 15251633651
+      },
+      {
+        "name": "ASTRA",
+        "objects": 7801,
+        "bytes": 12256861368
+      },
+      {
+        "name": "catalog-internal",
+        "objects": 1300,
+        "bytes": 10869735993
+      },
+      {
+        "name": "catalog-public-projections",
+        "objects": 501,
+        "bytes": 1471232281
+      },
+      {
+        "name": "sort-price-snapshots",
+        "objects": 476,
+        "bytes": 918226385
+      },
+      {
+        "name": "budget-price-snapshots",
+        "objects": 491,
+        "bytes": 682133554
+      },
+      {
+        "name": "CRM",
+        "objects": 1332,
+        "bytes": 559249550
+      },
+      {
+        "name": "other",
+        "objects": 4462,
+        "bytes": 445162790
+      },
+      {
+        "name": "catalog-runtime",
+        "objects": 49,
+        "bytes": 55748800
+      }
+    ],
+    "generations": 7,
+    "oldUnprotectedGenerationSummary": {
+      "objects": 29696,
+      "bytes": 39025651822,
+      "GB": 39.025651822,
+      "GiB": 36.34547053091228
+    }
+  },
+  "finished": {
+    "current": {
+      "objects": 135747,
+      "bytes": 156952142304,
+      "GB": 156.952142304,
+      "GiB": 146.17307326197624
+    },
+    "versions": {
+      "objects": 135748,
+      "bytes": 156959173796,
+      "GB": 156.959173796,
+      "GiB": 146.17962184920907,
+      "nonCurrent": {
+        "objects": 0,
+        "bytes": 0,
+        "GB": 0,
+        "GiB": 0
+      },
+      "deleteMarkers": 0
+    },
+    "multipart": {
+      "uploads": 0,
+      "parts": 0,
+      "bytes": 0
+    },
+    "savedMaintenance": {
+      "checkedAt": "2026-10-11T10:49:59.338Z",
+      "beforeBytes": 56189467686,
+      "afterBytes": 44208593836,
+      "deletedObjects": 1308
+    },
+    "savedCleanup": {
+      "finishedAt": "2026-10-11T10:49:47.164Z",
+      "dryRun": false,
+      "blocked": false,
+      "blockReason": "",
+      "planned": {
+        "generationObjects": 5913,
+        "internalObjects": 307,
+        "images": 0,
+        "sourceCandidates": 0,
+        "brandProjections": 0,
+        "runtimeObjects": 1,
+        "total": 6221,
+        "bytes": 11980873138
+      },
+      "deleted": {
+        "generationObjects": 1000,
+        "internalObjects": 307,
+        "images": 0,
+        "sourceCandidates": 0,
+        "brandProjections": 0,
+        "runtimeObjects": 1,
+        "total": 1308
+      },
+      "protectedGenerations": [
+        "gen_1791597210034_5b83bc90",
+        "gen_1791555837022_9a2cec74",
+        "gen_1791673144799_6ded2239"
+      ],
+      "physicalBucketBytes": 56189467686,
+      "errorCount": 0
+    },
+    "publicGenerationUnchanged": true,
+    "errors": []
+  },
+  "host": {
+    "checkedAt": "2026-11-12T15:42:16.567697+00:00",
+    "cpuLogical": 8,
+    "loadAverage": [
+      2.3896484375,
+      1.84033203125,
+      1.69189453125
+    ],
+    "memoryBytes": {
+      "MemTotal": 16763301888,
+      "MemAvailable": 11256324096,
+      "SwapTotal": 0,
+      "SwapFree": 0
+    },
+    "diskBytes": {
+      "total": 102916472832,
+      "used": 71027306496,
+      "free": 31872389120
+    },
+    "production": {
+      "running": true,
+      "oomKilled": false,
+      "restartCount": 0,
+      "memoryLimitBytes": 10737418240,
+      "nanoCpusLimit": 6000000000
+    },
+    "scope": "Read-only instantaneous snapshot during possible release preparation; no peak capacity or tariff inference.",
+    "dockerStats": "{\"BlockIO\":\"541MB / 1.38GB\",\"CPUPerc\":\"18.27%\",\"Container\":\"avtocena-production\",\"ID\":\"9bba3f06c068\",\"MemPerc\":\"41.38%\",\"MemUsage\":\"4.138GiB / 10GiB\",\"Name\":\"avtocena-production\",\"NetIO\":\"129GB / 6.16GB\",\"PIDs\":\"11\"}",
+    "health": {
+      "ok": true,
+      "releaseSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+      "calculationVersion": "c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6"
+    }
+  }
+}

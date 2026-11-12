@@ -1,0 +1,39 @@
+name: Inspect stored local market readiness
+on:
+  push:
+    branches: [main]
+    paths: ['scripts/local-market-readiness.ts']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Read small committed manifests without requesting supplier data
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '2'
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '15000'
+        run: node --import tsx scripts/local-market-readiness.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: local-market-readiness
+          path: local-market-readiness.json
+          retention-days: 14
