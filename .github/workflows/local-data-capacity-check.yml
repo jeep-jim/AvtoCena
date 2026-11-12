@@ -1,0 +1,50 @@
+name: Local data preparation capacity check
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/local-data-capacity-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: owner-local-data-capacity-readonly
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read host resources without restarting or changing applications
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PYTHON' | tee local-data-host-capacity.json
+          import json,os,shutil,subprocess,datetime,urllib.request
+          memory={}
+          for line in open('/proc/meminfo'):
+           k,v=line.split(':',1)
+           if k in ['MemTotal','MemAvailable','SwapTotal','SwapFree']: memory[k]=int(v.split()[0])*1024
+          disk=shutil.disk_usage('/opt/avtocena')
+          raw=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
+          r={'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'cpuLogical':os.cpu_count(),'loadAverage':os.getloadavg(),'memoryBytes':memory,'diskBytes':{'total':disk.total,'used':disk.used,'free':disk.free},'production':{'running':raw['State']['Running'],'oomKilled':raw['State']['OOMKilled'],'restartCount':raw['RestartCount'],'memoryLimitBytes':raw['HostConfig']['Memory'],'nanoCpusLimit':raw['HostConfig']['NanoCpus']},'scope':'Read-only instantaneous snapshot during possible release preparation; no peak capacity or tariff inference.'}
+          r['dockerStats']=subprocess.check_output(['docker','stats','--no-stream','--format','{{json .}}','avtocena-production'],text=True).strip()
+          try:
+           h=json.load(urllib.request.urlopen('https://avtocena.com/api/health',timeout=20));r['health']={k:h.get(k) for k in ['ok','releaseSha','calculationVersion']}
+          except Exception as e:r['health']={'error':type(e).__name__}
+          print(json.dumps(r))
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        with:
+          name: local-data-host-capacity
+          path: local-data-host-capacity.json
+          retention-days: 14
