@@ -1,3 +1,10 @@
+# Latest status — activation running, 2026-11-12
+
+- ACTIVE release43237942492, source57b8223e0a1648a9092cf0a31151c27ccfb5e4dd/PR1765, marker955c24c. All11exact-source checks PASS; review1766/4d6613f all8checks PASS and merged e6dffd9. Offlineguard43236590091 PASS. First release source/review guard passed; installation/runtime acceptance still pending. Do not start overlapping releases, merge acceptance history, deploy whole main, or weaken original gates.
+- Includes nationwide homepage order specials with selected-city pricing and Japan preliminary-power discovery; mandatory live Japan<=160 and Moscow/Novokuznetsk specials checks. Last prelaunch health a182/c489; not yet accepted new source. Track current-incident.md and roadmap for terminal result and independent public retention proof.
+
+---
+
 # Latest status — nationwide homepage specials, 2026-11-12
 
 - Source1765/57b8223e0a1648a9092cf0a31151c27ccfb5e4dd now11app/64paths, exact manifest PASS; includes review1766/4d6613f (pending CI/merge), nationwide order specials with selected-city pricing. Added mandatory Japan<=160 and homepage Moscow/Novokuznetsk live scenarios after frozen timing checks. TypeScript PASS,15targeted and12combined tests PASS,7handoff/verdict tests PASS.
