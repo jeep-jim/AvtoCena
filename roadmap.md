@@ -25986,3 +25986,14 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/75505627d2221c10608cc8072691ce5c26db9502
 
+
+
+### 12.11.2026 — проверено уменьшение одного публичного ответа без изменения сайта
+
+- Read-only43180627170/job131055422834 SUCCESS.24Volkswagen,total21907;health до/после a182/c489. Существующий publicOffer применён к ответу только внутри runner. Проверенные цены,характеристики,display/scenario/recycling мощности,calculationSnapshot иизображения совпали;differences=[].
+- JSON197092→86392байта;operational24→0. Это телоJSON, не время загрузки и не гарантированная передача по сети. Полный отчёт:2026-11-12-public-list-serialization.json.
+- Это пока не исправление production и не проверка всех рынков/гибридов/EV/сохранённых расчётов. Перед изменением финального DTO нужны соответствующие регрессии; активный7a257 не менялся.
+- Release43177669836: private encyclopedia и сборка/загрузка образа прошли. С08:06:30UTC идёт Prepare exact price indexes before activating the release. Server/browser приёмка и установленное ускорение ещё не подтверждены. Локальная среда недоступна; GitHub Actions/connector продолжают работать. Блог исключён.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/905f2e5c3c1dcbadba046e7309b78235a3fba5c7
+
