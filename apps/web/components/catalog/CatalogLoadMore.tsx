@@ -107,15 +107,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     void promise.catch(()=>{if(prepared.current===entry)prepared.current=null;});
     return promise;
   }
-  useEffect(()=>{
-    if(!more||query.market==='japan'||query.market==='china'||query.market==='korea')return;
-    // Prepare one batch while the visitor reads the visible cars. Do not
-    // recursively prefetch the catalogue, or append until explicitly asked.
-    const connection=(navigator as Navigator & {connection?:{saveData?:boolean;effectiveType?:string}}).connection;
-    if(connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType||""))return;
-    const timer=window.setTimeout(()=>{void prepareNext().catch(()=>{});},350);
-    return ()=>window.clearTimeout(timer);
-  },[key,page,more]);
+  // Fetch another batch only after an explicit load-more action.
   async function load(retry=false) {
     if (lock.current) return;
     lock.current = true; setBusy(true); setError("");
