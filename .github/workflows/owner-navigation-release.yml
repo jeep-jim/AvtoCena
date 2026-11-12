@@ -3,7 +3,7 @@ permissions:
   contents: read
   actions: read
 env:
-  RELEASE_SOURCE_SHA: 2ac23e236132bc0119ddb19eb078d7c21d37a91b
+  RELEASE_SOURCE_SHA: 57b8223e0a1648a9092cf0a31151c27ccfb5e4dd
 concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 2ac23e236132bc0119ddb19eb078d7c21d37a91b
+          ref: 57b8223e0a1648a9092cf0a31151c27ccfb5e4dd
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -26,12 +26,12 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='2ac23e236132bc0119ddb19eb078d7c21d37a91b'
+          sha='57b8223e0a1648a9092cf0a31151c27ccfb5e4dd'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1765')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate changed'
-          for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c')]:
+          for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
@@ -61,7 +61,7 @@ jobs:
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,10);
+          assert.equal(m.appPaths.length,11);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -94,7 +94,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 2ac23e236132bc0119ddb19eb078d7c21d37a91b
+          ref: 57b8223e0a1648a9092cf0a31151c27ccfb5e4dd
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -103,12 +103,12 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='2ac23e236132bc0119ddb19eb078d7c21d37a91b'
+          sha='57b8223e0a1648a9092cf0a31151c27ccfb5e4dd'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1765')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate changed'
-          for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c')]:
+          for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
@@ -138,7 +138,7 @@ jobs:
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,10);
+          assert.equal(m.appPaths.length,11);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -347,7 +347,7 @@ jobs:
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,10);
+          assert.equal(m.appPaths.length,11);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -379,7 +379,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 2ac23e236132bc0119ddb19eb078d7c21d37a91b
+          AVTOCENA_RELEASE_SHA: 57b8223e0a1648a9092cf0a31151c27ccfb5e4dd
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -451,12 +451,12 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='2ac23e236132bc0119ddb19eb078d7c21d37a91b'
+          sha='57b8223e0a1648a9092cf0a31151c27ccfb5e4dd'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1765')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate changed'
-          for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c')]:
+          for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
