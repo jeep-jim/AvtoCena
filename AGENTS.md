@@ -1,3 +1,10 @@
+# Latest status — 2026-11-12
+
+- Review1764/1b6c8c0 passed all9checks and merged8c96806. Isolated1765/2ac23 still awaits exact-source CI and live Japan scenario; NOT DEPLOYED. Full offlinecontrollerguard43233428384 PASSED. Activation marker unchanged; original gates remain.
+- Public health checked again this session: a182/c489. See latest roadmap and current-incident.md; prior checkpoints are historical.
+
+---
+
 # Current recovery checkpoint — 2026-11-12 Japan supplier follow-up
 
 - STAGED ONLY: isolated PR1765/2ac23e236132bc0119ddb19eb078d7c21d37a91b (10app/61paths), exact-source checks pending. Includes merged1754 login parallel reads missing from rejected7a257 and pending review1764 Japan preliminary PW discovery. No whole-main deploy or acceptance-history merge.
