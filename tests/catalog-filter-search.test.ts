@@ -226,8 +226,8 @@ test('prepared brand budget pagination preserves authoritative order and prices 
   await persistCatalogOffers(rows as any);
   const {warmBudgetPriceCaches}=await import('../apps/web/lib/catalog/storage');
   await warmBudgetPriceCaches(['korea']);
-  for(const city of [undefined,'Новокузнецк'])for(const sort of [undefined,'updatedAt','totalRub','totalRubDesc']){
-   const query={market:'korea',make:'Hyundai',model:'Avante (CN7)',powerTo:160,budgetTo:3_000_000,city,sort,pageSize:6};
+  for(const city of [undefined,'Новокузнецк'])for(const sort of [undefined,'updatedAt','totalRub','totalRubDesc'])for(const withBudget of [true,false]){
+   const query={market:'korea',make:'Hyundai',...(withBudget?{model:'Avante (CN7)',powerTo:160,budgetTo:3_000_000}:{}),city,sort,pageSize:6};
    resetCatalogReadCachesForTests();
    await countCatalogOffers({market:query.market,yearFrom:2021});
    const reference=await searchOffersWithoutBudgetIndexForTests({...query,pageSize:48});
@@ -239,6 +239,15 @@ test('prepared brand budget pagination preserves authoritative order and prices 
     assert.deepEqual(result.items.map(row=>[row.id,row.totalRub]),reference.items.slice((page-1)*6,page*6).map(row=>[row.id,row.totalRub]));
     assert.ok(result.usedIndexShards.every(p=>/^budget-cards-v\d+\//.test(p)),'visible results must come from prepared card blocks');
     seen.push(...result.items.map(row=>row.id));
+    if(!withBudget&&page===2){
+     const originalNow=Date.now,expiredAt=originalNow()+35_000;
+     try{
+      Date.now=()=>expiredAt;
+      const expired=await searchOffers({...query,page});
+      assert.equal(expired.total,reference.total);
+      assert.deepEqual(expired.items.map(row=>[row.id,row.totalRub]),reference.items.slice(6,12).map(row=>[row.id,row.totalRub]),'make-only page 2 remains complete after selection expiry');
+     }finally{Date.now=originalNow;}
+    }
    }
    assert.equal(new Set(seen).size,reference.total);
    assert.equal((await countCatalogOffers(query)).total,reference.total);
