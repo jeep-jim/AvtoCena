@@ -207,3 +207,35 @@ test("a market page does not hide an older source behind one freshly published s
   catalogSearchProjectionBalanceSources(rows);
   assert.deepEqual(rows.slice(0, 4).map((row) => row.id), ["kcar-new-1", "encar-retained-1", "kcar-new-2", "encar-retained-2"]);
 });
+
+test('prepared brand budget pagination preserves authoritative order and prices across cities',async()=>{
+ const cwd=process.cwd(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'brand-budget-parity-'));
+ fs.mkdirSync(path.join(directory,'data'));process.chdir(directory);process.env.JSON_STORAGE_DRIVER='local';process.env.CATALOG_GROW_ONLY_MARKETS='';resetJsonStorageForTests();
+ try{
+  const now=new Date().toISOString();
+  const rows=Array.from({length:20},(_,i)=>({
+   id:`brand-budget-${i}`,sourceId:'encar_direct',sourceOfferId:`BRAND${i}`,market:'korea',offerType:'fixed',status:'active',make:i>=18?'Kia':'Hyundai',model:i>=18?'K3':'Avante (CN7)',year:2021+i%4,
+   sourcePrice:18_000_000+i*100_000,sourceCurrency:'KRW',priceMode:'fixed',totalRub:i>=16?4_500_000:2_000_000+i*30_000,mileageKm:40_000+i*1000,engineCc:1598,powerHp:i>=14&&i<16?180:123,powerDataConfidence:'source_exact',powerDataSource:'synthetic_exact_fixture',fuel:'petrol',transmission:'automatic',drive:'fwd',bodyType:'sedan',
+   images:Array.from({length:5},(_,photo)=>({id:`brand-${i}-${photo}`,url:`/api/catalog/images/brand-${i}-${photo}`,objectKey:`catalog/images/korea/brand-${i}-${photo}.jpg`,width:1280,height:960,size:120000,checksum:`brand-${i}-${photo}`,mimeType:'image/jpeg'})),
+   calculationStatus:'ready',calculationSnapshot:{customs:{status:'ready'},breakdown:['car','topavto-commission','broker','svh','laboratory','sbkts','epts','rf-delivery','customs'].map(id=>({id,amountRub:1}))},firstSeenAt:now,updatedAt:new Date(Date.now()-i*60000).toISOString(),
+   operational:{sourceUrl:`https://www.encar.com/dc/dc_cardetailview.do?carid=BRAND${i}`,photoIdentityVerified:true,semanticEvidence:{fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1598},powerHp:{status:'exact',value:i>=14&&i<16?180:123}}}
+  }));
+  await persistCatalogOffers(rows as any);
+  for(const city of [undefined,'Новокузнецк'])for(const sort of [undefined,'updatedAt','totalRub','totalRubDesc']){
+   const query={market:'korea',make:'Hyundai',model:'Avante (CN7)',powerTo:160,budgetTo:3_000_000,city,sort,pageSize:6};
+   resetCatalogReadCachesForTests();
+   const reference=await searchOffersWithoutBudgetIndexForTests({...query,pageSize:48});
+   assert.ok(reference.total>6,'fixture must exercise more than one page');
+   const seen:string[]=[];
+   for(let page=1;page<=Math.ceil(reference.total/6);page++){
+    const result=await searchOffers({...query,page});
+    assert.equal(result.total,reference.total);
+    assert.deepEqual(result.items.map(row=>[row.id,row.totalRub]),reference.items.slice((page-1)*6,page*6).map(row=>[row.id,row.totalRub]));
+    assert.ok(result.usedIndexShards.every(p=>/^budget-cards-v\d+\//.test(p)),'visible results must come from prepared card blocks');
+    seen.push(...result.items.map(row=>row.id));
+   }
+   assert.equal(new Set(seen).size,reference.total);
+   assert.equal((await countCatalogOffers(query)).total,reference.total);
+  }
+ }finally{process.chdir(cwd);resetCatalogReadCachesForTests();resetJsonStorageForTests();fs.rmSync(directory,{recursive:true,force:true});}
+});
