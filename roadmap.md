@@ -25621,3 +25621,15 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/e3295321836f06da4bbb11b5893f5afe0968d6fc
 
+
+
+### 12.11.2026 — запрошен один адресный выпуск f112
+
+- 2026-11-12T00:03:33.931Z:все18checks sourcef11285ebb378878832be91dd0b14633ade2351c2 SUCCESS, включаяCI43123213504. В PR1755 снова проверены открытое состояние, точныйhead иbasea182; stagedcontroller не изменился.
+- Offline guard43123630096/job130870078015 SUCCESS:35shell blocks,3exactsource guards,private-evidence/frozen-baseline/server26/browser/handshake5/handoff2/retention4/buffers2 checks. Merge1754 остаётся2d0e0609,reviewhead933a3ca.
+- Меняется только release marker owner-navigation-release.json плюс документация/роад. Никакойактивации genericregcloudmarker, слиянияacceptancehistory, сменыфидов или accepted-image pin нет. Подготовкаиндексов/цен и строгаясерверная/браузернаяприёмка ещё впереди; это не подтверждениеустановки.
+- ПослеSUCCESS выпуска нужен отдельный publicretention390/1440:быстрыемодель+бюджет,сохранениевсехвыборов,карточкасверху,Backсо всеми рядами/прокруткой,явноеудалениетольковыбранного. JP/KRбуджет проверяется отдельно с учётом cursor/scanLimited; неполнаявыдача неуспех.
+- Последняяподтверждённаярабочаяверсияa182/e36/c489. Предыдущая75отклонена, PR1753закрыт. Запускf112единственный; неизменныйповторпослеизмеренногоотказанеразрешён.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/b95c3c7e2de0518ffae8d80c128c4786d183fcdb
+
