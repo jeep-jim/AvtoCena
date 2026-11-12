@@ -1,3 +1,10 @@
+# Latest status — nationwide homepage specials, 2026-11-12
+
+- Source1765/57b8223e0a1648a9092cf0a31151c27ccfb5e4dd now11app/64paths, exact manifest PASS; includes review1766/4d6613f (pending CI/merge), nationwide order specials with selected-city pricing. Added mandatory Japan<=160 and homepage Moscow/Novokuznetsk live scenarios after frozen timing checks. TypeScript PASS,15targeted and12combined tests PASS,7handoff/verdict tests PASS.
+- Offline controller guard43236590091 PASS at812592e; roadmap append43236589942 PASS. Activation marker UNCHANGED. Current source CI pending; wait all exact-source/review checks, merge1766 then activate only through existing strict controller. User authorizes immediate publication after checks; no further confirmation needed. Latest directhealth a182. Do not call changes deployed.
+
+---
+
 # Latest status — 2026-11-12
 
 - Review1764/1b6c8c0 passed all9checks and merged8c96806. Isolated1765/2ac23 still awaits exact-source CI and live Japan scenario; NOT DEPLOYED. Full offlinecontrollerguard43233428384 PASSED. Activation marker unchanged; original gates remain.
