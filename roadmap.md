@@ -26227,3 +26227,14 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/a60c1af75c9b4eaa354e5eccbc30d5e3c886dfdf
 
+
+
+### 13.11.2026 — срочный PR1770, предыдущий выпуск завершился отказом
+
+- 43348310517 / PR1769 завершился FAILURE в Deploy: performance_empty_catalog:/cars?market=korea. Лог сообщает old production retained; браузерная приёмка не достигнута. Read-only 43382621001 подтвердил a182 running, 3d01 stopped. PR1768 принят в main, но это не установка.
+- PR1770 теперь dafe08f0d7e245d9e4c100bb41c13f6a792a8397: четыре application-файла от a182, truck aliases, обзор Japan5 + green5 и полный AJES-каталог24. Два старых теста исправлены: пять вместо шести stock slots, зависимости projection harness. Все четыре адресных теста PASS.
+- Перенесены исходные замороженные release guards и rollback, manifest41paths/4app. Локально41guard tests,26server gate tests,2handoff tests PASS. Контроллер закреплён на1770; exact CI и offline guard ожидаются. Activation marker ещё не изменён. Проверка браузером требует Japan5 на главной и общем каталоге,green5,Japan24 в отдельном каталоге, без screenshot trucks. Japan power/nationwide specials не включены в этот минимальный выпуск и не объявляются исправленными.
+- Не разворачивать весь main или acceptance history. Не повторять3d01. Текущий supplier bot/visitor_restricted в read-only43382847564 — отдельное ограничение, не доказанная причина старого отказа. Япония dump и новая KoreaAutoAPI не включены.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/e82972299a27d8fe15bc9ec6a12b692269ab8223
+
