@@ -1,3 +1,11 @@
+### 13.11.2026 — выпуск43388147651 остановлен до установки; исправление проверяется
+
+- Отказ предварительного браузерного теста: ожидался устаревший query URL, получен действующий /cars/japan?page=2. Build/load/deploy SKIPPED, новый исходник не установлен. Повторять dafe08f без исправления нельзя.
+- По новому разрешению владельца PR1770 обновлён до1b2c885ed0ffe583e7a42430baa9671e0ec31e06: исправлены canonical URL ожидания Японии и Кореи; manifest43paths/4app. Теперь отдельный Verify catalog load more обязателен до установки. Создание evidence helper перенесено перед браузерными сценариями; неизменные speed/completeness/SHA/nonce/rollback gates сохранены.
+- Девять exact-source проверок и offlineguard ожидаются. Activation marker пока прежний. После зелёных проверок — новый точный выпуск и подтверждение5+5/24 без грузовиков. Локальный Chromium socket EPERM; никаких ложных локальных PASS.
+
+---
+
 ### 13.11.2026 — ACTIVE выпуск1770 после успешных проверок
 
 - Все8 exact-source checks dafe08f0d7e245d9e4c100bb41c13f6a792a8397 PASS, включая CI43387168812 и production build. Manifest41paths/4app подтверждён. Offlineguard43387235054 SUCCESS; локально2851tests и TypeScript PASS.
