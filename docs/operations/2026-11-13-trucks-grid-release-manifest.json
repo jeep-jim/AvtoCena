@@ -38,6 +38,8 @@
     "scripts/regcloud-release-retention.py",
     "scripts/verify-frozen-speed-baselines.mjs",
     "tests/accepted-browser-speed.test.mjs",
+    "tests/browser/catalog-load-more.mjs",
+    "tests/browser/catalog-navigation-recovery.mjs",
     "tests/browser/owner-filter-speed-live.mjs",
     "tests/catalog-market-brand-projection.test.ts",
     "tests/catalog-refresh-generation-pages.test.mjs",
