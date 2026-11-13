@@ -26262,3 +26262,11 @@ Source1b2c885ed0ffe583e7a42430baa9671e0ec31e06/PR1770, manifest43paths/4app. Б�
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/831e6e59c21fd2f82b5c6dafd7ab38fe65d469ce
 
+
+
+### 13.11.2026 — отказ выпуска 43390493860 и исправление длины запроса
+
+Выпуск 43390493860/source1b2c завершился FAILURE в серверном gate: performance_empty_catalog:/cars?market=korea. Browser gate не достигнут, old production retained. Независимый read-only43400213549 в09:18UTC подтвердил a182 running и1b2c stopped; новый исходник НЕ установлен.
+Read-only43400468374: сохранённый Korea makes HTTP414/query_too_large в09:02:26.590–26.806UTC совпадает с окном отказа. Более поздние list-1 Korea и stats вернули visitor_restricted/bot; они не доказывают причину первоначального пустого списка. Header proxy использует настоящий remote_addr, подмена IP не допускается.
+По новому разрешению «устанавливай» исправлен PR1770/source a661ca18a16bb798d5e86193979f3a4e79451beb: только транспортная замена развёрнутого truck predicate на существующий эквивалентный compact predicate. Cache identity, admission,visitor IP,limits,source refusals сохранены. Тестовый Korea makes encoded query8385→1946bytes, list8346→1907bytes (fixture credentials/address).68профильных тестов и web TypeScript PASS. Manifest45paths/5app; all-source CI и offlineguard43401066859 ожидаются. Controller staged2ee0106; activation marker ещё не изменён. Не выдавать подготовленный код за установленный.
+Спецпредложения всех городов владелец подтвердил как работающие. Japan<=160 остаётся отдельной незавершённой задачей; AutoBot UI draft1771 подготовлен отдельно, здесь не устанавливается. Платные фиды не отменялись/не переключались. Порогов приёмки не меняли.
