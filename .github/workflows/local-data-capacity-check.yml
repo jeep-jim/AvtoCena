@@ -50,3 +50,5 @@ jobs:
           retention-days: 14
 
 # Read-only retained-release recheck after terminal preparation 43237942492.
+
+# Recheck retained production after rejected 57b / run43255467223, 13 November.
