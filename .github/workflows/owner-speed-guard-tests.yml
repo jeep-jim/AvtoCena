@@ -26,7 +26,7 @@ jobs:
           import json,pathlib,re,subprocess,tempfile,yaml
           path=pathlib.Path('.github/workflows/owner-navigation-release.yml')
           workflow=yaml.safe_load(path.read_text())
-          assert workflow['env']['RELEASE_SOURCE_SHA']=='1b2c885ed0ffe583e7a42430baa9671e0ec31e06'
+          assert workflow['env']['RELEASE_SOURCE_SHA']=='a661ca18a16bb798d5e86193979f3a4e79451beb'
           trigger=workflow.get('on',workflow.get(True))
           assert trigger=={'push':{'branches':['main'],'paths':['.github/market-runs/owner-navigation-release.json']}}
           assert workflow['permissions']=={'contents':'read','actions':'read'}
@@ -45,14 +45,14 @@ jobs:
                           if label=='SOURCE_GUARD':
                               compile(body,label,'exec');guards+=1
                               assert "api('pulls/1770')" in body and "1756" in body and all(str(number) in body for number in [1758,1759,1760,1762,1763,1754,1764,1766,1768])
-                              assert "actions/runs/43388147651" in body and "a182cd21b21ecf612b63613d263e5bdd817ea4c0" in body
+                              assert "actions/runs/43390493860" in body and "a182cd21b21ecf612b63613d263e5bdd817ea4c0" in body
                           elif label=='REMOTE':
                               subprocess.run(['bash','-n'],input=body,text=True,check=True)
                           else:
                               file=pathlib.Path(temp)/(label+'.mjs');file.write_text(body)
                               subprocess.run(['node','--check',str(file)],check=True)
           assert guards==3 and scripts==27
-          print(json.dumps({'stagedControllerValid':True,'source':'1b2c885ed0ffe583e7a42430baa9671e0ec31e06','shellBlocks':scripts,'exactSourceGuards':guards,'activation':'unchanged marker-only boundary'}))
+          print(json.dumps({'stagedControllerValid':True,'source':'a661ca18a16bb798d5e86193979f3a4e79451beb','shellBlocks':scripts,'exactSourceGuards':guards,'activation':'unchanged marker-only boundary'}))
           CHECK_CONTROLLER
       - name: Require immutable private release evidence despite optional mirrors
         run: node --test tests/release-evidence-durability.test.mjs
