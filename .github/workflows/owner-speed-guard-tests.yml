@@ -26,7 +26,7 @@ jobs:
           import json,pathlib,re,subprocess,tempfile,yaml
           path=pathlib.Path('.github/workflows/owner-navigation-release.yml')
           workflow=yaml.safe_load(path.read_text())
-          assert workflow['env']['RELEASE_SOURCE_SHA']=='3d01d708dc47fc9ff0465021110f940383e0369e'
+          assert workflow['env']['RELEASE_SOURCE_SHA']=='dafe08f0d7e245d9e4c100bb41c13f6a792a8397'
           trigger=workflow.get('on',workflow.get(True))
           assert trigger=={'push':{'branches':['main'],'paths':['.github/market-runs/owner-navigation-release.json']}}
           assert workflow['permissions']=={'contents':'read','actions':'read'}
@@ -44,15 +44,15 @@ jobs:
                           label,body=match.groups()
                           if label=='SOURCE_GUARD':
                               compile(body,label,'exec');guards+=1
-                              assert "api('pulls/1769')" in body and "1756" in body and all(str(number) in body for number in [1758,1759,1760,1762,1763,1754,1764,1766,1768])
-                              assert "actions/runs/43255467223" in body and "a182cd21b21ecf612b63613d263e5bdd817ea4c0" in body
+                              assert "api('pulls/1770')" in body and "1756" in body and all(str(number) in body for number in [1758,1759,1760,1762,1763,1754,1764,1766,1768])
+                              assert "actions/runs/43348310517" in body and "a182cd21b21ecf612b63613d263e5bdd817ea4c0" in body
                           elif label=='REMOTE':
                               subprocess.run(['bash','-n'],input=body,text=True,check=True)
                           else:
                               file=pathlib.Path(temp)/(label+'.mjs');file.write_text(body)
                               subprocess.run(['node','--check',str(file)],check=True)
           assert guards==3 and scripts==27
-          print(json.dumps({'stagedControllerValid':True,'source':'3d01d708dc47fc9ff0465021110f940383e0369e','shellBlocks':scripts,'exactSourceGuards':guards,'activation':'unchanged marker-only boundary'}))
+          print(json.dumps({'stagedControllerValid':True,'source':'dafe08f0d7e245d9e4c100bb41c13f6a792a8397','shellBlocks':scripts,'exactSourceGuards':guards,'activation':'unchanged marker-only boundary'}))
           CHECK_CONTROLLER
       - name: Require immutable private release evidence despite optional mirrors
         run: node --test tests/release-evidence-durability.test.mjs
