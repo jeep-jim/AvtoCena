@@ -4,6 +4,7 @@
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/AjesRail.tsx",
     "apps/web/components/catalog/GreenCornerRail.tsx",
+    "apps/web/lib/catalog/ajes-client.ts",
     "apps/web/lib/catalog/heavy-vehicle-families.ts"
   ],
   "allowedPaths": [
@@ -22,6 +23,7 @@
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/AjesRail.tsx",
     "apps/web/components/catalog/GreenCornerRail.tsx",
+    "apps/web/lib/catalog/ajes-client.ts",
     "apps/web/lib/catalog/heavy-vehicle-families.ts",
     "docs/operations/2026-11-11-accepted-browser-speed-baseline.json",
     "docs/operations/2026-11-11-accepted-speed-baseline.json",
@@ -38,6 +40,7 @@
     "scripts/regcloud-release-retention.py",
     "scripts/verify-frozen-speed-baselines.mjs",
     "tests/accepted-browser-speed.test.mjs",
+    "tests/ajes-request-size.test.ts",
     "tests/browser/catalog-load-more.mjs",
     "tests/browser/catalog-navigation-recovery.mjs",
     "tests/browser/owner-filter-speed-live.mjs",
@@ -51,5 +54,5 @@
     "tests/regcloud-release-retention.test.py",
     "tests/release-speed-guard-contract.test.mjs"
   ],
-  "scope": "Truck aliases, Japan five + stock five, full catalog 24. Frozen release mechanics retained; no Japan power or nationwide specials feature included."
+  "scope": "Truck aliases, Japan five + stock five, full catalog 24. Frozen release mechanics retained; no Japan power or nationwide specials feature included. Compact equivalent truck admission on supplier wire requests; preserve cache identity and refusal handling."
 }
