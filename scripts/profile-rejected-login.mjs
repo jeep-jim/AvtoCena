@@ -28,10 +28,14 @@ for(const [phase,wait] of [['initial',0],['after35s',35000],['after65s',65000]])
  if(wait)await new Promise(r=>setTimeout(r,wait));
  reads.length=0;const stages={};const start=performance.now();
  const measure=async(name,fn)=>{const t=performance.now();try{return await fn();}finally{stages[name]=+(performance.now()-t).toFixed(2);}};
- const features=await measure('features',()=>readPublicFeatures());
- const stored=await measure('showcase',()=>readShowcase(PILOT_DEALER_ID));
- const available=stored?.profileEnabled?await measure('available',()=>availableShowcase(stored)):null;
- const dealer=available?await measure('quotesAndSavedRate',()=>withDealerRate(available)):null;
+ const [features,dealer]=await Promise.all([
+  measure('features',()=>readPublicFeatures()),
+  (async()=>{
+   const stored=await measure('showcase',()=>readShowcase(PILOT_DEALER_ID));
+   const available=stored?.profileEnabled?await measure('available',()=>availableShowcase(stored)):null;
+   return available?measure('quotesAndSavedRate',()=>withDealerRate(available)):null;
+  })(),
+ ]);
  const verified=dealer?.profileEnabled?(await measure('verification',()=>findDealer(PILOT_DEALER_ID)))?.status==='verified':false;
  const profile=dealer?.profileEnabled?publicDealerProfile(dealer):null,items=dealer?.profileEnabled?publicRail(dealer):[];
  console.log('LOGIN_READ_PROFILE',JSON.stringify({phase,totalMs:+(performance.now()-start).toFixed(2),stages,reads,profileEnabled:!!profile,verified,offers:items.length,marketOffers:dealer?.offers.filter(o=>o.availability==='market').length||0,quoteErrors:dealer?.offers.filter(o=>o.availability==='market'&&o.marketQuote?.error).length||0,featureVersion:features.version,itemsDigest:createHash('sha256').update(JSON.stringify(items.map(x=>[x.id,x.price]))).digest('hex'),readOnly:true,runnerNotServingProcess:true,reactRequestMemoizationNotSimulated:true}));
