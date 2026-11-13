@@ -1,3 +1,9 @@
+### 13.11.2026 — исправленный выпуск поставлен за обязательными exact-source checks
+
+Source1b2c885ed0ffe583e7a42430baa9671e0ec31e06/PR1770, manifest43paths/4app. Браузерный43389902082 SUCCESS: 390/1440, append/retry/final batch/Back/scroll, navigation recovery, AJES cursor/counts; остальные7 профильных проверок SUCCESS, CI43389902173 ещё выполняется. Offlineguard43390316229 SUCCESS. Контроллер теперь до любых подготовительных действий ограниченно ждёт все exact-source checks (20мин); failure или сменаhead немедленно останавливают, pending никогда не принимается. Маркерe2d6915fd01d7e4d7859bedca10e0c1bf547b5b8 запустил https://github.com/jeep-jim/AvtoCena/actions/runs/43390493860. Это ACTIVE/ожидание CI, не установленная версия. Не запускать пересекающийся выпуск. После CI — подготовка, строгие server/browser/SHA/nonce/rollback и проверкаJapan5+green5/24 без грузовиков. Monitor обновлён на этот run. Предыдущий43388147651 остановился ДО установки и не повторяется неизменённым.
+
+---
+
 ### 13.11.2026 — выпуск43388147651 остановлен до установки; исправление проверяется
 
 - Отказ предварительного браузерного теста: ожидался устаревший query URL, получен действующий /cars/japan?page=2. Build/load/deploy SKIPPED, новый исходник не установлен. Повторять dafe08f без исправления нельзя.
