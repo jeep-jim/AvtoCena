@@ -1,3 +1,11 @@
+### 13.11.2026 — ACTIVE выпуск1770 после успешных проверок
+
+- Все8 exact-source checks dafe08f0d7e245d9e4c100bb41c13f6a792a8397 PASS, включая CI43387168812 и production build. Manifest41paths/4app подтверждён. Offlineguard43387235054 SUCCESS; локально2851tests и TypeScript PASS.
+- Marker94168d2cb54ad4a8cf68460077b72d66b2c492ca запустил https://github.com/jeep-jim/AvtoCena/actions/runs/43388147651. Первый exact-source/manifest guard пройден, дальнейшая установка и runtime acceptance ещё ожидаются. Не запускать пересекающийся выпуск; это НЕ подтверждённая установка.
+- Нужны Japan5+green5 на главной/обзоре, Japan24 на отдельной странице и отсутствие screenshot trucks; исходные timing/full-output/SHA/nonce/rollback сохраняются. Проверка завершения Automation_a2b9a7715fe481918c3d88b60a1de36d переориентирована на этот новый run; после итога отключается. Старый1769failure уже сообщён, не дублировать его как результат1770.
+
+---
+
 ### 13.11.2026 — срочный PR1770, предыдущий выпуск завершился отказом
 
 - 43348310517 / PR1769 завершился FAILURE в Deploy: performance_empty_catalog:/cars?market=korea. Лог сообщает old production retained; браузерная приёмка не достигнута. Read-only 43382621001 подтвердил a182 running, 3d01 stopped. PR1768 принят в main, но это не установка.
