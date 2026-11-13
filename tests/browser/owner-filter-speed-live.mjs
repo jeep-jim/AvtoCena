@@ -105,6 +105,18 @@ try{
    assert.ok(matches.every(m=>m[1].split('/').every(v=>Number(v.trim().replace(',','.'))>0&&Number(v.trim().replace(',','.'))<=160)),'displayed Japan power must satisfy <=160');
   }
   report.japanPower={cards:texts.length,seconds:Number(((performance.now()-started)/1000).toFixed(3)),passed:true};
+  report.truckAdmission=[];
+  for(const path of ['/cars','/cars?market=japan']){
+   assert.equal((await page.goto(origin+path,{waitUntil:'domcontentloaded',timeout:90000})).status(),200);
+   const scope=path==='/cars'?page.locator('section[aria-label="Япония"]'):page;
+   const accepted=scope.locator('article.ac-catalog-card,article.ac-catalog-list-row');
+   await accepted.first().waitFor({state:'visible',timeout:60000});
+   const labels=await accepted.allTextContents();
+   assert.ok(labels.length>0,'real admitted cars required');
+   if(path==='/cars')assert.equal(labels.length,6,'Japan overview must show six admitted cars');
+   for(const label of labels)assert.doesNotMatch(label,/NISSAN\s+(?:UD\s+SERIES|CONDOR)|(?:MITSUBISHI\s+)?FUSO\s+FIGHTER/i,'owner screenshot truck must not be published');
+   report.truckAdmission.push({path,cards:labels.length,passed:true});
+  }
   const ending=await context.request.get(origin+'/api/health',{timeout:30000});assert.equal((await ending.json()).releaseSha,marker.release);
   await context.close();
  }

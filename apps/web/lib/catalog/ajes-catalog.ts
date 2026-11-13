@@ -58,10 +58,13 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
  const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
  return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
-export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void,options:{includeCount?:boolean}={}){
+export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void,options:{includeCount?:boolean;fillPreview?:boolean}={}){
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
- const {query,modelDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const resolved=await resolvedCatalogQuery(JSON.stringify(params));
+ const {modelDirectoryUnavailable}=resolved;
+ const visiblePageSize=resolved.query.pageSize||24;
+ const query=options.fillPreview?{...resolved.query,pageSize:Math.max(24,visiblePageSize)}:resolved.query;
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -95,7 +98,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // Unfiltered source pages keep their own offsets. Do not borrow rows from the
  // next page: numbered navigation must never repeat borrowed listings.
  // Post-calculation filters still require the explicit continuation below.
- if(query.table!=='china'&&!filter.active&&!params.after){
+ if(query.table!=='china'&&!filter.active&&!params.after&&!options.fillPreview){
   const page=await (firstPromise??read(query.page||1));
   const total=readyCount as AjesCountSummary|null;
   return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
@@ -104,11 +107,11 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const total=readyCount as AjesCountSummary|null;
  // Reuse the first read only when it is the requested continuation's source page.
  let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
- const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
+ const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:visiblePageSize,sourcePageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
- return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
+ return {...first,...page,page:query.page||1,pageSize:visiblePageSize,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{

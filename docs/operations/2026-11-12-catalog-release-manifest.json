@@ -1,17 +1,22 @@
 {
   "base": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
-  "purpose": "Isolated Japan preliminary power discovery plus previously reviewed login independent reads; includes prior prepared-search work; no whole-main deployment",
+  "purpose": "Isolated truck admission and six-card preview, plus reviewed platform membership read elimination; retains previous selected Japan and homepage corrections",
   "appPaths": [
     "apps/web/app/(public)/login/page.tsx",
     "apps/web/components/autobot/Autobot.tsx",
+    "apps/web/components/catalog/AjesRail.tsx",
     "apps/web/components/catalog/CatalogCard.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
+    "apps/web/lib/catalog/ajes-catalog.ts",
+    "apps/web/lib/catalog/ajes-filtered-page.ts",
     "apps/web/lib/catalog/ajes-public.ts",
     "apps/web/lib/catalog/ajes-result-filter.ts",
+    "apps/web/lib/catalog/heavy-vehicle-families.ts",
     "apps/web/lib/catalog/japan-source-power.ts",
     "apps/web/lib/catalog/page-currency-converter.ts",
     "apps/web/lib/catalog/storage.ts",
     "apps/web/lib/dealers/exchange-rate.ts",
+    "apps/web/lib/dealers/program-store.ts",
     "apps/web/lib/dealers/public-showcase.ts"
   ],
   "allowedPaths": [
@@ -29,14 +34,19 @@
     ".github/workflows/regcloud-resume-korea-release.yml",
     "apps/web/app/(public)/login/page.tsx",
     "apps/web/components/autobot/Autobot.tsx",
+    "apps/web/components/catalog/AjesRail.tsx",
     "apps/web/components/catalog/CatalogCard.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
+    "apps/web/lib/catalog/ajes-catalog.ts",
+    "apps/web/lib/catalog/ajes-filtered-page.ts",
     "apps/web/lib/catalog/ajes-public.ts",
     "apps/web/lib/catalog/ajes-result-filter.ts",
+    "apps/web/lib/catalog/heavy-vehicle-families.ts",
     "apps/web/lib/catalog/japan-source-power.ts",
     "apps/web/lib/catalog/page-currency-converter.ts",
     "apps/web/lib/catalog/storage.ts",
     "apps/web/lib/dealers/exchange-rate.ts",
+    "apps/web/lib/dealers/program-store.ts",
     "apps/web/lib/dealers/public-showcase.ts",
     "docs/operations/2026-11-11-accepted-browser-speed-baseline.json",
     "docs/operations/2026-11-11-accepted-speed-baseline.json",
@@ -59,6 +69,8 @@
     "scripts/verify-frozen-speed-baselines.mjs",
     "tests/accepted-browser-speed.test.mjs",
     "tests/ajes-count-display.test.ts",
+    "tests/ajes-filtered-page.test.ts",
+    "tests/ajes-rail-late-count.test.ts",
     "tests/browser/autobot-session.mjs",
     "tests/browser/catalog-load-more-fixture.tsx",
     "tests/browser/catalog-load-more.mjs",
@@ -70,7 +82,9 @@
     "tests/catalog-make-only-membership.test.ts",
     "tests/catalog-market-brand-projection.test.ts",
     "tests/catalog-refresh-generation-pages.test.mjs",
+    "tests/catalog-truck-aliases.test.ts",
     "tests/dealer-delivery-estimate.test.ts",
+    "tests/dealer-platform-membership-read.test.ts",
     "tests/japan-source-power.test.ts",
     "tests/login-parallel-reads.test.ts",
     "tests/page-currency-converter.test.ts",
@@ -93,6 +107,17 @@
     "specials": {
       "pr": 1766,
       "sha": "4d6613f0407e2cdb90070c09a6df6a5efb56cfec"
+    },
+    "trucks": {
+      "pr": 1768,
+      "sha": "336f7be5d0c185e2c2eb55708ab0a19ff07e8653"
+    },
+    "platformMembership": {
+      "commit": "e34f3a2fa0bc691fb04e4627f4a1627b451cab94",
+      "selectedPaths": [
+        "apps/web/lib/dealers/program-store.ts",
+        "tests/dealer-platform-membership-read.test.ts"
+      ]
     }
   },
   "partnerBudgetsFixed": false
