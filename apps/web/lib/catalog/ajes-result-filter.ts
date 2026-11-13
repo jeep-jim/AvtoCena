@@ -1,3 +1,4 @@
+import {japanPowerSearchHint} from './japan-source-power';
 import {isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
 import {matchesCatalogColor} from './catalog-color-index';
 import {filterSelections,matchesFilterSelection} from './filter-selections';
@@ -22,9 +23,13 @@ export function ajesResultFilter(params:Record<string,unknown>){
  const matchesPower=(offer:any)=>{
   if(!powerFilter)return true;
   const exact=isOwnerStepwgnNonHybrid(offer)?150:Number(offer.powerHp);
-  // Supplier PW is not a vehicle specification. Only the locally enriched,
-  // trusted encyclopedia value (or the explicit owner override) can qualify.
-  return Number.isFinite(exact)&&exact>0&&(powerFrom===undefined||exact>=powerFrom)&&(powerTo===undefined||exact<=powerTo);
+  const within=(value:number)=>(powerFrom===undefined||value>=powerFrom)&&(powerTo===undefined||value<=powerTo);
+  if(Number.isFinite(exact)&&exact>0)return within(exact);
+  // Owner supplier follow-up 12.11: permit clearly labelled approximate Japan
+  // discovery. Every supplied alternative must fit; never take just the first.
+  // This never writes powerHp, certified power, a saved scenario or a price.
+  const hint=params.market==='japan'?japanPowerSearchHint(offer):undefined;
+  return Boolean(hint?.values.length&&hint.values.every(within));
  };
  return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color)||japanDrive||japanFuel,priceFilter,powerFilter,matchesPower,matches(offer:any){
   if(japanFuel&&!matchesFilterSelection(offer.fuel,fuel==='electrified'?'hybrid|electric':fuel.replaceAll('electrified','hybrid|electric')))return false;

@@ -15,6 +15,20 @@ test('empty intermediate source pages do not become empty visible pages',async()
  const result=await readFilteredAjesPage({page:1,pageSize:24,read:async page=>({items:page===3?['match']:[],received:page===3?1:24})});
  assert.deepEqual(result.items,['match']);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
 });
+test('six-card rail uses one 24-candidate source page and full catalog resumes its exact cursor',async()=>{
+ const calls:number[]=[];
+ const read=async(page:number)=>{calls.push(page);return {items:Array.from({length:24},(_,i)=>`${page}/${i}`),received:24};};
+ const rail=await readFilteredAjesPage({page:1,pageSize:6,sourcePageSize:24,read});
+ assert.equal(rail.items.length,6);assert.equal(rail.nextCursor,'1.6');assert.deepEqual(calls,[1]);
+ const next=await readFilteredAjesPage({page:1,pageSize:24,sourcePageSize:24,after:rail.nextCursor,read});
+ assert.equal(next.items[0],'1/6');assert.equal(next.nextCursor,'2.6');
+ assert.equal(new Set([...rail.items,...next.items]).size,30);
+});
+test('source exhaustion and cursor validation use source size rather than six visible cards',async()=>{
+ const result=await readFilteredAjesPage({page:1,pageSize:6,sourcePageSize:24,after:'1.12',read:async()=>({items:Array.from({length:17},(_,i)=>i),received:17})});
+ assert.deepEqual(result.items,[12,13,14,15,16]);assert.equal(result.hasMore,false);
+ await assert.rejects(readFilteredAjesPage({page:1,pageSize:6,sourcePageSize:24,after:'1.24',read:async()=>{throw Error('not reached');}}),/ajes_invalid_query/);
+});
 test('a sparse search stops after eight pages and preserves its continuation',async()=>{
  const result=await readFilteredAjesPage({page:1,pageSize:24,read:async()=>({items:[],received:24})});
  assert.equal(result.reads,8);assert.equal(result.scanLimited,true);assert.equal(result.nextCursor,'9.0');

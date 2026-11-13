@@ -84,6 +84,12 @@ export function selectCityShowcases(showcases:DealerShowcase[],city:string){
  const key=normalizeCitySearch(city);
  return showcases.filter(s=>!key||(onlyPilot&&s.dealerId===PILOT_DEALER_ID)||s.offices.some(o=>normalizeCitySearch(o.city)===key));
 }
+/** Homepage special offers are nationwide; other sections retain office geography. */
+export function selectHomeShowcases(showcases:DealerShowcase[],city:string){
+ const local=new Set(selectCityShowcases(showcases,city).map(s=>s.dealerId));
+ return showcases.map(s=>local.has(s.dealerId)?s:{...s,offers:s.offers.filter(o=>offerAvailability(o)==="order")})
+  .filter(s=>s.offers.length>0);
+}
 export async function homeSpecialRail(city:string,pilot:DealerShowcase|null){
  const rows=await readDataJson<{id:string;status?:string}[]>('dealers/dealers.json',[]);
  const others=await Promise.all(rows.filter(d=>d.id!==PILOT_DEALER_ID&&d.status==='verified').map(async d=>{
@@ -91,7 +97,7 @@ export async function homeSpecialRail(city:string,pilot:DealerShowcase|null){
   const s=await availableShowcase(stored);return s.profileEnabled?s:null;
  }));
  const showcases=[...(pilot?[pilot]:[]),...others.filter((s):s is DealerShowcase=>!!s)];
- const selected=selectCityShowcases(showcases,city);
+ const selected=selectHomeShowcases(showcases,city);
  const priced=await Promise.all(selected.map(s=>((s.specialsEnabled||s.marketHomeEnabled)?withDealerRate(s):Promise.resolve(s))));
  return {heading:priced.length===1?priced[0].specialHeading:'Предложения дилеров',items:priced.flatMap(s=>publicRail(s,city,"home"))};
 }

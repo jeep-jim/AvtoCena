@@ -9,6 +9,30 @@ spec.loader.exec_module(retention)
 
 
 class ImageRetentionTest(unittest.TestCase):
+    def test_accepted_image_is_retained_even_when_old_unreferenced_or_retagged(self):
+        now = dt.datetime(2026, 11, 20, tzinfo=dt.timezone.utc)
+        base = {'Id': 'sha256:other', 'RepoTags': ['avtocena-regcloud:' + 'f' * 40], 'Created': '2026-10-01T00:00:00Z'}
+        self.assertTrue(retention.eligible_unused_image(base, set(), now))
+        for changed in ({'Id': retention.ACCEPTED_IMAGE},
+                        {'RepoTags': ['avtocena-regcloud:' + retention.ACCEPTED_RELEASE]},
+                        {'Config': {'Labels': {'org.opencontainers.image.revision': retention.ACCEPTED_RELEASE}}}):
+            pinned = dict(base, **changed)
+            self.assertTrue(retention.pinned_image(pinned))
+            self.assertFalse(retention.eligible_unused_image(pinned, set(), now))
+
+    def test_accepted_container_survives_backup_and_abandoned_cleanup(self):
+        now = dt.datetime(2026, 11, 20, tzinfo=dt.timezone.utc)
+        c = {'Name': '/avtocena-before-' + 'f' * 12, 'Image': 'sha256:other',
+             'State': {'Status': 'exited', 'FinishedAt': '2026-10-01T00:00:00Z'},
+             'Config': {'Labels': {'avtocena.role': 'production'}}, 'Mounts': []}
+        self.assertTrue(retention.eligible(c))
+        for changed in ({'Image': retention.ACCEPTED_IMAGE},
+                        {'Config': {'Labels': {'avtocena.role': 'production', 'org.opencontainers.image.revision': retention.ACCEPTED_RELEASE}}}):
+            pinned = dict(c, **changed)
+            self.assertFalse(retention.eligible(pinned))
+            self.assertFalse(retention.eligible_old_release(dict(pinned, Name='/avtocena-release-'+'f'*12), now))
+
+
     def test_abandoned_candidate_guards(self):
         now = dt.datetime(2026, 10, 20, tzinfo=dt.timezone.utc)
         c = {'Name': '/avtocena-release-' + 'a' * 12,

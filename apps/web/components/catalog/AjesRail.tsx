@@ -11,7 +11,7 @@ import {publicOffer} from '@/lib/catalog/storage';
 import {CatalogCard} from './CatalogCard';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
 
-function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return {...params,market,page:'1',pageSize:market==='japan'?'12':'6'};}
+function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return {...params,market,page:'1',pageSize:'6'};}
 export function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return readAjesCountSummary(JSON.stringify(railQuery(market,params))).catch(()=>null);}
 async function RailCount({market,params}:{market:'japan'|'china'|'korea';params:Record<string,string|string[]|undefined>}){
  const count=await readAjesRailCount(market,params);
@@ -20,12 +20,12 @@ async function RailCount({market,params}:{market:'japan'|'china'|'korea';params:
 export async function readAjesRailData(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>={}){
  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return {disabled:true,items:[],count:null,unavailable:false,unsupported:false,partial:false,stale:false,filteredByPage:false,hasMore:false};}
  try{
-  // A supplier page may contain rejected rows. One bounded extra row of candidates
-  // fills the six-card preview without pagination scans or bypassing admission.
+  // Fill six admitted cards through bounded 24-row source pages.
+  // Preserve explicit interruption and exhaustion instead of inventing results.
   // The overview starts Japan and Korea together. Their two optional counts
   // must not take both supplier slots before the visible lists can run.
   // RailCount and the overview total already read counts after these rows.
-  const page=await readAjesCatalogPage(railQuery(market,params),undefined,{includeCount:false});
+  const page=await readAjesCatalogPage(railQuery(market,params),undefined,{includeCount:false,fillPreview:true});
   return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
  }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false};}
 }

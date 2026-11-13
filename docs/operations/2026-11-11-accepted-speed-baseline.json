@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "release": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+  "capturedAt": "2026-11-11T09:55:41Z",
+  "environment": "production VM loopback, existing visitor traffic, sequential probes",
+  "samples": [
+    {
+      "phase": "warm_1",
+      "path": "/api/health",
+      "kind": "health",
+      "targetSeconds": 0.25,
+      "seconds": 0.0206,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/api/leads",
+      "kind": "lead_validation",
+      "targetSeconds": 1,
+      "seconds": 0.0065,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/",
+      "kind": "html",
+      "targetSeconds": 2,
+      "seconds": 0.3838,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/login",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.2903,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/autocalc",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.0125,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 1.3688,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.8934,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.075,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.2246,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars?sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 10.4885,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0221,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 4.4517,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars/autocatalog",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 1.8236,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars/autocatalog?make=Changan",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 3.3002,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 3.3663,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 2.3898,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_1",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 5.9205,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/api/health",
+      "kind": "health",
+      "targetSeconds": 0.25,
+      "seconds": 0.0126,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/api/leads",
+      "kind": "lead_validation",
+      "targetSeconds": 1,
+      "seconds": 0.0043,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/",
+      "kind": "html",
+      "targetSeconds": 2,
+      "seconds": 1.7938,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/login",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.2254,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/autocalc",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.0139,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.9607,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 1.427,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.1083,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.0811,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars?sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.485,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0613,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0822,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars/autocatalog",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 1.5871,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars/autocatalog?make=Changan",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 1.8049,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.1251,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.1251,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_2",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0481,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/api/health",
+      "kind": "health",
+      "targetSeconds": 0.25,
+      "seconds": 0.043,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/api/leads",
+      "kind": "lead_validation",
+      "targetSeconds": 1,
+      "seconds": 0.0136,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/",
+      "kind": "html",
+      "targetSeconds": 2,
+      "seconds": 0.4696,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/login",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.2259,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/autocalc",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.023,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.1497,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.0606,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.0901,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 1.1039,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars?sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.451,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0221,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0046,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars/autocatalog",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 1.5827,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars/autocatalog?make=Changan",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 1.803,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.3441,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.0485,
+      "functionalPassed": true
+    },
+    {
+      "phase": "warm_3",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0306,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/api/health",
+      "kind": "health",
+      "targetSeconds": 0.25,
+      "seconds": 0.021,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/api/leads",
+      "kind": "lead_validation",
+      "targetSeconds": 1,
+      "seconds": 0.0083,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/",
+      "kind": "html",
+      "targetSeconds": 2,
+      "seconds": 0.4231,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/login",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.2991,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/autocalc",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.0115,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 1.2358,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.8349,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.076,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.1497,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars?sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.8719,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.0216,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 1.2468,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars/autocatalog",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 1.2681,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 3.6745,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 1.5755,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.7527,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_ttl",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 2.216,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/api/health",
+      "kind": "health",
+      "targetSeconds": 0.25,
+      "seconds": 0.4258,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/api/leads",
+      "kind": "lead_validation",
+      "targetSeconds": 1,
+      "seconds": 0.0174,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/",
+      "kind": "html",
+      "targetSeconds": 2,
+      "seconds": 0.5037,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/login",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.3139,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/autocalc",
+      "kind": "html",
+      "targetSeconds": 1,
+      "seconds": 0.0135,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.2458,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars?market=china&make=Volkswagen&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.5845,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.0748,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars?market=europe&make=BMW&page=2",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.4275,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars?sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 2.8105,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/api/catalog/search?market=europe&make=BMW&page=2",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 0.065,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 4.2265,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars/autocatalog",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 2.1741,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars/autocatalog?make=Changan",
+      "kind": "encyclopedia",
+      "targetSeconds": 2,
+      "seconds": 2.0481,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 3.1902,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+      "kind": "catalog",
+      "targetSeconds": 2,
+      "seconds": 0.9499,
+      "functionalPassed": true
+    },
+    {
+      "phase": "after_directory_ttl",
+      "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+      "kind": "search",
+      "targetSeconds": 1,
+      "seconds": 1.5092,
+      "functionalPassed": true
+    }
+  ],
+  "providerDiagnostics": [
+    {
+      "market": "japan",
+      "path": "/api/catalog/search?market=japan&budgetTo=1500000&pageSize=6",
+      "http": 200,
+      "timings": "catalog-total;dur=1822.4, query-resolution;dur=0.0, count;dur=1570.0, supplier-read;dur=1818.4, editorial-read;dur=0.0, detail-cache-sum;dur=0.0, enrichment-sum;dur=5.1, pricing;dur=2.1",
+      "ok": true,
+      "total": null,
+      "partial": true,
+      "stale": true,
+      "filteredByPage": true,
+      "hasMore": false,
+      "nextCursor": null,
+      "scanLimited": false,
+      "reads": 1,
+      "interrupted": false,
+      "cards": 0,
+      "prices": [],
+      "seconds": 1.8654
+    },
+    {
+      "market": "japan",
+      "path": "/api/catalog/search?market=japan&budgetTo=1500000&pageSize=6&sort=totalRub",
+      "error": "HTTPError:HTTP Error 503: Service Unavailable",
+      "seconds": 0.4591
+    },
+    {
+      "market": "korea",
+      "path": "/api/catalog/search?market=korea&budgetTo=1500000&pageSize=6",
+      "http": 200,
+      "timings": "catalog-total;dur=6608.3, query-resolution;dur=0.0, count;dur=348.0, supplier-read;dur=3633.9, editorial-read;dur=0.0, detail-cache-sum;dur=5442.3, enrichment-sum;dur=28.6, pricing;dur=734.0",
+      "ok": true,
+      "total": null,
+      "partial": false,
+      "stale": true,
+      "filteredByPage": true,
+      "hasMore": true,
+      "nextCursor": "7.0",
+      "scanLimited": true,
+      "reads": 6,
+      "interrupted": true,
+      "cards": 0,
+      "prices": [],
+      "seconds": 6.6116
+    },
+    {
+      "market": "korea",
+      "path": "/api/catalog/search?market=korea&budgetTo=1500000&pageSize=6&sort=totalRub",
+      "error": "HTTPError:HTTP Error 503: Service Unavailable",
+      "seconds": 0.3845
+    }
+  ],
+  "complete": true,
+  "workflowRun": 42999201362,
+  "workflowJob": 130450804366
+}

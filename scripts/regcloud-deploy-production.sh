@@ -32,6 +32,8 @@ SCOPE
 [[ "$prewarm" = 0 || "$prewarm" = 1 ]]
 [[ "$calculator" =~ ^[a-f0-9]{64}$ ]]
 [[ "$release" =~ ^[a-f0-9]{40}$ ]]
+: "${AVTOCENA_BROWSER_NONCE:?required browser gate nonce}"
+[[ "$AVTOCENA_BROWSER_NONCE" =~ ^[a-f0-9]{32}$ ]]
 exec 9>/run/lock/avtocena-runtime-change.lock
 flock -n 9
 test -e /opt/avtocena/PRODUCTION_ACTIVE
@@ -93,13 +95,40 @@ switched=0
 committed=0
 rollback(){
  if [ "$committed" = 0 ]; then
-  if [ "$switched" = 1 ]; then cp -a "$runtime/nginx-before.conf" "$config"; nginx -t && systemctl reload nginx; fi
-  docker start "$old" >/dev/null 2>&1 || docker start "$backup" >/dev/null 2>&1 || true
+  # Start and verify the retained process before sending visitors back to it.
+  # The immutable container ID also survives a partially completed rename.
+  previous_id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))[0]["Id"])' "$runtime/before.json")
+  docker start "$previous_id" >/dev/null
+  python3 - "$runtime/before.json" "$old_port" <<'RESTORE_HEALTH'
+import json,sys,time,urllib.request
+old=json.load(open(sys.argv[1]))[0]
+expected=dict(v.split('=',1) for v in old['Config']['Env'] if '=' in v)['AVTOCENA_RELEASE_SHA']
+deadline=time.monotonic()+45
+while True:
+ try:
+  with urllib.request.urlopen('http://127.0.0.1:'+sys.argv[2]+'/api/health',timeout=3) as response:
+   value=json.load(response)
+  assert value.get('ok') is True and value.get('releaseSha')==expected
+  break
+ except Exception:
+  if time.monotonic()>=deadline:raise
+  time.sleep(1)
+RESTORE_HEALTH
+  if [ "$switched" = 1 ]; then
+   cp -a "$runtime/nginx-before.conf" "$config"
+   nginx -t
+   systemctl reload nginx
+  fi
   docker stop --time 20 "$candidate" >/dev/null || true
+  if [ "$(docker inspect --format '{{.Name}}' "$previous_id")" != /avtocena-production ]; then
+   # Only reached if the previous container had already been renamed.
+   docker rename "$previous_id" avtocena-production
+  fi
   echo 'Release gate failed: old production retained'
  fi
 }
 trap rollback EXIT
+trap 'exit 143' TERM HUP INT
 for attempt in $(seq 1 30); do
  if curl -fsS --max-time 2 "http://127.0.0.1:$port/api/health" >/dev/null; then break; fi
  sleep 1
@@ -168,6 +197,8 @@ except urllib.error.HTTPError as e:assert e.code in [401,403]
 PY
 # Candidate preparation has a smaller CPU budget than the serving process.
 # Acceptance runs before switching and again after the old process is stopped.
+export AVTOCENA_SPEED_BASELINE="$runtime/accepted-speed-baseline.json"
+export AVTOCENA_SPEED_BASELINE_MODE=observe
 python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
 # Promote before editing Nginx as well as before accepting traffic: if Docker
 # rejects the resource change, the saved serving configuration remains intact.
@@ -213,7 +244,11 @@ for attempt in 1 2 3; do
 done
 test "$ready" = 1
 docker stop --time 30 "$old" >/dev/null
+export AVTOCENA_SPEED_BASELINE_MODE=enforce
 python3 "$runtime/regcloud-performance-gate.py" "http://127.0.0.1:$port" "$release"
+# The runner must prove correct visible mobile/desktop results at the accepted
+# speed before the rollback trap is disarmed. Missing/failed evidence rolls back.
+python3 "$runtime/regcloud-browser-verdict.py" "$runtime" "$release" "$AVTOCENA_BROWSER_NONCE"
 docker rename "$old" "$backup"
 docker rename "$candidate" "$old"
 committed=1

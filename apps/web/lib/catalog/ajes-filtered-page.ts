@@ -7,14 +7,14 @@ type SourcePage<T> = {items:T[]; received:number; partial?:boolean; stale?:boole
  * The skip is within the accepted rows of one source page, never a guessed raw offset.
  */
 export async function readFilteredAjesPage<T>(options:{
- startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number;
+ startedAt?:number; page:number; pageSize:number; sourcePageSize?:number; after?:unknown; sourceTotal?:number;
  read:(page:number)=>Promise<SourcePage<T>>; now?:()=>number;
 }) {
- const {pageSize,read}=options,now=options.now??Date.now,started=options.startedAt??now();
+ const {pageSize,read}=options,sourcePageSize=options.sourcePageSize??pageSize,now=options.now??Date.now,started=options.startedAt??now();
  let sourcePage=options.page,skip=0;
  if(options.after!==undefined&&options.after!==''){
   const match=/^([1-9]\d{0,6})\.(\d{1,2})$/.exec(String(options.after));
-  if(!match||Number(match[1])>1_000_000||Number(match[2])>=pageSize)throw new AjesInputError();
+  if(!match||Number(match[1])>1_000_000||Number(match[2])>=sourcePageSize)throw new AjesInputError();
   sourcePage=Number(match[1]);skip=Number(match[2]);
  }
  const items:T[]=[];
@@ -31,7 +31,7 @@ export async function readFilteredAjesPage<T>(options:{
   partial ||= Boolean(result.partial);stale ||= Boolean(result.stale);
   const available=result.items.slice(skip),take=Math.min(pageSize-items.length,available.length);
   items.push(...available.slice(0,take));skip+=take;
-  const atEnd=Boolean(result.partial)||result.received<pageSize||(!result.stale&&options.sourceTotal!==undefined&&sourcePage*pageSize>=options.sourceTotal);
+  const atEnd=Boolean(result.partial)||result.received<sourcePageSize||(!result.stale&&options.sourceTotal!==undefined&&sourcePage*sourcePageSize>=options.sourceTotal);
   if(skip>=result.items.length){sourcePage++;skip=0;exhausted=atEnd;}
   if(partial){exhausted=true;break;}
   if(exhausted||items.length===pageSize)break;
