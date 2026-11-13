@@ -20,10 +20,10 @@ jobs:
       - name: Preserve diagnostic and checkout exact rejected source
         run: |
           cp scripts/profile-rejected-login.mjs /tmp/avtocena-login-read-profile.mjs
-          git fetch --depth=1 origin 75c2e6f57cfa4022865217e029a1f5d1671842c3
+          git fetch --depth=1 origin 57b8223e0a1648a9092cf0a31151c27ccfb5e4dd
           git checkout --detach FETCH_HEAD
           cp /tmp/avtocena-login-read-profile.mjs scripts/profile-rejected-login.mjs
-          test "$(git rev-parse HEAD)" = '75c2e6f57cfa4022865217e029a1f5d1671842c3'
+          test "$(git rev-parse HEAD)" = '57b8223e0a1648a9092cf0a31151c27ccfb5e4dd'
       - uses: actions/setup-node@v4
         with:
           node-version: '24.22.1'
