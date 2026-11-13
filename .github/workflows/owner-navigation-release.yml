@@ -3,7 +3,7 @@ permissions:
   contents: read
   actions: read
 env:
-  RELEASE_SOURCE_SHA: 3d01d708dc47fc9ff0465021110f940383e0369e
+  RELEASE_SOURCE_SHA: dafe08f0d7e245d9e4c100bb41c13f6a792a8397
 concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 3d01d708dc47fc9ff0465021110f940383e0369e
+          ref: dafe08f0d7e245d9e4c100bb41c13f6a792a8397
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -26,21 +26,21 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='3d01d708dc47fc9ff0465021110f940383e0369e'
+          sha='dafe08f0d7e245d9e4c100bb41c13f6a792a8397'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1769')
+          p=api('pulls/1770')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate changed'
           for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec'),(1768,'336f7be5d0c185e2c2eb55708ab0a19ff07e8653')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert 0<runs['total_count']<=100,'source check inventory invalid'
-          required={'CI','Verify catalog load more','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
+          required={'CI','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
           assert required<={r['name'] for r in runs['workflow_runs']},'source check missing'
           for r in runs['workflow_runs']:
            assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
-          previous=api('actions/runs/43255467223')
+          previous=api('actions/runs/43348310517')
           assert previous['status']=='completed' and previous['conclusion']=='failure','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained release changed'
@@ -55,13 +55,13 @@ jobs:
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-12-catalog-release-manifest.json','utf8'));
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-13-trucks-grid-release-manifest.json','utf8'));
           assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
           assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),process.env.RELEASE_SOURCE_SHA);
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,16);
+          assert.equal(m.appPaths.length,4);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -96,7 +96,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 3d01d708dc47fc9ff0465021110f940383e0369e
+          ref: dafe08f0d7e245d9e4c100bb41c13f6a792a8397
       - name: Require exact open candidate, merged reviews and all source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -105,21 +105,21 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='3d01d708dc47fc9ff0465021110f940383e0369e'
+          sha='dafe08f0d7e245d9e4c100bb41c13f6a792a8397'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1769')
+          p=api('pulls/1770')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate changed'
           for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec'),(1768,'336f7be5d0c185e2c2eb55708ab0a19ff07e8653')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert 0<runs['total_count']<=100,'source check inventory invalid'
-          required={'CI','Verify catalog load more','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
+          required={'CI','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
           assert required<={r['name'] for r in runs['workflow_runs']},'source check missing'
           for r in runs['workflow_runs']:
            assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
-          previous=api('actions/runs/43255467223')
+          previous=api('actions/runs/43348310517')
           assert previous['status']=='completed' and previous['conclusion']=='failure','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained release changed'
@@ -134,13 +134,13 @@ jobs:
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-12-catalog-release-manifest.json','utf8'));
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-13-trucks-grid-release-manifest.json','utf8'));
           assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
           assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),process.env.RELEASE_SOURCE_SHA);
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,16);
+          assert.equal(m.appPaths.length,4);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -343,13 +343,13 @@ jobs:
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-12-catalog-release-manifest.json','utf8'));
+          const m=JSON.parse(fs.readFileSync('docs/operations/2026-11-13-trucks-grid-release-manifest.json','utf8'));
           assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
           assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),process.env.RELEASE_SOURCE_SHA);
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,16);
+          assert.equal(m.appPaths.length,4);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -381,7 +381,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 3d01d708dc47fc9ff0465021110f940383e0369e
+          AVTOCENA_RELEASE_SHA: dafe08f0d7e245d9e4c100bb41c13f6a792a8397
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -453,21 +453,21 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='3d01d708dc47fc9ff0465021110f940383e0369e'
+          sha='dafe08f0d7e245d9e4c100bb41c13f6a792a8397'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
-          p=api('pulls/1769')
+          p=api('pulls/1770')
           assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate changed'
           for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec'),(1768,'336f7be5d0c185e2c2eb55708ab0a19ff07e8653')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
           assert 0<runs['total_count']<=100,'source check inventory invalid'
-          required={'CI','Verify catalog load more','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
+          required={'CI','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
           assert required<={r['name'] for r in runs['workflow_runs']},'source check missing'
           for r in runs['workflow_runs']:
            assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
-          previous=api('actions/runs/43255467223')
+          previous=api('actions/runs/43348310517')
           assert previous['status']=='completed' and previous['conclusion']=='failure','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained release changed'
