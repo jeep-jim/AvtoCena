@@ -26238,3 +26238,11 @@ PR1742 закрыт после проверки: редакционно отфи
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/e82972299a27d8fe15bc9ec6a12b692269ab8223
 
+
+
+### 13.11.2026 — точный выпуск1770 запущен после всех проверок
+
+Все8 exact-source workflows dafe08f0d7e245d9e4c100bb41c13f6a792a8397 SUCCESS, включая полный CI43387168812/build. Локально2851/2851, web+engine TypeScript PASS; manifest41paths/4app сверён по опубликованному git SHA. Offlineguard43387235054 SUCCESS. Marker94168d2cb54ad4a8cf68460077b72d66b2c492ca запустил https://github.com/jeep-jim/AvtoCena/actions/runs/43388147651. Это ACTIVE, НЕ подтверждённая установка. Никаких пересекающихся выпусков. Требуется terminal result, exact health SHA, серверная и браузерная приёмка Japan5+green5/24 и отсутствие trucks. Предыдущий1769/43348310517 FAILED и не повторяется. До активации браузер текущей главной всё ещё показал4 screenshot trucks и5green; это исходное состояние, не результат исправления.
+
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/c3fcc081bed27fb6eb601fb91adf6b585a9b82bf
+
