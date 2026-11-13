@@ -1,0 +1,47 @@
+name: Inspect saved Korea release refusal
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-korea-release-failure.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts
+      - name: Bundle saved incident reader without production secrets
+        run: |
+          node --input-type=module <<'JS'
+          import {build} from 'esbuild';
+          await build({stdin:{contents:"import {getJsonStorage} from './apps/web/lib/data'; async function main(){const s=getJsonStorage(); for(const table of ['korea','stats']) for(const kind of ['list-1','count','makes']) {const v:any=await s.readJson('integrations/ajes/catalog-failure-pages/'+table+'-'+kind+'.json',null); const allowed=['visitor_restricted','client_ip_missing','request_failed','request_timeout','connect_timeout','invalid_response','empty_response','query_too_large']; console.log('SAVED_FAILURE',JSON.stringify({table,kind,present:!!v,startedAt:v?.startedAt,finishedAt:v?.finishedAt,outcome:allowed.includes(v?.outcome)?v.outcome:'other',httpStatus:v?.httpStatus,providerCode:/^(bot|ban)[0-9]{0,12}$/.test(v?.providerCode)?v.providerCode:null,releaseWindow:!!v&&v.startedAt>='2026-11-13T09:01:41Z'&&v.startedAt<='2026-11-13T09:02:28Z'}));}} main().catch(()=>{console.log('SAVED_READ_FAILED');process.exitCode=1;});",resolveDir:process.cwd(),loader:'ts'},outfile:'/tmp/ajes-failure-summary.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          JS
+      - name: Count safe error codes and inspect proxy header directives
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,re,json,collections,pathlib
+          r=subprocess.run(['docker','logs','--since','12h','--tail','20000','avtocena-production'],capture_output=True,text=True)
+          allowed={'visitor_restricted','client_ip_missing','not_configured','invalid_response','request_failed','request_timeout','connect_timeout','response_too_large','empty_response','identity_mismatch','operation_failed'}
+          reasons=re.findall(r'AJES_PUBLIC_FAILURE\s+(\w+)',r.stdout+r.stderr)
+          print('AJES_FAILURE_COUNTS',json.dumps(dict(collections.Counter(x if x in allowed else 'other' for x in reasons))))
+          config=pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_text()
+          print('PROXY_HEADER_CHECK',json.dumps({'real_ip_from_remote_addr':bool(re.search(r'proxy_set_header\s+X-Real-IP\s+\$remote_addr\s*;',config,re.I)),'real_ip_from_incoming_header':bool(re.search(r'proxy_set_header\s+X-Real-IP\s+\$http_',config,re.I)),'real_ip_module_directive':bool(re.search(r'^\s*(real_ip_header|set_real_ip_from)\s+',config,re.M))}))
+          PY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'docker exec -i avtocena-production node' < /tmp/ajes-failure-summary.cjs
