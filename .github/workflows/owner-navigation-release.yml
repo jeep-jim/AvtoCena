@@ -34,12 +34,21 @@ jobs:
           for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec'),(1768,'336f7be5d0c185e2c2eb55708ab0a19ff07e8653')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
-          runs=api(f'actions/runs?head_sha={sha}&per_page=100')
-          assert 0<runs['total_count']<=100,'source check inventory invalid'
+          import time
           required={'CI','Verify catalog load more','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
-          assert required<={r['name'] for r in runs['workflow_runs']},'source check missing'
-          for r in runs['workflow_runs']:
-           assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
+          deadline=time.monotonic()+1200
+          while True:
+           current=api('pulls/1770')
+           assert current['state']=='open' and current['head']['sha']==sha,'candidate changed while awaiting checks'
+           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+           assert 0<runs['total_count']<=100,'source check inventory invalid'
+           for r in runs['workflow_runs']:
+            assert r['head_sha']==sha,'source check identity changed'
+            assert r['status']!='completed' or r['conclusion']=='success',f"source check failed: {r['id']} {r['name']}"
+           if required<={r['name'] for r in runs['workflow_runs']} and all(r['status']=='completed' and r['conclusion']=='success' for r in runs['workflow_runs']):break
+           assert time.monotonic()<deadline,'source checks wait deadline'
+           print('WAIT_EXACT_SOURCE_CHECKS',sha,flush=True)
+           time.sleep(20)
           previous=api('actions/runs/43388147651')
           assert previous['status']=='completed' and previous['conclusion']=='failure','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
@@ -113,12 +122,21 @@ jobs:
           for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec'),(1768,'336f7be5d0c185e2c2eb55708ab0a19ff07e8653')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
-          runs=api(f'actions/runs?head_sha={sha}&per_page=100')
-          assert 0<runs['total_count']<=100,'source check inventory invalid'
+          import time
           required={'CI','Verify catalog load more','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
-          assert required<={r['name'] for r in runs['workflow_runs']},'source check missing'
-          for r in runs['workflow_runs']:
-           assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
+          deadline=time.monotonic()+1200
+          while True:
+           current=api('pulls/1770')
+           assert current['state']=='open' and current['head']['sha']==sha,'candidate changed while awaiting checks'
+           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+           assert 0<runs['total_count']<=100,'source check inventory invalid'
+           for r in runs['workflow_runs']:
+            assert r['head_sha']==sha,'source check identity changed'
+            assert r['status']!='completed' or r['conclusion']=='success',f"source check failed: {r['id']} {r['name']}"
+           if required<={r['name'] for r in runs['workflow_runs']} and all(r['status']=='completed' and r['conclusion']=='success' for r in runs['workflow_runs']):break
+           assert time.monotonic()<deadline,'source checks wait deadline'
+           print('WAIT_EXACT_SOURCE_CHECKS',sha,flush=True)
+           time.sleep(20)
           previous=api('actions/runs/43388147651')
           assert previous['status']=='completed' and previous['conclusion']=='failure','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
@@ -461,12 +479,21 @@ jobs:
           for number,head in [(1756,'e03a90291cfe0fd0f2e0351dfc9841f2cfcca6e5'),(1758,'eb7411e574903fd700d3608a83952b00037fdbf5'),(1759,'393e5f9bf1c8f5e34b3a37a003d59dc25f311f0a'),(1760,'a8b897fe597fa7832b65081687de95f117191a25'),(1762,'94b0d744bb07c17f3b70a6cd864371762ce93c7f'),(1763,'201e680c856c206b15bb7506bf2aadac79bed50b'),(1754,'933a3ca4c70f934f579bf2ad1d18597507e23314'),(1764,'1b6c8c0ee65616c0850ae4b74677e62125214d3c'),(1766,'4d6613f0407e2cdb90070c09a6df6a5efb56cfec'),(1768,'336f7be5d0c185e2c2eb55708ab0a19ff07e8653')]:
            review=api(f'pulls/{number}')
            assert review['merged'] and review['head']['sha']==head,'review changed'
-          runs=api(f'actions/runs?head_sha={sha}&per_page=100')
-          assert 0<runs['total_count']<=100,'source check inventory invalid'
+          import time
           required={'CI','Verify catalog load more','Verify site controls and chat','Verify green corner budget','Verify owner UI polish'}
-          assert required<={r['name'] for r in runs['workflow_runs']},'source check missing'
-          for r in runs['workflow_runs']:
-           assert r['head_sha']==sha and r['status']=='completed' and r['conclusion']=='success',f"source check not green: {r['id']} {r['name']}"
+          deadline=time.monotonic()+1200
+          while True:
+           current=api('pulls/1770')
+           assert current['state']=='open' and current['head']['sha']==sha,'candidate changed while awaiting checks'
+           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+           assert 0<runs['total_count']<=100,'source check inventory invalid'
+           for r in runs['workflow_runs']:
+            assert r['head_sha']==sha,'source check identity changed'
+            assert r['status']!='completed' or r['conclusion']=='success',f"source check failed: {r['id']} {r['name']}"
+           if required<={r['name'] for r in runs['workflow_runs']} and all(r['status']=='completed' and r['conclusion']=='success' for r in runs['workflow_runs']):break
+           assert time.monotonic()<deadline,'source checks wait deadline'
+           print('WAIT_EXACT_SOURCE_CHECKS',sha,flush=True)
+           time.sleep(20)
           previous=api('actions/runs/43388147651')
           assert previous['status']=='completed' and previous['conclusion']=='failure','previous release not terminal'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=30) as response:health=json.load(response)
