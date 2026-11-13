@@ -1,3 +1,11 @@
+### 13.11.2026 — новый исправленный выпуск43401230797 ACTIVE, не установлен
+
+Source a661ca18a16bb798d5e86193979f3a4e79451beb / PR1770, marker1268845f8e116254871d519fb72101c461365b4a. По новому разрешению владельца запущен https://github.com/jeep-jim/AvtoCena/actions/runs/43401230797. Первый job ждёт все exact-source CI; offlineguard43401066859 SUCCESS. Manifest45paths/5app,68targeted tests и webTypeScript PASS. Исправлена длина транспорта SQL без изменения логического ключа кэша/правил/visitorIP/порогов. Все исходные server/browser/SHA/nonce/rollback обязательны. Не запускать пересекающийся выпуск.
+
+Предыдущий43390493860 FAILURE empty Korea, old production retained; независимый43400213549 подтвердилa182 running/1b2c stopped. Аудит43400468374 нашёл Korea makes HTTP414 в окне отказа; поздние list bot не доказывают исходную причину пустой выдачи. До приёмки не обещать отсутствие грузовиков и5+5/24 на сайте. Спецпредложения всех городов владелец подтвердил работающими; Japan<=160 отдельно не завершён; AutoBot draft1771 отдельно. Фиды не переключались. Монитор Automation_a2b9a7715fe481918c3d88b60a1de36d обновлён на43401230797, один итог и отключение. Roadmap append43401160321 SUCCESS, история сохранена.
+
+---
+
 ### 13.11.2026 — исправленный выпуск поставлен за обязательными exact-source checks
 
 Source1b2c885ed0ffe583e7a42430baa9671e0ec31e06/PR1770, manifest43paths/4app. Браузерный43389902082 SUCCESS: 390/1440, append/retry/final batch/Back/scroll, navigation recovery, AJES cursor/counts; остальные7 профильных проверок SUCCESS, CI43389902173 ещё выполняется. Offlineguard43390316229 SUCCESS. Контроллер теперь до любых подготовительных действий ограниченно ждёт все exact-source checks (20мин); failure или сменаhead немедленно останавливают, pending никогда не принимается. Маркерe2d6915fd01d7e4d7859bedca10e0c1bf547b5b8 запустил https://github.com/jeep-jim/AvtoCena/actions/runs/43390493860. Это ACTIVE/ожидание CI, не установленная версия. Не запускать пересекающийся выпуск. После CI — подготовка, строгие server/browser/SHA/nonce/rollback и проверкаJapan5+green5/24 без грузовиков. Monitor обновлён на этот run. Предыдущий43388147651 остановился ДО установки и не повторяется неизменённым.
