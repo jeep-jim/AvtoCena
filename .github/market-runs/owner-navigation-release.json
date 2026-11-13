@@ -1,10 +1,10 @@
 {
-  "sourceSha": "a661ca18a16bb798d5e86193979f3a4e79451beb",
+  "sourceSha": "52f7375262926f76d719f37945a9c0668d11fe06",
   "candidate": 1770,
-  "requestedAt": "2026-11-13T09:25:40.945Z",
-  "reason": "Owner explicitly requests installation. New compact-equivalent transport predicate repairs measured HTTP414 in rejected release window. 68 targeted tests and TypeScript PASS; offlineguard43401066859 SUCCESS. Controller waits for every exact-source CI before preparation. Supplier refusals remain blocking, no IP substitution. Full original runtime/browser/nonce/rollback gates unchanged.",
-  "previousRun": 43390493860,
-  "controllerGuardRun": 43401066859,
-  "controllerGuardCommit": "2ee0106a5dd7e2837f17732f5abe3ccf306adfa1",
+  "requestedAt": "2026-11-13T10:19:06.596Z",
+  "reason": "Owner authorizes fixes and publication. Correct transport regression expectation; preserve logical diagnostics. Include desktop AutoBot launcher/header with browser geometry checks. Offlineguard43407968357 SUCCESS. All exact-source checks required before preparation; unchanged runtime speed/completeness/nonce/rollback.",
+  "previousRun": 43401230797,
+  "controllerGuardRun": 43407968357,
+  "controllerGuardCommit": "3f9b5cf5fdc106455044f8bcf4e06092fe3147be",
   "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
