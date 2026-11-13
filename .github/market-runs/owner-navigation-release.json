@@ -1,10 +1,10 @@
 {
-  "sourceSha": "1b2c885ed0ffe583e7a42430baa9671e0ec31e06",
+  "sourceSha": "a661ca18a16bb798d5e86193979f3a4e79451beb",
   "candidate": 1770,
-  "requestedAt": "2026-11-13T08:05:26.691Z",
-  "reason": "Owner explicitly requests corrected publication. Canonical pagination and navigation browser tests now pass (43389902082); eight of nine source workflows passed, CI still running. First controller job waits at most20minutes for every exact-source check to succeed; failures or changed source stop before any preparation. Offlineguard43390316229 succeeded. Frozen runtime/browser/nonce/rollback retained.",
-  "previousRun": 43388147651,
-  "controllerGuardRun": 43390316229,
-  "controllerGuardCommit": "d71ff5e1aebab91d19adfa6a574d8914c8acb885",
+  "requestedAt": "2026-11-13T09:25:40.945Z",
+  "reason": "Owner explicitly requests installation. New compact-equivalent transport predicate repairs measured HTTP414 in rejected release window. 68 targeted tests and TypeScript PASS; offlineguard43401066859 SUCCESS. Controller waits for every exact-source CI before preparation. Supplier refusals remain blocking, no IP substitution. Full original runtime/browser/nonce/rollback gates unchanged.",
+  "previousRun": 43390493860,
+  "controllerGuardRun": 43401066859,
+  "controllerGuardCommit": "2ee0106a5dd7e2837f17732f5abe3ccf306adfa1",
   "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
