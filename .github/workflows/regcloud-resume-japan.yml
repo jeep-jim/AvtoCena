@@ -9,7 +9,9 @@ permissions:
   actions: read
 jobs:
   verify:
-    if: github.ref == 'refs/heads/main'
+    # Retired normal activation path. Use owner-navigation-release with current
+    # frozen baselines and browser acceptance; migrate before re-enabling.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 25
     environment: regcloud-staging
