@@ -1,10 +1,10 @@
 {
-  "sourceSha": "57b8223e0a1648a9092cf0a31151c27ccfb5e4dd",
-  "candidate": 1765,
-  "requestedAt": "2026-11-12T16:08:50.270Z",
-  "reason": "Owner-authorized source57b release after measured offline preparation exceeded whole-job 90m. Controller budget150m; exact source and original server/browser/SHA/nonce/full-result/rollback gates unchanged. Full guard43255205823 SUCCESS. Independent retained production43255265603 confirmed a182/c489 running at16:08UTC. Prior43237942492 cancelled before deployment; no measured visitor-speed rejection in that run.",
-  "previousRun": 43237942492,
-  "controllerGuardRun": 43255205823,
-  "controllerGuardCommit": "b45ae36b5db65bf63db68e4c9e320d251876c045",
+  "sourceSha": "3d01d708dc47fc9ff0465021110f940383e0369e",
+  "candidate": 1769,
+  "requestedAt": "2026-11-13T01:54:24.488Z",
+  "reason": "Owner-authorized truck admission and six-card overview release. Review1768 merged e5124150 after all9checks; exact candidate all11checks success; offline controller43347239879 success. Includes previously reviewed platform membership I/O elimination. Original server/browser speed, full-result, nonce and rollback gates unchanged.",
+  "previousRun": 43255467223,
+  "controllerGuardRun": 43347239879,
+  "controllerGuardCommit": "ccbee220cef8c7e7ff25bb667759905e17e6f444",
   "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
