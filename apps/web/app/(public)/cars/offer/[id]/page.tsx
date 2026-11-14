@@ -1,3 +1,4 @@
+import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import {isGreenCornerOffer} from "@/lib/catalog/green-corner-contract";
 import {DeferredOfferRecommendations} from "@/components/catalog/DeferredOfferRecommendations";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
@@ -209,7 +210,8 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
-  if(storedOffer.market==='korea' && storedOffer.sourceId!=='ajes_korea_feed') permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
+  if(storedOffer.market==='korea' && storedOffer.sourceId!=='ajes_korea_feed' &&
+     (storedOffer.sourceId!=='encar_direct' || storedOffer.operational?.provider!=='auto_api_encar' || await usesAjesMarket('korea'))) permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
   const canonicalPath = offerPath(storedOffer);
   if (`/cars/offer/${encodeURIComponent(routeId)}${routeSlug ? `/${encodeURIComponent(routeSlug)}` : ""}` !== canonicalPath && `/cars/offer/${routeId}${routeSlug ? `/${routeSlug}` : ""}` !== canonicalPath) {
     const preserved = new URLSearchParams();

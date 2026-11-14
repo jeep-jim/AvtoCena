@@ -3,14 +3,15 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
-async function fixture(entry:string,enabled:boolean){
+async function fixture(entry:string,enabled:boolean,paidSnapshot=false){
  const output=await build({entryPoints:[entry],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'switch-fixture',setup(b){
   b.onResolve({filter:/.*/},a=>{
+   if(a.path==='./storage' && a.importer.endsWith('ajes-market-selection.ts'))return {path:'manifest',namespace:'fixture'};
    if(a.path==='server-only')return {path:'empty',namespace:'fixture'};
    if(a.path.endsWith('collection-controls'))return {path:'controls',namespace:'fixture'};
    if(entry.endsWith('ajes-catalog.ts')&&a.importer.endsWith('ajes-catalog.ts')&&!a.path.endsWith('ajes-market-selection'))return {path:'empty',namespace:'fixture'};
   });
-  b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='controls'?`export async function assertCollectionEnabled(){if(!${enabled})throw Error('collection_disabled_by_owner');}`:`exports.cache=x=>x;exports.DetailReadCache=class {};`,loader:'js'}));
+  b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='manifest'?`export async function hasPublishedPaidEncar(){return ${paidSnapshot};}`:a.path==='controls'?`export async function assertCollectionEnabled(){if(!${enabled})throw Error('collection_disabled_by_owner');}`:`exports.cache=x=>x;exports.DetailReadCache=class {};`,loader:'js'}));
  }}]});
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);return m.exports;
 }
@@ -34,4 +35,15 @@ test('disabled paid Korea never falls back to historical parser rows or counts',
  const {withAjesCount}=await fixture('apps/web/lib/catalog/ajes-catalog.ts',false);
  const result=await withAjesCount({total:50,marketCounts:{korea:50},items:[{id:'old-kcar',market:'korea'}]},{market:'korea'});
  assert.equal(result.total,0);assert.equal(result.marketCounts.korea,0);assert.deepEqual(result.items,[]);assert.equal(result.countIncomplete,true);
+});
+
+test('Korea uses the published inventory only with its paid CRM switch and a bound manifest',async()=>{
+ for(const enabled of [false,true])for(const published of [false,true]){
+  const {usesAjesMarket}=await fixture('apps/web/lib/catalog/ajes-market-selection.ts',enabled,published);
+  for(const source of [undefined,'ajes','existing'])assert.equal(await usesAjesMarket('korea',source),!(enabled&&published));
+ }
+ const {withAjesCount}=await fixture('apps/web/lib/catalog/ajes-catalog.ts',true,true);
+ const value={total:15,marketCounts:{korea:15},items:[{id:'paid-offer',market:'korea'}]};
+ const result=await withAjesCount(value,{market:'korea'});
+ assert.deepEqual(result.items,value.items);assert.equal(result.total,15);
 });
