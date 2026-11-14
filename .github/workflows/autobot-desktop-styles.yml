@@ -55,10 +55,16 @@ jobs:
             for(const width of [320,360,390,430,1440]){
               const page=await browser.newPage({viewport:{width,height:900}});
               await page.route('**/api/auth/me',route=>route.fulfill({json:{user:{role:'owner',id:'layout-fixture',displayName:'Staff'}}}));
-              for(const route of ['/','/cars']){
+              let offerPath;
+              for(const kind of ['home','offer']){
+                const route=kind==='home'?'/':offerPath;assert.ok(route,'offer link on home');
                 await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-                await page.locator('.ac-staff-account').first().waitFor({timeout:12000});
-                const measure=await page.locator('.ac-public-header').evaluate(h=>{
+                if(kind==='home')offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
+                await page.locator('.ac-public-header:visible .ac-staff-account:visible').first().waitFor({timeout:25000}).catch(async error=>{
+                  console.log('public layout', page.url(), await page.title(),await page.locator('header').evaluateAll(els=>els.map(e=>e.className)));
+                  throw error;
+                });
+                const measure=await page.locator('.ac-public-header:visible').first().evaluate(h=>{
                   const brand=h.querySelector('a[href="/"] > div:last-child');
                   const title=brand.firstElementChild,sub=brand.lastElementChild;
                   const rect=el=>{const r=document.createRange();r.selectNodeContents(el);return r.getBoundingClientRect()};
