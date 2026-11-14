@@ -338,6 +338,20 @@ if (sellerInventory && !generation.offers.length && !generation.payloads.some(pa
     skipped:true, reason:"no_fresh_source_offers", generationErrors:generation.errors},null,2));
   throw new Error(`catalog_no_fresh_source_offers:${market}`);
 }
+const paidEncarReport = market === "korea"
+  ? generation.payloads.find(payload => payload.report?.provider === "auto_api_encar")?.report
+  : undefined;
+if (paidEncarReport) {
+  const source = paidEncarReport.sources?.[0];
+  if (!paidEncarReport.completed || paidEncarReport.market !== "korea" || !paidEncarReport.snapshotRun ||
+      paidEncarReport.sources?.length !== 1 || source?.stopReason !== "source_finished" ||
+      source.sourceId !== "encar_direct" || !source.uniqueOffers ||
+      generation.errors.length || source.uniqueOffers !== generation.offers.length ||
+      generation.offers.some(row => row.market !== "korea" || row.sourceId !== "encar_direct" ||
+        row.operational?.provider !== "auto_api_encar")) {
+    throw Error("incomplete_paid_encar_publication_input");
+  }
+}
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const completeChe168Inventory = generation.payloads.some(payload => {
   const report=payload.report,source=report?.sources?.find(row=>row.sourceId==='autohome_used_china_open');
@@ -386,6 +400,9 @@ const retentionDecisions = new Map();
 let currentRetainedRows = [...existingInventory.values()].filter((row) => {
   // The verified local replica is a complete active set, including explicit
   // removals and quarantine. Do not resurrect an older retained revision.
+  // The purchased Korea snapshot owns its prices and gallery even when an
+  // older parser observed the same Encar ID. Never merge those revisions.
+  if (paidEncarReport) return false;
   if (completeChe168Inventory && row.sourceId==='autohome_used_china_open' && !freshOfferMetaById.has(String(row.id))) return false;
   if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
@@ -744,6 +761,10 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
       async beforeManifestCommit() {
+        if (paidEncarReport) {
+          const { assertCollectionEnabled } = await import("../apps/web/lib/catalog/collection-controls.ts");
+          await assertCollectionEnabled("encar_feed");
+        }
         independentHeartbeat?.assertHealthy();
         await publishLockHeartbeatPromise;
         await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
