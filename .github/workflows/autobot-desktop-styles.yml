@@ -49,7 +49,17 @@ jobs:
           
               console.log({colorScheme,box,mascot,label,publicHeader,chat});
               await page.screenshot({path:'autobot-'+colorScheme+'.png'});
-              results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===64 && chat.height===64 && Math.abs(chat.y-publicHeader.y)<1);
+              results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===chat.height && Math.abs(chat.y-publicHeader.y)<1);
+              await page.close();
+            }
+            for(const width of [390,1440]){
+              const page=await browser.newPage({viewport:{width,height:900}});
+              await page.goto(origin,{waitUntil:'domcontentloaded'});
+              const header=page.locator('.ac-public-header a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'}).first();
+              const footer=page.locator('footer a[href="/"]').filter({hasText:'АвтоЦена'}).first();
+              const metrics=el=>[...el.querySelectorAll('span')].map(span=>[getComputedStyle(span).fontSize,getComputedStyle(span).fontWeight]);
+              const top=await header.evaluate(metrics),bottom=await footer.evaluate(metrics);
+              console.log({width,top,bottom});assert.equal(top.length,2);assert.deepEqual(top,bottom);
               await page.close();
             }
             assert.deepEqual(results,[true,true],'public desktop AutoBot geometry');
@@ -83,7 +93,7 @@ jobs:
           s=source.read_text()
           anchor='  location / {\n'
           assert s.count(anchor)==1 and 'sub_filter' not in s and 'autobot-desktop-v1' not in s
-          css='@media(min-width:900px){.ab-fab{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:88px;padding:6px;gap:2px;box-sizing:border-box}.ab-fab .ab-mascot{width:52px;height:52px}.ab-fab-label{line-height:18px;text-align:center}.ab-panel .ta-header{height:64px;min-height:64px;max-height:64px;flex:0 0 64px;padding:7px 14px;box-sizing:border-box}}'
+          css='.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500),.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:1.25rem!important;font-weight:900!important}@media(min-width:900px){.ab-fab{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:88px;padding:6px;gap:2px;box-sizing:border-box}.ab-fab .ab-mascot{width:52px;height:52px}.ab-fab-label{line-height:18px;text-align:center}.ab-panel .ta-header{height:65px;min-height:65px;max-height:65px;flex:0 0 65px;padding:7px 14px;box-sizing:border-box}}'
           directives = ["    proxy_set_header Accept-Encoding \"\";", "    sub_filter_once on;", f"""    sub_filter '</head>' '<style id="autobot-desktop-v1">{css}</style></head>';"""]
           target.write_text(s.replace(anchor,anchor+"\n".join(directives)+"\n"))
           PY
