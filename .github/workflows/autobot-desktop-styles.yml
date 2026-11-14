@@ -52,17 +52,18 @@ jobs:
               results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===chat.height && Math.abs(chat.y-publicHeader.y)<1);
               await page.close();
             }
+            let offerPath;
             for(const width of [320,360,390,430,1440]){
               const page=await browser.newPage({viewport:{width,height:900}});
               await page.route('**/api/auth/me',route=>route.fulfill({json:{user:{role:'owner',id:'layout-fixture',displayName:'Staff'}}}));
-              let offerPath;
               for(const kind of ['home','offer']){
                 const route=kind==='home'?'/':offerPath;assert.ok(route,'offer link on home');
                 await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-                if(kind==='home')offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
-                await page.locator('.ac-public-header:visible').first().waitFor();
+                if(kind==='home'&&!offerPath)offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
+                const liveHeader=page.locator('.ac-public-header:visible').filter({has:page.locator('a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'})}).first();
+                await liveHeader.waitFor();
                 // Reserve the two staff slots in a guest browser when hydration has no staff session.
-                await page.locator('.ac-public-header:visible').first().evaluate(h=>{
+                await liveHeader.evaluate(h=>{
                   const tools=h.firstElementChild.lastElementChild;
                   if(tools.querySelectorAll('.ac-staff-account').length>=2)return;
                   const account=tools.querySelector('a[href="/account"]');
@@ -70,7 +71,7 @@ jobs:
                   for(let i=0;i<2;i++){const button=document.createElement('button');button.className='ac-staff-account';button.style.cssText='width:36px;height:40px';pair.append(button);}
                   if(account)account.replaceWith(pair);else tools.prepend(pair);
                 });
-                const measure=await page.locator('.ac-public-header:visible').first().evaluate(h=>{
+                const measure=await liveHeader.evaluate(h=>{
                   const brand=h.querySelector('a[href="/"] > div:last-child');
                   const title=brand.firstElementChild,sub=brand.lastElementChild;
                   const rect=el=>{const r=document.createRange();r.selectNodeContents(el);return r.getBoundingClientRect()};
