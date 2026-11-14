@@ -76,7 +76,7 @@ jobs:
                     };
                     return {titleSize:getComputedStyle(title.firstElementChild).fontSize,
                       icon:metric(brand.parentElement.firstElementChild),back:metric(h.querySelector('button[aria-label="Назад"]')),
-                      subtitle:metric(brand.lastElementChild),outerGap:getComputedStyle(h.firstElementChild).gap};
+                      subtitle:metric(brand.lastElementChild).filter((_,index)=>index!==5),outerGap:getComputedStyle(h.firstElementChild).gap};
                   }
                   const applied=actual(), weight=getComputedStyle(title.firstElementChild).fontWeight;
                   overlay.disabled=true;
