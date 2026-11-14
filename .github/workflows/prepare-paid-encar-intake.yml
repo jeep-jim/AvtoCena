@@ -1,0 +1,43 @@
+name: Prepare completed Encar snapshot for Korea publication
+on:
+  workflow_run:
+    workflows: ['Verify paid Encar inventory']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        required: true
+      attempt:
+        default: '1'
+permissions:
+  contents: read
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'))
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Restore only the specified completed inventory
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          ENCAR_SNAPSHOT_RUN: ${{ inputs.run_id || github.event.workflow_run.id }}
+          ENCAR_SNAPSHOT_ATTEMPT: ${{ inputs.attempt || github.event.workflow_run.run_attempt }}
+        run: node --import tsx scripts/catalog-restore-encar-snapshot.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog-intake-korea
+          path: catalog-intake-korea/
+          if-no-files-found: error
+          retention-days: 3
