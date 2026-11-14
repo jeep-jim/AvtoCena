@@ -21,7 +21,7 @@ export const heavyVehicleFamilies = [
   {make:'UD TRUCKS',models:['CONDOR','QUON']},
   {make:'NISSAN DIESEL',models:['CONDOR','QUON','UD SERIES']},
   // Supplier aliases observed in the owner's 13 November auction screenshots.
-  {make:'NISSAN',models:['CONDOR','UD SERIES']},
+  {make:'NISSAN',models:['CONDOR','UD SERIES','CIVILIAN']},
 ] as const;
 export function knownHeavyVehicleFamily(make:unknown,model:unknown){
  const brand=String(make||'').normalize('NFKC').trim().toUpperCase();
