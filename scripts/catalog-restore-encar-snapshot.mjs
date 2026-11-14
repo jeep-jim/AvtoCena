@@ -25,7 +25,7 @@ let excluded = 0;
 let observations = 0;
 for (let page = 1; page <= snapshot.pages; page++) {
   const rows = await storage.readJson(prefix + '/pages/' + page + '.json', null);
-  if (!Array.isArray(rows) || !rows.length) throw Error('Missing saved Encar page ' + page);
+  if (!Array.isArray(rows) || (!rows.length && page !== snapshot.pages)) throw Error('Missing saved Encar page ' + page);
   for (const row of rows) {
     count++;
     const d = row.data;
@@ -49,7 +49,8 @@ for (let page = 1; page <= snapshot.pages; page++) {
       } catch { return false; }
     }).map(url => ({id:'',url,objectKey:'',checksum:'',size:0,mimeType:'image/jpeg'}));
     Object.assign(offer.operational, {provider:'auto_api_encar', exactDetail:true,
-      detailIdentityVerified:true, exactPhotos:offer.images.length>0, galleryImageCount:offer.images.length});
+      detailIdentityVerified:true, exactPhotos:offer.images.length>0, photoIdentityVerified:offer.images.length>0,
+      galleryImageCount:offer.images.length});
     await write({stage:'detail', observedAt:snapshot.completedAt, offer});
     seen.add(offer.id);
     observations++;
