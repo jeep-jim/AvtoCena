@@ -1,0 +1,118 @@
+name: Apply desktop AutoBot styles
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/autobot-desktop-styles.yml']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: npm install --prefix "$RUNNER_TEMP/autobot" --no-save playwright@1.55.0 && "$RUNNER_TEMP/autobot/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Prepare public geometry checks
+        run: |
+          cat > verify-autobot.mjs <<'JS'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+          const origin='https://avtocena.com';
+          const health=await (await fetch(origin+'/api/health',{cache:'no-store'})).json();
+          console.log('Public release',health.releaseSha);
+          const browser=await chromium.launch();
+          const results=[];
+          try{
+            for(const colorScheme of ['light','dark']){
+              const page=await browser.newPage({colorScheme,viewport:{width:1440,height:900}});
+              await page.addInitScript(theme=>localStorage.setItem('avtocena_theme',theme),colorScheme);
+              await page.goto(origin,{waitUntil:'domcontentloaded'});
+              const launcher=page.locator('.ab-fab');
+              await launcher.waitFor();
+              const box=await launcher.boundingBox();
+          
+              const mascot=await launcher.locator('.ab-mascot').boundingBox();
+              const label=await launcher.locator('.ab-fab-label').boundingBox();
+          
+              assert.equal(await page.locator('html').getAttribute('data-theme'),colorScheme);
+              const publicHeader=await page.locator('header:visible').first().boundingBox();
+              await launcher.click();
+              await page.locator('.ab-panel .ta-header').waitFor();
+              await page.locator('.ab-panel').evaluate(el=>Promise.all(el.getAnimations().map(a=>a.finished.catch(()=>{}))));
+              const chat=await page.locator('.ab-panel .ta-header').boundingBox();
+          
+              console.log({colorScheme,box,mascot,label,publicHeader,chat});
+              await page.screenshot({path:'autobot-'+colorScheme+'.png'});
+              results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===64 && chat.height===64 && Math.abs(chat.y-publicHeader.y)<1);
+              await page.close();
+            }
+            assert.deepEqual(results,[true,true],'public desktop AutoBot geometry');
+          }finally{await browser.close()}
+          JS
+          cp verify-autobot.mjs "$RUNNER_TEMP/autobot/"
+      - name: Apply only the style overlay and verify the public page
+        env:
+          DEPLOY_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key=$(mktemp)
+          printf '%s\n' "$DEPLOY_KEY" > "$key"
+          unset DEPLOY_KEY
+          remote=(ssh -i "$key" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=docs/operations/regcloud-staging-known-hosts root@151.248.113.177)
+          trap 'rm -f "$key"' EXIT
+          # Keep rollback on the server until the external browser has verified both themes.
+          "${remote[@]}" 'bash -se' <<'REMOTE'
+          set -euo pipefail
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -n 9
+          conf=/etc/nginx/conf.d/avtocena-prepare.conf
+          dir=/var/lib/avtocena-autobot-style
+          install -d -m 700 "$dir"
+          test ! -e "$dir/pending"
+          cp -p "$conf" "$dir/original"
+          python3 - "$conf" "$dir/proposed" <<'PY'
+          import pathlib, sys
+          source,target=map(pathlib.Path,sys.argv[1:])
+          s=source.read_text()
+          anchor='  location / {\n'
+          assert s.count(anchor)==1 and 'sub_filter' not in s and 'autobot-desktop-v1' not in s
+          css='@media(min-width:900px){.ab-fab{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:88px;padding:6px;gap:2px;box-sizing:border-box}.ab-fab .ab-mascot{width:52px;height:52px}.ab-fab-label{line-height:18px;text-align:center}.ab-panel .ta-header{height:64px;min-height:64px;max-height:64px;flex:0 0 64px;padding:7px 14px;box-sizing:border-box}}'
+          target.write_text(s.replace(anchor,anchor+'    proxy_set_header Accept-Encoding "";\n    sub_filter_once on;\n    sub_filter \'</head>\' \'<style id="autobot-desktop-v1">\'+css+'</style></head>\';\n'))
+          PY
+          cat > "$dir/rollback" <<'ROLLBACK'
+          #!/bin/bash
+          set -eu
+          cd /var/lib/avtocena-autobot-style
+          conf=/etc/nginx/conf.d/avtocena-prepare.conf
+          if test -f pending && cmp -s proposed "$conf"; then
+            cp -p original "$conf"
+            nginx -t && systemctl reload nginx
+          fi
+          rm -f pending
+          ROLLBACK
+          chmod 700 "$dir/rollback"
+          touch "$dir/pending"
+          systemd-run --unit="autobot-style-revert-$(date +%s)" --on-active=6min "$dir/rollback"
+          trap '"$dir/rollback"' ERR
+          cat "$dir/proposed" > "$conf"
+          nginx -t
+          systemctl reload nginx
+          REMOTE
+          if node "$RUNNER_TEMP/autobot/verify-autobot.mjs"; then
+            "${remote[@]}" 'cd /var/lib/avtocena-autobot-style && cmp -s proposed /etc/nginx/conf.d/avtocena-prepare.conf && rm -f pending'
+          else
+            "${remote[@]}" '/var/lib/avtocena-autobot-style/rollback'
+            exit 1
+          fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-autobot-public
+          path: autobot-*.png
