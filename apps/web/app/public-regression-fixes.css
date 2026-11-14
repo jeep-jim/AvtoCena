@@ -434,3 +434,17 @@ html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-price { 
   .ac-home-page .ac-home-hero-gallery > section > h2 { display:none; }
   .ac-home-page .ac-home-hero-gallery .ac-buyers-rail { margin-top:0; padding-bottom:0; }
 }
+
+/* Leave room for the staff notification and avatar controls on phones. */
+@media(max-width:767px){
+  html body .ac-public-header a[href="/"]{gap:4px!important}
+  html body .ac-public-header a[href="/"]>svg{width:28px!important;height:28px!important}
+  html body .ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500),
+  html body .ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:clamp(14px,4vw,17px)!important;font-weight:900!important}
+  html body .ac-home-page .ac-public-header a[href="/"]>div:last-child>div:last-child{white-space:nowrap!important;font-size:10px!important}
+}
+@media(max-width:399px){
+  html body .ac-public-header>div{padding-inline:6px!important;gap:4px!important}
+  html body .ac-public-header>div>div,html body .ac-public-header .ac-staff-tools{gap:3px!important}
+  html body .ac-public-header .ac-icon-button,html body .ac-public-header .ac-favorite-nav,html body .ac-public-header .ac-staff-account,html body .ac-public-header .ac-staff-tools button,html body .ac-public-header button[aria-label="Назад"]{width:32px!important;min-width:32px!important;padding-inline:0!important}
+}
