@@ -1,0 +1,26 @@
+name: Verify paid Encar inventory
+on:
+  push:
+    paths: ['.github/workflows/encar-paid-intake-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify inventory and inspect field names
+        env:
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+        run: |
+          node --input-type=module <<'JS'
+          import {autoApiChe168Client} from './scripts/lib/auto-api-che168-client.mjs';
+          const request=autoApiChe168Client({platform:'encar',apiKey:process.env.ACCOUNT_KEY});
+          const page=await request('offers',{page:1});
+          const rows=[page,page.data,page.offers,page.result,page.data?.offers].find(Array.isArray);
+          console.log(JSON.stringify({envelope:Object.keys(page).slice(0,15),count:rows?.length,fields:Object.keys(rows?.[0]||{}),dataFields:Object.keys(rows?.[0]?.data||{})}));
+          if(!rows?.length)throw Error('No Encar inventory recognized');
+          JS
