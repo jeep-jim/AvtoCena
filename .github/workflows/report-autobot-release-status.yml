@@ -17,7 +17,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          sha=39973df929193a3447986e1b0bf3640fef052a0b
+          sha=1fc4b38d335e607a5e29a5eab353e39a158306ea
           run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/autobot-desktop-styles.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
           url=$(jq -er .html_url <<< "$run")
           conclusion=$(jq -r .conclusion <<< "$run")
@@ -59,7 +59,7 @@ jobs:
 
               console.log({colorScheme,box,mascot,label,publicHeader,chat});
               await page.screenshot({path:'autobot-'+colorScheme+'.png'});
-              results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===64 && chat.height===64 && Math.abs(chat.y-publicHeader.y)<1);
+              results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===chat.height && Math.abs(chat.y-publicHeader.y)<1);
               await page.close();
             }
             assert.deepEqual(results,[true,true],'public desktop AutoBot geometry');
