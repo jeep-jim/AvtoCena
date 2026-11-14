@@ -435,20 +435,5 @@ html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-price { 
   .ac-home-page .ac-home-hero-gallery .ac-buyers-rail { margin-top:0; padding-bottom:0; }
 }
 
-/* Leave room for the staff notification and avatar controls on phones. */
-@media(max-width:767px){
-  html body .ac-public-header a[href="/"]{gap:4px!important}
-  html body .ac-public-header a[href="/"]>svg{width:28px!important;height:28px!important}
-  html body .ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500),
-  html body .ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:clamp(14px,4vw,17px)!important;font-weight:900!important}
-  html body .ac-home-page .ac-public-header a[href="/"]>div:last-child>div:last-child{white-space:nowrap!important;font-size:10px!important}
-}
-@media(max-width:399px){
-  html body .ac-public-header>div{padding-inline:6px!important;gap:4px!important}
-  html body .ac-public-header>div>div,html body .ac-public-header .ac-staff-tools{gap:3px!important}
-  html body .ac-public-header .ac-icon-button,html body .ac-public-header .ac-favorite-nav,html body .ac-public-header .ac-staff-account,html body .ac-public-header .ac-staff-tools button,html body .ac-public-header button[aria-label="Назад"]{width:32px!important;min-width:32px!important;padding-inline:0!important}
-}
-
-@media(max-width:767px){html body .ac-public-header.ac-public-header:not(:has(button[aria-label="Назад"])) a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500){display:flex!important;flex-flow:row nowrap!important;line-height:1!important;white-space:nowrap!important}html body .ac-public-header.ac-public-header:not(:has(button[aria-label="Назад"])) a[href="/"]>div:last-child>div:last-child{display:block!important;white-space:nowrap!important;line-height:1.1!important;font-size:10px!important}}
-
-@media(max-width:359px){html body .ac-public-header.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500),html body .ac-public-header.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:13px!important}html body .ac-public-header.ac-public-header a[href="/"]>svg{width:24px!important;height:24px!important}html body .ac-public-header.ac-public-header>div>div:last-child{gap:2px!important}}
+/* Match the footer weight while retaining the original mobile header metrics. */
+.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-weight:900!important}
