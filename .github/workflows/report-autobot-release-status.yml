@@ -17,7 +17,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          sha=de4aa641ed10490b6549877b25ece804c8d0ea0e
+          sha=80c9373a02be1f78cea25b145a155951d26ef7c0
           run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/autobot-desktop-styles.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
           url=$(jq -er .html_url <<< "$run")
           conclusion=$(jq -r .conclusion <<< "$run")
