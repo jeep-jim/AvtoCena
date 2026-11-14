@@ -1,0 +1,25 @@
+name: Record Encar account verification
+on:
+  push:
+    paths: ['.github/workflows/report-encar-intake-status.yml']
+  workflow_run:
+    workflows: ['Verify paid Encar inventory']
+    types: [requested, completed]
+permissions:
+  actions: read
+  statuses: write
+jobs:
+  report:
+    if: github.repository == 'jeep-jim/AvtoCena'
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          sha=27e67c9dadc51f8df69fbbc01d7dd0a2509caf17
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/encar-paid-intake-check.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
+          url=$(jq -er .html_url <<< "$run")
+          conclusion=$(jq -r .conclusion <<< "$run")
+          case "$conclusion" in success) state=success;; null) state=pending;; *) state=failure;; esac
+          gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" -f context='Encar account access' -f state="$state" -f target_url="$url"
