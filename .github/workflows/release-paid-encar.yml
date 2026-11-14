@@ -1,5 +1,8 @@
 name: Release paid Encar Korea
 on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/release-paid-encar.yml]
   workflow_run:
     workflows: ['Publish completed paid Encar intake']
     types: [completed]
@@ -15,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'release: build paid Encar from the verified clean candidate') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 165
@@ -253,7 +256,10 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           set -euo pipefail
-          git diff --quiet HEAD -- apps packages Dockerfile package.json package-lock.json
+          # Build tracked application files exactly as verified before preparation.
+          git diff --name-status HEAD -- apps packages Dockerfile package.json package-lock.json
+          git restore --source="$RELEASE_SOURCE_SHA" --staged --worktree -- apps packages Dockerfile package.json package-lock.json
+          git diff --exit-code HEAD -- apps packages Dockerfile package.json package-lock.json
           docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" -t "avtocena-regcloud:$GITHUB_SHA" .
           docker save "avtocena-regcloud:$GITHUB_SHA" | gzip -1 > "$RUNNER_TEMP/avtocena-image.tar.gz"
           cd "$RUNNER_TEMP"
