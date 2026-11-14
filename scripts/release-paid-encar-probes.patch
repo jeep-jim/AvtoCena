@@ -1,0 +1,37 @@
+--- a/scripts/regcloud-deploy-production.sh
++++ b/scripts/regcloud-deploy-production.sh
+@@ -179,12 +179,20 @@
+     value=json.load(response)
+    # China may use the owner-selected local Che168 catalog. AJES IDs must
+    # never pass this branch; its visitor-IP boundary remains mandatory.
++   if market=='korea' and markets==['korea']:
++    assert value.get('ok') is True and value.get('total',0)>0 and value.get('items')
++    assert all(row.get('market')=='korea' and row.get('paidEncar') is True
++               and row.get('sourceCurrency')=='KRW' and row.get('sourcePrice',0)>0
++               and re.fullmatch(r'[a-f0-9]{24}',str(row.get('id',''))) for row in value['items'])
++    print(json.dumps({'source':source,'localPaidEncar':'verified','matches':value['total']}),flush=True)
++    continue
+    assert market=='china', 'live source accepted a request without a real visitor IP'
+    assert value.get('ok') is True and value.get('total',0)>0 and value.get('items')
+    assert all(row.get('market')=='china' and re.fullmatch(r'[a-f0-9]{24}',str(row.get('id',''))) for row in value['items'])
+    print(json.dumps({'market':market,'coldPreparation':cold,'localChe168Catalog':'nonempty_verified'}),flush=True)
+    continue
+   except urllib.error.HTTPError as e:
++   if market=='korea' and markets==['korea']:raise AssertionError('paid Encar must serve local search') from e
+    value=json.load(e)
+    assert e.code==503, (market,e.code)
+    assert value.get('ok') is False and value.get('error')=='japan_search_unavailable'
+--- a/scripts/regcloud-deploy-with-browser.sh
++++ b/scripts/regcloud-deploy-with-browser.sh
+@@ -67,6 +67,11 @@
+ set +e
+ OWNER_FILTER_BROWSER_MARKER="$job_dir/marker.json" CHROME_BIN="$(command -v google-chrome)" node tests/browser/owner-filter-speed-live.mjs
+ browser_status=$?
++if [ "$browser_status" = 0 ]; then
++ node "$RUNNER_TEMP/release-browser/catalog-verify-paid-encar-public.mjs" > paid-encar-acceptance.json &&
++ node -e 'const r=require("./paid-encar-acceptance.json");require("node:assert/strict").equal(r.generation,process.env.PAID_GENERATION)'
++ browser_status=$?
++fi
+ set -e
+ python3 - "$release" "$nonce" "$browser_status" "$job_dir/verdict.json" <<'VERDICT'
+ import hashlib,json,pathlib,sys
