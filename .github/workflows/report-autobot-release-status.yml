@@ -11,13 +11,13 @@ permissions:
 jobs:
   report:
     if: github.repository == 'jeep-jim/AvtoCena'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          sha=8d49dd6516814cdfdbbc12c3c55cb483a977142d
+          sha=65402ae02ad6fd06bbef9224996243cd59e124e2
           run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/autobot-desktop-styles.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
           url=$(jq -er .html_url <<< "$run")
           conclusion=$(jq -r .conclusion <<< "$run")
@@ -25,7 +25,7 @@ jobs:
           gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" -f context='AutoBot production release' -f state="$state" -f target_url="$url"
   public-geometry:
     if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 6
     permissions:
       contents: read
