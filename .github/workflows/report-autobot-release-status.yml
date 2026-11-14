@@ -3,7 +3,7 @@ on:
   push:
     paths: ['.github/workflows/report-autobot-release-status.yml']
   workflow_run:
-    workflows: ['Release desktop AutoBot interface']
+    workflows: ['Apply desktop AutoBot styles']
     types: [requested, completed]
 permissions:
   actions: read
@@ -17,14 +17,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          sha=e10d583e6e29c47cd6f1b79b274e2d7a412a8a55
-          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/release-desktop-autobot.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
+          sha=8d49dd6516814cdfdbbc12c3c55cb483a977142d
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/autobot-desktop-styles.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
           url=$(jq -er .html_url <<< "$run")
           conclusion=$(jq -r .conclusion <<< "$run")
           case "$conclusion" in success) state=success;; null) state=pending;; *) state=failure;; esac
           gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" -f context='AutoBot production release' -f state="$state" -f target_url="$url"
   public-geometry:
-    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 6
     permissions:
