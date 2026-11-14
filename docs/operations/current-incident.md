@@ -1,3 +1,9 @@
+### 14.11.2026 — ACTIVE installation43543168871
+
+Owner explicitly required installation. Source26d640eacbaf9139bb9c53df1dfcccb90c70ffbb / PR1770, marker762dea226ae93fc8b709a525c503654af8125d4b. https://github.com/jeep-jim/AvtoCena/actions/runs/43543168871. Nine source checks and offlineguard43543077792 SUCCESS. Exact source/manifest guards passed; ASTRA wait in progress. Not yet installed or accepted. Includes Civilian-family exclusion and desktop AutoBot84x88 label below/header64px. Previous43408245426 attempt2 failure retained a182. Public Korea returned24offer links before this run; not candidate evidence. PR1772 UI-only baseline CI failed, not used for this installation. Roadmap append43543213001 SUCCESS. Monitor enabled for this run; no duplicate terminal notices. Required additional public verification: Civilian absence and AutoBot geometry, since live truck gate does not explicitly assert them. Japan<=160 unfinished separately; nationwide specials confirmed working by owner. Paid feeds unchanged.
+
+---
+
 ### 13.11.2026 — выпуск43408245426 запущен, установка ещё не подтверждена
 
 Source52f7375262926f76d719f37945a9c0668d11fe06 / PR1770, marker a05f548dbf0333aa070e4963dd70614d1fea2f59. https://github.com/jeep-jim/AvtoCena/actions/runs/43408245426. Девять профильных exact-source checks SUCCESS, включая AutoBot43407878087 (геометрия кнопки и шапки), controls/chat43407884870, catalog43407884759; полный CI43407884893 ещё выполняется. Offlineguard43407968357 SUCCESS. Контроллер ждёт все зелёные результаты до подготовки; неизменные server/browser/nonce/rollback обязательны. Монитор Automation_a2b9a7715fe481918c3d88b60a1de36d переведён на новый run и включён; один итог после завершения. Нельзя выдавать запуск за подтверждённую установку. Roadmap checkpoint43408137575 SUCCESS.
