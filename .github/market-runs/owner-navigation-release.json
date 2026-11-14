@@ -1,10 +1,10 @@
 {
-  "sourceSha": "52f7375262926f76d719f37945a9c0668d11fe06",
+  "sourceSha": "26d640eacbaf9139bb9c53df1dfcccb90c70ffbb",
   "candidate": 1770,
-  "requestedAt": "2026-11-13T10:19:06.596Z",
-  "reason": "Owner authorizes fixes and publication. Correct transport regression expectation; preserve logical diagnostics. Include desktop AutoBot launcher/header with browser geometry checks. Offlineguard43407968357 SUCCESS. All exact-source checks required before preparation; unchanged runtime speed/completeness/nonce/rollback.",
-  "previousRun": 43401230797,
-  "controllerGuardRun": 43407968357,
-  "controllerGuardCommit": "3f9b5cf5fdc106455044f8bcf4e06092fe3147be",
+  "requestedAt": "2026-11-14T01:52:49.346Z",
+  "reason": "Owner explicitly requires installation. Exact source nine checks success; Civilian variants excluded, both desktop AutoBot fixes included. Offline controller guard43543077792 SUCCESS. Preserve all server/browser/speed/identity/rollback acceptance.",
+  "previousRun": 43408245426,
+  "controllerGuardRun": 43543077792,
+  "controllerGuardCommit": "7ac0d701daed74d62a1957d6a6a8cccfd410c79d",
   "retainedRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0"
 }
