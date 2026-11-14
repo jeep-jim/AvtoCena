@@ -52,43 +52,48 @@ jobs:
               results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===chat.height && Math.abs(chat.y-publicHeader.y)<1);
               await page.close();
             }
+            const css=process.env.PROPOSED_HEADER_CSS;
             let offerPath;
-            for(const width of [320,360,390,430,1440]){
+            for(const width of [320,360,375,390,430,1440]){
               const page=await browser.newPage({viewport:{width,height:900}});
-              await page.route('**/api/auth/me',route=>route.fulfill({json:{user:{role:'owner',id:'layout-fixture',displayName:'Staff'}}}));
-              for(const kind of ['home','offer']){
-                const route=kind==='home'?'/':offerPath;assert.ok(route,'offer link on home');
-                await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-                if(kind==='home'&&!offerPath)offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
-                const liveHeader=page.locator('.ac-public-header:visible').filter({has:page.locator('a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'})}).first();
-                await liveHeader.waitFor();
+              let staff=false;
+              await page.route('**/api/auth/me',route=>route.fulfill({json:{user:staff?{role:'owner',id:'layout-fixture',displayName:'Staff'}:null}}));
+              await page.route('**/api/account/auth',route=>route.fulfill({json:{account:null}}));
+              for(const kind of ['guest','staff','offer']){
+                staff=kind!=='guest';
+                const path=kind==='offer'?offerPath:'/';
+                assert.ok(path,'offer link on home');
+                await page.goto(origin+path,{waitUntil:'domcontentloaded'});
+                if(css)await page.addStyleTag({content:css});
+                const header=page.locator('.ac-public-header:visible').filter({has:page.locator('a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'})}).first();
+                await header.waitFor();
+                if(staff)await header.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
+                if(!offerPath)offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
                 await page.evaluate(()=>document.fonts.ready);
-                const measure=await liveHeader.evaluate(h=>{
-                  const overlay=document.querySelector('style#autobot-desktop-v1');
-                  if(!overlay)throw Error('missing updated stylesheet');
+                const m=await header.evaluate(h=>{
                   const brand=h.querySelector('a[href="/"] > div:last-child');
-                  const title=brand.firstElementChild;
-                  function actual(){
-                    const metric=el=>{
-                      if(!el)return null;
-                      const s=getComputedStyle(el);
-                      return [s.fontSize,s.lineHeight,s.padding,s.gap,s.height,s.width,s.display,s.whiteSpace];
-                    };
-                    return {titleSize:getComputedStyle(title.firstElementChild).fontSize,
-                      icon:metric(brand.parentElement.firstElementChild),back:metric(h.querySelector('button[aria-label="Назад"]')),
-                      subtitle:metric(brand.lastElementChild).filter((_,index)=>index!==5),outerGap:getComputedStyle(h.firstElementChild).gap};
-                  }
-                  const applied=actual(), weight=getComputedStyle(title.firstElementChild).fontWeight;
-                  overlay.disabled=true;
-                  const baseline=actual();
-                  overlay.disabled=false;
-                  return {applied,baseline,weight};
+                  const title=brand.firstElementChild, sub=brand.lastElementChild;
+                  const rect=el=>{const r=document.createRange();r.selectNodeContents(el);const b=r.getBoundingClientRect();return {x:b.x,y:b.y,right:b.right,bottom:b.bottom,height:b.height}};
+                  const mark=brand.previousElementSibling.getBoundingClientRect();
+                  const lineCount=el=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const tops=new Set();
+                    while(walker.nextNode()){const r=document.createRange();r.selectNodeContents(walker.currentNode);for(const b of r.getClientRects())if(b.width)tops.add(Math.round(b.top));}return tops.size};
+                  return {title:rect(title),sub:rect(sub),mark:[mark.x,mark.y,mark.width,mark.height],titleLines:lineCount(title),subtitleLines:lineCount(sub),
+                    actions:h.firstElementChild.lastElementChild.getBoundingClientRect().left,
+                    size:getComputedStyle(title.firstElementChild).fontSize,weight:getComputedStyle(title.firstElementChild).fontWeight,
+                    subSize:getComputedStyle(sub).fontSize,back:!!h.querySelector('button[aria-label="Назад"]')};
                 });
-                console.log(JSON.stringify({width,route,...measure}));
-                assert.equal(measure.weight,'900');
-                if(width<768)assert.deepEqual(measure.applied,measure.baseline);
-                else assert.equal(measure.applied.titleSize,'20px');
-                if(width===360)await page.screenshot({path:'mobile-header-'+(route==='/'?'home':'catalog')+'.png'});
+                console.log(JSON.stringify({width,kind,...m}));
+                assert.equal(m.weight,'900');
+                if(kind==='offer'){assert.ok(m.back);continue}
+                if(width>=768){assert.equal(m.size,'20px');continue}
+                assert.equal(m.titleLines,1,'wordmark wraps');
+                assert.equal(m.subtitleLines,1,'subtitle wraps');
+                assert.ok(m.sub.y>m.title.y && m.sub.bottom>m.title.bottom,'subtitle below name');
+                assert.ok(Math.max(m.title.right,m.sub.right)<=m.actions,'logo overlaps actions at '+width);
+                const geometry=[m.title,m.sub,m.mark,m.size,m.subSize];
+                if(!staff)page.guestGeometry=geometry;
+                else assert.deepEqual(geometry,page.guestGeometry,'guest and staff logo geometry');
+                if(width===360)await header.screenshot({path:'mobile-header-'+kind+'.png'});
               }
               await page.close();
             }
@@ -96,6 +101,10 @@ jobs:
           }finally{await browser.close()}
           JS
           cp verify-autobot.mjs "$RUNNER_TEMP/autobot/"
+      - name: Preview the same header with signed-out and staff controls before installation
+        env:
+          PROPOSED_HEADER_CSS: '@media(max-width:767px){.ac-home-page .ac-public-header a[href="/"]>div:last-child>div:last-child{white-space:nowrap}}@media(max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools),.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}}'
+        run: node "$RUNNER_TEMP/autobot/verify-autobot.mjs"
       - name: Apply only the style overlay and verify the public page
         env:
           DEPLOY_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -133,6 +142,8 @@ jobs:
           assert len(original_desktop)==2
           desktop_bot=original_desktop[1].split('@media(max-width:767px)',1)[0]
           css=".ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-weight:900!important}"+'@media(min-width:768px){'+original_desktop[0]+'}@media(min-width:900px)'+desktop_bot
+          old_css=css
+          css+="@media(max-width:767px){.ac-home-page .ac-public-header a[href=\"/\"]>div:last-child>div:last-child{white-space:nowrap}}@media(max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools),.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}}"
           directives = ["    proxy_set_header Accept-Encoding \"\";", "    sub_filter_once on;", f"""    sub_filter '</head>' '<style id="autobot-desktop-v1">{css}</style></head>';"""]
           old_tag=f'<style id="autobot-desktop-v1">{old_css}</style>'
           assert s.count(old_tag)==1
