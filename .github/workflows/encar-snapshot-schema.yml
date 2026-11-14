@@ -1,0 +1,46 @@
+name: Validate saved Encar commercial fields
+on:
+  push:
+    paths: ['.github/workflows/encar-snapshot-schema.yml']
+permissions:
+  contents: read
+  statuses: write
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Inspect already stored pages without contacting supplier
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const storage=getJsonStorage();
+          for(const page of [1,1000,2000]){
+            const rows=await storage.readJson('catalog/intake-staging/encar/43570782014/1/pages/'+page+'.json',null);
+            if(!rows?.length)throw Error('Saved page unavailable: '+page);
+            for(const {inner_id,data:d} of rows.slice(0,3)){
+              const photos=d.photos;
+              const first=Array.isArray(photos)?photos[0]:null;
+              console.log(JSON.stringify({inner_id,make:d.mark,model:d.model,url:d.url,price:d.price,currency:d.currency,year:d.year,ad:d.advertisement_type,status:d.sales_status,photosType:typeof photos,photo:Array.isArray(photos)?(typeof first==='string'?first.split('?')[0].slice(0,150):Object.keys(first||{})):null,photosPrefix:typeof photos==='string'?photos.slice(0,120):null,cc:d.displacement_cc,power:d.power_ice_hp,leaseType:typeof d.lease}));
+            }
+          }
+          JS
+      - if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RESULT: ${{ job.status }}
+        run: gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f context='Saved Encar schema' -f state="$RESULT" -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
