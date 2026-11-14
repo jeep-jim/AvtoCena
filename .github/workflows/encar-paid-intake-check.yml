@@ -24,3 +24,33 @@ jobs:
           console.log(JSON.stringify({envelope:Object.keys(page).slice(0,15),count:rows?.length,fields:Object.keys(rows?.[0]||{}),dataFields:Object.keys(rows?.[0]?.data||{})}));
           if(!rows?.length)throw Error('No Encar inventory recognized');
           JS
+      - name: Collect purchased Encar snapshot
+        env:
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          npm ci
+          node --import tsx --input-type=module <<'JS'
+          import {autoApiChe168Client,autoApiPage} from './scripts/lib/auto-api-che168-client.mjs';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const request=autoApiChe168Client({platform:'encar',apiKey:process.env.ACCOUNT_KEY,requestDelayMs:200});
+          const storage=getJsonStorage();
+          const prefix='catalog/intake-staging/encar/'+process.env.GITHUB_RUN_ID+'/'+process.env.GITHUB_RUN_ATTEMPT;
+          let page=1,count=0,pages=0;
+          while(page!==null){
+            const {items,next}=autoApiPage(await request('offers',{page}),page);
+            if(items.some(row=>!row.inner_id||!row.data))throw Error('Invalid offer');
+            await storage.writeJson(prefix+'/pages/'+page+'.json',items);
+            count+=items.length;pages++;page=next;
+            if(pages%100===0)console.log({pages,count});
+          }
+          if(!count)throw Error('Empty inventory');
+          await storage.writeJson(prefix+'/complete.json',{pages,count,completedAt:new Date().toISOString()});
+          console.log({pages,count});
+          JS
