@@ -34,7 +34,18 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           ENCAR_SNAPSHOT_RUN: ${{ inputs.run_id || github.event.workflow_run.id }}
           ENCAR_SNAPSHOT_ATTEMPT: ${{ inputs.attempt || github.event.workflow_run.run_attempt }}
-        run: node --import tsx scripts/catalog-restore-encar-snapshot.mjs
+        run: |
+          node --import tsx scripts/catalog-restore-encar-snapshot.mjs
+          node --import tsx --input-type=module <<'JS'
+          import {readCollectionControls,saveCollectionSwitch} from './apps/web/lib/catalog/collection-controls.ts';
+          const controls=await readCollectionControls();
+          if(!controls.markets.korea.enabled)throw Error('Korea disabled in CRM');
+          const feed=controls.sources.encar_feed;
+          if(!feed.enabled){
+            if(feed.disabledAt || process.env.ENCAR_SNAPSHOT_RUN!=='43570782014')throw Error('Encar disabled in CRM');
+            await saveCollectionSwitch({scope:'source',id:'encar_feed',enabled:true,revision:controls.revision},'Подключение купленного Encar по поручению владельца');
+          }
+          JS
       - uses: actions/upload-artifact@v4
         with:
           name: catalog-intake-korea
